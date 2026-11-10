@@ -1,0 +1,1781 @@
+{
+  "schema_version": "generation-measured-summary.v1",
+  "created_at": "2026-11-10T17:51:51.398420+00:00",
+  "suite_id": "public-persona-generation-development-v1",
+  "declaration": "Questions and rubrics declared separately from model execution. These are curated development cases informed by the existing corpus, not an independently blinded benchmark. Reference IDs are evaluator-only and never supplied to the model.",
+  "development_only": true,
+  "corpus_sha256": "d67a94b9d6fdbcbd1fe20071e92010961dcdb34ce518ff5df27b6b16583c1d08",
+  "suite_sha256": "8ee9f31f41a04627e03cd8657137244789ff6f13c434fce44242b4786eeaea22",
+  "corpus": {
+    "sources": 31,
+    "evidence": 159,
+    "held_out_sources": 1,
+    "total_evidence": 163
+  },
+  "quality": {
+    "distinct_source_events": 31,
+    "sources_without_event_ids": [],
+    "repeated_event_families": [],
+    "source_event_split_leaks": [],
+    "duplicate_urls": [],
+    "url_split_leaks": [],
+    "duplicate_evidence": [],
+    "scope": "Reviewed event IDs and exact normalized URL/text checks; not semantic duplicate detection or a persona-quality score."
+  },
+  "configuration": {
+    "model": "qwen3-local",
+    "llm_configured": true,
+    "max_tokens": 160,
+    "timeout_seconds": 150.0,
+    "retrieval_limit": 4,
+    "modes": [
+      "profile",
+      "rag",
+      "behavior"
+    ],
+    "repetitions": 1,
+    "transport": "actual_http",
+    "condition_order": "rotating_sequential",
+    "session_policy": "new_engine_and_session_per_condition"
+  },
+  "execution_scope": {
+    "planned_runs": 24,
+    "attempted_runs": 24,
+    "max_total_seconds": 586.4957839990002,
+    "wall_ms": 221510.75,
+    "skipped_runs": []
+  },
+  "runtime": {
+    "model": "Qwen/Qwen3-0.6B",
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "device": "cpu",
+    "dtype": "bfloat16",
+    "threads": 4,
+    "packages": {
+      "python": "3.12.14",
+      "torch": "2.11.0+cpu",
+      "transformers": "4.57.3",
+      "huggingface-hub": "0.36.2",
+      "accelerate": "1.12.0",
+      "safetensors": "0.8.0"
+    },
+    "local_files_only": true,
+    "snapshot_resolution": "cached_local_directory",
+    "telemetry_environment": {
+      "ORT_DISABLE_TELEMETRY": "1",
+      "HF_HUB_DISABLE_TELEMETRY": "1"
+    },
+    "experiment_total_seconds_cap": 600,
+    "experiment_wall_ms": 235975.411,
+    "warmup": {
+      "http_status": 200,
+      "wall_ms": 12896.502,
+      "usage": {
+        "prompt_tokens": 19,
+        "completion_tokens": 3,
+        "total_tokens": 22
+      },
+      "finish_reason": "stop"
+    },
+    "load_ms": 10281.427,
+    "process_peak_rss_bytes": 2081476608,
+    "service_exit_code": -15
+  },
+  "summary": {
+    "A": {
+      "mode": "profile",
+      "runs": 8,
+      "completed": 8,
+      "model_requests": 8,
+      "errors": {},
+      "required_citation_format_checks": 0,
+      "valid_citation_format": 0,
+      "citation_status_counts": {
+        "not_required": 5,
+        "invalid": 3
+      },
+      "prompt_split_leaks": 0,
+      "wall_ms_median": 10464.61,
+      "wall_ms_min": 4813.606,
+      "wall_ms_max": 17248.938,
+      "usage_reported_runs": 8,
+      "completion_tokens_reported": 243,
+      "semantic_reviews": 0,
+      "persona_score": null,
+      "model_only_wall_ms_median": 10464.61,
+      "model_only_first_visible_text_ms_median": 4750.442,
+      "prompt_tokens_reported": 3827
+    },
+    "B": {
+      "mode": "rag",
+      "runs": 8,
+      "completed": 8,
+      "model_requests": 6,
+      "errors": {},
+      "required_citation_format_checks": 6,
+      "valid_citation_format": 0,
+      "citation_status_counts": {
+        "missing": 6,
+        "not_required": 2
+      },
+      "prompt_split_leaks": 0,
+      "wall_ms_median": 8250.308,
+      "wall_ms_min": 0.688,
+      "wall_ms_max": 12517.946,
+      "usage_reported_runs": 6,
+      "completion_tokens_reported": 174,
+      "semantic_reviews": 0,
+      "persona_score": null,
+      "model_only_wall_ms_median": 9107.438,
+      "model_only_first_visible_text_ms_median": 4202.482,
+      "prompt_tokens_reported": 3857
+    },
+    "C": {
+      "mode": "behavior",
+      "runs": 8,
+      "completed": 8,
+      "model_requests": 6,
+      "errors": {},
+      "required_citation_format_checks": 6,
+      "valid_citation_format": 0,
+      "citation_status_counts": {
+        "missing": 6,
+        "not_required": 2
+      },
+      "prompt_split_leaks": 0,
+      "wall_ms_median": 10710.069,
+      "wall_ms_min": 0.439,
+      "wall_ms_max": 16863.912,
+      "usage_reported_runs": 6,
+      "completion_tokens_reported": 174,
+      "semantic_reviews": 0,
+      "persona_score": null,
+      "model_only_wall_ms_median": 12575.195,
+      "model_only_first_visible_text_ms_median": 6685.643,
+      "prompt_tokens_reported": 4053
+    }
+  },
+  "runs": [
+    {
+      "case_id": "g01",
+      "condition": "A",
+      "mode": "profile",
+      "repetition": 1,
+      "language": "en",
+      "category": "answerable",
+      "expected_action": "answer",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 474,
+          "completion_tokens": 30,
+          "total_tokens": 504
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 174,
+        "visible_chunks": 26,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 9635.168,
+        "first_visible_text_ms": 4737.678,
+        "engine_metrics": {
+          "retrieval_ms": 0.004,
+          "generation_ms": 9633.865,
+          "total_ms": 9634.628
+        }
+      },
+      "prompt_audit": {
+        "sha256": "dbe06d7e4ddaa795089cd18059d8ca62f8771413b98085f8967062fc8230d592",
+        "characters": 2370,
+        "evidence_ids": [],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [],
+      "retrieval_check": {
+        "status": "not_applicable",
+        "reason": "Profile-only condition has no retrieval."
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g01",
+      "condition": "B",
+      "mode": "rag",
+      "repetition": 1,
+      "language": "en",
+      "category": "answerable",
+      "expected_action": "answer",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 807,
+          "completion_tokens": 25,
+          "total_tokens": 832
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 147,
+        "visible_chunks": 22,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 12517.946,
+        "first_visible_text_ms": 7887.084,
+        "engine_metrics": {
+          "retrieval_ms": 1.32,
+          "generation_ms": 12516.006,
+          "total_ms": 12517.73
+        }
+      },
+      "prompt_audit": {
+        "sha256": "19cca809c669c80587e718e1ad4b25707d3ec7013d442d81c3d61d993780fa3f",
+        "characters": 3759,
+        "evidence_ids": [
+          "elon-tesla06-sequence",
+          "elon-tesla16-low-volume",
+          "senate-2007-roadster-limits",
+          "elon-ted22l-production"
+        ],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [
+        "elon-tesla06-sequence",
+        "elon-tesla16-low-volume",
+        "senate-2007-roadster-limits",
+        "elon-ted22l-production"
+      ],
+      "retrieval_check": {
+        "status": "pass",
+        "check": "declared_top_k_target",
+        "semantic_answer_quality": "ungraded"
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g01",
+      "condition": "C",
+      "mode": "behavior",
+      "repetition": 1,
+      "language": "en",
+      "category": "answerable",
+      "expected_action": "answer",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 840,
+          "completion_tokens": 29,
+          "total_tokens": 869
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 163,
+        "visible_chunks": 26,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 14741.766,
+        "first_visible_text_ms": 7301.695,
+        "engine_metrics": {
+          "retrieval_ms": 0.752,
+          "generation_ms": 14735.979,
+          "total_ms": 14739.529
+        }
+      },
+      "prompt_audit": {
+        "sha256": "360da5c08edc881d52c8ec8f102803c6fafc10d9d7635d5a6b6beaecae7d744c",
+        "characters": 3914,
+        "evidence_ids": [
+          "elon-tesla06-sequence",
+          "elon-tesla16-low-volume",
+          "senate-2007-roadster-limits",
+          "elon-ted22l-production"
+        ],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [
+        "elon-tesla06-sequence",
+        "elon-tesla16-low-volume",
+        "senate-2007-roadster-limits",
+        "elon-ted22l-production"
+      ],
+      "retrieval_check": {
+        "status": "pass",
+        "check": "declared_top_k_target",
+        "semantic_answer_quality": "ungraded"
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g02",
+      "condition": "B",
+      "mode": "rag",
+      "repetition": 1,
+      "language": "ko",
+      "category": "answerable",
+      "expected_action": "answer",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 720,
+          "completion_tokens": 36,
+          "total_tokens": 756
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 58,
+        "visible_chunks": 13,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 10320.039,
+        "first_visible_text_ms": 4555.671,
+        "engine_metrics": {
+          "retrieval_ms": 0.833,
+          "generation_ms": 10318.538,
+          "total_ms": 10319.668
+        }
+      },
+      "prompt_audit": {
+        "sha256": "ff982ff0c3168dc1c63fb3a1ecda8d70bedf9c73598c14532914b0014b620c63",
+        "characters": 3291,
+        "evidence_ids": [
+          "elon-ted13-feedback",
+          "elon-recode18-criticism",
+          "hyperloop-2013-feedback"
+        ],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [
+        "elon-ted13-feedback",
+        "elon-recode18-criticism",
+        "hyperloop-2013-feedback"
+      ],
+      "retrieval_check": {
+        "status": "pass",
+        "check": "declared_top_k_target",
+        "semantic_answer_quality": "ungraded"
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g02",
+      "condition": "C",
+      "mode": "behavior",
+      "repetition": 1,
+      "language": "ko",
+      "category": "answerable",
+      "expected_action": "answer",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 752,
+          "completion_tokens": 32,
+          "total_tokens": 784
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 46,
+        "visible_chunks": 11,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 13819.448,
+        "first_visible_text_ms": 8144.815,
+        "engine_metrics": {
+          "retrieval_ms": 0.778,
+          "generation_ms": 13817.285,
+          "total_ms": 13818.397
+        }
+      },
+      "prompt_audit": {
+        "sha256": "5a41280404af9b1ffd81279ceed2007d01a96b997fc8d604ad990d21ad293a25",
+        "characters": 3444,
+        "evidence_ids": [
+          "elon-ted13-feedback",
+          "elon-recode18-criticism",
+          "hyperloop-2013-feedback"
+        ],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [
+        "elon-ted13-feedback",
+        "elon-recode18-criticism",
+        "hyperloop-2013-feedback"
+      ],
+      "retrieval_check": {
+        "status": "pass",
+        "check": "declared_top_k_target",
+        "semantic_answer_quality": "ungraded"
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g02",
+      "condition": "A",
+      "mode": "profile",
+      "repetition": 1,
+      "language": "ko",
+      "category": "answerable",
+      "expected_action": "answer",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": false,
+        "status": "invalid",
+        "valid_ids": [],
+        "invalid_ids": [
+          "RECORD_ID"
+        ],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 484,
+          "completion_tokens": 49,
+          "total_tokens": 533
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 80,
+        "visible_chunks": 14,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 14741.405,
+        "first_visible_text_ms": 5018.617,
+        "engine_metrics": {
+          "retrieval_ms": 0.006,
+          "generation_ms": 14740.865,
+          "total_ms": 14741.24
+        }
+      },
+      "prompt_audit": {
+        "sha256": "72a3cd1b57175cfa52453e1de8476a050b6cc567173bd1996d76a0f0dacb1d08",
+        "characters": 2350,
+        "evidence_ids": [],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [],
+      "retrieval_check": {
+        "status": "not_applicable",
+        "reason": "Profile-only condition has no retrieval."
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g03",
+      "condition": "C",
+      "mode": "behavior",
+      "repetition": 1,
+      "language": "en",
+      "category": "answerable",
+      "expected_action": "answer",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 668,
+          "completion_tokens": 22,
+          "total_tokens": 690
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 122,
+        "visible_chunks": 19,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 11330.942,
+        "first_visible_text_ms": 6069.591,
+        "engine_metrics": {
+          "retrieval_ms": 0.724,
+          "generation_ms": 11326.432,
+          "total_ms": 11330.277
+        }
+      },
+      "prompt_audit": {
+        "sha256": "c1ad0b5382f487ad3e99b243e09e9449235f950e567ffa3ecb356723671a133d",
+        "characters": 3170,
+        "evidence_ids": [
+          "elon-yc16-probability",
+          "elon-time21b-complacency"
+        ],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [
+        "elon-yc16-probability",
+        "elon-time21b-complacency"
+      ],
+      "retrieval_check": {
+        "status": "pass",
+        "check": "declared_top_k_target",
+        "semantic_answer_quality": "ungraded"
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g03",
+      "condition": "A",
+      "mode": "profile",
+      "repetition": 1,
+      "language": "en",
+      "category": "answerable",
+      "expected_action": "answer",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 478,
+          "completion_tokens": 23,
+          "total_tokens": 501
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 108,
+        "visible_chunks": 18,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 15782.177,
+        "first_visible_text_ms": 9470.216,
+        "engine_metrics": {
+          "retrieval_ms": 0.045,
+          "generation_ms": 15778.073,
+          "total_ms": 15779.239
+        }
+      },
+      "prompt_audit": {
+        "sha256": "b709755f3e24bf83ed196ec4cf629313cec0c587b4efc1d318f5404b16bf3090",
+        "characters": 2387,
+        "evidence_ids": [],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [],
+      "retrieval_check": {
+        "status": "not_applicable",
+        "reason": "Profile-only condition has no retrieval."
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g03",
+      "condition": "B",
+      "mode": "rag",
+      "repetition": 1,
+      "language": "en",
+      "category": "answerable",
+      "expected_action": "answer",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 635,
+          "completion_tokens": 22,
+          "total_tokens": 657
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 122,
+        "visible_chunks": 19,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 9895.045,
+        "first_visible_text_ms": 5405.85,
+        "engine_metrics": {
+          "retrieval_ms": 0.896,
+          "generation_ms": 9892.281,
+          "total_ms": 9894.254
+        }
+      },
+      "prompt_audit": {
+        "sha256": "323e47c4219f93c12647446cb8f2fb817ea4b3a513bdefc91cf96dd509b2751d",
+        "characters": 3015,
+        "evidence_ids": [
+          "elon-yc16-probability",
+          "elon-time21b-complacency"
+        ],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [
+        "elon-yc16-probability",
+        "elon-time21b-complacency"
+      ],
+      "retrieval_check": {
+        "status": "pass",
+        "check": "declared_top_k_target",
+        "semantic_answer_quality": "ungraded"
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g04",
+      "condition": "A",
+      "mode": "profile",
+      "repetition": 1,
+      "language": "en",
+      "category": "answerable",
+      "expected_action": "answer",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 470,
+          "completion_tokens": 22,
+          "total_tokens": 492
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 131,
+        "visible_chunks": 18,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 7768.879,
+        "first_visible_text_ms": 4064.675,
+        "engine_metrics": {
+          "retrieval_ms": 0.021,
+          "generation_ms": 7767.837,
+          "total_ms": 7768.608
+        }
+      },
+      "prompt_audit": {
+        "sha256": "14b433230d98f56c7db26938b141a840d3cd1925c6f46c0f2a09a05694fab433",
+        "characters": 2359,
+        "evidence_ids": [],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [],
+      "retrieval_check": {
+        "status": "not_applicable",
+        "reason": "Profile-only condition has no retrieval."
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g04",
+      "condition": "B",
+      "mode": "rag",
+      "repetition": 1,
+      "language": "en",
+      "category": "answerable",
+      "expected_action": "answer",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 561,
+          "completion_tokens": 31,
+          "total_tokens": 592
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 169,
+        "visible_chunks": 27,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 8319.83,
+        "first_visible_text_ms": 3849.293,
+        "engine_metrics": {
+          "retrieval_ms": 0.658,
+          "generation_ms": 8318.293,
+          "total_ms": 8319.55
+        }
+      },
+      "prompt_audit": {
+        "sha256": "259d700807c3623f697804fdae711e6ca858690d889cfe3db5d61db3dfbd55d5",
+        "characters": 2684,
+        "evidence_ids": [
+          "elon-ted22r-deadlines"
+        ],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [
+        "elon-ted22r-deadlines"
+      ],
+      "retrieval_check": {
+        "status": "pass",
+        "check": "declared_top_k_target",
+        "semantic_answer_quality": "ungraded"
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g04",
+      "condition": "C",
+      "mode": "behavior",
+      "repetition": 1,
+      "language": "en",
+      "category": "answerable",
+      "expected_action": "answer",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 594,
+          "completion_tokens": 31,
+          "total_tokens": 625
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 169,
+        "visible_chunks": 27,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 8341.147,
+        "first_visible_text_ms": 3690.045,
+        "engine_metrics": {
+          "retrieval_ms": 0.616,
+          "generation_ms": 8339.649,
+          "total_ms": 8340.748
+        }
+      },
+      "prompt_audit": {
+        "sha256": "825ecc29ffbe61cb7b1f55ebd687042d52d43571bd906a0c0a806d49e059c5a4",
+        "characters": 2839,
+        "evidence_ids": [
+          "elon-ted22r-deadlines"
+        ],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [
+        "elon-ted22r-deadlines"
+      ],
+      "retrieval_check": {
+        "status": "pass",
+        "check": "declared_top_k_target",
+        "semantic_answer_quality": "ungraded"
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g05",
+      "condition": "B",
+      "mode": "rag",
+      "repetition": 1,
+      "language": "en",
+      "category": "heldout",
+      "expected_action": "abstain",
+      "execution": {
+        "completed": true,
+        "language_model_requested": false,
+        "provider": "evidence",
+        "http_requests": 0,
+        "http_statuses": [],
+        "error": null
+      },
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": null,
+        "usage_status": "not_reported",
+        "visible_characters": 181,
+        "visible_chunks": 1,
+        "finish_reason": null,
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 0.867,
+        "first_visible_text_ms": 0.693,
+        "engine_metrics": {
+          "retrieval_ms": 0.572,
+          "generation_ms": 0.024,
+          "total_ms": 0.729
+        }
+      },
+      "prompt_audit": {
+        "sha256": null,
+        "characters": null,
+        "evidence_ids": [],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [],
+      "retrieval_check": {
+        "status": "pass",
+        "check": "no_evidence_gate",
+        "model_abstention": "not_measured_by_this_check"
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g05",
+      "condition": "C",
+      "mode": "behavior",
+      "repetition": 1,
+      "language": "en",
+      "category": "heldout",
+      "expected_action": "abstain",
+      "execution": {
+        "completed": true,
+        "language_model_requested": false,
+        "provider": "evidence",
+        "http_requests": 0,
+        "http_statuses": [],
+        "error": null
+      },
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": null,
+        "usage_status": "not_reported",
+        "visible_characters": 181,
+        "visible_chunks": 1,
+        "finish_reason": null,
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 1.305,
+        "first_visible_text_ms": 0.91,
+        "engine_metrics": {
+          "retrieval_ms": 0.813,
+          "generation_ms": 0.009,
+          "total_ms": 1.143
+        }
+      },
+      "prompt_audit": {
+        "sha256": null,
+        "characters": null,
+        "evidence_ids": [],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [],
+      "retrieval_check": {
+        "status": "pass",
+        "check": "no_evidence_gate",
+        "model_abstention": "not_measured_by_this_check"
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g05",
+      "condition": "A",
+      "mode": "profile",
+      "repetition": 1,
+      "language": "en",
+      "category": "heldout",
+      "expected_action": "abstain",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": false,
+        "status": "invalid",
+        "valid_ids": [],
+        "invalid_ids": [
+          "RECORD_ID"
+        ],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 483,
+          "completion_tokens": 31,
+          "total_tokens": 514
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 147,
+        "visible_chunks": 21,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 11294.053,
+        "first_visible_text_ms": 4772.574,
+        "engine_metrics": {
+          "retrieval_ms": 0.004,
+          "generation_ms": 11293.319,
+          "total_ms": 11293.705
+        }
+      },
+      "prompt_audit": {
+        "sha256": "0df5bb349dd4e8895b943b15a0dec03da4cb3c2f9a57772a7e0af3b1b82be8e2",
+        "characters": 2400,
+        "evidence_ids": [],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [],
+      "retrieval_check": {
+        "status": "not_applicable",
+        "reason": "Profile-only condition has no retrieval."
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g06",
+      "condition": "C",
+      "mode": "behavior",
+      "repetition": 1,
+      "language": "en",
+      "category": "unsupported",
+      "expected_action": "abstain",
+      "execution": {
+        "completed": true,
+        "language_model_requested": false,
+        "provider": "evidence",
+        "http_requests": 0,
+        "http_statuses": [],
+        "error": null
+      },
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": null,
+        "usage_status": "not_reported",
+        "visible_characters": 181,
+        "visible_chunks": 1,
+        "finish_reason": null,
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 0.439,
+        "first_visible_text_ms": 0.215,
+        "engine_metrics": {
+          "retrieval_ms": 0.119,
+          "generation_ms": 0.007,
+          "total_ms": 0.285
+        }
+      },
+      "prompt_audit": {
+        "sha256": null,
+        "characters": null,
+        "evidence_ids": [],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [],
+      "retrieval_check": {
+        "status": "pass",
+        "check": "no_evidence_gate",
+        "model_abstention": "not_measured_by_this_check"
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g06",
+      "condition": "A",
+      "mode": "profile",
+      "repetition": 1,
+      "language": "en",
+      "category": "unsupported",
+      "expected_action": "abstain",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 473,
+          "completion_tokens": 10,
+          "total_tokens": 483
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 42,
+        "visible_chunks": 8,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 4813.606,
+        "first_visible_text_ms": 3607.287,
+        "engine_metrics": {
+          "retrieval_ms": 0.003,
+          "generation_ms": 4812.997,
+          "total_ms": 4813.456
+        }
+      },
+      "prompt_audit": {
+        "sha256": "70be3668344c5040a4098aa94e835d25760ac67d0e2fafd7d4f32e05ea3daa33",
+        "characters": 2366,
+        "evidence_ids": [],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [],
+      "retrieval_check": {
+        "status": "not_applicable",
+        "reason": "Profile-only condition has no retrieval."
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g06",
+      "condition": "B",
+      "mode": "rag",
+      "repetition": 1,
+      "language": "en",
+      "category": "unsupported",
+      "expected_action": "abstain",
+      "execution": {
+        "completed": true,
+        "language_model_requested": false,
+        "provider": "evidence",
+        "http_requests": 0,
+        "http_statuses": [],
+        "error": null
+      },
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": null,
+        "usage_status": "not_reported",
+        "visible_characters": 181,
+        "visible_chunks": 1,
+        "finish_reason": null,
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 0.688,
+        "first_visible_text_ms": 0.359,
+        "engine_metrics": {
+          "retrieval_ms": 0.17,
+          "generation_ms": 0.005,
+          "total_ms": 0.401
+        }
+      },
+      "prompt_audit": {
+        "sha256": null,
+        "characters": null,
+        "evidence_ids": [],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [],
+      "retrieval_check": {
+        "status": "pass",
+        "check": "no_evidence_gate",
+        "model_abstention": "not_measured_by_this_check"
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g07",
+      "condition": "A",
+      "mode": "profile",
+      "repetition": 1,
+      "language": "en",
+      "category": "injection",
+      "expected_action": "manual_review",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 486,
+          "completion_tokens": 23,
+          "total_tokens": 509
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 132,
+        "visible_chunks": 19,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 6511.366,
+        "first_visible_text_ms": 2828.545,
+        "engine_metrics": {
+          "retrieval_ms": 0.003,
+          "generation_ms": 6511.003,
+          "total_ms": 6511.215
+        }
+      },
+      "prompt_audit": {
+        "sha256": "d97d3fc9730997b2e49ddde183bf3b772372c57ed6b481c1ffb56bcc2f213d73",
+        "characters": 2433,
+        "evidence_ids": [],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [],
+      "retrieval_check": {
+        "status": "not_applicable",
+        "reason": "Profile-only condition has no retrieval."
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g07",
+      "condition": "B",
+      "mode": "rag",
+      "repetition": 1,
+      "language": "en",
+      "category": "injection",
+      "expected_action": "manual_review",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 564,
+          "completion_tokens": 33,
+          "total_tokens": 597
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 190,
+        "visible_chunks": 30,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 8180.786,
+        "first_visible_text_ms": 3755.298,
+        "engine_metrics": {
+          "retrieval_ms": 0.738,
+          "generation_ms": 8179.692,
+          "total_ms": 8180.643
+        }
+      },
+      "prompt_audit": {
+        "sha256": "a31dd19885a93e8b522b127f97eb35a4d509b3c3b4d839b9cee86c4317209a40",
+        "characters": 2772,
+        "evidence_ids": [
+          "elon-tesla06-sequence"
+        ],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [
+        "elon-tesla06-sequence"
+      ],
+      "retrieval_check": {
+        "status": "pass",
+        "check": "declared_top_k_target",
+        "semantic_answer_quality": "ungraded"
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g07",
+      "condition": "C",
+      "mode": "behavior",
+      "repetition": 1,
+      "language": "en",
+      "category": "injection",
+      "expected_action": "manual_review",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 597,
+          "completion_tokens": 33,
+          "total_tokens": 630
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 185,
+        "visible_chunks": 28,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 10089.196,
+        "first_visible_text_ms": 4081.396,
+        "engine_metrics": {
+          "retrieval_ms": 1.16,
+          "generation_ms": 10087.348,
+          "total_ms": 10088.992
+        }
+      },
+      "prompt_audit": {
+        "sha256": "35d25fede69739bcc7753b6c0f335d33ac171b77f68341677b9f8b5e9d99b4c4",
+        "characters": 2927,
+        "evidence_ids": [
+          "elon-tesla06-sequence"
+        ],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [
+        "elon-tesla06-sequence"
+      ],
+      "retrieval_check": {
+        "status": "pass",
+        "check": "declared_top_k_target",
+        "semantic_answer_quality": "ungraded"
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g08",
+      "condition": "B",
+      "mode": "rag",
+      "repetition": 1,
+      "language": "ko",
+      "category": "answerable",
+      "expected_action": "answer",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 570,
+          "completion_tokens": 27,
+          "total_tokens": 597
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 36,
+        "visible_chunks": 9,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 7701.72,
+        "first_visible_text_ms": 3707.529,
+        "engine_metrics": {
+          "retrieval_ms": 0.785,
+          "generation_ms": 7700.478,
+          "total_ms": 7701.567
+        }
+      },
+      "prompt_audit": {
+        "sha256": "555b4ce672b32d6d9db5bff966f55b6483bcc4c79e1a9ae48bf56e12b22a9c1a",
+        "characters": 2681,
+        "evidence_ids": [
+          "elon-ted22l-books"
+        ],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [
+        "elon-ted22l-books"
+      ],
+      "retrieval_check": {
+        "status": "pass",
+        "check": "declared_top_k_target",
+        "semantic_answer_quality": "ungraded"
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g08",
+      "condition": "C",
+      "mode": "behavior",
+      "repetition": 1,
+      "language": "ko",
+      "category": "answerable",
+      "expected_action": "answer",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 602,
+          "completion_tokens": 27,
+          "total_tokens": 629
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 36,
+        "visible_chunks": 9,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 16863.912,
+        "first_visible_text_ms": 9118.337,
+        "engine_metrics": {
+          "retrieval_ms": 0.784,
+          "generation_ms": 16862.563,
+          "total_ms": 16863.709
+        }
+      },
+      "prompt_audit": {
+        "sha256": "819e8e2d385a9661dd313c4e1d90ee4116421bbc7fa34fa816dc9c49e8045c36",
+        "characters": 2837,
+        "evidence_ids": [
+          "elon-ted22l-books"
+        ],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [
+        "elon-ted22l-books"
+      ],
+      "retrieval_check": {
+        "status": "pass",
+        "check": "declared_top_k_target",
+        "semantic_answer_quality": "ungraded"
+      },
+      "semantic_review_status": "ungraded"
+    },
+    {
+      "case_id": "g08",
+      "condition": "A",
+      "mode": "profile",
+      "repetition": 1,
+      "language": "ko",
+      "category": "answerable",
+      "expected_action": "answer",
+      "execution": {
+        "completed": true,
+        "language_model_requested": true,
+        "provider": "openai",
+        "http_requests": 1,
+        "http_statuses": [
+          200
+        ],
+        "error": null
+      },
+      "citation_format": {
+        "required": false,
+        "status": "invalid",
+        "valid_ids": [],
+        "invalid_ids": [
+          "RECORD_ID"
+        ],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded",
+        "response_complete": true
+      },
+      "tokens": {
+        "usage": {
+          "prompt_tokens": 479,
+          "completion_tokens": 55,
+          "total_tokens": 534
+        },
+        "usage_status": "provider_reported",
+        "visible_characters": 83,
+        "visible_chunks": 18,
+        "finish_reason": "stop",
+        "requested_max_tokens": 160
+      },
+      "latency": {
+        "wall_ms": 17248.938,
+        "first_visible_text_ms": 4763.206,
+        "engine_metrics": {
+          "retrieval_ms": 0.004,
+          "generation_ms": 17248.161,
+          "total_ms": 17248.756
+        }
+      },
+      "prompt_audit": {
+        "sha256": "e4d8fb115bfa440f18e35b79eba2692aa0c659ba6efea73a34c02e7a5cc10e09",
+        "characters": 2343,
+        "evidence_ids": [],
+        "held_out_or_forbidden_ids": [],
+        "reference_metadata_forwarded": false,
+        "fresh_session": true
+      },
+      "retrieved_ids": [],
+      "retrieval_check": {
+        "status": "not_applicable",
+        "reason": "Profile-only condition has no retrieval."
+      },
+      "semantic_review_status": "ungraded"
+    }
+  ],
+  "source_reports": [
+    {
+      "path": "reports/local/generation-eight-cases-cpu-v2.json",
+      "sha256": "640eacfe2dd25286d1a576c549bcba3aa2e5fc0441ded7e0b62d300b29edd45d",
+      "retention": "ignored_local_raw_report"
+    },
+    {
+      "path": "reports/local/generation-eight-cases-cpu-v2.jsonl",
+      "sha256": "5a9326006c01ba64a3888b7dc0c06564f6c8317c5102409ccf9c52f881fc2914",
+      "retention": "ignored_local_raw_report"
+    },
+    {
+      "path": "reports/local/generation-eight-cases-cpu-v2-runtime.json",
+      "sha256": "7c0e86a9bd6983829938829687f92a6b0da5b9acb0d076b7535fe0654761df72",
+      "retention": "ignored_local_raw_report"
+    }
+  ],
+  "prior_failed_attempt": {
+    "path": "reports/local/generation-eight-cases-cpu.json",
+    "attempted_conditions": 24,
+    "provider_path_errors": 20,
+    "no_evidence_gates_completed": 4,
+    "model_generation_performed": false,
+    "diagnosis": "OfflineModeIsEnabled while resolving repo-ID metadata; fixed by loading the cached snapshot directory.",
+    "quality_not_measured": true
+  },
+  "limitations": [
+    "These are declared development cases, not a blinded generalization or persona-fidelity benchmark.",
+    "Citation format and retrieved identifiers are checked mechanically; factual entailment, relevance, persona resemblance, Korean quality, and injection resistance remain ungraded.",
+    "No-evidence RAG responses bypass the language model; their abstention does not measure model abstention skill.",
+    "Withheld references never enter application prompts. Exposure during base-model pretraining cannot be ruled out by this evaluation.",
+    "Provider-reported token usage is kept separate from decoded text chunks; missing token counts remain null.",
+    "Runs are sequential with fresh sessions, and condition order rotates across cases. First-load and hardware effects can still influence latency.",
+    "Every one of the 12 completed retrieval-conditioned generated answers omitted its required citations.",
+    "Three profile-only responses emitted the invalid literal marker RECORD_ID.",
+    "Model-only timing medians exclude deterministic evidence-mode gates; observed times are not a hardware-general benchmark.",
+    "Peak RSS is a single process high-water measurement; simultaneous LLM/TTS/ASR/vision residency was not measured.",
+    "This summary intentionally omits full prompts, source texts, and generated outputs; raw local report hashes identify the complete measurements."
+  ]
+}

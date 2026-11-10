@@ -22,7 +22,8 @@ export function ResearchLab({ language }: { language: Language }) {
     const requestTicket = ++ticket.current;
     const controller = new AbortController(); pending.current = controller;
     setResults({}); setRunning(true);
-    await Promise.all(experiments.map(async ({ id }) => {
+    for (const { id } of experiments) {
+      if (controller.signal.aborted || requestTicket !== ticket.current) break;
       try {
         await streamChat({ message: prompt.trim(), mode: id, language }, controller.signal, (event) => {
           if (requestTicket !== ticket.current) return;
@@ -32,7 +33,7 @@ export function ResearchLab({ language }: { language: Language }) {
       } catch (error) {
         if (!controller.signal.aborted && requestTicket === ticket.current) setResults((previous) => ({ ...previous, [id]: { text: previous[id]?.text ?? '', error: error instanceof Error ? error.message : 'Comparison failed.' } }));
       }
-    }));
+    }
     if (requestTicket === ticket.current) { setRunning(false); pending.current = null; }
   }
   function cancel() { ticket.current += 1; pending.current?.abort(); pending.current = null; setRunning(false); }
