@@ -52,6 +52,8 @@ The provider is called only when configured. Errors and missing capabilities rem
 | Evidence | Returned citation IDs checked against retrieved records; original source links |
 | Behavior plans | Timed face/gaze/head/gesture cues with explicit provenance and estimated timing |
 | Speech and transcription | Optional compatible provider adapters with real audio bytes and size limits |
+| Local reference voice | Optional Qwen3-TTS service with cached prompts, bounded requests, and a fixed server-side reference |
+| Media processing | FFmpeg clips, source-clock manifests, optional ASR/alignment and facial/body observation adapters |
 | Ingestion | Local SRT/VTT/WhisperX imports, speaker selection, hashes, source-clock offsets |
 | Evaluation | Reproducible retrieval checks and source-disjoint answerability fixtures |
 
@@ -103,5 +105,8 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 - [Delivery plan](docs/PLAN.md): review boundaries, acceptance criteria, fidelity ladder.
 - [Architecture](docs/architecture.md): evidence, generation, timing, and deployment boundaries.
 - [Source provenance](docs/research/sources.md): original URLs, dates, timebases, and corpus limitations.
+- [Media and voice pipeline](docs/media-pipeline.md): local clips, optional transcription/observations, and the reference-voice server.
+- [Execution and deployment](docs/deployment.md): coordinated development servers, container configuration, and CI artifacts.
+- [Inference validation](docs/inference-validation.md): real model smoke results, reproducible commands, and measured limitations.
 
 Run locally by default. Internet-facing deployment needs application authentication, inference quotas, and a considered persistence policy. The current session store is process-local and intentionally ephemeral; run a single API worker.

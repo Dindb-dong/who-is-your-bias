@@ -1,0 +1,2 @@
+# Optional forced-alignment environment. Install separately from the voice server.
+whisperx>=3.3,<4

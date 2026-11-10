@@ -1,0 +1,6 @@
+# Use a separate Python 3.12 environment. Install a PyTorch build appropriate
+# to the target CPU/CUDA hardware before these requirements.
+qwen-tts==0.1.1
+fastapi>=0.115,<1
+uvicorn>=0.30,<1
+numpy>=1.26,<3

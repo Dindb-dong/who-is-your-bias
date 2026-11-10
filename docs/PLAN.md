@@ -11,13 +11,14 @@ Build a real-time research studio that models Elon Musk's publicly documented st
 | Evidence and conversation foundation | PR 1, targeting `main` | Source-disjoint corpus, validated ingestion, retrieval, API, provider integration, grounded abstention, evaluation, tests |
 | Interactive avatar studio | PR 2, targeting PR 1 branch | Working browser conversation, evidence inspection, streaming, audio controls, procedural rig, GLB retargeting, responsive layout, browser verification |
 | Media pipeline and reproducible delivery | PR 3, targeting PR 2 branch | Local transcription and observation tools, voice-service integration, launch/deployment instructions, contract checks, reproducible evaluation |
+| Broader corpus and original transcript acquisition | PR 4, targeting PR 3 branch | Reviewed primary-source expansion, source-event isolation, English/Korean retrieval checks, full publisher transcript extraction, measured coverage |
 
 Intermediate changes are committed by coherent capability. Each completed milestone is published to its branch and opened as a pull request. Dependent pull requests remain stacked; the implementation does not merge them automatically.
 
 ## Fidelity ladder
 
 1. **Runnable without model credentials:** a source-note preview retrieves documented evidence. It does not claim to be an LLM or a personality clone. A procedural, rigged avatar previews synchronized, explicitly designed behaviors.
-2. **Configured inference:** connect a local or hosted OpenAI-compatible language model and a speech server. Real generated text is constrained to supplied source IDs. Provider errors are visible.
+2. **Configured inference:** connect a local or hosted OpenAI-compatible language model and a speech server. Returned citation IDs are checked against retrieved records; this is not an entailment check. Provider errors are visible.
 3. **Measured personal voice and motion:** import local interviews, align utterances, inspect observations, and connect an appropriate voice reference and rigged model. A waveform or facial landmark alone is not evidence of a personality trait.
 4. **High likeness:** capture or obtain a high-quality head/body asset and calibrate its blendshapes and bones; evaluate identity, speech, gesture, timing, and conversational behavior separately.
 
