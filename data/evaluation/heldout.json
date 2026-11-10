@@ -16,7 +16,17 @@
       "lex-438-2024"
     ],
     "expected_action": "abstain",
-    "notes": "The answer is present only in the held-out interview. The default train-only index must not expose it. Use the reference separately for future answer-fidelity evaluation; do not count it as retrieval evidence."
+    "notes": "Re-reviewed after merging all 135 expansion records. No reviewed train record gives the requested five-step order from the 2024 interview. Earlier train testimony gives related requirements and goal-setting advice, not the missing final step. Keep the test reference outside retrieval and generation context. This claim concerns the curated evidence records, not every passage of unindexed full source documents.",
+    "answerability_review": {
+      "reviewed_at": "2026-11-10",
+      "decision": "retain_abstention",
+      "train_candidates_considered": [
+        "house-2011-goals-not-methods",
+        "house-2004-requirements-team"
+      ],
+      "rationale": "No reviewed train record gives the requested five-step order from the 2024 interview. Earlier train testimony gives related requirements and goal-setting advice, not the missing final step.",
+      "timezone": "UTC"
+    }
   },
   {
     "id": "h02",
@@ -35,7 +45,17 @@
       "lex-438-2024"
     ],
     "expected_action": "abstain",
-    "notes": "The answer is present only in the held-out interview. The default train-only index must not expose it. Use the reference separately for future answer-fidelity evaluation; do not count it as retrieval evidence."
+    "notes": "Re-reviewed after merging all 135 expansion records. Train records discuss fewer components and design simplicity but do not state a fraction of deleted components to restore. Keep the test reference outside retrieval and generation context. This claim concerns the curated evidence records, not every passage of unindexed full source documents.",
+    "answerability_review": {
+      "reviewed_at": "2026-11-10",
+      "decision": "retain_abstention",
+      "train_candidates_considered": [
+        "stanford-2003-simpler-hardware",
+        "house-2004-requirements-team"
+      ],
+      "rationale": "Train records discuss fewer components and design simplicity but do not state a fraction of deleted components to restore.",
+      "timezone": "UTC"
+    }
   },
   {
     "id": "h03",
@@ -54,7 +74,16 @@
       "lex-438-2024"
     ],
     "expected_action": "abstain",
-    "notes": "The answer is present only in the held-out interview. The default train-only index must not expose it. Use the reference separately for future answer-fidelity evaluation; do not count it as retrieval evidence."
+    "notes": "Re-reviewed after merging all 135 expansion records. The added records include reading and childhood learning, but no reviewed train passage supplies podcast playback-speed settings. Keep the test reference outside retrieval and generation context. This claim concerns the curated evidence records, not every passage of unindexed full source documents.",
+    "answerability_review": {
+      "reviewed_at": "2026-11-10",
+      "decision": "retain_abstention",
+      "train_candidates_considered": [
+        "elon-ted22l-books"
+      ],
+      "rationale": "The added records include reading and childhood learning, but no reviewed train passage supplies podcast playback-speed settings.",
+      "timezone": "UTC"
+    }
   },
   {
     "id": "h04",
@@ -73,6 +102,16 @@
       "lex-438-2024"
     ],
     "expected_action": "abstain",
-    "notes": "The answer is present only in the held-out interview. The default train-only index must not expose it. Use the reference separately for future answer-fidelity evaluation; do not count it as retrieval evidence."
+    "notes": "Re-reviewed after merging all 135 expansion records. The added records discuss humorous names and social-media jokes, but no reviewed train passage explains memes as information compression. Keep the test reference outside retrieval and generation context. This claim concerns the curated evidence records, not every passage of unindexed full source documents.",
+    "answerability_review": {
+      "reviewed_at": "2026-11-10",
+      "decision": "retain_abstention",
+      "train_candidates_considered": [
+        "elon-gq15-memory",
+        "elon-recode18-tweets"
+      ],
+      "rationale": "The added records discuss humorous names and social-media jokes, but no reviewed train passage explains memes as information compression.",
+      "timezone": "UTC"
+    }
   }
 ]

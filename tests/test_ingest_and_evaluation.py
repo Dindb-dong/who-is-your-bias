@@ -2,10 +2,11 @@ import json
 from pathlib import Path
 
 import pytest
-from pydantic import ValidationError
+from pydantic import HttpUrl, ValidationError
 
 from bias.evaluate import evaluate_retrieval, read_cases
 from bias.ingest import import_transcript, parse_captions, parse_whisperx, write_evidence
+from bias.models import EvaluationCase
 
 
 def test_vtt_speaker_time_and_markup():
@@ -65,5 +66,29 @@ def test_evaluation_does_not_claim_unmeasured_persona_quality(actual_corpus):
     report = evaluate_retrieval(actual_corpus, read_cases(paths))
     assert report["summary"]["split_leaks"] == 0
     assert report["summary"]["failed"] == 0
-    assert report["summary"]["ungraded"] == 2
+    assert report["summary"]["ungraded"] == sum(case.category == "injection" for case in read_cases(paths))
     assert all(row["passed"] is None for row in report["cases"] if row["category"] == "injection")
+    assert not report["quality"]["source_event_split_leaks"]
+    assert report["summary"]["answer_cases"] == report["summary"]["answer_hits"]
+    assert report["summary"]["abstention_cases"] == report["summary"]["correct_abstentions"]
+
+
+def test_held_out_topic_may_be_answered_from_an_independent_train_event(corpus):
+    source = corpus.sources["rocket-interview"].model_copy(update={"id": "bird-interview", "url": HttpUrl("https://example.org/birds"), "source_event_id": "separate-bird-event"})
+    corpus.sources[source.id] = source
+    evidence = corpus.evidence["secret-kiwi"].model_copy(update={"id": "independent-bird-answer", "source_id": source.id, "text": "In a separate interview, the kiwi was described as a bird that cannot fly."})
+    corpus.evidence[evidence.id] = evidence
+    case = EvaluationCase(id="independent-answer", category="heldout", question="Can kiwi birds fly?", expected_evidence_ids=[evidence.id], expected_source_ids=[source.id], reference_evidence_ids=["secret-kiwi"], reference_source_ids=["heldout"], forbidden_source_ids=["heldout"], expected_action="answer")
+    report = evaluate_retrieval(corpus, [case])
+    assert report["summary"]["passed"] == 1
+    assert "secret-kiwi" not in report["cases"][0]["retrieved_ids"]
+    assert report["summary"]["split_leaks"] == 0
+
+
+def test_evaluation_rejects_heldout_positive_targets_and_unknown_sources(corpus):
+    case = EvaluationCase(id="bad-target", category="retrieval", question="kiwi birds", expected_evidence_ids=["secret-kiwi"], expected_action="answer")
+    with pytest.raises(ValueError, match="not reviewed train evidence"):
+        evaluate_retrieval(corpus, [case])
+    unknown = EvaluationCase(id="unknown-source", category="abstention", question="kiwi birds", forbidden_source_ids=["misspelled-source"], expected_action="abstain")
+    with pytest.raises(ValueError, match="Unknown evaluation source"):
+        evaluate_retrieval(corpus, [unknown])

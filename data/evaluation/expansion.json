@@ -1,0 +1,110 @@
+[
+  {
+    "id": "x01",
+    "category": "retrieval",
+    "question": "How did you say you deal with fear when an objective is important?",
+    "expected_evidence_ids": ["elon-yc16-fear"],
+    "expected_source_ids": ["yc-2016"],
+    "expected_action": "answer",
+    "notes": "Self-reported fear and action, not an inferred psychological trait."
+  },
+  {
+    "id": "x02",
+    "category": "retrieval",
+    "question": "친구들에게 비판적인 피드백을 구하라고 한 이유는 뭐야?",
+    "expected_evidence_ids": ["elon-ted13-feedback"],
+    "expected_source_ids": ["ted-2013"],
+    "expected_action": "answer",
+    "notes": "Korean question about advice in a specific public answer; does not claim a measured lifelong habit."
+  },
+  {
+    "id": "x03",
+    "category": "retrieval",
+    "question": "What did you acknowledge about your optimistic forecasts after missed predictions?",
+    "expected_evidence_ids": ["elon-ted22r-predictions"],
+    "expected_source_ids": ["ted-2022-recorded"],
+    "expected_action": "answer",
+    "notes": "Response to an interviewer challenging missed forecasts."
+  },
+  {
+    "id": "x04",
+    "category": "retrieval",
+    "question": "채용할 때 친절함과 신뢰를 중요하게 본다고 말했어?",
+    "expected_evidence_ids": ["elon-dw26-character"],
+    "expected_source_ids": ["dwarkesh-2026"],
+    "expected_action": "answer",
+    "notes": "Korean retrieval of a dated statement about revising hiring priorities."
+  },
+  {
+    "id": "x05",
+    "category": "retrieval",
+    "question": "Why set aggressive internal deadlines?",
+    "expected_evidence_ids": ["elon-ted22r-deadlines"],
+    "expected_source_ids": ["ted-2022-recorded"],
+    "expected_action": "answer",
+    "notes": "Management rationale without endorsing the effectiveness of the practice."
+  },
+  {
+    "id": "x06",
+    "category": "retrieval",
+    "question": "스페이스엑스 성공 가능성이 낮아도 도전한 이유는?",
+    "expected_evidence_ids": ["elon-yc16-probability"],
+    "expected_source_ids": ["yc-2016"],
+    "expected_action": "answer",
+    "notes": "Korean query about willingness to attempt an uncertain project."
+  },
+  {
+    "id": "x07",
+    "category": "retrieval",
+    "question": "How did you connect absurd humor with technology?",
+    "expected_evidence_ids": ["elon-gq15-humor"],
+    "expected_source_ids": ["gq-2015"],
+    "expected_action": "answer",
+    "notes": "Explicit stated interest; not a license to fabricate quotes or observed expressions."
+  },
+  {
+    "id": "x08",
+    "category": "retrieval",
+    "question": "어릴 때 책과 영화로 어떤 영향을 받았어?",
+    "expected_evidence_ids": ["elon-ted22l-books"],
+    "expected_source_ids": ["ted-2022-live"],
+    "expected_action": "answer",
+    "notes": "Korean question about a public childhood recollection."
+  },
+  {
+    "id": "x09",
+    "category": "retrieval",
+    "question": "Why should engineers receive goals and standards rather than a prescribed method?",
+    "expected_evidence_ids": ["house-2011-goals-not-methods"],
+    "expected_source_ids": ["house-commercial-crew-2011"],
+    "expected_action": "answer",
+    "notes": "Train-grounded engineering guidance; does not require the held-out five-step algorithm."
+  },
+  {
+    "id": "x10",
+    "category": "retrieval",
+    "question": "여러 요구사항을 한꺼번에 합치면 어떤 문제가 생길 수 있어?",
+    "expected_evidence_ids": ["house-2004-requirements-team"],
+    "expected_source_ids": ["house-space-cooperation-2004"],
+    "expected_action": "answer",
+    "notes": "Korean requirements question; a broader train-supported topic than the held-out deletion fraction."
+  },
+  {
+    "id": "x11",
+    "category": "retrieval",
+    "question": "How did you limit regulatory criticism to processes you had actually experienced?",
+    "expected_evidence_ids": ["house-2004-experience-boundary"],
+    "expected_source_ids": ["house-space-cooperation-2004"],
+    "expected_action": "answer",
+    "notes": "Acknowledging the limits of personal experience in a written response."
+  },
+  {
+    "id": "x12",
+    "category": "retrieval",
+    "question": "하이퍼루프 제안에서 오류와 피드백을 어떻게 다뤘어?",
+    "expected_evidence_ids": ["hyperloop-2013-feedback"],
+    "expected_source_ids": ["tesla-hyperloop-alpha-2013"],
+    "expected_action": "answer",
+    "notes": "Korean query about admitting possible mistakes and requesting criticism."
+  }
+]
