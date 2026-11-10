@@ -88,6 +88,7 @@ test('requires an explicit geometry preview and exposes rig calibration', async 
   await page.getByRole('slider', { name: /Source position/ }).focus();
   await page.getByRole('slider', { name: /Source position/ }).press('PageUp');
   await expect(page.getByText('Face: designed · Speech: silent', { exact: true })).toBeVisible();
+  await expect(page.getByText('Body: geometry_preview', { exact: true })).toBeVisible();
   await page.screenshot({ path: info.outputPath('measured-arm-motion.png'), fullPage: true });
   expect(errors).toEqual([]);
 });
