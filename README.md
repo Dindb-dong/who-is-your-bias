@@ -4,6 +4,19 @@
 
 Initial subject: **Elon Musk**. The project connects documented statements to a conversational model and a synchronized avatar. Generated interactions are explicitly presented as simulations. Historical statements keep their source and date; the system does not claim to reconstruct private thoughts.
 
+## Run the complete studio
+
+Requires Node 22.12+ (Node 24 recommended), Python 3.11+, and uv.
+
+```bash
+uv sync --extra dev
+npm ci
+npm run build
+uv run bias serve
+```
+
+Open `http://127.0.0.1:8000`. The studio includes conversation, source inspection, A/B/C comparison, voice playback controls, a rigged reference avatar, and local GLB loading. See [studio guide](docs/studio.md) for development, audio, and retargeting details.
+
 ## Run the conversation engine
 
 Requires Python 3.11+ and [uv](https://docs.astral.sh/uv/).
