@@ -1,0 +1,346 @@
+[
+  {
+    "id": "r01",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "Why did Tesla begin with a costly sports car?",
+    "expected_evidence_ids": [
+      "elon-tesla06-sequence",
+      "elon-tesla16-low-volume"
+    ],
+    "expected_source_ids": [
+      "tesla-master-plan-2006",
+      "tesla-master-plan-2016"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r02",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "What did the 2006 plan say about research and development spending?",
+    "expected_evidence_ids": [
+      "elon-tesla06-reinvestment"
+    ],
+    "expected_source_ids": [
+      "tesla-master-plan-2006"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r03",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "What was the purpose of Tesla in the first master plan?",
+    "expected_evidence_ids": [
+      "elon-tesla06-purpose"
+    ],
+    "expected_source_ids": [
+      "tesla-master-plan-2006"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r04",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "What did the plan say about solar roofs and battery storage?",
+    "expected_evidence_ids": [
+      "elon-tesla16-integration"
+    ],
+    "expected_source_ids": [
+      "tesla-master-plan-2016"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r05",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "Why describe the factory itself as an engineering product?",
+    "expected_evidence_ids": [
+      "elon-tesla16-factory"
+    ],
+    "expected_source_ids": [
+      "tesla-master-plan-2016"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r06",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "How does self-driving hardware differ from validating the software?",
+    "expected_evidence_ids": [
+      "elon-tesla16-validation"
+    ],
+    "expected_source_ids": [
+      "tesla-master-plan-2016"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r07",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "How did you explain first-principles reasoning in the 2008 interview?",
+    "expected_evidence_ids": [
+      "elon-henry08-first-principles"
+    ],
+    "expected_source_ids": [
+      "henry-ford-2008"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r08",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "Why pursue SpaceX and life beyond Earth?",
+    "expected_evidence_ids": [
+      "elon-henry08-space"
+    ],
+    "expected_source_ids": [
+      "henry-ford-2008"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r09",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "Does useful work always need to change the world?",
+    "expected_evidence_ids": [
+      "elon-stanford15-usefulness"
+    ],
+    "expected_source_ids": [
+      "stanford-2015"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r10",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "How do you balance aesthetics with practical utility in a car?",
+    "expected_evidence_ids": [
+      "elon-stanford15-design"
+    ],
+    "expected_source_ids": [
+      "stanford-2015"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r11",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "What setbacks did SpaceX and Tesla face in 2008?",
+    "expected_evidence_ids": [
+      "elon-stanford15-setbacks"
+    ],
+    "expected_source_ids": [
+      "stanford-2015"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r12",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "What makes a scientific claim testable?",
+    "expected_evidence_ids": [
+      "elon-lex19-testability"
+    ],
+    "expected_source_ids": [
+      "lex-049-2019"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r13",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "Which engineering disciplines are involved in Neuralink?",
+    "expected_evidence_ids": [
+      "elon-lex19-engineering"
+    ],
+    "expected_source_ids": [
+      "lex-049-2019"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r14",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "Which book did you connect to a philosophy of curiosity?",
+    "expected_evidence_ids": [
+      "elon-lex23-curiosity"
+    ],
+    "expected_source_ids": [
+      "lex-400-2023"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r15",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "What do you enjoy about challenging games?",
+    "expected_evidence_ids": [
+      "elon-lex23-games"
+    ],
+    "expected_source_ids": [
+      "lex-400-2023"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r16",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "What did you praise about Elden Ring?",
+    "expected_evidence_ids": [
+      "elon-lex23-elden-ring"
+    ],
+    "expected_source_ids": [
+      "lex-400-2023"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r17",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "테슬라는 왜 처음에 비싼 스포츠카를 만들었어?",
+    "expected_evidence_ids": [
+      "elon-tesla06-sequence",
+      "elon-tesla16-low-volume"
+    ],
+    "expected_source_ids": [
+      "tesla-master-plan-2006",
+      "tesla-master-plan-2016"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r18",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "제1원리로 공학 문제를 푼다는 건 무슨 뜻이야?",
+    "expected_evidence_ids": [
+      "elon-henry08-first-principles"
+    ],
+    "expected_source_ids": [
+      "henry-ford-2008"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r19",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "창업해서 반드시 세상을 바꿔야 해?",
+    "expected_evidence_ids": [
+      "elon-stanford15-usefulness"
+    ],
+    "expected_source_ids": [
+      "stanford-2015"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  },
+  {
+    "id": "r20",
+    "persona_id": "elon-musk",
+    "category": "retrieval",
+    "question": "게임이 취미라고 했는데 어떤 점을 즐겨?",
+    "expected_evidence_ids": [
+      "elon-lex23-games"
+    ],
+    "expected_source_ids": [
+      "lex-400-2023"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "answer",
+    "notes": "Retrieval smoke test on curated summaries; not a measured persona-similarity score."
+  }
+]
