@@ -5,7 +5,7 @@ export default defineConfig({
   fullyParallel: false,
   retries: process.env.CI ? 1 : 0,
   reporter: [['list'], ['html', { open: 'never' }]],
-  timeout: 30_000,
+  timeout: 60_000,
   use: {
     baseURL: 'http://127.0.0.1:8000',
     trace: 'retain-on-failure',

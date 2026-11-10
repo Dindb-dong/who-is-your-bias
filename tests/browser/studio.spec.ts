@@ -33,7 +33,9 @@ test('sources, comparison, settings, and mobile layout work', async ({ page }, i
   await expect(page.getByText('Source preview', { exact: true })).toHaveCount(3);
   await expect(page.getByRole('button', { name: 'Run comparison' })).toBeEnabled();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-  await page.getByRole('button', { name: 'Studio settings', exact: true }).filter({ visible: true }).click();
+  const settings = page.getByRole('button', { name: 'Studio settings', exact: true }).filter({ visible: true });
+  await expect(settings).toHaveCount(1);
+  await settings.click();
   await expect(page.getByRole('dialog', { name: 'Studio settings' })).toBeVisible();
   await page.getByRole('button', { name: 'Close settings' }).click();
   await page.screenshot({ path: info.outputPath('research-lab.png'), fullPage: true });
