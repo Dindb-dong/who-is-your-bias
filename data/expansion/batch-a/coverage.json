@@ -1,0 +1,453 @@
+{
+  "schema_version": "corpus_expansion_coverage.v1",
+  "batch": "a",
+  "status": "complete",
+  "sources": [
+    {
+      "source_id": "ted-2013",
+      "source_family": "ted",
+      "primary_transcript_url": "https://www.ted.com/talks/elon_musk_the_mind_behind_tesla_spacex_solarcity?view=transcript",
+      "transcript_status": "reviewed_publisher_transcript",
+      "media_links": [
+        {
+          "url": "https://www.youtube.com/watch?v=IgKWPdJWuBQ",
+          "kind": "youtube",
+          "observed_from": "TED public videoPlayerData.external.code"
+        }
+      ],
+      "publisher_duration_seconds": 1244,
+      "youtube_duration_seconds": 1265,
+      "source_timeline": "ted_transcript_cue",
+      "raw_cache_ignored": "data/raw/expansion-a/elon_musk_the_mind_behind_tesla_spacex_solarcity.json",
+      "rights_note": "Public access establishes provenance, not a license for likeness, voice, or redistribution.",
+      "evidence_count": 6,
+      "paraphrase_word_count": 112,
+      "paraphrase_word_budget": 180,
+      "verbatim_quote_words": 0,
+      "event_key": "ted-2013",
+      "published_at": "2013-03-19",
+      "review_scope": "Subject’s own answers; no interviewer claims or inferred gestures.",
+      "video_alignment_status": "not_verified"
+    },
+    {
+      "source_id": "ted-2017",
+      "source_family": "ted",
+      "primary_transcript_url": "https://www.ted.com/talks/elon_musk_the_future_we_re_building_and_boring?view=transcript",
+      "transcript_status": "reviewed_publisher_transcript",
+      "media_links": [
+        {
+          "url": "https://www.youtube.com/watch?v=zIwLWfaAg-8",
+          "kind": "youtube",
+          "observed_from": "TED public videoPlayerData.external.code"
+        }
+      ],
+      "publisher_duration_seconds": 2437,
+      "youtube_duration_seconds": 2451,
+      "source_timeline": "ted_transcript_cue",
+      "raw_cache_ignored": "data/raw/expansion-a/elon_musk_the_future_we_re_building_and_boring.json",
+      "rights_note": "Public access establishes provenance, not a license for likeness, voice, or redistribution.",
+      "evidence_count": 6,
+      "paraphrase_word_count": 103,
+      "paraphrase_word_budget": 180,
+      "verbatim_quote_words": 0,
+      "event_key": "ted-2017",
+      "published_at": "2017-04-30",
+      "review_scope": "Subject’s own answers; no interviewer claims or inferred gestures.",
+      "video_alignment_status": "not_verified"
+    },
+    {
+      "source_id": "ted-2022-recorded",
+      "source_family": "ted",
+      "primary_transcript_url": "https://www.ted.com/talks/elon_musk_a_future_worth_getting_excited_about?view=transcript",
+      "transcript_status": "reviewed_publisher_transcript",
+      "media_links": [
+        {
+          "url": "https://www.youtube.com/watch?v=YRvf00NooN8",
+          "kind": "youtube",
+          "observed_from": "TED public videoPlayerData.external.code"
+        }
+      ],
+      "publisher_duration_seconds": 3983,
+      "youtube_duration_seconds": 3985,
+      "source_timeline": "ted_transcript_cue",
+      "raw_cache_ignored": "data/raw/expansion-a/elon_musk_a_future_worth_getting_excited_about.json",
+      "rights_note": "Public access establishes provenance, not a license for likeness, voice, or redistribution.",
+      "evidence_count": 6,
+      "paraphrase_word_count": 108,
+      "paraphrase_word_budget": 180,
+      "verbatim_quote_words": 0,
+      "event_key": "ted-2022-recorded",
+      "published_at": "2022-04-18",
+      "review_scope": "Subject’s own answers; no interviewer claims or inferred gestures.",
+      "video_alignment_status": "not_verified"
+    },
+    {
+      "source_id": "ted-2022-live",
+      "source_family": "ted",
+      "primary_transcript_url": "https://www.ted.com/talks/elon_musk_elon_musk_talks_twitter_tesla_and_how_his_brain_works_live_at_ted2022?view=transcript",
+      "transcript_status": "reviewed_publisher_transcript",
+      "media_links": [
+        {
+          "url": "https://www.youtube.com/watch?v=cdZZpaB2kDM",
+          "kind": "youtube",
+          "observed_from": "TED public videoPlayerData.external.code"
+        }
+      ],
+      "publisher_duration_seconds": 3181,
+      "youtube_duration_seconds": 3286,
+      "source_timeline": "ted_transcript_cue",
+      "raw_cache_ignored": "data/raw/expansion-a/elon_musk_elon_musk_talks_twitter_tesla_and_how_his_brain_works_live_at_ted2022.json",
+      "rights_note": "Public access establishes provenance, not a license for likeness, voice, or redistribution.",
+      "evidence_count": 6,
+      "paraphrase_word_count": 113,
+      "paraphrase_word_budget": 180,
+      "verbatim_quote_words": 0,
+      "event_key": "ted-2022-live",
+      "published_at": "2022-04-15",
+      "review_scope": "Subject’s own answers; no interviewer claims or inferred gestures.",
+      "video_alignment_status": "not_verified"
+    },
+    {
+      "source_id": "dwarkesh-2026",
+      "source_family": "dwarkesh",
+      "primary_transcript_url": "https://www.dwarkesh.com/p/elon-musk",
+      "transcript_status": "reviewed_publisher_transcript",
+      "media_links": [
+        {
+          "url": "https://www.youtube.com/watch?v=BYXbuik3dgA",
+          "kind": "youtube",
+          "observed_from": "Publisher Watch on YouTube link"
+        }
+      ],
+      "source_timeline": "publisher_transcript_chapters",
+      "rights_note": "Public access establishes provenance, not a license for likeness, voice, or redistribution.",
+      "evidence_count": 7,
+      "paraphrase_word_count": 124,
+      "paraphrase_word_budget": 180,
+      "verbatim_quote_words": 0,
+      "event_key": "dwarkesh-2026",
+      "published_at": "2026-02-05",
+      "review_scope": "Subject’s own answers; no interviewer claims or inferred gestures.",
+      "video_alignment_status": "not_verified"
+    },
+    {
+      "source_id": "yc-2016",
+      "source_family": "y_combinator",
+      "primary_transcript_url": "https://www.ycombinator.com/blog/elon-musk-on-how-to-build-the-future",
+      "transcript_status": "reviewed_publisher_transcript",
+      "source_timeline": "publisher_podcast_transcript",
+      "media_links": [
+        {
+          "url": "https://www.youtube.com/watch?v=e56PbkJdmZ8",
+          "kind": "youtube",
+          "observed_from": "Publisher page embedded video"
+        }
+      ],
+      "paraphrase_word_budget": 180,
+      "verbatim_quote_words": 0,
+      "rights_note": "Public access establishes provenance, not a license for likeness, voice, or redistribution.",
+      "evidence_count": 6,
+      "paraphrase_word_count": 113,
+      "event_key": "yc-2016",
+      "published_at": "2016-09-15",
+      "review_scope": "Subject’s own answers; no interviewer claims or inferred gestures.",
+      "video_alignment_status": "not_verified"
+    },
+    {
+      "source_id": "recode-2018",
+      "source_family": "recode",
+      "primary_transcript_url": "https://www.vox.com/2018/11/2/18053428/recode-decode-full-podcast-transcript-elon-musk-tesla-spacex-boring-company-kara-swisher",
+      "transcript_status": "reviewed_publisher_transcript",
+      "source_timeline": "article_passages",
+      "media_links": [
+        {
+          "url": "https://podcasts.apple.com/us/podcast/recode-decode-elon-musk/id1011668648?i=1000423041084",
+          "kind": "podcast_episode",
+          "observed_from": "Vox Media podcast listing"
+        }
+      ],
+      "paraphrase_word_budget": 100,
+      "verbatim_quote_words": 0,
+      "rights_note": "Public access establishes provenance, not a license for likeness, voice, or redistribution.",
+      "evidence_count": 5,
+      "paraphrase_word_count": 79,
+      "event_key": "recode-2018",
+      "published_at": "2018-11-02",
+      "review_scope": "Subject’s own answers; no interviewer claims or inferred gestures.",
+      "video_alignment_status": "not_verified"
+    },
+    {
+      "source_id": "wired-2012",
+      "source_family": "wired",
+      "primary_transcript_url": "https://www.wired.com/2012/10/ff-elon-musk-qa/",
+      "transcript_status": "reviewed_original_interview_excerpt",
+      "source_timeline": "article_passages",
+      "media_links": [],
+      "paraphrase_word_budget": 100,
+      "verbatim_quote_words": 0,
+      "rights_note": "Public access establishes provenance, not a license for likeness, voice, or redistribution.",
+      "evidence_count": 5,
+      "paraphrase_word_count": 74,
+      "event_key": "wired-2012",
+      "published_at": "2012-10-21",
+      "review_scope": "Subject’s own answers; no interviewer claims or inferred gestures.",
+      "video_alignment_status": "not_applicable"
+    },
+    {
+      "source_id": "time-2021-boca-chica",
+      "source_family": "time",
+      "primary_transcript_url": "https://time.com/6127757/elon-musk-interview-person-of-the-year-2021/",
+      "transcript_status": "reviewed_original_interview_excerpt",
+      "source_timeline": "article_passages",
+      "media_links": [
+        {
+          "url": "https://cdn.jwplayer.com/manifests/mYXITUNy.m3u8",
+          "kind": "publisher_hls",
+          "observed_from": "Publisher Watch HLS stream link"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=IZPBYS_8rzE",
+          "kind": "youtube",
+          "observed_from": "Verified TIME channel search result"
+        }
+      ],
+      "paraphrase_word_budget": 100,
+      "verbatim_quote_words": 0,
+      "rights_note": "Public access establishes provenance, not a license for likeness, voice, or redistribution.",
+      "evidence_count": 4,
+      "paraphrase_word_count": 63,
+      "event_key": "time-2021-boca-chica",
+      "published_at": "2021-12-13",
+      "review_scope": "Subject’s own answers; no interviewer claims or inferred gestures.",
+      "video_alignment_status": "not_verified"
+    },
+    {
+      "source_id": "time-2021-live",
+      "source_family": "time",
+      "primary_transcript_url": "https://time.com/6128235/elon-musk-interview-person-of-the-year/",
+      "transcript_status": "reviewed_original_interview_excerpt",
+      "source_timeline": "article_passages",
+      "media_links": [
+        {
+          "url": "https://cdn.jwplayer.com/manifests/5IWSHt29.m3u8",
+          "kind": "publisher_hls",
+          "observed_from": "Publisher Watch HLS stream link"
+        }
+      ],
+      "paraphrase_word_budget": 100,
+      "verbatim_quote_words": 0,
+      "rights_note": "Public access establishes provenance, not a license for likeness, voice, or redistribution.",
+      "evidence_count": 4,
+      "paraphrase_word_count": 64,
+      "event_key": "time-2021-live",
+      "published_at": "2021-12-14",
+      "review_scope": "Subject’s own answers; no interviewer claims or inferred gestures.",
+      "video_alignment_status": "not_verified"
+    },
+    {
+      "source_id": "popular-mechanics-2019",
+      "source_family": "popular_mechanics",
+      "primary_transcript_url": "https://www.popularmechanics.com/space/moon-mars/a26513651/elon-musk-interview-spacex-mars/",
+      "transcript_status": "reviewed_original_interview_excerpt",
+      "source_timeline": "article_passages",
+      "media_links": [],
+      "paraphrase_word_budget": 100,
+      "verbatim_quote_words": 0,
+      "rights_note": "Public access establishes provenance, not a license for likeness, voice, or redistribution.",
+      "evidence_count": 4,
+      "paraphrase_word_count": 66,
+      "event_key": "popular-mechanics-2019",
+      "published_at": "2019-02-25",
+      "review_scope": "Subject’s own answers; no interviewer claims or inferred gestures.",
+      "video_alignment_status": "not_applicable"
+    },
+    {
+      "source_id": "gq-2015",
+      "source_family": "gq",
+      "primary_transcript_url": "https://www.gq.com/story/elon-musk-mars-spacex-tesla-interview",
+      "transcript_status": "reviewed_original_interview_excerpt",
+      "source_timeline": "article_passages",
+      "media_links": [],
+      "paraphrase_word_budget": 100,
+      "verbatim_quote_words": 0,
+      "rights_note": "Public access establishes provenance, not a license for likeness, voice, or redistribution.",
+      "evidence_count": 5,
+      "paraphrase_word_count": 71,
+      "event_key": "gq-2015",
+      "published_at": "2015-12-12",
+      "review_scope": "Subject’s own answers; no interviewer claims or inferred gestures.",
+      "video_alignment_status": "not_applicable"
+    }
+  ],
+  "metadata_only_candidates": [
+    {
+      "id": "lex-018-2019",
+      "title": "Elon Musk: Tesla Autopilot",
+      "url": "https://lexfridman.com/elon-musk/",
+      "publisher": "Lex Fridman Podcast",
+      "published_at": "2019-04-12",
+      "status": "metadata_verified_transcript_not_reviewed",
+      "reason": "Publisher episode page and audio are available; a primary text transcript was not located in this pass.",
+      "media_links": [
+        {
+          "url": "https://media.blubrry.com/takeituneasy/content.blubrry.com/takeituneasy/mit_ai_elon_musk.mp3",
+          "kind": "publisher_mp3",
+          "observed_from": "Publisher episode download link"
+        }
+      ]
+    },
+    {
+      "id": "lex-252-2021",
+      "title": "Elon Musk: SpaceX, Mars, Tesla Autopilot, Self-Driving, Robotics, and AI",
+      "url": "https://lexfridman.com/elon-musk-3/",
+      "publisher": "Lex Fridman Podcast",
+      "published_at": "2021-12-28",
+      "status": "metadata_verified_transcript_not_reviewed",
+      "reason": "Publisher episode has chapter labels and audio; no answer evidence was derived from chapter labels or third-party transcripts.",
+      "media_links": [
+        {
+          "url": "https://media.blubrry.com/takeituneasy/content.blubrry.com/takeituneasy/lex_ai_elon_musk_3.mp3",
+          "kind": "publisher_mp3",
+          "observed_from": "Publisher episode download link"
+        }
+      ]
+    },
+    {
+      "id": "reddit-ama-2015-candidate",
+      "title": "I am Elon Musk, CEO/CTO of a rocket company, AMA!",
+      "url": "https://www.reddit.com/r/IAmA/comments/2rgsan/i_am_elon_musk_ceocto_of_a_rocket_company_ama/",
+      "publisher": "Reddit / u/ElonMuskOfficial",
+      "status": "primary_replies_available_pending_provenance",
+      "reason": "Primary replies are publicly readable and thread links a verification tweet. Exact original post date and stable comment permalinks were not independently verified; not promoted. Public JSON request returned403.",
+      "media_links": [],
+      "source_timeline": "text_comments"
+    },
+    {
+      "id": "reddit-ama-2016-candidate",
+      "title": "I am Elon Musk, ask me anything about becoming a spacefaring civ!",
+      "url": "https://www.reddit.com/r/spacex/comments/590wi9/i_am_elon_musk_ask_me_anything_about_becoming_a/",
+      "publisher": "Reddit / u/ElonMuskOfficial",
+      "status": "primary_replies_available_pending_provenance",
+      "reason": "Public replies are still visible, but introductory post is removed and exact date/comment provenance needs another pass. No evidence promoted.",
+      "media_links": [],
+      "source_timeline": "text_comments"
+    }
+  ],
+  "reviewed_at": "2026-11-11",
+  "scope_note": "Twelve new original interview events. Evidence consists of short original paraphrases of the subject’s own public answers. This is retrieval material, not a trained or validated personality model.",
+  "counts": {
+    "reviewed_source_events": 12,
+    "reviewed_records": 64,
+    "publisher_families": 8,
+    "timed_records": 30,
+    "paraphrase_words": 1090,
+    "new_test_sources": 0
+  },
+  "split_policy": "All additions are retrieval/train material. Existing lex-438-2024 remains held out. No assertion of new held-out evaluation quality.",
+  "coverage_topics": {
+    "AI": 1,
+    "action": 1,
+    "advice": 3,
+    "aesthetics": 1,
+    "agency": 1,
+    "analogy": 1,
+    "aspiration": 1,
+    "automation": 1,
+    "autonomy": 1,
+    "beauty": 1,
+    "books": 1,
+    "bottlenecks": 1,
+    "career": 2,
+    "childhood": 1,
+    "competition": 2,
+    "consciousness": 1,
+    "cost": 2,
+    "criticism": 2,
+    "curiosity": 2,
+    "deadlines": 1,
+    "design": 2,
+    "effort": 1,
+    "energy": 1,
+    "engineering": 3,
+    "evidence": 1,
+    "explanation": 1,
+    "failure": 4,
+    "fear": 1,
+    "feedback": 1,
+    "first principles": 2,
+    "focus": 1,
+    "food": 1,
+    "formative experiences": 4,
+    "friends": 1,
+    "future": 3,
+    "hardship": 1,
+    "hiring": 3,
+    "history": 1,
+    "humor context": 8,
+    "identity": 1,
+    "impact": 3,
+    "inspiration": 3,
+    "interests": 2,
+    "internet": 1,
+    "leadership": 1,
+    "learning": 2,
+    "legacy": 1,
+    "management": 5,
+    "manufacturing": 3,
+    "mars": 3,
+    "meaning": 1,
+    "mission": 4,
+    "mistakes": 2,
+    "motivation": 3,
+    "movies": 1,
+    "optimism": 4,
+    "orbit": 1,
+    "patents": 1,
+    "persistence": 3,
+    "perspective": 1,
+    "philanthropy": 1,
+    "philosophy": 2,
+    "physics": 1,
+    "planning": 1,
+    "prediction": 1,
+    "predictions": 2,
+    "priorities": 2,
+    "probabilities": 1,
+    "problem solving": 2,
+    "process": 1,
+    "product design": 1,
+    "progress": 1,
+    "questions": 1,
+    "reading": 3,
+    "reasoning": 3,
+    "resources": 1,
+    "responsibility": 2,
+    "reusability": 1,
+    "risk": 4,
+    "rockets": 1,
+    "scale": 1,
+    "science": 1,
+    "social media": 2,
+    "space": 3,
+    "spacex": 1,
+    "sustainability": 1,
+    "sustainable energy": 1,
+    "talent": 1,
+    "technology": 3,
+    "tesla": 5,
+    "thinking": 1,
+    "time": 2,
+    "trust": 1,
+    "truth": 1,
+    "tunneling": 2,
+    "twitter": 1,
+    "uncertainty": 7,
+    "university": 1,
+    "usefulness": 2,
+    "values": 3,
+    "video games": 1,
+    "wordplay": 1,
+    "work": 1,
+    "work approach": 4
+  }
+}
