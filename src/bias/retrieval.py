@@ -12,7 +12,7 @@ from .corpus import Corpus
 from .models import Evidence
 
 STOPWORDS = frozenset("a an the and or of to in on for is are was were be been being that this it its as at by with from i you your me my we our he his they their what why how when where which do did does would could should can about tell explain please elon musk think thoughts opinion question have has had will might may need said say described describe back suggest compare".split())
-KOREAN_STOPWORDS = frozenset("어떤 어떻게 왜 무엇 무슨 했는데 대해 관해 알려줘 설명해줘 했어 말했어".split())
+KOREAN_STOPWORDS = frozenset("어떤 어떻게 왜 무엇 무슨 했는데 대해 관해 알려줘 설명해줘 했어 말했어 이유 뭐야 있어 받았어 다뤘어".split())
 ALIASES = {
     "화성": "mars multiplanetary", "우주": "space spacex", "스페이스엑스": "spacex rocket",
     "로켓": "rocket", "재사용": "reuse reusable", "전기차": "electric vehicle",
@@ -26,7 +26,22 @@ ALIASES = {
     "스포츠카": "sports car", "비싼": "expensive costly", "공학": "engineering",
     "원리": "principles fundamentals", "가설": "hypothesis hypotheses", "검증": "testable validation",
     "유용": "useful usefulness", "세상": "world", "바꾸": "transform change",
+    "친구": "friend", "비판": "criticism critical", "피드백": "feedback",
+    "채용": "hiring", "친절": "kindness", "신뢰": "trust trustworthiness",
+    "신뢰성": "reliability", "성공": "success succeeding", "가능성": "chance probability",
+    "확률": "probability", "도전": "attempt", "낮아": "low",
+    "책": "book reading", "독서": "reading book", "어릴": "childhood growing",
+    "어린": "childhood growing", "영화": "film movie", "영향": "influence impact",
+    "요구사항": "requirements", "합치": "combine combined", "문제": "problem",
+    "하이퍼루프": "hyperloop", "제안": "proposal", "오류": "mistake error",
+    "두려": "fear", "목표": "goal objective", "불확실": "uncertainty uncertain",
+    "일정": "schedule deadline", "예측": "forecast prediction", "낙관": "optimism optimistic",
+    "유머": "humor", "농담": "joke humor", "학습": "learning", "배움": "learning",
+    "경험": "experience", "실용": "useful utility", "디자인": "design",
+    "팀": "team", "기술": "technology", "호기심": "curiosity", "관심": "interest",
+    "기억": "memory memorable", "바꿔": "transform change",
 }
+KOREAN_PARTICLES = ("들에게", "들에서", "이라고", "에서는", "에게", "부터", "라고", "에서", "으로", "적인", "은", "는", "이", "가", "을", "를", "로", "과", "와", "에")
 SITUATIONS = {
     "explanation": ("why", "how", "explain", "왜", "어떻게", "설명"),
     "reflection": ("regret", "failure", "learn", "실패", "배웠", "후회"),
@@ -38,7 +53,20 @@ LIVE_QUERY = re.compile(r"\b(today|currently|latest|right now|(?:this|next) (?:w
 
 def tokenize(text: str) -> list[str]:
     normalized = unicodedata.normalize("NFKC", text).lower()
-    expanded = normalized + " " + " ".join(value for key, value in ALIASES.items() if key in normalized)
+    # Translate known concepts, not arbitrary substrings: 책 (book) must not
+    # match 정책 (policy) or 책임 (responsibility). Prefer a longer concept such
+    # as 신뢰성 (reliability) to its shorter root 신뢰 (trust).
+    alias_values = []
+    raw_tokens = re.findall(r"[^\W_]+", normalized, flags=re.UNICODE)
+    for token in raw_tokens:
+        matches = [
+            key for key in ALIASES if " " not in key and token.startswith(key)
+            and (len(key) > 1 or token == key or token[len(key):] in KOREAN_PARTICLES)
+        ]
+        if matches:
+            alias_values.append(ALIASES[max(matches, key=len)])
+    alias_values.extend(value for key, value in ALIASES.items() if " " in key and key in normalized)
+    expanded = normalized + " " + " ".join(alias_values)
     expanded = re.sub(r"['’]s\b", "", expanded)
     tokens = re.findall(r"[^\W_]+", expanded, flags=re.UNICODE)
     result = []
@@ -46,10 +74,12 @@ def tokenize(text: str) -> list[str]:
         if token in STOPWORDS or token in KOREAN_STOPWORDS or len(token) <= 1:
             continue
         if re.fullmatch(r"[가-힣]+", token):
-            for suffix in ("이라고", "에서는", "부터", "라고", "에서", "에게", "으로", "은", "는", "이", "가", "을", "를", "로"):
-                if token.endswith(suffix) and len(token) - len(suffix) >= 2:
+            for suffix in KOREAN_PARTICLES:
+                if token.endswith(suffix) and len(token) - len(suffix) >= 1:
                     token = token[:-len(suffix)]
                     break
+        if token in KOREAN_STOPWORDS:
+            continue
         if re.fullmatch(r"[a-z]+", token):
             if len(token) > 4 and token.endswith("ies"):
                 token = token[:-3] + "y"

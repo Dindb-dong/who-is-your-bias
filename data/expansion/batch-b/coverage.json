@@ -1,0 +1,208 @@
+{
+  "batch": "b",
+  "status": "curated_batch_complete",
+  "reviewed_at": "2026-11-11",
+  "counts": {
+    "sources": 12,
+    "evidence_records": 71,
+    "timed_evidence_records": 0,
+    "evidence_words_whitespace_count": 1357,
+    "minimum_words_per_source": 76,
+    "maximum_words_per_source": 136,
+    "source_types": {"congressional_events": 6, "university_events": 2, "authored_or_coauthored_documents": 4}
+  },
+  "policy": {
+    "source_unit": "One original event or authored document; multiple clips from one event are grouped.",
+    "max_paraphrase_words_per_source": 180,
+    "verbatim_passages_in_evidence": 0,
+    "raw_transcripts_distributed": false,
+    "behavioral_observation": "unknown; no gesture, expression, timing, or personality measurements inferred from text",
+    "predictions": "Historical plans and assertions, not verified outcomes or present-day views.",
+    "main_corpus_modified": false
+  },
+  "sources": [
+    {
+      "source_id": "stanford-etl-2003",
+      "evidence_count": 6,
+      "evidence_words": 114,
+      "date_basis": "The official clip pages each display October 8, 2003.",
+      "text_access": "Three official clip transcripts read; not the complete event transcript.",
+      "speaker_attribution": "Musk only; business-education and cost explanations are answers within the event.",
+      "transcript_urls": [
+        "https://stvp.stanford.edu/node/18391/printable/print",
+        "https://stvp.stanford.edu/node/18461/printable/print",
+        "https://stvp.stanford.edu/node/18496/printable/print"
+      ],
+      "component_urls": [
+        "https://stvp.stanford.edu/av/career-development",
+        "https://stvp.stanford.edu/av/career-development-mba-or-not",
+        "https://stvp.stanford.edu/av/decreasing-costs-space-travel"
+      ],
+      "video_url_basis": "Career Development clip's embedded YouTube player; other clips have distinct timelines.",
+      "timing": "Clip labels only. No timestamps inferred from prose or treated as full-event offsets.",
+      "behavioral_observation": "unknown"
+    },
+    {
+      "source_id": "tesla-hyperloop-alpha-2013",
+      "evidence_count": 6,
+      "evidence_words": 117,
+      "date_basis": "Release day is August 12, 2013; the primary PDF itself is undated. The contemporaneous AllThingsD publication documents the release.",
+      "date_reference_url": "https://allthingsd.com/20130812/hyperloop-elon-musks-really-rapid-transit-system/",
+      "text_access": "Official Tesla PDF, printed pages 1–4 read for the selected evidence.",
+      "speaker_attribution": "First-person introduction by Musk; technical development credited to Tesla and SpaceX colleagues.",
+      "timing": "Printed document pages; no audio/video alignment.",
+      "behavioral_observation": "unknown"
+    },
+    {
+      "source_id": "mit-aeroastro-2014",
+      "evidence_count": 4,
+      "evidence_words": 76,
+      "date_basis": "MIT News publication date October 25, 2014; exact interview recording date is not assigned.",
+      "text_access": "Event host's original report, Musk–Peraire section only; not a full transcript.",
+      "speaker_attribution": "Only remarks explicitly attributed to Musk; comments from astronauts and other panelists excluded.",
+      "timing": "Article section labels; no measured media timestamps.",
+      "behavioral_observation": "unknown"
+    },
+    {
+      "source_id": "senate-launch-2014",
+      "evidence_count": 5,
+      "evidence_words": 82,
+      "date_basis": "March 5, 2014 is printed on the statement and confirmed by the official hearing schedule.",
+      "date_reference_url": "https://www.appropriations.senate.gov/news/minority/schedule-for-the-week-of-march-3-2014",
+      "text_access": "Official prepared statement read. Later requests intermittently returned HTTP 403. The same statement was independently verified in the official GPO hearing transcript.",
+      "alternate_primary_url": "https://www.govinfo.gov/content/pkg/CHRG-113shrg49104594/html/CHRG-113shrg49104594.htm",
+      "speaker_attribution": "Musk's prepared statement only; other witnesses and oral exchanges excluded.",
+      "timing": "Document section locators; not a hearing recording timeline.",
+      "behavioral_observation": "unknown"
+    },
+    {
+      "source_id": "tesla-company-update-2019",
+      "evidence_count": 6,
+      "evidence_words": 116,
+      "date_basis": "January 18, 2019 is printed in SEC exhibit 99.1.",
+      "text_access": "Complete public exhibit read; only short paraphrases distributed.",
+      "speaker_attribution": "Employee message signed Elon, reproduced by Tesla in a public filing.",
+      "timing": "Document paragraph locators; no audiovisual source.",
+      "behavioral_observation": "unknown"
+    },
+    {
+      "source_id": "house-space-cooperation-2004",
+      "evidence_count": 7,
+      "evidence_words": 136,
+      "date_basis": "Public hearing on March 18, 2004. The later written answers have no exact submission date in the selected record and are labeled accordingly.",
+      "text_access": "Musk's oral statement and answers to post-hearing question 1a read in the official GPO transcript.",
+      "speaker_attribution": "Only Mr. Musk's statement and the explicitly labeled Responses by Elon Musk. Other witnesses' answers excluded.",
+      "question_context": "Statement concerns interagency launch cooperation; later written question asks which regulations SpaceX found burdensome.",
+      "timing": "Oral and post-hearing written material use distinct section timelines; no audiovisual alignment.",
+      "behavioral_observation": "unknown"
+    },
+    {
+      "source_id": "senate-future-launch-2004",
+      "evidence_count": 6,
+      "evidence_words": 119,
+      "date_basis": "Public hearing on May 5, 2004. GPO republication date is shown only as the year 2016; that is not substituted for the event date.",
+      "text_access": "Musk's oral statement read in the official GPO transcript.",
+      "speaker_attribution": "Musk only. Committee disagreement about a procurement protest is context, not evidence of a general behavioral trait.",
+      "question_context": "The chair requested remarks on launch capacity and ISS support; the selected records come from the ensuing statement.",
+      "timing": "Hearing section locators; no measured recording timestamps.",
+      "behavioral_observation": "unknown"
+    },
+    {
+      "source_id": "house-commercial-space-2005",
+      "evidence_count": 6,
+      "evidence_words": 117,
+      "date_basis": "Public hearing April 20, 2005; GPO volume printed in 2005.",
+      "text_access": "Musk's Panel II opening statement read in the official transcript.",
+      "speaker_attribution": "Only Musk's identified statement. The adjacent panel's discussion of learning from failed experiments belongs to Burt Rutan and is not attributed to Musk.",
+      "question_context": "Prepared responses about SpaceX's business plan, government support, and implications of exploration goals.",
+      "timing": "Section labels, not media offsets. Planned Falcon V features remain plans at the date of testimony.",
+      "behavioral_observation": "unknown"
+    },
+    {
+      "source_id": "senate-advanced-energy-2007",
+      "evidence_count": 6,
+      "evidence_words": 112,
+      "date_basis": "Public hearing March 7, 2007; GPO volume printed in 2007.",
+      "text_access": "Musk's oral statement read in the official transcript.",
+      "speaker_attribution": "Musk speaking as Tesla chairman; adjacent statements by Google and financial-sector witnesses excluded.",
+      "question_context": "How to accelerate commercialization and investment in advanced energy technologies.",
+      "timing": "Statement section locators; no measured recording timestamps.",
+      "behavioral_observation": "unknown"
+    },
+    {
+      "source_id": "house-commercial-crew-2011",
+      "evidence_count": 7,
+      "evidence_words": 136,
+      "date_basis": "Public hearing October 26, 2011; the transcript volume was printed in 2012.",
+      "text_access": "Musk's opening oral statement read in the official transcript.",
+      "speaker_attribution": "Only Musk's identified statement; no NASA or competing-company testimony attributed to him.",
+      "question_context": "Progress and constraints in commercial crew development; the selected material is an opening statement, not later Q&A.",
+      "timing": "Statement section locators. The transcript marks a video playback but supplies no shared media clock.",
+      "behavioral_observation": "unknown"
+    },
+    {
+      "source_id": "tesla-private-update-2018",
+      "evidence_count": 6,
+      "evidence_words": 120,
+      "date_basis": "Original post byline dated August 13, 2018; court exhibit preserves an April 5, 2021 webpage capture.",
+      "text_access": "Both pages of original blog post as preserved in public trial exhibit 53 read.",
+      "speaker_attribution": "Musk's bylined public explanation in his explicitly stated capacity as a potential bidder.",
+      "context_limit": "This establishes what he publicly said, not the truth of financing claims or a legal conclusion. No private email addresses or court-party personal details included.",
+      "original_url": "https://www.tesla.com/blog/update-taking-tesla-private",
+      "timing": "Court exhibit pages; no audiovisual source.",
+      "behavioral_observation": "unknown"
+    },
+    {
+      "source_id": "tesla-q4-2013-letter-2014",
+      "evidence_count": 6,
+      "evidence_words": 112,
+      "date_basis": "February 19, 2014 is printed on the shareholder letter; 2013 in the title is the reporting period.",
+      "text_access": "Corporate letter body and its two signatories verified in SEC exhibit 99.1.",
+      "speaker_attribution": "Co-signed by Elon Musk and Deepak Ahuja. All selected evidence explicitly preserves shared corporate authorship.",
+      "context_limit": "Supports corporate strategy he signed, not individual spontaneous speech, private belief, or verified present-day product claims.",
+      "timing": "Document section labels; no audio/video alignment.",
+      "behavioral_observation": "unknown"
+    }
+  ],
+  "validation": {
+    "schema": "All 12 Source and 71 Evidence records validated with the repository's Pydantic models.",
+    "integrity": "Unique source/evidence IDs; all source references resolve; no source-ID or canonical-URL overlap with the original seven-source corpus or expansion A.",
+    "evidence_range": "Each source has 4–7 records and fewer than 180 evidence words.",
+    "gesture_and_time": "All behavioral_observation fields are null; no numeric media timestamps invented.",
+    "accuracy_scope": "Manual source-grounding review plus structural checks, not an independent factual audit or persona-fidelity benchmark."
+  },
+  "coverage_limits": [
+    "The batch is concentrated in engineering, company strategy, and public testimony from 2003–2019; it does not represent every aspect or period of Musk's public persona.",
+    "Six congressional events contain advocacy by an interested business participant. These statements must remain attributed and dated.",
+    "No source in this batch supports visual, vocal, emotional, or psychological measurements.",
+    "The MIT record is a host's excerpted report. The Tesla 2014 letter is coauthored. These are weaker evidence of spontaneous personal phrasing than a directly attributed full interview.",
+    "Source dates use first public delivery for hearings; later official republication years and undated post-hearing answers are disclosed separately."
+  ],
+  "excluded_or_pending": [
+    {
+      "candidate": "Older Musk-authored Tesla blog posts",
+      "examples": ["https://www.tesla.com/blog/all-our-patent-are-belong-you", "https://www.tesla.com/blog/model-s-fire", "https://www.tesla.com/blog/mission-tesla"],
+      "reason": "Observed URLs redirect to a generic blog index. The original article body was not available through these URLs. No evidence records created."
+    },
+    {
+      "candidate": "Caltech commencement 2012",
+      "url": "https://commencement.caltech.edu/archive/speakers/2012_address",
+      "reason": "Original transcript link returned 404. Event metadata alone does not establish speech content. No evidence records created."
+    },
+    {
+      "candidate": "Caltech 2012 short host report",
+      "url": "https://www.eas.caltech.edu/news/118th-commencement-ceremony",
+      "reason": "A short original host report is accessible, but it provides too little directly attributed content for this batch's source coverage target. It is not counted as an acquired full speech."
+    },
+    {
+      "candidate": "USC commencement 2014",
+      "url": "https://www.youtube.com/watch?v=e7Qh-vwpYH8",
+      "reason": "Official USC video and May 16, 2014 event date verified. Only third-party transcript bodies were retrieved; no transcript-derived evidence is included in this batch."
+    },
+    {
+      "candidate": "Tesla September 2018 employee message",
+      "url": "https://www.sec.gov/Archives/edgar/data/1318605/000156459018023716/tsla-ex991_6.htm",
+      "reason": "Original short message verified in SEC filing, but not padded into four separate claims or counted in the acquired-source total."
+    }
+  ]
+}

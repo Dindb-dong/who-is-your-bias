@@ -109,7 +109,10 @@ Connect the main app using:
 export BIAS_TTS_BASE_URL=http://127.0.0.1:8010/v1
 export BIAS_TTS_MODEL=qwen3-tts
 export BIAS_TTS_VOICE=reference
+export BIAS_REQUEST_TIMEOUT=180
 ```
+
+The longer main-app timeout allows a slow cold start within the configured maximum. A first model download can still exceed it; download and exercise the model with the bounded [inference runner](inference-validation.md) before interactive use. The measured CPU voice path is slower than real-time, so use the reported timings when choosing a target runtime.
 
 If `BIAS_VOICE_API_KEY` is configured on the voice service, set the same value in the main app's `BIAS_TTS_API_KEY`. Bind to loopback for local use. The HTTP interface provides a narrow compatible subset:
 

@@ -1,0 +1,276 @@
+{
+  "schema_version": "transcript_acquisition_coverage.v1",
+  "measurement_date": "2026-11-10",
+  "input_source": "Four previously acquired public TED __NEXT_DATA__ documents",
+  "copyrighted_text_committed": false,
+  "sources": [
+    {
+      "schema_version": "transcript_acquisition_summary.v1",
+      "extractor_version": "1.0.0",
+      "source_id": "ted-2013",
+      "source_url": "https://www.ted.com/talks/elon_musk_the_mind_behind_tesla_spacex_solarcity",
+      "input_sha256": "1c70ddf9ff23a0f5368eaf60100585539d4fdaeefcd7025192886b10f9288225",
+      "publisher_caption_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "publisher_talk_id": "1695",
+      "translation_id": "52600",
+      "language": "en",
+      "source_timeline": "ted_transcript_cue",
+      "publisher_duration_seconds": 1244.0,
+      "first_cue_seconds": 0.354,
+      "last_cue_seconds": 1242.975,
+      "paragraph_count": 75,
+      "cue_count": 430,
+      "utterance_count": 88,
+      "word_count": 3575,
+      "known_speaker_cues": 417,
+      "unknown_speaker_cues": 13,
+      "known_speakers": {
+        "Chris Anderson": 124,
+        "Elon Musk": 293
+      },
+      "speaker_basis_counts": {
+        "explicit_publisher_label": 70,
+        "mixed_speakers": 9,
+        "non_speech_marker": 2,
+        "same_paragraph_label_continuation": 347,
+        "unknown": 2
+      },
+      "cue_interval_proxy_seconds_by_speaker": {
+        "Chris Anderson": 373.519,
+        "Elon Musk": 821.694
+      },
+      "unassigned_cue_interval_proxy_seconds": 48.433,
+      "cue_interval_proxy_may_overlap": false,
+      "duration_measurement_note": "Sums of caption onset-to-next-onset intervals, not measured speech duration; gaps and stage directions are included, and shared onsets may overlap.",
+      "explicit_label_occurrences": 85,
+      "shared_timestamp_cues": 0,
+      "whisperx_exportable_cues": 430,
+      "missing_end_cues": 0,
+      "speaker_identity_verified": false,
+      "audio_alignment_verified": false,
+      "review_status": "draft",
+      "full_text_committed": false,
+      "local_output_directory": "data/local/transcripts/publisher-ted-v1/ted-2013",
+      "draft_evidence_records": 430
+    },
+    {
+      "schema_version": "transcript_acquisition_summary.v1",
+      "extractor_version": "1.0.0",
+      "source_id": "ted-2017",
+      "source_url": "https://www.ted.com/talks/elon_musk_the_future_we_re_building_and_boring",
+      "input_sha256": "6ac81bc7990095225a4a07cbe43ef5fc80a71016eda97cf154fb32efffafdf52",
+      "publisher_caption_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "publisher_talk_id": "2774",
+      "translation_id": "111671",
+      "language": "en",
+      "source_timeline": "ted_transcript_cue",
+      "publisher_duration_seconds": 2437.0,
+      "first_cue_seconds": 0.52,
+      "last_cue_seconds": 2433.04,
+      "paragraph_count": 193,
+      "cue_count": 789,
+      "utterance_count": 195,
+      "word_count": 6073,
+      "known_speaker_cues": 681,
+      "unknown_speaker_cues": 108,
+      "known_speakers": {
+        "Chris Anderson": 245,
+        "Elon Musk": 436
+      },
+      "speaker_basis_counts": {
+        "explicit_publisher_label": 145,
+        "mixed_speakers": 2,
+        "non_speech_marker": 34,
+        "same_paragraph_label_continuation": 536,
+        "unknown": 72
+      },
+      "cue_interval_proxy_seconds_by_speaker": {
+        "Chris Anderson": 701.4,
+        "Elon Musk": 1414.7
+      },
+      "unassigned_cue_interval_proxy_seconds": 320.38,
+      "cue_interval_proxy_may_overlap": false,
+      "duration_measurement_note": "Sums of caption onset-to-next-onset intervals, not measured speech duration; gaps and stage directions are included, and shared onsets may overlap.",
+      "explicit_label_occurrences": 149,
+      "shared_timestamp_cues": 0,
+      "whisperx_exportable_cues": 789,
+      "missing_end_cues": 0,
+      "speaker_identity_verified": false,
+      "audio_alignment_verified": false,
+      "review_status": "draft",
+      "full_text_committed": false,
+      "local_output_directory": "data/local/transcripts/publisher-ted-v1/ted-2017",
+      "draft_evidence_records": 789
+    },
+    {
+      "schema_version": "transcript_acquisition_summary.v1",
+      "extractor_version": "1.0.0",
+      "source_id": "ted-2022-recorded",
+      "source_url": "https://www.ted.com/talks/elon_musk_a_future_worth_getting_excited_about",
+      "input_sha256": "e3e98a2e35ae736f76e57716da2e6dacd0d7f521eb0011889f589c995bf05a44",
+      "publisher_caption_sha256": "eb66551c1493446935a0fd76437b433ae4cbb62532526b574098671863834967",
+      "publisher_talk_id": "91078",
+      "translation_id": "207353",
+      "language": "en",
+      "source_timeline": "ted_transcript_cue",
+      "publisher_duration_seconds": 3983.0,
+      "first_cue_seconds": 0.288,
+      "last_cue_seconds": 3982.766,
+      "paragraph_count": 216,
+      "cue_count": 1242,
+      "utterance_count": 224,
+      "word_count": 10197,
+      "known_speaker_cues": 1076,
+      "unknown_speaker_cues": 166,
+      "known_speakers": {
+        "Chris Anderson": 418,
+        "Elon Musk": 658
+      },
+      "speaker_basis_counts": {
+        "explicit_publisher_label": 194,
+        "non_speech_marker": 6,
+        "same_paragraph_label_continuation": 882,
+        "unknown": 160
+      },
+      "cue_interval_proxy_seconds_by_speaker": {
+        "Chris Anderson": 1263.132,
+        "Elon Musk": 2178.454
+      },
+      "unassigned_cue_interval_proxy_seconds": 541.126,
+      "cue_interval_proxy_may_overlap": false,
+      "duration_measurement_note": "Sums of caption onset-to-next-onset intervals, not measured speech duration; gaps and stage directions are included, and shared onsets may overlap.",
+      "explicit_label_occurrences": 196,
+      "shared_timestamp_cues": 0,
+      "whisperx_exportable_cues": 1242,
+      "missing_end_cues": 0,
+      "speaker_identity_verified": false,
+      "audio_alignment_verified": false,
+      "review_status": "draft",
+      "full_text_committed": false,
+      "local_output_directory": "data/local/transcripts/publisher-ted-v1/ted-2022-recorded",
+      "draft_evidence_records": 1242
+    },
+    {
+      "schema_version": "transcript_acquisition_summary.v1",
+      "extractor_version": "1.0.0",
+      "source_id": "ted-2022-live",
+      "source_url": "https://www.ted.com/talks/elon_musk_elon_musk_talks_twitter_tesla_and_how_his_brain_works_live_at_ted2022",
+      "input_sha256": "8c86e2180e058f29235c9b720d3ba07aabb7e0cf29b7513b506317427f9395ca",
+      "publisher_caption_sha256": "ad3b3207510a1ac01c1cefdc38866e223caf49be8abd956445e130267eb7c546",
+      "publisher_talk_id": "90833",
+      "translation_id": "235127",
+      "language": "en",
+      "source_timeline": "ted_transcript_cue",
+      "publisher_duration_seconds": 3181.0,
+      "first_cue_seconds": 1.247,
+      "last_cue_seconds": 3174.292,
+      "paragraph_count": 223,
+      "cue_count": 990,
+      "utterance_count": 230,
+      "word_count": 7566,
+      "known_speaker_cues": 773,
+      "unknown_speaker_cues": 217,
+      "known_speakers": {
+        "Chris Anderson": 338,
+        "Elon Musk": 435
+      },
+      "speaker_basis_counts": {
+        "explicit_publisher_label": 141,
+        "non_speech_marker": 53,
+        "same_paragraph_label_continuation": 632,
+        "unknown": 164
+      },
+      "cue_interval_proxy_seconds_by_speaker": {
+        "Chris Anderson": 1009.219,
+        "Elon Musk": 1470.382
+      },
+      "unassigned_cue_interval_proxy_seconds": 700.152,
+      "cue_interval_proxy_may_overlap": false,
+      "duration_measurement_note": "Sums of caption onset-to-next-onset intervals, not measured speech duration; gaps and stage directions are included, and shared onsets may overlap.",
+      "explicit_label_occurrences": 143,
+      "shared_timestamp_cues": 0,
+      "whisperx_exportable_cues": 990,
+      "missing_end_cues": 0,
+      "speaker_identity_verified": false,
+      "audio_alignment_verified": false,
+      "review_status": "draft",
+      "full_text_committed": false,
+      "local_output_directory": "data/local/transcripts/publisher-ted-v1/ted-2022-live",
+      "draft_evidence_records": 990
+    }
+  ],
+  "totals": {
+    "publisher_duration_seconds": 10845.0,
+    "paragraph_count": 707,
+    "cue_count": 3451,
+    "utterance_count": 737,
+    "word_count": 27411,
+    "known_speaker_cues": 2947,
+    "unknown_speaker_cues": 504,
+    "whisperx_exportable_cues": 3451,
+    "missing_end_cues": 0,
+    "draft_evidence_records": 3451,
+    "unassigned_cue_interval_proxy_seconds": 1610.091,
+    "known_speakers": {
+      "Chris Anderson": 1125,
+      "Elon Musk": 1822
+    },
+    "speaker_basis_counts": {
+      "explicit_publisher_label": 550,
+      "mixed_speakers": 11,
+      "non_speech_marker": 95,
+      "same_paragraph_label_continuation": 2397,
+      "unknown": 398
+    },
+    "cue_interval_proxy_seconds_by_speaker": {
+      "Chris Anderson": 3347.27,
+      "Elon Musk": 5885.23
+    }
+  },
+  "public_https_smoke": {
+    "source_id": "ted-2013",
+    "url": "https://www.ted.com/talks/elon_musk_the_mind_behind_tesla_spacex_solarcity?view=transcript",
+    "input_sha256": "733c69f5fe00598c0c639fc8a144739fb6924cd86fc8817d73875b7350755f99",
+    "publisher_caption_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+    "local_output_directory": "data/local/transcripts/ted-2013-live-fetch",
+    "caption_content_matches_cached_input": true,
+    "note": "Fresh public HTML successfully parsed; this acquisition is the same source and is not counted twice."
+  },
+  "lex_primary_link_inspection": {
+    "checked_host_indexes": [
+      "https://lexfridman.com/podcast/",
+      "https://lexfridman.com/ai/"
+    ],
+    "sources": [
+      {
+        "source_id": "lex-018-2019",
+        "episode_url": "https://lexfridman.com/elon-musk/",
+        "youtube_url": "https://www.youtube.com/watch?v=dEv99vxKjVI",
+        "publisher_audio_url": "https://media.blubrry.com/takeituneasy/content.blubrry.com/takeituneasy/mit_ai_elon_musk.mp3",
+        "status": "publisher_media_links_observed_transcript_unreviewed",
+        "publisher_transcript_link_found": false,
+        "transcript_extracted": false,
+        "reviewed_evidence_added": 0
+      },
+      {
+        "source_id": "lex-252-2021",
+        "episode_url": "https://lexfridman.com/elon-musk-3/",
+        "youtube_url": "https://www.youtube.com/watch?v=DxREm3s1scA",
+        "publisher_audio_url": "https://media.blubrry.com/takeituneasy/content.blubrry.com/takeituneasy/lex_ai_elon_musk_3.mp3",
+        "status": "publisher_media_links_observed_transcript_unreviewed",
+        "publisher_transcript_link_found": false,
+        "transcript_extracted": false,
+        "reviewed_evidence_added": 0
+      }
+    ],
+    "scope_note": "No transcript link observed in these primary pages or indexes. This does not claim that no transcript exists anywhere. The primary Part II PDF belongs to episode49, not episode18."
+  },
+  "measurement_notes": [
+    "known_speakers counts text attribution from publisher labels, not independently verified audio identities.",
+    "unknown_speaker_cues includes mixed speakers, standalone stage directions, and other unlabeled captions.",
+    "utterance_count counts consecutive captions with shared paragraph/label context, not acoustically verified utterances.",
+    "word_count is whitespace-delimited and includes labels and stage directions.",
+    "Publisher durations and cue end proxies are not verified media alignment or actual speech durations.",
+    "All output and imported evidence remains draft/unverified; nothing was promoted into persona retrieval."
+  ]
+}

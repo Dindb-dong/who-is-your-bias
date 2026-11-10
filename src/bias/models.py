@@ -57,7 +57,8 @@ class Evidence(Record):
     kind: Literal["stated_view", "reported_experience", "authored_plan", "transcript"]
     confidence: Literal["source_grounded", "unverified_transcript"] = "source_grounded"
     behavioral_observation: dict | None = None
-    review_status: Literal["reviewed", "draft"] = "reviewed"
+    # Missing review metadata never grants permission to index a new record.
+    review_status: Literal["reviewed", "draft"] = "draft"
 
     @field_validator("text")
     @classmethod
