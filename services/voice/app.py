@@ -99,7 +99,7 @@ def create_app(settings: VoiceSettings | None = None, *, model_loader: Callable 
     app.add_middleware(BodyLimitMiddleware, max_bytes=settings.max_body_bytes)
 
     def authenticate(authorization: str | None) -> None:
-        if settings.api_key and not hmac.compare_digest(authorization or "", f"Bearer {settings.api_key}"):
+        if settings.api_key and not hmac.compare_digest((authorization or "").encode("utf-8"), f"Bearer {settings.api_key}".encode("utf-8")):
             raise HTTPException(status_code=401, detail="Valid voice service credentials are required")
 
     @app.get("/health")

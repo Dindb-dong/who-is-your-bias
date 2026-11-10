@@ -4,11 +4,14 @@ from __future__ import annotations
 
 import importlib.metadata
 import json
+import os
 import platform
 import re
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlsplit, urlunsplit
+
+os.environ.setdefault("ORT_DISABLE_TELEMETRY", "1")
 
 
 def package_versions() -> dict[str, str]:
