@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import type { Turn } from '../api';
+import type { PreparedSpeech, Turn } from '../api';
 import { createPlaybackController, planTime } from './playback';
 import type { PlaybackEnvironment, PlaybackState } from './playback';
 
@@ -57,6 +57,30 @@ beforeEach(() => vi.useFakeTimers());
 afterEach(() => { vi.clearAllTimers(); vi.useRealTimers(); });
 
 describe('speech playback ownership', () => {
+  it('keeps the raw audio clock separate from the behavior plan clock', async () => {
+    const f = setup();
+    f.environment.prepareSpeech = vi.fn(async (): Promise<PreparedSpeech> => ({ audio: new Blob(['audio']), audioSha256: 'a'.repeat(64),
+      timingStatus: 'available', speechTiming: { schema_version: 'speech-timing.v1', audio_sha256: 'a'.repeat(64),
+        audio_duration_ms: 6000, timing_basis: 'audio_recognition', label_set: 'rhubarb',
+        segments: [{ start_ms: 0, end_ms: 6000, label: 'B' }], provenance: { engine: 'rhubarb-lip-sync' } } }));
+    await f.controller.play(turn, 'provider');
+    expect(f.speech).not.toHaveBeenCalled();
+    expect(f.states.at(-1)?.audioElapsedMs).toBe(3000);
+    expect(f.states.at(-1)?.elapsedMs).toBe(5000);
+    expect(f.states.at(-1)?.speechTiming?.audio_sha256).toBe(f.states.at(-1)?.audioSha256);
+    f.controller.stop(); expect(f.states.at(-1)?.speechTiming).toBeUndefined(); f.controller.dispose();
+  });
+
+  it('discards a prepared package that finishes after cancellation', async () => {
+    const f = setup(); const preparation = deferred<PreparedSpeech>();
+    f.environment.prepareSpeech = vi.fn(() => preparation.promise);
+    const work = f.controller.play(turn, 'provider'); await flush(); f.controller.stop();
+    preparation.resolve({ audio: new Blob(['late']), audioSha256: 'a'.repeat(64), timingStatus: 'not_configured' });
+    await work;
+    expect(f.environment.createUrl).not.toHaveBeenCalled(); expect(f.speech).not.toHaveBeenCalled();
+    expect(f.states.at(-1)?.status).toBe('idle'); f.controller.dispose();
+  });
+
   it('does not request synthesis after cancellation during context resume', async () => {
     const f = setup(); const resume = deferred<void>(); const createContext = f.environment.createContext;
     f.environment.createContext = () => { const context = createContext(); context.resume = () => resume.promise; return context; };

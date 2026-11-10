@@ -1,9 +1,14 @@
-import { getSpeech } from '../api';
+import { getPreparedSpeech, getSpeech } from '../api';
 import type { Turn } from '../api';
+import type { SpeechTiming } from '../avatar/types';
 
 export type VoiceMode = 'off' | 'browser' | 'provider';
-export type PlaybackState = { status: 'idle' | 'loading' | 'playing'; elapsedMs: number; amplitude: number; error: string | null };
-export const initialPlayback: PlaybackState = { status: 'idle', elapsedMs: 0, amplitude: 0, error: null };
+export type PlaybackState = {
+  status: 'idle' | 'loading' | 'playing'; elapsedMs: number; audioElapsedMs: number;
+  amplitude: number; error: string | null; audioSha256?: string; speechTiming?: SpeechTiming;
+  timingStatus?: string; timingMessage?: string;
+};
+export const initialPlayback: PlaybackState = { status: 'idle', elapsedMs: 0, audioElapsedMs: 0, amplitude: 0, error: null };
 
 export function planTime(audioSeconds: number, audioDurationSeconds: number, planDurationMs: number): number {
   if (!Number.isFinite(audioSeconds) || audioSeconds < 0) return 0;
@@ -13,6 +18,7 @@ export function planTime(audioSeconds: number, audioDurationSeconds: number, pla
 
 export interface PlaybackEnvironment {
   getSpeech: typeof getSpeech;
+  prepareSpeech?: typeof getPreparedSpeech;
   createContext(): AudioContext;
   createAudio(url: string): HTMLAudioElement;
   createUtterance(text: string): SpeechSynthesisUtterance;
@@ -26,7 +32,7 @@ export interface PlaybackEnvironment {
 
 export function browserPlaybackEnvironment(): PlaybackEnvironment {
   return {
-    getSpeech, createContext: () => new AudioContext(), createAudio: (url) => new Audio(url),
+    getSpeech, prepareSpeech: getPreparedSpeech, createContext: () => new AudioContext(), createAudio: (url) => new Audio(url),
     createUtterance: (text) => new SpeechSynthesisUtterance(text),
     synthesis: 'speechSynthesis' in window ? window.speechSynthesis : undefined,
     createUrl: (blob) => URL.createObjectURL(blob), revokeUrl: (url) => URL.revokeObjectURL(url),
@@ -99,7 +105,9 @@ export function createPlaybackController(emit: (state: PlaybackState) => void, e
           audioContext = environment.createContext();
           await audioContext.resume();
           if (!isCurrent()) return;
-          const blob = await environment.getSpeech(turn.text, abort.signal);
+          const prepared = environment.prepareSpeech ? await environment.prepareSpeech(turn.text, turn.language, abort.signal) : undefined;
+          if (!isCurrent()) return;
+          const blob = prepared?.audio ?? await environment.getSpeech(turn.text, abort.signal);
           if (!isCurrent()) return;
           audioUrl = environment.createUrl(blob);
           audio = environment.createAudio(audioUrl);
@@ -113,7 +121,10 @@ export function createPlaybackController(emit: (state: PlaybackState) => void, e
             let squareSum = 0;
             for (const value of samples) squareSum += ((value - 128) / 128) ** 2;
             publish({ status: 'playing', elapsedMs: planTime(audio.currentTime, audio.duration, turn.behavior.duration_ms),
-              amplitude: Math.min(1, Math.sqrt(squareSum / samples.length) * 5), error: null });
+              audioElapsedMs: Number.isFinite(audio.currentTime) ? Math.max(0, audio.currentTime * 1000) : 0,
+              amplitude: Math.min(1, Math.sqrt(squareSum / samples.length) * 5), error: null,
+              audioSha256: prepared?.audioSha256, speechTiming: prepared?.speechTiming,
+              timingStatus: prepared?.timingStatus ?? 'not_configured', timingMessage: prepared?.timingMessage });
             raf = environment.requestFrame(tick);
           };
           audio.onended = () => finish();
@@ -137,7 +148,8 @@ export function createPlaybackController(emit: (state: PlaybackState) => void, e
             // Browser synthesis exposes no PCM waveform. This is designed
             // articulation rather than measured speech energy.
             publish({ status: 'playing', elapsedMs: planTime(elapsed / 1000, turn.behavior.duration_ms / 1000, turn.behavior.duration_ms),
-              amplitude: 0.12 + (Math.sin(elapsed / 83) + 1) * 0.17, error: null });
+              audioElapsedMs: elapsed, amplitude: 0.12 + (Math.sin(elapsed / 83) + 1) * 0.17, error: null,
+              timingStatus: 'estimated' });
             raf = environment.requestFrame(tick);
           };
           utterance.onstart = () => {

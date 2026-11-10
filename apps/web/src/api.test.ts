@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { createEventParser, streamChat } from './api';
+import { createEventParser, getPreparedSpeech, streamChat } from './api';
 import type { StreamEvent, Turn } from './api';
 import { planTime } from './hooks/usePlayback';
 
@@ -47,6 +47,55 @@ function mockStream(text: string, oneByte = false) {
   vi.stubGlobal('fetch', vi.fn(async () => response)); return response;
 }
 afterEach(() => vi.unstubAllGlobals());
+
+describe('audio and mouth-cue transport', () => {
+  const audio = new TextEncoder().encode('exact audio bytes');
+  async function fixture() {
+    const digest = new Uint8Array(await crypto.subtle.digest('SHA-256', audio));
+    const hash = Array.from(digest, (part) => part.toString(16).padStart(2, '0')).join('');
+    return { audio_url: `/api/speech/clips/${'a'.repeat(32)}`, audio_sha256: hash, timing_status: 'available',
+      speech_timing: { schema_version: 'speech-timing.v1', audio_sha256: hash, audio_duration_ms: 2000,
+        timing_basis: 'audio_recognition', label_set: 'rhubarb', segments: [{ start_ms: 0, end_ms: 2000, label: 'B' }],
+        provenance: { engine: 'rhubarb-lip-sync' } } };
+  }
+  it('verifies the exact audio bytes before exposing timing to playback', async () => {
+    const metadata = await fixture();
+    const fetcher = vi.fn().mockResolvedValueOnce(Response.json(metadata))
+      .mockResolvedValueOnce(new Response(audio, { headers: { 'content-type': 'audio/wav' } }));
+    vi.stubGlobal('fetch', fetcher);
+    const result = await getPreparedSpeech('Hello', 'en', new AbortController().signal);
+    expect(result.audioSha256).toBe(metadata.audio_sha256);
+    expect(result.speechTiming?.timing_basis).toBe('audio_recognition');
+    expect(await result.audio.text()).toBe('exact audio bytes');
+    expect(fetcher.mock.calls[1][0]).toBe(metadata.audio_url);
+  });
+  it('rejects an unrelated download and never animates its cues', async () => {
+    const fetcher = vi.fn().mockResolvedValueOnce(Response.json(await fixture()))
+      .mockResolvedValueOnce(new Response('different bytes', { headers: { 'content-type': 'audio/wav' } }));
+    vi.stubGlobal('fetch', fetcher);
+    await expect(getPreparedSpeech('Hello', 'en', new AbortController().signal)).rejects.toThrow('did not match');
+  });
+  it('does not fetch external or unexpected audio URLs', async () => {
+    const fetcher = vi.fn().mockResolvedValueOnce(Response.json({ ...await fixture(), audio_url: 'https://external.example/clip.wav' }));
+    vi.stubGlobal('fetch', fetcher);
+    await expect(getPreparedSpeech('Hello', 'en', new AbortController().signal)).rejects.toThrow('invalid audio metadata');
+    expect(fetcher).toHaveBeenCalledTimes(1);
+  });
+  it('rejects an available timing claim with a different audio hash', async () => {
+    const metadata = await fixture(); metadata.speech_timing.audio_sha256 = '0'.repeat(64);
+    const fetcher = vi.fn().mockResolvedValueOnce(Response.json(metadata)); vi.stubGlobal('fetch', fetcher);
+    await expect(getPreparedSpeech('Hello', 'en', new AbortController().signal)).rejects.toThrow('do not match');
+    expect(fetcher).toHaveBeenCalledTimes(1);
+  });
+  it('preserves a playable provider voice when analysis is not configured', async () => {
+    const metadata = { ...await fixture(), speech_timing: null, timing_status: 'not_configured', timing_message: 'Approximate movement' };
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(Response.json(metadata))
+      .mockResolvedValueOnce(new Response(audio, { headers: { 'content-type': 'audio/wav' } })));
+    const result = await getPreparedSpeech('Hello', 'ko', new AbortController().signal);
+    expect(result.speechTiming).toBeUndefined(); expect(result.timingStatus).toBe('not_configured');
+    expect(result.timingMessage).toBe('Approximate movement');
+  });
+});
 
 describe('stream completion and cancellation', () => {
   it('decodes UTF-8 split inside Korean characters and completes one result', async () => {

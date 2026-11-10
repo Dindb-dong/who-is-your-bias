@@ -1,4 +1,6 @@
 import type { BehaviorPlan } from './avatar/types';
+import type { SpeechTiming } from './avatar/types';
+import { parseSpeechTiming } from './avatar/validation';
 
 export type Language = 'en' | 'ko';
 export type ExperimentMode = 'profile' | 'rag' | 'behavior';
@@ -167,5 +169,65 @@ export async function getSpeech(text: string, signal: AbortSignal): Promise<Blob
   const blob = await response.blob();
   if (!blob.size) throw new ApiError('The voice service returned empty audio.');
   return blob;
+}
+
+export interface PreparedSpeech {
+  audio: Blob;
+  audioSha256: string;
+  speechTiming?: SpeechTiming;
+  timingStatus: string;
+  timingMessage?: string;
+}
+
+async function boundedBody(response: Response, maximum: number): Promise<Uint8Array<ArrayBuffer>> {
+  if (!response.body) throw new ApiError('The voice service returned an empty response.');
+  const reader = response.body.getReader(); const parts: Uint8Array[] = []; let length = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      length += value.byteLength;
+      if (length > maximum) throw new ApiError('The voice service response exceeded its size limit.');
+      parts.push(value);
+    }
+  } finally { await reader.cancel().catch(() => undefined); reader.releaseLock(); }
+  const bytes = new Uint8Array(length); let offset = 0;
+  for (const part of parts) { bytes.set(part, offset); offset += part.byteLength; }
+  return bytes;
+}
+
+/** Mouth cues are usable only for the exact verified audio bytes they describe. */
+export async function getPreparedSpeech(text: string, language: Language, signal: AbortSignal): Promise<PreparedSpeech> {
+  const response = await fetch('/api/speech/prepare', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text, language }), signal,
+  });
+  if (!response.ok) return failure(response);
+  let value: unknown;
+  try { value = JSON.parse(new TextDecoder().decode(await boundedBody(response, 2_000_000))); }
+  catch (error) { throw error instanceof ApiError ? error : new ApiError('The voice service returned invalid timing metadata.'); }
+  if (!object(value) || typeof value.audio_url !== 'string' || !/^\/api\/speech\/clips\/[a-f0-9]{32}$/.test(value.audio_url)
+    || typeof value.audio_sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(value.audio_sha256)
+    || typeof value.timing_status !== 'string' || !['available', 'not_configured', 'unsupported_audio', 'unavailable', 'failed', 'timeout'].includes(value.timing_status)) {
+    throw new ApiError('The voice service returned invalid audio metadata.');
+  }
+  const timing = value.speech_timing == null ? undefined : parseSpeechTiming(value.speech_timing);
+  if ((value.timing_status === 'available') !== Boolean(timing) || (timing && timing.audio_sha256 !== value.audio_sha256)) {
+    throw new ApiError('Mouth cues do not match the generated audio.');
+  }
+  signal.throwIfAborted();
+  const clip = await fetch(value.audio_url, { signal });
+  if (!clip.ok) return failure(clip);
+  const mime = clip.headers.get('content-type')?.split(';')[0].trim();
+  if (!mime || !['audio/wav', 'audio/x-wav', 'audio/mpeg', 'audio/ogg'].includes(mime)) throw new ApiError('The voice service returned an unsupported audio format.');
+  const bytes = await boundedBody(clip, 20_000_000);
+  if (!bytes.byteLength) throw new ApiError('The voice service returned empty audio.');
+  signal.throwIfAborted();
+  const digest = new Uint8Array(await crypto.subtle.digest('SHA-256', bytes));
+  const hash = Array.from(digest, (part) => part.toString(16).padStart(2, '0')).join('');
+  if (hash !== value.audio_sha256) throw new ApiError('The downloaded audio did not match its timing metadata. Generate the voice again.');
+  signal.throwIfAborted();
+  return { audio: new Blob([bytes], { type: mime }), audioSha256: hash, speechTiming: timing,
+    timingStatus: value.timing_status,
+    timingMessage: typeof value.timing_message === 'string' ? value.timing_message.slice(0, 500) : undefined };
 }
 
