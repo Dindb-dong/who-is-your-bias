@@ -1,0 +1,22 @@
+{
+  "name": "who-is-your-bias",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/web"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @bias/web",
+    "build": "npm run build --workspace @bias/web",
+    "typecheck": "npm run typecheck --workspace @bias/web",
+    "test:web": "npm run test --workspace @bias/web",
+    "test:e2e": "playwright test",
+    "check": "npm run typecheck && npm run test:web && npm run build"
+  },
+  "engines": {
+    "node": ">=22.12"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.0"
+  }
+}
