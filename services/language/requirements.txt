@@ -1,0 +1,6 @@
+# Install the PyTorch build appropriate for the machine before this file.
+# The separate CPU validation environment used torch==2.11.0+cpu.
+torch>=2.6,<3
+transformers==4.57.3
+accelerate>=1.10,<2
+safetensors>=0.6,<1
