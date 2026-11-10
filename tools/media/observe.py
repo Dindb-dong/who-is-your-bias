@@ -113,5 +113,9 @@ def observe_clip(manifest_path: str | Path, *, face_model: str | Path, pose_mode
         capture.release()
         Path(temp_name).unlink(missing_ok=True)
     summary = {"schema_version": "observations.v1", "created_at": timestamp(), "source_id": manifest["source_id"], "source_timeline": manifest["source_timeline"], "source_start_seconds": manifest["source_start_seconds"], "video_sha256": manifest["artifacts"]["video"]["sha256"], "observations": {"path": output.name, "sha256": sha256(output)}, "observed_frames": observed_frames, "frames_without_detected_face": empty_faces, "sample_fps_requested": sample_fps, "mediapipe_version": importlib.metadata.version("mediapipe"), "models": {"face_sha256": sha256(face_asset), "pose_sha256": sha256(pose_asset) if pose_asset else None}, "identity_attribution": "none", "review_status": "unreviewed", "limitations": ["Detection indexes are frame-local, not stable person identities.", "Blendshape scores and geometry do not establish emotional state.", "Missing detection means unobserved, not absence of a behavior.", "No linkage between a detected face and the audio speaker is inferred."]}
+    summary["preparation_manifest_sha256"] = sha256(path)
+    summary["input_sha256"] = manifest["input"]["sha256"]
+    if manifest.get("preparation", {}).get("video_crop"):
+        summary["video_crop"] = manifest["preparation"]["video_crop"]
     write_json(summary_path, summary, overwrite=overwrite)
     return summary

@@ -23,6 +23,7 @@ def main(argv: list[str] | None = None) -> int:
     prepare.add_argument("--input-source-offset", type=float, default=0)
     prepare.add_argument("--sample-rate", type=int, default=16000, choices=[16000, 24000, 48000])
     prepare.add_argument("--audio-only", action="store_true")
+    prepare.add_argument("--crop", type=int, nargs=4, metavar=("X", "Y", "WIDTH", "HEIGHT"), help="Fixed even-pixel video ROI; no automatic person selection")
     transcribe = commands.add_parser("transcribe", help="Optional ASR; produces a draft transcript for review")
     transcribe.add_argument("manifest")
     transcribe.add_argument("--engine", choices=["faster-whisper", "whisperx"], default="faster-whisper")
@@ -41,7 +42,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.command == "prepare":
             from .prepare import prepare_clip
-            output = prepare_clip(args.input, args.output_dir, source_id=args.source_id, source_url=args.source_url, source_timeline=args.source_timeline, start=args.start, duration=args.duration, input_source_offset=args.input_source_offset, sample_rate=args.sample_rate, include_video=not args.audio_only)
+            output = prepare_clip(args.input, args.output_dir, source_id=args.source_id, source_url=args.source_url, source_timeline=args.source_timeline, start=args.start, duration=args.duration, input_source_offset=args.input_source_offset, sample_rate=args.sample_rate, include_video=not args.audio_only, crop=tuple(args.crop) if args.crop else None)
             print(json.dumps({"source_id": output["source_id"], "duration_seconds": output["clip"]["duration_seconds"], "review_status": "unreviewed"}))
         elif args.command == "transcribe":
             from .transcribe import transcribe_clip
