@@ -1,0 +1,78 @@
+[
+  {
+    "id": "h01",
+    "persona_id": "elon-musk",
+    "category": "heldout",
+    "question": "In the five-step engineering sequence described in 2024, which step comes last?",
+    "expected_evidence_ids": [],
+    "expected_source_ids": [],
+    "reference_evidence_ids": [
+      "elon-lex24-algorithm"
+    ],
+    "reference_source_ids": [
+      "lex-438-2024"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "abstain",
+    "notes": "The answer is present only in the held-out interview. The default train-only index must not expose it. Use the reference separately for future answer-fidelity evaluation; do not count it as retrieval evidence."
+  },
+  {
+    "id": "h02",
+    "persona_id": "elon-musk",
+    "category": "heldout",
+    "question": "What fraction of deleted components did you suggest might need to be added back?",
+    "expected_evidence_ids": [],
+    "expected_source_ids": [],
+    "reference_evidence_ids": [
+      "elon-lex24-deletion"
+    ],
+    "reference_source_ids": [
+      "lex-438-2024"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "abstain",
+    "notes": "The answer is present only in the held-out interview. The default train-only index must not expose it. Use the reference separately for future answer-fidelity evaluation; do not count it as retrieval evidence."
+  },
+  {
+    "id": "h03",
+    "persona_id": "elon-musk",
+    "category": "heldout",
+    "question": "At what playback speeds did you say you listen to podcasts?",
+    "expected_evidence_ids": [],
+    "expected_source_ids": [],
+    "reference_evidence_ids": [
+      "elon-lex24-playback"
+    ],
+    "reference_source_ids": [
+      "lex-438-2024"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "abstain",
+    "notes": "The answer is present only in the held-out interview. The default train-only index must not expose it. Use the reference separately for future answer-fidelity evaluation; do not count it as retrieval evidence."
+  },
+  {
+    "id": "h04",
+    "persona_id": "elon-musk",
+    "category": "heldout",
+    "question": "Why did you compare memes with information compression?",
+    "expected_evidence_ids": [],
+    "expected_source_ids": [],
+    "reference_evidence_ids": [
+      "elon-lex24-memes"
+    ],
+    "reference_source_ids": [
+      "lex-438-2024"
+    ],
+    "forbidden_source_ids": [
+      "lex-438-2024"
+    ],
+    "expected_action": "abstain",
+    "notes": "The answer is present only in the held-out interview. The default train-only index must not expose it. Use the reference separately for future answer-fidelity evaluation; do not count it as retrieval evidence."
+  }
+]

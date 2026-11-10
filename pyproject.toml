@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "who-is-your-bias"
+version = "0.1.0"
+description = "Evidence-grounded conversational personas and synchronized avatar research"
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "uvicorn>=0.30,<1",
+  "pydantic>=2.9,<3",
+  "httpx>=0.27,<1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "numpy>=2,<3"]
+
+[project.scripts]
+bias = "bias.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bias"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra"
+
