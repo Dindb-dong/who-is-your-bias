@@ -57,7 +57,15 @@ The provider is called only when configured. Errors and missing capabilities rem
 | Ingestion | Local SRT/VTT/WhisperX imports, speaker selection, hashes, source-clock offsets |
 | Evaluation | Reproducible retrieval checks and source-disjoint answerability fixtures |
 
-The initial curated corpus is a development fixture, not a sufficient persona training set. Broader source acquisition, original media, detailed interaction context, and independently evaluated likeness are separate milestones.
+## Corpus and original material
+
+The initial 7-source development collection has expanded to **31 distinct source events/documents and 163 reviewed evidence records**, spanning **2003–2026**. Retrieval uses **159 records from 30 sources**; the four reference records from Lex #438 remain held out. Evidence is concise, attributed paraphrase, with original URLs and dates.
+
+The collection includes TED interviews, Lex Fridman conversations, Dwarkesh, Y Combinator, Recode, WIRED, TIME, GQ, Stanford, MIT, congressional testimony, and authored Tesla documents. Coverage now includes learning, fear, criticism, uncertainty, humor, motivation, and work habits alongside engineering and business plans. See [integrated corpus status](docs/research/corpus-status.md) for exact contributions, dates, acquisition links, and limitations.
+
+The publisher transcript pipeline also extracted **3,451 timestamped caption cues** from four complete TED interviews: **3:00:45 of declared program duration and 27,411 whitespace-delimited words**. Of those cues, **1,822 carry Musk labels in the publisher text**, 1,125 carry interviewer labels, and 504 remain unassigned. Questions and adjacent speaking turns are preserved. These full local transcripts remain **draft, unindexed** material; a text label is not independently verified voice identity. The repository contains reproducible extraction code and measured coverage, while complete originals remain outside Git.
+
+This is a research corpus and working application, not a validated replica of a person's mind, voice, or appearance. The [inference report](docs/inference-validation.md) separates real model execution from citation compliance and perceptual quality. The included avatar is a stylized reference rig; a high-quality likeness asset and measured individual behavior still require separate work.
 
 ## Research workflow
 
@@ -65,6 +73,7 @@ The initial curated corpus is a development fixture, not a sufficient persona tr
 uv run bias search "Why did Tesla start with an expensive sports car?"
 uv run bias search "테슬라는 왜 처음에 비싼 스포츠카를 만들었어?"
 uv run bias evaluate --fail-on-regression --output reports/local/retrieval.json
+uv run python -m tools.research inventory --output reports/local/source-inventory.json
 uv run pytest
 ```
 
@@ -105,6 +114,9 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 - [Delivery plan](docs/PLAN.md): review boundaries, acceptance criteria, fidelity ladder.
 - [Architecture](docs/architecture.md): evidence, generation, timing, and deployment boundaries.
 - [Source provenance](docs/research/sources.md): original URLs, dates, timebases, and corpus limitations.
+- [Integrated corpus status](docs/research/corpus-status.md): 31 sources, split isolation, and expanded retrieval evaluation.
+- [Publisher acquisition](docs/research/collection.md): explicit document collection, component links, and provenance manifests.
+- [Full transcript extraction](docs/research/transcript-acquisition.md): complete TED conversation drafts, speaker-label rules, and measured coverage.
 - [Media and voice pipeline](docs/media-pipeline.md): local clips, optional transcription/observations, and the reference-voice server.
 - [Execution and deployment](docs/deployment.md): coordinated development servers, container configuration, and CI artifacts.
 - [Inference validation](docs/inference-validation.md): real model smoke results, reproducible commands, and measured limitations.
