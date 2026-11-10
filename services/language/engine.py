@@ -182,6 +182,21 @@ class Backend(Protocol):
     def generate(self, request: CompletionRequest, job: GenerationJob) -> GenerationResult: ...
 
 
+def model_location(settings: LanguageSettings) -> str:
+    """Resolve a cached repo to a real directory before Transformers inspects it.
+
+    Some optional Transformers metadata probes do not consistently propagate
+    local_files_only. A local snapshot path avoids those Hub probes entirely.
+    """
+    local = Path(settings.model_id).expanduser()
+    if local.is_dir():
+        return str(local.resolve())
+    if not settings.local_files_only:
+        return settings.model_id
+    from huggingface_hub import snapshot_download
+    return snapshot_download(settings.model_id, revision=settings.revision, cache_dir=str(settings.cache_dir) if settings.cache_dir else None, local_files_only=True)
+
+
 class TransformersBackend:
     def __init__(self, settings: LanguageSettings):
         # Optional dependency trees may import ONNX Runtime. Disable telemetry
@@ -201,8 +216,9 @@ class TransformersBackend:
         torch.set_num_threads(settings.threads)
         kwargs = {"revision": settings.revision, "cache_dir": str(settings.cache_dir) if settings.cache_dir else None, "local_files_only": settings.local_files_only, "trust_remote_code": False}
         try:
-            self.tokenizer = AutoTokenizer.from_pretrained(settings.model_id, **kwargs)
-            self.model = AutoModelForCausalLM.from_pretrained(settings.model_id, dtype=getattr(torch, settings.dtype), use_safetensors=True, attn_implementation="sdpa", low_cpu_mem_usage=True, **kwargs).to(settings.device).eval()
+            location = model_location(settings)
+            self.tokenizer = AutoTokenizer.from_pretrained(location, **kwargs)
+            self.model = AutoModelForCausalLM.from_pretrained(location, dtype=getattr(torch, settings.dtype), use_safetensors=True, attn_implementation="sdpa", low_cpu_mem_usage=True, **kwargs).to(settings.device).eval()
         except Exception as exc:
             logger.error("Language model loading failed (%s)", type(exc).__name__)
             raise LanguageError("model_unavailable", "The configured model could not be loaded; inspect its cache, revision, dependencies, and device.", 503) from exc

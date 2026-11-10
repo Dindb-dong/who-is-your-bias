@@ -128,7 +128,7 @@ def create_app(settings: LanguageSettings | None = None, *, loader: Callable = l
         return JSONResponse(error_payload(LanguageError("invalid_request", "The request does not match the supported text-chat schema.", 422)), status_code=422)
 
     def authenticate(authorization: str | None) -> None:
-        if settings.api_key and not hmac.compare_digest(authorization or "", f"Bearer {settings.api_key}"):
+        if settings.api_key and not hmac.compare_digest((authorization or "").encode("utf-8"), f"Bearer {settings.api_key}".encode("utf-8")):
             raise LanguageError("authentication_required", "Valid language service credentials are required.", 401)
 
     @app.get("/health")

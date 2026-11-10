@@ -4,7 +4,9 @@ import asyncio
 import builtins
 import json
 import os
+import sys
 import threading
+from types import SimpleNamespace
 
 import httpx
 import pytest
@@ -14,7 +16,7 @@ from bias.config import ProviderSettings, Settings
 from bias.engine import Engine
 from bias.providers import OpenAICompatibleLLM, ProviderError
 from services.language.app import create_app, output_events
-from services.language.engine import GenerationResult, LanguageEngine, LanguageError, LanguageSettings, TransformersBackend
+from services.language.engine import GenerationResult, LanguageEngine, LanguageError, LanguageSettings, TransformersBackend, model_location
 from services.language.schemas import CompletionRequest
 
 
@@ -49,6 +51,7 @@ def test_lazy_loading_auth_and_json_usage_are_honest():
         assert "secret-only-on-server" not in health.text
         assert calls == []
         assert client.get("/v1/models").status_code == 401
+        assert client.get("/v1/models", headers={b"Authorization": b"Bearer \xff"}).status_code == 401
         assert client.post("/v1/chat/completions", json=request().model_dump()).status_code == 401
         headers = {"Authorization": "Bearer secret-only-on-server"}
         result = client.post("/v1/chat/completions", json=request().model_dump(), headers=headers)
@@ -251,3 +254,18 @@ def test_optional_runtime_telemetry_is_disabled_before_first_model_import(monkey
     with pytest.raises(LanguageError, match="optional language"):
         TransformersBackend(LanguageSettings())
     assert observed == ["1"]
+
+
+def test_offline_loader_resolves_cached_snapshot_before_transformers(monkeypatch, tmp_path):
+    calls = []
+
+    def snapshot(repo_id, **kwargs):
+        calls.append((repo_id, kwargs))
+        return str(tmp_path / "cached-snapshot")
+
+    monkeypatch.setitem(sys.modules, "huggingface_hub", SimpleNamespace(snapshot_download=snapshot))
+    settings = LanguageSettings(revision="pinned-revision", cache_dir=tmp_path, local_files_only=True)
+    assert model_location(settings) == str(tmp_path / "cached-snapshot")
+    assert calls == [("Qwen/Qwen3-0.6B", {"revision": "pinned-revision", "cache_dir": str(tmp_path), "local_files_only": True})]
+    assert model_location(LanguageSettings(model_id=str(tmp_path))) == str(tmp_path.resolve())
+    assert len(calls) == 1  # A configured local directory never contacts the Hub.
