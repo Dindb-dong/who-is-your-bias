@@ -122,11 +122,21 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
   };
 
   return (
-    <div className={`avatar-stage ${className}`} data-testid="avatar-stage"
-      style={{ position: 'relative', width: '100%', height: '100%', minHeight: 440, overflow: 'hidden', background: 'radial-gradient(ellipse at 50% 38%, #26301f 0%, #151c13 45%, #10160f 100%)' }}>
-      <div ref={host} style={{ position: 'absolute', inset: 0 }} aria-hidden={fatal ? true : undefined} />
-      {showCalibration && !fatal && <details className="avatar-calibration" onToggle={(event) => { if (!event.currentTarget.open) setDebugEnabled(false); }}
-        style={{ position: 'absolute', top: 14, right: 14, zIndex: 2, width: 'min(320px, calc(100% - 28px))', maxHeight: 'calc(100% - 28px)', overflow: 'auto', background: '#101810f2', border: '1px solid #46533c', borderRadius: 12, padding: 12, color: '#e3e8dc', fontSize: 12 }}>
+    <div className={`avatar-stage${showCalibration ? ' avatar-stage--calibration' : ''} ${className}`} data-testid="avatar-stage"
+      style={{ position: 'relative', width: '100%', height: showCalibration ? 'auto' : '100%', minHeight: 440, overflow: 'hidden', background: 'radial-gradient(ellipse at 50% 38%, #26301f 0%, #151c13 45%, #10160f 100%)' }}>
+      <div className="avatar-visual">
+        <div ref={host} style={{ position: 'absolute', inset: 0 }} aria-hidden={fatal ? true : undefined} />
+        {loadingModel && <div role="status" className="avatar-model-status" style={{ position: 'absolute', bottom: 20, left: 20, color: '#d8f8a0', fontSize: 12 }}>Loading your avatar…</div>}
+        {modelError && !fatal && <div role="status" className="avatar-model-status" style={{ position: 'absolute', bottom: 20, left: 20, right: 20, padding: 12, borderRadius: 12, background: '#172014ed', color: '#e3e8dc', fontSize: 12 }}>
+          {modelError} The built-in portrait is still available.
+        </div>}
+        {fatal && <div role="status" className="avatar-fallback" style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: 36, textAlign: 'center', color: '#c5ccbc', gap: 16 }}>
+          <span style={{ fontSize: 12, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#d8f8a0' }}>Avatar paused</span>
+          <p style={{ maxWidth: 280, lineHeight: 1.7, fontSize: 14, margin: 0 }}>{fatal}</p>
+          <button type="button" onClick={() => setEpoch((value) => value + 1)} style={{ background: '#d8f8a0', border: 0, borderRadius: 8, color: '#14200d', padding: '10px 16px', cursor: 'pointer', font: 'inherit', fontSize: 13 }}>Reload avatar</button>
+        </div>}
+      </div>
+      {showCalibration && !fatal && <details className="avatar-calibration" onToggle={(event) => { if (!event.currentTarget.open) setDebugEnabled(false); }}>
         <summary style={{ cursor: 'pointer', fontWeight: 650, color: '#d8f8a0' }}>Rig inspection & calibration</summary>
         <p>{diagnostics?.morphs.length ?? 0}/52 named face controls · {diagnostics?.visemes?.length ?? 0}/15 native visemes · {diagnostics?.bones.length ?? 0} mapped joints</p>
         <p style={{ color: '#b8c4ad', lineHeight: 1.55 }}>Face: {telemetry?.faceSource ?? 'designed'} · Speech: {telemetry?.speechSource ?? 'silent'}</p>
@@ -158,15 +168,6 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
           {diagnostics?.warnings?.map((warning, index) => <p key={index} style={{ color: '#f0d6a0' }}>{warning}</p>)}
         </details>
       </details>}
-      {loadingModel && <div role="status" className="avatar-model-status" style={{ position: 'absolute', bottom: 20, left: 20, color: '#d8f8a0', fontSize: 12 }}>Loading your avatar…</div>}
-      {modelError && !fatal && <div role="status" className="avatar-model-status" style={{ position: 'absolute', bottom: 20, left: 20, right: 20, padding: 12, borderRadius: 12, background: '#172014ed', color: '#e3e8dc', fontSize: 12 }}>
-        {modelError} The built-in portrait is still available.
-      </div>}
-      {fatal && <div role="status" className="avatar-fallback" style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: 36, textAlign: 'center', color: '#c5ccbc', gap: 16 }}>
-        <span style={{ fontSize: 12, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#d8f8a0' }}>Avatar paused</span>
-        <p style={{ maxWidth: 280, lineHeight: 1.7, fontSize: 14, margin: 0 }}>{fatal}</p>
-        <button type="button" onClick={() => setEpoch((value) => value + 1)} style={{ background: '#d8f8a0', border: 0, borderRadius: 8, color: '#14200d', padding: '10px 16px', cursor: 'pointer', font: 'inherit', fontSize: 13 }}>Reload avatar</button>
-      </div>}
     </div>
   );
 }

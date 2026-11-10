@@ -1,5 +1,11 @@
 import { createHash } from 'node:crypto';
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
+
+async function openMotionLab(page: Page, mobile: boolean) {
+  await page.goto('/');
+  await page.getByRole('navigation', { name: mobile ? 'Mobile navigation' : 'Main navigation', exact: true })
+    .getByRole('button', { name: mobile ? 'Lab' : 'Research lab', exact: true }).click();
+}
 
 function testAudio() {
   const rate = 16000; const frames = rate * 4; const output = Buffer.alloc(44 + frames * 2);
@@ -43,10 +49,7 @@ test('plays a hash-bound speech package through the browser audio transport', as
 
 test('requires an explicit geometry preview and exposes rig calibration', async ({ page }, info) => {
   const errors: string[] = []; page.on('pageerror', (error) => errors.push(error.message));
-  await page.goto('/');
-  const mobile = info.project.name === 'mobile';
-  await page.getByRole('navigation', { name: mobile ? 'Mobile navigation' : 'Main navigation', exact: true })
-    .getByRole('button', { name: mobile ? 'Lab' : 'Research lab', exact: true }).click();
+  await openMotionLab(page, info.project.name === 'mobile');
   const clip = { schema_version: 'avatar-clip.v1', duration_ms: 1000, max_gap_ms: 1000,
     source: { source_id: 'synthetic-ui-fixture', source_timeline: 'test', source_start_seconds: 0, video_sha256: 'a'.repeat(64), observations_sha256: 'b'.repeat(64) },
     review: { status: 'geometry_preview', reviewer: 'automated-test', track_id: 'fixture', track_continuity_reviewed: false,
@@ -66,29 +69,40 @@ test('requires an explicit geometry preview and exposes rig calibration', async 
   await page.getByRole('slider', { name: 'Calibration preview value' }).focus();
   await page.getByRole('slider', { name: 'Calibration preview value' }).press('ArrowRight');
   await expect(page.getByText('Preview value: 0.01', { exact: true })).toBeVisible();
+  const previewBounds = await page.getByTestId('avatar-stage').locator('canvas').boundingBox();
+  const inspectorBounds = await page.locator('.avatar-calibration').boundingBox();
+  expect(previewBounds && inspectorBounds).toBeTruthy();
+  expect(inspectorBounds!.y).toBeGreaterThanOrEqual(previewBounds!.y + previewBounds!.height - 1);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
-  await page.screenshot({ path: info.outputPath('motion-calibration.png'), fullPage: true });
+  await page.getByRole('region', { name: 'Motion & rig calibration', exact: true }).screenshot({ path: info.outputPath('motion-calibration.png') });
   await page.getByRole('button', { name: 'Clear imported files' }).click();
   await expect(page.getByRole('button', { name: 'Replay source motion' })).toHaveCount(0);
-  await page.getByRole('checkbox', { name: 'Manual pose preview' }).uncheck();
+  expect(errors).toEqual([]);
+});
+
+test('replays measured face and body samples with independent provenance', async ({ page }, info) => {
+  const errors: string[] = []; page.on('pageerror', (error) => errors.push(error.message));
+  await openMotionLab(page, info.project.name === 'mobile');
+  await page.getByText('Rig inspection & calibration', { exact: true }).click();
   await page.getByRole('button', { name: 'Load measured sample' }).click();
   await expect(page.getByText('ted-2013', { exact: true })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Replay source motion' })).toBeDisabled();
   await page.getByRole('checkbox', { name: 'Preview geometry without speaker attribution' }).check();
   await page.getByRole('button', { name: 'Replay source motion' }).click();
   await page.getByRole('button', { name: 'Pause replay' }).click();
-  await page.getByRole('slider', { name: /Source position/ }).focus();
-  await page.getByRole('slider', { name: /Source position/ }).press('PageUp');
+  await page.getByRole('slider', { name: 'Source position', exact: true }).focus();
+  await page.getByRole('slider', { name: 'Source position', exact: true }).press('PageUp');
   await expect(page.getByText('Face: geometry_preview · Speech: silent', { exact: true })).toBeVisible();
-  await page.screenshot({ path: info.outputPath('measured-motion.png'), fullPage: true });
+  await page.getByRole('region', { name: 'Motion & rig calibration', exact: true }).screenshot({ path: info.outputPath('measured-motion.png') });
   await page.getByRole('button', { name: 'Load arm-motion sample' }).click();
   await expect(page.getByText('ted-2013-body-geometry-preview.json', { exact: true })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Replay source motion' })).toBeDisabled();
   await page.getByRole('checkbox', { name: 'Preview geometry without speaker attribution' }).check();
-  await page.getByRole('slider', { name: /Source position/ }).focus();
-  await page.getByRole('slider', { name: /Source position/ }).press('PageUp');
+  await page.getByRole('slider', { name: 'Source position', exact: true }).focus();
+  await page.getByRole('slider', { name: 'Source position', exact: true }).press('PageUp');
   await expect(page.getByText('Face: designed · Speech: silent', { exact: true })).toBeVisible();
   await expect(page.getByText('Body: geometry_preview', { exact: true })).toBeVisible();
-  await page.screenshot({ path: info.outputPath('measured-arm-motion.png'), fullPage: true });
+  await page.getByRole('region', { name: 'Motion & rig calibration', exact: true }).screenshot({ path: info.outputPath('measured-arm-motion.png') });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   expect(errors).toEqual([]);
 });

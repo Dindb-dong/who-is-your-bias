@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { Play, RotateCcw, SlidersHorizontal, Square, Upload } from 'lucide-react';
 import { AvatarStage } from './AvatarStage';
 import { parseAvatarClip, parseRigMapping } from '../avatar/validation';
@@ -6,6 +6,7 @@ import type { AvatarClip, RigMapping } from '../avatar/types';
 
 /** Imported measurements have their own source clock, separate from conversation cues. */
 export function MotionLab({ modelUrl, reducedMotion }: { modelUrl?: string; reducedMotion: boolean }) {
+  const scrubberId = useId();
   const [clip, setClip] = useState<AvatarClip>();
   const [mapping, setMapping] = useState<RigMapping>();
   const [clipName, setClipName] = useState('');
@@ -83,7 +84,7 @@ export function MotionLab({ modelUrl, reducedMotion }: { modelUrl?: string; redu
           <div className="motion-source"><span className="eyebrow">{clip.review.status === 'speaker_reviewed' ? 'REVIEWED SOURCE TRACK' : 'GEOMETRY PREVIEW'}</span><strong>{clip.source.source_id}</strong><p>{clip.review.attribution_basis}</p><small>{clip.frames.length} measured frames · {(clip.duration_ms / 1000).toFixed(2)} seconds</small></div>
           {clip.review.status === 'geometry_preview' && <label className="motion-check preview-choice"><input type="checkbox" checked={allowPreview} onChange={(event) => { setAllowPreview(event.target.checked); setPlaying(false); }}/> Preview geometry without speaker attribution</label>}
           <div className="motion-transport"><button className="primary-button" disabled={!permitted} onClick={() => { if (elapsed >= clip.duration_ms) setElapsed(0); setPlaying(!playing); }}>{playing ? <Square size={14}/> : <Play size={14}/>} {playing ? 'Pause replay' : 'Replay source motion'}</button><button className="icon-button" aria-label="Reset source replay" onClick={() => { setPlaying(false); setElapsed(0); }}><RotateCcw size={16}/></button></div>
-          <label className="motion-scrubber"><span>Source position <output>{(elapsed / 1000).toFixed(2)} s</output></span><input type="range" min={0} max={clip.duration_ms} step={10} value={elapsed} disabled={!permitted} onChange={(event) => { setPlaying(false); setElapsed(Number(event.target.value)); }}/></label>
+          <div className="motion-scrubber"><span><label htmlFor={scrubberId}>Source position</label><output htmlFor={scrubberId}>{(elapsed / 1000).toFixed(2)} s</output></span><input id={scrubberId} type="range" min={0} max={clip.duration_ms} step={10} value={elapsed} aria-valuetext={`${(elapsed / 1000).toFixed(2)} seconds`} disabled={!permitted} onChange={(event) => { setPlaying(false); setElapsed(Number(event.target.value)); }}/></div>
           <details className="motion-details"><summary>Measurement limitations</summary><ul>{clip.limitations.map((limitation, index) => <li key={index}>{limitation}</li>)}</ul></details>
         </> : <p className="motion-empty">Import a source track to inspect its movements. Calibration controls also let you check individual channels on an avatar before replay.</p>}
         {(clip || mapping) && <button className="text-button" onClick={() => { sampleRequest.current?.abort(); ++importTicket.current.clip; ++importTicket.current.mapping; setClip(undefined); setMapping(undefined); setClipName(''); setMappingName(''); setPlaying(false); setElapsed(0); setAllowPreview(false); setError(null); }}>Clear imported files</button>}
