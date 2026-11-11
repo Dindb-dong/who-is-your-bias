@@ -180,7 +180,8 @@ class Engine:
                 if use_llm:
                     if self.snapshot or self.settings.retrieval_backend == "hybrid":
                         package = build_snapshot_messages(self.corpus, request, result, list(session.history), self.snapshot, temporal,
-                            context_window=self.settings.llm_context_window, output_tokens=self.settings.llm_max_tokens, counter=self.counter)
+                            context_window=self.settings.llm_context_window, output_tokens=self.settings.llm_max_tokens,
+                            counter=self.counter, resolved=resolved)
                         messages = package.messages
                         allowed_ids = set(package.supplied_ids)
                         context["prompt_budget"] = package.budget

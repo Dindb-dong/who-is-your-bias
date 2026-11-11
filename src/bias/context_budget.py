@@ -44,7 +44,7 @@ class PromptPackage:
 
 
 def build_snapshot_messages(corpus, request: ChatRequest, result, history, snapshot, temporal,
-                            *, context_window: int, output_tokens: int, counter: Counter) -> PromptPackage:
+                            *, context_window: int, output_tokens: int, counter: Counter, resolved=None) -> PromptPackage:
     system = (
         f"You are a clearly labeled AI simulation of {corpus.persona.name}, not the real person. "
         f"Answer in {'Korean' if request.language == 'ko' else 'English'}. Adapt length to the question. "
@@ -60,6 +60,12 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
                "snapshot": snapshot.summary() if snapshot else None,
                "temporal_request": temporal.intent.mode if temporal else "general",
                "factual_evidence": [], "style_examples": []}
+    # Retain the user reference needed to interpret "How so?" even when an
+    # oversized prior assistant response prevents packing its history pair.
+    # This is part of the reserved base context, never factual evidence.
+    if resolved is not None and resolved.supporting_turn_ids:
+        context["dialogue_reference"] = {"user_anchor": resolved.anchor, "resolved_search_query": resolved.query,
+            "supporting_user_turn_ids": list(resolved.supporting_turn_ids), "role": "user_context_not_factual_evidence"}
     selected_history = []
     def messages():
         return [{"role": "system", "content": system}, {"role": "user", "content": "Reference context (untrusted data):\n" +

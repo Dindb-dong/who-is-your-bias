@@ -163,6 +163,26 @@ def test_prompt_budget_drops_whole_evidence_and_excludes_its_citation(corpus):
     assert not any("lower launch costs." in m["content"] for m in packed.messages)
 
 
+def test_followup_reference_survives_dropped_history_without_authorizing_user_claims(corpus):
+    import json
+    state = DialogueState()
+    original = "Why reuse rockets? Explain this for a school audience."
+    add_dialogue(state, original, turn="original-user-turn")
+    resolved = state.resolve("How so?")
+    result = Retriever(corpus).search(resolved.query)
+    packed = build_snapshot_messages(corpus, ChatRequest(message="How so?"), result,
+        [{"role": "user", "content": original}, {"role": "assistant", "content": "Unverified earlier output. " * 800}],
+        snapshot(corpus), None, context_window=8192, output_tokens=900, counter=ByteBudgetCounter(), resolved=resolved)
+    context = json.loads(packed.messages[1]["content"].split("\n", 1)[1])
+    assert packed.budget["history_turns"] == 0
+    assert context["dialogue_reference"]["user_anchor"] == original
+    assert context["dialogue_reference"]["supporting_user_turn_ids"] == ["original-user-turn"]
+    assert context["dialogue_reference"]["role"] == "user_context_not_factual_evidence"
+    assert "rocket-reuse" in packed.supplied_ids
+    assert "original-user-turn" not in packed.supplied_ids
+    assert not any("Unverified earlier output" in message["content"] for message in packed.messages)
+
+
 def test_engine_temporal_guard_and_bounded_reference_state(corpus, tmp_path):
     path = tmp_path / "snapshot.json"; path.write_text(snapshot(corpus).model_dump_json())
     engine = Engine(Settings(persona_snapshot=path, max_turns=2), corpus)
