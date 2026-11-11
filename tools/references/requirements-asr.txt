@@ -1,0 +1,4 @@
+# Optional isolated CPU environment; core reference review has no model dependency.
+faster-whisper==1.2.1
+# Required when the model hub is reached through this workspace's SOCKS proxy.
+socksio>=1,<2

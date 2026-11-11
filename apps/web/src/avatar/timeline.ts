@@ -1,4 +1,5 @@
-import type { BehaviorCue, RigPose, TimelineInput } from './types';
+import { Quaternion } from 'three';
+import type { BehaviorCue, BoneRotations, FaceWeights, QuaternionTuple, RigPose, TimelineInput, VisemeWeights } from './types';
 
 export const clamp01 = (value: number): number =>
   Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : 0;
@@ -96,6 +97,34 @@ export function samplePose(input: TimelineInput): RigPose {
 export function dampPose(current: RigPose, target: RigPose, deltaSeconds: number): RigPose {
   const t = 1 - Math.exp(-18 * Math.max(0, Math.min(0.1, finite(deltaSeconds))));
   const output = { ...current };
-  for (const key of Object.keys(output) as (keyof RigPose)[]) output[key] += (target[key] - output[key]) * t;
+  for (const key of Object.keys(neutralPose()) as (keyof Omit<RigPose, 'face' | 'bones' | 'visemes'>)[]) output[key] += (target[key] - output[key]) * t;
+  if (current.face || target.face) {
+    const face: FaceWeights = {};
+    for (const channel of new Set([...Object.keys(current.face ?? {}), ...Object.keys(target.face ?? {})]) as Set<keyof FaceWeights>) {
+      const from = current.face?.[channel] ?? 0; const to = target.face?.[channel] ?? 0;
+      const value = from + (to - from) * t;
+      if (target.face?.[channel] !== undefined || value > 0.001) face[channel] = clamp01(value);
+    }
+    output.face = Object.keys(face).length ? face : undefined;
+  }
+  if (current.visemes || target.visemes) {
+    const visemes: VisemeWeights = {};
+    for (const channel of new Set([...Object.keys(current.visemes ?? {}), ...Object.keys(target.visemes ?? {})]) as Set<keyof VisemeWeights>) {
+      const from = current.visemes?.[channel] ?? 0; const to = target.visemes?.[channel] ?? 0;
+      const value = from + (to - from) * t;
+      if (target.visemes?.[channel] !== undefined || value > 0.001) visemes[channel] = clamp01(value);
+    }
+    output.visemes = Object.keys(visemes).length ? visemes : undefined;
+  }
+  if (current.bones || target.bones) {
+    const bones: BoneRotations = {}; const identity: QuaternionTuple = [0, 0, 0, 1];
+    for (const channel of new Set([...Object.keys(current.bones ?? {}), ...Object.keys(target.bones ?? {})]) as Set<keyof BoneRotations>) {
+      const from = new Quaternion(...(current.bones?.[channel] ?? identity));
+      const to = new Quaternion(...(target.bones?.[channel] ?? identity));
+      const value = from.slerp(to, t).normalize();
+      if (target.bones?.[channel] || value.angleTo(new Quaternion()) > 0.001) bones[channel] = value.toArray() as QuaternionTuple;
+    }
+    output.bones = Object.keys(bones).length ? bones : undefined;
+  }
   return output;
 }

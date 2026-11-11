@@ -1,0 +1,141 @@
+{
+  "schema_version": "voice_reference_validation.v1",
+  "measured_at_utc": "2026-11-10T17:36:58.735135+00:00",
+  "source": {
+    "id": "ted-2013",
+    "publisher_page": "https://www.ted.com/talks/elon_musk_the_mind_behind_tesla_spacex_solarcity?view=transcript",
+    "public_media_url": "https://py.tedcdn.com/consus/projects/00/03/56/011/products/2013-elon-musk-011-fallback-ac0208b9ee7c6d6d53feec1fec06c734-1200k.mp4",
+    "observed_from": "videoPlayerData.resources.h264.file in publisher TED public page JSON",
+    "source_timeline": "ted_native_mp4",
+    "downloaded_opening_seconds": "50.114756",
+    "downloaded_bytes": 7320515,
+    "sha256": "b4ab286ff7642adfc0f921ae72e3a64ed7031201b29d38a2603e7b68ac485ec8"
+  },
+  "asr": {
+    "context_seconds": 49.049188,
+    "context_elapsed_seconds": 14.438,
+    "context_token_count": 133,
+    "publisher_matched_tokens": 128,
+    "token_coverage": 0.962406,
+    "engine": {
+      "name": "faster-whisper",
+      "version": "1.2.1",
+      "ctranslate2_version": "4.8.5",
+      "model": "Systran/faster-whisper-small.en",
+      "revision": "d1d751a5f8271d482d14ca55d9e2deeebbae577f",
+      "model_sha256": "62b2a45b05ee59acb4a5341b33ee35e041395d378d418a18acfe4c9e768ee37a",
+      "device": "cpu",
+      "compute_type": "int8",
+      "cpu_threads": 4,
+      "num_workers": 1,
+      "beam_size": 5,
+      "input_decoder": "stdlib_wave_pcm16_float32",
+      "initial_prompt": null,
+      "condition_on_previous_text": false,
+      "vad_filter": false,
+      "alignment": "faster-whisper-word-timestamps"
+    },
+    "context_sha256": "7c217ff4115326b4fb5d0aa3abffe58378bc80c5cacb080d4b5979dbd355ff71",
+    "secondary_input_seconds": 11.75,
+    "secondary_elapsed_seconds": 7.807,
+    "secondary_sha256": "bc3cdcec23b635f4f69dfd20c914b18e516a5714108a3f28aff4070968a217be",
+    "secondary_is_new_decoding_of_actual_parent_clip": true
+  },
+  "clock_comparison": {
+    "publisher_timeline": "ted_transcript_cue",
+    "native_timeline": "ted_native_mp4",
+    "observed_local_offset_summary": {
+      "median_seconds": 3.6155,
+      "minimum_seconds": 2.974,
+      "maximum_seconds": 4.56
+    },
+    "global_offset_verified": false,
+    "note": "These compare caption onset and matched ASR word onset; captions are not forced-aligned word boundaries."
+  },
+  "canonical_reference": {
+    "local_directory": "data/local/references/ted-2013-reference-v2",
+    "manifest_name": "reference.json",
+    "reference_name": "audio.wav",
+    "text_name": "reference.txt",
+    "duration_seconds": 9.830042,
+    "sample_rate": 24000,
+    "channels": 1,
+    "source_start_seconds": 21.45,
+    "source_end_seconds": 31.280042,
+    "publisher_speaker_label": "Elon Musk",
+    "publisher_cue_ids": [
+      "cue-00007",
+      "cue-00008",
+      "cue-00009",
+      "cue-00010"
+    ],
+    "normalized_reference_tokens": 32,
+    "exact_tokens_match_publisher_and_two_asr_decodings": true,
+    "prefix_pcm_equal_to_secondary_input_parent": true,
+    "audio_sha256": "f20f897fde67d14d2fb77d42d98b0890bf3c1d1fd121b41879dfd448f0d47e4c",
+    "text_sha256": "22cbc93befad6c0d493433c4b392a2ad8c1357b04575d9e0055609ca68aa9a87",
+    "manifest_sha256": "b97c294efd8e08a1b162e90e0eace4dbb490fa50cc044f3726b6ffa53cc0d4bf",
+    "audio_metrics": {
+      "duration_seconds": 9.830041666666666,
+      "sample_rate": 24000,
+      "channels": 1,
+      "rms_dbfs": -22.895,
+      "peak_dbfs": -1.613,
+      "clipped_sample_fraction": 0.0,
+      "note": "Signal levels do not establish speaker identity, lack of music/noise, or subjective reference quality."
+    },
+    "review_status": "candidate",
+    "review_checks": {
+      "publisher_attribution": "verified",
+      "transcript_text": "verified",
+      "clip_timing": "verified",
+      "single_speaker": "unknown",
+      "audio_quality": "unknown"
+    },
+    "listening_review_completed": false,
+    "ledger_entries": 2,
+    "ledger_head_sha256": "a9072330673b45cd774971b3e4cfb01792062cc23f90c441da16e2e013839143"
+  },
+  "earlier_candidate": {
+    "local_directory": "data/local/references/ted-2013-reference-v1",
+    "duration_seconds": 11.750042,
+    "normalized_reference_tokens": 36,
+    "secondary_asr_tokens": 35,
+    "disposition": "superseded",
+    "reason": "Independent parent-clip ASR omitted one function word in the final phrase; that entire phrase is excluded from canonical v2."
+  },
+  "vision_sample": {
+    "local_directory": "data/local/references/ted-2013-vision-sample",
+    "source_timeline": "ted_native_mp4",
+    "source_start_seconds": 12.0,
+    "source_end_seconds": 20.0,
+    "duration_seconds": 8.0,
+    "video_sha256": "9623d217112de891147327b2328e96b6a6d224caef7e300da928c0471da3e3a8",
+    "audio_sha256": "b3fb7ed606d8569361603bd43f4e1eb2ecf19950631012bc0fcf2bcc005e27fd",
+    "review_status": "unreviewed",
+    "note": "Prepared for the separate MediaPipe/animation workflow. First answer begins around native13.56s; subtitle clock is not reused. No face/voice identity inference."
+  },
+  "verification": {
+    "targeted_tests_passed": 22,
+    "real_asr_runs_completed": 3,
+    "optional_dependency_decoder_failure": "Initial PyAV19 file decoding rejected metadata_errors; documented NumPy PCM API succeeded. No model-size escalation.",
+    "full_source_text_or_audio_committed": false,
+    "model_inference_is_not_voice_similarity_evaluation": true,
+    "onnx_telemetry_default": "ORT_DISABLE_TELEMETRY=1 before optional ASR imports; reproduction commands set it before Python starts.",
+    "measured_reference_asr_runs_preceded_telemetry_default_change": true,
+    "reference_material_asr_runs": 2,
+    "generated_speech_screen_asr_runs": 1
+  },
+  "generated_audio_intelligibility_screen": {
+    "audio_sha256": "1a78aa966e2bde3045d7a2d37fc9f1264b1e1e55c187e7460f5891862344f219",
+    "requested_text": "This is a research simulation.",
+    "recognized_text": "This is a research simulation.",
+    "word_errors": 0,
+    "reference_word_count": 5,
+    "normalized_token_wer": 0.0,
+    "asr_elapsed_seconds": 6.719,
+    "recognizer_prompt_supplied": false,
+    "scope": "Single short-sentence ASR-based intelligibility screen only; not human listening evaluation, perceptual quality, speaker identity, or voice similarity.",
+    "local_report": "reports/local/voice-http-asr-screening.json"
+  }
+}

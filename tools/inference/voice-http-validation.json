@@ -1,0 +1,97 @@
+{
+  "schema_version": "voice-http-validation.v1",
+  "measured_at_utc": "2026-11-10T17:38:30.023998+00:00",
+  "scope": "Actual local speech service + main API + Rhubarb + audio retrieval; separate unprompted ASR screen. Not human listening or voice-similarity validation.",
+  "requested_text": "This is a research simulation.",
+  "model": {
+    "id": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+    "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+    "device": "cpu",
+    "dtype": "bfloat16",
+    "threads": 4,
+    "max_new_tokens": 96,
+    "reference_mode": "audio_and_transcript"
+  },
+  "reference": {
+    "audio_sha256": "f20f897fde67d14d2fb77d42d98b0890bf3c1d1fd121b41879dfd448f0d47e4c",
+    "text_sha256": "22cbc93befad6c0d493433c4b392a2ad8c1357b04575d9e0055609ca68aa9a87",
+    "candidate_manifest": "data/local/references/ted-2013-reference-v2/reference.json",
+    "review_status": "candidate",
+    "listening_review_completed": false
+  },
+  "execution": {
+    "status": "completed",
+    "http_audio_roundtrip": true,
+    "prepare_seconds": 44.55147808400034,
+    "total_seconds": 44.56278635699891,
+    "audio_sha256": "1a78aa966e2bde3045d7a2d37fc9f1264b1e1e55c187e7460f5891862344f219",
+    "audio_bytes": 73004,
+    "audio_duration_ms": 1520.0,
+    "mime_type": "audio/wav",
+    "timing_status": "available",
+    "timing_basis": "audio_recognition",
+    "mouth_cues": 10,
+    "timing_provenance": {
+      "engine": "rhubarb-lip-sync",
+      "model": "pocketSphinx"
+    },
+    "rhubarb": {
+      "version": "1.14.0",
+      "archive_sha256": "a9a9074862cff47b2d59b8bf399a678a3b0b74f9452ad6ad94cb292913dd8667"
+    },
+    "voice_service_after": {
+      "status": "ready",
+      "reference_configured": true,
+      "reference_mode": "audio_and_transcript",
+      "model_loaded": true,
+      "busy": false,
+      "voice": "reference",
+      "synthesis": "reference_conditioned",
+      "streaming": false
+    },
+    "sampled_process_memory": {
+      "voice": {
+        "rss_kib": 3165060,
+        "hwm_kib": 3165236
+      },
+      "api": {
+        "rss_kib": 47988,
+        "hwm_kib": 47988
+      }
+    }
+  },
+  "waveform": {
+    "sample_rate": 24000,
+    "frames": 36480,
+    "channels": 1,
+    "sample_width": 2,
+    "peak": 0.458953857421875,
+    "rms": 0.07623553276062012
+  },
+  "asr_screen": {
+    "recognized_text": "This is a research simulation.",
+    "reference_words": 5,
+    "word_errors": 0,
+    "normalized_token_wer": 0.0,
+    "elapsed_seconds": 6.719,
+    "text_prompt_supplied": false,
+    "model": "Systran/faster-whisper-small.en",
+    "revision": "d1d751a5f8271d482d14ca55d9e2deeebbae577f"
+  },
+  "limitations": [
+    "One short English sentence; not long-form or Korean validation.",
+    "Reference remains a candidate; acoustic overlap and listening quality are unreviewed.",
+    "No target-identity, voice-similarity, naturalness, or human-listening score.",
+    "Speech prepares before playback; waveform API does not report EOS.",
+    "LLM and TTS were tested in separate processes sequentially; combined memory residency is not established.",
+    "Browser audio transport is separately covered with a synthetic WAV fixture."
+  ],
+  "raw_report_hashes": {
+    "reports/local/voice-http.json": "4403de071d61d83ec38ae06c02f2144a388523ca7c37033765ae01ebe0f2c0e4",
+    "reports/local/voice-http-asr-screening.json": "3a9402528206e859ea9f1a1cf076f02224b4bd5482f9508a87a7df888de86e2f"
+  },
+  "telemetry": {
+    "blocked_initial_attempt_preserved": true,
+    "completed_attempt_environment": "ORT_DISABLE_TELEMETRY=1 before Python and optional imports; local model cache in Hub offline mode"
+  }
+}

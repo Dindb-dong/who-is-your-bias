@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib.metadata
+import os
 from pathlib import Path
 from typing import Any
 
@@ -49,6 +50,9 @@ def transcribe_clip(
     language: str | None = None,
     overwrite: bool = False,
 ) -> dict[str, Any]:
+    # Apply the upstream runtime opt-out before either optional ASR stack imports
+    # ONNX Runtime (including the faster-whisper VAD dependency).
+    os.environ.setdefault("ORT_DISABLE_TELEMETRY", "1")
     path, manifest = load_manifest(manifest_path)
     audio = verify_artifact(path, manifest, "audio")
     output = path.parent / "transcript.json"

@@ -15,7 +15,7 @@ npm run build
 uv run bias serve
 ```
 
-Open `http://127.0.0.1:8000`. The studio includes conversation, source inspection, A/B/C comparison, voice playback controls, a rigged reference avatar, and local GLB loading. See [studio guide](docs/studio.md) for development, audio, and retargeting details.
+Open `http://127.0.0.1:8000`. The studio includes conversation, source inspection, A/B/C comparison, voice playback controls, a rigged reference avatar, local GLB loading, and a motion/calibration lab. See [studio guide](docs/studio.md) for development, audio, and retargeting details.
 
 ## Run the conversation engine
 
@@ -41,6 +41,8 @@ The adapter supports the OpenAI-compatible `/chat/completions` streaming protoco
 
 The provider is called only when configured. Errors and missing capabilities remain visible. This repository does not bundle a language-model checkpoint, a trained voice, or a photorealistic head asset.
 
+The optional [local language server](docs/language-runtime.md) runs a server-selected Transformers checkpoint behind that protocol. Its model loads lazily, generation is bounded, and overlapping requests are rejected while the worker is occupied. The studio's A/B/C comparison runs sequentially to support this CPU-oriented configuration. [Generation evaluation](docs/evaluation.md) records actual outputs, timing, provider token usage when available, citation-format checks, and separately ungraded review criteria.
+
 ## What is implemented
 
 | Capability | Behavior |
@@ -53,9 +55,13 @@ The provider is called only when configured. Errors and missing capabilities rem
 | Behavior plans | Timed face/gaze/head/gesture cues with explicit provenance and estimated timing |
 | Speech and transcription | Optional compatible provider adapters with real audio bytes and size limits |
 | Local reference voice | Optional Qwen3-TTS service with cached prompts, bounded requests, and a fixed server-side reference |
+| Speech timing | Optional Rhubarb mouth-cue recognition, SHA-256-bound audio packages, actual playback clock, explicit amplitude fallback |
+| Avatar calibration | 52 named face-channel mappings, viseme mappings, neutral/range calibration, local quaternion bases, capability diagnostics |
+| Measured motion | Source-linked face/pose clip export and replay, separate source clock, explicit geometry-preview and speaker-review states |
+| Reference preparation | Publisher-text/ASR comparison, bounded candidate WAVs, clock metadata, artifact hashes, and a review ledger |
 | Media processing | FFmpeg clips, source-clock manifests, optional ASR/alignment and facial/body observation adapters |
 | Ingestion | Local SRT/VTT/WhisperX imports, speaker selection, hashes, source-clock offsets |
-| Evaluation | Reproducible retrieval checks and source-disjoint answerability fixtures |
+| Evaluation | Reproducible retrieval checks, separate generation cases, actual A/B/C execution, and source-disjoint answerability fixtures |
 
 ## Corpus and original material
 
@@ -65,7 +71,7 @@ The collection includes TED interviews, Lex Fridman conversations, Dwarkesh, Y C
 
 The publisher transcript pipeline also extracted **3,451 timestamped caption cues** from four complete TED interviews: **3:00:45 of declared program duration and 27,411 whitespace-delimited words**. Of those cues, **1,822 carry Musk labels in the publisher text**, 1,125 carry interviewer labels, and 504 remain unassigned. Questions and adjacent speaking turns are preserved. These full local transcripts remain **draft, unindexed** material; a text label is not independently verified voice identity. The repository contains reproducible extraction code and measured coverage, while complete originals remain outside Git.
 
-This is a research corpus and working application, not a validated replica of a person's mind, voice, or appearance. The [inference report](docs/inference-validation.md) separates real model execution from citation compliance and perceptual quality. The included avatar is a stylized reference rig; a high-quality likeness asset and measured individual behavior still require separate work.
+This is a research corpus and working application, not a validated replica of a person's mind, voice, or appearance. The [initial inference report](docs/inference-validation.md) and [integration results](docs/integration-validation.md) separate real model execution from citation compliance and perceptual quality. The included avatar remains a stylized reference rig. A high-quality likeness asset, learned personal mannerisms across many situations, and independent perceptual evaluation remain separate work.
 
 ## Research workflow
 
@@ -93,7 +99,7 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 - A valid citation ID means the response referenced an allowed record; it does not prove that every generated sentence follows from that record.
 - Retrieval smoke tests are not an independent persona-fidelity benchmark. Cases derived while authoring the corpus are labeled development fixtures.
 - An entire held-out source is excluded from runtime retrieval, including its records and reference answers.
-- Initial motion cues are authored demonstration rules, not measured Musk mannerisms. Lip motion needs actual audio/phoneme alignment to support precise synchronization claims.
+- Conversation behavior cues remain authored demonstration rules. Measured video clips can be replayed in the motion lab; they are not automatically promoted into learned personality or gesture policies. Audio-recognized mouth cues remain predictions, with their timing basis shown explicitly.
 - No-key source previews do not translate English evidence into fabricated Korean quotations. A connected model can answer in Korean with English-source attribution.
 
 ## API
@@ -106,6 +112,8 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 | `POST /api/chat` | Complete response with citations and behavioral timeline |
 | `POST /api/chat/stream` | SSE `meta`, `status`, `token`, `result`, `done` or `error` |
 | `POST /api/speech` | Speech-provider audio, when configured |
+| `POST /api/speech/prepare` | Generate audio and optional mouth cues bound to its SHA-256 |
+| `GET /api/speech/clips/{id}` | Retrieve an ephemeral prepared clip before expiry |
 | `POST /api/transcribe` | Raw-audio transcription, when configured |
 | `DELETE /api/sessions/{id}` | Delete an idle conversation session |
 
@@ -120,5 +128,11 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 - [Media and voice pipeline](docs/media-pipeline.md): local clips, optional transcription/observations, and the reference-voice server.
 - [Execution and deployment](docs/deployment.md): coordinated development servers, container configuration, and CI artifacts.
 - [Inference validation](docs/inference-validation.md): real model smoke results, reproducible commands, and measured limitations.
+- [Local language server](docs/language-runtime.md): model loading, bounded generation, and main-app connection.
+- [Generation evaluation](docs/evaluation.md): A/B/C execution, token usage, citation checks, and human-review fields.
+- [Reference preparation](docs/research/voice-reference.md): publisher-linked audio candidates, clock matching, and review evidence.
+- [Speech timing](docs/speech-timing.md): real audio transport, recognized mouth cues, and failure behavior.
+- [Avatar calibration](docs/avatar-calibration.md): observed clip export, rig mapping, and channel inspection.
+- [Integration validation](docs/integration-validation.md): actual ASR, local HTTP inference, speech packages, and video observations.
 
 Run locally by default. Internet-facing deployment needs application authentication, inference quotas, and a considered persistence policy. The current session store is process-local and intentionally ephemeral; run a single API worker.

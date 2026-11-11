@@ -1,10 +1,12 @@
 import {
   BufferGeometry, CatmullRomCurve3, Color, Float32BufferAttribute,
-  Group, LatheGeometry, Mesh, MeshStandardMaterial, SphereGeometry, TorusGeometry, TubeGeometry,
+  Group, LatheGeometry, Mesh, MeshStandardMaterial, Quaternion, SphereGeometry, TorusGeometry, TubeGeometry,
   Vector2, Vector3,
 } from 'three';
 import { disposeObject } from './dispose';
-import type { RigDiagnostics, RigPose } from './types';
+import { BONE_CHANNELS, FACE_CHANNELS } from './channels';
+import { poseFace } from './retarget';
+import type { BoneControl, FaceWeights, RigDiagnostics, RigPose } from './types';
 
 export interface AvatarRig {
   root: Group;
@@ -69,6 +71,28 @@ function faceGeometry(): BufferGeometry {
     new Float32BufferAttribute(smileDelta, 3), new Float32BufferAttribute(jawDelta, 3), new Float32BufferAttribute(browDelta, 3),
   ];
   ['mouthSmile', 'jawOpen', 'browRaise'].forEach((name, index) => { faceMorphs[index].name = name; });
+  for (const name of ['mouthSmileLeft', 'mouthSmileRight', 'mouthFrownLeft', 'mouthFrownRight', 'browInnerUp',
+    'browOuterUpLeft', 'browOuterUpRight', 'browDownLeft', 'browDownRight', 'cheekSquintLeft', 'cheekSquintRight', 'cheekPuff', 'jawLeft', 'jawRight', 'jawForward'] as const) {
+    const delta: number[] = [];
+    for (let i = 0; i < positions.count; i++) {
+      const x = positions.getX(i); const y = positions.getY(i); const z = positions.getZ(i);
+      const front = Math.max(0, z / 0.327);
+      const side = name.endsWith('Left') ? Math.max(0, x / 0.15) : name.endsWith('Right') ? Math.max(0, -x / 0.15) : 1;
+      const cheek = Math.exp(-Math.pow((Math.abs(x) - 0.20) / 0.10, 2) - Math.pow((y + 0.06) / 0.15, 2)) * front * Math.min(1, side);
+      const forehead = Math.exp(-Math.pow((y - 0.18) / 0.10, 2)) * front * Math.min(1, side);
+      const lower = Math.max(0, Math.min(1, (-y - 0.12) / 0.25));
+      let dx = 0; let dy = 0; let dz = 0;
+      if (name.startsWith('mouthSmile')) dy = cheek * 0.022;
+      if (name.startsWith('mouthFrown')) dy = -cheek * 0.012;
+      if (name.startsWith('brow')) dy = forehead * (name.startsWith('browDown') ? -0.012 : 0.014);
+      if (name.startsWith('cheekSquint')) { dy = cheek * 0.013; dz = cheek * 0.007; }
+      if (name === 'cheekPuff') { dx = Math.sign(x) * cheek * 0.008; dz = cheek * 0.018; }
+      if (name === 'jawLeft' || name === 'jawRight') dx = lower * (name === 'jawLeft' ? 0.022 : -0.022);
+      if (name === 'jawForward') dz = lower * 0.018;
+      delta.push(dx, dy, dz);
+    }
+    const attribute = new Float32BufferAttribute(delta, 3); attribute.name = name; faceMorphs.push(attribute);
+  }
   geometry.morphAttributes.position = faceMorphs;
   geometry.morphTargetsRelative = true;
   geometry.computeVertexNormals();
@@ -82,7 +106,18 @@ function addLipSmile(mesh: Mesh): void {
     delta.push(0, weight * 0.036, 0);
   }
   const target = new Float32BufferAttribute(delta, 3); target.name = 'mouthSmile';
-  mesh.geometry.morphAttributes.position = [target]; mesh.geometry.morphTargetsRelative = true;
+  const targets = [target];
+  for (const name of ['mouthSmileLeft', 'mouthSmileRight', 'mouthFrownLeft', 'mouthFrownRight', 'mouthUpperUpLeft', 'mouthUpperUpRight', 'mouthLowerDownLeft', 'mouthLowerDownRight'] as const) {
+    const delta: number[] = [];
+    for (let i = 0; i < position.count; i++) {
+      const x = position.getX(i); const side = name.endsWith('Left') ? Math.max(0, x) : Math.max(0, -x);
+      const weight = Math.min(1, Math.pow(side / 0.101, 1.4));
+      const direction = name.startsWith('mouthFrown') || name.startsWith('mouthLowerDown') ? -1 : 1;
+      delta.push(0, weight * 0.028 * direction, 0);
+    }
+    const attribute = new Float32BufferAttribute(delta, 3); attribute.name = name; targets.push(attribute);
+  }
+  mesh.geometry.morphAttributes.position = targets; mesh.geometry.morphTargetsRelative = true;
   mesh.updateMorphTargets();
 }
 
@@ -166,7 +201,7 @@ export function createProceduralRig(): AvatarRig {
   const collar = new Mesh(new TorusGeometry(0.19, 0.026, 10, 48, Math.PI * 2), shirtSeam);
   collar.rotation.x = Math.PI / 2; collar.position.set(0, 1.34, 0.012); collar.scale.set(1, 0.88, 1); torso.add(collar);
 
-  const head = new Group(); head.name = 'head'; head.position.set(0, 1.92, 0); torso.add(head);
+  const head = new Group(); head.name = 'head'; head.position.set(0, 0.63, 0); neck.add(head);
   const face = new Mesh(faceGeometry(), faceMaterial); face.castShadow = true; face.receiveShadow = true; head.add(face);
   for (const side of [-1, 1]) {
     head.add(ellipsoid(skin, [0.06, 0.103, 0.05], [side * 0.355, -0.015, -0.008], 24));
@@ -221,6 +256,10 @@ export function createProceduralRig(): AvatarRig {
   const lowerLip = curveMesh([[-0.101, -0.001, 0], [-0.052, -0.012, 0.022], [0, -0.015, 0.029], [0.055, -0.011, 0.021], [0.101, -0.001, 0]], 0.011, lips, 24);
   addLipSmile(lowerLip);
   jaw.add(lowerLip);
+  const teeth = ellipsoid(new MeshStandardMaterial({ color: '#d7d0b8', roughness: 0.48 }), [0.071, 0.010, 0.008], [0, -0.010, 0.024], 24);
+  mouth.add(teeth); teeth.visible = false;
+  const tongue = ellipsoid(new MeshStandardMaterial({ color: '#a36563', roughness: 0.76 }), [0.044, 0.009, 0.032], [0, -0.023, 0.017], 24);
+  jaw.add(tongue); tongue.visible = false;
 
   const shoulders: Group[] = []; const forearms: Group[] = []; const hands: Group[] = [];
   for (const side of [-1, 1]) {
@@ -235,38 +274,72 @@ export function createProceduralRig(): AvatarRig {
     const hand = makeHand(skin, side); hand.position.set(0, -0.41, 0); forearm.add(hand); hands.push(hand);
   }
   root.rotation.y = -0.075;
+  const supported: (keyof FaceWeights)[] = ['eyeBlinkLeft', 'eyeBlinkRight', 'eyeWideLeft', 'eyeWideRight', 'eyeSquintLeft', 'eyeSquintRight',
+    'eyeLookUpLeft', 'eyeLookUpRight', 'eyeLookDownLeft', 'eyeLookDownRight', 'eyeLookInLeft', 'eyeLookInRight', 'eyeLookOutLeft', 'eyeLookOutRight',
+    'jawOpen', 'jawLeft', 'jawRight', 'jawForward', 'mouthClose', 'mouthSmileLeft', 'mouthSmileRight', 'mouthFrownLeft', 'mouthFrownRight',
+    'mouthFunnel', 'mouthPucker', 'mouthLeft', 'mouthRight', 'mouthStretchLeft', 'mouthStretchRight', 'mouthPressLeft', 'mouthPressRight',
+    'mouthRollLower', 'mouthRollUpper', 'mouthUpperUpLeft', 'mouthUpperUpRight', 'mouthLowerDownLeft', 'mouthLowerDownRight',
+    'browInnerUp', 'browOuterUpLeft', 'browOuterUpRight', 'browDownLeft', 'browDownRight', 'cheekSquintLeft', 'cheekSquintRight', 'cheekPuff', 'tongueOut'];
+  const articulated = new Map<BoneControl, { object: Group; neutral: Quaternion }>();
+  for (const [name, object] of [['chest', torso], ['neck', neck], ['head', head],
+    ['rightUpperArm', shoulders[0]], ['leftUpperArm', shoulders[1]], ['rightForearm', forearms[0]], ['leftForearm', forearms[1]],
+    ['rightHand', hands[0]], ['leftHand', hands[1]]] as [BoneControl, Group][]) articulated.set(name, { object, neutral: object.quaternion.clone() });
   const diagnostics: RigDiagnostics = {
     kind: 'procedural',
-    morphs: ['eyeBlinkLeft', 'eyeBlinkRight', 'jawOpen', 'mouthSmileLeft', 'mouthSmileRight', 'mouthFunnel', 'browInnerUp', 'browDownLeft', 'browDownRight'],
-    bones: ['head', 'neck', 'jaw', 'leftUpperArm', 'rightUpperArm', 'leftForearm', 'rightForearm', 'leftHand', 'rightHand'],
-    missing: [],
+    morphs: supported,
+    bones: [...articulated.keys()], visemes: [],
+    missing: [], unsupportedFace: FACE_CHANNELS.filter((name) => !supported.includes(name)),
+    unsupportedBones: BONE_CHANNELS.filter((name) => !articulated.has(name)),
+    warnings: ['The built-in portrait uses authored geometric approximations, not a scanned face or 52 production blendshapes. Native visemes use the face-control fallback.'],
   };
   return {
     root, diagnostics,
     apply(pose) {
+      const f = poseFace(pose); const v = (name: keyof FaceWeights) => Math.max(0, Math.min(1, f[name] ?? 0));
+      const smile = (v('mouthSmileLeft') + v('mouthSmileRight')) / 2;
+      const opening = Math.max(v('jawOpen') * (1 - v('mouthClose')), v('tongueOut') * 0.16);
+      const pucker = v('mouthPucker'); const round = v('mouthFunnel');
       torso.position.y = pose.breath;
+      torso.quaternion.identity();
       head.rotation.set(pose.headPitch, pose.headYaw, pose.headRoll);
       neck.rotation.set(pose.headPitch * 0.2, pose.headYaw * 0.15, pose.headRoll * 0.2);
-      eyeGroups.forEach((eye) => { eye.scale.y = Math.max(0.05, 1 - pose.blink * 0.95 - pose.mouthSmile * 0.12); });
-      irises.forEach((iris) => { iris.position.x = pose.gazeX * 0.031; iris.position.y = pose.gazeY * 0.03; });
-      brows.forEach((brow, index) => {
-        brow.position.y = 0.15 + pose.browRaise * 0.035 - pose.browFurrow * 0.017;
-        brow.rotation.z = (index === 0 ? 1 : -1) * (pose.browFurrow * 0.2 + pose.browRaise * 0.05);
+      eyeGroups.forEach((eye, index) => {
+        const side = index === 0 ? 'Right' : 'Left';
+        eye.scale.y = Math.max(0.05, 1 - v(`eyeBlink${side}`) * 0.95 - v(`eyeSquint${side}`) * 0.28 - smile * 0.12 + v(`eyeWide${side}`) * 0.22);
+        const horizontal = (v(`eyeLookOut${side}`) - v(`eyeLookIn${side}`)) * (side === 'Left' ? 1 : -1);
+        irises[index].position.x = pose.gazeX * 0.031 + horizontal * 0.016;
+        irises[index].position.y = pose.gazeY * 0.03 + (v(`eyeLookUp${side}`) - v(`eyeLookDown${side}`)) * 0.009;
       });
-      jaw.position.y = -pose.jawOpen * 0.060;
+      brows.forEach((brow, index) => {
+        const side = index === 0 ? 'Right' : 'Left';
+        const raise = v('browInnerUp') * 0.6 + v(`browOuterUp${side}`) * 0.4; const lower = v(`browDown${side}`);
+        brow.position.y = 0.15 + raise * 0.035 - lower * 0.017;
+        brow.rotation.z = (index === 0 ? 1 : -1) * (lower * 0.2 + raise * 0.05);
+      });
+      jaw.position.y = -opening * 0.048;
+      jaw.position.x = (v('jawLeft') - v('jawRight')) * 0.022;
+      jaw.position.z = v('jawForward') * 0.018;
       if (face.morphTargetInfluences) {
-        face.morphTargetInfluences[0] = pose.mouthSmile;
-        face.morphTargetInfluences[1] = pose.jawOpen;
-        face.morphTargetInfluences[2] = pose.browRaise;
+        for (const [name, index] of Object.entries(face.morphTargetDictionary ?? {})) face.morphTargetInfluences[index] = name === 'jawOpen' ? opening : v(name as keyof FaceWeights);
       }
-      if (upperLip.morphTargetInfluences) upperLip.morphTargetInfluences[0] = pose.mouthSmile;
-      if (lowerLip.morphTargetInfluences) lowerLip.morphTargetInfluences[0] = pose.mouthSmile;
-      cavity.scale.y = 0.006 + pose.jawOpen * 0.045;
-      cavity.position.y = -0.006 - pose.jawOpen * 0.022;
-      mouth.scale.x = 1 + pose.mouthSmile * 0.17 - pose.mouthRound * 0.20;
-      mouth.rotation.z = pose.mouthSmile * -0.018;
-      upperLip.scale.y = 1 + pose.mouthSmile * 0.5;
-      lowerLip.scale.y = 1 - pose.mouthSmile * 0.25;
+      for (const lip of [upperLip, lowerLip]) if (lip.morphTargetInfluences) {
+        for (const [name, index] of Object.entries(lip.morphTargetDictionary ?? {})) {
+          const relevant = lip === upperLip ? !name.startsWith('mouthLowerDown') : !name.startsWith('mouthUpperUp');
+          lip.morphTargetInfluences[index] = relevant ? v(name as keyof FaceWeights) : 0;
+        }
+      }
+      cavity.scale.y = 0.006 + opening * 0.033;
+      cavity.position.y = -0.006 - opening * 0.019;
+      mouth.position.x = (v('mouthLeft') - v('mouthRight')) * 0.018;
+      mouth.position.z = 0.291 + pucker * 0.017 + round * 0.007;
+      mouth.scale.x = 1 + smile * 0.12 + (v('mouthStretchLeft') + v('mouthStretchRight')) * 0.06 - round * 0.20 - pucker * 0.26;
+      mouth.rotation.z = (v('mouthSmileLeft') - v('mouthSmileRight')) * 0.02;
+      const press = (v('mouthPressLeft') + v('mouthPressRight')) / 2;
+      upperLip.scale.y = 1 + smile * 0.3 - press * 0.4 - v('mouthRollUpper') * 0.4;
+      lowerLip.scale.y = 1 - smile * 0.2 - press * 0.4 - v('mouthRollLower') * 0.4;
+      upperLip.position.z = -v('mouthRollUpper') * 0.009; lowerLip.position.z = -v('mouthRollLower') * 0.009;
+      teeth.visible = opening > 0.12; tongue.visible = v('tongueOut') > 0.02;
+      tongue.position.z = 0.017 + v('tongueOut') * 0.045;
       shoulders.forEach((shoulder, index) => {
         const side = index === 0 ? -1 : 1;
         shoulder.rotation.z = side * (0.13 + pose.openPalm * 0.19 + pose.shrug * 0.1);
@@ -277,6 +350,10 @@ export function createProceduralRig(): AvatarRig {
         hands[index].rotation.y = side * pose.openPalm * 0.7;
         hands[index].rotation.z = side * (pose.emphasis * 0.13 + pose.wave * 0.35);
       });
+      for (const [name, binding] of articulated) {
+        const measured = pose.bones?.[name];
+        if (measured) binding.object.quaternion.copy(binding.neutral).multiply(new Quaternion(...measured)).normalize();
+      }
     },
     dispose() { disposeObject(root); },
   };

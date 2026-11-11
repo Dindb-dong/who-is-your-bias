@@ -2,6 +2,8 @@
 
 This document records an execution smoke test on **2026-11-10 UTC**, separate from the application's protocol tests and browser checks. Model inference, citation compliance, speaker identity, and perceptual similarity are separate outcomes. Reports and generated audio stay in ignored `reports/local/`; downloaded weights stay outside the repository.
 
+These are the initial direct-engine measurements. Subsequent real HTTP/SSE integration, transcript-conditioned speech, ASR, mouth-cue recognition, and video observations are recorded separately in [integration validation](integration-validation.md). Historical limitations below describe the initial runs and are not silently upgraded by later results.
+
 ## Language model: real generation completed; citation compliance failed
 
 The actual [`Qwen/Qwen3-0.6B`](https://huggingface.co/Qwen/Qwen3-0.6B) weights at commit `c1899de289a04d12100db370d81485cdf75e47ca` generated a response on CPU. The runner used the repository's `Corpus`, `Retriever`, `build_messages`, and `validate_citations`; it did not use a canned model response. The prompt used the behavior condition, English, no conversation history, and four reviewed evidence records. Qwen thinking was disabled through the official chat-template option.

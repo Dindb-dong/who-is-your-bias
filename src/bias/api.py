@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+import re
 from contextlib import aclosing, asynccontextmanager
 from typing import AsyncIterator
 
@@ -17,9 +18,11 @@ from . import __version__
 from .config import Settings
 from .corpus import Corpus
 from .engine import Engine
-from .models import ChatRequest, ChatTurn, SpeechRequest
+from .lipsync import LipsyncEngine
+from .models import ChatRequest, ChatTurn, SpeechPackageRequest, SpeechRequest
 from .providers import OpenAICompatibleLLM, ProviderError, SpeechProvider, TranscriptionProvider
 from .sessions import SessionCapacityError, SessionNotFound
+from .speech import SpeechPackages
 
 logger = logging.getLogger(__name__)
 
@@ -84,7 +87,12 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
         application.state.engine = Engine(config, corpus or Corpus.load(config.corpus_dir), llm=llm)
         application.state.speech = SpeechProvider(config.tts, voice=config.tts_voice, timeout=config.request_timeout)
         application.state.transcription = TranscriptionProvider(config.asr, timeout=config.request_timeout)
-        yield
+        application.state.lipsync = LipsyncEngine.from_env()
+        application.state.speech_packages = SpeechPackages()
+        try:
+            yield
+        finally:
+            application.state.speech_packages.clear()
 
     application = FastAPI(title="Who Is Your Bias?", version=__version__, lifespan=lifespan)
     application.add_middleware(CORSMiddleware, allow_origins=list(config.cors_origins), allow_credentials=False, allow_methods=["GET", "POST", "DELETE"], allow_headers=["Content-Type"], expose_headers=["X-Speech-Timing", "X-Voice-Mode"])
@@ -169,6 +177,24 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
         except ProviderError as exc:
             status, error = _public_error(exc)
             return JSONResponse(status_code=status, content={"error": error})
+
+    @application.post("/api/speech/prepare")
+    async def prepare_speech(body: SpeechPackageRequest, request: Request):
+        try:
+            return await request.app.state.speech_packages.prepare(
+                request.app.state.speech, request.app.state.lipsync,
+                text=body.text, voice=body.voice, language=body.language,
+            )
+        except ProviderError as exc:
+            status, error = _public_error(exc)
+            return JSONResponse(status_code=status, content={"error": error})
+
+    @application.get("/api/speech/clips/{clip_id}")
+    async def speech_clip(clip_id: str, request: Request):
+        clip = request.app.state.speech_packages.get(clip_id) if re.fullmatch(r"[a-f0-9]{32}", clip_id) else None
+        if clip is None:
+            raise HTTPException(status_code=404, detail="The speech clip has expired. Generate the voice again.")
+        return Response(content=clip.data, media_type=clip.mime)
 
     @application.post("/api/transcribe")
     async def transcribe(request: Request):

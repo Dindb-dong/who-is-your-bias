@@ -7,8 +7,10 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { disposeObject } from './dispose';
 import { createProceduralRig, type AvatarRig } from './procedural';
 import { loadGlbRig } from './retarget';
-import { dampPose, neutralPose, samplePose } from './timeline';
-import type { BehaviorPlan, RigDiagnostics, RigMapping, RigPose } from './types';
+import { dampPose, neutralPose } from './timeline';
+import { samplePerformance } from './performance';
+import { parseAvatarClip, parseSpeechTiming } from './validation';
+import type { AnimationTelemetry, AvatarClip, BehaviorPlan, RigDiagnostics, RigMapping, RigPose, SpeechTiming } from './types';
 
 export interface PlaybackState {
   speaking: boolean;
@@ -16,12 +18,19 @@ export interface PlaybackState {
   amplitude?: number;
   timeline?: BehaviorPlan;
   reducedMotion?: boolean;
+  audioElapsedMs?: number;
+  audioSha256?: string;
+  speechTiming?: SpeechTiming;
+  performanceClip?: AvatarClip;
+  observationElapsedMs?: number;
+  allowGeometryPreview?: boolean;
 }
 
 interface RendererCallbacks {
   onReady?: (diagnostics: RigDiagnostics) => void;
   onError?: (error: Error) => void;
   onModelState?: (state: 'loading' | 'ready' | 'fallback') => void;
+  onTelemetry?: (telemetry: AnimationTelemetry) => void;
 }
 
 export class AvatarRenderer {
@@ -42,6 +51,13 @@ export class AvatarRenderer {
   private start = performance.now();
   private modelAbort?: AbortController;
   private modelSerial = 0;
+  private timingInput?: SpeechTiming;
+  private clipInput?: AvatarClip;
+  private validatedTiming?: SpeechTiming;
+  private validatedClip?: AvatarClip;
+  private calibrationPose?: RigPose;
+  private lastClock = 0;
+  private lastTelemetry = 0;
 
   constructor(private host: HTMLElement, private callbacks: RendererCallbacks = {}) {
     this.renderer = new WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
@@ -93,7 +109,21 @@ export class AvatarRenderer {
     backdrop.position.set(0, 1.50, -1.1); this.scene.add(backdrop);
   }
 
-  setPlayback(state: PlaybackState): void { this.playback = state; }
+  setPlayback(state: PlaybackState): void {
+    if (state.speechTiming !== this.timingInput) {
+      this.timingInput = state.speechTiming; this.validatedTiming = undefined;
+      try { if (state.speechTiming) this.validatedTiming = parseSpeechTiming(state.speechTiming); }
+      catch (error) { this.callbacks.onError?.(error instanceof Error ? error : new Error('Invalid speech timing.')); }
+    }
+    if (state.performanceClip !== this.clipInput || state.allowGeometryPreview !== this.playback.allowGeometryPreview) {
+      this.clipInput = state.performanceClip; this.validatedClip = undefined;
+      try { if (state.performanceClip) this.validatedClip = parseAvatarClip(state.performanceClip, state.allowGeometryPreview); }
+      catch (error) { this.callbacks.onError?.(error instanceof Error ? error : new Error('Invalid animation clip.')); }
+    }
+    this.playback = { ...state, speechTiming: this.validatedTiming, performanceClip: this.validatedClip };
+  }
+
+  setCalibrationPose(pose?: RigPose): void { this.calibrationPose = pose; this.pose = neutralPose(); }
 
   async setModel(url?: string, mapping: RigMapping = {}): Promise<void> {
     const serial = ++this.modelSerial;
@@ -150,8 +180,16 @@ export class AvatarRenderer {
     if (this.disposed || this.contextLost || !this.visible) return;
     const delta = this.previousFrame ? (now - this.previousFrame) / 1000 : 1 / 60;
     this.previousFrame = now;
-    const target = samplePose({ ...this.playback, plan: this.playback.timeline, idleMs: now - this.start });
-    this.pose = dampPose(this.pose, target, delta); this.rig.apply(this.pose);
+    const sample = samplePerformance({ ...this.playback, plan: this.playback.timeline, idleMs: now - this.start }, this.rig.diagnostics);
+    const target = this.calibrationPose ?? sample.pose;
+    const clock = this.playback.performanceClip ? this.playback.observationElapsedMs ?? this.playback.elapsedMs : this.playback.audioElapsedMs ?? this.playback.elapsedMs;
+    const seek = clock < this.lastClock || clock - this.lastClock > 250;
+    this.lastClock = clock;
+    this.pose = seek || this.calibrationPose ? target : dampPose(this.pose, target, delta); this.rig.apply(this.pose);
+    if (now - this.lastTelemetry > 250) {
+      this.lastTelemetry = now;
+      this.callbacks.onTelemetry?.(this.calibrationPose ? { ...sample.telemetry, faceSource: 'calibration', boneSource: 'calibration', speechSource: 'silent' } : sample.telemetry);
+    }
     this.controls.update(); this.renderer.render(this.scene, this.camera);
     this.raf = requestAnimationFrame(this.frame);
   };

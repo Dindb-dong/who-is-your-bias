@@ -13,7 +13,14 @@ Build a real-time research studio that models Elon Musk's publicly documented st
 | Media pipeline and reproducible delivery | PR 3, targeting PR 2 branch | Local transcription and observation tools, voice-service integration, launch/deployment instructions, contract checks, reproducible evaluation |
 | Broader corpus and original transcript acquisition | PR 4, targeting PR 3 branch | Reviewed primary-source expansion, source-event isolation, English/Korean retrieval checks, full publisher transcript extraction, measured coverage |
 
-Intermediate changes are committed by coherent capability. Each completed milestone is published to its branch and opened as a pull request. Dependent pull requests remain stacked; the implementation does not merge them automatically.
+Foundation PRs 1–4 were merged into `main` in order on 2026-11-10 UTC after the user's explicit merge instruction, preserving their intermediate commits. Follow-up work remains organized into coherent commits and reviewable milestone PRs:
+
+| Follow-up | Review unit | Acceptance |
+| --- | --- | --- |
+| Local inference and generated-answer evaluation | Local language runtime and A/B/C evaluation PR | Actual HTTP/SSE model connection, bounded lazy runtime, token/timing observations, separate ungraded semantic review |
+| Audio-timed embodiment and measured media | Dependent speech/motion PR | Reference-candidate workflow, real ASR and voice HTTP smoke, audio-bound mouth timing, measured clip replay, calibration, browser checks |
+
+Intermediate changes are committed by coherent capability. Completed milestones are published to their branches and opened as pull requests. New follow-up PRs remain available for review; the prior merge instruction is recorded against the four existing foundation PRs.
 
 ## Fidelity ladder
 

@@ -11,6 +11,10 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable
 
+# The official ONNX Runtime opt-out must precede initialization, including
+# transitive imports by model libraries. Local inference needs no telemetry.
+os.environ.setdefault("ORT_DISABLE_TELEMETRY", "1")
+
 
 class VoiceUnavailable(RuntimeError):
     pass
@@ -57,6 +61,17 @@ class VoiceSettings:
     def from_env(cls) -> "VoiceSettings":
         device = os.getenv("BIAS_VOICE_DEVICE", "cuda:0")
         reference = os.getenv("BIAS_VOICE_REFERENCE_WAV")
+        transcript = os.getenv("BIAS_VOICE_REFERENCE_TEXT") or None
+        transcript_file = os.getenv("BIAS_VOICE_REFERENCE_TEXT_FILE") or None
+        if transcript and transcript_file:
+            raise ValueError("Configure only one reference transcript source")
+        if transcript_file:
+            path = Path(transcript_file).expanduser().resolve()
+            if not path.is_file() or path.stat().st_size > 16000:
+                raise ValueError("Reference transcript file is missing or exceeds 16 KB")
+            transcript = path.read_text(encoding="utf-8").strip()
+        if transcript is not None and (not 1 <= len(transcript.strip()) <= 4000 or "\x00" in transcript):
+            raise ValueError("Reference transcript must contain 1–4000 characters and no NUL")
         x_vector_only = os.getenv("BIAS_VOICE_X_VECTOR_ONLY_MODE", "false").strip().lower()
         if x_vector_only not in {"true", "false", "1", "0"}:
             raise ValueError("BIAS_VOICE_X_VECTOR_ONLY_MODE must be true, false, 1, or 0")
@@ -66,7 +81,7 @@ class VoiceSettings:
             dtype=os.getenv("BIAS_VOICE_DTYPE", "float32" if device == "cpu" else "bfloat16"),
             attention=os.getenv("BIAS_VOICE_ATTENTION", "sdpa"),
             reference_wav=Path(reference).expanduser().resolve() if reference else None,
-            reference_text=os.getenv("BIAS_VOICE_REFERENCE_TEXT"),
+            reference_text=transcript,
             x_vector_only_mode=x_vector_only in {"true", "1"},
             api_key=os.getenv("BIAS_VOICE_API_KEY"),
             max_input_chars=int(os.getenv("BIAS_VOICE_MAX_INPUT_CHARS", "2000")),
