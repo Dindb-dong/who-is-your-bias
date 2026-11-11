@@ -1,0 +1,2014 @@
+{
+  "schema_version": "retrieval-development-cases.v1",
+  "id": "multilingual-summary-development.v1",
+  "split": "development",
+  "registered_at": "2026-11-11T10:08:17.349089+00:00",
+  "scope": "100 answerable bilingual paraphrases and 50 absent-evidence cases. Agent-authored and agent-reviewed development material on the existing exposed summary corpus. No human-reviewed or fresh test-event claim. The original frozen Q&A pilot is unchanged.",
+  "label_provenance": {
+    "reviewer_type": "agent",
+    "human_review": "ungraded",
+    "basis": "Direct inspection of the existing reviewed summaries and absence of the requested facts in that corpus. Paired translations are correlated observations."
+  },
+  "cases": [
+    {
+      "id": "positive-001-en",
+      "pair_id": "positive-001",
+      "language": "en",
+      "query": "What transition was Tesla meant to speed up when its first plan was written?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-tesla06-purpose"
+      ],
+      "expected_source_ids": [
+        "tesla-master-plan-2006"
+      ],
+      "support_text_sha256": "e9040863104c981a710132be756035fcaa52b482d2b7023d24dfb2e4951a0eb7",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-001-ko",
+      "pair_id": "positive-001",
+      "language": "ko",
+      "query": "테슬라의 첫 계획은 사회가 어떤 에너지원으로 전환하는 일을 앞당기려 했나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-tesla06-purpose"
+      ],
+      "expected_source_ids": [
+        "tesla-master-plan-2006"
+      ],
+      "support_text_sha256": "e9040863104c981a710132be756035fcaa52b482d2b7023d24dfb2e4951a0eb7",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-002-en",
+      "pair_id": "positive-002",
+      "language": "en",
+      "query": "How could selling expensive cars help pay for cheaper ones later?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-tesla06-sequence"
+      ],
+      "expected_source_ids": [
+        "tesla-master-plan-2006"
+      ],
+      "support_text_sha256": "674c5796b0824e918dec573e37b9d715ea5a004d6e2015b319319e5fc293edfe",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-002-ko",
+      "pair_id": "positive-002",
+      "language": "ko",
+      "query": "처음에 고가 자동차를 판매하는 것이 이후 저렴한 차를 만드는 자금과 어떻게 이어지나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-tesla06-sequence"
+      ],
+      "expected_source_ids": [
+        "tesla-master-plan-2006"
+      ],
+      "support_text_sha256": "674c5796b0824e918dec573e37b9d715ea5a004d6e2015b319319e5fc293edfe",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-003-en",
+      "pair_id": "positive-003",
+      "language": "en",
+      "query": "Where did Tesla put its spare operating cash to make future products arrive sooner?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-tesla06-reinvestment"
+      ],
+      "expected_source_ids": [
+        "tesla-master-plan-2006"
+      ],
+      "support_text_sha256": "16e2dedaa12263e4661a95a2500176e2e0469ed2a65b3d732b707b0533d2c463",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-003-ko",
+      "pair_id": "positive-003",
+      "language": "ko",
+      "query": "테슬라는 후속 제품을 더 빨리 출시하려고 남는 현금을 어디에 다시 투자했나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-tesla06-reinvestment"
+      ],
+      "expected_source_ids": [
+        "tesla-master-plan-2006"
+      ],
+      "support_text_sha256": "16e2dedaa12263e4661a95a2500176e2e0469ed2a65b3d732b707b0533d2c463",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-004-en",
+      "pair_id": "positive-004",
+      "language": "en",
+      "query": "Why is looking only at exhaust emissions an incomplete way to judge an electric vehicle?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-tesla06-system"
+      ],
+      "expected_source_ids": [
+        "tesla-master-plan-2006"
+      ],
+      "support_text_sha256": "b23d35fe92fbb6ce347c6f1d6866f98852cd13588414d35edfdce4534e57f42b",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-004-ko",
+      "pair_id": "positive-004",
+      "language": "ko",
+      "query": "전기차를 평가할 때 배기관 배출만 보면 전체 에너지 효율을 놓치는 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-tesla06-system"
+      ],
+      "expected_source_ids": [
+        "tesla-master-plan-2006"
+      ],
+      "support_text_sha256": "b23d35fe92fbb6ce347c6f1d6866f98852cd13588414d35edfdce4534e57f42b",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-005-en",
+      "pair_id": "positive-005",
+      "language": "en",
+      "query": "What parts of the customer's solar roof and home battery experience were meant to be combined?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-tesla16-integration"
+      ],
+      "expected_source_ids": [
+        "tesla-master-plan-2016"
+      ],
+      "support_text_sha256": "598d51582e3b056b5c984da579a51652aa080b8bd639606be8149ec90d66e1a7",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-005-ko",
+      "pair_id": "positive-005",
+      "language": "ko",
+      "query": "태양광 지붕과 가정용 저장장치를 결합할 때 구매부터 사후지원까지 어떤 경험을 하나로 만들려 했나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-tesla16-integration"
+      ],
+      "expected_source_ids": [
+        "tesla-master-plan-2016"
+      ],
+      "support_text_sha256": "598d51582e3b056b5c984da579a51652aa080b8bd639606be8149ec90d66e1a7",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-006-en",
+      "pair_id": "positive-006",
+      "language": "en",
+      "query": "Why regard the production plant itself as something engineers should design like a product?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-tesla16-factory"
+      ],
+      "expected_source_ids": [
+        "tesla-master-plan-2016"
+      ],
+      "support_text_sha256": "c3673fe9235f72f5c7ffc195ab73540ec069ec148a8260fa623c12a709a89013",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-006-ko",
+      "pair_id": "positive-006",
+      "language": "ko",
+      "query": "생산 공장 자체를 엔지니어링 제품으로 설계해야 한다고 본 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-tesla16-factory"
+      ],
+      "expected_source_ids": [
+        "tesla-master-plan-2016"
+      ],
+      "support_text_sha256": "c3673fe9235f72f5c7ffc195ab73540ec069ec148a8260fa623c12a709a89013",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-007-en",
+      "pair_id": "positive-007",
+      "language": "en",
+      "query": "Why would having self-driving sensors installed not mean the car could immediately drive itself legally?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-tesla16-validation"
+      ],
+      "expected_source_ids": [
+        "tesla-master-plan-2016"
+      ],
+      "support_text_sha256": "e7c0820e85c4c03c5917a36b1295e4bd6c0590891aa6c89431a3454f48a4475a",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-007-ko",
+      "pair_id": "positive-007",
+      "language": "ko",
+      "query": "자율주행 장비가 이미 달렸더라도 소프트웨어 검증과 규제 승인 때문에 바로 운행할 수 없는 이유가 뭔가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-tesla16-validation"
+      ],
+      "expected_source_ids": [
+        "tesla-master-plan-2016"
+      ],
+      "support_text_sha256": "e7c0820e85c4c03c5917a36b1295e4bd6c0590891aa6c89431a3454f48a4475a",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-008-en",
+      "pair_id": "positive-008",
+      "language": "en",
+      "query": "Was starting SpaceX mainly a way to maximize an investment return or to extend civilization beyond Earth?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-henry08-space"
+      ],
+      "expected_source_ids": [
+        "henry-ford-2008"
+      ],
+      "support_text_sha256": "749b795be67fe1d19f0da1dbbfe0b627855285def2b9627e01416ff5a7a68c25",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-008-ko",
+      "pair_id": "positive-008",
+      "language": "ko",
+      "query": "스페이스엑스 설립의 중심 목적은 투자수익 극대화였나요, 아니면 지구 밖으로 문명을 확장하는 일이었나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-henry08-space"
+      ],
+      "expected_source_ids": [
+        "henry-ford-2008"
+      ],
+      "support_text_sha256": "749b795be67fe1d19f0da1dbbfe0b627855285def2b9627e01416ff5a7a68c25",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-009-en",
+      "pair_id": "positive-009",
+      "language": "en",
+      "query": "How do you build a conclusion upward from fundamental truths instead of relying on analogies?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-henry08-first-principles"
+      ],
+      "expected_source_ids": [
+        "henry-ford-2008"
+      ],
+      "support_text_sha256": "a537c4bd4ea332ce9d3e4f6dfbca102e04fd5827b41179cfd31e5b1e325a250e",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-009-ko",
+      "pair_id": "positive-009",
+      "language": "ko",
+      "query": "비슷한 사례를 따라 하기보다 근본적인 사실에서 출발해 결론을 세우는 사고방식을 설명해 주세요.",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-henry08-first-principles"
+      ],
+      "expected_source_ids": [
+        "henry-ford-2008"
+      ],
+      "support_text_sha256": "a537c4bd4ea332ce9d3e4f6dfbca102e04fd5827b41179cfd31e5b1e325a250e",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-010-en",
+      "pair_id": "positive-010",
+      "language": "en",
+      "query": "Why did daily factory work make it easy to overlook how much had already been accomplished?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-henry08-factory-attention"
+      ],
+      "expected_source_ids": [
+        "henry-ford-2008"
+      ],
+      "support_text_sha256": "bed873b3bbb79cbd1899a3d4eca46f32eff9ecf0a69a46412438334e1737abc3",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-010-ko",
+      "pair_id": "positive-010",
+      "language": "ko",
+      "query": "로켓 공장에서 매일 결점을 찾다 보면 이미 이룬 성과를 놓치기 쉬웠던 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-henry08-factory-attention"
+      ],
+      "expected_source_ids": [
+        "henry-ford-2008"
+      ],
+      "support_text_sha256": "bed873b3bbb79cbd1899a3d4eca46f32eff9ecf0a69a46412438334e1737abc3",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-011-en",
+      "pair_id": "positive-011",
+      "language": "en",
+      "query": "Can a small improvement still count as valuable work without changing the whole world?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-stanford15-usefulness"
+      ],
+      "expected_source_ids": [
+        "stanford-2015"
+      ],
+      "support_text_sha256": "4fa7077f2944f1ed0a8c6cfe2f5ea3f0539ab0c97f11c64f7cc2329558b06997",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-011-ko",
+      "pair_id": "positive-011",
+      "language": "ko",
+      "query": "세상을 완전히 바꾸지 않는 작은 개선도 많은 사람에게 도움이 된다면 가치가 있나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-stanford15-usefulness"
+      ],
+      "expected_source_ids": [
+        "stanford-2015"
+      ],
+      "support_text_sha256": "4fa7077f2944f1ed0a8c6cfe2f5ea3f0539ab0c97f11c64f7cc2329558b06997",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-012-en",
+      "pair_id": "positive-012",
+      "language": "en",
+      "query": "Besides pay, what could make a company's work attractive to talented recruits?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-stanford15-purpose"
+      ],
+      "expected_source_ids": [
+        "stanford-2015"
+      ],
+      "support_text_sha256": "7e55648eb442ff4a4e6c3d6babf245882d259fb0cec1d7abbf787abe6026a63b",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-012-ko",
+      "pair_id": "positive-012",
+      "language": "ko",
+      "query": "금전적인 보상 외에 어떤 사명과 일의 특성이 우수한 인재를 끌어들일 수 있나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-stanford15-purpose"
+      ],
+      "expected_source_ids": [
+        "stanford-2015"
+      ],
+      "support_text_sha256": "7e55648eb442ff4a4e6c3d6babf245882d259fb0cec1d7abbf787abe6026a63b",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-013-en",
+      "pair_id": "positive-013",
+      "language": "en",
+      "query": "What tension did you describe between a car's attractive shape and how many passengers it fits?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-stanford15-design"
+      ],
+      "expected_source_ids": [
+        "stanford-2015"
+      ],
+      "support_text_sha256": "9e3dc7b90601826cc778935fa6ff822a26beb19ecbbff8b2a6d646a75d85da28",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-013-ko",
+      "pair_id": "positive-013",
+      "language": "ko",
+      "query": "차량의 보기 좋은 비율과 탑승 인원 사이에는 어떤 설계상의 충돌이 있었나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-stanford15-design"
+      ],
+      "expected_source_ids": [
+        "stanford-2015"
+      ],
+      "support_text_sha256": "9e3dc7b90601826cc778935fa6ff822a26beb19ecbbff8b2a6d646a75d85da28",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-014-en",
+      "pair_id": "positive-014",
+      "language": "en",
+      "query": "How did the fourth rocket launch and last-minute financing change the crisis after three failed launches?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-stanford15-setbacks"
+      ],
+      "expected_source_ids": [
+        "stanford-2015"
+      ],
+      "support_text_sha256": "ea8fd9636e6f216793f3d45254ca307df9788f390fc572e2ed71c7010e01541a",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-014-ko",
+      "pair_id": "positive-014",
+      "language": "ko",
+      "query": "세 번의 발사 실패 뒤 네 번째 성공과 크리스마스이브의 자금 조달은 위기 상황을 어떻게 바꿨나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-stanford15-setbacks"
+      ],
+      "expected_source_ids": [
+        "stanford-2015"
+      ],
+      "support_text_sha256": "ea8fd9636e6f216793f3d45254ca307df9788f390fc572e2ed71c7010e01541a",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-015-en",
+      "pair_id": "positive-015",
+      "language": "en",
+      "query": "How do testable scientific hypotheses differ from preferences that cannot be checked?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-lex19-testability"
+      ],
+      "expected_source_ids": [
+        "lex-049-2019"
+      ],
+      "support_text_sha256": "249fab7da4351007563fa84953ef0bb3d0aa05f0639c9e7ed8bad8f6f7b331d4",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-015-ko",
+      "pair_id": "positive-015",
+      "language": "ko",
+      "query": "검증 가능한 과학적 가설과 실험으로 확인할 수 없는 개인적 선호는 어떻게 구분하나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-lex19-testability"
+      ],
+      "expected_source_ids": [
+        "lex-049-2019"
+      ],
+      "support_text_sha256": "249fab7da4351007563fa84953ef0bb3d0aa05f0639c9e7ed8bad8f6f7b331d4",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-016-en",
+      "pair_id": "positive-016",
+      "language": "en",
+      "query": "Which engineering disciplines have to work together to build a durable low-power brain interface?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-lex19-engineering"
+      ],
+      "expected_source_ids": [
+        "lex-049-2019"
+      ],
+      "support_text_sha256": "06fc0ab1f4b2f88288f407cb9ead31e44699da2eb7c542c21c04658bc0491470",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-016-ko",
+      "pair_id": "positive-016",
+      "language": "ko",
+      "query": "오래 쓸 수 있고 전력 소모가 적은 뇌 인터페이스를 만들려면 어떤 공학 분야들이 함께 필요하나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-lex19-engineering"
+      ],
+      "expected_source_ids": [
+        "lex-049-2019"
+      ],
+      "support_text_sha256": "06fc0ab1f4b2f88288f407cb9ead31e44699da2eb7c542c21c04658bc0491470",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-017-en",
+      "pair_id": "positive-017",
+      "language": "en",
+      "query": "What did admiring Carl Sagan have to do with not taking civilization's survival for granted?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-lex19-sagan"
+      ],
+      "expected_source_ids": [
+        "lex-049-2019"
+      ],
+      "support_text_sha256": "2ee8121225699d87ea5c640f165ad115adb7d8b9e36ea10fc7f2a7d8c9ac9f87",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-017-ko",
+      "pair_id": "positive-017",
+      "language": "ko",
+      "query": "칼 세이건에 대한 존경과 지구의 우주적 규모는 문명의 존속을 당연시하지 않는 태도와 어떻게 연결됐나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-lex19-sagan"
+      ],
+      "expected_source_ids": [
+        "lex-049-2019"
+      ],
+      "support_text_sha256": "2ee8121225699d87ea5c640f165ad115adb7d8b9e36ea10fc7f2a7d8c9ac9f87",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-018-en",
+      "pair_id": "positive-018",
+      "language": "en",
+      "query": "How did The Hitchhiker's Guide influence the search for better questions about the universe?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-lex23-curiosity"
+      ],
+      "expected_source_ids": [
+        "lex-400-2023"
+      ],
+      "support_text_sha256": "6fa88e85be2aaa36f2469fcf40958ca03fba91d4a98932ffe1ba3f1103b96867",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-018-ko",
+      "pair_id": "positive-018",
+      "language": "ko",
+      "query": "은하수를 여행하는 히치하이커를 위한 안내서는 우주에 대해 더 나은 질문을 찾으려는 관심에 어떤 영향을 줬나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-lex23-curiosity"
+      ],
+      "expected_source_ids": [
+        "lex-400-2023"
+      ],
+      "support_text_sha256": "6fa88e85be2aaa36f2469fcf40958ca03fba91d4a98932ffe1ba3f1103b96867",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-019-en",
+      "pair_id": "positive-019",
+      "language": "en",
+      "query": "What should an AI engineering answer do when it is uncertain instead of confidently making mistakes?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-lex23-grounding"
+      ],
+      "expected_source_ids": [
+        "lex-400-2023"
+      ],
+      "support_text_sha256": "2fc2eb2a4f664ab0852d6499c119dc325be0be2e0f08d88f9fdc2f410c6c8b61",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-019-ko",
+      "pair_id": "positive-019",
+      "language": "ko",
+      "query": "인공지능이 공학 문제에 답할 때 자신 있게 틀리는 일을 줄이려면 물리 법칙과 불확실성을 어떻게 다뤄야 하나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-lex23-grounding"
+      ],
+      "expected_source_ids": [
+        "lex-400-2023"
+      ],
+      "support_text_sha256": "2fc2eb2a4f664ab0852d6499c119dc325be0be2e0f08d88f9fdc2f410c6c8b61",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-020-en",
+      "pair_id": "positive-020",
+      "language": "en",
+      "query": "Why might a difficult game be relaxing when it offers flow and a sense of progress?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-lex23-games"
+      ],
+      "expected_source_ids": [
+        "lex-400-2023"
+      ],
+      "support_text_sha256": "1cd562770f65069c16ba4d5ce3709a21cce67b3bb277def5e222b24cd7aa7ca7",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-020-ko",
+      "pair_id": "positive-020",
+      "language": "ko",
+      "query": "어려운 게임도 몰입과 진전이 느껴지면 편안하고 즐겁게 느껴지는 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-lex23-games"
+      ],
+      "expected_source_ids": [
+        "lex-400-2023"
+      ],
+      "support_text_sha256": "1cd562770f65069c16ba4d5ce3709a21cce67b3bb277def5e222b24cd7aa7ca7",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-021-en",
+      "pair_id": "positive-021",
+      "language": "en",
+      "query": "Whose criticism did you suggest deliberately seeking rather than avoiding?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-ted13-feedback"
+      ],
+      "expected_source_ids": [
+        "ted-2013"
+      ],
+      "support_text_sha256": "e94f8555a145027ba6bfcbb4424b1169c03dd8f4b511b81d6db56954597463df",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-021-ko",
+      "pair_id": "positive-021",
+      "language": "ko",
+      "query": "피하기보다 적극적으로 찾아야 한다고 말한 비판적 피드백은 누구에게서 받는 것이 좋았나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-ted13-feedback"
+      ],
+      "expected_source_ids": [
+        "ted-2013"
+      ],
+      "support_text_sha256": "e94f8555a145027ba6bfcbb4424b1169c03dd8f4b511b81d6db56954597463df",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-022-en",
+      "pair_id": "positive-022",
+      "language": "en",
+      "query": "Why might patents offer little practical protection against government-backed competitors in space?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-ted13-patents"
+      ],
+      "expected_source_ids": [
+        "ted-2013"
+      ],
+      "support_text_sha256": "63d2acd0c332f619388a3b75fa17f1754d1d8d25dbd2d47771e2b04c59d9ca82",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-022-ko",
+      "pair_id": "positive-022",
+      "language": "ko",
+      "query": "우주 사업의 경쟁자가 국가 정부라면 특허로 보호받기 어렵다고 본 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-ted13-patents"
+      ],
+      "expected_source_ids": [
+        "ted-2013"
+      ],
+      "support_text_sha256": "63d2acd0c332f619388a3b75fa17f1754d1d8d25dbd2d47771e2b04c59d9ca82",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-023-en",
+      "pair_id": "positive-023",
+      "language": "en",
+      "query": "What engineering changes could make excavating a tunnel less expensive?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-ted17-tunneling"
+      ],
+      "expected_source_ids": [
+        "ted-2017"
+      ],
+      "support_text_sha256": "5fe6b8e2f886236ead6da805ca114efc9f15492f480990684ee0b4e493908daf",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-023-ko",
+      "pair_id": "positive-023",
+      "language": "ko",
+      "query": "지하 통로를 파는 비용을 줄이려면 지름, 굴착 방식, 기계 출력에 어떤 변화를 줄 수 있나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-ted17-tunneling"
+      ],
+      "expected_source_ids": [
+        "ted-2017"
+      ],
+      "support_text_sha256": "5fe6b8e2f886236ead6da805ca114efc9f15492f480990684ee0b4e493908daf",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-024-en",
+      "pair_id": "positive-024",
+      "language": "en",
+      "query": "How can deliberate action shift which possible future eventually happens?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-ted17-probabilities"
+      ],
+      "expected_source_ids": [
+        "ted-2017"
+      ],
+      "support_text_sha256": "f63a4c319c898fd42cbd1feee2d227e51abde92e928934768b133d2632f5fb12",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-024-ko",
+      "pair_id": "positive-024",
+      "language": "ko",
+      "query": "미래가 여러 확률로 갈라진다고 볼 때 의도적인 행동은 어떤 미래가 실현되는지 어떻게 바꿀 수 있나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-ted17-probabilities"
+      ],
+      "expected_source_ids": [
+        "ted-2017"
+      ],
+      "support_text_sha256": "f63a4c319c898fd42cbd1feee2d227e51abde92e928934768b133d2632f5fb12",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-025-en",
+      "pair_id": "positive-025",
+      "language": "en",
+      "query": "Does technology necessarily keep advancing if people stop putting effort into it?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-ted17-progress"
+      ],
+      "expected_source_ids": [
+        "ted-2017"
+      ],
+      "support_text_sha256": "0c3aa7ee1a18a5f6b0092b7d1c31e40bd382669af64132a109b6367be62e79ee",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-025-ko",
+      "pair_id": "positive-025",
+      "language": "ko",
+      "query": "사람들이 계속 노력하지 않아도 기술은 저절로 발전하나요, 아니면 퇴보할 수도 있나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-ted17-progress"
+      ],
+      "expected_source_ids": [
+        "ted-2017"
+      ],
+      "support_text_sha256": "0c3aa7ee1a18a5f6b0092b7d1c31e40bd382669af64132a109b6367be62e79ee",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-026-en",
+      "pair_id": "positive-026",
+      "language": "en",
+      "query": "Why deliberately set an internal schedule shorter than the time work might otherwise take?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-ted22r-deadlines"
+      ],
+      "expected_source_ids": [
+        "ted-2022-recorded"
+      ],
+      "support_text_sha256": "694b4e297f6f1e4672062b784273d32b17b5a3b6e84e5593256ab7106257f9d4",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-026-ko",
+      "pair_id": "positive-026",
+      "language": "ko",
+      "query": "일이 주어진 시간을 채우는 경향이 있다면 내부 마감일을 공격적으로 짧게 잡는 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-ted22r-deadlines"
+      ],
+      "expected_source_ids": [
+        "ted-2022-recorded"
+      ],
+      "support_text_sha256": "694b4e297f6f1e4672062b784273d32b17b5a3b6e84e5593256ab7106257f9d4",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-027-en",
+      "pair_id": "positive-027",
+      "language": "en",
+      "query": "How did you judge philanthropy by actual benefits rather than only its label?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-ted22r-philanthropy"
+      ],
+      "expected_source_ids": [
+        "ted-2022-recorded"
+      ],
+      "support_text_sha256": "417047fdbabba7f391632e80b01abe29acec2f571c4c0ca7620b9dc5fa91a386",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-027-ko",
+      "pair_id": "positive-027",
+      "language": "ko",
+      "query": "자선 활동을 이름이나 형식보다 실제로 인류에게 주는 좋은 결과로 판단한다는 뜻은 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-ted22r-philanthropy"
+      ],
+      "expected_source_ids": [
+        "ted-2022-recorded"
+      ],
+      "support_text_sha256": "417047fdbabba7f391632e80b01abe29acec2f571c4c0ca7620b9dc5fa91a386",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-028-en",
+      "pair_id": "positive-028",
+      "language": "en",
+      "query": "Why was mass-producing cars without going bankrupt harder than building a prototype?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-ted22l-production"
+      ],
+      "expected_source_ids": [
+        "ted-2022-live"
+      ],
+      "support_text_sha256": "91724cea7e55e2a305816ed228014908a90dc11eb91b1d5fd16addc1c91411d2",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-028-ko",
+      "pair_id": "positive-028",
+      "language": "ko",
+      "query": "전기차 시제품을 만드는 것보다 파산하지 않고 대량생산에 도달하는 일이 더 어려웠던 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-ted22l-production"
+      ],
+      "expected_source_ids": [
+        "ted-2022-live"
+      ],
+      "support_text_sha256": "91724cea7e55e2a305816ed228014908a90dc11eb91b1d5fd16addc1c91411d2",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-029-en",
+      "pair_id": "positive-029",
+      "language": "en",
+      "query": "What personal qualities did you say you had previously undervalued when hiring?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-dw26-character"
+      ],
+      "expected_source_ids": [
+        "dwarkesh-2026"
+      ],
+      "support_text_sha256": "54a1b068183f5722eeb93c83708972e5c4f1149d4849940df028c511dcf3a495",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-029-ko",
+      "pair_id": "positive-029",
+      "language": "ko",
+      "query": "사람을 뽑을 때 과거에 충분히 중요하게 보지 않았던 친절함과 신뢰성 같은 자질은 무엇이었나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-dw26-character"
+      ],
+      "expected_source_ids": [
+        "dwarkesh-2026"
+      ],
+      "support_text_sha256": "54a1b068183f5722eeb93c83708972e5c4f1149d4849940df028c511dcf3a495",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-030-en",
+      "pair_id": "positive-030",
+      "language": "en",
+      "query": "When would a very small technical detail deserve the leader's limited attention?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-dw26-details"
+      ],
+      "expected_source_ids": [
+        "dwarkesh-2026"
+      ],
+      "support_text_sha256": "2ec3ae8f20adbd41af14319fa54db53f431cbfd9e77cccf4d737b5a6a719d2eb",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-030-ko",
+      "pair_id": "positive-030",
+      "language": "ko",
+      "query": "시간이 한정된 리더가 아주 작은 기술적 세부사항까지 직접 들여다볼 만한 경우는 언제인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-dw26-details"
+      ],
+      "expected_source_ids": [
+        "dwarkesh-2026"
+      ],
+      "support_text_sha256": "2ec3ae8f20adbd41af14319fa54db53f431cbfd9e77cccf4d737b5a6a719d2eb",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-031-en",
+      "pair_id": "positive-031",
+      "language": "en",
+      "query": "Why is predicting the destination of a technology different from predicting the path there?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-dw26-uncertainty"
+      ],
+      "expected_source_ids": [
+        "dwarkesh-2026"
+      ],
+      "support_text_sha256": "cc518aabcf308a0bae2533a5293c9a42e0168e25747bdf88823ef24e11d13db0",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-031-ko",
+      "pair_id": "positive-031",
+      "language": "ko",
+      "query": "기술이 언젠가 도달할 지점과 그곳까지 가는 복잡한 과정을 예측하는 일은 왜 다른가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-dw26-uncertainty"
+      ],
+      "expected_source_ids": [
+        "dwarkesh-2026"
+      ],
+      "support_text_sha256": "cc518aabcf308a0bae2533a5293c9a42e0168e25747bdf88823ef24e11d13db0",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-032-en",
+      "pair_id": "positive-032",
+      "language": "en",
+      "query": "Can someone feel strong fear and still act because the objective matters enough?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-yc16-fear"
+      ],
+      "expected_source_ids": [
+        "yc-2016"
+      ],
+      "support_text_sha256": "9acc88cf1fe0b34744ab4f5eaa314778f38fb52660d953a380519de42022a991",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-032-ko",
+      "pair_id": "positive-032",
+      "language": "ko",
+      "query": "두려움을 강하게 느끼더라도 목표가 충분히 중요하면 행동할 수 있다는 말은 어떤 뜻인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-yc16-fear"
+      ],
+      "expected_source_ids": [
+        "yc-2016"
+      ],
+      "support_text_sha256": "9acc88cf1fe0b34744ab4f5eaa314778f38fb52660d953a380519de42022a991",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-033-en",
+      "pair_id": "positive-033",
+      "language": "en",
+      "query": "What made the rapidly growing internet pull you away from planned graduate research in energy storage?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-yc16-career"
+      ],
+      "expected_source_ids": [
+        "yc-2016"
+      ],
+      "support_text_sha256": "c242f027f05c96fcd2f57d7829c3c2ffa1f72c06549c88671b4a90c183682b0e",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-033-ko",
+      "pair_id": "positive-033",
+      "language": "ko",
+      "query": "빠르게 발전하던 인터넷은 계획했던 에너지 저장 대학원 연구 대신 사업을 택하는 데 어떤 영향을 줬나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-yc16-career"
+      ],
+      "expected_source_ids": [
+        "yc-2016"
+      ],
+      "support_text_sha256": "c242f027f05c96fcd2f57d7829c3c2ffa1f72c06549c88671b4a90c183682b0e",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-034-en",
+      "pair_id": "positive-034",
+      "language": "en",
+      "query": "Why did you describe sharing spontaneous online thoughts as entertaining?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-recode18-tweets"
+      ],
+      "expected_source_ids": [
+        "recode-2018"
+      ],
+      "support_text_sha256": "ae4e3beae730ea0e746aec5957c493aa537946ee7cf9e4e5c0731153ce8ae08f",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-034-ko",
+      "pair_id": "positive-034",
+      "language": "ko",
+      "query": "즉흥적인 생각을 트위터에 올리는 일을 자신과 다른 사람의 재미와 연결해 설명한 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-recode18-tweets"
+      ],
+      "expected_source_ids": [
+        "recode-2018"
+      ],
+      "support_text_sha256": "ae4e3beae730ea0e746aec5957c493aa537946ee7cf9e4e5c0731153ce8ae08f",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-035-en",
+      "pair_id": "positive-035",
+      "language": "en",
+      "query": "How did comparing raw material prices with launch prices help assess whether cheaper rockets were possible?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-wired12-cost"
+      ],
+      "expected_source_ids": [
+        "wired-2012"
+      ],
+      "support_text_sha256": "0e5f4b71274bdb47d9fba1e125d292598ebcaeb0d33ba21c424917ebb47dd381",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-035-ko",
+      "pair_id": "positive-035",
+      "language": "ko",
+      "query": "원재료의 시장가격과 기존 발사 가격을 비교하는 것이 저렴한 로켓의 가능성을 판단하는 데 어떻게 도움이 됐나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-wired12-cost"
+      ],
+      "expected_source_ids": [
+        "wired-2012"
+      ],
+      "support_text_sha256": "0e5f4b71274bdb47d9fba1e125d292598ebcaeb0d33ba21c424917ebb47dd381",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-036-en",
+      "pair_id": "positive-036",
+      "language": "en",
+      "query": "Why welcome rival electric cars if they help the larger energy transition?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-time21b-competition"
+      ],
+      "expected_source_ids": [
+        "time-2021-boca-chica"
+      ],
+      "support_text_sha256": "9d5231ba0107b69146a9faa4326c453204dab84b2416d2f663875711ec1d2468",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-036-ko",
+      "pair_id": "positive-036",
+      "language": "ko",
+      "query": "다른 회사의 전기차도 지속가능한 에너지 전환을 앞당긴다면 환영한다고 한 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-time21b-competition"
+      ],
+      "expected_source_ids": [
+        "time-2021-boca-chica"
+      ],
+      "support_text_sha256": "9d5231ba0107b69146a9faa4326c453204dab84b2416d2f663875711ec1d2468",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-037-en",
+      "pair_id": "positive-037",
+      "language": "en",
+      "query": "How did childhood enthusiasm for Tolkien connect with seeing yourself primarily as an engineer?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-time21l-engineer"
+      ],
+      "expected_source_ids": [
+        "time-2021-live"
+      ],
+      "support_text_sha256": "0a82da83a6e185cdfa50fe17d23d5f817e00fc688f61239151678373d2f03e6d",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-037-ko",
+      "pair_id": "positive-037",
+      "language": "ko",
+      "query": "어린 시절 톨킨에 대한 열광과 자신을 주로 엔지니어로 여기는 태도는 어떻게 연결됐나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-time21l-engineer"
+      ],
+      "expected_source_ids": [
+        "time-2021-live"
+      ],
+      "support_text_sha256": "0a82da83a6e185cdfa50fe17d23d5f817e00fc688f61239151678373d2f03e6d",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-038-en",
+      "pair_id": "positive-038",
+      "language": "en",
+      "query": "What protected growing systems and living environment did you suggest for people on Mars?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-pm19-food"
+      ],
+      "expected_source_ids": [
+        "popular-mechanics-2019"
+      ],
+      "support_text_sha256": "c993e0a4c28532c315869e04053fced47db7a1c9a58dac907664befaab658e6c",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-038-ko",
+      "pair_id": "positive-038",
+      "language": "ko",
+      "query": "화성에서 식량을 재배하고 생활을 더 쾌적하게 하려면 어떤 보호된 농업시설과 가압 공간을 구상했나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-pm19-food"
+      ],
+      "expected_source_ids": [
+        "popular-mechanics-2019"
+      ],
+      "support_text_sha256": "c993e0a4c28532c315869e04053fced47db7a1c9a58dac907664befaab658e6c",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-039-en",
+      "pair_id": "positive-039",
+      "language": "en",
+      "query": "What local resources and infrastructure would be needed to make rocket propellant on Mars?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-pm19-fuel"
+      ],
+      "expected_source_ids": [
+        "popular-mechanics-2019"
+      ],
+      "support_text_sha256": "5341274b6b27d954a1239d2b9f99b79f9fea942736f7cb2303d69d0eb9f01dd6",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-039-ko",
+      "pair_id": "positive-039",
+      "language": "ko",
+      "query": "화성에서 추진제를 현지 생산하려면 어떤 물 자원과 전력 기반시설이 필요하나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-pm19-fuel"
+      ],
+      "expected_source_ids": [
+        "popular-mechanics-2019"
+      ],
+      "support_text_sha256": "5341274b6b27d954a1239d2b9f99b79f9fea942736f7cb2303d69d0eb9f01dd6",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-040-en",
+      "pair_id": "positive-040",
+      "language": "en",
+      "query": "Did the practical usefulness of your actions matter more to you than your eventual reputation?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-gq15-legacy"
+      ],
+      "expected_source_ids": [
+        "gq-2015"
+      ],
+      "support_text_sha256": "a88b2b627c2e7310a6e3f78af45a8ef05499f1de43d711f302d126013b460744",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-040-ko",
+      "pair_id": "positive-040",
+      "language": "ko",
+      "query": "훗날의 평판보다 실제 행동이 얼마나 쓸모 있는지가 더 중요하다고 생각했나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "elon-gq15-legacy"
+      ],
+      "expected_source_ids": [
+        "gq-2015"
+      ],
+      "support_text_sha256": "a88b2b627c2e7310a6e3f78af45a8ef05499f1de43d711f302d126013b460744",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-041-en",
+      "pair_id": "positive-041",
+      "language": "en",
+      "query": "Is sustained learning more important than holding a particular educational credential?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "stanford-2003-learning-commitment"
+      ],
+      "expected_source_ids": [
+        "stanford-etl-2003"
+      ],
+      "support_text_sha256": "8dc47236a1534a264a89ceafe58660a15d73884064934cee9ac272ee4774c784",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-041-ko",
+      "pair_id": "positive-041",
+      "language": "ko",
+      "query": "특정 학위나 자격증을 갖추는 것보다 필요한 지식을 꾸준히 배우는 태도가 더 중요하다는 말은 어떤 뜻인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "stanford-2003-learning-commitment"
+      ],
+      "expected_source_ids": [
+        "stanford-etl-2003"
+      ],
+      "support_text_sha256": "8dc47236a1534a264a89ceafe58660a15d73884064934cee9ac272ee4774c784",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-042-en",
+      "pair_id": "positive-042",
+      "language": "en",
+      "query": "Why restrict the proposed transport system to busy cities relatively close together?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "hyperloop-2013-bounded-use-case"
+      ],
+      "expected_source_ids": [
+        "tesla-hyperloop-alpha-2013"
+      ],
+      "support_text_sha256": "b2f539b6580ba3b36cff922d4ff19a95eb962592c1bd33fd41a87ecd06cd3c89",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-042-ko",
+      "pair_id": "positive-042",
+      "language": "ko",
+      "query": "제안한 교통 시스템의 적용 범위를 수요가 많고 비교적 가까운 도시 사이로 제한한 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "hyperloop-2013-bounded-use-case"
+      ],
+      "expected_source_ids": [
+        "tesla-hyperloop-alpha-2013"
+      ],
+      "support_text_sha256": "b2f539b6580ba3b36cff922d4ff19a95eb962592c1bd33fd41a87ecd06cd3c89",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-043-en",
+      "pair_id": "positive-043",
+      "language": "en",
+      "query": "Why warn that the opportunity to reach Mars might not stay open forever?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "mit-2014-window-of-opportunity"
+      ],
+      "expected_source_ids": [
+        "mit-aeroastro-2014"
+      ],
+      "support_text_sha256": "aa58e112812dbb7e65205904e79268b0f85abff55d1b3caa516844c3854f9535",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-043-ko",
+      "pair_id": "positive-043",
+      "language": "ko",
+      "query": "화성에 도달할 수 있는 기술적 기회가 영원히 유지되지는 않을 수 있다고 경고한 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "mit-2014-window-of-opportunity"
+      ],
+      "expected_source_ids": [
+        "mit-aeroastro-2014"
+      ],
+      "support_text_sha256": "aa58e112812dbb7e65205904e79268b0f85abff55d1b3caa516844c3854f9535",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-044-en",
+      "pair_id": "positive-044",
+      "language": "en",
+      "query": "Could launch procurement and technical risk reduction proceed together before final certification?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "senate-2014-parallel-review"
+      ],
+      "expected_source_ids": [
+        "senate-launch-2014"
+      ],
+      "support_text_sha256": "4b91326381b2f74ecd4976ea850f060f0f7921ea576226c7d40331a5ba6bea28",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-044-ko",
+      "pair_id": "positive-044",
+      "language": "ko",
+      "query": "최종 발사 인증 전에도 조달 경쟁과 기술적 위험 감소 작업을 동시에 진행하자는 제안은 무엇이었나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "senate-2014-parallel-review"
+      ],
+      "expected_source_ids": [
+        "senate-launch-2014"
+      ],
+      "support_text_sha256": "4b91326381b2f74ecd4976ea850f060f0f7921ea576226c7d40331a5ba6bea28",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-045-en",
+      "pair_id": "positive-045",
+      "language": "en",
+      "query": "Why treat making cars affordable to many more people as unfinished work central to the mission?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "tesla-2019-affordability-gap"
+      ],
+      "expected_source_ids": [
+        "tesla-company-update-2019"
+      ],
+      "support_text_sha256": "a54e9f2298bc92bfaeb152493a578d2206ed2c1dd058cd11e994278a8812fb29",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-045-ko",
+      "pair_id": "positive-045",
+      "language": "ko",
+      "query": "많은 사람이 아직 테슬라를 살 수 없다는 점을 사명 달성에 중요한 미완성 과제로 본 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "tesla-2019-affordability-gap"
+      ],
+      "expected_source_ids": [
+        "tesla-company-update-2019"
+      ],
+      "support_text_sha256": "a54e9f2298bc92bfaeb152493a578d2206ed2c1dd058cd11e994278a8812fb29",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-046-en",
+      "pair_id": "positive-046",
+      "language": "en",
+      "query": "Why can individually reasonable requirements become incompatible when a large group combines them?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "house-2004-requirements-team"
+      ],
+      "expected_source_ids": [
+        "house-space-cooperation-2004"
+      ],
+      "support_text_sha256": "b972792c9d6913beb4d625a3298fa2ef184db2f67a6b32210cc0a420ad8b1515",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-046-ko",
+      "pair_id": "positive-046",
+      "language": "ko",
+      "query": "각각은 가능해 보이는 요구사항도 모두 합치면 서로 충돌할 수 있으므로 작은 숙련된 팀이 요구사항을 정해야 한다는 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "house-2004-requirements-team"
+      ],
+      "expected_source_ids": [
+        "house-space-cooperation-2004"
+      ],
+      "support_text_sha256": "b972792c9d6913beb4d625a3298fa2ef184db2f67a6b32210cc0a420ad8b1515",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-047-en",
+      "pair_id": "positive-047",
+      "language": "en",
+      "query": "How do achievement prizes change when a sponsor pays compared with a contract that can reward failure?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "senate-2004-pay-for-results"
+      ],
+      "expected_source_ids": [
+        "senate-future-launch-2004"
+      ],
+      "support_text_sha256": "15601277728b0f6d88265eaba850a52d0da800895536c2216f62049ad91a5583",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-047-ko",
+      "pair_id": "positive-047",
+      "language": "ko",
+      "query": "성과에 대한 상금은 실패가 지속되어도 비용을 지불하는 계약과 보상 시점이 어떻게 다른가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "senate-2004-pay-for-results"
+      ],
+      "expected_source_ids": [
+        "senate-future-launch-2004"
+      ],
+      "support_text_sha256": "15601277728b0f6d88265eaba850a52d0da800895536c2216f62049ad91a5583",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-048-en",
+      "pair_id": "positive-048",
+      "language": "en",
+      "query": "Why ask crew-vehicle designers to exceed NASA specifications instead of only meeting the minimum?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "house-2005-safety-margins"
+      ],
+      "expected_source_ids": [
+        "house-commercial-space-2005"
+      ],
+      "support_text_sha256": "d36aed2dd2814b6696d1b971f27b182e15bb9de19cb33e19157caf8c64e1fe93",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-048-ko",
+      "pair_id": "positive-048",
+      "language": "ko",
+      "query": "유인 우주선 설계자에게 나사의 최소 기준을 맞추는 데 그치지 말고 더 큰 안전 여유를 두라고 한 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "house-2005-safety-margins"
+      ],
+      "expected_source_ids": [
+        "house-commercial-space-2005"
+      ],
+      "support_text_sha256": "d36aed2dd2814b6696d1b971f27b182e15bb9de19cb33e19157caf8c64e1fe93",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-049-en",
+      "pair_id": "positive-049",
+      "language": "en",
+      "query": "Which financial tools did you propose to help clean-energy technologies reach production?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "senate-2007-financing-tools"
+      ],
+      "expected_source_ids": [
+        "senate-advanced-energy-2007"
+      ],
+      "support_text_sha256": "36e5abda0ac4fec39267a9094a3a13a334318edbafdc2e3351f4fdcc70edfbed",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-049-ko",
+      "pair_id": "positive-049",
+      "language": "ko",
+      "query": "청정에너지 기술이 실제 생산으로 이어지도록 어떤 대출 보증과 성과 경쟁 제도를 제안했나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "senate-2007-financing-tools"
+      ],
+      "expected_source_ids": [
+        "senate-advanced-energy-2007"
+      ],
+      "support_text_sha256": "36e5abda0ac4fec39267a9094a3a13a334318edbafdc2e3351f4fdcc70edfbed",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-050-en",
+      "pair_id": "positive-050",
+      "language": "en",
+      "query": "Why prefer customers to specify outcomes and standards while engineers choose how to meet them?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "house-2011-goals-not-methods"
+      ],
+      "expected_source_ids": [
+        "house-commercial-crew-2011"
+      ],
+      "support_text_sha256": "02f7b3864feb507c59fce5adf4187f35f77e3e13870c15cb44f387632409e93c",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "positive-050-ko",
+      "pair_id": "positive-050",
+      "language": "ko",
+      "query": "고객은 목표와 기준을 정하고 엔지니어는 이를 달성할 방법을 선택하도록 하는 방식을 선호한 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "house-2011-goals-not-methods"
+      ],
+      "expected_source_ids": [
+        "house-commercial-crew-2011"
+      ],
+      "support_text_sha256": "02f7b3864feb507c59fce5adf4187f35f77e3e13870c15cb44f387632409e93c",
+      "review_basis": "Agent checked this paraphrase against the named reviewed summary. It tests retrieval of that summary, not original-dialogue fidelity or a current personal belief."
+    },
+    {
+      "id": "absent-001-en",
+      "pair_id": "absent-001",
+      "language": "en",
+      "query": "What did you eat for breakfast on 11 November 2026?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Unpublished day-specific personal activity is absent."
+    },
+    {
+      "id": "absent-001-ko",
+      "pair_id": "absent-001",
+      "language": "ko",
+      "query": "2026년 11월 11일 아침에 무엇을 먹었나요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Unpublished day-specific personal activity is absent."
+    },
+    {
+      "id": "absent-002-en",
+      "pair_id": "absent-002",
+      "language": "en",
+      "query": "What is your favorite flavor of ice cream?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The archive has no attributed ice-cream preference."
+    },
+    {
+      "id": "absent-002-ko",
+      "pair_id": "absent-002",
+      "language": "ko",
+      "query": "가장 좋아하는 아이스크림 맛은 무엇인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The archive has no attributed ice-cream preference."
+    },
+    {
+      "id": "absent-003-en",
+      "pair_id": "absent-003",
+      "language": "en",
+      "query": "What birthday present did you buy for your mother last year?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The requested personal purchase is absent."
+    },
+    {
+      "id": "absent-003-ko",
+      "pair_id": "absent-003",
+      "language": "ko",
+      "query": "작년에 어머니 생일 선물로 무엇을 샀나요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The requested personal purchase is absent."
+    },
+    {
+      "id": "absent-004-en",
+      "pair_id": "absent-004",
+      "language": "en",
+      "query": "Give the recipe for quantum unicorn soup.",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Fictional recipe is outside the evidence corpus."
+    },
+    {
+      "id": "absent-004-ko",
+      "pair_id": "absent-004",
+      "language": "ko",
+      "query": "양자 유니콘 수프의 조리법을 알려주세요.",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Fictional recipe is outside the evidence corpus."
+    },
+    {
+      "id": "absent-005-en",
+      "pair_id": "absent-005",
+      "language": "en",
+      "query": "How do I make Vietnamese pho broth at home?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No cooking procedure is present."
+    },
+    {
+      "id": "absent-005-ko",
+      "pair_id": "absent-005",
+      "language": "ko",
+      "query": "집에서 베트남 쌀국수 육수를 만드는 방법은 무엇인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No cooking procedure is present."
+    },
+    {
+      "id": "absent-006-en",
+      "pair_id": "absent-006",
+      "language": "en",
+      "query": "Which team won yesterday's Korean baseball final?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The archive contains no baseball result."
+    },
+    {
+      "id": "absent-006-ko",
+      "pair_id": "absent-006",
+      "language": "ko",
+      "query": "어제 한국 야구 결승전에서 어느 팀이 이겼나요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The archive contains no baseball result."
+    },
+    {
+      "id": "absent-007-en",
+      "pair_id": "absent-007",
+      "language": "en",
+      "query": "What is the street address where you are sleeping tonight?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No verified personal lodging information is present."
+    },
+    {
+      "id": "absent-007-ko",
+      "pair_id": "absent-007",
+      "language": "ko",
+      "query": "오늘 밤 머무는 곳의 도로명 주소는 무엇인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No verified personal lodging information is present."
+    },
+    {
+      "id": "absent-008-en",
+      "pair_id": "absent-008",
+      "language": "en",
+      "query": "What is your account password?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No private credential is present."
+    },
+    {
+      "id": "absent-008-ko",
+      "pair_id": "absent-008",
+      "language": "ko",
+      "query": "계정 비밀번호는 무엇인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No private credential is present."
+    },
+    {
+      "id": "absent-009-en",
+      "pair_id": "absent-009",
+      "language": "en",
+      "query": "What mortgage rate did your own bank offer you last month?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The personal banking transaction is absent."
+    },
+    {
+      "id": "absent-009-ko",
+      "pair_id": "absent-009",
+      "language": "ko",
+      "query": "지난달 개인 은행에서 제안받은 주택담보대출 금리는 얼마였나요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The personal banking transaction is absent."
+    },
+    {
+      "id": "absent-010-en",
+      "pair_id": "absent-010",
+      "language": "en",
+      "query": "What is Tesla's stock price right now?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Static source records do not contain real-time prices."
+    },
+    {
+      "id": "absent-010-ko",
+      "pair_id": "absent-010",
+      "language": "ko",
+      "query": "지금 테슬라 주가는 얼마인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Static source records do not contain real-time prices."
+    },
+    {
+      "id": "absent-011-en",
+      "pair_id": "absent-011",
+      "language": "en",
+      "query": "How many vehicles did Tesla deliver in the third quarter of 2026?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "This numerical reporting fact is not in this corpus."
+    },
+    {
+      "id": "absent-011-ko",
+      "pair_id": "absent-011",
+      "language": "ko",
+      "query": "테슬라는 2026년 3분기에 자동차를 정확히 몇 대 인도했나요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "This numerical reporting fact is not in this corpus."
+    },
+    {
+      "id": "absent-012-en",
+      "pair_id": "absent-012",
+      "language": "en",
+      "query": "What will SpaceX's exact revenue be in 2050?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No evidence establishes an exact future revenue."
+    },
+    {
+      "id": "absent-012-ko",
+      "pair_id": "absent-012",
+      "language": "ko",
+      "query": "2050년 스페이스엑스의 정확한 매출액은 얼마일까요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No evidence establishes an exact future revenue."
+    },
+    {
+      "id": "absent-013-en",
+      "pair_id": "absent-013",
+      "language": "en",
+      "query": "Why did you select blue paint rather than red for the new rocket office?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The premise and specific color decision are absent."
+    },
+    {
+      "id": "absent-013-ko",
+      "pair_id": "absent-013",
+      "language": "ko",
+      "query": "새 로켓 사무실에 빨강 대신 파란 페인트를 고른 이유가 뭔가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The premise and specific color decision are absent."
+    },
+    {
+      "id": "absent-014-en",
+      "pair_id": "absent-014",
+      "language": "en",
+      "query": "What does Article 42 of the adopted Mars constitution say?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No adopted constitution or article is present."
+    },
+    {
+      "id": "absent-014-ko",
+      "pair_id": "absent-014",
+      "language": "ko",
+      "query": "채택된 화성 헌법 제42조에는 무엇이라고 적혀 있나요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No adopted constitution or article is present."
+    },
+    {
+      "id": "absent-015-en",
+      "pair_id": "absent-015",
+      "language": "en",
+      "query": "What is the exact firmware checksum of a Neuralink implant released in 2026?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Engineering discussion does not supply firmware checksums."
+    },
+    {
+      "id": "absent-015-ko",
+      "pair_id": "absent-015",
+      "language": "ko",
+      "query": "2026년에 출시된 뉴럴링크 임플란트 펌웨어의 정확한 체크섬은 무엇인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Engineering discussion does not supply firmware checksums."
+    },
+    {
+      "id": "absent-016-en",
+      "pair_id": "absent-016",
+      "language": "en",
+      "query": "What concrete curing humidity is mandatory for every Boring Company tunnel?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "General tunnel-cost evidence does not give this construction specification."
+    },
+    {
+      "id": "absent-016-ko",
+      "pair_id": "absent-016",
+      "language": "ko",
+      "query": "보링컴퍼니의 모든 터널에 의무적으로 적용되는 콘크리트 양생 습도는 얼마인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "General tunnel-cost evidence does not give this construction specification."
+    },
+    {
+      "id": "absent-017-en",
+      "pair_id": "absent-017",
+      "language": "en",
+      "query": "What is the correct tightening torque for a Model 3 suspension bolt?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No service manual specification is present."
+    },
+    {
+      "id": "absent-017-ko",
+      "pair_id": "absent-017",
+      "language": "ko",
+      "query": "모델3 서스펜션 볼트의 올바른 체결 토크는 얼마인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No service manual specification is present."
+    },
+    {
+      "id": "absent-018-en",
+      "pair_id": "absent-018",
+      "language": "en",
+      "query": "How much money did your cousin privately transfer to you last week?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The private transfer is absent."
+    },
+    {
+      "id": "absent-018-ko",
+      "pair_id": "absent-018",
+      "language": "ko",
+      "query": "지난주 사촌이 개인적으로 보내준 돈은 정확히 얼마인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The private transfer is absent."
+    },
+    {
+      "id": "absent-019-en",
+      "pair_id": "absent-019",
+      "language": "en",
+      "query": "How do you prove the complete mathematical theorem of quantum error correction?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No such proof is contained in these persona sources."
+    },
+    {
+      "id": "absent-019-ko",
+      "pair_id": "absent-019",
+      "language": "ko",
+      "query": "양자 오류정정에 관한 완전한 수학 정리를 어떻게 증명하나요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No such proof is contained in these persona sources."
+    },
+    {
+      "id": "absent-020-en",
+      "pair_id": "absent-020",
+      "language": "en",
+      "query": "What dose of medication did your doctor prescribe yesterday?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Private medical prescription details are absent."
+    },
+    {
+      "id": "absent-020-ko",
+      "pair_id": "absent-020",
+      "language": "ko",
+      "query": "어제 담당 의사가 처방한 약의 복용량은 얼마인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Private medical prescription details are absent."
+    },
+    {
+      "id": "absent-021-en",
+      "pair_id": "absent-021",
+      "language": "en",
+      "query": "Which restaurant have you booked for this coming weekend?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No future personal reservation is known."
+    },
+    {
+      "id": "absent-021-ko",
+      "pair_id": "absent-021",
+      "language": "ko",
+      "query": "이번 주말에 어느 식당을 예약했나요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No future personal reservation is known."
+    },
+    {
+      "id": "absent-022-en",
+      "pair_id": "absent-022",
+      "language": "en",
+      "query": "What is the supplier part number of the fuse in the latest Falcon avionics box?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The archive lacks that component inventory."
+    },
+    {
+      "id": "absent-022-ko",
+      "pair_id": "absent-022",
+      "language": "ko",
+      "query": "최신 팰컨 항공전자 장치에 들어가는 퓨즈의 공급업체 부품번호는 무엇인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The archive lacks that component inventory."
+    },
+    {
+      "id": "absent-023-en",
+      "pair_id": "absent-023",
+      "language": "en",
+      "query": "Which K-pop singer is your personal favorite?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No attributed K-pop preference is present."
+    },
+    {
+      "id": "absent-023-ko",
+      "pair_id": "absent-023",
+      "language": "ko",
+      "query": "개인적으로 가장 좋아하는 케이팝 가수는 누구인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No attributed K-pop preference is present."
+    },
+    {
+      "id": "absent-024-en",
+      "pair_id": "absent-024",
+      "language": "en",
+      "query": "What is the full vaccination history of your pet dog?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No veterinary record is present."
+    },
+    {
+      "id": "absent-024-ko",
+      "pair_id": "absent-024",
+      "language": "ko",
+      "query": "반려견의 전체 예방접종 이력은 어떻게 되나요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No veterinary record is present."
+    },
+    {
+      "id": "absent-025-en",
+      "pair_id": "absent-025",
+      "language": "en",
+      "query": "What confidential promise did you make in the private board meeting this morning?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Public sources do not establish private meeting promises."
+    },
+    {
+      "id": "absent-025-ko",
+      "pair_id": "absent-025",
+      "language": "ko",
+      "query": "오늘 아침 비공개 이사회에서 어떤 비밀 약속을 했나요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Public sources do not establish private meeting promises."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": "retrieval-run-archive.v1",
+  "report_file": "e5-mmarco-cpu-development.v3.json.gz",
+  "uncompressed_report_sha256": "675dcc17030a1d0b37b9a5e0be764c21e0a2b0411091b14e7042fb8682fa02f1",
+  "compressed_report_sha256": "1b6484644cfad2aea88b4e4cb6bae54e9f045d882ec9e5c9cfc188d34e862e4a",
+  "implementation_archive": "e5-mmarco-development-implementation.v3.tar.gz",
+  "implementation_archive_sha256": "7836f64780c126b0c3013a7d5f84572ab003c36ca7d14a7a90b1a3f589573368",
+  "notes": "Preserved completed fixed-policy summary development run before adding concurrent input integrity checks."
+}

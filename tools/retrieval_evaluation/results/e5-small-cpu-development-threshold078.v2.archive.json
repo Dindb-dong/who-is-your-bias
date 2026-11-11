@@ -1,0 +1,9 @@
+{
+  "schema_version": "retrieval-run-archive.v1",
+  "report_file": "e5-small-cpu-development-threshold078.v2.json.gz",
+  "uncompressed_report_sha256": "3b70b281780cb3b95fdfe0adb0969aa29f520ac65c97913aa2b014c76a10c4b2",
+  "compressed_report_sha256": "43228615be5d7f4a2177eac19db6ba16f55f7447079c70b0db1ce78d28226042",
+  "implementation_archive": "e5-small-threshold078-implementation.v2.tar.gz",
+  "implementation_archive_sha256": "78b5f78a2c92d3844cd1af25ac4e8e239c2df70503b63842b60c6ba16b4f3946",
+  "notes": "Preserved completed development run and exact code before adding bounded inference caches."
+}

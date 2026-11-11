@@ -1,0 +1,762 @@
+{
+  "schema_version": "retrieval-development-cases.v1",
+  "id": "original-qa-expanded-development.v2",
+  "split": "development",
+  "registered_at": "2026-11-11T10:32:23.174905+00:00",
+  "scope": "36 bilingual answerable paraphrases of18 inspected original exchanges across9 acquired training events, plus20 absent-evidence cases. All evaluation is held-in development, with agent review and correlated translation pairs. The2026 questions are explicitly dated interview positions, not unbounded live knowledge.",
+  "corpus_evidence_sha256": "27675695d1c2e4d83cbdc75ad33fec99a6ff59c628ad6208af5feb52ebb21ebc",
+  "label_provenance": {
+    "reviewer_type": "agent",
+    "human_review": "ungraded",
+    "basis": "Checked selected original text and requested unsupported detail against corpus; unknown exact private events and technical specifications remain absent."
+  },
+  "cases": [
+    {
+      "id": "original-positive-001-en",
+      "pair_id": "original-positive-001",
+      "language": "en",
+      "query": "How did you first learn to write computer programs as a child?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-henry-ford-2008-turn-00015"
+      ],
+      "expected_source_ids": [
+        "henry-ford-2008"
+      ],
+      "support_text_sha256": "d8d36c6386cca34d0ae23cf0ab4685e35e167528054bc5dfac4e3f6ff9a14d2e",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-001-ko",
+      "pair_id": "original-positive-001",
+      "language": "ko",
+      "query": "어릴 때 프로그래밍은 어떻게 배웠으며 처음 컴퓨터와 상업용 프로그램을 접한 시기는 언제였나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-henry-ford-2008-turn-00015"
+      ],
+      "expected_source_ids": [
+        "henry-ford-2008"
+      ],
+      "support_text_sha256": "d8d36c6386cca34d0ae23cf0ab4685e35e167528054bc5dfac4e3f6ff9a14d2e",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-002-en",
+      "pair_id": "original-positive-002",
+      "language": "en",
+      "query": "How is reasoning from first principles different from following what has always been done?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-henry-ford-2008-turn-00056"
+      ],
+      "expected_source_ids": [
+        "henry-ford-2008"
+      ],
+      "support_text_sha256": "596f2176cff6bff267b5dd920a1d59b6444f77d893c6c0b2b3cf2314f41c663b",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-002-ko",
+      "pair_id": "original-positive-002",
+      "language": "ko",
+      "query": "늘 하던 방식을 따르는 것과 제1원리에서 출발해 생각하는 방식은 어떻게 다른가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-henry-ford-2008-turn-00056"
+      ],
+      "expected_source_ids": [
+        "henry-ford-2008"
+      ],
+      "support_text_sha256": "596f2176cff6bff267b5dd920a1d59b6444f77d893c6c0b2b3cf2314f41c663b",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-003-en",
+      "pair_id": "original-positive-003",
+      "language": "en",
+      "query": "In the 2026 interview, which character traits did you say matter more than prior industry experience when hiring?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-dwarkesh-2026-turn-00937"
+      ],
+      "expected_source_ids": [
+        "dwarkesh-2026"
+      ],
+      "support_text_sha256": "4ff14822981b3b21aff078291df014e0f9673744b7407a7c0a11e4f240b8e359",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-003-ko",
+      "pair_id": "original-positive-003",
+      "language": "ko",
+      "query": "2026년 인터뷰에서 채용할 때 기존 업계 경험보다 더 중요하다고 말한 인성과 능력은 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-dwarkesh-2026-turn-00937"
+      ],
+      "expected_source_ids": [
+        "dwarkesh-2026"
+      ],
+      "support_text_sha256": "4ff14822981b3b21aff078291df014e0f9673744b7407a7c0a11e4f240b8e359",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-004-en",
+      "pair_id": "original-positive-004",
+      "language": "en",
+      "query": "In the 2026 conversation, did someone need previous rocket-industry experience to work on Starship?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-dwarkesh-2026-turn-01016"
+      ],
+      "expected_source_ids": [
+        "dwarkesh-2026"
+      ],
+      "support_text_sha256": "5b1d25a75335853e661392a9b263c30bff25effe31317a2bb9c75aa3bfb27e90",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-004-ko",
+      "pair_id": "original-positive-004",
+      "language": "ko",
+      "query": "2026년 대화에서 스타십에 참여하려면 로켓 업계의 경력이 반드시 필요하다고 했나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-dwarkesh-2026-turn-01016"
+      ],
+      "expected_source_ids": [
+        "dwarkesh-2026"
+      ],
+      "support_text_sha256": "5b1d25a75335853e661392a9b263c30bff25effe31317a2bb9c75aa3bfb27e90",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-005-en",
+      "pair_id": "original-positive-005",
+      "language": "en",
+      "query": "What does the scientific method allow you to conclude about a hypothesis you cannot test?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-lex-049-2019-turn-00008"
+      ],
+      "expected_source_ids": [
+        "lex-049-2019"
+      ],
+      "support_text_sha256": "c4afc0f6b6730c79d5db21d003ae864b049ff507bcd7d08ee61d96d9003b5d05",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-005-ko",
+      "pair_id": "original-positive-005",
+      "language": "ko",
+      "query": "과학적 방법에 따르면 검증할 수 없는 가설이 참이라고 의미 있게 결론 내릴 수 있나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-lex-049-2019-turn-00008"
+      ],
+      "expected_source_ids": [
+        "lex-049-2019"
+      ],
+      "support_text_sha256": "c4afc0f6b6730c79d5db21d003ae864b049ff507bcd7d08ee61d96d9003b5d05",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-006-en",
+      "pair_id": "original-positive-006",
+      "language": "en",
+      "query": "In a brain-machine interface, which side would need to do most of the adapting?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-lex-049-2019-turn-00034"
+      ],
+      "expected_source_ids": [
+        "lex-049-2019"
+      ],
+      "support_text_sha256": "be0857e0c6e8af8966e5e5f5a3e6a34f6041b8811059532ecbde418261ca80c0",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-006-ko",
+      "pair_id": "original-positive-006",
+      "language": "ko",
+      "query": "뇌와 기계가 연결되는 인터페이스에서 대부분의 적응은 어느 쪽에서 이뤄져야 하나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-lex-049-2019-turn-00034"
+      ],
+      "expected_source_ids": [
+        "lex-049-2019"
+      ],
+      "support_text_sha256": "be0857e0c6e8af8966e5e5f5a3e6a34f6041b8811059532ecbde418261ca80c0",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-007-en",
+      "pair_id": "original-positive-007",
+      "language": "en",
+      "query": "How can an improvement's size and the number of people affected be combined to judge usefulness?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-yc-2016-turn-00014"
+      ],
+      "expected_source_ids": [
+        "yc-2016"
+      ],
+      "support_text_sha256": "f3cba205c886905ecfe00cde866c0be5070b8789076192448cace0bc65615841",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-007-ko",
+      "pair_id": "original-positive-007",
+      "language": "ko",
+      "query": "개선의 크기와 영향을 받는 사람의 수를 함께 고려해 유용함을 어떻게 판단하나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-yc-2016-turn-00014"
+      ],
+      "expected_source_ids": [
+        "yc-2016"
+      ],
+      "support_text_sha256": "f3cba205c886905ecfe00cde866c0be5070b8789076192448cace0bc65615841",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-008-en",
+      "pair_id": "original-positive-008",
+      "language": "en",
+      "query": "Why pause planned graduate study in energy storage to start an internet company?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-yc-2016-turn-00008"
+      ],
+      "expected_source_ids": [
+        "yc-2016"
+      ],
+      "support_text_sha256": "c587f194260728faf48ba420658d9ff317dc5dc4bdf55ac1515bc9c04268ec1b",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-008-ko",
+      "pair_id": "original-positive-008",
+      "language": "ko",
+      "query": "에너지 저장 분야 대학원 연구를 미루고 인터넷 회사를 시작하려고 한 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-yc-2016-turn-00008"
+      ],
+      "expected_source_ids": [
+        "yc-2016"
+      ],
+      "support_text_sha256": "c587f194260728faf48ba420658d9ff317dc5dc4bdf55ac1515bc9c04268ec1b",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-009-en",
+      "pair_id": "original-positive-009",
+      "language": "en",
+      "query": "How painful was the Model 3 production ramp for the people at Tesla?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-recode-2018-turn-00092"
+      ],
+      "expected_source_ids": [
+        "recode-2018"
+      ],
+      "support_text_sha256": "82f19b6fc579c0e5863c73433f192ece903ec9abaa49714707445242c1483f9e",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-009-ko",
+      "pair_id": "original-positive-009",
+      "language": "ko",
+      "query": "모델3의 생산량을 늘리는 과정은 테슬라에서 일한 사람들에게 얼마나 힘들었나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-recode-2018-turn-00092"
+      ],
+      "expected_source_ids": [
+        "recode-2018"
+      ],
+      "support_text_sha256": "82f19b6fc579c0e5863c73433f192ece903ec9abaa49714707445242c1483f9e",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-010-en",
+      "pair_id": "original-positive-010",
+      "language": "en",
+      "query": "Who helped fix the many mistakes in the Model 3 production system?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-recode-2018-turn-00151"
+      ],
+      "expected_source_ids": [
+        "recode-2018"
+      ],
+      "support_text_sha256": "48a7e68b569851f03ad23b8a46fa77cfc396f9c8d9ee3655bd2c8b27944cfa65",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-010-ko",
+      "pair_id": "original-positive-010",
+      "language": "ko",
+      "query": "모델3 생산 시스템에 있었던 많은 문제를 해결하는 데 누가 함께 참여했나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-recode-2018-turn-00151"
+      ],
+      "expected_source_ids": [
+        "recode-2018"
+      ],
+      "support_text_sha256": "48a7e68b569851f03ad23b8a46fa77cfc396f9c8d9ee3655bd2c8b27944cfa65",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-011-en",
+      "pair_id": "original-positive-011",
+      "language": "en",
+      "query": "How can smaller tunnel diameter and simultaneous digging and reinforcement reduce construction cost?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-ted-2017-cue-00072"
+      ],
+      "expected_source_ids": [
+        "ted-2017"
+      ],
+      "support_text_sha256": "17620716fe70b6f90ef13ef7b71ceb45ef38d9f6de8170d89783727b51f61124",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-011-ko",
+      "pair_id": "original-positive-011",
+      "language": "ko",
+      "query": "터널 지름을 줄이고 굴착과 보강을 동시에 진행하면 시공 비용을 어떻게 낮출 수 있나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-ted-2017-cue-00072"
+      ],
+      "expected_source_ids": [
+        "ted-2017"
+      ],
+      "support_text_sha256": "17620716fe70b6f90ef13ef7b71ceb45ef38d9f6de8170d89783727b51f61124",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-012-en",
+      "pair_id": "original-positive-012",
+      "language": "en",
+      "query": "Why might people not notice a tunnel being dug sufficiently far beneath their house?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-ted-2017-cue-00176"
+      ],
+      "expected_source_ids": [
+        "ted-2017"
+      ],
+      "support_text_sha256": "7e1d561c2158d5606846c81db0007af2333a4a7bde434f14fe0bb927ccc5a159",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-012-ko",
+      "pair_id": "original-positive-012",
+      "language": "ko",
+      "query": "집 아래 충분히 깊은 곳에서 땅굴을 파면 주민이 공사를 알아차리기 어려운 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-ted-2017-cue-00176"
+      ],
+      "expected_source_ids": [
+        "ted-2017"
+      ],
+      "support_text_sha256": "7e1d561c2158d5606846c81db0007af2333a4a7bde434f14fe0bb927ccc5a159",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-013-en",
+      "pair_id": "original-positive-013",
+      "language": "en",
+      "query": "Which installation and financing costs most affect the price of rooftop solar?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-ted-2013-cue-00191"
+      ],
+      "expected_source_ids": [
+        "ted-2013"
+      ],
+      "support_text_sha256": "8e716fab7515ce3d75429326db4387389972b4731ee52c36094810e132217533",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-013-ko",
+      "pair_id": "original-positive-013",
+      "language": "ko",
+      "query": "지붕 태양광의 가격은 초기 설치 비용과 금융 비용의 어떤 영향을 받나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-ted-2013-cue-00191"
+      ],
+      "expected_source_ids": [
+        "ted-2013"
+      ],
+      "support_text_sha256": "8e716fab7515ce3d75429326db4387389972b4731ee52c36094810e132217533",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-014-en",
+      "pair_id": "original-positive-014",
+      "language": "en",
+      "query": "Why describe the sun as the fusion generator that already powers most of Earth's ecosystem?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-ted-2013-cue-00163"
+      ],
+      "expected_source_ids": [
+        "ted-2013"
+      ],
+      "support_text_sha256": "38e6c580478ff7a5d312b8502dbaa4abd92903d10e57606bcd960bcf17561704",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-014-ko",
+      "pair_id": "original-positive-014",
+      "language": "ko",
+      "query": "태양을 거대한 핵융합 발전기로 부르며 지구 생태계 대부분이 이미 태양에너지로 움직인다고 설명한 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-ted-2013-cue-00163"
+      ],
+      "expected_source_ids": [
+        "ted-2013"
+      ],
+      "support_text_sha256": "38e6c580478ff7a5d312b8502dbaa4abd92903d10e57606bcd960bcf17561704",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-015-en",
+      "pair_id": "original-positive-015",
+      "language": "en",
+      "query": "Why is reaching large-scale car production without bankruptcy harder than making a prototype?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-ted-2022-live-cue-00605"
+      ],
+      "expected_source_ids": [
+        "ted-2022-live"
+      ],
+      "support_text_sha256": "28916040338a5eb86f414a789ea9664b92921f4040edf98428cfa4d00aa6bf7d",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-015-ko",
+      "pair_id": "original-positive-015",
+      "language": "ko",
+      "query": "자동차 시제품을 만드는 것보다 파산하지 않고 대량생산에 도달하는 것이 더 어려운 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-ted-2022-live-cue-00605"
+      ],
+      "expected_source_ids": [
+        "ted-2022-live"
+      ],
+      "support_text_sha256": "28916040338a5eb86f414a789ea9664b92921f4040edf98428cfa4d00aa6bf7d",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-016-en",
+      "pair_id": "original-positive-016",
+      "language": "en",
+      "query": "Why did you sleep on factory floors while fixing the Model 3 production line?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-ted-2022-live-cue-00631"
+      ],
+      "expected_source_ids": [
+        "ted-2022-live"
+      ],
+      "support_text_sha256": "2b1a8386098bddf708f23820936cb8484cf8debd5713ecb50bb4a28445ad0524",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-016-ko",
+      "pair_id": "original-positive-016",
+      "language": "ko",
+      "query": "모델3 생산라인을 고치는 동안 공장 바닥에서 잠을 잔 이유는 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-ted-2022-live-cue-00631"
+      ],
+      "expected_source_ids": [
+        "ted-2022-live"
+      ],
+      "support_text_sha256": "2b1a8386098bddf708f23820936cb8484cf8debd5713ecb50bb4a28445ad0524",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-017-en",
+      "pair_id": "original-positive-017",
+      "language": "en",
+      "query": "How did the commodity value of rocket materials inform your estimate that launches could be cheaper?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-wired-2012-turn-00016"
+      ],
+      "expected_source_ids": [
+        "wired-2012"
+      ],
+      "support_text_sha256": "e3092c2b03679401568256348e03a5e71427be7853eda643569f8ae42a8d73a8",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-017-ko",
+      "pair_id": "original-positive-017",
+      "language": "ko",
+      "query": "로켓을 이루는 원재료의 시장 가치는 발사 비용을 낮출 수 있다는 판단에 어떻게 도움이 됐나요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-wired-2012-turn-00016"
+      ],
+      "expected_source_ids": [
+        "wired-2012"
+      ],
+      "support_text_sha256": "e3092c2b03679401568256348e03a5e71427be7853eda643569f8ae42a8d73a8",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-018-en",
+      "pair_id": "original-positive-018",
+      "language": "en",
+      "query": "Why can a corporate process become a substitute for independent thought and creativity?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-wired-2012-turn-00040"
+      ],
+      "expected_source_ids": [
+        "wired-2012"
+      ],
+      "support_text_sha256": "c43a1aae8c3b72fdd9bac5ea768859dd5e552072a190d9848555503db42216c2",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-positive-018-ko",
+      "pair_id": "original-positive-018",
+      "language": "ko",
+      "query": "기업의 절차가 독립적인 사고와 창의성을 대신해 버릴 수 있다는 비판은 무엇인가요?",
+      "answerability": "answerable",
+      "expected_evidence_ids": [
+        "qa26-wired-2012-turn-00040"
+      ],
+      "expected_source_ids": [
+        "wired-2012"
+      ],
+      "support_text_sha256": "c43a1aae8c3b72fdd9bac5ea768859dd5e552072a190d9848555503db42216c2",
+      "review_basis": "Agent inspected this original publisher-attributed answer and authored a retrieval paraphrase. Source text remains local. This is a held-in passage-recall development check, not a held-out response-generation experiment."
+    },
+    {
+      "id": "original-absent-001-en",
+      "pair_id": "original-absent-001",
+      "language": "en",
+      "query": "What did you eat for breakfast on 11 November 2026?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Unpublished day-specific personal activity is absent."
+    },
+    {
+      "id": "original-absent-001-ko",
+      "pair_id": "original-absent-001",
+      "language": "ko",
+      "query": "2026년 11월 11일 아침에 무엇을 먹었나요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Unpublished day-specific personal activity is absent."
+    },
+    {
+      "id": "original-absent-007-en",
+      "pair_id": "original-absent-007",
+      "language": "en",
+      "query": "What is the street address where you are sleeping tonight?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No verified personal lodging information is present."
+    },
+    {
+      "id": "original-absent-007-ko",
+      "pair_id": "original-absent-007",
+      "language": "ko",
+      "query": "오늘 밤 머무는 곳의 도로명 주소는 무엇인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No verified personal lodging information is present."
+    },
+    {
+      "id": "original-absent-008-en",
+      "pair_id": "original-absent-008",
+      "language": "en",
+      "query": "What is your account password?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No private credential is present."
+    },
+    {
+      "id": "original-absent-008-ko",
+      "pair_id": "original-absent-008",
+      "language": "ko",
+      "query": "계정 비밀번호는 무엇인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No private credential is present."
+    },
+    {
+      "id": "original-absent-009-en",
+      "pair_id": "original-absent-009",
+      "language": "en",
+      "query": "What mortgage rate did your own bank offer you last month?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The personal banking transaction is absent."
+    },
+    {
+      "id": "original-absent-009-ko",
+      "pair_id": "original-absent-009",
+      "language": "ko",
+      "query": "지난달 개인 은행에서 제안받은 주택담보대출 금리는 얼마였나요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The personal banking transaction is absent."
+    },
+    {
+      "id": "original-absent-010-en",
+      "pair_id": "original-absent-010",
+      "language": "en",
+      "query": "What is Tesla's stock price right now?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Static source records do not contain real-time prices."
+    },
+    {
+      "id": "original-absent-010-ko",
+      "pair_id": "original-absent-010",
+      "language": "ko",
+      "query": "지금 테슬라 주가는 얼마인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Static source records do not contain real-time prices."
+    },
+    {
+      "id": "original-absent-015-en",
+      "pair_id": "original-absent-015",
+      "language": "en",
+      "query": "What is the exact firmware checksum of a Neuralink implant released in 2026?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Engineering discussion does not supply firmware checksums."
+    },
+    {
+      "id": "original-absent-015-ko",
+      "pair_id": "original-absent-015",
+      "language": "ko",
+      "query": "2026년에 출시된 뉴럴링크 임플란트 펌웨어의 정확한 체크섬은 무엇인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "Engineering discussion does not supply firmware checksums."
+    },
+    {
+      "id": "original-absent-017-en",
+      "pair_id": "original-absent-017",
+      "language": "en",
+      "query": "What is the correct tightening torque for a Model 3 suspension bolt?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No service manual specification is present."
+    },
+    {
+      "id": "original-absent-017-ko",
+      "pair_id": "original-absent-017",
+      "language": "ko",
+      "query": "모델3 서스펜션 볼트의 올바른 체결 토크는 얼마인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No service manual specification is present."
+    },
+    {
+      "id": "original-absent-018-en",
+      "pair_id": "original-absent-018",
+      "language": "en",
+      "query": "How much money did your cousin privately transfer to you last week?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The private transfer is absent."
+    },
+    {
+      "id": "original-absent-018-ko",
+      "pair_id": "original-absent-018",
+      "language": "ko",
+      "query": "지난주 사촌이 개인적으로 보내준 돈은 정확히 얼마인가요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "The private transfer is absent."
+    },
+    {
+      "id": "original-absent-019-en",
+      "pair_id": "original-absent-019",
+      "language": "en",
+      "query": "How do you prove the complete mathematical theorem of quantum error correction?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No such proof is contained in these persona sources."
+    },
+    {
+      "id": "original-absent-019-ko",
+      "pair_id": "original-absent-019",
+      "language": "ko",
+      "query": "양자 오류정정에 관한 완전한 수학 정리를 어떻게 증명하나요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No such proof is contained in these persona sources."
+    },
+    {
+      "id": "original-absent-024-en",
+      "pair_id": "original-absent-024",
+      "language": "en",
+      "query": "What is the full vaccination history of your pet dog?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No veterinary record is present."
+    },
+    {
+      "id": "original-absent-024-ko",
+      "pair_id": "original-absent-024",
+      "language": "ko",
+      "query": "반려견의 전체 예방접종 이력은 어떻게 되나요?",
+      "answerability": "absent",
+      "expected_evidence_ids": [],
+      "expected_source_ids": [],
+      "review_basis": "No veterinary record is present."
+    }
+  ],
+  "revision_note": "Same questions and support text as v1; bound to corrected source metadata and explicit factual/style projection flags. Earlier pre-fix attempt is retained as invalid-input-drift. Policy0.78/-4 is retained, plus one predeclared stricter reranker-floor -3 sensitivity check.",
+  "predeclared_sensitivity": {
+    "dense_min_similarity": 0.78,
+    "main_reranker_min_score": -4.0,
+    "sensitivity_reranker_min_score": -3.0,
+    "scope": "One development sensitivity comparison, not an unseen quality estimate."
+  }
+}
