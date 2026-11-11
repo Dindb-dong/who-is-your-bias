@@ -48,7 +48,7 @@ The optional [local language server](docs/language-runtime.md) runs a server-sel
 | Capability | Behavior |
 | --- | --- |
 | Source corpus | Linked primary-source records, dated paraphrases, explicit timelines, review state |
-| Retrieval | BM25, English/Korean query support, topic/situation matching, conservative abstention |
+| Retrieval | BM25, English/Korean query support, topical matching, conservative abstention; situation reranking needs the documented label correction |
 | Dialogue | OpenAI-compatible streaming adapter; profile, evidence, and behavior experiment modes |
 | Conversation state | Opaque sessions, bounded history, TTL, serialized turns, cancellation cleanup |
 | Evidence | Per-unit citation coverage, separately labeled semantic review, original source links, frozen prompt comparisons |
@@ -96,6 +96,7 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 
 ### Interpret results correctly
 
+- The original YAICON proposal's actual-Q&A comparison is unfinished. B currently retrieves summaries; C's situation-label mismatch prevents situation reranking on the current corpus. See [proposal alignment and next milestones](docs/proposal-alignment.md) for the evidence, missing experiments, and acceptance criteria.
 - A valid citation ID means the response referenced an allowed record; it does not prove that every generated sentence follows from that record.
 - Retrieval smoke tests are not an independent persona-fidelity benchmark. Cases derived while authoring the corpus are labeled development fixtures.
 - An entire held-out source is excluded from runtime retrieval, including its records and reference answers.
@@ -121,7 +122,8 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 
 ## Documentation
 
-- [Quality completion](docs/quality-completion.md): PR dependencies, browser evidence, recovery fixes, measured limits, and current verification links.
+- [Proposal alignment and next milestones](docs/proposal-alignment.md): original YAICON requirements, current gaps, the C retrieval issue, and prioritized implementation acceptance criteria.
+- [Engineering verification and recovery](docs/quality-completion.md): merged PR status, browser evidence, recovery fixes, measured limits, and verification links.
 - [Delivery plan](docs/PLAN.md): review boundaries, acceptance criteria, fidelity ladder.
 - [Architecture](docs/architecture.md): evidence, generation, timing, and deployment boundaries.
 - [Source provenance](docs/research/sources.md): original URLs, dates, timebases, and corpus limitations.

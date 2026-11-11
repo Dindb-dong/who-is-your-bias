@@ -20,7 +20,19 @@ Foundation PRs 1–4 were merged into `main` in order on 2026-11-10 UTC after th
 | Local inference and generated-answer evaluation | Local language runtime and A/B/C evaluation PR | Actual HTTP/SSE model connection, bounded lazy runtime, token/timing observations, separate ungraded semantic review |
 | Audio-timed embodiment and measured media | Dependent speech/motion PR | Reference-candidate workflow, real ASR and voice HTTP smoke, audio-bound mouth timing, measured clip replay, calibration, browser checks |
 
-Intermediate changes are committed by coherent capability. Completed milestones are published to their branches and opened as pull requests. PRs #5 and #6 were merged into `main` on 2026-11-11 UTC following the next explicit merge instruction. The resumed quality work is divided into three further review units: citation/semantic evaluation, multilingual voice quality and review audio, and human-avatar/measured-motion integration. Each is preserved in coherent commits and a dependent pull request. These new pull requests remain available for review.
+Intermediate changes are committed by coherent capability. Completed milestones are published to their branches and opened as pull requests. PRs #5 and #6 were merged into `main` on 2026-11-11 UTC following the next explicit merge instruction. The resumed quality work was divided into PRs #7, #8, and #9: citation/semantic evaluation, multilingual voice quality and review audio, and human-avatar/measured-motion integration. All three were merged in dependency order on 2026-11-11, producing `f9a9c23a576469536a3c288b43c07489d709d089`; its integrated CI passed.
+
+## Proposal alignment and next milestones
+
+The [proposal alignment audit](proposal-alignment.md) maps the original **2026-2 YAICON** plan to the current implementation. Passed engineering checks do not complete the proposal's actual-interview Q&A experiment or its MuseTalk presentation path.
+
+| Priority | Proposed review unit | Acceptance |
+| --- | --- | --- |
+| 1 | Actual Q&A data, effective situation-aware retrieval, and reference-answer evaluation | Reviewed original exchanges; shared situation vocabulary; meaningful B/C retrieval distinction; fixed source-event holdouts; controlled same-model A/B/C runs; preserved outputs and a blinded review bundle |
+| 2 | Prepared presentation media and live Q&A | Actual Qwen3-TTS → MuseTalk presentation artifact, audio/video timing verification, and a measured live question-to-speech path |
+| 3 | Situation-linked voice/motion quality | Reviewed observable features tied to Q&A, independent source-event evaluation, real listening judgments, and latency measurements on the demonstration hardware |
+
+The immediate defect is that the query classifier's situation labels never exactly match any indexed corpus label, so C's score multiplier does not activate. The current B/C corpus also contains summaries instead of original question/answer pairs. Fix those data and retrieval conditions before interpreting C as the proposal's situation-aware experiment. Preserve existing results as historical runs of their original conditions.
 
 ## Fidelity ladder
 

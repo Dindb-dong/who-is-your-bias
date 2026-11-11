@@ -1,23 +1,27 @@
-# Quality completion and recovery
+# Engineering verification and recovery
 
-Status snapshot: 2026-11-11. PRs #7, #8, and #9 remain open. The baseline browser
-suite completed, screenshots were inspected, and the recovery fixes below are
-included on `feat/human-motion-studio`. The [PR #9 checks](https://github.com/Dindb-dong/who-is-your-bias/pull/9/checks)
-and PR description record the latest pushed head's result; a baseline result
-does not establish that a later commit passed.
+Status snapshot: 2026-11-11. PRs #7, #8, and #9 are merged into `main` at
+`f9a9c23a576469536a3c288b43c07489d709d089`. The recovery fixes below are included.
+The [merged-main workflow run 42947174466](https://github.com/Dindb-dong/who-is-your-bias/actions/runs/42947174466)
+completed successfully at that revision.
 
-## Review and merge dependencies
+These checks establish engineering functionality and regression coverage.
+The original proposal's retrieval of real interview question and answer pairs
+and comparison with actual answers from held-out interviews remain unfinished.
+See [proposal alignment](proposal-alignment.md)
+for the requirement audit, concrete research gaps, and next milestones.
 
-| PR | Scope | Current base | Head at initial recovery |
+## Merged milestones
+
+| PR | Scope | Merged into | Merge commit |
 | --- | --- | --- | --- |
-| [#7](https://github.com/Dindb-dong/who-is-your-bias/pull/7) | Grounding diagnostics and measured prompt comparison | `main` | `69db99a7359a3d611c79a2f59715c8368c65f982` |
-| [#8](https://github.com/Dindb-dong/who-is-your-bias/pull/8) | Language propagation and measured voice/listening outputs | `feat/grounding-quality` | `afbb9581524ec2f37533eb465a9ea4b0a359fe89` |
-| [#9](https://github.com/Dindb-dong/who-is-your-bias/pull/9) | Human avatar, measured motion, and browser coverage | `feat/voice-quality` | `3c10b3b627716e972bd09a535b3ee5dddd49f52c` |
+| [#7](https://github.com/Dindb-dong/who-is-your-bias/pull/7) | Grounding diagnostics and measured prompt comparison | `main` | `a5224f274c2c336f1ba55cc7a7ddbb2f70c8f13e` |
+| [#8](https://github.com/Dindb-dong/who-is-your-bias/pull/8) | Language propagation and measured voice/listening outputs | `main` | `dfcd664b6b188526c6d65c52fe2ea2b4ac2136b8` |
+| [#9](https://github.com/Dindb-dong/who-is-your-bias/pull/9) | Human avatar, measured motion, and browser coverage | `main` | `f9a9c23a576469536a3c288b43c07489d709d089` |
 
-The full implementation is on `feat/human-motion-studio`. When merging is
-requested, merge #7 first, retarget #8 to `main` and merge it, then retarget #9 to
-`main`. Recheck diffs and CI after each base change. This handoff does not merge
-or approve the three PRs.
+The PRs were merged in dependency order, retargeting #8 and #9 to `main` after
+their predecessors. The integrated tree matches the validated #9 head
+`19df443289b33c6e2e8a82614ad3c442744768b7` with no file changes.
 
 ## Browser evidence and recovery fixes
 
@@ -109,5 +113,6 @@ npm run check
 npm run test:e2e
 ```
 
-Current-head workflow links and test totals are recorded in the PR description.
+The successful merged-main workflow is linked above; historical runs remain
+identified separately so their results are tied to the code they tested.
 Keep original listening ratings unrated until an actual listener supplies them.
