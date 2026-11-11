@@ -1,0 +1,352 @@
+{
+  "schema_version": "motion-input.v1",
+  "id": "elon-musk-ted-geometry",
+  "version": "0.1.0",
+  "sources": [
+    {
+      "id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "url": "https://www.ted.com/talks/elon_musk_the_mind_behind_tesla_spacex_solarcity",
+      "corpus_split": "train",
+      "motion_split": "train"
+    },
+    {
+      "id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "url": "https://www.ted.com/talks/elon_musk_the_future_we_re_building_and_boring",
+      "corpus_split": "train",
+      "motion_split": "validation"
+    }
+  ],
+  "clips": [
+    {
+      "id": "ted-2013-close-035",
+      "path": "motion/ted-2013-close-035.json",
+      "sha256": "0e2a100118c041ab04f91f2a741d7d3aa1572f98e914ee2a9a795d26c9c2a02e",
+      "source_id": "ted-2013",
+      "context": {
+        "id": "ted-2013-close-035-context",
+        "summary": "Finite fossil fuels motivate sustainable energy. 화석연료 고갈과 지속 가능한 에너지.",
+        "summary_kind": "original_paraphrase",
+        "cue_ids": [
+          "cue-00012",
+          "cue-00013",
+          "cue-00014"
+        ],
+        "timeline": "ted_transcript_cue",
+        "start_seconds": 30.226,
+        "end_seconds": 40.278,
+        "alignment": "asr_word_matches",
+        "alignment_note": "Exact ASR and publisher artifacts were hash-checked and their token matches recomputed against this acquired video clock. The linked report gives within-window word/context coverage. Timings are ASR estimates, not forced alignment or a constant cue offset; image-to-speaker association and human listening remain unreviewed.",
+        "alignment_evidence_id": "ted-2013-close-035",
+        "alignment_evidence_path": "motion/context-alignment.v1.json",
+        "alignment_evidence_sha256": "8cc1942841f355bf562c522ee3147f767d561970a760588e4b290a48ccd2a0d5"
+      }
+    },
+    {
+      "id": "ted-2013-close-059",
+      "path": "motion/ted-2013-close-059.json",
+      "sha256": "5dcd1b8b40ea0439d5dacbbcb4605b9910eea3f52ade6606d0ee2be21ee73c13",
+      "source_id": "ted-2013",
+      "context": {
+        "id": "ted-2013-close-059-context",
+        "summary": "Power plants can charge electric cars using the same fuel more efficiently. 발전소와 전기차의 에너지 효율.",
+        "summary_kind": "original_paraphrase",
+        "cue_ids": [
+          "cue-00019",
+          "cue-00020",
+          "cue-00021"
+        ],
+        "timeline": "ted_transcript_cue",
+        "start_seconds": 53.524,
+        "end_seconds": 61.367,
+        "alignment": "asr_word_matches",
+        "alignment_note": "Exact ASR and publisher artifacts were hash-checked and their token matches recomputed against this acquired video clock. The linked report gives within-window word/context coverage. Timings are ASR estimates, not forced alignment or a constant cue offset; image-to-speaker association and human listening remain unreviewed.",
+        "alignment_evidence_id": "ted-2013-close-059",
+        "alignment_evidence_path": "motion/context-alignment.v1.json",
+        "alignment_evidence_sha256": "8cc1942841f355bf562c522ee3147f767d561970a760588e4b290a48ccd2a0d5"
+      }
+    },
+    {
+      "id": "ted-2013-body-065",
+      "path": "motion/ted-2013-body-065.json",
+      "sha256": "32f7387b93fbdd70f303d19e4a612d47b7b30a20466a6f4231ca81e77fdcc698",
+      "source_id": "ted-2013",
+      "context": {
+        "id": "ted-2013-body-065-context",
+        "summary": "Natural gas illustrates the power-generation comparison. 천연가스를 이용한 발전 효율 비교.",
+        "summary_kind": "original_paraphrase",
+        "cue_ids": [
+          "cue-00022",
+          "cue-00023",
+          "cue-00024"
+        ],
+        "timeline": "ted_transcript_cue",
+        "start_seconds": 61.367,
+        "end_seconds": 68.952,
+        "alignment": "asr_word_matches",
+        "alignment_note": "Exact ASR and publisher artifacts were hash-checked and their token matches recomputed against this acquired video clock. The linked report gives within-window word/context coverage. Timings are ASR estimates, not forced alignment or a constant cue offset; image-to-speaker association and human listening remain unreviewed.",
+        "alignment_evidence_id": "ted-2013-body-065",
+        "alignment_evidence_path": "motion/context-alignment.v1.json",
+        "alignment_evidence_sha256": "8cc1942841f355bf562c522ee3147f767d561970a760588e4b290a48ccd2a0d5"
+      }
+    },
+    {
+      "id": "ted-2013-body-068",
+      "path": "motion/ted-2013-body-068.json",
+      "sha256": "0522ee0dcba90d60e81e20e4f6c97e9c35448ef7e8230774d690d2ad99f5d322",
+      "source_id": "ted-2013",
+      "context": {
+        "id": "ted-2013-body-068-context",
+        "summary": "Modern gas turbines illustrate stationary power-plant efficiency. 가스 터빈과 발전소의 효율.",
+        "summary_kind": "original_paraphrase",
+        "cue_ids": [
+          "cue-00023",
+          "cue-00024",
+          "cue-00025",
+          "cue-00026"
+        ],
+        "timeline": "ted_transcript_cue",
+        "start_seconds": 63.346,
+        "end_seconds": 72.985,
+        "alignment": "asr_word_matches",
+        "alignment_note": "Exact ASR and publisher artifacts were hash-checked and their token matches recomputed against this acquired video clock. The linked report gives within-window word/context coverage. Timings are ASR estimates, not forced alignment or a constant cue offset; image-to-speaker association and human listening remain unreviewed.",
+        "alignment_evidence_id": "ted-2013-body-068",
+        "alignment_evidence_path": "motion/context-alignment.v1.json",
+        "alignment_evidence_sha256": "8cc1942841f355bf562c522ee3147f767d561970a760588e4b290a48ccd2a0d5"
+      }
+    },
+    {
+      "id": "ted-2013-close-083",
+      "path": "motion/ted-2013-close-083.json",
+      "sha256": "ea69bfb2b8e76513fbe85c169f31336e77253de238bdf7fd1432f5a51bb5aa09",
+      "source_id": "ted-2013",
+      "context": {
+        "id": "ted-2013-close-083-context",
+        "summary": "Large stationary plants can recover waste heat. 대형 발전소의 폐열 회수와 효율.",
+        "summary_kind": "original_paraphrase",
+        "cue_ids": [
+          "cue-00029",
+          "cue-00030",
+          "cue-00031",
+          "cue-00032",
+          "cue-00033",
+          "cue-00034"
+        ],
+        "timeline": "ted_transcript_cue",
+        "start_seconds": 77.596,
+        "end_seconds": 87.866,
+        "alignment": "asr_word_matches",
+        "alignment_note": "Exact ASR and publisher artifacts were hash-checked and their token matches recomputed against this acquired video clock. The linked report gives within-window word/context coverage. Timings are ASR estimates, not forced alignment or a constant cue offset; image-to-speaker association and human listening remain unreviewed.",
+        "alignment_evidence_id": "ted-2013-close-083",
+        "alignment_evidence_path": "motion/context-alignment.v1.json",
+        "alignment_evidence_sha256": "8cc1942841f355bf562c522ee3147f767d561970a760588e4b290a48ccd2a0d5"
+      }
+    },
+    {
+      "id": "ted-2013-close-104",
+      "path": "motion/ted-2013-close-104.json",
+      "sha256": "e1f5ab30b70a8271f63b6aa6586d442f47b8a903d98513d846c0d6ae889e8107",
+      "source_id": "ted-2013",
+      "context": {
+        "id": "ted-2013-close-104-context",
+        "summary": "Transport and sustainable electricity generation need a shared solution. 교통과 지속 가능한 전력 생산.",
+        "summary_kind": "original_paraphrase",
+        "cue_ids": [
+          "cue-00039",
+          "cue-00040",
+          "cue-00041",
+          "cue-00042"
+        ],
+        "timeline": "ted_transcript_cue",
+        "start_seconds": 99.639,
+        "end_seconds": 109.868,
+        "alignment": "asr_word_matches",
+        "alignment_note": "Exact ASR and publisher artifacts were hash-checked and their token matches recomputed against this acquired video clock. The linked report gives within-window word/context coverage. Timings are ASR estimates, not forced alignment or a constant cue offset; image-to-speaker association and human listening remain unreviewed.",
+        "alignment_evidence_id": "ted-2013-close-104",
+        "alignment_evidence_path": "motion/context-alignment.v1.json",
+        "alignment_evidence_sha256": "8cc1942841f355bf562c522ee3147f767d561970a760588e4b290a48ccd2a0d5"
+      }
+    },
+    {
+      "id": "ted-2013-body-113",
+      "path": "motion/ted-2013-body-113.json",
+      "sha256": "1f369f108bdc358e61f85f1a53b57082a2fd3bf5f544f04c9e9d8e4140874c1d",
+      "source_id": "ted-2013",
+      "context": {
+        "id": "ted-2013-body-113-context",
+        "summary": "Sustainable electricity supports electric transport. 지속 가능한 전력과 전기차 교통.",
+        "summary_kind": "original_paraphrase",
+        "cue_ids": [
+          "cue-00042",
+          "cue-00043",
+          "cue-00044"
+        ],
+        "timeline": "ted_transcript_cue",
+        "start_seconds": 106.799,
+        "end_seconds": 115.908,
+        "alignment": "asr_word_matches",
+        "alignment_note": "Exact ASR and publisher artifacts were hash-checked and their token matches recomputed against this acquired video clock. The linked report gives within-window word/context coverage. Timings are ASR estimates, not forced alignment or a constant cue offset; image-to-speaker association and human listening remain unreviewed.",
+        "alignment_evidence_id": "ted-2013-body-113",
+        "alignment_evidence_path": "motion/context-alignment.v1.json",
+        "alignment_evidence_sha256": "8cc1942841f355bf562c522ee3147f767d561970a760588e4b290a48ccd2a0d5"
+      }
+    },
+    {
+      "id": "ted-2017-close-025",
+      "path": "motion/ted-2017-close-025.json",
+      "sha256": "00d51aa00389c3ecd36f7f418c35a7fb51b8fcf00c0562ab48a520cb720abe0e",
+      "source_id": "ted-2017",
+      "context": {
+        "id": "ted-2017-close-025-context",
+        "summary": "An underground tunnel network is proposed for Los Angeles traffic. 로스앤젤레스 교통 정체와 지하 터널.",
+        "summary_kind": "original_paraphrase",
+        "cue_ids": [
+          "cue-00009",
+          "cue-00010",
+          "cue-00011",
+          "cue-00012",
+          "cue-00013",
+          "cue-00014"
+        ],
+        "timeline": "ted_transcript_cue",
+        "start_seconds": 21.08,
+        "end_seconds": 41.76,
+        "alignment": "asr_word_matches",
+        "alignment_note": "Exact ASR and publisher artifacts were hash-checked and their token matches recomputed against this acquired video clock. The linked report gives within-window word/context coverage. Timings are ASR estimates, not forced alignment or a constant cue offset; image-to-speaker association and human listening remain unreviewed.",
+        "alignment_evidence_id": "ted-2017-close-025",
+        "alignment_evidence_path": "motion/context-alignment.v1.json",
+        "alignment_evidence_sha256": "8cc1942841f355bf562c522ee3147f767d561970a760588e4b290a48ccd2a0d5"
+      }
+    },
+    {
+      "id": "ted-2017-close-054",
+      "path": "motion/ted-2017-close-054.json",
+      "sha256": "bc1ff14dcad7aa6078255bc4494a20ecd92774523e5060b9aaf1ac97da9373be",
+      "source_id": "ted-2017",
+      "context": {
+        "id": "ted-2017-close-054-context",
+        "summary": "Traffic consumes time, particularly in Los Angeles. 교통 정체로 낭비되는 시간.",
+        "summary_kind": "original_paraphrase",
+        "cue_ids": [
+          "cue-00017",
+          "cue-00018",
+          "cue-00019"
+        ],
+        "timeline": "ted_transcript_cue",
+        "start_seconds": 50.2,
+        "end_seconds": 57.68,
+        "alignment": "asr_word_matches",
+        "alignment_note": "Exact ASR and publisher artifacts were hash-checked and their token matches recomputed against this acquired video clock. The linked report gives within-window word/context coverage. Timings are ASR estimates, not forced alignment or a constant cue offset; image-to-speaker association and human listening remain unreviewed.",
+        "alignment_evidence_id": "ted-2017-close-054",
+        "alignment_evidence_path": "motion/context-alignment.v1.json",
+        "alignment_evidence_sha256": "8cc1942841f355bf562c522ee3147f767d561970a760588e4b290a48ccd2a0d5"
+      }
+    },
+    {
+      "id": "ted-2017-body-065",
+      "path": "motion/ted-2017-body-065.json",
+      "sha256": "ec9dbc95da0370ff0b22d8f601a576053f8d943423ffd525de14441aa6a6f50e",
+      "source_id": "ted-2017",
+      "context": {
+        "id": "ted-2017-body-065-context",
+        "summary": "The interview introduces a tunnel-network visualization. 터널 네트워크 시각화 소개.",
+        "summary_kind": "original_paraphrase",
+        "cue_ids": [
+          "cue-00021",
+          "cue-00022",
+          "cue-00023",
+          "cue-00024",
+          "cue-00025",
+          "cue-00026",
+          "cue-00027"
+        ],
+        "timeline": "ted_transcript_cue",
+        "start_seconds": 60.36,
+        "end_seconds": 76.84,
+        "alignment": "asr_word_matches",
+        "alignment_note": "Exact ASR and publisher artifacts were hash-checked and their token matches recomputed against this acquired video clock. The linked report gives within-window word/context coverage. Timings are ASR estimates, not forced alignment or a constant cue offset; image-to-speaker association and human listening remain unreviewed.",
+        "alignment_evidence_id": "ted-2017-body-065",
+        "alignment_evidence_path": "motion/context-alignment.v1.json",
+        "alignment_evidence_sha256": "8cc1942841f355bf562c522ee3147f767d561970a760588e4b290a48ccd2a0d5"
+      }
+    },
+    {
+      "id": "ted-2017-body-139",
+      "path": "motion/ted-2017-body-139.json",
+      "sha256": "1c7ce10d4a07fe2b2019674d42b1a7fb365d6a59603fd921b2d59fd224cad6b2",
+      "source_id": "ted-2017",
+      "context": {
+        "id": "ted-2017-body-139-context",
+        "summary": "Multiple tunnel levels could extend far underground. 여러 층의 지하 터널.",
+        "summary_kind": "original_paraphrase",
+        "cue_ids": [
+          "cue-00048",
+          "cue-00049",
+          "cue-00050"
+        ],
+        "timeline": "ted_transcript_cue",
+        "start_seconds": 134.64,
+        "end_seconds": 145.28,
+        "alignment": "asr_word_matches",
+        "alignment_note": "Exact ASR and publisher artifacts were hash-checked and their token matches recomputed against this acquired video clock. The linked report gives within-window word/context coverage. Timings are ASR estimates, not forced alignment or a constant cue offset; image-to-speaker association and human listening remain unreviewed.",
+        "alignment_evidence_id": "ted-2017-body-139",
+        "alignment_evidence_path": "motion/context-alignment.v1.json",
+        "alignment_evidence_sha256": "8cc1942841f355bf562c522ee3147f767d561970a760588e4b290a48ccd2a0d5"
+      }
+    },
+    {
+      "id": "ted-2017-close-149",
+      "path": "motion/ted-2017-close-149.json",
+      "sha256": "8bfe0d95f8f35bfded4d501b4ebadd4743e33188905ed9fa65152beeccb6855d",
+      "source_id": "ted-2017",
+      "context": {
+        "id": "ted-2017-close-149-context",
+        "summary": "Deep mines illustrate the proposed capacity of layered tunnels. 깊은 광산과 다층 터널의 수용력.",
+        "summary_kind": "original_paraphrase",
+        "cue_ids": [
+          "cue-00050",
+          "cue-00051",
+          "cue-00052",
+          "cue-00053"
+        ],
+        "timeline": "ted_transcript_cue",
+        "start_seconds": 142.44,
+        "end_seconds": 156.08,
+        "alignment": "asr_word_matches",
+        "alignment_note": "Exact ASR and publisher artifacts were hash-checked and their token matches recomputed against this acquired video clock. The linked report gives within-window word/context coverage. Timings are ASR estimates, not forced alignment or a constant cue offset; image-to-speaker association and human listening remain unreviewed.",
+        "alignment_evidence_id": "ted-2017-close-149",
+        "alignment_evidence_path": "motion/context-alignment.v1.json",
+        "alignment_evidence_sha256": "8cc1942841f355bf562c522ee3147f767d561970a760588e4b290a48ccd2a0d5"
+      }
+    },
+    {
+      "id": "ted-2017-close-172",
+      "path": "motion/ted-2017-close-172.json",
+      "sha256": "a15569234d6694a9dff9c8033681b8ba3e28f1b00df89d7d98afff906514fde6",
+      "source_id": "ted-2017",
+      "context": {
+        "id": "ted-2017-close-172-context",
+        "summary": "Additional tunnel levels are offered as a response to congestion. 혼잡 해소를 위한 추가 터널 층.",
+        "summary_kind": "original_paraphrase",
+        "cue_ids": [
+          "cue-00057",
+          "cue-00058",
+          "cue-00059"
+        ],
+        "timeline": "ted_transcript_cue",
+        "start_seconds": 166.84,
+        "end_seconds": 173.96,
+        "alignment": "asr_word_matches",
+        "alignment_note": "Exact ASR and publisher artifacts were hash-checked and their token matches recomputed against this acquired video clock. The linked report gives within-window word/context coverage. Timings are ASR estimates, not forced alignment or a constant cue offset; image-to-speaker association and human listening remain unreviewed.",
+        "alignment_evidence_id": "ted-2017-close-172",
+        "alignment_evidence_path": "motion/context-alignment.v1.json",
+        "alignment_evidence_sha256": "8cc1942841f355bf562c522ee3147f767d561970a760588e4b290a48ccd2a0d5"
+      }
+    }
+  ],
+  "window_ms": 2500,
+  "stride_ms": 2500,
+  "minimum_feature_coverage": 0.8,
+  "clusters_per_family": 3
+}

@@ -1,5 +1,5 @@
 import { BONE_SET, FACE_SET, VISEME_SET } from './channels';
-import type { AvatarClip, BoneBinding, BoneRotations, FaceWeights, MorphBinding, QuaternionTuple, RigMapping, SpeechTiming, VideoCrop } from './types';
+import type { AvatarClip, BoneBinding, BoneRotations, FaceWeights, MorphBinding, MotionSelection, QuaternionTuple, RigMapping, SpeechTiming, VideoCrop } from './types';
 
 type RecordValue = Record<string, unknown>;
 const object = (value: unknown, name: string): RecordValue => {
@@ -96,7 +96,37 @@ export function parseSpeechTiming(value: unknown): SpeechTiming {
   };
 }
 
-/** Geometry previews require a separate explicit preview action, never automatic persona playback. */
+export function parseMotionSelection(value: unknown): MotionSelection {
+  const data = object(value, 'Motion selection');
+  if (data.schema_version !== 'motion-selection.v1') throw new Error('Unsupported motion selection schema.');
+  const identifier = (value: unknown, name: string) => {
+    const result = text(value, name, 120);
+    if (!/^[a-z0-9][a-z0-9_.-]{0,119}$/.test(result)) throw new Error(`Invalid ${name}.`);
+    return result;
+  };
+  const primitive = identifier(data.primitive_id, 'primitive_id');
+  const duration = number(data.duration_ms, 'duration_ms', 1, 120000);
+  const start = number(data.source_start_seconds, 'source_start_seconds', 0, 86400);
+  const end = number(data.source_end_seconds, 'source_end_seconds', start, 86400);
+  if (Math.abs((end - start) * 1000 - duration) > 0.01) throw new Error('Motion source interval does not match its duration.');
+  if (data.clip_url !== `/api/motion/clip/${primitive}`) throw new Error('Motion selection has an unexpected clip URL.');
+  return {
+    schema_version: 'motion-selection.v1', primitive_id: primitive,
+    library_id: identifier(data.library_id, 'library_id'), library_version: text(data.library_version, 'library_version', 60),
+    family: choice(data.family, ['face', 'upper_body'], 'family'),
+    source_id: identifier(data.source_id, 'source_id'), source_event_id: identifier(data.source_event_id, 'source_event_id'),
+    source_timeline: text(data.source_timeline, 'source_timeline'), source_start_seconds: start, source_end_seconds: end,
+    duration_ms: duration, review_status: choice(data.review_status, ['geometry_preview', 'speaker_reviewed'], 'review_status'),
+    selection_basis: choice(data.selection_basis, ['source_context_retrieval', 'nearby_source_context_retrieval'], 'selection_basis'),
+    context_summary: text(data.context_summary, 'context_summary', 1000),
+    context_alignment: choice(data.context_alignment, ['reviewed_word_anchors', 'publisher_metadata_mapping', 'asr_word_matches', 'unverified_nearby_context'], 'context_alignment'),
+    score: number(data.score, 'score', 0, 1e9),
+    geometry_cluster_id: data.geometry_cluster_id == null ? null : identifier(data.geometry_cluster_id, 'geometry_cluster_id'),
+    clip_url: data.clip_url, clip_sha256: hash(data.clip_sha256, 'clip_sha256'), parent_clip_sha256: hash(data.parent_clip_sha256, 'parent_clip_sha256'),
+  };
+}
+
+/** Unreviewed geometry requires the separate source-geometry preview opt-in. */
 export function parseAvatarClip(value: unknown, allowGeometryPreview = false): AvatarClip {
   const data = object(value, 'Animation clip');
   if (data.schema_version !== 'avatar-clip.v1') throw new Error('Unsupported animation clip schema.');
@@ -110,6 +140,20 @@ export function parseAvatarClip(value: unknown, allowGeometryPreview = false): A
   if (status === 'geometry_preview' && !allowGeometryPreview) throw new Error('This unreviewed geometry clip is restricted to an explicit calibration preview.');
   if (status === 'speaker_reviewed' && (!continuity || !clock || !speaker)) throw new Error('Speaker replay requires reviewed track continuity, source clock, and speaker association.');
   if (calibration.coordinate_basis !== 'right_handed_y_up' || calibration.bone_rotation_space !== 'local_delta') throw new Error('Animation rotations must use a right-handed Y-up local-delta basis.');
+  let parentReference: AvatarClip['calibration']['parent_reference'];
+  if (calibration.parent_reference !== undefined) {
+    const parent = object(calibration.parent_reference, 'parent_reference');
+    parentReference = {
+      clip_sha256: hash(parent.clip_sha256, 'parent_reference.clip_sha256'),
+      neutral_frame_ms: number(parent.neutral_frame_ms, 'parent_reference.neutral_frame_ms', 0, 120000),
+      window_start_ms: number(parent.window_start_ms, 'parent_reference.window_start_ms', 0, 120000),
+      rotation_operation: choice(parent.rotation_operation, ['retained_parent_local_delta'], 'parent_reference.rotation_operation'),
+    };
+  }
+  const neutralFrame = number(calibration.neutral_frame_ms, 'neutral_frame_ms', parentReference ? -120000 : 0, parentReference ? 120000 : duration);
+  if (parentReference && Math.abs(neutralFrame - (parentReference.neutral_frame_ms - parentReference.window_start_ms)) > 0.01) {
+    throw new Error('Neutral reference does not match the retained parent calibration.');
+  }
   if (!Array.isArray(data.frames) || !data.frames.length || data.frames.length > 3601) throw new Error('Animation clips require 1–3601 frames.');
   let previousTime = -1;
   const frames = data.frames.map((value, index) => {
@@ -123,7 +167,8 @@ export function parseAvatarClip(value: unknown, allowGeometryPreview = false): A
   if (!Array.isArray(data.limitations) || data.limitations.length > 30) throw new Error('Clip limitations must be a bounded list.');
   const measurement = data.measurement === undefined ? undefined : object(data.measurement, 'measurement');
   return {
-    schema_version: 'avatar-clip.v1', duration_ms: duration, max_gap_ms: number(data.max_gap_ms, 'max_gap_ms', 1, 1000),
+    schema_version: 'avatar-clip.v1', ...(data.id === undefined ? {} : { id: text(data.id, 'id', 120) }),
+    duration_ms: duration, max_gap_ms: number(data.max_gap_ms, 'max_gap_ms', 1, 1000),
     source: { source_id: text(source.source_id, 'source_id'), source_timeline: text(source.source_timeline, 'source_timeline'),
       source_start_seconds: number(source.source_start_seconds, 'source_start_seconds', 0, 1e7),
       video_sha256: hash(source.video_sha256, 'video_sha256'), observations_sha256: hash(source.observations_sha256, 'observations_sha256'),
@@ -135,7 +180,8 @@ export function parseAvatarClip(value: unknown, allowGeometryPreview = false): A
     review: { status, reviewer: text(review.reviewer, 'reviewer'), track_id: text(review.track_id, 'track_id'),
       track_continuity_reviewed: continuity, source_clock_reviewed: clock, speaker_association_reviewed: speaker,
       attribution_basis: text(review.attribution_basis, 'attribution_basis', 1000) },
-    calibration: { neutral_frame_ms: number(calibration.neutral_frame_ms, 'neutral_frame_ms', 0, duration),
+    calibration: { neutral_frame_ms: neutralFrame,
+      ...(parentReference ? { parent_reference: parentReference } : {}),
       face_neutral: faceWeights(calibration.face_neutral, 'face_neutral'),
       ...(calibration.bone_neutral === undefined ? {} : { bone_neutral: boneRotations(calibration.bone_neutral, 'bone_neutral') }),
       coordinate_basis: 'right_handed_y_up', bone_rotation_space: 'local_delta' },

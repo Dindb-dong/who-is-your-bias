@@ -1,11 +1,92 @@
 import { createHash } from 'node:crypto';
 import { expect, test, type Page } from '@playwright/test';
 
+async function expectHumanReady(page: Page) {
+  // Loading a real rig while software rendering may outlast Playwright's
+  // default 5 s assertion budget on a mobile CI viewport.
+  await expect(page.getByTestId('avatar-stage')).toHaveAttribute('data-rig-kind', 'glb', { timeout: 15_000 });
+}
+
 async function openMotionLab(page: Page, mobile: boolean) {
   await page.goto('/');
   await page.getByRole('navigation', { name: mobile ? 'Mobile navigation' : 'Main navigation', exact: true })
     .getByRole('button', { name: mobile ? 'Lab' : 'Research lab', exact: true }).click();
+  await expectHumanReady(page);
 }
+
+test('loads the bundled human and switches camera framing and avatar assets', async ({ page }, info) => {
+  const errors: string[] = []; page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto('/');
+  const stage = page.getByTestId('avatar-stage');
+  await expectHumanReady(page);
+  await expect(stage).toHaveAttribute('data-face-controls', '52');
+  await expect(stage).toHaveAttribute('data-visemes', '15');
+  await expect(stage).toHaveAttribute('data-mapped-joints', '16');
+  await expect(stage).toHaveAttribute('data-framing', 'portrait');
+  await expect(page.locator('.stage-caption')).toHaveText('RESEARCH HUMAN RIG');
+  await page.getByRole('region', { name: 'Avatar studio', exact: true }).screenshot({ path: info.outputPath('research-human-portrait.png') });
+  const settings = page.getByRole('button', { name: 'Studio settings', exact: true }).filter({ visible: true });
+  await settings.click();
+  await page.getByRole('combobox', { name: 'Avatar camera framing', exact: true }).selectOption('full_body');
+  await page.getByRole('button', { name: 'Close settings' }).click();
+  await expect(stage).toHaveAttribute('data-framing', 'full_body');
+  await page.getByRole('region', { name: 'Avatar studio', exact: true }).screenshot({ path: info.outputPath('research-human-full-body.png') });
+  await settings.click();
+  await page.getByRole('button', { name: /^Stylized portrait/ }).click();
+  await page.getByRole('button', { name: 'Close settings' }).click();
+  await expect(stage).toHaveAttribute('data-rig-kind', 'procedural');
+  await expect(page.locator('.stage-caption')).toHaveText('STYLIZED PORTRAIT RIG');
+  await settings.click();
+  await page.getByRole('button', { name: /^Research human/ }).click();
+  await page.getByRole('button', { name: 'Close settings' }).click();
+  await expectHumanReady(page);
+  await expect(page.getByRole('alert')).toHaveCount(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  expect(errors).toEqual([]);
+});
+
+test('recovers from a failed human asset without leaving the portrait loading', async ({ page }) => {
+  await page.route('**/models/research-human-v2.glb', (route) => route.fulfill({ status: 500, body: 'Unavailable' }));
+  await page.goto('/');
+  await expect(page.getByRole('alert')).toContainText('The model could not be loaded (500).');
+  await page.getByRole('button', { name: 'Use stylized portrait', exact: true }).click();
+  const stage = page.getByTestId('avatar-stage');
+  await expect(stage).toHaveAttribute('data-rig-kind', 'procedural');
+  await expect(stage).toHaveAttribute('data-model-state', 'ready');
+  await expect(page.locator('.stage-caption')).toHaveText('STYLIZED PORTRAIT RIG');
+  await expect(page.getByRole('alert')).toHaveCount(0);
+  await expect(page.locator('.avatar-loading')).toHaveCount(0);
+  await expect(page.getByText('Loading your avatar…', { exact: true })).toHaveCount(0);
+});
+
+test('replays selected source geometry only after explicit conversation opt-in', async ({ page }, info) => {
+  const clips: string[] = [];
+  page.on('request', (request) => { if (request.url().includes('/api/motion/clip/')) clips.push(request.url()); });
+  await page.goto('/');
+  await expect(page.getByText('Studio connected', { exact: true })).toBeVisible();
+  await expectHumanReady(page);
+  const ask = async () => {
+    await page.getByRole('textbox', { name: 'Your message' }).fill('Why compare power plants and electric cars for efficiency?');
+    await page.getByRole('button', { name: 'Send message', exact: true }).click();
+    await expect(page.getByRole('button', { name: 'Stop response', exact: true })).toHaveCount(0);
+    await expect(page.getByRole('button', { name: /evidence records/ }).last()).toBeVisible();
+    await expect(page.getByText(/electricity generation and transmission losses/).last()).toBeVisible();
+    await expect(page.getByText(/tunnel-cost/)).toHaveCount(0);
+  };
+  await ask();
+  expect(clips).toEqual([]);
+  await page.getByRole('button', { name: 'Studio settings', exact: true }).filter({ visible: true }).click();
+  await expect(page.getByRole('button', { name: /^Reviewed source motion/ })).toBeDisabled();
+  await page.getByRole('button', { name: /^Source geometry preview/ }).click();
+  await page.getByRole('button', { name: 'Close settings' }).click();
+  await ask();
+  await expect.poll(() => clips.length).toBe(1);
+  expect(clips[0]).toContain('?preview=true');
+  await expect(page.getByRole('complementary', { name: 'Source movement status', exact: true })).toContainText('ted-2013');
+  await expect(page.getByRole('complementary', { name: 'Source movement status', exact: true })).toContainText('geometry');
+  await page.screenshot({ path: info.outputPath('conversation-source-motion.png'), fullPage: true });
+  await expect(page.getByRole('alert')).toHaveCount(0);
+});
 
 function testAudio() {
   const rate = 16000; const frames = rate * 4; const output = Buffer.alloc(44 + frames * 2);

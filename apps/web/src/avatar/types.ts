@@ -2,6 +2,21 @@ import type { BoneControl, BoneRotations, FaceChannel, FaceWeights, QuaternionTu
 export type { BoneControl, BoneRotations, FaceChannel, FaceWeights, QuaternionTuple, Viseme, VisemeWeights } from './channels';
 
 export type CueChannel = 'face' | 'gaze' | 'head' | 'gesture';
+export type MotionMode = 'disabled' | 'reviewed' | 'geometry_preview';
+
+/** A source-context retrieval result, never a prediction of personal behavior. */
+export interface MotionSelection {
+  schema_version: 'motion-selection.v1';
+  library_id: string; library_version: string; primitive_id: string;
+  family: 'face' | 'upper_body'; source_id: string; source_event_id: string;
+  source_timeline: string; source_start_seconds: number; source_end_seconds: number;
+  duration_ms: number; review_status: 'geometry_preview' | 'speaker_reviewed';
+  selection_basis: 'source_context_retrieval' | 'nearby_source_context_retrieval';
+  context_summary: string;
+  context_alignment: 'reviewed_word_anchors' | 'publisher_metadata_mapping' | 'asr_word_matches' | 'unverified_nearby_context';
+  score: number; geometry_cluster_id?: string | null;
+  clip_url: string; clip_sha256: string; parent_clip_sha256: string;
+}
 
 export interface BehaviorCue {
   start_ms: number;
@@ -18,6 +33,7 @@ export interface BehaviorPlan {
   duration_ms: number;
   timing_basis?: string;
   speech?: { rate: number; pitch: number; pause_ms: number };
+  motion?: MotionSelection | null;
 }
 
 /** Controls are normalized, except gaze/head angles which are in radians. */
@@ -115,6 +131,7 @@ export interface SpeechTiming {
 
 export interface AvatarClip {
   schema_version: 'avatar-clip.v1';
+  id?: string;
   duration_ms: number;
   max_gap_ms: number;
   source: {
@@ -145,6 +162,10 @@ export interface AvatarClip {
     bone_neutral?: BoneRotations;
     coordinate_basis: 'right_handed_y_up';
     bone_rotation_space: 'local_delta';
+    parent_reference?: {
+      clip_sha256: string; neutral_frame_ms: number; window_start_ms: number;
+      rotation_operation: 'retained_parent_local_delta';
+    };
   };
   measurement?: { engine: string; version: string; face_model_sha256: string; pose_model_sha256?: string };
   frames: { time_ms: number; face?: FaceWeights; bones?: BoneRotations }[];

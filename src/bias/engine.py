@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import asyncio
+import logging
 import time
 import uuid
 from collections.abc import AsyncIterator
@@ -13,10 +14,13 @@ from .config import Settings
 from .corpus import Corpus
 from .grounding import CITATION, audit_citations, validate_citations
 from .models import ChatRequest, ChatTurn, Grounding, TurnMetrics
+from .motion import MotionError, MotionLibrary, MotionSelection
 from .prompts import PromptBuilder, build_messages
 from .providers import OpenAICompatibleLLM
 from .retrieval import Retriever, SearchResult, tokenize
 from .sessions import Session, SessionStore
+
+logger = logging.getLogger(__name__)
 
 def evidence_preview(request: ChatRequest, result: SearchResult) -> str:
     if request.mode == "profile":
@@ -40,13 +44,31 @@ def evidence_preview(request: ChatRequest, result: SearchResult) -> str:
 
 
 class Engine:
-    def __init__(self, settings: Settings, corpus: Corpus, *, llm: OpenAICompatibleLLM | None = None, prompt_builder: PromptBuilder = build_messages):
+    def __init__(self, settings: Settings, corpus: Corpus, *, llm: OpenAICompatibleLLM | None = None, prompt_builder: PromptBuilder = build_messages, motion_library: MotionLibrary | None = None):
         self.settings = settings
         self.corpus = corpus
         self.prompt_builder = prompt_builder
+        self.motion_library = motion_library
         self.retriever = Retriever(corpus)
         self.sessions = SessionStore(ttl=settings.session_ttl, max_sessions=settings.max_sessions, max_turns=settings.max_turns)
         self.llm = llm or OpenAICompatibleLLM(settings.llm, timeout=settings.request_timeout, max_chars=settings.max_response_chars, max_tokens=settings.llm_max_tokens)
+
+    def _select_motion(self, request: ChatRequest, result: SearchResult) -> MotionSelection | None:
+        if request.mode != "behavior" or request.motion_mode == "disabled" or not result.hits or self.motion_library is None:
+            return None
+        preview = request.motion_mode == "geometry_preview"
+        try:
+            # The question is preferred. Bounded retrieved paraphrases provide
+            # a cross-language fallback; generated responses and emotion labels
+            # never become claims about the source person's gesture policy.
+            selected = self.motion_library.select(request.message, allow_geometry_preview=preview)
+            if selected is None:
+                context = "\n".join(hit.evidence.text[:600] for hit in result.hits[:2])
+                selected = self.motion_library.select(request.message + "\n" + context, allow_geometry_preview=preview)
+            return selected
+        except MotionError as exc:
+            logger.warning("Optional motion selection failed (%s)", type(exc).__name__)
+            return None
 
     async def events(self, request: ChatRequest) -> AsyncIterator[tuple[str, dict]]:
         started = time.perf_counter()
@@ -111,6 +133,10 @@ class Engine:
                 else:
                     status = "grounded"
                     reason = "Curated evidence preview; no language-model inference was performed."
+                behavior = plan_behavior(text, request.message, mode=request.mode, language=request.language)
+                selected_motion = self._select_motion(request, result)
+                if selected_motion is not None:
+                    behavior = behavior.model_copy(update={"motion": selected_motion})
                 turn = ChatTurn(
                     id=uuid.uuid4().hex,
                     session_id=session.id,
@@ -119,7 +145,7 @@ class Engine:
                     mode=request.mode,
                     provider="openai" if use_llm else "evidence",
                     citations=[self.corpus.citation(identifier) for identifier in valid],
-                    behavior=plan_behavior(text, request.message, mode=request.mode, language=request.language),
+                    behavior=behavior,
                     grounding=Grounding(
                         status=status, retrieved_ids=[hit.evidence.id for hit in result.hits], invalid_citation_ids=invalid, reason=reason,
                         citation_status=audit.coverage_status, citation_unit_count=len(audit.units), cited_unit_count=audit.cited_unit_count,

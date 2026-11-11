@@ -1,16 +1,20 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowDown, ArrowRight, ArrowUp, ArrowUpRight, BookOpen, ChevronDown, ChevronRight, CircleHelp, FlaskConical, Globe2, Layers3, LoaderCircle, MessageCircle, Mic, Plus, Radio, RotateCcw, Settings2, Sparkles, Square, Volume2, VolumeX, X } from 'lucide-react';
-import { getJson, streamChat } from './api';
-import type { Citation, ExperimentMode, Language, Persona, Source, Turn } from './api';
+import { getJson, getMotionLibrary, streamChat } from './api';
+import type { Citation, ExperimentMode, Language, MotionLibraryStatus, Persona, Source, Turn } from './api';
+import type { MotionMode } from './avatar/types';
+import { RESEARCH_HUMAN_AVATAR, type AvatarFraming } from './avatar/builtin';
 import { AvatarStage } from './components/AvatarStage';
 import { SourcesView } from './components/SourcesView';
 import { experiments, ResearchLab } from './components/ResearchLab';
 import { SettingsDialog } from './components/SettingsDialog';
 import { MotionLab } from './components/MotionLab';
 import { GroundingBadge } from './components/GroundingBadge';
+import { MotionNotice } from './components/MotionNotice';
 import { usePlayback } from './hooks/usePlayback';
 import type { VoiceMode } from './hooks/usePlayback';
 import { useMicrophone } from './hooks/useMicrophone';
+import { useMeasuredMotion } from './hooks/useMeasuredMotion';
 
 interface Message { id: string; role: 'user' | 'assistant'; text: string; turn?: Turn; pending?: boolean; error?: string }
 type Page = 'studio' | 'sources' | 'lab';
@@ -34,6 +38,9 @@ export default function App() {
   const [reload, setReload] = useState(0);
   const [language, setLanguage] = useState<Language>('en');
   const [mode, setMode] = useState<ExperimentMode>('behavior');
+  const [motionMode, setMotionMode] = useState<MotionMode>('disabled');
+  const [motionLibrary, setMotionLibrary] = useState<MotionLibraryStatus | null>(null);
+  const [motionLibraryError, setMotionLibraryError] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [draft, setDraft] = useState('');
   const [busy, setBusy] = useState(false);
@@ -46,6 +53,8 @@ export default function App() {
   const [autoPlay, setAutoPlay] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches);
   const [model, setModel] = useState<{ name: string; url: string } | undefined>();
+  const [builtinAvatar, setBuiltinAvatar] = useState<'human' | 'portrait'>('human');
+  const [framing, setFraming] = useState<AvatarFraming>('portrait');
   const [avatarError, setAvatarError] = useState<string | null>(null);
   const [avatarReady, setAvatarReady] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
@@ -54,6 +63,7 @@ export default function App() {
   const chatBottom = useRef<HTMLDivElement>(null);
   const composer = useRef<HTMLTextAreaElement>(null);
   const playback = usePlayback();
+  const measuredMotion = useMeasuredMotion({ mode: motionMode, enabled: page === 'studio' && mode === 'behavior', reducedMotion });
   const playbackPreferences = useRef({ autoPlay, voice });
   playbackPreferences.current = { autoPlay, voice };
   const microphone = useMicrophone(language, setDraft);
@@ -70,6 +80,14 @@ export default function App() {
       .catch((error: unknown) => { if (!controller.signal.aborted) { setConnection('error'); setConnectionError(error instanceof Error ? error.message : 'The conversation service is unavailable.'); } });
     return () => controller.abort();
   }, [reload]);
+  useEffect(() => {
+    const controller = new AbortController();
+    setMotionLibrary(null); setMotionLibraryError('');
+    getMotionLibrary(controller.signal).then(setMotionLibrary).catch((error: unknown) => {
+      if (!controller.signal.aborted) setMotionLibraryError(error instanceof Error ? error.message : 'The measured-motion library is unavailable.');
+    });
+    return () => controller.abort();
+  }, [reload]);
   useEffect(() => { chatBottom.current?.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth', block: 'nearest' }); }, [messages.length, busy, reducedMotion]);
   useEffect(() => () => { generation.current += 1; currentRequest.current?.abort(); }, []);
   useEffect(() => () => { if (model) URL.revokeObjectURL(model.url); }, [model]);
@@ -78,7 +96,7 @@ export default function App() {
     generation.current += 1;
     currentRequest.current?.abort(); currentRequest.current = null;
     setMessages((previous) => previous.map((message) => message.pending ? { ...message, pending: false, text: message.text || 'Response stopped.' } : message));
-    setBusy(false); setStatus(''); playback.stop(); microphone.stop();
+    setBusy(false); setStatus(''); playback.stop(); microphone.stop(); measuredMotion.stop();
   }
   function reset() {
     cancel(); setMessages([]); setSessionId(undefined); setActiveTurn(undefined); setEvidence(null); setDraft('');
@@ -88,7 +106,7 @@ export default function App() {
   async function send(text = draft) {
     const question = text.trim();
     if (!question || busy || connection !== 'ready') return;
-    playback.stop(); microphone.stop(); setDraft(''); setEvidence(null);
+    playback.stop(); microphone.stop(); measuredMotion.stop(); setDraft(''); setEvidence(null);
     const ticket = ++generation.current;
     const controller = new AbortController(); currentRequest.current = controller;
     const answerId = crypto.randomUUID();
@@ -96,13 +114,14 @@ export default function App() {
     setBusy(true); setStatus('Finding relevant sources');
     let received: Turn | undefined;
     try {
-      await streamChat({ message: question, session_id: sessionId, mode, language }, controller.signal, (event) => {
+      await streamChat({ message: question, session_id: sessionId, mode, language, motion_mode: motionMode }, controller.signal, (event) => {
         if (ticket !== generation.current) return;
         if (event.event === 'meta') setSessionId(event.data.session_id);
         if (event.event === 'status') setStatus(stages[event.data.stage] ?? event.data.stage.replaceAll('_', ' '));
         if (event.event === 'token') setMessages((previous) => previous.map((message) => message.id === answerId ? { ...message, text: message.text + event.data.text } : message));
         if (event.event === 'result') {
           received = event.data.turn; setActiveTurn(received);
+          void measuredMotion.play(received.behavior.motion);
           setMessages((previous) => previous.map((message) => message.id === answerId ? { ...message, text: event.data.turn.text, turn: event.data.turn, pending: false } : message));
         }
       });
@@ -119,11 +138,16 @@ export default function App() {
   }
   function loadModel(file: File) {
     if (!file.name.toLowerCase().endsWith('.glb') || file.size > 50 * 1024 * 1024) { setAvatarError('Choose a GLB file smaller than 50 MB.'); return; }
-    setAvatarError(null); setAvatarReady(false); setModel({ name: file.name, url: URL.createObjectURL(file) });
+    measuredMotion.stop(); setAvatarError(null); setAvatarReady(false); setModel({ name: file.name, url: URL.createObjectURL(file) });
   }
-  function listen(turn: Turn) { if (busy) return; setActiveTurn(turn); void playback.play(turn, voice === 'off' ? 'browser' : voice); }
+  function selectBuiltinAvatar(next: 'human' | 'portrait') {
+    if (!model && builtinAvatar === next && !avatarError) return;
+    measuredMotion.stop(); setModel(undefined); setBuiltinAvatar(next); setAvatarError(null); setAvatarReady(false);
+  }
+  function listen(turn: Turn) { if (busy) return; setActiveTurn(turn); void measuredMotion.play(turn.behavior.motion); void playback.play(turn, voice === 'off' ? 'browser' : voice); }
   const questions = persona?.example_questions[language] ?? defaultQuestions;
   const speaking = playback.status === 'playing';
+  const modelUrl = model?.url ?? (builtinAvatar === 'human' ? RESEARCH_HUMAN_AVATAR.modelUrl : undefined);
   const stageState = speaking ? 'Speaking' : playback.status === 'loading' ? 'Preparing voice' : microphone.listening ? 'Listening' : busy ? 'Thinking' : 'Ready when you are';
 
   return <div className="app-shell">
@@ -139,17 +163,17 @@ export default function App() {
       <main>
         {infoOpen && <div className="about-banner"><Sparkles size={19}/><p><strong>Who Is Your Bias?</strong> A research workspace for source-grounded dialogue, voice, and embodied behavior. This is an AI simulation, not Elon Musk or an official representative. The reference avatar and its movement rules are designed prototypes.</p><button className="icon-button" onClick={() => setInfoOpen(false)} aria-label="Close project information"><X size={17}/></button></div>}
         {connection === 'error' && <div className="connection-error" role="alert"><span><strong>The conversation service is offline.</strong> {connectionError}</span><button onClick={() => setReload((value) => value + 1)}><RotateCcw size={14}/> Reconnect</button></div>}
-        {page === 'sources' ? <SourcesView sources={sources}/> : page === 'lab' ? <><ResearchLab language={language}/><MotionLab modelUrl={model?.url} reducedMotion={reducedMotion}/></> : <>
+        {page === 'sources' ? <SourcesView sources={sources}/> : page === 'lab' ? <><ResearchLab language={language}/><MotionLab modelUrl={modelUrl} reducedMotion={reducedMotion}/></> : <>
           <div className="studio-heading"><div><div className="eyebrow">CURIOSITY, IN CONVERSATION</div><h1>Meet the mind. <span>Explore the ideas.</span></h1><p>A conversation with an evidence-grounded Elon Musk persona.</p></div><button className="secondary-button" onClick={reset}><Plus size={16}/> New conversation</button></div>
           <div className="studio-grid">
-            <section className="stage-card" aria-label="Avatar studio">
+            <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}><section className="stage-card" aria-label="Avatar studio" style={{ flex: 1 }}>
               <div className="stage-top"><div><span className="tag dark"><span className="tiny-dot"/> AI SIMULATION</span><div className="stage-title">Elon Musk<span>01 / RESEARCH PERSONA</span></div></div><button className="stage-options" onClick={() => setSettings(true)} aria-label="Avatar settings"><Settings2 size={18}/></button></div>
-              <div className="avatar-viewport"><AvatarStage speaking={speaking} timeline={activeTurn?.behavior} elapsedMs={playback.elapsedMs} amplitude={speaking ? playback.amplitude : 0} modelUrl={model?.url} reducedMotion={reducedMotion} speechTiming={playback.speechTiming} audioSha256={playback.audioSha256} audioElapsedMs={playback.audioElapsedMs} onReady={onAvatarReady} onError={onAvatarError}/></div>
-              <div className="stage-caption"><span className="caption-rule"/><span>{model ? 'YOUR CUSTOM RIG' : 'STYLIZED REFERENCE RIG'}</span><span className="caption-rule"/></div>
+              <div className="avatar-viewport"><AvatarStage speaking={speaking} timeline={activeTurn?.behavior} elapsedMs={playback.elapsedMs} amplitude={speaking ? playback.amplitude : 0} modelUrl={modelUrl} framing={framing} reducedMotion={reducedMotion} speechTiming={playback.speechTiming} audioSha256={playback.audioSha256} audioElapsedMs={playback.audioElapsedMs} performanceClip={motionMode !== 'disabled' && mode === 'behavior' && !reducedMotion ? measuredMotion.clip : undefined} observationElapsedMs={measuredMotion.elapsedMs} allowGeometryPreview={motionMode === 'geometry_preview'} onReady={onAvatarReady} onError={onAvatarError}/></div>
+              <div className="stage-caption"><span className="caption-rule"/><span>{model ? 'YOUR CUSTOM RIG' : builtinAvatar === 'human' ? 'RESEARCH HUMAN RIG' : 'STYLIZED PORTRAIT RIG'}</span><span className="caption-rule"/></div>
               <div className="stage-bottom"><div className="live-status"><span className={`status-orb ${speaking || busy ? 'animated' : ''}`}/><div><strong>{stageState}</strong><span title={playback.timingMessage}>{voice === 'provider' ? playback.timingStatus === 'available' ? 'Provider voice · audio-timed mouth cues' : 'Provider voice · approximate mouth movement' : voice === 'browser' || speaking ? 'Generic browser voice · approximate lip sync' : 'Text mode · voice available'}</span></div></div><button className="round-control" aria-label={speaking || playback.status === 'loading' ? 'Stop audio' : 'Enable voice settings'} onClick={() => speaking || playback.status === 'loading' ? playback.stop() : setSettings(true)}>{speaking || playback.status === 'loading' ? <Square size={16}/> : voice === 'off' ? <VolumeX size={18}/> : <Volume2 size={18}/>}</button></div>
               {!avatarReady && !avatarError && <div className="avatar-loading"><LoaderCircle size={18} className="spin"/> Preparing the rig</div>}
-              {avatarError && <div className="avatar-error" role="alert">{avatarError}<button onClick={() => { setModel(undefined); setAvatarError(null); }}>Use reference rig</button></div>}
-            </section>
+              {avatarError && <div className="avatar-error" role="alert">{avatarError}<button onClick={() => selectBuiltinAvatar('portrait')}>Use stylized portrait</button></div>}
+            </section><MotionNotice state={measuredMotion} mode={motionMode} reducedMotion={reducedMotion} noMatch={Boolean(activeTurn && !busy && !activeTurn.behavior.motion)}/></div>
             <section className="conversation-card" aria-label="Conversation">
               <div className="conversation-header"><div><MessageCircle size={18}/><h2>Let's talk</h2></div><span className="preview-label">{persona?.capabilities.llm ? 'LLM connected' : 'Source preview'}</span></div>
               <div className="message-list" role="log" aria-label="Conversation messages" aria-live="polite" aria-relevant="additions text">
@@ -169,7 +193,7 @@ export default function App() {
       <nav className="mobile-nav" aria-label="Mobile navigation"><button className={page === 'studio' ? 'active' : ''} onClick={() => navigate('studio')}><MessageCircle size={19}/>Studio</button><button className={page === 'sources' ? 'active' : ''} onClick={() => navigate('sources')}><BookOpen size={19}/>Sources</button><button className={page === 'lab' ? 'active' : ''} onClick={() => navigate('lab')}><FlaskConical size={19}/>Lab</button></nav>
     </div>
     {evidence && <><button className="drawer-scrim" onClick={() => setEvidence(null)} aria-label="Close response evidence"/><EvidencePanel citations={evidence} onClose={() => setEvidence(null)}/></>}
-    <SettingsDialog open={settings} close={() => setSettings(false)} persona={persona} voice={voice} setVoice={(next) => { playback.stop(); setVoice(next); }} autoPlay={autoPlay} setAutoPlay={setAutoPlay} reducedMotion={reducedMotion} setReducedMotion={setReducedMotion} modelName={model?.name} loadModel={loadModel} resetModel={() => { setModel(undefined); setAvatarError(null); }}/>
+    <SettingsDialog open={settings} close={() => setSettings(false)} persona={persona} voice={voice} setVoice={(next) => { playback.stop(); setVoice(next); }} autoPlay={autoPlay} setAutoPlay={setAutoPlay} reducedMotion={reducedMotion} setReducedMotion={(value) => { measuredMotion.stop(); setReducedMotion(value); }} modelName={model?.name} loadModel={loadModel} resetModel={() => selectBuiltinAvatar('human')} builtinAvatar={builtinAvatar} setBuiltinAvatar={selectBuiltinAvatar} framing={framing} setFraming={setFraming} motionMode={motionMode} setMotionMode={(value) => { measuredMotion.stop(); setMotionMode(value); }} motionLibrary={motionLibrary} motionLibraryError={motionLibraryError}/>
   </div>;
 }
 

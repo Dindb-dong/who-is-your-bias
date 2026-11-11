@@ -15,7 +15,7 @@ npm run build
 uv run bias serve
 ```
 
-Open `http://127.0.0.1:8000`. The studio includes conversation, source inspection, A/B/C comparison, voice playback controls, a rigged reference avatar, local GLB loading, and a motion/calibration lab. See [studio guide](docs/studio.md) for development, audio, and retargeting details.
+Open `http://127.0.0.1:8000`. The studio includes conversation, source inspection, A/B/C comparison, voice playback controls, a bundled human avatar, a lightweight portrait, local GLB loading, and a motion/calibration lab. See [studio guide](docs/studio.md) for development, audio, and retargeting details.
 
 ## Run the conversation engine
 
@@ -51,13 +51,13 @@ The optional [local language server](docs/language-runtime.md) runs a server-sel
 | Retrieval | BM25, English/Korean query support, topic/situation matching, conservative abstention |
 | Dialogue | OpenAI-compatible streaming adapter; profile, evidence, and behavior experiment modes |
 | Conversation state | Opaque sessions, bounded history, TTL, serialized turns, cancellation cleanup |
-| Evidence | Returned citation IDs checked against retrieved records; original source links |
+| Evidence | Per-unit citation coverage, separately labeled semantic review, original source links, frozen prompt comparisons |
 | Behavior plans | Timed face/gaze/head/gesture cues with explicit provenance and estimated timing |
 | Speech and transcription | Optional compatible provider adapters with real audio bytes and size limits |
 | Local reference voice | Optional Qwen3-TTS service with cached prompts, bounded requests, and a fixed server-side reference |
 | Speech timing | Optional Rhubarb mouth-cue recognition, SHA-256-bound audio packages, actual playback clock, explicit amplitude fallback |
-| Avatar calibration | 52 named face-channel mappings, viseme mappings, neutral/range calibration, local quaternion bases, capability diagnostics |
-| Measured motion | Source-linked face/pose clip export and replay, separate source clock, explicit geometry-preview and speaker-review states |
+| Avatar calibration | Bundled compressed human mesh with 163 bones and 67 named face/viseme targets; calibrated controls, portrait/full-body cameras, and local GLB support |
+| Measured motion | 13 source-linked clips and 40 primitives from two events; opt-in conversation retrieval, source-clock replay, and explicit review gates |
 | Reference preparation | Publisher-text/ASR comparison, bounded candidate WAVs, clock metadata, artifact hashes, and a review ledger |
 | Media processing | FFmpeg clips, source-clock manifests, optional ASR/alignment and facial/body observation adapters |
 | Ingestion | Local SRT/VTT/WhisperX imports, speaker selection, hashes, source-clock offsets |
@@ -71,7 +71,7 @@ The collection includes TED interviews, Lex Fridman conversations, Dwarkesh, Y C
 
 The publisher transcript pipeline also extracted **3,451 timestamped caption cues** from four complete TED interviews: **3:00:45 of declared program duration and 27,411 whitespace-delimited words**. Of those cues, **1,822 carry Musk labels in the publisher text**, 1,125 carry interviewer labels, and 504 remain unassigned. Questions and adjacent speaking turns are preserved. These full local transcripts remain **draft, unindexed** material; a text label is not independently verified voice identity. The repository contains reproducible extraction code and measured coverage, while complete originals remain outside Git.
 
-This is a research corpus and working application, not a validated replica of a person's mind, voice, or appearance. The [initial inference report](docs/inference-validation.md) and [integration results](docs/integration-validation.md) separate real model execution from citation compliance and perceptual quality. The included avatar remains a stylized reference rig. A high-quality likeness asset, learned personal mannerisms across many situations, and independent perceptual evaluation remain separate work.
+This is a research corpus and working application, not a validated replica of a person's mind, voice, or appearance. The [initial inference report](docs/inference-validation.md) and [integration results](docs/integration-validation.md) separate real model execution from citation compliance and perceptual quality. The included human avatar is an artistic reference asset with a calibrated face/body rig. A high-quality likeness asset, learned personal mannerisms across many situations, and independent perceptual evaluation remain separate work.
 
 ## Research workflow
 
@@ -109,6 +109,8 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 | `GET /api/health` | Configuration and corpus status; does not assert remote-provider availability |
 | `GET /api/persona` | Profile, examples, corpus counts, capabilities |
 | `GET /api/sources` | Source inventory and train/test designation |
+| `GET /api/motion/library` | Optional measured-motion availability, review counts, and provenance |
+| `GET /api/motion/clip/{id}` | Hash-bound eligible source window; unreviewed geometry requires explicit preview |
 | `POST /api/chat` | Complete response with citations and behavioral timeline |
 | `POST /api/chat/stream` | SSE `meta`, `status`, `token`, `result`, `done` or `error` |
 | `POST /api/speech` | Speech-provider audio, when configured |
@@ -119,6 +121,7 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 
 ## Documentation
 
+- [Quality completion](docs/quality-completion.md): PR dependencies, browser evidence, recovery fixes, measured limits, and current verification links.
 - [Delivery plan](docs/PLAN.md): review boundaries, acceptance criteria, fidelity ladder.
 - [Architecture](docs/architecture.md): evidence, generation, timing, and deployment boundaries.
 - [Source provenance](docs/research/sources.md): original URLs, dates, timebases, and corpus limitations.
@@ -132,6 +135,10 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 - [Generation evaluation](docs/evaluation.md): A/B/C execution, token usage, citation checks, and human-review fields.
 - [Reference preparation](docs/research/voice-reference.md): publisher-linked audio candidates, clock matching, and review evidence.
 - [Speech timing](docs/speech-timing.md): real audio transport, recognized mouth cues, and failure behavior.
+- [Grounding quality](docs/grounding-quality.md): frozen prompt comparisons, exact generated responses, citation coverage, and separate semantic review.
+- [Voice evaluation](docs/voice-evaluation.md): four real synthesized cases, independent ASR, runtime measurements, and a generated-output listening bundle.
+- [Bundled human avatar](docs/humanoid-avatar.md): asset licenses, compressed GLB build, named controls, and actual deformation checks.
+- [Motion library](docs/motion-library.md): two-event measurements, source-context selection, validation results, and reproduction.
 - [Avatar calibration](docs/avatar-calibration.md): observed clip export, rig mapping, and channel inspection.
 - [Integration validation](docs/integration-validation.md): actual ASR, local HTTP inference, speech packages, and video observations.
 

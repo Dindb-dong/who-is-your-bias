@@ -1,6 +1,6 @@
-import type { BehaviorPlan } from './avatar/types';
+import type { AvatarClip, BehaviorPlan, MotionMode, MotionSelection } from './avatar/types';
 import type { SpeechTiming } from './avatar/types';
-import { parseSpeechTiming } from './avatar/validation';
+import { parseAvatarClip, parseMotionSelection, parseSpeechTiming } from './avatar/validation';
 
 export type Language = 'en' | 'ko';
 export type ExperimentMode = 'profile' | 'rag' | 'behavior';
@@ -30,7 +30,7 @@ export interface Persona {
   capabilities: { llm: boolean; speech: boolean; transcription?: boolean };
   notice: string;
 }
-export interface ChatRequest { message: string; session_id?: string; mode: ExperimentMode; language: Language }
+export interface ChatRequest { message: string; session_id?: string; mode: ExperimentMode; language: Language; motion_mode?: MotionMode }
 export type StreamEvent =
   | { event: 'meta'; data: { session_id: string } }
   | { event: 'status'; data: { stage: string } }
@@ -86,6 +86,10 @@ function isTurn(value: unknown): value is Turn {
   }
   if (typeof grounding.citation_unit_count === 'number' && typeof grounding.cited_unit_count === 'number' && grounding.cited_unit_count > grounding.citation_unit_count) return false;
   if (grounding.semantic_status === 'curated_source' && value.provider !== 'evidence') return false;
+  if (plan.motion != null) {
+    if (value.mode !== 'behavior' || grounding.retrieved_ids.length === 0) return false;
+    try { parseMotionSelection(plan.motion); } catch { return false; }
+  }
   const metrics = value.metrics;
   return object(metrics) && ['retrieval_ms', 'generation_ms', 'total_ms'].every((key) => positive(metrics[key]));
 }
@@ -197,21 +201,76 @@ export interface PreparedSpeech {
   timingMessage?: string;
 }
 
-async function boundedBody(response: Response, maximum: number): Promise<Uint8Array<ArrayBuffer>> {
-  if (!response.body) throw new ApiError('The voice service returned an empty response.');
+async function boundedBody(response: Response, maximum: number, service = 'voice service'): Promise<Uint8Array<ArrayBuffer>> {
+  if (!response.body) throw new ApiError(`The ${service} returned an empty response.`);
   const reader = response.body.getReader(); const parts: Uint8Array[] = []; let length = 0;
   try {
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
       length += value.byteLength;
-      if (length > maximum) throw new ApiError('The voice service response exceeded its size limit.');
+      if (length > maximum) throw new ApiError(`The ${service} response exceeded its size limit.`);
       parts.push(value);
     }
   } finally { await reader.cancel().catch(() => undefined); reader.releaseLock(); }
   const bytes = new Uint8Array(length); let offset = 0;
   for (const part of parts) { bytes.set(part, offset); offset += part.byteLength; }
   return bytes;
+}
+
+export interface MotionLibraryStatus {
+  available: boolean;
+  status: 'available' | 'not_configured' | 'invalid_catalog';
+  id?: string; version?: string;
+  reviewed_runtime_primitives: number; preview_runtime_primitives: number;
+}
+
+export async function getMotionLibrary(signal: AbortSignal): Promise<MotionLibraryStatus> {
+  const response = await fetch('/api/motion/library', { signal, redirect: 'error' });
+  if (!response.ok) return failure(response);
+  const value: unknown = JSON.parse(new TextDecoder().decode(await boundedBody(response, 1_000_000, 'motion service')));
+  if (!object(value) || typeof value.available !== 'boolean' || !['available', 'not_configured', 'invalid_catalog'].includes(String(value.status))) throw new ApiError('Invalid motion library status.');
+  for (const key of ['reviewed_runtime_primitives', 'preview_runtime_primitives']) {
+    if (!positive(value[key]) || !Number.isSafeInteger(value[key]) || value[key] > 20000) throw new ApiError('Invalid motion library counts.');
+  }
+  if ((value.available && (value.status !== 'available' || typeof value.id !== 'string' || typeof value.version !== 'string'))
+    || (!value.available && (value.status === 'available' || value.preview_runtime_primitives !== 0 || value.reviewed_runtime_primitives !== 0))
+    || Number(value.reviewed_runtime_primitives) > Number(value.preview_runtime_primitives)) throw new ApiError('Inconsistent motion library status.');
+  signal.throwIfAborted();
+  return value as unknown as MotionLibraryStatus;
+}
+
+/** Verify raw canonical response bytes before trusting any measured channels. */
+export async function getMotionClip(selection: MotionSelection, mode: MotionMode, signal: AbortSignal): Promise<AvatarClip> {
+  const chosen = parseMotionSelection(selection);
+  const preview = mode === 'geometry_preview';
+  if (!['reviewed', 'geometry_preview'].includes(mode) || (chosen.review_status === 'geometry_preview' && !preview)) {
+    throw new ApiError('Source geometry requires an explicit preview opt-in.');
+  }
+  signal.throwIfAborted();
+  const response = await fetch(chosen.clip_url + (preview ? '?preview=true' : ''), { signal, redirect: 'error' });
+  if (!response.ok) return failure(response);
+  if (response.headers.get('content-type')?.split(';')[0].trim() !== 'application/json') throw new ApiError('The motion service returned an unsupported format.');
+  const bytes = await boundedBody(response, 8 * 1024 * 1024, 'motion service');
+  signal.throwIfAborted();
+  const digest = new Uint8Array(await crypto.subtle.digest('SHA-256', bytes));
+  const checksum = Array.from(digest, (part) => part.toString(16).padStart(2, '0')).join('');
+  if (checksum !== chosen.clip_sha256) throw new ApiError('The downloaded motion did not match its selection hash.');
+  const clip = parseAvatarClip(JSON.parse(new TextDecoder().decode(bytes)), preview);
+  if (clip.id !== chosen.primitive_id || clip.source.source_id !== chosen.source_id || clip.source.source_timeline !== chosen.source_timeline
+    || Math.abs(clip.duration_ms - chosen.duration_ms) > 0.01 || Math.abs(clip.source.source_start_seconds - chosen.source_start_seconds) > 0.00001
+    || clip.review.status !== chosen.review_status || clip.calibration.parent_reference?.clip_sha256 !== chosen.parent_clip_sha256) {
+    throw new ApiError('Motion provenance does not match the selected source window.');
+  }
+  const bodyBones = new Set(['chest', 'leftUpperArm', 'rightUpperArm', 'leftForearm', 'rightForearm', 'leftHand', 'rightHand']);
+  for (const frame of clip.frames) {
+    if ((chosen.family === 'upper_body' && frame.face && Object.keys(frame.face).length > 0)
+      || Object.keys(frame.bones ?? {}).some((name) => chosen.family === 'face' ? name !== 'head' : !bodyBones.has(name))) {
+      throw new ApiError('Motion channels do not match the selected geometry family.');
+    }
+  }
+  signal.throwIfAborted();
+  return clip;
 }
 
 /** Mouth cues are usable only for the exact verified audio bytes they describe. */

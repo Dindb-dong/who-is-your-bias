@@ -5,7 +5,9 @@ export default defineConfig({
   fullyParallel: false,
   retries: process.env.CI ? 1 : 0,
   reporter: [['list'], ['html', { open: 'never' }]],
-  timeout: 60_000,
+  // Software WebGL on shared CI runners can exceed a minute across the full
+  // mobile scenario. Keep each assertion bounded; allow the scenario to finish.
+  timeout: process.env.CI ? 120_000 : 60_000,
   use: {
     baseURL: 'http://127.0.0.1:8000',
     trace: 'retain-on-failure',
@@ -18,6 +20,7 @@ export default defineConfig({
   ],
   webServer: {
     command: 'uv run bias serve --host 127.0.0.1 --port 8000',
+    env: { BIAS_MOTION_CATALOG: 'data/motion/elon-musk-ted-v1.json' },
     url: 'http://127.0.0.1:8000/api/health',
     reuseExistingServer: !process.env.CI,
     timeout: 30_000,

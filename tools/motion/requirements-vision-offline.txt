@@ -1,0 +1,10 @@
+# Separate legacy Tasks runtime, audited for the experiment in docs/motion-library.md.
+# Do not silently upgrade: 0.10.35 introduced a separate Tasks logging path.
+# The official CPython 3.12 manylinux wheel used for this run has SHA-256
+# 956eb1ebc275c629e61b085b2cab89c3a5b9e93bad1bb107348d98dafb5a4bb5.
+mediapipe==0.10.21
+numpy==1.26.4
+opencv-contrib-python==4.11.0.86
+protobuf==4.25.8
+jax==0.6.2
+jaxlib==0.6.2

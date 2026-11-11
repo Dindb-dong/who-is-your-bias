@@ -29,15 +29,27 @@ Listen to any completed answer or enable automatic playback. Starting another tu
 
 ## Avatar
 
-The bundled portrait is a stylized procedural reference rig with independent facial controls and articulated head, neck, eyes, arms, and hands. It demonstrates the control pipeline; it is not a photorealistic scan or a verified likeness. Initial behavior cues are designed, not observed Musk mannerisms.
+The default **Research human** is a compressed, rigged human mesh with facial expression and mouth-shape targets, articulated limbs, and a calibrated rest pose. Studio settings can switch to the lightweight **Stylized portrait**, choose portrait or full-body framing, or load a custom GLB. Both bundled models are artistic reference assets; high-fidelity personal likeness has not been established. See [human asset provenance and runtime verification](humanoid-avatar.md). Initial conversation cues remain designed behavior.
 
-In **Research lab → Motion & rig calibration**, select **Load measured sample** to load a six-second face/head track extracted from native publisher video. It stays behind the explicit **Preview geometry without speaker attribution** control. The measured coefficients and source clock are preserved; this does not assign a personality trait or verify a visible person's identity. Other `avatar-clip.v1` files can be imported locally, paused, scrubbed, and replayed independently of conversation timing.
+The motion lab starts with full-body framing; use its camera selector for close facial inspection. In **Research lab → Motion & rig calibration**, select **Load measured sample** to load a six-second face/head track extracted from native publisher video. It stays behind the explicit **Preview geometry without speaker attribution** control. The measured coefficients and source clock are preserved; this does not assign a personality trait or verify a visible person's identity. Other `avatar-clip.v1` files can be imported locally, paused, scrubbed, and replayed independently of conversation timing.
 
 **Load arm-motion sample** loads a separate five-second pose-only track from a fixed single-person crop of a wider camera view. Chest, upper arms, forearms, and hand directions are measured; fingers and limb twist are not reconstructed. The inspector reports face and body provenance independently, so this pose-only replay leaves its facial animation labeled designed. Both included samples retain their geometry-preview review state.
 
 Open **Rig inspection & calibration** to inspect the controls actually supported by the current asset. Manual pose preview can isolate a face channel, viseme, or joint. Import/export a rig-mapping JSON to set target names, neutral/range calibration, and local quaternion bases. Missing channels remain visible as unsupported instead of claiming full facial coverage. See [avatar calibration](avatar-calibration.md) for the data contract, source-review states, and measured sample limitations.
 
 Studio settings accepts a local, self-contained GLB up to 50 MB. The file stays in the browser. The runtime supports morph-target and bone mappings; see [avatar retargeting](../apps/web/src/avatar/README.md). Assets with external resource references are rejected. A finished human asset needs its own calibration and visual evaluation.
+
+## Source movement in conversation
+
+Load the included measured library when starting the API:
+
+```bash
+BIAS_MOTION_CATALOG=data/motion/elon-musk-ted-v1.json uv run bias serve
+```
+
+Open **Studio settings → Conversation movement → Source geometry preview**. In the full conversation condition, an answer with retrieved evidence can select a relevant window from the motion-training event. Each clip plays once at recorded speed, independently of voice timing. Its source, interval, geometry family, and review state appear below the avatar. Reduced motion, changing modes, starting a new request, and navigating away interrupt playback. The selection remains optional; unavailable or unmatched motion leaves the existing designed animation usable.
+
+The shipped library has 12 eligible training primitives and no speaker-reviewed primitives. The 28 validation-event primitives cannot enter automatic conversation selection. [Motion library](motion-library.md) documents the measured counts, review boundaries, and weak cross-event generalization.
 
 ## Validation
 

@@ -1,0 +1,254 @@
+{
+  "schema_version": "motion-review.v1",
+  "observations_sha256": "ac8a81e963d886c45cc254fb2fbc440961f5a40e1ea85b40ba2a9f9bf86f89b2",
+  "status": "geometry_preview",
+  "reviewer": "assistant-contact-sheet-screening",
+  "track_id": "ted-2017-close-172-image-track",
+  "track_continuity_reviewed": false,
+  "source_clock_reviewed": false,
+  "speaker_association_reviewed": false,
+  "attribution_basis": "Publisher page identifies the event, not a detected face. Single detections in the selected spatial crop are retained; multiple detections are omitted. Sequential decoded contact sheets plus frame-difference peaks screened gross cuts; declared tail exclusions remove four observed camera transitions. Full-frame continuity and image-to-audio-speaker association remain unreviewed. Time refers to the zero-start acquired h264 clock, not publisher captions.",
+  "selections": [
+    {
+      "start_ms": 0.0,
+      "end_ms": 125.122,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 125.122,
+      "end_ms": 250.256,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 250.256,
+      "end_ms": 375.378,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 375.378,
+      "end_ms": 500.5,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 500.5,
+      "end_ms": 625.622,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 625.622,
+      "end_ms": 750.756,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 750.756,
+      "end_ms": 875.878,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 875.878,
+      "end_ms": 1001.0,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 1001.0,
+      "end_ms": 1126.122,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 1126.122,
+      "end_ms": 1251.256,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 1251.256,
+      "end_ms": 1376.378,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 1376.378,
+      "end_ms": 1501.5,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 1501.5,
+      "end_ms": 1626.622,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 1626.622,
+      "end_ms": 1751.756,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 1751.756,
+      "end_ms": 1876.878,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 1876.878,
+      "end_ms": 2002.0,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 2002.0,
+      "end_ms": 2127.122,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 2127.122,
+      "end_ms": 2252.256,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 2252.256,
+      "end_ms": 2377.378,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 2377.378,
+      "end_ms": 2502.5,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 2502.5,
+      "end_ms": 2627.622,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 2627.622,
+      "end_ms": 2752.756,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 2752.756,
+      "end_ms": 2877.878,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 2877.878,
+      "end_ms": 3003.0,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 3003.0,
+      "end_ms": 3128.122,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 3128.122,
+      "end_ms": 3253.256,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 3253.256,
+      "end_ms": 3378.378,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 3378.378,
+      "end_ms": 3503.5,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 3503.5,
+      "end_ms": 3628.622,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 3628.622,
+      "end_ms": 3753.756,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 3753.756,
+      "end_ms": 3878.878,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 3878.878,
+      "end_ms": 4004.0,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 4004.0,
+      "end_ms": 4129.122,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 4129.122,
+      "end_ms": 4254.256,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 4254.256,
+      "end_ms": 4379.378,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 4379.378,
+      "end_ms": 4504.5,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 4504.5,
+      "end_ms": 4629.622,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 4629.622,
+      "end_ms": 4754.756,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 4754.756,
+      "end_ms": 4879.878,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 4879.878,
+      "end_ms": 5000,
+      "face_index": 0,
+      "pose_index": 0
+    }
+  ],
+  "accepted_end_ms": 5000
+}

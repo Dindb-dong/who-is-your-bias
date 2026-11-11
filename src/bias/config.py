@@ -52,6 +52,8 @@ class Settings:
     asr: ProviderSettings = field(default_factory=ProviderSettings)
     tts_voice: str = "default"
     tts_language_hint: bool = False
+    motion_catalog: Path | None = None
+    motion_asset_root: Path = field(default_factory=lambda: repository_root() / "apps/web/public")
     request_timeout: float = 60.0
     session_ttl: float = 3_600.0
     max_sessions: int = 256
@@ -95,6 +97,8 @@ class Settings:
             asr=provider("ASR"),
             tts_voice=os.getenv("BIAS_TTS_VOICE", "default"),
             tts_language_hint=language_hint in {"true", "1"},
+            motion_catalog=Path(os.environ["BIAS_MOTION_CATALOG"]).expanduser() if os.getenv("BIAS_MOTION_CATALOG") else None,
+            motion_asset_root=Path(os.getenv("BIAS_MOTION_ASSET_ROOT", str(repository_root() / "apps/web/public"))).expanduser(),
             request_timeout=number("BIAS_REQUEST_TIMEOUT", 60, 1, 180),
             session_ttl=number("BIAS_SESSION_TTL", 3600, 1, 86400),
             max_sessions=int(number("BIAS_MAX_SESSIONS", 256, 1, 10000)),

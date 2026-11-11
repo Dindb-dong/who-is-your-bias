@@ -7,6 +7,8 @@ from typing import Annotated, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl, field_validator, model_validator
 
+from .motion import MotionSelection
+
 Identifier = Annotated[str, Field(pattern=r"^[A-Za-z0-9][A-Za-z0-9_.-]{0,119}$")]
 Mode = Literal["profile", "rag", "behavior"]
 Language = Literal["en", "ko"]
@@ -85,6 +87,7 @@ class ChatRequest(Record):
     session_id: str | None = Field(default=None, pattern=r"^[a-f0-9]{32}$")
     mode: Mode = "behavior"
     language: Language = "en"
+    motion_mode: Literal["disabled", "reviewed", "geometry_preview"] = "disabled"
 
     @field_validator("message")
     @classmethod
@@ -130,6 +133,8 @@ class BehaviorPlan(Record):
     speech: SpeechStyle
     duration_ms: int = Field(ge=0, le=120_000)
     timing_basis: Literal["estimated_text", "audio_aligned"] = "estimated_text"
+    # Measured source timing is independent of the designed/audio timeline.
+    motion: MotionSelection | None = None
 
     @model_validator(mode="after")
     def cues_fit_timeline(self) -> "BehaviorPlan":

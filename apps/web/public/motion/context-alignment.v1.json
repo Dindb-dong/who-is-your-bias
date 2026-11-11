@@ -1,0 +1,2114 @@
+{
+  "schema_version": "motion-context-alignment.v1",
+  "method": "recomputed_publisher_asr_token_sequence_matches",
+  "thresholds": {
+    "minimum_fully_matched_words": 4,
+    "minimum_word_match_fraction": 0.8,
+    "minimum_declared_context_match_fraction": 0.8
+  },
+  "runs": [
+    {
+      "id": "ted-2013-30-120",
+      "source_id": "ted-2013",
+      "engine": {
+        "name": "faster-whisper",
+        "version": "1.2.1",
+        "ctranslate2_version": "4.8.5",
+        "model": "Systran/faster-whisper-small",
+        "revision": "536b0662742c02347bc0e980a01041f333bce120",
+        "model_sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+        "device": "cpu",
+        "compute_type": "int8",
+        "cpu_threads": 2,
+        "num_workers": 1,
+        "beam_size": 5,
+        "initial_prompt": null,
+        "prefix": null,
+        "hotwords": null,
+        "vad_filter": false,
+        "word_timestamps": true,
+        "condition_on_previous_text": false,
+        "input_decoder": "stdlib_wave_pcm16_float32",
+        "telemetry_disabled_before_import": true
+      },
+      "audio_sha256": "614e40f6823b2eb5d065e826b134217eb19cc28ab289f835f527a9987d8cd2c3",
+      "asr_sha256": "c8f861fd09c78e22552e0639acc88f86e7f4333d202d64c3d47ee59564b5a16c",
+      "publisher_sha256": "9075ba7547f87a08af0cc4080c9885101d12e2012db4411c04e1ad0b93276c61",
+      "alignment_sha256": "1b3bae3f2a1f8cdf4a1193cd09c2287fbd03832e8c06c9dab1c903a12f6cb8cf",
+      "token_coverage": 0.956044,
+      "cue_onset_offset_diagnostics": {
+        "median_seconds": 3.5919999999999996,
+        "minimum_seconds": 3.081,
+        "maximum_seconds": 4.066
+      }
+    },
+    {
+      "id": "ted-2017-20-120",
+      "source_id": "ted-2017",
+      "engine": {
+        "name": "faster-whisper",
+        "version": "1.2.1",
+        "ctranslate2_version": "4.8.5",
+        "model": "Systran/faster-whisper-small",
+        "revision": "536b0662742c02347bc0e980a01041f333bce120",
+        "model_sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+        "device": "cpu",
+        "compute_type": "int8",
+        "cpu_threads": 2,
+        "num_workers": 1,
+        "beam_size": 5,
+        "initial_prompt": null,
+        "prefix": null,
+        "hotwords": null,
+        "vad_filter": false,
+        "word_timestamps": true,
+        "condition_on_previous_text": false,
+        "input_decoder": "stdlib_wave_pcm16_float32",
+        "telemetry_disabled_before_import": true
+      },
+      "audio_sha256": "3bdf84fb135b137ca4b427078c013a8913985d95e0a4b23e1d032f4fc7093d79",
+      "asr_sha256": "9d90b096d09ea21b6c95f74604518aab40f7167a1deb499f215e89b56ece886c",
+      "publisher_sha256": "f648129841ede4ef94e458f61d12ef42ca1f1bac5e56dee57eee8e0e8792a4fa",
+      "alignment_sha256": "ffaa0f8f0cd8a35b0e4acfa759b43cc55a2d8a95b6b6d5f16428afb0101dddfa",
+      "token_coverage": 0.952174,
+      "cue_onset_offset_diagnostics": {
+        "median_seconds": 3.48,
+        "minimum_seconds": 0.86,
+        "maximum_seconds": 3.66
+      }
+    },
+    {
+      "id": "ted-2017-120-179",
+      "source_id": "ted-2017",
+      "engine": {
+        "name": "faster-whisper",
+        "version": "1.2.1",
+        "ctranslate2_version": "4.8.5",
+        "model": "Systran/faster-whisper-small",
+        "revision": "536b0662742c02347bc0e980a01041f333bce120",
+        "model_sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+        "device": "cpu",
+        "compute_type": "int8",
+        "cpu_threads": 2,
+        "num_workers": 1,
+        "beam_size": 5,
+        "initial_prompt": null,
+        "prefix": null,
+        "hotwords": null,
+        "vad_filter": false,
+        "word_timestamps": true,
+        "condition_on_previous_text": false,
+        "input_decoder": "stdlib_wave_pcm16_float32",
+        "telemetry_disabled_before_import": true
+      },
+      "audio_sha256": "f7d0bda3f7a63d10710158e76fe11250e4d3514dc335a5688ac1d5accaca685e",
+      "asr_sha256": "4206e8183b0856a627c77d9940ec58ba313f06d3a52c09af78f985bed849f52c",
+      "publisher_sha256": "f648129841ede4ef94e458f61d12ef42ca1f1bac5e56dee57eee8e0e8792a4fa",
+      "alignment_sha256": "1d4a65445bd781c7bd0873339b5245f7c232ff7ac826172d48d1415bd8c21d60",
+      "token_coverage": 0.937107,
+      "cue_onset_offset_diagnostics": {
+        "median_seconds": 3.34,
+        "minimum_seconds": 2.38,
+        "maximum_seconds": 3.72
+      }
+    }
+  ],
+  "entries": [
+    {
+      "id": "ted-2013-close-035",
+      "source_id": "ted-2013",
+      "clip_sha256": "0e2a100118c041ab04f91f2a741d7d3aa1572f98e914ee2a9a795d26c9c2a02e",
+      "source_timeline": "ted_h264_zero_start_capture",
+      "start_seconds": 35.0,
+      "end_seconds": 40.0,
+      "asr_run_id": "ted-2013-30-120",
+      "asr_artifact_sha256": "c8f861fd09c78e22552e0639acc88f86e7f4333d202d64c3d47ee59564b5a16c",
+      "publisher_artifact_sha256": "9075ba7547f87a08af0cc4080c9885101d12e2012db4411c04e1ad0b93276c61",
+      "alignment_artifact_sha256": "1b3bae3f2a1f8cdf4a1193cd09c2287fbd03832e8c06c9dab1c903a12f6cb8cf",
+      "observed_asr_words": 16,
+      "fully_matched_asr_words": 15,
+      "word_match_fraction": 0.9375,
+      "declared_context_match_fraction": 1.0,
+      "matched_cue_ids": [
+        "cue-00012",
+        "cue-00013"
+      ],
+      "status": "asr_word_matches",
+      "anchors": [
+        {
+          "asr_word_index": 14,
+          "cue_id": "cue-00012",
+          "source_start_seconds": 35.0,
+          "source_end_seconds": 35.4,
+          "publisher_cue_start_seconds": 30.226
+        },
+        {
+          "asr_word_index": 15,
+          "cue_id": "cue-00012",
+          "source_start_seconds": 35.4,
+          "source_end_seconds": 35.88,
+          "publisher_cue_start_seconds": 30.226
+        },
+        {
+          "asr_word_index": 17,
+          "cue_id": "cue-00012",
+          "source_start_seconds": 36.019999999999996,
+          "source_end_seconds": 36.18,
+          "publisher_cue_start_seconds": 30.226
+        },
+        {
+          "asr_word_index": 18,
+          "cue_id": "cue-00012",
+          "source_start_seconds": 36.18,
+          "source_end_seconds": 36.3,
+          "publisher_cue_start_seconds": 30.226
+        },
+        {
+          "asr_word_index": 19,
+          "cue_id": "cue-00012",
+          "source_start_seconds": 36.3,
+          "source_end_seconds": 36.4,
+          "publisher_cue_start_seconds": 30.226
+        },
+        {
+          "asr_word_index": 20,
+          "cue_id": "cue-00012",
+          "source_start_seconds": 36.4,
+          "source_end_seconds": 36.74,
+          "publisher_cue_start_seconds": 30.226
+        },
+        {
+          "asr_word_index": 21,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 36.94,
+          "source_end_seconds": 37.1,
+          "publisher_cue_start_seconds": 33.143
+        },
+        {
+          "asr_word_index": 22,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 37.1,
+          "source_end_seconds": 37.28,
+          "publisher_cue_start_seconds": 33.143
+        },
+        {
+          "asr_word_index": 23,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 37.28,
+          "source_end_seconds": 38.3,
+          "publisher_cue_start_seconds": 33.143
+        },
+        {
+          "asr_word_index": 24,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 38.3,
+          "source_end_seconds": 38.46,
+          "publisher_cue_start_seconds": 33.143
+        },
+        {
+          "asr_word_index": 25,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 38.46,
+          "source_end_seconds": 38.5,
+          "publisher_cue_start_seconds": 33.143
+        },
+        {
+          "asr_word_index": 26,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 38.5,
+          "source_end_seconds": 38.68,
+          "publisher_cue_start_seconds": 33.143
+        },
+        {
+          "asr_word_index": 27,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 38.68,
+          "source_end_seconds": 38.86,
+          "publisher_cue_start_seconds": 33.143
+        },
+        {
+          "asr_word_index": 28,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 38.86,
+          "source_end_seconds": 38.94,
+          "publisher_cue_start_seconds": 33.143
+        },
+        {
+          "asr_word_index": 29,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 38.94,
+          "source_end_seconds": 39.6,
+          "publisher_cue_start_seconds": 33.143
+        }
+      ],
+      "speaker_association_reviewed": false,
+      "human_listening_completed": false,
+      "context_sha256": "65da4179a6e6c170ce60357c1561bad1f245039868e81fc6ae516b2104dc1862"
+    },
+    {
+      "id": "ted-2013-close-059",
+      "source_id": "ted-2013",
+      "clip_sha256": "5dcd1b8b40ea0439d5dacbbcb4605b9910eea3f52ade6606d0ee2be21ee73c13",
+      "source_timeline": "ted_h264_zero_start_capture",
+      "start_seconds": 59.0,
+      "end_seconds": 63.0,
+      "asr_run_id": "ted-2013-30-120",
+      "asr_artifact_sha256": "c8f861fd09c78e22552e0639acc88f86e7f4333d202d64c3d47ee59564b5a16c",
+      "publisher_artifact_sha256": "9075ba7547f87a08af0cc4080c9885101d12e2012db4411c04e1ad0b93276c61",
+      "alignment_artifact_sha256": "1b3bae3f2a1f8cdf4a1193cd09c2287fbd03832e8c06c9dab1c903a12f6cb8cf",
+      "observed_asr_words": 16,
+      "fully_matched_asr_words": 16,
+      "word_match_fraction": 1.0,
+      "declared_context_match_fraction": 1.0,
+      "matched_cue_ids": [
+        "cue-00019",
+        "cue-00020",
+        "cue-00021"
+      ],
+      "status": "asr_word_matches",
+      "anchors": [
+        {
+          "asr_word_index": 73,
+          "cue_id": "cue-00019",
+          "source_start_seconds": 58.879999999999995,
+          "source_end_seconds": 59.06,
+          "publisher_cue_start_seconds": 53.524
+        },
+        {
+          "asr_word_index": 74,
+          "cue_id": "cue-00019",
+          "source_start_seconds": 59.06,
+          "source_end_seconds": 59.260000000000005,
+          "publisher_cue_start_seconds": 53.524
+        },
+        {
+          "asr_word_index": 75,
+          "cue_id": "cue-00019",
+          "source_start_seconds": 59.260000000000005,
+          "source_end_seconds": 59.54,
+          "publisher_cue_start_seconds": 53.524
+        },
+        {
+          "asr_word_index": 76,
+          "cue_id": "cue-00019",
+          "source_start_seconds": 59.54,
+          "source_end_seconds": 59.84,
+          "publisher_cue_start_seconds": 53.524
+        },
+        {
+          "asr_word_index": 77,
+          "cue_id": "cue-00020",
+          "source_start_seconds": 59.84,
+          "source_end_seconds": 60.42,
+          "publisher_cue_start_seconds": 56.484
+        },
+        {
+          "asr_word_index": 78,
+          "cue_id": "cue-00020",
+          "source_start_seconds": 60.42,
+          "source_end_seconds": 60.86,
+          "publisher_cue_start_seconds": 56.484
+        },
+        {
+          "asr_word_index": 79,
+          "cue_id": "cue-00020",
+          "source_start_seconds": 60.86,
+          "source_end_seconds": 61.239999999999995,
+          "publisher_cue_start_seconds": 56.484
+        },
+        {
+          "asr_word_index": 80,
+          "cue_id": "cue-00020",
+          "source_start_seconds": 61.239999999999995,
+          "source_end_seconds": 61.36,
+          "publisher_cue_start_seconds": 56.484
+        },
+        {
+          "asr_word_index": 81,
+          "cue_id": "cue-00020",
+          "source_start_seconds": 61.36,
+          "source_end_seconds": 61.480000000000004,
+          "publisher_cue_start_seconds": 56.484
+        },
+        {
+          "asr_word_index": 82,
+          "cue_id": "cue-00020",
+          "source_start_seconds": 61.480000000000004,
+          "source_end_seconds": 61.64,
+          "publisher_cue_start_seconds": 56.484
+        },
+        {
+          "asr_word_index": 83,
+          "cue_id": "cue-00020",
+          "source_start_seconds": 61.64,
+          "source_end_seconds": 61.94,
+          "publisher_cue_start_seconds": 56.484
+        },
+        {
+          "asr_word_index": 84,
+          "cue_id": "cue-00021",
+          "source_start_seconds": 61.94,
+          "source_end_seconds": 62.2,
+          "publisher_cue_start_seconds": 58.473
+        },
+        {
+          "asr_word_index": 85,
+          "cue_id": "cue-00021",
+          "source_start_seconds": 62.2,
+          "source_end_seconds": 62.64,
+          "publisher_cue_start_seconds": 58.473
+        },
+        {
+          "asr_word_index": 86,
+          "cue_id": "cue-00021",
+          "source_start_seconds": 62.64,
+          "source_end_seconds": 62.78,
+          "publisher_cue_start_seconds": 58.473
+        },
+        {
+          "asr_word_index": 87,
+          "cue_id": "cue-00021",
+          "source_start_seconds": 62.78,
+          "source_end_seconds": 62.88,
+          "publisher_cue_start_seconds": 58.473
+        },
+        {
+          "asr_word_index": 88,
+          "cue_id": "cue-00021",
+          "source_start_seconds": 62.88,
+          "source_end_seconds": 63.1,
+          "publisher_cue_start_seconds": 58.473
+        }
+      ],
+      "speaker_association_reviewed": false,
+      "human_listening_completed": false,
+      "context_sha256": "a2e9f7b907bdf11ecc80b2f40c4a2eab6c909cd035b7f349dd5a91e1ecb3116e"
+    },
+    {
+      "id": "ted-2013-body-065",
+      "source_id": "ted-2013",
+      "clip_sha256": "32f7387b93fbdd70f303d19e4a612d47b7b30a20466a6f4231ca81e77fdcc698",
+      "source_timeline": "ted_h264_zero_start_capture",
+      "start_seconds": 65.0,
+      "end_seconds": 67.5,
+      "asr_run_id": "ted-2013-30-120",
+      "asr_artifact_sha256": "c8f861fd09c78e22552e0639acc88f86e7f4333d202d64c3d47ee59564b5a16c",
+      "publisher_artifact_sha256": "9075ba7547f87a08af0cc4080c9885101d12e2012db4411c04e1ad0b93276c61",
+      "alignment_artifact_sha256": "1b3bae3f2a1f8cdf4a1193cd09c2287fbd03832e8c06c9dab1c903a12f6cb8cf",
+      "observed_asr_words": 11,
+      "fully_matched_asr_words": 11,
+      "word_match_fraction": 1.0,
+      "declared_context_match_fraction": 1.0,
+      "matched_cue_ids": [
+        "cue-00022",
+        "cue-00023"
+      ],
+      "status": "asr_word_matches",
+      "anchors": [
+        {
+          "asr_word_index": 95,
+          "cue_id": "cue-00022",
+          "source_start_seconds": 65.18,
+          "source_end_seconds": 65.25999999999999,
+          "publisher_cue_start_seconds": 61.367
+        },
+        {
+          "asr_word_index": 96,
+          "cue_id": "cue-00022",
+          "source_start_seconds": 65.25999999999999,
+          "source_end_seconds": 65.36,
+          "publisher_cue_start_seconds": 61.367
+        },
+        {
+          "asr_word_index": 97,
+          "cue_id": "cue-00022",
+          "source_start_seconds": 65.36,
+          "source_end_seconds": 65.44,
+          "publisher_cue_start_seconds": 61.367
+        },
+        {
+          "asr_word_index": 98,
+          "cue_id": "cue-00022",
+          "source_start_seconds": 65.44,
+          "source_end_seconds": 65.62,
+          "publisher_cue_start_seconds": 61.367
+        },
+        {
+          "asr_word_index": 99,
+          "cue_id": "cue-00022",
+          "source_start_seconds": 65.72,
+          "source_end_seconds": 65.96000000000001,
+          "publisher_cue_start_seconds": 61.367
+        },
+        {
+          "asr_word_index": 100,
+          "cue_id": "cue-00022",
+          "source_start_seconds": 66.0,
+          "source_end_seconds": 66.24000000000001,
+          "publisher_cue_start_seconds": 61.367
+        },
+        {
+          "asr_word_index": 101,
+          "cue_id": "cue-00022",
+          "source_start_seconds": 66.24000000000001,
+          "source_end_seconds": 66.53999999999999,
+          "publisher_cue_start_seconds": 61.367
+        },
+        {
+          "asr_word_index": 102,
+          "cue_id": "cue-00023",
+          "source_start_seconds": 66.78,
+          "source_end_seconds": 66.88,
+          "publisher_cue_start_seconds": 63.346
+        },
+        {
+          "asr_word_index": 103,
+          "cue_id": "cue-00023",
+          "source_start_seconds": 66.88,
+          "source_end_seconds": 67.14,
+          "publisher_cue_start_seconds": 63.346
+        },
+        {
+          "asr_word_index": 104,
+          "cue_id": "cue-00023",
+          "source_start_seconds": 67.14,
+          "source_end_seconds": 67.42,
+          "publisher_cue_start_seconds": 63.346
+        },
+        {
+          "asr_word_index": 105,
+          "cue_id": "cue-00023",
+          "source_start_seconds": 67.42,
+          "source_end_seconds": 67.62,
+          "publisher_cue_start_seconds": 63.346
+        }
+      ],
+      "speaker_association_reviewed": false,
+      "human_listening_completed": false,
+      "context_sha256": "abfa01394cbedacab3fc8e62ce7f5c80cde84972d85d2f0241a9b7b71f73cc4b"
+    },
+    {
+      "id": "ted-2013-body-068",
+      "source_id": "ted-2013",
+      "clip_sha256": "0522ee0dcba90d60e81e20e4f6c97e9c35448ef7e8230774d690d2ad99f5d322",
+      "source_timeline": "ted_h264_zero_start_capture",
+      "start_seconds": 68.5,
+      "end_seconds": 71.0,
+      "asr_run_id": "ted-2013-30-120",
+      "asr_artifact_sha256": "c8f861fd09c78e22552e0639acc88f86e7f4333d202d64c3d47ee59564b5a16c",
+      "publisher_artifact_sha256": "9075ba7547f87a08af0cc4080c9885101d12e2012db4411c04e1ad0b93276c61",
+      "alignment_artifact_sha256": "1b3bae3f2a1f8cdf4a1193cd09c2287fbd03832e8c06c9dab1c903a12f6cb8cf",
+      "observed_asr_words": 6,
+      "fully_matched_asr_words": 6,
+      "word_match_fraction": 1.0,
+      "declared_context_match_fraction": 1.0,
+      "matched_cue_ids": [
+        "cue-00023",
+        "cue-00024"
+      ],
+      "status": "asr_word_matches",
+      "anchors": [
+        {
+          "asr_word_index": 107,
+          "cue_id": "cue-00023",
+          "source_start_seconds": 67.96000000000001,
+          "source_end_seconds": 68.56,
+          "publisher_cue_start_seconds": 63.346
+        },
+        {
+          "asr_word_index": 108,
+          "cue_id": "cue-00023",
+          "source_start_seconds": 68.56,
+          "source_end_seconds": 68.86,
+          "publisher_cue_start_seconds": 63.346
+        },
+        {
+          "asr_word_index": 109,
+          "cue_id": "cue-00023",
+          "source_start_seconds": 68.86,
+          "source_end_seconds": 69.12,
+          "publisher_cue_start_seconds": 63.346
+        },
+        {
+          "asr_word_index": 110,
+          "cue_id": "cue-00024",
+          "source_start_seconds": 70.02000000000001,
+          "source_end_seconds": 70.5,
+          "publisher_cue_start_seconds": 65.954
+        },
+        {
+          "asr_word_index": 111,
+          "cue_id": "cue-00024",
+          "source_start_seconds": 70.5,
+          "source_end_seconds": 70.97999999999999,
+          "publisher_cue_start_seconds": 65.954
+        },
+        {
+          "asr_word_index": 112,
+          "cue_id": "cue-00024",
+          "source_start_seconds": 70.97999999999999,
+          "source_end_seconds": 71.38,
+          "publisher_cue_start_seconds": 65.954
+        }
+      ],
+      "speaker_association_reviewed": false,
+      "human_listening_completed": false,
+      "context_sha256": "531d1073383565ee7c106e59c1d494fe8b84d115d8ba73b9c564ddc335132f66"
+    },
+    {
+      "id": "ted-2013-close-083",
+      "source_id": "ted-2013",
+      "clip_sha256": "ea69bfb2b8e76513fbe85c169f31336e77253de238bdf7fd1432f5a51bb5aa09",
+      "source_timeline": "ted_h264_zero_start_capture",
+      "start_seconds": 83.0,
+      "end_seconds": 87.375,
+      "asr_run_id": "ted-2013-30-120",
+      "asr_artifact_sha256": "c8f861fd09c78e22552e0639acc88f86e7f4333d202d64c3d47ee59564b5a16c",
+      "publisher_artifact_sha256": "9075ba7547f87a08af0cc4080c9885101d12e2012db4411c04e1ad0b93276c61",
+      "alignment_artifact_sha256": "1b3bae3f2a1f8cdf4a1193cd09c2287fbd03832e8c06c9dab1c903a12f6cb8cf",
+      "observed_asr_words": 16,
+      "fully_matched_asr_words": 16,
+      "word_match_fraction": 1.0,
+      "declared_context_match_fraction": 1.0,
+      "matched_cue_ids": [
+        "cue-00030",
+        "cue-00031",
+        "cue-00032"
+      ],
+      "status": "asr_word_matches",
+      "anchors": [
+        {
+          "asr_word_index": 156,
+          "cue_id": "cue-00030",
+          "source_start_seconds": 82.92,
+          "source_end_seconds": 83.03999999999999,
+          "publisher_cue_start_seconds": 79.176
+        },
+        {
+          "asr_word_index": 157,
+          "cue_id": "cue-00030",
+          "source_start_seconds": 83.03999999999999,
+          "source_end_seconds": 83.3,
+          "publisher_cue_start_seconds": 79.176
+        },
+        {
+          "asr_word_index": 158,
+          "cue_id": "cue-00030",
+          "source_start_seconds": 83.3,
+          "source_end_seconds": 83.46000000000001,
+          "publisher_cue_start_seconds": 79.176
+        },
+        {
+          "asr_word_index": 159,
+          "cue_id": "cue-00030",
+          "source_start_seconds": 83.46000000000001,
+          "source_end_seconds": 83.62,
+          "publisher_cue_start_seconds": 79.176
+        },
+        {
+          "asr_word_index": 160,
+          "cue_id": "cue-00030",
+          "source_start_seconds": 83.62,
+          "source_end_seconds": 83.86,
+          "publisher_cue_start_seconds": 79.176
+        },
+        {
+          "asr_word_index": 161,
+          "cue_id": "cue-00030",
+          "source_start_seconds": 83.86,
+          "source_end_seconds": 84.02000000000001,
+          "publisher_cue_start_seconds": 79.176
+        },
+        {
+          "asr_word_index": 162,
+          "cue_id": "cue-00030",
+          "source_start_seconds": 84.02000000000001,
+          "source_end_seconds": 84.28,
+          "publisher_cue_start_seconds": 79.176
+        },
+        {
+          "asr_word_index": 163,
+          "cue_id": "cue-00030",
+          "source_start_seconds": 84.28,
+          "source_end_seconds": 84.44,
+          "publisher_cue_start_seconds": 79.176
+        },
+        {
+          "asr_word_index": 164,
+          "cue_id": "cue-00030",
+          "source_start_seconds": 84.44,
+          "source_end_seconds": 84.53999999999999,
+          "publisher_cue_start_seconds": 79.176
+        },
+        {
+          "asr_word_index": 165,
+          "cue_id": "cue-00030",
+          "source_start_seconds": 84.53999999999999,
+          "source_end_seconds": 84.78,
+          "publisher_cue_start_seconds": 79.176
+        },
+        {
+          "asr_word_index": 166,
+          "cue_id": "cue-00031",
+          "source_start_seconds": 85.36,
+          "source_end_seconds": 85.66,
+          "publisher_cue_start_seconds": 81.544
+        },
+        {
+          "asr_word_index": 167,
+          "cue_id": "cue-00031",
+          "source_start_seconds": 85.66,
+          "source_end_seconds": 86.58,
+          "publisher_cue_start_seconds": 81.544
+        },
+        {
+          "asr_word_index": 168,
+          "cue_id": "cue-00032",
+          "source_start_seconds": 86.97999999999999,
+          "source_end_seconds": 87.06,
+          "publisher_cue_start_seconds": 83.259
+        },
+        {
+          "asr_word_index": 169,
+          "cue_id": "cue-00032",
+          "source_start_seconds": 87.06,
+          "source_end_seconds": 87.14,
+          "publisher_cue_start_seconds": 83.259
+        },
+        {
+          "asr_word_index": 170,
+          "cue_id": "cue-00032",
+          "source_start_seconds": 87.14,
+          "source_end_seconds": 87.25999999999999,
+          "publisher_cue_start_seconds": 83.259
+        },
+        {
+          "asr_word_index": 171,
+          "cue_id": "cue-00032",
+          "source_start_seconds": 87.25999999999999,
+          "source_end_seconds": 87.42,
+          "publisher_cue_start_seconds": 83.259
+        }
+      ],
+      "speaker_association_reviewed": false,
+      "human_listening_completed": false,
+      "context_sha256": "eaf0c2c336cb411ce48296de4da3c3fe89b5aad2516f4d26ce39f54d3bab533c"
+    },
+    {
+      "id": "ted-2013-close-104",
+      "source_id": "ted-2013",
+      "clip_sha256": "e1f5ab30b70a8271f63b6aa6586d442f47b8a903d98513d846c0d6ae889e8107",
+      "source_timeline": "ted_h264_zero_start_capture",
+      "start_seconds": 104.0,
+      "end_seconds": 109.875,
+      "asr_run_id": "ted-2013-30-120",
+      "asr_artifact_sha256": "c8f861fd09c78e22552e0639acc88f86e7f4333d202d64c3d47ee59564b5a16c",
+      "publisher_artifact_sha256": "9075ba7547f87a08af0cc4080c9885101d12e2012db4411c04e1ad0b93276c61",
+      "alignment_artifact_sha256": "1b3bae3f2a1f8cdf4a1193cd09c2287fbd03832e8c06c9dab1c903a12f6cb8cf",
+      "observed_asr_words": 21,
+      "fully_matched_asr_words": 20,
+      "word_match_fraction": 0.952381,
+      "declared_context_match_fraction": 1.0,
+      "matched_cue_ids": [
+        "cue-00039",
+        "cue-00040",
+        "cue-00041"
+      ],
+      "status": "asr_word_matches",
+      "anchors": [
+        {
+          "asr_word_index": 230,
+          "cue_id": "cue-00039",
+          "source_start_seconds": 104.48,
+          "source_end_seconds": 104.56,
+          "publisher_cue_start_seconds": 99.639
+        },
+        {
+          "asr_word_index": 231,
+          "cue_id": "cue-00039",
+          "source_start_seconds": 104.56,
+          "source_end_seconds": 104.74,
+          "publisher_cue_start_seconds": 99.639
+        },
+        {
+          "asr_word_index": 232,
+          "cue_id": "cue-00040",
+          "source_start_seconds": 105.16,
+          "source_end_seconds": 105.32,
+          "publisher_cue_start_seconds": 101.378
+        },
+        {
+          "asr_word_index": 233,
+          "cue_id": "cue-00040",
+          "source_start_seconds": 105.32,
+          "source_end_seconds": 105.44,
+          "publisher_cue_start_seconds": 101.378
+        },
+        {
+          "asr_word_index": 234,
+          "cue_id": "cue-00040",
+          "source_start_seconds": 105.44,
+          "source_end_seconds": 105.58,
+          "publisher_cue_start_seconds": 101.378
+        },
+        {
+          "asr_word_index": 235,
+          "cue_id": "cue-00040",
+          "source_start_seconds": 105.58,
+          "source_end_seconds": 105.92,
+          "publisher_cue_start_seconds": 101.378
+        },
+        {
+          "asr_word_index": 236,
+          "cue_id": "cue-00040",
+          "source_start_seconds": 105.92,
+          "source_end_seconds": 106.12,
+          "publisher_cue_start_seconds": 101.378
+        },
+        {
+          "asr_word_index": 237,
+          "cue_id": "cue-00040",
+          "source_start_seconds": 106.12,
+          "source_end_seconds": 106.32,
+          "publisher_cue_start_seconds": 101.378
+        },
+        {
+          "asr_word_index": 238,
+          "cue_id": "cue-00040",
+          "source_start_seconds": 106.32,
+          "source_end_seconds": 106.68,
+          "publisher_cue_start_seconds": 101.378
+        },
+        {
+          "asr_word_index": 239,
+          "cue_id": "cue-00040",
+          "source_start_seconds": 106.68,
+          "source_end_seconds": 106.84,
+          "publisher_cue_start_seconds": 101.378
+        },
+        {
+          "asr_word_index": 240,
+          "cue_id": "cue-00040",
+          "source_start_seconds": 106.84,
+          "source_end_seconds": 106.96,
+          "publisher_cue_start_seconds": 101.378
+        },
+        {
+          "asr_word_index": 241,
+          "cue_id": "cue-00040",
+          "source_start_seconds": 106.96,
+          "source_end_seconds": 107.1,
+          "publisher_cue_start_seconds": 101.378
+        },
+        {
+          "asr_word_index": 242,
+          "cue_id": "cue-00040",
+          "source_start_seconds": 107.1,
+          "source_end_seconds": 107.4,
+          "publisher_cue_start_seconds": 101.378
+        },
+        {
+          "asr_word_index": 243,
+          "cue_id": "cue-00040",
+          "source_start_seconds": 107.4,
+          "source_end_seconds": 107.76,
+          "publisher_cue_start_seconds": 101.378
+        },
+        {
+          "asr_word_index": 244,
+          "cue_id": "cue-00041",
+          "source_start_seconds": 107.76,
+          "source_end_seconds": 107.92,
+          "publisher_cue_start_seconds": 104.396
+        },
+        {
+          "asr_word_index": 245,
+          "cue_id": "cue-00041",
+          "source_start_seconds": 107.92,
+          "source_end_seconds": 108.12,
+          "publisher_cue_start_seconds": 104.396
+        },
+        {
+          "asr_word_index": 246,
+          "cue_id": "cue-00041",
+          "source_start_seconds": 108.12,
+          "source_end_seconds": 108.56,
+          "publisher_cue_start_seconds": 104.396
+        },
+        {
+          "asr_word_index": 247,
+          "cue_id": "cue-00041",
+          "source_start_seconds": 108.56,
+          "source_end_seconds": 108.88,
+          "publisher_cue_start_seconds": 104.396
+        },
+        {
+          "asr_word_index": 248,
+          "cue_id": "cue-00041",
+          "source_start_seconds": 109.08,
+          "source_end_seconds": 109.36,
+          "publisher_cue_start_seconds": 104.396
+        },
+        {
+          "asr_word_index": 249,
+          "cue_id": "cue-00041",
+          "source_start_seconds": 109.36,
+          "source_end_seconds": 109.88,
+          "publisher_cue_start_seconds": 104.396
+        }
+      ],
+      "speaker_association_reviewed": false,
+      "human_listening_completed": false,
+      "context_sha256": "40fdddbb2d4591c032803c0fad68f2120bf24b9639cf880130c9360ef75b3563"
+    },
+    {
+      "id": "ted-2013-body-113",
+      "source_id": "ted-2013",
+      "clip_sha256": "1f369f108bdc358e61f85f1a53b57082a2fd3bf5f544f04c9e9d8e4140874c1d",
+      "source_timeline": "ted_h264_zero_start_capture",
+      "start_seconds": 113.0,
+      "end_seconds": 118.0,
+      "asr_run_id": "ted-2013-30-120",
+      "asr_artifact_sha256": "c8f861fd09c78e22552e0639acc88f86e7f4333d202d64c3d47ee59564b5a16c",
+      "publisher_artifact_sha256": "9075ba7547f87a08af0cc4080c9885101d12e2012db4411c04e1ad0b93276c61",
+      "alignment_artifact_sha256": "1b3bae3f2a1f8cdf4a1193cd09c2287fbd03832e8c06c9dab1c903a12f6cb8cf",
+      "observed_asr_words": 14,
+      "fully_matched_asr_words": 14,
+      "word_match_fraction": 1.0,
+      "declared_context_match_fraction": 1.0,
+      "matched_cue_ids": [
+        "cue-00042",
+        "cue-00043",
+        "cue-00044"
+      ],
+      "status": "asr_word_matches",
+      "anchors": [
+        {
+          "asr_word_index": 259,
+          "cue_id": "cue-00042",
+          "source_start_seconds": 112.72,
+          "source_end_seconds": 113.36,
+          "publisher_cue_start_seconds": 106.799
+        },
+        {
+          "asr_word_index": 260,
+          "cue_id": "cue-00043",
+          "source_start_seconds": 113.9,
+          "source_end_seconds": 114.0,
+          "publisher_cue_start_seconds": 109.868
+        },
+        {
+          "asr_word_index": 261,
+          "cue_id": "cue-00043",
+          "source_start_seconds": 114.0,
+          "source_end_seconds": 114.7,
+          "publisher_cue_start_seconds": 109.868
+        },
+        {
+          "asr_word_index": 262,
+          "cue_id": "cue-00043",
+          "source_start_seconds": 114.7,
+          "source_end_seconds": 114.94,
+          "publisher_cue_start_seconds": 109.868
+        },
+        {
+          "asr_word_index": 263,
+          "cue_id": "cue-00043",
+          "source_start_seconds": 114.94,
+          "source_end_seconds": 115.18,
+          "publisher_cue_start_seconds": 109.868
+        },
+        {
+          "asr_word_index": 264,
+          "cue_id": "cue-00043",
+          "source_start_seconds": 115.18,
+          "source_end_seconds": 115.38,
+          "publisher_cue_start_seconds": 109.868
+        },
+        {
+          "asr_word_index": 265,
+          "cue_id": "cue-00043",
+          "source_start_seconds": 115.38,
+          "source_end_seconds": 115.46,
+          "publisher_cue_start_seconds": 109.868
+        },
+        {
+          "asr_word_index": 266,
+          "cue_id": "cue-00043",
+          "source_start_seconds": 115.46,
+          "source_end_seconds": 115.58,
+          "publisher_cue_start_seconds": 109.868
+        },
+        {
+          "asr_word_index": 267,
+          "cue_id": "cue-00043",
+          "source_start_seconds": 115.58,
+          "source_end_seconds": 115.8,
+          "publisher_cue_start_seconds": 109.868
+        },
+        {
+          "asr_word_index": 268,
+          "cue_id": "cue-00043",
+          "source_start_seconds": 115.8,
+          "source_end_seconds": 116.26,
+          "publisher_cue_start_seconds": 109.868
+        },
+        {
+          "asr_word_index": 269,
+          "cue_id": "cue-00043",
+          "source_start_seconds": 116.26,
+          "source_end_seconds": 116.72,
+          "publisher_cue_start_seconds": 109.868
+        },
+        {
+          "asr_word_index": 270,
+          "cue_id": "cue-00044",
+          "source_start_seconds": 116.72,
+          "source_end_seconds": 117.76,
+          "publisher_cue_start_seconds": 113.333
+        },
+        {
+          "asr_word_index": 271,
+          "cue_id": "cue-00044",
+          "source_start_seconds": 117.76,
+          "source_end_seconds": 117.9,
+          "publisher_cue_start_seconds": 113.333
+        },
+        {
+          "asr_word_index": 272,
+          "cue_id": "cue-00044",
+          "source_start_seconds": 117.9,
+          "source_end_seconds": 118.42,
+          "publisher_cue_start_seconds": 113.333
+        }
+      ],
+      "speaker_association_reviewed": false,
+      "human_listening_completed": false,
+      "context_sha256": "8187ae385aafb4d59b9a7dfaa618b757042d9b4fd1c8be66675d63ae5a04e116"
+    },
+    {
+      "id": "ted-2017-close-025",
+      "source_id": "ted-2017",
+      "clip_sha256": "00d51aa00389c3ecd36f7f418c35a7fb51b8fcf00c0562ab48a520cb720abe0e",
+      "source_timeline": "ted_h264_zero_start_capture",
+      "start_seconds": 25.0,
+      "end_seconds": 42.125,
+      "asr_run_id": "ted-2017-20-120",
+      "asr_artifact_sha256": "9d90b096d09ea21b6c95f74604518aab40f7167a1deb499f215e89b56ece886c",
+      "publisher_artifact_sha256": "f648129841ede4ef94e458f61d12ef42ca1f1bac5e56dee57eee8e0e8792a4fa",
+      "alignment_artifact_sha256": "ffaa0f8f0cd8a35b0e4acfa759b43cc55a2d8a95b6b6d5f16428afb0101dddfa",
+      "observed_asr_words": 31,
+      "fully_matched_asr_words": 31,
+      "word_match_fraction": 1.0,
+      "declared_context_match_fraction": 1.0,
+      "matched_cue_ids": [
+        "cue-00010",
+        "cue-00011",
+        "cue-00012",
+        "cue-00013",
+        "cue-00014"
+      ],
+      "status": "asr_word_matches",
+      "anchors": [
+        {
+          "asr_word_index": 9,
+          "cue_id": "cue-00010",
+          "source_start_seconds": 24.94,
+          "source_end_seconds": 26.08,
+          "publisher_cue_start_seconds": 22.32
+        },
+        {
+          "asr_word_index": 10,
+          "cue_id": "cue-00010",
+          "source_start_seconds": 26.08,
+          "source_end_seconds": 26.18,
+          "publisher_cue_start_seconds": 22.32
+        },
+        {
+          "asr_word_index": 11,
+          "cue_id": "cue-00010",
+          "source_start_seconds": 26.18,
+          "source_end_seconds": 26.44,
+          "publisher_cue_start_seconds": 22.32
+        },
+        {
+          "asr_word_index": 12,
+          "cue_id": "cue-00010",
+          "source_start_seconds": 26.44,
+          "source_end_seconds": 26.66,
+          "publisher_cue_start_seconds": 22.32
+        },
+        {
+          "asr_word_index": 13,
+          "cue_id": "cue-00010",
+          "source_start_seconds": 26.66,
+          "source_end_seconds": 27.0,
+          "publisher_cue_start_seconds": 22.32
+        },
+        {
+          "asr_word_index": 14,
+          "cue_id": "cue-00011",
+          "source_start_seconds": 30.4,
+          "source_end_seconds": 31.08,
+          "publisher_cue_start_seconds": 27.24
+        },
+        {
+          "asr_word_index": 15,
+          "cue_id": "cue-00011",
+          "source_start_seconds": 31.08,
+          "source_end_seconds": 31.259999999999998,
+          "publisher_cue_start_seconds": 27.24
+        },
+        {
+          "asr_word_index": 16,
+          "cue_id": "cue-00011",
+          "source_start_seconds": 31.259999999999998,
+          "source_end_seconds": 31.380000000000003,
+          "publisher_cue_start_seconds": 27.24
+        },
+        {
+          "asr_word_index": 17,
+          "cue_id": "cue-00011",
+          "source_start_seconds": 31.380000000000003,
+          "source_end_seconds": 31.68,
+          "publisher_cue_start_seconds": 27.24
+        },
+        {
+          "asr_word_index": 18,
+          "cue_id": "cue-00011",
+          "source_start_seconds": 31.68,
+          "source_end_seconds": 32.14,
+          "publisher_cue_start_seconds": 27.24
+        },
+        {
+          "asr_word_index": 19,
+          "cue_id": "cue-00011",
+          "source_start_seconds": 32.14,
+          "source_end_seconds": 32.44,
+          "publisher_cue_start_seconds": 27.24
+        },
+        {
+          "asr_word_index": 20,
+          "cue_id": "cue-00011",
+          "source_start_seconds": 32.44,
+          "source_end_seconds": 33.7,
+          "publisher_cue_start_seconds": 27.24
+        },
+        {
+          "asr_word_index": 21,
+          "cue_id": "cue-00011",
+          "source_start_seconds": 33.7,
+          "source_end_seconds": 33.92,
+          "publisher_cue_start_seconds": 27.24
+        },
+        {
+          "asr_word_index": 22,
+          "cue_id": "cue-00012",
+          "source_start_seconds": 33.92,
+          "source_end_seconds": 35.16,
+          "publisher_cue_start_seconds": 31.4
+        },
+        {
+          "asr_word_index": 23,
+          "cue_id": "cue-00012",
+          "source_start_seconds": 35.16,
+          "source_end_seconds": 35.54,
+          "publisher_cue_start_seconds": 31.4
+        },
+        {
+          "asr_word_index": 24,
+          "cue_id": "cue-00012",
+          "source_start_seconds": 35.54,
+          "source_end_seconds": 35.7,
+          "publisher_cue_start_seconds": 31.4
+        },
+        {
+          "asr_word_index": 25,
+          "cue_id": "cue-00012",
+          "source_start_seconds": 35.7,
+          "source_end_seconds": 36.019999999999996,
+          "publisher_cue_start_seconds": 31.4
+        },
+        {
+          "asr_word_index": 26,
+          "cue_id": "cue-00012",
+          "source_start_seconds": 36.019999999999996,
+          "source_end_seconds": 36.480000000000004,
+          "publisher_cue_start_seconds": 31.4
+        },
+        {
+          "asr_word_index": 27,
+          "cue_id": "cue-00012",
+          "source_start_seconds": 36.480000000000004,
+          "source_end_seconds": 37.620000000000005,
+          "publisher_cue_start_seconds": 31.4
+        },
+        {
+          "asr_word_index": 28,
+          "cue_id": "cue-00012",
+          "source_start_seconds": 37.620000000000005,
+          "source_end_seconds": 37.9,
+          "publisher_cue_start_seconds": 31.4
+        },
+        {
+          "asr_word_index": 29,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 37.9,
+          "source_end_seconds": 38.44,
+          "publisher_cue_start_seconds": 34.6
+        },
+        {
+          "asr_word_index": 30,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 38.44,
+          "source_end_seconds": 38.879999999999995,
+          "publisher_cue_start_seconds": 34.6
+        },
+        {
+          "asr_word_index": 31,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 38.879999999999995,
+          "source_end_seconds": 39.0,
+          "publisher_cue_start_seconds": 34.6
+        },
+        {
+          "asr_word_index": 32,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 39.0,
+          "source_end_seconds": 39.260000000000005,
+          "publisher_cue_start_seconds": 34.6
+        },
+        {
+          "asr_word_index": 33,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 39.260000000000005,
+          "source_end_seconds": 39.56,
+          "publisher_cue_start_seconds": 34.6
+        },
+        {
+          "asr_word_index": 34,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 39.56,
+          "source_end_seconds": 40.379999999999995,
+          "publisher_cue_start_seconds": 34.6
+        },
+        {
+          "asr_word_index": 35,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 40.379999999999995,
+          "source_end_seconds": 40.64,
+          "publisher_cue_start_seconds": 34.6
+        },
+        {
+          "asr_word_index": 36,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 40.64,
+          "source_end_seconds": 40.92,
+          "publisher_cue_start_seconds": 34.6
+        },
+        {
+          "asr_word_index": 37,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 40.92,
+          "source_end_seconds": 41.120000000000005,
+          "publisher_cue_start_seconds": 34.6
+        },
+        {
+          "asr_word_index": 38,
+          "cue_id": "cue-00013",
+          "source_start_seconds": 41.120000000000005,
+          "source_end_seconds": 41.519999999999996,
+          "publisher_cue_start_seconds": 34.6
+        },
+        {
+          "asr_word_index": 39,
+          "cue_id": "cue-00014",
+          "source_start_seconds": 41.519999999999996,
+          "source_end_seconds": 43.34,
+          "publisher_cue_start_seconds": 39.52
+        }
+      ],
+      "speaker_association_reviewed": false,
+      "human_listening_completed": false,
+      "context_sha256": "ad3011a9c8055e8c1291212e3845e0ff20502ab9a7adfc5fe37991c6a0399e2c"
+    },
+    {
+      "id": "ted-2017-close-054",
+      "source_id": "ted-2017",
+      "clip_sha256": "bc1ff14dcad7aa6078255bc4494a20ecd92774523e5060b9aaf1ac97da9373be",
+      "source_timeline": "ted_h264_zero_start_capture",
+      "start_seconds": 54.0,
+      "end_seconds": 61.5,
+      "asr_run_id": "ted-2017-20-120",
+      "asr_artifact_sha256": "9d90b096d09ea21b6c95f74604518aab40f7167a1deb499f215e89b56ece886c",
+      "publisher_artifact_sha256": "f648129841ede4ef94e458f61d12ef42ca1f1bac5e56dee57eee8e0e8792a4fa",
+      "alignment_artifact_sha256": "ffaa0f8f0cd8a35b0e4acfa759b43cc55a2d8a95b6b6d5f16428afb0101dddfa",
+      "observed_asr_words": 16,
+      "fully_matched_asr_words": 15,
+      "word_match_fraction": 0.9375,
+      "declared_context_match_fraction": 1.0,
+      "matched_cue_ids": [
+        "cue-00017",
+        "cue-00018",
+        "cue-00019"
+      ],
+      "status": "asr_word_matches",
+      "anchors": [
+        {
+          "asr_word_index": 65,
+          "cue_id": "cue-00017",
+          "source_start_seconds": 53.67999999999999,
+          "source_end_seconds": 54.16,
+          "publisher_cue_start_seconds": 50.2
+        },
+        {
+          "asr_word_index": 66,
+          "cue_id": "cue-00017",
+          "source_start_seconds": 54.16,
+          "source_end_seconds": 54.64,
+          "publisher_cue_start_seconds": 50.2
+        },
+        {
+          "asr_word_index": 67,
+          "cue_id": "cue-00017",
+          "source_start_seconds": 54.64,
+          "source_end_seconds": 55.06,
+          "publisher_cue_start_seconds": 50.2
+        },
+        {
+          "asr_word_index": 68,
+          "cue_id": "cue-00017",
+          "source_start_seconds": 55.06,
+          "source_end_seconds": 55.3,
+          "publisher_cue_start_seconds": 50.2
+        },
+        {
+          "asr_word_index": 69,
+          "cue_id": "cue-00017",
+          "source_start_seconds": 55.3,
+          "source_end_seconds": 55.56,
+          "publisher_cue_start_seconds": 50.2
+        },
+        {
+          "asr_word_index": 70,
+          "cue_id": "cue-00017",
+          "source_start_seconds": 55.56,
+          "source_end_seconds": 55.92,
+          "publisher_cue_start_seconds": 50.2
+        },
+        {
+          "asr_word_index": 71,
+          "cue_id": "cue-00017",
+          "source_start_seconds": 55.92,
+          "source_end_seconds": 56.08,
+          "publisher_cue_start_seconds": 50.2
+        },
+        {
+          "asr_word_index": 72,
+          "cue_id": "cue-00017",
+          "source_start_seconds": 56.08,
+          "source_end_seconds": 56.68,
+          "publisher_cue_start_seconds": 50.2
+        },
+        {
+          "asr_word_index": 74,
+          "cue_id": "cue-00018",
+          "source_start_seconds": 56.84,
+          "source_end_seconds": 58.3,
+          "publisher_cue_start_seconds": 54.04
+        },
+        {
+          "asr_word_index": 75,
+          "cue_id": "cue-00018",
+          "source_start_seconds": 58.3,
+          "source_end_seconds": 58.76,
+          "publisher_cue_start_seconds": 54.04
+        },
+        {
+          "asr_word_index": 76,
+          "cue_id": "cue-00019",
+          "source_start_seconds": 59.58,
+          "source_end_seconds": 59.86,
+          "publisher_cue_start_seconds": 56.04
+        },
+        {
+          "asr_word_index": 77,
+          "cue_id": "cue-00019",
+          "source_start_seconds": 59.86,
+          "source_end_seconds": 60.1,
+          "publisher_cue_start_seconds": 56.04
+        },
+        {
+          "asr_word_index": 78,
+          "cue_id": "cue-00019",
+          "source_start_seconds": 60.1,
+          "source_end_seconds": 60.4,
+          "publisher_cue_start_seconds": 56.04
+        },
+        {
+          "asr_word_index": 79,
+          "cue_id": "cue-00019",
+          "source_start_seconds": 60.4,
+          "source_end_seconds": 60.56,
+          "publisher_cue_start_seconds": 56.04
+        },
+        {
+          "asr_word_index": 80,
+          "cue_id": "cue-00019",
+          "source_start_seconds": 60.56,
+          "source_end_seconds": 60.76,
+          "publisher_cue_start_seconds": 56.04
+        }
+      ],
+      "speaker_association_reviewed": false,
+      "human_listening_completed": false,
+      "context_sha256": "7a3b868a45c7dc7e64b42f555ba9ffd5dee79fb6d339f40e80f1b09301cbdc4a"
+    },
+    {
+      "id": "ted-2017-body-065",
+      "source_id": "ted-2017",
+      "clip_sha256": "ec9dbc95da0370ff0b22d8f601a576053f8d943423ffd525de14441aa6a6f50e",
+      "source_timeline": "ted_h264_zero_start_capture",
+      "start_seconds": 65.0,
+      "end_seconds": 72.125,
+      "asr_run_id": "ted-2017-20-120",
+      "asr_artifact_sha256": "9d90b096d09ea21b6c95f74604518aab40f7167a1deb499f215e89b56ece886c",
+      "publisher_artifact_sha256": "f648129841ede4ef94e458f61d12ef42ca1f1bac5e56dee57eee8e0e8792a4fa",
+      "alignment_artifact_sha256": "ffaa0f8f0cd8a35b0e4acfa759b43cc55a2d8a95b6b6d5f16428afb0101dddfa",
+      "observed_asr_words": 23,
+      "fully_matched_asr_words": 23,
+      "word_match_fraction": 1.0,
+      "declared_context_match_fraction": 1.0,
+      "matched_cue_ids": [
+        "cue-00021",
+        "cue-00022",
+        "cue-00023",
+        "cue-00024"
+      ],
+      "status": "asr_word_matches",
+      "anchors": [
+        {
+          "asr_word_index": 84,
+          "cue_id": "cue-00021",
+          "source_start_seconds": 65.0,
+          "source_end_seconds": 65.25999999999999,
+          "publisher_cue_start_seconds": 60.36
+        },
+        {
+          "asr_word_index": 85,
+          "cue_id": "cue-00021",
+          "source_start_seconds": 65.25999999999999,
+          "source_end_seconds": 65.75999999999999,
+          "publisher_cue_start_seconds": 60.36
+        },
+        {
+          "asr_word_index": 86,
+          "cue_id": "cue-00021",
+          "source_start_seconds": 65.75999999999999,
+          "source_end_seconds": 65.82,
+          "publisher_cue_start_seconds": 60.36
+        },
+        {
+          "asr_word_index": 87,
+          "cue_id": "cue-00022",
+          "source_start_seconds": 65.82,
+          "source_end_seconds": 65.96000000000001,
+          "publisher_cue_start_seconds": 62.32
+        },
+        {
+          "asr_word_index": 88,
+          "cue_id": "cue-00022",
+          "source_start_seconds": 65.96000000000001,
+          "source_end_seconds": 66.3,
+          "publisher_cue_start_seconds": 62.32
+        },
+        {
+          "asr_word_index": 89,
+          "cue_id": "cue-00022",
+          "source_start_seconds": 66.3,
+          "source_end_seconds": 67.02000000000001,
+          "publisher_cue_start_seconds": 62.32
+        },
+        {
+          "asr_word_index": 90,
+          "cue_id": "cue-00022",
+          "source_start_seconds": 67.02000000000001,
+          "source_end_seconds": 67.44,
+          "publisher_cue_start_seconds": 62.32
+        },
+        {
+          "asr_word_index": 91,
+          "cue_id": "cue-00022",
+          "source_start_seconds": 67.44,
+          "source_end_seconds": 67.62,
+          "publisher_cue_start_seconds": 62.32
+        },
+        {
+          "asr_word_index": 92,
+          "cue_id": "cue-00022",
+          "source_start_seconds": 67.62,
+          "source_end_seconds": 67.97999999999999,
+          "publisher_cue_start_seconds": 62.32
+        },
+        {
+          "asr_word_index": 93,
+          "cue_id": "cue-00022",
+          "source_start_seconds": 67.97999999999999,
+          "source_end_seconds": 68.14,
+          "publisher_cue_start_seconds": 62.32
+        },
+        {
+          "asr_word_index": 94,
+          "cue_id": "cue-00022",
+          "source_start_seconds": 68.14,
+          "source_end_seconds": 68.28,
+          "publisher_cue_start_seconds": 62.32
+        },
+        {
+          "asr_word_index": 95,
+          "cue_id": "cue-00023",
+          "source_start_seconds": 68.38,
+          "source_end_seconds": 68.46000000000001,
+          "publisher_cue_start_seconds": 64.8
+        },
+        {
+          "asr_word_index": 96,
+          "cue_id": "cue-00023",
+          "source_start_seconds": 68.46000000000001,
+          "source_end_seconds": 68.84,
+          "publisher_cue_start_seconds": 64.8
+        },
+        {
+          "asr_word_index": 97,
+          "cue_id": "cue-00023",
+          "source_start_seconds": 68.84,
+          "source_end_seconds": 69.0,
+          "publisher_cue_start_seconds": 64.8
+        },
+        {
+          "asr_word_index": 98,
+          "cue_id": "cue-00023",
+          "source_start_seconds": 69.0,
+          "source_end_seconds": 69.18,
+          "publisher_cue_start_seconds": 64.8
+        },
+        {
+          "asr_word_index": 99,
+          "cue_id": "cue-00024",
+          "source_start_seconds": 69.68,
+          "source_end_seconds": 69.82,
+          "publisher_cue_start_seconds": 66.16
+        },
+        {
+          "asr_word_index": 100,
+          "cue_id": "cue-00024",
+          "source_start_seconds": 69.9,
+          "source_end_seconds": 70.08,
+          "publisher_cue_start_seconds": 66.16
+        },
+        {
+          "asr_word_index": 101,
+          "cue_id": "cue-00024",
+          "source_start_seconds": 70.28,
+          "source_end_seconds": 70.34,
+          "publisher_cue_start_seconds": 66.16
+        },
+        {
+          "asr_word_index": 102,
+          "cue_id": "cue-00024",
+          "source_start_seconds": 70.34,
+          "source_end_seconds": 70.46000000000001,
+          "publisher_cue_start_seconds": 66.16
+        },
+        {
+          "asr_word_index": 103,
+          "cue_id": "cue-00024",
+          "source_start_seconds": 70.46000000000001,
+          "source_end_seconds": 70.56,
+          "publisher_cue_start_seconds": 66.16
+        },
+        {
+          "asr_word_index": 104,
+          "cue_id": "cue-00024",
+          "source_start_seconds": 70.56,
+          "source_end_seconds": 70.66,
+          "publisher_cue_start_seconds": 66.16
+        },
+        {
+          "asr_word_index": 105,
+          "cue_id": "cue-00024",
+          "source_start_seconds": 70.66,
+          "source_end_seconds": 70.9,
+          "publisher_cue_start_seconds": 66.16
+        },
+        {
+          "asr_word_index": 106,
+          "cue_id": "cue-00024",
+          "source_start_seconds": 70.9,
+          "source_end_seconds": 71.3,
+          "publisher_cue_start_seconds": 66.16
+        }
+      ],
+      "speaker_association_reviewed": false,
+      "human_listening_completed": false,
+      "context_sha256": "e956e850be92cd225ead76d8e5093d8a0a69ff981a5b2c98ff8cf357a7260e8a"
+    },
+    {
+      "id": "ted-2017-body-139",
+      "source_id": "ted-2017",
+      "clip_sha256": "1c7ce10d4a07fe2b2019674d42b1a7fb365d6a59603fd921b2d59fd224cad6b2",
+      "source_timeline": "ted_h264_zero_start_capture",
+      "start_seconds": 139.0,
+      "end_seconds": 146.5,
+      "asr_run_id": "ted-2017-120-179",
+      "asr_artifact_sha256": "4206e8183b0856a627c77d9940ec58ba313f06d3a52c09af78f985bed849f52c",
+      "publisher_artifact_sha256": "f648129841ede4ef94e458f61d12ef42ca1f1bac5e56dee57eee8e0e8792a4fa",
+      "alignment_artifact_sha256": "1d4a65445bd781c7bd0873339b5245f7c232ff7ac826172d48d1415bd8c21d60",
+      "observed_asr_words": 28,
+      "fully_matched_asr_words": 25,
+      "word_match_fraction": 0.892857,
+      "declared_context_match_fraction": 1.0,
+      "matched_cue_ids": [
+        "cue-00048",
+        "cue-00049",
+        "cue-00050"
+      ],
+      "status": "asr_word_matches",
+      "anchors": [
+        {
+          "asr_word_index": 36,
+          "cue_id": "cue-00048",
+          "source_start_seconds": 138.46,
+          "source_end_seconds": 139.72,
+          "publisher_cue_start_seconds": 134.64
+        },
+        {
+          "asr_word_index": 37,
+          "cue_id": "cue-00048",
+          "source_start_seconds": 139.72,
+          "source_end_seconds": 139.8,
+          "publisher_cue_start_seconds": 134.64
+        },
+        {
+          "asr_word_index": 38,
+          "cue_id": "cue-00048",
+          "source_start_seconds": 139.8,
+          "source_end_seconds": 139.82,
+          "publisher_cue_start_seconds": 134.64
+        },
+        {
+          "asr_word_index": 42,
+          "cue_id": "cue-00048",
+          "source_start_seconds": 140.2,
+          "source_end_seconds": 140.32,
+          "publisher_cue_start_seconds": 134.64
+        },
+        {
+          "asr_word_index": 43,
+          "cue_id": "cue-00048",
+          "source_start_seconds": 140.32,
+          "source_end_seconds": 140.38,
+          "publisher_cue_start_seconds": 134.64
+        },
+        {
+          "asr_word_index": 44,
+          "cue_id": "cue-00048",
+          "source_start_seconds": 140.38,
+          "source_end_seconds": 140.46,
+          "publisher_cue_start_seconds": 134.64
+        },
+        {
+          "asr_word_index": 45,
+          "cue_id": "cue-00048",
+          "source_start_seconds": 140.46,
+          "source_end_seconds": 140.68,
+          "publisher_cue_start_seconds": 134.64
+        },
+        {
+          "asr_word_index": 46,
+          "cue_id": "cue-00049",
+          "source_start_seconds": 140.78,
+          "source_end_seconds": 140.86,
+          "publisher_cue_start_seconds": 137.28
+        },
+        {
+          "asr_word_index": 47,
+          "cue_id": "cue-00049",
+          "source_start_seconds": 140.86,
+          "source_end_seconds": 141.5,
+          "publisher_cue_start_seconds": 137.28
+        },
+        {
+          "asr_word_index": 48,
+          "cue_id": "cue-00049",
+          "source_start_seconds": 141.5,
+          "source_end_seconds": 141.74,
+          "publisher_cue_start_seconds": 137.28
+        },
+        {
+          "asr_word_index": 49,
+          "cue_id": "cue-00049",
+          "source_start_seconds": 141.74,
+          "source_end_seconds": 142.6,
+          "publisher_cue_start_seconds": 137.28
+        },
+        {
+          "asr_word_index": 50,
+          "cue_id": "cue-00049",
+          "source_start_seconds": 142.6,
+          "source_end_seconds": 142.88,
+          "publisher_cue_start_seconds": 137.28
+        },
+        {
+          "asr_word_index": 51,
+          "cue_id": "cue-00049",
+          "source_start_seconds": 142.88,
+          "source_end_seconds": 143.07999999999998,
+          "publisher_cue_start_seconds": 137.28
+        },
+        {
+          "asr_word_index": 52,
+          "cue_id": "cue-00049",
+          "source_start_seconds": 143.07999999999998,
+          "source_end_seconds": 143.22,
+          "publisher_cue_start_seconds": 137.28
+        },
+        {
+          "asr_word_index": 53,
+          "cue_id": "cue-00049",
+          "source_start_seconds": 143.22,
+          "source_end_seconds": 143.34,
+          "publisher_cue_start_seconds": 137.28
+        },
+        {
+          "asr_word_index": 54,
+          "cue_id": "cue-00049",
+          "source_start_seconds": 143.34,
+          "source_end_seconds": 143.7,
+          "publisher_cue_start_seconds": 137.28
+        },
+        {
+          "asr_word_index": 55,
+          "cue_id": "cue-00049",
+          "source_start_seconds": 143.7,
+          "source_end_seconds": 144.07999999999998,
+          "publisher_cue_start_seconds": 137.28
+        },
+        {
+          "asr_word_index": 56,
+          "cue_id": "cue-00049",
+          "source_start_seconds": 144.07999999999998,
+          "source_end_seconds": 144.82,
+          "publisher_cue_start_seconds": 137.28
+        },
+        {
+          "asr_word_index": 57,
+          "cue_id": "cue-00049",
+          "source_start_seconds": 144.82,
+          "source_end_seconds": 145.02,
+          "publisher_cue_start_seconds": 137.28
+        },
+        {
+          "asr_word_index": 58,
+          "cue_id": "cue-00049",
+          "source_start_seconds": 145.02,
+          "source_end_seconds": 145.16,
+          "publisher_cue_start_seconds": 137.28
+        },
+        {
+          "asr_word_index": 59,
+          "cue_id": "cue-00049",
+          "source_start_seconds": 145.16,
+          "source_end_seconds": 145.46,
+          "publisher_cue_start_seconds": 137.28
+        },
+        {
+          "asr_word_index": 60,
+          "cue_id": "cue-00050",
+          "source_start_seconds": 145.98,
+          "source_end_seconds": 146.07999999999998,
+          "publisher_cue_start_seconds": 142.44
+        },
+        {
+          "asr_word_index": 61,
+          "cue_id": "cue-00050",
+          "source_start_seconds": 146.07999999999998,
+          "source_end_seconds": 146.34,
+          "publisher_cue_start_seconds": 142.44
+        },
+        {
+          "asr_word_index": 62,
+          "cue_id": "cue-00050",
+          "source_start_seconds": 146.34,
+          "source_end_seconds": 146.48,
+          "publisher_cue_start_seconds": 142.44
+        },
+        {
+          "asr_word_index": 63,
+          "cue_id": "cue-00050",
+          "source_start_seconds": 146.48,
+          "source_end_seconds": 146.74,
+          "publisher_cue_start_seconds": 142.44
+        }
+      ],
+      "speaker_association_reviewed": false,
+      "human_listening_completed": false,
+      "context_sha256": "f21afba8a47a4d36f8103942da484493a33c17bbb3056c32b1eabed9e3d82fc6"
+    },
+    {
+      "id": "ted-2017-close-149",
+      "source_id": "ted-2017",
+      "clip_sha256": "8bfe0d95f8f35bfded4d501b4ebadd4743e33188905ed9fa65152beeccb6855d",
+      "source_timeline": "ted_h264_zero_start_capture",
+      "start_seconds": 149.0,
+      "end_seconds": 156.5,
+      "asr_run_id": "ted-2017-120-179",
+      "asr_artifact_sha256": "4206e8183b0856a627c77d9940ec58ba313f06d3a52c09af78f985bed849f52c",
+      "publisher_artifact_sha256": "f648129841ede4ef94e458f61d12ef42ca1f1bac5e56dee57eee8e0e8792a4fa",
+      "alignment_artifact_sha256": "1d4a65445bd781c7bd0873339b5245f7c232ff7ac826172d48d1415bd8c21d60",
+      "observed_asr_words": 20,
+      "fully_matched_asr_words": 19,
+      "word_match_fraction": 0.95,
+      "declared_context_match_fraction": 1.0,
+      "matched_cue_ids": [
+        "cue-00051",
+        "cue-00052"
+      ],
+      "status": "asr_word_matches",
+      "anchors": [
+        {
+          "asr_word_index": 72,
+          "cue_id": "cue-00051",
+          "source_start_seconds": 148.98,
+          "source_end_seconds": 149.2,
+          "publisher_cue_start_seconds": 145.28
+        },
+        {
+          "asr_word_index": 73,
+          "cue_id": "cue-00051",
+          "source_start_seconds": 149.2,
+          "source_end_seconds": 149.57999999999998,
+          "publisher_cue_start_seconds": 145.28
+        },
+        {
+          "asr_word_index": 74,
+          "cue_id": "cue-00051",
+          "source_start_seconds": 149.57999999999998,
+          "source_end_seconds": 149.96,
+          "publisher_cue_start_seconds": 145.28
+        },
+        {
+          "asr_word_index": 75,
+          "cue_id": "cue-00051",
+          "source_start_seconds": 149.96,
+          "source_end_seconds": 150.24,
+          "publisher_cue_start_seconds": 145.28
+        },
+        {
+          "asr_word_index": 76,
+          "cue_id": "cue-00051",
+          "source_start_seconds": 150.24,
+          "source_end_seconds": 150.86,
+          "publisher_cue_start_seconds": 145.28
+        },
+        {
+          "asr_word_index": 77,
+          "cue_id": "cue-00051",
+          "source_start_seconds": 150.86,
+          "source_end_seconds": 151.1,
+          "publisher_cue_start_seconds": 145.28
+        },
+        {
+          "asr_word_index": 78,
+          "cue_id": "cue-00051",
+          "source_start_seconds": 151.1,
+          "source_end_seconds": 151.2,
+          "publisher_cue_start_seconds": 145.28
+        },
+        {
+          "asr_word_index": 79,
+          "cue_id": "cue-00051",
+          "source_start_seconds": 151.2,
+          "source_end_seconds": 151.44,
+          "publisher_cue_start_seconds": 145.28
+        },
+        {
+          "asr_word_index": 80,
+          "cue_id": "cue-00051",
+          "source_start_seconds": 151.44,
+          "source_end_seconds": 151.72,
+          "publisher_cue_start_seconds": 145.28
+        },
+        {
+          "asr_word_index": 81,
+          "cue_id": "cue-00051",
+          "source_start_seconds": 151.72,
+          "source_end_seconds": 151.96,
+          "publisher_cue_start_seconds": 145.28
+        },
+        {
+          "asr_word_index": 82,
+          "cue_id": "cue-00051",
+          "source_start_seconds": 151.96,
+          "source_end_seconds": 152.26,
+          "publisher_cue_start_seconds": 145.28
+        },
+        {
+          "asr_word_index": 83,
+          "cue_id": "cue-00052",
+          "source_start_seconds": 153.1,
+          "source_end_seconds": 153.26,
+          "publisher_cue_start_seconds": 149.48
+        },
+        {
+          "asr_word_index": 84,
+          "cue_id": "cue-00052",
+          "source_start_seconds": 153.26,
+          "source_end_seconds": 153.54,
+          "publisher_cue_start_seconds": 149.48
+        },
+        {
+          "asr_word_index": 85,
+          "cue_id": "cue-00052",
+          "source_start_seconds": 153.54,
+          "source_end_seconds": 153.68,
+          "publisher_cue_start_seconds": 149.48
+        },
+        {
+          "asr_word_index": 86,
+          "cue_id": "cue-00052",
+          "source_start_seconds": 153.68,
+          "source_end_seconds": 153.96,
+          "publisher_cue_start_seconds": 149.48
+        },
+        {
+          "asr_word_index": 87,
+          "cue_id": "cue-00052",
+          "source_start_seconds": 153.96,
+          "source_end_seconds": 154.5,
+          "publisher_cue_start_seconds": 149.48
+        },
+        {
+          "asr_word_index": 88,
+          "cue_id": "cue-00052",
+          "source_start_seconds": 154.5,
+          "source_end_seconds": 155.74,
+          "publisher_cue_start_seconds": 149.48
+        },
+        {
+          "asr_word_index": 89,
+          "cue_id": "cue-00052",
+          "source_start_seconds": 155.74,
+          "source_end_seconds": 156.14,
+          "publisher_cue_start_seconds": 149.48
+        },
+        {
+          "asr_word_index": 90,
+          "cue_id": "cue-00052",
+          "source_start_seconds": 156.14,
+          "source_end_seconds": 156.34,
+          "publisher_cue_start_seconds": 149.48
+        }
+      ],
+      "speaker_association_reviewed": false,
+      "human_listening_completed": false,
+      "context_sha256": "557bc1246d30ab270c6ab4b394c8935359c9c09f3eab57dc4131d9e949c7cfed"
+    },
+    {
+      "id": "ted-2017-close-172",
+      "source_id": "ted-2017",
+      "clip_sha256": "a15569234d6694a9dff9c8033681b8ba3e28f1b00df89d7d98afff906514fde6",
+      "source_timeline": "ted_h264_zero_start_capture",
+      "start_seconds": 172.0,
+      "end_seconds": 177.0,
+      "asr_run_id": "ted-2017-120-179",
+      "asr_artifact_sha256": "4206e8183b0856a627c77d9940ec58ba313f06d3a52c09af78f985bed849f52c",
+      "publisher_artifact_sha256": "f648129841ede4ef94e458f61d12ef42ca1f1bac5e56dee57eee8e0e8792a4fa",
+      "alignment_artifact_sha256": "1d4a65445bd781c7bd0873339b5245f7c232ff7ac826172d48d1415bd8c21d60",
+      "observed_asr_words": 24,
+      "fully_matched_asr_words": 24,
+      "word_match_fraction": 1.0,
+      "declared_context_match_fraction": 0.958333,
+      "matched_cue_ids": [
+        "cue-00057",
+        "cue-00058",
+        "cue-00059",
+        "cue-00060"
+      ],
+      "status": "asr_word_matches",
+      "anchors": [
+        {
+          "asr_word_index": 132,
+          "cue_id": "cue-00057",
+          "source_start_seconds": 171.64,
+          "source_end_seconds": 172.04,
+          "publisher_cue_start_seconds": 166.84
+        },
+        {
+          "asr_word_index": 133,
+          "cue_id": "cue-00057",
+          "source_start_seconds": 172.04,
+          "source_end_seconds": 172.14,
+          "publisher_cue_start_seconds": 166.84
+        },
+        {
+          "asr_word_index": 134,
+          "cue_id": "cue-00057",
+          "source_start_seconds": 172.14,
+          "source_end_seconds": 172.36,
+          "publisher_cue_start_seconds": 166.84
+        },
+        {
+          "asr_word_index": 135,
+          "cue_id": "cue-00057",
+          "source_start_seconds": 172.36,
+          "source_end_seconds": 172.48,
+          "publisher_cue_start_seconds": 166.84
+        },
+        {
+          "asr_word_index": 136,
+          "cue_id": "cue-00057",
+          "source_start_seconds": 172.48,
+          "source_end_seconds": 172.54,
+          "publisher_cue_start_seconds": 166.84
+        },
+        {
+          "asr_word_index": 137,
+          "cue_id": "cue-00057",
+          "source_start_seconds": 172.54,
+          "source_end_seconds": 172.82,
+          "publisher_cue_start_seconds": 166.84
+        },
+        {
+          "asr_word_index": 138,
+          "cue_id": "cue-00057",
+          "source_start_seconds": 172.92000000000002,
+          "source_end_seconds": 173.12,
+          "publisher_cue_start_seconds": 166.84
+        },
+        {
+          "asr_word_index": 139,
+          "cue_id": "cue-00057",
+          "source_start_seconds": 173.12,
+          "source_end_seconds": 173.26,
+          "publisher_cue_start_seconds": 166.84
+        },
+        {
+          "asr_word_index": 140,
+          "cue_id": "cue-00057",
+          "source_start_seconds": 173.26,
+          "source_end_seconds": 173.6,
+          "publisher_cue_start_seconds": 166.84
+        },
+        {
+          "asr_word_index": 141,
+          "cue_id": "cue-00058",
+          "source_start_seconds": 173.74,
+          "source_end_seconds": 173.82,
+          "publisher_cue_start_seconds": 170.16
+        },
+        {
+          "asr_word_index": 142,
+          "cue_id": "cue-00058",
+          "source_start_seconds": 173.82,
+          "source_end_seconds": 173.9,
+          "publisher_cue_start_seconds": 170.16
+        },
+        {
+          "asr_word_index": 143,
+          "cue_id": "cue-00058",
+          "source_start_seconds": 173.9,
+          "source_end_seconds": 174.02,
+          "publisher_cue_start_seconds": 170.16
+        },
+        {
+          "asr_word_index": 144,
+          "cue_id": "cue-00058",
+          "source_start_seconds": 174.02,
+          "source_end_seconds": 174.1,
+          "publisher_cue_start_seconds": 170.16
+        },
+        {
+          "asr_word_index": 145,
+          "cue_id": "cue-00058",
+          "source_start_seconds": 174.1,
+          "source_end_seconds": 174.26,
+          "publisher_cue_start_seconds": 170.16
+        },
+        {
+          "asr_word_index": 146,
+          "cue_id": "cue-00058",
+          "source_start_seconds": 174.26,
+          "source_end_seconds": 174.5,
+          "publisher_cue_start_seconds": 170.16
+        },
+        {
+          "asr_word_index": 147,
+          "cue_id": "cue-00058",
+          "source_start_seconds": 174.5,
+          "source_end_seconds": 175.16,
+          "publisher_cue_start_seconds": 170.16
+        },
+        {
+          "asr_word_index": 148,
+          "cue_id": "cue-00058",
+          "source_start_seconds": 175.16,
+          "source_end_seconds": 175.48,
+          "publisher_cue_start_seconds": 170.16
+        },
+        {
+          "asr_word_index": 149,
+          "cue_id": "cue-00058",
+          "source_start_seconds": 175.48,
+          "source_end_seconds": 175.64,
+          "publisher_cue_start_seconds": 170.16
+        },
+        {
+          "asr_word_index": 150,
+          "cue_id": "cue-00058",
+          "source_start_seconds": 175.64,
+          "source_end_seconds": 175.98,
+          "publisher_cue_start_seconds": 170.16
+        },
+        {
+          "asr_word_index": 151,
+          "cue_id": "cue-00059",
+          "source_start_seconds": 176.18,
+          "source_end_seconds": 176.3,
+          "publisher_cue_start_seconds": 172.6
+        },
+        {
+          "asr_word_index": 152,
+          "cue_id": "cue-00059",
+          "source_start_seconds": 176.3,
+          "source_end_seconds": 176.54,
+          "publisher_cue_start_seconds": 172.6
+        },
+        {
+          "asr_word_index": 153,
+          "cue_id": "cue-00059",
+          "source_start_seconds": 176.54,
+          "source_end_seconds": 176.64,
+          "publisher_cue_start_seconds": 172.6
+        },
+        {
+          "asr_word_index": 154,
+          "cue_id": "cue-00059",
+          "source_start_seconds": 176.64,
+          "source_end_seconds": 176.88,
+          "publisher_cue_start_seconds": 172.6
+        }
+      ],
+      "speaker_association_reviewed": false,
+      "human_listening_completed": false,
+      "context_sha256": "5d249ee1a9be71779fcecf6da15fd174ea783e0f405cc771bfae0acfd0584a28"
+    }
+  ],
+  "limitations": [
+    "ASR word timings are estimates, not forced alignment or human listening.",
+    "Publisher cues have interval-proxy timing. No constant publisher-to-media offset is assumed.",
+    "Only transcript text/time context is linked; no geometry track is identified or associated with the audio speaker.",
+    "The thresholds are authored quality gates, not learned behavioral labels.",
+    "No raw audio or full transcript text is included in this report."
+  ]
+}
