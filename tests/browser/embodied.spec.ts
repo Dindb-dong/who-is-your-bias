@@ -1,18 +1,24 @@
 import { createHash } from 'node:crypto';
 import { expect, test, type Page } from '@playwright/test';
 
+async function expectHumanReady(page: Page) {
+  // Loading a real rig while software rendering may outlast Playwright's
+  // default 5 s assertion budget on a mobile CI viewport.
+  await expect(page.getByTestId('avatar-stage')).toHaveAttribute('data-rig-kind', 'glb', { timeout: 15_000 });
+}
+
 async function openMotionLab(page: Page, mobile: boolean) {
   await page.goto('/');
   await page.getByRole('navigation', { name: mobile ? 'Mobile navigation' : 'Main navigation', exact: true })
     .getByRole('button', { name: mobile ? 'Lab' : 'Research lab', exact: true }).click();
-  await expect(page.getByTestId('avatar-stage')).toHaveAttribute('data-rig-kind', 'glb');
+  await expectHumanReady(page);
 }
 
 test('loads the bundled human and switches camera framing and avatar assets', async ({ page }, info) => {
   const errors: string[] = []; page.on('pageerror', (error) => errors.push(error.message));
   await page.goto('/');
   const stage = page.getByTestId('avatar-stage');
-  await expect(stage).toHaveAttribute('data-rig-kind', 'glb');
+  await expectHumanReady(page);
   await expect(stage).toHaveAttribute('data-face-controls', '52');
   await expect(stage).toHaveAttribute('data-visemes', '15');
   await expect(stage).toHaveAttribute('data-mapped-joints', '16');
@@ -33,7 +39,7 @@ test('loads the bundled human and switches camera framing and avatar assets', as
   await settings.click();
   await page.getByRole('button', { name: /^Research human/ }).click();
   await page.getByRole('button', { name: 'Close settings' }).click();
-  await expect(stage).toHaveAttribute('data-rig-kind', 'glb');
+  await expectHumanReady(page);
   await expect(page.getByRole('alert')).toHaveCount(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
   expect(errors).toEqual([]);
@@ -58,12 +64,14 @@ test('replays selected source geometry only after explicit conversation opt-in',
   page.on('request', (request) => { if (request.url().includes('/api/motion/clip/')) clips.push(request.url()); });
   await page.goto('/');
   await expect(page.getByText('Studio connected', { exact: true })).toBeVisible();
-  await expect(page.getByTestId('avatar-stage')).toHaveAttribute('data-rig-kind', 'glb');
+  await expectHumanReady(page);
   const ask = async () => {
-    await page.getByRole('textbox', { name: 'Your message' }).fill('Why can power plants charge electric cars more efficiently?');
+    await page.getByRole('textbox', { name: 'Your message' }).fill('Why compare power plants and electric cars for efficiency?');
     await page.getByRole('button', { name: 'Send message', exact: true }).click();
     await expect(page.getByRole('button', { name: 'Stop response', exact: true })).toHaveCount(0);
     await expect(page.getByRole('button', { name: /evidence records/ }).last()).toBeVisible();
+    await expect(page.getByText(/electricity generation and transmission losses/).last()).toBeVisible();
+    await expect(page.getByText(/tunnel-cost/)).toHaveCount(0);
   };
   await ask();
   expect(clips).toEqual([]);
