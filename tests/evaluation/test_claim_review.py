@@ -6,7 +6,7 @@ import pytest
 
 from bias.config import ProviderSettings, Settings
 from tools.evaluation.cases import GenerationCase, GenerationSuite
-from tools.evaluation.review import digest, prepare_packet, summarize_review
+from tools.evaluation.review import digest, make_publication, prepare_packet, summarize_review
 from tools.evaluation.run import run_suite
 
 
@@ -113,3 +113,25 @@ def test_summary_only_or_incomplete_generation_cannot_become_a_semantic_pass(cor
     del report["runs"][0]["raw_response"]
     with pytest.raises(ValueError, match="raw responses"):
         prepare_packet(report, corpus, report_sha256=digest(report))
+
+
+def test_publication_preserves_negative_examples_and_review_bindings_without_source_dumps(corpus):
+    report = report_for(corpus, "Every launch costs exactly 1 dollar. [source:rocket-reuse]")
+    packet, annotations = prepare_packet(report, corpus, report_sha256=digest(report))
+    annotations = annotate_supported(annotations)
+    annotations["runs"][0]["units"][0].update(evidence_support="unsupported", citation_support="unsupported", supporting_evidence_ids=[], rationale="The exact one-dollar price is absent from the source; the valid identifier does not support it.")
+    runtime = {"model": "explicit-synthetic-test-model", "revision": "test-revision", "transport": "test_injected"}
+    publication = make_publication([(packet, annotations)], study_labels=["Synthetic protocol test"], runtime_metadata=[runtime])
+    study = publication["studies"][0]
+    assert study["runs"][0]["raw_response"] == report["runs"][0]["raw_response"]
+    assert study["packet_sha256"] == digest(packet)
+    assert study["label"] == "Synthetic protocol test"
+    assert study["runtime_metadata_sha256"] == digest(runtime)
+    assert study["runs"][0]["prompt_evidence_ids"] == ["rocket-reuse"]
+    assert "prompt_evidence" not in study["runs"][0]
+    assert study["condition_reviews"]["B"]["citation_coverage"] == {"complete": 1}
+    assert study["condition_reviews"]["B"]["answers_with_all_factual_units_supported"] == 0
+    assert study["runs"][0]["units"][0]["review"]["evidence_support"] == "unsupported"
+    assert publication["persona_fidelity"] == "ungraded"
+    with pytest.raises(ValueError, match="same reviewed packet"):
+        make_publication([(packet, annotations), (packet, annotations)])

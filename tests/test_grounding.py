@@ -10,7 +10,7 @@ from bias.engine import Engine
 from bias.grounding import audit_citations
 from bias.legacy_prompts import build_legacy_messages
 from bias.models import ChatRequest
-from bias.prompts import build_messages
+from bias.prompts import PROMPT_BUILDERS, build_compact_messages, build_grounded_messages, build_messages
 from bias.retrieval import Retriever, SearchResult
 from tools.evaluation.cases import read_suite
 from tools.evaluation.run import fingerprint_corpus
@@ -109,6 +109,22 @@ def test_compact_history_keeps_only_bounded_complete_exchanges(corpus):
     assert len(messages) == 5
 
 
+def test_grounded_candidate_separates_presentation_from_source_evidence(corpus):
+    result = Retriever(corpus).search("rocket reuse")
+    request = ChatRequest(message="Why reuse rockets?", mode="rag")
+    compact = build_compact_messages(corpus.persona, request, result, [], corpus.sources)
+    grounded = build_grounded_messages(corpus.persona, request, result, [], corpus.sources)
+    before = json.loads(compact[1]["content"].split("\n", 1)[1])
+    after = json.loads(grounded[1]["content"].split("\n", 1)[1])
+    assert before["evidence_records"] == after["evidence_records"]
+    assert "profile" not in after
+    assert after["presentation"]["provenance"] == "editorial_design"
+    assert corpus.evidence["rocket-reuse"].text not in grounded[0]["content"]
+    assert grounded[-1] == compact[-1]
+    profile = request.model_copy(update={"mode": "profile"})
+    assert build_grounded_messages(corpus.persona, profile, result, [], corpus.sources) == build_compact_messages(corpus.persona, profile, result, [], corpus.sources)
+
+
 def test_legacy_prompts_reproduce_all_prior_measured_prompt_hashes(actual_corpus):
     root = Path(__file__).resolve().parents[1]
     measured = json.loads((root / "tools/evaluation/results/qwen3-06b-cpu.json").read_text())
@@ -129,3 +145,29 @@ def test_legacy_prompts_reproduce_all_prior_measured_prompt_hashes(actual_corpus
         assert digest == row["prompt_audit"]["sha256"], (case.id, mode)
         checked += 1
     assert checked == 20
+
+
+def test_versioned_prompts_reproduce_all_published_comparison_hashes(actual_corpus):
+    root = Path(__file__).resolve().parents[1]
+    published = json.loads((root / "tools/evaluation/results/grounding-quality-review.json").read_text())
+    corpus_hash = fingerprint_corpus(actual_corpus)
+    if any(study["binding"]["corpus_sha256"] != corpus_hash for study in published["studies"]):
+        pytest.skip("Restore the measured corpus snapshot to reproduce these historical prompts.")
+    retriever = Retriever(actual_corpus)
+    checked = 0
+    for study in published["studies"]:
+        builder = PROMPT_BUILDERS[study["configuration"]["prompt_version"]]
+        for row in study["runs"]:
+            if row["population"] != "model":
+                continue
+            mode = row["mode"]
+            request = ChatRequest(message=row["question"], language=row["language"], mode=mode)
+            result = SearchResult((), 0, "") if mode == "profile" else retriever.search(
+                row["question"], limit=study["configuration"]["retrieval_limit"], behavior=mode == "behavior"
+            )
+            messages = builder(actual_corpus.persona, request, result, [], actual_corpus.sources)
+            observed = hashlib.sha256(json.dumps(messages, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()
+            assert observed == row["prompt_sha256"], (study["label"], row["run_key"])
+            assert hashlib.sha256(row["raw_response"].encode("utf-8")).hexdigest() == row["raw_response_sha256"]
+            checked += 1
+    assert checked == 100

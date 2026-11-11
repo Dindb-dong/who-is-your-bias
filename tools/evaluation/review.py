@@ -200,6 +200,85 @@ def summarize_review(packet: dict, annotation_data: dict) -> dict:
     }
 
 
+def make_publication(reviews: list[tuple[dict, dict]], *, study_labels: list[str] | None = None, runtime_metadata: list[dict] | None = None) -> dict:
+    """Keep inspectable final answers and reviewer judgments without source dumps."""
+    if not reviews:
+        raise ValueError("At least one source-bound review is required")
+    if study_labels is not None and (len(study_labels) != len(reviews) or any(not label.strip() for label in study_labels)):
+        raise ValueError("Supply one nonblank study label per reviewed packet")
+    if runtime_metadata is not None and (len(runtime_metadata) != len(reviews) or any(not isinstance(item, dict) for item in runtime_metadata)):
+        raise ValueError("Supply one runtime metadata object per reviewed packet")
+    studies = []
+    seen = set()
+    for study_index, (packet, annotations) in enumerate(reviews):
+        summary = summarize_review(packet, annotations)
+        if summary["packet_sha256"] in seen:
+            raise ValueError("Do not publish the same reviewed packet twice")
+        seen.add(summary["packet_sha256"])
+        labels = {run["run_key"]: run for run in summary["runs"]}
+        rows = []
+        for entry in packet["runs"]:
+            reviewed = labels[entry["run_key"]]
+            units = {unit["index"]: unit for unit in entry["units"]}
+            rows.append({
+                "run_key": entry["run_key"], "case_id": entry["case_id"], "mode": entry["mode"], "condition": entry["condition"],
+                "population": entry["population"], "completed": entry["completed"], "category": entry["category"],
+                "question": entry["question"], "language": entry["language"], "expected_action": entry["expected_action"],
+                "raw_response": entry["raw_response"], "raw_response_sha256": entry["raw_response_sha256"], "prompt_sha256": entry["prompt_sha256"],
+                "prompt_evidence_ids": [item["evidence_id"] for item in entry["prompt_evidence"]],
+                "prompt_source_ids": list(dict.fromkeys(item["source_id"] for item in entry["prompt_evidence"])),
+                "withheld_reference_ids_for_review_only": [item["evidence_id"] for item in entry["withheld_references_for_review_only"]],
+                "citation_coverage": entry["coverage"],
+                "units": [{"index": unit["index"], "text": units[unit["index"]]["text"], "model_citation_ids": units[unit["index"]]["citation_ids"], "review": {key: value for key, value in unit.items() if key != "index"}} for unit in reviewed["units"]],
+                "answer_review": reviewed["answer"],
+            })
+        conditions = {}
+        for condition in ("A", "B", "C"):
+            group = [row for row in rows if row["condition"] == condition and row["population"] == "model" and row["completed"]]
+            if not group:
+                continue
+            supported = []
+            for row in group:
+                factual = [unit for unit in row["units"] if unit["review"]["evidence_support"] != "not_factual"]
+                if factual and all(unit["review"]["evidence_support"] == "supported" for unit in factual):
+                    supported.append(row)
+            conditions[condition] = {
+                "completed_model_responses": len(group),
+                "responses_with_all_factual_units_supported": len(supported),
+                "answers_with_all_factual_units_supported": sum(row["answer_review"]["relevance"] == "answers" for row in supported),
+                "citation_coverage": dict(Counter(row["citation_coverage"]["status"] for row in group)),
+                "evidence_support_units": dict(Counter(unit["review"]["evidence_support"] for row in group for unit in row["units"])),
+                "language_quality": dict(Counter(row["answer_review"]["language_quality"] for row in group)),
+                "injection_probe_labels": dict(Counter(row["answer_review"]["injection_resistance"] for row in group if row["category"] == "injection")),
+            }
+        studies.append({
+            "label": study_labels[study_index] if study_labels else f"Study {study_index + 1}: {packet['configuration'].get('model')} / {packet['configuration'].get('prompt_version', 'unspecified')}",
+            "configuration": packet["configuration"], "binding": packet["binding"],
+            "runtime_metadata": runtime_metadata[study_index] if runtime_metadata else None,
+            "runtime_metadata_sha256": digest(runtime_metadata[study_index]) if runtime_metadata else None,
+            "packet_sha256": summary["packet_sha256"], "annotations_sha256": summary["annotations_sha256"],
+            "reviewer": summary["reviewer"], "review_status": summary["status"],
+            "populations": summary["populations"], "condition_reviews": conditions, "runs": rows,
+        })
+    return {
+        "schema_version": "semantic-review-publication.v1", "created_at": datetime.now(timezone.utc).isoformat(),
+        "development_only": True, "studies": studies, "persona_fidelity": "ungraded",
+        "definitions": {
+            "evidence_support": "Reviewer judgment against provided prompt evidence, not external-world truth.",
+            "all_factual_units_supported": "At least one factual unit, every factual unit labeled supported; nonfactual wrappers/refusals are excluded. Relevance is counted separately.",
+            "citation_coverage": "Mechanical trailing-marker coverage, never a semantic score.",
+            "unit": "A sentence-like formatting unit; it may contain several claims and is not an atomic-fact annotation.",
+        },
+        "limitations": [
+            "Inspect reviewer provenance: implementation-agent reviews are nonblind model-assisted development judgments, not independent human evaluations.",
+            "The same small declared cases informed prompt revisions. These exploratory counts are not a held-out benchmark or a persona-fidelity score.",
+            "Model sizes, runtimes, quantization, and prompt versions can differ across studies; use the configuration and runtime reports before making causal comparisons.",
+            "Application gates and incomplete generations are excluded from completed-model response counts.",
+            "No original transcripts or reasoning traces are included. Exact final model answers and their negative examples are retained for reviewability.",
+        ],
+    }
+
+
 def _write_new(path: Path, value: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("x", encoding="utf-8") as stream:
@@ -217,6 +296,11 @@ def main() -> int:
     summarize.add_argument("--packet", type=Path, required=True)
     summarize.add_argument("--annotations", type=Path, required=True)
     summarize.add_argument("--output", type=Path, required=True)
+    publish = commands.add_parser("publish", help="Retain exact final answers and judgments in a compact review artifact")
+    publish.add_argument("--review", type=Path, nargs=2, action="append", required=True, metavar=("PACKET", "ANNOTATIONS"))
+    publish.add_argument("--label", action="append", help="Explicit study/model label; repeat in the same order as --review")
+    publish.add_argument("--runtime-metadata", type=Path, action="append", help="Measured runtime metadata JSON; repeat in the same order as --review")
+    publish.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.output.exists() or args.output.suffix != ".json":
         parser.error("Choose a new .json output path")
@@ -230,10 +314,18 @@ def main() -> int:
             _write_new(args.output, packet)
             _write_new(annotation_path, annotations)
             print(json.dumps({"packet": str(args.output), "annotations": str(annotation_path), "semantic_review": "ungraded"}))
-        else:
+        elif args.command == "summarize":
             summary = summarize_review(json.loads(args.packet.read_text()), json.loads(args.annotations.read_text()))
             _write_new(args.output, summary)
             print(json.dumps({"summary": str(args.output), "status": summary["status"], "populations": summary["populations"]}))
+        else:
+            publication = make_publication(
+                [(json.loads(packet.read_text()), json.loads(annotations.read_text())) for packet, annotations in args.review],
+                study_labels=args.label,
+                runtime_metadata=[json.loads(path.read_text()) for path in args.runtime_metadata] if args.runtime_metadata else None,
+            )
+            _write_new(args.output, publication)
+            print(json.dumps({"publication": str(args.output), "studies": len(publication["studies"]), "persona_fidelity": "ungraded"}))
     except (ValueError, KeyError, OSError) as exc:
         parser.error(str(exc))
     return 0

@@ -154,7 +154,7 @@ def summarize(rows: list[dict]) -> dict:
 async def run_suite(settings: Settings, corpus: Corpus, suite: GenerationSuite, *, modes: tuple[str, ...] = ("profile", "rag", "behavior"), repetitions: int = 1, allow_preview: bool = False, max_total_seconds: float = 600, transport_factory: Callable[[], httpx.AsyncBaseTransport] | None = None, progress: Callable[[dict], None] | None = None, checkpoint: Callable[[dict], None] | None = None, prompt_version: str = "compact") -> dict:
     validate_suite(suite, corpus)
     if prompt_version not in PROMPT_BUILDERS:
-        raise ValueError("Choose legacy or compact prompts")
+        raise ValueError("Choose a declared prompt version: " + ", ".join(PROMPT_BUILDERS))
     if not modes or len(set(modes)) != len(modes) or any(mode not in CONDITIONS for mode in modes):
         raise ValueError("Choose distinct profile, rag, or behavior conditions")
     if not 1 <= repetitions <= 5:
@@ -199,7 +199,7 @@ def main() -> int:
     parser.add_argument("--case", action="append", dest="case_ids", help="Select a declared case; may be repeated")
     parser.add_argument("--modes", nargs="+", choices=list(CONDITIONS), default=list(CONDITIONS))
     parser.add_argument("--repetitions", type=int, choices=range(1, 6), default=1)
-    parser.add_argument("--prompt-version", choices=list(PROMPT_BUILDERS), default="compact", help="Freeze the legacy PR6 prompt or use the compact production prompt")
+    parser.add_argument("--prompt-version", choices=list(PROMPT_BUILDERS), default="compact", help="Select a frozen baseline or an explicitly versioned grounding candidate")
     parser.add_argument("--max-total-seconds", type=float, default=600)
     parser.add_argument("--allow-preview", action="store_true")
     parser.add_argument("--validate-only", action="store_true")
