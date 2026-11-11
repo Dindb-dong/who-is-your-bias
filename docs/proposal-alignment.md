@@ -15,11 +15,13 @@ The central implementation now uses original interview question/answer pairs, a 
 | R5 | Qwen3-TTS Base speech | Fresh 12.24-second narration synthesized in 79.27 s on CPU, with three generated segments and an independent unprompted ASR report. Human naturalness and likeness remain ungraded. |
 | R6 | MuseTalk presentation | Actual MuseTalk 1.5 inference generated 306 frames at 25 fps in 491.07 s. Packaged H.264/AAC timing and full decode verified. Fixed artistic portrait and geometric blend are explicit adaptations; perceptual lip-sync remains unrated. |
 | R7 | Prepared presentation plus live audience Q&A | Bundled player, captions, downloads and fresh live-session handoff implemented. Browser timing export and real HTTP language-to-voice benchmark distinguish digital/server measurements from unmeasured target-device/acoustic output; see the actual live report. |
-| R8 | Situation-linked observable voice and motion | Dependent observations delivery must retain source clocks, unknown acoustic boundaries, visible/audible distinctions and review gates. |
+| R8 | Situation-linked observable voice and motion | Measured four original Q&As across two events: 19 matched speech-rate windows and ten visual windows with 512 sampled frames, eight excluded frames and two smile candidates. Source clocks and unknown acoustic boundaries remain explicit. Human review is uncompleted and the reviewed runtime index is empty. |
 
 ## Delivered experiment
 
 [Original Q&A](original-qa.md) explains attribution, context, complete versus partial exchanges, source-wide training selection and the exact split manifest. [Reference-answer evaluation](reference-evaluation.md) records the real run and interpretation. [Prepared media](presentation.md) and [live measurement](live-demo-latency.md) record the separate speech/video path.
+
+[Situation observations](situation-observations.md) records the executed R8 pilot and its review workflow. All four whole-answer speech rates and validated pre-answer pauses remain unknown; matched subwindows and visible-smile candidates do not establish audible laughter, semantic gestures or perceptual voice quality. TED2017 is held out for observation validation while remaining a text-training event. The [artifact audit](research/observation-pilot-status.md) verifies that the four exchange digests are unchanged in Q&A v2, but the preserved observation report and its review bundle remain bound to the v1 corpus. The larger text corpus does not expand measured media coverage or supply human judgments.
 
 The five source events have fixed roles: TED2013 and TED2017 train, TED2022 recorded development, and Lex #400/#438 test. Old summary-corpus material is not mixed into this study because its historical split assignments differ. All original v1 selections are retained by the expanded v2 corpus. Full source text remains local, reconstructed from publisher material whose canonical transcript and selection hashes are pinned.
 

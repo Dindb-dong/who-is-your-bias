@@ -60,6 +60,7 @@ The optional [local language server](docs/language-runtime.md) runs a server-sel
 | Speech timing | Optional Rhubarb mouth-cue recognition, SHA-256-bound audio packages, actual playback clock, explicit amplitude fallback |
 | Avatar calibration | Bundled compressed human mesh with 163 bones and 67 named face/viseme targets; calibrated controls, portrait/full-body cameras, and local GLB support |
 | Measured motion | 13 source-linked clips and 40 primitives from two events; opt-in conversation retrieval, source-clock replay, and explicit review gates |
+| Situation observations | Four original Q&As linked to 19 speech-rate windows and ten visual windows; source-clock measurements, explicit unknowns and an empty reviewed runtime index |
 | Reference preparation | Publisher-text/ASR comparison, bounded candidate WAVs, clock metadata, artifact hashes, and a review ledger |
 | Media processing | FFmpeg clips, source-clock manifests, optional ASR/alignment and facial/body observation adapters |
 | Ingestion | Local SRT/VTT/WhisperX imports, speaker selection, hashes, source-clock offsets |
@@ -118,6 +119,7 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 - Retrieval smoke tests are not an independent persona-fidelity benchmark. Cases derived while authoring the corpus are labeled development fixtures.
 - An entire held-out source is excluded from runtime retrieval, including its records and reference answers.
 - Conversation behavior cues remain authored demonstration rules. Measured video clips can be replayed in the motion lab; they are not automatically promoted into learned personality or gesture policies. Audio-recognized mouth cues remain predictions, with their timing basis shown explicitly.
+- The [situation-observation pilot](docs/situation-observations.md) measured four Q&As from two events: 19 matched speech-rate windows and ten visual windows with 512 sampled frames, eight excluded frames and two smile candidates. Human listening, verified pauses and semantic gesture judgments remain uncompleted; its runtime index is empty. The preserved report remains bound to Q&A v1, although the four linked exchange digests also match v2.
 - No-key source previews do not translate English evidence into fabricated Korean quotations. A connected model can answer in Korean with English-source attribution.
 
 ## API
@@ -162,6 +164,8 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 - [Voice evaluation](docs/voice-evaluation.md): four real synthesized cases, independent ASR, runtime measurements, and a generated-output listening bundle.
 - [Bundled human avatar](docs/humanoid-avatar.md): asset licenses, compressed GLB build, named controls, and actual deformation checks.
 - [Motion library](docs/motion-library.md): two-event measurements, source-context selection, validation results, and reproduction.
+- [Situation observations](docs/situation-observations.md): actual Q&A-linked speech and visual measurements, source clocks, review gates and unmeasured outcomes.
+- [Observation artifact audit](docs/research/observation-pilot-status.md): preserved pilot hashes, measured coverage and exact v1/v2 exchange compatibility.
 - [Avatar calibration](docs/avatar-calibration.md): observed clip export, rig mapping, and channel inspection.
 - [Integration validation](docs/integration-validation.md): actual ASR, local HTTP inference, speech packages, and video observations.
 
