@@ -83,6 +83,27 @@ def test_missing_and_fabricated_citations_are_not_semantic_passes(corpus):
     assert all(row["tokens"]["usage"] is None for row in report["runs"])
     assert all(row["tokens"]["usage_status"] == "not_reported" for row in report["runs"])
     assert report["runs"][2]["turn"]["grounding"]["reason"].endswith("factual entailment still requires review.")
+    assert report["runs"][2]["turn"]["grounding"]["status"] == "unverified"
+
+
+def test_prompt_comparison_is_explicit_and_preserves_identical_evidence(corpus):
+    factory = lambda: httpx.MockTransport(lambda request: httpx.Response(200, text=sse("A claim. [source:rocket-reuse]")))
+    settings = Settings(llm=ProviderSettings("http://test/v1", "synthetic-test"))
+    reports = {version: asyncio.run(run_suite(settings, corpus, suite(answer_case()), modes=("rag",), prompt_version=version, transport_factory=factory)) for version in ("legacy", "compact")}
+    audits = [report["runs"][0]["prompt_audit"] for report in reports.values()]
+    assert audits[0]["sha256"] != audits[1]["sha256"]
+    assert audits[0]["evidence_text_sha256"] == audits[1]["evidence_text_sha256"]
+    assert audits[0]["evidence_ids"] == audits[1]["evidence_ids"]
+    assert [report["configuration"]["prompt_version"] for report in reports.values()] == ["legacy", "compact"]
+    assert all(report["runs"][0]["execution"]["http_requests"] == 1 for report in reports.values())
+
+
+def test_marker_validity_and_sentence_coverage_have_separate_counts(corpus):
+    factory = lambda: httpx.MockTransport(lambda request: httpx.Response(200, text=sse("A claim. [source:rocket-reuse] An uncited claim.")))
+    report = asyncio.run(run_suite(Settings(llm=ProviderSettings("http://test/v1", "synthetic-test")), corpus, suite(answer_case()), modes=("rag",), transport_factory=factory))
+    assert report["summary"]["B"]["valid_citation_format"] == 1
+    assert report["summary"]["B"]["complete_citation_coverage"] == 0
+    assert report["runs"][0]["citation_format"]["coverage"]["uncited_unit_indices"] == [1]
 
 
 def test_truncation_records_partial_output_usage_and_real_provider_error(corpus):
