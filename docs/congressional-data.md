@@ -87,8 +87,10 @@ The canonical transcript and shareable recipe bind the source-byte hash,
 canonical turn hash, adapter version, adapter-code hash, exact preformatted
 line window, excluded prefix/suffix hashes and skipped editorial-block hashes.
 The existing parser version and frozen source/split registry are unchanged.
-The nine current non-congressional canonical transcripts and all 977 existing
-records were replayed without changes to their extracted content.
+The [compatibility check](../reports/persona-data/combined-2026-v2/compatibility.json)
+replayed all nine current non-congressional canonical transcripts and verified
+that every one of the 977 existing records is preserved exactly in the combined
+output.
 
 ## Reproduce the separate acquisition
 
@@ -209,8 +211,65 @@ The availability questions added explicit space/government topic anchors
 after this observation. Their success shows that the new source passages are
 usable through the API, not that paraphrase retrieval quality is solved.
 The runner records those negative diagnostics separately and makes no
-held-out or semantic-quality claim. A hybrid retrieval comparison requires
-its own pinned model execution and report.
+held-out or semantic-quality claim.
+
+### Actual pinned hybrid diagnostic
+
+The [six natural-paraphrase cases](../reports/persona-data/combined-2026-v2/hybrid-cases.v1.json)
+were frozen after observing the lexical results and before hybrid execution.
+The [completed hybrid API report](../reports/persona-data/combined-2026-v2/hybrid-api.v2.json)
+uses the documented E5 and mMARCO revisions, dense threshold `0.78`, reranker
+floor `-3`, and two CPU threads. The observed loaded models both used
+`torch.float32` in evaluation mode. Their actual file inventories, parameter
+counts, package versions, complete candidate-scoring traces and input hashes
+are retained. All corpus, case, implementation and model-file checks stayed
+stable during the completed run.
+
+| Natural paraphrase topic | Lexical source retrieved | Hybrid intended passage cited |
+| --- | --- | --- |
+| 2014 fixed-price versus cost-plus launches | No | Yes |
+| 2004 satellites intended for the Shuttle | No | Yes |
+| 2004 prizes for private space activity | Yes | No; abstained |
+| 2005 Falcon I versus Pegasus price | No | Yes |
+| 2007 lithium-ion manufacturing | Yes | Yes |
+| 2011 United States manufacturing | No | Yes |
+
+All six API requests completed; five retrieved and cited the bound intended
+passage. The prize question shows a concrete regression from the lexical
+diagnostic: its intended passage had dense similarity `0.7907681` and the
+highest lexical rank, but the cross-encoder score `-8.3775101` was below the
+unchanged `-3` floor. The runner retained this abstention and did not tune the
+gate or rewrite the question. These six exposed development questions do not
+establish general retrieval improvement or answer entailment.
+
+The [first hybrid attempt](../reports/persona-data/combined-2026-v2/hybrid-api.v1.json)
+is preserved as failed: after its six requests, an overly early file-inventory
+baseline detected the E5 model card newly cached during loading. The
+[follow-up artifact audit](../reports/persona-data/combined-2026-v2/hybrid-api.v1-audit.json)
+verified that the only addition was `README.md`, with no changed or removed
+model/config/tokenizer file. The corrected recorder freezes the complete
+inventory after startup and before querying, and captures the API's actual
+retrieval trace. The second attempt uses the same cases and thresholds.
+
+To repeat this diagnostic, use a compatible Python environment with the
+project and its optional hybrid dependencies installed. Match the runtime
+versions recorded in the report for an exact environment comparison:
+
+```bash
+PYTHONPATH=src OMP_NUM_THREADS=2 MKL_NUM_THREADS=2 \
+  OPENBLAS_NUM_THREADS=2 TOKENIZERS_PARALLELISM=false \
+  python -m tools.persona_data.congress_hybrid \
+  --corpus data/local/persona-combined-2026-v2/corpus \
+  --snapshot data/local/persona-combined-2026-v2/snapshot.json \
+  --cases reports/persona-data/combined-2026-v2/hybrid-cases.v1.json \
+  --output reports/local/congress-hybrid-new.json
+```
+
+The recorder acquires the immutable model revisions, excludes download time
+from API-startup and per-query metrics, and verifies model files before and
+after the registered requests. It performs real embedding and cross-encoder
+inference. Language generation, speech synthesis and acoustic output remain
+unmeasured.
 
 ```bash
 uv run pytest tests/persona_data -q

@@ -1,0 +1,135 @@
+{
+  "schema_version": "larger-control-receipts.v1",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 4429,
+      "sha256": "bd957a756dfe5e61992300d940592a39387b3631be540105a37f3bb5752b671c"
+    },
+    {
+      "path": "attempt-01-4gb/comparison.json",
+      "bytes": 8876,
+      "sha256": "d214f5ba4baa3af506b990383a98aaf8e50c47cc9027da95290e71b18f21827b"
+    },
+    {
+      "path": "attempt-01-4gb/execution.json",
+      "bytes": 7747,
+      "sha256": "e38fd236b96e1c45e9b53c67395fc820d0cb9ecdba4571fdfc9e3effaaa35c6e"
+    },
+    {
+      "path": "attempt-01-4gb/larger/attempts.jsonl",
+      "bytes": 3537,
+      "sha256": "8fceb7b9f64c03d6cef88cb1a3c8147c1ae7172e09e3f176dd9af81f9cb92b2b"
+    },
+    {
+      "path": "attempt-01-4gb/larger/raw-generations.jsonl",
+      "bytes": 758,
+      "sha256": "2ed8ce52dc65366a5166b7895fc3ba48590c7ba9e3e8c6b9fc741781032e91f4"
+    },
+    {
+      "path": "attempt-01-4gb/larger/run.json",
+      "bytes": 7027,
+      "sha256": "4a232fc7d8fb7db2656a5e1164dd46339486be33ca7d3cd2f116f0a255958106"
+    },
+    {
+      "path": "attempt-01-4gb/official-metadata.json",
+      "bytes": 9168,
+      "sha256": "9cacf83dcad4defd2c9c5f45dc5ed8071531d2ef001370d4911d71c29d0c4359"
+    },
+    {
+      "path": "attempt-01-4gb/outcome.json",
+      "bytes": 1436,
+      "sha256": "bb9049fd61edf82e19b238a94126b1d08edcea79cd4c9d296568f9b0eee94e35"
+    },
+    {
+      "path": "attempt-01-4gb/server-memory.jsonl",
+      "bytes": 2383,
+      "sha256": "3e5e171bd5f03b65b85615fc65994148beb6aedf4672262d85e8677fa82a85c0"
+    },
+    {
+      "path": "attempt-01-4gb/server.log",
+      "bytes": 1096,
+      "sha256": "93e8501eed2d59168562e56bda2a9888295ee10455f53aba1d276983ffd1d9ec"
+    },
+    {
+      "path": "attempt-01-4gb/supervisor.py",
+      "bytes": 13076,
+      "sha256": "5906e64b0843f0fd322da395f628daf26bd0acd52cadb5378f16e5029abfb001"
+    },
+    {
+      "path": "attempt-02-5gb/comparison.json",
+      "bytes": 9183,
+      "sha256": "6c59945bbfe5be8216a500e075d6ddccd8cbd7c87a6349793a13aa481a3e596d"
+    },
+    {
+      "path": "attempt-02-5gb/execution.json",
+      "bytes": 8120,
+      "sha256": "b970b594400e526ab51b084a77751455e25717e187cd301e68a5d40c0b643ff5"
+    },
+    {
+      "path": "attempt-02-5gb/larger/attempts.jsonl",
+      "bytes": 18985,
+      "sha256": "763f65774fe7f5be4f4b07272da7703144a80900a5e5f18bc2f94ebbeb4720c6"
+    },
+    {
+      "path": "attempt-02-5gb/larger/raw-generations.jsonl",
+      "bytes": 4142,
+      "sha256": "e44f00caf58291ff9339f6a5c17d3c7dafbbb1e91a8c44abed6453679a0feaf5"
+    },
+    {
+      "path": "attempt-02-5gb/larger/run.json",
+      "bytes": 26236,
+      "sha256": "89afee8a452bfd2b99803dfc3f9ea14b58ce94cd651a2db3f47704c6fe6d9e6e"
+    },
+    {
+      "path": "attempt-02-5gb/official-metadata.json",
+      "bytes": 9168,
+      "sha256": "9cacf83dcad4defd2c9c5f45dc5ed8071531d2ef001370d4911d71c29d0c4359"
+    },
+    {
+      "path": "attempt-02-5gb/server-memory.jsonl",
+      "bytes": 41427,
+      "sha256": "e10512b9fe8e54be33ba9cc29cc54d6c8593de975e8ec01b91ad96e9ec43303a"
+    },
+    {
+      "path": "attempt-02-5gb/server.log",
+      "bytes": 1651,
+      "sha256": "47802f6ef1132b723ad0ac43b255bdbbc81ca991f89bb2b217ca2797df9d8b30"
+    },
+    {
+      "path": "attempt-02-5gb/supervisor.py",
+      "bytes": 13938,
+      "sha256": "12214c7347fb588d60d2d8caa94826c387f7182d7f93da4623e4f7019c51900a"
+    },
+    {
+      "path": "comparison.json",
+      "bytes": 9183,
+      "sha256": "6c59945bbfe5be8216a500e075d6ddccd8cbd7c87a6349793a13aa481a3e596d"
+    },
+    {
+      "path": "model-acquisition.json",
+      "bytes": 1827,
+      "sha256": "a390839ab116055cdd51d49bfa8ff503005a5ae1caadf46bd5e82c554ab2c455"
+    },
+    {
+      "path": "plan-summary.json",
+      "bytes": 6333,
+      "sha256": "6af05747f1e66dda4152e67ea5e9a503cfd65c12564a5cafb5e843c3b4a5339d"
+    },
+    {
+      "path": "setup-01-import-path/execution.json",
+      "bytes": 1269,
+      "sha256": "18d042381c0fd434169dd8a0037a753101e5bae6c93ddeb600d7dec108801349"
+    },
+    {
+      "path": "setup-01-import-path/supervisor.py",
+      "bytes": 12931,
+      "sha256": "b0ee35911ae4bca7d6ddd8bf083cf06a0a0438078e5483447159d5887614849f"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 3602,
+      "sha256": "2d2cd99d302d8a972eb765b50f4a5bc35cc5db7304275c277d84eee1769d7bea"
+    }
+  ]
+}

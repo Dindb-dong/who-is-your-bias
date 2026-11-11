@@ -1,0 +1,177 @@
+{
+  "schema_version": "larger-control-execution.v1",
+  "started_at": "2026-11-11T14:19:25.039546+00:00",
+  "model": "Qwen/Qwen3-1.7B",
+  "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+  "status": "incomplete",
+  "overall_budget_seconds": 600,
+  "server_rss_limit_bytes": 4000000000,
+  "cache_directory": "data/local/larger-model-cache",
+  "transport": "actual_loopback_http",
+  "served_dtype": "bfloat16",
+  "served_device": "cpu",
+  "torch_threads": 2,
+  "trained_adapter": null,
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "supervisor_sha256": "5906e64b0843f0fd322da395f628daf26bd0acd52cadb5378f16e5029abfb001",
+  "inference_attempted": true,
+  "limits": [
+    "Exploratory larger-base control on four exposed development questions.",
+    "Sequential execution and other host activity do not support a model-speed ranking.",
+    "A completed response is not a factual or persona-quality judgment.",
+    "4 GB means 4,000,000,000 bytes of sampled server RSS, not checkpoint file size or total host RSS."
+  ],
+  "plan_sha256": "a10a6f8f764127e964fca7c2229577b49332c78449a2a85ece8999249c2a9f30",
+  "implementation_sha256": {
+    "tools/adaptation_evaluation/protocol.py": "cb807344d378de8e811cc1d111a00c54f42ef40f6703cd3eb2c39266ffe52c07",
+    "tools/adaptation_evaluation/run.py": "ead4af96d3ee25305611e776d8871bcba538a6d80715ed8cef0a4561c3803f57",
+    "tools/adaptation_evaluation/__main__.py": "98cdf136d3e7352e42c01ccadb7cf51e13f5e36230a915c88064cced9ae2cf13",
+    "tools/adaptation_evaluation/local.py": "e9609da6819c8db350b888dc32408f2d5c49a703f8018c05bec5a21c456bc70e",
+    "services/language/engine.py": "4de8fb45c173620e502539273a76ce9e708e8e12fee51060ae61fca8845a633c",
+    "services/language/adapters.py": "ccd92dace3db5065f9af73d26958fcb045fbb3d650f0ead0b10636fe36a185c1",
+    "services/language/app.py": "8e9ae8d0b2e3be25d6fdbbac830f38c827f567d8bb2e26fb86cb7402ae8ff799",
+    "services/language/schemas.py": "f9bea7bde3338b9b5c2e2c670a9ff7ad26d1857777e9d35c787b7f5ffa75da5e",
+    "services/language/requirements.txt": "925c22fead2bd564f8a0ca268d30e05533bfd2856338e7b800f6465dc4258f3b",
+    "services/language/requirements-adapter.txt": "66a43ff50713f25cc71213529074841f61a637acaa55212236ac7b2bafd183dc",
+    "src/bias/context_budget.py": "cffce0af28994922cb50f1e2564456e99e6d0aef0c13893572ffae85c0a8eff9",
+    "src/bias/snapshots.py": "28659167b62d4de7354ccbe83ab4cc3c924891d8c6df2418a33d8755e7b51fc2",
+    "src/bias/config.py": "c5a286c9c32cc18e7409075b87094ed1c7ff7cdd5f94f3cc359341a7df6aec3b",
+    "src/bias/corpus.py": "16b9eef8a6fef0e20a7dd4099b470724e793dc14c698313d06fb679b87e9aeb0",
+    "src/bias/models.py": "1342ef5660b903e2bed04ed28f52e06ec1b1b39fddfb97f8c4b58f36fe13caca",
+    "src/bias/retrieval.py": "72b7b06718b762068fb932131fd6102cd3d8c5e54190b514ee27158aea8b86d9",
+    "src/bias/hybrid_retrieval.py": "d2bf0892205da0304187f421fd582e4aa23da6efe3fb78c2a56b2d69f1389095",
+    "tools/reference_evaluation/run.py": "9e713a05d9e403d91278242d0a110193f3ec6f50764c79efb7ddf1aa873be17b",
+    "tools/reference_evaluation/protocol.py": "781463b6c3bbccb9d02fe513b7595bc31bac837158257dcc02ef923eaf77b9fb",
+    "tools/evaluation/observe.py": "857361e39a940958eef70e6f052e9453ae98676c8f931fcdd5af3ce78284f541",
+    "tools/evaluation/run.py": "25fb528cdf08ad9396a994eabd919a6956f991e7a839a7d6bc61afb09418f15d"
+  },
+  "policy": {
+    "conditions": [
+      "facts",
+      "style",
+      "adapter"
+    ],
+    "max_tokens": 192,
+    "context_window": 8192,
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 42,
+    "factual_policy": "identical_complete_passages_all_conditions",
+    "adapter_style_policy": "identical_prompts",
+    "reference_answer_supplied": false,
+    "history_policy": "same_frozen_context_all_conditions"
+  },
+  "versions": {
+    "torch": "2.11.0+cpu",
+    "transformers": "4.57.3",
+    "peft": "0.18.1",
+    "huggingface-hub": "0.36.2",
+    "httpx": "0.28.1",
+    "uvicorn": "0.54.0"
+  },
+  "official_metadata": {
+    "url": "https://huggingface.co/api/models/Qwen/Qwen3-1.7B",
+    "status": 200,
+    "retrieved_at": "2026-11-11T14:19:33.318678+00:00",
+    "sha256": "9cacf83dcad4defd2c9c5f45dc5ed8071531d2ef001370d4911d71c29d0c4359",
+    "safetensors": {
+      "parameters": {
+        "BF16": 2031739904
+      },
+      "total": 2031739904
+    }
+  },
+  "download_exit_code": 0,
+  "checkpoint_sha256": {
+    "config.json": "1ddb5b89ebc90dcb417a45c213d818577e65976454d29385c8f6140771d95197",
+    "generation_config.json": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2",
+    "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+    "model-00001-of-00002.safetensors": "169ad53ec313c3a34b06c0809216e4fc072cce444a5d4ff2b59690d064130ed5",
+    "model-00002-of-00002.safetensors": "912becff8d60672aa8628ef08c05898d9adf17c2ad4ae3caf99b065622fdeff9",
+    "model.safetensors.index.json": "0d660e94b165eb912669a5249dff44b83188c4777a07ddb9611fb78d91b0578d",
+    "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+    "tokenizer_config.json": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  },
+  "checkpoint_bytes": 4079423234,
+  "download_finished_at": "2026-11-11T14:21:25.235012+00:00",
+  "settings": {
+    "MODEL": "Qwen/Qwen3-1.7B",
+    "REVISION": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "SERVED_MODEL": "comparison-larger",
+    "DTYPE": "bfloat16",
+    "DEVICE": "cpu",
+    "THREADS": "2",
+    "LOCAL_FILES_ONLY": "true",
+    "GENERATION_TIMEOUT": "180",
+    "MAX_INPUT_TOKENS": "8192",
+    "MAX_OUTPUT_TOKENS": "192"
+  },
+  "peak_sampled_server_rss_bytes": 4033294336,
+  "warmup": {
+    "elapsed_seconds": 10.3950645609998,
+    "finish_reason": "stop",
+    "included_in_case_metrics": false
+  },
+  "loaded_health": {
+    "status": "ready",
+    "model": "comparison-larger",
+    "model_loaded": true,
+    "identity": {
+      "schema_version": "language-model-identity.v1",
+      "base_model": "Qwen/Qwen3-1.7B",
+      "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+      "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+      "chat_template_options": {
+        "enable_thinking": false
+      }
+    },
+    "adapter": {
+      "configured": false,
+      "loaded": false,
+      "verified": false
+    },
+    "runtime": {
+      "backend": "transformers",
+      "requested_device": "cpu",
+      "requested_dtype": "bfloat16",
+      "device": "cpu",
+      "dtype": "bfloat16",
+      "context_window": 40960,
+      "base_parameters": 1720574976,
+      "versions": {
+        "torch": "2.11.0+cpu",
+        "transformers": "4.57.3"
+      },
+      "threads": 2,
+      "attention": "sdpa",
+      "generation_defaults": {
+        "seed": 42,
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20
+      }
+    },
+    "busy": false,
+    "stage": null,
+    "concurrency": 1,
+    "cancellation": "cooperative_between_model_steps",
+    "load_ms": 9338.71566400012,
+    "process_peak_rss_bytes": 3987300352,
+    "limits": {
+      "input_tokens": 8192,
+      "output_tokens": 192,
+      "generation_seconds": 180.0
+    }
+  },
+  "attempted_cases": 1,
+  "completed_generations": 0,
+  "larger_run_sha256": "68914ed52df4af09bff052f14b62dfbb5b73de477381fd85c307edc91eb4d2f2",
+  "comparison_sha256": "d214f5ba4baa3af506b990383a98aaf8e50c47cc9027da95290e71b18f21827b",
+  "completed_at": "2026-11-11T14:22:08.594964+00:00",
+  "elapsed_seconds": 163.55544489400017,
+  "server_exit_code_after_cleanup": -15,
+  "implementation_unchanged": true
+}

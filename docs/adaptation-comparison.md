@@ -13,11 +13,13 @@ application's session or audio APIs; use the
 [dialogue scenarios](dialogue-evaluation.md) and
 [live stream benchmark](live-stream-benchmark.md) for those paths.
 
-This document describes the protocol and commands. It does not report a
-completed model comparison, human ratings or improved persona quality. A
-completed training run proves that the recorded optimizer work produced a
-loadable adapter. A completed generation proves that a particular request
-finished. Neither establishes that the answer is better.
+This document describes the protocol and commands. The separately preserved
+[development execution summary](../reports/adaptation/2026-v1/final-comparison/comparison.json)
+records actual attempted, completed and failed calls; its human review remains
+ungraded and its efficacy claim is false. A completed training run proves that
+the recorded optimizer work produced a loadable adapter. A completed generation
+proves that a particular request finished. Neither establishes that the answer
+is better.
 
 ## The controlled conditions
 

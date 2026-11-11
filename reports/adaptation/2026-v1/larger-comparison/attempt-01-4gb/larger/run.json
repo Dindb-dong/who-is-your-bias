@@ -1,0 +1,198 @@
+{
+  "schema_version": "text-adaptation-condition-run.v1",
+  "condition": "larger",
+  "plan_sha256": "a10a6f8f764127e964fca7c2229577b49332c78449a2a85ece8999249c2a9f30",
+  "exposure": "development",
+  "started_at": "2026-11-11T14:21:36.006402+00:00",
+  "status": "failed",
+  "model": {
+    "identity": {
+      "base_model": "Qwen/Qwen3-1.7B",
+      "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+      "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+      "chat_template_options": {
+        "enable_thinking": false
+      }
+    },
+    "adapter": {
+      "configured": false,
+      "loaded": false,
+      "verified": false
+    },
+    "runtime": {
+      "device": "cpu",
+      "dtype": "bfloat16",
+      "backend": "transformers",
+      "context_window": 40960,
+      "threads": 2,
+      "attention": "sdpa",
+      "base_parameters": 1720574976,
+      "versions": {
+        "torch": "2.11.0+cpu",
+        "transformers": "4.57.3"
+      },
+      "generation_defaults": {
+        "seed": 42,
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20
+      }
+    }
+  },
+  "served_model": "comparison-larger",
+  "requested_adapter_run_sha256": null,
+  "policy": {
+    "conditions": [
+      "facts",
+      "style",
+      "adapter"
+    ],
+    "max_tokens": 192,
+    "context_window": 8192,
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 42,
+    "factual_policy": "identical_complete_passages_all_conditions",
+    "adapter_style_policy": "identical_prompts",
+    "reference_answer_supplied": false,
+    "history_policy": "same_frozen_context_all_conditions"
+  },
+  "planned_case_ids": [
+    "original-positive-001-ko",
+    "original-positive-002-en",
+    "original-positive-003-en",
+    "current-2030-unavailable"
+  ],
+  "transport": "actual_http",
+  "environment": {
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "python": "3.12.14"
+  },
+  "timing_scope": "warm_model_http_generation_no_speech_or_acoustic_measurement",
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "runs": [
+    {
+      "case_id": "original-positive-001-ko",
+      "condition": "larger",
+      "prompt_sha256": "99437b189810789275d0a6cb4c97246b0f44e071ddcd22599fab00e0096b7dd2",
+      "factual_sha256": "2edd66ec3b3760b9714e9d6c8d7e58202a8180d6de2804385ed18e1b95889895",
+      "factual_ids": [
+        "qa26-henry-ford-2008-turn-00015"
+      ],
+      "style_ids": [
+        "qa26-dwarkesh-2026-turn-00046"
+      ],
+      "provider_generation": {
+        "text": "어릴 때 프로그래밍은 스스로 학습하며, 처음 컴퓨터를 구매한 시기는 10세이며, 처음 상업용 프로그램을 접한 시기는 12세였습니다. 이는 개인적인 경험으로, 구체적인 기술적 또는 역사적 사실을 제공하지 않습니다.",
+        "completed": true,
+        "error": null,
+        "first_text_ms": 9372.112,
+        "wall_ms": 32453.16,
+        "finish_reason": "stop",
+        "response_model": "comparison-larger",
+        "usage": {
+          "prompt_tokens": 892,
+          "completion_tokens": 70,
+          "total_tokens": 962
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "c3cf54f23d29a2b34cd72918eb4cc0de835898af4b1881520a2f1cc174b74276"
+      },
+      "generation": {
+        "text": "어릴 때 프로그래밍은 스스로 학습하며, 처음 컴퓨터를 구매한 시기는 10세이며, 처음 상업용 프로그램을 접한 시기는 12세였습니다. 이는 개인적인 경험으로, 구체적인 기술적 또는 역사적 사실을 제공하지 않습니다.",
+        "completed": false,
+        "error": "post_generation_identity_unverified",
+        "first_text_ms": 9372.112,
+        "wall_ms": 32453.16,
+        "finish_reason": "stop",
+        "response_model": "comparison-larger",
+        "usage": {
+          "prompt_tokens": 892,
+          "completion_tokens": 70,
+          "total_tokens": 962
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "c3cf54f23d29a2b34cd72918eb4cc0de835898af4b1881520a2f1cc174b74276"
+      },
+      "identity_check": {
+        "before": "verified",
+        "after": "unverified",
+        "failure_type": "ConnectError"
+      },
+      "validation_errors": [
+        "post_generation_identity_unverified"
+      ],
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "missing",
+          "unit_count": 2,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0,
+            1
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "어릴 때 프로그래밍은 스스로 학습하며, 처음 컴퓨터를 구매한 시기는 10세이며, 처음 상업용 프로그램을 접한 시기는 12세였습니다.",
+              "raw_text": "어릴 때 프로그래밍은 스스로 학습하며, 처음 컴퓨터를 구매한 시기는 10세이며, 처음 상업용 프로그램을 접한 시기는 12세였습니다.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 1,
+              "text": "이는 개인적인 경험으로, 구체적인 기술적 또는 역사적 사실을 제공하지 않습니다.",
+              "raw_text": "이는 개인적인 경험으로, 구체적인 기술적 또는 역사적 사실을 제공하지 않습니다.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "reference_surface_overlap": {
+        "token_unigram_f1": 0,
+        "generated_tokens": 26,
+        "reference_tokens": 31,
+        "interpretation": "surface_overlap_only_not_persona_quality"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    }
+  ],
+  "elapsed_seconds": 32.485,
+  "failure_type": "ConnectError",
+  "skipped_case_ids": [
+    "original-positive-002-en",
+    "original-positive-003-en",
+    "current-2030-unavailable"
+  ],
+  "run_sha256": "68914ed52df4af09bff052f14b62dfbb5b73de477381fd85c307edc91eb4d2f2"
+}

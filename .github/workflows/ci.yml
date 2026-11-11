@@ -28,7 +28,16 @@ jobs:
         with:
           enable-cache: true
           python-version: '3.12'
-      - run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Ensure FFmpeg is available
+        # Fail a stalled package mirror promptly enough to leave the actual
+        # software-WebGL browser suite its normal execution budget.
+        timeout-minutes: 4
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get update -o Acquire::Retries=1 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20
+            sudo apt-get install -y ffmpeg -o Acquire::Retries=1 -o Acquire::http::Timeout=20 -o Acquire::https::Timeout=20
+          fi
+          ffmpeg -version
       - run: uv sync --locked --extra dev
       - run: npm ci
       - run: npm ci --prefix tools/avatar --ignore-scripts

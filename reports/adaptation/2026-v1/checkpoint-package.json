@@ -1,10 +1,12 @@
 {
   "schema_version": "adapter-download-package.v1",
   "filename": "who-is-your-bias-qwen06-lora-2026-11-11.zip",
-  "size_bytes": 22609279,
-  "sha256": "8db5eae438fe3edd07724c39d53b7d206e45ff9b18cc48f01c9909c5e6a44022",
+  "size_bytes": 22625535,
+  "sha256": "ce4b7e4dfb27b15ba087e2ed3fb3871e79c159961f52c23d73201e378f7e3692",
   "adapter_run_sha256": "dd1e049aa38ea22e97188da4ee001b0ac0df1e493af22aef30177dc70cb06cf6",
   "includes_base_weights": false,
   "includes_original_training_wording": false,
-  "quality_review_status": "ungraded"
+  "quality_review_status": "ungraded",
+  "development_release_decision": "do_not_promote_as_default",
+  "includes_generation_failure_records": true
 }

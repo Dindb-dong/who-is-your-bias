@@ -43,6 +43,19 @@ build contains **1,018 records across 15 families**, with **777 factual records,
 visible-behavior records**. Exact normalized deduplication removed no records.
 These are extraction counts, not human-approved quality scores.
 
+Six natural questions were fixed before testing the added sources. The
+[lexical diagnostic](../reports/persona-data/combined-2026-v2/api-availability.json)
+found the intended passages in 2/6 cases. With the previously documented E5
+and mMARCO revisions and unchanged 0.78 dense / −3 reranker gates, the
+[actual hybrid API run](../reports/persona-data/combined-2026-v2/hybrid-api.v2.json)
+completed all six requests and cited the intended passages in **5/6**. The
+2004 prize case passed the dense gate but received a −8.3775101 reranker score,
+so it abstained; lexical had found that passage. No threshold or question was
+retuned after those results. This is a small training-event development
+diagnostic, not fresh held-out retrieval accuracy. The
+[source-extension guide](congressional-data.md) records the full comparison,
+actual model/runtime identities, and the earlier inventory-check failure.
+
 The comparison and training below deliberately retain the earlier nine-event
 corpus. Adding hearing documents afterward does not silently change their
 frozen evidence, data identities, or prompts. The later combined corpus has its
@@ -151,6 +164,31 @@ or valid citation identifier is presented as measured persona improvement.
 Timing is sequential and not counterbalanced; concurrent development inference
 also makes these observations unsuitable for a model-speed ranking.
 
+### Larger base control
+
+The [additional larger-model comparison](../reports/adaptation/2026-v1/larger-comparison/README.md)
+uses the same frozen style-condition messages and generation policy with
+`Qwen/Qwen3-1.7B` at revision
+`70d244cc86ccca08cf5af4e1e306ecf908b1ad5e`. Its observed base parameter count is
+1,720,574,976, compared with 596,049,920 in the smaller base, and the tokenizer
+contract matches. CPU BF16 and two threads remain the same.
+
+The completed attempt verified **3/4 generations**; the English first-principles
+answer ended at the token limit. All three evidence-bearing outputs also lacked
+required citations. Its current-plan answer was an unsupported personal denial,
+so it is not evidence of calibrated abstention. This control does not establish
+a successful quality fix or justify changing the default model.
+
+An initial attempt hit a deliberately configured 4,000,000,000-byte server RSS
+guard at 4,033,294,336 bytes. That incomplete attempt remains recorded as a
+resource-budget interruption, not an OOM or model incompatibility. After the
+hybrid process exited and available memory was recorded, one separate attempt
+used a 5,000,000,000-byte guard and completed all four requests, peaking at
+4,251,389,952 bytes. The
+[four-condition report](../reports/adaptation/2026-v1/larger-comparison/comparison.json)
+includes the larger control; the earlier three-condition report retains its
+original identity and scope.
+
 ## Dialogue and fresh evaluation
 
 The [dialogue suite](dialogue-evaluation.md) contains 29 scenarios and 100 steps.
@@ -236,3 +274,11 @@ and speech were separately executed in the documented optional environments.
 The new branch's browser checks and exact final commit status are tracked in
 the pull request's CI checks. A prior PR's successful run is not substituted for
 validation of a later commit.
+
+The first continuation CI run remained in FFmpeg package installation for several
+minutes, whereas that step took 21 seconds in the prior successful PR #13 run.
+The workflow now reuses FFmpeg when present and otherwise performs a bounded
+package installation with explicit connection timeouts and a four-minute step
+limit. FFmpeg was not preinstalled on the inspected earlier runner. The actual
+browser suite and its job deadline were retained; setup failure remains an
+explicit failed check.
