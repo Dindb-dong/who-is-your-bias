@@ -51,6 +51,7 @@ class Settings:
     tts: ProviderSettings = field(default_factory=ProviderSettings)
     asr: ProviderSettings = field(default_factory=ProviderSettings)
     tts_voice: str = "default"
+    tts_language_hint: bool = False
     request_timeout: float = 60.0
     session_ttl: float = 3_600.0
     max_sessions: int = 256
@@ -59,6 +60,10 @@ class Settings:
     max_response_chars: int = 6_000
     llm_max_tokens: int = 900
     cors_origins: tuple[str, ...] = ("http://localhost:5173", "http://127.0.0.1:5173")
+
+    def __post_init__(self) -> None:
+        if not isinstance(self.tts_language_hint, bool):
+            raise ValueError("tts_language_hint must be a boolean")
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -78,6 +83,9 @@ class Settings:
         llm_max_tokens = number("BIAS_LLM_MAX_TOKENS", 900, 1, 4096)
         if not llm_max_tokens.is_integer():
             raise ValueError("BIAS_LLM_MAX_TOKENS must be an integer")
+        language_hint = os.getenv("BIAS_TTS_LANGUAGE_HINT", "false").strip().lower()
+        if language_hint not in {"true", "false", "1", "0"}:
+            raise ValueError("BIAS_TTS_LANGUAGE_HINT must be true, false, 1, or 0")
 
         return cls(
             corpus_dir=Path(os.getenv("BIAS_CORPUS_DIR", str(repository_root() / "data/personas/elon-musk"))),
@@ -86,6 +94,7 @@ class Settings:
             tts=provider("TTS"),
             asr=provider("ASR"),
             tts_voice=os.getenv("BIAS_TTS_VOICE", "default"),
+            tts_language_hint=language_hint in {"true", "1"},
             request_timeout=number("BIAS_REQUEST_TIMEOUT", 60, 1, 180),
             session_ttl=number("BIAS_SESSION_TTL", 3600, 1, 86400),
             max_sessions=int(number("BIAS_MAX_SESSIONS", 256, 1, 10000)),

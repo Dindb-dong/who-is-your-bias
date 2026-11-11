@@ -63,7 +63,7 @@ class SpeechPackages:
             raise ProviderError("speech_busy", "Speech preparation is busy. Try again shortly.", 429)
         self.active += 1
         try:
-            data, mime = await provider.synthesize(text, voice)
+            data, mime = await provider.synthesize(text, voice, language=language)
             if len(data) > 20_000_000:
                 raise ProviderError("audio_output_limit", "Generated audio exceeds the playback limit.", 502)
             analysis = await lipsync.analyze(data, text, language)

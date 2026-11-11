@@ -1,0 +1,33 @@
+{
+  "schema_version": "voice_listening.v1",
+  "created_at": "2026-11-11T01:52:16.551439+00:00",
+  "status": "unrated",
+  "reference": null,
+  "samples": [
+    {
+      "id": "sample001",
+      "path": "sample001.wav",
+      "sha256": "47fa7aac63d0e31b80a445eb8420616221a356a70a038f34392d9586205d05cf",
+      "language": "Korean"
+    },
+    {
+      "id": "sample002",
+      "path": "sample002.wav",
+      "sha256": "15f9916febb709de71bf111a0999e2fd7b4317428a5c3c1bb23c465642863a8d",
+      "language": "English"
+    },
+    {
+      "id": "sample003",
+      "path": "sample003.wav",
+      "sha256": "20a22caa3d34c0e49b6a14714f464accbb2a0b5536de36984656ee62be26fc58",
+      "language": "English"
+    },
+    {
+      "id": "sample004",
+      "path": "sample004.wav",
+      "sha256": "9b9204ef4c5f6074a6f97550802e56b43574666f197b9e7c9a5c985514e7d9d6",
+      "language": "English"
+    }
+  ],
+  "instructions": "Listen before reading any answer key. Rate only languages you understand; leave other fields null. Scores are subjective self-reports, not identity verification. Share the listener directory only."
+}

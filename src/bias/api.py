@@ -85,7 +85,7 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
     @asynccontextmanager
     async def lifespan(application: FastAPI) -> AsyncIterator[None]:
         application.state.engine = Engine(config, corpus or Corpus.load(config.corpus_dir), llm=llm)
-        application.state.speech = SpeechProvider(config.tts, voice=config.tts_voice, timeout=config.request_timeout)
+        application.state.speech = SpeechProvider(config.tts, voice=config.tts_voice, timeout=config.request_timeout, language_hint=config.tts_language_hint)
         application.state.transcription = TranscriptionProvider(config.asr, timeout=config.request_timeout)
         application.state.lipsync = LipsyncEngine.from_env()
         application.state.speech_packages = SpeechPackages()
@@ -172,7 +172,7 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
     @application.post("/api/speech")
     async def speech(body: SpeechRequest, request: Request):
         try:
-            data, mime = await request.app.state.speech.synthesize(body.text, body.voice)
+            data, mime = await request.app.state.speech.synthesize(body.text, body.voice, language=body.language)
             return Response(content=data, media_type=mime, headers={"X-Speech-Timing": "unavailable", "X-Voice-Mode": "configured-provider"})
         except ProviderError as exc:
             status, error = _public_error(exc)

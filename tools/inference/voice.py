@@ -39,7 +39,7 @@ def run(args: argparse.Namespace) -> dict:
             model_id=args.model, device="cpu", dtype=args.dtype, attention="sdpa",
             reference_wav=args.reference, reference_text=transcript,
             x_vector_only_mode=args.x_vector_only, max_new_tokens=args.max_new_tokens,
-            max_audio_seconds=20,
+            max_audio_seconds=20, threads=args.threads, seed=args.seed,
         )
         reference, reference_rate = read_reference(settings)
         report["reference"] = {
@@ -73,7 +73,7 @@ def run(args: argparse.Namespace) -> dict:
             allow_patterns=["*.json", "*.txt", "*.safetensors"], max_workers=2,
         )
         report["download_seconds"] = time.perf_counter() - download_started
-        settings = replace(settings, model_id=snapshot)
+        settings = replace(settings, model_id=snapshot, revision=info.sha, cache_dir=args.cache_dir)
         save_report(args.report, report)
 
         class MeasuredModel:

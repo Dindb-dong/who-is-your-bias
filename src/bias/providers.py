@@ -106,19 +106,29 @@ class OpenAICompatibleLLM:
 
 
 class SpeechProvider:
-    def __init__(self, settings: ProviderSettings, *, voice: str = "default", timeout: float = 60, transport: httpx.AsyncBaseTransport | None = None):
+    def __init__(self, settings: ProviderSettings, *, voice: str = "default", timeout: float = 60, language_hint: bool = False, transport: httpx.AsyncBaseTransport | None = None):
+        if not isinstance(language_hint, bool):
+            raise ValueError("language_hint must be a boolean")
         self.settings = settings
         self.voice = voice
         self.timeout = timeout
+        self.language_hint = language_hint
         self.transport = transport
 
-    async def synthesize(self, text: str, voice: str | None = None) -> tuple[bytes, str]:
+    async def synthesize(self, text: str, voice: str | None = None, *, language: str | None = None) -> tuple[bytes, str]:
         if not self.settings.configured:
             raise ProviderError("speech_unconfigured", "Configure a speech provider to enable server-generated audio.", 503)
+        if language not in {None, "en", "ko"}:
+            raise ProviderError("speech_language", "Speech language must be en or ko.", 422)
+        payload = {"model": self.settings.model, "input": text, "voice": voice or self.voice, "response_format": "wav"}
+        # `language` is a local-Qwen extension, not part of the generic OpenAI
+        # speech contract. Never add it without explicit server configuration.
+        if self.language_hint and language is not None:
+            payload["language"] = {"en": "English", "ko": "Korean"}[language]
         try:
             async with asyncio.timeout(self.timeout):
                 async with httpx.AsyncClient(timeout=self.timeout, transport=self.transport, follow_redirects=False) as client:
-                    async with client.stream("POST", f"{self.settings.base_url}/audio/speech", headers=self.settings.headers, json={"model": self.settings.model, "input": text, "voice": voice or self.voice, "response_format": "wav"}) as response:
+                    async with client.stream("POST", f"{self.settings.base_url}/audio/speech", headers=self.settings.headers, json=payload) as response:
                         if response.status_code != 200:
                             raise _status_error(response.status_code)
                         data = bytearray()

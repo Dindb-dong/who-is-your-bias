@@ -1,0 +1,5 @@
+# Separate CPU-only recognizer environment; no PyTorch/TTS dependency is needed.
+faster-whisper==1.2.1
+ctranslate2==4.8.5
+huggingface-hub==0.36.2
+httpx>=0.27,<1
