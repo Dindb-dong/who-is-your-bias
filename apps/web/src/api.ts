@@ -10,10 +10,17 @@ export interface Source {
 }
 export interface Locator { label: string; start_seconds?: number | null; end_seconds?: number | null; timeline?: string | null }
 export interface Citation { evidence_id: string; source_id: string; title: string; url: string; locator: Locator; text: string }
+export interface Grounding {
+  status: 'grounded' | 'insufficient' | 'unverified'; retrieved_ids: string[]; invalid_citation_ids: string[];
+  reason?: string | null;
+  citation_status?: 'complete' | 'partial' | 'missing' | 'invalid' | 'not_required';
+  citation_unit_count?: number; cited_unit_count?: number; malformed_citations?: string[];
+  semantic_status?: 'unreviewed' | 'curated_source';
+}
 export interface Turn {
   id: string; session_id: string; text: string; language: Language; mode: ExperimentMode;
   provider: 'evidence' | 'openai'; citations: Citation[]; behavior: BehaviorPlan & { speech: { rate: number; pitch: number; pause_ms: number } };
-  grounding: { status: 'grounded' | 'insufficient' | 'unverified'; retrieved_ids: string[]; invalid_citation_ids: string[] };
+  grounding: Grounding;
   metrics: { retrieval_ms: number; generation_ms: number; total_ms: number };
 }
 export interface Persona {
@@ -68,6 +75,17 @@ function isTurn(value: unknown): value is Turn {
   if (!object(plan.speech) || !positive(plan.speech.rate, false) || !positive(plan.speech.pitch, false) || !positive(plan.speech.pause_ms)) return false;
   const grounding = value.grounding;
   if (!object(grounding) || !['grounded', 'insufficient', 'unverified'].includes(String(grounding.status)) || !strings(grounding.retrieved_ids) || !strings(grounding.invalid_citation_ids)) return false;
+  // Older servers omit these additive diagnostics. Present fields must still
+  // be validated before a coverage count or semantic label reaches the UI.
+  if (grounding.reason != null && typeof grounding.reason !== 'string') return false;
+  if (grounding.citation_status !== undefined && !['complete', 'partial', 'missing', 'invalid', 'not_required'].includes(String(grounding.citation_status))) return false;
+  if (grounding.semantic_status !== undefined && !['unreviewed', 'curated_source'].includes(String(grounding.semantic_status))) return false;
+  if (grounding.malformed_citations !== undefined && !strings(grounding.malformed_citations)) return false;
+  for (const key of ['citation_unit_count', 'cited_unit_count']) {
+    if (grounding[key] !== undefined && (!positive(grounding[key]) || !Number.isSafeInteger(grounding[key]))) return false;
+  }
+  if (typeof grounding.citation_unit_count === 'number' && typeof grounding.cited_unit_count === 'number' && grounding.cited_unit_count > grounding.citation_unit_count) return false;
+  if (grounding.semantic_status === 'curated_source' && value.provider !== 'evidence') return false;
   const metrics = value.metrics;
   return object(metrics) && ['retrieval_ms', 'generation_ms', 'total_ms'].every((key) => positive(metrics[key]));
 }
