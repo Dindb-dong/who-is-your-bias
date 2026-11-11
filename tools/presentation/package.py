@@ -71,6 +71,8 @@ def package(*, plan_path: Path, speech_dir: Path, render_dir: Path, portrait: Pa
     # Also decode every video/audio packet; a readable header alone is insufficient.
     subprocess.run(["ffmpeg", "-v", "error", "-i", str(output / "presentation.mp4"), "-f", "null", "-"],
         check=True, capture_output=True, timeout=60)
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-i", str(output / "presentation.mp4"),
+        "-frames:v", "1", str(output / "poster.png")], check=True, capture_output=True, timeout=30)
     record = {"schema_version": "presentation-package.v1", "status": "completed", "backend": render["backend"],
         "title": plan["title"], "language": plan["language"],
         "generated_at": datetime.now(timezone.utc).isoformat(), "duration_seconds": wav_info(audio)["seconds"],
@@ -83,14 +85,14 @@ def package(*, plan_path: Path, speech_dir: Path, render_dir: Path, portrait: Pa
             "Geometric face blending differs from the upstream face-parsing pipeline.",
             "Container integrity does not establish perceptual lip-sync, voice quality, or likeness.",
             "This prepared narration explains the experiment; it is not an attributed source quotation or live LLM answer."]}
-    record["artifacts"] = {p.name: {"sha256": digest(p), "bytes": p.stat().st_size} for p in output.iterdir() if p.is_file()}
-    save(output / "manifest.json", record)
     (output / "index.html").write_text("""<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Who is your bias? — Prepared presentation</title><style>body{margin:0;background:#101827;color:#e2e8f0;font:16px system-ui;padding:24px}main{max-width:1040px;margin:auto}video{width:100%;border-radius:12px;background:#000}h1{font-size:26px}.notice{color:#fbbf24}a{color:#7dd3fc}p{line-height:1.6}</style><main>
 <h1>Who is your bias?</h1><p class="notice">AI research simulation — not the real person</p>
-<video controls preload="metadata" poster="slide.png"><source src="presentation.mp4" type="video/mp4"><track kind="captions" src="captions.vtt" srclang="en" label="English"></video>
+<video controls preload="metadata" poster="poster.png"><source src="presentation.mp4" type="video/mp4"><track kind="captions" src="captions.vtt" srclang="en" label="English"></video>
 <p>Prepared Qwen3-TTS speech and actual MuseTalk 1.5 neural lip-sync on an artistic portrait. The captions are also burned into the video. Human voice and visual synchronization ratings remain ungraded.</p>
 <p><a href="speech.wav">Generated speech</a> · <a href="captions.vtt">Captions</a> · <a href="manifest.json">Measured run metadata</a> · <a href="plan.json">Prepared script and sources</a></p></main></html>""", encoding="utf-8")
+    record["artifacts"] = {p.name: {"sha256": digest(p), "bytes": p.stat().st_size} for p in output.iterdir() if p.is_file()}
+    save(output / "manifest.json", record)
     return record
 
 

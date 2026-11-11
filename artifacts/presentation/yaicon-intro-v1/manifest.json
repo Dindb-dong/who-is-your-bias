@@ -1,0 +1,139 @@
+{
+  "schema_version": "presentation-package.v1",
+  "status": "completed",
+  "backend": "musetalk-1.5-fixed-crop",
+  "title": "Who is your bias? \u2014 Research demo",
+  "language": "en",
+  "generated_at": "2026-11-11T04:17:30.705313+00:00",
+  "duration_seconds": 12.24,
+  "disclosure": "AI research simulation \u2014 not the real person",
+  "script_kind": "prepared_project_narration",
+  "speech_model": {
+    "model": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+    "revision": "5d83992436eae1d760afd27aff78a71d676296fc"
+  },
+  "video_models": {
+    "musetalk": {
+      "repo": "TMElyralab/MuseTalk",
+      "revision": "2bcb936e2fddb4d86db4c62fd45b387d0c061571"
+    },
+    "vae": {
+      "repo": "stabilityai/sd-vae-ft-mse",
+      "revision": "31f26fdeee1355a5c34592e401dd41e45d25a493"
+    },
+    "whisper": {
+      "repo": "openai/whisper-tiny",
+      "revision": "169d4a4341b33bc18d8881c4b69c2e104e1cc0af"
+    }
+  },
+  "timing": {
+    "passed": true,
+    "video_seconds": 12.24,
+    "audio_seconds": 12.24,
+    "fps": 25.0,
+    "video_frames": 306,
+    "source_audio_seconds": 12.24,
+    "start_offset_seconds": 0.0,
+    "duration_difference_seconds": 0.0,
+    "tolerance_seconds": 0.04766666666666666,
+    "scope": "Container/timeline integrity; visual lip-sync quality requires review."
+  },
+  "full_decode_passed": true,
+  "generated_frames": 306,
+  "human_listening_review": "unrated",
+  "human_visual_sync_review": "unrated",
+  "likeness_review": "unrated",
+  "limitations": [
+    "Fixed artistic portrait; no learned personal head/body motion.",
+    "Geometric face blending differs from the upstream face-parsing pipeline.",
+    "Container integrity does not establish perceptual lip-sync, voice quality, or likeness.",
+    "This prepared narration explains the experiment; it is not an attributed source quotation or live LLM answer."
+  ],
+  "artifacts": {
+    "plan.json": {
+      "sha256": "b3c864004bd5e63e5d6a4031346ad07dd2d05a013860229fa2ce8c9f1cef16fb",
+      "bytes": 898
+    },
+    "asr-input.json": {
+      "sha256": "ff3371e2cf45c3646e20b15d55234061ae766673fa235a48bca2c38e94fc6a48",
+      "bytes": 844
+    },
+    "portrait.png": {
+      "sha256": "ae0a70f4e000c650cba5d52e865f2b48ec24e1598f99515596e62b7759ae8822",
+      "bytes": 729704
+    },
+    "poster.png": {
+      "sha256": "9fec5e70e7f3ad0243d607f36cecbd5b0b9ee4422319d048a7674174c9008513",
+      "bytes": 307474
+    },
+    "speech.json": {
+      "sha256": "c0e74ff58d4ed9d88cbed8f6011d1e76b4ddb15657fd87b9546a3aea42bff726",
+      "bytes": 2533
+    },
+    "visual-inspection.json": {
+      "sha256": "2c28e45c8812152742816d6a0e9699bc9ef8804533b4383cd1689266a29953a9",
+      "bytes": 580
+    },
+    "captions.vtt": {
+      "sha256": "2c6f5fa942e088666b7e9888d1c02e484898a341af865d150801f54aed382408",
+      "bytes": 316
+    },
+    "presentation.mp4": {
+      "sha256": "384083f45f2364510ba2433a688f7a33b5146189646228247d6685e57386bff5",
+      "bytes": 416948
+    },
+    "disclosure.wav": {
+      "sha256": "f8a2fb22f40c36ce04f86586643680481a3ca5a254678a492c4938330a8af6e0",
+      "bytes": 142124
+    },
+    "experiment.wav": {
+      "sha256": "75b2c145db5549095ad991c79488994254d5ece83f922deb4abc269f0421bf66",
+      "bytes": 184364
+    },
+    "asr.json": {
+      "sha256": "5971856426e2a09c9a918715c392e58028559303b67964d942905ad8b9dfff35",
+      "bytes": 8643
+    },
+    "speech.wav": {
+      "sha256": "f3e3fb41fca380073cb9d4fdb0209e4062b1e5d60da988e2f58d419c09635e0a",
+      "bytes": 587564
+    },
+    "review.wav": {
+      "sha256": "7b992ad6e8fb0972560dfd345c5dd0b72a1797f196ba2fc8d3e04fdd174f35e4",
+      "bytes": 241964
+    },
+    "index.html": {
+      "sha256": "a0ba47dc325faf8338686712295b8b984a03bc2318c7ec4da947c1c726637b14",
+      "bytes": 1135
+    },
+    "captions.srt": {
+      "sha256": "030df6be578bb4e053e9e96e684099488ac8d7c210c01eb43210be08897c38a4",
+      "bytes": 308
+    },
+    "slide.png": {
+      "sha256": "03555c634de3e733e4ce8b26b6e0735ff56fe8a36918f5fed8b1c68f3b67dc2e",
+      "bytes": 35443
+    },
+    "render.json": {
+      "sha256": "f8fc385f708c636656f7ea63ebca4d760370b866ea099ce52f710dffc6317ecc",
+      "bytes": 1792
+    },
+    "execution-provenance.json": {
+      "sha256": "f2c937c91340a4b30203eaa5803d7249896bd9bb0763218bcadd9b6de094669c",
+      "bytes": 2029
+    },
+    "attempts.json": {
+      "sha256": "fe3ee8360ea0d5dd5d871655d84ed90d86874acc3976e28a1bcf479d1296f520",
+      "bytes": 1700
+    }
+  },
+  "automated_intelligibility_check": {
+    "report": "asr.json",
+    "kind": "unprompted_ASR",
+    "human_listening": false,
+    "primary_metric": "wer",
+    "error_rate": 0.090909,
+    "cer": 0.005952,
+    "note": "A I versus AI changes word tokenization; ASR also omits one article."
+  }
+}

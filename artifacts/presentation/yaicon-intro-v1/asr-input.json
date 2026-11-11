@@ -1,0 +1,24 @@
+{
+  "schema_version": "voice_synthesis.v1",
+  "status": "completed",
+  "condition": "prepared-presentation",
+  "execution": "existing_prepared_audio",
+  "prepared_speech_sha256": "c0e74ff58d4ed9d88cbed8f6011d1e76b4ddb15657fd87b9546a3aea42bff726",
+  "cases": [
+    {
+      "id": "presentation",
+      "status": "succeeded",
+      "text": "This is an A I research simulation, not the real person. We compare a profile, interview examples, and situation matching. The answers need independent review. Better performance is a question, not a promise.",
+      "language": "English",
+      "asr_language": "en",
+      "audio": {
+        "path": "speech.wav",
+        "sha256": "f3e3fb41fca380073cb9d4fdb0209e4062b1e5d60da988e2f58d419c09635e0a",
+        "bytes": 587564
+      },
+      "signal": {
+        "duration_seconds": 12.24
+      }
+    }
+  ]
+}

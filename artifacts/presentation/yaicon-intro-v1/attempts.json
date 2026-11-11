@@ -1,0 +1,38 @@
+{
+  "schema_version": "presentation-attempts.v1",
+  "attempts": [
+    {
+      "status": "failed",
+      "started_at": "2026-11-11T04:07:47.915531+00:00",
+      "generated_frames": 0,
+      "elapsed_seconds": 0.17745839599956525,
+      "stage_seconds": {},
+      "error": "OSError: Can't load feature extractor for '<local-model-cache>/hf-cache/models--openai--whisper-tiny/blobs'. If you were trying to load it from 'https://huggingface.co/models', make sure you don't have a local directory with the same name. Otherwise, make sure '<local-model-cache>/hf-cache/models--openai--whisper-tiny/blobs' is the correct path to a directory containing a preprocessor_config.json file",
+      "scope": "Initial loader probe; failed because resolving cache symlinks lost the snapshot config filenames. Fixed before the next attempt."
+    },
+    {
+      "status": "partial_probe",
+      "started_at": "2026-11-11T04:08:25.682817+00:00",
+      "generated_frames": 3,
+      "elapsed_seconds": 15.070048694000434,
+      "stage_seconds": {
+        "audio_features": 0.839897445999668,
+        "image_and_model_load": 5.283643229999143,
+        "frame_inference_and_encoding": 8.887088499999663
+      },
+      "scope": "Three-frame neural execution/visual probe, not a complete clip."
+    },
+    {
+      "status": "completed",
+      "started_at": "2026-11-11T04:09:14.892874+00:00",
+      "generated_frames": 306,
+      "elapsed_seconds": 491.06990769800177,
+      "stage_seconds": {
+        "audio_features": 0.4680356489989208,
+        "image_and_model_load": 2.819091027999093,
+        "frame_inference_and_encoding": 487.763279756
+      },
+      "scope": "Complete 306-frame prepared presentation."
+    }
+  ]
+}

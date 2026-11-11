@@ -1,0 +1,14 @@
+{
+  "schema_version": "presentation-visual-inspection.v1",
+  "reviewer": "assistant",
+  "scope": "Inspected rendered stills at 0.8, 5.8, and 10.8 seconds; no independent human audiovisual review.",
+  "findings": [
+    "Simulation disclosure is visible and uncropped.",
+    "Caption text is readable and inside the video boundaries.",
+    "The generated lower face changes across sampled frames while the fixed portrait is preserved.",
+    "A/B/C comparison labels are visible."
+  ],
+  "human_lip_sync_rating": null,
+  "human_voice_rating": null,
+  "human_likeness_rating": null
+}

@@ -5,6 +5,43 @@ new Qwen3-TTS Base speech and real MuseTalk 1.5 neural inference. Its script
 introduces the A/B/C experiment; it is original project narration, not an
 attributed interview answer. The live conversational path remains separate.
 
+## Completed pilot
+
+The [self-contained player](../artifacts/presentation/yaicon-intro-v1/index.html)
+and [MP4](../artifacts/presentation/yaicon-intro-v1/presentation.mp4) were generated
+on 2026-11-11. The complete package includes the generated speech, captions,
+input portrait, exact script, checksums, model revisions, and execution evidence.
+
+| Measured property | Result |
+| --- | --- |
+| Prepared speech | 12.24 seconds; 293,760 mono PCM16 samples at 24 kHz |
+| Qwen3-TTS synthesis | Three new segments; 79.27 seconds including the cold first call; CPU bfloat16, two threads |
+| MuseTalk render | All 306 frames generated at 25 fps; 491.07 seconds including feature/model preparation; CPU bfloat16, four threads |
+| MuseTalk UNet parameters | 849,947,844 |
+| Delivered video | H.264/AAC, 1280×720, 416,948 bytes |
+| Audio/video duration | 12.24 seconds each; measured difference 0 seconds |
+| Audio/video start offset | 0 seconds |
+| Full media decode | Passed |
+| Unprompted ASR | WER 3/33 = 9.09%; CER 1/168 = 0.60% |
+| Human voice, lip-sync, and likeness ratings | Unrated |
+
+The recognizer joins the synthesis spelling `A I` into `AI`, accounting for two
+word-level edits; it also omits the article before “profile.” Its raw output,
+word timestamps, model hash/revision, and normalization are retained. This
+small automated check does not establish naturalness or voice resemblance.
+
+An assistant inspected rendered frames at 0.8, 5.8, and 10.8 seconds for layout,
+visible disclosure, captions, and changing generated mouth shapes. This is
+separate from a human audiovisual synchronization judgment. The successful run
+and earlier failed/partial probes remain distinct in `attempts.json`; the
+initial cache-path loader failure was corrected before inference succeeded.
+
+The video preparation rate was about **0.63 frames per second** on this CPU.
+That is appropriate for a prepared pilot, not evidence of real-time video
+generation. The later independent ASR check briefly shared the CPU with video
+preparation, so these times are execution observations rather than controlled
+cross-backend benchmarks.
+
 ## What is implemented
 
 `tools.presentation.speech` synthesizes bounded script segments, preserves each
