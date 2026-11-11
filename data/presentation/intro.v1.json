@@ -1,0 +1,26 @@
+{
+  "schema_version": "presentation-plan.v1",
+  "id": "yaicon-intro-v1",
+  "title": "Who is your bias? — Research demo",
+  "language": "en",
+  "disclosure": "AI research simulation — not the real person",
+  "script_kind": "prepared_project_narration",
+  "script_author": "project assistant",
+  "segments": [
+    {
+      "id": "disclosure",
+      "text": "This is an A I research simulation, not the real person.",
+      "source_refs": ["README.md#who-is-your-bias"]
+    },
+    {
+      "id": "experiment",
+      "text": "We compare a profile, interview examples, and situation matching.",
+      "source_refs": ["docs/proposal-alignment.md#controlled-abc-conditions"]
+    },
+    {
+      "id": "review",
+      "text": "The answers need independent review. Better performance is a question, not a promise.",
+      "source_refs": ["docs/proposal-alignment.md#evaluation-and-acceptance"]
+    }
+  ]
+}
