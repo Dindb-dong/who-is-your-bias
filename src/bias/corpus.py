@@ -50,6 +50,7 @@ class Corpus:
     sources: dict[str, Source]
     evidence: dict[str, Evidence]
     manifest: dict | None = None
+    source_assignments: dict[str, tuple[str, str]] | None = None
 
     @classmethod
     def load(cls, directory: Path, *, check_splits: bool = True) -> "Corpus":
@@ -90,19 +91,26 @@ class Corpus:
             persona = Persona.model_validate_json((directory / "profile.json").read_text(encoding="utf-8"))
             manifest_path = directory / "corpus-manifest.json"
             manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else None
+            if manifest is not None and not isinstance(manifest, dict):
+                raise CorpusError("corpus-manifest.json must be an object")
             split_path = directory / "split-manifest.json"
+            source_assignments = None
             if split_path.exists():
                 split = json.loads(split_path.read_text(encoding="utf-8"))
+                if not isinstance(split, dict) or not isinstance(split.get("events"), list) or any(not isinstance(item, dict) or not all(key in item for key in ("source_event_id", "split", "source_ids")) or not isinstance(item["source_ids"], list) or not item["source_ids"] or any(not isinstance(key, str) for key in item["source_ids"]) for item in split["events"]):
+                    raise CorpusError("Invalid frozen source-event manifest")
                 declared = {item["source_event_id"]: item["split"] for item in split["events"]}
-                if len(declared) != len(split["events"]) or any(declared.get(source_event_id(source)) != source.split for source in sources.values()):
+                source_events = {identifier: item["source_event_id"] for item in split["events"] for identifier in item["source_ids"]}
+                if len(declared) != len(split["events"]) or sum(len(item["source_ids"]) for item in split["events"]) != len(source_events) or any(declared.get(source_event_id(source)) != source.split or source_events.get(source.id) != source_event_id(source) for source in sources.values()):
                     raise CorpusError("Source splits do not match the frozen event manifest")
+                source_assignments = {identifier: (event_id, declared[event_id]) for identifier, event_id in source_events.items()}
         except (OSError, ValueError) as exc:
             if isinstance(exc, CorpusError):
                 raise
             raise CorpusError(f"Cannot load corpus from {directory}: {exc}") from exc
         if not sources or not evidence:
             raise CorpusError("Corpus must contain sources and evidence")
-        corpus = cls(persona, sources, evidence, manifest)
+        corpus = cls(persona, sources, evidence, manifest, source_assignments)
         if check_splits:
             corpus.validate_split_isolation()
         return corpus
@@ -160,6 +168,10 @@ class Corpus:
         }
 
     def validate_split_isolation(self) -> None:
+        if self.source_assignments is not None:
+            for source in self.sources.values():
+                if self.source_assignments.get(source.id) != (source_event_id(source), source.split):
+                    raise CorpusError(f"Source {source.id} differs from the frozen event manifest")
         quality = self.quality_report()
         if quality["source_event_split_leaks"]:
             events = ", ".join(group["source_event_id"] for group in quality["source_event_split_leaks"])

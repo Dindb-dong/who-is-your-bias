@@ -1,0 +1,159 @@
+{
+  "schema_version": "original-qa-retrieval-development.v1",
+  "corpus_id": "elon-musk-original-qa.v1",
+  "materialization": "full_selected_exchanges_local",
+  "retriever_version": "qa-bm25-situation.v2",
+  "situation_multiplier": 1.35,
+  "scope": "Development-only reranking and topic-floor checks. Original test questions and reference answers were not used to tune these rules. This is not a persona-quality score.",
+  "input_sha256": {
+    "evidence.jsonl": "bb9276d5c1b270532f7e15eb4a43a89d4af791737e6f161504b179a25638a04a",
+    "profile.json": "c597d33eaaf0fb145122ba3b374c0c3b431f8d42c65434717b13368ee81a3b4a",
+    "sources.json": "6eb1031c09784bfdb563649f06ecfba163fb9fc187f608fee3c98f1d79fc222b",
+    "split-manifest.json": "d9ef0051c278e376074dbe8cc12de1c67658774930c32e0b5ab1a526f6355295",
+    "selection-recipes.json": "65954d160d2e2bb0d273ce9064f95b18fa603f681345d0689f52a47d23aa07dd"
+  },
+  "hand_authored_development_queries": [
+    {
+      "query": "How do you reduce tunnel costs?",
+      "situation": "explanation",
+      "conditions": {
+        "B": [
+          {
+            "id": "qa-ted-2017-cost",
+            "score": 4.724787,
+            "topical_score": 4.724787,
+            "situation_match": false
+          },
+          {
+            "id": "qa-ted-2017-cost-method",
+            "score": 4.425883,
+            "topical_score": 4.425883,
+            "situation_match": true
+          },
+          {
+            "id": "qa-ted-2017-flying-cars",
+            "score": 4.142203,
+            "topical_score": 4.142203,
+            "situation_match": false
+          }
+        ],
+        "C": [
+          {
+            "id": "qa-ted-2017-cost-method",
+            "score": 5.974942,
+            "topical_score": 4.425883,
+            "situation_match": true
+          },
+          {
+            "id": "qa-ted-2017-cost",
+            "score": 4.724787,
+            "topical_score": 4.724787,
+            "situation_match": false
+          },
+          {
+            "id": "qa-ted-2017-flying-cars",
+            "score": 4.142203,
+            "topical_score": 4.142203,
+            "situation_match": false
+          }
+        ]
+      }
+    },
+    {
+      "query": "I admire your innovation. How do you work?",
+      "situation": "praise",
+      "conditions": {
+        "B": [
+          {
+            "id": "qa-ted-2013-praise",
+            "score": 6.804089,
+            "topical_score": 6.804089,
+            "situation_match": true
+          }
+        ],
+        "C": [
+          {
+            "id": "qa-ted-2013-praise",
+            "score": 9.18552,
+            "topical_score": 6.804089,
+            "situation_match": true
+          }
+        ]
+      }
+    },
+    {
+      "query": "What did failure teach you about rockets?",
+      "situation": "reflection",
+      "conditions": {
+        "B": [
+          {
+            "id": "qa-ted-2013-setback",
+            "score": 8.337486,
+            "topical_score": 8.337486,
+            "situation_match": true
+          },
+          {
+            "id": "qa-ted-2013-rocket-cost",
+            "score": 3.144511,
+            "topical_score": 3.144511,
+            "situation_match": false
+          },
+          {
+            "id": "qa-ted-2013-financial-risk",
+            "score": 2.310013,
+            "topical_score": 2.310013,
+            "situation_match": false
+          }
+        ],
+        "C": [
+          {
+            "id": "qa-ted-2013-setback",
+            "score": 11.255606,
+            "topical_score": 8.337486,
+            "situation_match": true
+          },
+          {
+            "id": "qa-ted-2013-rocket-cost",
+            "score": 3.144511,
+            "topical_score": 3.144511,
+            "situation_match": false
+          },
+          {
+            "id": "qa-ted-2013-financial-risk",
+            "score": 2.310013,
+            "topical_score": 2.310013,
+            "situation_match": false
+          }
+        ]
+      }
+    }
+  ],
+  "validation_source_questions": [
+    {
+      "id": "qa-ted-2022-recorded-ai-risk",
+      "question_sha256": "408053d10268a8aeab18ea3b1f9e9d450b8a63e3ea4c290954f13369009ea57c",
+      "B_selected_ids": [],
+      "C_selected_ids": []
+    },
+    {
+      "id": "qa-ted-2022-recorded-launch-risk",
+      "question_sha256": "39b07c77bea0bb43568589131f642a572fec041625afb77c99e862711062c2da",
+      "B_selected_ids": [],
+      "C_selected_ids": []
+    },
+    {
+      "id": "qa-ted-2022-recorded-motivation",
+      "question_sha256": "0a9c33b11aa438f668ea69e7b387f4df9da1bcd25c1bd9f2cc0bdfa0ad20eec6",
+      "B_selected_ids": [],
+      "C_selected_ids": []
+    },
+    {
+      "id": "qa-ted-2022-recorded-future-advice",
+      "question_sha256": "58199d21854a3b0341f5ff0b35a1d88c97f9fef1f52dff589fb93cd47c1efc23",
+      "B_selected_ids": [],
+      "C_selected_ids": []
+    }
+  ],
+  "heldout_test_used": false,
+  "human_review": "ungraded"
+}

@@ -1,0 +1,1429 @@
+{
+  "schema_version": "qa-selection-recipes.v1",
+  "corpus_id": "elon-musk-original-qa.v1",
+  "selection_policy": "Hand-selected development pilot after event splits were fixed; selection records original contiguous turns and speaker/context review. No model outputs or test scores were used to tune selection. Source text remains local; tracked records use bounded exact excerpts.",
+  "source_hash_definition": "TED publisher_caption_sha256 from tools.transcripts.ted. Lex SHA256 of canonical UTF-8 JSON array of {id,speaker,text,start}, sorted keys and compact separators; HTML file hashes can vary independently.",
+  "selections": [
+    {
+      "id": "qa-ted-2013-energy",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00001",
+        "cue-00002",
+        "cue-00003"
+      ],
+      "answer_cue_ids": [
+        "cue-00004",
+        "cue-00005",
+        "cue-00006",
+        "cue-00007",
+        "cue-00008",
+        "cue-00009",
+        "cue-00010",
+        "cue-00011",
+        "cue-00012",
+        "cue-00013",
+        "cue-00014"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "4da5d802c12348491e66987942d64dbf5bc674ad4c9c4d711044eab18e70a423",
+      "answer_sha256": "67d55d1497f10ff95cc791f323304dfddee3093720288316ab8bfc5d78f7ac12",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Opening question about choosing electric vehicles.",
+      "topics": [
+        "energy",
+        "electric cars",
+        "future"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-efficiency",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00015",
+        "cue-00016",
+        "cue-00017"
+      ],
+      "answer_cue_ids": [
+        "cue-00018",
+        "cue-00019",
+        "cue-00020",
+        "cue-00021",
+        "cue-00022",
+        "cue-00023",
+        "cue-00024",
+        "cue-00025",
+        "cue-00026",
+        "cue-00027",
+        "cue-00028",
+        "cue-00029",
+        "cue-00030",
+        "cue-00031",
+        "cue-00032",
+        "cue-00033",
+        "cue-00034",
+        "cue-00035",
+        "cue-00036",
+        "cue-00037"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "2d1a346c148902a2f52d2fab2ec5a8a46336093904eb424e72b3c733e7562afb",
+      "answer_sha256": "8ebda5180e80dd5cd59381dd4ec40539f7fbdd102fb66346b3f586189d908e9c",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Interviewer challenges electric vehicles using fossil-generated power.",
+      "topics": [
+        "electric cars",
+        "energy",
+        "efficiency",
+        "fossil fuels"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          62,
+          85
+        ],
+        "answer": [
+          168,
+          192
+        ]
+      }
+    },
+    {
+      "id": "qa-ted-2013-driving",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00090",
+        "cue-00091",
+        "cue-00092",
+        "cue-00093",
+        "cue-00094"
+      ],
+      "answer_cue_ids": [
+        "cue-00095",
+        "cue-00096",
+        "cue-00097",
+        "cue-00098",
+        "cue-00099",
+        "cue-00100",
+        "cue-00101",
+        "cue-00102",
+        "cue-00103",
+        "cue-00104",
+        "cue-00105"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "e6e9f349990558bb1b238966053403ebbe7a18f9567a2f2fb2f857ff6bd41137",
+      "answer_sha256": "2cc8a1ddcffdc613630981fc5238af1f3bb83ebb048c7211850e7122c1098b41",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Question follows a demonstration of the car.",
+      "topics": [
+        "electric cars",
+        "driving",
+        "responsiveness"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-pricing",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00106",
+        "cue-00107",
+        "cue-00108"
+      ],
+      "answer_cue_ids": [
+        "cue-00109",
+        "cue-00110",
+        "cue-00111",
+        "cue-00112",
+        "cue-00113",
+        "cue-00114",
+        "cue-00115",
+        "cue-00116",
+        "cue-00117",
+        "cue-00118",
+        "cue-00119",
+        "cue-00120",
+        "cue-00121",
+        "cue-00122",
+        "cue-00123",
+        "cue-00124"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "af3dce18b3d8b18af070342176682a76529ce43d86f1bdddf84670f543394f2c",
+      "answer_sha256": "8abb6d07d415059f4315f74bf7d33da862e8bd3183c6a492587ce06b36a38737",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Interviewer raises affordability after praising the car.",
+      "topics": [
+        "electric cars",
+        "price",
+        "mass market"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-charging",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00152",
+        "cue-00153",
+        "cue-00154",
+        "cue-00155",
+        "cue-00156"
+      ],
+      "answer_cue_ids": [
+        "cue-00157",
+        "cue-00158",
+        "cue-00159",
+        "cue-00160",
+        "cue-00161",
+        "cue-00162"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "e13f59eb30c2beebc1b5c01b50ce1df8c31eccfb422b6747d2a4bbd947be3334",
+      "answer_sha256": "7c3e49dc484f02d7ae3eaf6c5972da65b2351e5bb3440a0abcd82584c302a4f1",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Interviewer states a charging-time estimate; respondent corrects it.",
+      "topics": [
+        "electric cars",
+        "charging",
+        "travel"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-solar",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00181",
+        "cue-00182",
+        "cue-00183",
+        "cue-00184",
+        "cue-00185",
+        "cue-00186"
+      ],
+      "answer_cue_ids": [
+        "cue-00187",
+        "cue-00188"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "8a96f73199bf49dad22f3ff4eb60f04a8c757ff199b6dd0cd711b7e7f95cb628",
+      "answer_sha256": "0bf1fefe7c84f905982ceba60dade04ce96ab390036748d4b28bb8949870abfa",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Interviewer challenges the business case for solar.",
+      "topics": [
+        "solar",
+        "energy",
+        "cost",
+        "natural gas"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-solar-how",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00189"
+      ],
+      "answer_cue_ids": [
+        "cue-00190"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "0ea5977074d19b323a93e0a94cb9a5d4abeb75418234455cf38e6293403fe236",
+      "answer_sha256": "57487c6f1f09a8c1aad2d9fa78291c8ac0fd633428fd4cd7f95c108eba5a937e",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Follow-up asks how solar can beat competing energy sources.",
+      "topics": [
+        "solar",
+        "energy",
+        "cost"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          0,
+          4
+        ],
+        "answer": [
+          0,
+          18
+        ]
+      }
+    },
+    {
+      "id": "qa-ted-2013-privacy",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00248"
+      ],
+      "answer_cue_ids": [
+        "cue-00249"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "0069835a64c702bbf527aa9b9e733076083037522fb38fda65fba8e9170e3e61",
+      "answer_sha256": "678c28e988770b69d5effce5a569d4f10587ada7afe222774b810c7a31ba1229",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Interviewer asks the identity of a private betting partner.",
+      "topics": [
+        "solar",
+        "bet",
+        "privacy"
+      ],
+      "situations": [
+        "disclosure_request"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-financial-risk",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00254",
+        "cue-00255",
+        "cue-00256",
+        "cue-00257",
+        "cue-00258"
+      ],
+      "answer_cue_ids": [
+        "cue-00260",
+        "cue-00261",
+        "cue-00262",
+        "cue-00263",
+        "cue-00264",
+        "cue-00265",
+        "cue-00266"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "7b3fde21894e8752f3d346d1a98734f09400dbce2e19998029f95b6275141781",
+      "answer_sha256": "29abb3473e709a0b9e99635aa30dc9ac2ce0297ad5d2b0a9802d26b34d29d2ed",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Space-company question uses a rhetorical financial-risk setup.",
+      "topics": [
+        "rocket",
+        "spacex",
+        "risk",
+        "money"
+      ],
+      "situations": [
+        "humor"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-setback",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00267"
+      ],
+      "answer_cue_ids": [
+        "cue-00268",
+        "cue-00269",
+        "cue-00270",
+        "cue-00271",
+        "cue-00272",
+        "cue-00273",
+        "cue-00274",
+        "cue-00275"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "4c2ea879439f52a5883d9f21bbebb199b35174c03f9dcd46facf847881f7680d",
+      "answer_sha256": "0c6a35aab5ff3839e69bb0bf6948eaa08d8b25f1db4187b8cfa3ff79f72f098a",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Follow-up on the financial-risk anecdote asks what happened.",
+      "topics": [
+        "rocket",
+        "spacex",
+        "failure",
+        "reuse"
+      ],
+      "situations": [
+        "reflection"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-rocket-cost",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00291",
+        "cue-00292",
+        "cue-00293",
+        "cue-00294"
+      ],
+      "answer_cue_ids": [
+        "cue-00295",
+        "cue-00296",
+        "cue-00297",
+        "cue-00298",
+        "cue-00299",
+        "cue-00300"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "0b6121aa941d3376e5d3d6e24f073a50a0147aea4262dec9418959b8b84513de",
+      "answer_sha256": "73102fa5c457f24a36cc0a95bc4fdc6e1df74d2250c57c62d8109bb2b7209f77",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Interviewer asks about lower rocket-building costs.",
+      "topics": [
+        "rocket",
+        "cost",
+        "engineering"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-praise",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00376",
+        "cue-00377",
+        "cue-00378",
+        "cue-00379",
+        "cue-00380",
+        "cue-00381",
+        "cue-00382",
+        "cue-00383"
+      ],
+      "answer_cue_ids": [
+        "cue-00384",
+        "cue-00385",
+        "cue-00386"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "c91a29d02983734734cc9b97cd0f44503820498abd7bcde1cd8cd1b30935a244",
+      "answer_sha256": "e48594f178afae0e0f521e29926b9955b07a4db441f1ae85adbab7c03a4f9be1",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Interviewer praises the range of ambitious projects.",
+      "topics": [
+        "innovation",
+        "work",
+        "success"
+      ],
+      "situations": [
+        "praise"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          259,
+          280
+        ],
+        "answer": [
+          60,
+          73
+        ]
+      }
+    },
+    {
+      "id": "qa-ted-2013-first-principles",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00388",
+        "cue-00389",
+        "cue-00390",
+        "cue-00391",
+        "cue-00392",
+        "cue-00393",
+        "cue-00394",
+        "cue-00395",
+        "cue-00396",
+        "cue-00397",
+        "cue-00398",
+        "cue-00399",
+        "cue-00400"
+      ],
+      "answer_cue_ids": [
+        "cue-00401",
+        "cue-00402",
+        "cue-00403",
+        "cue-00404",
+        "cue-00405",
+        "cue-00406",
+        "cue-00407",
+        "cue-00408",
+        "cue-00409",
+        "cue-00410",
+        "cue-00411",
+        "cue-00412",
+        "cue-00413",
+        "cue-00414",
+        "cue-00415",
+        "cue-00416",
+        "cue-00417",
+        "cue-00418",
+        "cue-00419",
+        "cue-00420",
+        "cue-00421",
+        "cue-00422",
+        "cue-00423"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "36d1898bc6b197649b38d7e834cec2513ce51b04e203cdf646aab7b694159156",
+      "answer_sha256": "1f98c84abafad2d598d45182fda0124780e3355d97533579b3b6b764fa4c443b",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Interviewer praises systemic thinking and asks about learning it.",
+      "topics": [
+        "physics",
+        "first principles",
+        "thinking",
+        "feedback"
+      ],
+      "situations": [
+        "praise",
+        "advice"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2017-tunnels",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00004",
+        "cue-00005",
+        "cue-00006",
+        "cue-00007",
+        "cue-00008"
+      ],
+      "answer_cue_ids": [
+        "cue-00009",
+        "cue-00010",
+        "cue-00011",
+        "cue-00012",
+        "cue-00013",
+        "cue-00014",
+        "cue-00015",
+        "cue-00016",
+        "cue-00017",
+        "cue-00018",
+        "cue-00019"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "f740a2bd808b1d77beab3cc177943e90efb785f26b5ee8cc65e2ac396ac908f4",
+      "answer_sha256": "8201fe7853d8b7d5ea522c83971598de26720e32ff923b1e9a9dc40bf1ade1c1",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Opening question plays on the word boring.",
+      "topics": [
+        "tunnel",
+        "boring",
+        "traffic",
+        "congestion"
+      ],
+      "situations": [
+        "humor"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          187,
+          206
+        ],
+        "answer": [
+          36,
+          72
+        ]
+      }
+    },
+    {
+      "id": "qa-ted-2017-capacity",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00046",
+        "cue-00047"
+      ],
+      "answer_cue_ids": [
+        "cue-00048",
+        "cue-00049",
+        "cue-00050",
+        "cue-00051",
+        "cue-00052",
+        "cue-00053",
+        "cue-00054",
+        "cue-00055",
+        "cue-00056",
+        "cue-00057",
+        "cue-00058",
+        "cue-00059"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "56b7c619f4f943ff480f7fbbbb86feb3137dbde41d7e6e3fe2633eb19d026fd4",
+      "answer_sha256": "c7b38869acc3394f89a2ae4e98d5b00c043cb9609e64dcde812a25a3eed0327e",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Interviewer suggests surface traffic relief.",
+      "topics": [
+        "tunnel",
+        "traffic",
+        "congestion",
+        "levels"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2017-cost",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00060",
+        "cue-00061"
+      ],
+      "answer_cue_ids": [
+        "cue-00062",
+        "cue-00063",
+        "cue-00064",
+        "cue-00065",
+        "cue-00066",
+        "cue-00067",
+        "cue-00068",
+        "cue-00069",
+        "cue-00070",
+        "cue-00071"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "0202b405b58a1c0e92e4320965e8d1207e48772d8fe605a61cdbc2ce99aed77b",
+      "answer_sha256": "3d44914feff19d4ca813486a653519625a399586b174cce23629a6e3a7bf1a67",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Interviewer objects to historically high tunneling costs.",
+      "topics": [
+        "tunnel",
+        "cost",
+        "expensive",
+        "digging"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          34,
+          66
+        ],
+        "answer": [
+          0,
+          26
+        ]
+      }
+    },
+    {
+      "id": "qa-ted-2017-cost-method",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00072"
+      ],
+      "answer_cue_ids": [
+        "cue-00073",
+        "cue-00074",
+        "cue-00075",
+        "cue-00076",
+        "cue-00077",
+        "cue-00078",
+        "cue-00079",
+        "cue-00080",
+        "cue-00081",
+        "cue-00082",
+        "cue-00083",
+        "cue-00084",
+        "cue-00085",
+        "cue-00086",
+        "cue-00087",
+        "cue-00088",
+        "cue-00089",
+        "cue-00090",
+        "cue-00091",
+        "cue-00092",
+        "cue-00093",
+        "cue-00094",
+        "cue-00095",
+        "cue-00096",
+        "cue-00097",
+        "cue-00098",
+        "cue-00099",
+        "cue-00100",
+        "cue-00101",
+        "cue-00102",
+        "cue-00103",
+        "cue-00104",
+        "cue-00105"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "e61cfd2ec85a9f43cd7fc6a83a41290b806178e56b0820cd203e9239c0605b55",
+      "answer_sha256": "17620716fe70b6f90ef13ef7b71ceb45ef38d9f6de8170d89783727b51f61124",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Follow-up asks how to improve tunneling costs.",
+      "topics": [
+        "tunnel",
+        "cost",
+        "engineering",
+        "diameter"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "excerpt",
+      "excerpt_note": "Complete first explanatory paragraph; further continuation after an intervening stage-direction cue is omitted. Original wording is unchanged.",
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2017-flying-cars",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00117",
+        "cue-00118",
+        "cue-00119",
+        "cue-00120",
+        "cue-00121"
+      ],
+      "answer_cue_ids": [
+        "cue-00122",
+        "cue-00123",
+        "cue-00124",
+        "cue-00125",
+        "cue-00126",
+        "cue-00127",
+        "cue-00128",
+        "cue-00129",
+        "cue-00130"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "a182c8427b4e07b3f314d9607f7d9de5a530c4599266a16cb26f2d1ca1e9e92b",
+      "answer_sha256": "328e8e7d603f6b531fe9976dc92e087fbc506f6f8c448958335d03b70d8c8326",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Interviewer offers flying cars as an alternative.",
+      "topics": [
+        "tunnel",
+        "flying cars",
+        "cost",
+        "traffic"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2017-victory",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00253",
+        "cue-00254",
+        "cue-00255"
+      ],
+      "answer_cue_ids": [
+        "cue-00256",
+        "cue-00257",
+        "cue-00258",
+        "cue-00259",
+        "cue-00260"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "934be5e471967e56d87622a9d001cd84963ea29e96bb09e42eb4807ef4964a78",
+      "answer_sha256": "ed69eb3e886b6af2d9c8424276d91918f4ee6a3e4a2e9aad18d95cea3baf6559",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Interviewer asks whether the electrification mission is already won.",
+      "topics": [
+        "tesla",
+        "electric cars",
+        "future",
+        "success"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2017-teaser",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00374",
+        "cue-00375",
+        "cue-00376",
+        "cue-00377"
+      ],
+      "answer_cue_ids": [
+        "cue-00378"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "04c8619e23ca6141ba41348174df1a72f1485599ce8708a04836dac62502fb44",
+      "answer_sha256": "1b7ebe4694d3c57cc5d2ac80606e681d999c9cab4a6ec71d0d9bd3a88a37f904",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Interviewer requests material before a planned announcement.",
+      "topics": [
+        "truck",
+        "tesla",
+        "semi",
+        "announcement"
+      ],
+      "situations": [
+        "disclosure_request"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2017-factories",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00537",
+        "cue-00538",
+        "cue-00539",
+        "cue-00540"
+      ],
+      "answer_cue_ids": [
+        "cue-00541",
+        "cue-00542",
+        "cue-00543"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "5147c67dc7777b6ad92b0427ad2fb5eb7eebbb8e8d05d1bfa472694c10676e8f",
+      "answer_sha256": "1876799146c393f1dbd8e2f9551448c7b4ec5dc849e06cb75ed6f6cc285c1ffe",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Question asks about global battery-factory requirements.",
+      "topics": [
+        "energy",
+        "battery",
+        "gigafactory"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2017-criticism",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00570",
+        "cue-00571",
+        "cue-00572",
+        "cue-00573"
+      ],
+      "answer_cue_ids": [
+        "cue-00574",
+        "cue-00575",
+        "cue-00576",
+        "cue-00577",
+        "cue-00578",
+        "cue-00579",
+        "cue-00580",
+        "cue-00581",
+        "cue-00582",
+        "cue-00583",
+        "cue-00584"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "ed8162f9821c44a260e822397fee5afafe9056dd34eeaa925fea770fc85b3f90",
+      "answer_sha256": "07d297a128e00d3d9a838ebbb223143d287458d5ff9dda4ce4bd38a9d473cf77",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Interviewer relays criticism of policy advisory participation.",
+      "topics": [
+        "climate",
+        "advisory councils",
+        "criticism"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2022-recorded-ai-risk",
+      "source_id": "ted-2022-recorded",
+      "source_event_id": "ted-2022-recorded",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00559",
+        "cue-00560",
+        "cue-00561",
+        "cue-00562",
+        "cue-00563"
+      ],
+      "answer_cue_ids": [
+        "cue-00564",
+        "cue-00565",
+        "cue-00566",
+        "cue-00567",
+        "cue-00568",
+        "cue-00569",
+        "cue-00570"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "408053d10268a8aeab18ea3b1f9e9d450b8a63e3ea4c290954f13369009ea57c",
+      "answer_sha256": "91fd38d0f7a2bfc324ccb2a87a66d1f791129c97b7a2666138a426efdda496f7",
+      "transcript_sha256": "eb66551c1493446935a0fd76437b433ae4cbb62532526b574098671863834967",
+      "context_before": "Interviewer challenges a proposed way to reduce AI risk.",
+      "topics": [
+        "ai",
+        "neuralink",
+        "risk"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2022-recorded-launch-risk",
+      "source_id": "ted-2022-recorded",
+      "source_event_id": "ted-2022-recorded",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00806",
+        "cue-00807"
+      ],
+      "answer_cue_ids": [
+        "cue-00808",
+        "cue-00809",
+        "cue-00810"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "39b07c77bea0bb43568589131f642a572fec041625afb77c99e862711062c2da",
+      "answer_sha256": "a8ac49677e8de3dba3b2afb6304dbe55b93488ed2b108e214ebcfa39db9ab8fa",
+      "transcript_sha256": "eb66551c1493446935a0fd76437b433ae4cbb62532526b574098671863834967",
+      "context_before": "Interviewer raises risk in early launch attempts.",
+      "topics": [
+        "rocket",
+        "risk",
+        "failure"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2022-recorded-motivation",
+      "source_id": "ted-2022-recorded",
+      "source_event_id": "ted-2022-recorded",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-01201"
+      ],
+      "answer_cue_ids": [
+        "cue-01202",
+        "cue-01203",
+        "cue-01204",
+        "cue-01205",
+        "cue-01206",
+        "cue-01207",
+        "cue-01208",
+        "cue-01209",
+        "cue-01210",
+        "cue-01211",
+        "cue-01212",
+        "cue-01213",
+        "cue-01214"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "0a9c33b11aa438f668ea69e7b387f4df9da1bcd25c1bd9f2cc0bdfa0ad20eec6",
+      "answer_sha256": "5a4f2fca82cbc03e3e8b4e2b2a91210900bc6c8e325dd8c8f982d3ce8841ce16",
+      "transcript_sha256": "eb66551c1493446935a0fd76437b433ae4cbb62532526b574098671863834967",
+      "context_before": "Closing question asks about day-to-day motivation.",
+      "topics": [
+        "motivation",
+        "future",
+        "curiosity"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2022-recorded-future-advice",
+      "source_id": "ted-2022-recorded",
+      "source_event_id": "ted-2022-recorded",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-01233",
+        "cue-01234",
+        "cue-01235"
+      ],
+      "answer_cue_ids": [
+        "cue-01236",
+        "cue-01237",
+        "cue-01238"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "58199d21854a3b0341f5ff0b35a1d88c97f9fef1f52dff589fb93cd47c1efc23",
+      "answer_sha256": "0500d3353defe30308b0a51c3a67af3befb603c0feedaaca8a952e00249b1954",
+      "transcript_sha256": "eb66551c1493446935a0fd76437b433ae4cbb62532526b574098671863834967",
+      "context_before": "Interviewer asks what to tell a pessimistic generation.",
+      "topics": [
+        "future",
+        "advice",
+        "action"
+      ],
+      "situations": [
+        "advice"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          80,
+          107
+        ],
+        "answer": [
+          70,
+          98
+        ]
+      }
+    },
+    {
+      "id": "qa-lex-400-2023-compute-efficiency",
+      "source_id": "lex-400-2023",
+      "source_event_id": "lex-400-2023",
+      "questioner": "Lex Fridman",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00240"
+      ],
+      "answer_cue_ids": [
+        "cue-00241"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "9c37fdaac94d762d9105f8edd3745bf9c262272881d3d34abdc64405e71e5eba",
+      "answer_sha256": "3213d80a0d9e86a4cc09e82743d1f4087668425226c2bb8f5e4038de294765e7",
+      "transcript_sha256": "dda2d4b72a451437d82ba571dc83d117784ad5d96f656997c63b2743a6b6aae0",
+      "context_before": "Question concerns lessons from improving model-training efficiency.",
+      "topics": [
+        "ai",
+        "physics",
+        "efficiency"
+      ],
+      "situations": [
+        "reflection"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-lex-400-2023-trust",
+      "source_id": "lex-400-2023",
+      "source_event_id": "lex-400-2023",
+      "questioner": "Lex Fridman",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00475"
+      ],
+      "answer_cue_ids": [
+        "cue-00476"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "948046fdf90654f43d7e8da936bb24f921772a6e78c1b8162d3c74df2aa0cb89",
+      "answer_sha256": "05ce00fc8cc8f647fffae40dff385b93bd683646efe73f94221d7074b98439cb",
+      "transcript_sha256": "dda2d4b72a451437d82ba571dc83d117784ad5d96f656997c63b2743a6b6aae0",
+      "context_before": "Question asks how to assess trust at work and personally.",
+      "topics": [
+        "trust",
+        "work",
+        "relationships"
+      ],
+      "situations": [
+        "advice"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-lex-400-2023-wellbeing",
+      "source_id": "lex-400-2023",
+      "source_event_id": "lex-400-2023",
+      "questioner": "Lex Fridman",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00533"
+      ],
+      "answer_cue_ids": [
+        "cue-00534"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "ec3db42c7f1e7ed8b05e55506e18a5cd06216b097b029da89105e3983ddd2689",
+      "answer_sha256": "6ad7d3f5d1a746caa72262f96209c1c492bc29b54a74aeca3c314526bbf64470",
+      "transcript_sha256": "dda2d4b72a451437d82ba571dc83d117784ad5d96f656997c63b2743a6b6aae0",
+      "context_before": "Follow-up after discussing personal difficulties.",
+      "topics": [
+        "wellbeing",
+        "life"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          0,
+          18
+        ],
+        "answer": [
+          0,
+          17
+        ]
+      }
+    },
+    {
+      "id": "qa-lex-400-2023-loneliness",
+      "source_id": "lex-400-2023",
+      "source_event_id": "lex-400-2023",
+      "questioner": "Lex Fridman",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00535"
+      ],
+      "answer_cue_ids": [
+        "cue-00536"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "05fc1d93552fb368bbf73e5e01290d2ace2034c68065b070b4a888425ca55845",
+      "answer_sha256": "b66c8faa92e1d2c13fcaa45fa4f445a1dd30702602db8a9e682408e893787c27",
+      "transcript_sha256": "dda2d4b72a451437d82ba571dc83d117784ad5d96f656997c63b2743a6b6aae0",
+      "context_before": "Follow-up asks about loneliness.",
+      "topics": [
+        "loneliness",
+        "family",
+        "friends"
+      ],
+      "situations": [
+        "reflection"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          0,
+          18
+        ],
+        "answer": [
+          0,
+          51
+        ]
+      }
+    },
+    {
+      "id": "qa-lex-438-2024-engineering",
+      "source_id": "lex-438-2024",
+      "source_event_id": "lex-438-2024",
+      "questioner": "Lex Fridman",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00272"
+      ],
+      "answer_cue_ids": [
+        "cue-00273",
+        "cue-00274"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "160f176a4233387cafa42c0619de594dbcc7e775711be549c58ddeb8b30419a8",
+      "answer_sha256": "a9e97eeaa8ea44174746230046af626f29ef032d3ae1ff78bee65a16ecdc1b2a",
+      "transcript_sha256": "4d7704020f1af02902208e443d928fb91a6f224cd9d8b8fa85d3a5055da92d69",
+      "context_before": "Interviewer praises engineering iteration and asks about teams.",
+      "topics": [
+        "engineering",
+        "requirements",
+        "first principles"
+      ],
+      "situations": [
+        "praise",
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed. The explicitly listed unlabeled continuation was read in context and attributed to the same preceding respondent; it is not automatic diarization.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "answer_reviewed_continuations": [
+        "cue-00274"
+      ]
+    },
+    {
+      "id": "qa-lex-438-2024-success",
+      "source_id": "lex-438-2024",
+      "source_event_id": "lex-438-2024",
+      "questioner": "Lex Fridman",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00417"
+      ],
+      "answer_cue_ids": [
+        "cue-00418"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "2b0dd7d8c8fb11b2c403d8a6bae36e1a8383dfc56a69462296562b2c45ea45c7",
+      "answer_sha256": "eff139766c1736f13b92e1ea176d7f1bea5fb4fb3f288f504a61ae4de28ea930",
+      "transcript_sha256": "4d7704020f1af02902208e443d928fb91a6f224cd9d8b8fa85d3a5055da92d69",
+      "context_before": "Question asks for a personal measure of success.",
+      "topics": [
+        "success",
+        "usefulness",
+        "life"
+      ],
+      "situations": [
+        "reflection"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          72,
+          104
+        ],
+        "answer": [
+          31,
+          69
+        ]
+      }
+    },
+    {
+      "id": "qa-lex-438-2024-time",
+      "source_id": "lex-438-2024",
+      "source_event_id": "lex-438-2024",
+      "questioner": "Lex Fridman",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00421"
+      ],
+      "answer_cue_ids": [
+        "cue-00422"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "f2731fb432b3a88ba503e5dc2d69bc306b084307a507560994a5aa25f8c63ac8",
+      "answer_sha256": "09d28686800a8560bcf8c81a5c52fe1f4b39b858b9003e8156085bfd3b6a21ac",
+      "transcript_sha256": "4d7704020f1af02902208e443d928fb91a6f224cd9d8b8fa85d3a5055da92d69",
+      "context_before": "Interviewer praises the teams and asks about allocating time.",
+      "topics": [
+        "time",
+        "usefulness",
+        "work"
+      ],
+      "situations": [
+        "praise",
+        "advice"
+      ],
+      "completeness": "excerpt",
+      "excerpt_note": "First response before an interviewer acknowledgment; the later elaboration is excluded rather than silently merging noncontiguous turns.",
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          131,
+          149
+        ],
+        "answer": [
+          0,
+          32
+        ]
+      }
+    },
+    {
+      "id": "qa-lex-438-2024-risk",
+      "source_id": "lex-438-2024",
+      "source_event_id": "lex-438-2024",
+      "questioner": "Lex Fridman",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00425"
+      ],
+      "answer_cue_ids": [
+        "cue-00426"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "556af664125ed16bfd40c7b5b7bb05e76ab4f4c419aa8626de151e8c477b3f32",
+      "answer_sha256": "d194e5d178414502eb5f22b3389d65cbc5cf6c88cfba88f31aecbc7c9f3ab006",
+      "transcript_sha256": "4d7704020f1af02902208e443d928fb91a6f224cd9d8b8fa85d3a5055da92d69",
+      "context_before": "Follow-up concerns the scale of decision consequences.",
+      "topics": [
+        "risk",
+        "time",
+        "decisions"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    }
+  ]
+}

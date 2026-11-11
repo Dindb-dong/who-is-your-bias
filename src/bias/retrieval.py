@@ -12,8 +12,11 @@ from .corpus import Corpus
 from .models import Evidence
 from .situations import classify_situation
 
-RETRIEVER_VERSION = "qa-bm25-situation.v1"
+RETRIEVER_VERSION = "qa-bm25-situation.v2"
 SITUATION_MULTIPLIER = 1.35
+# Alone these broad topics do not identify what a question is about. Require an
+# additional reviewed topic or a concrete anchor for original-Q&A candidates.
+GENERIC_QA_TOPICS = frozenset({"future", "work", "life", "success", "risk", "cost", "time", "advice", "thinking", "problem"})
 
 # Generic comparative wording is not topical evidence: "more power" alone must
 # not connect an electric-car efficiency question to a tunnel-machine passage.
@@ -153,6 +156,7 @@ class Retriever:
             if hit.score >= 0.65
             and len(hit.matched_terms) / max(1, len(terms)) >= 0.28
             and (len(hit.matched_terms) >= 2 or bool(set(hit.matched_terms).intersection(self.topic_terms[hit.evidence.id])))
+            and (hit.evidence.question_answer is None or self._qa_topic_supported(hit))
         ]
         if not hits:
             return SearchResult((), 0, "Matches are too weak to support an answer.")
@@ -166,3 +170,7 @@ class Retriever:
         coverage = len(best_terms) / max(1, len(terms))
         confidence = min(1.0, 0.35 + min(0.35, hits[0].score / 12) + 0.30 * coverage)
         return SearchResult(tuple(hits[:limit]), round(confidence, 3))
+
+    def _qa_topic_supported(self, hit: SearchHit) -> bool:
+        matched = set(hit.matched_terms).intersection(self.topic_terms[hit.evidence.id])
+        return bool(matched.difference(GENERIC_QA_TOPICS)) or len(matched) >= 2
