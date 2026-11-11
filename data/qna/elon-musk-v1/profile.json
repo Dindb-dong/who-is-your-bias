@@ -11,13 +11,13 @@
   "example_questions": {
     "en": [
       "Why are you boring?",
-      "Why do you seek feedback?",
-      "How do you approach engineering problems?"
+      "Why are tunnels so expensive?",
+      "What is behind your innovation?"
     ],
     "ko": [
       "땅굴을 파는 이유가 뭐야?",
-      "피드백을 구하는 이유가 뭐야?",
-      "공학 문제는 어떻게 접근해?"
+      "터널을 파는 비용이 왜 비싼 거야?",
+      "혁신의 비결은 뭐야?"
     ]
   },
   "notice": "AI research simulation. Not Elon Musk or an official representative.",

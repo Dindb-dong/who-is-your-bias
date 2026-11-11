@@ -10,7 +10,7 @@ from pydantic import ValidationError
 from bias.corpus import Corpus, CorpusError
 from bias.models import ChatRequest, Evidence, Locator, Persona, Source
 from bias.qa_prompts import build_qa_messages
-from bias.retrieval import Retriever, SearchResult
+from bias.retrieval import Retriever, SearchResult, tokenize
 from bias.situations import classify_situation
 from tools.qna.acquire import AcquisitionError, canonical_lex, validate_source_url
 from tools.qna.hydrate import materialize_record, selected_text, text_sha
@@ -54,6 +54,42 @@ def test_bundled_originals_are_explicit_bounded_excerpts_with_event_splits():
         assert record.question_answer.question_end_seconds is None
         counts[record.source_id] = counts.get(record.source_id, 0) + len(record.question_answer.question.split()) + len(record.question_answer.answer.split())
     assert max(counts.values()) <= 25
+
+
+def test_bundled_starters_have_relevant_evidence_in_both_languages():
+    data = Corpus.load(ROOT / "data/qna/elon-musk-v1")
+    retriever = Retriever(data)
+    expected = ("qa-ted-2017-tunnels", "qa-ted-2017-cost", "qa-ted-2013-praise")
+    for language in ("en", "ko"):
+        for question, record_id in zip(data.persona.example_questions[language], expected, strict=True):
+            for behavior in (False, True):
+                assert retriever.search(question, behavior=behavior).hits[0].evidence.id == record_id
+    assert "tunnel" not in tokenize("땅굴")
+    assert "tunnel" in tokenize("땅굴", original_qa=True)
+
+
+def test_v2_source_wide_expansion_preserves_v1_and_heldout_selections():
+    folder = ROOT / "data/qna/elon-musk-v1"
+    v1 = json.loads((folder / "selection-recipes.json").read_text())
+    v2 = json.loads((folder / "selection-recipes.v2.json").read_text())
+    inventory = json.loads((folder / "training-inventory.v2.json").read_text())
+    assert v2["base_selection_sha256"] == hashlib.sha256((folder / "selection-recipes.json").read_bytes()).hexdigest()
+    by_id = {record["id"]: record for record in v2["selections"]}
+    assert len(by_id) == len(v2["selections"]) == 92
+    assert all(by_id[record["id"]] == record for record in v1["selections"])
+    train_sources = {"ted-2013", "ted-2017"}
+    assert [r for r in v2["selections"] if r["source_id"] not in train_sources] == [r for r in v1["selections"] if r["source_id"] not in train_sources]
+    included = {turn["record_id"] for event in inventory["source_events"] for turn in event["turns"] if turn["status"] == "included"}
+    assert included == {r["id"] for r in v2["selections"] if r["source_id"] in train_sources}
+    assert len(included) == 80
+    assert [event["counts"]["eligible_pairs"] for event in inventory["source_events"]] == [28, 52]
+    for event in inventory["source_events"]:
+        counts = event["counts"]
+        assert len(event["turns"]) == counts["interviewer_turns"]
+        assert sum(turn["status"] == "included" for turn in event["turns"]) == counts["eligible_pairs"]
+        assert counts["interviewer_turns"] == counts["eligible_pairs"] + counts["excluded_brief_nonquestions"] + counts["excluded_fragmented_starts"] + counts["excluded_no_unambiguous_answer"]
+    assert inventory["validation_and_test_unchanged"] is True
+    assert inventory["test_model_results_used"] is False
 
 
 def test_event_manifest_rejects_changed_source_assignment(tmp_path):
@@ -195,6 +231,22 @@ def test_changed_original_answer_rejected_even_with_a_reused_transcript_hash():
                  "question_sha256": text_sha("Authored question?"), "answer_sha256": text_sha("Authored answer.")}
     transcript["segments"][1]["text"] = "Changed answer."
     with pytest.raises(AcquisitionError, match="Original text changed"):
+        materialize_record(selection, transcript)
+
+
+def test_original_context_is_hydrated_and_independently_digest_checked():
+    transcript = canonical_lex(lex_input([("Host", "00:00:01", "Earlier topic?"), ("Guest", "00:00:02", "Earlier answer."), ("Host", "00:00:03", "Why?"), ("Guest", "00:00:04", "The reason.")]), source_id="fixture", source_url="https://example.org")
+    selection = {"id": "sample", "source_id": "fixture", "source_event_id": "fixture", "transcript_sha256": transcript["publisher_caption_sha256"],
+                 "question_cue_ids": ["cue-00003"], "answer_cue_ids": ["cue-00004"], "questioner": "Host", "respondent": "Guest",
+                 "question_sha256": text_sha("Why?"), "answer_sha256": text_sha("The reason."),
+                 "completeness": "complete_exchange", "context_kind": "original_text", "context_before": "Hydrated from pinned original cues.",
+                 "context_cue_ids": ["cue-00001"], "context_source_speaker": "Host", "context_sha256": text_sha("Earlier topic?"),
+                 "review_basis": "Authored test fixture", "annotation_basis": "Authored test label", "topics": ["topic"], "situations": ["explanation"]}
+    record = materialize_record(selection, transcript)
+    assert record.question_answer.context_before == "Earlier topic?"
+    assert record.question_answer.context_kind == "original_text"
+    transcript["segments"][0]["text"] = "Changed earlier topic?"
+    with pytest.raises(AcquisitionError, match="Original preceding context changed"):
         materialize_record(selection, transcript)
 
 

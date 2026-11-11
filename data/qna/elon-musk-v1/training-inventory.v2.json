@@ -1,0 +1,674 @@
+{
+  "schema_version": "qa-training-source-inventory.v2",
+  "corpus_id": "elon-musk-original-qa.v2",
+  "rule": "Source-wide inclusion across full TED2013 and TED2017 training events: directly adjacent labeled interviewer/respondent turns (allowing only standalone stage cues between), explicit label at both starts, and either an interviewer question mark or at least eight interviewer words and eight respondent words. Fragmented starts, unassigned speakers and brief nonquestion acknowledgments are excluded. All eligible exchanges are included. Existing v1 records and the entire development/test selection are unchanged. No heldout model run or heldout score was consulted.",
+  "validation_and_test_unchanged": true,
+  "test_model_results_used": false,
+  "source_events": [
+    {
+      "source_id": "ted-2013",
+      "publisher_caption_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "counts": {
+        "interviewer_turns": 39,
+        "direct_labeled_pairs": 33,
+        "eligible_pairs": 28,
+        "excluded_brief_nonquestions": 3,
+        "excluded_fragmented_starts": 2,
+        "excluded_no_unambiguous_answer": 6
+      },
+      "turns": [
+        {
+          "question_utterance": "utterance-0001",
+          "answer_utterance": "utterance-0002",
+          "record_id": "qa-ted-2013-energy",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0003",
+          "answer_utterance": "utterance-0004",
+          "record_id": "qa-ted-2013-efficiency",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0005",
+          "answer_utterance": "utterance-0006",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0007",
+          "answer_utterance": "utterance-0008",
+          "record_id": "qa-ted-2013-q00007",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0009",
+          "answer_utterance": "utterance-0010",
+          "record_id": "qa-ted-2013-q00009",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0011",
+          "status": "excluded_no_unambiguous_answer"
+        },
+        {
+          "question_utterance": "utterance-0013",
+          "answer_utterance": "utterance-0014",
+          "record_id": "qa-ted-2013-q00013",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0015",
+          "answer_utterance": "utterance-0016",
+          "record_id": "qa-ted-2013-driving",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0017",
+          "answer_utterance": "utterance-0018",
+          "record_id": "qa-ted-2013-pricing",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0019",
+          "answer_utterance": "utterance-0020",
+          "record_id": "qa-ted-2013-q00019",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0021",
+          "answer_utterance": "utterance-0022",
+          "record_id": "qa-ted-2013-charging",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0023",
+          "answer_utterance": "utterance-0024",
+          "record_id": "qa-ted-2013-q00023",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0025",
+          "answer_utterance": "utterance-0026",
+          "record_id": "qa-ted-2013-solar",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0027",
+          "answer_utterance": "utterance-0028",
+          "record_id": "qa-ted-2013-solar-how",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0029",
+          "answer_utterance": "utterance-0030",
+          "record_id": "qa-ted-2013-q00029",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0031",
+          "status": "excluded_no_unambiguous_answer"
+        },
+        {
+          "question_utterance": "utterance-0033",
+          "answer_utterance": "utterance-0034",
+          "status": "excluded_fragmented_start"
+        },
+        {
+          "question_utterance": "utterance-0035",
+          "answer_utterance": "utterance-0036",
+          "record_id": "qa-ted-2013-q00035",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0037",
+          "answer_utterance": "utterance-0038",
+          "record_id": "qa-ted-2013-q00037",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0039",
+          "answer_utterance": "utterance-0040",
+          "record_id": "qa-ted-2013-q00039",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0043",
+          "answer_utterance": "utterance-0044",
+          "record_id": "qa-ted-2013-privacy",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0045",
+          "answer_utterance": "utterance-0046",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0047",
+          "answer_utterance": "utterance-0049",
+          "record_id": "qa-ted-2013-financial-risk",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0050",
+          "answer_utterance": "utterance-0051",
+          "record_id": "qa-ted-2013-setback",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0052",
+          "answer_utterance": "utterance-0053",
+          "record_id": "qa-ted-2013-q00052",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0054",
+          "answer_utterance": "utterance-0055",
+          "record_id": "qa-ted-2013-rocket-cost",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0056",
+          "status": "excluded_no_unambiguous_answer"
+        },
+        {
+          "question_utterance": "utterance-0058",
+          "answer_utterance": "utterance-0059",
+          "status": "excluded_fragmented_start"
+        },
+        {
+          "question_utterance": "utterance-0060",
+          "answer_utterance": "utterance-0061",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0062",
+          "answer_utterance": "utterance-0063",
+          "record_id": "qa-ted-2013-q00062",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0064",
+          "answer_utterance": "utterance-0065",
+          "record_id": "qa-ted-2013-q00064",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0068",
+          "status": "excluded_no_unambiguous_answer"
+        },
+        {
+          "question_utterance": "utterance-0070",
+          "answer_utterance": "utterance-0071",
+          "record_id": "qa-ted-2013-q00070",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0072",
+          "answer_utterance": "utterance-0073",
+          "record_id": "qa-ted-2013-q00072",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0076",
+          "answer_utterance": "utterance-0077",
+          "record_id": "qa-ted-2013-q00076",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0080",
+          "answer_utterance": "utterance-0081",
+          "record_id": "qa-ted-2013-praise",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0083",
+          "answer_utterance": "utterance-0084",
+          "record_id": "qa-ted-2013-first-principles",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0085",
+          "status": "excluded_no_unambiguous_answer"
+        },
+        {
+          "question_utterance": "utterance-0087",
+          "status": "excluded_no_unambiguous_answer"
+        }
+      ]
+    },
+    {
+      "source_id": "ted-2017",
+      "publisher_caption_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "counts": {
+        "interviewer_turns": 74,
+        "direct_labeled_pairs": 69,
+        "eligible_pairs": 52,
+        "excluded_brief_nonquestions": 16,
+        "excluded_fragmented_starts": 1,
+        "excluded_no_unambiguous_answer": 5
+      },
+      "turns": [
+        {
+          "question_utterance": "utterance-0001",
+          "answer_utterance": "utterance-0002",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0003",
+          "answer_utterance": "utterance-0004",
+          "record_id": "qa-ted-2017-tunnels",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0006",
+          "answer_utterance": "utterance-0007",
+          "record_id": "qa-ted-2017-q00006",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0008",
+          "answer_utterance": "utterance-0009",
+          "record_id": "qa-ted-2017-q00008",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0011",
+          "answer_utterance": "utterance-0012",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0013",
+          "answer_utterance": "utterance-0014",
+          "record_id": "qa-ted-2017-capacity",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0015",
+          "answer_utterance": "utterance-0016",
+          "record_id": "qa-ted-2017-cost",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0017",
+          "answer_utterance": "utterance-0018",
+          "record_id": "qa-ted-2017-cost-method",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0022",
+          "answer_utterance": "utterance-0023",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0026",
+          "answer_utterance": "utterance-0027",
+          "record_id": "qa-ted-2017-flying-cars",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0030",
+          "answer_utterance": "utterance-0031",
+          "record_id": "qa-ted-2017-q00030",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0032",
+          "answer_utterance": "utterance-0033",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0034",
+          "answer_utterance": "utterance-0035",
+          "record_id": "qa-ted-2017-q00034",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0036",
+          "answer_utterance": "utterance-0037",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0038",
+          "answer_utterance": "utterance-0039",
+          "record_id": "qa-ted-2017-q00038",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0040",
+          "answer_utterance": "utterance-0042",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0044",
+          "answer_utterance": "utterance-0045",
+          "record_id": "qa-ted-2017-q00044",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0046",
+          "answer_utterance": "utterance-0048",
+          "record_id": "qa-ted-2017-q00046",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0049",
+          "answer_utterance": "utterance-0050",
+          "record_id": "qa-ted-2017-q00049",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0051",
+          "answer_utterance": "utterance-0052",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0055",
+          "answer_utterance": "utterance-0056",
+          "record_id": "qa-ted-2017-q00055",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0057",
+          "answer_utterance": "utterance-0058",
+          "record_id": "qa-ted-2017-victory",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0059",
+          "answer_utterance": "utterance-0060",
+          "record_id": "qa-ted-2017-q00059",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0061",
+          "answer_utterance": "utterance-0062",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0063",
+          "answer_utterance": "utterance-0064",
+          "record_id": "qa-ted-2017-q00063",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0065",
+          "answer_utterance": "utterance-0066",
+          "record_id": "qa-ted-2017-q00065",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0067",
+          "answer_utterance": "utterance-0068",
+          "record_id": "qa-ted-2017-q00067",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0069",
+          "answer_utterance": "utterance-0070",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0071",
+          "answer_utterance": "utterance-0072",
+          "record_id": "qa-ted-2017-q00071",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0074",
+          "answer_utterance": "utterance-0075",
+          "record_id": "qa-ted-2017-q00074",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0076",
+          "answer_utterance": "utterance-0077",
+          "record_id": "qa-ted-2017-q00076",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0080",
+          "answer_utterance": "utterance-0081",
+          "record_id": "qa-ted-2017-q00080",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0082",
+          "answer_utterance": "utterance-0083",
+          "record_id": "qa-ted-2017-q00082",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0084",
+          "answer_utterance": "utterance-0085",
+          "record_id": "qa-ted-2017-teaser",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0088",
+          "answer_utterance": "utterance-0089",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0091",
+          "answer_utterance": "utterance-0092",
+          "record_id": "qa-ted-2017-q00091",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0095",
+          "answer_utterance": "utterance-0096",
+          "record_id": "qa-ted-2017-q00095",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0097",
+          "answer_utterance": "utterance-0099",
+          "record_id": "qa-ted-2017-q00097",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0100",
+          "answer_utterance": "utterance-0101",
+          "record_id": "qa-ted-2017-q00100",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0102",
+          "answer_utterance": "utterance-0103",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0104",
+          "answer_utterance": "utterance-0105",
+          "record_id": "qa-ted-2017-q00104",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0106",
+          "answer_utterance": "utterance-0107",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0109",
+          "answer_utterance": "utterance-0110",
+          "record_id": "qa-ted-2017-q00109",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0111",
+          "answer_utterance": "utterance-0112",
+          "record_id": "qa-ted-2017-q00111",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0114",
+          "answer_utterance": "utterance-0115",
+          "record_id": "qa-ted-2017-q00114",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0116",
+          "answer_utterance": "utterance-0117",
+          "record_id": "qa-ted-2017-q00116",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0118",
+          "answer_utterance": "utterance-0119",
+          "record_id": "qa-ted-2017-q00118",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0120",
+          "answer_utterance": "utterance-0121",
+          "record_id": "qa-ted-2017-q00120",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0122",
+          "answer_utterance": "utterance-0123",
+          "record_id": "qa-ted-2017-q00122",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0124",
+          "status": "excluded_no_unambiguous_answer"
+        },
+        {
+          "question_utterance": "utterance-0126",
+          "answer_utterance": "utterance-0127",
+          "status": "excluded_fragmented_start"
+        },
+        {
+          "question_utterance": "utterance-0129",
+          "answer_utterance": "utterance-0130",
+          "record_id": "qa-ted-2017-q00129",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0132",
+          "answer_utterance": "utterance-0133",
+          "record_id": "qa-ted-2017-factories",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0134",
+          "answer_utterance": "utterance-0135",
+          "record_id": "qa-ted-2017-q00134",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0136",
+          "status": "excluded_no_unambiguous_answer"
+        },
+        {
+          "question_utterance": "utterance-0140",
+          "status": "excluded_no_unambiguous_answer"
+        },
+        {
+          "question_utterance": "utterance-0144",
+          "answer_utterance": "utterance-0145",
+          "record_id": "qa-ted-2017-criticism",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0148",
+          "status": "excluded_no_unambiguous_answer"
+        },
+        {
+          "question_utterance": "utterance-0152",
+          "answer_utterance": "utterance-0153",
+          "record_id": "qa-ted-2017-q00152",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0155",
+          "answer_utterance": "utterance-0156",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0158",
+          "answer_utterance": "utterance-0159",
+          "record_id": "qa-ted-2017-q00158",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0160",
+          "answer_utterance": "utterance-0161",
+          "record_id": "qa-ted-2017-q00160",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0162",
+          "answer_utterance": "utterance-0163",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0164",
+          "answer_utterance": "utterance-0165",
+          "record_id": "qa-ted-2017-q00164",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0167",
+          "answer_utterance": "utterance-0168",
+          "record_id": "qa-ted-2017-q00167",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0169",
+          "answer_utterance": "utterance-0170",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0174",
+          "answer_utterance": "utterance-0175",
+          "record_id": "qa-ted-2017-q00174",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0176",
+          "answer_utterance": "utterance-0177",
+          "record_id": "qa-ted-2017-q00176",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0179",
+          "answer_utterance": "utterance-0180",
+          "status": "excluded_brief_nonquestion"
+        },
+        {
+          "question_utterance": "utterance-0181",
+          "answer_utterance": "utterance-0182",
+          "record_id": "qa-ted-2017-q00181",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0184",
+          "answer_utterance": "utterance-0185",
+          "record_id": "qa-ted-2017-q00184",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0188",
+          "answer_utterance": "utterance-0189",
+          "record_id": "qa-ted-2017-q00188",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0191",
+          "answer_utterance": "utterance-0192",
+          "record_id": "qa-ted-2017-q00191",
+          "status": "included"
+        },
+        {
+          "question_utterance": "utterance-0194",
+          "status": "excluded_no_unambiguous_answer"
+        }
+      ]
+    }
+  ],
+  "training_records": 80,
+  "validation_records": 4,
+  "test_records": 8
+}

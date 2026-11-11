@@ -12,7 +12,7 @@ from .corpus import Corpus
 from .models import Evidence
 from .situations import classify_situation
 
-RETRIEVER_VERSION = "qa-bm25-situation.v2"
+RETRIEVER_VERSION = "qa-bm25-situation.v3"
 SITUATION_MULTIPLIER = 1.35
 # Alone these broad topics do not identify what a question is about. Require an
 # additional reviewed topic or a concrete anchor for original-Q&A candidates.
@@ -50,12 +50,19 @@ ALIASES = {
     "팀": "team", "기술": "technology", "호기심": "curiosity", "관심": "interest",
     "기억": "memory memorable", "바꿔": "transform change",
 }
+# Keep archived summary-corpus retrieval reproducible while adding the ordinary
+# vocabulary needed by the original-Q&A pilot's Korean starter questions.
+QA_ALIASES = {
+    "땅굴": "tunnel", "터널": "tunnel", "교통": "traffic", "혼잡": "congestion",
+    "비용": "cost", "혁신": "innovation",
+}
 KOREAN_PARTICLES = ("들에게", "들에서", "이라고", "에서는", "에게", "부터", "라고", "에서", "으로", "적인", "은", "는", "이", "가", "을", "를", "로", "과", "와", "에")
 LIVE_QUERY = re.compile(r"\b(today|currently|latest|right now|(?:this|next) (?:week|month)|stock price|net worth)\b|오늘|현재|최신|지금 주가|최근 소식|다음 주", re.I)
 
 
-def tokenize(text: str) -> list[str]:
+def tokenize(text: str, *, original_qa: bool = False) -> list[str]:
     normalized = unicodedata.normalize("NFKC", text).lower()
+    aliases = ALIASES | QA_ALIASES if original_qa else ALIASES
     # Translate known concepts, not arbitrary substrings: 책 (book) must not
     # match 정책 (policy) or 책임 (responsibility). Prefer a longer concept such
     # as 신뢰성 (reliability) to its shorter root 신뢰 (trust).
@@ -63,12 +70,12 @@ def tokenize(text: str) -> list[str]:
     raw_tokens = re.findall(r"[^\W_]+", normalized, flags=re.UNICODE)
     for token in raw_tokens:
         matches = [
-            key for key in ALIASES if " " not in key and token.startswith(key)
+            key for key in aliases if " " not in key and token.startswith(key)
             and (len(key) > 1 or token == key or token[len(key):] in KOREAN_PARTICLES)
         ]
         if matches:
-            alias_values.append(ALIASES[max(matches, key=len)])
-    alias_values.extend(value for key, value in ALIASES.items() if " " in key and key in normalized)
+            alias_values.append(aliases[max(matches, key=len)])
+    alias_values.extend(value for key, value in aliases.items() if " " in key and key in normalized)
     expanded = normalized + " " + " ".join(alias_values)
     expanded = re.sub(r"['’]s\b", "", expanded)
     tokens = re.findall(r"[^\W_]+", expanded, flags=re.UNICODE)
@@ -111,12 +118,13 @@ class SearchResult:
 class Retriever:
     def __init__(self, corpus: Corpus):
         self.records = tuple(corpus.training_evidence)
+        self.original_qa = any(record.question_answer is not None for record in self.records)
         self.source_years = {source.id: {source.published_at.year, *([source.recorded_at.year] if source.recorded_at else [])} for source in corpus.sources.values()}
-        self.topic_terms = {record.id: set(tokenize(" ".join(record.topics))) for record in self.records}
+        self.topic_terms = {record.id: set(tokenize(" ".join(record.topics), original_qa=self.original_qa)) for record in self.records}
         # Match incoming questions against original questions as well as answers.
         # Both B and C use exactly this topical index; only C reranks its eligible
         # candidates. An annotation summary is never substituted for source text.
-        self.term_counts = [Counter(tokenize(record.text + " " + (record.question_answer.question + " " + record.question_answer.question if record.question_answer else "") + " " + " ".join(record.topics + record.topics))) for record in self.records]
+        self.term_counts = [Counter(tokenize(record.text + " " + (record.question_answer.question + " " + record.question_answer.question if record.question_answer else "") + " " + " ".join(record.topics + record.topics), original_qa=self.original_qa)) for record in self.records]
         self.lengths = [sum(count.values()) for count in self.term_counts]
         self.average_length = sum(self.lengths) / max(1, len(self.lengths))
         self.df: Counter[str] = Counter()
@@ -128,7 +136,7 @@ class Retriever:
             raise ValueError("limit must be between 1 and 10")
         if not allow_live and LIVE_QUERY.search(query):
             return SearchResult((), 0, "The curated corpus is historical and cannot verify current information.")
-        terms = set(tokenize(query))
+        terms = set(tokenize(query, original_qa=self.original_qa))
         known = terms.intersection(self.df)
         if not known or not self.records:
             return SearchResult((), 0, "No matching evidence in the reviewed training corpus.")

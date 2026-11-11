@@ -76,7 +76,13 @@ def materialize_record(selection: dict, transcript: dict, *, bounded: bool = Fal
                 answer = original[start:end]
         completeness = "excerpt"
         excerpt_note = "Bounded verbatim excerpt. The full question, answer and nearby context remain at the publisher; locally hydrate the pinned selection for the experiment. Cue times locate the containing original turns, not individual excerpt words."
-    qa = {"question": question, "answer": answer, "context_before": selection["context_before"], "context_kind": "editorial_summary",
+    context = selection["context_before"]
+    context_kind = selection.get("context_kind", "editorial_summary")
+    if context_kind == "original_text":
+        context = selected_text(transcript, selection["context_cue_ids"], selection["context_source_speaker"])
+        if text_sha(context) != selection["context_sha256"]:
+            raise AcquisitionError(f"Original preceding context changed for {selection['id']}")
+    qa = {"question": question, "answer": answer, "context_before": context, "context_kind": context_kind,
           "original_language": "en", "questioner": selection["questioner"], "respondent": selection["respondent"],
           "source_event_id": selection["source_event_id"], "completeness": completeness, "excerpt_note": excerpt_note,
           "question_start_seconds": segments[q_ids[0]]["start"], "answer_start_seconds": segments[a_ids[0]]["start"],
@@ -95,11 +101,12 @@ def materialize_record(selection: dict, transcript: dict, *, bounded: bool = Fal
                                                "start_seconds": segments[a_ids[0]]["start"], "timeline": transcript["source_timeline"]}})
 
 
-def hydrate(recipe_dir: Path, output: Path, *, raw_inputs: dict[str, Path] | None = None, transcripts: dict[str, dict] | None = None, bounded: bool = False) -> dict:
+def hydrate(recipe_dir: Path, output: Path, *, raw_inputs: dict[str, Path] | None = None, transcripts: dict[str, dict] | None = None, bounded: bool = False, selection_path: Path | None = None) -> dict:
     """Fail closed on changed source text, splits, speakers, or existing output."""
     if output.exists():
         raise AcquisitionError("Output already exists; choose a new directory to preserve the prior corpus")
-    recipes = json.loads((recipe_dir / "selection-recipes.json").read_text())
+    selection_path = selection_path or recipe_dir / "selection-recipes.json"
+    recipes = json.loads(selection_path.read_text())
     if recipes.get("schema_version") != "qa-selection-recipes.v1":
         raise AcquisitionError("Unsupported Q&A recipe version")
     sources = json.loads((recipe_dir / "sources.json").read_text())
@@ -129,12 +136,16 @@ def hydrate(recipe_dir: Path, output: Path, *, raw_inputs: dict[str, Path] | Non
     output.parent.mkdir(parents=True, exist_ok=True)
     temporary = Path(tempfile.mkdtemp(prefix=".qa-hydrate-", dir=output.parent))
     try:
-        for name in ("profile.json", "sources.json", "split-manifest.json", "selection-recipes.json"):
+        for name in ("profile.json", "sources.json", "split-manifest.json"):
             shutil.copyfile(recipe_dir / name, temporary / name)
+        shutil.copyfile(selection_path, temporary / "selection-recipes.json")
+        profile = json.loads((temporary / "profile.json").read_text())
+        profile["qa_corpus_id"] = recipes["corpus_id"]
+        (temporary / "profile.json").write_text(json.dumps(profile, ensure_ascii=False, indent=2) + "\n")
         (temporary / "evidence.jsonl").write_text("".join(record.model_dump_json(exclude={"text"}) + "\n" for record in records), encoding="utf-8")
         manifest = {"schema_version": "original-qa-corpus.v1", "id": recipes["corpus_id"],
                     "materialization": "bounded_excerpts" if bounded else "full_selected_exchanges_local",
-                    "selection_recipe_sha256": hashlib.sha256((recipe_dir / "selection-recipes.json").read_bytes()).hexdigest(),
+                    "selection_recipe_sha256": hashlib.sha256(selection_path.read_bytes()).hexdigest(),
                     "split_manifest_sha256": hashlib.sha256((recipe_dir / "split-manifest.json").read_bytes()).hexdigest(),
                     "source_content_sha256": {key: value["publisher_caption_sha256"] for key, value in loaded.items()},
                     "record_count": len(records), "raw_transcripts_distributed": False,
