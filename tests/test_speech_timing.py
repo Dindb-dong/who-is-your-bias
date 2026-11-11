@@ -114,7 +114,7 @@ def test_concurrent_preparation_is_bounded_and_cancellation_releases_slot():
     async def run():
         started = asyncio.Event()
         class Provider:
-            async def synthesize(self, text, voice):
+            async def synthesize(self, text, voice, *, language=None):
                 started.set()
                 await asyncio.Event().wait()
         cache = SpeechPackages()
@@ -133,8 +133,9 @@ def test_concurrent_preparation_is_bounded_and_cancellation_releases_slot():
 def test_prepared_speech_api_retrieves_exact_bytes_and_clears_on_shutdown(corpus, tmp_path):
     audio = wav()
     class Provider:
-        async def synthesize(self, text, voice):
+        async def synthesize(self, text, voice, *, language=None):
             assert text == "Hello"
+            assert language == "ko"
             return audio, "audio/wav"
     class Analysis:
         async def analyze(self, data, text, language):

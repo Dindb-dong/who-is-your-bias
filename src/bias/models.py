@@ -173,6 +173,7 @@ class ChatTurn(Record):
 class SpeechRequest(Record):
     text: str = Field(min_length=1, max_length=4_000)
     voice: str | None = Field(default=None, min_length=1, max_length=100, pattern=r"^[\w.-]+$")
+    language: Language | None = None
 
 
 class SpeechPackageRequest(SpeechRequest):

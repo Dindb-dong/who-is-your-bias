@@ -90,6 +90,13 @@ Create a separate Python 3.12 environment and install a PyTorch build suited to 
 
 ```bash
 pip install -r services/voice/requirements.txt
+export ORT_DISABLE_TELEMETRY=1
+export HF_HUB_DISABLE_TELEMETRY=1
+export BIAS_VOICE_MODEL=Qwen/Qwen3-TTS-12Hz-0.6B-Base
+export BIAS_VOICE_REVISION=5d83992436eae1d760afd27aff78a71d676296fc
+export BIAS_VOICE_CACHE_DIR=/absolute/path/to/huggingface/hub
+hf download "$BIAS_VOICE_MODEL" --revision "$BIAS_VOICE_REVISION" --cache-dir "$BIAS_VOICE_CACHE_DIR"
+export BIAS_VOICE_LOCAL_FILES_ONLY=true
 export BIAS_VOICE_REFERENCE_WAV=/absolute/path/to/reviewed-reference.wav
 export BIAS_VOICE_REFERENCE_TEXT='The accurate words spoken in that specific reference clip.'
 export BIAS_VOICE_DEVICE=cuda:0
@@ -109,10 +116,11 @@ Connect the main app using:
 export BIAS_TTS_BASE_URL=http://127.0.0.1:8010/v1
 export BIAS_TTS_MODEL=qwen3-tts
 export BIAS_TTS_VOICE=reference
+export BIAS_TTS_LANGUAGE_HINT=true
 export BIAS_REQUEST_TIMEOUT=180
 ```
 
-The longer main-app timeout allows a slow cold start within the configured maximum. A first model download can still exceed it; download and exercise the model with the bounded [inference runner](inference-validation.md) before interactive use. The measured CPU voice path is slower than real-time, so use the reported timings when choosing a target runtime.
+The longer main-app timeout allows a slow cold start within the configured maximum. The voice service defaults to offline cache resolution and never downloads during an HTTP request unless the operator explicitly disables that default. Download the pinned model separately, then exercise the model with the bounded [inference runner](inference-validation.md) before interactive use. `BIAS_TTS_LANGUAGE_HINT=true` forwards application `en`/`ko` choices to local Qwen as `English`/`Korean`; leave it false for generic providers that do not accept this extension. The measured CPU voice path is slower than real-time, so use the [multi-sentence English/Korean measurements](voice-evaluation.md) when choosing a target runtime.
 
 If `BIAS_VOICE_API_KEY` is configured on the voice service, set the same value in the main app's `BIAS_TTS_API_KEY`. Bind to loopback for local use. The HTTP interface provides a narrow compatible subset:
 

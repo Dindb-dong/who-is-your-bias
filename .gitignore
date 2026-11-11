@@ -25,3 +25,5 @@ playwright-report/
 *.gltf
 .DS_Store
 
+# Bounded generated evaluation speech; source/reference recordings stay ignored.
+!tools/voice_evaluation/results/qwen06-cpu-2026-11-11-listening/listener/sample*.wav
