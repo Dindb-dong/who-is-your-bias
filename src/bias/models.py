@@ -129,6 +129,15 @@ class Evidence(Record):
     review_status: Literal["reviewed", "draft"] = "draft"
     question_answer: QuestionAnswer | None = None
 
+    @model_validator(mode="before")
+    @classmethod
+    def original_answer_as_citation(cls, value):
+        # A JSONL source need not duplicate copyrighted original wording in both
+        # fields. Runtime citations retain the same validated answer text.
+        if isinstance(value, dict) and "text" not in value and isinstance(value.get("question_answer"), dict):
+            value = dict(value, text=value["question_answer"].get("answer"))
+        return value
+
     @model_validator(mode="after")
     def validate_question_answer(self) -> "Evidence":
         if self.kind == "question_answer" and self.question_answer is None:
