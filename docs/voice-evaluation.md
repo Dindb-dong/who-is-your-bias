@@ -95,9 +95,16 @@ that comparison recording, remains in ignored `reports/local/`.
 Every score remains null and every listening attestation remains false. These
 are ready review artifacts, not a completed listening study. The recovered
 synthesis, ASR, execution records, and generated WAVs were checked against their
-saved hashes. JavaScript syntax is checked, but browser verification remains
-incomplete: the available Chromium cannot start because the execution environment
-rejects its process-singleton socket operation.
+saved hashes. Desktop and mobile browser transport checks passed in
+[CI run 42943071040](https://github.com/Dindb-dong/who-is-your-bias/actions/runs/42943071040)
+at commit `3c10b3b627716e972bd09a535b3ee5dddd49f52c`: the test verifies all four
+WAV hashes and metadata, plays/pauses/completes the shortest English sample, and
+exports the review JSON while keeping the answer key out of the page. Playback
+is muted and form values are synthetic test inputs; no listening score was
+recorded. The earlier local Chromium launch failed because the environment
+rejected its process-singleton socket, so the browser evidence comes from CI.
+See [quality completion](quality-completion.md) for the later regression checks
+and the current branch's verification link.
 
 ## Reproducible voice runtime
 

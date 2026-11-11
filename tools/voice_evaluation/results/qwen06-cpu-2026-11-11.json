@@ -422,7 +422,7 @@
     "actual_generated_audio_ASR_cases": 4,
     "actual_restored_reference_ASR_cases": 1,
     "listener_script_syntax_check": "passed",
-    "listener_browser_check": "not_completed: Playwright browser missing; installed system Chromium launch rejected socket syscall",
+    "listener_browser_check": "passed: desktop/mobile generated-WAV playback and review JSON export in GitHub Actions run 42943071040 at 3c10b3b627716e972bd09a535b3ee5dddd49f52c; all four hashes/metadata checked, shortest English sample played muted; no human listening or scores",
     "human_listening_performed": false,
     "recovery_hash_check": "passed: synthesis, ASR, execution, all four generated WAVs and both listening manifests match the recorded artifacts"
   },

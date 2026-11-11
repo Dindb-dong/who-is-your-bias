@@ -142,11 +142,16 @@ checks that neutral returns do not accumulate deformation.
 
 For these CPU tests only, image/material creation is replaced with plain
 materials. The tests validate neither browser WebP decoding nor GPU rendering.
-The browser suite must cover the unmodified asset, successful GLB readiness,
+The browser suite covers the unmodified asset, successful GLB readiness,
 portrait/body framing, and the procedural alternative on desktop and mobile.
-The local recovery environment rejected Chromium's process-singleton socket, so
-that launch attempt supplied no browser-rendering evidence. CI browser results
-and screenshots are the separate source of that evidence.
+[CI run 42943071040](https://github.com/Dindb-dong/who-is-your-bias/actions/runs/42943071040)
+passed all 16 baseline browser cases at `3c10b3b`. Its actual desktop/mobile
+screenshots were inspected: the textured human renders, full-body framing keeps
+the feet in view, and measured-motion/calibration controls remain within their
+panels. Static screenshots do not establish smooth animation or naturalness.
+The local recovery environment rejected Chromium's process-singleton socket;
+that failed launch supplied no rendering evidence. The current suite also
+checks recovery after a failed GLB load; see [quality completion](quality-completion.md).
 
 The recovered Blender preview demonstrates that the authored model can render,
 but is not a screenshot of the web application. No independent likeness score,

@@ -121,6 +121,7 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 
 ## Documentation
 
+- [Quality completion](docs/quality-completion.md): PR dependencies, browser evidence, recovery fixes, measured limits, and current verification links.
 - [Delivery plan](docs/PLAN.md): review boundaries, acceptance criteria, fidelity ladder.
 - [Architecture](docs/architecture.md): evidence, generation, timing, and deployment boundaries.
 - [Source provenance](docs/research/sources.md): original URLs, dates, timebases, and corpus limitations.
