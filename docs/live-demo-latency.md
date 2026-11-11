@@ -41,12 +41,12 @@ python -m tools.demo_latency \
   --reference-wav /absolute/reference/audio.wav \
   --reference-text /absolute/reference/reference.txt \
   --corpus-dir "$PWD/data/local/qna/elon-musk-v2" \
-  --question 'How does tunnel diameter affect cost? One sentence, please.' \
+  --question 'How does tunnel diameter affect cost? In 12 words.' \
   --repeats 2 \
   --output "$PWD/artifacts/demo-latency/my-cpu-run"
 ```
 
-Hydrate the full original Q&A corpus first using the corpus workflow. The requested one-sentence answer keeps this CPU pilot bounded, but the harness preserves all generated text and does not silently shorten an overlong answer. Default budgets are 96 LLM tokens and 384 voice tokens; the voice backend currently does not expose its termination reason. A successful file transfer does not prove the spoken content is complete or faithful.
+Hydrate the full original Q&A corpus first using the corpus workflow. The requested 12-word answer keeps this CPU pilot bounded, but the harness preserves all generated text and does not silently shorten an overlong answer. Default budgets are 96 LLM tokens and 384 voice tokens; the voice backend currently does not expose its termination reason. A successful file transfer does not prove the spoken content is complete or faithful. The earlier one-sentence instruction produced a 43-word answer whose CPU voice request exceeded the application's 180-second timeout; that attempt is preserved separately.
 
 Default CPU settings use four llama threads, two voice threads, a 4,096-token context, llama logical batch 128 and physical batch 64, BF16 Qwen voice, and a 180-second provider request timeout. These settings are recorded so results cannot be mistaken for a different model run or a target-device measurement. The first LLM request follows llama.cpp's enabled startup warmup. The first voice request includes lazy model loading and reference-prompt preparation. The second repetition reuses warm processes and the same question; it can benefit from a repeated prompt cache. Two repetitions are an execution pilot, not a latency distribution.
 
