@@ -1,0 +1,37 @@
+{
+  "schema_version": "exchange-observation-screening.v1",
+  "reviewer_type": "agent",
+  "reviewer": "assistant-source-contact-sheet-screening",
+  "reviewed_at": "2026-11-11",
+  "method": "Visual inspection of two previously decoded, source-time-labeled contact sheets. No audio was listened to. This is preliminary window screening, not full-frame track or speaker-association validation.",
+  "sources": [
+    {
+      "source_event_id": "ted-2013",
+      "source_timeline": "ted_h264_zero_start_capture",
+      "contact_sheet_basename": "ted-2013-window-review.jpg",
+      "contact_sheet_sha256": "72796a209883fe8672979f29d386c31aa2f81f18f7f6e977d24330f7f6d981f7",
+      "observations": [
+        "Samples around 35–40, 59–62 and 83–87 seconds show a close image crop where the hands are outside the visible area. A missing hand measurement is appropriate for those windows.",
+        "Samples around 65–70 seconds show two seated people; the frozen preparation crop is needed to select one image region. A pose detection index by itself does not establish who is speaking.",
+        "The contact sheet includes camera-view transitions near the selected windows. Exact tail exclusions remain those in the original frame-screened measurement plan."
+      ]
+    },
+    {
+      "source_event_id": "ted-2017",
+      "source_timeline": "ted_h264_zero_start_capture",
+      "contact_sheet_basename": "ted-2017-window-review.jpg",
+      "contact_sheet_sha256": "3298b5fefa89c02e9d5a201d1d051c4c598a50460462e96780e45ffb728f9142",
+      "observations": [
+        "The selected one-person views generally include upper-body and wrist regions, making bounded wrist-geometry candidates plausible where model visibility checks also pass.",
+        "The 65–72 and 139–145 second samples include two seated people; cropping and a separate image-to-speaker review are required.",
+        "Visible mouth and head changes do not show whether laughter is audible or whether a movement is an intentional nod. Those annotation fields remain ungraded."
+      ]
+    }
+  ],
+  "human_review": false,
+  "audio_listening_completed": false,
+  "track_continuity_verified": false,
+  "image_speaker_association_verified": false,
+  "changes_to_runtime_policy": false,
+  "source_images_redistributed": false
+}
