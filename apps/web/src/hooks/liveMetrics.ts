@@ -43,7 +43,7 @@ export class LiveTurnClock {
     if (this.value.first_visible_text_ms === null) this.value.first_visible_text_ms = this.elapsed(at);
   }
   answer(at: number, provider: LiveMeasurement['provider'], server: LiveMeasurement['server']): void {
-    if (this.value.status !== 'running') return;
+    if (!['running', 'speaking'].includes(this.value.status)) return;
     this.value.answer_complete_ms = this.elapsed(at); this.value.provider = provider; this.value.server = server;
     if (this.value.voice === 'off') { this.value.status = 'text_only'; this.value.turn_complete_ms = this.elapsed(at); }
   }

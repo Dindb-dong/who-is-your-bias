@@ -2,6 +2,7 @@ import type { AvatarClip, BehaviorPlan, MotionMode, MotionSelection } from './av
 import type { SpeechTiming } from './avatar/types';
 import { parseAvatarClip, parseMotionSelection, parseSpeechTiming } from './avatar/validation';
 import type { SpeechServerTiming } from './hooks/liveMetrics';
+import type { PcmChunk } from './hooks/pcmPlayback';
 
 export type Language = 'en' | 'ko';
 export type ExperimentMode = 'profile' | 'rag' | 'behavior';
@@ -23,21 +24,29 @@ export interface Turn {
   provider: 'evidence' | 'openai'; citations: Citation[]; behavior: BehaviorPlan & { speech: { rate: number; pitch: number; pause_ms: number } };
   grounding: Grounding;
   metrics: { retrieval_ms: number; generation_ms: number; total_ms: number };
+  context?: { snapshot?: { id: string; as_of: string } | null; retrieval_backend?: string; query_resolution?: { original: string; query: string; method: string; supporting_turn_ids: string[] } } | null;
 }
 export interface Persona {
   id: string; name: string; tagline: string; description: string;
   example_questions: { en: string[]; ko: string[] };
   stats: { sources: number; evidence: number; held_out_sources: number };
   qa_corpus?: { corpus_id: string | null; materialization: string; question_answer_records: number; training_question_answers: number; complete_exchanges: number; excerpts: number };
-  capabilities: { llm: boolean; speech: boolean; transcription?: boolean };
+  capabilities: { llm: boolean; speech: boolean; transcription?: boolean; live_speech?: boolean };
+  snapshot?: { id: string; as_of: string; current_dated_training_sources: number; coverage_note: string } | null;
   notice: string;
 }
 export interface ChatRequest { message: string; session_id?: string; mode: ExperimentMode; language: Language; motion_mode?: MotionMode }
 export type StreamEvent =
-  | { event: 'meta'; data: { session_id: string } }
+  | { event: 'meta'; data: { session_id: string; turn_id?: string; snapshot_id?: string | null; protocol?: string } }
   | { event: 'status'; data: { stage: string } }
   | { event: 'token'; data: { text: string } }
   | { event: 'result'; data: { turn: Turn } }
+  | { event: 'segment'; data: { turn_id: string; segment_id: string; sequence: number; text: string; evidence_ids: string[]; state: 'committed' } }
+  | { event: 'audio_segment'; data: { turn_id: string; segment_id: string; sequence: number; audio_sha256: string; sample_rate: number; channels: number; sample_offset: number; sample_count: number; synthesis_ms: number } }
+  | { event: 'audio'; data: PcmChunk }
+  | { event: 'audio_segment_end'; data: { turn_id: string; segment_id: string; sequence: number; sample_end: number; state: 'delivered' } }
+  | { event: 'audio_end'; data: { turn_id: string; chunks: number; sample_count: number; sample_rate: number | null; first_pcm_ready_ms: number | null; total_ms: number; state: 'delivered'; spoken_complete: false; acoustic_latency_ms: null } }
+  | { event: 'turn_state'; data: { turn_id: string | null; state: 'failed'; text_complete: boolean; delivered_audio_chunks: number; spoken_complete: false } }
   | { event: 'done'; data: Record<string, never> }
   | { event: 'error'; data: { code: string; message: string } };
 
@@ -97,13 +106,23 @@ function isTurn(value: unknown): value is Turn {
 }
 
 function validateEvent(event: string, data: unknown): StreamEvent | null {
-  if (!['meta', 'status', 'token', 'result', 'done', 'error'].includes(event)) return null;
+  if (!['meta', 'status', 'token', 'result', 'done', 'error', 'segment', 'audio_segment', 'audio', 'audio_segment_end', 'audio_end', 'turn_state'].includes(event)) return null;
   if (!object(data)) throw new ApiError('Invalid event from the conversation service.');
-  const valid = event === 'meta' ? typeof data.session_id === 'string'
+  const integer = (value: unknown) => positive(value) && Number.isSafeInteger(value);
+  const identity = (value: unknown) => typeof value === 'string' && value.length > 0;
+  const rate = (value: unknown) => integer(value) && Number(value) >= 8000 && Number(value) <= 48000;
+  const segment = () => identity(data.turn_id) && identity(data.segment_id) && integer(data.sequence);
+  const valid = event === 'meta' ? identity(data.session_id) && (data.turn_id === undefined || identity(data.turn_id)) && (data.protocol === undefined || typeof data.protocol === 'string')
     : event === 'status' ? typeof data.stage === 'string'
     : event === 'token' ? typeof data.text === 'string'
     : event === 'result' ? isTurn(data.turn)
     : event === 'error' ? typeof data.code === 'string' && typeof data.message === 'string'
+    : event === 'segment' ? segment() && typeof data.text === 'string' && data.text.length <= 6000 && strings(data.evidence_ids) && data.state === 'committed'
+    : event === 'audio_segment' ? segment() && typeof data.audio_sha256 === 'string' && /^[a-f0-9]{64}$/.test(data.audio_sha256) && rate(data.sample_rate) && [1, 2].includes(Number(data.channels)) && integer(data.sample_offset) && integer(data.sample_count) && Number(data.sample_count) > 0 && Number(data.sample_count) <= Number(data.sample_rate) * 180 && positive(data.synthesis_ms)
+    : event === 'audio' ? segment() && integer(data.segment_sequence) && integer(data.sample_offset) && integer(data.sample_count) && Number(data.sample_count) > 0 && Number(data.sample_count) <= 16384 && rate(data.sample_rate) && [1, 2].includes(Number(data.channels)) && data.encoding === 'pcm_s16le' && typeof data.pcm_base64 === 'string' && data.pcm_base64.length <= 90000
+    : event === 'audio_segment_end' ? segment() && integer(data.sample_end) && data.state === 'delivered'
+    : event === 'audio_end' ? identity(data.turn_id) && integer(data.chunks) && integer(data.sample_count) && (data.sample_rate === null || rate(data.sample_rate)) && (data.first_pcm_ready_ms === null || positive(data.first_pcm_ready_ms)) && positive(data.total_ms) && data.state === 'delivered' && data.spoken_complete === false && data.acoustic_latency_ms === null
+    : event === 'turn_state' ? (data.turn_id === null || typeof data.turn_id === 'string') && data.state === 'failed' && typeof data.text_complete === 'boolean' && integer(data.delivered_audio_chunks) && data.spoken_complete === false
     : true;
   if (!valid) throw new ApiError(`Invalid ${event} event from the conversation service.`);
   return { event, data } as StreamEvent;
@@ -140,8 +159,90 @@ export function createEventParser(emit: (event: StreamEvent) => void) {
   };
 }
 
-export async function streamChat(request: ChatRequest, signal: AbortSignal, emit: (event: StreamEvent) => void) {
-  const response = await fetch('/api/chat/stream', {
+/** Bind live PCM to this response's committed text before it reaches playback. */
+class LiveStreamIntegrity {
+  private owner: { turnId: string; sessionId: string } | undefined;
+  private segments: { id: string; sequence: number }[] = [];
+  private segmentIds = new Set<string>();
+  private nextSegment = 0;
+  private nextChunk = 0;
+  private nextSample = 0;
+  private format: [number, number] | undefined;
+  private active: Extract<StreamEvent, { event: 'audio_segment' }>['data'] | undefined;
+  private textComplete = false;
+  private audioComplete = false;
+  private failed = false;
+
+  accept(event: StreamEvent): void {
+    const invalid = (detail: string): never => { throw new ApiError(`Invalid live voice stream: ${detail}.`); };
+    if (event.event === 'meta') {
+      if (this.owner || !event.data.turn_id || event.data.protocol !== 'live-segments-pcm.v1') invalid('missing or changed turn ownership');
+      this.owner = { turnId: event.data.turn_id!, sessionId: event.data.session_id };
+      return;
+    }
+    if (!this.owner) invalid('data arrived before turn ownership');
+    const owner = this.owner!;
+    if (this.failed) invalid('data arrived after failure');
+    if ('turn_id' in event.data && event.data.turn_id !== owner.turnId) invalid('turn identity changed');
+    if (this.audioComplete && ['segment', 'audio_segment', 'audio', 'audio_segment_end', 'audio_end'].includes(event.event)) invalid('audio arrived after completion');
+    switch (event.event) {
+      case 'result':
+        if (event.data.turn.id !== owner.turnId || event.data.turn.session_id !== owner.sessionId) invalid('result ownership changed');
+        this.textComplete = true;
+        break;
+      case 'token':
+        if (this.textComplete) invalid('text arrived after its result');
+        break;
+      case 'segment': {
+        const data = event.data;
+        if (this.textComplete || data.sequence !== this.nextSegment || this.segmentIds.has(data.segment_id)) invalid('committed segments are reordered or duplicated');
+        this.segments.push({ id: data.segment_id, sequence: data.sequence });
+        this.segmentIds.add(data.segment_id); this.nextSegment++;
+        break;
+      }
+      case 'audio_segment': {
+        const data = event.data; const committed = this.segments[0];
+        if (this.active || !committed || data.segment_id !== committed.id || data.sequence !== committed.sequence) invalid('audio does not match the next committed segment');
+        if (data.sample_offset !== this.nextSample || !Number.isSafeInteger(data.sample_offset + data.sample_count)) invalid('segment sample boundary changed');
+        if (this.format && (data.sample_rate !== this.format[0] || data.channels !== this.format[1])) invalid('PCM format changed');
+        this.format = [data.sample_rate, data.channels]; this.active = data;
+        break;
+      }
+      case 'audio': {
+        const data = event.data; const active = this.active;
+        if (!active || data.segment_id !== active.segment_id || data.segment_sequence !== active.sequence) invalid('PCM has no matching committed segment');
+        if (data.sequence !== this.nextChunk || data.sample_offset !== this.nextSample || data.sample_offset + data.sample_count > active!.sample_offset + active!.sample_count) invalid('PCM sequence or sample boundary changed');
+        if (data.sample_rate !== active!.sample_rate || data.channels !== active!.channels) invalid('PCM format differs from its segment');
+        this.nextChunk++; this.nextSample += data.sample_count;
+        break;
+      }
+      case 'audio_segment_end': {
+        const data = event.data; const active = this.active;
+        if (!active || data.segment_id !== active.segment_id || data.sequence !== active.sequence || data.sample_end !== this.nextSample || this.nextSample !== active.sample_offset + active.sample_count) invalid('segment ended with missing or unexpected samples');
+        this.active = undefined; this.segments.shift();
+        break;
+      }
+      case 'audio_end': {
+        const data = event.data;
+        if (!this.textComplete || this.active || this.segments.length) invalid('audio ended before all committed segments were delivered');
+        if (data.chunks !== this.nextChunk || data.sample_count !== this.nextSample || data.sample_rate !== (this.format?.[0] ?? null)) invalid('audio completion counts or format differ');
+        if ((this.nextChunk === 0) !== (data.first_pcm_ready_ms === null)) invalid('first PCM timing disagrees with delivery');
+        this.audioComplete = true;
+        break;
+      }
+      case 'turn_state':
+        if (event.data.delivered_audio_chunks !== this.nextChunk) invalid('failure delivery count differs');
+        this.failed = true;
+        break;
+      case 'done':
+        if (!this.textComplete || !this.audioComplete) invalid('turn completed before text and audio delivery');
+        break;
+    }
+  }
+}
+
+export async function streamChat(request: ChatRequest, signal: AbortSignal, emit: (event: StreamEvent) => unknown | Promise<unknown>, options: { live?: boolean } = {}) {
+  const response = await fetch(options.live ? '/api/chat/live' : '/api/chat/stream', {
     method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'text/event-stream' },
     body: JSON.stringify(request), signal,
   });
@@ -153,29 +254,43 @@ export async function streamChat(request: ChatRequest, signal: AbortSignal, emit
   const decoder = new TextDecoder();
   let completed = false;
   let receivedResult = false;
+  let receivedAudioEnd = false;
+  const liveIntegrity = options.live ? new LiveStreamIntegrity() : undefined;
+  const pending: StreamEvent[] = [];
   const parser = createEventParser((event) => {
     signal.throwIfAborted();
     if (completed) throw new ApiError('The conversation service sent data after completion.');
     if (event.event === 'error') throw new ApiError(event.data.message);
+    liveIntegrity?.accept(event);
     if (event.event === 'result') {
       if (receivedResult) throw new ApiError('The conversation service sent a duplicate result.');
       receivedResult = true;
     }
     if (event.event === 'done') {
       if (!receivedResult) throw new ApiError('The conversation ended without a result.');
+      if (options.live && !receivedAudioEnd) throw new ApiError('The conversation ended without complete audio delivery.');
       completed = true;
     }
-    emit(event);
+    if (event.event === 'audio_end') {
+      if (receivedAudioEnd) throw new ApiError('The voice stream sent a duplicate completion.');
+      receivedAudioEnd = true;
+    }
+    pending.push(event);
   });
+  async function deliver() {
+    for (const event of pending.splice(0)) { signal.throwIfAborted(); await emit(event); }
+  }
   try {
     while (true) {
       signal.throwIfAborted();
       const part = await reader.read();
       if (part.done) break;
       parser.push(decoder.decode(part.value, { stream: true }));
+      await deliver();
     }
     parser.push(decoder.decode());
     parser.finish();
+    await deliver();
     if (!completed && !signal.aborted) throw new ApiError('The response ended early. Please retry your question.');
   } finally {
     await reader.cancel().catch(() => undefined);
