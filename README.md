@@ -47,8 +47,8 @@ The optional [local language server](docs/language-runtime.md) runs a server-sel
 
 | Capability | Behavior |
 | --- | --- |
-| Source corpus | Linked primary-source records, dated paraphrases, explicit timelines, review state |
-| Retrieval | BM25, English/Korean query support, topical matching, conservative abstention; situation reranking needs the documented label correction |
+| Source corpus | Original question/answer pairs, distinct context/annotations, pinned source events, explicit unknown acoustic boundaries and review provenance |
+| Retrieval | Original-Q&A BM25, English/Korean aliases, shared situation labels and working reranking after a common topical gate; held-out coverage remains inadequate |
 | Dialogue | OpenAI-compatible streaming adapter; profile, evidence, and behavior experiment modes |
 | Conversation state | Opaque sessions, bounded history, TTL, serialized turns, cancellation cleanup |
 | Evidence | Per-unit citation coverage, separately labeled semantic review, original source links, frozen prompt comparisons |
@@ -63,13 +63,15 @@ The optional [local language server](docs/language-runtime.md) runs a server-sel
 | Ingestion | Local SRT/VTT/WhisperX imports, speaker selection, hashes, source-clock offsets |
 | Evaluation | Reproducible retrieval checks, separate generation cases, actual A/B/C execution, and source-disjoint answerability fixtures |
 
-## Corpus and original material
+## Historical corpus and source acquisition
+
+The following counts describe the preserved `data/personas/elon-musk` summary archive, not the current original-Q&A default or the v2 experiment.
 
 The initial 7-source development collection has expanded to **31 distinct source events/documents and 163 reviewed evidence records**, spanning **2003–2026**. Retrieval uses **159 records from 30 sources**; the four reference records from Lex #438 remain held out. Evidence is concise, attributed paraphrase, with original URLs and dates.
 
 The collection includes TED interviews, Lex Fridman conversations, Dwarkesh, Y Combinator, Recode, WIRED, TIME, GQ, Stanford, MIT, congressional testimony, and authored Tesla documents. Coverage now includes learning, fear, criticism, uncertainty, humor, motivation, and work habits alongside engineering and business plans. See [integrated corpus status](docs/research/corpus-status.md) for exact contributions, dates, acquisition links, and limitations.
 
-The publisher transcript pipeline also extracted **3,451 timestamped caption cues** from four complete TED interviews: **3:00:45 of declared program duration and 27,411 whitespace-delimited words**. Of those cues, **1,822 carry Musk labels in the publisher text**, 1,125 carry interviewer labels, and 504 remain unassigned. Questions and adjacent speaking turns are preserved. These full local transcripts remain **draft, unindexed** material; a text label is not independently verified voice identity. The repository contains reproducible extraction code and measured coverage, while complete originals remain outside Git.
+The publisher transcript pipeline also extracted **3,451 timestamped caption cues** from four complete TED interviews: **3:00:45 of declared program duration and 27,411 whitespace-delimited words**. Of those cues, **1,822 carry Musk labels in the publisher text**, 1,125 carry interviewer labels, and 504 remain unassigned. Questions and adjacent speaking turns are preserved. The full local transcript imports remain **draft, unindexed** material. Separately reviewed original-Q&A selections from the pinned transcripts enter the new explicit corpus; a text label is not independently verified voice identity. The repository contains reproducible extraction code and measured coverage, while complete originals remain outside Git.
 
 This is a research corpus and working application, not a validated replica of a person's mind, voice, or appearance. The [initial inference report](docs/inference-validation.md) and [integration results](docs/integration-validation.md) separate real model execution from citation compliance and perceptual quality. The included human avatar is an artistic reference asset with a calibrated face/body rig. A high-quality likeness asset, learned personal mannerisms across many situations, and independent perceptual evaluation remain separate work.
 
