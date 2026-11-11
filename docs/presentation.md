@@ -194,3 +194,13 @@ result needs no model execution. Live Q&A should use the existing streaming
 answer and speech path; use measured question-to-text, question-to-audio, and
 turn-completion timings on the actual demonstration computer to choose its
 settings.
+
+## Studio playback and live handoff
+
+After `npm run build` and `uv run bias serve`, open **Presentation** (mobile: **Present**). The bundled MP4, generated WAV and WebVTT captions are served locally from the verified package. The viewer has standard video controls, persistent simulation disclosure and direct downloads. The prepared clip requires no running LLM or voice service.
+
+**Open live Q&A** clears the prior conversation and starts a fresh session. Configure the actual language and voice endpoints, choose **Connected voice** and enable automatic reading in Studio settings for spoken audience answers. The normal studio's **This turn** card reports browser-clock events and exports their JSON. [Live measurement](live-demo-latency.md) separates browser paint opportunities, digital PCM playback, server synthesis and HTTP transfer from unmeasured acoustic output.
+
+Cancellation closes the request-owned speech HTTP stream, releases application preparation slots and reaps an active local mouth-analysis subprocess. Whether a remote voice service can interrupt an already-running inference thread is provider-specific. Cancelled browser speech and disconnected requests do not produce a completed-turn measurement.
+
+The browser acceptance scenario plays the actual committed MP4, verifies its decoded duration, exports a source-preview turn with unmeasured audio fields left null, and checks the fresh-session handoff on desktop and mobile. Muted automated playback is an engineering test, not human listening. CI also verifies every package hash, the exact copies served by the UI, PCM sample count, stream codecs, frame count and full FFmpeg decode.
