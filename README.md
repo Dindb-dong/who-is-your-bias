@@ -137,6 +137,8 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 
 ## Documentation
 
+- [2026 persona roadmap](docs/2026-persona-roadmap.md): current-pilot limits, the 2026 snapshot, data and learning expansion, retrieval, dialogue, streaming, and acceptance criteria.
+- [Musk 3D avatar shortlist](docs/research/musk-3d-avatar-shortlist.md): researched facially rigged models, free candidates, detailed portraits, licensing evidence, and an asset qualification plan.
 - [Proposal implementation status](docs/proposal-alignment.md): requirement mapping, completed evidence and remaining review boundaries.
 - [Original Q&A corpus](docs/original-qa.md): pinned publisher selections, event splits and working situation retrieval.
 - [Actual-answer evaluation](docs/reference-evaluation.md): the complete 24-response run, negative coverage result and reconstructable blinded review.
