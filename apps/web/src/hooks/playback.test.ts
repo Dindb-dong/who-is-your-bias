@@ -57,6 +57,21 @@ beforeEach(() => vi.useFakeTimers());
 afterEach(() => { vi.clearAllTimers(); vi.useRealTimers(); });
 
 describe('speech playback ownership', () => {
+  it.each([false, true])('does not count externally interrupted browser speech as completion (started=%s)', async (started) => {
+    const f = setup(); const events: string[] = [];
+    await f.controller.play(turn, 'browser', (event) => events.push(event.type));
+    const utterance = f.utterances[0];
+    if (started) utterance.onstart?.call(utterance, {} as SpeechSynthesisEvent);
+    utterance.onerror?.call(utterance, { error: 'interrupted' } as SpeechSynthesisErrorEvent);
+    expect(events).toContain('cancelled'); expect(events).not.toContain('playback_completed');
+    expect(f.states.at(-1)?.status).toBe('idle'); f.controller.dispose();
+  });
+
+  it('keeps citation identifiers out of spoken text', async () => {
+    const f = setup();
+    await f.controller.play({ ...turn, text: 'A useful answer. [source:qa-example]' }, 'provider');
+    expect(f.speech.mock.calls[0][0]).toBe('A useful answer.'); f.controller.dispose();
+  });
   it('keeps the raw audio clock separate from the behavior plan clock', async () => {
     const f = setup();
     f.environment.prepareSpeech = vi.fn(async (): Promise<PreparedSpeech> => ({ audio: new Blob(['audio']), audioSha256: 'a'.repeat(64),

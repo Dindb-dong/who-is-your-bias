@@ -63,14 +63,20 @@ class SpeechPackages:
             raise ProviderError("speech_busy", "Speech preparation is busy. Try again shortly.", 429)
         self.active += 1
         try:
+            started = time.perf_counter()
             data, mime = await provider.synthesize(text, voice, language=language)
+            synthesized = time.perf_counter()
             if len(data) > 20_000_000:
                 raise ProviderError("audio_output_limit", "Generated audio exceeds the playback limit.", 502)
             analysis = await lipsync.analyze(data, text, language)
+            aligned = time.perf_counter()
             identifier = self.put(data, mime)
             return {"id": identifier, "audio_url": f"/api/speech/clips/{identifier}", "audio_sha256": hashlib.sha256(data).hexdigest(),
                     "mime_type": mime, "audio_duration_ms": wav_duration_ms(data), "expires_in_seconds": self.ttl,
                     "speech_timing": analysis.timing, "timing_status": analysis.status, "timing_message": analysis.message,
+                    "server_timing": {"synthesis_ms": round((synthesized - started) * 1000, 3),
+                                      "alignment_ms": round((aligned - synthesized) * 1000, 3),
+                                      "total_ms": round((time.perf_counter() - started) * 1000, 3)},
                     "voice_mode": "configured-provider"}
         finally:
             self.active -= 1

@@ -1,6 +1,7 @@
 import type { AvatarClip, BehaviorPlan, MotionMode, MotionSelection } from './avatar/types';
 import type { SpeechTiming } from './avatar/types';
 import { parseAvatarClip, parseMotionSelection, parseSpeechTiming } from './avatar/validation';
+import type { SpeechServerTiming } from './hooks/liveMetrics';
 
 export type Language = 'en' | 'ko';
 export type ExperimentMode = 'profile' | 'rag' | 'behavior';
@@ -200,6 +201,7 @@ export interface PreparedSpeech {
   speechTiming?: SpeechTiming;
   timingStatus: string;
   timingMessage?: string;
+  serverTiming?: SpeechServerTiming;
 }
 
 async function boundedBody(response: Response, maximum: number, service = 'voice service'): Promise<Uint8Array<ArrayBuffer>> {
@@ -289,6 +291,7 @@ export async function getPreparedSpeech(text: string, language: Language, signal
     throw new ApiError('The voice service returned invalid audio metadata.');
   }
   const timing = value.speech_timing == null ? undefined : parseSpeechTiming(value.speech_timing);
+  if (value.server_timing !== undefined && (!object(value.server_timing) || !['synthesis_ms', 'alignment_ms', 'total_ms'].every((key) => positive((value.server_timing as Record<string, unknown>)[key])))) throw new ApiError('The voice service returned invalid performance timing.');
   if ((value.timing_status === 'available') !== Boolean(timing) || (timing && timing.audio_sha256 !== value.audio_sha256)) {
     throw new ApiError('Mouth cues do not match the generated audio.');
   }
@@ -305,6 +308,7 @@ export async function getPreparedSpeech(text: string, language: Language, signal
   if (hash !== value.audio_sha256) throw new ApiError('The downloaded audio did not match its timing metadata. Generate the voice again.');
   signal.throwIfAborted();
   return { audio: new Blob([bytes], { type: mime }), audioSha256: hash, speechTiming: timing,
+    serverTiming: value.server_timing as SpeechServerTiming | undefined,
     timingStatus: value.timing_status,
     timingMessage: typeof value.timing_message === 'string' ? value.timing_message.slice(0, 500) : undefined };
 }

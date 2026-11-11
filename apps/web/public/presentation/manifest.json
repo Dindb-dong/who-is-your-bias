@@ -1,0 +1,14 @@
+{
+  "schema_version": "presentation.v1",
+  "title": "Who is your bias? — Research demo",
+  "video_url": "/presentation/presentation.mp4",
+  "audio_url": "/presentation/narration.wav",
+  "captions_url": "/presentation/captions.vtt",
+  "duration_seconds": 12.24,
+  "backend": "Qwen3-TTS Base → MuseTalk 1.5 (fixed portrait)",
+  "generated_at": "2026-11-11T04:17:30.705313+00:00",
+  "disclosure": "AI research simulation — not the real person",
+  "timing_verified": true,
+  "source_package": "artifacts/presentation/yaicon-intro-v1/manifest.json",
+  "source_package_sha256": "275c09313930b45a63063d7a1a627b6bc30c956102d868c21a8e1bf111c676be"
+}

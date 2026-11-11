@@ -1,0 +1,38 @@
+import { expect, test } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
+
+test('prepared neural video plays with captions and opens a fresh live session', async ({ page }, info) => {
+  const errors: string[] = []; page.on('pageerror', (error) => errors.push(error.message));
+  await page.goto('/');
+  await expect(page.getByText('Studio connected', { exact: true })).toBeVisible();
+  await page.getByRole('textbox', { name: 'Your message' }).fill('Why are you boring?');
+  await page.getByRole('button', { name: 'Send message', exact: true }).click();
+  await expect(page.getByText(/Evidence preview — original interview/)).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Live response timing' })).toBeVisible();
+  const download = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Download this turn timing' }).click();
+  const file = await download; const path = await file.path();
+  const measured = JSON.parse(await readFile(path!, 'utf8'));
+  expect(measured.provider).toBe('evidence');
+  expect(measured.first_audio_signal_ms).toBeNull();
+  expect(measured.submitted_at).toBeTruthy(); expect(measured.exported_at).toBeTruthy();
+  expect(measured.answer_complete_ms).toBeGreaterThanOrEqual(0);
+  const mobile = info.project.name === 'mobile';
+  const nav = page.getByRole('navigation', { name: mobile ? 'Mobile navigation' : 'Main navigation', exact: true });
+  await nav.getByRole('button', { name: mobile ? 'Present' : 'Presentation', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Presentation & live Q&A' })).toBeVisible();
+  const video = page.getByLabel('Prepared AI presentation');
+  await expect(video).toBeVisible();
+  await expect.poll(() => video.evaluate((node) => (node as HTMLVideoElement).readyState)).toBeGreaterThanOrEqual(1);
+  expect(await video.evaluate((node) => (node as HTMLVideoElement).duration)).toBeCloseTo(12.24, 1);
+  await video.evaluate((node) => { const media = node as HTMLVideoElement; media.muted = true; return media.play(); });
+  await expect.poll(() => video.evaluate((node) => (node as HTMLVideoElement).currentTime)).toBeGreaterThan(0.25);
+  await video.evaluate((node) => (node as HTMLVideoElement).pause());
+  await expect(page.getByRole('link', { name: 'Captions', exact: true })).toHaveAttribute('href', '/presentation/captions.vtt');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.screenshot({ path: info.outputPath('presentation.png'), fullPage: true });
+  await page.getByRole('button', { name: 'Open live Q&A' }).click();
+  await expect(page.getByRole('heading', { name: 'Where should we begin?' })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Live response timing' })).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
