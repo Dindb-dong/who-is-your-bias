@@ -1,0 +1,76 @@
+{
+  "schema_version": "persona-snapshot.v1",
+  "id": "elon-musk-2026-11-11-preview.v1",
+  "persona_id": "elon-musk",
+  "as_of": "2026-11-11T10:01:40Z",
+  "current_evidence_since": "2026-01-01",
+  "corpus_sha256": "0fd9dc28535469d569138252e032d0844b552ea0b804933d6a67ca03165cd0b7",
+  "knowledge_version": "elon-musk-original-qa.v1",
+  "style_version": "attributed-examples.v1-no-trained-adapter",
+  "voice_version": "reference-conditioned-baseline",
+  "appearance_version": "research-human-v2-proxy-not-2026-likeness",
+  "sources": [
+    {
+      "source_id": "lex-400-2023",
+      "event_family": "lex-400-2023",
+      "event_at": null,
+      "published_at": "2023-11-09",
+      "ingested_at": "2026-11-11T10:01:40Z",
+      "split": "test",
+      "source_content_sha256": "dda2d4b72a451437d82ba571dc83d117784ad5d96f656997c63b2743a6b6aae0",
+      "assertion_period_start": null,
+      "assertion_period_end": null,
+      "assertion_period_basis": null
+    },
+    {
+      "source_id": "lex-438-2024",
+      "event_family": "lex-438-2024",
+      "event_at": null,
+      "published_at": "2024-08-02",
+      "ingested_at": "2026-11-11T10:01:40Z",
+      "split": "test",
+      "source_content_sha256": "4d7704020f1af02902208e443d928fb91a6f224cd9d8b8fa85d3a5055da92d69",
+      "assertion_period_start": null,
+      "assertion_period_end": null,
+      "assertion_period_basis": null
+    },
+    {
+      "source_id": "ted-2013",
+      "event_family": "ted-2013",
+      "event_at": null,
+      "published_at": "2013-03-19",
+      "ingested_at": "2026-11-11T10:01:40Z",
+      "split": "train",
+      "source_content_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "assertion_period_start": null,
+      "assertion_period_end": null,
+      "assertion_period_basis": null
+    },
+    {
+      "source_id": "ted-2017",
+      "event_family": "ted-2017",
+      "event_at": null,
+      "published_at": "2017-04-30",
+      "ingested_at": "2026-11-11T10:01:40Z",
+      "split": "train",
+      "source_content_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "assertion_period_start": null,
+      "assertion_period_end": null,
+      "assertion_period_basis": null
+    },
+    {
+      "source_id": "ted-2022-recorded",
+      "event_family": "ted-2022-recorded",
+      "event_at": "2022-04-06",
+      "published_at": "2022-04-18",
+      "ingested_at": "2026-11-11T10:01:40Z",
+      "split": "validation",
+      "source_content_sha256": "eb66551c1493446935a0fd76437b433ae4cbb62532526b574098671863834967",
+      "assertion_period_start": null,
+      "assertion_period_end": null,
+      "assertion_period_basis": null
+    }
+  ],
+  "statement_links": [],
+  "coverage_note": "Snapshot date limits availability; it does not imply contemporary coverage. Unknown event dates remain unknown."
+}

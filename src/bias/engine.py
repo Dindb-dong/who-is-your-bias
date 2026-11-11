@@ -11,14 +11,17 @@ from contextlib import aclosing
 
 from .behavior import plan_behavior
 from .config import Settings
+from .context_budget import ByteBudgetCounter, TokenizerCounter, build_snapshot_messages
 from .corpus import Corpus
 from .grounding import CITATION, audit_citations, validate_citations
 from .models import ChatRequest, ChatTurn, Grounding, TurnMetrics
 from .motion import MotionError, MotionLibrary, MotionSelection
 from .prompts import PromptBuilder, build_messages
-from .providers import OpenAICompatibleLLM
+from .providers import OpenAICompatibleLLM, ProviderError
 from .retrieval import Retriever, SearchResult, tokenize
 from .sessions import Session, SessionStore
+from .snapshots import PersonaSnapshot, TemporalIntent, select_temporal, temporal_intent
+from .segments import SegmentCommitter
 
 logger = logging.getLogger(__name__)
 
@@ -56,7 +59,24 @@ class Engine:
         self.corpus = corpus
         self.prompt_builder = prompt_builder
         self.motion_library = motion_library
-        self.retriever = Retriever(corpus)
+        self.snapshot = PersonaSnapshot.load(settings.persona_snapshot, corpus) if settings.persona_snapshot else None
+        self.counter = ByteBudgetCounter()
+        if settings.llm_tokenizer_path:
+            from transformers import AutoTokenizer
+            tokenizer = AutoTokenizer.from_pretrained(str(settings.llm_tokenizer_path), local_files_only=True, trust_remote_code=False)
+            self.counter = TokenizerCounter(tokenizer, str(settings.llm_tokenizer_path))
+        if settings.retrieval_backend == "hybrid":
+            from .hybrid_retrieval import CrossEncoderReranker, HybridPolicy, HybridRetriever, OpenAIEmbeddingProvider, SentenceTransformerEmbedder
+            common = dict(revision=settings.embedding_revision, query_prefix=settings.embedding_query_prefix,
+                          passage_prefix=settings.embedding_passage_prefix)
+            embedder = (OpenAIEmbeddingProvider(settings.embedding_base_url, settings.embedding_model,
+                                               api_key=settings.embedding_api_key or "", timeout=settings.request_timeout, **common)
+                        if settings.embedding_backend == "http" else SentenceTransformerEmbedder(settings.embedding_model, **common))
+            reranker = CrossEncoderReranker(settings.reranker_model, revision=settings.reranker_revision) if settings.reranker_model else None
+            self.retriever = HybridRetriever(corpus, embedder, policy=HybridPolicy(dense_min_similarity=settings.dense_min_similarity,
+                                               reranker_min_score=settings.reranker_min_score), reranker=reranker)
+        else:
+            self.retriever = Retriever(corpus)
         self.sessions = SessionStore(ttl=settings.session_ttl, max_sessions=settings.max_sessions, max_turns=settings.max_turns)
         self.llm = llm or OpenAICompatibleLLM(settings.llm, timeout=settings.request_timeout, max_chars=settings.max_response_chars, max_tokens=settings.llm_max_tokens)
 
@@ -77,49 +97,122 @@ class Engine:
             logger.warning("Optional motion selection failed (%s)", type(exc).__name__)
             return None
 
-    async def events(self, request: ChatRequest) -> AsyncIterator[tuple[str, dict]]:
+    async def events(self, request: ChatRequest, *, committed_segments: bool = False, _session_owner: Session | None = None) -> AsyncIterator[tuple[str, dict]]:
         started = time.perf_counter()
-        session = self.sessions.get_or_create(request.session_id)
+        deadline = asyncio.get_running_loop().time() + self.settings.request_timeout + 2
+        session = _session_owner or self.sessions.get_or_create(request.session_id)
+        if _session_owner is not None:
+            # The live transport holds the turn lock/pin until voice cleanup.
+            async with aclosing(self._session_events(request, session, started, deadline=deadline, committed_segments=committed_segments)) as events:
+                async for event in events:
+                    yield event
+            return
         session.in_flight += 1
+        acquired = False
         try:
-            async with aclosing(self._session_events(request, session, started)) as events:
+            # Lock waiting and generation share one absolute deadline. Leaving
+            # the acquisition scope must not grant a fresh generation budget.
+            async with asyncio.timeout_at(deadline):
+                await session.turn_lock.acquire()
+                acquired = True
+            async with aclosing(self._session_events(request, session, started, deadline=deadline, committed_segments=committed_segments)) as events:
                 async for event in events:
                     yield event
         finally:
+            if acquired:
+                session.turn_lock.release()
             session.in_flight -= 1
 
-    async def _session_events(self, request: ChatRequest, session: Session, started: float) -> AsyncIterator[tuple[str, dict]]:
-        yield "meta", {"session_id": session.id}
-        async with asyncio.timeout(self.settings.request_timeout + 2):
+    async def _session_events(self, request: ChatRequest, session: Session, started: float, *, deadline: float, committed_segments: bool = False) -> AsyncIterator[tuple[str, dict]]:
+        async with asyncio.timeout_at(deadline):
+            turn_id = uuid.uuid4().hex
+            yield "meta", {"session_id": session.id, "turn_id": turn_id,
+                           "snapshot_id": self.snapshot.id if self.snapshot else None}
             async with session.lock:
                 yield "status", {"stage": "retrieving"}
                 retrieval_started = time.perf_counter()
+                resolved = session.dialogue.resolve(request.message)
+                temporal_query = request.message
+                inherited_intent = None
+                if self.snapshot and resolved.supporting_turn_ids and temporal_intent(request.message, self.snapshot.as_of).mode == "general":
+                    temporal_query = resolved.query
+                    prior = session.dialogue.records[-1]
+                    inherited_intent = TemporalIntent(prior.temporal_mode, prior.temporal_years, prior.temporal_period)
+                temporal = select_temporal(self.corpus, self.snapshot, temporal_query, intent_override=inherited_intent) if self.snapshot else None
+                style_temporal = select_temporal(self.corpus, self.snapshot, temporal_query, projection="text_style", intent_override=inherited_intent) if self.snapshot and self.settings.style_examples else None
+                context = {"snapshot": self.snapshot.summary() if self.snapshot else None,
+                           "query_resolution": {"original": request.message, "query": resolved.query,
+                                                "method": resolved.method, "supporting_turn_ids": list(resolved.supporting_turn_ids)},
+                           "temporal": {"mode": temporal.intent.mode, "years": list(temporal.intent.years), "period": temporal.intent.period,
+                                        "excluded": temporal.exclusion_reasons} if temporal else None,
+                           "retrieval_backend": self.settings.retrieval_backend}
                 if request.mode == "profile":
                     result = SearchResult((), 0, "Profile-only ablation has no retrieved evidence.")
+                elif temporal and not temporal.eligible_ids:
+                    result = SearchResult((), 0, temporal.reason)
                 else:
-                    query = request.message
-                    if session.history and len(tokenize(query)) < 3:
-                        query = session.history[-2]["content"] + "\n" + query
-                    result = self.retriever.search(query, limit=self.settings.retrieval_limit, behavior=request.mode == "behavior")
+                    query = resolved.query
+                    if self.settings.retrieval_backend == "hybrid":
+                        from .hybrid_retrieval import EmbeddingError
+                        try:
+                            result = await asyncio.to_thread(self.retriever.search, query, limit=self.settings.retrieval_limit,
+                                behavior=request.mode == "behavior", original_query=request.message, allow_live=bool(temporal),
+                                eligible_ids=temporal.eligible_ids if temporal else None,
+                                eligible_style_ids=style_temporal.eligible_ids if style_temporal else None,
+                                exclusion_reasons=temporal.exclusion_reasons if temporal else None,
+                                temporal_scores=temporal.temporal_scores if temporal else None, include_style=self.settings.style_examples)
+                        except EmbeddingError as exc:
+                            raise ProviderError("embedding_unavailable", "The configured embedding service failed; retrieval was not silently downgraded.", 503) from exc
+                        context["retrieval"] = result.trace
+                    else:
+                        retriever = self.retriever
+                        if temporal and len(temporal.eligible_ids) != len(self.corpus.training_evidence):
+                            filtered = Corpus(self.corpus.persona, self.corpus.sources,
+                                              {key: value for key, value in self.corpus.evidence.items() if key in temporal.eligible_ids})
+                            retriever = Retriever(filtered)
+                        result = retriever.search(query, limit=self.settings.retrieval_limit, behavior=request.mode == "behavior", allow_live=bool(temporal))
                 retrieval_ms = (time.perf_counter() - retrieval_started) * 1000
                 yield "status", {"stage": "generating"}
                 generation_started = time.perf_counter()
                 use_llm = self.settings.llm.configured and (request.mode == "profile" or bool(result.hits))
                 fragments: list[str] = []
+                allowed_ids = {hit.evidence.id for hit in result.hits}
                 if use_llm:
-                    messages = self.prompt_builder(self.corpus.persona, request, result, list(session.history), self.corpus.sources)
+                    if self.snapshot or self.settings.retrieval_backend == "hybrid":
+                        package = build_snapshot_messages(self.corpus, request, result, list(session.history), self.snapshot, temporal,
+                            context_window=self.settings.llm_context_window, output_tokens=self.settings.llm_max_tokens, counter=self.counter)
+                        messages = package.messages
+                        allowed_ids = set(package.supplied_ids)
+                        context["prompt_budget"] = package.budget
+                        if request.mode != "profile" and not allowed_ids:
+                            raise ProviderError("evidence_budget", "No complete evidence passage fits this model's context budget.", 422)
+                    else:
+                        messages = self.prompt_builder(self.corpus.persona, request, result, list(session.history), self.corpus.sources)
+                    committer = SegmentCommitter(turn_id=turn_id, language=request.language, allowed_ids=allowed_ids)
                     async with aclosing(self.llm.stream(messages)) as tokens:
                         async for token in tokens:
                             fragments.append(token)
                             yield "token", {"text": token}
+                            if committed_segments:
+                                for segment in committer.push(token):
+                                    yield "segment", segment
+                    if committed_segments:
+                        for segment in committer.finish():
+                            yield "segment", segment
                 else:
                     preview = evidence_preview(request, result)
+                    if temporal and temporal.reason and request.mode != "profile":
+                        preview = ("이 스냅샷에는 요청한 시점의 입장을 확인할 수 있는 검토된 자료가 없습니다. 과거 발언을 현재 입장으로 간주하지 않습니다."
+                                   if request.language == "ko" else temporal.reason)
                     fragments.append(preview)
                     yield "token", {"text": preview}
+                    if committed_segments:
+                        committer = SegmentCommitter(turn_id=turn_id, language=request.language, allowed_ids=allowed_ids)
+                        for segment in committer.push(preview) + committer.finish():
+                            yield "segment", segment
                 generation_ms = (time.perf_counter() - generation_started) * 1000
                 yield "status", {"stage": "planning"}
                 raw = "".join(fragments)
-                allowed_ids = {hit.evidence.id for hit in result.hits}
                 text, valid, invalid = validate_citations(raw, allowed_ids)
                 audit = audit_citations(raw, allowed_ids, required=use_llm and request.mode != "profile")
                 if request.mode != "profile" and not result.hits:
@@ -145,7 +238,7 @@ class Engine:
                 if selected_motion is not None:
                     behavior = behavior.model_copy(update={"motion": selected_motion})
                 turn = ChatTurn(
-                    id=uuid.uuid4().hex,
+                    id=turn_id,
                     session_id=session.id,
                     text=text,
                     language=request.language,
@@ -159,9 +252,13 @@ class Engine:
                         malformed_citations=list(audit.malformed_markers), semantic_status="curated_source" if status == "grounded" else "unreviewed",
                     ),
                     metrics=TurnMetrics(retrieval_ms=round(retrieval_ms, 3), generation_ms=round(generation_ms, 3), total_ms=round((time.perf_counter() - started) * 1000, 3)),
+                    context=context,
                 )
                 # Failed or cancelled generations never enter conversation memory.
                 self.sessions.append(session, request.message, turn.text)
+                session.dialogue.append(turn_id=turn.id, resolved=resolved, assistant=turn.text, cited_ids=valid,
+                                        grounding=status, intent=temporal.intent if temporal else None,
+                                        snapshot_id=self.snapshot.id if self.snapshot else None)
                 yield "result", {"turn": turn.model_dump(mode="json")}
                 yield "done", {}
 
