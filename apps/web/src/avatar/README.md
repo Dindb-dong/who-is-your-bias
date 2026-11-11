@@ -1,13 +1,16 @@
 # Avatar runtime
 
-The built-in portrait is a **stylized procedural prototype**, not a scan or a
-photorealistic reconstruction. The renderer composes authored animation, imported
+The bundled human is an **authored anatomical proxy** with a complete native
+face/viseme set; the stylized procedural portrait is also available. Neither is
+a scan or a validated likeness. The renderer composes authored animation, imported
 geometry estimates, and audio-bound mouth cues while reporting their separate
 origins. A geometry measurement does not establish identity, emotion, or a
 characteristic personal habit.
 
 For source provenance, actual measurement results, import commands, and detailed
 calibration instructions, see [Avatar calibration](../../../../docs/avatar-calibration.md).
+For the humanoid's exact asset measurements, licenses, build commands, and native
+deformation checks, see [Bundled humanoid](../../../../docs/humanoid-avatar.md).
 
 ## Runtime contract
 
@@ -21,6 +24,7 @@ available on the current rig; `onError` receives an `Error`. New measurement pro
 | `performanceClip`, `observationElapsedMs` | An `avatar-clip.v1` and its independent source-motion clock. |
 | `allowGeometryPreview` | Explicit permission to display unreviewed geometry. Default false. |
 | `showCalibration` | Show supported controls, actual asset targets, mapping import/export, and manual pose preview. |
+| `framing` | `portrait` or `full_body`; changes the camera without reloading geometry. |
 | `onTelemetry` | Face, body/joint, and speech provenance plus unsupported channels and warnings. |
 
 `elapsedMs` is the behavior-plan clock. The transport can map audio playback time
@@ -71,9 +75,10 @@ An authored cue name is not upgraded into an observation by the renderer.
 
 ## Importing and calibrating a rig
 
-Use a self-contained, uncompressed binary glTF 2.0 (`.glb`) with embedded textures
-and buffers. Draco/KTX2 decoders are not bundled. No model or decoder downloads
-are automatic. Models must be local object URLs or same-origin resources. The
+Use a self-contained binary glTF 2.0 (`.glb`) with embedded textures
+and buffers. Uncompressed and Meshopt geometry are supported; the Meshopt decoder
+is bundled. Draco/KTX2 decoders are not bundled. Models must be local object URLs
+or same-origin resources; external asset and decoder URLs are not fetched. The
 runtime rejects files above 64 MiB; the upload UI may impose a smaller limit.
 
 `channels.ts` enumerates 52 ARKit-style face channels, 15 native visemes, and
@@ -105,7 +110,7 @@ Quaternions are normalized XYZW. The joint operation is authored rest × neutral
 Every frame begins from the authored rest pose. A jaw morph or native mouth
 shape takes precedence over jaw-bone opening to prevent double deformation.
 
-The built-in asset approximates 46 named face controls through articulated parts
+The procedural portrait approximates 46 named face controls through articulated parts
 and authored mesh morphs. It has 36 morph targets across meshes, covering 20
 unique named channels; its procedural eye scaling is not a GLB morph. Exporting
 it does not magically produce a complete 52-target face. The calibration panel

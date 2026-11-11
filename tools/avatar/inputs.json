@@ -1,0 +1,269 @@
+{
+  "schema_version": 1,
+  "archives": [
+    {
+      "name": "mpfb",
+      "repo": "makehumancommunity/mpfb2",
+      "revision": "6ff1eb358f6c1959ced77e79e6dd2406d9a71f49",
+      "url": "https://codeload.github.com/makehumancommunity/mpfb2/tar.gz/6ff1eb358f6c1959ced77e79e6dd2406d9a71f49",
+      "sha256": "aef0a8860e1a0bf0dac68a61ab5384f8a466cafdfd8ab1dcf9de904b77cd33cd",
+      "size": 44629660,
+      "directory": "mpfb2-6ff1eb358f6c1959ced77e79e6dd2406d9a71f49",
+      "license": "code GPL-3.0; graphical assets CC0-1.0"
+    },
+    {
+      "name": "extra-targets",
+      "repo": "makehumancommunity/extra-targets",
+      "revision": "7eaba3453134385bb5ea9811ef0b33b85b4b556d",
+      "url": "https://codeload.github.com/makehumancommunity/extra-targets/tar.gz/7eaba3453134385bb5ea9811ef0b33b85b4b556d",
+      "sha256": "03814ffa98ac3f83d434343665916d342aad055354efdc01cc8a0e6b1974247d",
+      "size": 575680,
+      "directory": "extra-targets-7eaba3453134385bb5ea9811ef0b33b85b4b556d",
+      "license": "CC0-1.0"
+    }
+  ],
+  "system_assets": {
+    "source_url": "https://files2.makehumancommunity.org/asset_packs/makehuman_system_assets/makehuman_system_assets_cc0.zip",
+    "archive_size": 280737770,
+    "central_directory_sha256": "95e78ccc765d5e77d270e0ca357317f543027143edff7f6435d2b8ed59a9d235",
+    "acquisition": "HTTP byte ranges; each member CRC32 and size checked; per-file SHA256 pinned",
+    "license": "CC0-1.0",
+    "full_archive_digest": null,
+    "files": [
+      {
+        "path": "clothes/male_casualsuit01/male_casualsuit01.mhclo",
+        "compression": 8,
+        "crc32": 1274658053,
+        "compressed": 199174,
+        "size": 570419,
+        "offset": 213331495,
+        "sha256": "78503ed7f56c149843d85e06e1164bc6871ce7319b2ef689237046352cc90de4"
+      },
+      {
+        "path": "clothes/male_casualsuit01/male_casualsuit01.mhmat",
+        "compression": 8,
+        "crc32": 3594465301,
+        "compressed": 606,
+        "size": 1345,
+        "offset": 213330782,
+        "sha256": "043b25cefd398261b893d3dae58c81fc3e9633a25a01eafe66963591f5ad6eb6"
+      },
+      {
+        "path": "clothes/male_casualsuit01/male_casualsuit01.obj",
+        "compression": 8,
+        "crc32": 3427442410,
+        "compressed": 232791,
+        "size": 699545,
+        "offset": 214284560,
+        "sha256": "001921d237e408c35103720d046aa37f9c5512db1a179a5ede6a065cd504ba89"
+      },
+      {
+        "path": "clothes/male_casualsuit01/male_casualsuit01_diffuse.png",
+        "compression": 8,
+        "crc32": 1944317385,
+        "compressed": 5525333,
+        "size": 5531728,
+        "offset": 206036483,
+        "sha256": "3fd0bba5dcbdea0ac427f644a6c7c298938f7369b8f96626621ce1e88989394e"
+      },
+      {
+        "path": "eyebrows/eyebrow001/eyebrow001.mhclo",
+        "compression": 8,
+        "crc32": 1496989710,
+        "compressed": 3038,
+        "size": 9141,
+        "offset": 271641277,
+        "sha256": "54c8892c2ba577f4152d779ce1f20f7cd323beb8cbd9cb701796165c221b4f5b"
+      },
+      {
+        "path": "eyebrows/eyebrow001/eyebrow001.mhmat",
+        "compression": 8,
+        "crc32": 1674605508,
+        "compressed": 555,
+        "size": 1098,
+        "offset": 271781967,
+        "sha256": "976e5f4f1d3922d7a11c6e2db233f8b4584b068d00619d5749687e81c92d61fc"
+      },
+      {
+        "path": "eyebrows/eyebrow001/eyebrow001.obj",
+        "compression": 8,
+        "crc32": 132765174,
+        "compressed": 2873,
+        "size": 8227,
+        "offset": 271550171,
+        "sha256": "88b13146395133f3901715e11706cdfd293e5d6087ad7c5e01efe1485a26b513"
+      },
+      {
+        "path": "eyebrows/eyebrow001/eyebrow001.png",
+        "compression": 8,
+        "crc32": 3589177450,
+        "compressed": 88049,
+        "size": 89619,
+        "offset": 271553136,
+        "sha256": "9940f7d0b1b223709a19b05156ba6f6e9e4dbdbced02d7574f4d51d72c58967b"
+      },
+      {
+        "path": "eyes/high-poly/high-poly.mhclo",
+        "compression": 8,
+        "crc32": 3747890432,
+        "compressed": 21322,
+        "size": 72490,
+        "offset": 280642520,
+        "sha256": "b183cfe37120ab726f9b3f2ea6cd3a64c44ce7b4bd91a77c841cf70c04f83a0d"
+      },
+      {
+        "path": "eyes/high-poly/high-poly.obj",
+        "compression": 8,
+        "crc32": 3977861638,
+        "compressed": 29513,
+        "size": 100882,
+        "offset": 280592672,
+        "sha256": "da2493215b708a344c33dc72f2a9a5b8fa985dcc5a70ad3b208995cf871da8e1"
+      },
+      {
+        "path": "eyes/materials/grey.mhmat",
+        "compression": 8,
+        "crc32": 1639168635,
+        "compressed": 593,
+        "size": 1244,
+        "offset": 280591923,
+        "sha256": "65c536157ef0550b2f8461a9526c726707533dc7cfe8a65abb9b9db0b4e6b25e"
+      },
+      {
+        "path": "eyes/materials/grey_eye.png",
+        "compression": 8,
+        "crc32": 3272591027,
+        "compressed": 666778,
+        "size": 669883,
+        "offset": 275700903,
+        "sha256": "ecb05613126036a3d017880fabbd570501c5f14032c186462d8f6e2d719f6c4f"
+      },
+      {
+        "path": "hair/short01/short01.mhclo",
+        "compression": 8,
+        "crc32": 2069295345,
+        "compressed": 68368,
+        "size": 201588,
+        "offset": 236127380,
+        "sha256": "ae1ffaa98da5753b803b3a173bede4895d2215e6bb94763f3765a71f0e984f35"
+      },
+      {
+        "path": "hair/short01/short01.mhmat",
+        "compression": 8,
+        "crc32": 1479685553,
+        "compressed": 642,
+        "size": 1314,
+        "offset": 236195832,
+        "sha256": "01e2e12ce3f3d3c859225456660acadcdd27d4f4b4d888bcbd6f11998cadd975"
+      },
+      {
+        "path": "hair/short01/short01.obj",
+        "compression": 8,
+        "crc32": 98592969,
+        "compressed": 67065,
+        "size": 194450,
+        "offset": 236196558,
+        "sha256": "d998d8416f9b5d5591f1d756f4d292288d000a6951bc0f4d2e8e72727bbc44fa"
+      },
+      {
+        "path": "hair/short01/short01_diffuse.png",
+        "compression": 8,
+        "crc32": 2320943918,
+        "compressed": 2338834,
+        "size": 2354146,
+        "offset": 236263705,
+        "sha256": "f34a0957184e3d1e911ed59245f874f8d4843f61ee44ff49f43edb4be0196949"
+      },
+      {
+        "path": "skins/middleage_caucasian_male/middleage_caucasian_male.mhmat",
+        "compression": 8,
+        "crc32": 1610347184,
+        "compressed": 707,
+        "size": 1469,
+        "offset": 47614876,
+        "sha256": "113326b7670cb273610314b91e2597b228711adf5f0666660b16fef269bfbe72"
+      },
+      {
+        "path": "skins/middleage_caucasian_male/middleage_lightskinned_male_diffuse.png",
+        "compression": 8,
+        "crc32": 1696652457,
+        "compressed": 3664897,
+        "size": 3668589,
+        "offset": 43868622,
+        "sha256": "3f94f3f6a5cab92dedf5cce392a87332312fc435f1cb44c6e7b897daef9a5fbb"
+      },
+      {
+        "path": "teeth/teeth_base/teeth.mhmat",
+        "compression": 8,
+        "crc32": 100449754,
+        "compressed": 531,
+        "size": 1086,
+        "offset": 223690670,
+        "sha256": "3baeff72d9eb06ca16c3cff7ca2ab304216717dee247e0d88f1dc33037c8320e"
+      },
+      {
+        "path": "teeth/teeth_base/teeth.png",
+        "compression": 8,
+        "crc32": 3203849251,
+        "compressed": 1791924,
+        "size": 1799930,
+        "offset": 223691287,
+        "sha256": "d0afb57869c6fbb56b98f5efc4aec629ee7593e70d8dd2bfb9de923acfb65f43"
+      },
+      {
+        "path": "teeth/teeth_base/teeth_base.mhclo",
+        "compression": 8,
+        "crc32": 3551084828,
+        "compressed": 69749,
+        "size": 263220,
+        "offset": 223620830,
+        "sha256": "9edc3deff3bb97a95c791878064dd069a74a38f95ea6d9707a9ba68d888b3b5c"
+      },
+      {
+        "path": "teeth/teeth_base/teeth_base.obj",
+        "compression": 8,
+        "crc32": 1512583142,
+        "compressed": 92301,
+        "size": 313110,
+        "offset": 223528440,
+        "sha256": "f55198069e55d360c4b4cc7ecb1cc292b2c7665753ab8b65eabf46a8783f2875"
+      },
+      {
+        "path": "tongue/tongue01/tongue01.mhclo",
+        "compression": 8,
+        "crc32": 388477905,
+        "compressed": 906,
+        "size": 2113,
+        "offset": 268932262,
+        "sha256": "61d825899cd78ff3146fa1324118060cb44b095fae1427d408c199ade74e3c9e"
+      },
+      {
+        "path": "tongue/tongue01/tongue01.mhmat",
+        "compression": 8,
+        "crc32": 3616849708,
+        "compressed": 599,
+        "size": 1261,
+        "offset": 268309565,
+        "sha256": "7769df66c69b8c09a0ec713d70d8381abbb08ac82207369f5413970495cd4340"
+      },
+      {
+        "path": "tongue/tongue01/tongue01.obj",
+        "compression": 8,
+        "crc32": 1118128776,
+        "compressed": 5666,
+        "size": 17155,
+        "offset": 268303813,
+        "sha256": "12f4a6a9f85abae2ce3b4aa42d8119e1f679a437e0e89cb928ec68b29a7a1587"
+      },
+      {
+        "path": "tongue/tongue01/tongue01_diffuse.png",
+        "compression": 8,
+        "crc32": 2338159375,
+        "compressed": 621916,
+        "size": 625419,
+        "offset": 268310252,
+        "sha256": "3150be398e48e8ba1feac164c3143c16c0b2e959d9ffb6155f0171f59cfb4ea9"
+      }
+    ]
+  }
+}

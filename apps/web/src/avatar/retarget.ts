@@ -1,5 +1,7 @@
 import { Box3, Euler, Group, LoadingManager, Mesh, Object3D, Quaternion, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+import { createResearchHumanMapping, mergeRigMappings, RESEARCH_HUMAN_AVATAR } from './builtin';
 import { BONE_CHANNELS, FACE_CHANNELS, VISEMES } from './channels';
 import { disposeObject } from './dispose';
 import type { AvatarRig } from './procedural';
@@ -174,7 +176,13 @@ export function createRetargetedRig(model: Group, suppliedMapping: RigMapping = 
       rotate(pose, 'hips'); rotate(pose, 'spine'); rotate(pose, 'chest');
       rotate(pose, 'head', pose.headPitch + pose.gazeY * 0.2, pose.headYaw + pose.gazeX * 0.2, pose.headRoll);
       rotate(pose, 'neck', pose.headPitch * 0.2, pose.headYaw * 0.2, pose.headRoll * 0.2);
-      rotate(pose, 'leftEye', pose.gazeY, pose.gazeX); rotate(pose, 'rightEye', pose.gazeY, pose.gazeX);
+      for (const [eye, side] of [['leftEye', 'Left'], ['rightEye', 'Right']] as const) {
+        const measuredHorizontal = (['In', 'Out'] as const).some((axis) => pose.face?.[`eyeLook${axis}${side}`] !== undefined && morphs.has(`eyeLook${axis}${side}`));
+        const measuredVertical = (['Up', 'Down'] as const).some((axis) => pose.face?.[`eyeLook${axis}${side}`] !== undefined && morphs.has(`eyeLook${axis}${side}`));
+        // Eye-direction morphs already move the eyeball. Do not add a second
+        // authored or observed eye-bone rotation to the same measured gaze.
+        rotate(pose, eye, measuredVertical ? 0 : pose.gazeY, measuredHorizontal ? 0 : pose.gazeX, 0, !measuredHorizontal && !measuredVertical);
+      }
       rotate(pose, 'jaw', morphs.has('jawOpen') || nativeMouth ? 0 : (face.jawOpen ?? pose.jawOpen) * 0.2, 0, 0, !morphs.has('jawOpen') && !nativeMouth);
       rotate(pose, 'leftShoulder', 0, 0, pose.shrug * 0.08); rotate(pose, 'rightShoulder', 0, 0, -pose.shrug * 0.08);
       rotate(pose, 'leftUpperArm', -pose.openPalm * 0.35 - pose.emphasis * 0.25, 0, pose.openPalm * 0.13 + pose.shrug * 0.08);
@@ -229,9 +237,13 @@ export async function loadGlbRig(url: string, mapping: RigMapping, signal?: Abor
     if (resource.startsWith('blob:') || resource.startsWith('data:')) return resource;
     throw new Error('Use a self-contained GLB with embedded textures and buffers.');
   });
-  const loader = new GLTFLoader(manager);
+  const loader = new GLTFLoader(manager).setMeshoptDecoder(MeshoptDecoder);
   const gltf = await loader.parseAsync(bytes, '');
   if (signal?.aborted) { disposeObject(gltf.scene); signal.throwIfAborted(); }
-  try { return createRetargetedRig(gltf.scene, mapping); }
+  try {
+    const calibrated = target.pathname === RESEARCH_HUMAN_AVATAR.modelUrl
+      ? mergeRigMappings(createResearchHumanMapping(gltf.scene), mapping) : mapping;
+    return createRetargetedRig(gltf.scene, calibrated);
+  }
   catch (error) { disposeObject(gltf.scene); throw error; }
 }

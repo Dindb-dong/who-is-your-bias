@@ -25,5 +25,10 @@ playwright-report/
 *.gltf
 .DS_Store
 
+# One reviewed, self-contained CC0 runtime asset. Model weights remain ignored.
+!apps/web/public/models/
+apps/web/public/models/*
+!apps/web/public/models/research-human-v2.glb
+
 # Bounded generated evaluation speech; source/reference recordings stay ignored.
 !tools/voice_evaluation/results/qwen06-cpu-2026-11-11-listening/listener/sample*.wav

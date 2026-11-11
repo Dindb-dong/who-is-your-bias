@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Quaternion, Vector3 } from 'three';
+import type { AvatarFraming } from '../avatar/builtin';
 import { BONE_CHANNELS, FACE_CHANNELS, VISEMES } from '../avatar/channels';
 import { AvatarRenderer } from '../avatar/renderer';
 import { visemesToFace } from '../avatar/speech';
@@ -19,6 +20,7 @@ export interface AvatarStageProps {
   observationElapsedMs?: number;
   allowGeometryPreview?: boolean;
   showCalibration?: boolean;
+  framing?: AvatarFraming;
   modelUrl?: string;
   rigMapping?: RigMapping;
   reducedMotion?: boolean;
@@ -32,7 +34,7 @@ export interface AvatarStageProps {
 export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, modelUrl,
   rigMapping, reducedMotion, onReady, onError, onTelemetry, className = '',
   audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview = false,
-  showCalibration = false }: AvatarStageProps) {
+  showCalibration = false, framing = 'portrait' }: AvatarStageProps) {
   const host = useRef<HTMLDivElement>(null);
   const runtime = useRef<AvatarRenderer | null>(null);
   const callbacks = useRef({ onReady, onError, onTelemetry, showCalibration }); callbacks.current = { onReady, onError, onTelemetry, showCalibration };
@@ -96,6 +98,8 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
 
   useEffect(() => { void runtime.current?.setModel(modelUrl, localMapping ?? rigMapping); }, [modelUrl, localMapping, rigMapping, epoch]);
 
+  useEffect(() => { runtime.current?.setFraming(framing); }, [framing, epoch]);
+
   useEffect(() => {
     if (!debugEnabled || !showCalibration) { runtime.current?.setCalibrationPose(); return; }
     const pose = neutralPose(); const [group, name] = control.split(':');
@@ -123,6 +127,9 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
 
   return (
     <div className={`avatar-stage${showCalibration ? ' avatar-stage--calibration' : ''} ${className}`} data-testid="avatar-stage"
+      data-rig-kind={diagnostics?.kind ?? 'initializing'} data-face-controls={diagnostics?.morphs.length ?? 0}
+      data-visemes={diagnostics?.visemes?.length ?? 0} data-mapped-joints={diagnostics?.bones.length ?? 0}
+      data-framing={framing} data-model-state={loadingModel ? 'loading' : modelError ? 'fallback' : diagnostics ? 'ready' : 'initializing'}
       style={{ position: 'relative', width: '100%', height: showCalibration ? 'auto' : '100%', minHeight: 440, overflow: 'hidden', background: 'radial-gradient(ellipse at 50% 38%, #26301f 0%, #151c13 45%, #10160f 100%)' }}>
       <div className="avatar-visual">
         <div ref={host} style={{ position: 'absolute', inset: 0 }} aria-hidden={fatal ? true : undefined} />

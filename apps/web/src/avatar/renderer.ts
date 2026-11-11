@@ -4,6 +4,7 @@ import {
   PerspectiveCamera, PlaneGeometry, Scene, SRGBColorSpace, WebGLRenderer,
 } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { avatarView, type AvatarFraming } from './builtin';
 import { disposeObject } from './dispose';
 import { createProceduralRig, type AvatarRig } from './procedural';
 import { loadGlbRig } from './retarget';
@@ -58,6 +59,7 @@ export class AvatarRenderer {
   private calibrationPose?: RigPose;
   private lastClock = 0;
   private lastTelemetry = 0;
+  private framing: AvatarFraming = 'portrait';
 
   constructor(private host: HTMLElement, private callbacks: RendererCallbacks = {}) {
     this.renderer = new WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
@@ -67,6 +69,7 @@ export class AvatarRenderer {
     this.canvas.setAttribute('aria-label', 'Interactive stylized 3D avatar. Drag to change the viewing angle.');
     this.canvas.setAttribute('role', 'img');
     this.canvas.dataset.avatar = 'procedural';
+    this.canvas.dataset.framing = this.framing;
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
     this.renderer.setClearColor(0x10150f, 0);
     this.renderer.outputColorSpace = SRGBColorSpace;
@@ -125,7 +128,13 @@ export class AvatarRenderer {
 
   setCalibrationPose(pose?: RigPose): void { this.calibrationPose = pose; this.pose = neutralPose(); }
 
+  setFraming(framing: AvatarFraming): void {
+    if (this.disposed || this.framing === framing) return;
+    this.framing = framing; this.canvas.dataset.framing = framing; this.resetView();
+  }
+
   async setModel(url?: string, mapping: RigMapping = {}): Promise<void> {
+    if (this.disposed) return;
     const serial = ++this.modelSerial;
     this.modelAbort?.abort();
     if (!url) {
@@ -150,8 +159,12 @@ export class AvatarRenderer {
 
   private replaceRig(rig: AvatarRig): void {
     this.scene.remove(this.rig.root); this.rig.dispose(); this.rig = rig;
-    this.pose = neutralPose(); this.scene.add(rig.root);
+    this.pose = neutralPose(); rig.apply(this.pose); this.scene.add(rig.root);
     this.canvas.dataset.avatar = rig.diagnostics.kind;
+    this.canvas.setAttribute('aria-label', rig.diagnostics.kind === 'glb'
+      ? 'Interactive rigged 3D human avatar. Drag to change the viewing angle.'
+      : 'Interactive stylized 3D avatar. Drag to change the viewing angle.');
+    this.resetView();
     this.callbacks.onReady?.(rig.diagnostics);
   }
 
@@ -160,7 +173,7 @@ export class AvatarRenderer {
     const width = Math.max(1, this.host.clientWidth); const height = Math.max(1, this.host.clientHeight);
     this.camera.aspect = width / height;
     // Preserve the face/shoulder framing on narrow mobile stages.
-    this.camera.fov = width / height < 0.8 ? 41 : 34;
+    this.camera.fov = avatarView(this.rig.diagnostics.kind, this.framing, this.camera.aspect).fov;
     this.camera.updateProjectionMatrix(); this.renderer.setSize(width, height, false);
   };
 
@@ -195,7 +208,9 @@ export class AvatarRenderer {
   };
 
   resetView(): void {
-    this.camera.position.set(0.07, 1.58, 4.45); this.controls.target.set(0, 1.40, 0); this.controls.update();
+    const view = avatarView(this.rig.diagnostics.kind, this.framing, this.camera.aspect);
+    this.camera.position.fromArray(view.position); this.controls.target.fromArray(view.target);
+    this.camera.fov = view.fov; this.camera.updateProjectionMatrix(); this.controls.update();
   }
 
   dispose(): void {
