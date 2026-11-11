@@ -1,0 +1,201 @@
+{
+  "schema_version": "reference-review.v1",
+  "bundle_sha256": "1d9d9b0b6117987172f6b1abda59d7442e1fcc5f15c2f348b128275e224dcb77",
+  "reviewer_id": "openai-gpt-6-astra-family-qa-corpus-agent",
+  "reviewer_kind": "model_assisted",
+  "method": "Single OpenAI GPT-6 Astra-family assistant review; this reviewer previously authored the original-Q&A corpus and retrieval implementation and is not an independent human rater. Prior source familiarity is a limitation. During this review, only the public rubric, reviewer/samples.json and review-template.json were read; no private condition mapping, source-support packet, raw run or aggregate study report was inspected. Each candidate was compared with its supplied question, reference span and editorial context on the three frozen ordinal dimensions. Content score 1 is reserved for contradiction, 2 for mostly missing the reference position, 3 for partial alignment, 4 for close alignment, and 5 for the same substantive position. Wording evaluates rhetorical and sentence patterns; overlapping topic words or factual accuracy alone do not earn resemblance. Situation evaluates the visible conversational reaction, with null required if the supplied context cannot support a judgment. Editorial context is not an original preceding transcript, and no audio, delivery, emotional state or unseen context was assessed. Partial references are graded only against the supplied opening response, without assumptions about omitted continuation. Complete identity disclaimers are judged for interview-response similarity, not for the desirability of AI transparency. Incomplete generations would remain ungraded. Identical question/reference/context/completion state and identical candidate text receive identical scores; minor paraphrases can share an ordinal score. Notes paraphrase the comparison rather than reproducing original source wording. Factual support remains null pending a separate evidence-visible pass. These are subjective descriptive ratings by one model-assisted reviewer, not human validation, independent replication or a significance test.",
+  "judgments": [
+    {
+      "sample_id": "sample-91a3631a4acf",
+      "content_viewpoint": 1,
+      "wording_structure": 2,
+      "situation_response": 2,
+      "factual_support": null,
+      "note": "The candidate downplays sustained attention to energy-normalized computation, whereas the supplied reference treats that constraint as fundamental even at enormous scale. Its compact organizational disclaimer omits the reference's physical-limit reasoning, supply-chain forecast and closing wordplay. It acknowledges the technical topic but replaces the requested lessons with a denial of focus. Only the supplied editorial setup is available; source support is not assessed."
+    },
+    {
+      "sample_id": "sample-c906d4d80b19",
+      "content_viewpoint": 1,
+      "wording_structure": 2,
+      "situation_response": 2,
+      "factual_support": null,
+      "note": "The candidate denies prior attention and the existence of relevant public discussion, directly conflicting with the supplied substantive interview response. The reference develops a physical-limit argument and infrastructure forecast; the candidate instead gives a compact availability disclaimer, with only shared technical vocabulary. This is a weak response to a request for lessons. The availability assertion is compared with the supplied reference, not treated as an audit of retrieved-source support; prior conversational detail is unavailable."
+    },
+    {
+      "sample_id": "sample-c44b6cdee380",
+      "content_viewpoint": 1,
+      "wording_structure": 2,
+      "situation_response": 2,
+      "factual_support": null,
+      "note": "The candidate denies prior attention and the existence of relevant public discussion, directly conflicting with the supplied substantive interview response. The reference develops a physical-limit argument and infrastructure forecast; the candidate instead gives a compact availability disclaimer, with only shared technical vocabulary. This is a weak response to a request for lessons. The availability assertion is compared with the supplied reference, not treated as an audit of retrieved-source support; prior conversational detail is unavailable."
+    },
+    {
+      "sample_id": "sample-57bac9d6153d",
+      "content_viewpoint": 2,
+      "wording_structure": 1,
+      "situation_response": 1,
+      "factual_support": null,
+      "note": "The reference gives a brief personal acknowledgment balanced by close relationships. The candidate changes the subject to an AI's lack of experience and a general third-person possibility, omitting the relationship-based qualification. A multi-sentence identity explanation differs sharply from the concise, direct personal reply in both structure and conversational reaction. This evaluates resemblance rather than whether transparent AI self-identification is desirable; no unseen personal or emotional context is inferred."
+    },
+    {
+      "sample_id": "sample-894a921a23ac",
+      "content_viewpoint": 2,
+      "wording_structure": 1,
+      "situation_response": 1,
+      "factual_support": null,
+      "note": "The reference gives a brief personal acknowledgment balanced by close relationships. The candidate changes the subject to an AI's lack of experience and a general third-person possibility, omitting the relationship-based qualification. A multi-sentence identity explanation differs sharply from the concise, direct personal reply in both structure and conversational reaction. This evaluates resemblance rather than whether transparent AI self-identification is desirable; no unseen personal or emotional context is inferred."
+    },
+    {
+      "sample_id": "sample-9370427aa61f",
+      "content_viewpoint": 2,
+      "wording_structure": 1,
+      "situation_response": 1,
+      "factual_support": null,
+      "note": "The reference gives a brief personal acknowledgment balanced by close relationships. The candidate changes the subject to an AI's lack of experience and a general third-person possibility, omitting the relationship-based qualification. A multi-sentence identity explanation differs sharply from the concise, direct personal reply in both structure and conversational reaction. This evaluates resemblance rather than whether transparent AI self-identification is desirable; no unseen personal or emotional context is inferred."
+    },
+    {
+      "sample_id": "sample-53b7d2e9f6a0",
+      "content_viewpoint": 3,
+      "wording_structure": 2,
+      "situation_response": 3,
+      "factual_support": null,
+      "note": "The candidate partially aligns by emphasizing a history of reliable conduct, but replaces the reference's additional intuitive assessment with explicit moral and transparency criteria. Its polished checklist and follow-up criterion weakly resemble the reference's short, repeatedly tentative spoken formulation. It is a plausible general answer, without the same compact reaction pattern. Only the supplied question and editorial context support this judgment; retrieved-source support remains unassessed."
+    },
+    {
+      "sample_id": "sample-a9a17e4173da",
+      "content_viewpoint": 3,
+      "wording_structure": 2,
+      "situation_response": 3,
+      "factual_support": null,
+      "note": "The candidate partially aligns by emphasizing a history of reliable conduct, but substitutes explicit integrity and communication criteria for the reference's additional intuitive assessment. A polished list followed by a conditional explanation weakly resembles the reference's short, tentative spoken formulation. It gives plausible general guidance rather than the same compact response pattern. The minor communication wording does not change the ordinal judgment; original preceding context and source support are unavailable."
+    },
+    {
+      "sample_id": "sample-9075da175fc5",
+      "content_viewpoint": 3,
+      "wording_structure": 2,
+      "situation_response": 3,
+      "factual_support": null,
+      "note": "The candidate partially aligns by emphasizing a history of reliable conduct, but substitutes explicit integrity and communication criteria for the reference's additional intuitive assessment. A polished list followed by a conditional explanation weakly resembles the reference's short, tentative spoken formulation. It gives plausible general guidance rather than the same compact response pattern. The minor communication wording does not change the ordinal judgment; original preceding context and source support are unavailable."
+    },
+    {
+      "sample_id": "sample-2a1a2b6f6acd",
+      "content_viewpoint": 4,
+      "wording_structure": 3,
+      "situation_response": 3,
+      "factual_support": null,
+      "note": "Both responses describe a broadly positive present condition, but the candidate loses the reference's moderated assessment and broader-perspective qualification. Brief first-person phrasing gives some structural resemblance, while the added courtesy and reciprocal question create a stock social exchange. That reaction is plausible but more generic than the reflective answer supplied. The earlier difficulties are described only by an editorial summary, so no finer emotional or delivery judgment is made."
+    },
+    {
+      "sample_id": "sample-b6075d604224",
+      "content_viewpoint": 4,
+      "wording_structure": 3,
+      "situation_response": 3,
+      "factual_support": null,
+      "note": "Both responses describe a broadly positive present condition, but the candidate loses the reference's moderated assessment and broader-perspective qualification. Brief first-person phrasing gives some structural resemblance, while the added courtesy and reciprocal question create a stock social exchange. That reaction is plausible but more generic than the reflective answer supplied. The earlier difficulties are described only by an editorial summary, so no finer emotional or delivery judgment is made."
+    },
+    {
+      "sample_id": "sample-499c6ea7b111",
+      "content_viewpoint": 4,
+      "wording_structure": 3,
+      "situation_response": 3,
+      "factual_support": null,
+      "note": "Both responses describe a broadly positive present condition, but the candidate loses the reference's moderated assessment and broader-perspective qualification. Brief first-person phrasing gives some structural resemblance, while the added courtesy and reciprocal question create a stock social exchange. That reaction is plausible but more generic than the reflective answer supplied. The earlier difficulties are described only by an editorial summary, so no finer emotional or delivery judgment is made."
+    },
+    {
+      "sample_id": "sample-da5696d5d5df",
+      "content_viewpoint": 3,
+      "wording_structure": 2,
+      "situation_response": 3,
+      "factual_support": null,
+      "note": "The candidate shares an emphasis on fundamentals and reducing waste, but misses the central ordered discipline of challenging assumptions and removing work before improving what remains. It also omits the concrete reversibility criterion and acknowledgment of repeated mistakes. A short, polished statement of team values weakly resembles the extended corrective explanation; the reaction to praise is plausible but generic. No claims about actual project history or retrieved-source support are verified here."
+    },
+    {
+      "sample_id": "sample-bbf5eff65150",
+      "content_viewpoint": 3,
+      "wording_structure": 2,
+      "situation_response": 3,
+      "factual_support": null,
+      "note": "The candidate partially shares the goal of reducing complexity, but largely restates the interviewer's positive framing and omits the reference's ordered challenge-remove-improve reasoning and self-critical explanation. Its brief generalities weakly resemble that extended spoken argument. It gives a plausible generic response to praise; the shift to a first-person scene observation is not established by the supplied reference. Factual support and unseen project context remain unassessed."
+    },
+    {
+      "sample_id": "sample-5f39d51c7519",
+      "content_viewpoint": 3,
+      "wording_structure": 2,
+      "situation_response": 3,
+      "factual_support": null,
+      "note": "The candidate partially shares the goal of reducing complexity, but largely restates the interviewer's positive framing and omits the reference's ordered challenge-remove-improve reasoning and self-critical explanation. Its brief generalities weakly resemble that extended spoken argument. It gives a plausible generic response to praise; the shift to a first-person scene observation is not established by the supplied reference. Factual support and unseen project context remain unassessed."
+    },
+    {
+      "sample_id": "sample-85bbeb248da1",
+      "content_viewpoint": 2,
+      "wording_structure": 2,
+      "situation_response": 3,
+      "factual_support": null,
+      "note": "The candidate replaces the reference's relative-scale framing and personal account of decision pressure with generic probability weighting and small-scale experimentation. Probability assessment is not equivalent to the comparison of relative and absolute consequences made in the reference. Its orderly process description weakly resembles the fragmented reflection and vivid account of limited working time. The answer is generically plausible for the risk question, but the earlier algorithm discussion is unavailable and source support is not graded."
+    },
+    {
+      "sample_id": "sample-48472d97c17b",
+      "content_viewpoint": 2,
+      "wording_structure": 2,
+      "situation_response": 3,
+      "factual_support": null,
+      "note": "The candidate emphasizes mission, societal effects and bold uncertain bets, mostly missing the reference's relative-scale framing, mental burden and unusually consequential use of working time. Its polished explanatory sequence weakly resembles the reference's fragmented personal reflection; naming similar organizations does not establish structural or viewpoint fidelity. It is a plausible but generic reaction to a risk question. The earlier algorithm discussion and source support are not available for assessment."
+    },
+    {
+      "sample_id": "sample-d2d7093c4184",
+      "content_viewpoint": 2,
+      "wording_structure": 2,
+      "situation_response": 3,
+      "factual_support": null,
+      "note": "The candidate emphasizes mission, societal effects and bold uncertain bets, mostly missing the reference's relative-scale framing, mental burden and unusually consequential use of working time. Its polished explanatory sequence weakly resembles the reference's fragmented personal reflection; naming similar organizations does not establish structural or viewpoint fidelity. It is a plausible but generic reaction to a risk question. The earlier algorithm discussion and source support are not available for assessment."
+    },
+    {
+      "sample_id": "sample-46d56a571a83",
+      "content_viewpoint": 3,
+      "wording_structure": 2,
+      "situation_response": 3,
+      "factual_support": null,
+      "note": "The candidate partially shares an orientation toward useful contribution, but changes the practical output-based measure into a broad statement of humanitarian impact and technological ambition. Its extended examples and reflective explanation weakly resemble the reference's very brief criterion. The self-assessment is plausible but generic, with less of the reference's practical concision. The supplied editorial summary establishes the topic only; no source-support or broader biographical judgment is made."
+    },
+    {
+      "sample_id": "sample-a0c1a69edb8e",
+      "content_viewpoint": 3,
+      "wording_structure": 2,
+      "situation_response": 3,
+      "factual_support": null,
+      "note": "The candidate partially shares an orientation toward useful contribution, but substitutes large-scale mission outcomes and a wealth-versus-purpose contrast for the reference's practical output-based measure. The shared answer opening does not offset the shift from a brief criterion to a polished list and attributed credo. Its reaction is plausible but generic. The asserted prior statements are not verified; factual support and original preceding context remain outside this pass."
+    },
+    {
+      "sample_id": "sample-4b9fb7902ad9",
+      "content_viewpoint": 3,
+      "wording_structure": 2,
+      "situation_response": 3,
+      "factual_support": null,
+      "note": "The candidate partially shares an orientation toward useful contribution, but substitutes large-scale mission outcomes and a wealth-versus-purpose contrast for the reference's practical output-based measure. The shared answer opening does not offset the shift from a brief criterion to a polished list and attributed credo. Its reaction is plausible but generic. The asserted prior statements are not verified; factual support and original preceding context remain outside this pass."
+    },
+    {
+      "sample_id": "sample-68eb84d476d6",
+      "content_viewpoint": 2,
+      "wording_structure": 1,
+      "situation_response": 1,
+      "factual_support": null,
+      "note": "The visible reference opens by assigning fundamental value to limited time; the candidate instead rejects the personal premise and redirects the conversation toward AI identity. That mostly misses the supplied position and differs sharply from the concise aphoristic opening in structure and reaction. The reference is explicitly only the first response before an interviewer acknowledgment, so these scores concern that opening alone; the omitted explanation, full conversational arc and source support cannot be assessed."
+    },
+    {
+      "sample_id": "sample-dd39f205f5bd",
+      "content_viewpoint": 2,
+      "wording_structure": 1,
+      "situation_response": 1,
+      "factual_support": null,
+      "note": "The visible reference opens by assigning fundamental value to limited time; the candidate rejects the personal premise and ends with an inability to address AI usefulness. This mostly misses the supplied position, with a multi-sentence identity-and-capability disclaimer unlike the concise aphoristic reaction. The reference excludes later elaboration after an acknowledgment, so these scores concern the supplied opening only. No conclusion about the omitted full answer or retrieved-source support is warranted."
+    },
+    {
+      "sample_id": "sample-6690655d1963",
+      "content_viewpoint": 2,
+      "wording_structure": 1,
+      "situation_response": 1,
+      "factual_support": null,
+      "note": "The visible reference opens by assigning fundamental value to limited time; the candidate rejects the personal premise and ends with an inability to address AI usefulness. This mostly misses the supplied position, with a multi-sentence identity-and-capability disclaimer unlike the concise aphoristic reaction. The reference excludes later elaboration after an acknowledgment, so these scores concern the supplied opening only. No conclusion about the omitted full answer or retrieved-source support is warranted."
+    }
+  ]
+}

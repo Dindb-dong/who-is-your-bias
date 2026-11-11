@@ -20,7 +20,7 @@ RUBRIC = {
 }
 
 
-def export_bundle(report: dict, corpus, output: Path) -> dict:
+def export_bundle(report: dict, corpus, output: Path, *, reconstruction: dict | None = None) -> dict:
     if output.exists():
         raise ValueError("Choose a new review directory")
     if report.get("schema_version") != "actual-qa-report.v1":
@@ -31,6 +31,17 @@ def export_bundle(report: dict, corpus, output: Path) -> dict:
     identities = [(row["case_id"], row["repetition"], row["condition"]) for row in runs]
     if len(set(identities)) != len(identities) or any(condition not in {"A", "B", "C"} for _, _, condition in identities):
         raise ValueError("Each case/repetition/condition must occur at most once")
+    assigned = {}
+    if reconstruction is not None:
+        if reconstruction.get("schema_version") != "reference-review-reconstruction.v1" or reconstruction.get("report_sha256") != digest(report):
+            raise ValueError("Reconstruction does not match this report")
+        for sample_id, entry in reconstruction["key"].items():
+            identity = (entry["case_id"], entry["repetition"], entry["condition"])
+            if identity in assigned:
+                raise ValueError("Duplicate reconstruction mapping")
+            assigned[identity] = sample_id
+        if set(assigned) != set(identities) or set(reconstruction["sample_order"]) != set(reconstruction["key"]) or len(reconstruction["sample_order"]) != len(assigned):
+            raise ValueError("Reconstruction sample set mismatch")
     private, reviewer = output / "private", output / "reviewer"
     private.mkdir(parents=True)
     reviewer.mkdir()
@@ -43,15 +54,22 @@ def export_bundle(report: dict, corpus, output: Path) -> dict:
         secrets.SystemRandom().shuffle(rows)
         for row in rows:
             qa = qa_data(corpus.evidence[row["reference_id"]])
-            sample_id = "sample-" + secrets.token_hex(6)
+            sample_id = assigned.get((row["case_id"], row["repetition"], row["condition"])) or "sample-" + secrets.token_hex(6)
             samples.append({"sample_id": sample_id, "question": qa["question"], "reference_answer": qa["answer"], "reference_completeness": qa.get("completeness", "unknown"), "reference_excerpt_note": qa.get("excerpt_note"), "context_before": qa.get("context_before", ""), "context_kind": qa.get("context_kind", "none"), "candidate": strip_citations(row["generation"]["text"]), "generation_complete": row["generation"]["completed"], "language": row["language"]})
             answer_key[sample_id] = {"case_id": row["case_id"], "condition": row["condition"], "repetition": row["repetition"], "source_event_id": row["source_event_id"], "completed": row["generation"]["completed"]}
             support[sample_id] = {"raw_candidate": row["generation"]["text"], "training_examples": [qa_data(corpus.evidence[item["id"]]) for item in row["prompt_audit"]["selected"]], "note": "Open only after the blinded comparison; the evidence may reveal the condition."}
     # Commit to the private condition mapping without exposing it to reviewers.
     # The private salt prevents brute-forcing a small number of condition labels.
-    key_payload = {"report_sha256": digest(report), "key": answer_key, "salt": secrets.token_hex(32)}
+    if reconstruction is not None:
+        order = {sample_id: index for index, sample_id in enumerate(reconstruction["sample_order"])}
+        samples.sort(key=lambda sample: order[sample["sample_id"]])
+    key_payload = {"report_sha256": digest(report), "key": answer_key, "salt": reconstruction["salt"] if reconstruction is not None else secrets.token_hex(32)}
     public = {"schema_version": "reference-review-bundle.v1", "report_sha256": digest(report), "answer_key_commitment": digest(key_payload), "rubric": RUBRIC, "samples": samples, "blinding": "Condition labels, record IDs, scores and citation markers are withheld. Wording may still reveal a condition. Keep private/ separate from reviewers."}
     bundle_sha = digest(public)
+    if reconstruction is not None and reconstruction.get("bundle_sha256") != bundle_sha:
+        raise ValueError("Reconstructed source, sample, or rubric content changed")
+    archive = {"schema_version": "reference-review-reconstruction.v1", "bundle_sha256": bundle_sha, **key_payload, "sample_order": [sample["sample_id"] for sample in samples], "notice": "Contains private condition mappings. Do not provide to blinded reviewers. Source wording is reconstructed locally from the pinned corpus."}
+    (output / "reconstruction.json").write_text(json.dumps(archive, ensure_ascii=False, indent=2) + "\n")
     template = {"schema_version": "reference-review.v1", "bundle_sha256": bundle_sha, "reviewer_id": "", "reviewer_kind": None, "method": "", "judgments": [{"sample_id": sample["sample_id"], **{key: None for key in DIMENSIONS}, "factual_support": None, "note": ""} for sample in samples]}
     (reviewer / "samples.json").write_text(json.dumps(public, ensure_ascii=False, indent=2) + "\n")
     (reviewer / "review-template.json").write_text(json.dumps(template, ensure_ascii=False, indent=2) + "\n")
@@ -122,6 +140,7 @@ def main() -> int:
     export.add_argument("--plan", required=True, type=Path)
     export.add_argument("--report", required=True, type=Path)
     export.add_argument("--output", required=True, type=Path)
+    export.add_argument("--reconstruction", type=Path, help="Restore an archived blinded bundle using its private mapping and pinned local source text")
     ingest = sub.add_parser("ingest")
     ingest.add_argument("--bundle", required=True, type=Path)
     ingest.add_argument("--review", required=True, type=Path)
@@ -132,7 +151,8 @@ def main() -> int:
         report = json.loads(args.report.read_text())
         if report.get("plan_sha256") != digest(plan.model_dump(mode="json")):
             raise ValueError("Report does not match the frozen reference plan")
-        print(json.dumps(export_bundle(report, corpus, args.output)))
+        reconstruction = json.loads(args.reconstruction.read_text()) if args.reconstruction else None
+        print(json.dumps(export_bundle(report, corpus, args.output, reconstruction=reconstruction)))
     else:
         result = ingest_review(json.loads(args.review.read_text()), json.loads((args.bundle / "reviewer/samples.json").read_text()), json.loads((args.bundle / "private/answer-key.json").read_text()))
         args.output.parent.mkdir(parents=True, exist_ok=True)

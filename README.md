@@ -27,7 +27,7 @@ uv run bias validate
 uv run bias serve
 ```
 
-The API runs at `http://127.0.0.1:8000`; API documentation is at `/docs`. With no model configured, responses contain labeled, curated source notes. This mode exercises retrieval, sessions, evidence links, and behavior planning without claiming language-model inference.
+The API runs at `http://127.0.0.1:8000`; API documentation is at `/docs`. With no model configured, responses contain labeled original-interview excerpts from a bounded pilot. This mode exercises retrieval, sessions, evidence links, and behavior planning without claiming language-model inference.
 
 ### Connect an actual model
 
@@ -73,12 +73,25 @@ The publisher transcript pipeline also extracted **3,451 timestamped caption cue
 
 This is a research corpus and working application, not a validated replica of a person's mind, voice, or appearance. The [initial inference report](docs/inference-validation.md) and [integration results](docs/integration-validation.md) separate real model execution from citation compliance and perceptual quality. The included human avatar is an artistic reference asset with a calibrated face/body rig. A high-quality likeness asset, learned personal mannerisms across many situations, and independent perceptual evaluation remain separate work.
 
+## Original interview corpus
+
+The explicit default is a ten-record bounded excerpt pilot. The source library identifies it. The full original-answer study uses 92 locally materialized exchanges (80 train / four development / eight test); source text is pinned and reconstructed locally:
+
+```bash
+uv run python -m tools.qna hydrate \
+  --selection data/qna/elon-musk-v1/selection-recipes.v2.json \
+  --output data/local/qna/elon-musk-v2
+BIAS_CORPUS_DIR=data/local/qna/elon-musk-v2 uv run bias serve
+```
+
+See [original Q&A](docs/original-qa.md) for source review, source-event isolation, unknown acoustic timestamps and bounded-versus-full materialization. Old summary-corpus results retain their original version and explicit corpus path.
+
 ## Research workflow
 
 ```bash
-uv run bias search "Why did Tesla start with an expensive sports car?"
-uv run bias search "테슬라는 왜 처음에 비싼 스포츠카를 만들었어?"
-uv run bias evaluate --fail-on-regression --output reports/local/retrieval.json
+uv run bias search "Why are you boring?"
+uv run bias search "땅굴을 왜 파나요?"
+uv run bias --corpus data/personas/elon-musk evaluate --fail-on-regression --output reports/local/retrieval.json
 uv run python -m tools.research inventory --output reports/local/source-inventory.json
 uv run pytest
 ```
@@ -96,7 +109,7 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 
 ### Interpret results correctly
 
-- The original YAICON proposal's actual-Q&A comparison is unfinished. B currently retrieves summaries; C's situation-label mismatch prevents situation reranking on the current corpus. See [proposal alignment and next milestones](docs/proposal-alignment.md) for the evidence, missing experiments, and acceptance criteria.
+- Original Q&A and a shared situation taxonomy are implemented. The first held-out pilot completed 24 real A/B/C responses but retrieved no examples for its eight questions, so it does not establish a C advantage. See [reference-answer evaluation](docs/reference-evaluation.md) and [proposal status](docs/proposal-alignment.md). Human judgments remain separate and ungraded.
 - A valid citation ID means the response referenced an allowed record; it does not prove that every generated sentence follows from that record.
 - Retrieval smoke tests are not an independent persona-fidelity benchmark. Cases derived while authoring the corpus are labeled development fixtures.
 - An entire held-out source is excluded from runtime retrieval, including its records and reference answers.
@@ -122,7 +135,9 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 
 ## Documentation
 
-- [Proposal alignment and next milestones](docs/proposal-alignment.md): original YAICON requirements, current gaps, the C retrieval issue, and prioritized implementation acceptance criteria.
+- [Proposal implementation status](docs/proposal-alignment.md): requirement mapping, completed evidence and remaining review boundaries.
+- [Original Q&A corpus](docs/original-qa.md): pinned publisher selections, event splits and working situation retrieval.
+- [Actual-answer evaluation](docs/reference-evaluation.md): the complete 24-response run, negative coverage result and reconstructable blinded review.
 - [Engineering verification and recovery](docs/quality-completion.md): merged PR status, browser evidence, recovery fixes, measured limits, and verification links.
 - [Delivery plan](docs/PLAN.md): review boundaries, acceptance criteria, fidelity ladder.
 - [Architecture](docs/architecture.md): evidence, generation, timing, and deployment boundaries.

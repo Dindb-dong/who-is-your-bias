@@ -1,0 +1,203 @@
+{
+  "schema_version": "reference-review-reconstruction.v1",
+  "bundle_sha256": "1d9d9b0b6117987172f6b1abda59d7442e1fcc5f15c2f348b128275e224dcb77",
+  "report_sha256": "1b2d2d48c3dddb70b4eb46352bf0d1a6019620abf64790dbff927fc2accf8bc8",
+  "key": {
+    "sample-91a3631a4acf": {
+      "case_id": "qa-lex-400-2023-compute-efficiency",
+      "condition": "A",
+      "repetition": 1,
+      "source_event_id": "lex-400-2023",
+      "completed": true
+    },
+    "sample-c906d4d80b19": {
+      "case_id": "qa-lex-400-2023-compute-efficiency",
+      "condition": "B",
+      "repetition": 1,
+      "source_event_id": "lex-400-2023",
+      "completed": true
+    },
+    "sample-c44b6cdee380": {
+      "case_id": "qa-lex-400-2023-compute-efficiency",
+      "condition": "C",
+      "repetition": 1,
+      "source_event_id": "lex-400-2023",
+      "completed": true
+    },
+    "sample-57bac9d6153d": {
+      "case_id": "qa-lex-400-2023-loneliness",
+      "condition": "A",
+      "repetition": 1,
+      "source_event_id": "lex-400-2023",
+      "completed": true
+    },
+    "sample-894a921a23ac": {
+      "case_id": "qa-lex-400-2023-loneliness",
+      "condition": "B",
+      "repetition": 1,
+      "source_event_id": "lex-400-2023",
+      "completed": true
+    },
+    "sample-9370427aa61f": {
+      "case_id": "qa-lex-400-2023-loneliness",
+      "condition": "C",
+      "repetition": 1,
+      "source_event_id": "lex-400-2023",
+      "completed": true
+    },
+    "sample-53b7d2e9f6a0": {
+      "case_id": "qa-lex-400-2023-trust",
+      "condition": "C",
+      "repetition": 1,
+      "source_event_id": "lex-400-2023",
+      "completed": true
+    },
+    "sample-a9a17e4173da": {
+      "case_id": "qa-lex-400-2023-trust",
+      "condition": "B",
+      "repetition": 1,
+      "source_event_id": "lex-400-2023",
+      "completed": true
+    },
+    "sample-9075da175fc5": {
+      "case_id": "qa-lex-400-2023-trust",
+      "condition": "A",
+      "repetition": 1,
+      "source_event_id": "lex-400-2023",
+      "completed": true
+    },
+    "sample-2a1a2b6f6acd": {
+      "case_id": "qa-lex-400-2023-wellbeing",
+      "condition": "B",
+      "repetition": 1,
+      "source_event_id": "lex-400-2023",
+      "completed": true
+    },
+    "sample-b6075d604224": {
+      "case_id": "qa-lex-400-2023-wellbeing",
+      "condition": "A",
+      "repetition": 1,
+      "source_event_id": "lex-400-2023",
+      "completed": true
+    },
+    "sample-499c6ea7b111": {
+      "case_id": "qa-lex-400-2023-wellbeing",
+      "condition": "C",
+      "repetition": 1,
+      "source_event_id": "lex-400-2023",
+      "completed": true
+    },
+    "sample-da5696d5d5df": {
+      "case_id": "qa-lex-438-2024-engineering",
+      "condition": "B",
+      "repetition": 1,
+      "source_event_id": "lex-438-2024",
+      "completed": true
+    },
+    "sample-bbf5eff65150": {
+      "case_id": "qa-lex-438-2024-engineering",
+      "condition": "A",
+      "repetition": 1,
+      "source_event_id": "lex-438-2024",
+      "completed": true
+    },
+    "sample-5f39d51c7519": {
+      "case_id": "qa-lex-438-2024-engineering",
+      "condition": "C",
+      "repetition": 1,
+      "source_event_id": "lex-438-2024",
+      "completed": true
+    },
+    "sample-85bbeb248da1": {
+      "case_id": "qa-lex-438-2024-risk",
+      "condition": "C",
+      "repetition": 1,
+      "source_event_id": "lex-438-2024",
+      "completed": true
+    },
+    "sample-48472d97c17b": {
+      "case_id": "qa-lex-438-2024-risk",
+      "condition": "B",
+      "repetition": 1,
+      "source_event_id": "lex-438-2024",
+      "completed": true
+    },
+    "sample-d2d7093c4184": {
+      "case_id": "qa-lex-438-2024-risk",
+      "condition": "A",
+      "repetition": 1,
+      "source_event_id": "lex-438-2024",
+      "completed": true
+    },
+    "sample-46d56a571a83": {
+      "case_id": "qa-lex-438-2024-success",
+      "condition": "A",
+      "repetition": 1,
+      "source_event_id": "lex-438-2024",
+      "completed": true
+    },
+    "sample-a0c1a69edb8e": {
+      "case_id": "qa-lex-438-2024-success",
+      "condition": "B",
+      "repetition": 1,
+      "source_event_id": "lex-438-2024",
+      "completed": true
+    },
+    "sample-4b9fb7902ad9": {
+      "case_id": "qa-lex-438-2024-success",
+      "condition": "C",
+      "repetition": 1,
+      "source_event_id": "lex-438-2024",
+      "completed": true
+    },
+    "sample-68eb84d476d6": {
+      "case_id": "qa-lex-438-2024-time",
+      "condition": "B",
+      "repetition": 1,
+      "source_event_id": "lex-438-2024",
+      "completed": true
+    },
+    "sample-dd39f205f5bd": {
+      "case_id": "qa-lex-438-2024-time",
+      "condition": "C",
+      "repetition": 1,
+      "source_event_id": "lex-438-2024",
+      "completed": true
+    },
+    "sample-6690655d1963": {
+      "case_id": "qa-lex-438-2024-time",
+      "condition": "A",
+      "repetition": 1,
+      "source_event_id": "lex-438-2024",
+      "completed": true
+    }
+  },
+  "salt": "b8ea33eb1f83b91fdf8680bc8529ce1a8abf0902dc2625dfb2027e2d7b9b7e9c",
+  "sample_order": [
+    "sample-91a3631a4acf",
+    "sample-c906d4d80b19",
+    "sample-c44b6cdee380",
+    "sample-57bac9d6153d",
+    "sample-894a921a23ac",
+    "sample-9370427aa61f",
+    "sample-53b7d2e9f6a0",
+    "sample-a9a17e4173da",
+    "sample-9075da175fc5",
+    "sample-2a1a2b6f6acd",
+    "sample-b6075d604224",
+    "sample-499c6ea7b111",
+    "sample-da5696d5d5df",
+    "sample-bbf5eff65150",
+    "sample-5f39d51c7519",
+    "sample-85bbeb248da1",
+    "sample-48472d97c17b",
+    "sample-d2d7093c4184",
+    "sample-46d56a571a83",
+    "sample-a0c1a69edb8e",
+    "sample-4b9fb7902ad9",
+    "sample-68eb84d476d6",
+    "sample-dd39f205f5bd",
+    "sample-6690655d1963"
+  ],
+  "notice": "Contains private condition mappings. Do not provide to blinded reviewers. Source wording is reconstructed locally from the pinned corpus."
+}

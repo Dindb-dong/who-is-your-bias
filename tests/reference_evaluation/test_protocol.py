@@ -103,6 +103,11 @@ def test_bundle_blinds_conditions_and_requires_real_review_provenance(qa_corpus,
         ingest_review(review, bundle, modified_key)
     assert all("context_kind" in sample for sample in bundle["samples"])
     assert "Adjacent context" in (root / "reviewer/index.html").read_text()
+    archive = json.loads((root / "reconstruction.json").read_text())
+    restored = tmp_path / "restored"
+    export_bundle(report, qa_corpus, restored, reconstruction=archive)
+    assert json.loads((restored / "reviewer/samples.json").read_text()) == bundle
+    assert json.loads((restored / "private/answer-key.json").read_text()) == key
     duplicated = {**report, "runs": report["runs"] + [report["runs"][0]]}
     with pytest.raises(ValueError, match="at most once"):
         export_bundle(duplicated, qa_corpus, tmp_path / "duplicate")
