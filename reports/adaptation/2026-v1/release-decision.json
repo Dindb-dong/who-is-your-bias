@@ -1,0 +1,36 @@
+{
+  "schema_version": "development-adapter-decision.v1",
+  "decision": "do_not_promote_as_default",
+  "adapter_run_sha256": "dd1e049aa38ea22e97188da4ee001b0ac0df1e493af22aef30177dc70cb06cf6",
+  "plan_sha256": "a10a6f8f764127e964fca7c2229577b49332c78449a2a85ece8999249c2a9f30",
+  "source_run_sha256": {
+    "facts": "c446687454ff884c18c8194603daad27625e9be5c6967f3686d8347867939967",
+    "style": "70e9283825844b9a577ba93e9da963c597ec2f568b0527ed6010dea10e3a9e74",
+    "adapter": "0e9766bdf5b3b85ee31b5e42fe65b71a54242a213662d2038095511b106aa648"
+  },
+  "mechanical_results": {
+    "attempts": 12,
+    "completed_generations": 10,
+    "evidence_bearing_generations": 9,
+    "evidence_bearing_missing_required_citations": 9,
+    "length_incomplete": [
+      {
+        "condition": "style",
+        "case_id": "original-positive-001-ko"
+      },
+      {
+        "condition": "adapter",
+        "case_id": "original-positive-001-ko"
+      }
+    ]
+  },
+  "ai_qualitative_observations": [
+    "Adapted Korean output repeats a phrase until token-limit termination.",
+    "Adapted English factual outputs become short nonspecific statements that do not recover the supplied reference explanation.",
+    "The no-current-evidence adapted output is a personal denial, not explicit evidence-limited abstention; a single output does not establish calibration."
+  ],
+  "human_review": null,
+  "heldout_quality_estimate": null,
+  "runtime_default_changed": false,
+  "scope": "Four exposed development questions, fixed factual/style inputs; no population-level efficacy estimate."
+}

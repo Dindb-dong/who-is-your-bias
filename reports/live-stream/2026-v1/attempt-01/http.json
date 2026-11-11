@@ -1,0 +1,398 @@
+{
+  "schema_version": "live-http-benchmark.v1",
+  "started_at": "2026-11-11T14:05:18.655996+00:00",
+  "status": "failed",
+  "transport": "real_http_sse",
+  "request": {
+    "message": "Why reuse rockets? Answer in one sentence of at most 12 words.",
+    "session_id": null,
+    "mode": "behavior",
+    "language": "en",
+    "motion_mode": "disabled"
+  },
+  "cancel_after_first_pcm": false,
+  "endpoints": {
+    "api": "http://127.0.0.1:8142",
+    "language_health": "http://127.0.0.1:8140/health",
+    "voice_health": "http://127.0.0.1:8141/health"
+  },
+  "clock": {
+    "source": "time.perf_counter",
+    "monotonic": true,
+    "adjustable": false,
+    "resolution_seconds": 1e-09
+  },
+  "benchmark_host": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "machine": "x86_64",
+    "logical_cpus": 9,
+    "scope": "HTTP client host; does not establish remote model hardware"
+  },
+  "implementation_sha256": {
+    "tools/live_benchmark.py": "403096cb0064752c69d03bdd2843be099b8b0094db2db6bbac75260e8f95a4ce"
+  },
+  "timeout_seconds": 180.0,
+  "health_before": {
+    "api": {
+      "status": "ok",
+      "version": "0.1.0",
+      "provider": "openai",
+      "live_protocol": "live-segments-pcm.v1",
+      "configuration_only": true,
+      "providers": {
+        "llm": {
+          "configured": true,
+          "model": "qwen3-local"
+        },
+        "speech": {
+          "configured": true,
+          "model": "qwen3-tts"
+        }
+      },
+      "retrieval": {
+        "backend": "lexical",
+        "embedding_model": null,
+        "embedding_revision": null,
+        "style_examples": false,
+        "prewarmed": false,
+        "startup_warmup_ms": null
+      },
+      "persona_snapshot": {
+        "id": null,
+        "as_of": null,
+        "corpus_sha256": null
+      }
+    },
+    "language": {
+      "status": "not_loaded",
+      "model_loaded": false,
+      "busy": false,
+      "model": "qwen3-local",
+      "load_ms": null,
+      "stage": null,
+      "identity": {
+        "schema_version": "language-model-identity.v1",
+        "base_model": "Qwen/Qwen3-0.6B",
+        "base_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+        "base_checkpoint_manifest_sha256": null,
+        "tokenizer_contract_sha256": null,
+        "chat_template_options": {
+          "enable_thinking": false
+        }
+      },
+      "adapter": {
+        "configured": false,
+        "loaded": false,
+        "verified": false,
+        "schema_version": null,
+        "run_sha256": null,
+        "artifact_manifest_sha256": null,
+        "base_model": null,
+        "base_revision": null,
+        "base_checkpoint_manifest_sha256": null,
+        "dataset_sha256": null,
+        "tokenizer_contract_sha256": null,
+        "optimizer_steps": null
+      },
+      "runtime": {
+        "backend": "transformers",
+        "requested_device": "cpu",
+        "requested_dtype": "bfloat16",
+        "device": null,
+        "dtype": null,
+        "context_window": null,
+        "base_parameters": null,
+        "threads": 2,
+        "attention": "sdpa",
+        "versions": {
+          "torch": null,
+          "transformers": null,
+          "peft": null
+        },
+        "generation_defaults": {
+          "seed": 42,
+          "temperature": 0.0,
+          "top_p": 0.8,
+          "top_k": 20
+        }
+      },
+      "limits": {
+        "input_tokens": 8192,
+        "output_tokens": 96,
+        "generation_seconds": 180.0
+      }
+    },
+    "voice": {
+      "status": "not_loaded",
+      "model_loaded": false,
+      "busy": false,
+      "reference_configured": true,
+      "reference_mode": "audio_and_transcript",
+      "voice": "reference",
+      "synthesis": "reference_conditioned",
+      "streaming": false,
+      "runtime": {
+        "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+        "device": "cpu",
+        "dtype": "bfloat16",
+        "attention": "sdpa",
+        "local_files_only": true,
+        "threads": 2,
+        "seed": 42,
+        "max_new_tokens": 384,
+        "do_sample": true,
+        "temperature": 0.9,
+        "top_k": 50,
+        "top_p": 1.0,
+        "repetition_penalty": 1.05
+      },
+      "last_generation": {
+        "language": null,
+        "input_chars": null,
+        "cold_start": null,
+        "elapsed_seconds": null,
+        "audio_seconds": null,
+        "real_time_factor": null,
+        "termination_reason": null
+      }
+    }
+  },
+  "health_after": {
+    "api": {
+      "status": "ok",
+      "version": "0.1.0",
+      "provider": "openai",
+      "live_protocol": "live-segments-pcm.v1",
+      "configuration_only": true,
+      "providers": {
+        "llm": {
+          "configured": true,
+          "model": "qwen3-local"
+        },
+        "speech": {
+          "configured": true,
+          "model": "qwen3-tts"
+        }
+      },
+      "retrieval": {
+        "backend": "lexical",
+        "embedding_model": null,
+        "embedding_revision": null,
+        "style_examples": false,
+        "prewarmed": false,
+        "startup_warmup_ms": null
+      },
+      "persona_snapshot": {
+        "id": null,
+        "as_of": null,
+        "corpus_sha256": null
+      }
+    },
+    "language": {
+      "status": "not_loaded",
+      "model_loaded": false,
+      "busy": false,
+      "model": "qwen3-local",
+      "load_ms": null,
+      "stage": null,
+      "identity": {
+        "schema_version": "language-model-identity.v1",
+        "base_model": "Qwen/Qwen3-0.6B",
+        "base_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+        "base_checkpoint_manifest_sha256": null,
+        "tokenizer_contract_sha256": null,
+        "chat_template_options": {
+          "enable_thinking": false
+        }
+      },
+      "adapter": {
+        "configured": false,
+        "loaded": false,
+        "verified": false,
+        "schema_version": null,
+        "run_sha256": null,
+        "artifact_manifest_sha256": null,
+        "base_model": null,
+        "base_revision": null,
+        "base_checkpoint_manifest_sha256": null,
+        "dataset_sha256": null,
+        "tokenizer_contract_sha256": null,
+        "optimizer_steps": null
+      },
+      "runtime": {
+        "backend": "transformers",
+        "requested_device": "cpu",
+        "requested_dtype": "bfloat16",
+        "device": null,
+        "dtype": null,
+        "context_window": null,
+        "base_parameters": null,
+        "threads": 2,
+        "attention": "sdpa",
+        "versions": {
+          "torch": null,
+          "transformers": null,
+          "peft": null
+        },
+        "generation_defaults": {
+          "seed": 42,
+          "temperature": 0.0,
+          "top_p": 0.8,
+          "top_k": 20
+        }
+      },
+      "limits": {
+        "input_tokens": 8192,
+        "output_tokens": 96,
+        "generation_seconds": 180.0
+      }
+    },
+    "voice": {
+      "status": "not_loaded",
+      "model_loaded": false,
+      "busy": true,
+      "reference_configured": true,
+      "reference_mode": "audio_and_transcript",
+      "voice": "reference",
+      "synthesis": "reference_conditioned",
+      "streaming": false,
+      "runtime": {
+        "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+        "device": "cpu",
+        "dtype": "bfloat16",
+        "attention": "sdpa",
+        "local_files_only": true,
+        "threads": 2,
+        "seed": 42,
+        "max_new_tokens": 384,
+        "do_sample": true,
+        "temperature": 0.9,
+        "top_k": 50,
+        "top_p": 1.0,
+        "repetition_penalty": 1.05
+      },
+      "last_generation": {
+        "language": null,
+        "input_chars": null,
+        "cold_start": null,
+        "elapsed_seconds": null,
+        "audio_seconds": null,
+        "real_time_factor": null,
+        "termination_reason": null
+      }
+    }
+  },
+  "events": [
+    {
+      "event": "meta",
+      "received_at_ms": 31.249,
+      "payload_sha256": "eac70609236768e6237380e6c9f0d06520c9bf80a9b603f786eff570e385690e"
+    },
+    {
+      "event": "status",
+      "received_at_ms": 34.203,
+      "payload_sha256": "53b95bbfde5669741eb27989d640ce86acd6f37787433f4a0c39495f6328b2e4"
+    },
+    {
+      "event": "status",
+      "received_at_ms": 34.373,
+      "payload_sha256": "add89013c742d658cc76cf318ba33588f34785b458c7594530a7d4cfe2df228a"
+    },
+    {
+      "event": "token",
+      "received_at_ms": 34.403,
+      "payload_sha256": "7dc0b624ea3f403c905a033f2b9f3c0ef01a9df91dd138bb4d6e19fa32e4eb88"
+    },
+    {
+      "event": "segment",
+      "received_at_ms": 34.436,
+      "payload_sha256": "afbc2301cc51248e3b7b2d865c1f989fc4386dd2db1fdf01cb7de82911cdb131"
+    },
+    {
+      "event": "segment",
+      "received_at_ms": 34.643,
+      "payload_sha256": "6263a1d6516af6dace325e69c03e91fb00f07ce1d5c5f57ddf96be4022d39073"
+    },
+    {
+      "event": "status",
+      "received_at_ms": 34.685,
+      "payload_sha256": "226fc560e942f888de90f8542eaba0fbf06dca2714c6079e52674b2bfeadf9cd"
+    }
+  ],
+  "limitations": [
+    "HTTP receipt times are digital transport measurements, not first visible text, playback or acoustic output.",
+    "Application-level committed-sentence WAV synthesis is not native neural audio-token streaming.",
+    "Configured provider aliases and observed health are not independent proof of all remote checkpoint bytes.",
+    "A cancelled prefix cannot establish complete segment integrity, text generation or spoken completion.",
+    "Session release does not prove that an external synchronous voice worker has stopped; inspect post-run busy state."
+  ],
+  "warm_state": {
+    "language": false,
+    "voice": false
+  },
+  "http_status": 200,
+  "headers_received_ms": 8.275,
+  "failure": {
+    "type": "ProtocolError",
+    "reason": "Source-preview response did not execute language-model inference"
+  },
+  "request_closed_ms": 35.195,
+  "stream": {
+    "session_id": "6dbbe1b398714e64b39e1bddda8fb389",
+    "turn_id": "7cde5e92e435418db2d02ad5735497ab",
+    "protocol": "live-segments-pcm.v1",
+    "completed": false,
+    "events": {
+      "meta": 1,
+      "status": 3,
+      "token": 1,
+      "segment": 2,
+      "result": 1
+    },
+    "timings": {
+      "first_text_received_ms": 34.403,
+      "first_pcm_received_ms": null,
+      "result_received_ms": null,
+      "audio_end_received_ms": null,
+      "done_received_ms": null
+    },
+    "llm_result_confirmed": false,
+    "generated_text_sha256": "1542d5a75f7e1cdbbcc664f33e020ef9cd22e8c76ad9d73240176eb192ca842d",
+    "pcm_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "received_frames": 0,
+    "received_chunks": 0,
+    "received_pcm_bytes": 0,
+    "sample_rate": null,
+    "channels": null,
+    "delivered_audio_duration_ms": null,
+    "complete_verified_segments": 0,
+    "segments": [],
+    "active_segment_incomplete": false,
+    "first_pcm_preceded_text_result": null,
+    "server_metrics": {
+      "language": null,
+      "first_pcm_ready_ms": null,
+      "total_ms": null
+    },
+    "original_wav_hash_verification": "not_possible_without_original_wav_headers; actual PCM digests verified per complete segment",
+    "browser_first_visible_text_ms": null,
+    "browser_playback_first_pcm_ms": null,
+    "speaker_first_audible_ms": null,
+    "playback_completion_ms": null,
+    "spoken_complete": null
+  },
+  "session_release": {
+    "observed": true,
+    "elapsed_ms": 7.389,
+    "basis": "benchmark-owned_session_deletion_accepted"
+  },
+  "model_services_loaded_after": false,
+  "provider_identity_continuity": {
+    "verified": true,
+    "changed_fields": [],
+    "scope": "service_reported_identity_and_runtime"
+  },
+  "measured_inference_complete": false,
+  "completed_at": "2026-11-11T14:05:18.781243+00:00"
+}

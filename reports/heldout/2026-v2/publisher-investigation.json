@@ -1,0 +1,266 @@
+{
+  "schema_version": "heldout-publisher-link-investigation.v1",
+  "started_at": "2026-11-11T14:15:02.865748+00:00",
+  "scope": "Bounded official publisher link investigation; no model output or evaluation results read.",
+  "records": [
+    {
+      "id": "lex-018-2019",
+      "requested_url": "https://lexfridman.com/elon-musk/",
+      "final_url": "https://lexfridman.com/elon-musk/",
+      "status": 200,
+      "retrieved_at": "2026-11-11T14:15:09.692715+00:00",
+      "mime_type": "text/html",
+      "bytes": 57969,
+      "sha256": "0c5be363ed1662c195fa1e9e4b23ee37bbb3c00977a42909212619a8da6a584a",
+      "file": "lex-018-2019.html",
+      "title": "Elon Musk: Tesla Autopilot | Lex Fridman Podcast",
+      "pdf_links": [],
+      "transcript_links": []
+    },
+    {
+      "id": "lex-049-2019",
+      "requested_url": "https://lexfridman.com/elon-musk-2/",
+      "final_url": "https://lexfridman.com/elon-musk-2/",
+      "status": 200,
+      "retrieved_at": "2026-11-11T14:15:09.625028+00:00",
+      "mime_type": "text/html",
+      "bytes": 60306,
+      "sha256": "9fbeaca4adea8816b8e6d8ab2b7496432f6f77ef09f9a7924c4e1dcaf1a0a071",
+      "file": "lex-049-2019.html",
+      "title": "Elon Musk: Neuralink, AI, Autopilot, and the Pale Blue Dot | Lex Fridman Podcast",
+      "pdf_links": [
+        {
+          "text": "transcript (PDF) here",
+          "url": "https://lexfridman.com/wordpress/wp-content/uploads/2019/11/elon_musk_lex_fridman_2_transcript.pdf"
+        }
+      ],
+      "transcript_links": [
+        {
+          "text": "transcript (PDF) here",
+          "url": "https://lexfridman.com/wordpress/wp-content/uploads/2019/11/elon_musk_lex_fridman_2_transcript.pdf"
+        }
+      ]
+    },
+    {
+      "id": "lex-252-2021",
+      "requested_url": "https://lexfridman.com/elon-musk-3/",
+      "final_url": "https://lexfridman.com/elon-musk-3/",
+      "status": 200,
+      "retrieved_at": "2026-11-11T14:15:09.619457+00:00",
+      "mime_type": "text/html",
+      "bytes": 62730,
+      "sha256": "592c3bbd9164056c92e30f696c30f12da226db2571655289b4d941a99403ba19",
+      "file": "lex-252-2021.html",
+      "title": "#252 - Elon Musk: SpaceX, Mars, Tesla Autopilot, Self-Driving, Robotics, and AI | Lex Fridman Podcast",
+      "pdf_links": [],
+      "transcript_links": []
+    },
+    {
+      "id": "official-index",
+      "requested_url": "https://lexfridman.com/podcast/",
+      "final_url": "https://lexfridman.com/podcast/",
+      "status": 200,
+      "retrieved_at": "2026-11-11T14:15:15.966453+00:00",
+      "mime_type": "text/html",
+      "bytes": 772422,
+      "sha256": "145a5c476fda4a179763ae8359c593b0fadce83ef9eddfe75657f4d28c106a30",
+      "file": "official-index.html",
+      "title": "Lex Fridman Podcast - Lex Fridman",
+      "pdf_links": [],
+      "transcript_links": [
+        {
+          "text": "Transcript",
+          "url": "https://lexfridman.com/elon-musk-and-neuralink-team-transcript"
+        },
+        {
+          "text": "Transcript",
+          "url": "https://lexfridman.com/elon-musk-4-transcript"
+        },
+        {
+          "text": "Transcript",
+          "url": "https://lexfridman.com/elon-musk-and-neuralink-team-transcript"
+        },
+        {
+          "text": "Transcript",
+          "url": "https://lexfridman.com/elon-musk-4-transcript"
+        }
+      ]
+    },
+    {
+      "id": "official-search",
+      "requested_url": "https://lexfridman.com/?s=Elon+Musk+transcript",
+      "final_url": "https://lexfridman.com/?s=Elon+Musk+transcript",
+      "status": 200,
+      "retrieved_at": "2026-11-11T14:15:16.209874+00:00",
+      "mime_type": "text/html",
+      "bytes": 65829,
+      "sha256": "36591ef36faad5bdee6daa8671613165102c85c5ff8832404a8803f5c498e63a",
+      "file": "official-search.html",
+      "title": "You searched for Elon Musk transcript - Lex Fridman",
+      "pdf_links": [],
+      "transcript_links": [
+        {
+          "text": "Skip to content",
+          "url": "https://lexfridman.com/?s=Elon+Musk+transcript#content"
+        },
+        {
+          "text": "← Older posts",
+          "url": "https://lexfridman.com/page/2/?s=Elon+Musk+transcript"
+        },
+        {
+          "text": "Transcript for Elon Musk: Neuralink and the Future of Humanity | Lex Fridman Podcast #438",
+          "url": "https://lexfridman.com/elon-musk-and-neuralink-team-transcript/"
+        },
+        {
+          "text": "August 2, 2024",
+          "url": "https://lexfridman.com/elon-musk-and-neuralink-team-transcript/"
+        },
+        {
+          "text": "Transcript for Elon Musk: War, AI, Aliens, Politics, Physics, Video Games, and Humanity | Lex Fridman Podcast #400",
+          "url": "https://lexfridman.com/elon-musk-4-transcript/"
+        },
+        {
+          "text": "November 10, 2023",
+          "url": "https://lexfridman.com/elon-musk-4-transcript/"
+        },
+        {
+          "text": "← Older posts",
+          "url": "https://lexfridman.com/page/2/?s=Elon+Musk+transcript"
+        }
+      ]
+    },
+    {
+      "id": "lex-049-pdf",
+      "requested_url": "https://lexfridman.com/wordpress/wp-content/uploads/2019/11/elon_musk_lex_fridman_2_transcript.pdf",
+      "final_url": "https://lexfridman.com/wordpress/wp-content/uploads/2019/11/elon_musk_lex_fridman_2_transcript.pdf",
+      "status": 200,
+      "retrieved_at": "2026-11-11T14:15:15.451511+00:00",
+      "mime_type": "application/pdf",
+      "bytes": 144047,
+      "sha256": "999374c2f86694b31824dcc41bcc9f7b9c076a83a17327c6284af348416be6d2",
+      "file": "lex-049-pdf.pdf"
+    },
+    {
+      "id": "official-search-page-2",
+      "requested_url": "https://lexfridman.com/page/2/?s=Elon+Musk+transcript",
+      "final_url": "https://lexfridman.com/page/2/?s=Elon+Musk+transcript",
+      "status": 200,
+      "retrieved_at": "2026-11-11T14:16:03.412563+00:00",
+      "bytes": 66476,
+      "sha256": "5741ba04192650fa18958249b69d0f4ea9573550350b21e571af8f4a50fc68cf",
+      "file": "official-search-page-2.html",
+      "transcript_links": [
+        {
+          "text": "Skip to content",
+          "url": "https://lexfridman.com/page/2/?s=Elon+Musk+transcript#content"
+        },
+        {
+          "text": "← Older posts",
+          "url": "https://lexfridman.com/page/3/?s=Elon+Musk+transcript"
+        },
+        {
+          "text": "Newer posts →",
+          "url": "https://lexfridman.com/?s=Elon+Musk+transcript"
+        },
+        {
+          "text": "← Older posts",
+          "url": "https://lexfridman.com/page/3/?s=Elon+Musk+transcript"
+        },
+        {
+          "text": "Newer posts →",
+          "url": "https://lexfridman.com/?s=Elon+Musk+transcript"
+        }
+      ]
+    }
+  ],
+  "completed_at": "2026-11-11T14:16:36.388157+00:00",
+  "registry_files": {
+    "source-families.json": "efd6bc70fc8b5697c6046b4bc333229b73b5cf086ce25bbbf6b6d25f3c2f2b9a",
+    "split-registration.json": "43f9e23ae610c007c2b84101accbb2231826747bdc77bda7f4cfe484ad9b0a5e"
+  },
+  "event_identities": [
+    {
+      "id": "lex-049-2019",
+      "source_event_id": "lex-049-2019",
+      "event_family_id": "lex-049-2019",
+      "url": "https://lexfridman.com/wordpress/wp-content/uploads/2019/11/elon_musk_lex_fridman_2_transcript.pdf",
+      "landing_page_url": "https://lexfridman.com/elon-musk-2/",
+      "split": "train",
+      "split_reason": "Previously seen summary/training source; eligible for original-dialogue acquisition, never a fresh test."
+    },
+    {
+      "id": "lex-018-2019",
+      "source_event_id": "lex-018-2019",
+      "event_family_id": "lex-018-2019",
+      "url": "https://lexfridman.com/elon-musk/",
+      "landing_page_url": null,
+      "split": "test",
+      "split_reason": "Episode metadata/media known; transcript not acquired or used for tuning."
+    },
+    {
+      "id": "lex-252-2021",
+      "source_event_id": "lex-252-2021",
+      "event_family_id": "lex-252-2021",
+      "url": "https://lexfridman.com/elon-musk-3/",
+      "landing_page_url": null,
+      "split": "test",
+      "split_reason": "Episode metadata/media known; transcript not acquired or used for tuning."
+    }
+  ],
+  "finding": {
+    "roadmap_label": "interview 2 with transcript PDF",
+    "roadmap_link": "https://lexfridman.com/elon-musk-2/",
+    "actual_pdf_event_family": "lex-049-2019",
+    "actual_pdf_split": "train",
+    "reserved_families": [
+      "lex-018-2019",
+      "lex-252-2021"
+    ],
+    "document_first_page_verified": {
+      "method": "PDF skill: pdftoppm first-page visual inspection plus pdftotext",
+      "page_count": 14,
+      "export_date_printed": "2019-11-12",
+      "opening_identifies_second_conversation": true,
+      "explicit_speaker_labels": [
+        "Lex Fridman",
+        "Elon Musk"
+      ],
+      "first_target_speaker_timestamp": "02:10",
+      "human_review_performed": false,
+      "image_sha256": "abb4f8bf584ecaf2d35909d7978babaa27c8d82c7dab26cb617b1cba3e7a61c1",
+      "extracted_text_sha256": "1683098cb8bfba215a67667cfb2d7a00b2091a263d046c38b0b8096d454d5b76"
+    },
+    "decision": "Reject as a fresh evaluation reference: publisher PDF belongs to an already exposed training family, not reserved #18 or #252.",
+    "reserved_episode_pdf_or_transcript_links_found": 0,
+    "fresh_reference_cases": 0,
+    "materialized": false,
+    "parser_changes_needed": false
+  },
+  "search_scope": {
+    "official_pages": [
+      "https://lexfridman.com/elon-musk/",
+      "https://lexfridman.com/elon-musk-2/",
+      "https://lexfridman.com/elon-musk-3/",
+      "https://lexfridman.com/podcast/",
+      "https://lexfridman.com/?s=Elon+Musk+transcript",
+      "https://lexfridman.com/page/2/?s=Elon+Musk+transcript"
+    ],
+    "external_search_queries": [
+      "site:lexfridman.com \"Elon Musk\" \"18\" transcript pdf",
+      "site:lexfridman.com \"elon-musk\" \"pdf\" transcript",
+      "site:lexfridman.com/wordpress/wp-content/uploads \"Elon Musk\" \"transcript\" \"2019\"",
+      "site:lexfridman.com \"Elon Musk\" \"#18\" transcript"
+    ],
+    "limit": "Bounded official-link/search investigation; absence of a discovered link does not establish global nonexistence."
+  },
+  "invariants": {
+    "prior_v1_report_sha256": "3ed7d1ce97e6e1d1ef9dce462c9e7609ddc5c6fac1d3adc8a31f7a8ee9eaa2f4",
+    "v1_overwritten": false,
+    "frozen_registry_modified": false,
+    "families_reassigned": false,
+    "model_outputs_or_comparison_results_read": false,
+    "reference_cases_selected_from_model_results": false,
+    "raw_publisher_text_pdf_distributed": false
+  },
+  "blocker": "No attributable publisher transcript for reserved Lex #18 or #252 was found in the inspected official pages/search. The existing official PDF is #49 and cannot be relabeled as a fresh test."
+}

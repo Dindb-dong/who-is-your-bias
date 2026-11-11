@@ -27,11 +27,53 @@ The language/speech services run separately. A URL containing `127.0.0.1` inside
 
 Heavy model dependencies have separate requirement files so the ordinary studio remains lightweight. Follow [media pipeline](media-pipeline.md) to prepare recordings, extract optional observations, and configure the local reference-voice service. Model downloads and inference can need considerably more memory than the web/API application.
 
-## CI
+## Local validation
 
-The workflow validates locked Python/Node installs, core and optional-lightweight media tests, corpus integrity, retrieval cases, type checking, frontend tests, production build, and desktop/mobile browser tests. Provider integration tests use explicit protocol fakes unless the separately documented inference smoke was run. CI does not download speech/language model weights or use account secrets.
+Use Python 3.12 with uv, Node 24, and FFmpeg on PATH.
 
-Screenshots and traces are retained in the `validation-results` workflow artifact for 14 days. Confirm the actual workflow conclusion on the exact branch head; a configured test is not evidence of a passing run.
+```bash
+make setup
+make test
+npx playwright install --no-shell chromium
+make test-e2e
+```
+
+`make test` checks the Python suite, corpus integrity, historical retrieval regressions, TypeScript, frontend unit tests, production build, and avatar fixtures. Run it before `make test-e2e` so Playwright serves the production build. The local target uses full Chromium and two Playwright workers for the software WebGL tests. Free port 8000 and run the browser suite from a shell without model provider configuration. To use an installed browser, set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` to its executable instead of installing Playwright Chromium.
+
+The retrieval report is written to `reports/local/retrieval.json`. Browser reports, screenshots and failure traces are under `playwright-report/` and `test-results/`. Record the commands and results on the PR head you tested. Model inference is checked separately.
+
+## Apple Silicon text inference
+
+Use a Metal-enabled [llama.cpp](https://github.com/ggml-org/llama.cpp/blob/master/docs/build.md#metal-build) build and confirm `llama-server --list-devices` reports `MTL0`. The local candidate is [Qwen3-4B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507) in the [pinned ggml-org Q8_0 conversion](https://huggingface.co/ggml-org/Qwen3-4B-Instruct-2507-Q8_0-GGUF/blob/e6f794d44f9395d0184a966c27b5ae99ea356fcb/qwen3-4b-instruct-2507-q8_0.gguf) (4.28 GB).
+
+```bash
+mkdir -p models
+model=models/qwen3-4b-instruct-2507-q8_0.gguf
+curl -fL --max-filesize 4280403520 -o "$model.part" \
+  https://huggingface.co/ggml-org/Qwen3-4B-Instruct-2507-Q8_0-GGUF/resolve/e6f794d44f9395d0184a966c27b5ae99ea356fcb/qwen3-4b-instruct-2507-q8_0.gguf &&
+printf '%s  %s\n' ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1 "$model.part" |
+  shasum -a 256 -c &&
+mv "$model.part" "$model"
+```
+
+Run the loopback model server in one terminal. Add `--verbose` to inspect Metal layer offload during startup.
+
+```bash
+llama-server --model models/qwen3-4b-instruct-2507-q8_0.gguf \
+  --alias qwen3-4b-instruct-2507 --host 127.0.0.1 --port 8020 \
+  --device MTL0 --n-gpu-layers 99 --ctx-size 8192 --parallel 1 --threads 4
+```
+
+Run the studio from a second terminal with the existing OpenAI-compatible provider settings.
+
+```bash
+BIAS_LLM_BASE_URL=http://127.0.0.1:8020/v1 \
+BIAS_LLM_MODEL=qwen3-4b-instruct-2507 \
+BIAS_LLM_CONTEXT_WINDOW=8192 \
+BIAS_LLM_MAX_TOKENS=256 make dev
+```
+
+For PyTorch LoRA training, the separate [adapter training command](text-adapter-runtime.md#create-a-compatible-training-run) accepts `--device mps` and probes BF16 forward and backward when `--precision bfloat16` is selected. The GGUF above serves base-model inference. Adapter training uses the pinned Transformers checkpoint.
 
 ## Remaining production work
 

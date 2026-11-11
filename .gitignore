@@ -1,6 +1,8 @@
 .venv/
 .venv-inference/
 .venv-retrieval/
+.venv-model/
+.venv-voice/
 __pycache__/
 *.py[cod]
 .pytest_cache/

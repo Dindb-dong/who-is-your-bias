@@ -171,3 +171,25 @@ def test_versioned_prompts_reproduce_all_published_comparison_hashes(actual_corp
             assert hashlib.sha256(row["raw_response"].encode("utf-8")).hexdigest() == row["raw_response_sha256"]
             checked += 1
     assert checked == 100
+
+
+@pytest.mark.parametrize("snapshot_prompt", [False, True])
+def test_korean_grounded_prompt_preserves_literal_citation_syntax(corpus, snapshot_prompt):
+    from bias.context_budget import ByteBudgetCounter, build_snapshot_messages
+
+    query = "로켓을 왜 재사용해?"
+    hits = Retriever(corpus).search(query)
+    assert hits.hits
+
+    def messages(request):
+        if snapshot_prompt:
+            return build_snapshot_messages(corpus, request, hits, [], None, None,
+                                           context_window=8192, output_tokens=256,
+                                           counter=ByteBudgetCounter()).messages
+        return build_messages(corpus.persona, request, hits, [], corpus.sources)
+
+    korean = messages(ChatRequest(message=query, mode="rag", language="ko"))
+    assert "영문 source:" in korean[0]["content"]
+    assert "[source:rocket-reuse]" in korean[1]["content"]
+    assert "영문 source:" not in messages(ChatRequest(message=query, mode="profile", language="ko"))[0]["content"]
+    assert "영문 source:" not in messages(ChatRequest(message=query, mode="rag", language="en"))[0]["content"]

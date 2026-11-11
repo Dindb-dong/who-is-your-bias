@@ -1,0 +1,203 @@
+{
+  "schema_version": "avatar-acquisition-followup.v1",
+  "checked_at_utc": "2026-11-11T14:05:52.149836+00:00",
+  "scope": "official_public_model_metadata_and_documented_download_endpoints",
+  "package_acquired": false,
+  "download_credentials_available": false,
+  "candidates": [
+    {
+      "candidate_id": "lasqueti-speaking",
+      "model_uid": "8ede6f6ead9b4dc79ea51c050fefb594",
+      "retrieved_at_utc": "2026-11-11T14:05:45.304362+00:00",
+      "metadata_url": "https://api.sketchfab.com/v3/models/8ede6f6ead9b4dc79ea51c050fefb594",
+      "authenticated_request": false,
+      "package_acquired": false,
+      "qualification": "not_inspected",
+      "listing": {
+        "name": "Talking Elon Musk Avatar Character for Narration",
+        "viewerUrl": "https://sketchfab.com/3d-models/talking-elon-musk-avatar-character-for-narration-8ede6f6ead9b4dc79ea51c050fefb594",
+        "createdAt": "2022-02-15T00:18:48.320721",
+        "publishedAt": "2022-02-15T00:28:04.012253",
+        "updatedAt": "2022-07-18T23:16:39.503103",
+        "isDownloadable": true,
+        "isProtected": false,
+        "faceCount": 16668,
+        "vertexCount": 8542,
+        "animationCount": 1,
+        "textureCount": 2,
+        "materialCount": 1,
+        "pbrType": null,
+        "license": {
+          "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution",
+          "fullName": "Creative Commons Attribution",
+          "requirements": "Author must be credited. Commercial use is allowed.",
+          "url": "http://creativecommons.org/licenses/by/4.0/",
+          "slug": "by"
+        },
+        "creator": {
+          "uid": "50505affb6284a18ae87fe009adc7e9d",
+          "username": "LasquetiSpice",
+          "displayName": "LasquetiSpice",
+          "profileUrl": "https://sketchfab.com/LasquetiSpice"
+        }
+      },
+      "metadata_request": {
+        "url": "https://api.sketchfab.com/v3/models/8ede6f6ead9b4dc79ea51c050fefb594",
+        "method": "GET",
+        "status": 200,
+        "server_date": "Wed, 11 Nov 2026 14:04:58 GMT",
+        "content_type": "application/json",
+        "response_sha256": "bb5888bec4e79ebcece5852801b41a33e27e0ab84ddeada149e86a78fbcf6303",
+        "response_bytes": 5947,
+        "saved_response": "lasqueti-speaking.metadata.json"
+      },
+      "download_request": {
+        "url": "https://api.sketchfab.com/v3/models/8ede6f6ead9b4dc79ea51c050fefb594/download",
+        "method": "GET",
+        "status": 401,
+        "server_date": "Wed, 11 Nov 2026 14:05:51 GMT",
+        "content_type": "application/json",
+        "response_sha256": "dbff0849bc109eee7f9b7b1fe12e40fc8add21823b2f1fb600b37f620cbd7862",
+        "response_bytes": 58,
+        "detail": "Authentication credentials were not provided.",
+        "saved_response": "lasqueti-speaking.download-response.json"
+      },
+      "blocker": "download_requires_authenticated_sketchfab_user"
+    },
+    {
+      "candidate_id": "fedenko-low-poly",
+      "model_uid": "e647578649c34e29be81c8f94ecaabd2",
+      "retrieved_at_utc": "2026-11-11T14:05:45.304925+00:00",
+      "metadata_url": "https://api.sketchfab.com/v3/models/e647578649c34e29be81c8f94ecaabd2",
+      "authenticated_request": false,
+      "package_acquired": false,
+      "qualification": "not_inspected",
+      "listing": {
+        "name": "Elon Musk Low Poly",
+        "viewerUrl": "https://sketchfab.com/3d-models/elon-musk-low-poly-e647578649c34e29be81c8f94ecaabd2",
+        "createdAt": "2020-05-24T21:59:26.199823",
+        "publishedAt": "2020-05-24T22:24:18.038658",
+        "updatedAt": "2022-07-20T23:02:16.881626",
+        "isDownloadable": true,
+        "isProtected": false,
+        "faceCount": 25202,
+        "vertexCount": 17719,
+        "animationCount": 1,
+        "textureCount": 3,
+        "materialCount": 10,
+        "pbrType": "metalness",
+        "license": {
+          "uri": "https://api.sketchfab.com/v3/licenses/322a749bcfa841b29dff1e8a1bb74b0b",
+          "label": "CC Attribution",
+          "fullName": "Creative Commons Attribution",
+          "requirements": "Author must be credited. Commercial use is allowed.",
+          "url": "http://creativecommons.org/licenses/by/4.0/",
+          "slug": "by"
+        },
+        "creator": {
+          "uid": "d022616831464394a2d65b118de85964",
+          "username": "vadimfedenko",
+          "displayName": "Vadim Fedenko",
+          "profileUrl": "https://sketchfab.com/vadimfedenko"
+        }
+      },
+      "metadata_request": {
+        "url": "https://api.sketchfab.com/v3/models/e647578649c34e29be81c8f94ecaabd2",
+        "method": "GET",
+        "status": 200,
+        "server_date": "Wed, 11 Nov 2026 14:04:58 GMT",
+        "content_type": "application/json",
+        "response_sha256": "19681d248618ce9d27866883ebc896f5932bb1704cda265a9b9cd76931d3068a",
+        "response_bytes": 5037,
+        "saved_response": "fedenko-low-poly.metadata.json"
+      },
+      "download_request": {
+        "url": "https://api.sketchfab.com/v3/models/e647578649c34e29be81c8f94ecaabd2/download",
+        "method": "GET",
+        "status": 401,
+        "server_date": "Wed, 11 Nov 2026 14:05:51 GMT",
+        "content_type": "application/json",
+        "response_sha256": "dbff0849bc109eee7f9b7b1fe12e40fc8add21823b2f1fb600b37f620cbd7862",
+        "response_bytes": 58,
+        "detail": "Authentication credentials were not provided.",
+        "saved_response": "fedenko-low-poly.download-response.json"
+      },
+      "blocker": "download_requires_authenticated_sketchfab_user"
+    },
+    {
+      "candidate_id": "kingofthepirates-portrait",
+      "model_uid": "8406baac0f634d5084a7a33efa296dd1",
+      "retrieved_at_utc": "2026-11-11T14:05:45.305476+00:00",
+      "metadata_url": "https://api.sketchfab.com/v3/models/8406baac0f634d5084a7a33efa296dd1",
+      "authenticated_request": false,
+      "package_acquired": false,
+      "qualification": "not_inspected",
+      "listing": {
+        "name": "Elon Musk",
+        "viewerUrl": "https://sketchfab.com/3d-models/elon-musk-8406baac0f634d5084a7a33efa296dd1",
+        "createdAt": "2024-06-28T15:10:25.224060",
+        "publishedAt": "2024-06-28T15:35:13.563453",
+        "updatedAt": "2024-06-28T15:38:15.002891",
+        "isDownloadable": true,
+        "isProtected": false,
+        "faceCount": 50000,
+        "vertexCount": 25000,
+        "animationCount": 0,
+        "textureCount": 1,
+        "materialCount": 1,
+        "pbrType": null,
+        "license": {
+          "uri": "https://api.sketchfab.com/v3/licenses/72eb2b1960364637901eacce19283624",
+          "label": "Free Standard",
+          "fullName": "Free Standard",
+          "requirements": "Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works",
+          "url": "https://sketchfab.com/licenses",
+          "slug": "free-st"
+        },
+        "creator": {
+          "uid": "3dce5c7b8e3e4d7f85f91b67a2026fec",
+          "username": "KingOfThePirates",
+          "displayName": "ᗰOᑎKEY ᗪ. ᒪᑌᖴᖴY",
+          "profileUrl": "https://sketchfab.com/KingOfThePirates"
+        }
+      },
+      "metadata_request": {
+        "url": "https://api.sketchfab.com/v3/models/8406baac0f634d5084a7a33efa296dd1",
+        "method": "GET",
+        "status": 200,
+        "server_date": "Wed, 11 Nov 2026 14:04:58 GMT",
+        "content_type": "application/json",
+        "response_sha256": "81ca30bdc978c4237e857c22a54f3c723ad997c8b688c1febfe9a5db66ac4b4e",
+        "response_bytes": 6447,
+        "saved_response": "kingofthepirates-portrait.metadata.json"
+      },
+      "download_request": {
+        "url": "https://api.sketchfab.com/v3/models/8406baac0f634d5084a7a33efa296dd1/download",
+        "method": "GET",
+        "status": 401,
+        "server_date": "Wed, 11 Nov 2026 14:05:52 GMT",
+        "content_type": "application/json",
+        "response_sha256": "dbff0849bc109eee7f9b7b1fe12e40fc8add21823b2f1fb600b37f620cbd7862",
+        "response_bytes": 58,
+        "detail": "Authentication credentials were not provided.",
+        "saved_response": "kingofthepirates-portrait.download-response.json"
+      },
+      "blocker": "download_requires_authenticated_sketchfab_user"
+    }
+  ],
+  "files": {
+    "fedenko-low-poly.download-response.json": "dbff0849bc109eee7f9b7b1fe12e40fc8add21823b2f1fb600b37f620cbd7862",
+    "fedenko-low-poly.metadata.json": "19681d248618ce9d27866883ebc896f5932bb1704cda265a9b9cd76931d3068a",
+    "kingofthepirates-portrait.download-response.json": "dbff0849bc109eee7f9b7b1fe12e40fc8add21823b2f1fb600b37f620cbd7862",
+    "kingofthepirates-portrait.metadata.json": "81ca30bdc978c4237e857c22a54f3c723ad997c8b688c1febfe9a5db66ac4b4e",
+    "lasqueti-speaking.download-response.json": "dbff0849bc109eee7f9b7b1fe12e40fc8add21823b2f1fb600b37f620cbd7862",
+    "lasqueti-speaking.metadata.json": "bb5888bec4e79ebcece5852801b41a33e27e0ab84ddeada149e86a78fbcf6303"
+  },
+  "limitations": [
+    "Metadata is a listing/API claim, not a mesh, morph, skin, texture or runtime inspection.",
+    "Public model metadata does not authorize unauthenticated package access.",
+    "No signup, purchase, seller contact, session extraction or viewer asset extraction was attempted.",
+    "A current complete selected-item license and actual package must be retained at authenticated acquisition."
+  ]
+}

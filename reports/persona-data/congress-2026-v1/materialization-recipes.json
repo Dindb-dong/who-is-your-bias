@@ -1,0 +1,1131 @@
+{
+  "schema_version": "persona-materialization.v1",
+  "parser_version": "original-dialogue-adapters.v1",
+  "hash_definition": "Registry, split, recipe and non-TED transcript digests use sorted compact UTF-8 JSON with ensure_ascii=False; source artifacts and original text use exact bytes.",
+  "split_registration_sha256": "66215bda8f2a4e9c2808a21e3933f8e717a8ed27c7a1d0061409a9f1e3006918",
+  "source_registry_sha256": "019683ba595e2638a5f4ea2fb8816c029a875f58c4e5883152f05a9157ea8bb9",
+  "sources": [
+    {
+      "source_id": "senate-launch-2014",
+      "event_family_id": "senate-launch-2014",
+      "status": "extracted",
+      "source_url": "https://www.govinfo.gov/content/pkg/CHRG-113shrg49104594/html/CHRG-113shrg49104594.htm",
+      "published_at": "2014-03-05",
+      "acquired_at": "2026-11-11T13:56:49.496376+00:00",
+      "artifact_sha256": "50d63a0e68e16c9b8850fc9d8805698971789ea65820b399b0be619d7289e7ce",
+      "transcript_sha256": "e6f535c8b14e96d0aac4802574ab5b8efecb09c6236d2840fcfb045733c58593",
+      "attributed_turns": 85,
+      "candidate_exchanges": 17,
+      "accepted_exchanges": 15,
+      "target_speaker_words": 1175,
+      "adapter_version": "govinfo-oral-discussion.v1",
+      "adapter_sha256": "c637a3ce69f9d163ba33d20074332aece2f02ba25b65b542bc071defb21080c4",
+      "extraction_audit": {
+        "window_pre_lines": {
+          "first_included": 2780,
+          "last_included": 3633,
+          "stop_exclusive": 3634
+        },
+        "window_sha256": "8b8c9c5820f4020e05f328eadf9d4bc33d4d93ab14c00f84f56c7f095c36b385",
+        "excluded_prefix_sha256": "e62133da3301122aa5d58fd7e914d0f486729ba15451480fbc644f39d3bac7d7",
+        "excluded_suffix_sha256": "489c67c6919496ac3ddff9126b8b3821001dcd077b58238e4f16bd5e87a1fa75",
+        "excluded_blocks": [
+          {
+            "pre_line": 2795,
+            "kind": "editorial_heading",
+            "text_sha256": "a91d239bd9ba5030e3914892d1e625b919c2d675406e2fa00a2075e37ddf0229"
+          },
+          {
+            "pre_line": 2859,
+            "kind": "editorial_heading",
+            "text_sha256": "595431cb6f6463789abb0bafe0aad4686a2f8be1af74a7ef1d00bb023efd1ff2"
+          },
+          {
+            "pre_line": 2897,
+            "kind": "editorial_heading",
+            "text_sha256": "9e95a099f0d82e1509eb3a990052073e2aad90130b4e33c004a87388dde38a45"
+          },
+          {
+            "pre_line": 2967,
+            "kind": "editorial_heading",
+            "text_sha256": "caca87b00f4f03dd0c779b13612a40dbba08410793b675aa6a4ccfe096922ac6"
+          },
+          {
+            "pre_line": 3114,
+            "kind": "written_insertion_boundary",
+            "text_sha256": "b64f35a2615879d3e0273929110e1adcf042c01d957ca861771eefd96d0f46a8"
+          },
+          {
+            "pre_line": 3117,
+            "kind": "written_insertion_boundary",
+            "text_sha256": "5eb57d972c9c6a2aabdad7e35b11728c502e097a79ca265e279a0c29ab1e4472"
+          },
+          {
+            "pre_line": 3135,
+            "kind": "editorial_heading",
+            "text_sha256": "99b1f667c9b02a81a0ff283deee3eef4b55a797b79ff79d2bc195d31193d39fc"
+          },
+          {
+            "pre_line": 3174,
+            "kind": "editorial_heading",
+            "text_sha256": "dd3e4348d5e5d56eb29167229b1adcbde2d3bdec57dbdb2b997a4041c30a1156"
+          },
+          {
+            "pre_line": 3214,
+            "kind": "editorial_heading",
+            "text_sha256": "b38aa1d499e20d288a6f38da7b8fa966acbe65a7be5f5e430e6cc7cf9b2979d3"
+          },
+          {
+            "pre_line": 3255,
+            "kind": "editorial_heading",
+            "text_sha256": "686e237744348f4a192f2571904943dab770ec078d21163aa183465d4fcbc89f"
+          },
+          {
+            "pre_line": 3335,
+            "kind": "editorial_heading",
+            "text_sha256": "8542e08e30151905d2ec2f227b4783452ae93c7c7f3554daefa4c3415c8f8bdf"
+          }
+        ],
+        "projection_rule": "adjacent_direct_committee_question_with_question_mark_then_labeled_musk_turn",
+        "interrupted_answers": "retained_as_excerpts_ineligible_for_style",
+        "text_normalization": "collapse_whitespace_only; retain_published_spelling_and_hard_wrap_hyphens",
+        "written_testimony_and_appendices_projected": false,
+        "human_review_completed": false
+      }
+    },
+    {
+      "source_id": "house-space-cooperation-2004",
+      "event_family_id": "house-space-cooperation-2004",
+      "status": "extracted",
+      "source_url": "https://www.govinfo.gov/content/pkg/CHRG-108hhrg92514/html/CHRG-108hhrg92514.htm",
+      "published_at": "2004-03-18",
+      "acquired_at": "2026-11-11T13:56:57.017361+00:00",
+      "artifact_sha256": "d10833cf833e41f5abdd1afef678b2fa0b4f2fcdbc027bb565e7b9bdabc55b68",
+      "transcript_sha256": "3eb870b702aa548181f468a5ecc7f211470d8277b800e8054e65378bffc8ca20",
+      "attributed_turns": 168,
+      "candidate_exchanges": 15,
+      "accepted_exchanges": 7,
+      "target_speaker_words": 700,
+      "adapter_version": "govinfo-oral-discussion.v1",
+      "adapter_sha256": "c637a3ce69f9d163ba33d20074332aece2f02ba25b65b542bc071defb21080c4",
+      "extraction_audit": {
+        "window_pre_lines": {
+          "first_included": 2520,
+          "last_included": 3639,
+          "stop_exclusive": 3640
+        },
+        "window_sha256": "d4abdb19f1901c5563a15d546bf2cfdc5cae37f20436902b3cb752404d21e5d4",
+        "excluded_prefix_sha256": "f838fd8903cebba3a898220cedc1758dbcc29ca36c4de7fc85fefbe25df0073a",
+        "excluded_suffix_sha256": "32b790086e54d23c4d4293422d1b696f79c8f4ed7af87422d77d49852c07458a",
+        "excluded_blocks": [
+          {
+            "pre_line": 2756,
+            "kind": "editorial_heading",
+            "text_sha256": "b1f0441be00ca60898ec054fdd4fe84249e5b546b031bba963b4f6ee0cbca6d1"
+          },
+          {
+            "pre_line": 2757,
+            "kind": "editorial_heading",
+            "text_sha256": "27bd063859de5128b0daa78e6f186066a0bb7f0b0f5945445c031a1f5ab69ac3"
+          },
+          {
+            "pre_line": 2847,
+            "kind": "editorial_heading",
+            "text_sha256": "63c69a14d6c86e58bbb42fb6b39f790cc441e943fe493acd3ddbeac08c3bd94c"
+          },
+          {
+            "pre_line": 2880,
+            "kind": "editorial_heading",
+            "text_sha256": "8d88dfd1dfabd467b6faac9320b20e9206664dfc2978b968c8821a6a8e7c84fa"
+          },
+          {
+            "pre_line": 2925,
+            "kind": "editorial_heading",
+            "text_sha256": "b2d575e1db11371c62e7b1677ed08f17b0c7c778d00621d7446f6379272bc827"
+          },
+          {
+            "pre_line": 3025,
+            "kind": "editorial_heading",
+            "text_sha256": "b182401c3a65ddfc4d6058894efa80422af0921bbdfe66e3c1899d7c2f439445"
+          },
+          {
+            "pre_line": 3071,
+            "kind": "editorial_heading",
+            "text_sha256": "46da9363798f74661424983d34669c2d652332099fcd93906d84e640405d342f"
+          },
+          {
+            "pre_line": 3119,
+            "kind": "editorial_heading",
+            "text_sha256": "25dbe9ae6108cc38b57e1676252b1370f887e885550ee693e21802a3f32f2235"
+          },
+          {
+            "pre_line": 3246,
+            "kind": "editorial_heading",
+            "text_sha256": "988312cd0af0e5df9bd38f13d849af5d20567528a0c36440cbf1ace1bcac56be"
+          },
+          {
+            "pre_line": 3350,
+            "kind": "editorial_heading",
+            "text_sha256": "45cd0103c25bfbf6cef52581d2b428a0a3a02ac8629e7366e5050cfb12881039"
+          },
+          {
+            "pre_line": 3364,
+            "kind": "editorial_heading",
+            "text_sha256": "25dbe9ae6108cc38b57e1676252b1370f887e885550ee693e21802a3f32f2235"
+          },
+          {
+            "pre_line": 3400,
+            "kind": "editorial_heading",
+            "text_sha256": "af00f56d93eb2c733cfaad8b12a3e4abf8b5fe3b3fe63ba843a195e48323228a"
+          },
+          {
+            "pre_line": 3470,
+            "kind": "editorial_heading",
+            "text_sha256": "701febbfe98adbb85a9fef1f254baae3e8c800d32e4b625e59769016ccf18f67"
+          },
+          {
+            "pre_line": 3502,
+            "kind": "editorial_heading",
+            "text_sha256": "f8b382e8558271341799cf71a56ef936e113736a4e64cab6fa08c6d5859ea1cc"
+          },
+          {
+            "pre_line": 3550,
+            "kind": "editorial_heading",
+            "text_sha256": "bb0e391ad1f5e9aea834803d78396f6a067c5eb99e269baf1a66db91afc4112c"
+          },
+          {
+            "pre_line": 3581,
+            "kind": "editorial_heading",
+            "text_sha256": "ffa7675cc6fcf8e678ee4137ba32cd4d3f7f5363ec3e0228f7992c65100a32b9"
+          },
+          {
+            "pre_line": 3582,
+            "kind": "editorial_heading",
+            "text_sha256": "021381b018dea873bdd1bca8c9f880d2f1dd615359badb4c8b8f67bec7f34760"
+          }
+        ],
+        "projection_rule": "adjacent_direct_committee_question_with_question_mark_then_labeled_musk_turn",
+        "interrupted_answers": "retained_as_excerpts_ineligible_for_style",
+        "text_normalization": "collapse_whitespace_only; retain_published_spelling_and_hard_wrap_hyphens",
+        "written_testimony_and_appendices_projected": false,
+        "human_review_completed": false
+      }
+    },
+    {
+      "source_id": "senate-future-launch-2004",
+      "event_family_id": "senate-future-launch-2004",
+      "status": "extracted",
+      "source_url": "https://www.govinfo.gov/content/pkg/CHRG-108shrg20624/html/CHRG-108shrg20624.htm",
+      "published_at": "2004-05-05",
+      "acquired_at": "2026-11-11T13:57:03.136290+00:00",
+      "artifact_sha256": "afe10e5b07293c05edf212f1e29df22b0e02f04fdf5488d16cf60102752b4700",
+      "transcript_sha256": "797486a15577c1a307efccd7f7ec8955739b878652533872db725a68f69cb2cc",
+      "attributed_turns": 30,
+      "candidate_exchanges": 1,
+      "accepted_exchanges": 1,
+      "target_speaker_words": 88,
+      "adapter_version": "govinfo-oral-discussion.v1",
+      "adapter_sha256": "c637a3ce69f9d163ba33d20074332aece2f02ba25b65b542bc071defb21080c4",
+      "extraction_audit": {
+        "window_pre_lines": {
+          "first_included": 2868,
+          "last_included": 3006,
+          "stop_exclusive": 3007
+        },
+        "window_sha256": "c82e7ce0725a886b1d12e2bff35b58bc6f339da01368018f1643259401d3d5f8",
+        "excluded_prefix_sha256": "9e84f9bd86492bc506aee66439a0fdfbdc271a5c7a42a94e7b129df2f41b95cf",
+        "excluded_suffix_sha256": "b8fbb9eb25f6731ba0945b8625b1a2c53eab4751962d810243cab651bcab7fe9",
+        "excluded_blocks": [],
+        "projection_rule": "adjacent_direct_committee_question_with_question_mark_then_labeled_musk_turn",
+        "interrupted_answers": "retained_as_excerpts_ineligible_for_style",
+        "text_normalization": "collapse_whitespace_only; retain_published_spelling_and_hard_wrap_hyphens",
+        "written_testimony_and_appendices_projected": false,
+        "human_review_completed": false
+      }
+    },
+    {
+      "source_id": "house-commercial-space-2005",
+      "event_family_id": "house-commercial-space-2005",
+      "status": "extracted",
+      "source_url": "https://www.govinfo.gov/content/pkg/CHRG-109hhrg20541/html/CHRG-109hhrg20541.htm",
+      "published_at": "2005-04-20",
+      "acquired_at": "2026-11-11T13:57:08.846132+00:00",
+      "artifact_sha256": "58d2de1eefb2966c940b89a8ea71af9a1a2448276b3d0be85ff69e1e033db1b4",
+      "transcript_sha256": "a676e6a62fe9a1f4bcc45ee3b7954751e5488261d65df89387b6eb94bd41f38a",
+      "attributed_turns": 35,
+      "candidate_exchanges": 8,
+      "accepted_exchanges": 5,
+      "target_speaker_words": 907,
+      "adapter_version": "govinfo-oral-discussion.v1",
+      "adapter_sha256": "c637a3ce69f9d163ba33d20074332aece2f02ba25b65b542bc071defb21080c4",
+      "extraction_audit": {
+        "window_pre_lines": {
+          "first_included": 4263,
+          "last_included": 4565,
+          "stop_exclusive": 4566
+        },
+        "window_sha256": "f60703b0e6a6ea49f3e5f7a0105dca8dbd9df8db5ce89458cdb400617acbaf0b",
+        "excluded_prefix_sha256": "50bd39b812b3931146e70ffebf9a5fc164dfa9953d818ffefe22d6c5e30e0ac3",
+        "excluded_suffix_sha256": "17330d41b38e7c97db9b67b2dc02824084bd32f8f12a8947f7451962fe36ce51",
+        "excluded_blocks": [
+          {
+            "pre_line": 4460,
+            "kind": "editorial_heading",
+            "text_sha256": "79eda09d567fc1620e472898d6cd4a287aee88e39bb84064aca485d5b87d5293"
+          }
+        ],
+        "projection_rule": "adjacent_direct_committee_question_with_question_mark_then_labeled_musk_turn",
+        "interrupted_answers": "retained_as_excerpts_ineligible_for_style",
+        "text_normalization": "collapse_whitespace_only; retain_published_spelling_and_hard_wrap_hyphens",
+        "written_testimony_and_appendices_projected": false,
+        "human_review_completed": false
+      }
+    },
+    {
+      "source_id": "senate-advanced-energy-2007",
+      "event_family_id": "senate-advanced-energy-2007",
+      "status": "extracted",
+      "source_url": "https://www.govinfo.gov/content/pkg/CHRG-110shrg36077/html/CHRG-110shrg36077.htm",
+      "published_at": "2007-03-07",
+      "acquired_at": "2026-11-11T13:57:15.192121+00:00",
+      "artifact_sha256": "b0133085394b7e04c7bf1831c8c24bb0b84b6f51e7c40570a78bd3fd92e17232",
+      "transcript_sha256": "1bd7857d24dd57b162fb315cf0652867d0056e1917162fc248f2222ea8dc314f",
+      "attributed_turns": 160,
+      "candidate_exchanges": 12,
+      "accepted_exchanges": 8,
+      "target_speaker_words": 930,
+      "adapter_version": "govinfo-oral-discussion.v1",
+      "adapter_sha256": "c637a3ce69f9d163ba33d20074332aece2f02ba25b65b542bc071defb21080c4",
+      "extraction_audit": {
+        "window_pre_lines": {
+          "first_included": 2293,
+          "last_included": 3572,
+          "stop_exclusive": 3573
+        },
+        "window_sha256": "0f6e626419cc02b7e9fc9dc0ab6ff11e8c37491c9e3fbbe711d9a686821dbc0e",
+        "excluded_prefix_sha256": "63d02cb2fe432f9bd8a81116ba35241c826ab89bae3e46d7dd365209f8d8fd83",
+        "excluded_suffix_sha256": "b44d49ac86796ff69c2b613473aa07c42be8e20c2a1b30742b6c8043ecf29e70",
+        "excluded_blocks": [
+          {
+            "pre_line": 3101,
+            "kind": "stage_direction",
+            "text_sha256": "69f58162b58c4ba8981e3b0753c2ac97954615cb4181471519e2cb4c4b7f0050"
+          }
+        ],
+        "projection_rule": "adjacent_direct_committee_question_with_question_mark_then_labeled_musk_turn",
+        "interrupted_answers": "retained_as_excerpts_ineligible_for_style",
+        "text_normalization": "collapse_whitespace_only; retain_published_spelling_and_hard_wrap_hyphens",
+        "written_testimony_and_appendices_projected": false,
+        "human_review_completed": false
+      }
+    },
+    {
+      "source_id": "house-commercial-crew-2011",
+      "event_family_id": "house-commercial-crew-2011",
+      "status": "extracted",
+      "source_url": "https://www.govinfo.gov/content/pkg/CHRG-112hhrg70800/html/CHRG-112hhrg70800.htm",
+      "published_at": "2011-10-26",
+      "acquired_at": "2026-11-11T13:57:20.848463+00:00",
+      "artifact_sha256": "c2bee57ee1f9d8fffadca86fa231b032b6669e62247e4034499a91a5dbd09954",
+      "transcript_sha256": "eb4ebcd10c53f76e40e5c65c014d56f5a028be2eadeb5f19db3561a467fd526c",
+      "attributed_turns": 130,
+      "candidate_exchanges": 17,
+      "accepted_exchanges": 5,
+      "target_speaker_words": 1762,
+      "adapter_version": "govinfo-oral-discussion.v1",
+      "adapter_sha256": "c637a3ce69f9d163ba33d20074332aece2f02ba25b65b542bc071defb21080c4",
+      "extraction_audit": {
+        "window_pre_lines": {
+          "first_included": 2626,
+          "last_included": 3864,
+          "stop_exclusive": 3865
+        },
+        "window_sha256": "e6b078b89ff765c6596201d6fc48a566507e39688be8141908d472c024ac7348",
+        "excluded_prefix_sha256": "4ff2099924a5e3caea6f1ec65e3623f36a68a8371bda5a2c6d4b0f1d4766332c",
+        "excluded_suffix_sha256": "f32d785807f43808722816bffcdaf52fed24f444e522ef0a3285ef4e40d0ad6e",
+        "excluded_blocks": [
+          {
+            "pre_line": 2963,
+            "kind": "written_insertion_boundary",
+            "text_sha256": "51cd5a7de1cdb95fecaa1dffe2843825574d5d0bc2f62d4fef1e484937e1bc14"
+          }
+        ],
+        "projection_rule": "adjacent_direct_committee_question_with_question_mark_then_labeled_musk_turn",
+        "interrupted_answers": "retained_as_excerpts_ineligible_for_style",
+        "text_normalization": "collapse_whitespace_only; retain_published_spelling_and_hard_wrap_hyphens",
+        "written_testimony_and_appendices_projected": false,
+        "human_review_completed": false
+      }
+    }
+  ],
+  "selections": [
+    {
+      "id": "qa26-senate-launch-2014-turn-l02861",
+      "source_id": "senate-launch-2014",
+      "question_sha256": "a4ed38221b6fa7fef467c2ec2694531496ce52dee88005dfd2a066e73303b6b6",
+      "answer_sha256": "b8345d686fff2c635b21325455d349d18e479609f037c129e770668fcd026b6a",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l02861"
+        ],
+        "answer_cue_ids": [
+          "turn-l02876"
+        ],
+        "context_cue_ids": [
+          "turn-l02832"
+        ],
+        "transcript_sha256": "e6f535c8b14e96d0aac4802574ab5b8efecb09c6236d2840fcfb045733c58593"
+      }
+    },
+    {
+      "id": "qa26-senate-launch-2014-turn-l02963",
+      "source_id": "senate-launch-2014",
+      "question_sha256": "c53543f305c69b8b59f2b675a39f814ee8684aaa972c7ae6d0bc019fddcb62cd",
+      "answer_sha256": "2f3077a2c4101e04e84968c7b601b525d1b0fb48e0e66fba06342292b6ac6d5b",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l02963"
+        ],
+        "answer_cue_ids": [
+          "turn-l02976"
+        ],
+        "context_cue_ids": [],
+        "transcript_sha256": "e6f535c8b14e96d0aac4802574ab5b8efecb09c6236d2840fcfb045733c58593"
+      }
+    },
+    {
+      "id": "qa26-senate-launch-2014-turn-l03041",
+      "source_id": "senate-launch-2014",
+      "question_sha256": "48fcfb6aa0a47b0bc5d5eadb0d4fb69bc9099218ed538252b8b5ef1cde7f19f1",
+      "answer_sha256": "2adda38058f30b3c1b911a61fdc1d52eb9d83e2833b071b0ca08e37fee2b8d67",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03041"
+        ],
+        "answer_cue_ids": [
+          "turn-l03043"
+        ],
+        "context_cue_ids": [
+          "turn-l02996"
+        ],
+        "transcript_sha256": "e6f535c8b14e96d0aac4802574ab5b8efecb09c6236d2840fcfb045733c58593"
+      }
+    },
+    {
+      "id": "qa26-senate-launch-2014-turn-l03120",
+      "source_id": "senate-launch-2014",
+      "question_sha256": "b5b71c82caaa7c7e44000efc7e89cc297f6518401a58f047710201e5c72db787",
+      "answer_sha256": "01bdd3fa7039c818ed22c388a66b40d8c9cf813b8efbacd0e67e404d5279db28",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03120"
+        ],
+        "answer_cue_ids": [
+          "turn-l03143"
+        ],
+        "context_cue_ids": [],
+        "transcript_sha256": "e6f535c8b14e96d0aac4802574ab5b8efecb09c6236d2840fcfb045733c58593"
+      }
+    },
+    {
+      "id": "qa26-senate-launch-2014-turn-l03157",
+      "source_id": "senate-launch-2014",
+      "question_sha256": "0d00dfc84c250bf58e4ee0cd711fa7c8637ff0a8dc3dbb48efe91c51b13041c6",
+      "answer_sha256": "d68209891e5a30122aa50b1fb999a686d810b78065b150b22576aeb00b7b7fef",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03157"
+        ],
+        "answer_cue_ids": [
+          "turn-l03162"
+        ],
+        "context_cue_ids": [
+          "turn-l03143"
+        ],
+        "transcript_sha256": "e6f535c8b14e96d0aac4802574ab5b8efecb09c6236d2840fcfb045733c58593"
+      }
+    },
+    {
+      "id": "qa26-senate-launch-2014-turn-l03164",
+      "source_id": "senate-launch-2014",
+      "question_sha256": "2eb83802a4c8bd7c51545c731baf47579300a19e1188f19afe94beaf3d98d23e",
+      "answer_sha256": "66513edd9fb8f6beb784dd3f0d0f3f66998b220e6f2622562ac8d9f6bacaec3e",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03164"
+        ],
+        "answer_cue_ids": [
+          "turn-l03166"
+        ],
+        "context_cue_ids": [
+          "turn-l03162"
+        ],
+        "transcript_sha256": "e6f535c8b14e96d0aac4802574ab5b8efecb09c6236d2840fcfb045733c58593"
+      }
+    },
+    {
+      "id": "qa26-senate-launch-2014-turn-l03172",
+      "source_id": "senate-launch-2014",
+      "question_sha256": "62a598442d25d1664d76d9f6e6482134219f7b9b08217eaeb8ed0f68c202d37e",
+      "answer_sha256": "9e2354ff42cca0a36eeff9a3efcf3323cc7564a9db1ee4a5c771b602a5a710ff",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03172"
+        ],
+        "answer_cue_ids": [
+          "turn-l03191"
+        ],
+        "context_cue_ids": [],
+        "transcript_sha256": "e6f535c8b14e96d0aac4802574ab5b8efecb09c6236d2840fcfb045733c58593"
+      }
+    },
+    {
+      "id": "qa26-senate-launch-2014-turn-l03207",
+      "source_id": "senate-launch-2014",
+      "question_sha256": "b06fc0896a2a933215d182fb5a0571c15b99a1b1a8b01acae096427129e92313",
+      "answer_sha256": "fceee6f367dd6797bd992cbf518c6c4b48a2d30a5ef68a1341af3318f077bdb0",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03207"
+        ],
+        "answer_cue_ids": [
+          "turn-l03210"
+        ],
+        "context_cue_ids": [
+          "turn-l03191"
+        ],
+        "transcript_sha256": "e6f535c8b14e96d0aac4802574ab5b8efecb09c6236d2840fcfb045733c58593"
+      }
+    },
+    {
+      "id": "qa26-senate-launch-2014-turn-l03257",
+      "source_id": "senate-launch-2014",
+      "question_sha256": "e540242b3af8bac4d6f630a702972caab96cf5ea75f032a37b93d94ba092b288",
+      "answer_sha256": "efd492eac94d7acadc89c1063067c5b963056d0ef71e3725243eeca4b7926b4f",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03257"
+        ],
+        "answer_cue_ids": [
+          "turn-l03259"
+        ],
+        "context_cue_ids": [
+          "turn-l03225"
+        ],
+        "transcript_sha256": "e6f535c8b14e96d0aac4802574ab5b8efecb09c6236d2840fcfb045733c58593"
+      }
+    },
+    {
+      "id": "qa26-senate-launch-2014-turn-l03273",
+      "source_id": "senate-launch-2014",
+      "question_sha256": "5f72ef3157b271066cda45b8e381b8b6091a0e2353439728545ecc1f7506c312",
+      "answer_sha256": "49452daf57f0738630e31bf8175df05a5a849fdafebe50a3bb3891e8a00269f9",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03273"
+        ],
+        "answer_cue_ids": [
+          "turn-l03280"
+        ],
+        "context_cue_ids": [
+          "turn-l03265"
+        ],
+        "transcript_sha256": "e6f535c8b14e96d0aac4802574ab5b8efecb09c6236d2840fcfb045733c58593"
+      }
+    },
+    {
+      "id": "qa26-senate-launch-2014-turn-l03282",
+      "source_id": "senate-launch-2014",
+      "question_sha256": "2e1224652a1af8e456ef214032a77b9f9131d50d0ab448c8bde838d0c4e6d810",
+      "answer_sha256": "cd5592e5e3140daa2f3fe0541c004877a65933bc07d69dbec8e3a441e7877c90",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03282"
+        ],
+        "answer_cue_ids": [
+          "turn-l03284"
+        ],
+        "context_cue_ids": [
+          "turn-l03280"
+        ],
+        "transcript_sha256": "e6f535c8b14e96d0aac4802574ab5b8efecb09c6236d2840fcfb045733c58593"
+      }
+    },
+    {
+      "id": "qa26-senate-launch-2014-turn-l03285",
+      "source_id": "senate-launch-2014",
+      "question_sha256": "87d40f9fea8efa5816fadcdf7429c9c649b759342bd623c286e29e1f2e467ac9",
+      "answer_sha256": "61c33a1cce303e277900293b4247f69de3fa57c0aa7c3ee4f512e95db64f1582",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03285"
+        ],
+        "answer_cue_ids": [
+          "turn-l03286"
+        ],
+        "context_cue_ids": [
+          "turn-l03284"
+        ],
+        "transcript_sha256": "e6f535c8b14e96d0aac4802574ab5b8efecb09c6236d2840fcfb045733c58593"
+      }
+    },
+    {
+      "id": "qa26-senate-launch-2014-turn-l03329",
+      "source_id": "senate-launch-2014",
+      "question_sha256": "7ed71c94307496a85989dea29bf3def72d82f3a6cef21757dc6452d4dbc6b3e6",
+      "answer_sha256": "e8773fd3c397b9289df4afc47fb6dab55761c4943b71a483af3965ead524def7",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03329"
+        ],
+        "answer_cue_ids": [
+          "turn-l03362"
+        ],
+        "context_cue_ids": [
+          "turn-l03327"
+        ],
+        "transcript_sha256": "e6f535c8b14e96d0aac4802574ab5b8efecb09c6236d2840fcfb045733c58593"
+      }
+    },
+    {
+      "id": "qa26-senate-launch-2014-turn-l03502",
+      "source_id": "senate-launch-2014",
+      "question_sha256": "6a47b8c55651726f373289b5b978fac6a2c308fd51a4c1f1e91c028eb1a9a8b0",
+      "answer_sha256": "85f0d7581dc1b2cb8dad5495b77845821be23ec3f60a21410f2569e39610b62f",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03502"
+        ],
+        "answer_cue_ids": [
+          "turn-l03504"
+        ],
+        "context_cue_ids": [
+          "turn-l03497"
+        ],
+        "transcript_sha256": "e6f535c8b14e96d0aac4802574ab5b8efecb09c6236d2840fcfb045733c58593"
+      }
+    },
+    {
+      "id": "qa26-senate-launch-2014-turn-l03561",
+      "source_id": "senate-launch-2014",
+      "question_sha256": "667c4ddf13355d3471ac61c9e08e9508565fd513bca082a8996ebfc4787b8aa1",
+      "answer_sha256": "fa67c9ca10204af9f69a03b406c207b1c13b6a3e49bf65fc26342f5792aa15ee",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03561"
+        ],
+        "answer_cue_ids": [
+          "turn-l03563"
+        ],
+        "context_cue_ids": [
+          "turn-l03549"
+        ],
+        "transcript_sha256": "e6f535c8b14e96d0aac4802574ab5b8efecb09c6236d2840fcfb045733c58593"
+      }
+    },
+    {
+      "id": "qa26-house-space-cooperation-2004-turn-l02644",
+      "source_id": "house-space-cooperation-2004",
+      "question_sha256": "6406ff9c33c9ec0360d182c68fcf9a9f03237ae9ae63ee1087884ce74bbb750a",
+      "answer_sha256": "5c822b00c227cb259832de8b1d2e25b28795cff37acedfaf62f22261d36143ab",
+      "completeness": "excerpt",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l02644"
+        ],
+        "answer_cue_ids": [
+          "turn-l02646"
+        ],
+        "context_cue_ids": [
+          "turn-l02640"
+        ],
+        "transcript_sha256": "3eb870b702aa548181f468a5ecc7f211470d8277b800e8054e65378bffc8ca20"
+      }
+    },
+    {
+      "id": "qa26-house-space-cooperation-2004-turn-l02656",
+      "source_id": "house-space-cooperation-2004",
+      "question_sha256": "91a14f7662872bde2f06923cba97aff4e98a3bde11b3675170e1325626910d3b",
+      "answer_sha256": "be5318af97decf6826f5d03b076f7a55ac12297df7f60365e66cb09eb8c04b97",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l02656"
+        ],
+        "answer_cue_ids": [
+          "turn-l02659"
+        ],
+        "context_cue_ids": [
+          "turn-l02646"
+        ],
+        "transcript_sha256": "3eb870b702aa548181f468a5ecc7f211470d8277b800e8054e65378bffc8ca20"
+      }
+    },
+    {
+      "id": "qa26-house-space-cooperation-2004-turn-l02660",
+      "source_id": "house-space-cooperation-2004",
+      "question_sha256": "fd5b5814290c01b8582572da4c8fbf97c596fe101fd3af968a36f83f6b31eba4",
+      "answer_sha256": "3e94f2b161c19d31235193e85632d8960ebf5b5de174880ed1630652490d4089",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l02660"
+        ],
+        "answer_cue_ids": [
+          "turn-l02662"
+        ],
+        "context_cue_ids": [
+          "turn-l02659"
+        ],
+        "transcript_sha256": "3eb870b702aa548181f468a5ecc7f211470d8277b800e8054e65378bffc8ca20"
+      }
+    },
+    {
+      "id": "qa26-house-space-cooperation-2004-turn-l02703",
+      "source_id": "house-space-cooperation-2004",
+      "question_sha256": "602fd60b9480e00e2d6fd71438fde7443728df8e196fa1901d095dce2ab8bcb7",
+      "answer_sha256": "d3c716d6a9421d1dc7ab6c5d7b317ce405bbca289aecee50d24b5cc1a82eff4e",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l02703"
+        ],
+        "answer_cue_ids": [
+          "turn-l02705"
+        ],
+        "context_cue_ids": [
+          "turn-l02702"
+        ],
+        "transcript_sha256": "3eb870b702aa548181f468a5ecc7f211470d8277b800e8054e65378bffc8ca20"
+      }
+    },
+    {
+      "id": "qa26-house-space-cooperation-2004-turn-l03058",
+      "source_id": "house-space-cooperation-2004",
+      "question_sha256": "f782ae4ebe95800223f39d8e1072e54c5f43dc1b7f5b821312d40e521310f926",
+      "answer_sha256": "9f04cdd4e491a97db843864a54bc20f1a53553eb51f080ccd8972b6814026c7e",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03058"
+        ],
+        "answer_cue_ids": [
+          "turn-l03060"
+        ],
+        "context_cue_ids": [
+          "turn-l03037"
+        ],
+        "transcript_sha256": "3eb870b702aa548181f468a5ecc7f211470d8277b800e8054e65378bffc8ca20"
+      }
+    },
+    {
+      "id": "qa26-house-space-cooperation-2004-turn-l03156",
+      "source_id": "house-space-cooperation-2004",
+      "question_sha256": "bb4266d91626c47ac9d0e1b39d1c68c6b756b179c11d6049bcdca492deb02b0e",
+      "answer_sha256": "0278802d389cce99c13920e8910d97152d49a8f52acbf7c9aead79dab8980301",
+      "completeness": "excerpt",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03156"
+        ],
+        "answer_cue_ids": [
+          "turn-l03159"
+        ],
+        "context_cue_ids": [
+          "turn-l03142"
+        ],
+        "transcript_sha256": "3eb870b702aa548181f468a5ecc7f211470d8277b800e8054e65378bffc8ca20"
+      }
+    },
+    {
+      "id": "qa26-house-space-cooperation-2004-turn-l03306",
+      "source_id": "house-space-cooperation-2004",
+      "question_sha256": "b65b3d57fd736bd64d3d0d22e221ec5bbd878d4845e6d1a5f6c32b29c1a73c55",
+      "answer_sha256": "5d75d1b67a1214c2a441e7c3fc86c4870ffa74e8efc9f14741df078cdda0def3",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03306"
+        ],
+        "answer_cue_ids": [
+          "turn-l03321"
+        ],
+        "context_cue_ids": [
+          "turn-l03299"
+        ],
+        "transcript_sha256": "3eb870b702aa548181f468a5ecc7f211470d8277b800e8054e65378bffc8ca20"
+      }
+    },
+    {
+      "id": "qa26-senate-future-launch-2004-turn-l02989",
+      "source_id": "senate-future-launch-2004",
+      "question_sha256": "df315342a6d9e58c5f2577344bb3af1843c812ab2692077a8b05ddb8f9d25cd0",
+      "answer_sha256": "1e2ffb160a317d8a5e7f9b8880fec636750d413ee28d7fb4fe3290f19f456dae",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l02989"
+        ],
+        "answer_cue_ids": [
+          "turn-l02994"
+        ],
+        "context_cue_ids": [
+          "turn-l02978"
+        ],
+        "transcript_sha256": "797486a15577c1a307efccd7f7ec8955739b878652533872db725a68f69cb2cc"
+      }
+    },
+    {
+      "id": "qa26-house-commercial-space-2005-turn-l04263",
+      "source_id": "house-commercial-space-2005",
+      "question_sha256": "bf7983d70fa6088a8df25364dccc56c9b02ae80055e415f8425f7f8b712ba147",
+      "answer_sha256": "538caa8744286ab51fc940235a6521640842318cb2af740745a546e5489a6c8b",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l04263"
+        ],
+        "answer_cue_ids": [
+          "turn-l04277"
+        ],
+        "context_cue_ids": [],
+        "transcript_sha256": "a676e6a62fe9a1f4bcc45ee3b7954751e5488261d65df89387b6eb94bd41f38a"
+      }
+    },
+    {
+      "id": "qa26-house-commercial-space-2005-turn-l04308",
+      "source_id": "house-commercial-space-2005",
+      "question_sha256": "ad53c2d9c6409cd40f6d6500f5481dabfc71ce24a1ed761bd1c50066315825e6",
+      "answer_sha256": "e2d8594ef10f888a7bc21fd3a989f228428c150fc3b9984f3214c55efa8eb4d8",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l04308"
+        ],
+        "answer_cue_ids": [
+          "turn-l04319"
+        ],
+        "context_cue_ids": [
+          "turn-l04277"
+        ],
+        "transcript_sha256": "a676e6a62fe9a1f4bcc45ee3b7954751e5488261d65df89387b6eb94bd41f38a"
+      }
+    },
+    {
+      "id": "qa26-house-commercial-space-2005-turn-l04372",
+      "source_id": "house-commercial-space-2005",
+      "question_sha256": "b76ab203602c7eab08113cd32311d89863cea54cb0c35c9d323fd02202f90a7b",
+      "answer_sha256": "99971f1e00da2bf09b982491a8757d26d63e06acc197a4675913141e11ec6b36",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l04372"
+        ],
+        "answer_cue_ids": [
+          "turn-l04374"
+        ],
+        "context_cue_ids": [
+          "turn-l04363"
+        ],
+        "transcript_sha256": "a676e6a62fe9a1f4bcc45ee3b7954751e5488261d65df89387b6eb94bd41f38a"
+      }
+    },
+    {
+      "id": "qa26-house-commercial-space-2005-turn-l04375",
+      "source_id": "house-commercial-space-2005",
+      "question_sha256": "f082cbf821e2955748ee13e35032a133434447e06c8cbc53e734be171d76ac60",
+      "answer_sha256": "e9d37220c1efac13ebb1cba0c91f14d20cd9c29bdb57b10530b650159631f835",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l04375"
+        ],
+        "answer_cue_ids": [
+          "turn-l04379"
+        ],
+        "context_cue_ids": [
+          "turn-l04374"
+        ],
+        "transcript_sha256": "a676e6a62fe9a1f4bcc45ee3b7954751e5488261d65df89387b6eb94bd41f38a"
+      }
+    },
+    {
+      "id": "qa26-house-commercial-space-2005-turn-l04462",
+      "source_id": "house-commercial-space-2005",
+      "question_sha256": "111e5f9e112ffef5aef4830ce21113fe245c5c9746685fd8718556033de47d43",
+      "answer_sha256": "582b7ec090be88dedd119d492eaa65be361099031f49e9cb3b9921990803c2a7",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l04462"
+        ],
+        "answer_cue_ids": [
+          "turn-l04472"
+        ],
+        "context_cue_ids": [
+          "turn-l04448"
+        ],
+        "transcript_sha256": "a676e6a62fe9a1f4bcc45ee3b7954751e5488261d65df89387b6eb94bd41f38a"
+      }
+    },
+    {
+      "id": "qa26-senate-advanced-energy-2007-turn-l02293",
+      "source_id": "senate-advanced-energy-2007",
+      "question_sha256": "ac303fedfb53036caa301b6d3dced427b56a9cf51a5c2c6e5963eef2a275d272",
+      "answer_sha256": "aaef70ea417fdc8cdb9b6bb2819bfc11a8b9d317ee867e441eb9c680453c7fb8",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l02293"
+        ],
+        "answer_cue_ids": [
+          "turn-l02307"
+        ],
+        "context_cue_ids": [],
+        "transcript_sha256": "1bd7857d24dd57b162fb315cf0652867d0056e1917162fc248f2222ea8dc314f"
+      }
+    },
+    {
+      "id": "qa26-senate-advanced-energy-2007-turn-l02332",
+      "source_id": "senate-advanced-energy-2007",
+      "question_sha256": "e9b9d19698b5f8f7ff6da8cdfd786f411230ccee3a66e3521d7a7a24a3c892f7",
+      "answer_sha256": "98c3e3d2071902e8b2318881f2bcb9072205f9fd30aefb446daddfecb62417c5",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l02332"
+        ],
+        "answer_cue_ids": [
+          "turn-l02333"
+        ],
+        "context_cue_ids": [
+          "turn-l02307"
+        ],
+        "transcript_sha256": "1bd7857d24dd57b162fb315cf0652867d0056e1917162fc248f2222ea8dc314f"
+      }
+    },
+    {
+      "id": "qa26-senate-advanced-energy-2007-turn-l02334",
+      "source_id": "senate-advanced-energy-2007",
+      "question_sha256": "d809392eff9f3754d17b1aa374e9412f771c830001e90612090a4d873a4cc664",
+      "answer_sha256": "ed035818939288af65444f5420f980cbf893b4865660f461c007027d2e07b245",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l02334"
+        ],
+        "answer_cue_ids": [
+          "turn-l02336"
+        ],
+        "context_cue_ids": [
+          "turn-l02333"
+        ],
+        "transcript_sha256": "1bd7857d24dd57b162fb315cf0652867d0056e1917162fc248f2222ea8dc314f"
+      }
+    },
+    {
+      "id": "qa26-senate-advanced-energy-2007-turn-l02639",
+      "source_id": "senate-advanced-energy-2007",
+      "question_sha256": "b47ca77fc678e53d349a51d02c6d21976611317f668a3e2b94940ad8c6a9dda5",
+      "answer_sha256": "be6f08e5169995f7f2c7f581b5c0d25b8f3280fd99f62a0f475334a14ffc68ec",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l02639"
+        ],
+        "answer_cue_ids": [
+          "turn-l02650"
+        ],
+        "context_cue_ids": [
+          "turn-l02638"
+        ],
+        "transcript_sha256": "1bd7857d24dd57b162fb315cf0652867d0056e1917162fc248f2222ea8dc314f"
+      }
+    },
+    {
+      "id": "qa26-senate-advanced-energy-2007-turn-l03096",
+      "source_id": "senate-advanced-energy-2007",
+      "question_sha256": "9073803fc50f061b1b561a2b291326955608d0682e423d702b831e3e1774c9dc",
+      "answer_sha256": "7cb64e5690d438b6879ecd2ac1460707efd17d2e8b6a380496a2c79318d6dba8",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03096"
+        ],
+        "answer_cue_ids": [
+          "turn-l03102"
+        ],
+        "context_cue_ids": [
+          "turn-l03082"
+        ],
+        "transcript_sha256": "1bd7857d24dd57b162fb315cf0652867d0056e1917162fc248f2222ea8dc314f"
+      }
+    },
+    {
+      "id": "qa26-senate-advanced-energy-2007-turn-l03341",
+      "source_id": "senate-advanced-energy-2007",
+      "question_sha256": "b75ee02ada0d7895d2efdf1b59abdeba03ad96af006173e8e029e7baa22b9725",
+      "answer_sha256": "f6fd0553e21294a83c96b91832a05492a123e1d53d1a218aef43f03cfe59eda2",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03341"
+        ],
+        "answer_cue_ids": [
+          "turn-l03358"
+        ],
+        "context_cue_ids": [],
+        "transcript_sha256": "1bd7857d24dd57b162fb315cf0652867d0056e1917162fc248f2222ea8dc314f"
+      }
+    },
+    {
+      "id": "qa26-senate-advanced-energy-2007-turn-l03542",
+      "source_id": "senate-advanced-energy-2007",
+      "question_sha256": "5da5e0d452d17c72c85943368c532491c9a26a6adc00352689d6fe090e920568",
+      "answer_sha256": "5210d82f443cd6732e8f11d697f6204d81bbd01c41be41edf094fda618bd9e1e",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03542"
+        ],
+        "answer_cue_ids": [
+          "turn-l03545"
+        ],
+        "context_cue_ids": [
+          "turn-l03541"
+        ],
+        "transcript_sha256": "1bd7857d24dd57b162fb315cf0652867d0056e1917162fc248f2222ea8dc314f"
+      }
+    },
+    {
+      "id": "qa26-senate-advanced-energy-2007-turn-l03561",
+      "source_id": "senate-advanced-energy-2007",
+      "question_sha256": "7db872e86ba107419eaf4994b5f2a4f9617aea341a7db5986327cb539b168945",
+      "answer_sha256": "bf60a0592406feb0992a5e07499ceaa3cfb83d3d5006e85ecc9932b83bcffec8",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03561"
+        ],
+        "answer_cue_ids": [
+          "turn-l03563"
+        ],
+        "context_cue_ids": [
+          "turn-l03545"
+        ],
+        "transcript_sha256": "1bd7857d24dd57b162fb315cf0652867d0056e1917162fc248f2222ea8dc314f"
+      }
+    },
+    {
+      "id": "qa26-house-commercial-crew-2011-turn-l02974",
+      "source_id": "house-commercial-crew-2011",
+      "question_sha256": "1681de8dd41f548d0941b83ad3824ef32a2f1a86fc79844b466ce63371827cc4",
+      "answer_sha256": "8a2a41ff01267944ea01fe55257017596df7c7fd91980c4c5be482469fda3ac1",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l02974"
+        ],
+        "answer_cue_ids": [
+          "turn-l03004"
+        ],
+        "context_cue_ids": [
+          "turn-l02964"
+        ],
+        "transcript_sha256": "eb4ebcd10c53f76e40e5c65c014d56f5a028be2eadeb5f19db3561a467fd526c"
+      }
+    },
+    {
+      "id": "qa26-house-commercial-crew-2011-turn-l03060",
+      "source_id": "house-commercial-crew-2011",
+      "question_sha256": "6e3afd8e522d3ca8dc9fe1515b300b7b0dc2c31272ef504f5ce31c9104c09be1",
+      "answer_sha256": "8e14cbb5875fef1540dfc7a8660c63f2a3becd9598300c38b018ddaf5eaf4328",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03060"
+        ],
+        "answer_cue_ids": [
+          "turn-l03073"
+        ],
+        "context_cue_ids": [
+          "turn-l03058"
+        ],
+        "transcript_sha256": "eb4ebcd10c53f76e40e5c65c014d56f5a028be2eadeb5f19db3561a467fd526c"
+      }
+    },
+    {
+      "id": "qa26-house-commercial-crew-2011-turn-l03773",
+      "source_id": "house-commercial-crew-2011",
+      "question_sha256": "b1119d33408398f5e100628adcbf6c953fde0abe535a3456d4e2a4094feab2dd",
+      "answer_sha256": "2b02d74a83dfcf0b181143304d68cabfc4327bb7c804a64aabaf4bec641c071a",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03773"
+        ],
+        "answer_cue_ids": [
+          "turn-l03785"
+        ],
+        "context_cue_ids": [
+          "turn-l03772"
+        ],
+        "transcript_sha256": "eb4ebcd10c53f76e40e5c65c014d56f5a028be2eadeb5f19db3561a467fd526c"
+      }
+    },
+    {
+      "id": "qa26-house-commercial-crew-2011-turn-l03792",
+      "source_id": "house-commercial-crew-2011",
+      "question_sha256": "cd6d10e40b2d6d8de8a0044dfde998c56a882e83a4d11d20b01f0366c2d866e4",
+      "answer_sha256": "018f8a3c77ba88d38290126f794d34030271a071ae16b1090d33a8ad40c0e572",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03792"
+        ],
+        "answer_cue_ids": [
+          "turn-l03794"
+        ],
+        "context_cue_ids": [
+          "turn-l03785"
+        ],
+        "transcript_sha256": "eb4ebcd10c53f76e40e5c65c014d56f5a028be2eadeb5f19db3561a467fd526c"
+      }
+    },
+    {
+      "id": "qa26-house-commercial-crew-2011-turn-l03800",
+      "source_id": "house-commercial-crew-2011",
+      "question_sha256": "019f96edf75ee3f50d33a181b6c5ba184ac92b41719f607ebef54b6debfb5155",
+      "answer_sha256": "86019b22ca536261f370a7421bbe3213df963ac4257e716700119a545dd4e9a2",
+      "completeness": "complete_exchange",
+      "transcript_locator": {
+        "question_cue_ids": [
+          "turn-l03800"
+        ],
+        "answer_cue_ids": [
+          "turn-l03806"
+        ],
+        "context_cue_ids": [
+          "turn-l03794"
+        ],
+        "transcript_sha256": "eb4ebcd10c53f76e40e5c65c014d56f5a028be2eadeb5f19db3561a467fd526c"
+      }
+    }
+  ],
+  "original_wording_distributed": false
+}

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import re
 import time
 import uuid
 from collections.abc import AsyncIterator
@@ -22,6 +23,7 @@ from .retrieval import Retriever, SearchResult, tokenize
 from .sessions import Session, SessionStore
 from .snapshots import PersonaSnapshot, TemporalIntent, select_temporal, temporal_intent
 from .segments import SegmentCommitter
+from .dialogue import DEICTIC_PAST
 
 logger = logging.getLogger(__name__)
 
@@ -134,10 +136,17 @@ class Engine:
                 resolved = session.dialogue.resolve(request.message)
                 temporal_query = request.message
                 inherited_intent = None
-                if self.snapshot and resolved.supporting_turn_ids and temporal_intent(request.message, self.snapshot.as_of).mode == "general":
-                    temporal_query = resolved.query
-                    prior = session.dialogue.records[-1]
-                    inherited_intent = TemporalIntent(prior.temporal_mode, prior.temporal_years, prior.temporal_period)
+                if self.snapshot and resolved.supporting_turn_ids:
+                    explicit_intent = temporal_intent(request.message, self.snapshot.as_of)
+                    # The last supporting user record can be an explicitly
+                    # resumed earlier topic, not necessarily the last turn.
+                    prior = next((record for record in reversed(session.dialogue.records)
+                                  if record.turn_id == resolved.supporting_turn_ids[-1]), None)
+                    if prior is not None and (explicit_intent.mode == "general" or
+                            (explicit_intent.mode == "historical" and not explicit_intent.years and
+                             DEICTIC_PAST.search(request.message) and prior.temporal_mode == "historical")):
+                        temporal_query = resolved.query
+                        inherited_intent = TemporalIntent(prior.temporal_mode, prior.temporal_years, prior.temporal_period)
                 temporal = select_temporal(self.corpus, self.snapshot, temporal_query, intent_override=inherited_intent) if self.snapshot else None
                 style_temporal = select_temporal(self.corpus, self.snapshot, temporal_query, projection="text_style", intent_override=inherited_intent) if self.snapshot and self.settings.style_examples else None
                 context = {"snapshot": self.snapshot.summary() if self.snapshot else None,
@@ -170,7 +179,15 @@ class Engine:
                             filtered = Corpus(self.corpus.persona, self.corpus.sources,
                                               {key: value for key, value in self.corpus.evidence.items() if key in temporal.eligible_ids})
                             retriever = Retriever(filtered)
-                        result = retriever.search(query, limit=self.settings.retrieval_limit, behavior=request.mode == "behavior", allow_live=bool(temporal))
+                        # The snapshot already applies exact/before/through/
+                        # forecast policy to the eligible corpus. The archived
+                        # lexical retriever's independent exact-year gate must
+                        # not turn "before 2020" into "in 2020", or a future
+                        # target into the publication year of its old forecast.
+                        lexical_query = (re.sub(r"(?<!\d)(?:19|20)\d{2}(?!\d)", "", query)
+                                         if temporal and temporal.intent.mode != "comparison" else query)
+                        context["lexical_search"] = {"query": lexical_query, "temporal_scope_applied_before_search": bool(temporal)}
+                        result = retriever.search(lexical_query, limit=self.settings.retrieval_limit, behavior=request.mode == "behavior", allow_live=bool(temporal))
                 retrieval_ms = (time.perf_counter() - retrieval_started) * 1000
                 yield "status", {"stage": "generating"}
                 generation_started = time.perf_counter()

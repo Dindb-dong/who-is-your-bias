@@ -1,0 +1,105 @@
+{
+  "schema_version": "larger-development-control-summary.v1",
+  "status": "completed_bounded_exploration",
+  "plan_sha256": "a10a6f8f764127e964fca7c2229577b49332c78449a2a85ece8999249c2a9f30",
+  "larger_model": "Qwen/Qwen3-1.7B",
+  "larger_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+  "larger_run_sha256": "b815d4430509238844ea328f6d3a42ef0d87b3dae0139e2afd054aa535810183",
+  "base_parameters": 1720574976,
+  "baseline_base_parameters": 596049920,
+  "tokenizer_contract_matches_baseline": true,
+  "source_implementation_unchanged": true,
+  "identical_style_prompts": true,
+  "max_tokens": 192,
+  "temperature": 0,
+  "seed": 42,
+  "completed_generations": 3,
+  "attempted_generations": 4,
+  "peak_sampled_server_rss_bytes": 4251389952,
+  "server_rss_limit_bytes": 5000000000,
+  "observed_memory_before_bytes": {
+    "MemTotal": 10451427328,
+    "MemAvailable": 6762450944,
+    "MemFree": 2591555584
+  },
+  "elapsed_seconds": 209.95719960099996,
+  "cases": [
+    {
+      "id": "original-positive-001-ko",
+      "completed": true,
+      "error": null,
+      "finish_reason": "stop",
+      "wall_ms": 35610.892,
+      "citation_format_status": "missing",
+      "factual_ids": [
+        "qa26-henry-ford-2008-turn-00015"
+      ],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      }
+    },
+    {
+      "id": "original-positive-002-en",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "wall_ms": 76960.914,
+      "citation_format_status": "missing",
+      "factual_ids": [
+        "qa26-henry-ford-2008-turn-00056"
+      ],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      }
+    },
+    {
+      "id": "original-positive-003-en",
+      "completed": true,
+      "error": null,
+      "finish_reason": "stop",
+      "wall_ms": 46156.689,
+      "citation_format_status": "missing",
+      "factual_ids": [
+        "qa26-dwarkesh-2026-turn-00937"
+      ],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      }
+    },
+    {
+      "id": "current-2030-unavailable",
+      "completed": true,
+      "error": null,
+      "finish_reason": "stop",
+      "wall_ms": 24018.584,
+      "citation_format_status": "not_required",
+      "factual_ids": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      }
+    }
+  ],
+  "earlier_attempts": {
+    "setup_import_failure": "setup-01-import-path/execution.json",
+    "4gb_guard_stop": "attempt-01-4gb/outcome.json"
+  },
+  "ai_inspection": [
+    "All three larger-model outputs with supplied factual evidence omitted required citation markers.",
+    "The current-plan diagnostic returned an unsupported personal denial rather than explicit evidence-limited abstention."
+  ],
+  "human_review": null,
+  "heldout_quality_estimate": null,
+  "efficacy_claim": false,
+  "runtime_default_changed": false,
+  "limitations": [
+    "The four development questions and factual/style prompts are exposed, fixed and unchanged.",
+    "Condition completion and citation syntax do not establish semantic grounding, calibrated abstention or persona quality.",
+    "The one follow-up used a raised 5 GB sampled server-RSS guard after actual available memory was checked and hybrid inference ended.",
+    "Memory is sampled process RSS; it excludes supervisor and total-host use. The first 4 GB attempt and raw partial output remain separate.",
+    "Model conditions ran sequentially at different times and prior conditions had host contention; do not rank their speed."
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": "persona-heldout-acquisition-execution.v1",
+  "executed_at": "2026-11-11T13:40:04.311734+00:00",
+  "acquisition_manifest_sha256": "b3fd100914c91c6f9f7d153059012a917d15d4f7717b19f480f64ffda19b3b0e",
+  "source_registry_sha256": "019683ba595e2638a5f4ea2fb8816c029a875f58c4e5883152f05a9157ea8bb9",
+  "split_registration_sha256": "66215bda8f2a4e9c2808a21e3933f8e717a8ed27c7a1d0061409a9f1e3006918",
+  "sources": [
+    {
+      "source_id": "lex-018-2019",
+      "status": "acquired",
+      "requested_url": "https://lexfridman.com/elon-musk/",
+      "final_url": "https://lexfridman.com/elon-musk/",
+      "retrieved_at": "2026-11-11T13:39:00.368913+00:00",
+      "mime_type": "text/html",
+      "bytes": 57969,
+      "sha256": "81de72ba14412fe5e2839cb75ce0681c2951763c55bacab8f0477f8c34a8f7ef"
+    },
+    {
+      "source_id": "lex-252-2021",
+      "status": "acquired",
+      "requested_url": "https://lexfridman.com/elon-musk-3/",
+      "final_url": "https://lexfridman.com/elon-musk-3/",
+      "retrieved_at": "2026-11-11T13:39:06.499200+00:00",
+      "mime_type": "text/html",
+      "bytes": 62730,
+      "sha256": "0e6603074702e27882fe600003feb44086fe90d86448c4bed60ad6f994117cd4"
+    }
+  ],
+  "materialization": {
+    "status": "not_materialized",
+    "reason": "No complete held-out references extracted; publisher landing pages are not transcripts: [{\"source_id\": \"lex-018-2019\", \"status\": \"not_original_qa\", \"reason\": \"No complete, bounded publisher transcript found\", \"artifact_sha256\": \"81de72ba14412fe5e2839cb75ce0681c2951763c55bacab8f0477f8c34a8f7ef\"}, {\"source_id\": \"lex-252-2021\", \"status\": \"not_original_qa\", \"reason\": \"No complete, bounded publisher transcript found\", \"artifact_sha256\": \"0e6603074702e27882fe600003feb44086fe90d86448c4bed60ad6f994117cd4\"}]"
+  },
+  "fresh_reference_cases": 0,
+  "raw_source_pages_distributed": false,
+  "original_registry_modified": false,
+  "human_review_completed": false,
+  "limitations": [
+    "Acquired publisher pages contain episode metadata and media links, not labeled original dialogue.",
+    "Lex #49 PDF belongs to an existing training family and was not substituted for either reserved episode.",
+    "Accepted audio alignment and human reference review were not performed."
+  ]
+}

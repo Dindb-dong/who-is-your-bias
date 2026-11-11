@@ -145,10 +145,18 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 
 ## Documentation
 
+- [2026 continuation and execution evidence](docs/2026-continuation.md): merged PR #13, verified adapter serving, real training/comparison boundaries, dialogue regressions, and remaining acceptance work.
+- [Congressional source extension](docs/congressional-data.md): six additional official hearing events, source-bound parsing, combined corpus replay, and actual API availability limits.
+- [Verified text adapter runtime](docs/text-adapter-runtime.md): hash-bound LoRA training, tokenizer compatibility, operator-selected loading, and actual runtime identity.
+- [Controlled adaptation comparison](docs/adaptation-comparison.md): frozen factual/style inputs, base/style/adapter controls, raw failures, and blinded review exports.
+- [Dialogue evaluation](docs/dialogue-evaluation.md): English/Korean follow-ups, date corrections, topic switches, bounded context, and source-preview regressions.
+- [Held-out evaluation data](docs/heldout-evaluation-data.md): publisher acquisition, source-family isolation, corpus overlap checks, and evaluation-only records.
+- [Live neural streaming benchmark](docs/live-stream-benchmark.md): actual HTTP text/PCM measurements, service identity, cancellation, and unmeasured playback/acoustic outcomes.
 - [2026 implementation and evidence](docs/2026-implementation.md): package status, exact snapshot, runtime configuration, early PCM protocol and remaining release conditions.
 - [Original-data expansion and adaptation](docs/persona-data.md): ten actual acquisitions, nine dialogue events, independent modality eligibility, pinned replay and training exports/launchers.
 - [Hybrid retrieval](docs/hybrid-retrieval.md): actual multilingual embedding/reranker runs, false-candidate tradeoffs and reproducible optional configuration.
 - [Avatar audition](docs/avatar-audition.md): decoded GLB qualification, Blender conversion, same-audio recording and actual acquisition boundaries.
+- [Avatar acquisition follow-up](docs/avatar-acquisition-followup.md): current official free-candidate metadata and the authenticated-download requirement before actual asset qualification.
 - [2026 persona roadmap](docs/2026-persona-roadmap.md): current-pilot limits, the 2026 snapshot, data and learning expansion, retrieval, dialogue, streaming, and acceptance criteria.
 - [Musk 3D avatar shortlist](docs/research/musk-3d-avatar-shortlist.md): researched facially rigged models, free candidates, detailed portraits, licensing evidence, and an asset qualification plan.
 - [Proposal implementation status](docs/proposal-alignment.md): requirement mapping, completed evidence and remaining review boundaries.
@@ -162,7 +170,7 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 - [Publisher acquisition](docs/research/collection.md): explicit document collection, component links, and provenance manifests.
 - [Full transcript extraction](docs/research/transcript-acquisition.md): complete TED conversation drafts, speaker-label rules, and measured coverage.
 - [Media and voice pipeline](docs/media-pipeline.md): local clips, optional transcription/observations, and the reference-voice server.
-- [Execution and deployment](docs/deployment.md): coordinated development servers, container configuration, and CI artifacts.
+- [Execution and deployment](docs/deployment.md): coordinated development servers, container configuration, and local validation.
 - [Inference validation](docs/inference-validation.md): real model smoke results, reproducible commands, and measured limitations.
 - [Local language server](docs/language-runtime.md): model loading, bounded generation, and main-app connection.
 - [Generation evaluation](docs/evaluation.md): A/B/C execution, token usage, citation checks, and human-review fields.

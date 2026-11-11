@@ -1,0 +1,32 @@
+{
+  "schema_version": "larger-control-execution.v1",
+  "started_at": "2026-11-11T14:19:00.185964+00:00",
+  "model": "Qwen/Qwen3-1.7B",
+  "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+  "status": "blocked",
+  "overall_budget_seconds": 600,
+  "server_rss_limit_bytes": 4000000000,
+  "cache_directory": "data/local/larger-model-cache",
+  "transport": "actual_loopback_http",
+  "served_dtype": "bfloat16",
+  "served_device": "cpu",
+  "torch_threads": 2,
+  "trained_adapter": null,
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "supervisor_sha256": "b0ee35911ae4bca7d6ddd8bf083cf06a0a0438078e5483447159d5887614849f",
+  "inference_attempted": false,
+  "limits": [
+    "Exploratory larger-base control on four exposed development questions.",
+    "Sequential execution and other host activity do not support a model-speed ranking.",
+    "A completed response is not a factual or persona-quality judgment.",
+    "4 GB means 4,000,000,000 bytes of sampled server RSS, not checkpoint file size or total host RSS."
+  ],
+  "failure": {
+    "type": "ModuleNotFoundError",
+    "reason": "No module named 'tools'"
+  },
+  "completed_at": "2026-11-11T14:19:00.186354+00:00",
+  "elapsed_seconds": 0.00039852800000517163,
+  "server_exit_code_after_cleanup": null
+}

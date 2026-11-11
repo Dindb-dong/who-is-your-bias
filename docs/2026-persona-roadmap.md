@@ -2,7 +2,7 @@
 
 Status: **implementation plan; not a completed capability claim**. Recorded on **2026-11-11, Asia/Seoul**. The user selected Musk as represented in 2026 and requested this documentation update without implementation changes or a new PR.
 
-**Implementation follow-up (2026-11-11):** the user subsequently authorized implementation and merging the existing PRs. PRs #10–#12 are now merged. See [implemented work, actual measurements and remaining acceptance evidence](2026-implementation.md). The plan and authoring-time status below remain a dated record.
+**Implementation follow-up (2026-11-11):** the user subsequently authorized implementation and merging the existing PRs. PRs #10–#13 are now merged. See [the PR #13 implementation record](2026-implementation.md) and [continued implementation and actual execution evidence](2026-continuation.md). The plan and authoring-time status below remain a dated record.
 
 The goal is a convincing, source-grounded conversation with a recognizable Musk avatar: relevant answers, characteristic language and speech, coherent dialogue, and natural audiovisual behavior. The existing engineering pilot provides reusable infrastructure, but its small original-Q&A dataset, short voice reference, and generic face do not establish that experience.
 

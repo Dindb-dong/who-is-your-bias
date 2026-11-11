@@ -11,6 +11,12 @@ import re
 from dataclasses import asdict, dataclass
 from typing import Literal
 
+KOREAN_CITATION_INSTRUCTION = (
+    " 답변 본문만 한국어로 작성하세요. 근거의 citation 값은 기계가 읽는 표기이므로 "
+    "대괄호, 영문 source:, 식별자를 공백 추가나 번역 없이 그대로 복사하세요. "
+    "근거가 뒷받침하는 각 문장 뒤에 해당 값을 붙이세요."
+)
+
 CITATION = re.compile(r"\[source:([A-Za-z0-9_.-]+)\]")
 # Also recognize marker-like attempts that the exact grammar rejects. Stop at a
 # new opening bracket so a malformed attempt cannot swallow a later valid one.

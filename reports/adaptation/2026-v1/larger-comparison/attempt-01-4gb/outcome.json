@@ -1,0 +1,32 @@
+{
+  "schema_version": "larger-control-resource-outcome.v1",
+  "status": "incomplete_after_configured_memory_limit",
+  "basis": "Derived from unchanged execution receipt, sampled memory log, exact supervisor source and server termination log; original execution.failure was null because the recorder returned a normal failed-condition report.",
+  "model": "Qwen/Qwen3-1.7B",
+  "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+  "plan_sha256": "a10a6f8f764127e964fca7c2229577b49332c78449a2a85ece8999249c2a9f30",
+  "loaded_base_parameters": 1720574976,
+  "server_rss_limit_bytes": 4000000000,
+  "peak_sampled_server_rss_bytes": 4033294336,
+  "supervisor_termination_policy": "SIGTERM on first RSS sample above the configured bound",
+  "server_exit_code_after_cleanup": -15,
+  "attempted_cases": 1,
+  "verified_completed_generations": 0,
+  "skipped_case_ids": [
+    "original-positive-002-en",
+    "original-positive-003-en",
+    "current-2030-unavailable"
+  ],
+  "provider_reported_completions": 1,
+  "post_generation_identity_verified": false,
+  "elapsed_seconds": 163.55544489400017,
+  "execution_json_sha256": "e38fd236b96e1c45e9b53c67395fc820d0cb9ecdba4571fdfc9e3effaaa35c6e",
+  "condition_run_sha256": "68914ed52df4af09bff052f14b62dfbb5b73de477381fd85c307edc91eb4d2f2",
+  "not_claimed": [
+    "operating_system_OOM",
+    "model_incompatibility",
+    "access_block",
+    "completed_larger_control",
+    "persona_efficacy"
+  ]
+}

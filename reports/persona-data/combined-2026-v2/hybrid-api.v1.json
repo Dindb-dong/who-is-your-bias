@@ -1,0 +1,402 @@
+{
+  "schema_version": "congress-hybrid-api-diagnostic.v1",
+  "status": "failed",
+  "started_at": "2026-11-11T14:18:02.922868+00:00",
+  "case_manifest_sha256": "9cee8771bee2cbb69a1396ea624b6fbc0475610150387afe5785c337c03563f4",
+  "transport": "in_process_asgi_testclient",
+  "exposure": "development",
+  "policy": {
+    "embedding_model": "intfloat/multilingual-e5-small",
+    "embedding_revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "reranker_model": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "reranker_revision": "1427fd652930e4ba29e8149678df786c240d8825",
+    "dense_min_similarity": 0.78,
+    "reranker_min_score": -3,
+    "retrieval_limit": 4,
+    "style_examples": false,
+    "device": "cpu",
+    "threads": 2
+  },
+  "llm_inference": false,
+  "tts_inference": false,
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "runtime": {
+    "python": "3.12.14",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "torch_threads": 2,
+    "packages": {
+      "torch": "2.11.0+cpu",
+      "transformers": "4.57.3",
+      "sentence-transformers": "5.7.0",
+      "numpy": "2.5.4",
+      "huggingface-hub": "0.36.2",
+      "tokenizers": "0.22.2"
+    }
+  },
+  "input_hashes_before": {
+    "snapshot": "0bed5348adca8b6c3e9ed2ea347d84156f600e4ef07c1a749eb9a01323028b6d",
+    "cases": "9cee8771bee2cbb69a1396ea624b6fbc0475610150387afe5785c337c03563f4",
+    "corpus/evidence.jsonl": "ca8464f48ddaee2b79dc34eea1da887b015eecb48e7e633b58ed7c16a5ce128f",
+    "corpus/corpus-manifest.json": "bc9dee21add11d16bbaf27f45955a7aa3edf53ae92a4071a20f6b4cf4261417e",
+    "corpus/split-manifest.json": "43f9e23ae610c007c2b84101accbb2231826747bdc77bda7f4cfe484ad9b0a5e",
+    "corpus/profile.json": "37e12d59c72ce37791a6ef52af17556a3d0ffd7a5b45b9a3bbc44360b62e648a",
+    "corpus/sources.json": "04553eb128854344b0028804817b3f7b501d8b7c870ff8bdffa60975351905df",
+    "src/bias/config.py": "c5a286c9c32cc18e7409075b87094ed1c7ff7cdd5f94f3cc359341a7df6aec3b",
+    "src/bias/compact_prompts.py": "032013e9c1a1c2420868cff31833628b25391e2a161ce5cd4435dd046ae5110e",
+    "src/bias/cli.py": "9c78fdde8b0fa4fd89abb2f27c95ee957bded68fc25e2251e8914fcc708b04b4",
+    "src/bias/retrieval.py": "72b7b06718b762068fb932131fd6102cd3d8c5e54190b514ee27158aea8b86d9",
+    "src/bias/segments.py": "49ae6689c25986335ed79770d0d3a89c0bece75df5d64938ab5f09c345a4a88b",
+    "src/bias/qa_prompts.py": "040e790013e68c274487096cce889855ab3b1d5b3176c3c187d3244ec414e254",
+    "src/bias/live.py": "730cf102e458f3f5ea48fc8cc604bd15ad994d54cc97d1771d1999891573fcfc",
+    "src/bias/api.py": "f1389a67ecc32e966a9153b908880cfdb4487d3707ad093fedba9830c883040f",
+    "src/bias/snapshots.py": "28659167b62d4de7354ccbe83ab4cc3c924891d8c6df2418a33d8755e7b51fc2",
+    "src/bias/__init__.py": "5ce8591bb917837fe2b6d12beffc1b632ccff7e15b44c23aefcaa76da7d1cf42",
+    "src/bias/context_budget.py": "cffce0af28994922cb50f1e2564456e99e6d0aef0c13893572ffae85c0a8eff9",
+    "src/bias/motion.py": "8f0922adab913a33472dbb6920bbfb2ad5d82c0eb34ce7a7040435315bc4f288",
+    "src/bias/speech.py": "7948a52419250b08d40ac7851cafe58c432210cd5d19ed3f2467d99ebb6c11ff",
+    "src/bias/request_work.py": "15fa420d3fdbe74651fa2dc73948ab2ef314ea83e5b089aece77375063506423",
+    "src/bias/lipsync.py": "05feac2d1041b4a6a09929227fba680ebbd669bca169807cac3976b1dd304063",
+    "src/bias/providers.py": "e92f428eeefff17a35d0992a0951d9a1fb31620aed9d5516d8402712aef1b083",
+    "src/bias/evaluate.py": "757b7a0fc4b703b22c5555a84e2b17d31c847ca5867b27ca1f18d4ff8285b500",
+    "src/bias/situations.py": "64ac395448105ced33a5249adef4125704c6acfb6aa1274bc29fc18b521a86a1",
+    "src/bias/ingest.py": "6136b8039f9326852cb8ddcd07ba1d2ee4fba2ce3ff2e74edd30d7793c3d31bc",
+    "src/bias/dialogue.py": "3c5aa9b2e959ce501a807711760683c89b069ebff3f0706b3e3bfd1d88c7455e",
+    "src/bias/engine.py": "1cccb003c81ebfcf5ad94b5e2b0a3d04380195454e7ebe28c52aef7b0246d51a",
+    "src/bias/legacy_prompts.py": "c6b6e84ed4c9a8da6f01c6d9ada07934b8548bca8530f7f39d79ad8cb8a14dd7",
+    "src/bias/grounding.py": "a3098cc9d39914226e89b3e6dad8c6b770f0c0eda3d28a3e3f8192d3488bf8a0",
+    "src/bias/prompts.py": "baa7c142b293d27b612e00c14d2a316e2c6faffc82b4dd7578e9fa6a58f66edc",
+    "src/bias/models.py": "1342ef5660b903e2bed04ed28f52e06ec1b1b39fddfb97f8c4b58f36fe13caca",
+    "src/bias/legacy_situations.py": "3f1a182e6c095bf30a00b0ead537fd1a8d4a80277b635d149a10b356ed2b0524",
+    "src/bias/sessions.py": "b0f8b1725886250b919e321fa6eda142737088e782ba13f4f96ee3fc33b1fac6",
+    "src/bias/corpus.py": "16b9eef8a6fef0e20a7dd4099b470724e793dc14c698313d06fb679b87e9aeb0",
+    "src/bias/behavior.py": "58810783d5e7010ff153303608c8db8cf3c0c16b4a74c7ac4c75695ce84cf1f4",
+    "src/bias/hybrid_retrieval.py": "d2bf0892205da0304187f421fd582e4aa23da6efe3fb78c2a56b2d69f1389095",
+    "tools/persona_data/congress_hybrid.py": "341d0688b52c18168f9934eae1858b3e2f35d98c1220752fe487c9db1cfa6986"
+  },
+  "model_files": {
+    "embedding": [
+      {
+        "path": "1_Pooling/config.json",
+        "bytes": 200,
+        "sha256": "987f7a67a38fa564c849bb5d277c52ab9088a84368fc0be31a354125aebb12a0"
+      },
+      {
+        "path": "config.json",
+        "bytes": 655,
+        "sha256": "69137736cab8b8903a07fe8afaafdda25aac55415a12a55d1bffa9f581abf959"
+      },
+      {
+        "path": "model.safetensors",
+        "bytes": 470641600,
+        "sha256": "1a55775f53449dac10a2bcbc312469fac40b96d53198c407081a831f81c98477"
+      },
+      {
+        "path": "modules.json",
+        "bytes": 387,
+        "sha256": "c6e29747481e8b5dd2b58401966aeac910de39092f90cda9a704b1545f902b04"
+      },
+      {
+        "path": "sentence_bert_config.json",
+        "bytes": 57,
+        "sha256": "948201d8329907aae938fa62f9ceeed53f5694dacc2b87b9f3b78b37ee986529"
+      },
+      {
+        "path": "sentencepiece.bpe.model",
+        "bytes": 5069051,
+        "sha256": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865"
+      },
+      {
+        "path": "special_tokens_map.json",
+        "bytes": 167,
+        "sha256": "d05497f1da52c5e09554c0cd874037a083e1dc1b9cfd48034d1c717f1afc07a7"
+      },
+      {
+        "path": "tokenizer.json",
+        "bytes": 17082730,
+        "sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39"
+      },
+      {
+        "path": "tokenizer_config.json",
+        "bytes": 443,
+        "sha256": "a1d6bc8734a6f635dc158508bef000f8e2e5a759c7d92f984b2c86e5ff53425b"
+      }
+    ],
+    "reranker": [
+      {
+        "path": "config.json",
+        "bytes": 891,
+        "sha256": "cc2cfe51aa3fd759d21d21acf5dfd6994aa67a3c9210636d22e143699d336c77"
+      },
+      {
+        "path": "model.safetensors",
+        "bytes": 470592698,
+        "sha256": "5daeca2481a76b5976a2bdc32f0a78532b6716da4f8cd3ff59460ef8d2f359b4"
+      },
+      {
+        "path": "sentencepiece.bpe.model",
+        "bytes": 5069051,
+        "sha256": "cfc8146abe2a0488e9e2a0c56de7952f7c11ab059eca145a0a727afce0db2865"
+      },
+      {
+        "path": "special_tokens_map.json",
+        "bytes": 239,
+        "sha256": "378eb3bf733eb16e65792d7e3fda5b8a4631387ca04d2015199c4d4f22ae554d"
+      },
+      {
+        "path": "tokenizer.json",
+        "bytes": 17082660,
+        "sha256": "62c24cdc13d4c9952d63718d6c9fa4c287974249e16b7ade6d5a85e7bbb75626"
+      },
+      {
+        "path": "tokenizer_config.json",
+        "bytes": 435,
+        "sha256": "e7fbfbfa6347b4e414c1cee50d142e2c2f9a895dad68b068ae83a8b564c3837e"
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "congress-paraphrase-01",
+      "query": "In 2014, how would fixed-price competition for the basic launch vehicle relate to cost-plus?",
+      "language": "en",
+      "expected_source_id": "senate-launch-2014",
+      "expected_evidence_id": "qa26-senate-launch-2014-turn-l03561",
+      "support_text_sha256": "fa67c9ca10204af9f69a03b406c207b1c13b6a3e49bf65fc26342f5792aa15ee",
+      "review_basis": "Agent inspected the complete printed source response to bind the intended passage; no human relevance or entailment rating.",
+      "status": "completed",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "grounded",
+      "retrieved_ids": [
+        "qa26-senate-launch-2014-turn-l03561",
+        "qa26-senate-launch-2014-turn-l03502"
+      ],
+      "citation_ids": [
+        "qa26-senate-launch-2014-turn-l03561",
+        "qa26-senate-launch-2014-turn-l03502"
+      ],
+      "expected_passage_retrieved": true,
+      "expected_passage_cited": true,
+      "expected_source_retrieved": true,
+      "retrieval_trace": null,
+      "response_text_sha256": "a8a5d123e7aca30b3fa2443760859f4e752a1fc12f90744821591d70be2fe7b8",
+      "elapsed_ms": 872.696
+    },
+    {
+      "id": "congress-paraphrase-02",
+      "query": "In March 2004, did satellites intended for the Shuttle have to be done on the Shuttle?",
+      "language": "en",
+      "expected_source_id": "house-space-cooperation-2004",
+      "expected_evidence_id": "qa26-house-space-cooperation-2004-turn-l02703",
+      "support_text_sha256": "d3c716d6a9421d1dc7ab6c5d7b317ce405bbca289aecee50d24b5cc1a82eff4e",
+      "review_basis": "Agent inspected the complete printed source response to bind the intended passage; no human relevance or entailment rating.",
+      "status": "completed",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "grounded",
+      "retrieved_ids": [
+        "qa26-house-space-cooperation-2004-turn-l02703",
+        "qa26-house-space-cooperation-2004-turn-l02644"
+      ],
+      "citation_ids": [
+        "qa26-house-space-cooperation-2004-turn-l02703",
+        "qa26-house-space-cooperation-2004-turn-l02644"
+      ],
+      "expected_passage_retrieved": true,
+      "expected_passage_cited": true,
+      "expected_source_retrieved": true,
+      "retrieval_trace": null,
+      "response_text_sha256": "e9584dedde849ad7a8b0e547dd609c5857d447a741ad25ce7a94a031af34d96e",
+      "elapsed_ms": 209.098
+    },
+    {
+      "id": "congress-paraphrase-03",
+      "query": "In 2004, what is a meaningful prize to engage the private sector in space?",
+      "language": "en",
+      "expected_source_id": "senate-future-launch-2004",
+      "expected_evidence_id": "qa26-senate-future-launch-2004-turn-l02989",
+      "support_text_sha256": "1e2ffb160a317d8a5e7f9b8880fec636750d413ee28d7fb4fe3290f19f456dae",
+      "review_basis": "Agent inspected the complete printed source response to bind the intended passage; no human relevance or entailment rating.",
+      "status": "completed",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "insufficient",
+      "retrieved_ids": [],
+      "citation_ids": [],
+      "expected_passage_retrieved": false,
+      "expected_passage_cited": false,
+      "expected_source_retrieved": false,
+      "retrieval_trace": null,
+      "response_text_sha256": "1542d5a75f7e1cdbbcc664f33e020ef9cd22e8c76ad9d73240176eb192ca842d",
+      "elapsed_ms": 324.891
+    },
+    {
+      "id": "congress-paraphrase-04",
+      "query": "In 2005, what price did the Falcon I have compared to the Pegasus launch vehicle?",
+      "language": "en",
+      "expected_source_id": "house-commercial-space-2005",
+      "expected_evidence_id": "qa26-house-commercial-space-2005-turn-l04263",
+      "support_text_sha256": "538caa8744286ab51fc940235a6521640842318cb2af740745a546e5489a6c8b",
+      "review_basis": "Agent inspected the complete printed source response to bind the intended passage; no human relevance or entailment rating.",
+      "status": "completed",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "grounded",
+      "retrieved_ids": [
+        "qa26-house-commercial-space-2005-turn-l04263"
+      ],
+      "citation_ids": [
+        "qa26-house-commercial-space-2005-turn-l04263"
+      ],
+      "expected_passage_retrieved": true,
+      "expected_passage_cited": true,
+      "expected_source_retrieved": true,
+      "retrieval_trace": null,
+      "response_text_sha256": "ac39e9b1cee2e5469e3fa41c2f0ff26e852d9328e06b806d22170b55dee8fd7a",
+      "elapsed_ms": 217.839
+    },
+    {
+      "id": "congress-paraphrase-05",
+      "query": "In 2007, why did Tesla need lithium-ion cell and pack manufacturing in the United States?",
+      "language": "en",
+      "expected_source_id": "senate-advanced-energy-2007",
+      "expected_evidence_id": "qa26-senate-advanced-energy-2007-turn-l02293",
+      "support_text_sha256": "aaef70ea417fdc8cdb9b6bb2819bfc11a8b9d317ee867e441eb9c680453c7fb8",
+      "review_basis": "Agent inspected the complete printed source response to bind the intended passage; no human relevance or entailment rating.",
+      "status": "completed",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "grounded",
+      "retrieved_ids": [
+        "qa26-senate-advanced-energy-2007-turn-l02293"
+      ],
+      "citation_ids": [
+        "qa26-senate-advanced-energy-2007-turn-l02293"
+      ],
+      "expected_passage_retrieved": true,
+      "expected_passage_cited": true,
+      "expected_source_retrieved": true,
+      "retrieval_trace": null,
+      "response_text_sha256": "9d6b25fd6efb719b04a059a33893aa2170138b21ba81c9bff0a3d913207c0c56",
+      "elapsed_ms": 204.684
+    },
+    {
+      "id": "congress-paraphrase-06",
+      "query": "In 2011, why were SpaceX launch vehicles sourced 100 percent in the United States?",
+      "language": "en",
+      "expected_source_id": "house-commercial-crew-2011",
+      "expected_evidence_id": "qa26-house-commercial-crew-2011-turn-l03773",
+      "support_text_sha256": "2b02d74a83dfcf0b181143304d68cabfc4327bb7c804a64aabaf4bec641c071a",
+      "review_basis": "Agent inspected the complete printed source response to bind the intended passage; no human relevance or entailment rating.",
+      "status": "completed",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "grounded",
+      "retrieved_ids": [
+        "qa26-house-commercial-crew-2011-turn-l03773",
+        "qa26-house-commercial-crew-2011-turn-l03060"
+      ],
+      "citation_ids": [
+        "qa26-house-commercial-crew-2011-turn-l03773",
+        "qa26-house-commercial-crew-2011-turn-l03060"
+      ],
+      "expected_passage_retrieved": true,
+      "expected_passage_cited": true,
+      "expected_source_retrieved": true,
+      "retrieval_trace": null,
+      "response_text_sha256": "c116a591b3a4d6eec562b84414c4743b66861aebceb5234988c8f4d764a719b9",
+      "elapsed_ms": 541.338
+    }
+  ],
+  "limitations": [
+    "Six developer-written paraphrases with prior lexical exposure; no fresh held-out efficacy claim.",
+    "Candidate and citation matches are not human relevance, factual entailment or persona ratings.",
+    "No threshold changes or query rewrites after the hybrid run starts; failures remain in its denominator.",
+    "CPU ASGI timings include this corpus and model state; they do not measure network, generation, speech or target-device latency."
+  ],
+  "api_startup_ms": 88492.63,
+  "snapshot": {
+    "id": "musk-combined-2026-v2",
+    "as_of": "2026-11-11T14:08:38.928202+00:00",
+    "corpus_sha256": "57cead316fd009be5d19e34c4a70a3df0290a67d4a90192b5d1e0c58c1bfc622",
+    "current_evidence_since": "2026-01-01",
+    "current_dated_training_sources": 0,
+    "coverage_note": "Snapshot date limits availability; it does not imply contemporary coverage. Unknown event dates remain unknown.",
+    "knowledge_version": "elon-musk-original-2026.v1",
+    "style_version": "attributed-examples.v1-no-trained-adapter",
+    "voice_version": "reference-conditioned-baseline",
+    "appearance_version": "research-human-v2-proxy-not-2026-likeness"
+  },
+  "corpus": {
+    "sources": 15,
+    "evidence": 777,
+    "held_out_sources": 0,
+    "total_evidence": 1018
+  },
+  "retrieval": {
+    "backend": "hybrid",
+    "embedding_model": "intfloat/multilingual-e5-small",
+    "embedding_revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "style_examples": false,
+    "prewarmed": true,
+    "startup_warmup_ms": 86808.338
+  },
+  "failure": {
+    "stage": "post_run_integrity",
+    "exception_types": [
+      "ValueError"
+    ]
+  },
+  "input_hashes_after": {
+    "snapshot": "0bed5348adca8b6c3e9ed2ea347d84156f600e4ef07c1a749eb9a01323028b6d",
+    "cases": "9cee8771bee2cbb69a1396ea624b6fbc0475610150387afe5785c337c03563f4",
+    "corpus/evidence.jsonl": "ca8464f48ddaee2b79dc34eea1da887b015eecb48e7e633b58ed7c16a5ce128f",
+    "corpus/corpus-manifest.json": "bc9dee21add11d16bbaf27f45955a7aa3edf53ae92a4071a20f6b4cf4261417e",
+    "corpus/split-manifest.json": "43f9e23ae610c007c2b84101accbb2231826747bdc77bda7f4cfe484ad9b0a5e",
+    "corpus/profile.json": "37e12d59c72ce37791a6ef52af17556a3d0ffd7a5b45b9a3bbc44360b62e648a",
+    "corpus/sources.json": "04553eb128854344b0028804817b3f7b501d8b7c870ff8bdffa60975351905df",
+    "src/bias/config.py": "c5a286c9c32cc18e7409075b87094ed1c7ff7cdd5f94f3cc359341a7df6aec3b",
+    "src/bias/compact_prompts.py": "032013e9c1a1c2420868cff31833628b25391e2a161ce5cd4435dd046ae5110e",
+    "src/bias/cli.py": "9c78fdde8b0fa4fd89abb2f27c95ee957bded68fc25e2251e8914fcc708b04b4",
+    "src/bias/retrieval.py": "72b7b06718b762068fb932131fd6102cd3d8c5e54190b514ee27158aea8b86d9",
+    "src/bias/segments.py": "49ae6689c25986335ed79770d0d3a89c0bece75df5d64938ab5f09c345a4a88b",
+    "src/bias/qa_prompts.py": "040e790013e68c274487096cce889855ab3b1d5b3176c3c187d3244ec414e254",
+    "src/bias/live.py": "730cf102e458f3f5ea48fc8cc604bd15ad994d54cc97d1771d1999891573fcfc",
+    "src/bias/api.py": "f1389a67ecc32e966a9153b908880cfdb4487d3707ad093fedba9830c883040f",
+    "src/bias/snapshots.py": "28659167b62d4de7354ccbe83ab4cc3c924891d8c6df2418a33d8755e7b51fc2",
+    "src/bias/__init__.py": "5ce8591bb917837fe2b6d12beffc1b632ccff7e15b44c23aefcaa76da7d1cf42",
+    "src/bias/context_budget.py": "cffce0af28994922cb50f1e2564456e99e6d0aef0c13893572ffae85c0a8eff9",
+    "src/bias/motion.py": "8f0922adab913a33472dbb6920bbfb2ad5d82c0eb34ce7a7040435315bc4f288",
+    "src/bias/speech.py": "7948a52419250b08d40ac7851cafe58c432210cd5d19ed3f2467d99ebb6c11ff",
+    "src/bias/request_work.py": "15fa420d3fdbe74651fa2dc73948ab2ef314ea83e5b089aece77375063506423",
+    "src/bias/lipsync.py": "05feac2d1041b4a6a09929227fba680ebbd669bca169807cac3976b1dd304063",
+    "src/bias/providers.py": "e92f428eeefff17a35d0992a0951d9a1fb31620aed9d5516d8402712aef1b083",
+    "src/bias/evaluate.py": "757b7a0fc4b703b22c5555a84e2b17d31c847ca5867b27ca1f18d4ff8285b500",
+    "src/bias/situations.py": "64ac395448105ced33a5249adef4125704c6acfb6aa1274bc29fc18b521a86a1",
+    "src/bias/ingest.py": "6136b8039f9326852cb8ddcd07ba1d2ee4fba2ce3ff2e74edd30d7793c3d31bc",
+    "src/bias/dialogue.py": "3c5aa9b2e959ce501a807711760683c89b069ebff3f0706b3e3bfd1d88c7455e",
+    "src/bias/engine.py": "1cccb003c81ebfcf5ad94b5e2b0a3d04380195454e7ebe28c52aef7b0246d51a",
+    "src/bias/legacy_prompts.py": "c6b6e84ed4c9a8da6f01c6d9ada07934b8548bca8530f7f39d79ad8cb8a14dd7",
+    "src/bias/grounding.py": "a3098cc9d39914226e89b3e6dad8c6b770f0c0eda3d28a3e3f8192d3488bf8a0",
+    "src/bias/prompts.py": "baa7c142b293d27b612e00c14d2a316e2c6faffc82b4dd7578e9fa6a58f66edc",
+    "src/bias/models.py": "1342ef5660b903e2bed04ed28f52e06ec1b1b39fddfb97f8c4b58f36fe13caca",
+    "src/bias/legacy_situations.py": "3f1a182e6c095bf30a00b0ead537fd1a8d4a80277b635d149a10b356ed2b0524",
+    "src/bias/sessions.py": "b0f8b1725886250b919e321fa6eda142737088e782ba13f4f96ee3fc33b1fac6",
+    "src/bias/corpus.py": "16b9eef8a6fef0e20a7dd4099b470724e793dc14c698313d06fb679b87e9aeb0",
+    "src/bias/behavior.py": "58810783d5e7010ff153303608c8db8cf3c0c16b4a74c7ac4c75695ce84cf1f4",
+    "src/bias/hybrid_retrieval.py": "d2bf0892205da0304187f421fd582e4aa23da6efe3fb78c2a56b2d69f1389095",
+    "tools/persona_data/congress_hybrid.py": "341d0688b52c18168f9934eae1858b3e2f35d98c1220752fe487c9db1cfa6986"
+  },
+  "input_integrity_stable": true,
+  "summary": {
+    "registered_cases": 6,
+    "attempted": 6,
+    "completed": 6,
+    "expected_passages_retrieved": 5,
+    "expected_passages_cited": 5,
+    "expected_sources_retrieved": 5
+  },
+  "completed_at": "2026-11-11T14:20:24.188844+00:00",
+  "total_seconds": 141.26
+}

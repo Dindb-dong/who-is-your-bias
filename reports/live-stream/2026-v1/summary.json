@@ -1,0 +1,96 @@
+{
+  "schema_version": "live-stream-summary.v1",
+  "finalized_at": "2026-11-11T14:10:12.290483+00:00",
+  "actual_neural_execution_status": "completed",
+  "actual_neural_completed_requests": 1,
+  "source_preview_setup_attempts": 1,
+  "acquisition_failed_attempts": 1,
+  "measured_inference_complete": true,
+  "question": "How does tunnel diameter affect cost? In 12 words.",
+  "runtime": {
+    "language_model": "Qwen/Qwen3-0.6B",
+    "language_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "language_adapter": null,
+    "voice_model": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+    "voice_revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+    "speech_tokenizer_revision": "7dd38ad4e9bad454aae9cd937d0cd577604fe229",
+    "device": "cpu",
+    "dtype": "bfloat16",
+    "torch_threads_per_model": 2,
+    "llm_temperature": 0.0,
+    "max_llm_output_tokens": 96,
+    "max_voice_tokens": 384,
+    "deadline_seconds": 180,
+    "warm_before": {
+      "language": false,
+      "voice": false
+    }
+  },
+  "evidence": {
+    "corpus": "data/qna/elon-musk-v1",
+    "retrieval_backend": "lexical",
+    "preflight_evidence_ids": [
+      "qa-ted-2017-cost"
+    ]
+  },
+  "client_milliseconds": {
+    "first_text_received_ms": 7093.753,
+    "first_pcm_received_ms": 52715.145,
+    "result_received_ms": 9888.115,
+    "audio_end_received_ms": 52721.938,
+    "done_received_ms": 52721.974
+  },
+  "server_metrics": {
+    "language": {
+      "retrieval_ms": 0.644,
+      "generation_ms": 9863.675,
+      "total_ms": 9864.796
+    },
+    "first_pcm_ready_ms": 52695.772,
+    "total_ms": 52699.863
+  },
+  "audio": {
+    "sample_rate": 24000,
+    "channels": 1,
+    "frames": 132480,
+    "chunks": 65,
+    "duration_seconds": 5.52,
+    "pcm_sha256": "69e7f795dbb1c790e9bdb138e6a878412a3d5ca69de99c1469e643cd8239a311",
+    "verified_segments": 1,
+    "first_pcm_preceded_text_result": false,
+    "backend_eos_observed": null
+  },
+  "reference": {
+    "review_status": "candidate",
+    "human_listening_completed": false,
+    "new_asr_performed": false,
+    "source_matches_prior_recording": true,
+    "audio_matches_prior_canonical_candidate": true,
+    "audio_sha256": "f20f897fde67d14d2fb77d42d98b0890bf3c1d1fd121b41879dfd448f0d47e4c",
+    "text_sha256": "0e75c3c62963a9a06932a87113f14d8ac206d1cad4fbb409a484b552fcc5f83d"
+  },
+  "provider_identity_continuity": {
+    "verified": true,
+    "changed_fields": [],
+    "scope": "service_reported_identity_and_runtime"
+  },
+  "application_source_unchanged_during_request": true,
+  "peak_sampled_service_sum_rss_bytes": 4855287808,
+  "concurrency": "The parent final four-case model comparison ran with two CPU threads concurrently. Training completed before this neural request.",
+  "browser_first_visible_text_ms": null,
+  "browser_first_playback_ms": null,
+  "speaker_first_audible_ms": null,
+  "spoken_complete": null,
+  "verification": {
+    "command": "uv run pytest tests/demo_latency/test_live_benchmark.py tests/test_live_streaming.py tests/persona_data/test_heldout.py -q",
+    "passed": 112,
+    "meaning": "Synthetic integrity tests; actual model evidence is separately retained in attempt-02."
+  },
+  "limitations": [
+    "One cold short request under shared-host contention does not establish warm or target-device latency.",
+    "PCM arrived after final text; this run does not demonstrate overlapping text/audio delivery.",
+    "Application-level per-sentence synthesis uses complete WAVs, not native neural audio-token streaming.",
+    "No listening, intelligibility ASR, voice-similarity score, browser playback, avatar or acoustic output was evaluated.",
+    "TTS termination reason is not exposed; complete transport does not prove native EOS or spoken completion."
+  ]
+}

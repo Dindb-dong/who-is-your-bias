@@ -34,6 +34,8 @@ def main(argv=None):
     text_train.add_argument("--gradient-accumulation", type=int, default=8)
     text_train.add_argument("--max-steps", type=int)
     text_train.add_argument("--device", default="cpu")
+    text_train.add_argument("--precision", choices=("float32", "bfloat16"), default="float32")
+    text_train.add_argument("--gradient-checkpointing", action="store_true")
     voice_train = commands.add_parser("train-voice")
     for key in ("dataset", "output", "upstream", "base-model", "tokenizer-model"):
         voice_train.add_argument("--"+key, type=Path, required=True)

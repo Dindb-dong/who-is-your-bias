@@ -1,0 +1,31 @@
+{
+  "schema_version": "execution-source-archive.v1",
+  "scope": "Actual pilot comparison evaluator and serving sources at completion, prior to expanding future plan fingerprint scope.",
+  "plan_sha256": "4bb2a3856ada4fec56db9df27e360f36d4b2d9ddde940b0461766b502f979193",
+  "archive_sha256": "4aa93555a89ba83a983dd47fd139be778dea10a5023819dfba27c7367037383a",
+  "files": {
+    "services/language/adapters.py": "ccd92dace3db5065f9af73d26958fcb045fbb3d650f0ead0b10636fe36a185c1",
+    "services/language/app.py": "8e9ae8d0b2e3be25d6fdbbac830f38c827f567d8bb2e26fb86cb7402ae8ff799",
+    "services/language/engine.py": "4de8fb45c173620e502539273a76ce9e708e8e12fee51060ae61fca8845a633c",
+    "services/language/requirements-adapter.txt": "66a43ff50713f25cc71213529074841f61a637acaa55212236ac7b2bafd183dc",
+    "services/language/requirements.txt": "925c22fead2bd564f8a0ca268d30e05533bfd2856338e7b800f6465dc4258f3b",
+    "services/language/schemas.py": "f9bea7bde3338b9b5c2e2c670a9ff7ad26d1857777e9d35c787b7f5ffa75da5e",
+    "src/bias/config.py": "c5a286c9c32cc18e7409075b87094ed1c7ff7cdd5f94f3cc359341a7df6aec3b",
+    "src/bias/context_budget.py": "cffce0af28994922cb50f1e2564456e99e6d0aef0c13893572ffae85c0a8eff9",
+    "src/bias/corpus.py": "16b9eef8a6fef0e20a7dd4099b470724e793dc14c698313d06fb679b87e9aeb0",
+    "src/bias/hybrid_retrieval.py": "d2bf0892205da0304187f421fd582e4aa23da6efe3fb78c2a56b2d69f1389095",
+    "src/bias/models.py": "1342ef5660b903e2bed04ed28f52e06ec1b1b39fddfb97f8c4b58f36fe13caca",
+    "src/bias/retrieval.py": "72b7b06718b762068fb932131fd6102cd3d8c5e54190b514ee27158aea8b86d9",
+    "src/bias/snapshots.py": "28659167b62d4de7354ccbe83ab4cc3c924891d8c6df2418a33d8755e7b51fc2",
+    "tools/adaptation_evaluation/__main__.py": "98cdf136d3e7352e42c01ccadb7cf51e13f5e36230a915c88064cced9ae2cf13",
+    "tools/adaptation_evaluation/local.py": "e9609da6819c8db350b888dc32408f2d5c49a703f8018c05bec5a21c456bc70e",
+    "tools/adaptation_evaluation/protocol.py": "9c0036957e5587fe88cf09971f86430150d8ff194471e97c78c16fd56753be1a",
+    "tools/adaptation_evaluation/run.py": "ead4af96d3ee25305611e776d8871bcba538a6d80715ed8cef0a4561c3803f57",
+    "tools/evaluation/observe.py": "857361e39a940958eef70e6f052e9453ae98676c8f931fcdd5af3ce78284f541",
+    "tools/evaluation/run.py": "25fb528cdf08ad9396a994eabd919a6956f991e7a839a7d6bc61afb09418f15d",
+    "tools/reference_evaluation/protocol.py": "781463b6c3bbccb9d02fe513b7595bc31bac837158257dcc02ef923eaf77b9fb",
+    "tools/reference_evaluation/run.py": "9e713a05d9e403d91278242d0a110193f3ec6f50764c79efb7ddf1aa873be17b"
+  },
+  "pilot_training_source_complete": false,
+  "limitation": "The earlier4-step training receipt predates final trainer changes and has no complete exact-source archive. It is only an execution smoke; the final balanced run uses its own exact training archive."
+}

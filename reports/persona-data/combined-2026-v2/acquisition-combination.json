@@ -1,0 +1,39 @@
+{
+  "schema_version": "persona-acquisition-combination.v1",
+  "created_at": "2026-11-11T14:08:15.482006+00:00",
+  "inputs": [
+    {
+      "acquisition_log_sha256": "5c9b656b8de6104fd706d49440b16b6d8f60950713f337a122c051639c7d532a",
+      "attempts": 10
+    },
+    {
+      "acquisition_log_sha256": "0c10b53393500783bc24771b5a2b1538daf44f6c75296f3603ae7a4020c8c662",
+      "attempts": 6
+    }
+  ],
+  "sources": [
+    "ted-2013",
+    "ted-2017",
+    "ted-2022-live",
+    "dwarkesh-2026",
+    "recode-2018",
+    "yc-2016",
+    "wired-2012",
+    "lex-049-2019",
+    "henry-ford-2008",
+    "time-2021-boca-chica",
+    "senate-launch-2014",
+    "house-space-cooperation-2004",
+    "senate-future-launch-2004",
+    "house-commercial-space-2005",
+    "senate-advanced-energy-2007",
+    "house-commercial-crew-2011"
+  ],
+  "attempts": 16,
+  "acquired": 16,
+  "failed": 0,
+  "acquisition_log_sha256": "9349fa1d5a08ffe620b308fbe3442c64c69d7208dfc264c1950d6c7f6c43fd21",
+  "original_acquisition_timestamps_preserved": true,
+  "source_bytes_unchanged": true,
+  "source_wording_distributed": false
+}

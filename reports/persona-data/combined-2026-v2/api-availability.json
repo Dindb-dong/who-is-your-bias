@@ -1,0 +1,293 @@
+{
+  "schema_version": "congress-api-availability.v1",
+  "exposure": "development",
+  "started_at": "2026-11-11T14:11:11.843071+00:00",
+  "transport": "in_process_asgi_testclient",
+  "llm_inference": false,
+  "tts_inference": false,
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "checks": [
+    {
+      "expected_source": "senate-launch-2014",
+      "question": "In 2014, why did you prefer fixed-price competition for government space launches over cost-plus?",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "grounded",
+      "retrieved_ids": [
+        "qa26-senate-launch-2014-turn-l03561",
+        "qa26-senate-launch-2014-turn-l03172",
+        "qa26-senate-launch-2014-turn-l02861",
+        "qa26-senate-launch-2014-turn-l03041"
+      ],
+      "citation_ids": [
+        "qa26-senate-launch-2014-turn-l03561",
+        "qa26-senate-launch-2014-turn-l03172"
+      ],
+      "expected_source_retrieved": true,
+      "expected_source_cited": true,
+      "response_text_sha256": "e4dc5945bbfad364c94d3bb59693f26c0b7d3ff07306306c81194c3405f4c60d"
+    },
+    {
+      "expected_source": "house-space-cooperation-2004",
+      "question": "In 2004, why were small space satellites intended for the Shuttle?",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "grounded",
+      "retrieved_ids": [
+        "qa26-house-space-cooperation-2004-turn-l02703",
+        "qa26-house-space-cooperation-2004-turn-l02644"
+      ],
+      "citation_ids": [
+        "qa26-house-space-cooperation-2004-turn-l02703",
+        "qa26-house-space-cooperation-2004-turn-l02644"
+      ],
+      "expected_source_retrieved": true,
+      "expected_source_cited": true,
+      "response_text_sha256": "e9584dedde849ad7a8b0e547dd609c5857d447a741ad25ce7a94a031af34d96e"
+    },
+    {
+      "expected_source": "senate-future-launch-2004",
+      "question": "In 2004, what is a meaningful prize to engage the private sector in space?",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "grounded",
+      "retrieved_ids": [
+        "qa26-senate-future-launch-2004-turn-l02989",
+        "qa26-house-space-cooperation-2004-turn-l02644"
+      ],
+      "citation_ids": [
+        "qa26-senate-future-launch-2004-turn-l02989",
+        "qa26-house-space-cooperation-2004-turn-l02644"
+      ],
+      "expected_source_retrieved": true,
+      "expected_source_cited": true,
+      "response_text_sha256": "71b88b067ea2a772605781ebb2290f5a801fb6e8e77845e1c46cb85289ba5638"
+    },
+    {
+      "expected_source": "house-commercial-space-2005",
+      "question": "In 2005, what was the Falcon I price for access to space compared to Pegasus?",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "grounded",
+      "retrieved_ids": [
+        "qa26-house-commercial-space-2005-turn-l04263"
+      ],
+      "citation_ids": [
+        "qa26-house-commercial-space-2005-turn-l04263"
+      ],
+      "expected_source_retrieved": true,
+      "expected_source_cited": true,
+      "response_text_sha256": "ac39e9b1cee2e5469e3fa41c2f0ff26e852d9328e06b806d22170b55dee8fd7a"
+    },
+    {
+      "expected_source": "senate-advanced-energy-2007",
+      "question": "In 2007, why did Tesla need lithium-ion cell and pack manufacturing in the United States?",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "grounded",
+      "retrieved_ids": [
+        "qa26-senate-advanced-energy-2007-turn-l02293"
+      ],
+      "citation_ids": [
+        "qa26-senate-advanced-energy-2007-turn-l02293"
+      ],
+      "expected_source_retrieved": true,
+      "expected_source_cited": true,
+      "response_text_sha256": "9d6b25fd6efb719b04a059a33893aa2170138b21ba81c9bff0a3d913207c0c56"
+    },
+    {
+      "expected_source": "house-commercial-crew-2011",
+      "question": "In 2011, why did government space contracts need well-defined terms and costs?",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "grounded",
+      "retrieved_ids": [
+        "qa26-house-commercial-crew-2011-turn-l03060",
+        "qa26-house-commercial-crew-2011-turn-l03800",
+        "qa26-house-commercial-crew-2011-turn-l03773",
+        "qa26-house-commercial-crew-2011-turn-l02974"
+      ],
+      "citation_ids": [
+        "qa26-house-commercial-crew-2011-turn-l03060",
+        "qa26-house-commercial-crew-2011-turn-l03800"
+      ],
+      "expected_source_retrieved": true,
+      "expected_source_cited": true,
+      "response_text_sha256": "a1873cc402f5431e5ce939e490f924da393f2285655cfa72d32b775a07c75ba5"
+    }
+  ],
+  "paraphrase_diagnostics": [
+    {
+      "expected_source": "senate-launch-2014",
+      "question": "In 2014, how would fixed-price competition for the basic launch vehicle relate to cost-plus?",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "insufficient",
+      "retrieved_ids": [],
+      "citation_ids": [],
+      "expected_source_retrieved": false,
+      "expected_source_cited": false,
+      "response_text_sha256": "1542d5a75f7e1cdbbcc664f33e020ef9cd22e8c76ad9d73240176eb192ca842d"
+    },
+    {
+      "expected_source": "house-space-cooperation-2004",
+      "question": "In March 2004, did satellites intended for the Shuttle have to be done on the Shuttle?",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "insufficient",
+      "retrieved_ids": [],
+      "citation_ids": [],
+      "expected_source_retrieved": false,
+      "expected_source_cited": false,
+      "response_text_sha256": "1542d5a75f7e1cdbbcc664f33e020ef9cd22e8c76ad9d73240176eb192ca842d"
+    },
+    {
+      "expected_source": "senate-future-launch-2004",
+      "question": "In 2004, what is a meaningful prize to engage the private sector in space?",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "grounded",
+      "retrieved_ids": [
+        "qa26-senate-future-launch-2004-turn-l02989",
+        "qa26-house-space-cooperation-2004-turn-l02644"
+      ],
+      "citation_ids": [
+        "qa26-senate-future-launch-2004-turn-l02989",
+        "qa26-house-space-cooperation-2004-turn-l02644"
+      ],
+      "expected_source_retrieved": true,
+      "expected_source_cited": true,
+      "response_text_sha256": "71b88b067ea2a772605781ebb2290f5a801fb6e8e77845e1c46cb85289ba5638"
+    },
+    {
+      "expected_source": "house-commercial-space-2005",
+      "question": "In 2005, what price did the Falcon I have compared to the Pegasus launch vehicle?",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "insufficient",
+      "retrieved_ids": [],
+      "citation_ids": [],
+      "expected_source_retrieved": false,
+      "expected_source_cited": false,
+      "response_text_sha256": "1542d5a75f7e1cdbbcc664f33e020ef9cd22e8c76ad9d73240176eb192ca842d"
+    },
+    {
+      "expected_source": "senate-advanced-energy-2007",
+      "question": "In 2007, why did Tesla need lithium-ion cell and pack manufacturing in the United States?",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "grounded",
+      "retrieved_ids": [
+        "qa26-senate-advanced-energy-2007-turn-l02293"
+      ],
+      "citation_ids": [
+        "qa26-senate-advanced-energy-2007-turn-l02293"
+      ],
+      "expected_source_retrieved": true,
+      "expected_source_cited": true,
+      "response_text_sha256": "9d6b25fd6efb719b04a059a33893aa2170138b21ba81c9bff0a3d913207c0c56"
+    },
+    {
+      "expected_source": "house-commercial-crew-2011",
+      "question": "In 2011, why were SpaceX launch vehicles sourced 100 percent in the United States?",
+      "provider": "evidence",
+      "temporal_mode": "historical",
+      "grounding_status": "insufficient",
+      "retrieved_ids": [],
+      "citation_ids": [],
+      "expected_source_retrieved": false,
+      "expected_source_cited": false,
+      "response_text_sha256": "1542d5a75f7e1cdbbcc664f33e020ef9cd22e8c76ad9d73240176eb192ca842d"
+    }
+  ],
+  "current_checks": [
+    {
+      "question": "현재 2030년 화성 탐사 계획은 뭐야?",
+      "temporal_mode": "current",
+      "grounding_status": "insufficient",
+      "retrieved_ids": [],
+      "citation_ids": [],
+      "response_text_sha256": "37e19ce910034401f6e1d66d7e5ff77f085b5dcc95ba8a9ffcfc073b9402d89b"
+    },
+    {
+      "question": "그건 왜?",
+      "temporal_mode": "current",
+      "grounding_status": "insufficient",
+      "retrieved_ids": [],
+      "citation_ids": [],
+      "response_text_sha256": "37e19ce910034401f6e1d66d7e5ff77f085b5dcc95ba8a9ffcfc073b9402d89b"
+    }
+  ],
+  "implementation_sha256": {
+    "tools/persona_data/congress_smoke.py": "f3cc7fab6343108e1ac8448af17355db590b1f44130c9bb0bdbdb9a09a207c13",
+    "tools/persona_data/congress.py": "c637a3ce69f9d163ba33d20074332aece2f02ba25b65b542bc071defb21080c4",
+    "tools/persona_data/pipeline.py": "3ca840342d1d645a8a9d9289ca32809954c3ada521bf36800497fb0be6be1ed9",
+    "src/bias/__init__.py": "5ce8591bb917837fe2b6d12beffc1b632ccff7e15b44c23aefcaa76da7d1cf42",
+    "src/bias/api.py": "f1389a67ecc32e966a9153b908880cfdb4487d3707ad093fedba9830c883040f",
+    "src/bias/behavior.py": "58810783d5e7010ff153303608c8db8cf3c0c16b4a74c7ac4c75695ce84cf1f4",
+    "src/bias/cli.py": "9c78fdde8b0fa4fd89abb2f27c95ee957bded68fc25e2251e8914fcc708b04b4",
+    "src/bias/compact_prompts.py": "032013e9c1a1c2420868cff31833628b25391e2a161ce5cd4435dd046ae5110e",
+    "src/bias/config.py": "c5a286c9c32cc18e7409075b87094ed1c7ff7cdd5f94f3cc359341a7df6aec3b",
+    "src/bias/context_budget.py": "cffce0af28994922cb50f1e2564456e99e6d0aef0c13893572ffae85c0a8eff9",
+    "src/bias/corpus.py": "16b9eef8a6fef0e20a7dd4099b470724e793dc14c698313d06fb679b87e9aeb0",
+    "src/bias/dialogue.py": "3c5aa9b2e959ce501a807711760683c89b069ebff3f0706b3e3bfd1d88c7455e",
+    "src/bias/engine.py": "1cccb003c81ebfcf5ad94b5e2b0a3d04380195454e7ebe28c52aef7b0246d51a",
+    "src/bias/evaluate.py": "757b7a0fc4b703b22c5555a84e2b17d31c847ca5867b27ca1f18d4ff8285b500",
+    "src/bias/grounding.py": "a3098cc9d39914226e89b3e6dad8c6b770f0c0eda3d28a3e3f8192d3488bf8a0",
+    "src/bias/hybrid_retrieval.py": "d2bf0892205da0304187f421fd582e4aa23da6efe3fb78c2a56b2d69f1389095",
+    "src/bias/ingest.py": "6136b8039f9326852cb8ddcd07ba1d2ee4fba2ce3ff2e74edd30d7793c3d31bc",
+    "src/bias/legacy_prompts.py": "c6b6e84ed4c9a8da6f01c6d9ada07934b8548bca8530f7f39d79ad8cb8a14dd7",
+    "src/bias/legacy_situations.py": "3f1a182e6c095bf30a00b0ead537fd1a8d4a80277b635d149a10b356ed2b0524",
+    "src/bias/lipsync.py": "05feac2d1041b4a6a09929227fba680ebbd669bca169807cac3976b1dd304063",
+    "src/bias/live.py": "730cf102e458f3f5ea48fc8cc604bd15ad994d54cc97d1771d1999891573fcfc",
+    "src/bias/models.py": "1342ef5660b903e2bed04ed28f52e06ec1b1b39fddfb97f8c4b58f36fe13caca",
+    "src/bias/motion.py": "8f0922adab913a33472dbb6920bbfb2ad5d82c0eb34ce7a7040435315bc4f288",
+    "src/bias/prompts.py": "baa7c142b293d27b612e00c14d2a316e2c6faffc82b4dd7578e9fa6a58f66edc",
+    "src/bias/providers.py": "e92f428eeefff17a35d0992a0951d9a1fb31620aed9d5516d8402712aef1b083",
+    "src/bias/qa_prompts.py": "040e790013e68c274487096cce889855ab3b1d5b3176c3c187d3244ec414e254",
+    "src/bias/request_work.py": "15fa420d3fdbe74651fa2dc73948ab2ef314ea83e5b089aece77375063506423",
+    "src/bias/retrieval.py": "72b7b06718b762068fb932131fd6102cd3d8c5e54190b514ee27158aea8b86d9",
+    "src/bias/segments.py": "49ae6689c25986335ed79770d0d3a89c0bece75df5d64938ab5f09c345a4a88b",
+    "src/bias/sessions.py": "b0f8b1725886250b919e321fa6eda142737088e782ba13f4f96ee3fc33b1fac6",
+    "src/bias/situations.py": "64ac395448105ced33a5249adef4125704c6acfb6aa1274bc29fc18b521a86a1",
+    "src/bias/snapshots.py": "28659167b62d4de7354ccbe83ab4cc3c924891d8c6df2418a33d8755e7b51fc2",
+    "src/bias/speech.py": "7948a52419250b08d40ac7851cafe58c432210cd5d19ed3f2467d99ebb6c11ff"
+  },
+  "limitations": [
+    "Developer-inspected source-availability questions, not a fresh ranking benchmark.",
+    "Source previews do not establish answer entailment, neural generation, speech or target-device latency.",
+    "Topic-word anchors were added after observing lexical abstention; original paraphrases remain separate diagnostics."
+  ],
+  "snapshot": {
+    "id": "musk-combined-2026-v2",
+    "as_of": "2026-11-11T14:08:38.928202+00:00",
+    "corpus_sha256": "57cead316fd009be5d19e34c4a70a3df0290a67d4a90192b5d1e0c58c1bfc622",
+    "current_evidence_since": "2026-01-01",
+    "current_dated_training_sources": 0,
+    "coverage_note": "Snapshot date limits availability; it does not imply contemporary coverage. Unknown event dates remain unknown.",
+    "knowledge_version": "elon-musk-original-2026.v1",
+    "style_version": "attributed-examples.v1-no-trained-adapter",
+    "voice_version": "reference-conditioned-baseline",
+    "appearance_version": "research-human-v2-proxy-not-2026-likeness"
+  },
+  "corpus": {
+    "sources": 15,
+    "evidence": 777,
+    "held_out_sources": 0,
+    "total_evidence": 1018
+  },
+  "retrieval": {
+    "backend": "lexical",
+    "embedding_model": null,
+    "embedding_revision": null,
+    "style_examples": false,
+    "prewarmed": false,
+    "startup_warmup_ms": null
+  },
+  "source_availability_passed": true,
+  "current_abstention_passed": true,
+  "paraphrase_sources_retrieved": 2,
+  "passed": true,
+  "completed_at": "2026-11-11T14:11:13.401435+00:00"
+}

@@ -1,0 +1,116 @@
+{
+  "schema_version": "text-adaptation-plan-summary.v1",
+  "plan_sha256": "4bb2a3856ada4fec56db9df27e360f36d4b2d9ddde940b0461766b502f979193",
+  "id": "qwen06-control-development.v1",
+  "created_at": "2026-11-11T13:55:08.828161+00:00",
+  "exposure": "development",
+  "corpus_sha256": "78665e13240fa6087be0371c3c9b931afc676873c1ec9f1f8e2b514126a03ca0",
+  "policy": {
+    "conditions": [
+      "facts",
+      "style",
+      "adapter"
+    ],
+    "max_tokens": 192,
+    "context_window": 8192,
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 42,
+    "factual_policy": "identical_complete_passages_all_conditions",
+    "adapter_style_policy": "identical_prompts",
+    "reference_answer_supplied": false,
+    "history_policy": "same_frozen_context_all_conditions"
+  },
+  "implementation_sha256": {
+    "tools/adaptation_evaluation/protocol.py": "9c0036957e5587fe88cf09971f86430150d8ff194471e97c78c16fd56753be1a",
+    "tools/adaptation_evaluation/run.py": "ead4af96d3ee25305611e776d8871bcba538a6d80715ed8cef0a4561c3803f57",
+    "src/bias/context_budget.py": "cffce0af28994922cb50f1e2564456e99e6d0aef0c13893572ffae85c0a8eff9",
+    "src/bias/snapshots.py": "28659167b62d4de7354ccbe83ab4cc3c924891d8c6df2418a33d8755e7b51fc2",
+    "src/bias/config.py": "c5a286c9c32cc18e7409075b87094ed1c7ff7cdd5f94f3cc359341a7df6aec3b",
+    "src/bias/corpus.py": "16b9eef8a6fef0e20a7dd4099b470724e793dc14c698313d06fb679b87e9aeb0",
+    "src/bias/models.py": "1342ef5660b903e2bed04ed28f52e06ec1b1b39fddfb97f8c4b58f36fe13caca",
+    "src/bias/retrieval.py": "72b7b06718b762068fb932131fd6102cd3d8c5e54190b514ee27158aea8b86d9",
+    "src/bias/hybrid_retrieval.py": "d2bf0892205da0304187f421fd582e4aa23da6efe3fb78c2a56b2d69f1389095",
+    "tools/reference_evaluation/run.py": "9e713a05d9e403d91278242d0a110193f3ec6f50764c79efb7ddf1aa873be17b",
+    "tools/reference_evaluation/protocol.py": "781463b6c3bbccb9d02fe513b7595bc31bac837158257dcc02ef923eaf77b9fb",
+    "tools/evaluation/observe.py": "857361e39a940958eef70e6f052e9453ae98676c8f931fcdd5af3ce78284f541",
+    "tools/evaluation/run.py": "25fb528cdf08ad9396a994eabd919a6956f991e7a839a7d6bc61afb09418f15d"
+  },
+  "cases": [
+    {
+      "id": "original-positive-001-ko",
+      "language": "ko",
+      "factual_ids": [
+        "qa26-henry-ford-2008-turn-00015"
+      ],
+      "style_ids": [
+        "qa26-dwarkesh-2026-turn-00046"
+      ],
+      "factual_sha256": "2edd66ec3b3760b9714e9d6c8d7e58202a8180d6de2804385ed18e1b95889895",
+      "reference_sha256": "8d5266b21eb6f16fd39a09fcc1f6aef46b60f3747a844681c1015bf88cb08651",
+      "question_sha256": "5c304423b61e7337e7224ddf9ce8be0b496b6c1796871b0e051dc7a743ba1f46",
+      "prompt_sha256": {
+        "facts": "6bf040d625bcc8128fd5bac15e073401ce62176c9bae51a4ec984db15e0e22c7",
+        "style": "99437b189810789275d0a6cb4c97246b0f44e071ddcd22599fab00e0096b7dd2",
+        "adapter": "99437b189810789275d0a6cb4c97246b0f44e071ddcd22599fab00e0096b7dd2"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "original-positive-002-en",
+      "language": "en",
+      "factual_ids": [
+        "qa26-henry-ford-2008-turn-00056"
+      ],
+      "style_ids": [
+        "qa26-dwarkesh-2026-turn-00046"
+      ],
+      "factual_sha256": "6eb932e962a508d821b11a91a3cf0149cbc71e9e6135f9e08da023269a3b8ab0",
+      "reference_sha256": "d6f835123b268393d9cf0852a8084c2a660656b2a9f2f5c96bfb76872973e55b",
+      "question_sha256": "5fd8a1629a6839d6e993ba288fd58f2decea314abe4b85c088ad036eec508030",
+      "prompt_sha256": {
+        "facts": "8036bad57b57b576d228b38c5aa59d12353959fb1177df9710a0a995b1a1a37e",
+        "style": "5e79ef8cbdbe9053d98dc2f5c75915e844db21c3fec29e17ec3ea71bd416b29a",
+        "adapter": "5e79ef8cbdbe9053d98dc2f5c75915e844db21c3fec29e17ec3ea71bd416b29a"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "original-positive-003-en",
+      "language": "en",
+      "factual_ids": [
+        "qa26-dwarkesh-2026-turn-00937"
+      ],
+      "style_ids": [
+        "qa26-dwarkesh-2026-turn-00046"
+      ],
+      "factual_sha256": "9db6ba7372206992201cc3ee4e77aa6cc35f33f435d97ad98ce394389f289ed8",
+      "reference_sha256": "5eba1d49196aee030c90bec97cc05c43532a245cfd9a482a473561e6a76e51fe",
+      "question_sha256": "2bef245c2d8604584197fbd5274aec01189bcd5d60c849823d4839039a0aa06a",
+      "prompt_sha256": {
+        "facts": "dcf62e55f1e2806209894edd5c01bd65e649010a1f9ce44e4e11363d9d3f5932",
+        "style": "f1004922367af1f9dd905fac872c1c61a6e9d43dfa08cd22d2e6d89e9697f112",
+        "adapter": "f1004922367af1f9dd905fac872c1c61a6e9d43dfa08cd22d2e6d89e9697f112"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "current-2030-unavailable",
+      "language": "en",
+      "factual_ids": [],
+      "style_ids": [],
+      "factual_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "question_sha256": "f4a7bc4f8317cf9b1c08b26d8de6acd0d4773518c3ccb93827d9c193e5ed21d2",
+      "prompt_sha256": {
+        "facts": "293089a50e55c269cd99df0dcfe213c149fa8db58e4d80a074c7eab69705a1ff",
+        "style": "293089a50e55c269cd99df0dcfe213c149fa8db58e4d80a074c7eab69705a1ff",
+        "adapter": "293089a50e55c269cd99df0dcfe213c149fa8db58e4d80a074c7eab69705a1ff"
+      },
+      "style_contrast_present": false
+    }
+  ],
+  "source_wording_distributed": false,
+  "human_review": "ungraded",
+  "efficacy_claim": false
+}

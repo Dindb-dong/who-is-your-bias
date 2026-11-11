@@ -1,0 +1,29 @@
+{
+  "schema_version": "hybrid-attempt-audit.v1",
+  "checked_at": "2026-11-11T14:23:53.565811+00:00",
+  "attempt_file": "hybrid-api.v1.json",
+  "attempt_sha256": "ec9af557d40dc7f99594d94bf02303ab7aecb5ef26998ea4acea9ee75fa41521",
+  "recorded_status": "failed",
+  "failure_stage": "post_run_integrity",
+  "model_inventory_difference": {
+    "embedding": {
+      "added": [
+        "README.md"
+      ],
+      "removed": [],
+      "changed": []
+    },
+    "reranker": {
+      "added": [],
+      "removed": [],
+      "changed": []
+    }
+  },
+  "all_preexisting_model_files_unchanged": true,
+  "input_integrity_stable": true,
+  "limitations": [
+    "The original failed attempt is preserved unchanged.",
+    "The additional E5 README.md was cached during model loading; this is not a model-weight mutation.",
+    "The corrected recorder freezes its complete file inventory after startup and before the same six queries."
+  ]
+}
