@@ -82,10 +82,16 @@ def import_review(report_path: str | Path, annotations_path: str | Path, output_
             raise MediaError("Accepted annotations need a verified source clock")
         intervals = []
         audio_intervals = []
+        complete_audio_intervals = []
         for run in row["speech"]["runs"]:
             spans = [run[field] for field in ("question_window_seconds", "answer_window_seconds") if run.get(field)]
             if spans:
-                audio_intervals.append([min(span[0] for span in spans), max(span[1] for span in spans)])
+                interval = [min(span[0] for span in spans), max(span[1] for span in spans)]
+                audio_intervals.append(interval)
+                if len(spans) == 2 and all(run.get(field) is not None for field in (
+                    "question_end_seconds_candidate", "answer_start_seconds_candidate", "answer_end_seconds_candidate",
+                )):
+                    complete_audio_intervals.append(interval)
         visual_intervals = [[window["window_start_seconds"], window["window_end_seconds"]] for window in row["visual_windows"]]
         intervals = audio_intervals + visual_intervals
         if not intervals:
@@ -137,8 +143,8 @@ def import_review(report_path: str | Path, annotations_path: str | Path, output_
             a_end = finite_number(boundaries["answer_end_seconds"], "answer ending", a_start + 0.001, upper)
             if a_start < q_end:
                 raise MediaError("Overlapping turns are not a positive pre-answer pause")
-            if not any(run.get("question_end_seconds_candidate") is not None and run.get("answer_start_seconds_candidate") is not None and run.get("answer_end_seconds_candidate") is not None for run in row["speech"]["runs"]):
-                raise MediaError("The observed audio does not cover complete turn boundaries")
+            if not any(lo <= q_end <= a_start < a_end <= hi for lo, hi in complete_audio_intervals):
+                raise MediaError("Reviewed pause requires all boundaries inside one complete, continuously observed audio run")
             pause = round(a_start - q_end, 6)
         if not validated and pause is None:
             raise MediaError("An accepted review must provide at least one actual observation")

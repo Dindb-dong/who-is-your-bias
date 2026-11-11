@@ -296,6 +296,46 @@ def test_verified_boundaries_produce_pause_separate_from_candidates(tmp_path):
     assert result["accepted"][0]["pre_answer_pause_seconds"] == 1
 
 
+def test_visual_coverage_cannot_authorize_acoustic_boundaries(tmp_path):
+    file, report, review = review_fixture(tmp_path)
+    report["entries"][0]["visual_windows"].append({"window_start_seconds": 100, "window_end_seconds": 110, "exclusions": []})
+    file.write_text(json.dumps(report))
+    review["report_sha256"] = sha256(file)
+    approve(review)
+    review["entries"][0]["acoustic_boundaries"] = {"question_end_seconds": 101, "answer_start_seconds": 102, "answer_end_seconds": 103}
+    with pytest.raises(MediaError, match="one complete, continuously observed audio run"):
+        import_payload(tmp_path, file, review)
+    assert not (tmp_path / "reviewed.json").exists()
+
+
+def test_pause_cannot_bridge_two_observed_audio_runs(tmp_path):
+    file, report, review = review_fixture(tmp_path)
+    later = dict(report["entries"][0]["speech"]["runs"][0], question_window_seconds=[20, 21.5], answer_window_seconds=[22.5, 26],
+                 question_end_seconds_candidate=21.5, answer_start_seconds_candidate=22.5, answer_end_seconds_candidate=26)
+    report["entries"][0]["speech"]["runs"].append(later)
+    file.write_text(json.dumps(report))
+    review["report_sha256"] = sha256(file)
+    approve(review)
+    review["entries"][0]["acoustic_boundaries"] = {"question_end_seconds": 11.5, "answer_start_seconds": 12.5, "answer_end_seconds": 26}
+    with pytest.raises(MediaError, match="one complete, continuously observed audio run"):
+        import_payload(tmp_path, file, review)
+    assert not (tmp_path / "reviewed.json").exists()
+
+
+def test_complete_turn_in_another_run_cannot_authorize_partial_audio(tmp_path):
+    file, report, review = review_fixture(tmp_path)
+    partial = dict(report["entries"][0]["speech"]["runs"][0], question_window_seconds=[20, 21.5], answer_window_seconds=[22.5, 26],
+                   question_end_seconds_candidate=21.5, answer_start_seconds_candidate=None, answer_end_seconds_candidate=26)
+    report["entries"][0]["speech"]["runs"].append(partial)
+    file.write_text(json.dumps(report))
+    review["report_sha256"] = sha256(file)
+    approve(review)
+    review["entries"][0]["acoustic_boundaries"] = {"question_end_seconds": 21.5, "answer_start_seconds": 22.5, "answer_end_seconds": 26}
+    with pytest.raises(MediaError, match="one complete, continuously observed audio run"):
+        import_payload(tmp_path, file, review)
+    assert not (tmp_path / "reviewed.json").exists()
+
+
 def test_overlapping_speech_not_positive_pause(tmp_path):
     file, _, review = review_fixture(tmp_path)
     approve(review)
