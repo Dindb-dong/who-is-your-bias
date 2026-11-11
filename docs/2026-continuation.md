@@ -271,14 +271,42 @@ build, **four avatar-structure tests**, corpus validation, and the preserved
 historical retrieval regression also passed. Actual neural training, generation,
 and speech were separately executed in the documented optional environments.
 
-The new branch's browser checks and exact final commit status are tracked in
-the pull request's CI checks. A prior PR's successful run is not substituted for
-validation of a later commit.
+The continuation's [GitHub Actions run](https://github.com/Dindb-dong/who-is-your-bias/actions/runs/43039375289) failed in FFmpeg setup on both attempts. Neither reached browser assertions. Automatic validation moved to the [local checks](deployment.md#local-validation).
 
-The first continuation CI run remained in FFmpeg package installation for several
-minutes, whereas that step took 21 seconds in the prior successful PR #13 run.
-The workflow now reuses FFmpeg when present and otherwise performs a bounded
-package installation with explicit connection timeouts and a four-minute step
-limit. FFmpeg was not preinstalled on the inspected earlier runner. The actual
-browser suite and its job deadline were retained; setup failure remains an
-explicit failed check.
+On the M4 Pro, the first local browser run with Chrome 157 and seven workers
+passed 24 of 30 scenarios. Two avatar auditions exceeded the test deadline and
+four mobile live-stream scenarios timed out waiting for the studio. The same
+Chrome binary, assertions, and timeouts passed all 30 with two workers (2m 30s).
+Playwright's pinned 158 Headless Shell passed three of four studio smoke tests,
+with the fourth failing to capture a full-page mobile screenshot. Full Chromium
+158 passed all 30 cases with two workers (2.4 minutes) and is the local default.
+Python 3.12 passed 785 tests and skipped three (Torch, Pillow, and Blender).
+The 181 web tests, four avatar structure tests, corpus validation, and 39
+graded retrieval checks passed.
+
+## Apple Silicon inference pilot
+
+[Local setup](deployment.md#apple-silicon-text-inference) uses a verified
+Qwen3-4B-Instruct-2507 Q8_0 checkpoint on an Apple M4 Pro (48 GB, macOS 27.2).
+Both runs used llama.cpp b11669 (620d2225c), the same GGUF, four CPU threads,
+one slot, an 8,192-token context, a 256-token output cap, temperature zero,
+seed 42, and prompt caching disabled. Metal used `--device MTL0 --n-gpu-layers 99`.
+A verbose startup confirmed that all 37 layers were offloaded to the GPU.
+The CPU control used `--device none --n-gpu-layers 0`.
+
+The table times the first non-whitespace text and stream completion at
+`/api/chat/stream`. Each row used a fresh session in behavior mode with the
+default committed Q&A corpus. The two devices returned identical text for all
+three requests.
+
+| Question | CPU first / complete | Metal first / complete | Result on both devices |
+| --- | ---: | ---: | --- |
+| Why are you boring? | 9.05 / 10.50 s | 1.12 / 1.94 s | Completed with the allowed citation |
+| Boring Company는 왜 로스앤젤레스 아래에 터널을 파려고 했어? | 10.29 / 19.30 s | 1.39 / 6.05 s | Completed with a translated citation marker that the app could not link |
+| What did you have for breakfast this morning? | 2.53 / 3.19 ms | 2.13 / 2.64 ms | Evidence gate abstained before inference |
+
+These one-pass timings describe local text transport. Factual support,
+persona likeness, and audio timing await separate evaluation. Keep the model
+opt-in while Korean citation behavior is unresolved. A separate PyTorch
+2.14.0 tensor probe completed forward and backward on `mps:0` in FP32 and
+BF16. A model-level LoRA run on MPS remains pending.

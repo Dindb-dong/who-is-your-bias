@@ -9,6 +9,8 @@ export default defineConfig({
   // mobile scenario. Keep each assertion bounded; allow the scenario to finish.
   timeout: process.env.CI ? 120_000 : 60_000,
   use: {
+    // Full Chromium supports the mobile full-page captures used by the suite.
+    channel: 'chromium',
     baseURL: 'http://127.0.0.1:8000',
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',

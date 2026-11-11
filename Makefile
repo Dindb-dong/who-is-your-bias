@@ -13,7 +13,7 @@ test: evaluate
 	npm run check
 	node --test tools/avatar_audition.test.mjs
 test-e2e:
-	npm run test:e2e
+	npm run test:e2e -- --workers=2
 evaluate:
 	uv run bias --corpus data/personas/elon-musk evaluate --fail-on-regression --output reports/local/retrieval.json
 serve:
