@@ -1,0 +1,93 @@
+{
+  "schema_version": "actual-qa-reference.v1",
+  "id": "qa-v2-qwen4b-2026-11-11",
+  "frozen_at": "2026-11-11T04:24:37.924785+00:00",
+  "corpus_sha256": "5514c261956fdcf91500607c8275713308f65c307884d9bbc72d4afc4c98e941",
+  "source_manifest_sha256": "14dc4b2a65d44d2077c0dbd58aff9829ff20dde90280f15c3297fd65d7fc00f8",
+  "implementation_sha256": {
+    "src/bias/models.py": "66aacccfb0751ddf38f1f1f02e6c23d732ad1392b2ac13f5e6c971d1dd439fd7",
+    "src/bias/corpus.py": "8ddf6b10a58aef56dcd52aa9881ad350d18c1df91667c52987b470909bf1cdcb",
+    "src/bias/retrieval.py": "72b7b06718b762068fb932131fd6102cd3d8c5e54190b514ee27158aea8b86d9",
+    "src/bias/situations.py": "64ac395448105ced33a5249adef4125704c6acfb6aa1274bc29fc18b521a86a1",
+    "src/bias/qa_prompts.py": "040e790013e68c274487096cce889855ab3b1d5b3176c3c187d3244ec414e254",
+    "tools/reference_evaluation/protocol.py": "781463b6c3bbccb9d02fe513b7595bc31bac837158257dcc02ef923eaf77b9fb",
+    "tools/reference_evaluation/run.py": "9e713a05d9e403d91278242d0a110193f3ec6f50764c79efb7ddf1aa873be17b"
+  },
+  "retriever_version": "qa-bm25-situation.v3",
+  "prompt_version": "original-qa.v1",
+  "taxonomy_version": "situations.v1",
+  "evaluation_split": "test",
+  "selection_rule": "all_reviewed_original_exchanges_in_split",
+  "cases": [
+    {
+      "id": "qa-lex-400-2023-compute-efficiency",
+      "reference_id": "qa-lex-400-2023-compute-efficiency",
+      "source_event_id": "lex-400-2023",
+      "language": "en",
+      "question_sha256": "156e9c262bef563c491c4294499c4e8f638240bc7c5ebc01da229923f45f7c85",
+      "answer_sha256": "02bddab24e77a52496c9824240aacc6f0d374fc8fabcc83d7f10a8e9407aba1c"
+    },
+    {
+      "id": "qa-lex-400-2023-loneliness",
+      "reference_id": "qa-lex-400-2023-loneliness",
+      "source_event_id": "lex-400-2023",
+      "language": "en",
+      "question_sha256": "018d0fdda0bc8151327e3c8c1b4ddb411ed29dd4230ab209eb45016500f0f0ca",
+      "answer_sha256": "1ff0387f6e71ba727d29f5a8d066880fa380b91356c62745a956df7679f0429c"
+    },
+    {
+      "id": "qa-lex-400-2023-trust",
+      "reference_id": "qa-lex-400-2023-trust",
+      "source_event_id": "lex-400-2023",
+      "language": "en",
+      "question_sha256": "92db0e416a41c066e6f440843aa1ea44c96232beee5372e3ea329411a6872e1b",
+      "answer_sha256": "b95642c1b659639469b3b963be9e2fb1e6b12901c4d02d83b8d13d1d68ca3fe8"
+    },
+    {
+      "id": "qa-lex-400-2023-wellbeing",
+      "reference_id": "qa-lex-400-2023-wellbeing",
+      "source_event_id": "lex-400-2023",
+      "language": "en",
+      "question_sha256": "d74a2b9ed329271d6c88885b57a607e1151bc313d5139bde9b2e0b35b3885faf",
+      "answer_sha256": "f58825739cb7401e62cb866183a7e64309d4e2cdad9205471f151305533a718b"
+    },
+    {
+      "id": "qa-lex-438-2024-engineering",
+      "reference_id": "qa-lex-438-2024-engineering",
+      "source_event_id": "lex-438-2024",
+      "language": "en",
+      "question_sha256": "686f184b85bfb4b12e42707ab54b4e7cf7330aca6ec84bac257c48ef3c1734cd",
+      "answer_sha256": "8037864bed7221ced20479172c0f381c650f324d3a4e1acc1b58d8a8cb05f233"
+    },
+    {
+      "id": "qa-lex-438-2024-risk",
+      "reference_id": "qa-lex-438-2024-risk",
+      "source_event_id": "lex-438-2024",
+      "language": "en",
+      "question_sha256": "6519da12e4d682ea0fcdb47e2640595b5cf8d9be0c1b5e1d7430264638d2c35c",
+      "answer_sha256": "951d598486364595184eb9c0aa689d6fc05b72f6325b92f924af6c440556b2ac"
+    },
+    {
+      "id": "qa-lex-438-2024-success",
+      "reference_id": "qa-lex-438-2024-success",
+      "source_event_id": "lex-438-2024",
+      "language": "en",
+      "question_sha256": "f2f803aa3ff6d10efc1df70e63b169c0e91b6b7bc1d4789eb6cdad5262e5f2c9",
+      "answer_sha256": "8ed02ea23e81bf7c39c7465913f37f2744fe77d2e5fba53802239b76f85d2eae"
+    },
+    {
+      "id": "qa-lex-438-2024-time",
+      "reference_id": "qa-lex-438-2024-time",
+      "source_event_id": "lex-438-2024",
+      "language": "en",
+      "question_sha256": "baf60bff50176e84488283c98b6d136fd59d85aba60ee1f7d4754823ee2138a3",
+      "answer_sha256": "82fff1b6818183b5643541d8b7c88174c14ad1cb6962882e23af6b21262cf952"
+    }
+  ],
+  "limitations": [
+    "A small source-event pilot, not evidence of population-level persona fidelity.",
+    "Complete events and their declared mirrors are withheld from retrieval; pretraining exposure is unknown.",
+    "Source excerpts and full locally materialized exchanges are different experiments and have different corpus hashes.",
+    "Lexical overlap is diagnostic only; human and model-assisted judgments are reported separately."
+  ]
+}

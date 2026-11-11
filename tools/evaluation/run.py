@@ -42,7 +42,15 @@ LIMITATIONS = [
 
 
 def fingerprint_corpus(corpus: Corpus) -> str:
-    payload = {"profile": corpus.persona.model_dump(mode="json"), "sources": [corpus.sources[key].model_dump(mode="json") for key in sorted(corpus.sources)], "evidence": [corpus.evidence[key].model_dump(mode="json") for key in sorted(corpus.evidence)]}
+    # An absent additive Q&A field must not rewrite the identity of an archived
+    # summary corpus. New Q&A records retain their complete exchange payload.
+    records = []
+    for key in sorted(corpus.evidence):
+        record = corpus.evidence[key].model_dump(mode="json")
+        if record.get("question_answer") is None:
+            record.pop("question_answer", None)
+        records.append(record)
+    payload = {"profile": corpus.persona.model_dump(mode="json"), "sources": [corpus.sources[key].model_dump(mode="json") for key in sorted(corpus.sources)], "evidence": records}
     return hashlib.sha256(json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
 
 

@@ -32,7 +32,7 @@ The [proposal alignment audit](proposal-alignment.md) maps the original **2026-2
 | 2 | Prepared presentation media and live Q&A | Actual Qwen3-TTS → MuseTalk presentation artifact, audio/video timing verification, and a measured live question-to-speech path |
 | 3 | Situation-linked voice/motion quality | Reviewed observable features tied to Q&A, independent source-event evaluation, real listening judgments, and latency measurements on the demonstration hardware |
 
-The immediate defect is that the query classifier's situation labels never exactly match any indexed corpus label, so C's score multiplier does not activate. The current B/C corpus also contains summaries instead of original question/answer pairs. Fix those data and retrieval conditions before interpreting C as the proposal's situation-aware experiment. Preserve existing results as historical runs of their original conditions.
+The original-Q&A and shared-taxonomy milestone is implemented. Full v2 materialization contains 80 train / four development / eight test exchanges. The first frozen same-model experiment completed 24/24 responses; B/C retrieved no examples on all eight held-out questions, so C superiority is not established. See [the recorded experiment](reference-evaluation.md). Subsequent retrieval changes need a new version and fresh independent evaluation. Preserve existing results as historical runs of their original conditions.
 
 ## Fidelity ladder
 

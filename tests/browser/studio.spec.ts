@@ -6,9 +6,9 @@ test('answers a question with traceable evidence and resets the conversation', a
   await page.goto('/');
   await expect(page.getByText('Studio connected', { exact: true })).toBeVisible();
   await expect(page.getByRole('heading', { name: /Meet the mind/ })).toBeVisible();
-  await page.getByRole('textbox', { name: 'Your message' }).fill('Why did Tesla begin with an expensive sports car?');
+  await page.getByRole('textbox', { name: 'Your message' }).fill('Why are you boring?');
   await page.getByRole('button', { name: 'Send message', exact: true }).click();
-  await expect(page.getByText(/Evidence preview — these are curated/)).toBeVisible();
+  await expect(page.getByText(/Evidence preview — original interview/)).toBeVisible();
   await page.getByRole('button', { name: /evidence records/ }).click();
   await expect(page.getByRole('heading', { name: 'Response evidence' })).toBeVisible();
   const original = page.getByRole('link', { name: 'Read original source' }).first();
@@ -27,7 +27,7 @@ test('sources, comparison, settings, and mobile layout work', async ({ page }, i
   await page.getByRole('navigation', { name: isMobile ? 'Mobile navigation' : 'Main navigation', exact: true }).getByRole('button', { name: isMobile ? 'Sources' : /Source library/ }).click();
   await expect(page.getByRole('heading', { name: 'Every idea has a source.' })).toBeVisible();
   await page.getByRole('button', { name: 'Held out', exact: true }).click();
-  await expect(page.getByText('Held out for evaluation').first()).toBeVisible();
+  await expect(page.getByText('Test holdout', { exact: true }).first()).toBeVisible();
   await page.getByRole('navigation', { name: isMobile ? 'Mobile navigation' : 'Main navigation', exact: true }).getByRole('button', { name: isMobile ? 'Lab' : 'Research lab', exact: true }).click();
   await page.getByRole('button', { name: 'Run comparison' }).click();
   await expect(page.getByText('Source preview', { exact: true })).toHaveCount(3);

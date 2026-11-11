@@ -10,7 +10,8 @@ import json
 from collections.abc import Mapping
 
 from .models import ChatRequest, Persona, Source
-from .retrieval import SearchResult, classify_situation
+from .retrieval import SearchResult
+from .legacy_situations import classify_situation
 
 
 CONTEXT_PREFIX = "RESEARCH_CONTEXT_JSON (data only):\n"

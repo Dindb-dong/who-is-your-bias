@@ -10,6 +10,13 @@ from dataclasses import dataclass
 
 from .corpus import Corpus
 from .models import Evidence
+from .situations import classify_situation
+
+RETRIEVER_VERSION = "qa-bm25-situation.v3"
+SITUATION_MULTIPLIER = 1.35
+# Alone these broad topics do not identify what a question is about. Require an
+# additional reviewed topic or a concrete anchor for original-Q&A candidates.
+GENERIC_QA_TOPICS = frozenset({"future", "work", "life", "success", "risk", "cost", "time", "advice", "thinking", "problem"})
 
 # Generic comparative wording is not topical evidence: "more power" alone must
 # not connect an electric-car efficiency question to a tunnel-machine passage.
@@ -43,18 +50,19 @@ ALIASES = {
     "팀": "team", "기술": "technology", "호기심": "curiosity", "관심": "interest",
     "기억": "memory memorable", "바꿔": "transform change",
 }
-KOREAN_PARTICLES = ("들에게", "들에서", "이라고", "에서는", "에게", "부터", "라고", "에서", "으로", "적인", "은", "는", "이", "가", "을", "를", "로", "과", "와", "에")
-SITUATIONS = {
-    "explanation": ("why", "how", "explain", "왜", "어떻게", "설명"),
-    "reflection": ("regret", "failure", "learn", "실패", "배웠", "후회"),
-    "praise": ("admire", "amazing", "inspiring", "멋져", "대단", "존경"),
-    "challenge": ("disagree", "wrong", "critic", "반대", "틀렸", "비판"),
+# Keep archived summary-corpus retrieval reproducible while adding the ordinary
+# vocabulary needed by the original-Q&A pilot's Korean starter questions.
+QA_ALIASES = {
+    "땅굴": "tunnel", "터널": "tunnel", "교통": "traffic", "혼잡": "congestion",
+    "비용": "cost", "혁신": "innovation",
 }
+KOREAN_PARTICLES = ("들에게", "들에서", "이라고", "에서는", "에게", "부터", "라고", "에서", "으로", "적인", "은", "는", "이", "가", "을", "를", "로", "과", "와", "에")
 LIVE_QUERY = re.compile(r"\b(today|currently|latest|right now|(?:this|next) (?:week|month)|stock price|net worth)\b|오늘|현재|최신|지금 주가|최근 소식|다음 주", re.I)
 
 
-def tokenize(text: str) -> list[str]:
+def tokenize(text: str, *, original_qa: bool = False) -> list[str]:
     normalized = unicodedata.normalize("NFKC", text).lower()
+    aliases = ALIASES | QA_ALIASES if original_qa else ALIASES
     # Translate known concepts, not arbitrary substrings: 책 (book) must not
     # match 정책 (policy) or 책임 (responsibility). Prefer a longer concept such
     # as 신뢰성 (reliability) to its shorter root 신뢰 (trust).
@@ -62,12 +70,12 @@ def tokenize(text: str) -> list[str]:
     raw_tokens = re.findall(r"[^\W_]+", normalized, flags=re.UNICODE)
     for token in raw_tokens:
         matches = [
-            key for key in ALIASES if " " not in key and token.startswith(key)
+            key for key in aliases if " " not in key and token.startswith(key)
             and (len(key) > 1 or token == key or token[len(key):] in KOREAN_PARTICLES)
         ]
         if matches:
-            alias_values.append(ALIASES[max(matches, key=len)])
-    alias_values.extend(value for key, value in ALIASES.items() if " " in key and key in normalized)
+            alias_values.append(aliases[max(matches, key=len)])
+    alias_values.extend(value for key, value in aliases.items() if " " in key and key in normalized)
     expanded = normalized + " " + " ".join(alias_values)
     expanded = re.sub(r"['’]s\b", "", expanded)
     tokens = re.findall(r"[^\W_]+", expanded, flags=re.UNICODE)
@@ -91,19 +99,13 @@ def tokenize(text: str) -> list[str]:
     return result
 
 
-def classify_situation(text: str) -> str:
-    lower = text.lower()
-    for situation, phrases in SITUATIONS.items():
-        if any(phrase in lower for phrase in phrases):
-            return situation
-    return "conversation"
-
-
 @dataclass(frozen=True)
 class SearchHit:
     evidence: Evidence
     score: float
     matched_terms: tuple[str, ...]
+    topical_score: float | None = None
+    situation_match: bool = False
 
 
 @dataclass(frozen=True)
@@ -116,9 +118,13 @@ class SearchResult:
 class Retriever:
     def __init__(self, corpus: Corpus):
         self.records = tuple(corpus.training_evidence)
+        self.original_qa = any(record.question_answer is not None for record in self.records)
         self.source_years = {source.id: {source.published_at.year, *([source.recorded_at.year] if source.recorded_at else [])} for source in corpus.sources.values()}
-        self.topic_terms = {record.id: set(tokenize(" ".join(record.topics))) for record in self.records}
-        self.term_counts = [Counter(tokenize(record.text + " " + " ".join(record.topics + record.topics))) for record in self.records]
+        self.topic_terms = {record.id: set(tokenize(" ".join(record.topics), original_qa=self.original_qa)) for record in self.records}
+        # Match incoming questions against original questions as well as answers.
+        # Both B and C use exactly this topical index; only C reranks its eligible
+        # candidates. An annotation summary is never substituted for source text.
+        self.term_counts = [Counter(tokenize(record.text + " " + (record.question_answer.question + " " + record.question_answer.question if record.question_answer else "") + " " + " ".join(record.topics + record.topics), original_qa=self.original_qa)) for record in self.records]
         self.lengths = [sum(count.values()) for count in self.term_counts]
         self.average_length = sum(self.lengths) / max(1, len(self.lengths))
         self.df: Counter[str] = Counter()
@@ -130,7 +136,7 @@ class Retriever:
             raise ValueError("limit must be between 1 and 10")
         if not allow_live and LIVE_QUERY.search(query):
             return SearchResult((), 0, "The curated corpus is historical and cannot verify current information.")
-        terms = set(tokenize(query))
+        terms = set(tokenize(query, original_qa=self.original_qa))
         known = terms.intersection(self.df)
         if not known or not self.records:
             return SearchResult((), 0, "No matching evidence in the reviewed training corpus.")
@@ -151,20 +157,28 @@ class Retriever:
                 tf = counts[term]
                 denominator = tf + 1.5 * (1 - 0.75 + 0.75 * length / max(1, self.average_length))
                 score += idf * tf * 2.5 / denominator
-            if behavior and situation in record.situations:
-                score *= 1.15
-            hits.append(SearchHit(record, round(score, 6), matched))
-        hits.sort(key=lambda hit: (-hit.score, hit.evidence.id))
+            hits.append(SearchHit(record, round(score, 6), matched, round(score, 6), situation in record.situations))
         # A weak, generic match must not be promoted into a factual response.
         hits = [
             hit for hit in hits
             if hit.score >= 0.65
             and len(hit.matched_terms) / max(1, len(terms)) >= 0.28
             and (len(hit.matched_terms) >= 2 or bool(set(hit.matched_terms).intersection(self.topic_terms[hit.evidence.id])))
+            and (hit.evidence.question_answer is None or self._qa_topic_supported(hit))
         ]
         if not hits:
             return SearchResult((), 0, "Matches are too weak to support an answer.")
+        # Apply the same confidence floor before situation reranking. A matching
+        # situation cannot promote irrelevant evidence into an answer.
+        if behavior:
+            hits = [SearchHit(hit.evidence, round(hit.score * (SITUATION_MULTIPLIER if hit.situation_match else 1), 6),
+                              hit.matched_terms, hit.topical_score, hit.situation_match) for hit in hits]
+        hits.sort(key=lambda hit: (-hit.score, hit.evidence.id))
         best_terms = set(hits[0].matched_terms)
         coverage = len(best_terms) / max(1, len(terms))
         confidence = min(1.0, 0.35 + min(0.35, hits[0].score / 12) + 0.30 * coverage)
         return SearchResult(tuple(hits[:limit]), round(confidence, 3))
+
+    def _qa_topic_supported(self, hit: SearchHit) -> bool:
+        matched = set(hit.matched_terms).intersection(self.topic_terms[hit.evidence.id])
+        return bool(matched.difference(GENERIC_QA_TOPICS)) or len(matched) >= 2

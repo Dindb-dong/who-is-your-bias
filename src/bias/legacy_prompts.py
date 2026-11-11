@@ -11,7 +11,8 @@ import json
 from collections.abc import Mapping
 
 from .models import ChatRequest, Persona, Source
-from .retrieval import SearchResult, classify_situation
+from .retrieval import SearchResult
+from .legacy_situations import classify_situation
 
 
 def build_legacy_messages(persona: Persona, request: ChatRequest, result: SearchResult, history: list[dict[str, str]], sources: Mapping[str, Source] | None = None) -> list[dict[str, str]]:

@@ -5,11 +5,7 @@ Status snapshot: 2026-11-11. PRs #7, #8, and #9 are merged into `main` at
 The [merged-main workflow run 42947174466](https://github.com/Dindb-dong/who-is-your-bias/actions/runs/42947174466)
 completed successfully at that revision.
 
-These checks establish engineering functionality and regression coverage.
-The original proposal's retrieval of real interview question and answer pairs
-and comparison with actual answers from held-out interviews remain unfinished.
-See [proposal alignment](proposal-alignment.md)
-for the requirement audit, concrete research gaps, and next milestones.
+The historical checks below establish engineering functionality at the stated merged revision. The new [original-Q&A study](reference-evaluation.md) is recorded separately: 24/24 real model calls completed, but zero held-out questions obtained retrieved examples. Its negative coverage result does not establish C superiority. See [current proposal status](proposal-alignment.md) for subsequent implementation and review boundaries.
 
 ## Merged milestones
 
@@ -108,7 +104,7 @@ Without rerunning synthesis, open the saved listening page at
 
 ```bash
 uv run pytest
-uv run bias evaluate --fail-on-regression --output reports/local/retrieval.json
+uv run bias --corpus data/personas/elon-musk evaluate --fail-on-regression --output reports/local/retrieval.json
 npm run check
 npm run test:e2e
 ```

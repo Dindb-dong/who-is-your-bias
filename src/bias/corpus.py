@@ -11,6 +11,7 @@ from pathlib import Path
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 from .models import Citation, Evidence, Persona, Source
+from .situations import SITUATION_LABELS, TAXONOMY_VERSION, validate_situations
 
 
 class CorpusError(ValueError):
@@ -48,6 +49,8 @@ class Corpus:
     persona: Persona
     sources: dict[str, Source]
     evidence: dict[str, Evidence]
+    manifest: dict | None = None
+    source_assignments: dict[str, tuple[str, str]] | None = None
 
     @classmethod
     def load(cls, directory: Path, *, check_splits: bool = True) -> "Corpus":
@@ -80,15 +83,34 @@ class Corpus:
                         raise CorpusError(f"Duplicate evidence id: {record.id}")
                     if record.source_id not in sources:
                         raise CorpusError(f"Unknown source {record.source_id} for evidence {record.id}")
+                    if record.question_answer:
+                        if record.question_answer.source_event_id != source_event_id(sources[record.source_id]):
+                            raise CorpusError(f"Q&A event differs from its source: {record.id}")
+                        validate_situations(record.situations)
                     evidence[record.id] = record
             persona = Persona.model_validate_json((directory / "profile.json").read_text(encoding="utf-8"))
+            manifest_path = directory / "corpus-manifest.json"
+            manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else None
+            if manifest is not None and not isinstance(manifest, dict):
+                raise CorpusError("corpus-manifest.json must be an object")
+            split_path = directory / "split-manifest.json"
+            source_assignments = None
+            if split_path.exists():
+                split = json.loads(split_path.read_text(encoding="utf-8"))
+                if not isinstance(split, dict) or not isinstance(split.get("events"), list) or any(not isinstance(item, dict) or not all(key in item for key in ("source_event_id", "split", "source_ids")) or not isinstance(item["source_ids"], list) or not item["source_ids"] or any(not isinstance(key, str) for key in item["source_ids"]) for item in split["events"]):
+                    raise CorpusError("Invalid frozen source-event manifest")
+                declared = {item["source_event_id"]: item["split"] for item in split["events"]}
+                source_events = {identifier: item["source_event_id"] for item in split["events"] for identifier in item["source_ids"]}
+                if len(declared) != len(split["events"]) or sum(len(item["source_ids"]) for item in split["events"]) != len(source_events) or any(declared.get(source_event_id(source)) != source.split or source_events.get(source.id) != source_event_id(source) for source in sources.values()):
+                    raise CorpusError("Source splits do not match the frozen event manifest")
+                source_assignments = {identifier: (event_id, declared[event_id]) for identifier, event_id in source_events.items()}
         except (OSError, ValueError) as exc:
             if isinstance(exc, CorpusError):
                 raise
             raise CorpusError(f"Cannot load corpus from {directory}: {exc}") from exc
         if not sources or not evidence:
             raise CorpusError("Corpus must contain sources and evidence")
-        corpus = cls(persona, sources, evidence)
+        corpus = cls(persona, sources, evidence, manifest, source_assignments)
         if check_splits:
             corpus.validate_split_isolation()
         return corpus
@@ -146,6 +168,10 @@ class Corpus:
         }
 
     def validate_split_isolation(self) -> None:
+        if self.source_assignments is not None:
+            for source in self.sources.values():
+                if self.source_assignments.get(source.id) != (source_event_id(source), source.split):
+                    raise CorpusError(f"Source {source.id} differs from the frozen event manifest")
         quality = self.quality_report()
         if quality["source_event_split_leaks"]:
             events = ", ".join(group["source_event_id"] for group in quality["source_event_split_leaks"])
@@ -153,6 +179,33 @@ class Corpus:
         if quality["url_split_leaks"]:
             sources = ", ".join(source for group in quality["url_split_leaks"] for source in group["sources"])
             raise CorpusError(f"Canonical source URL spans multiple splits: {sources}")
+        # Programmatic construction must not bypass the same Q&A contract.
+        for record in self.evidence.values():
+            if record.question_answer:
+                if record.question_answer.source_event_id != source_event_id(self.sources[record.source_id]):
+                    raise CorpusError(f"Q&A event differs from its source: {record.id}")
+                try:
+                    validate_situations(record.situations)
+                except ValueError as exc:
+                    raise CorpusError(str(exc)) from exc
+
+    def qa_report(self) -> dict:
+        records = [record for record in self.evidence.values() if record.question_answer]
+        training = [record for record in self._eligible_training_evidence() if record.question_answer]
+        covered = sorted({label for record in training for label in record.situations})
+        return {
+            "schema_version": "qa-corpus-report.v1",
+            "corpus_id": (self.manifest or {}).get("id"),
+            "materialization": (self.manifest or {}).get("materialization", "legacy_summary_corpus"),
+            "question_answer_records": len(records),
+            "training_question_answers": len(training),
+            "complete_exchanges": sum(record.question_answer.completeness == "complete_exchange" for record in records),
+            "excerpts": sum(record.question_answer.completeness == "excerpt" for record in records),
+            "taxonomy_version": TAXONOMY_VERSION,
+            "covered_training_situations": covered,
+            "uncovered_situations": sorted(SITUATION_LABELS.difference(covered)),
+            "reviewer_types": sorted({record.question_answer.review.reviewer_type for record in records}),
+        }
 
     def citation(self, evidence_id: str) -> Citation:
         record = self.evidence[evidence_id]

@@ -35,6 +35,13 @@ def evidence_preview(request: ChatRequest, result: SearchResult) -> str:
             if request.language == "ko" else
             "I couldn't find reviewed public evidence that answers this question. This archive contains historical interviews and articles; it cannot verify current facts or private experiences."
         )
+    if any(hit.evidence.question_answer for hit in result.hits):
+        prefix = (
+            "자료 미리보기입니다. 원본 인터뷰 문답의 발췌이며, 새로 생성한 인물의 답변이 아닙니다. 전체 문답 여부는 데이터에 별도 기록되어 있습니다.\n\n"
+            if request.language == "ko" else
+            "Evidence preview — original interview excerpts, not a newly generated persona response. Exchange completeness is recorded separately.\n\n"
+        )
+        return prefix + "\n\n".join(f"{hit.evidence.text} [source:{hit.evidence.id}]" for hit in result.hits[:2])
     prefix = (
         "자료 미리보기입니다. 아래 내용은 공개 자료의 영어 요약이며, 언어 모델이 생성한 한국어 답변은 아닙니다.\n\n"
         if request.language == "ko" else

@@ -48,6 +48,72 @@ class Source(Record):
     timeline: str | None = None
 
 
+class ExchangeReview(Record):
+    reviewer_type: Literal["agent", "human"]
+    reviewer: str = Field(min_length=1, max_length=200)
+    reviewed_at: date
+    basis: str = Field(min_length=1, max_length=2000)
+    speaker_status: Literal["publisher_labels_checked", "audio_verified", "unreviewed"]
+    timing_status: Literal["not_audio_verified", "audio_verified"] = "not_audio_verified"
+
+
+class ExchangeLocator(Record):
+    question_cue_ids: list[Identifier] = Field(min_length=1, max_length=300)
+    answer_cue_ids: list[Identifier] = Field(min_length=1, max_length=500)
+    context_cue_ids: list[Identifier] = Field(default_factory=list, max_length=300)
+    transcript_sha256: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class QuestionAnswer(Record):
+    """Original publisher wording, distinct from annotations and timing proxies."""
+
+    question: str = Field(min_length=1, max_length=6000)
+    answer: str = Field(min_length=1, max_length=12000)
+    context_before: str = Field(default="", max_length=3000)
+    context_kind: Literal["editorial_summary", "original_text", "none"] = "editorial_summary"
+    original_language: Literal["en", "ko"]
+    questioner: str = Field(min_length=1, max_length=200)
+    respondent: str = Field(min_length=1, max_length=200)
+    source_event_id: Identifier
+    completeness: Literal["complete_exchange", "excerpt"]
+    excerpt_note: str | None = Field(default=None, max_length=2000)
+    question_start_seconds: float | None = Field(default=None, ge=0)
+    question_end_seconds: float | None = Field(default=None, ge=0)
+    answer_start_seconds: float | None = Field(default=None, ge=0)
+    answer_end_seconds: float | None = Field(default=None, ge=0)
+    # End proxies never masquerade as acoustically verified utterance ends.
+    question_end_proxy_seconds: float | None = Field(default=None, ge=0)
+    answer_end_proxy_seconds: float | None = Field(default=None, ge=0)
+    source_timeline: str | None = None
+    timing_basis: Literal["publisher_cue_onsets_only", "publisher_transcript_timestamps_only", "audio_verified", "unavailable"]
+    transcript_locator: ExchangeLocator
+    review: ExchangeReview
+    annotation_basis: str = Field(min_length=1, max_length=2000)
+    taxonomy_version: Literal["situations.v1"] = "situations.v1"
+
+    @model_validator(mode="after")
+    def valid_exchange(self) -> "QuestionAnswer":
+        if not self.question.strip() or not self.answer.strip():
+            raise ValueError("Original question and answer must not be blank")
+        if self.completeness == "excerpt" and not self.excerpt_note:
+            raise ValueError("Excerpted exchanges must explain omitted context")
+        times = (self.question_start_seconds, self.question_end_seconds, self.answer_start_seconds, self.answer_end_seconds,
+                 self.question_end_proxy_seconds, self.answer_end_proxy_seconds)
+        if any(value is not None for value in times) and not self.source_timeline:
+            raise ValueError("Timed exchanges require their exact source timeline")
+        if self.timing_basis != "audio_verified" and (self.question_end_seconds is not None or self.answer_end_seconds is not None):
+            raise ValueError("Publisher onsets do not establish acoustic end boundaries")
+        for start, end in ((self.question_start_seconds, self.question_end_seconds), (self.answer_start_seconds, self.answer_end_seconds),
+                           (self.question_start_seconds, self.question_end_proxy_seconds), (self.answer_start_seconds, self.answer_end_proxy_seconds)):
+            if end is not None and (start is None or end <= start):
+                raise ValueError("Exchange end must follow its start")
+        if self.question_start_seconds is not None and self.answer_start_seconds is not None and self.answer_start_seconds < self.question_start_seconds:
+            raise ValueError("Answer cannot precede its question")
+        if self.timing_basis == "unavailable" and any(value is not None for value in times):
+            raise ValueError("Unavailable timing must remain null")
+        return self
+
+
 class Evidence(Record):
     model_config = ConfigDict(extra="allow", frozen=True)
     id: Identifier
@@ -56,11 +122,32 @@ class Evidence(Record):
     topics: list[str] = Field(default_factory=list, max_length=30)
     situations: list[str] = Field(default_factory=list, max_length=30)
     locator: Locator
-    kind: Literal["stated_view", "reported_experience", "authored_plan", "transcript"]
+    kind: Literal["stated_view", "reported_experience", "authored_plan", "transcript", "question_answer"]
     confidence: Literal["source_grounded", "unverified_transcript"] = "source_grounded"
     behavioral_observation: dict | None = None
     # Missing review metadata never grants permission to index a new record.
     review_status: Literal["reviewed", "draft"] = "draft"
+    question_answer: QuestionAnswer | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def original_answer_as_citation(cls, value):
+        # A JSONL source need not duplicate copyrighted original wording in both
+        # fields. Runtime citations retain the same validated answer text.
+        if isinstance(value, dict) and "text" not in value and isinstance(value.get("question_answer"), dict):
+            value = dict(value, text=value["question_answer"].get("answer"))
+        return value
+
+    @model_validator(mode="after")
+    def validate_question_answer(self) -> "Evidence":
+        if self.kind == "question_answer" and self.question_answer is None:
+            raise ValueError("Question-answer evidence requires an original exchange")
+        if self.question_answer is not None:
+            if self.kind != "question_answer" or self.text != self.question_answer.answer:
+                raise ValueError("Question-answer citation text must equal its original answer")
+            if self.review_status == "reviewed" and self.question_answer.review.speaker_status == "unreviewed":
+                raise ValueError("Reviewed Q&A requires checked speaker attribution")
+        return self
 
     @field_validator("text")
     @classmethod

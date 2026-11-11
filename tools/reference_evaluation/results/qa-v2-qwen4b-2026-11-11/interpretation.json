@@ -1,0 +1,54 @@
+{
+  "schema_version": "actual-qa-interpretation.v1",
+  "report_sha256": "1b2d2d48c3dddb70b4eb46352bf0d1a6019620abf64790dbff927fc2accf8bc8",
+  "complete_requests": 24,
+  "reference_questions": 8,
+  "independent_test_events": 2,
+  "retrieval_coverage_B": 0,
+  "retrieval_coverage_C": 0,
+  "paired_questions_with_identical_provider_payloads": 8,
+  "paired_questions_with_identical_raw_outputs": 2,
+  "bc_selected_example_changes": 0,
+  "condition_blinded_model_review": {
+    "content_viewpoint": {
+      "paired_cases": 8,
+      "independent_events": 2,
+      "event_mean_C_minus_B": {
+        "lex-400-2023": 0,
+        "lex-438-2024": 0
+      },
+      "event_balanced_C_minus_B": 0,
+      "descriptive_result": "equal",
+      "inference": "descriptive_pilot_no_significance_claim"
+    },
+    "wording_structure": {
+      "paired_cases": 8,
+      "independent_events": 2,
+      "event_mean_C_minus_B": {
+        "lex-400-2023": 0,
+        "lex-438-2024": 0
+      },
+      "event_balanced_C_minus_B": 0,
+      "descriptive_result": "equal",
+      "inference": "descriptive_pilot_no_significance_claim"
+    },
+    "situation_response": {
+      "paired_cases": 8,
+      "independent_events": 2,
+      "event_mean_C_minus_B": {
+        "lex-400-2023": 0,
+        "lex-438-2024": 0
+      },
+      "event_balanced_C_minus_B": 0,
+      "descriptive_result": "equal",
+      "inference": "descriptive_pilot_no_significance_claim"
+    }
+  },
+  "source_support": {
+    "unsupported": 18,
+    "not_assessable": 6
+  },
+  "human_ratings": 0,
+  "conclusion": "Retrieval coverage failure: no intervention difference between A/B/C. Observed text or timing differences cannot establish a retrieval effect. C benefit is not demonstrated.",
+  "future_evaluation": "Freeze a new version and fresh independent test set before evaluating a redesigned retriever; these exposed questions remain reproduction/development material."
+}

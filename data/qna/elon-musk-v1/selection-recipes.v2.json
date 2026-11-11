@@ -1,0 +1,4184 @@
+{
+  "schema_version": "qa-selection-recipes.v1",
+  "corpus_id": "elon-musk-original-qa.v2",
+  "selection_policy": "Source-wide inclusion across full TED2013 and TED2017 training events: directly adjacent labeled interviewer/respondent turns (allowing only standalone stage cues between), explicit label at both starts, and either an interviewer question mark or at least eight interviewer words and eight respondent words. Fragmented starts, unassigned speakers and brief nonquestion acknowledgments are excluded. All eligible exchanges are included. Existing v1 records and the entire development/test selection are unchanged. No heldout model run or heldout score was consulted.",
+  "source_hash_definition": "TED publisher_caption_sha256 from tools.transcripts.ted. Lex SHA256 of canonical UTF-8 JSON array of {id,speaker,text,start}, sorted keys and compact separators; HTML file hashes can vary independently.",
+  "base_selection_sha256": "65954d160d2e2bb0d273ce9064f95b18fa603f681345d0689f52a47d23aa07dd",
+  "selections": [
+    {
+      "id": "qa-ted-2013-energy",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00001",
+        "cue-00002",
+        "cue-00003"
+      ],
+      "answer_cue_ids": [
+        "cue-00004",
+        "cue-00005",
+        "cue-00006",
+        "cue-00007",
+        "cue-00008",
+        "cue-00009",
+        "cue-00010",
+        "cue-00011",
+        "cue-00012",
+        "cue-00013",
+        "cue-00014"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "4da5d802c12348491e66987942d64dbf5bc674ad4c9c4d711044eab18e70a423",
+      "answer_sha256": "67d55d1497f10ff95cc791f323304dfddee3093720288316ab8bfc5d78f7ac12",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Opening question about choosing electric vehicles.",
+      "topics": [
+        "energy",
+        "electric cars",
+        "future"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-efficiency",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00015",
+        "cue-00016",
+        "cue-00017"
+      ],
+      "answer_cue_ids": [
+        "cue-00018",
+        "cue-00019",
+        "cue-00020",
+        "cue-00021",
+        "cue-00022",
+        "cue-00023",
+        "cue-00024",
+        "cue-00025",
+        "cue-00026",
+        "cue-00027",
+        "cue-00028",
+        "cue-00029",
+        "cue-00030",
+        "cue-00031",
+        "cue-00032",
+        "cue-00033",
+        "cue-00034",
+        "cue-00035",
+        "cue-00036",
+        "cue-00037"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "2d1a346c148902a2f52d2fab2ec5a8a46336093904eb424e72b3c733e7562afb",
+      "answer_sha256": "8ebda5180e80dd5cd59381dd4ec40539f7fbdd102fb66346b3f586189d908e9c",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Interviewer challenges electric vehicles using fossil-generated power.",
+      "topics": [
+        "electric cars",
+        "energy",
+        "efficiency",
+        "fossil fuels"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          62,
+          85
+        ],
+        "answer": [
+          168,
+          192
+        ]
+      }
+    },
+    {
+      "id": "qa-ted-2013-q00007",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00045",
+        "cue-00046",
+        "cue-00047",
+        "cue-00048"
+      ],
+      "answer_cue_ids": [
+        "cue-00049",
+        "cue-00050",
+        "cue-00051",
+        "cue-00052",
+        "cue-00053",
+        "cue-00054",
+        "cue-00055",
+        "cue-00056",
+        "cue-00057",
+        "cue-00058",
+        "cue-00059",
+        "cue-00060",
+        "cue-00061",
+        "cue-00062",
+        "cue-00063",
+        "cue-00064",
+        "cue-00065",
+        "cue-00066",
+        "cue-00067",
+        "cue-00068",
+        "cue-00069"
+      ],
+      "context_cue_ids": [
+        "cue-00038"
+      ],
+      "question_sha256": "1623ef9d8b1ddc4df3ed690f0e7fc6bd197efb5e1edfcece247a8067cfa1207b",
+      "answer_sha256": "c8e24f03cb10bbbd0e9737af23ce8dd048bac98cbb67d895b2c1939cb55c534c",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "electric cars",
+        "battery",
+        "design",
+        "efficiency"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "b171fd57e9bd54b157bb733110f9342e9d60506e4383631da74a7473d35c83f3"
+    },
+    {
+      "id": "qa-ted-2013-q00009",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00070",
+        "cue-00071",
+        "cue-00072",
+        "cue-00073"
+      ],
+      "answer_cue_ids": [
+        "cue-00074",
+        "cue-00075",
+        "cue-00076",
+        "cue-00077",
+        "cue-00078",
+        "cue-00079",
+        "cue-00080"
+      ],
+      "context_cue_ids": [
+        "cue-00045",
+        "cue-00046",
+        "cue-00047",
+        "cue-00048"
+      ],
+      "question_sha256": "6783e7031788dfd80356a0da38e9e2abacf0130f9c62e181ecd6cef349e98a6c",
+      "answer_sha256": "504e16f55dc60b0ae8f3cbc58c01f039cabf2a4ad94d45f1c06512a8b09592cb",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "electric cars",
+        "battery",
+        "weight",
+        "range"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "1623ef9d8b1ddc4df3ed690f0e7fc6bd197efb5e1edfcece247a8067cfa1207b"
+    },
+    {
+      "id": "qa-ted-2013-q00013",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00083",
+        "cue-00084",
+        "cue-00085"
+      ],
+      "answer_cue_ids": [
+        "cue-00086",
+        "cue-00087",
+        "cue-00088",
+        "cue-00089"
+      ],
+      "context_cue_ids": [
+        "cue-00081"
+      ],
+      "question_sha256": "f0ec2db8b397743700e27e25fa805b31ebd991725bd26612db2638b1827b91ba",
+      "answer_sha256": "4c04f95cf9bb5c3f0218725037eb61421a54235231d84ba375a08fdb1f7b79d4",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "electric cars",
+        "range",
+        "driving"
+      ],
+      "situations": [
+        "humor"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "668316cc3b5be3533754b756a5179ee2f3dd815e2a1c26c045d72429e2baf40f"
+    },
+    {
+      "id": "qa-ted-2013-driving",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00090",
+        "cue-00091",
+        "cue-00092",
+        "cue-00093",
+        "cue-00094"
+      ],
+      "answer_cue_ids": [
+        "cue-00095",
+        "cue-00096",
+        "cue-00097",
+        "cue-00098",
+        "cue-00099",
+        "cue-00100",
+        "cue-00101",
+        "cue-00102",
+        "cue-00103",
+        "cue-00104",
+        "cue-00105"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "e6e9f349990558bb1b238966053403ebbe7a18f9567a2f2fb2f857ff6bd41137",
+      "answer_sha256": "2cc8a1ddcffdc613630981fc5238af1f3bb83ebb048c7211850e7122c1098b41",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Question follows a demonstration of the car.",
+      "topics": [
+        "electric cars",
+        "driving",
+        "responsiveness"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-pricing",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00106",
+        "cue-00107",
+        "cue-00108"
+      ],
+      "answer_cue_ids": [
+        "cue-00109",
+        "cue-00110",
+        "cue-00111",
+        "cue-00112",
+        "cue-00113",
+        "cue-00114",
+        "cue-00115",
+        "cue-00116",
+        "cue-00117",
+        "cue-00118",
+        "cue-00119",
+        "cue-00120",
+        "cue-00121",
+        "cue-00122",
+        "cue-00123",
+        "cue-00124"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "af3dce18b3d8b18af070342176682a76529ce43d86f1bdddf84670f543394f2c",
+      "answer_sha256": "8abb6d07d415059f4315f74bf7d33da862e8bd3183c6a492587ce06b36a38737",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Interviewer raises affordability after praising the car.",
+      "topics": [
+        "electric cars",
+        "price",
+        "mass market"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-q00019",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00125",
+        "cue-00126",
+        "cue-00127",
+        "cue-00128",
+        "cue-00129"
+      ],
+      "answer_cue_ids": [
+        "cue-00130",
+        "cue-00131",
+        "cue-00132",
+        "cue-00133",
+        "cue-00134",
+        "cue-00135",
+        "cue-00136",
+        "cue-00137",
+        "cue-00138",
+        "cue-00139",
+        "cue-00140",
+        "cue-00141",
+        "cue-00142",
+        "cue-00143",
+        "cue-00144",
+        "cue-00145",
+        "cue-00146",
+        "cue-00147",
+        "cue-00148",
+        "cue-00149",
+        "cue-00150",
+        "cue-00151"
+      ],
+      "context_cue_ids": [
+        "cue-00106",
+        "cue-00107",
+        "cue-00108"
+      ],
+      "question_sha256": "1f569d62b949ef8c822f9fc0ddf94efbcef70afa7a9ae251eb3bedaafa75b21b",
+      "answer_sha256": "3e9031cc830c07a935bec600bbde791cb63ce5042d7fc94c317864f843152f2f",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "electric cars",
+        "charging",
+        "network",
+        "travel"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "af3dce18b3d8b18af070342176682a76529ce43d86f1bdddf84670f543394f2c"
+    },
+    {
+      "id": "qa-ted-2013-charging",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00152",
+        "cue-00153",
+        "cue-00154",
+        "cue-00155",
+        "cue-00156"
+      ],
+      "answer_cue_ids": [
+        "cue-00157",
+        "cue-00158",
+        "cue-00159",
+        "cue-00160",
+        "cue-00161",
+        "cue-00162"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "e13f59eb30c2beebc1b5c01b50ce1df8c31eccfb422b6747d2a4bbd947be3334",
+      "answer_sha256": "7c3e49dc484f02d7ae3eaf6c5972da65b2351e5bb3440a0abcd82584c302a4f1",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Interviewer states a charging-time estimate; respondent corrects it.",
+      "topics": [
+        "electric cars",
+        "charging",
+        "travel"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-q00023",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00163",
+        "cue-00164",
+        "cue-00165"
+      ],
+      "answer_cue_ids": [
+        "cue-00166",
+        "cue-00167",
+        "cue-00168",
+        "cue-00169",
+        "cue-00170",
+        "cue-00171",
+        "cue-00172",
+        "cue-00173",
+        "cue-00174",
+        "cue-00175",
+        "cue-00176",
+        "cue-00177",
+        "cue-00178",
+        "cue-00179",
+        "cue-00180"
+      ],
+      "context_cue_ids": [
+        "cue-00152",
+        "cue-00153",
+        "cue-00154",
+        "cue-00155",
+        "cue-00156"
+      ],
+      "question_sha256": "c96499081a32533de5bc1288358d6cb99dc983814f71e06618fbbb09a52143ed",
+      "answer_sha256": "38e6c580478ff7a5d312b8502dbaa4abd92903d10e57606bcd960bcf17561704",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "solar",
+        "energy",
+        "electricity"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "e13f59eb30c2beebc1b5c01b50ce1df8c31eccfb422b6747d2a4bbd947be3334"
+    },
+    {
+      "id": "qa-ted-2013-solar",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00181",
+        "cue-00182",
+        "cue-00183",
+        "cue-00184",
+        "cue-00185",
+        "cue-00186"
+      ],
+      "answer_cue_ids": [
+        "cue-00187",
+        "cue-00188"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "8a96f73199bf49dad22f3ff4eb60f04a8c757ff199b6dd0cd711b7e7f95cb628",
+      "answer_sha256": "0bf1fefe7c84f905982ceba60dade04ce96ab390036748d4b28bb8949870abfa",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Interviewer challenges the business case for solar.",
+      "topics": [
+        "solar",
+        "energy",
+        "cost",
+        "natural gas"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-solar-how",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00189"
+      ],
+      "answer_cue_ids": [
+        "cue-00190"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "0ea5977074d19b323a93e0a94cb9a5d4abeb75418234455cf38e6293403fe236",
+      "answer_sha256": "57487c6f1f09a8c1aad2d9fa78291c8ac0fd633428fd4cd7f95c108eba5a937e",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Follow-up asks how solar can beat competing energy sources.",
+      "topics": [
+        "solar",
+        "energy",
+        "cost"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          0,
+          4
+        ],
+        "answer": [
+          0,
+          18
+        ]
+      }
+    },
+    {
+      "id": "qa-ted-2013-q00029",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00191",
+        "cue-00192"
+      ],
+      "answer_cue_ids": [
+        "cue-00193",
+        "cue-00194",
+        "cue-00195",
+        "cue-00196",
+        "cue-00197",
+        "cue-00198",
+        "cue-00199",
+        "cue-00200",
+        "cue-00201",
+        "cue-00202",
+        "cue-00203",
+        "cue-00204",
+        "cue-00205"
+      ],
+      "context_cue_ids": [
+        "cue-00189"
+      ],
+      "question_sha256": "8dbb34e7cade38c821b1195daef5216b2374c316b0c9c81455d7d61a2443d8a5",
+      "answer_sha256": "8e716fab7515ce3d75429326db4387389972b4731ee52c36094810e132217533",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "solar",
+        "financing",
+        "lease",
+        "cost"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "0ea5977074d19b323a93e0a94cb9a5d4abeb75418234455cf38e6293403fe236"
+    },
+    {
+      "id": "qa-ted-2013-q00035",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00215",
+        "cue-00216",
+        "cue-00217",
+        "cue-00218",
+        "cue-00219"
+      ],
+      "answer_cue_ids": [
+        "cue-00220",
+        "cue-00221",
+        "cue-00222",
+        "cue-00223",
+        "cue-00224",
+        "cue-00225",
+        "cue-00226",
+        "cue-00227"
+      ],
+      "context_cue_ids": [
+        "cue-00206",
+        "cue-00207"
+      ],
+      "question_sha256": "c1da848d54c24b532869acfb92af17e19d739b0593dee5b91f0b2bd66195d5af",
+      "answer_sha256": "8979017d1e7a4847bd871c5efd4c5e975d2e250f85c10e125a3be059737bffa6",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "solar",
+        "ownership",
+        "financing",
+        "lease"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "c2e1851d27c4851c8505c4f285cbc5db44e14cc2046568d1e1673a840da4e6a8"
+    },
+    {
+      "id": "qa-ted-2013-q00037",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00228",
+        "cue-00229"
+      ],
+      "answer_cue_ids": [
+        "cue-00230",
+        "cue-00231",
+        "cue-00232",
+        "cue-00233",
+        "cue-00234",
+        "cue-00235",
+        "cue-00236",
+        "cue-00237",
+        "cue-00238",
+        "cue-00239"
+      ],
+      "context_cue_ids": [
+        "cue-00215",
+        "cue-00216",
+        "cue-00217",
+        "cue-00218",
+        "cue-00219"
+      ],
+      "question_sha256": "a8a9366983c4109cec15b396436acaa19122e0b5b7fb1fcbfe063e8930b349ac",
+      "answer_sha256": "ef8912dde7870537137361c8b5133d4d8c289ed09b518b28b4d5c1884713fd96",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "solar",
+        "utilities",
+        "competition"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "c1da848d54c24b532869acfb92af17e19d739b0593dee5b91f0b2bd66195d5af"
+    },
+    {
+      "id": "qa-ted-2013-q00039",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00240",
+        "cue-00241",
+        "cue-00242"
+      ],
+      "answer_cue_ids": [
+        "cue-00243",
+        "cue-00244",
+        "cue-00245"
+      ],
+      "context_cue_ids": [
+        "cue-00228",
+        "cue-00229"
+      ],
+      "question_sha256": "f7e17e1e68b5cf3d1ec34aaca67bab2aa723b75729d107e9ca89589b8e0a0606",
+      "answer_sha256": "b863951a385803ecd2ff4da2dd18680d48a2f27d5e7e1588899486b60d52d23e",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "solar",
+        "electricity",
+        "forecast"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "excerpt",
+      "excerpt_note": "Selected complete publisher paragraph; ambiguous or continuing material follows before the next clearly labeled interviewer turn, so the selection is not claimed to be the entire response.",
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "a8a9366983c4109cec15b396436acaa19122e0b5b7fb1fcbfe063e8930b349ac"
+    },
+    {
+      "id": "qa-ted-2013-privacy",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00248"
+      ],
+      "answer_cue_ids": [
+        "cue-00249"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "0069835a64c702bbf527aa9b9e733076083037522fb38fda65fba8e9170e3e61",
+      "answer_sha256": "678c28e988770b69d5effce5a569d4f10587ada7afe222774b810c7a31ba1229",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Interviewer asks the identity of a private betting partner.",
+      "topics": [
+        "solar",
+        "bet",
+        "privacy"
+      ],
+      "situations": [
+        "disclosure_request"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-financial-risk",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00254",
+        "cue-00255",
+        "cue-00256",
+        "cue-00257",
+        "cue-00258"
+      ],
+      "answer_cue_ids": [
+        "cue-00260",
+        "cue-00261",
+        "cue-00262",
+        "cue-00263",
+        "cue-00264",
+        "cue-00265",
+        "cue-00266"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "7b3fde21894e8752f3d346d1a98734f09400dbce2e19998029f95b6275141781",
+      "answer_sha256": "29abb3473e709a0b9e99635aa30dc9ac2ce0297ad5d2b0a9802d26b34d29d2ed",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Space-company question uses a rhetorical financial-risk setup.",
+      "topics": [
+        "rocket",
+        "spacex",
+        "risk",
+        "money"
+      ],
+      "situations": [
+        "humor"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-setback",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00267"
+      ],
+      "answer_cue_ids": [
+        "cue-00268",
+        "cue-00269",
+        "cue-00270",
+        "cue-00271",
+        "cue-00272",
+        "cue-00273",
+        "cue-00274",
+        "cue-00275"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "4c2ea879439f52a5883d9f21bbebb199b35174c03f9dcd46facf847881f7680d",
+      "answer_sha256": "0c6a35aab5ff3839e69bb0bf6948eaa08d8b25f1db4187b8cfa3ff79f72f098a",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Follow-up on the financial-risk anecdote asks what happened.",
+      "topics": [
+        "rocket",
+        "spacex",
+        "failure",
+        "reuse"
+      ],
+      "situations": [
+        "reflection"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-q00052",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00276",
+        "cue-00277",
+        "cue-00278"
+      ],
+      "answer_cue_ids": [
+        "cue-00279",
+        "cue-00280",
+        "cue-00281",
+        "cue-00282",
+        "cue-00283",
+        "cue-00284",
+        "cue-00285",
+        "cue-00286",
+        "cue-00287",
+        "cue-00288",
+        "cue-00289",
+        "cue-00290"
+      ],
+      "context_cue_ids": [
+        "cue-00267"
+      ],
+      "question_sha256": "345e1aa286564bd5a7ee538dcf6c468f4e8294ea1e4d62d9bf30b9369050f88b",
+      "answer_sha256": "de0808ad89313f19c26e8be0f8e81cb91d9e25d5db99f9f2b29df24091f057aa",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "mars",
+        "spacex",
+        "motivation",
+        "future"
+      ],
+      "situations": [
+        "reflection"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "4c2ea879439f52a5883d9f21bbebb199b35174c03f9dcd46facf847881f7680d"
+    },
+    {
+      "id": "qa-ted-2013-rocket-cost",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00291",
+        "cue-00292",
+        "cue-00293",
+        "cue-00294"
+      ],
+      "answer_cue_ids": [
+        "cue-00295",
+        "cue-00296",
+        "cue-00297",
+        "cue-00298",
+        "cue-00299",
+        "cue-00300"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "0b6121aa941d3376e5d3d6e24f073a50a0147aea4262dec9418959b8b84513de",
+      "answer_sha256": "73102fa5c457f24a36cc0a95bc4fdc6e1df74d2250c57c62d8109bb2b7209f77",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Interviewer asks about lower rocket-building costs.",
+      "topics": [
+        "rocket",
+        "cost",
+        "engineering"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2013-q00062",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00311"
+      ],
+      "answer_cue_ids": [
+        "cue-00312",
+        "cue-00313",
+        "cue-00314",
+        "cue-00315",
+        "cue-00316",
+        "cue-00317",
+        "cue-00318",
+        "cue-00319",
+        "cue-00320"
+      ],
+      "context_cue_ids": [
+        "cue-00307",
+        "cue-00308",
+        "cue-00309"
+      ],
+      "question_sha256": "02ad093ce563aca707beb1fb1b4a82c5a5c44c04ff913d3a589639acbbb7b148",
+      "answer_sha256": "b36dabb3fcc1aa04892bee893977bbaa230bb65f0259fb619809a3634520ed2c",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "rocket",
+        "reuse",
+        "cost",
+        "space shuttle"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "b829d1cf3ef9f88e637f33f2fab54f510b69c7a6d7a25e4c4acdf8000dfd219c"
+    },
+    {
+      "id": "qa-ted-2013-q00064",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00321"
+      ],
+      "answer_cue_ids": [
+        "cue-00322",
+        "cue-00323",
+        "cue-00324"
+      ],
+      "context_cue_ids": [
+        "cue-00311"
+      ],
+      "question_sha256": "8fcf4d2e52753c8b438f5b57c386d01adb69e0cccf3384c4dbb891b345e5b3eb",
+      "answer_sha256": "e7a222864c954a898526af34351dfb395d91d19d4f84940ab3496f991864ad5e",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "rocket",
+        "landing",
+        "reuse"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "excerpt",
+      "excerpt_note": "Selected complete publisher paragraph; ambiguous or continuing material follows before the next clearly labeled interviewer turn, so the selection is not claimed to be the entire response.",
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "02ad093ce563aca707beb1fb1b4a82c5a5c44c04ff913d3a589639acbbb7b148"
+    },
+    {
+      "id": "qa-ted-2013-q00070",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00342",
+        "cue-00343",
+        "cue-00344",
+        "cue-00345",
+        "cue-00346"
+      ],
+      "answer_cue_ids": [
+        "cue-00347",
+        "cue-00348",
+        "cue-00349",
+        "cue-00350",
+        "cue-00351",
+        "cue-00352",
+        "cue-00353"
+      ],
+      "context_cue_ids": [
+        "cue-00339",
+        "cue-00340"
+      ],
+      "question_sha256": "64aabb6e6f6ca825ca3ff92628d996cb3a48d7c7ecd18aa3233c569eae71b41e",
+      "answer_sha256": "fe9e1e22ce7e66b0c42bd055540a5df6443b8c6227edee3f019e485c90883306",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "mars",
+        "multiplanetary",
+        "spacex"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "bb305d4b077664069d632192840670af785305c46b3ed9622d83cdaa1b07e83c"
+    },
+    {
+      "id": "qa-ted-2013-q00072",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00354",
+        "cue-00355",
+        "cue-00356"
+      ],
+      "answer_cue_ids": [
+        "cue-00357",
+        "cue-00358",
+        "cue-00359",
+        "cue-00360",
+        "cue-00361"
+      ],
+      "context_cue_ids": [
+        "cue-00342",
+        "cue-00343",
+        "cue-00344",
+        "cue-00345",
+        "cue-00346"
+      ],
+      "question_sha256": "c9c27ab591e08d1d292fa95c5c4bc99cb9bd7550587ccd135e78e6ff25918e78",
+      "answer_sha256": "db20435a921e9e1a93da795cfad4e32305228d2f4b5c55fc1838b05e53d8f851",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "rocket",
+        "reuse",
+        "grasshopper",
+        "testing"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "excerpt",
+      "excerpt_note": "Selected complete publisher paragraph; ambiguous or continuing material follows before the next clearly labeled interviewer turn, so the selection is not claimed to be the entire response.",
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "64aabb6e6f6ca825ca3ff92628d996cb3a48d7c7ecd18aa3233c569eae71b41e"
+    },
+    {
+      "id": "qa-ted-2013-q00076",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00366",
+        "cue-00367",
+        "cue-00368"
+      ],
+      "answer_cue_ids": [
+        "cue-00369",
+        "cue-00370"
+      ],
+      "context_cue_ids": [
+        "cue-00354",
+        "cue-00355",
+        "cue-00356"
+      ],
+      "question_sha256": "e80cbe5b6641e355bd549665c7968e293c32ec2f5189345f4a1a7bb371a8c2da",
+      "answer_sha256": "9657d2ba5b0b9ba3b08a8e5b1dd7a22cf0a6ab456410e90bcdcf38a719169234",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "rocket",
+        "scale",
+        "testing"
+      ],
+      "situations": [
+        "praise"
+      ],
+      "completeness": "excerpt",
+      "excerpt_note": "Selected complete publisher paragraph; ambiguous or continuing material follows before the next clearly labeled interviewer turn, so the selection is not claimed to be the entire response.",
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "c9c27ab591e08d1d292fa95c5c4bc99cb9bd7550587ccd135e78e6ff25918e78"
+    },
+    {
+      "id": "qa-ted-2013-praise",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00376",
+        "cue-00377",
+        "cue-00378",
+        "cue-00379",
+        "cue-00380",
+        "cue-00381",
+        "cue-00382",
+        "cue-00383"
+      ],
+      "answer_cue_ids": [
+        "cue-00384",
+        "cue-00385",
+        "cue-00386"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "c91a29d02983734734cc9b97cd0f44503820498abd7bcde1cd8cd1b30935a244",
+      "answer_sha256": "e48594f178afae0e0f521e29926b9955b07a4db441f1ae85adbab7c03a4f9be1",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Interviewer praises the range of ambitious projects.",
+      "topics": [
+        "innovation",
+        "work",
+        "success"
+      ],
+      "situations": [
+        "praise"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          259,
+          280
+        ],
+        "answer": [
+          60,
+          73
+        ]
+      }
+    },
+    {
+      "id": "qa-ted-2013-first-principles",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00388",
+        "cue-00389",
+        "cue-00390",
+        "cue-00391",
+        "cue-00392",
+        "cue-00393",
+        "cue-00394",
+        "cue-00395",
+        "cue-00396",
+        "cue-00397",
+        "cue-00398",
+        "cue-00399",
+        "cue-00400"
+      ],
+      "answer_cue_ids": [
+        "cue-00401",
+        "cue-00402",
+        "cue-00403",
+        "cue-00404",
+        "cue-00405",
+        "cue-00406",
+        "cue-00407",
+        "cue-00408",
+        "cue-00409",
+        "cue-00410",
+        "cue-00411",
+        "cue-00412",
+        "cue-00413",
+        "cue-00414",
+        "cue-00415",
+        "cue-00416",
+        "cue-00417",
+        "cue-00418",
+        "cue-00419",
+        "cue-00420",
+        "cue-00421",
+        "cue-00422",
+        "cue-00423"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "36d1898bc6b197649b38d7e834cec2513ce51b04e203cdf646aab7b694159156",
+      "answer_sha256": "1f98c84abafad2d598d45182fda0124780e3355d97533579b3b6b764fa4c443b",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "context_before": "Interviewer praises systemic thinking and asks about learning it.",
+      "topics": [
+        "physics",
+        "first principles",
+        "thinking",
+        "feedback"
+      ],
+      "situations": [
+        "praise",
+        "advice"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2017-tunnels",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00004",
+        "cue-00005",
+        "cue-00006",
+        "cue-00007",
+        "cue-00008"
+      ],
+      "answer_cue_ids": [
+        "cue-00009",
+        "cue-00010",
+        "cue-00011",
+        "cue-00012",
+        "cue-00013",
+        "cue-00014",
+        "cue-00015",
+        "cue-00016",
+        "cue-00017",
+        "cue-00018",
+        "cue-00019"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "f740a2bd808b1d77beab3cc177943e90efb785f26b5ee8cc65e2ac396ac908f4",
+      "answer_sha256": "8201fe7853d8b7d5ea522c83971598de26720e32ff923b1e9a9dc40bf1ade1c1",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Opening question plays on the word boring.",
+      "topics": [
+        "tunnel",
+        "boring",
+        "traffic",
+        "congestion"
+      ],
+      "situations": [
+        "humor"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          187,
+          206
+        ],
+        "answer": [
+          36,
+          72
+        ]
+      }
+    },
+    {
+      "id": "qa-ted-2017-q00006",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00021",
+        "cue-00022",
+        "cue-00023"
+      ],
+      "answer_cue_ids": [
+        "cue-00024",
+        "cue-00025",
+        "cue-00026",
+        "cue-00027",
+        "cue-00028",
+        "cue-00029",
+        "cue-00030",
+        "cue-00031",
+        "cue-00032",
+        "cue-00033",
+        "cue-00034",
+        "cue-00035",
+        "cue-00036",
+        "cue-00037"
+      ],
+      "context_cue_ids": [
+        "cue-00004",
+        "cue-00005",
+        "cue-00006",
+        "cue-00007",
+        "cue-00008"
+      ],
+      "question_sha256": "c6d42c5558437f0baa89dce415e46f219c63ca1e846af9ab3a9f58bfd35e5ab0",
+      "answer_sha256": "f3f91eaac2a7ba2f890bd4acf7c70858471170544d38d5d608fd92afc0d33ccb",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "tunnel",
+        "entrance",
+        "design",
+        "transport"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "f740a2bd808b1d77beab3cc177943e90efb785f26b5ee8cc65e2ac396ac908f4"
+    },
+    {
+      "id": "qa-ted-2017-q00008",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00038"
+      ],
+      "answer_cue_ids": [
+        "cue-00039",
+        "cue-00040",
+        "cue-00041"
+      ],
+      "context_cue_ids": [
+        "cue-00021",
+        "cue-00022",
+        "cue-00023"
+      ],
+      "question_sha256": "06a1ee61a3f25ce69023acd14a97fd9f7865e9b56d7a0cf0e10bd16421cb3c9f",
+      "answer_sha256": "7da51cffb14d4f69cb263fbb7d560995fae0d0298a97eab0d8b5e53172137189",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "tunnel",
+        "speed",
+        "transport"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "c6d42c5558437f0baa89dce415e46f219c63ca1e846af9ab3a9f58bfd35e5ab0"
+    },
+    {
+      "id": "qa-ted-2017-capacity",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00046",
+        "cue-00047"
+      ],
+      "answer_cue_ids": [
+        "cue-00048",
+        "cue-00049",
+        "cue-00050",
+        "cue-00051",
+        "cue-00052",
+        "cue-00053",
+        "cue-00054",
+        "cue-00055",
+        "cue-00056",
+        "cue-00057",
+        "cue-00058",
+        "cue-00059"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "56b7c619f4f943ff480f7fbbbb86feb3137dbde41d7e6e3fe2633eb19d026fd4",
+      "answer_sha256": "c7b38869acc3394f89a2ae4e98d5b00c043cb9609e64dcde812a25a3eed0327e",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Interviewer suggests surface traffic relief.",
+      "topics": [
+        "tunnel",
+        "traffic",
+        "congestion",
+        "levels"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2017-cost",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00060",
+        "cue-00061"
+      ],
+      "answer_cue_ids": [
+        "cue-00062",
+        "cue-00063",
+        "cue-00064",
+        "cue-00065",
+        "cue-00066",
+        "cue-00067",
+        "cue-00068",
+        "cue-00069",
+        "cue-00070",
+        "cue-00071"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "0202b405b58a1c0e92e4320965e8d1207e48772d8fe605a61cdbc2ce99aed77b",
+      "answer_sha256": "3d44914feff19d4ca813486a653519625a399586b174cce23629a6e3a7bf1a67",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Interviewer objects to historically high tunneling costs.",
+      "topics": [
+        "tunnel",
+        "cost",
+        "expensive",
+        "digging"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          34,
+          66
+        ],
+        "answer": [
+          0,
+          26
+        ]
+      }
+    },
+    {
+      "id": "qa-ted-2017-cost-method",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00072"
+      ],
+      "answer_cue_ids": [
+        "cue-00073",
+        "cue-00074",
+        "cue-00075",
+        "cue-00076",
+        "cue-00077",
+        "cue-00078",
+        "cue-00079",
+        "cue-00080",
+        "cue-00081",
+        "cue-00082",
+        "cue-00083",
+        "cue-00084",
+        "cue-00085",
+        "cue-00086",
+        "cue-00087",
+        "cue-00088",
+        "cue-00089",
+        "cue-00090",
+        "cue-00091",
+        "cue-00092",
+        "cue-00093",
+        "cue-00094",
+        "cue-00095",
+        "cue-00096",
+        "cue-00097",
+        "cue-00098",
+        "cue-00099",
+        "cue-00100",
+        "cue-00101",
+        "cue-00102",
+        "cue-00103",
+        "cue-00104",
+        "cue-00105"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "e61cfd2ec85a9f43cd7fc6a83a41290b806178e56b0820cd203e9239c0605b55",
+      "answer_sha256": "17620716fe70b6f90ef13ef7b71ceb45ef38d9f6de8170d89783727b51f61124",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Follow-up asks how to improve tunneling costs.",
+      "topics": [
+        "tunnel",
+        "cost",
+        "engineering",
+        "diameter"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "excerpt",
+      "excerpt_note": "Complete first explanatory paragraph; further continuation after an intervening stage-direction cue is omitted. Original wording is unchanged.",
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2017-flying-cars",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00117",
+        "cue-00118",
+        "cue-00119",
+        "cue-00120",
+        "cue-00121"
+      ],
+      "answer_cue_ids": [
+        "cue-00122",
+        "cue-00123",
+        "cue-00124",
+        "cue-00125",
+        "cue-00126",
+        "cue-00127",
+        "cue-00128",
+        "cue-00129",
+        "cue-00130"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "a182c8427b4e07b3f314d9607f7d9de5a530c4599266a16cb26f2d1ca1e9e92b",
+      "answer_sha256": "328e8e7d603f6b531fe9976dc92e087fbc506f6f8c448958335d03b70d8c8326",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Interviewer offers flying cars as an alternative.",
+      "topics": [
+        "tunnel",
+        "flying cars",
+        "cost",
+        "traffic"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2017-q00030",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00136",
+        "cue-00137",
+        "cue-00138",
+        "cue-00139",
+        "cue-00140"
+      ],
+      "answer_cue_ids": [
+        "cue-00141",
+        "cue-00142",
+        "cue-00143",
+        "cue-00144",
+        "cue-00145",
+        "cue-00146",
+        "cue-00147",
+        "cue-00148",
+        "cue-00149",
+        "cue-00150",
+        "cue-00151",
+        "cue-00152",
+        "cue-00153",
+        "cue-00154",
+        "cue-00155",
+        "cue-00156"
+      ],
+      "context_cue_ids": [
+        "cue-00117",
+        "cue-00118",
+        "cue-00119",
+        "cue-00120",
+        "cue-00121"
+      ],
+      "question_sha256": "dd7310f52f0f182a29335c91569f72253c454ea3db6db77d971160f5bbc4ee63",
+      "answer_sha256": "54a3e6139204c7c38e085f45aa39e6acd18fd8998d0bd4ea1691134b830d5507",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "hyperloop",
+        "tunnel",
+        "vacuum",
+        "competition"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "a182c8427b4e07b3f314d9607f7d9de5a530c4599266a16cb26f2d1ca1e9e92b"
+    },
+    {
+      "id": "qa-ted-2017-q00034",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00160",
+        "cue-00161"
+      ],
+      "answer_cue_ids": [
+        "cue-00162",
+        "cue-00163",
+        "cue-00164",
+        "cue-00165",
+        "cue-00166",
+        "cue-00167",
+        "cue-00168",
+        "cue-00169",
+        "cue-00170",
+        "cue-00171",
+        "cue-00172",
+        "cue-00173"
+      ],
+      "context_cue_ids": [
+        "cue-00157"
+      ],
+      "question_sha256": "f677df7565b1cd5b3a037e76f283ec53d217f5a02ff2137244ebf33e98220f4f",
+      "answer_sha256": "9b826f89e0ce4b252c71704f5b8d31ab60010132f7839a0016a861d012b925dd",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "hyperloop",
+        "tunnel",
+        "vacuum"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "b856e5d15fb936642c90bd15faca3391395ee84804ac113123aa5ffffaf58f2f"
+    },
+    {
+      "id": "qa-ted-2017-q00038",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00176",
+        "cue-00177"
+      ],
+      "answer_cue_ids": [
+        "cue-00178",
+        "cue-00179",
+        "cue-00180",
+        "cue-00181",
+        "cue-00182",
+        "cue-00183",
+        "cue-00184",
+        "cue-00185",
+        "cue-00186",
+        "cue-00187",
+        "cue-00188",
+        "cue-00189",
+        "cue-00190",
+        "cue-00191",
+        "cue-00192",
+        "cue-00193",
+        "cue-00194",
+        "cue-00195",
+        "cue-00196",
+        "cue-00197",
+        "cue-00198",
+        "cue-00199",
+        "cue-00200",
+        "cue-00201",
+        "cue-00202"
+      ],
+      "context_cue_ids": [
+        "cue-00174"
+      ],
+      "question_sha256": "58fe8774f9ff934f8eb833a4c335a703ec8b81e0101f3c767b14d609f8867f19",
+      "answer_sha256": "7e1d561c2158d5606846c81db0007af2333a4a7bde434f14fe0bb927ccc5a159",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "tunnel",
+        "depth",
+        "vibration"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "330f62b120b737f930bfdf148df8c9b99e004a46c4b8f406b7fd6aa742c47528"
+    },
+    {
+      "id": "qa-ted-2017-q00044",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00209"
+      ],
+      "answer_cue_ids": [
+        "cue-00210",
+        "cue-00211"
+      ],
+      "context_cue_ids": [
+        "cue-00203",
+        "cue-00204",
+        "cue-00205"
+      ],
+      "question_sha256": "1f665f1e367fa3c3441562f69f4c0b7c2cbdcde525e14c04cf05e3a6f6befe11",
+      "answer_sha256": "ef160191bc3f4786cea6c1db3ea07cd4b7c5f0979a2913fd3a220152cfe26c6a",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "tunnel",
+        "time",
+        "hobby"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "ef93bda614ee52092d32b9fb1a5ffbd20e81ae892770364fc4a84ff001aba09b"
+    },
+    {
+      "id": "qa-ted-2017-q00046",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00212",
+        "cue-00213"
+      ],
+      "answer_cue_ids": [
+        "cue-00215",
+        "cue-00216",
+        "cue-00217",
+        "cue-00218"
+      ],
+      "context_cue_ids": [
+        "cue-00209"
+      ],
+      "question_sha256": "9b18b3b8193dd7bdf309ebd4271c04b0d831fb1f73f82250c411fef37e6a2b2a",
+      "answer_sha256": "96e2c54ff2c8327eaf7df37973f17c82c24ae8c26970490867413c9f1aa2878b",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "tunnel",
+        "hobby",
+        "team"
+      ],
+      "situations": [
+        "humor"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "1f665f1e367fa3c3441562f69f4c0b7c2cbdcde525e14c04cf05e3a6f6befe11",
+      "intervening_stage_cue_ids": [
+        "cue-00214"
+      ]
+    },
+    {
+      "id": "qa-ted-2017-q00049",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00219",
+        "cue-00220",
+        "cue-00221",
+        "cue-00222",
+        "cue-00223",
+        "cue-00224",
+        "cue-00225"
+      ],
+      "answer_cue_ids": [
+        "cue-00226",
+        "cue-00227",
+        "cue-00228",
+        "cue-00229",
+        "cue-00230",
+        "cue-00231",
+        "cue-00232",
+        "cue-00233",
+        "cue-00234",
+        "cue-00235"
+      ],
+      "context_cue_ids": [
+        "cue-00212",
+        "cue-00213"
+      ],
+      "question_sha256": "301abde8babfca12a8ae209fcfa9cc6eac793723e5ee882479c600c7124f112c",
+      "answer_sha256": "b95db1a234d8941d9cdd3986a6bb0e0e8c2a34451bef042d65381c91ddc9acaa",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "autonomy",
+        "traffic",
+        "congestion",
+        "transport"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "9b18b3b8193dd7bdf309ebd4271c04b0d831fb1f73f82250c411fef37e6a2b2a"
+    },
+    {
+      "id": "qa-ted-2017-q00055",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00243",
+        "cue-00244",
+        "cue-00245"
+      ],
+      "answer_cue_ids": [
+        "cue-00246",
+        "cue-00247",
+        "cue-00248",
+        "cue-00249",
+        "cue-00250",
+        "cue-00251",
+        "cue-00252"
+      ],
+      "context_cue_ids": [
+        "cue-00236",
+        "cue-00237",
+        "cue-00238",
+        "cue-00239"
+      ],
+      "question_sha256": "37ade2b4c29b3e6d9250c65edc125ed18877ffd35c27db868aba7bb53cf1ff3d",
+      "answer_sha256": "f911317878f46b8bb47ea04eb2dd76b95b1dfbebe9a376219628717f12cd223b",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "electric cars",
+        "industry",
+        "fuel cells"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "d8f82aebc0929dcb78ad83ed0e8a5bdd51ce8e81fd0af9f09f79f1b8bd001f72"
+    },
+    {
+      "id": "qa-ted-2017-victory",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00253",
+        "cue-00254",
+        "cue-00255"
+      ],
+      "answer_cue_ids": [
+        "cue-00256",
+        "cue-00257",
+        "cue-00258",
+        "cue-00259",
+        "cue-00260"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "934be5e471967e56d87622a9d001cd84963ea29e96bb09e42eb4807ef4964a78",
+      "answer_sha256": "ed69eb3e886b6af2d9c8424276d91918f4ee6a3e4a2e9aad18d95cea3baf6559",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Interviewer asks whether the electrification mission is already won.",
+      "topics": [
+        "tesla",
+        "electric cars",
+        "future",
+        "success"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2017-q00059",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00261",
+        "cue-00262"
+      ],
+      "answer_cue_ids": [
+        "cue-00263"
+      ],
+      "context_cue_ids": [
+        "cue-00253",
+        "cue-00254",
+        "cue-00255"
+      ],
+      "question_sha256": "ae975dd482f8186676aaec9ae79156faed23682f3b3ef1dc300136f0a50951d3",
+      "answer_sha256": "2017edeff62b30f1cee21c1daba8af755570a8e328a40f3e32385fa24483cef2",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "tesla",
+        "model 3",
+        "production",
+        "schedule"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "934be5e471967e56d87622a9d001cd84963ea29e96bb09e42eb4807ef4964a78"
+    },
+    {
+      "id": "qa-ted-2017-q00063",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00270",
+        "cue-00271"
+      ],
+      "answer_cue_ids": [
+        "cue-00272",
+        "cue-00273",
+        "cue-00274",
+        "cue-00275",
+        "cue-00276",
+        "cue-00277",
+        "cue-00278",
+        "cue-00279",
+        "cue-00280",
+        "cue-00281",
+        "cue-00282"
+      ],
+      "context_cue_ids": [
+        "cue-00264",
+        "cue-00265",
+        "cue-00266",
+        "cue-00267",
+        "cue-00268"
+      ],
+      "question_sha256": "063382d0fabb4c2953e93f43b3bb6bceb09b4a90f055ac690451616f6431466a",
+      "answer_sha256": "4f7b8c7af46c77b808e1403770c610816239127162c3cd7da26a1b51f5fea5a3",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "autonomy",
+        "vision",
+        "camera",
+        "ai"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "bae27f14d4b63356ae154993aa64b55eedce4bd3c42fbb698d802891a1a30c2b"
+    },
+    {
+      "id": "qa-ted-2017-q00065",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00283",
+        "cue-00284"
+      ],
+      "answer_cue_ids": [
+        "cue-00285",
+        "cue-00286",
+        "cue-00287"
+      ],
+      "context_cue_ids": [
+        "cue-00270",
+        "cue-00271"
+      ],
+      "question_sha256": "76afc97576a83532bacc9e0a25de81eb2a4c5834860c23f71017577f732dd132",
+      "answer_sha256": "eecf6a68500d976397451dc14606eba471d28fb54450d970b28ed963abeda8e7",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "autonomy",
+        "camera",
+        "lidar"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "063382d0fabb4c2953e93f43b3bb6bceb09b4a90f055ac690451616f6431466a"
+    },
+    {
+      "id": "qa-ted-2017-q00067",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00288",
+        "cue-00289",
+        "cue-00290"
+      ],
+      "answer_cue_ids": [
+        "cue-00291",
+        "cue-00292"
+      ],
+      "context_cue_ids": [
+        "cue-00283",
+        "cue-00284"
+      ],
+      "question_sha256": "74fca1137e7d49577a92a6602726b8ea483f784348c666a966be71244d05bbb2",
+      "answer_sha256": "4c699dc21787cccc98dcbfa33b4722d5709e7d3d745980c120d1c21dbd160cfc",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "autonomy",
+        "camera",
+        "schedule"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "76afc97576a83532bacc9e0a25de81eb2a4c5834860c23f71017577f732dd132"
+    },
+    {
+      "id": "qa-ted-2017-q00071",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00297"
+      ],
+      "answer_cue_ids": [
+        "cue-00298",
+        "cue-00299",
+        "cue-00300",
+        "cue-00301"
+      ],
+      "context_cue_ids": [
+        "cue-00293",
+        "cue-00294",
+        "cue-00295"
+      ],
+      "question_sha256": "681a691884c5ab4b78eeb50d0685f7fb86aff81836ce0747b6cb2d7d356bb395",
+      "answer_sha256": "6b7f4ff7f6d4590cf63398f1ff5b7a0a96e7caaf0537cb448dd6f5f309622540",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "autonomy",
+        "schedule",
+        "forecast"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "08a7cde40dc0bdf030a1102365ba2509e5879402f91629aa4867aa92573ad106"
+    },
+    {
+      "id": "qa-ted-2017-q00074",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00303",
+        "cue-00304",
+        "cue-00305",
+        "cue-00306"
+      ],
+      "answer_cue_ids": [
+        "cue-00307",
+        "cue-00308",
+        "cue-00309",
+        "cue-00310",
+        "cue-00311",
+        "cue-00312",
+        "cue-00313",
+        "cue-00314",
+        "cue-00315",
+        "cue-00316",
+        "cue-00317",
+        "cue-00318",
+        "cue-00319",
+        "cue-00320"
+      ],
+      "context_cue_ids": [
+        "cue-00297"
+      ],
+      "question_sha256": "fb9dfc083ebe21ce63f5ee74d10c22f4c3284c02094c3a3d38a79f4e91f013fa",
+      "answer_sha256": "84c9183084c1ef86615e092cea401734a6bb4db4b3d1f79f791b3cab8c6831e2",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "autonomy",
+        "data",
+        "routes",
+        "generalization"
+      ],
+      "situations": [
+        "praise"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "681a691884c5ab4b78eeb50d0685f7fb86aff81836ce0747b6cb2d7d356bb395"
+    },
+    {
+      "id": "qa-ted-2017-q00076",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00321",
+        "cue-00322",
+        "cue-00323",
+        "cue-00324",
+        "cue-00325",
+        "cue-00326"
+      ],
+      "answer_cue_ids": [
+        "cue-00327",
+        "cue-00328",
+        "cue-00329",
+        "cue-00330",
+        "cue-00331",
+        "cue-00332"
+      ],
+      "context_cue_ids": [
+        "cue-00303",
+        "cue-00304",
+        "cue-00305",
+        "cue-00306"
+      ],
+      "question_sha256": "8f63e8f33822bfd2fbbbc9ddf3fa72e142fbb89d228824fcb395b4a3b4948141",
+      "answer_sha256": "ff8dd4327972a4aff3314253bdcc76ef6877e2a516b3c366e6ea94b7119678c8",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "autonomy",
+        "safety",
+        "reliability"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "excerpt",
+      "excerpt_note": "Selected complete publisher paragraph; ambiguous or continuing material follows before the next clearly labeled interviewer turn, so the selection is not claimed to be the entire response.",
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "fb9dfc083ebe21ce63f5ee74d10c22f4c3284c02094c3a3d38a79f4e91f013fa"
+    },
+    {
+      "id": "qa-ted-2017-q00080",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00342",
+        "cue-00343",
+        "cue-00344",
+        "cue-00345"
+      ],
+      "answer_cue_ids": [
+        "cue-00346",
+        "cue-00347",
+        "cue-00348",
+        "cue-00349",
+        "cue-00350",
+        "cue-00351",
+        "cue-00352",
+        "cue-00353",
+        "cue-00354",
+        "cue-00355"
+      ],
+      "context_cue_ids": [
+        "cue-00321",
+        "cue-00322",
+        "cue-00323",
+        "cue-00324",
+        "cue-00325",
+        "cue-00326"
+      ],
+      "question_sha256": "f7a01e024d486df7ccd42271fa2bfd8dc8321e04356c519e3379e11c5bb3df80",
+      "answer_sha256": "3d0c88e2bcfb8ff5269271aefa5011f670aeef31e741c60413955e5e77806474",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "autonomy",
+        "safety",
+        "probability"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "8f63e8f33822bfd2fbbbc9ddf3fa72e142fbb89d228824fcb395b4a3b4948141"
+    },
+    {
+      "id": "qa-ted-2017-q00082",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00356",
+        "cue-00357",
+        "cue-00358",
+        "cue-00359",
+        "cue-00360",
+        "cue-00361",
+        "cue-00362",
+        "cue-00363",
+        "cue-00364"
+      ],
+      "answer_cue_ids": [
+        "cue-00365",
+        "cue-00366",
+        "cue-00367",
+        "cue-00368",
+        "cue-00369",
+        "cue-00370",
+        "cue-00371",
+        "cue-00372",
+        "cue-00373"
+      ],
+      "context_cue_ids": [
+        "cue-00342",
+        "cue-00343",
+        "cue-00344",
+        "cue-00345"
+      ],
+      "question_sha256": "f41005320d1845bb143db0c7abd8b6fee3350c7e3f513f92830748c03e89d779",
+      "answer_sha256": "7409f08086e497861de8cd5a131451fac8be3cd70c81fcc1f34203459bee7f0a",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "autonomy",
+        "fleet",
+        "sharing"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "f7a01e024d486df7ccd42271fa2bfd8dc8321e04356c519e3379e11c5bb3df80"
+    },
+    {
+      "id": "qa-ted-2017-teaser",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00374",
+        "cue-00375",
+        "cue-00376",
+        "cue-00377"
+      ],
+      "answer_cue_ids": [
+        "cue-00378"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "04c8619e23ca6141ba41348174df1a72f1485599ce8708a04836dac62502fb44",
+      "answer_sha256": "1b7ebe4694d3c57cc5d2ac80606e681d999c9cab4a6ec71d0d9bd3a88a37f904",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Interviewer requests material before a planned announcement.",
+      "topics": [
+        "truck",
+        "tesla",
+        "semi",
+        "announcement"
+      ],
+      "situations": [
+        "disclosure_request"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2017-q00091",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00386",
+        "cue-00387",
+        "cue-00388",
+        "cue-00389"
+      ],
+      "answer_cue_ids": [
+        "cue-00390",
+        "cue-00391",
+        "cue-00392",
+        "cue-00393",
+        "cue-00394",
+        "cue-00395",
+        "cue-00396",
+        "cue-00397",
+        "cue-00398",
+        "cue-00399",
+        "cue-00400"
+      ],
+      "context_cue_ids": [
+        "cue-00381"
+      ],
+      "question_sha256": "1ef9649307e12ca0733649e75e285d4c4f88f6ca15d6b582504e49e0f141f388",
+      "answer_sha256": "511c3feeac27f32b7e39756e84dab90ffa65eb2c6dbcf1da9aabefae50a02bda",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "electric truck",
+        "power",
+        "range"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "b814aabdde112d89d45105c3205482949a86d7bbc33040034db21f7a85c84c4a"
+    },
+    {
+      "id": "qa-ted-2017-q00095",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00403",
+        "cue-00404"
+      ],
+      "answer_cue_ids": [
+        "cue-00405",
+        "cue-00406",
+        "cue-00407",
+        "cue-00408",
+        "cue-00409",
+        "cue-00410",
+        "cue-00411"
+      ],
+      "context_cue_ids": [
+        "cue-00386",
+        "cue-00387",
+        "cue-00388",
+        "cue-00389"
+      ],
+      "question_sha256": "f5b6bef982097a635a9baf5e769bc69b8ab35b382237f276937eb1f90fa118be",
+      "answer_sha256": "717b7012c1e1c2df527f066cfceb29201cc14eecee992ef1a67c5b87dd179c8f",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "electric truck",
+        "torque",
+        "driving"
+      ],
+      "situations": [
+        "praise"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "1ef9649307e12ca0733649e75e285d4c4f88f6ca15d6b582504e49e0f141f388"
+    },
+    {
+      "id": "qa-ted-2017-q00097",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00412",
+        "cue-00413",
+        "cue-00414"
+      ],
+      "answer_cue_ids": [
+        "cue-00416",
+        "cue-00417",
+        "cue-00418",
+        "cue-00419"
+      ],
+      "context_cue_ids": [
+        "cue-00403",
+        "cue-00404"
+      ],
+      "question_sha256": "9333839c1c20563fc50e2238e3c2a89d861fa7f979d2e660316b23c048218935",
+      "answer_sha256": "009662162bb8a7953508c42d57c2559e6d04b3b17af2120ddf649ca62e2e2cc8",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "truck",
+        "prototype",
+        "driving"
+      ],
+      "situations": [
+        "humor"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "f5b6bef982097a635a9baf5e769bc69b8ab35b382237f276937eb1f90fa118be",
+      "intervening_stage_cue_ids": [
+        "cue-00415"
+      ]
+    },
+    {
+      "id": "qa-ted-2017-q00100",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00420"
+      ],
+      "answer_cue_ids": [
+        "cue-00421",
+        "cue-00422"
+      ],
+      "context_cue_ids": [
+        "cue-00412",
+        "cue-00413",
+        "cue-00414"
+      ],
+      "question_sha256": "ad630b548714626402758eee811d8332d76711eaaac04f250bc0b34215308139",
+      "answer_sha256": "2a3446b768c3c4263e2ca3b7fb32ecfa31f1cdc2cc6479a54855e9bc6e935236",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "truck",
+        "prototype",
+        "driving"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "9333839c1c20563fc50e2238e3c2a89d861fa7f979d2e660316b23c048218935"
+    },
+    {
+      "id": "qa-ted-2017-q00104",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00426",
+        "cue-00427",
+        "cue-00428",
+        "cue-00429"
+      ],
+      "answer_cue_ids": [
+        "cue-00430",
+        "cue-00431",
+        "cue-00432",
+        "cue-00433",
+        "cue-00434",
+        "cue-00435",
+        "cue-00436"
+      ],
+      "context_cue_ids": [
+        "cue-00423"
+      ],
+      "question_sha256": "e15df6ae2b822ad39695aaeacc614c9df2fe56065fbd183b41daf62fb4d29b4b",
+      "answer_sha256": "1a756fada3b07dbf20566ca50e12d7aca629fa29ffb10b0afff86d11d7776c05",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "solar",
+        "roof",
+        "powerwall",
+        "home"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "787e9d611fd45b8ff5ae64ae6161e51538b1f75b0d71d2b69b84288564a60045"
+    },
+    {
+      "id": "qa-ted-2017-q00109",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00441",
+        "cue-00442"
+      ],
+      "answer_cue_ids": [
+        "cue-00443",
+        "cue-00444",
+        "cue-00445",
+        "cue-00446",
+        "cue-00447",
+        "cue-00448",
+        "cue-00449",
+        "cue-00450",
+        "cue-00451",
+        "cue-00452",
+        "cue-00453",
+        "cue-00454",
+        "cue-00455",
+        "cue-00456"
+      ],
+      "context_cue_ids": [
+        "cue-00437"
+      ],
+      "question_sha256": "9206fd382adc599d72ebe9e1f42198438d59686abf5c0d7b91bc2c231e1bec83",
+      "answer_sha256": "4928622802e564ce2f0f21fc811cbb1e740d5a91ce6fe754a63fe06f51c36c3e",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "solar",
+        "roof",
+        "design"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "b814aabdde112d89d45105c3205482949a86d7bbc33040034db21f7a85c84c4a"
+    },
+    {
+      "id": "qa-ted-2017-q00111",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00457",
+        "cue-00458",
+        "cue-00459"
+      ],
+      "answer_cue_ids": [
+        "cue-00460",
+        "cue-00461",
+        "cue-00462",
+        "cue-00463",
+        "cue-00464",
+        "cue-00465",
+        "cue-00466",
+        "cue-00467",
+        "cue-00468",
+        "cue-00469",
+        "cue-00470",
+        "cue-00471",
+        "cue-00472",
+        "cue-00473",
+        "cue-00474",
+        "cue-00475"
+      ],
+      "context_cue_ids": [
+        "cue-00441",
+        "cue-00442"
+      ],
+      "question_sha256": "54a7d920b684b74988e9f6a2ade12431667a1b17e004181fe14657f31d7e428b",
+      "answer_sha256": "a0c0caf09efb225adfd401d48358707e1d814833234b7f4327eaa0e8575931bf",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "solar",
+        "roof",
+        "cost",
+        "warranty"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "9206fd382adc599d72ebe9e1f42198438d59686abf5c0d7b91bc2c231e1bec83"
+    },
+    {
+      "id": "qa-ted-2017-q00114",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00477",
+        "cue-00478",
+        "cue-00479"
+      ],
+      "answer_cue_ids": [
+        "cue-00480",
+        "cue-00481"
+      ],
+      "context_cue_ids": [
+        "cue-00457",
+        "cue-00458",
+        "cue-00459"
+      ],
+      "question_sha256": "16999f783513af14509bdf36cfc41ae78794ab1fcb26e789f3493554d8ab6378",
+      "answer_sha256": "7c919d222b0a52885e4164f982d10963aba5b28d04653d14f7dac77ed2be4460",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "solar",
+        "roof",
+        "production"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "54a7d920b684b74988e9f6a2ade12431667a1b17e004181fe14657f31d7e428b"
+    },
+    {
+      "id": "qa-ted-2017-q00116",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00482",
+        "cue-00483"
+      ],
+      "answer_cue_ids": [
+        "cue-00484",
+        "cue-00485",
+        "cue-00486",
+        "cue-00487",
+        "cue-00488",
+        "cue-00489",
+        "cue-00490",
+        "cue-00491",
+        "cue-00492",
+        "cue-00493"
+      ],
+      "context_cue_ids": [
+        "cue-00477",
+        "cue-00478",
+        "cue-00479"
+      ],
+      "question_sha256": "fad68b26136a5bf3dcae0bb72a99dbcbf18a09bf6801e61fd6e0becdf92ea18c",
+      "answer_sha256": "26a99f8ed5919d6f3aa4dc7c191a8384a717877d9314757818785e57a75b7547",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "solar",
+        "roof",
+        "adoption",
+        "forecast"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "16999f783513af14509bdf36cfc41ae78794ab1fcb26e789f3493554d8ab6378"
+    },
+    {
+      "id": "qa-ted-2017-q00118",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00494",
+        "cue-00495",
+        "cue-00496",
+        "cue-00497",
+        "cue-00498",
+        "cue-00499",
+        "cue-00500"
+      ],
+      "answer_cue_ids": [
+        "cue-00501",
+        "cue-00502",
+        "cue-00503",
+        "cue-00504",
+        "cue-00505"
+      ],
+      "context_cue_ids": [
+        "cue-00482",
+        "cue-00483"
+      ],
+      "question_sha256": "104631cab9becd058383afec5742acaf67789b6381498f7235ee2849db7dbcc0",
+      "answer_sha256": "6d12b4c03e4ecf963c5de4d809c2791002944c39667fed5bdb5538791c18cac9",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "solar",
+        "roof",
+        "electricity",
+        "area"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "fad68b26136a5bf3dcae0bb72a99dbcbf18a09bf6801e61fd6e0becdf92ea18c"
+    },
+    {
+      "id": "qa-ted-2017-q00120",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00506",
+        "cue-00507",
+        "cue-00508",
+        "cue-00509",
+        "cue-00510",
+        "cue-00511",
+        "cue-00512",
+        "cue-00513",
+        "cue-00514",
+        "cue-00515"
+      ],
+      "answer_cue_ids": [
+        "cue-00516",
+        "cue-00517",
+        "cue-00518",
+        "cue-00519",
+        "cue-00520",
+        "cue-00521",
+        "cue-00522",
+        "cue-00523"
+      ],
+      "context_cue_ids": [
+        "cue-00494",
+        "cue-00495",
+        "cue-00496",
+        "cue-00497",
+        "cue-00498",
+        "cue-00499",
+        "cue-00500"
+      ],
+      "question_sha256": "41a6b6bd0e4d6e9f689c4db307fd063bc15a52de887512c498134401ec4f1c76",
+      "answer_sha256": "13760de63db88738aa33de0c85c8ecee34178c05534ad2b271d194d42575bb94",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "battery",
+        "gigafactory",
+        "manufacturing"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "104631cab9becd058383afec5742acaf67789b6381498f7235ee2849db7dbcc0"
+    },
+    {
+      "id": "qa-ted-2017-q00122",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00524",
+        "cue-00525"
+      ],
+      "answer_cue_ids": [
+        "cue-00526"
+      ],
+      "context_cue_ids": [
+        "cue-00506",
+        "cue-00507",
+        "cue-00508",
+        "cue-00509",
+        "cue-00510",
+        "cue-00511",
+        "cue-00512",
+        "cue-00513",
+        "cue-00514",
+        "cue-00515"
+      ],
+      "question_sha256": "e5b8edbfd09a16c445afd0ee905c71071796b3af84eb13b2f6b7722cbd097534",
+      "answer_sha256": "387cd7ff3700c61dcf6e2efd509470e53a9bf99d8fcce1dd77577395472c540a",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "battery",
+        "gigafactory",
+        "capacity"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "41a6b6bd0e4d6e9f689c4db307fd063bc15a52de887512c498134401ec4f1c76"
+    },
+    {
+      "id": "qa-ted-2017-q00129",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00532"
+      ],
+      "answer_cue_ids": [
+        "cue-00533",
+        "cue-00534",
+        "cue-00535"
+      ],
+      "context_cue_ids": [
+        "cue-00527"
+      ],
+      "question_sha256": "aa609e0b4ef6360dd6afad283603b2985448da966cfb9ccea05e9bd90305c2ce",
+      "answer_sha256": "e4c38b0d4a95b9005be0f955c429e44d21092948a07952feb622718605576e9e",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "battery",
+        "manufacturing",
+        "speed"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "86bb1043d74d879744c74b754c8634e98fdaf6d75be4d7dc8e4efd902e6332b1"
+    },
+    {
+      "id": "qa-ted-2017-factories",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00537",
+        "cue-00538",
+        "cue-00539",
+        "cue-00540"
+      ],
+      "answer_cue_ids": [
+        "cue-00541",
+        "cue-00542",
+        "cue-00543"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "5147c67dc7777b6ad92b0427ad2fb5eb7eebbb8e8d05d1bfa472694c10676e8f",
+      "answer_sha256": "1876799146c393f1dbd8e2f9551448c7b4ec5dc849e06cb75ed6f6cc285c1ffe",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Question asks about global battery-factory requirements.",
+      "topics": [
+        "energy",
+        "battery",
+        "gigafactory"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2017-q00134",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00544",
+        "cue-00545",
+        "cue-00546",
+        "cue-00547",
+        "cue-00548",
+        "cue-00549",
+        "cue-00550",
+        "cue-00551"
+      ],
+      "answer_cue_ids": [
+        "cue-00552",
+        "cue-00553",
+        "cue-00554"
+      ],
+      "context_cue_ids": [
+        "cue-00537",
+        "cue-00538",
+        "cue-00539",
+        "cue-00540"
+      ],
+      "question_sha256": "effd1ec1f536791b2727e234229bd71e0bc3e2c1c4d41fff7b67f26e716ca7d9",
+      "answer_sha256": "27b1ba603f63d90a9ce9805e2cfb29fd305901e158d475de375855e65a548ac8",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "battery",
+        "gigafactory",
+        "locations"
+      ],
+      "situations": [
+        "praise"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "5147c67dc7777b6ad92b0427ad2fb5eb7eebbb8e8d05d1bfa472694c10676e8f"
+    },
+    {
+      "id": "qa-ted-2017-criticism",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00570",
+        "cue-00571",
+        "cue-00572",
+        "cue-00573"
+      ],
+      "answer_cue_ids": [
+        "cue-00574",
+        "cue-00575",
+        "cue-00576",
+        "cue-00577",
+        "cue-00578",
+        "cue-00579",
+        "cue-00580",
+        "cue-00581",
+        "cue-00582",
+        "cue-00583",
+        "cue-00584"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "ed8162f9821c44a260e822397fee5afafe9056dd34eeaa925fea770fc85b3f90",
+      "answer_sha256": "07d297a128e00d3d9a838ebbb223143d287458d5ff9dda4ce4bd38a9d473cf77",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Interviewer relays criticism of policy advisory participation.",
+      "topics": [
+        "climate",
+        "advisory councils",
+        "criticism"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2017-q00152",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00597"
+      ],
+      "answer_cue_ids": [
+        "cue-00598",
+        "cue-00599",
+        "cue-00600",
+        "cue-00601",
+        "cue-00602",
+        "cue-00603"
+      ],
+      "context_cue_ids": [
+        "cue-00589"
+      ],
+      "question_sha256": "a35424573fc06bcd6747caf8019b1221272f54538e680aa67d3f3ab104caada2",
+      "answer_sha256": "38b443e554865745e7ace977210c900f353354606a9b4b765d10790d9e01033b",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "rocket",
+        "landing",
+        "booster"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "b814aabdde112d89d45105c3205482949a86d7bbc33040034db21f7a85c84c4a"
+    },
+    {
+      "id": "qa-ted-2017-q00158",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00608",
+        "cue-00609",
+        "cue-00610",
+        "cue-00611",
+        "cue-00612"
+      ],
+      "answer_cue_ids": [
+        "cue-00613"
+      ],
+      "context_cue_ids": [
+        "cue-00605"
+      ],
+      "question_sha256": "78f6b68f8a5464f22faf7801c41c5e5313c6984c7ec7b766f4a900615cbef7a3",
+      "answer_sha256": "1ac93d912a6225da6b5286c5b00dd585f394c9d849323eecfd2996493021e86f",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "rocket",
+        "landing",
+        "failure",
+        "flights"
+      ],
+      "situations": [
+        "praise",
+        "reflection"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "d27cf020891ee50424fa49fe45b1ab3acba011ef34e46fd2800a1bcc2275c3bc"
+    },
+    {
+      "id": "qa-ted-2017-q00160",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00614",
+        "cue-00615"
+      ],
+      "answer_cue_ids": [
+        "cue-00616",
+        "cue-00617",
+        "cue-00618",
+        "cue-00619",
+        "cue-00620",
+        "cue-00621",
+        "cue-00622",
+        "cue-00623",
+        "cue-00624"
+      ],
+      "context_cue_ids": [
+        "cue-00608",
+        "cue-00609",
+        "cue-00610",
+        "cue-00611",
+        "cue-00612"
+      ],
+      "question_sha256": "4a3caa893ca5e85c76adb384b3f79bd3d81d32bf7e4e8c82ac8d4079e756cb3d",
+      "answer_sha256": "8cb2bda9acfe68475592a57943bb85a165fe247da596e25b377baf6181454aa5",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "rocket",
+        "reuse",
+        "booster"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "78f6b68f8a5464f22faf7801c41c5e5313c6984c7ec7b766f4a900615cbef7a3"
+    },
+    {
+      "id": "qa-ted-2017-q00164",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00629",
+        "cue-00630"
+      ],
+      "answer_cue_ids": [
+        "cue-00631",
+        "cue-00632"
+      ],
+      "context_cue_ids": [
+        "cue-00625",
+        "cue-00626",
+        "cue-00627"
+      ],
+      "question_sha256": "e5bc4b36c1784378ef141e39a5eaeb03e37e8d16cd12932855be756877a49d60",
+      "answer_sha256": "a05be29d06f7e310389590c967b4d60e68d5a545786485aaa917aa97ace6cecf",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "rocket",
+        "scale",
+        "design"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "eb894172e6b3917b04dadb708b08e9ac4778327fa13afa78f077114c6ea764bf"
+    },
+    {
+      "id": "qa-ted-2017-q00167",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00634",
+        "cue-00635"
+      ],
+      "answer_cue_ids": [
+        "cue-00636",
+        "cue-00637",
+        "cue-00638"
+      ],
+      "context_cue_ids": [
+        "cue-00629",
+        "cue-00630"
+      ],
+      "question_sha256": "f1223f642d10f9a21e20951ca1ef198a9a47d13a620aba74541ae54b52a0f224",
+      "answer_sha256": "e8117e99e0cafbd8bef3fa0f29cdd59ef5302db69d0c405e00ea24071b053874",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "rocket",
+        "thrust",
+        "scale"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "e5bc4b36c1784378ef141e39a5eaeb03e37e8d16cd12932855be756877a49d60"
+    },
+    {
+      "id": "qa-ted-2017-q00174",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00647",
+        "cue-00648",
+        "cue-00649",
+        "cue-00650",
+        "cue-00651"
+      ],
+      "answer_cue_ids": [
+        "cue-00652",
+        "cue-00653",
+        "cue-00654"
+      ],
+      "context_cue_ids": [
+        "cue-00639"
+      ],
+      "question_sha256": "eee7e6aaf961aa31ecab048a6505d084747947944f216966ff061f2f3c3baf02",
+      "answer_sha256": "dbb6c86a0ba8344f61d403e1733baaf7c873648cb36d4c4c422f13dca766ce15",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "rocket",
+        "cargo",
+        "mass"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "1c4ae502c0f6c9fa30f0590ce1b8e08d50e4ebfc002f6099ed8d9d723b563fe3"
+    },
+    {
+      "id": "qa-ted-2017-q00176",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00655",
+        "cue-00656",
+        "cue-00657",
+        "cue-00658",
+        "cue-00659"
+      ],
+      "answer_cue_ids": [
+        "cue-00660",
+        "cue-00661",
+        "cue-00662"
+      ],
+      "context_cue_ids": [
+        "cue-00647",
+        "cue-00648",
+        "cue-00649",
+        "cue-00650",
+        "cue-00651"
+      ],
+      "question_sha256": "3e2c79d82e920d95cee6c80a0dbe28e33c8cec621df6b9d876641d84f1c1c0ac",
+      "answer_sha256": "dfb2b9a884d8174b1d231fc66bd9f8cac998b005eaafd035b7f6ee508b3a7e09",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "mars",
+        "transport",
+        "schedule"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "eee7e6aaf961aa31ecab048a6505d084747947944f216966ff061f2f3c3baf02"
+    },
+    {
+      "id": "qa-ted-2017-q00181",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00670",
+        "cue-00671",
+        "cue-00672",
+        "cue-00673"
+      ],
+      "answer_cue_ids": [
+        "cue-00674",
+        "cue-00675",
+        "cue-00676",
+        "cue-00677",
+        "cue-00678",
+        "cue-00679",
+        "cue-00680",
+        "cue-00681",
+        "cue-00682",
+        "cue-00683",
+        "cue-00684",
+        "cue-00685"
+      ],
+      "context_cue_ids": [
+        "cue-00664"
+      ],
+      "question_sha256": "b4f6f03c891d0bf537d5c85eb954763345ea6dd71163c0b1b02cea07d5f84db4",
+      "answer_sha256": "8aa94f52e3b714c45ee7e9c72a1b8cdc09a7e695901b374e39ca870822e46572",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "mars",
+        "motivation",
+        "inspiration",
+        "future"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "b814aabdde112d89d45105c3205482949a86d7bbc33040034db21f7a85c84c4a"
+    },
+    {
+      "id": "qa-ted-2017-q00184",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00687",
+        "cue-00688",
+        "cue-00689",
+        "cue-00690",
+        "cue-00691",
+        "cue-00692",
+        "cue-00693",
+        "cue-00694",
+        "cue-00695"
+      ],
+      "answer_cue_ids": [
+        "cue-00696",
+        "cue-00697",
+        "cue-00698",
+        "cue-00699",
+        "cue-00700",
+        "cue-00701",
+        "cue-00702",
+        "cue-00703",
+        "cue-00704",
+        "cue-00705",
+        "cue-00706",
+        "cue-00707",
+        "cue-00708",
+        "cue-00709",
+        "cue-00710",
+        "cue-00711",
+        "cue-00712",
+        "cue-00713"
+      ],
+      "context_cue_ids": [
+        "cue-00670",
+        "cue-00671",
+        "cue-00672",
+        "cue-00673"
+      ],
+      "question_sha256": "5907f4b7e886a5509afc72cf00092b56a74ce40d5fa0e361b8304f3f8e210d2e",
+      "answer_sha256": "d9308a2ff26d11b3a039d340ff8f05a9621d3e32cc762fee5e2478ae794e4ad3",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "mars",
+        "energy",
+        "probability",
+        "action"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "excerpt",
+      "excerpt_note": "Selected complete publisher paragraph; ambiguous or continuing material follows before the next clearly labeled interviewer turn, so the selection is not claimed to be the entire response.",
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "b4f6f03c891d0bf537d5c85eb954763345ea6dd71163c0b1b02cea07d5f84db4"
+    },
+    {
+      "id": "qa-ted-2017-q00188",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00745",
+        "cue-00746",
+        "cue-00747",
+        "cue-00748",
+        "cue-00749",
+        "cue-00750",
+        "cue-00751",
+        "cue-00752",
+        "cue-00753",
+        "cue-00754",
+        "cue-00755",
+        "cue-00756",
+        "cue-00757",
+        "cue-00758",
+        "cue-00759",
+        "cue-00760",
+        "cue-00761",
+        "cue-00762",
+        "cue-00763",
+        "cue-00764",
+        "cue-00765"
+      ],
+      "answer_cue_ids": [
+        "cue-00766",
+        "cue-00767",
+        "cue-00768",
+        "cue-00769",
+        "cue-00770",
+        "cue-00771",
+        "cue-00772",
+        "cue-00773"
+      ],
+      "context_cue_ids": [
+        "cue-00687",
+        "cue-00688",
+        "cue-00689",
+        "cue-00690",
+        "cue-00691",
+        "cue-00692",
+        "cue-00693",
+        "cue-00694",
+        "cue-00695"
+      ],
+      "question_sha256": "ffa4263346c379ff84a8866ef19dadcd38eadcf1da2466b8f6e03757a7b0ded1",
+      "answer_sha256": "715fa6f2eb206dc44a1c1a226e6155e615d58d51c16029a4ea088b760b2133bd",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "inspiration",
+        "beauty",
+        "motivation",
+        "future"
+      ],
+      "situations": [
+        "praise"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "5907f4b7e886a5509afc72cf00092b56a74ce40d5fa0e361b8304f3f8e210d2e"
+    },
+    {
+      "id": "qa-ted-2017-q00191",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00775",
+        "cue-00776",
+        "cue-00777",
+        "cue-00778",
+        "cue-00779",
+        "cue-00780",
+        "cue-00781",
+        "cue-00782",
+        "cue-00783",
+        "cue-00784"
+      ],
+      "answer_cue_ids": [
+        "cue-00785"
+      ],
+      "context_cue_ids": [
+        "cue-00745",
+        "cue-00746",
+        "cue-00747",
+        "cue-00748",
+        "cue-00749",
+        "cue-00750",
+        "cue-00751",
+        "cue-00752",
+        "cue-00753",
+        "cue-00754",
+        "cue-00755",
+        "cue-00756",
+        "cue-00757",
+        "cue-00758",
+        "cue-00759",
+        "cue-00760",
+        "cue-00761",
+        "cue-00762",
+        "cue-00763",
+        "cue-00764",
+        "cue-00765"
+      ],
+      "question_sha256": "d9b53533c0fcc387f5518c00411f94463c10db49669441708f254a27685d268b",
+      "answer_sha256": "fc468b177152a0a06c5f3314c8d58435afd8e2fcd13263d75c1d1d1f20928acf",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "context_before": "Original preceding interviewer turn is hydrated locally from pinned cues.",
+      "topics": [
+        "dreams",
+        "feedback",
+        "humor",
+        "praise"
+      ],
+      "situations": [
+        "praise"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent reviewed the full training-event publisher transcript and checked explicit speaker labels on both selected starts. Every pair meeting the fixed source-wide rule is included, independently of held-out questions or model scores. No audio or human review is claimed.",
+      "annotation_basis": "AI agent assigned topic and observable interviewer-request labels after reading the training exchange. Generic rule suggestions were corrected where praise, challenge or reflection was explicit; no inferred internal state.",
+      "context_kind": "original_text",
+      "context_source_speaker": "Chris Anderson",
+      "context_sha256": "ffa4263346c379ff84a8866ef19dadcd38eadcf1da2466b8f6e03757a7b0ded1"
+    },
+    {
+      "id": "qa-ted-2022-recorded-ai-risk",
+      "source_id": "ted-2022-recorded",
+      "source_event_id": "ted-2022-recorded",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00559",
+        "cue-00560",
+        "cue-00561",
+        "cue-00562",
+        "cue-00563"
+      ],
+      "answer_cue_ids": [
+        "cue-00564",
+        "cue-00565",
+        "cue-00566",
+        "cue-00567",
+        "cue-00568",
+        "cue-00569",
+        "cue-00570"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "408053d10268a8aeab18ea3b1f9e9d450b8a63e3ea4c290954f13369009ea57c",
+      "answer_sha256": "91fd38d0f7a2bfc324ccb2a87a66d1f791129c97b7a2666138a426efdda496f7",
+      "transcript_sha256": "eb66551c1493446935a0fd76437b433ae4cbb62532526b574098671863834967",
+      "context_before": "Interviewer challenges a proposed way to reduce AI risk.",
+      "topics": [
+        "ai",
+        "neuralink",
+        "risk"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2022-recorded-launch-risk",
+      "source_id": "ted-2022-recorded",
+      "source_event_id": "ted-2022-recorded",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00806",
+        "cue-00807"
+      ],
+      "answer_cue_ids": [
+        "cue-00808",
+        "cue-00809",
+        "cue-00810"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "39b07c77bea0bb43568589131f642a572fec041625afb77c99e862711062c2da",
+      "answer_sha256": "a8ac49677e8de3dba3b2afb6304dbe55b93488ed2b108e214ebcfa39db9ab8fa",
+      "transcript_sha256": "eb66551c1493446935a0fd76437b433ae4cbb62532526b574098671863834967",
+      "context_before": "Interviewer raises risk in early launch attempts.",
+      "topics": [
+        "rocket",
+        "risk",
+        "failure"
+      ],
+      "situations": [
+        "challenge"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2022-recorded-motivation",
+      "source_id": "ted-2022-recorded",
+      "source_event_id": "ted-2022-recorded",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-01201"
+      ],
+      "answer_cue_ids": [
+        "cue-01202",
+        "cue-01203",
+        "cue-01204",
+        "cue-01205",
+        "cue-01206",
+        "cue-01207",
+        "cue-01208",
+        "cue-01209",
+        "cue-01210",
+        "cue-01211",
+        "cue-01212",
+        "cue-01213",
+        "cue-01214"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "0a9c33b11aa438f668ea69e7b387f4df9da1bcd25c1bd9f2cc0bdfa0ad20eec6",
+      "answer_sha256": "5a4f2fca82cbc03e3e8b4e2b2a91210900bc6c8e325dd8c8f982d3ce8841ce16",
+      "transcript_sha256": "eb66551c1493446935a0fd76437b433ae4cbb62532526b574098671863834967",
+      "context_before": "Closing question asks about day-to-day motivation.",
+      "topics": [
+        "motivation",
+        "future",
+        "curiosity"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-ted-2022-recorded-future-advice",
+      "source_id": "ted-2022-recorded",
+      "source_event_id": "ted-2022-recorded",
+      "questioner": "Chris Anderson",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-01233",
+        "cue-01234",
+        "cue-01235"
+      ],
+      "answer_cue_ids": [
+        "cue-01236",
+        "cue-01237",
+        "cue-01238"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "58199d21854a3b0341f5ff0b35a1d88c97f9fef1f52dff589fb93cd47c1efc23",
+      "answer_sha256": "0500d3353defe30308b0a51c3a67af3befb603c0feedaaca8a952e00249b1954",
+      "transcript_sha256": "eb66551c1493446935a0fd76437b433ae4cbb62532526b574098671863834967",
+      "context_before": "Interviewer asks what to tell a pessimistic generation.",
+      "topics": [
+        "future",
+        "advice",
+        "action"
+      ],
+      "situations": [
+        "advice"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          80,
+          107
+        ],
+        "answer": [
+          70,
+          98
+        ]
+      }
+    },
+    {
+      "id": "qa-lex-400-2023-compute-efficiency",
+      "source_id": "lex-400-2023",
+      "source_event_id": "lex-400-2023",
+      "questioner": "Lex Fridman",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00240"
+      ],
+      "answer_cue_ids": [
+        "cue-00241"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "9c37fdaac94d762d9105f8edd3745bf9c262272881d3d34abdc64405e71e5eba",
+      "answer_sha256": "3213d80a0d9e86a4cc09e82743d1f4087668425226c2bb8f5e4038de294765e7",
+      "transcript_sha256": "dda2d4b72a451437d82ba571dc83d117784ad5d96f656997c63b2743a6b6aae0",
+      "context_before": "Question concerns lessons from improving model-training efficiency.",
+      "topics": [
+        "ai",
+        "physics",
+        "efficiency"
+      ],
+      "situations": [
+        "reflection"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-lex-400-2023-trust",
+      "source_id": "lex-400-2023",
+      "source_event_id": "lex-400-2023",
+      "questioner": "Lex Fridman",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00475"
+      ],
+      "answer_cue_ids": [
+        "cue-00476"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "948046fdf90654f43d7e8da936bb24f921772a6e78c1b8162d3c74df2aa0cb89",
+      "answer_sha256": "05ce00fc8cc8f647fffae40dff385b93bd683646efe73f94221d7074b98439cb",
+      "transcript_sha256": "dda2d4b72a451437d82ba571dc83d117784ad5d96f656997c63b2743a6b6aae0",
+      "context_before": "Question asks how to assess trust at work and personally.",
+      "topics": [
+        "trust",
+        "work",
+        "relationships"
+      ],
+      "situations": [
+        "advice"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    },
+    {
+      "id": "qa-lex-400-2023-wellbeing",
+      "source_id": "lex-400-2023",
+      "source_event_id": "lex-400-2023",
+      "questioner": "Lex Fridman",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00533"
+      ],
+      "answer_cue_ids": [
+        "cue-00534"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "ec3db42c7f1e7ed8b05e55506e18a5cd06216b097b029da89105e3983ddd2689",
+      "answer_sha256": "6ad7d3f5d1a746caa72262f96209c1c492bc29b54a74aeca3c314526bbf64470",
+      "transcript_sha256": "dda2d4b72a451437d82ba571dc83d117784ad5d96f656997c63b2743a6b6aae0",
+      "context_before": "Follow-up after discussing personal difficulties.",
+      "topics": [
+        "wellbeing",
+        "life"
+      ],
+      "situations": [
+        "conversation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          0,
+          18
+        ],
+        "answer": [
+          0,
+          17
+        ]
+      }
+    },
+    {
+      "id": "qa-lex-400-2023-loneliness",
+      "source_id": "lex-400-2023",
+      "source_event_id": "lex-400-2023",
+      "questioner": "Lex Fridman",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00535"
+      ],
+      "answer_cue_ids": [
+        "cue-00536"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "05fc1d93552fb368bbf73e5e01290d2ace2034c68065b070b4a888425ca55845",
+      "answer_sha256": "b66c8faa92e1d2c13fcaa45fa4f445a1dd30702602db8a9e682408e893787c27",
+      "transcript_sha256": "dda2d4b72a451437d82ba571dc83d117784ad5d96f656997c63b2743a6b6aae0",
+      "context_before": "Follow-up asks about loneliness.",
+      "topics": [
+        "loneliness",
+        "family",
+        "friends"
+      ],
+      "situations": [
+        "reflection"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          0,
+          18
+        ],
+        "answer": [
+          0,
+          51
+        ]
+      }
+    },
+    {
+      "id": "qa-lex-438-2024-engineering",
+      "source_id": "lex-438-2024",
+      "source_event_id": "lex-438-2024",
+      "questioner": "Lex Fridman",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00272"
+      ],
+      "answer_cue_ids": [
+        "cue-00273",
+        "cue-00274"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "160f176a4233387cafa42c0619de594dbcc7e775711be549c58ddeb8b30419a8",
+      "answer_sha256": "a9e97eeaa8ea44174746230046af626f29ef032d3ae1ff78bee65a16ecdc1b2a",
+      "transcript_sha256": "4d7704020f1af02902208e443d928fb91a6f224cd9d8b8fa85d3a5055da92d69",
+      "context_before": "Interviewer praises engineering iteration and asks about teams.",
+      "topics": [
+        "engineering",
+        "requirements",
+        "first principles"
+      ],
+      "situations": [
+        "praise",
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed. The explicitly listed unlabeled continuation was read in context and attributed to the same preceding respondent; it is not automatic diarization.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "answer_reviewed_continuations": [
+        "cue-00274"
+      ]
+    },
+    {
+      "id": "qa-lex-438-2024-success",
+      "source_id": "lex-438-2024",
+      "source_event_id": "lex-438-2024",
+      "questioner": "Lex Fridman",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00417"
+      ],
+      "answer_cue_ids": [
+        "cue-00418"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "2b0dd7d8c8fb11b2c403d8a6bae36e1a8383dfc56a69462296562b2c45ea45c7",
+      "answer_sha256": "eff139766c1736f13b92e1ea176d7f1bea5fb4fb3f288f504a61ae4de28ea930",
+      "transcript_sha256": "4d7704020f1af02902208e443d928fb91a6f224cd9d8b8fa85d3a5055da92d69",
+      "context_before": "Question asks for a personal measure of success.",
+      "topics": [
+        "success",
+        "usefulness",
+        "life"
+      ],
+      "situations": [
+        "reflection"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          72,
+          104
+        ],
+        "answer": [
+          31,
+          69
+        ]
+      }
+    },
+    {
+      "id": "qa-lex-438-2024-time",
+      "source_id": "lex-438-2024",
+      "source_event_id": "lex-438-2024",
+      "questioner": "Lex Fridman",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00421"
+      ],
+      "answer_cue_ids": [
+        "cue-00422"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "f2731fb432b3a88ba503e5dc2d69bc306b084307a507560994a5aa25f8c63ac8",
+      "answer_sha256": "09d28686800a8560bcf8c81a5c52fe1f4b39b858b9003e8156085bfd3b6a21ac",
+      "transcript_sha256": "4d7704020f1af02902208e443d928fb91a6f224cd9d8b8fa85d3a5055da92d69",
+      "context_before": "Interviewer praises the teams and asks about allocating time.",
+      "topics": [
+        "time",
+        "usefulness",
+        "work"
+      ],
+      "situations": [
+        "praise",
+        "advice"
+      ],
+      "completeness": "excerpt",
+      "excerpt_note": "First response before an interviewer acknowledgment; the later elaboration is excluded rather than silently merging noncontiguous turns.",
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary.",
+      "bundled_excerpt": {
+        "question": [
+          131,
+          149
+        ],
+        "answer": [
+          0,
+          32
+        ]
+      }
+    },
+    {
+      "id": "qa-lex-438-2024-risk",
+      "source_id": "lex-438-2024",
+      "source_event_id": "lex-438-2024",
+      "questioner": "Lex Fridman",
+      "respondent": "Elon Musk",
+      "question_cue_ids": [
+        "cue-00425"
+      ],
+      "answer_cue_ids": [
+        "cue-00426"
+      ],
+      "context_cue_ids": [],
+      "question_sha256": "556af664125ed16bfd40c7b5b7bb05e76ab4f4c419aa8626de151e8c477b3f32",
+      "answer_sha256": "d194e5d178414502eb5f22b3389d65cbc5cf6c88cfba88f31aecbc7c9f3ab006",
+      "transcript_sha256": "4d7704020f1af02902208e443d928fb91a6f224cd9d8b8fa85d3a5055da92d69",
+      "context_before": "Follow-up concerns the scale of decision consequences.",
+      "topics": [
+        "risk",
+        "time",
+        "decisions"
+      ],
+      "situations": [
+        "explanation"
+      ],
+      "completeness": "complete_exchange",
+      "excerpt_note": null,
+      "review_basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+      "annotation_basis": "Editorial label of the observable interviewer request and exchange context; no inference of internal feelings. Fixed situations.v1 vocabulary."
+    }
+  ]
+}

@@ -45,7 +45,7 @@ class ProviderSettings:
 
 @dataclass(frozen=True)
 class Settings:
-    corpus_dir: Path = field(default_factory=lambda: repository_root() / "data/personas/elon-musk")
+    corpus_dir: Path = field(default_factory=lambda: repository_root() / "data/qna/elon-musk-v1")
     web_dir: Path = field(default_factory=lambda: repository_root() / "apps/web/dist")
     llm: ProviderSettings = field(default_factory=ProviderSettings)
     tts: ProviderSettings = field(default_factory=ProviderSettings)
@@ -90,7 +90,7 @@ class Settings:
             raise ValueError("BIAS_TTS_LANGUAGE_HINT must be true, false, 1, or 0")
 
         return cls(
-            corpus_dir=Path(os.getenv("BIAS_CORPUS_DIR", str(repository_root() / "data/personas/elon-musk"))),
+            corpus_dir=Path(os.getenv("BIAS_CORPUS_DIR", str(repository_root() / "data/qna/elon-musk-v1"))),
             web_dir=Path(os.getenv("BIAS_WEB_DIR", str(repository_root() / "apps/web/dist"))),
             llm=provider("LLM"),
             tts=provider("TTS"),

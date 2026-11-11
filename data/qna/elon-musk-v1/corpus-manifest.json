@@ -1,0 +1,17 @@
+{
+  "schema_version": "original-qa-corpus.v1",
+  "id": "elon-musk-original-qa.v1",
+  "materialization": "bounded_excerpts",
+  "selection_recipe_sha256": "65954d160d2e2bb0d273ce9064f95b18fa603f681345d0689f52a47d23aa07dd",
+  "split_manifest_sha256": "d9ef0051c278e376074dbe8cc12de1c67658774930c32e0b5ab1a526f6355295",
+  "source_content_sha256": {
+    "ted-2017": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+    "ted-2022-recorded": "eb66551c1493446935a0fd76437b433ae4cbb62532526b574098671863834967",
+    "lex-400-2023": "dda2d4b72a451437d82ba571dc83d117784ad5d96f656997c63b2743a6b6aae0",
+    "lex-438-2024": "4d7704020f1af02902208e443d928fb91a6f224cd9d8b8fa85d3a5055da92d69",
+    "ted-2013": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269"
+  },
+  "record_count": 10,
+  "raw_transcripts_distributed": false,
+  "review_note": "Publisher text and speakers checked by an AI agent. No independent human, acoustic alignment or persona fidelity judgment is implied."
+}

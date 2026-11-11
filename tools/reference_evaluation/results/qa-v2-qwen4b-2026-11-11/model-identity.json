@@ -1,0 +1,22 @@
+{
+  "model": "Qwen3-4B-Instruct-2507",
+  "revision": "e6f794d44f9395d0184a966c27b5ae99ea356fcb",
+  "source_repository": "ggml-org/Qwen3-4B-Instruct-2507-Q8_0-GGUF",
+  "quantization": "Q4_K_M, locally quantized from the pinned Q8_0 GGUF",
+  "gguf_sha256": "9b7d1268c8d2953d4d8ba24c8ba5ab211d18b8511b61d6ecb2c15d56e4fb875c",
+  "gguf_bytes": 2497279040,
+  "source_gguf_sha256": "ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1",
+  "runtime": {
+    "name": "llama.cpp",
+    "release": "b12110",
+    "revision": "368227edcc229be5f9bed16a2223d79b5e41d0ac2e19bcf5825e82291c060e55",
+    "device": "CPU",
+    "threads": 4,
+    "threads_batch": 4,
+    "context_tokens": 4096,
+    "parallel_slots": 1,
+    "prompt_cache": "llama.cpp default; order rotated; timing is descriptive, not a controlled speed comparison"
+  },
+  "simulation": true,
+  "scope": "same model for all three conditions; no fine-tuning"
+}

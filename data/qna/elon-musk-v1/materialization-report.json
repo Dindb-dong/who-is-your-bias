@@ -1,0 +1,30 @@
+{
+  "schema_version": "qa-corpus-report.v1",
+  "corpus_id": "elon-musk-original-qa.v1",
+  "materialization": "bounded_excerpts",
+  "question_answer_records": 10,
+  "training_question_answers": 5,
+  "complete_exchanges": 0,
+  "excerpts": 10,
+  "taxonomy_version": "situations.v1",
+  "covered_training_situations": [
+    "challenge",
+    "explanation",
+    "humor",
+    "praise"
+  ],
+  "uncovered_situations": [
+    "advice",
+    "conversation",
+    "disclosure_request",
+    "reflection"
+  ],
+  "reviewer_types": [
+    "agent"
+  ],
+  "split_counts": {
+    "train": 5,
+    "validation": 1,
+    "test": 4
+  }
+}
