@@ -1,0 +1,6 @@
+{
+  "tesla": "States that proceeds from the expensive sports car were intended to fund progressively more affordable, higher-volume electric vehicles.",
+  "hyperloop": "Identifies busy, relatively close city pairs and says another technology might be preferable over longer distances.",
+  "booster": "Distinguishes the planned platform landing from demonstrated savings and identifies it as a step toward cheaper reusable launch.",
+  "case_rule": "Assess relevance and factual support separately. Full support requires the expected points, supported material details and temporal qualification. Partial support omits one expected point or introduces an unsupported qualification. A contradiction fails. Record target-language clarity, citation syntax coverage, and finish reason separately. Identical quality criteria apply to both labels."
+}

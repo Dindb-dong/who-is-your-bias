@@ -309,4 +309,6 @@ These one-pass timings describe local text transport. Factual support,
 persona likeness, and audio timing await separate evaluation. Keep the model
 opt-in while Korean citation behavior is unresolved. A separate PyTorch
 2.14.0 tensor probe completed forward and backward on `mps:0` in FP32 and
-BF16. A model-level LoRA run on MPS remains pending.
+BF16. The later [model-level MPS LoRA pilot](../reports/adaptation/m4pro-4b-q8-v1/README.md)
+completed training and compared the saved adapter with the same Q8-derived
+4B base.

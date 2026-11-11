@@ -1,0 +1,203 @@
+{
+  "review": {
+    "reviewer": "implementing assistant",
+    "review_type": "model_assisted",
+    "blinding": "condition names withheld until scores recorded; the reviewer implemented the experiment"
+  },
+  "conditions": {
+    "base": {
+      "completed": 6,
+      "fully_supported": 1,
+      "covers_all_expected_points": 6,
+      "complete_citations": 1,
+      "has_valid_citation_coverage": 5,
+      "korean_with_valid_citation_coverage": 3,
+      "median_completion_tokens": 122.5
+    },
+    "adapter": {
+      "completed": 6,
+      "fully_supported": 2,
+      "covers_all_expected_points": 3,
+      "complete_citations": 2,
+      "has_valid_citation_coverage": 2,
+      "korean_with_valid_citation_coverage": 2,
+      "median_completion_tokens": 47.5
+    }
+  },
+  "cases": [
+    {
+      "id": "tesla-en",
+      "adapter": {
+        "support": "full",
+        "covers_all_expected_points": true,
+        "clarity": "clear",
+        "note": "Directly ties sports-car proceeds to cheaper, higher-volume EVs.",
+        "finish": "stop",
+        "citation": "missing",
+        "completion_tokens": 41,
+        "seconds": 5.962,
+        "text_sha256": "dd8c37d0da675e6e82ff778564e37983df375849c074077a0c09ecfd2792fa7b",
+        "prompt_sha256": "9e49c459762e05b1e0a8f2571c51046dddbb8ff0e0bd982e0aedd5a74c47ffc3",
+        "factual_sha256": "9e8eadeaeb86436a5928fb605f3d09dc1ee204d29002f7c7b8587514c5bad7de"
+      },
+      "base": {
+        "support": "partial",
+        "covers_all_expected_points": true,
+        "clarity": "clear",
+        "note": "Gets the funding mechanism but adds unsupported cost recovery, demand validation, and technical capability claims.",
+        "finish": "stop",
+        "citation": "partial",
+        "completion_tokens": 125,
+        "seconds": 28.058,
+        "text_sha256": "7933cbef47952b07f5d16c3078af9cf3ea320c44b0b361077eb3e8b481a51f9f",
+        "prompt_sha256": "9e49c459762e05b1e0a8f2571c51046dddbb8ff0e0bd982e0aedd5a74c47ffc3",
+        "factual_sha256": "9e8eadeaeb86436a5928fb605f3d09dc1ee204d29002f7c7b8587514c5bad7de"
+      }
+    },
+    {
+      "id": "tesla-ko",
+      "adapter": {
+        "support": "full",
+        "covers_all_expected_points": true,
+        "clarity": "clear",
+        "note": "Concise and conditional on how the funds could be used, with the proposal date implicit in the question.",
+        "finish": "stop",
+        "citation": "missing",
+        "completion_tokens": 54,
+        "seconds": 7.689,
+        "text_sha256": "9aafcf1d6d34945793906adfcc049c4f43abd8a4adfecd105e7de083a6931468",
+        "prompt_sha256": "521cf692012ca12a33bf5787ca63b93f790de5e20a7bfbfceedb77242d734ad8",
+        "factual_sha256": "9e8eadeaeb86436a5928fb605f3d09dc1ee204d29002f7c7b8587514c5bad7de"
+      },
+      "base": {
+        "support": "partial",
+        "covers_all_expected_points": true,
+        "clarity": "clear",
+        "note": "States the funding mechanism and proposal date, then asserts unsupported market demand, awareness, and efficiency outcomes.",
+        "finish": "stop",
+        "citation": "partial",
+        "completion_tokens": 179,
+        "seconds": 22.689,
+        "text_sha256": "3526fea54858b8d92ef5c2ebbc30dc4fa674c9708d7aec1f14538e87516d3326",
+        "prompt_sha256": "521cf692012ca12a33bf5787ca63b93f790de5e20a7bfbfceedb77242d734ad8",
+        "factual_sha256": "9e8eadeaeb86436a5928fb605f3d09dc1ee204d29002f7c7b8587514c5bad7de"
+      }
+    },
+    {
+      "id": "hyperloop-en",
+      "adapter": {
+        "support": "partial",
+        "covers_all_expected_points": false,
+        "clarity": "clear",
+        "note": "Correct route scope; omits the longer-distance caveat.",
+        "finish": "stop",
+        "citation": "missing",
+        "completion_tokens": 18,
+        "seconds": 3.962,
+        "text_sha256": "8acde7941e10c4ab88e2f22835d25023c51f285886dd25f8940483e2c97cff6d",
+        "prompt_sha256": "2cd97e2898e34e25cc67a3e6d292cdd3c016a19719fcb404a3287ffc9f072ad5",
+        "factual_sha256": "ae3f691672710a324a70a0de4ef5e2dc030f7869df771168503bf4eaa963682f"
+      },
+      "base": {
+        "support": "partial",
+        "covers_all_expected_points": true,
+        "clarity": "clear",
+        "note": "Includes both expected points but turns a possibility into a firmer prediction.",
+        "finish": "stop",
+        "citation": "partial",
+        "completion_tokens": 49,
+        "seconds": 7.499,
+        "text_sha256": "3819ee872c3fc56935a5c2b76235da7aba1cf4c1653770ac19c0edf74c972d6c",
+        "prompt_sha256": "2cd97e2898e34e25cc67a3e6d292cdd3c016a19719fcb404a3287ffc9f072ad5",
+        "factual_sha256": "ae3f691672710a324a70a0de4ef5e2dc030f7869df771168503bf4eaa963682f"
+      }
+    },
+    {
+      "id": "hyperloop-ko",
+      "adapter": {
+        "support": "partial",
+        "covers_all_expected_points": true,
+        "clarity": "clear",
+        "note": "Includes both expected points but states another technology is more appropriate without preserving the possibility.",
+        "finish": "stop",
+        "citation": "complete",
+        "completion_tokens": 76,
+        "seconds": 11.504,
+        "text_sha256": "16310164c95f5950266393e99d9046fe4473850dc5d79745b8658ac4a77a7d25",
+        "prompt_sha256": "b2cc5d9fe81744464ca30d953d13fd18ac3785929b1582b5b8210709d91f7c33",
+        "factual_sha256": "ae3f691672710a324a70a0de4ef5e2dc030f7869df771168503bf4eaa963682f"
+      },
+      "base": {
+        "support": "full",
+        "covers_all_expected_points": true,
+        "clarity": "clear",
+        "note": "Includes the route scope and preserves the conditional longer-distance caveat.",
+        "finish": "stop",
+        "citation": "complete",
+        "completion_tokens": 83,
+        "seconds": 9.216,
+        "text_sha256": "87ead028b9e30e4595ad0f50623a4b2c553b7ece75cf380375fcf1abdf3eab28",
+        "prompt_sha256": "b2cc5d9fe81744464ca30d953d13fd18ac3785929b1582b5b8210709d91f7c33",
+        "factual_sha256": "ae3f691672710a324a70a0de4ef5e2dc030f7869df771168503bf4eaa963682f"
+      }
+    },
+    {
+      "id": "booster-en",
+      "base": {
+        "support": "partial",
+        "covers_all_expected_points": true,
+        "clarity": "clear",
+        "note": "Distinguishes plan from proof and explains reuse and costs, but calls it a key milestone beyond the supplied description.",
+        "finish": "stop",
+        "citation": "invalid",
+        "completion_tokens": 120,
+        "seconds": 14.983,
+        "text_sha256": "8dfca4defb28ae3983c5abe98ce79128433a3c809fc41e20a5a66a0c44378986",
+        "prompt_sha256": "5f80edcfcd82fce7da0d10a0b761c33c3b7ba2832fa7a7431ae1ed5f5254ef89",
+        "factual_sha256": "e610d93265090ae72c7fa33c8bf615f076dc16a6404332dfc0c40e8b80207181"
+      },
+      "adapter": {
+        "support": "partial",
+        "covers_all_expected_points": false,
+        "clarity": "clear",
+        "note": "Answers the plan-versus-proof distinction; omits the cheaper reusable-launch rationale.",
+        "finish": "stop",
+        "citation": "missing",
+        "completion_tokens": 8,
+        "seconds": 2.441,
+        "text_sha256": "6e20d53fed181c833ce8129b7134839ab3f1f0a8d72287e044218c8dc05125d7",
+        "prompt_sha256": "5f80edcfcd82fce7da0d10a0b761c33c3b7ba2832fa7a7431ae1ed5f5254ef89",
+        "factual_sha256": "e610d93265090ae72c7fa33c8bf615f076dc16a6404332dfc0c40e8b80207181"
+      }
+    },
+    {
+      "id": "booster-ko",
+      "adapter": {
+        "support": "partial",
+        "covers_all_expected_points": false,
+        "clarity": "clear",
+        "note": "Clearly distinguishes plan from proof; omits the reuse rationale.",
+        "finish": "stop",
+        "citation": "complete",
+        "completion_tokens": 56,
+        "seconds": 7.128,
+        "text_sha256": "300033e2cea269b26b420bc0c93ccc4264bb37d052702198a840be503e5f53b9",
+        "prompt_sha256": "2bddca5243f0025f2677f8a3332b73133147f66fb918bba3e75acb78ae698124",
+        "factual_sha256": "e610d93265090ae72c7fa33c8bf615f076dc16a6404332dfc0c40e8b80207181"
+      },
+      "base": {
+        "support": "partial",
+        "covers_all_expected_points": true,
+        "clarity": "awkward",
+        "note": "Covers the plan and reuse rationale but calls it the first step, which the evidence does not establish, and mixes scripts in a name.",
+        "finish": "stop",
+        "citation": "partial",
+        "completion_tokens": 189,
+        "seconds": 18.444,
+        "text_sha256": "5c4917571812df9ffdc88fc895e8fce4e1802387c1a328d2b2024f9f4875b20a",
+        "prompt_sha256": "2bddca5243f0025f2677f8a3332b73133147f66fb918bba3e75acb78ae698124",
+        "factual_sha256": "e610d93265090ae72c7fa33c8bf615f076dc16a6404332dfc0c40e8b80207181"
+      }
+    }
+  ]
+}

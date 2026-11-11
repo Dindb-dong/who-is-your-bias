@@ -1,0 +1,38 @@
+{
+  "tesla-en": {
+    "factual_ids": [
+      "elon-tesla06-sequence"
+    ],
+    "style_ids": []
+  },
+  "tesla-ko": {
+    "factual_ids": [
+      "elon-tesla06-sequence"
+    ],
+    "style_ids": []
+  },
+  "hyperloop-en": {
+    "factual_ids": [
+      "hyperloop-2013-bounded-use-case"
+    ],
+    "style_ids": []
+  },
+  "hyperloop-ko": {
+    "factual_ids": [
+      "hyperloop-2013-bounded-use-case"
+    ],
+    "style_ids": []
+  },
+  "booster-en": {
+    "factual_ids": [
+      "mit-2014-reusability-experiment"
+    ],
+    "style_ids": []
+  },
+  "booster-ko": {
+    "factual_ids": [
+      "mit-2014-reusability-experiment"
+    ],
+    "style_ids": []
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "exposure": "development",
+  "cases": [
+    {"id":"tesla-en","language":"en","question":"How was Tesla's initial expensive sports car supposed to help fund the next stage of the 2006 plan?"},
+    {"id":"tesla-ko","language":"ko","question":"2006년 테슬라 계획에서 처음에 비싼 스포츠카를 만드는 게 다음 단계에 어떻게 도움이 된다고 했어?"},
+    {"id":"hyperloop-en","language":"en","question":"What kinds of routes did the 2013 Hyperloop proposal target, and what caveat did it give about longer trips?"},
+    {"id":"hyperloop-ko","language":"ko","question":"2013년 하이퍼루프 제안은 어떤 구간을 대상으로 했고, 더 먼 거리에는 어떤 단서를 달았어?"},
+    {"id":"booster-en","language":"en","question":"In the 2014 MIT conversation, had the floating-platform landing already proven that launches were cheaper, or was it still a proposed step?"},
+    {"id":"booster-ko","language":"ko","question":"2014년 MIT 대화 당시 해상 플랫폼 착륙으로 발사비 절감이 이미 입증됐어, 아니면 아직 계획 단계였어?"}
+  ]
+}
