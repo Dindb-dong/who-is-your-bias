@@ -226,7 +226,7 @@ def parser() -> argparse.ArgumentParser:
     for name in ("app-repo", "app-python", "voice-python", "llama-server", "llm-metadata", "voice-cache", "reference-wav", "reference-text", "output"):
         result.add_argument("--" + name, type=Path, required=True)
     result.add_argument("--corpus-dir", type=Path)
-    result.add_argument("--question", default="How could smaller tunnels reduce construction costs? Answer in one sentence of at most 25 words.")
+    result.add_argument("--question", default="How does tunnel diameter affect cost? One sentence, please.")
     result.add_argument("--repeats", type=int, default=2)
     result.add_argument("--mode", choices=("profile", "rag", "behavior"), default="behavior")
     result.add_argument("--language", choices=("en", "ko"), default="en")

@@ -26,7 +26,7 @@ Complete WAV availability is a lower bound on first audible output for the appli
 
 ## Reproduce on a CPU host
 
-Use a prepared application environment and the separate voice environment from [voice-service.md](voice-service.md). The model cache must contain the exact Qwen revisions pinned in the command implementation. The harness stays offline and refuses to overwrite an existing output directory. It does not download weights.
+Use a prepared application environment and the separate voice environment described in [the repository README](../README.md). The model cache must contain the exact Qwen revisions pinned in the command implementation. The harness stays offline and refuses to overwrite an existing output directory. It does not download weights.
 
 The LLM metadata JSON must contain `path`, `bytes`, and `sha256` for the actual GGUF. The recorded run uses the project's existing Qwen3-4B Q4_K_M metadata with its official source-model revision and local requantization history. Both the declared byte count and a fresh full-file hash must match before any server starts.
 
@@ -41,7 +41,7 @@ python -m tools.demo_latency \
   --reference-wav /absolute/reference/audio.wav \
   --reference-text /absolute/reference/reference.txt \
   --corpus-dir "$PWD/data/local/qna/elon-musk-v2" \
-  --question 'How could smaller tunnels reduce construction costs? Answer in one sentence of at most 25 words.' \
+  --question 'How does tunnel diameter affect cost? One sentence, please.' \
   --repeats 2 \
   --output "$PWD/artifacts/demo-latency/my-cpu-run"
 ```
