@@ -131,6 +131,105 @@ describe('stream completion and cancellation', () => {
   });
 });
 
+function liveEvents(): StreamEvent[] {
+  const audio = (sequence: number, offset: number): StreamEvent => ({ event: 'audio', data: {
+    turn_id: turn.id, segment_id: `${turn.id}:${sequence}`, sequence, segment_sequence: sequence,
+    sample_rate: 16000, channels: 1, sample_offset: offset, sample_count: 2,
+    encoding: 'pcm_s16le', pcm_base64: btoa('\x00\x40\x00\xc0'),
+  } });
+  const segment = (sequence: number): StreamEvent => ({ event: 'segment', data: {
+    turn_id: turn.id, segment_id: `${turn.id}:${sequence}`, sequence, text: sequence ? '하세요' : '안녕', evidence_ids: [], state: 'committed',
+  } });
+  const ready = (sequence: number, offset: number): StreamEvent => ({ event: 'audio_segment', data: {
+    turn_id: turn.id, segment_id: `${turn.id}:${sequence}`, sequence, audio_sha256: 'a'.repeat(64),
+    sample_rate: 16000, channels: 1, sample_offset: offset, sample_count: 2, synthesis_ms: 20,
+  } });
+  const end = (sequence: number, sampleEnd: number): StreamEvent => ({ event: 'audio_segment_end', data: {
+    turn_id: turn.id, segment_id: `${turn.id}:${sequence}`, sequence, sample_end: sampleEnd, state: 'delivered',
+  } });
+  return [
+    { event: 'meta', data: { session_id: turn.session_id, turn_id: turn.id, protocol: 'live-segments-pcm.v1' } },
+    { event: 'token', data: { text: '안녕' } }, segment(0), segment(1), ready(0, 0), audio(0, 0), end(0, 2),
+    { event: 'result', data: { turn } }, ready(1, 2), audio(1, 2), end(1, 4),
+    { event: 'audio_end', data: { turn_id: turn.id, chunks: 2, sample_count: 4, sample_rate: 16000,
+      first_pcm_ready_ms: 25, total_ms: 50, state: 'delivered', spoken_complete: false, acoustic_latency_ms: null } },
+    { event: 'done', data: {} },
+  ];
+}
+const liveText = (events: StreamEvent[]) => events.map((event) => frame(event.event, event.data)).join('');
+function changeLive(events: StreamEvent[], kind: StreamEvent['event'], patch: Record<string, unknown>): StreamEvent[] {
+  let changed = false;
+  return events.map((event) => {
+    if (changed || event.event !== kind) return event;
+    changed = true; return { ...event, data: { ...event.data, ...patch } } as StreamEvent;
+  });
+}
+
+describe('live stream ownership and delivery', () => {
+  it('accepts early PCM with committed identities and a result before the last audio segment', async () => {
+    const events = liveEvents(); mockStream(liveText(events), true);
+    const received: StreamEvent[] = [];
+    await streamChat(request, new AbortController().signal, (event) => received.push(event), { live: true });
+    expect(received).toEqual(events);
+    expect(received.findIndex((event) => event.event === 'audio')).toBeLessThan(received.findIndex((event) => event.event === 'result'));
+  });
+
+  const invalidCases: [string, (events: StreamEvent[]) => StreamEvent[]][] = [
+    ['missing meta', (events) => events.slice(1)],
+    ['missing protocol', (events) => changeLive(events, 'meta', { protocol: undefined })],
+    ['changed meta', (events) => [events[0], events[0], ...events.slice(1)]],
+    ['result turn', (events) => changeLive(events, 'result', { turn: { ...turn, id: 'stale-turn' } })],
+    ['result session', (events) => changeLive(events, 'result', { turn: { ...turn, session_id: 'other-session' } })],
+    ['committed turn', (events) => changeLive(events, 'segment', { turn_id: 'stale-turn' })],
+    ['committed sequence', (events) => changeLive(events, 'segment', { sequence: 3 })],
+    ['duplicate segment identity', (events) => events.map((event) => event.event === 'segment' && event.data.sequence === 1 ? { ...event, data: { ...event.data, segment_id: `${turn.id}:0` } } : event)],
+    ['uncommitted audio', (events) => events.filter((event) => event.event !== 'segment')],
+    ['segment turn', (events) => changeLive(events, 'audio_segment', { turn_id: 'stale-turn' })],
+    ['segment boundary', (events) => changeLive(events, 'audio_segment', { sample_offset: 2 })],
+    ['segment identity', (events) => changeLive(events, 'audio_segment', { segment_id: 'not-committed' })],
+    ['first PCM turn', (events) => changeLive(events, 'audio', { turn_id: 'stale-turn' })],
+    ['PCM identity', (events) => changeLive(events, 'audio', { segment_id: 'not-committed' })],
+    ['PCM segment sequence', (events) => changeLive(events, 'audio', { segment_sequence: 1 })],
+    ['PCM chunk sequence', (events) => changeLive(events, 'audio', { sequence: 1 })],
+    ['PCM offset', (events) => changeLive(events, 'audio', { sample_offset: 1 })],
+    ['PCM beyond segment', (events) => changeLive(events, 'audio', { sample_count: 3 })],
+    ['PCM format', (events) => changeLive(events, 'audio', { channels: 2 })],
+    ['missing PCM', (events) => events.filter((event) => event.event !== 'audio' || event.data.sequence !== 0)],
+    ['missing segment terminal', (events) => events.filter((event) => event.event !== 'audio_segment_end')],
+    ['segment terminal count', (events) => changeLive(events, 'audio_segment_end', { sample_end: 1 })],
+    ['completion turn', (events) => changeLive(events, 'audio_end', { turn_id: 'stale-turn' })],
+    ['completion chunks', (events) => changeLive(events, 'audio_end', { chunks: 1 })],
+    ['completion samples', (events) => changeLive(events, 'audio_end', { sample_count: 3 })],
+    ['completion rate', (events) => changeLive(events, 'audio_end', { sample_rate: 24000 })],
+    ['completion onset', (events) => changeLive(events, 'audio_end', { first_pcm_ready_ms: null })],
+    ['audio after completion', (events) => [...events.slice(0, -1), events[5], events.at(-1)!]],
+  ];
+  it.each(invalidCases)('rejects %s before claiming completion', async (_label, change) => {
+    const response = mockStream(liveText(change(liveEvents())), true);
+    const received: StreamEvent[] = [];
+    await expect(streamChat(request, new AbortController().signal, (event) => received.push(event), { live: true })).rejects.toThrow('live voice stream');
+    expect(received.some((event) => event.event === 'done')).toBe(false);
+    expect(response.body?.locked).toBe(false);
+  });
+
+  it('awaits a PCM consumer and stops delivering buffered events after cancellation', async () => {
+    mockStream(liveText(liveEvents()));
+    let release: (() => void) | undefined; let reached: (() => void) | undefined;
+    const paused = new Promise<void>((resolve) => { release = resolve; });
+    const waiting = new Promise<void>((resolve) => { reached = resolve; });
+    const abort = new AbortController(); const received: StreamEvent[] = [];
+    const result = streamChat(request, abort.signal, async (event) => {
+      received.push(event); if (event.event === 'audio') { reached?.(); await paused; }
+    }, { live: true });
+    await waiting;
+    expect(received.at(-1)?.event).toBe('audio');
+    expect(received.some((event) => event.event === 'result')).toBe(false);
+    abort.abort(); release?.();
+    await expect(result).rejects.toMatchObject({ name: 'AbortError' });
+    expect(received.at(-1)?.event).toBe('audio');
+  });
+});
+
 describe('audio and behavior clock', () => {
   it('uses actual audio position to retime an estimated gesture plan', () => {
     expect(planTime(3, 6, 10_000)).toBe(5000);

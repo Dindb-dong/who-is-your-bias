@@ -19,6 +19,12 @@ def parser() -> argparse.ArgumentParser:
     command.add_argument("--corpus", type=Path, default=None, help="Persona corpus directory")
     sub = command.add_subparsers(dest="command", required=True)
     sub.add_parser("validate", help="Validate corpus schemas, provenance, and split references")
+    snapshot = sub.add_parser("snapshot", help="Register an exact persona cutoff and independent modality versions")
+    snapshot.add_argument("--id", required=True)
+    snapshot.add_argument("--as-of", required=True, help="ISO timestamp with UTC offset")
+    snapshot.add_argument("--ingested-at", required=True, help="Actual acquisition timestamp with UTC offset")
+    snapshot.add_argument("--current-since", default="2026-01-01")
+    snapshot.add_argument("--output", required=True, type=Path)
     search = sub.add_parser("search", help="Search reviewed training evidence")
     search.add_argument("query")
     search.add_argument("--limit", type=int, default=4)
@@ -60,7 +66,17 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({"output": str(args.output), "records": len(records), "review_status": "draft", "indexed": False}))
             return 0
         corpus = Corpus.load(args.corpus or Settings.from_env().corpus_dir)
-        if args.command == "validate":
+        if args.command == "snapshot":
+            from datetime import date, datetime
+            from .snapshots import register_snapshot
+            snapshot = register_snapshot(corpus, identifier=args.id, as_of=datetime.fromisoformat(args.as_of),
+                ingested_at=datetime.fromisoformat(args.ingested_at), current_evidence_since=date.fromisoformat(args.current_since))
+            if args.output.exists():
+                raise ValueError("Snapshot already exists; use a new versioned output path")
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            args.output.write_text(snapshot.model_dump_json(indent=2) + "\n", encoding="utf-8")
+            print(json.dumps(snapshot.summary(), ensure_ascii=False, indent=2))
+        elif args.command == "validate":
             print(json.dumps({"valid": True, "persona": corpus.persona.id, **corpus.stats()}, ensure_ascii=False, indent=2))
         elif args.command == "search":
             result = Retriever(corpus).search(args.query, limit=args.limit, behavior=args.behavior)

@@ -1,0 +1,26 @@
+{
+  "schema_version": "text-adaptation-dataset.v1",
+  "projection_sha256": "9954aa9d93d9562237819805da5a8b787425e1469edf5a239c3b147c89b408a8",
+  "dataset_sha256": "2de5675e35b6a73a25a9cfe7a7e2acb32c93edc90989b52ad86da8a137b2fea0",
+  "samples": 595,
+  "seed": 42,
+  "max_per_event": 150,
+  "event_counts": {
+    "dwarkesh-2026": 150,
+    "henry-ford-2008": 72,
+    "lex-049-2019": 41,
+    "recode-2018": 150,
+    "ted-2013": 27,
+    "ted-2017": 41,
+    "ted-2022-live": 37,
+    "wired-2012": 36,
+    "yc-2016": 41
+  },
+  "full_source_wording_local_only": true,
+  "generated_augmentation": false,
+  "test_or_validation_samples": 0,
+  "limitations": [
+    "Historical factual content can still be memorized; retrieval-only facts are a design intention, not a guarantee.",
+    "Training loss does not measure likeness or held-out answer quality."
+  ]
+}

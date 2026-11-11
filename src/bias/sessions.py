@@ -8,6 +8,8 @@ import uuid
 from collections import deque
 from dataclasses import dataclass, field
 
+from .dialogue import DialogueState
+
 
 class SessionNotFound(LookupError):
     pass
@@ -23,7 +25,9 @@ class Session:
     last_used: float
     history: deque[dict[str, str]]
     lock: asyncio.Lock = field(default_factory=asyncio.Lock)
+    turn_lock: asyncio.Lock = field(default_factory=asyncio.Lock)
     in_flight: int = 0
+    dialogue: DialogueState = field(default_factory=DialogueState)
 
 
 class SessionStore:
@@ -52,6 +56,7 @@ class SessionStore:
                     raise SessionCapacityError("All conversation slots are busy. Try again shortly.")
                 del self.sessions[idle[0].id]
             session = Session(uuid.uuid4().hex, now, deque(maxlen=self.max_turns * 2))
+            session.dialogue.records = deque(maxlen=self.max_turns)
             self.sessions[session.id] = session
         session.last_used = now
         return session

@@ -61,11 +61,45 @@ class Settings:
     retrieval_limit: int = 4
     max_response_chars: int = 6_000
     llm_max_tokens: int = 900
+    persona_snapshot: Path | None = None
+    llm_context_window: int = 8192
+    llm_tokenizer_path: Path | None = None
+    retrieval_backend: str = "lexical"
+    retrieval_prewarm: bool = True
+    embedding_backend: str = "local"
+    embedding_model: str | None = None
+    embedding_revision: str | None = None
+    embedding_base_url: str | None = None
+    embedding_api_key: str | None = field(default=None, repr=False)
+    embedding_query_prefix: str = "query: "
+    embedding_passage_prefix: str = "passage: "
+    dense_min_similarity: float = 0.84
+    reranker_model: str | None = None
+    reranker_revision: str | None = None
+    reranker_min_score: float | None = None
+    style_examples: bool = False
     cors_origins: tuple[str, ...] = ("http://localhost:5173", "http://127.0.0.1:5173")
 
     def __post_init__(self) -> None:
         if not isinstance(self.tts_language_hint, bool):
             raise ValueError("tts_language_hint must be a boolean")
+        if self.retrieval_backend not in {"lexical", "hybrid"} or self.embedding_backend not in {"local", "http"}:
+            raise ValueError("Select lexical/hybrid retrieval and local/http embeddings")
+        if not isinstance(self.retrieval_prewarm, bool):
+            raise ValueError("retrieval_prewarm must be a boolean")
+        if self.retrieval_backend == "hybrid" and not self.embedding_model:
+            raise ValueError("Hybrid retrieval requires an explicit embedding model")
+        if self.retrieval_backend == "hybrid" and self.embedding_backend == "http" and not self.embedding_base_url:
+            raise ValueError("HTTP embeddings require an explicit base URL")
+        object.__setattr__(self, "embedding_base_url", _endpoint(self.embedding_base_url))
+        if not -1 <= self.dense_min_similarity <= 1:
+            raise ValueError("Dense relevance threshold must be between -1 and 1")
+        if self.reranker_min_score is not None:
+            import math
+            if not self.reranker_model or not math.isfinite(self.reranker_min_score):
+                raise ValueError("A finite reranker threshold requires a configured reranker")
+        if not 1024 <= self.llm_context_window <= 262144 or self.llm_max_tokens >= self.llm_context_window:
+            raise ValueError("Context window must leave an input budget after reserved output tokens")
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -88,6 +122,9 @@ class Settings:
         language_hint = os.getenv("BIAS_TTS_LANGUAGE_HINT", "false").strip().lower()
         if language_hint not in {"true", "false", "1", "0"}:
             raise ValueError("BIAS_TTS_LANGUAGE_HINT must be true, false, 1, or 0")
+        prewarm = os.getenv("BIAS_RETRIEVAL_PREWARM", "true").strip().lower()
+        if prewarm not in {"true", "false", "1", "0"}:
+            raise ValueError("BIAS_RETRIEVAL_PREWARM must be true, false, 1, or 0")
 
         return cls(
             corpus_dir=Path(os.getenv("BIAS_CORPUS_DIR", str(repository_root() / "data/qna/elon-musk-v1"))),
@@ -105,5 +142,24 @@ class Settings:
             max_turns=int(number("BIAS_MAX_TURNS", 12, 1, 100)),
             retrieval_limit=int(number("BIAS_RETRIEVAL_LIMIT", 4, 1, 10)),
             llm_max_tokens=int(llm_max_tokens),
+            persona_snapshot=(Path(os.environ["BIAS_PERSONA_SNAPSHOT"]).expanduser() if os.getenv("BIAS_PERSONA_SNAPSHOT") else
+                              None if os.getenv("BIAS_CORPUS_DIR") or os.environ.get("BIAS_PERSONA_SNAPSHOT") == "" else
+                              repository_root() / "data/snapshots/elon-musk-2026-11-11.json"),
+            llm_context_window=int(number("BIAS_LLM_CONTEXT_WINDOW", 8192, 1024, 262144)),
+            llm_tokenizer_path=Path(os.environ["BIAS_LLM_TOKENIZER_PATH"]).expanduser() if os.getenv("BIAS_LLM_TOKENIZER_PATH") else None,
+            retrieval_backend=os.getenv("BIAS_RETRIEVAL_BACKEND", "lexical"),
+            retrieval_prewarm=prewarm in {"true", "1"},
+            embedding_backend=os.getenv("BIAS_EMBEDDING_BACKEND", "local"),
+            embedding_model=os.getenv("BIAS_EMBEDDING_MODEL") or None,
+            embedding_revision=os.getenv("BIAS_EMBEDDING_REVISION") or None,
+            embedding_base_url=os.getenv("BIAS_EMBEDDING_BASE_URL") or None,
+            embedding_api_key=os.getenv("BIAS_EMBEDDING_API_KEY") or None,
+            embedding_query_prefix=os.getenv("BIAS_EMBEDDING_QUERY_PREFIX", "query: "),
+            embedding_passage_prefix=os.getenv("BIAS_EMBEDDING_PASSAGE_PREFIX", "passage: "),
+            dense_min_similarity=number("BIAS_DENSE_MIN_SIMILARITY", 0.84, -1, 1),
+            reranker_model=os.getenv("BIAS_RERANKER_MODEL") or None,
+            reranker_revision=os.getenv("BIAS_RERANKER_REVISION") or None,
+            reranker_min_score=float(os.environ["BIAS_RERANKER_MIN_SCORE"]) if os.getenv("BIAS_RERANKER_MIN_SCORE") else None,
+            style_examples=os.getenv("BIAS_STYLE_EXAMPLES", "false").lower() == "true",
             cors_origins=tuple(x.strip() for x in os.getenv("BIAS_CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",") if x.strip()),
         )

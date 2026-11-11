@@ -1,0 +1,8 @@
+{
+  "schema_version": "qwen3-tts-dataset.v1",
+  "ready": false,
+  "samples": 0,
+  "reason": "No independently accepted, aligned original target-speaker recordings; publisher text is insufficient.",
+  "projection_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "dataset_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,9 @@
+{
+  "schema_version": "invalid-retrieval-attempt.v1",
+  "report_file": "e5-mmarco-expanded-original-qa.v1.invalid-input-drift.json.gz",
+  "report_sha256": "941a0d8b65cfbc9c4926d1bec1753274ac27971d1f2e8823f1fcf3fe56ecea50",
+  "valid_for_evaluation": false,
+  "reason": "sources.json was corrected by the acquisition task after Corpus.load while the benchmark was running. End-of-run file hashes and the consumed in-memory corpus do not identify the same source metadata snapshot. Source evidence text is unchanged, but this attempt is not used as the final reproducible evaluation.",
+  "implementation_archive": "e5-mmarco-development-implementation.v3.tar.gz",
+  "replacement": "A clean rerun will bind the corrected source metadata and check all input hashes before and after execution."
+}

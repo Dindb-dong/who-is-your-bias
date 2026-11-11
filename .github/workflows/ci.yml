@@ -15,7 +15,9 @@ concurrency:
 jobs:
   checks:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # The prior software-WebGL browser suite takes about 13 minutes; the new
+    # desktop/mobile live-audio and same-audio audition cases need headroom.
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -29,10 +31,12 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y ffmpeg
       - run: uv sync --locked --extra dev
       - run: npm ci
+      - run: npm ci --prefix tools/avatar --ignore-scripts
       - run: uv run pytest
       - run: uv run bias validate
       - run: uv run bias --corpus data/personas/elon-musk evaluate --fail-on-regression --output reports/local/retrieval.json
       - run: npm run check
+      - run: node --test tools/avatar_audition.test.mjs
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
       - uses: actions/upload-artifact@v4

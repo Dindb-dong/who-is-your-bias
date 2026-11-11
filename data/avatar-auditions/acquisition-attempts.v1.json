@@ -1,0 +1,35 @@
+{
+  "schema_version": "avatar-acquisition-attempts.v1",
+  "checked_on": "2026-11-11",
+  "timezone": "UTC",
+  "target": "Elon Musk as of 2026-11-11",
+  "candidates": [
+    {
+      "id": "lasquetispice-talking",
+      "url": "https://sketchfab.com/3d-models/talking-elon-musk-avatar-character-for-narration-8ede6f6ead9b4dc79ea51c050fefb594",
+      "listing_fetch": "HTTP 403",
+      "package_acquired": false,
+      "blocker": "Official download requires authenticated Sketchfab access; no connected credentials are available."
+    },
+    {
+      "id": "vadim-low-poly",
+      "url": "https://sketchfab.com/3d-models/elon-musk-low-poly-e647578649c34e29be81c8f94ecaabd2",
+      "listing_fetch": "HTTP 403",
+      "package_acquired": false,
+      "blocker": "Official download requires authenticated Sketchfab access; no connected credentials are available."
+    },
+    {
+      "id": "kingofthepirates-portrait",
+      "url": "https://sketchfab.com/3d-models/elon-musk-8406baac0f634d5084a7a33efa296dd1",
+      "listing_fetch": "HTTP 403",
+      "package_acquired": false,
+      "blocker": "Official download requires authenticated Sketchfab access; no connected credentials are available."
+    }
+  ],
+  "download_contract": "https://sketchfab.com/developers/download-api/downloading-models",
+  "download_contract_observation": "Official indexed documentation states that a Sketchfab account must authenticate before a temporary archive link is issued.",
+  "paid_candidates": "The two first-priority paid packages remain unacquired; no purchase or seller contact was made.",
+  "qualified_musk_candidates": 0,
+  "next_acquisition_step": "Download a selected package through the official authenticated flow or provide a licensed local asset; run the implemented conversion/qualification workflow.",
+  "proxy_scope": "Current bundled file is inspected as a reproducible control asset only, not as an acquired Musk-specific candidate."
+}

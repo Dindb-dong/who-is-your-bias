@@ -17,6 +17,8 @@ uv run bias serve
 
 Open `http://127.0.0.1:8000`. The studio includes conversation, source inspection, A/B/C comparison, a prepared presentation player with live Q&A handoff, exportable turn timing, voice playback controls, a bundled human avatar, a lightweight portrait, local GLB loading, and a motion/calibration lab. See [studio guide](docs/studio.md) for development, audio, and retargeting details.
 
+The [2026 implementation report](docs/2026-implementation.md) adds a reproducible 977-QA original-data build, optional multilingual hybrid retrieval, explicit temporal snapshots, follow-up resolution, early PCM speech and same-audio avatar audition. The bundled excerpt preview remains the lightweight default. The report separates actual development results from uncompleted adapter training, recent-position coverage and Musk-likeness evaluation.
+
 ## Run the conversation engine
 
 Requires Python 3.11+ and [uv](https://docs.astral.sh/uv/).
@@ -48,12 +50,12 @@ The optional [local language server](docs/language-runtime.md) runs a server-sel
 | Capability | Behavior |
 | --- | --- |
 | Source corpus | Original question/answer pairs, distinct context/annotations, pinned source events, explicit unknown acoustic boundaries and review provenance |
-| Retrieval | Original-Q&A BM25, English/Korean aliases, shared situation labels and working reranking after a common topical gate; held-out coverage remains inadequate |
-| Dialogue | OpenAI-compatible streaming adapter; profile, evidence, and behavior experiment modes |
-| Conversation state | Opaque sessions, bounded history, TTL, serialized turns, cancellation cleanup |
+| Retrieval | Preserved lexical baseline; optional pinned multilingual embeddings, fusion and cross-encoder with independent factual/style gates and recorded development tradeoffs |
+| Dialogue | OpenAI-compatible streaming adapter; profile, evidence, and behavior modes; explicit corpus-bound historical/current snapshot policy |
+| Conversation state | Opaque sessions, bounded user-reference anchors, corrections, TTL, serialized text/audio turns, absolute deadlines and cancellation cleanup |
 | Evidence | Per-unit citation coverage, separately labeled semantic review, original source links, frozen prompt comparisons |
 | Behavior plans | Timed face/gaze/head/gesture cues with explicit provenance and estimated timing |
-| Speech and transcription | Optional compatible provider adapters with real audio bytes and size limits |
+| Speech and transcription | Optional compatible providers; committed-sentence synthesis and bounded PCM delivery while later text continues; sample-clock playback and interruption |
 | Prepared presentation | Actual 12.24-second Qwen3-TTS → MuseTalk video, captions, generated WAV, verified media hashes and fresh live-session handoff |
 | Live timing | Browser text/PCM events and JSON export; separate actual-service HTTP benchmark; acoustic speaker output remains unmeasured |
 | Local reference voice | Optional Qwen3-TTS service with cached prompts, bounded requests, and a fixed server-side reference |
@@ -133,6 +135,8 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 | `GET /api/motion/clip/{id}` | Hash-bound eligible source window; unreviewed geometry requires explicit preview |
 | `POST /api/chat` | Complete response with citations and behavioral timeline |
 | `POST /api/chat/stream` | SSE `meta`, `status`, `token`, `result`, `done` or `error` |
+| `POST /api/chat/live` | Committed text segments and validated PCM streaming; requires configured speech |
+| `GET /api/sessions/{id}/context` | Inspect bounded user references, citations and temporal provenance |
 | `POST /api/speech` | Speech-provider audio, when configured |
 | `POST /api/speech/prepare` | Generate audio and optional mouth cues bound to its SHA-256 |
 | `GET /api/speech/clips/{id}` | Retrieve an ephemeral prepared clip before expiry |
@@ -141,6 +145,10 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 
 ## Documentation
 
+- [2026 implementation and evidence](docs/2026-implementation.md): package status, exact snapshot, runtime configuration, early PCM protocol and remaining release conditions.
+- [Original-data expansion and adaptation](docs/persona-data.md): ten actual acquisitions, nine dialogue events, independent modality eligibility, pinned replay and training exports/launchers.
+- [Hybrid retrieval](docs/hybrid-retrieval.md): actual multilingual embedding/reranker runs, false-candidate tradeoffs and reproducible optional configuration.
+- [Avatar audition](docs/avatar-audition.md): decoded GLB qualification, Blender conversion, same-audio recording and actual acquisition boundaries.
 - [2026 persona roadmap](docs/2026-persona-roadmap.md): current-pilot limits, the 2026 snapshot, data and learning expansion, retrieval, dialogue, streaming, and acceptance criteria.
 - [Musk 3D avatar shortlist](docs/research/musk-3d-avatar-shortlist.md): researched facially rigged models, free candidates, detailed portraits, licensing evidence, and an asset qualification plan.
 - [Proposal implementation status](docs/proposal-alignment.md): requirement mapping, completed evidence and remaining review boundaries.

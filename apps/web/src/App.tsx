@@ -19,6 +19,8 @@ import { LiveTurnClock } from './hooks/liveMetrics';
 import type { LiveMeasurement } from './hooks/liveMetrics';
 import { LiveTiming } from './components/LiveTiming';
 import { PresentationView } from './components/PresentationView';
+import { createPcmPlayback, initialPcmState } from './hooks/pcmPlayback';
+import type { PcmState } from './hooks/pcmPlayback';
 
 interface Message { id: string; role: 'user' | 'assistant'; text: string; turn?: Turn; pending?: boolean; error?: string }
 type Page = 'studio' | 'sources' | 'lab' | 'presentation';
@@ -69,6 +71,9 @@ export default function App() {
   const chatBottom = useRef<HTMLDivElement>(null);
   const composer = useRef<HTMLTextAreaElement>(null);
   const playback = usePlayback();
+  const [pcmState, setPcmState] = useState<PcmState>(initialPcmState);
+  const pcmPlayer = useRef<ReturnType<typeof createPcmPlayback> | null>(null);
+  const streamingVoice = pcmState.status === 'playing' || pcmState.status === 'loading';
   const measuredMotion = useMeasuredMotion({ mode: motionMode, enabled: page === 'studio' && mode === 'behavior', reducedMotion });
   const playbackPreferences = useRef({ autoPlay, voice });
   playbackPreferences.current = { autoPlay, voice };
@@ -95,12 +100,13 @@ export default function App() {
     return () => controller.abort();
   }, [reload]);
   useEffect(() => { chatBottom.current?.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth', block: 'nearest' }); }, [messages.length, busy, reducedMotion]);
-  useEffect(() => () => { generation.current += 1; currentRequest.current?.abort(); }, []);
+  useEffect(() => () => { generation.current += 1; currentRequest.current?.abort(); pcmPlayer.current?.stop(); }, []);
   useEffect(() => () => { if (model) URL.revokeObjectURL(model.url); }, [model]);
 
   function cancel() {
     liveClock.current?.finish('cancelled');
     if (liveClock.current) setLiveMeasurement(liveClock.current.snapshot());
+    pcmPlayer.current?.stop();
     generation.current += 1;
     currentRequest.current?.abort(); currentRequest.current = null;
     setMessages((previous) => previous.map((message) => message.pending ? { ...message, pending: false, text: message.text || 'Response stopped.' } : message));
@@ -115,6 +121,7 @@ export default function App() {
   async function send(text = draft) {
     const question = text.trim();
     if (!question || busy || connection !== 'ready') return;
+    pcmPlayer.current?.stop(); setPcmState(initialPcmState); setActiveTurn(undefined);
     playback.stop(); microphone.stop(); measuredMotion.stop(); setDraft(''); setEvidence(null);
     const ticket = ++generation.current;
     const controller = new AbortController(); currentRequest.current = controller;
@@ -126,10 +133,27 @@ export default function App() {
     setMessages((previous) => [...previous, { id: crypto.randomUUID(), role: 'user', text: question }, { id: answerId, role: 'assistant', text: '', pending: true }]);
     setBusy(true); setStatus('Finding relevant sources');
     let received: Turn | undefined;
+    const useLiveVoice = Boolean(preferences.autoPlay && preferences.voice === 'provider' && persona?.capabilities.live_speech);
+    let audioFrames = 0; let liveTurnId: string = answerId; let preparationMarked = false; let audioMarked = false;
+    let playingMarked = false; let signalMarked = false;
     try {
-      await streamChat({ message: question, session_id: sessionId, mode, language, motion_mode: motionMode }, controller.signal, (event) => {
+      if (useLiveVoice) pcmPlayer.current = createPcmPlayback((state) => {
         if (ticket !== generation.current) return;
-        if (event.event === 'meta') setSessionId(event.data.session_id);
+        setPcmState(state);
+        const mark = (type: 'playback_started' | 'first_signal' | 'playback_completed' | 'cancelled' | 'failed') => clock.playback({ type, atMs: performance.now(), turnId: liveTurnId, voiceMode: 'provider' });
+        if (state.status === 'playing' && !playingMarked) { playingMarked = true; mark('playback_started'); }
+        if (state.firstDigitalPcmMs !== null && !signalMarked) { signalMarked = true; mark('first_signal'); }
+        if (state.status === 'completed') mark('playback_completed');
+        if (state.status === 'cancelled' || state.status === 'failed') mark(state.status);
+        setLiveMeasurement(clock.snapshot());
+      });
+      await streamChat({ message: question, session_id: sessionId, mode, language, motion_mode: motionMode }, controller.signal, async (event) => {
+        if (ticket !== generation.current) return;
+        if (event.event === 'meta') { setSessionId(event.data.session_id); liveTurnId = event.data.turn_id ?? answerId; }
+        if (event.event === 'segment' && useLiveVoice && !preparationMarked) { preparationMarked = true; clock.playback({ type: 'preparation_started', atMs: performance.now(), turnId: liveTurnId, voiceMode: 'provider' }); }
+        if (event.event === 'audio_segment' && useLiveVoice && !audioMarked) { audioMarked = true; clock.playback({ type: 'audio_ready', atMs: performance.now(), turnId: liveTurnId, voiceMode: 'provider' }); }
+        if (event.event === 'audio' && useLiveVoice) await pcmPlayer.current?.push(event.data);
+        if (event.event === 'audio_end') audioFrames = event.data.sample_count;
         if (event.event === 'status') setStatus(stages[event.data.stage] ?? event.data.stage.replaceAll('_', ' '));
         if (event.event === 'token') {
           setMessages((previous) => previous.map((message) => message.id === answerId ? { ...message, text: message.text + event.data.text } : message));
@@ -148,16 +172,18 @@ export default function App() {
           void measuredMotion.play(received.behavior.motion);
           setMessages((previous) => previous.map((message) => message.id === answerId ? { ...message, text: event.data.turn.text, turn: event.data.turn, pending: false } : message));
         }
-      });
+      }, { live: useLiveVoice });
       const current = playbackPreferences.current;
       if (ticket === generation.current && received) {
         clock.streamComplete(performance.now()); clock.configureVoice(current.autoPlay ? current.voice : 'off'); setLiveMeasurement(clock.snapshot());
-        if (current.autoPlay && current.voice !== 'off') void playback.play(received, current.voice, (event) => {
+        if (useLiveVoice) await pcmPlayer.current?.finish(audioFrames);
+        else if (current.autoPlay && current.voice !== 'off') void playback.play(received, current.voice, (event) => {
           if (ticket === generation.current && event.turnId === received?.id) { clock.playback(event); setLiveMeasurement(clock.snapshot()); }
         });
       }
     } catch (error) {
       if (ticket === generation.current && !controller.signal.aborted) {
+        pcmPlayer.current?.stop(error instanceof Error ? error.message : 'Streaming playback failed.');
         clock.finish('failed'); setLiveMeasurement(clock.snapshot());
         const message = error instanceof Error ? error.message : 'The response could not be completed.';
         setMessages((previous) => previous.map((item) => item.id === answerId ? { ...item, pending: false, error: message } : item));
@@ -174,11 +200,12 @@ export default function App() {
     if (!model && builtinAvatar === next && !avatarError) return;
     measuredMotion.stop(); setModel(undefined); setBuiltinAvatar(next); setAvatarError(null); setAvatarReady(false);
   }
-  function listen(turn: Turn) { if (busy) return; setActiveTurn(turn); void measuredMotion.play(turn.behavior.motion); void playback.play(turn, voice === 'off' ? 'browser' : voice); }
+  function listen(turn: Turn) { if (busy) return; pcmPlayer.current?.stop(); setPcmState(initialPcmState); setActiveTurn(turn); void measuredMotion.play(turn.behavior.motion); void playback.play(turn, voice === 'off' ? 'browser' : voice); }
   const questions = persona?.example_questions[language] ?? defaultQuestions;
-  const speaking = playback.status === 'playing';
+  const speaking = pcmState.status === 'playing' || playback.status === 'playing';
+  const visualPlayback = streamingVoice ? { ...playback, ...pcmState, speechTiming: undefined, audioSha256: undefined } : playback;
   const modelUrl = model?.url ?? (builtinAvatar === 'human' ? RESEARCH_HUMAN_AVATAR.modelUrl : undefined);
-  const stageState = speaking ? 'Speaking' : playback.status === 'loading' ? 'Preparing voice' : microphone.listening ? 'Listening' : busy ? 'Thinking' : 'Ready when you are';
+  const stageState = speaking ? 'Speaking' : (playback.status === 'loading' || pcmState.status === 'loading') ? 'Preparing voice' : microphone.listening ? 'Listening' : busy ? 'Thinking' : 'Ready when you are';
 
   return <div className="app-shell">
     <aside className="sidebar">
@@ -198,9 +225,9 @@ export default function App() {
           <div className="studio-grid">
             <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}><section className="stage-card" aria-label="Avatar studio" style={{ flex: 1 }}>
               <div className="stage-top"><div><span className="tag dark"><span className="tiny-dot"/> AI SIMULATION</span><div className="stage-title">Elon Musk<span>01 / RESEARCH PERSONA</span></div></div><button className="stage-options" onClick={() => setSettings(true)} aria-label="Avatar settings"><Settings2 size={18}/></button></div>
-              <div className="avatar-viewport"><AvatarStage speaking={speaking} timeline={activeTurn?.behavior} elapsedMs={playback.elapsedMs} amplitude={speaking ? playback.amplitude : 0} modelUrl={modelUrl} framing={framing} reducedMotion={reducedMotion} speechTiming={playback.speechTiming} audioSha256={playback.audioSha256} audioElapsedMs={playback.audioElapsedMs} performanceClip={motionMode !== 'disabled' && mode === 'behavior' && !reducedMotion ? measuredMotion.clip : undefined} observationElapsedMs={measuredMotion.elapsedMs} allowGeometryPreview={motionMode === 'geometry_preview'} onReady={onAvatarReady} onError={onAvatarError}/></div>
+              <div className="avatar-viewport"><AvatarStage speaking={speaking} timeline={streamingVoice ? undefined : activeTurn?.behavior} elapsedMs={visualPlayback.elapsedMs} amplitude={speaking ? visualPlayback.amplitude : 0} modelUrl={modelUrl} framing={framing} reducedMotion={reducedMotion} speechTiming={visualPlayback.speechTiming} audioSha256={visualPlayback.audioSha256} audioElapsedMs={visualPlayback.audioElapsedMs} performanceClip={motionMode !== 'disabled' && mode === 'behavior' && !reducedMotion ? measuredMotion.clip : undefined} observationElapsedMs={measuredMotion.elapsedMs} allowGeometryPreview={motionMode === 'geometry_preview'} onReady={onAvatarReady} onError={onAvatarError}/></div>
               <div className="stage-caption"><span className="caption-rule"/><span>{model ? 'YOUR CUSTOM RIG' : builtinAvatar === 'human' ? 'RESEARCH HUMAN RIG' : 'STYLIZED PORTRAIT RIG'}</span><span className="caption-rule"/></div>
-              <div className="stage-bottom"><div className="live-status"><span className={`status-orb ${speaking || busy ? 'animated' : ''}`}/><div><strong>{stageState}</strong><span title={playback.timingMessage}>{voice === 'provider' ? playback.timingStatus === 'available' ? 'Provider voice · audio-timed mouth cues' : 'Provider voice · approximate mouth movement' : voice === 'browser' || speaking ? 'Generic browser voice · approximate lip sync' : 'Text mode · voice available'}</span></div></div><button className="round-control" aria-label={speaking || playback.status === 'loading' ? 'Stop audio' : 'Enable voice settings'} onClick={() => speaking || playback.status === 'loading' ? playback.stop() : setSettings(true)}>{speaking || playback.status === 'loading' ? <Square size={16}/> : voice === 'off' ? <VolumeX size={18}/> : <Volume2 size={18}/>}</button></div>
+              <div className="stage-bottom"><div className="live-status"><span className={`status-orb ${speaking || busy ? 'animated' : ''}`}/><div><strong>{stageState}</strong><span title={playback.timingMessage}>{streamingVoice ? 'Streaming voice · PCM-clock mouth movement' : voice === 'provider' ? playback.timingStatus === 'available' ? 'Provider voice · audio-timed mouth cues' : 'Provider voice · approximate mouth movement' : voice === 'browser' || speaking ? 'Generic browser voice · approximate lip sync' : 'Text mode · voice available'}</span></div></div><button className="round-control" aria-label={streamingVoice || speaking || playback.status === 'loading' ? 'Stop audio' : 'Enable voice settings'} onClick={() => streamingVoice ? cancel() : speaking || playback.status === 'loading' ? playback.stop() : setSettings(true)}>{streamingVoice || speaking || playback.status === 'loading' ? <Square size={16}/> : voice === 'off' ? <VolumeX size={18}/> : <Volume2 size={18}/>}</button></div>
               {!avatarReady && !avatarError && <div className="avatar-loading"><LoaderCircle size={18} className="spin"/> Preparing the rig</div>}
               {avatarError && <div className="avatar-error" role="alert">{avatarError}<button onClick={() => selectBuiltinAvatar('portrait')}>Use stylized portrait</button></div>}
             </section><MotionNotice state={measuredMotion} mode={motionMode} reducedMotion={reducedMotion} noMatch={Boolean(activeTurn && !busy && !activeTurn.behavior.motion)}/></div>
@@ -211,20 +238,20 @@ export default function App() {
                 {messages.map((message) => <article key={message.id} className={`message ${message.role}`}><div className="message-avatar">{message.role === 'assistant' ? <Mark small/> : 'Y'}</div><div className="message-content"><div className="message-author">{message.role === 'assistant' ? 'Research persona' : 'You'}{message.turn && <span>{message.turn.provider === 'evidence' ? 'Source notes' : 'Generated'}</span>}</div>{message.text && <p className="message-text">{message.text}</p>}{message.pending && <div className="thinking"><LoaderCircle size={13} className="spin"/>{status || 'Working on your question'}</div>}{message.error && <div className="message-error" role="alert">{message.error}</div>}{message.turn && <div className="message-tools"><button onClick={() => setEvidence(message.turn!.citations)}><BookOpen size={13}/>{message.turn.citations.length ? `${message.turn.citations.length} evidence records` : 'No supporting evidence'}</button><button onClick={() => listen(message.turn!)} disabled={busy} aria-label="Play response"><Volume2 size={14}/><span>Listen</span></button><GroundingBadge grounding={message.turn.grounding} language={message.turn.language}/></div>}</div></article>)}
                 <div ref={chatBottom}/>
               </div>
-              {(playback.error || microphone.error) && <div className="inline-error" role="alert">{playback.error || microphone.error}</div>}
+              {(playback.error || pcmState.error || microphone.error) && <div className="inline-error" role="alert">{playback.error || pcmState.error || microphone.error}</div>}
               <form className={`composer ${microphone.listening ? 'listening' : ''}`} onSubmit={(event) => { event.preventDefault(); void send(); }}><textarea ref={composer} value={draft} onChange={(event) => setDraft(event.target.value)} placeholder={microphone.listening ? 'Listening… you can edit before sending' : language === 'ko' ? '궁금한 것을 물어봐…' : 'Ask something you’re curious about…'} aria-label="Your message" rows={2} maxLength={2000} disabled={busy} onKeyDown={(event) => { if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void send(); } }}/><div className="composer-bottom"><button className={`microphone-button ${microphone.listening ? 'active' : ''}`} type="button" onClick={() => { playback.stop(); microphone.toggle(); }} disabled={busy || !microphone.supported} aria-label={microphone.listening ? 'Stop microphone' : 'Use microphone'} title={microphone.supported ? 'Dictate a question' : 'Microphone transcription is unavailable in this browser'}><Mic size={16}/><span>{microphone.listening ? 'Listening' : 'Use your voice'}</span></button><span className="keyboard-hint">↵ to send</span>{busy ? <button type="button" className="send-button" onClick={cancel} aria-label="Stop response"><Square size={15}/></button> : <button type="submit" className="send-button" disabled={!draft.trim() || connection !== 'ready'} aria-label="Send message"><ArrowUp size={18}/></button>}</div></form>
-              <div className="conversation-footer"><span className="tiny-dot"/> AI simulation · Historical sources · Verify important claims</div>
+              <div className="conversation-footer"><span className="tiny-dot"/> AI simulation · {persona?.snapshot ? `Snapshot ${persona.snapshot.as_of.slice(0, 10)} · dated sources` : 'Historical sources'} · Verify important claims</div>
             </section>
           </div>
           <section className="session-strip"><div className="session-evidence"><div className="strip-icon"><Layers3 size={20}/></div><div><span className="eyebrow">GROUNDED IN PUBLIC MATERIAL</span><strong>{persona?.stats.sources ?? '—'} sources <i/> {persona?.stats.evidence ?? '—'} evidence records</strong></div><button onClick={() => navigate('sources')} aria-label="Explore source library"><ArrowRight size={18}/></button></div><div className="session-model"><div><span className="eyebrow">CONVERSATION APPROACH</span><label><select value={mode} onChange={(event) => setMode(event.target.value as ExperimentMode)} disabled={busy} aria-label="Conversation approach">{experiments.map((experiment) => <option key={experiment.id} value={experiment.id}>{experiment.letter} · {experiment.name}</option>)}</select><ChevronDown size={14}/></label></div><button className="text-button" onClick={() => navigate('lab')}>Compare <ArrowUpRight size={14}/></button></div></section>
           <div className="studio-footnote"><span><Radio size={13}/> {activeTurn ? `${Math.round(activeTurn.metrics.total_ms)} ms server response · designed behavior cues` : 'Designed motion · reference avatar · source-grounded conversation'}</span><button onClick={() => setInfoOpen(!infoOpen)}>How this works <ArrowDown size={12}/></button></div>
-          <LiveTiming measurement={liveMeasurement}/>
+          <LiveTiming measurement={liveMeasurement} pcm={pcmState.status === 'idle' ? null : pcmState}/>
         </>}
       </main>
       <nav className="mobile-nav" aria-label="Mobile navigation"><button className={page === 'studio' ? 'active' : ''} onClick={() => navigate('studio')}><MessageCircle size={19}/>Studio</button><button className={page === 'sources' ? 'active' : ''} onClick={() => navigate('sources')}><BookOpen size={19}/>Sources</button><button className={page === 'lab' ? 'active' : ''} onClick={() => navigate('lab')}><FlaskConical size={19}/>Lab</button><button className={page === 'presentation' ? 'active' : ''} onClick={() => navigate('presentation')}><Clapperboard size={19}/>Present</button></nav>
     </div>
     {evidence && <><button className="drawer-scrim" onClick={() => setEvidence(null)} aria-label="Close response evidence"/><EvidencePanel citations={evidence} onClose={() => setEvidence(null)}/></>}
-    <SettingsDialog open={settings} close={() => setSettings(false)} persona={persona} voice={voice} setVoice={(next) => { playback.stop(); setVoice(next); }} autoPlay={autoPlay} setAutoPlay={setAutoPlay} reducedMotion={reducedMotion} setReducedMotion={(value) => { measuredMotion.stop(); setReducedMotion(value); }} modelName={model?.name} loadModel={loadModel} resetModel={() => selectBuiltinAvatar('human')} builtinAvatar={builtinAvatar} setBuiltinAvatar={selectBuiltinAvatar} framing={framing} setFraming={setFraming} motionMode={motionMode} setMotionMode={(value) => { measuredMotion.stop(); setMotionMode(value); }} motionLibrary={motionLibrary} motionLibraryError={motionLibraryError}/>
+    <SettingsDialog open={settings} close={() => setSettings(false)} persona={persona} voice={voice} setVoice={(next) => { if (streamingVoice) cancel(); playback.stop(); setVoice(next); }} autoPlay={autoPlay} setAutoPlay={setAutoPlay} reducedMotion={reducedMotion} setReducedMotion={(value) => { measuredMotion.stop(); setReducedMotion(value); }} modelName={model?.name} loadModel={loadModel} resetModel={() => selectBuiltinAvatar('human')} builtinAvatar={builtinAvatar} setBuiltinAvatar={selectBuiltinAvatar} framing={framing} setFraming={setFraming} motionMode={motionMode} setMotionMode={(value) => { measuredMotion.stop(); setMotionMode(value); }} motionLibrary={motionLibrary} motionLibraryError={motionLibraryError}/>
   </div>;
 }
 

@@ -1,0 +1,416 @@
+{
+  "schema_version": "persona-split-registration.v1",
+  "id": "musk-2026-splits.v1",
+  "registered_at": "2026-11-11T10:04:52.681586+00:00",
+  "policy": "Registered before new extraction/tuning. All previous original pilot test events are development only; new reserved test event transcripts stay unacquired. No efficacy result is claimed.",
+  "events": [
+    {
+      "source_event_id": "tesla-master-plan-2006",
+      "event_family_id": "tesla-master-plan-2006",
+      "source_ids": [
+        "tesla-master-plan-2006"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "tesla-master-plan-2016",
+      "event_family_id": "tesla-master-plan-2016",
+      "source_ids": [
+        "tesla-master-plan-2016"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "henry-ford-2008",
+      "event_family_id": "henry-ford-2008",
+      "source_ids": [
+        "henry-ford-2008"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "stanford-2015",
+      "event_family_id": "stanford-2015",
+      "source_ids": [
+        "stanford-2015"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "lex-049-2019",
+      "event_family_id": "lex-049-2019",
+      "source_ids": [
+        "lex-049-2019"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "lex-400-2023",
+      "event_family_id": "lex-400-2023",
+      "source_ids": [
+        "lex-400-2023"
+      ],
+      "split": "validation",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": "test"
+      }
+    },
+    {
+      "source_event_id": "lex-438-2024",
+      "event_family_id": "lex-438-2024",
+      "source_ids": [
+        "lex-438-2024"
+      ],
+      "split": "validation",
+      "prior_exposure": {
+        "summary_split": "test",
+        "original_qa_split": "test"
+      }
+    },
+    {
+      "source_event_id": "ted-2013",
+      "event_family_id": "ted-2013",
+      "source_ids": [
+        "ted-2013"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": "train"
+      }
+    },
+    {
+      "source_event_id": "ted-2017",
+      "event_family_id": "ted-2017",
+      "source_ids": [
+        "ted-2017"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": "train"
+      }
+    },
+    {
+      "source_event_id": "ted-2022-recorded",
+      "event_family_id": "ted-2022-recorded",
+      "source_ids": [
+        "ted-2022-recorded"
+      ],
+      "split": "validation",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": "validation"
+      }
+    },
+    {
+      "source_event_id": "ted-2022-live",
+      "event_family_id": "ted-2022-live",
+      "source_ids": [
+        "ted-2022-live"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "dwarkesh-2026",
+      "event_family_id": "dwarkesh-2026",
+      "source_ids": [
+        "dwarkesh-2026"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "yc-2016",
+      "event_family_id": "yc-2016",
+      "source_ids": [
+        "yc-2016"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "recode-2018",
+      "event_family_id": "recode-2018",
+      "source_ids": [
+        "recode-2018"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "wired-2012",
+      "event_family_id": "wired-2012",
+      "source_ids": [
+        "wired-2012"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "time-2021-boca-chica",
+      "event_family_id": "time-2021-boca-chica",
+      "source_ids": [
+        "time-2021-boca-chica"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "time-2021-live",
+      "event_family_id": "time-2021-live",
+      "source_ids": [
+        "time-2021-live"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "popular-mechanics-2019",
+      "event_family_id": "popular-mechanics-2019",
+      "source_ids": [
+        "popular-mechanics-2019"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "gq-2015",
+      "event_family_id": "gq-2015",
+      "source_ids": [
+        "gq-2015"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "stanford-etl-2003",
+      "event_family_id": "stanford-etl-2003",
+      "source_ids": [
+        "stanford-etl-2003"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "tesla-hyperloop-alpha-2013",
+      "event_family_id": "tesla-hyperloop-alpha-2013",
+      "source_ids": [
+        "tesla-hyperloop-alpha-2013"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "mit-aeroastro-2014",
+      "event_family_id": "mit-aeroastro-2014",
+      "source_ids": [
+        "mit-aeroastro-2014"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "senate-launch-2014",
+      "event_family_id": "senate-launch-2014",
+      "source_ids": [
+        "senate-launch-2014"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "tesla-company-update-2019",
+      "event_family_id": "tesla-company-update-2019",
+      "source_ids": [
+        "tesla-company-update-2019"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "house-space-cooperation-2004",
+      "event_family_id": "house-space-cooperation-2004",
+      "source_ids": [
+        "house-space-cooperation-2004"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "senate-future-launch-2004",
+      "event_family_id": "senate-future-launch-2004",
+      "source_ids": [
+        "senate-future-launch-2004"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "house-commercial-space-2005",
+      "event_family_id": "house-commercial-space-2005",
+      "source_ids": [
+        "house-commercial-space-2005"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "senate-advanced-energy-2007",
+      "event_family_id": "senate-advanced-energy-2007",
+      "source_ids": [
+        "senate-advanced-energy-2007"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "house-commercial-crew-2011",
+      "event_family_id": "house-commercial-crew-2011",
+      "source_ids": [
+        "house-commercial-crew-2011"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "tesla-private-update-2018",
+      "event_family_id": "tesla-private-update-2018",
+      "source_ids": [
+        "tesla-private-update-2018"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "tesla-q4-2013-letter-2014",
+      "event_family_id": "tesla-q4-2013-letter-2014",
+      "source_ids": [
+        "tesla-q4-2013-letter-2014"
+      ],
+      "split": "train",
+      "prior_exposure": {
+        "summary_split": "train",
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "lex-018-2019",
+      "event_family_id": "lex-018-2019",
+      "source_ids": [
+        "lex-018-2019"
+      ],
+      "split": "test",
+      "prior_exposure": {
+        "summary_split": null,
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "lex-252-2021",
+      "event_family_id": "lex-252-2021",
+      "source_ids": [
+        "lex-252-2021"
+      ],
+      "split": "test",
+      "prior_exposure": {
+        "summary_split": null,
+        "original_qa_split": null
+      }
+    },
+    {
+      "source_event_id": "tesla-q3-2026-webcast",
+      "event_family_id": "tesla-q3-2026-webcast",
+      "source_ids": [
+        "tesla-q3-2026-webcast"
+      ],
+      "split": "test",
+      "prior_exposure": {
+        "summary_split": null,
+        "original_qa_split": null
+      }
+    }
+  ]
+}

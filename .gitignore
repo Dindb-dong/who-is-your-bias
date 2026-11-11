@@ -1,5 +1,6 @@
 .venv/
 .venv-inference/
+.venv-retrieval/
 __pycache__/
 *.py[cod]
 .pytest_cache/

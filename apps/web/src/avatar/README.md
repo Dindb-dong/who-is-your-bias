@@ -11,6 +11,8 @@ For source provenance, actual measurement results, import commands, and detailed
 calibration instructions, see [Avatar calibration](../../../../docs/avatar-calibration.md).
 For the humanoid's exact asset measurements, licenses, build commands, and native
 deformation checks, see [Bundled humanoid](../../../../docs/humanoid-avatar.md).
+For local package conversion, actual geometry inspection, and fixed-camera
+same-audio recording/export, see [Avatar audition](../../../../docs/avatar-audition.md).
 
 ## Runtime contract
 

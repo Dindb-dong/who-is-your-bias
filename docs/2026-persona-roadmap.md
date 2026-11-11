@@ -2,6 +2,8 @@
 
 Status: **implementation plan; not a completed capability claim**. Recorded on **2026-11-11, Asia/Seoul**. The user selected Musk as represented in 2026 and requested this documentation update without implementation changes or a new PR.
 
+**Implementation follow-up (2026-11-11):** the user subsequently authorized implementation and merging the existing PRs. PRs #10–#12 are now merged. See [implemented work, actual measurements and remaining acceptance evidence](2026-implementation.md). The plan and authoring-time status below remain a dated record.
+
 The goal is a convincing, source-grounded conversation with a recognizable Musk avatar: relevant answers, characteristic language and speech, coherent dialogue, and natural audiovisual behavior. The existing engineering pilot provides reusable infrastructure, but its small original-Q&A dataset, short voice reference, and generic face do not establish that experience.
 
 Read the [3D avatar shortlist](research/musk-3d-avatar-shortlist.md) alongside this plan. Existing Musk-specific assets advertised with facial rigs make **3D asset evaluation a priority**. Image/video-based rendering remains a comparison path; it is not a predetermined replacement for 3D.

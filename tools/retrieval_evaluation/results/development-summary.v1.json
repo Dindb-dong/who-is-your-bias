@@ -1,0 +1,652 @@
+{
+  "schema_version": "retrieval-development-summary.v1",
+  "recorded_date": "2026-11-11",
+  "scope": "Actual pinned local multilingual model inference on agent-reviewed held-in development cases. Translation pairs are correlated. No fresh held-out-event efficacy, human likeness, generated-answer entailment, or current-2026 answerability claim.",
+  "runs": [
+    {
+      "report_file": "e5-small-cpu-development-threshold084.v1.json.gz",
+      "report_sha256": "0d20cd7bcd88227ec6ca0bbe0521dbd2450a2cff9f08e5467696d5a1985bcdb0",
+      "case_manifest": "multilingual-summary-development.v1",
+      "case_manifest_sha256": "4ff1a62c913c4aa0b76cac8dff39748ba4d63f6bc5aad78cd7d8a6d4520c5228",
+      "corpus_sha256": "b32c3b95cbb9d02f1c411970aa0efa82f954ec086910e8965eaf36449fc276b7",
+      "training_records": 159,
+      "style_records": null,
+      "training_events": 30,
+      "registered_support_sources": 28,
+      "input_integrity_stable": null,
+      "policy": {
+        "dense_min_similarity": 0.84,
+        "candidate_limit": 24,
+        "rrf_constant": 60,
+        "max_per_event": 2,
+        "max_style_examples": 2,
+        "situation_multiplier": 1.15,
+        "temporal_weight": 0.1,
+        "reranker_min_score": null,
+        "max_chunk_tokens": 240
+      },
+      "elapsed_seconds": 71.429,
+      "conditions": {
+        "lexical": {
+          "metrics": {
+            "answerable_cases": 100,
+            "retrieval_hits": 48,
+            "hit_rate_at_k": 0.48,
+            "mean_recall_at_k": 0.48,
+            "mrr_at_k": 0.47,
+            "absent_cases": 50,
+            "absent_cases_with_candidates": 5,
+            "false_support_candidate_rate": 0.1,
+            "failures": 0,
+            "scope": "Candidate retrieval against agent-reviewed development labels; not answer entailment or human persona evaluation."
+          },
+          "language_support_hits": {
+            "en": {
+              "cases": 50,
+              "hits": 39
+            },
+            "ko": {
+              "cases": 50,
+              "hits": 9
+            }
+          },
+          "explicit_2026_support": {
+            "cases": 0,
+            "hits": 0
+          },
+          "absent_case_ids_with_candidates": [
+            "absent-010-ko",
+            "absent-011-ko",
+            "absent-012-ko",
+            "absent-013-en",
+            "absent-014-ko"
+          ]
+        },
+        "hybrid_B": {
+          "metrics": {
+            "answerable_cases": 100,
+            "retrieval_hits": 58,
+            "hit_rate_at_k": 0.58,
+            "mean_recall_at_k": 0.58,
+            "mrr_at_k": 0.5633333333333332,
+            "absent_cases": 50,
+            "absent_cases_with_candidates": 5,
+            "false_support_candidate_rate": 0.1,
+            "failures": 0,
+            "scope": "Candidate retrieval against agent-reviewed development labels; not answer entailment or human persona evaluation."
+          },
+          "language_support_hits": {
+            "en": {
+              "cases": 50,
+              "hits": 47
+            },
+            "ko": {
+              "cases": 50,
+              "hits": 11
+            }
+          },
+          "explicit_2026_support": {
+            "cases": 0,
+            "hits": 0
+          },
+          "absent_case_ids_with_candidates": [
+            "absent-010-ko",
+            "absent-011-ko",
+            "absent-012-ko",
+            "absent-013-en",
+            "absent-014-ko"
+          ]
+        },
+        "hybrid_C": {
+          "metrics": {
+            "answerable_cases": 100,
+            "retrieval_hits": 58,
+            "hit_rate_at_k": 0.58,
+            "mean_recall_at_k": 0.58,
+            "mrr_at_k": 0.5633333333333332,
+            "absent_cases": 50,
+            "absent_cases_with_candidates": 5,
+            "false_support_candidate_rate": 0.1,
+            "failures": 0,
+            "scope": "Candidate retrieval against agent-reviewed development labels; not answer entailment or human persona evaluation."
+          },
+          "language_support_hits": {
+            "en": {
+              "cases": 50,
+              "hits": 47
+            },
+            "ko": {
+              "cases": 50,
+              "hits": 11
+            }
+          },
+          "explicit_2026_support": {
+            "cases": 0,
+            "hits": 0
+          },
+          "absent_case_ids_with_candidates": [
+            "absent-010-ko",
+            "absent-011-ko",
+            "absent-012-ko",
+            "absent-013-en",
+            "absent-014-ko"
+          ]
+        }
+      }
+    },
+    {
+      "report_file": "e5-small-cpu-development-threshold078.v2.json.gz",
+      "report_sha256": "43228615be5d7f4a2177eac19db6ba16f55f7447079c70b0db1ce78d28226042",
+      "case_manifest": "multilingual-summary-development.v1",
+      "case_manifest_sha256": "4ff1a62c913c4aa0b76cac8dff39748ba4d63f6bc5aad78cd7d8a6d4520c5228",
+      "corpus_sha256": "b32c3b95cbb9d02f1c411970aa0efa82f954ec086910e8965eaf36449fc276b7",
+      "training_records": 159,
+      "style_records": null,
+      "training_events": 30,
+      "registered_support_sources": 28,
+      "input_integrity_stable": null,
+      "policy": {
+        "dense_min_similarity": 0.78,
+        "candidate_limit": 24,
+        "rrf_constant": 60,
+        "max_per_event": 2,
+        "max_style_examples": 2,
+        "situation_multiplier": 1.15,
+        "temporal_weight": 0.1,
+        "reranker_min_score": null,
+        "max_chunk_tokens": 240
+      },
+      "elapsed_seconds": 37.548,
+      "conditions": {
+        "lexical": {
+          "metrics": {
+            "answerable_cases": 100,
+            "retrieval_hits": 48,
+            "hit_rate_at_k": 0.48,
+            "mean_recall_at_k": 0.48,
+            "mrr_at_k": 0.47,
+            "absent_cases": 50,
+            "absent_cases_with_candidates": 5,
+            "false_support_candidate_rate": 0.1,
+            "failures": 0,
+            "scope": "Candidate retrieval against agent-reviewed development labels; not answer entailment or human persona evaluation."
+          },
+          "language_support_hits": {
+            "en": {
+              "cases": 50,
+              "hits": 39
+            },
+            "ko": {
+              "cases": 50,
+              "hits": 9
+            }
+          },
+          "explicit_2026_support": {
+            "cases": 0,
+            "hits": 0
+          },
+          "absent_case_ids_with_candidates": [
+            "absent-010-ko",
+            "absent-011-ko",
+            "absent-012-ko",
+            "absent-013-en",
+            "absent-014-ko"
+          ]
+        },
+        "hybrid_B": {
+          "metrics": {
+            "answerable_cases": 100,
+            "retrieval_hits": 94,
+            "hit_rate_at_k": 0.94,
+            "mean_recall_at_k": 0.94,
+            "mrr_at_k": 0.8916666666666667,
+            "absent_cases": 50,
+            "absent_cases_with_candidates": 9,
+            "false_support_candidate_rate": 0.18,
+            "failures": 0,
+            "scope": "Candidate retrieval against agent-reviewed development labels; not answer entailment or human persona evaluation."
+          },
+          "language_support_hits": {
+            "en": {
+              "cases": 50,
+              "hits": 48
+            },
+            "ko": {
+              "cases": 50,
+              "hits": 46
+            }
+          },
+          "explicit_2026_support": {
+            "cases": 0,
+            "hits": 0
+          },
+          "absent_case_ids_with_candidates": [
+            "absent-004-en",
+            "absent-009-en",
+            "absent-013-en",
+            "absent-014-en",
+            "absent-014-ko",
+            "absent-018-en",
+            "absent-019-en",
+            "absent-020-en",
+            "absent-025-en"
+          ]
+        },
+        "hybrid_C": {
+          "metrics": {
+            "answerable_cases": 100,
+            "retrieval_hits": 94,
+            "hit_rate_at_k": 0.94,
+            "mean_recall_at_k": 0.94,
+            "mrr_at_k": 0.8916666666666667,
+            "absent_cases": 50,
+            "absent_cases_with_candidates": 9,
+            "false_support_candidate_rate": 0.18,
+            "failures": 0,
+            "scope": "Candidate retrieval against agent-reviewed development labels; not answer entailment or human persona evaluation."
+          },
+          "language_support_hits": {
+            "en": {
+              "cases": 50,
+              "hits": 48
+            },
+            "ko": {
+              "cases": 50,
+              "hits": 46
+            }
+          },
+          "explicit_2026_support": {
+            "cases": 0,
+            "hits": 0
+          },
+          "absent_case_ids_with_candidates": [
+            "absent-004-en",
+            "absent-009-en",
+            "absent-013-en",
+            "absent-014-en",
+            "absent-014-ko",
+            "absent-018-en",
+            "absent-019-en",
+            "absent-020-en",
+            "absent-025-en"
+          ]
+        }
+      }
+    },
+    {
+      "report_file": "e5-mmarco-cpu-development.v3.json.gz",
+      "report_sha256": "1b6484644cfad2aea88b4e4cb6bae54e9f045d882ec9e5c9cfc188d34e862e4a",
+      "case_manifest": "multilingual-summary-development.v1",
+      "case_manifest_sha256": "4ff1a62c913c4aa0b76cac8dff39748ba4d63f6bc5aad78cd7d8a6d4520c5228",
+      "corpus_sha256": "b32c3b95cbb9d02f1c411970aa0efa82f954ec086910e8965eaf36449fc276b7",
+      "training_records": 159,
+      "style_records": null,
+      "training_events": 30,
+      "registered_support_sources": 28,
+      "input_integrity_stable": null,
+      "policy": {
+        "dense_min_similarity": 0.78,
+        "candidate_limit": 24,
+        "rrf_constant": 60,
+        "max_per_event": 2,
+        "max_style_examples": 2,
+        "situation_multiplier": 1.15,
+        "temporal_weight": 0.1,
+        "reranker_min_score": -4.0,
+        "max_chunk_tokens": 240
+      },
+      "elapsed_seconds": 43.969,
+      "conditions": {
+        "lexical": {
+          "metrics": {
+            "answerable_cases": 100,
+            "retrieval_hits": 48,
+            "hit_rate_at_k": 0.48,
+            "mean_recall_at_k": 0.48,
+            "mrr_at_k": 0.47,
+            "absent_cases": 50,
+            "absent_cases_with_candidates": 5,
+            "false_support_candidate_rate": 0.1,
+            "failures": 0,
+            "scope": "Candidate retrieval against agent-reviewed development labels; not answer entailment or human persona evaluation."
+          },
+          "language_support_hits": {
+            "en": {
+              "cases": 50,
+              "hits": 39
+            },
+            "ko": {
+              "cases": 50,
+              "hits": 9
+            }
+          },
+          "explicit_2026_support": {
+            "cases": 0,
+            "hits": 0
+          },
+          "absent_case_ids_with_candidates": [
+            "absent-010-ko",
+            "absent-011-ko",
+            "absent-012-ko",
+            "absent-013-en",
+            "absent-014-ko"
+          ]
+        },
+        "hybrid_B": {
+          "metrics": {
+            "answerable_cases": 100,
+            "retrieval_hits": 92,
+            "hit_rate_at_k": 0.92,
+            "mean_recall_at_k": 0.92,
+            "mrr_at_k": 0.8983333333333334,
+            "absent_cases": 50,
+            "absent_cases_with_candidates": 2,
+            "false_support_candidate_rate": 0.04,
+            "failures": 0,
+            "scope": "Candidate retrieval against agent-reviewed development labels; not answer entailment or human persona evaluation."
+          },
+          "language_support_hits": {
+            "en": {
+              "cases": 50,
+              "hits": 46
+            },
+            "ko": {
+              "cases": 50,
+              "hits": 46
+            }
+          },
+          "explicit_2026_support": {
+            "cases": 0,
+            "hits": 0
+          },
+          "absent_case_ids_with_candidates": [
+            "absent-014-en",
+            "absent-014-ko"
+          ]
+        },
+        "hybrid_C": {
+          "metrics": {
+            "answerable_cases": 100,
+            "retrieval_hits": 92,
+            "hit_rate_at_k": 0.92,
+            "mean_recall_at_k": 0.92,
+            "mrr_at_k": 0.8983333333333334,
+            "absent_cases": 50,
+            "absent_cases_with_candidates": 2,
+            "false_support_candidate_rate": 0.04,
+            "failures": 0,
+            "scope": "Candidate retrieval against agent-reviewed development labels; not answer entailment or human persona evaluation."
+          },
+          "language_support_hits": {
+            "en": {
+              "cases": 50,
+              "hits": 46
+            },
+            "ko": {
+              "cases": 50,
+              "hits": 46
+            }
+          },
+          "explicit_2026_support": {
+            "cases": 0,
+            "hits": 0
+          },
+          "absent_case_ids_with_candidates": [
+            "absent-014-en",
+            "absent-014-ko"
+          ]
+        }
+      }
+    },
+    {
+      "report_file": "e5-mmarco-expanded-original-qa.v2.json.gz",
+      "report_sha256": "a5642758854ebd1dd0f47cb8ce3123b84b2b105ce9adaa4b0095da0c1b747eea",
+      "case_manifest": "original-qa-expanded-development.v2",
+      "case_manifest_sha256": "c1df62d327aa296d45175d705b46a78ff2d2bac221074ed1afa79d718a27f863",
+      "corpus_sha256": "f354ea77d4a9ba5816618611126f8d3069293424911d17ba26fe4ea1ed19d139",
+      "training_records": 745,
+      "style_records": 922,
+      "training_events": 9,
+      "registered_support_sources": 9,
+      "input_integrity_stable": true,
+      "policy": {
+        "dense_min_similarity": 0.78,
+        "candidate_limit": 24,
+        "rrf_constant": 60,
+        "max_per_event": 2,
+        "max_style_examples": 2,
+        "situation_multiplier": 1.15,
+        "temporal_weight": 0.1,
+        "reranker_min_score": -4.0,
+        "max_chunk_tokens": 240
+      },
+      "elapsed_seconds": 188.642,
+      "conditions": {
+        "lexical": {
+          "metrics": {
+            "answerable_cases": 36,
+            "retrieval_hits": 3,
+            "hit_rate_at_k": 0.08333333333333333,
+            "mean_recall_at_k": 0.08333333333333333,
+            "mrr_at_k": 0.08333333333333333,
+            "absent_cases": 20,
+            "absent_cases_with_candidates": 0,
+            "false_support_candidate_rate": 0.0,
+            "failures": 0,
+            "scope": "Candidate retrieval against agent-reviewed development labels; not answer entailment or human persona evaluation."
+          },
+          "language_support_hits": {
+            "en": {
+              "cases": 18,
+              "hits": 3
+            },
+            "ko": {
+              "cases": 18,
+              "hits": 0
+            }
+          },
+          "explicit_2026_support": {
+            "cases": 4,
+            "hits": 0
+          },
+          "absent_case_ids_with_candidates": []
+        },
+        "hybrid_B": {
+          "metrics": {
+            "answerable_cases": 36,
+            "retrieval_hits": 28,
+            "hit_rate_at_k": 0.7777777777777778,
+            "mean_recall_at_k": 0.7777777777777778,
+            "mrr_at_k": 0.7361111111111112,
+            "absent_cases": 20,
+            "absent_cases_with_candidates": 4,
+            "false_support_candidate_rate": 0.2,
+            "failures": 0,
+            "scope": "Candidate retrieval against agent-reviewed development labels; not answer entailment or human persona evaluation."
+          },
+          "language_support_hits": {
+            "en": {
+              "cases": 18,
+              "hits": 16
+            },
+            "ko": {
+              "cases": 18,
+              "hits": 12
+            }
+          },
+          "explicit_2026_support": {
+            "cases": 4,
+            "hits": 1
+          },
+          "absent_case_ids_with_candidates": [
+            "original-absent-008-en",
+            "original-absent-018-ko",
+            "original-absent-019-en",
+            "original-absent-024-en"
+          ]
+        },
+        "hybrid_C": {
+          "metrics": {
+            "answerable_cases": 36,
+            "retrieval_hits": 28,
+            "hit_rate_at_k": 0.7777777777777778,
+            "mean_recall_at_k": 0.7777777777777778,
+            "mrr_at_k": 0.7361111111111112,
+            "absent_cases": 20,
+            "absent_cases_with_candidates": 4,
+            "false_support_candidate_rate": 0.2,
+            "failures": 0,
+            "scope": "Candidate retrieval against agent-reviewed development labels; not answer entailment or human persona evaluation."
+          },
+          "language_support_hits": {
+            "en": {
+              "cases": 18,
+              "hits": 16
+            },
+            "ko": {
+              "cases": 18,
+              "hits": 12
+            }
+          },
+          "explicit_2026_support": {
+            "cases": 4,
+            "hits": 1
+          },
+          "absent_case_ids_with_candidates": [
+            "original-absent-008-en",
+            "original-absent-018-ko",
+            "original-absent-019-en",
+            "original-absent-024-en"
+          ]
+        }
+      }
+    },
+    {
+      "report_file": "e5-mmarco-expanded-original-qa-stricter.v2.json.gz",
+      "report_sha256": "6a62294098bec99d9f2859d612e12aa0aebda1d460910764475c6fda2508567d",
+      "case_manifest": "original-qa-expanded-development.v2",
+      "case_manifest_sha256": "c1df62d327aa296d45175d705b46a78ff2d2bac221074ed1afa79d718a27f863",
+      "corpus_sha256": "f354ea77d4a9ba5816618611126f8d3069293424911d17ba26fe4ea1ed19d139",
+      "training_records": 745,
+      "style_records": 922,
+      "training_events": 9,
+      "registered_support_sources": 9,
+      "input_integrity_stable": true,
+      "policy": {
+        "dense_min_similarity": 0.78,
+        "candidate_limit": 24,
+        "rrf_constant": 60,
+        "max_per_event": 2,
+        "max_style_examples": 2,
+        "situation_multiplier": 1.15,
+        "temporal_weight": 0.1,
+        "reranker_min_score": -3.0,
+        "max_chunk_tokens": 240
+      },
+      "elapsed_seconds": 147.258,
+      "conditions": {
+        "lexical": {
+          "metrics": {
+            "answerable_cases": 36,
+            "retrieval_hits": 3,
+            "hit_rate_at_k": 0.08333333333333333,
+            "mean_recall_at_k": 0.08333333333333333,
+            "mrr_at_k": 0.08333333333333333,
+            "absent_cases": 20,
+            "absent_cases_with_candidates": 0,
+            "false_support_candidate_rate": 0.0,
+            "failures": 0,
+            "scope": "Candidate retrieval against agent-reviewed development labels; not answer entailment or human persona evaluation."
+          },
+          "language_support_hits": {
+            "en": {
+              "cases": 18,
+              "hits": 3
+            },
+            "ko": {
+              "cases": 18,
+              "hits": 0
+            }
+          },
+          "explicit_2026_support": {
+            "cases": 4,
+            "hits": 0
+          },
+          "absent_case_ids_with_candidates": []
+        },
+        "hybrid_B": {
+          "metrics": {
+            "answerable_cases": 36,
+            "retrieval_hits": 27,
+            "hit_rate_at_k": 0.75,
+            "mean_recall_at_k": 0.75,
+            "mrr_at_k": 0.7222222222222222,
+            "absent_cases": 20,
+            "absent_cases_with_candidates": 0,
+            "false_support_candidate_rate": 0.0,
+            "failures": 0,
+            "scope": "Candidate retrieval against agent-reviewed development labels; not answer entailment or human persona evaluation."
+          },
+          "language_support_hits": {
+            "en": {
+              "cases": 18,
+              "hits": 16
+            },
+            "ko": {
+              "cases": 18,
+              "hits": 11
+            }
+          },
+          "explicit_2026_support": {
+            "cases": 4,
+            "hits": 1
+          },
+          "absent_case_ids_with_candidates": []
+        },
+        "hybrid_C": {
+          "metrics": {
+            "answerable_cases": 36,
+            "retrieval_hits": 27,
+            "hit_rate_at_k": 0.75,
+            "mean_recall_at_k": 0.75,
+            "mrr_at_k": 0.7222222222222222,
+            "absent_cases": 20,
+            "absent_cases_with_candidates": 0,
+            "false_support_candidate_rate": 0.0,
+            "failures": 0,
+            "scope": "Candidate retrieval against agent-reviewed development labels; not answer entailment or human persona evaluation."
+          },
+          "language_support_hits": {
+            "en": {
+              "cases": 18,
+              "hits": 16
+            },
+            "ko": {
+              "cases": 18,
+              "hits": 11
+            }
+          },
+          "explicit_2026_support": {
+            "cases": 4,
+            "hits": 1
+          },
+          "absent_case_ids_with_candidates": []
+        }
+      }
+    }
+  ],
+  "optional_expanded_recipe_selection": {
+    "dense_min_similarity": 0.78,
+    "reranker_min_score": -3,
+    "basis": "One predeclared stricter sensitivity on the same corrected expanded corpus and development cases: 27/36 support hits and 0/20 false candidates versus baseline -4 28/36 and 4/20. Only 1/4 explicitly dated 2026 support cases hit under either threshold. Default application remains lexical.",
+    "no_additional_threshold_search": true
+  },
+  "excluded_diagnostic_runs": [
+    {
+      "report_file": "e5-mmarco-expanded-original-qa.v1.invalid-input-drift.json.gz",
+      "notice_file": "e5-mmarco-expanded-original-qa.v1.invalid-input-drift.json",
+      "reason": "Source metadata changed during the run and factual/style projection membership was not yet materialized. Not a completed valid comparison."
+    }
+  ],
+  "shareability": "Reports contain authored questions, record IDs, metadata, scores, hashes and offsets. Original transcripts and model weights remain outside these artifacts."
+}

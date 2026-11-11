@@ -4,6 +4,7 @@ import { AvatarStage } from './AvatarStage';
 import { parseAvatarClip, parseRigMapping } from '../avatar/validation';
 import type { AvatarClip, RigMapping } from '../avatar/types';
 import type { AvatarFraming } from '../avatar/builtin';
+import { useAuditionAudio } from '../avatar/useAuditionAudio';
 
 /** Imported measurements have their own source clock, separate from conversation cues. */
 export function MotionLab({ modelUrl, reducedMotion }: { modelUrl?: string; reducedMotion: boolean }) {
@@ -19,6 +20,7 @@ export function MotionLab({ modelUrl, reducedMotion }: { modelUrl?: string; redu
   const [showCalibration, setShowCalibration] = useState(true);
   const [framing, setFraming] = useState<AvatarFraming>('full_body');
   const [loadingSample, setLoadingSample] = useState<'face' | 'body' | null>(null);
+  const audio = useAuditionAudio(); const [auditionStartKey, setAuditionStartKey] = useState(0);
   const clock = useRef(0); clock.current = elapsed;
   const sampleRequest = useRef<AbortController | null>(null);
   const alive = useRef(true); const importTicket = useRef({ clip: 0, mapping: 0 });
@@ -73,7 +75,9 @@ export function MotionLab({ modelUrl, reducedMotion }: { modelUrl?: string; redu
   return <section className="motion-lab" aria-labelledby="motion-lab-heading">
     <div className="motion-heading"><div><span className="eyebrow">FROM SOURCE VIDEO TO MOVEMENT</span><h2 id="motion-lab-heading">Motion & rig calibration</h2><p>Replay measured face and pose tracks on the reference rig or your own avatar.</p></div><SlidersHorizontal size={27}/></div>
     <div className="motion-layout">
-      <div className="motion-stage"><AvatarStage speaking={false} modelUrl={modelUrl} rigMapping={mapping} framing={framing}
+      <div className="motion-stage"><AvatarStage speaking={audio.state.status === 'playing'} modelUrl={modelUrl} rigMapping={mapping} framing={framing}
+        audioElapsedMs={audio.state.audioElapsedMs} elapsedMs={audio.state.elapsedMs} amplitude={audio.state.amplitude}
+        audioSha256={audio.state.audioSha256} speechTiming={audio.state.speechTiming} auditionStartKey={auditionStartKey}
         reducedMotion={reducedMotion} performanceClip={permitted ? clip : undefined}
         observationElapsedMs={elapsed} allowGeometryPreview={allowPreview} showCalibration={showCalibration}/></div>
       <div className="motion-controls">
@@ -83,6 +87,21 @@ export function MotionLab({ modelUrl, reducedMotion }: { modelUrl?: string; redu
         <label className="motion-upload"><Upload size={17}/><span>Import motion clip<small>{clipName || 'Source-linked animation JSON · up to 8 MB'}</small></span><input type="file" accept=".json,application/json" aria-label="Import motion clip" onChange={(event) => { const file = event.target.files?.[0]; if (file) void importFile(file, 'clip'); event.target.value = ''; }}/></label>
         <label className="motion-upload"><Upload size={17}/><span>Import rig mapping<small>{mappingName || 'Morphs, neutral values and bone axes · JSON'}</small></span><input type="file" accept=".json,application/json" aria-label="Import rig mapping" onChange={(event) => { const file = event.target.files?.[0]; if (file) void importFile(file, 'mapping'); event.target.value = ''; }}/></label>
         <label className="motion-check"><input type="checkbox" checked={showCalibration} onChange={(event) => setShowCalibration(event.target.checked)}/> Show calibration controls</label>
+        <div className="motion-source">
+          <span className="eyebrow">SAME-AUDIO AVATAR AUDITION</span>
+          <strong>{audio.sample?.name ?? 'Choose a speech sample'}</strong>
+          <p>Replay the same WAV on each candidate. Import matching speech timing for phoneme-based articulation, or compare measured audio-energy motion.</p>
+          <button className="secondary-button" disabled={audio.loading} onClick={() => void audio.loadBundled()}>Load narration sample</button>
+          <label className="motion-upload"><Upload size={17}/><span>Import audition audio<small>Local WAV · up to 16 MiB</small></span><input type="file" accept=".wav,audio/wav" aria-label="Import audition audio" onChange={(event) => { const file = event.target.files?.[0]; if (file) void audio.importAudio(file, file.name); event.target.value = ''; }}/></label>
+          <label className="motion-upload"><Upload size={17}/><span>Import matching speech timing<small>Optional speech-timing.v1 JSON</small></span><input type="file" accept=".json,application/json" disabled={!audio.sample} aria-label="Import audition speech timing" onChange={(event) => { const file = event.target.files?.[0]; if (file) void audio.importTiming(file); event.target.value = ''; }}/></label>
+          {audio.sample && <p>{audio.sample.timingStatus === 'amplitude' ? 'Articulation: measured audio energy' : `Articulation: ${audio.sample.timingStatus}`} · {(audio.state.audioElapsedMs / 1000).toFixed(2)} s</p>}
+          <div className="motion-transport">
+            <button className="primary-button" disabled={!audio.sample || audio.loading} onClick={() => { setShowCalibration(true); setPlaying(false); setElapsed(0); setAuditionStartKey((key) => key + 1); void audio.play(); }}><Play size={14}/> Play & record audition</button>
+            <button className="icon-button" aria-label="Stop audition audio" disabled={audio.state.status === 'idle'} onClick={audio.stop}><Square size={14}/></button>
+          </div>
+          <p>Export the recording from Asset audition in the rig inspection panel. Appearance ratings remain ungraded.</p>
+          {audio.error && <p className="error-text" role="alert">{audio.error}</p>}
+        </div>
         {clip ? <>
           <div className="motion-source"><span className="eyebrow">{clip.review.status === 'speaker_reviewed' ? 'REVIEWED SOURCE TRACK' : 'GEOMETRY PREVIEW'}</span><strong>{clip.source.source_id}</strong><p>{clip.review.attribution_basis}</p><small>{clip.frames.length} measured frames · {(clip.duration_ms / 1000).toFixed(2)} seconds</small></div>
           {clip.review.status === 'geometry_preview' && <label className="motion-check preview-choice"><input type="checkbox" checked={allowPreview} onChange={(event) => { setAllowPreview(event.target.checked); setPlaying(false); }}/> Preview geometry without speaker attribution</label>}

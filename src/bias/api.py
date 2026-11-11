@@ -6,6 +6,8 @@ import asyncio
 import json
 import logging
 import re
+import time
+import anyio
 from contextlib import aclosing, asynccontextmanager
 from typing import AsyncIterator
 
@@ -26,8 +28,38 @@ from .providers import OpenAICompatibleLLM, ProviderError, SpeechProvider, Trans
 from .request_work import run_until_disconnect
 from .sessions import SessionCapacityError, SessionNotFound
 from .speech import SpeechPackages
+from .live import live_events
 
 logger = logging.getLogger(__name__)
+
+
+class DisconnectStreamingResponse(StreamingResponse):
+    """Observe disconnect while awaiting a provider, including ASGI 2.4.
+
+    The default 2.4 response detects send errors only at its next outgoing
+    chunk. A listening task here cancels owned synthesis during silent waits.
+    """
+    async def __call__(self, scope, receive, send):
+        async with anyio.create_task_group() as group:
+            async def deliver():
+                try:
+                    await self.stream_response(send)
+                except OSError:
+                    pass
+                finally:
+                    # Cancellation may arrive while send() is applying socket
+                    # backpressure, leaving the body generator suspended at a
+                    # yield. Explicitly close it before this request exits.
+                    with anyio.CancelScope(shield=True):
+                        close = getattr(self.body_iterator, "aclose", None)
+                        if close is not None:
+                            await close()
+                    group.cancel_scope.cancel()
+            group.start_soon(deliver)
+            await self.listen_for_disconnect(receive)
+            group.cancel_scope.cancel()
+        if self.background is not None:
+            await self.background()
 
 
 class RequestBodyLimit:
@@ -98,6 +130,14 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
         application.state.motion_library = loaded_motion
         application.state.motion_status = "available" if loaded_motion else motion_status
         application.state.engine = Engine(config, corpus or Corpus.load(config.corpus_dir), llm=llm, motion_library=loaded_motion)
+        application.state.retrieval_warmup_ms = None
+        if config.retrieval_backend == "hybrid" and config.retrieval_prewarm:
+            # Cold local indexing can take longer than a conversation deadline.
+            # Finish it before advertising readiness; failures stop startup.
+            started = time.perf_counter()
+            logger.info("Warming the configured hybrid retrieval index before API readiness")
+            await asyncio.to_thread(application.state.engine.retriever.warm_up)
+            application.state.retrieval_warmup_ms = round((time.perf_counter() - started) * 1000, 3)
         application.state.speech = SpeechProvider(config.tts, voice=config.tts_voice, timeout=config.request_timeout, language_hint=config.tts_language_hint)
         application.state.transcription = TranscriptionProvider(config.asr, timeout=config.request_timeout)
         application.state.lipsync = LipsyncEngine.from_env()
@@ -136,6 +176,12 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
             "providers": {"llm": {"configured": config.llm.configured, "model": config.llm.model}, "speech": {"configured": config.tts.configured, "model": config.tts.model}, "transcription": {"configured": config.asr.configured, "model": config.asr.model}},
             "corpus": engine.corpus.stats(),
             "qa_corpus": engine.corpus.qa_report(),
+            "persona_snapshot": engine.snapshot.summary() if engine.snapshot else None,
+            "retrieval": {"backend": config.retrieval_backend, "embedding_model": config.embedding_model,
+                          "embedding_revision": config.embedding_revision, "style_examples": config.style_examples,
+                          "prewarmed": request.app.state.retrieval_warmup_ms is not None,
+                          "startup_warmup_ms": request.app.state.retrieval_warmup_ms},
+            "live_protocol": "live-segments-pcm.v1",
             "configuration_only": True,
         }
 
@@ -143,7 +189,8 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
     async def persona(request: Request):
         loaded: Corpus = request.app.state.engine.corpus
         item = loaded.persona
-        return {"id": item.id, "name": item.name, "tagline": item.tagline, "description": item.description, "example_questions": item.example_questions, "stats": loaded.stats(), "qa_corpus": loaded.qa_report(), "capabilities": {"llm": config.llm.configured, "speech": config.tts.configured, "transcription": config.asr.configured}, "notice": item.notice}
+        snapshot = request.app.state.engine.snapshot
+        return {"id": item.id, "name": item.name, "tagline": item.tagline, "description": item.description, "example_questions": item.example_questions, "stats": loaded.stats(), "qa_corpus": loaded.qa_report(), "snapshot": snapshot.summary() if snapshot else None, "capabilities": {"llm": config.llm.configured, "speech": config.tts.configured, "transcription": config.asr.configured, "live_speech": config.tts.configured}, "notice": item.notice}
 
     @application.get("/api/sources")
     async def sources(request: Request):
@@ -186,15 +233,13 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
             try:
                 async with aclosing(request.app.state.engine.events(body)) as engine_events:
                     async for event, data in engine_events:
-                        if await request.is_disconnected():
-                            return
                         yield encode_sse(event, data)
             except asyncio.CancelledError:
                 raise
             except Exception as exc:
                 _, error = _public_error(exc)
                 yield encode_sse("error", error)
-        return StreamingResponse(events(), media_type="text/event-stream", headers={"Cache-Control": "no-cache, no-transform", "X-Accel-Buffering": "no", "Connection": "keep-alive"})
+        return DisconnectStreamingResponse(events(), media_type="text/event-stream", headers={"Cache-Control": "no-cache, no-transform", "X-Accel-Buffering": "no", "Connection": "keep-alive"})
 
     @application.delete("/api/sessions/{session_id}")
     async def delete_session(session_id: str, request: Request):
@@ -203,6 +248,31 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
             return {"deleted": deleted}
         except SessionCapacityError as exc:
             raise HTTPException(status_code=409, detail=str(exc)) from exc
+
+    @application.get("/api/sessions/{session_id}/context")
+    async def session_context(session_id: str, request: Request):
+        store = request.app.state.engine.sessions
+        try:
+            session = store.get_or_create(session_id)
+        except SessionNotFound as exc:
+            raise HTTPException(status_code=404, detail=str(exc)) from exc
+        return session.dialogue.inspect()
+
+    @application.post("/api/chat/live")
+    async def live_chat(body: ChatRequest, request: Request):
+        async def events():
+            try:
+                async with aclosing(live_events(request.app.state.engine, request.app.state.speech, body,
+                                               timeout=min(1800, max(180, config.request_timeout * 4)))) as stream:
+                    async for event, data in stream:
+                        yield encode_sse(event, data)
+            except asyncio.CancelledError:
+                raise
+            except Exception as exc:
+                _, error = _public_error(exc)
+                yield encode_sse("error", error)
+        return DisconnectStreamingResponse(events(), media_type="text/event-stream",
+                                 headers={"Cache-Control": "no-cache, no-transform", "X-Accel-Buffering": "no"})
 
     @application.post("/api/speech")
     async def speech(body: SpeechRequest, request: Request):

@@ -260,6 +260,7 @@ class ChatTurn(Record):
     behavior: BehaviorPlan
     grounding: Grounding
     metrics: TurnMetrics
+    context: dict | None = None
 
 
 class SpeechRequest(Record):
