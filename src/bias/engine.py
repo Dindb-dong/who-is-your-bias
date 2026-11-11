@@ -58,7 +58,7 @@ class Engine:
         self.corpus = corpus
         self.retriever = Retriever(corpus)
         self.sessions = SessionStore(ttl=settings.session_ttl, max_sessions=settings.max_sessions, max_turns=settings.max_turns)
-        self.llm = llm or OpenAICompatibleLLM(settings.llm, timeout=settings.request_timeout, max_chars=settings.max_response_chars)
+        self.llm = llm or OpenAICompatibleLLM(settings.llm, timeout=settings.request_timeout, max_chars=settings.max_response_chars, max_tokens=settings.llm_max_tokens)
 
     async def events(self, request: ChatRequest) -> AsyncIterator[tuple[str, dict]]:
         started = time.perf_counter()

@@ -28,16 +28,19 @@ def _status_error(status: int) -> ProviderError:
 
 
 class OpenAICompatibleLLM:
-    def __init__(self, settings: ProviderSettings, *, timeout: float = 60, max_chars: int = 6000, transport: httpx.AsyncBaseTransport | None = None):
+    def __init__(self, settings: ProviderSettings, *, timeout: float = 60, max_chars: int = 6000, max_tokens: int = 900, transport: httpx.AsyncBaseTransport | None = None):
+        if isinstance(max_tokens, bool) or not isinstance(max_tokens, int) or not 1 <= max_tokens <= 4096:
+            raise ValueError("max_tokens must be an integer between 1 and 4096")
         self.settings = settings
         self.timeout = timeout
         self.max_chars = max_chars
+        self.max_tokens = max_tokens
         self.transport = transport
 
     async def stream(self, messages: list[dict[str, str]]) -> AsyncIterator[str]:
         if not self.settings.configured:
             raise ProviderError("provider_unconfigured", "No language model is configured.", 503)
-        payload = {"model": self.settings.model, "messages": messages, "stream": True, "max_tokens": 900}
+        payload = {"model": self.settings.model, "messages": messages, "stream": True, "max_tokens": self.max_tokens}
         # Retry a connection failure once, before receiving any output. Never
         # replay after partial output or automatically repeat a billable request.
         for attempt in range(2):

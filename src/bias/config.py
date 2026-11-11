@@ -57,6 +57,7 @@ class Settings:
     max_turns: int = 12
     retrieval_limit: int = 4
     max_response_chars: int = 6_000
+    llm_max_tokens: int = 900
     cors_origins: tuple[str, ...] = ("http://localhost:5173", "http://127.0.0.1:5173")
 
     @classmethod
@@ -74,6 +75,10 @@ class Settings:
                 raise ValueError(f"{name} must be between {lower} and {upper}")
             return value
 
+        llm_max_tokens = number("BIAS_LLM_MAX_TOKENS", 900, 1, 4096)
+        if not llm_max_tokens.is_integer():
+            raise ValueError("BIAS_LLM_MAX_TOKENS must be an integer")
+
         return cls(
             corpus_dir=Path(os.getenv("BIAS_CORPUS_DIR", str(repository_root() / "data/personas/elon-musk"))),
             web_dir=Path(os.getenv("BIAS_WEB_DIR", str(repository_root() / "apps/web/dist"))),
@@ -86,5 +91,6 @@ class Settings:
             max_sessions=int(number("BIAS_MAX_SESSIONS", 256, 1, 10000)),
             max_turns=int(number("BIAS_MAX_TURNS", 12, 1, 100)),
             retrieval_limit=int(number("BIAS_RETRIEVAL_LIMIT", 4, 1, 10)),
+            llm_max_tokens=int(llm_max_tokens),
             cors_origins=tuple(x.strip() for x in os.getenv("BIAS_CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",") if x.strip()),
         )
