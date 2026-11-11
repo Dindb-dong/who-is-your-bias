@@ -7,6 +7,7 @@ import { disposeObject } from './dispose';
 import type { AvatarRig } from './procedural';
 import type { BoneBinding, BoneControl, FaceWeights, MorphBinding, MorphControl, RigMapping, RigPose, Viseme } from './types';
 import { parseRigMapping } from './validation';
+import { inspectAvatarAsset, sha256Bytes } from './audition';
 
 const MORPH_ALIASES: Partial<Record<MorphControl, string[]>> = {
   eyeBlinkLeft: ['eyeBlink_L', 'blinkLeft'], eyeBlinkRight: ['eyeBlink_R', 'blinkRight'],
@@ -48,6 +49,7 @@ interface ResolvedBone { object: Object3D; baseline: Quaternion; neutral: Quater
 
 export function createRetargetedRig(model: Group, suppliedMapping: RigMapping = {}): AvatarRig {
   const mapping = parseRigMapping(suppliedMapping);
+  const assetInspection = inspectAvatarAsset(model);
   const root = new Group(); root.name = 'retargetedPortrait'; root.add(model);
   const morphs = new Map<MorphControl, ResolvedMorph[]>();
   const visemes = new Map<Viseme, ResolvedMorph[]>();
@@ -56,6 +58,7 @@ export function createRetargetedRig(model: Group, suppliedMapping: RigMapping = 
   const availableMorphs: { mesh: string; target: string; initial: number }[] = [];
   const targetOwners = new Map<string, string[]>();
   const targets = new Map<string, ResolvedMorph>();
+  const resolvedTargets: NonNullable<AvatarRig['diagnostics']['resolvedTargets']> = [];
   model.traverse((object) => {
     if (object !== model) nodes.push(object);
     if (object instanceof Mesh) {
@@ -80,6 +83,8 @@ export function createRetargetedRig(model: Group, suppliedMapping: RigMapping = 
         inputNeutral: binding?.inputNeutral ?? 0, inputMax: binding?.inputMax ?? 1, key };
       found.push(resolved); targets.set(key, resolved);
       targetOwners.set(key, [...(targetOwners.get(key) ?? []), control]);
+      resolvedTargets.push({ control, kind: FACE_CHANNELS.includes(control as MorphControl) ? 'face' : 'viseme', mesh: mesh.name, target: entry[0],
+        scale: resolved.scale, inputNeutral: resolved.inputNeutral, inputMax: resolved.inputMax, outputNeutral: resolved.neutral });
     }
     if (binding && !found.length) warnings.push(`Mapped target for ${control} was not found.`);
     return found;
@@ -153,6 +158,10 @@ export function createRetargetedRig(model: Group, suppliedMapping: RigMapping = 
       missing: [...(['eyeBlinkLeft', 'eyeBlinkRight', 'jawOpen'] as const).filter((name) => !morphs.has(name)), ...(!bones.has('head') ? ['head'] : [])],
       unsupportedFace: FACE_CHANNELS.filter((name) => !morphs.has(name)), unsupportedBones: BONE_CHANNELS.filter((name) => !bones.has(name)),
       availableMorphs, availableNodes: nodes.map((node) => node.name).filter(Boolean), warnings,
+      assetInspection, resolvedMapping: mapping, resolvedTargets,
+      resolvedBones: [...bones].map(([control, binding]) => ({ control, node: binding.object.name, scale: binding.scale,
+        maxAngle: binding.maxAngle, axis: binding.axis, authoredRest: binding.baseline.toArray() as [number, number, number, number],
+        neutral: binding.neutral.toArray() as [number, number, number, number], basis: binding.basis.toArray() as [number, number, number, number] })),
     },
     apply(pose: RigPose) {
       root.position.y = pose.breath;
@@ -226,6 +235,7 @@ async function readBoundedBody(response: Response, signal?: AbortSignal): Promis
 }
 
 export async function loadGlbRig(url: string, mapping: RigMapping, signal?: AbortSignal): Promise<AvatarRig> {
+  const loadStarted = performance.now();
   const target = validateModelUrl(url, window.location.origin);
   const response = await fetch(target, { signal, credentials: 'same-origin' });
   if (!response.ok) throw new Error(`The model could not be loaded (${response.status}).`);
@@ -243,7 +253,13 @@ export async function loadGlbRig(url: string, mapping: RigMapping, signal?: Abor
   try {
     const calibrated = target.pathname === RESEARCH_HUMAN_AVATAR.modelUrl
       ? mergeRigMappings(createResearchHumanMapping(gltf.scene), mapping) : mapping;
-    return createRetargetedRig(gltf.scene, calibrated);
+    const rig = createRetargetedRig(gltf.scene, calibrated);
+    const inspection = rig.diagnostics.assetInspection!;
+    inspection.sha256 = await sha256Bytes(bytes); inspection.bytes = bytes.byteLength;
+    inspection.loadMs = performance.now() - loadStarted;
+    inspection.animations = gltf.animations.map((clip) => ({ name: clip.name, durationSeconds: clip.duration, tracks: clip.tracks.length }));
+    signal?.throwIfAborted();
+    return rig;
   }
   catch (error) { disposeObject(gltf.scene); throw error; }
 }

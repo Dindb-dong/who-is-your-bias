@@ -1,4 +1,5 @@
 import type { BoneControl, BoneRotations, FaceChannel, FaceWeights, QuaternionTuple, Viseme, VisemeWeights } from './channels';
+import type { AssetInspection } from './audition';
 export type { BoneControl, BoneRotations, FaceChannel, FaceWeights, QuaternionTuple, Viseme, VisemeWeights } from './channels';
 
 export type CueChannel = 'face' | 'gaze' | 'head' | 'gesture';
@@ -117,6 +118,13 @@ export interface RigDiagnostics {
   availableMorphs?: { mesh: string; target: string; initial: number }[];
   availableNodes?: string[];
   warnings?: string[];
+  /** Measured decoded geometry. Mapped names and actual deformation are separate. */
+  assetInspection?: AssetInspection;
+  resolvedMapping?: RigMapping;
+  resolvedTargets?: { control: string; kind: 'face' | 'viseme'; mesh: string; target: string;
+    scale?: number; inputNeutral?: number; inputMax?: number; outputNeutral?: number }[];
+  resolvedBones?: { control: BoneControl; node: string; scale: number; maxAngle: number; axis?: 'x' | 'y' | 'z';
+    authoredRest: QuaternionTuple; neutral: QuaternionTuple; basis: QuaternionTuple }[];
 }
 
 export interface SpeechTiming {

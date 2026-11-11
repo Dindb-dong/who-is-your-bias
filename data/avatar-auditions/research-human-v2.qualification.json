@@ -1,0 +1,6655 @@
+{
+  "report": {
+    "schema_version": "avatar-qualification.v1",
+    "asset": {
+      "filename": "research-human-v2.glb",
+      "sha256": "aee550c9cb5b20c6afccfb038c42c2eb8d7aab2c8fb74ca977aefed56f633519",
+      "bytes": 2752352,
+      "generator": "glTF-Transform v4.5.1",
+      "extensions_required": [
+        "EXT_meshopt_compression",
+        "EXT_texture_webp",
+        "KHR_mesh_quantization"
+      ]
+    },
+    "provenance": {
+      "status": "project_authored",
+      "creator": "MakeHuman/MPFB contributors; project-authored assembly and calibration",
+      "source_url": "https://github.com/Dindb-dong/who-is-your-bias/blob/main/docs/humanoid-avatar.md",
+      "license": "CC0-1.0 graphical inputs; MPFB executable build tool has a separate GPL-3.0 license",
+      "license_sha256": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c",
+      "source_input_manifest_sha256": "408aa0191f665fe1b375ce0b7b91eb1a4ffaa95a4e47099cef91343adb0ec25c",
+      "permitted_distribution": "bundled",
+      "appearance_reference_period": "none; authored generic anatomical proxy",
+      "identity_claim": "No verified Elon Musk likeness or 2026 appearance",
+      "verification_basis": "operator_supplied_record"
+    },
+    "measurement": {
+      "decoder": "gltf-transform 4.5.1 / meshoptimizer 1.2.0",
+      "tool_sha256": "9e41fed1cf3baa03625c8a36c1aa95c3126675688804a07b23c4f94959026a43",
+      "dependency_lock_sha256": "33635a13096af63519d546fcdb5de2672b1bef348a4cc0cfe3ec4a5a31b643cd",
+      "basis": "actual decoded GLB accessors; morph displacement in mesh-local units",
+      "meshes": [
+        {
+          "index": 0,
+          "name": "base.001",
+          "primitives": [
+            {
+              "index": 0,
+              "mode": 4,
+              "vertices": 11072,
+              "triangles": 20028,
+              "invalid_position_vertices": 0,
+              "material": "Skin",
+              "morphs": [
+                {
+                  "name": "browDownLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.007459325570602677,
+                  "moved_vertices": 516
+                },
+                {
+                  "name": "browDownRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.007459325570602677,
+                  "moved_vertices": 516
+                },
+                {
+                  "name": "browInnerUp",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.005584887234107486,
+                  "moved_vertices": 575
+                },
+                {
+                  "name": "browOuterUpLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.007465191734562938,
+                  "moved_vertices": 352
+                },
+                {
+                  "name": "browOuterUpRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.007465191734562938,
+                  "moved_vertices": 352
+                },
+                {
+                  "name": "cheekPuff",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.015211969339812906,
+                  "moved_vertices": 2042
+                },
+                {
+                  "name": "cheekSquintLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.009611586411905,
+                  "moved_vertices": 666
+                },
+                {
+                  "name": "cheekSquintRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.009611586411905,
+                  "moved_vertices": 666
+                },
+                {
+                  "name": "eyeBlinkLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.013535019163735298,
+                  "moved_vertices": 747
+                },
+                {
+                  "name": "eyeBlinkRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.013535019163735298,
+                  "moved_vertices": 747
+                },
+                {
+                  "name": "eyeLookDownLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.004005256438861762,
+                  "moved_vertices": 388
+                },
+                {
+                  "name": "eyeLookDownRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.004005256438861762,
+                  "moved_vertices": 388
+                },
+                {
+                  "name": "eyeLookInLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0010751008608544288,
+                  "moved_vertices": 350
+                },
+                {
+                  "name": "eyeLookInRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0010751008608544288,
+                  "moved_vertices": 350
+                },
+                {
+                  "name": "eyeLookOutLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0010751008608544288,
+                  "moved_vertices": 350
+                },
+                {
+                  "name": "eyeLookOutRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0010751008608544288,
+                  "moved_vertices": 350
+                },
+                {
+                  "name": "eyeLookUpLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0027692919942687863,
+                  "moved_vertices": 739
+                },
+                {
+                  "name": "eyeLookUpRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0027692919942687863,
+                  "moved_vertices": 738
+                },
+                {
+                  "name": "eyeSquintLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.003803566292408643,
+                  "moved_vertices": 405
+                },
+                {
+                  "name": "eyeSquintRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.003803566292408643,
+                  "moved_vertices": 405
+                },
+                {
+                  "name": "eyeWideLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0038962229372758953,
+                  "moved_vertices": 368
+                },
+                {
+                  "name": "eyeWideRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0038962229372758953,
+                  "moved_vertices": 368
+                },
+                {
+                  "name": "jawForward",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.009267280959207747,
+                  "moved_vertices": 2002
+                },
+                {
+                  "name": "jawLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.008633772092847023,
+                  "moved_vertices": 1881
+                },
+                {
+                  "name": "jawOpen",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.04153537746534996,
+                  "moved_vertices": 2329
+                },
+                {
+                  "name": "jawRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.008633772092847023,
+                  "moved_vertices": 1881
+                },
+                {
+                  "name": "mouthClose",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.03852936137364927,
+                  "moved_vertices": 2034
+                },
+                {
+                  "name": "mouthDimpleLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.008471786516126949,
+                  "moved_vertices": 969
+                },
+                {
+                  "name": "mouthDimpleRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.008471786516126949,
+                  "moved_vertices": 969
+                },
+                {
+                  "name": "mouthFrownLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.007165028518120885,
+                  "moved_vertices": 863
+                },
+                {
+                  "name": "mouthFrownRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.007165028518120885,
+                  "moved_vertices": 863
+                },
+                {
+                  "name": "mouthFunnel",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.011732332811357347,
+                  "moved_vertices": 1760
+                },
+                {
+                  "name": "mouthLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.011474513139923764,
+                  "moved_vertices": 1875
+                },
+                {
+                  "name": "mouthLowerDownLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.005277761299355695,
+                  "moved_vertices": 343
+                },
+                {
+                  "name": "mouthLowerDownRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.005277761299355695,
+                  "moved_vertices": 343
+                },
+                {
+                  "name": "mouthPressLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.008677781336108024,
+                  "moved_vertices": 1152
+                },
+                {
+                  "name": "mouthPressRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.008677781336108024,
+                  "moved_vertices": 1152
+                },
+                {
+                  "name": "mouthPucker",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.009348432692016719,
+                  "moved_vertices": 1770
+                },
+                {
+                  "name": "mouthRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.011474513139923764,
+                  "moved_vertices": 1875
+                },
+                {
+                  "name": "mouthRollLower",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00782113842155638,
+                  "moved_vertices": 563
+                },
+                {
+                  "name": "mouthRollUpper",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.011366987475407219,
+                  "moved_vertices": 975
+                },
+                {
+                  "name": "mouthShrugLower",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.007447079132237163,
+                  "moved_vertices": 380
+                },
+                {
+                  "name": "mouthShrugUpper",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.005692499697214411,
+                  "moved_vertices": 861
+                },
+                {
+                  "name": "mouthSmileLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.020043273606937948,
+                  "moved_vertices": 1685
+                },
+                {
+                  "name": "mouthSmileRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.019360524846126697,
+                  "moved_vertices": 1686
+                },
+                {
+                  "name": "mouthStretchLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.009272455362913323,
+                  "moved_vertices": 1220
+                },
+                {
+                  "name": "mouthStretchRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.009272455362913323,
+                  "moved_vertices": 1220
+                },
+                {
+                  "name": "mouthUpperUpLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.006388946273746289,
+                  "moved_vertices": 898
+                },
+                {
+                  "name": "mouthUpperUpRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.006388946273746289,
+                  "moved_vertices": 898
+                },
+                {
+                  "name": "noseSneerLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0051779937603152635,
+                  "moved_vertices": 1068
+                },
+                {
+                  "name": "noseSneerRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0051779937603152635,
+                  "moved_vertices": 1068
+                },
+                {
+                  "name": "viseme_CH",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.008042828787278076,
+                  "moved_vertices": 1472
+                },
+                {
+                  "name": "viseme_DD",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.005356759148066196,
+                  "moved_vertices": 1393
+                },
+                {
+                  "name": "viseme_E",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0062639565956810195,
+                  "moved_vertices": 2253
+                },
+                {
+                  "name": "viseme_FF",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.005770581290131686,
+                  "moved_vertices": 1575
+                },
+                {
+                  "name": "viseme_I",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.009716108033409132,
+                  "moved_vertices": 1622
+                },
+                {
+                  "name": "viseme_O",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.007510840174609896,
+                  "moved_vertices": 2037
+                },
+                {
+                  "name": "viseme_PP",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.007757706661369071,
+                  "moved_vertices": 1678
+                },
+                {
+                  "name": "viseme_RR",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.006253465258100184,
+                  "moved_vertices": 1526
+                },
+                {
+                  "name": "viseme_SS",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.005210538370605753,
+                  "moved_vertices": 1970
+                },
+                {
+                  "name": "viseme_TH",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.003061753397761923,
+                  "moved_vertices": 1400
+                },
+                {
+                  "name": "viseme_U",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0047735865871788,
+                  "moved_vertices": 1423
+                },
+                {
+                  "name": "viseme_aa",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.019470067594426477,
+                  "moved_vertices": 2218
+                },
+                {
+                  "name": "viseme_kk",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.007778928008328357,
+                  "moved_vertices": 1879
+                },
+                {
+                  "name": "viseme_nn",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0062269726223856195,
+                  "moved_vertices": 1911
+                },
+                {
+                  "name": "viseme_sil",
+                  "status": "zero",
+                  "max_displacement_local_units": 0,
+                  "moved_vertices": 0
+                }
+              ],
+              "skin_weights": {
+                "sets": 1,
+                "zero_weight_vertices": 0,
+                "non_unit_weight_vertices": 0,
+                "invalid_weight_vertices": 0
+              }
+            }
+          ]
+        },
+        {
+          "index": 1,
+          "name": "eyebrow001",
+          "primitives": [
+            {
+              "index": 0,
+              "mode": 4,
+              "vertices": 124,
+              "triangles": 192,
+              "invalid_position_vertices": 0,
+              "material": "Brows",
+              "morphs": [
+                {
+                  "name": "browDownLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.006488324114343486,
+                  "moved_vertices": 72
+                },
+                {
+                  "name": "browDownRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.006488324114343486,
+                  "moved_vertices": 72
+                },
+                {
+                  "name": "browInnerUp",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.004980598306351693,
+                  "moved_vertices": 98
+                },
+                {
+                  "name": "browOuterUpLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.007370330611933565,
+                  "moved_vertices": 52
+                },
+                {
+                  "name": "browOuterUpRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.007370330611933565,
+                  "moved_vertices": 52
+                },
+                {
+                  "name": "cheekPuff",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0003636700121406593,
+                  "moved_vertices": 14
+                },
+                {
+                  "name": "cheekSquintLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.001324306403012002,
+                  "moved_vertices": 49
+                },
+                {
+                  "name": "cheekSquintRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.001324306403012002,
+                  "moved_vertices": 49
+                },
+                {
+                  "name": "eyeBlinkLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.004233611409981954,
+                  "moved_vertices": 23
+                },
+                {
+                  "name": "eyeBlinkRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.004233611409981954,
+                  "moved_vertices": 23
+                },
+                {
+                  "name": "eyeLookDownLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0011024745547769672,
+                  "moved_vertices": 12
+                },
+                {
+                  "name": "eyeLookDownRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0011024745547769672,
+                  "moved_vertices": 12
+                },
+                {
+                  "name": "eyeLookInLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00027466658528397473,
+                  "moved_vertices": 8
+                },
+                {
+                  "name": "eyeLookInRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00027466658528397473,
+                  "moved_vertices": 8
+                },
+                {
+                  "name": "eyeLookOutLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0002763568571470509,
+                  "moved_vertices": 8
+                },
+                {
+                  "name": "eyeLookOutRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0002763568571470509,
+                  "moved_vertices": 8
+                },
+                {
+                  "name": "eyeLookUpLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0009037808096536665,
+                  "moved_vertices": 22
+                },
+                {
+                  "name": "eyeLookUpRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0009037808096536665,
+                  "moved_vertices": 22
+                },
+                {
+                  "name": "eyeSquintLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00022217810264230835,
+                  "moved_vertices": 4
+                },
+                {
+                  "name": "eyeSquintRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00022217810264230835,
+                  "moved_vertices": 4
+                },
+                {
+                  "name": "eyeWideLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.001642621740262812,
+                  "moved_vertices": 27
+                },
+                {
+                  "name": "eyeWideRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.001642621740262812,
+                  "moved_vertices": 27
+                },
+                {
+                  "name": "jawForward",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0001258310381059499,
+                  "moved_vertices": 12
+                },
+                {
+                  "name": "jawOpen",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0004506003924751549,
+                  "moved_vertices": 14
+                },
+                {
+                  "name": "mouthClose",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0002460480894893811,
+                  "moved_vertices": 12
+                },
+                {
+                  "name": "mouthFrownLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00012207403790398877,
+                  "moved_vertices": 6
+                },
+                {
+                  "name": "mouthFrownRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00012207403790398877,
+                  "moved_vertices": 6
+                },
+                {
+                  "name": "mouthLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00021362956633198035,
+                  "moved_vertices": 12
+                },
+                {
+                  "name": "mouthPucker",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0001726387600174682,
+                  "moved_vertices": 12
+                },
+                {
+                  "name": "mouthRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00021362956633198035,
+                  "moved_vertices": 12
+                },
+                {
+                  "name": "mouthSmileLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00044644730485939493,
+                  "moved_vertices": 9
+                },
+                {
+                  "name": "mouthSmileRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00044644730485939493,
+                  "moved_vertices": 9
+                },
+                {
+                  "name": "mouthStretchLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00012207403790398877,
+                  "moved_vertices": 6
+                },
+                {
+                  "name": "mouthStretchRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00012207403790398877,
+                  "moved_vertices": 6
+                },
+                {
+                  "name": "noseSneerLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.004433804848138363,
+                  "moved_vertices": 62
+                },
+                {
+                  "name": "noseSneerRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.004433804848138363,
+                  "moved_vertices": 62
+                },
+                {
+                  "name": "viseme_E",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00016434720319634098,
+                  "moved_vertices": 12
+                },
+                {
+                  "name": "viseme_I",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0001726387600174682,
+                  "moved_vertices": 12
+                },
+                {
+                  "name": "viseme_O",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0001258310381059499,
+                  "moved_vertices": 12
+                },
+                {
+                  "name": "viseme_SS",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0001258310381059499,
+                  "moved_vertices": 12
+                },
+                {
+                  "name": "viseme_aa",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00023242204369835226,
+                  "moved_vertices": 12
+                },
+                {
+                  "name": "viseme_kk",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0001258310381059499,
+                  "moved_vertices": 12
+                }
+              ],
+              "skin_weights": {
+                "sets": 1,
+                "zero_weight_vertices": 0,
+                "non_unit_weight_vertices": 0,
+                "invalid_weight_vertices": 0
+              }
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "name": "high-poly",
+          "primitives": [
+            {
+              "index": 0,
+              "mode": 4,
+              "vertices": 1076,
+              "triangles": 2040,
+              "invalid_position_vertices": 0,
+              "material": "Eyes",
+              "morphs": [
+                {
+                  "name": "eyeLookDownLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00554664989182352,
+                  "moved_vertices": 544
+                },
+                {
+                  "name": "eyeLookDownRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00554664989182352,
+                  "moved_vertices": 532
+                },
+                {
+                  "name": "eyeLookInLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.006823463727288375,
+                  "moved_vertices": 544
+                },
+                {
+                  "name": "eyeLookInRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.006823463727288375,
+                  "moved_vertices": 532
+                },
+                {
+                  "name": "eyeLookOutLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00667351255011759,
+                  "moved_vertices": 544
+                },
+                {
+                  "name": "eyeLookOutRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00667351255011759,
+                  "moved_vertices": 532
+                },
+                {
+                  "name": "eyeLookUpLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0033886541394818953,
+                  "moved_vertices": 544
+                },
+                {
+                  "name": "eyeLookUpRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.003399767434707754,
+                  "moved_vertices": 532
+                }
+              ],
+              "skin_weights": {
+                "sets": 1,
+                "zero_weight_vertices": 0,
+                "non_unit_weight_vertices": 0,
+                "invalid_weight_vertices": 0
+              }
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "name": "male_casualsuit01",
+          "primitives": [
+            {
+              "index": 0,
+              "mode": 4,
+              "vertices": 8864,
+              "triangles": 16672,
+              "invalid_position_vertices": 0,
+              "material": "Clothes",
+              "morphs": [],
+              "skin_weights": {
+                "sets": 1,
+                "zero_weight_vertices": 0,
+                "non_unit_weight_vertices": 0,
+                "invalid_weight_vertices": 0
+              }
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "name": "short01",
+          "primitives": [
+            {
+              "index": 0,
+              "mode": 4,
+              "vertices": 3050,
+              "triangles": 3678,
+              "invalid_position_vertices": 0,
+              "material": "Hair",
+              "morphs": [
+                {
+                  "name": "browDownLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0014239427652562888,
+                  "moved_vertices": 152
+                },
+                {
+                  "name": "browDownRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0013267656556464832,
+                  "moved_vertices": 161
+                },
+                {
+                  "name": "browOuterUpLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0007183204013757634,
+                  "moved_vertices": 3
+                },
+                {
+                  "name": "browOuterUpRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0008080204043625432,
+                  "moved_vertices": 3
+                },
+                {
+                  "name": "cheekPuff",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0015471409473722436,
+                  "moved_vertices": 9
+                },
+                {
+                  "name": "cheekSquintLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.002165094137459999,
+                  "moved_vertices": 11
+                },
+                {
+                  "name": "cheekSquintRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0019316070923119796,
+                  "moved_vertices": 11
+                },
+                {
+                  "name": "jawForward",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00028791104257504816,
+                  "moved_vertices": 4
+                },
+                {
+                  "name": "jawLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00020243689018557696,
+                  "moved_vertices": 2
+                },
+                {
+                  "name": "jawOpen",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0015742936950625852,
+                  "moved_vertices": 17
+                },
+                {
+                  "name": "jawRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00020243689018557696,
+                  "moved_vertices": 2
+                },
+                {
+                  "name": "mouthClose",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.001400197729051114,
+                  "moved_vertices": 16
+                },
+                {
+                  "name": "mouthDimpleLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0005442229834933624,
+                  "moved_vertices": 2
+                },
+                {
+                  "name": "mouthDimpleRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0004708166332145608,
+                  "moved_vertices": 2
+                },
+                {
+                  "name": "mouthFrownLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0001954138077160817,
+                  "moved_vertices": 2
+                },
+                {
+                  "name": "mouthFrownRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00018311105685598315,
+                  "moved_vertices": 2
+                },
+                {
+                  "name": "mouthFunnel",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0001779519606569201,
+                  "moved_vertices": 4
+                },
+                {
+                  "name": "mouthLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00075127620014595,
+                  "moved_vertices": 7
+                },
+                {
+                  "name": "mouthPressLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00041509660660833897,
+                  "moved_vertices": 3
+                },
+                {
+                  "name": "mouthPressRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00037749311431784974,
+                  "moved_vertices": 3
+                },
+                {
+                  "name": "mouthPucker",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0004986765538001096,
+                  "moved_vertices": 5
+                },
+                {
+                  "name": "mouthRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00064451161479363,
+                  "moved_vertices": 5
+                },
+                {
+                  "name": "mouthSmileLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0009084063885090009,
+                  "moved_vertices": 5
+                },
+                {
+                  "name": "mouthSmileRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0008108969545937328,
+                  "moved_vertices": 3
+                },
+                {
+                  "name": "mouthStretchLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0001779519606569201,
+                  "moved_vertices": 1
+                },
+                {
+                  "name": "mouthStretchRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00014950955185297267,
+                  "moved_vertices": 1
+                },
+                {
+                  "name": "noseSneerLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00027466658528397473,
+                  "moved_vertices": 66
+                },
+                {
+                  "name": "noseSneerRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00027466658528397473,
+                  "moved_vertices": 59
+                },
+                {
+                  "name": "viseme_E",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0003687565530440557,
+                  "moved_vertices": 6
+                },
+                {
+                  "name": "viseme_FF",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0003506309791276607,
+                  "moved_vertices": 4
+                },
+                {
+                  "name": "viseme_I",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0006003697492265389,
+                  "moved_vertices": 5
+                },
+                {
+                  "name": "viseme_O",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0005442229834933625,
+                  "moved_vertices": 4
+                },
+                {
+                  "name": "viseme_PP",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0001726387600174682,
+                  "moved_vertices": 6
+                },
+                {
+                  "name": "viseme_RR",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0003598079202414502,
+                  "moved_vertices": 4
+                },
+                {
+                  "name": "viseme_SS",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0002780368535155583,
+                  "moved_vertices": 6
+                },
+                {
+                  "name": "viseme_U",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00024980476613276927,
+                  "moved_vertices": 4
+                },
+                {
+                  "name": "viseme_aa",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0005152117379111341,
+                  "moved_vertices": 12
+                },
+                {
+                  "name": "viseme_kk",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00045980770816124043,
+                  "moved_vertices": 5
+                },
+                {
+                  "name": "viseme_nn",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0001779519606569201,
+                  "moved_vertices": 4
+                }
+              ],
+              "skin_weights": {
+                "sets": 1,
+                "zero_weight_vertices": 0,
+                "non_unit_weight_vertices": 0,
+                "invalid_weight_vertices": 0
+              }
+            }
+          ]
+        },
+        {
+          "index": 5,
+          "name": "teeth_base",
+          "primitives": [
+            {
+              "index": 0,
+              "mode": 4,
+              "vertices": 4494,
+              "triangles": 7120,
+              "invalid_position_vertices": 0,
+              "material": "Teeth",
+              "morphs": [
+                {
+                  "name": "jawForward",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.009985104116647924,
+                  "moved_vertices": 2180
+                },
+                {
+                  "name": "jawLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.009375989440917665,
+                  "moved_vertices": 2180
+                },
+                {
+                  "name": "jawOpen",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.03584054305183716,
+                  "moved_vertices": 2180
+                },
+                {
+                  "name": "jawRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.009375989440917665,
+                  "moved_vertices": 2180
+                },
+                {
+                  "name": "viseme_DD",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0009770690385804085,
+                  "moved_vertices": 2180
+                },
+                {
+                  "name": "viseme_E",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.002445483032021928,
+                  "moved_vertices": 2180
+                },
+                {
+                  "name": "viseme_O",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.004570955539396471,
+                  "moved_vertices": 2180
+                },
+                {
+                  "name": "viseme_PP",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.004239766835367841,
+                  "moved_vertices": 2180
+                },
+                {
+                  "name": "viseme_TH",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0017188180596732962,
+                  "moved_vertices": 2180
+                },
+                {
+                  "name": "viseme_aa",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.018018356468471327,
+                  "moved_vertices": 2180
+                },
+                {
+                  "name": "viseme_kk",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.001692058018815163,
+                  "moved_vertices": 2180
+                },
+                {
+                  "name": "viseme_nn",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0009770690385804085,
+                  "moved_vertices": 2180
+                }
+              ],
+              "skin_weights": {
+                "sets": 1,
+                "zero_weight_vertices": 0,
+                "non_unit_weight_vertices": 0,
+                "invalid_weight_vertices": 0
+              }
+            }
+          ]
+        },
+        {
+          "index": 6,
+          "name": "tongue01",
+          "primitives": [
+            {
+              "index": 0,
+              "mode": 4,
+              "vertices": 253,
+              "triangles": 448,
+              "invalid_position_vertices": 0,
+              "material": "Tongue",
+              "morphs": [
+                {
+                  "name": "jawForward",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.010080629100803646,
+                  "moved_vertices": 253
+                },
+                {
+                  "name": "jawLeft",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.009485464995020053,
+                  "moved_vertices": 253
+                },
+                {
+                  "name": "jawOpen",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.033670879397867844,
+                  "moved_vertices": 253
+                },
+                {
+                  "name": "jawRight",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.009485464995020053,
+                  "moved_vertices": 253
+                },
+                {
+                  "name": "tongueOut",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.03285261908229053,
+                  "moved_vertices": 253
+                },
+                {
+                  "name": "viseme_DD",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0009017173804555899,
+                  "moved_vertices": 253
+                },
+                {
+                  "name": "viseme_E",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.005089642013556927,
+                  "moved_vertices": 253
+                },
+                {
+                  "name": "viseme_O",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.004485390380465194,
+                  "moved_vertices": 253
+                },
+                {
+                  "name": "viseme_PP",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.00414119418431211,
+                  "moved_vertices": 253
+                },
+                {
+                  "name": "viseme_TH",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0016718461775325586,
+                  "moved_vertices": 253
+                },
+                {
+                  "name": "viseme_aa",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.016968401047110393,
+                  "moved_vertices": 253
+                },
+                {
+                  "name": "viseme_kk",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0016177688870752367,
+                  "moved_vertices": 253
+                },
+                {
+                  "name": "viseme_nn",
+                  "status": "deforms",
+                  "max_displacement_local_units": 0.0009017173804555899,
+                  "moved_vertices": 253
+                }
+              ],
+              "skin_weights": {
+                "sets": 1,
+                "zero_weight_vertices": 0,
+                "non_unit_weight_vertices": 0,
+                "invalid_weight_vertices": 0
+              }
+            }
+          ]
+        }
+      ],
+      "skins": [
+        {
+          "index": 0,
+          "name": "ResearchHumanRig",
+          "joints": [
+            "root",
+            "pelvis.L",
+            "upperleg01.L",
+            "upperleg02.L",
+            "lowerleg01.L",
+            "lowerleg02.L",
+            "foot.L",
+            "toe1-1.L",
+            "toe1-2.L",
+            "toe2-1.L",
+            "toe2-2.L",
+            "toe2-3.L",
+            "toe3-1.L",
+            "toe3-2.L",
+            "toe3-3.L",
+            "toe4-1.L",
+            "toe4-2.L",
+            "toe4-3.L",
+            "toe5-1.L",
+            "toe5-2.L",
+            "toe5-3.L",
+            "pelvis.R",
+            "upperleg01.R",
+            "upperleg02.R",
+            "lowerleg01.R",
+            "lowerleg02.R",
+            "foot.R",
+            "toe1-1.R",
+            "toe1-2.R",
+            "toe2-1.R",
+            "toe2-2.R",
+            "toe2-3.R",
+            "toe3-1.R",
+            "toe3-2.R",
+            "toe3-3.R",
+            "toe4-1.R",
+            "toe4-2.R",
+            "toe4-3.R",
+            "toe5-1.R",
+            "toe5-2.R",
+            "toe5-3.R",
+            "spine05",
+            "spine04",
+            "spine03",
+            "spine02",
+            "breast.L",
+            "breast.R",
+            "spine01",
+            "clavicle.L",
+            "shoulder01.L",
+            "upperarm01.L",
+            "upperarm02.L",
+            "lowerarm01.L",
+            "lowerarm02.L",
+            "wrist.L",
+            "finger1-1.L",
+            "finger1-2.L",
+            "finger1-3.L",
+            "metacarpal1.L",
+            "finger2-1.L",
+            "finger2-2.L",
+            "finger2-3.L",
+            "metacarpal2.L",
+            "finger3-1.L",
+            "finger3-2.L",
+            "finger3-3.L",
+            "metacarpal3.L",
+            "finger4-1.L",
+            "finger4-2.L",
+            "finger4-3.L",
+            "metacarpal4.L",
+            "finger5-1.L",
+            "finger5-2.L",
+            "finger5-3.L",
+            "clavicle.R",
+            "shoulder01.R",
+            "upperarm01.R",
+            "upperarm02.R",
+            "lowerarm01.R",
+            "lowerarm02.R",
+            "wrist.R",
+            "finger1-1.R",
+            "finger1-2.R",
+            "finger1-3.R",
+            "metacarpal1.R",
+            "finger2-1.R",
+            "finger2-2.R",
+            "finger2-3.R",
+            "metacarpal2.R",
+            "finger3-1.R",
+            "finger3-2.R",
+            "finger3-3.R",
+            "metacarpal3.R",
+            "finger4-1.R",
+            "finger4-2.R",
+            "finger4-3.R",
+            "metacarpal4.R",
+            "finger5-1.R",
+            "finger5-2.R",
+            "finger5-3.R",
+            "neck01",
+            "neck02",
+            "neck03",
+            "head",
+            "jaw",
+            "special04",
+            "oris02",
+            "oris01",
+            "oris06.L",
+            "oris07.L",
+            "oris06.R",
+            "oris07.R",
+            "tongue00",
+            "tongue01",
+            "tongue02",
+            "tongue03",
+            "tongue04",
+            "tongue07.L",
+            "tongue07.R",
+            "tongue06.L",
+            "tongue06.R",
+            "tongue05.L",
+            "tongue05.R",
+            "levator02.L",
+            "levator03.L",
+            "levator04.L",
+            "levator05.L",
+            "levator02.R",
+            "levator03.R",
+            "levator04.R",
+            "levator05.R",
+            "special01",
+            "oris04.L",
+            "oris03.L",
+            "oris04.R",
+            "oris03.R",
+            "oris06",
+            "oris05",
+            "special03",
+            "levator06.L",
+            "levator06.R",
+            "special06.L",
+            "special05.L",
+            "eye.L",
+            "orbicularis03.L",
+            "orbicularis04.L",
+            "special06.R",
+            "special05.R",
+            "eye.R",
+            "orbicularis03.R",
+            "orbicularis04.R",
+            "temporalis01.L",
+            "oculi02.L",
+            "oculi01.L",
+            "temporalis01.R",
+            "oculi02.R",
+            "oculi01.R",
+            "temporalis02.L",
+            "risorius02.L",
+            "risorius03.L",
+            "temporalis02.R",
+            "risorius02.R",
+            "risorius03.R"
+          ],
+          "inverse_bind_matrices": 163
+        },
+        {
+          "index": 1,
+          "name": "ResearchHumanRig",
+          "joints": [
+            "root",
+            "pelvis.L",
+            "upperleg01.L",
+            "upperleg02.L",
+            "lowerleg01.L",
+            "lowerleg02.L",
+            "foot.L",
+            "toe1-1.L",
+            "toe1-2.L",
+            "toe2-1.L",
+            "toe2-2.L",
+            "toe2-3.L",
+            "toe3-1.L",
+            "toe3-2.L",
+            "toe3-3.L",
+            "toe4-1.L",
+            "toe4-2.L",
+            "toe4-3.L",
+            "toe5-1.L",
+            "toe5-2.L",
+            "toe5-3.L",
+            "pelvis.R",
+            "upperleg01.R",
+            "upperleg02.R",
+            "lowerleg01.R",
+            "lowerleg02.R",
+            "foot.R",
+            "toe1-1.R",
+            "toe1-2.R",
+            "toe2-1.R",
+            "toe2-2.R",
+            "toe2-3.R",
+            "toe3-1.R",
+            "toe3-2.R",
+            "toe3-3.R",
+            "toe4-1.R",
+            "toe4-2.R",
+            "toe4-3.R",
+            "toe5-1.R",
+            "toe5-2.R",
+            "toe5-3.R",
+            "spine05",
+            "spine04",
+            "spine03",
+            "spine02",
+            "breast.L",
+            "breast.R",
+            "spine01",
+            "clavicle.L",
+            "shoulder01.L",
+            "upperarm01.L",
+            "upperarm02.L",
+            "lowerarm01.L",
+            "lowerarm02.L",
+            "wrist.L",
+            "finger1-1.L",
+            "finger1-2.L",
+            "finger1-3.L",
+            "metacarpal1.L",
+            "finger2-1.L",
+            "finger2-2.L",
+            "finger2-3.L",
+            "metacarpal2.L",
+            "finger3-1.L",
+            "finger3-2.L",
+            "finger3-3.L",
+            "metacarpal3.L",
+            "finger4-1.L",
+            "finger4-2.L",
+            "finger4-3.L",
+            "metacarpal4.L",
+            "finger5-1.L",
+            "finger5-2.L",
+            "finger5-3.L",
+            "clavicle.R",
+            "shoulder01.R",
+            "upperarm01.R",
+            "upperarm02.R",
+            "lowerarm01.R",
+            "lowerarm02.R",
+            "wrist.R",
+            "finger1-1.R",
+            "finger1-2.R",
+            "finger1-3.R",
+            "metacarpal1.R",
+            "finger2-1.R",
+            "finger2-2.R",
+            "finger2-3.R",
+            "metacarpal2.R",
+            "finger3-1.R",
+            "finger3-2.R",
+            "finger3-3.R",
+            "metacarpal3.R",
+            "finger4-1.R",
+            "finger4-2.R",
+            "finger4-3.R",
+            "metacarpal4.R",
+            "finger5-1.R",
+            "finger5-2.R",
+            "finger5-3.R",
+            "neck01",
+            "neck02",
+            "neck03",
+            "head",
+            "jaw",
+            "special04",
+            "oris02",
+            "oris01",
+            "oris06.L",
+            "oris07.L",
+            "oris06.R",
+            "oris07.R",
+            "tongue00",
+            "tongue01",
+            "tongue02",
+            "tongue03",
+            "tongue04",
+            "tongue07.L",
+            "tongue07.R",
+            "tongue06.L",
+            "tongue06.R",
+            "tongue05.L",
+            "tongue05.R",
+            "levator02.L",
+            "levator03.L",
+            "levator04.L",
+            "levator05.L",
+            "levator02.R",
+            "levator03.R",
+            "levator04.R",
+            "levator05.R",
+            "special01",
+            "oris04.L",
+            "oris03.L",
+            "oris04.R",
+            "oris03.R",
+            "oris06",
+            "oris05",
+            "special03",
+            "levator06.L",
+            "levator06.R",
+            "special06.L",
+            "special05.L",
+            "eye.L",
+            "orbicularis03.L",
+            "orbicularis04.L",
+            "special06.R",
+            "special05.R",
+            "eye.R",
+            "orbicularis03.R",
+            "orbicularis04.R",
+            "temporalis01.L",
+            "oculi02.L",
+            "oculi01.L",
+            "temporalis01.R",
+            "oculi02.R",
+            "oculi01.R",
+            "temporalis02.L",
+            "risorius02.L",
+            "risorius03.L",
+            "temporalis02.R",
+            "risorius02.R",
+            "risorius03.R"
+          ],
+          "inverse_bind_matrices": 163
+        },
+        {
+          "index": 2,
+          "name": "ResearchHumanRig",
+          "joints": [
+            "root",
+            "pelvis.L",
+            "upperleg01.L",
+            "upperleg02.L",
+            "lowerleg01.L",
+            "lowerleg02.L",
+            "foot.L",
+            "toe1-1.L",
+            "toe1-2.L",
+            "toe2-1.L",
+            "toe2-2.L",
+            "toe2-3.L",
+            "toe3-1.L",
+            "toe3-2.L",
+            "toe3-3.L",
+            "toe4-1.L",
+            "toe4-2.L",
+            "toe4-3.L",
+            "toe5-1.L",
+            "toe5-2.L",
+            "toe5-3.L",
+            "pelvis.R",
+            "upperleg01.R",
+            "upperleg02.R",
+            "lowerleg01.R",
+            "lowerleg02.R",
+            "foot.R",
+            "toe1-1.R",
+            "toe1-2.R",
+            "toe2-1.R",
+            "toe2-2.R",
+            "toe2-3.R",
+            "toe3-1.R",
+            "toe3-2.R",
+            "toe3-3.R",
+            "toe4-1.R",
+            "toe4-2.R",
+            "toe4-3.R",
+            "toe5-1.R",
+            "toe5-2.R",
+            "toe5-3.R",
+            "spine05",
+            "spine04",
+            "spine03",
+            "spine02",
+            "breast.L",
+            "breast.R",
+            "spine01",
+            "clavicle.L",
+            "shoulder01.L",
+            "upperarm01.L",
+            "upperarm02.L",
+            "lowerarm01.L",
+            "lowerarm02.L",
+            "wrist.L",
+            "finger1-1.L",
+            "finger1-2.L",
+            "finger1-3.L",
+            "metacarpal1.L",
+            "finger2-1.L",
+            "finger2-2.L",
+            "finger2-3.L",
+            "metacarpal2.L",
+            "finger3-1.L",
+            "finger3-2.L",
+            "finger3-3.L",
+            "metacarpal3.L",
+            "finger4-1.L",
+            "finger4-2.L",
+            "finger4-3.L",
+            "metacarpal4.L",
+            "finger5-1.L",
+            "finger5-2.L",
+            "finger5-3.L",
+            "clavicle.R",
+            "shoulder01.R",
+            "upperarm01.R",
+            "upperarm02.R",
+            "lowerarm01.R",
+            "lowerarm02.R",
+            "wrist.R",
+            "finger1-1.R",
+            "finger1-2.R",
+            "finger1-3.R",
+            "metacarpal1.R",
+            "finger2-1.R",
+            "finger2-2.R",
+            "finger2-3.R",
+            "metacarpal2.R",
+            "finger3-1.R",
+            "finger3-2.R",
+            "finger3-3.R",
+            "metacarpal3.R",
+            "finger4-1.R",
+            "finger4-2.R",
+            "finger4-3.R",
+            "metacarpal4.R",
+            "finger5-1.R",
+            "finger5-2.R",
+            "finger5-3.R",
+            "neck01",
+            "neck02",
+            "neck03",
+            "head",
+            "jaw",
+            "special04",
+            "oris02",
+            "oris01",
+            "oris06.L",
+            "oris07.L",
+            "oris06.R",
+            "oris07.R",
+            "tongue00",
+            "tongue01",
+            "tongue02",
+            "tongue03",
+            "tongue04",
+            "tongue07.L",
+            "tongue07.R",
+            "tongue06.L",
+            "tongue06.R",
+            "tongue05.L",
+            "tongue05.R",
+            "levator02.L",
+            "levator03.L",
+            "levator04.L",
+            "levator05.L",
+            "levator02.R",
+            "levator03.R",
+            "levator04.R",
+            "levator05.R",
+            "special01",
+            "oris04.L",
+            "oris03.L",
+            "oris04.R",
+            "oris03.R",
+            "oris06",
+            "oris05",
+            "special03",
+            "levator06.L",
+            "levator06.R",
+            "special06.L",
+            "special05.L",
+            "eye.L",
+            "orbicularis03.L",
+            "orbicularis04.L",
+            "special06.R",
+            "special05.R",
+            "eye.R",
+            "orbicularis03.R",
+            "orbicularis04.R",
+            "temporalis01.L",
+            "oculi02.L",
+            "oculi01.L",
+            "temporalis01.R",
+            "oculi02.R",
+            "oculi01.R",
+            "temporalis02.L",
+            "risorius02.L",
+            "risorius03.L",
+            "temporalis02.R",
+            "risorius02.R",
+            "risorius03.R"
+          ],
+          "inverse_bind_matrices": 163
+        },
+        {
+          "index": 3,
+          "name": "ResearchHumanRig",
+          "joints": [
+            "root",
+            "pelvis.L",
+            "upperleg01.L",
+            "upperleg02.L",
+            "lowerleg01.L",
+            "lowerleg02.L",
+            "foot.L",
+            "toe1-1.L",
+            "toe1-2.L",
+            "toe2-1.L",
+            "toe2-2.L",
+            "toe2-3.L",
+            "toe3-1.L",
+            "toe3-2.L",
+            "toe3-3.L",
+            "toe4-1.L",
+            "toe4-2.L",
+            "toe4-3.L",
+            "toe5-1.L",
+            "toe5-2.L",
+            "toe5-3.L",
+            "pelvis.R",
+            "upperleg01.R",
+            "upperleg02.R",
+            "lowerleg01.R",
+            "lowerleg02.R",
+            "foot.R",
+            "toe1-1.R",
+            "toe1-2.R",
+            "toe2-1.R",
+            "toe2-2.R",
+            "toe2-3.R",
+            "toe3-1.R",
+            "toe3-2.R",
+            "toe3-3.R",
+            "toe4-1.R",
+            "toe4-2.R",
+            "toe4-3.R",
+            "toe5-1.R",
+            "toe5-2.R",
+            "toe5-3.R",
+            "spine05",
+            "spine04",
+            "spine03",
+            "spine02",
+            "breast.L",
+            "breast.R",
+            "spine01",
+            "clavicle.L",
+            "shoulder01.L",
+            "upperarm01.L",
+            "upperarm02.L",
+            "lowerarm01.L",
+            "lowerarm02.L",
+            "wrist.L",
+            "finger1-1.L",
+            "finger1-2.L",
+            "finger1-3.L",
+            "metacarpal1.L",
+            "finger2-1.L",
+            "finger2-2.L",
+            "finger2-3.L",
+            "metacarpal2.L",
+            "finger3-1.L",
+            "finger3-2.L",
+            "finger3-3.L",
+            "metacarpal3.L",
+            "finger4-1.L",
+            "finger4-2.L",
+            "finger4-3.L",
+            "metacarpal4.L",
+            "finger5-1.L",
+            "finger5-2.L",
+            "finger5-3.L",
+            "clavicle.R",
+            "shoulder01.R",
+            "upperarm01.R",
+            "upperarm02.R",
+            "lowerarm01.R",
+            "lowerarm02.R",
+            "wrist.R",
+            "finger1-1.R",
+            "finger1-2.R",
+            "finger1-3.R",
+            "metacarpal1.R",
+            "finger2-1.R",
+            "finger2-2.R",
+            "finger2-3.R",
+            "metacarpal2.R",
+            "finger3-1.R",
+            "finger3-2.R",
+            "finger3-3.R",
+            "metacarpal3.R",
+            "finger4-1.R",
+            "finger4-2.R",
+            "finger4-3.R",
+            "metacarpal4.R",
+            "finger5-1.R",
+            "finger5-2.R",
+            "finger5-3.R",
+            "neck01",
+            "neck02",
+            "neck03",
+            "head",
+            "jaw",
+            "special04",
+            "oris02",
+            "oris01",
+            "oris06.L",
+            "oris07.L",
+            "oris06.R",
+            "oris07.R",
+            "tongue00",
+            "tongue01",
+            "tongue02",
+            "tongue03",
+            "tongue04",
+            "tongue07.L",
+            "tongue07.R",
+            "tongue06.L",
+            "tongue06.R",
+            "tongue05.L",
+            "tongue05.R",
+            "levator02.L",
+            "levator03.L",
+            "levator04.L",
+            "levator05.L",
+            "levator02.R",
+            "levator03.R",
+            "levator04.R",
+            "levator05.R",
+            "special01",
+            "oris04.L",
+            "oris03.L",
+            "oris04.R",
+            "oris03.R",
+            "oris06",
+            "oris05",
+            "special03",
+            "levator06.L",
+            "levator06.R",
+            "special06.L",
+            "special05.L",
+            "eye.L",
+            "orbicularis03.L",
+            "orbicularis04.L",
+            "special06.R",
+            "special05.R",
+            "eye.R",
+            "orbicularis03.R",
+            "orbicularis04.R",
+            "temporalis01.L",
+            "oculi02.L",
+            "oculi01.L",
+            "temporalis01.R",
+            "oculi02.R",
+            "oculi01.R",
+            "temporalis02.L",
+            "risorius02.L",
+            "risorius03.L",
+            "temporalis02.R",
+            "risorius02.R",
+            "risorius03.R"
+          ],
+          "inverse_bind_matrices": 163
+        },
+        {
+          "index": 4,
+          "name": "ResearchHumanRig",
+          "joints": [
+            "root",
+            "pelvis.L",
+            "upperleg01.L",
+            "upperleg02.L",
+            "lowerleg01.L",
+            "lowerleg02.L",
+            "foot.L",
+            "toe1-1.L",
+            "toe1-2.L",
+            "toe2-1.L",
+            "toe2-2.L",
+            "toe2-3.L",
+            "toe3-1.L",
+            "toe3-2.L",
+            "toe3-3.L",
+            "toe4-1.L",
+            "toe4-2.L",
+            "toe4-3.L",
+            "toe5-1.L",
+            "toe5-2.L",
+            "toe5-3.L",
+            "pelvis.R",
+            "upperleg01.R",
+            "upperleg02.R",
+            "lowerleg01.R",
+            "lowerleg02.R",
+            "foot.R",
+            "toe1-1.R",
+            "toe1-2.R",
+            "toe2-1.R",
+            "toe2-2.R",
+            "toe2-3.R",
+            "toe3-1.R",
+            "toe3-2.R",
+            "toe3-3.R",
+            "toe4-1.R",
+            "toe4-2.R",
+            "toe4-3.R",
+            "toe5-1.R",
+            "toe5-2.R",
+            "toe5-3.R",
+            "spine05",
+            "spine04",
+            "spine03",
+            "spine02",
+            "breast.L",
+            "breast.R",
+            "spine01",
+            "clavicle.L",
+            "shoulder01.L",
+            "upperarm01.L",
+            "upperarm02.L",
+            "lowerarm01.L",
+            "lowerarm02.L",
+            "wrist.L",
+            "finger1-1.L",
+            "finger1-2.L",
+            "finger1-3.L",
+            "metacarpal1.L",
+            "finger2-1.L",
+            "finger2-2.L",
+            "finger2-3.L",
+            "metacarpal2.L",
+            "finger3-1.L",
+            "finger3-2.L",
+            "finger3-3.L",
+            "metacarpal3.L",
+            "finger4-1.L",
+            "finger4-2.L",
+            "finger4-3.L",
+            "metacarpal4.L",
+            "finger5-1.L",
+            "finger5-2.L",
+            "finger5-3.L",
+            "clavicle.R",
+            "shoulder01.R",
+            "upperarm01.R",
+            "upperarm02.R",
+            "lowerarm01.R",
+            "lowerarm02.R",
+            "wrist.R",
+            "finger1-1.R",
+            "finger1-2.R",
+            "finger1-3.R",
+            "metacarpal1.R",
+            "finger2-1.R",
+            "finger2-2.R",
+            "finger2-3.R",
+            "metacarpal2.R",
+            "finger3-1.R",
+            "finger3-2.R",
+            "finger3-3.R",
+            "metacarpal3.R",
+            "finger4-1.R",
+            "finger4-2.R",
+            "finger4-3.R",
+            "metacarpal4.R",
+            "finger5-1.R",
+            "finger5-2.R",
+            "finger5-3.R",
+            "neck01",
+            "neck02",
+            "neck03",
+            "head",
+            "jaw",
+            "special04",
+            "oris02",
+            "oris01",
+            "oris06.L",
+            "oris07.L",
+            "oris06.R",
+            "oris07.R",
+            "tongue00",
+            "tongue01",
+            "tongue02",
+            "tongue03",
+            "tongue04",
+            "tongue07.L",
+            "tongue07.R",
+            "tongue06.L",
+            "tongue06.R",
+            "tongue05.L",
+            "tongue05.R",
+            "levator02.L",
+            "levator03.L",
+            "levator04.L",
+            "levator05.L",
+            "levator02.R",
+            "levator03.R",
+            "levator04.R",
+            "levator05.R",
+            "special01",
+            "oris04.L",
+            "oris03.L",
+            "oris04.R",
+            "oris03.R",
+            "oris06",
+            "oris05",
+            "special03",
+            "levator06.L",
+            "levator06.R",
+            "special06.L",
+            "special05.L",
+            "eye.L",
+            "orbicularis03.L",
+            "orbicularis04.L",
+            "special06.R",
+            "special05.R",
+            "eye.R",
+            "orbicularis03.R",
+            "orbicularis04.R",
+            "temporalis01.L",
+            "oculi02.L",
+            "oculi01.L",
+            "temporalis01.R",
+            "oculi02.R",
+            "oculi01.R",
+            "temporalis02.L",
+            "risorius02.L",
+            "risorius03.L",
+            "temporalis02.R",
+            "risorius02.R",
+            "risorius03.R"
+          ],
+          "inverse_bind_matrices": 163
+        },
+        {
+          "index": 5,
+          "name": "ResearchHumanRig",
+          "joints": [
+            "root",
+            "pelvis.L",
+            "upperleg01.L",
+            "upperleg02.L",
+            "lowerleg01.L",
+            "lowerleg02.L",
+            "foot.L",
+            "toe1-1.L",
+            "toe1-2.L",
+            "toe2-1.L",
+            "toe2-2.L",
+            "toe2-3.L",
+            "toe3-1.L",
+            "toe3-2.L",
+            "toe3-3.L",
+            "toe4-1.L",
+            "toe4-2.L",
+            "toe4-3.L",
+            "toe5-1.L",
+            "toe5-2.L",
+            "toe5-3.L",
+            "pelvis.R",
+            "upperleg01.R",
+            "upperleg02.R",
+            "lowerleg01.R",
+            "lowerleg02.R",
+            "foot.R",
+            "toe1-1.R",
+            "toe1-2.R",
+            "toe2-1.R",
+            "toe2-2.R",
+            "toe2-3.R",
+            "toe3-1.R",
+            "toe3-2.R",
+            "toe3-3.R",
+            "toe4-1.R",
+            "toe4-2.R",
+            "toe4-3.R",
+            "toe5-1.R",
+            "toe5-2.R",
+            "toe5-3.R",
+            "spine05",
+            "spine04",
+            "spine03",
+            "spine02",
+            "breast.L",
+            "breast.R",
+            "spine01",
+            "clavicle.L",
+            "shoulder01.L",
+            "upperarm01.L",
+            "upperarm02.L",
+            "lowerarm01.L",
+            "lowerarm02.L",
+            "wrist.L",
+            "finger1-1.L",
+            "finger1-2.L",
+            "finger1-3.L",
+            "metacarpal1.L",
+            "finger2-1.L",
+            "finger2-2.L",
+            "finger2-3.L",
+            "metacarpal2.L",
+            "finger3-1.L",
+            "finger3-2.L",
+            "finger3-3.L",
+            "metacarpal3.L",
+            "finger4-1.L",
+            "finger4-2.L",
+            "finger4-3.L",
+            "metacarpal4.L",
+            "finger5-1.L",
+            "finger5-2.L",
+            "finger5-3.L",
+            "clavicle.R",
+            "shoulder01.R",
+            "upperarm01.R",
+            "upperarm02.R",
+            "lowerarm01.R",
+            "lowerarm02.R",
+            "wrist.R",
+            "finger1-1.R",
+            "finger1-2.R",
+            "finger1-3.R",
+            "metacarpal1.R",
+            "finger2-1.R",
+            "finger2-2.R",
+            "finger2-3.R",
+            "metacarpal2.R",
+            "finger3-1.R",
+            "finger3-2.R",
+            "finger3-3.R",
+            "metacarpal3.R",
+            "finger4-1.R",
+            "finger4-2.R",
+            "finger4-3.R",
+            "metacarpal4.R",
+            "finger5-1.R",
+            "finger5-2.R",
+            "finger5-3.R",
+            "neck01",
+            "neck02",
+            "neck03",
+            "head",
+            "jaw",
+            "special04",
+            "oris02",
+            "oris01",
+            "oris06.L",
+            "oris07.L",
+            "oris06.R",
+            "oris07.R",
+            "tongue00",
+            "tongue01",
+            "tongue02",
+            "tongue03",
+            "tongue04",
+            "tongue07.L",
+            "tongue07.R",
+            "tongue06.L",
+            "tongue06.R",
+            "tongue05.L",
+            "tongue05.R",
+            "levator02.L",
+            "levator03.L",
+            "levator04.L",
+            "levator05.L",
+            "levator02.R",
+            "levator03.R",
+            "levator04.R",
+            "levator05.R",
+            "special01",
+            "oris04.L",
+            "oris03.L",
+            "oris04.R",
+            "oris03.R",
+            "oris06",
+            "oris05",
+            "special03",
+            "levator06.L",
+            "levator06.R",
+            "special06.L",
+            "special05.L",
+            "eye.L",
+            "orbicularis03.L",
+            "orbicularis04.L",
+            "special06.R",
+            "special05.R",
+            "eye.R",
+            "orbicularis03.R",
+            "orbicularis04.R",
+            "temporalis01.L",
+            "oculi02.L",
+            "oculi01.L",
+            "temporalis01.R",
+            "oculi02.R",
+            "oculi01.R",
+            "temporalis02.L",
+            "risorius02.L",
+            "risorius03.L",
+            "temporalis02.R",
+            "risorius02.R",
+            "risorius03.R"
+          ],
+          "inverse_bind_matrices": 163
+        },
+        {
+          "index": 6,
+          "name": "ResearchHumanRig",
+          "joints": [
+            "root",
+            "pelvis.L",
+            "upperleg01.L",
+            "upperleg02.L",
+            "lowerleg01.L",
+            "lowerleg02.L",
+            "foot.L",
+            "toe1-1.L",
+            "toe1-2.L",
+            "toe2-1.L",
+            "toe2-2.L",
+            "toe2-3.L",
+            "toe3-1.L",
+            "toe3-2.L",
+            "toe3-3.L",
+            "toe4-1.L",
+            "toe4-2.L",
+            "toe4-3.L",
+            "toe5-1.L",
+            "toe5-2.L",
+            "toe5-3.L",
+            "pelvis.R",
+            "upperleg01.R",
+            "upperleg02.R",
+            "lowerleg01.R",
+            "lowerleg02.R",
+            "foot.R",
+            "toe1-1.R",
+            "toe1-2.R",
+            "toe2-1.R",
+            "toe2-2.R",
+            "toe2-3.R",
+            "toe3-1.R",
+            "toe3-2.R",
+            "toe3-3.R",
+            "toe4-1.R",
+            "toe4-2.R",
+            "toe4-3.R",
+            "toe5-1.R",
+            "toe5-2.R",
+            "toe5-3.R",
+            "spine05",
+            "spine04",
+            "spine03",
+            "spine02",
+            "breast.L",
+            "breast.R",
+            "spine01",
+            "clavicle.L",
+            "shoulder01.L",
+            "upperarm01.L",
+            "upperarm02.L",
+            "lowerarm01.L",
+            "lowerarm02.L",
+            "wrist.L",
+            "finger1-1.L",
+            "finger1-2.L",
+            "finger1-3.L",
+            "metacarpal1.L",
+            "finger2-1.L",
+            "finger2-2.L",
+            "finger2-3.L",
+            "metacarpal2.L",
+            "finger3-1.L",
+            "finger3-2.L",
+            "finger3-3.L",
+            "metacarpal3.L",
+            "finger4-1.L",
+            "finger4-2.L",
+            "finger4-3.L",
+            "metacarpal4.L",
+            "finger5-1.L",
+            "finger5-2.L",
+            "finger5-3.L",
+            "clavicle.R",
+            "shoulder01.R",
+            "upperarm01.R",
+            "upperarm02.R",
+            "lowerarm01.R",
+            "lowerarm02.R",
+            "wrist.R",
+            "finger1-1.R",
+            "finger1-2.R",
+            "finger1-3.R",
+            "metacarpal1.R",
+            "finger2-1.R",
+            "finger2-2.R",
+            "finger2-3.R",
+            "metacarpal2.R",
+            "finger3-1.R",
+            "finger3-2.R",
+            "finger3-3.R",
+            "metacarpal3.R",
+            "finger4-1.R",
+            "finger4-2.R",
+            "finger4-3.R",
+            "metacarpal4.R",
+            "finger5-1.R",
+            "finger5-2.R",
+            "finger5-3.R",
+            "neck01",
+            "neck02",
+            "neck03",
+            "head",
+            "jaw",
+            "special04",
+            "oris02",
+            "oris01",
+            "oris06.L",
+            "oris07.L",
+            "oris06.R",
+            "oris07.R",
+            "tongue00",
+            "tongue01",
+            "tongue02",
+            "tongue03",
+            "tongue04",
+            "tongue07.L",
+            "tongue07.R",
+            "tongue06.L",
+            "tongue06.R",
+            "tongue05.L",
+            "tongue05.R",
+            "levator02.L",
+            "levator03.L",
+            "levator04.L",
+            "levator05.L",
+            "levator02.R",
+            "levator03.R",
+            "levator04.R",
+            "levator05.R",
+            "special01",
+            "oris04.L",
+            "oris03.L",
+            "oris04.R",
+            "oris03.R",
+            "oris06",
+            "oris05",
+            "special03",
+            "levator06.L",
+            "levator06.R",
+            "special06.L",
+            "special05.L",
+            "eye.L",
+            "orbicularis03.L",
+            "orbicularis04.L",
+            "special06.R",
+            "special05.R",
+            "eye.R",
+            "orbicularis03.R",
+            "orbicularis04.R",
+            "temporalis01.L",
+            "oculi02.L",
+            "oculi01.L",
+            "temporalis01.R",
+            "oculi02.R",
+            "oculi01.R",
+            "temporalis02.L",
+            "risorius02.L",
+            "risorius03.L",
+            "temporalis02.R",
+            "risorius02.R",
+            "risorius03.R"
+          ],
+          "inverse_bind_matrices": 163
+        }
+      ],
+      "nodes": [
+        {
+          "index": 0,
+          "name": "toe1-2.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.4959368854761124e-8,
+            0.02908085286617279,
+            1.9208528101444244e-9
+          ],
+          "rotation_xyzw": [
+            0.0378129668533802,
+            -0.0619395412504673,
+            -0.026534227654337883,
+            0.997010350227356
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 1,
+          "name": "toe1-1.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -0.03279010206460953,
+            0.14837408065795898,
+            -0.0333113968372345
+          ],
+          "rotation_xyzw": [
+            -0.10043900460004807,
+            0.02938312105834484,
+            -0.03436896950006485,
+            0.9939152002334595
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 2,
+          "name": "toe2-3.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -8.149072527885437e-9,
+            0.015505766496062279,
+            -9.313225746154785e-9
+          ],
+          "rotation_xyzw": [
+            0.0016606607241556048,
+            0.1663850098848343,
+            -0.01620052382349968,
+            0.9859263896942139
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 3,
+          "name": "toe2-2.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.862645149230957e-8,
+            0.023475784808397293,
+            -9.313225746154785e-9
+          ],
+          "rotation_xyzw": [
+            0.0978618860244751,
+            0.03717704862356186,
+            0.010911325924098492,
+            0.9944455027580261
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 4,
+          "name": "toe2-1.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -0.007171034812927246,
+            0.15319813787937164,
+            -0.033121608197689056
+          ],
+          "rotation_xyzw": [
+            -0.15947085618972778,
+            -0.0599604994058609,
+            -0.011115867644548416,
+            0.9853173494338989
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 5,
+          "name": "toe3-3.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            2.0023435354232788e-8,
+            0.013929983600974083,
+            1.862645149230957e-9
+          ],
+          "rotation_xyzw": [
+            -0.00760292075574398,
+            0.24286872148513794,
+            -0.016345202922821045,
+            0.9698916673660278
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 6,
+          "name": "toe3-2.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            9.313225746154785e-9,
+            0.02154892310500145,
+            -2.421438694000244e-8
+          ],
+          "rotation_xyzw": [
+            0.08380881696939468,
+            0.2473628669977188,
+            -0.013401567004621029,
+            0.9651985168457031
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 7,
+          "name": "toe3-1.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0.011264661327004433,
+            0.152059867978096,
+            -0.030076954513788223
+          ],
+          "rotation_xyzw": [
+            -0.15723788738250732,
+            -0.3224521279335022,
+            0.05511421710252762,
+            0.9318065047264099
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 8,
+          "name": "toe4-3.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            9.313225746154785e-10,
+            0.013539295643568039,
+            3.725290298461914e-9
+          ],
+          "rotation_xyzw": [
+            0.07634470611810684,
+            0.10587094724178314,
+            -0.07799196988344193,
+            0.9883724451065063
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 9,
+          "name": "toe4-2.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.1175870895385742e-8,
+            0.01687755435705185,
+            -2.7939677238464355e-8
+          ],
+          "rotation_xyzw": [
+            0.0715678483247757,
+            0.20085781812667847,
+            0.025962546467781067,
+            0.9766576290130615
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 10,
+          "name": "toe4-1.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0.027596313506364822,
+            0.1452876478433609,
+            -0.0263688825070858
+          ],
+          "rotation_xyzw": [
+            -0.1455812305212021,
+            -0.2715975344181061,
+            0.04650965332984924,
+            0.950198769569397
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 11,
+          "name": "toe5-3.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -2.444721758365631e-9,
+            0.009339416399598122,
+            -3.725290298461914e-9
+          ],
+          "rotation_xyzw": [
+            0.09005280584096909,
+            0.1799691617488861,
+            -0.10899241268634796,
+            0.9734588861465454
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 12,
+          "name": "toe5-2.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            4.6566128730773926e-9,
+            0.012678859755396843,
+            -1.1175870895385742e-8
+          ],
+          "rotation_xyzw": [
+            0.054911233484745026,
+            -0.10680338740348816,
+            0.06621420383453369,
+            0.9905521273612976
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 13,
+          "name": "toe5-1.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0.04315764084458351,
+            0.14257878065109253,
+            -0.024025117978453636
+          ],
+          "rotation_xyzw": [
+            -0.11849791556596756,
+            -0.09804980456829071,
+            0.024013247340917587,
+            0.9878095984458923
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 14,
+          "name": "foot.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.507578417658806e-8,
+            0.23260772228240967,
+            2.561137080192566e-9
+          ],
+          "rotation_xyzw": [
+            -0.5311384201049805,
+            -0.04275720566511154,
+            0.05417231470346451,
+            0.8444697856903076
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 15,
+          "name": "lowerleg02.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            3.534660208970308e-8,
+            0.22192123532295227,
+            -1.7171259969472885e-9
+          ],
+          "rotation_xyzw": [
+            0.004311868455260992,
+            -0.008975197561085224,
+            0.009332746267318726,
+            0.9999068975448608
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 16,
+          "name": "lowerleg01.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.0943040251731873e-8,
+            0.3500256836414337,
+            -7.450580596923828e-9
+          ],
+          "rotation_xyzw": [
+            0.03663792833685875,
+            0.01903543248772621,
+            -0.003952010069042444,
+            0.9991394877433777
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 17,
+          "name": "upperleg02.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.0244548320770264e-8,
+            0.09136339277029037,
+            1.862645149230957e-8
+          ],
+          "rotation_xyzw": [
+            0.1001792699098587,
+            -0.0896478071808815,
+            0.022895626723766327,
+            0.9906579852104187
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 18,
+          "name": "upperleg01.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -8.149072527885437e-9,
+            0.11588726192712784,
+            1.501757651567459e-8
+          ],
+          "rotation_xyzw": [
+            0.3974018394947052,
+            0.6419373750686646,
+            0.488249808549881,
+            0.4377216398715973
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 19,
+          "name": "pelvis.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -9.097087266699087e-16,
+            0.07282444834709167,
+            5.657784640789032e-8
+          ],
+          "rotation_xyzw": [
+            -0.03233043849468231,
+            -0.09456870704889297,
+            -0.7441433668136597,
+            0.6605015397071838
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 20,
+          "name": "toe1-2.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.4959368854761124e-8,
+            0.02908085100352764,
+            -4.3655745685100555e-10
+          ],
+          "rotation_xyzw": [
+            0.037812963128089905,
+            0.0619395449757576,
+            0.02653423510491848,
+            0.997010350227356
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 21,
+          "name": "toe1-1.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0.032790105789899826,
+            0.14837408065795898,
+            -0.033311404287815094
+          ],
+          "rotation_xyzw": [
+            -0.10043901950120926,
+            -0.02938312105834484,
+            0.03436896950006485,
+            0.9939152002334595
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 22,
+          "name": "toe2-3.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.0477378964424133e-8,
+            0.01550576463341713,
+            0
+          ],
+          "rotation_xyzw": [
+            0.0016606675926595926,
+            -0.1663849949836731,
+            0.01620052009820938,
+            0.9859263896942139
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 23,
+          "name": "toe2-2.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.862645149230957e-9,
+            0.02347579225897789,
+            -5.587935447692871e-9
+          ],
+          "rotation_xyzw": [
+            0.0978618860244751,
+            -0.03717704862356186,
+            -0.010911318473517895,
+            0.9944455027580261
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 24,
+          "name": "toe2-1.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0.007171036675572395,
+            0.15319813787937164,
+            -0.03312160447239876
+          ],
+          "rotation_xyzw": [
+            -0.15947085618972778,
+            0.059960491955280304,
+            0.011115865781903267,
+            0.9853173494338989
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 25,
+          "name": "toe3-3.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.955777406692505e-8,
+            0.01392997708171606,
+            1.862645149230957e-9
+          ],
+          "rotation_xyzw": [
+            -0.007602929603308439,
+            -0.24286875128746033,
+            0.016345206648111343,
+            0.9698916673660278
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 26,
+          "name": "toe3-2.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.4901161193847656e-8,
+            0.021548926830291748,
+            -3.725290298461914e-9
+          ],
+          "rotation_xyzw": [
+            0.08380880206823349,
+            -0.2473628669977188,
+            0.01340156514197588,
+            0.9651985168457031
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 27,
+          "name": "toe3-1.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -0.011264657601714134,
+            0.152059867978096,
+            -0.030076956376433372
+          ],
+          "rotation_xyzw": [
+            -0.15723790228366852,
+            0.3224521577358246,
+            -0.05511422082781792,
+            0.9318064451217651
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 28,
+          "name": "toe4-3.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -9.313225746154785e-10,
+            0.01353929191827774,
+            0
+          ],
+          "rotation_xyzw": [
+            0.07634468376636505,
+            -0.10587094724178314,
+            0.07799197733402252,
+            0.9883724451065063
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 29,
+          "name": "toe4-2.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.3969838619232178e-8,
+            0.016877545043826103,
+            -1.1175870895385742e-8
+          ],
+          "rotation_xyzw": [
+            0.07156785577535629,
+            -0.20085781812667847,
+            -0.025962546467781067,
+            0.9766576290130615
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 30,
+          "name": "toe4-1.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -0.027596309781074524,
+            0.1452876478433609,
+            -0.02636888436973095
+          ],
+          "rotation_xyzw": [
+            -0.1455812305212021,
+            0.2715975344181061,
+            -0.04650965332984924,
+            0.9501988291740417
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 31,
+          "name": "toe5-3.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -9.371433407068253e-9,
+            0.009339438751339912,
+            0
+          ],
+          "rotation_xyzw": [
+            0.09005279093980789,
+            -0.1799691617488861,
+            0.10899241268634796,
+            0.9734589457511902
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 32,
+          "name": "toe5-2.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.3969838619232178e-8,
+            0.012678862549364567,
+            -1.1175870895385742e-8
+          ],
+          "rotation_xyzw": [
+            0.05491121858358383,
+            0.10680338740348816,
+            -0.06621420383453369,
+            0.9905521273612976
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 33,
+          "name": "toe5-1.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -0.04315763711929321,
+            0.14257878065109253,
+            -0.02402511239051819
+          ],
+          "rotation_xyzw": [
+            -0.11849793046712875,
+            0.09804981201887131,
+            -0.024013249203562737,
+            0.9878095984458923
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 34,
+          "name": "foot.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.3140379451215267e-8,
+            0.23260772228240967,
+            1.1641532182693481e-9
+          ],
+          "rotation_xyzw": [
+            -0.5311384201049805,
+            0.04275720566511154,
+            -0.05417231470346451,
+            0.8444697856903076
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 35,
+          "name": "lowerleg02.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -3.740569809451699e-8,
+            0.22192123532295227,
+            -2.4156179279088974e-9
+          ],
+          "rotation_xyzw": [
+            0.0043118675239384174,
+            0.008975197561085224,
+            -0.009332743473351002,
+            0.9999068975448608
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 36,
+          "name": "lowerleg01.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            2.9103830456733704e-9,
+            0.3500256836414337,
+            -6.05359673500061e-9
+          ],
+          "rotation_xyzw": [
+            0.03663792833685875,
+            -0.01903543248772621,
+            0.003952006809413433,
+            0.9991394877433777
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 37,
+          "name": "upperleg02.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            3.958120942115784e-9,
+            0.09136339277029037,
+            1.862645149230957e-8
+          ],
+          "rotation_xyzw": [
+            0.1001792699098587,
+            0.0896478071808815,
+            -0.02289562113583088,
+            0.9906579852104187
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 38,
+          "name": "upperleg01.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -2.1653249859809875e-8,
+            0.11588726192712784,
+            -4.621688276529312e-8
+          ],
+          "rotation_xyzw": [
+            0.3974018394947052,
+            -0.6419373750686646,
+            -0.48824986815452576,
+            0.4377216398715973
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 39,
+          "name": "pelvis.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -9.097087266699087e-16,
+            0.07282444834709167,
+            5.657784640789032e-8
+          ],
+          "rotation_xyzw": [
+            -0.03233043849468231,
+            0.09456870704889297,
+            0.7441433668136597,
+            0.6605015397071838
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 40,
+          "name": "breast.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -4.400459510159034e-16,
+            0.14227266609668732,
+            -3.725290742551124e-9
+          ],
+          "rotation_xyzw": [
+            -0.09961371123790741,
+            -0.5853057503700256,
+            -0.7729762196540833,
+            0.2236115038394928
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 41,
+          "name": "breast.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -4.400459510159034e-16,
+            0.14227266609668732,
+            -3.725290742551124e-9
+          ],
+          "rotation_xyzw": [
+            -0.09961369633674622,
+            0.5853057503700256,
+            0.7729762196540833,
+            0.2236115038394928
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 42,
+          "name": "finger1-3.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -3.725290298461914e-9,
+            0.04013770818710327,
+            -4.842877388000488e-8
+          ],
+          "rotation_xyzw": [
+            0.16113272309303284,
+            0.08275974541902542,
+            -0.048622388392686844,
+            0.9822539687156677
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 43,
+          "name": "finger1-2.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            7.450580596923828e-9,
+            0.033755868673324585,
+            -3.3527612686157227e-8
+          ],
+          "rotation_xyzw": [
+            0.0335196889936924,
+            -0.06315135955810547,
+            -0.1906326562166214,
+            0.9790544509887695
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 44,
+          "name": "finger1-1.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -0.0003626439720392227,
+            0.04376998543739319,
+            0.02245013415813446
+          ],
+          "rotation_xyzw": [
+            0.4333688020706177,
+            0.8347567319869995,
+            0.2887992262840271,
+            0.17879517376422882
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 45,
+          "name": "finger2-3.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -2.9802322387695312e-8,
+            0.025682415813207626,
+            0
+          ],
+          "rotation_xyzw": [
+            0.06065328046679497,
+            0.0012611483689397573,
+            0.016356462612748146,
+            0.9980241060256958
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 46,
+          "name": "finger2-2.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0,
+            0.028564520180225372,
+            1.4901161193847656e-8
+          ],
+          "rotation_xyzw": [
+            0.10706964880228043,
+            -0.007711496204137802,
+            0.0066736722365021706,
+            0.994199275970459
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 47,
+          "name": "finger2-1.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0,
+            0.08114536106586456,
+            -1.341104507446289e-7
+          ],
+          "rotation_xyzw": [
+            0.14283187687397003,
+            -0.050969645380973816,
+            -0.04270472005009651,
+            0.9875108003616333
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 48,
+          "name": "metacarpal1.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -3.725290298461914e-9,
+            0.03583043813705444,
+            -7.450580596923828e-8
+          ],
+          "rotation_xyzw": [
+            0.0505005419254303,
+            0.7902377247810364,
+            0.09309437870979309,
+            0.6035788655281067
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 49,
+          "name": "finger3-3.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.4901161193847656e-8,
+            0.029673293232917786,
+            0
+          ],
+          "rotation_xyzw": [
+            0.05524637550115585,
+            0.01782088167965412,
+            -0.006376979406923056,
+            0.998293399810791
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 50,
+          "name": "finger3-2.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            2.9802322387695312e-8,
+            0.037487298250198364,
+            1.4156103134155273e-7
+          ],
+          "rotation_xyzw": [
+            0.05007825046777725,
+            -0.010227504186332226,
+            0.03671814873814583,
+            0.9980177283287048
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 51,
+          "name": "finger3-1.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            2.9802322387695312e-8,
+            0.0766330435872078,
+            -1.2665987014770508e-7
+          ],
+          "rotation_xyzw": [
+            0.19623036682605743,
+            -0.02163727581501007,
+            -0.014068965800106525,
+            0.9802181124687195
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 52,
+          "name": "metacarpal2.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -3.725290298461914e-9,
+            0.03583043813705444,
+            -7.450580596923828e-8
+          ],
+          "rotation_xyzw": [
+            -0.07768564671278,
+            0.7463199496269226,
+            -0.0319996103644371,
+            0.6602632403373718
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 53,
+          "name": "finger4-3.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -5.960464477539063e-8,
+            0.027124740183353424,
+            -1.1920928955078125e-7
+          ],
+          "rotation_xyzw": [
+            0.06760302931070328,
+            -0.013108854182064533,
+            -0.02610749937593937,
+            0.9972845315933228
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 54,
+          "name": "finger4-2.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            5.960464477539063e-8,
+            0.032883286476135254,
+            -1.341104507446289e-7
+          ],
+          "rotation_xyzw": [
+            0.04270486906170845,
+            0.020297346636652946,
+            0.04638310521841049,
+            0.9978041052818298
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 55,
+          "name": "finger4-1.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -2.9802322387695312e-8,
+            0.06458215415477753,
+            -1.862645149230957e-9
+          ],
+          "rotation_xyzw": [
+            0.21419133245944977,
+            -0.04977669194340706,
+            -0.11232701689004898,
+            0.9690340757369995
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 56,
+          "name": "metacarpal3.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0.0031909290701150894,
+            0.03886215388774872,
+            -0.02339118719100952
+          ],
+          "rotation_xyzw": [
+            -0.08486854285001755,
+            0.7515231370925903,
+            -0.013948583975434303,
+            0.654076337814331
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 57,
+          "name": "finger5-3.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.4901161193847656e-8,
+            0.017049886286258698,
+            1.043081283569336e-7
+          ],
+          "rotation_xyzw": [
+            0.011282253079116344,
+            -0.027653316035866737,
+            -0.015210003592073917,
+            0.9994381666183472
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 58,
+          "name": "finger5-2.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -2.9802322387695312e-8,
+            0.02328117936849594,
+            -3.725290298461914e-8
+          ],
+          "rotation_xyzw": [
+            0.07668988406658173,
+            0.0009248637361451983,
+            0.024373166263103485,
+            0.9967566132545471
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 59,
+          "name": "finger5-1.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.4901161193847656e-8,
+            0.05838409811258316,
+            5.122274160385132e-8
+          ],
+          "rotation_xyzw": [
+            0.17415550351142883,
+            0.0017800440546125174,
+            -0.025172917172312737,
+            0.9843947887420654
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 60,
+          "name": "metacarpal4.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0.0031909290701150894,
+            0.03886215388774872,
+            -0.02339118719100952
+          ],
+          "rotation_xyzw": [
+            -0.1717061847448349,
+            0.6571425199508667,
+            -0.16787682473659515,
+            0.7144914865493774
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 61,
+          "name": "wrist.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -3.585591912269592e-8,
+            0.13111470639705658,
+            1.4901161193847656e-8
+          ],
+          "rotation_xyzw": [
+            0.09291569888591766,
+            0.03628935664892197,
+            -0.04222330451011658,
+            0.9941161870956421
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 62,
+          "name": "lowerarm02.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -8.029746823012829e-8,
+            0.12897075712680817,
+            -6.705522537231445e-8
+          ],
+          "rotation_xyzw": [
+            -0.004735457245260477,
+            -0.04196666181087494,
+            -0.016980277374386787,
+            0.9989635348320007
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 63,
+          "name": "lowerarm01.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            5.145557224750519e-8,
+            0.18550808727741241,
+            0
+          ],
+          "rotation_xyzw": [
+            0.3882046341896057,
+            0.03016052022576332,
+            0.033377211540937424,
+            0.9204745888710022
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 64,
+          "name": "upperarm02.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            3.748573362827301e-8,
+            0.07500936836004257,
+            1.1175870895385742e-8
+          ],
+          "rotation_xyzw": [
+            -0.0132638243958354,
+            0.03163103759288788,
+            0.042044881731271744,
+            0.9985268115997314
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 65,
+          "name": "upperarm01.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -6.542541086673737e-8,
+            0.08668346703052521,
+            1.862645149230957e-9
+          ],
+          "rotation_xyzw": [
+            0.0434018038213253,
+            0.007415429688990116,
+            -0.1752292513847351,
+            0.9835425615310669
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 66,
+          "name": "shoulder01.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            4.353933036327362e-8,
+            0.09451485425233841,
+            -2.7939677238464355e-9
+          ],
+          "rotation_xyzw": [
+            -0.060808781534433365,
+            0.027279971167445183,
+            -0.36051270365715027,
+            0.9303702116012573
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 67,
+          "name": "clavicle.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0.023690609261393547,
+            0.15084955096244812,
+            0.03735913708806038
+          ],
+          "rotation_xyzw": [
+            -0.1624573916196823,
+            -0.124861940741539,
+            -0.6246390342712402,
+            0.7535536885261536
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 68,
+          "name": "finger1-3.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -4.0978193283081055e-8,
+            0.04013773798942566,
+            8.568167686462402e-8
+          ],
+          "rotation_xyzw": [
+            0.16113269329071045,
+            -0.08275975286960602,
+            0.048622407019138336,
+            0.9822539687156677
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 69,
+          "name": "finger1-2.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            7.450580596923828e-9,
+            0.033755868673324585,
+            -2.9802322387695312e-8
+          ],
+          "rotation_xyzw": [
+            0.033519696444272995,
+            0.06315135955810547,
+            0.190632626414299,
+            0.9790544509887695
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 70,
+          "name": "finger1-1.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0.0003626197576522827,
+            0.04376992583274841,
+            0.022450149059295654
+          ],
+          "rotation_xyzw": [
+            0.4333688020706177,
+            -0.8347567319869995,
+            -0.2887992560863495,
+            0.17879514396190643
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 71,
+          "name": "finger2-3.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0,
+            0.02568235620856285,
+            -2.9802322387695312e-8
+          ],
+          "rotation_xyzw": [
+            0.06065327674150467,
+            -0.0012611296260729432,
+            -0.016356470063328743,
+            0.998024046421051
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 72,
+          "name": "finger2-2.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -5.960464477539063e-8,
+            0.028564512729644775,
+            -1.1175870895385742e-7
+          ],
+          "rotation_xyzw": [
+            0.10706963390111923,
+            0.007711518090218306,
+            -0.006673700176179409,
+            0.9941992163658142
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 73,
+          "name": "finger2-1.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0,
+            0.08114541321992874,
+            0
+          ],
+          "rotation_xyzw": [
+            0.14283190667629242,
+            0.05096961185336113,
+            0.04270472005009651,
+            0.9875107407569885
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 74,
+          "name": "metacarpal1.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            9.313225746154785e-9,
+            0.03583042323589325,
+            -7.450580596923828e-8
+          ],
+          "rotation_xyzw": [
+            0.05050053820014,
+            -0.7902377843856812,
+            -0.09309439361095428,
+            0.6035788655281067
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 75,
+          "name": "finger3-3.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.4901161193847656e-8,
+            0.029673241078853607,
+            0
+          ],
+          "rotation_xyzw": [
+            0.05524635314941406,
+            -0.01782088167965412,
+            0.006376961246132851,
+            0.998293399810791
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 76,
+          "name": "finger3-2.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -2.9802322387695312e-8,
+            0.03748725354671478,
+            8.195638656616211e-8
+          ],
+          "rotation_xyzw": [
+            0.05007825791835785,
+            0.010227513499557972,
+            -0.03671814128756523,
+            0.9980177283287048
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 77,
+          "name": "finger3-1.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.4901161193847656e-8,
+            0.07663311064243317,
+            -1.0989606380462646e-7
+          ],
+          "rotation_xyzw": [
+            0.19623036682605743,
+            0.021637272089719772,
+            0.014068973250687122,
+            0.9802181124687195
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 78,
+          "name": "metacarpal2.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            9.313225746154785e-9,
+            0.03583042323589325,
+            -7.450580596923828e-8
+          ],
+          "rotation_xyzw": [
+            -0.0776856392621994,
+            -0.7463199496269226,
+            0.031999580562114716,
+            0.6602632403373718
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 79,
+          "name": "finger4-3.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            2.9802322387695312e-8,
+            0.027124784886837006,
+            -1.1175870895385742e-7
+          ],
+          "rotation_xyzw": [
+            0.06760304421186447,
+            0.013108832761645317,
+            0.02610747329890728,
+            0.9972845315933228
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 80,
+          "name": "finger4-2.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0,
+            0.03288330137729645,
+            -8.940696716308594e-8
+          ],
+          "rotation_xyzw": [
+            0.04270487651228905,
+            -0.020297357812523842,
+            -0.046383101493120193,
+            0.9978041052818298
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 81,
+          "name": "finger4-1.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.1920928955078125e-7,
+            0.06458212435245514,
+            -4.0978193283081055e-8
+          ],
+          "rotation_xyzw": [
+            0.21419133245944977,
+            0.04977670684456825,
+            0.11232703179121017,
+            0.9690340161323547
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 82,
+          "name": "metacarpal3.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -0.0031909234821796417,
+            0.038862138986587524,
+            -0.023391172289848328
+          ],
+          "rotation_xyzw": [
+            -0.08486854285001755,
+            -0.7515231370925903,
+            0.013948561623692513,
+            0.6540762782096863
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 83,
+          "name": "finger5-3.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            5.960464477539063e-8,
+            0.01704983413219452,
+            -1.4901161193847656e-8
+          ],
+          "rotation_xyzw": [
+            0.011282253079116344,
+            0.02765331044793129,
+            0.015210001729428768,
+            0.9994381666183472
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 84,
+          "name": "finger5-2.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0,
+            0.02328120917081833,
+            -7.450580596923828e-9
+          ],
+          "rotation_xyzw": [
+            0.07668990641832352,
+            -0.000924869382288307,
+            -0.02437315136194229,
+            0.9967566132545471
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 85,
+          "name": "finger5-1.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0,
+            0.05838414281606674,
+            9.755603969097137e-8
+          ],
+          "rotation_xyzw": [
+            0.17415547370910645,
+            -0.0017800371861085296,
+            0.02517293021082878,
+            0.9843947887420654
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 86,
+          "name": "metacarpal4.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -0.0031909234821796417,
+            0.038862138986587524,
+            -0.023391172289848328
+          ],
+          "rotation_xyzw": [
+            -0.1717061549425125,
+            -0.6571425795555115,
+            0.16787682473659515,
+            0.7144914865493774
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 87,
+          "name": "wrist.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -6.193295121192932e-8,
+            0.13111457228660583,
+            1.4901161193847656e-8
+          ],
+          "rotation_xyzw": [
+            0.09291568398475647,
+            -0.036289364099502563,
+            0.04222330078482628,
+            0.9941161870956421
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 88,
+          "name": "lowerarm02.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            9.212817531079054e-8,
+            0.128970667719841,
+            2.2351741790771484e-8
+          ],
+          "rotation_xyzw": [
+            -0.004735434893518686,
+            0.04196665808558464,
+            0.016980288550257683,
+            0.9989635348320007
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 89,
+          "name": "lowerarm01.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -5.058245733380318e-8,
+            0.18550808727741241,
+            4.656612873077393e-10
+          ],
+          "rotation_xyzw": [
+            0.3882046639919281,
+            -0.030160509049892426,
+            -0.033377207815647125,
+            0.9204745888710022
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 90,
+          "name": "upperarm02.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -3.841705620288849e-8,
+            0.07500936836004257,
+            -5.587935447692871e-9
+          ],
+          "rotation_xyzw": [
+            -0.0132638243958354,
+            -0.03163103759288788,
+            -0.042044878005981445,
+            0.9985268115997314
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 91,
+          "name": "upperarm01.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.9033905118703842e-7,
+            0.08668339997529984,
+            3.725290298461914e-9
+          ],
+          "rotation_xyzw": [
+            0.0434018038213253,
+            -0.00741542736068368,
+            0.1752292513847351,
+            0.9835426211357117
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 92,
+          "name": "shoulder01.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -4.6333298087120056e-8,
+            0.09451483190059662,
+            -6.170012056827545e-9
+          ],
+          "rotation_xyzw": [
+            -0.060808777809143066,
+            -0.027279969304800034,
+            0.36051270365715027,
+            0.9303702116012573
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 93,
+          "name": "clavicle.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -0.023690609261393547,
+            0.15084955096244812,
+            0.03735913336277008
+          ],
+          "rotation_xyzw": [
+            -0.1624573916196823,
+            0.124861940741539,
+            0.6246390342712402,
+            0.7535536885261536
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 94,
+          "name": "oris01",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            4.440892098500626e-16,
+            0.015418998897075653,
+            2.9802322387695312e-8
+          ],
+          "rotation_xyzw": [
+            -0.12995825707912445,
+            7.83803123587893e-15,
+            -3.0232407950101263e-15,
+            0.9915195107460022
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 95,
+          "name": "oris02",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.5987211554602254e-14,
+            0.03150384873151779,
+            1.7881393432617188e-7
+          ],
+          "rotation_xyzw": [
+            -8.434067666485134e-9,
+            0.9937405586242676,
+            0.11171268671751022,
+            7.5025333501344e-8
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 96,
+          "name": "oris07.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.1594966053962708e-7,
+            0.015783358365297318,
+            -1.3969838619232178e-9
+          ],
+          "rotation_xyzw": [
+            0.18699152767658234,
+            -0.005613252986222506,
+            -0.3484894335269928,
+            0.9184539914131165
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 97,
+          "name": "oris06.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.5987211554602254e-14,
+            0.03150384873151779,
+            1.7881393432617188e-7
+          ],
+          "rotation_xyzw": [
+            0.10927966982126236,
+            -0.14894244074821472,
+            0.49911120533943176,
+            0.8466180562973022
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 98,
+          "name": "oris07.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -2.1886080503463745e-7,
+            0.015783336013555527,
+            2.6309862732887268e-8
+          ],
+          "rotation_xyzw": [
+            0.18699148297309875,
+            0.00561321247369051,
+            0.3484894335269928,
+            0.9184540510177612
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 99,
+          "name": "oris06.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.5987211554602254e-14,
+            0.03150384873151779,
+            1.7881393432617188e-7
+          ],
+          "rotation_xyzw": [
+            0.10927974432706833,
+            0.14894232153892517,
+            -0.49911120533943176,
+            0.846618115901947
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 100,
+          "name": "special04",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.5941973218955297e-15,
+            0.10656757652759552,
+            -7.450581485102248e-9
+          ],
+          "rotation_xyzw": [
+            -5.806239755656861e-8,
+            -0.6391765475273132,
+            0.7690600752830505,
+            4.825649213557881e-8
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 101,
+          "name": "tongue04",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            3.2014213502407074e-9,
+            0.010337568819522858,
+            6.380287231877446e-8
+          ],
+          "rotation_xyzw": [
+            0.15109983086585999,
+            0.23828822374343872,
+            0.06854070723056793,
+            0.9569167494773865
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 102,
+          "name": "tongue07.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            3.2014213502407074e-9,
+            0.010337568819522858,
+            6.380287231877446e-8
+          ],
+          "rotation_xyzw": [
+            -0.45259854197502136,
+            0.5330270528793335,
+            0.5010009407997131,
+            0.5099360942840576
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 103,
+          "name": "tongue07.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            3.2014213502407074e-9,
+            0.010337568819522858,
+            6.380287231877446e-8
+          ],
+          "rotation_xyzw": [
+            -0.4906415045261383,
+            -0.4675723910331726,
+            -0.3963533937931061,
+            0.619314968585968
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 104,
+          "name": "tongue03",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.0658141036401503e-14,
+            0.02108435519039631,
+            2.3981554519991732e-8
+          ],
+          "rotation_xyzw": [
+            -0.31656941771507263,
+            -0.08139151334762573,
+            -0.0005406094714999199,
+            0.9450708627700806
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 105,
+          "name": "tongue06.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.0658141036401503e-14,
+            0.02108435519039631,
+            2.3981554519991732e-8
+          ],
+          "rotation_xyzw": [
+            -0.6043127775192261,
+            0.4150618314743042,
+            0.4410775899887085,
+            0.5176683068275452
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 106,
+          "name": "tongue06.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.0658141036401503e-14,
+            0.02108435519039631,
+            2.3981554519991732e-8
+          ],
+          "rotation_xyzw": [
+            -0.6043127775192261,
+            -0.4150618314743042,
+            -0.4410775899887085,
+            0.5176681876182556
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 107,
+          "name": "tongue02",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -6.217248937900877e-15,
+            0.030327558517456055,
+            1.5087425708770752e-7
+          ],
+          "rotation_xyzw": [
+            -0.06832648813724518,
+            -7.862099507668571e-14,
+            -5.973322281249693e-9,
+            0.9976630210876465
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 108,
+          "name": "tongue05.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -6.217248937900877e-15,
+            0.030327558517456055,
+            1.5087425708770752e-7
+          ],
+          "rotation_xyzw": [
+            -0.5259407162666321,
+            0.46860426664352417,
+            0.42525020241737366,
+            0.5682945251464844
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 109,
+          "name": "tongue05.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -6.217248937900877e-15,
+            0.030327558517456055,
+            1.5087425708770752e-7
+          ],
+          "rotation_xyzw": [
+            -0.5259407162666321,
+            -0.4686043858528137,
+            -0.42525023221969604,
+            0.5682944655418396
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 110,
+          "name": "tongue01",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            8.881784197001252e-15,
+            0.06711459904909134,
+            -4.0978193283081055e-8
+          ],
+          "rotation_xyzw": [
+            -0.8913490176200867,
+            -1.4409171633644746e-8,
+            -1.0625721102996977e-7,
+            0.45331764221191406
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 111,
+          "name": "tongue00",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.5941973218955297e-15,
+            0.10656757652759552,
+            -7.450581485102248e-9
+          ],
+          "rotation_xyzw": [
+            7.521456524273162e-8,
+            -0.08654676377773285,
+            -0.9962478280067444,
+            6.534103480504427e-9
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 112,
+          "name": "jaw",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.8421637548726721e-9,
+            0.0068743303418159485,
+            0.018482448533177376
+          ],
+          "rotation_xyzw": [
+            0.9568337202072144,
+            3.8808503077802925e-9,
+            1.2858833109419265e-8,
+            0.29063597321510315
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 113,
+          "name": "levator05.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            9.313225746154785e-9,
+            0.019329655915498734,
+            -2.0489096641540527e-8
+          ],
+          "rotation_xyzw": [
+            0.2554326355457306,
+            0.30480414628982544,
+            0.013364101760089397,
+            0.9174257516860962
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 114,
+          "name": "levator04.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.862645149230957e-9,
+            0.022781334817409515,
+            9.313225746154785e-9
+          ],
+          "rotation_xyzw": [
+            -0.02209639735519886,
+            0.12224195897579193,
+            -0.06318049877882004,
+            0.9902408719062805
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 115,
+          "name": "levator03.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.30385160446167e-8,
+            0.02696213871240616,
+            3.259629011154175e-8
+          ],
+          "rotation_xyzw": [
+            0.4569610059261322,
+            0.011951613239943981,
+            0.014396407641470432,
+            0.889289915561676
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 116,
+          "name": "levator02.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0.003118193009868264,
+            0.01975708082318306,
+            0.12258921563625336
+          ],
+          "rotation_xyzw": [
+            0.24483729898929596,
+            0.486966609954834,
+            -0.8008213639259338,
+            0.2482001930475235
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 117,
+          "name": "levator05.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0,
+            0.01932954415678978,
+            -6.332993507385254e-8
+          ],
+          "rotation_xyzw": [
+            0.2554326057434082,
+            -0.30480411648750305,
+            -0.01336417905986309,
+            0.9174257516860962
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 118,
+          "name": "levator04.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            3.5390257835388184e-8,
+            0.022781100124120712,
+            -5.587935447692871e-9
+          ],
+          "rotation_xyzw": [
+            -0.02209637127816677,
+            -0.12224197387695312,
+            0.06318049132823944,
+            0.9902408719062805
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 119,
+          "name": "levator03.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -2.514570951461792e-8,
+            0.02696213126182556,
+            4.540197551250458e-8
+          ],
+          "rotation_xyzw": [
+            0.45696091651916504,
+            -0.011951609514653683,
+            -0.014396448619663715,
+            0.8892899751663208
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 120,
+          "name": "levator02.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -0.003118194406852126,
+            0.01975708082318306,
+            0.12258920818567276
+          ],
+          "rotation_xyzw": [
+            0.24483732879161835,
+            -0.486966609954834,
+            0.8008213639259338,
+            0.2482001930475235
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 121,
+          "name": "oris03.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            4.1443854570388794e-8,
+            0.01694647967815399,
+            5.587935447692871e-9
+          ],
+          "rotation_xyzw": [
+            0.2321978360414505,
+            0.10570122301578522,
+            -0.009146442636847496,
+            0.9668649435043335
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 122,
+          "name": "oris04.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            2.6645352591003757e-15,
+            0.1960717737674713,
+            2.4214385163645602e-8
+          ],
+          "rotation_xyzw": [
+            -0.7662625908851624,
+            0.5837425589561462,
+            -0.102849580347538,
+            0.24800869822502136
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 123,
+          "name": "oris03.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -3.585591912269592e-8,
+            0.016946561634540558,
+            -3.213062882423401e-8
+          ],
+          "rotation_xyzw": [
+            0.23219770193099976,
+            -0.10570113360881805,
+            0.009146367199718952,
+            0.9668649435043335
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 124,
+          "name": "oris04.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            2.6645352591003757e-15,
+            0.1960717737674713,
+            2.4214385163645602e-8
+          ],
+          "rotation_xyzw": [
+            -0.7662625908851624,
+            -0.583742618560791,
+            0.10284961760044098,
+            0.24800854921340942
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 125,
+          "name": "oris05",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.6792123247455493e-15,
+            0.006718318909406662,
+            -2.220446049250313e-16
+          ],
+          "rotation_xyzw": [
+            0.18904456496238708,
+            -1.707220654992639e-14,
+            1.6526801260852153e-8,
+            0.9819685220718384
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 126,
+          "name": "oris06",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            2.6645352591003757e-15,
+            0.1960717737674713,
+            2.4214385163645602e-8
+          ],
+          "rotation_xyzw": [
+            -0.7250839471817017,
+            -2.397386111852029e-8,
+            -8.863069922426803e-8,
+            0.6886604428291321
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 127,
+          "name": "special01",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            4.037350009866714e-9,
+            0.003081141971051693,
+            -0.07719975709915161
+          ],
+          "rotation_xyzw": [
+            7.123165346456517e-8,
+            -0.6747240424156189,
+            -0.7380700707435608,
+            5.094025823382253e-8
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 128,
+          "name": "levator06.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -0.006107470486313105,
+            0.11461836844682693,
+            -0.005272042937576771
+          ],
+          "rotation_xyzw": [
+            0.955191433429718,
+            -0.205628901720047,
+            -0.20373207330703735,
+            0.061800021678209305
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 129,
+          "name": "levator06.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0.006107472348958254,
+            0.11461836844682693,
+            -0.0052720410749316216
+          ],
+          "rotation_xyzw": [
+            0.955191433429718,
+            0.2056289166212082,
+            0.20373214781284332,
+            0.06180008500814438
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 130,
+          "name": "special03",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.8421637548726721e-9,
+            0.0068743303418159485,
+            0.018482448533177376
+          ],
+          "rotation_xyzw": [
+            7.011226443864871e-8,
+            -0.6931025385856628,
+            -0.7208390235900879,
+            5.232778832464646e-8
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 131,
+          "name": "eye.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.1175870895385742e-8,
+            0.10052560269832611,
+            -1.5832483768463135e-8
+          ],
+          "rotation_xyzw": [
+            -0.26999351382255554,
+            0.8016731142997742,
+            -0.5122692584991455,
+            0.14833734929561615
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 132,
+          "name": "orbicularis03.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.1175870895385742e-8,
+            0.10052560269832611,
+            -1.5832483768463135e-8
+          ],
+          "rotation_xyzw": [
+            0.12948884069919586,
+            -0.7125492691993713,
+            0.6869072914123535,
+            0.06053593382239342
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 133,
+          "name": "orbicularis04.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.1175870895385742e-8,
+            0.10052560269832611,
+            -1.5832483768463135e-8
+          ],
+          "rotation_xyzw": [
+            0.11970213055610657,
+            -0.8894450664520264,
+            0.4367241859436035,
+            0.06189456954598427
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 134,
+          "name": "special05.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.862645149230957e-9,
+            0.07211730629205704,
+            3.818422555923462e-8
+          ],
+          "rotation_xyzw": [
+            0.4944542348384857,
+            0.1317860633134842,
+            -0.09852684289216995,
+            0.853486955165863
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 135,
+          "name": "special06.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            8.881784197001252e-16,
+            0.15822358429431915,
+            -1.8626445941194447e-9
+          ],
+          "rotation_xyzw": [
+            0.7668548226356506,
+            -0.001692194608040154,
+            -0.23245155811309814,
+            0.5982450842857361
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 136,
+          "name": "eye.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -7.450580596923828e-9,
+            0.10052569955587387,
+            -4.0046870708465576e-8
+          ],
+          "rotation_xyzw": [
+            -0.2699935734272003,
+            -0.8016730546951294,
+            0.5122693181037903,
+            0.14833739399909973
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 137,
+          "name": "orbicularis03.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -7.450580596923828e-9,
+            0.10052569955587387,
+            -4.0046870708465576e-8
+          ],
+          "rotation_xyzw": [
+            0.12948885560035706,
+            0.7125492691993713,
+            -0.6869072914123535,
+            0.06053587421774864
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 138,
+          "name": "orbicularis04.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -7.450580596923828e-9,
+            0.10052569955587387,
+            -4.0046870708465576e-8
+          ],
+          "rotation_xyzw": [
+            0.11970213055610657,
+            0.8894449472427368,
+            -0.43672436475753784,
+            0.06189453974366188
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 139,
+          "name": "special05.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            5.960464477539063e-8,
+            0.072117380797863,
+            -8.568167686462402e-8
+          ],
+          "rotation_xyzw": [
+            0.4944543242454529,
+            -0.1317860335111618,
+            0.09852684289216995,
+            0.8534868955612183
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 140,
+          "name": "special06.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            8.881784197001252e-16,
+            0.15822358429431915,
+            -1.8626445941194447e-9
+          ],
+          "rotation_xyzw": [
+            0.7668547630310059,
+            0.0016921559581533074,
+            0.23245154321193695,
+            0.5982451438903809
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 141,
+          "name": "oculi01.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -7.636845111846924e-8,
+            0.033709198236465454,
+            1.0896474123001099e-7
+          ],
+          "rotation_xyzw": [
+            -0.12230654060840607,
+            0.12646931409835815,
+            0.2989059090614319,
+            0.9379242658615112
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 142,
+          "name": "oculi02.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            4.470348358154297e-8,
+            0.021025290712714195,
+            3.725290298461914e-9
+          ],
+          "rotation_xyzw": [
+            -0.043845389038324356,
+            0.9483054876327515,
+            0.30621400475502014,
+            0.07090312242507935
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 143,
+          "name": "temporalis01.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0.06582971662282944,
+            0.04771886393427849,
+            0.06866548210382462
+          ],
+          "rotation_xyzw": [
+            0.42583173513412476,
+            -0.6697432994842529,
+            -0.5882584452629089,
+            0.1551234871149063
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 144,
+          "name": "oculi01.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.9185245037078857e-7,
+            0.03370923921465874,
+            1.0244548320770264e-7
+          ],
+          "rotation_xyzw": [
+            -0.12230656296014786,
+            -0.12646923959255219,
+            -0.2989058792591095,
+            0.9379242658615112
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 145,
+          "name": "oculi02.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -2.60770320892334e-8,
+            0.021025288850069046,
+            -5.960464477539063e-8
+          ],
+          "rotation_xyzw": [
+            -0.04384540021419525,
+            -0.9483054280281067,
+            -0.30621421337127686,
+            0.07090301811695099
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 146,
+          "name": "temporalis01.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -0.06582973152399063,
+            0.04771886393427849,
+            0.06866548210382462
+          ],
+          "rotation_xyzw": [
+            0.42583170533180237,
+            0.6697431802749634,
+            0.588258683681488,
+            0.1551235020160675
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 147,
+          "name": "risorius03.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.4901161193847656e-8,
+            0.032255593687295914,
+            3.725290298461914e-9
+          ],
+          "rotation_xyzw": [
+            -0.42612892389297485,
+            -0.028245409950613976,
+            0.031924229115247726,
+            0.9036576747894287
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 148,
+          "name": "risorius02.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -2.2351741790771484e-8,
+            0.022703373804688454,
+            -1.30385160446167e-8
+          ],
+          "rotation_xyzw": [
+            -0.7155410051345825,
+            0.011772769503295422,
+            0.02176399528980255,
+            0.6981323957443237
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 149,
+          "name": "temporalis02.L",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0.06643204391002655,
+            0.02415078692138195,
+            0.06507819890975952
+          ],
+          "rotation_xyzw": [
+            -0.0929376408457756,
+            0.7559053301811218,
+            0.598627507686615,
+            0.24822355806827545
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 150,
+          "name": "risorius03.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.1175870895385742e-8,
+            0.032255589962005615,
+            -3.725290298461914e-8
+          ],
+          "rotation_xyzw": [
+            -0.42612889409065247,
+            0.028245434165000916,
+            -0.03192420303821564,
+            0.9036576747894287
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 151,
+          "name": "risorius02.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            3.725290298461914e-9,
+            0.0227033868432045,
+            1.0896474123001099e-7
+          ],
+          "rotation_xyzw": [
+            -0.7155410051345825,
+            -0.01177275087684393,
+            -0.021764012053608894,
+            0.6981323957443237
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 152,
+          "name": "temporalis02.R",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -0.06643204391002655,
+            0.02415078692138195,
+            0.06507819890975952
+          ],
+          "rotation_xyzw": [
+            -0.09293767064809799,
+            -0.755905270576477,
+            -0.5986275672912598,
+            0.24822358787059784
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 153,
+          "name": "head",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            1.028368501465593e-10,
+            0.033336006104946136,
+            -1.0875500500162616e-8
+          ],
+          "rotation_xyzw": [
+            -0.18527132272720337,
+            -0.04418887943029404,
+            -0.04375886172056198,
+            0.980717658996582
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 154,
+          "name": "neck03",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            3.841705620288849e-9,
+            0.04774641990661621,
+            3.360037226229906e-8
+          ],
+          "rotation_xyzw": [
+            0.05844937264919281,
+            0.07972946017980576,
+            0.058216776698827744,
+            0.993397057056427
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 155,
+          "name": "neck02",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.3969838619232178e-9,
+            0.019524680450558662,
+            -3.865625330945477e-8
+          ],
+          "rotation_xyzw": [
+            -0.003164892317727208,
+            -0.0228290818631649,
+            -0.017296267673373222,
+            0.9995847940444946
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 156,
+          "name": "neck01",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -3.5200927459358433e-15,
+            0.22060465812683105,
+            8.381903171539307e-9
+          ],
+          "rotation_xyzw": [
+            -0.01285551767796278,
+            -0.006472429260611534,
+            -0.004782956559211016,
+            0.9998850226402283
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 157,
+          "name": "spine01",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -4.400459510159034e-16,
+            0.14227266609668732,
+            -3.725290742551124e-9
+          ],
+          "rotation_xyzw": [
+            0.2202696055173874,
+            2.170901792264001e-22,
+            -4.552711564845627e-16,
+            0.9754390716552734
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 158,
+          "name": "spine02",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.998388738831073e-15,
+            0.06460486352443695,
+            1.6763806343078613e-8
+          ],
+          "rotation_xyzw": [
+            0.03441755101084709,
+            1.7774099131119244e-15,
+            6.665286380076328e-16,
+            0.9994075894355774
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 159,
+          "name": "spine03",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.2439859382599636e-16,
+            0.07218290865421295,
+            3.725290298461914e-9
+          ],
+          "rotation_xyzw": [
+            -0.16873668134212494,
+            -1.850269569652371e-15,
+            2.2008611916719156e-16,
+            0.9856611490249634
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 160,
+          "name": "spine04",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -1.7763441339060417e-15,
+            0.09462793916463852,
+            -9.313225746154785e-9
+          ],
+          "rotation_xyzw": [
+            0.23596836626529694,
+            0,
+            0,
+            0.9717607498168945
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 161,
+          "name": "spine05",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            -9.097087266699087e-16,
+            0.07282444834709167,
+            5.657784640789032e-8
+          ],
+          "rotation_xyzw": [
+            -0.7703464031219482,
+            8.824307188178536e-16,
+            -2.405399716689789e-15,
+            0.6376255750656128
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 162,
+          "name": "root",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0,
+            0.9638328552246094,
+            -0.06471754610538483
+          ],
+          "rotation_xyzw": [
+            0.6466584801673889,
+            0,
+            0,
+            0.7627796530723572
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 163,
+          "name": "ResearchHumanSkin",
+          "mesh": "base.001",
+          "skin": 0,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation_xyzw": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 164,
+          "name": "ResearchHumanSkin.eyebrow001",
+          "mesh": "eyebrow001",
+          "skin": 1,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation_xyzw": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 165,
+          "name": "ResearchHumanSkin.high-poly",
+          "mesh": "high-poly",
+          "skin": 2,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation_xyzw": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 166,
+          "name": "ResearchHumanSkin.male_casualsuit01",
+          "mesh": "male_casualsuit01",
+          "skin": 3,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation_xyzw": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 167,
+          "name": "ResearchHumanSkin.short01",
+          "mesh": "short01",
+          "skin": 4,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation_xyzw": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 168,
+          "name": "ResearchHumanSkin.teeth_base",
+          "mesh": "teeth_base",
+          "skin": 5,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation_xyzw": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 169,
+          "name": "ResearchHumanSkin.tongue01",
+          "mesh": "tongue01",
+          "skin": 6,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation_xyzw": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "index": 170,
+          "name": "ResearchHumanRig",
+          "mesh": null,
+          "skin": null,
+          "translation": [
+            0,
+            0,
+            0
+          ],
+          "rotation_xyzw": [
+            0,
+            -1,
+            0,
+            4.371138828673793e-8
+          ],
+          "scale": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "name": "Skin",
+          "alpha_mode": "OPAQUE",
+          "alpha_cutoff": 0.5,
+          "double_sided": true,
+          "base_color": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "metallic": 0,
+          "roughness": 0.5799999833106995,
+          "base_color_texture": "middleage_lightskinned_male_diffuse",
+          "normal_texture": null,
+          "metallic_roughness_texture": null
+        },
+        {
+          "name": "Brows",
+          "alpha_mode": "MASK",
+          "alpha_cutoff": 0.35,
+          "double_sided": true,
+          "base_color": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "metallic": 0,
+          "roughness": 0.7400000095367432,
+          "base_color_texture": "eyebrow001",
+          "normal_texture": null,
+          "metallic_roughness_texture": null
+        },
+        {
+          "name": "Eyes",
+          "alpha_mode": "MASK",
+          "alpha_cutoff": 0.35,
+          "double_sided": true,
+          "base_color": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "metallic": 0,
+          "roughness": 0.2199999988079071,
+          "base_color_texture": "grey_eye",
+          "normal_texture": null,
+          "metallic_roughness_texture": null
+        },
+        {
+          "name": "Clothes",
+          "alpha_mode": "OPAQUE",
+          "alpha_cutoff": 0.5,
+          "double_sided": true,
+          "base_color": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "metallic": 0,
+          "roughness": 0.8999999761581421,
+          "base_color_texture": "male_casualsuit01_diffuse",
+          "normal_texture": null,
+          "metallic_roughness_texture": null
+        },
+        {
+          "name": "Hair",
+          "alpha_mode": "MASK",
+          "alpha_cutoff": 0.35,
+          "double_sided": true,
+          "base_color": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "metallic": 0,
+          "roughness": 0.6600000262260437,
+          "base_color_texture": "short01_diffuse",
+          "normal_texture": null,
+          "metallic_roughness_texture": null
+        },
+        {
+          "name": "Teeth",
+          "alpha_mode": "OPAQUE",
+          "alpha_cutoff": 0.5,
+          "double_sided": true,
+          "base_color": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "metallic": 0,
+          "roughness": 0.4000000059604645,
+          "base_color_texture": "teeth",
+          "normal_texture": null,
+          "metallic_roughness_texture": null
+        },
+        {
+          "name": "Tongue",
+          "alpha_mode": "OPAQUE",
+          "alpha_cutoff": 0.5,
+          "double_sided": true,
+          "base_color": [
+            1,
+            1,
+            1,
+            1
+          ],
+          "metallic": 0,
+          "roughness": 0.44999998807907104,
+          "base_color_texture": "tongue01_diffuse",
+          "normal_texture": null,
+          "metallic_roughness_texture": null
+        }
+      ],
+      "textures": [
+        {
+          "name": "middleage_lightskinned_male_diffuse",
+          "mime": "image/webp",
+          "encoded_bytes": 201126,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "bcbf011ef113ebdc5163f2440b9314cd4c63db0cb9d78fd473986b07850cd5ce"
+        },
+        {
+          "name": "eyebrow001",
+          "mime": "image/webp",
+          "encoded_bytes": 33276,
+          "dimensions": [
+            512,
+            512
+          ],
+          "sha256": "4dd1584ffcd4fd2cc4c26702c9a6bd906d6ffbe95d9a33912b99526300e90c8c"
+        },
+        {
+          "name": "grey_eye",
+          "mime": "image/webp",
+          "encoded_bytes": 37190,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "sha256": "c1f43b92681c103344fe0df8d3f8853d8b13742b1508b48f7ff6c4f32a080553"
+        },
+        {
+          "name": "male_casualsuit01_diffuse",
+          "mime": "image/webp",
+          "encoded_bytes": 300766,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "005ed97ecf9a9e2569bda0d335aa4ff5d55a5d42356075d0cd309b1889935b30"
+        },
+        {
+          "name": "short01_diffuse",
+          "mime": "image/webp",
+          "encoded_bytes": 733170,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "5be87adec203e408a6332bbcd436e5a46da6aedb536b5d9bc8db54553b4e00f6"
+        },
+        {
+          "name": "teeth",
+          "mime": "image/webp",
+          "encoded_bytes": 108508,
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "d20c48455a854985f0f4ef016c8ac04328eb80561dbe330ce15d346d4d3c33ec"
+        },
+        {
+          "name": "tongue01_diffuse",
+          "mime": "image/webp",
+          "encoded_bytes": 28896,
+          "dimensions": [
+            1024,
+            1024
+          ],
+          "sha256": "e268ef2e2aa35ea720f05bc521270f9d9f4e86a098afc818c4e11ba7a70ef64e"
+        }
+      ],
+      "animations": [],
+      "named_targets": [
+        "browDownLeft",
+        "browDownRight",
+        "browInnerUp",
+        "browOuterUpLeft",
+        "browOuterUpRight",
+        "cheekPuff",
+        "cheekSquintLeft",
+        "cheekSquintRight",
+        "eyeBlinkLeft",
+        "eyeBlinkRight",
+        "eyeLookDownLeft",
+        "eyeLookDownRight",
+        "eyeLookInLeft",
+        "eyeLookInRight",
+        "eyeLookOutLeft",
+        "eyeLookOutRight",
+        "eyeLookUpLeft",
+        "eyeLookUpRight",
+        "eyeSquintLeft",
+        "eyeSquintRight",
+        "eyeWideLeft",
+        "eyeWideRight",
+        "jawForward",
+        "jawLeft",
+        "jawOpen",
+        "jawRight",
+        "mouthClose",
+        "mouthDimpleLeft",
+        "mouthDimpleRight",
+        "mouthFrownLeft",
+        "mouthFrownRight",
+        "mouthFunnel",
+        "mouthLeft",
+        "mouthLowerDownLeft",
+        "mouthLowerDownRight",
+        "mouthPressLeft",
+        "mouthPressRight",
+        "mouthPucker",
+        "mouthRight",
+        "mouthRollLower",
+        "mouthRollUpper",
+        "mouthShrugLower",
+        "mouthShrugUpper",
+        "mouthSmileLeft",
+        "mouthSmileRight",
+        "mouthStretchLeft",
+        "mouthStretchRight",
+        "mouthUpperUpLeft",
+        "mouthUpperUpRight",
+        "noseSneerLeft",
+        "noseSneerRight",
+        "tongueOut",
+        "viseme_CH",
+        "viseme_DD",
+        "viseme_E",
+        "viseme_FF",
+        "viseme_I",
+        "viseme_O",
+        "viseme_PP",
+        "viseme_RR",
+        "viseme_SS",
+        "viseme_TH",
+        "viseme_U",
+        "viseme_aa",
+        "viseme_kk",
+        "viseme_nn",
+        "viseme_sil"
+      ],
+      "deforming_targets": [
+        "browDownLeft",
+        "browDownRight",
+        "browInnerUp",
+        "browOuterUpLeft",
+        "browOuterUpRight",
+        "cheekPuff",
+        "cheekSquintLeft",
+        "cheekSquintRight",
+        "eyeBlinkLeft",
+        "eyeBlinkRight",
+        "eyeLookDownLeft",
+        "eyeLookDownRight",
+        "eyeLookInLeft",
+        "eyeLookInRight",
+        "eyeLookOutLeft",
+        "eyeLookOutRight",
+        "eyeLookUpLeft",
+        "eyeLookUpRight",
+        "eyeSquintLeft",
+        "eyeSquintRight",
+        "eyeWideLeft",
+        "eyeWideRight",
+        "jawForward",
+        "jawLeft",
+        "jawOpen",
+        "jawRight",
+        "mouthClose",
+        "mouthDimpleLeft",
+        "mouthDimpleRight",
+        "mouthFrownLeft",
+        "mouthFrownRight",
+        "mouthFunnel",
+        "mouthLeft",
+        "mouthLowerDownLeft",
+        "mouthLowerDownRight",
+        "mouthPressLeft",
+        "mouthPressRight",
+        "mouthPucker",
+        "mouthRight",
+        "mouthRollLower",
+        "mouthRollUpper",
+        "mouthShrugLower",
+        "mouthShrugUpper",
+        "mouthSmileLeft",
+        "mouthSmileRight",
+        "mouthStretchLeft",
+        "mouthStretchRight",
+        "mouthUpperUpLeft",
+        "mouthUpperUpRight",
+        "noseSneerLeft",
+        "noseSneerRight",
+        "tongueOut",
+        "viseme_CH",
+        "viseme_DD",
+        "viseme_E",
+        "viseme_FF",
+        "viseme_I",
+        "viseme_O",
+        "viseme_PP",
+        "viseme_RR",
+        "viseme_SS",
+        "viseme_TH",
+        "viseme_U",
+        "viseme_aa",
+        "viseme_kk",
+        "viseme_nn"
+      ],
+      "warnings": []
+    },
+    "controls": {
+      "basis": "canonical runtime names and aliases; explicit custom mappings require browser inspection",
+      "face_with_position_deformation": [
+        "browDownLeft",
+        "browDownRight",
+        "browInnerUp",
+        "browOuterUpLeft",
+        "browOuterUpRight",
+        "cheekPuff",
+        "cheekSquintLeft",
+        "cheekSquintRight",
+        "eyeBlinkLeft",
+        "eyeBlinkRight",
+        "eyeLookDownLeft",
+        "eyeLookDownRight",
+        "eyeLookInLeft",
+        "eyeLookInRight",
+        "eyeLookOutLeft",
+        "eyeLookOutRight",
+        "eyeLookUpLeft",
+        "eyeLookUpRight",
+        "eyeSquintLeft",
+        "eyeSquintRight",
+        "eyeWideLeft",
+        "eyeWideRight",
+        "jawForward",
+        "jawLeft",
+        "jawOpen",
+        "jawRight",
+        "mouthClose",
+        "mouthDimpleLeft",
+        "mouthDimpleRight",
+        "mouthFrownLeft",
+        "mouthFrownRight",
+        "mouthFunnel",
+        "mouthLeft",
+        "mouthLowerDownLeft",
+        "mouthLowerDownRight",
+        "mouthPressLeft",
+        "mouthPressRight",
+        "mouthPucker",
+        "mouthRight",
+        "mouthRollLower",
+        "mouthRollUpper",
+        "mouthShrugLower",
+        "mouthShrugUpper",
+        "mouthSmileLeft",
+        "mouthSmileRight",
+        "mouthStretchLeft",
+        "mouthStretchRight",
+        "mouthUpperUpLeft",
+        "mouthUpperUpRight",
+        "noseSneerLeft",
+        "noseSneerRight",
+        "tongueOut"
+      ],
+      "missing_face": [],
+      "native_visemes": [
+        "sil",
+        "PP",
+        "FF",
+        "TH",
+        "DD",
+        "kk",
+        "CH",
+        "SS",
+        "nn",
+        "RR",
+        "aa",
+        "E",
+        "I",
+        "O",
+        "U"
+      ],
+      "missing_visemes": [],
+      "jaw_policy": "runtime selects native visemes or face morphs or jaw bone, without additive opening"
+    },
+    "same_audio_reference": {
+      "filename": "narration.wav",
+      "sha256": "f3e3fb41fca380073cb9d4fdb0209e4062b1e5d60da988e2f58d419c09635e0a"
+    },
+    "review": {
+      "appearance_period": "none; authored generic anatomical proxy",
+      "likeness": "ungraded",
+      "material_appearance": "ungraded",
+      "mouth_interior": "ungraded",
+      "dynamic_articulation": "ungraded",
+      "browser_performance": "unmeasured",
+      "listening": "ungraded"
+    },
+    "decision": "inspection_only",
+    "remaining": [
+      "Review acquisition and permitted distribution for this exact file.",
+      "Inspect mouth interior, neutral and speaking likeness against dated references.",
+      "Import the file in the browser, verify explicit rig mapping, and export a same-audio audition.",
+      "Record human appearance and naturalness ratings before candidate selection."
+    ]
+  },
+  "reportSha256": "1bfdcbfe4cb4c57e3d9c429988ffd40e9795e73ae54a57fd02df59c13397b24d"
+}

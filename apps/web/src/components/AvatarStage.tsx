@@ -6,6 +6,7 @@ import { AvatarRenderer } from '../avatar/renderer';
 import { visemesToFace } from '../avatar/speech';
 import { neutralPose } from '../avatar/timeline';
 import { parseRigMapping } from '../avatar/validation';
+import { canonicalJson, effectiveFaceControls, sha256Bytes } from '../avatar/audition';
 import type { AnimationTelemetry, AvatarClip, BehaviorPlan, BoneControl, FaceChannel, QuaternionTuple, RigDiagnostics, RigMapping, SpeechTiming, Viseme } from '../avatar/types';
 
 export interface AvatarStageProps {
@@ -28,13 +29,15 @@ export interface AvatarStageProps {
   onError?: (error: Error) => void;
   onTelemetry?: (telemetry: AnimationTelemetry) => void;
   className?: string;
+  /** Increment when local sample playback starts to capture from its first frames. */
+  auditionStartKey?: number;
 }
 
 /** GPU resources are owned by one mount, including under React StrictMode. */
 export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, modelUrl,
   rigMapping, reducedMotion, onReady, onError, onTelemetry, className = '',
   audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview = false,
-  showCalibration = false, framing = 'portrait' }: AvatarStageProps) {
+  showCalibration = false, framing = 'portrait', auditionStartKey = 0 }: AvatarStageProps) {
   const host = useRef<HTMLDivElement>(null);
   const runtime = useRef<AvatarRenderer | null>(null);
   const callbacks = useRef({ onReady, onError, onTelemetry, showCalibration }); callbacks.current = { onReady, onError, onTelemetry, showCalibration };
@@ -52,6 +55,9 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
   const [localMapping, setLocalMapping] = useState<RigMapping | undefined>();
   const [mappingText, setMappingText] = useState('{}');
   const [mappingError, setMappingError] = useState<string | null>(null);
+  const [recordingAudition, setRecordingAudition] = useState(false);
+  const [auditionStatus, setAuditionStatus] = useState<string | null>(null);
+  const lastAuditionRequest = useRef(0);
 
   useEffect(() => { setLocalMapping(undefined); setMappingText(JSON.stringify(rigMapping ?? {}, null, 2)); }, [rigMapping]);
 
@@ -82,6 +88,10 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
           if (callbacks.current.showCalibration) setTelemetry(value);
           callbacks.current.onTelemetry?.(value);
         },
+        onAuditionState: (recording) => { if (alive) {
+          setRecordingAudition(recording);
+          if (!recording) setAuditionStatus('Recording stopped. Export it to keep the measurements.');
+        } },
       });
       runtime.current = instance;
     } catch (error) {
@@ -99,6 +109,14 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
   useEffect(() => { void runtime.current?.setModel(modelUrl, localMapping ?? rigMapping); }, [modelUrl, localMapping, rigMapping, epoch]);
 
   useEffect(() => { runtime.current?.setFraming(framing); }, [framing, epoch]);
+
+  useEffect(() => {
+    if (!auditionStartKey || auditionStartKey <= lastAuditionRequest.current || !speaking || !audioSha256 || !diagnostics?.assetInspection?.sha256) return;
+    lastAuditionRequest.current = auditionStartKey;
+    setDebugEnabled(false); runtime.current?.setCalibrationPose();
+    void runtime.current?.startAudition().then(() => setAuditionStatus('Recording this audio sample with a fixed camera.'))
+      .catch((error) => setAuditionStatus(error instanceof Error ? error.message : 'Could not record audition.'));
+  }, [auditionStartKey, speaking, audioSha256, diagnostics]);
 
   useEffect(() => {
     if (!debugEnabled || !showCalibration) { runtime.current?.setCalibrationPose(); return; }
@@ -123,6 +141,34 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
       const link = document.createElement('a'); link.href = url; link.download = 'avatar-rig-mapping.json'; link.click();
       setTimeout(() => URL.revokeObjectURL(url), 1000); setMappingError(null);
     } catch (error) { setMappingError(error instanceof Error ? error.message : 'Invalid rig mapping.'); }
+  };
+  const downloadReport = (value: unknown, filename: string) => {
+    const url = URL.createObjectURL(new Blob([JSON.stringify(value, null, 2)], { type: 'application/json' }));
+    const link = document.createElement('a'); link.href = url; link.download = filename; link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  };
+  const exportInspection = async () => {
+    try {
+      if (!diagnostics?.assetInspection) throw new Error('Load a GLB to inspect its actual geometry.');
+      const report = { asset: diagnostics.assetInspection, configuredMapping: diagnostics.resolvedMapping ?? {},
+        resolvedTargets: diagnostics.resolvedTargets ?? [], resolvedBones: diagnostics.resolvedBones ?? [], unsupportedFace: diagnostics.unsupportedFace ?? [],
+        unsupportedBones: diagnostics.unsupportedBones ?? [], effectiveFaceControls: effectiveFaceControls(diagnostics) };
+      const reportSha256 = await sha256Bytes(new TextEncoder().encode(canonicalJson(report)).buffer);
+      downloadReport({ report, reportSha256 }, 'avatar-asset-inspection.json'); setAuditionStatus('Asset inspection exported.');
+    } catch (error) { setAuditionStatus(error instanceof Error ? error.message : 'Could not export inspection.'); }
+  };
+  const recordAudition = async () => {
+    try {
+      if (recordingAudition) { runtime.current?.stopAudition(); setAuditionStatus('Recording stopped. Export it to keep the measurements.'); }
+      else { await runtime.current?.startAudition(); setAuditionStatus('Recording this audio sample with a fixed camera.'); }
+    } catch (error) { setAuditionStatus(error instanceof Error ? error.message : 'Could not start audition.'); }
+  };
+  const exportAudition = async () => {
+    try {
+      const report = await runtime.current?.exportAudition();
+      if (!report) throw new Error('The avatar is not ready.');
+      downloadReport(report, 'avatar-audition.json'); setAuditionStatus('Audition exported. Human appearance ratings remain ungraded.');
+    } catch (error) { setAuditionStatus(error instanceof Error ? error.message : 'Could not export audition.'); }
   };
 
   return (
@@ -173,6 +219,19 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
           <p style={{ overflowWrap: 'anywhere', lineHeight: 1.6 }}>Asset nodes: {diagnostics?.availableNodes?.slice(0, 240).join(', ') || diagnostics?.bones.join(', ')}</p>
           <p style={{ overflowWrap: 'anywhere', lineHeight: 1.6 }}>Unsupported face channels: {diagnostics?.unsupportedFace?.join(', ') || 'none reported'}</p>
           {diagnostics?.warnings?.map((warning, index) => <p key={index} style={{ color: '#f0d6a0' }}>{warning}</p>)}
+        </details>
+        <details style={{ marginTop: 10 }}><summary style={{ cursor: 'pointer' }}>Asset audition</summary>
+          <p style={{ lineHeight: 1.5 }}>Compare imported avatars using the same recorded audio and framing. Start the audio, then record; the camera stays fixed during the sample.</p>
+          {diagnostics?.assetInspection && <p style={{ lineHeight: 1.5 }}>
+            {diagnostics.assetInspection.meshes.length} meshes · {effectiveFaceControls(diagnostics).length} face controls with measured vertex movement · {diagnostics.assetInspection.animations.length} embedded animations
+          </p>}
+          <p style={{ lineHeight: 1.5 }}>The export records file, mapping and audio digests, frame intervals and draw counts. Likeness and material appearance need a separate review.</p>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+            <button type="button" disabled={!diagnostics?.assetInspection} onClick={() => void exportInspection()}>Export asset inspection</button>
+            <button type="button" disabled={!recordingAudition && (!speaking || !audioSha256 || !diagnostics?.assetInspection?.sha256 || debugEnabled)} onClick={() => void recordAudition()}>{recordingAudition ? 'Stop audition' : 'Record audition'}</button>
+            <button type="button" onClick={() => void exportAudition()}>Export audition</button>
+          </div>
+          {auditionStatus && <p role="status" style={{ lineHeight: 1.5 }}>{auditionStatus}</p>}
         </details>
       </details>}
     </div>

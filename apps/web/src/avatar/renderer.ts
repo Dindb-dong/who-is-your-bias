@@ -1,7 +1,7 @@
 import {
   ACESFilmicToneMapping, AmbientLight, CircleGeometry, DirectionalLight,
   FogExp2, HemisphereLight, Mesh, MeshBasicMaterial, MeshStandardMaterial,
-  PerspectiveCamera, PlaneGeometry, Scene, SRGBColorSpace, WebGLRenderer,
+  PerspectiveCamera, PlaneGeometry, Scene, SRGBColorSpace, Vector2, WebGLRenderer,
 } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { avatarView, type AvatarFraming } from './builtin';
@@ -11,6 +11,7 @@ import { loadGlbRig } from './retarget';
 import { dampPose, neutralPose } from './timeline';
 import { samplePerformance } from './performance';
 import { parseAvatarClip, parseSpeechTiming } from './validation';
+import { AUDITION_PROTOCOL, AuditionRecorder, canonicalJson, sealAudition, sha256Bytes } from './audition';
 import type { AnimationTelemetry, AvatarClip, BehaviorPlan, RigDiagnostics, RigMapping, RigPose, SpeechTiming } from './types';
 
 export interface PlaybackState {
@@ -32,6 +33,7 @@ interface RendererCallbacks {
   onError?: (error: Error) => void;
   onModelState?: (state: 'loading' | 'ready' | 'fallback') => void;
   onTelemetry?: (telemetry: AnimationTelemetry) => void;
+  onAuditionState?: (recording: boolean) => void;
 }
 
 export class AvatarRenderer {
@@ -60,6 +62,7 @@ export class AvatarRenderer {
   private lastClock = 0;
   private lastTelemetry = 0;
   private framing: AvatarFraming = 'portrait';
+  private audition?: AuditionRecorder;
 
   constructor(private host: HTMLElement, private callbacks: RendererCallbacks = {}) {
     this.renderer = new WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
@@ -113,6 +116,13 @@ export class AvatarRenderer {
   }
 
   setPlayback(state: PlaybackState): void {
+    if (this.audition?.recording) {
+      if (this.playback.speaking && !state.speaking) this.stopAudition('playback_inactive');
+      else if (state.audioSha256 !== this.playback.audioSha256) this.stopAudition('audio_changed');
+      else if (state.speechTiming !== this.timingInput) this.stopAudition('speech_timing_changed');
+      else if (state.performanceClip !== this.clipInput || state.allowGeometryPreview !== this.playback.allowGeometryPreview
+        || state.reducedMotion !== this.playback.reducedMotion) this.stopAudition('motion_settings_changed');
+    }
     if (state.speechTiming !== this.timingInput) {
       this.timingInput = state.speechTiming; this.validatedTiming = undefined;
       try { if (state.speechTiming) this.validatedTiming = parseSpeechTiming(state.speechTiming); }
@@ -126,15 +136,67 @@ export class AvatarRenderer {
     this.playback = { ...state, speechTiming: this.validatedTiming, performanceClip: this.validatedClip };
   }
 
-  setCalibrationPose(pose?: RigPose): void { this.calibrationPose = pose; this.pose = neutralPose(); }
+  setCalibrationPose(pose?: RigPose): void {
+    if (pose) this.stopAudition('manual_calibration');
+    this.calibrationPose = pose; this.pose = neutralPose();
+  }
+
+  async startAudition(): Promise<void> {
+    if (this.disposed || this.contextLost || !this.visible) throw new Error('The avatar must be visible before recording.');
+    if (this.calibrationPose) throw new Error('Turn off manual pose preview before recording.');
+    const asset = this.rig.diagnostics.assetInspection;
+    if (!asset?.sha256) throw new Error('Load a GLB before recording an audition.');
+    if (!this.playback.speaking || !this.playback.audioSha256) throw new Error('Start a recorded audio sample, then record the audition.');
+    this.stopAudition('restarted');
+    const serial = this.modelSerial; const state = this.playback;
+    const encodeHash = (value: unknown) => sha256Bytes(new TextEncoder().encode(canonicalJson(value)).buffer);
+    const [speechTimingSha256, sourceClipSha256] = await Promise.all([
+      state.speechTiming ? encodeHash(state.speechTiming) : null,
+      state.performanceClip ? encodeHash(state.performanceClip) : null,
+    ]);
+    if (serial !== this.modelSerial || this.disposed || this.playback.audioSha256 !== state.audioSha256
+      || !this.playback.speaking || this.playback.speechTiming !== state.speechTiming
+      || this.playback.performanceClip !== state.performanceClip) throw new Error('Playback changed; start the audition again.');
+    // Consume pre-existing drag inertia, then reset the camera. Disabling input
+    // alone does not stop OrbitControls' damping from moving a comparison view.
+    const damping = this.controls.enableDamping; this.controls.enableDamping = false;
+    this.controls.update(); this.resetView(); this.controls.enableDamping = damping; this.controls.enabled = false;
+    this.start = performance.now(); this.previousFrame = 0; this.pose = neutralPose();
+    const size = this.renderer.getSize(new Vector2());
+    this.audition = new AuditionRecorder({ schema_version: 'avatar-audition-run.v1', protocol: AUDITION_PROTOCOL,
+      asset: JSON.parse(canonicalJson(asset)), resolvedMapping: this.rig.diagnostics.resolvedMapping ?? {},
+      resolvedTargets: this.rig.diagnostics.resolvedTargets ?? [],
+      resolvedBones: this.rig.diagnostics.resolvedBones ?? [],
+      audioSha256: state.audioSha256!, speechTimingSha256,
+      camera: { framing: this.framing, position: this.camera.position.toArray(), target: this.controls.target.toArray(),
+        fov: this.camera.fov, viewport: size.toArray(), pixelRatio: this.renderer.getPixelRatio() },
+      settings: { reducedMotion: !!state.reducedMotion, geometryPreview: !!state.allowGeometryPreview, sourceClipSha256 },
+      startedAt: new Date().toISOString(),
+    }, performance.now());
+    this.callbacks.onAuditionState?.(true);
+  }
+
+  stopAudition(reason = 'user_stopped'): void {
+    if (!this.audition?.recording) return;
+    this.audition.stop(reason, performance.now()); this.controls.enabled = true;
+    this.callbacks.onAuditionState?.(false);
+  }
+
+  async exportAudition() {
+    if (!this.audition) throw new Error('Record an audition before exporting it.');
+    this.stopAudition('exported');
+    return sealAudition(this.audition.report());
+  }
 
   setFraming(framing: AvatarFraming): void {
     if (this.disposed || this.framing === framing) return;
+    this.stopAudition('framing_changed');
     this.framing = framing; this.canvas.dataset.framing = framing; this.resetView();
   }
 
   async setModel(url?: string, mapping: RigMapping = {}): Promise<void> {
     if (this.disposed) return;
+    this.stopAudition('model_or_mapping_changed');
     const serial = ++this.modelSerial;
     this.modelAbort?.abort();
     if (!url) {
@@ -172,6 +234,8 @@ export class AvatarRenderer {
   private resize = (): void => {
     if (this.disposed) return;
     const width = Math.max(1, this.host.clientWidth); const height = Math.max(1, this.host.clientHeight);
+    const oldSize = this.renderer.getSize(new Vector2());
+    if (oldSize.x !== width || oldSize.y !== height) this.stopAudition('viewport_changed');
     this.camera.aspect = width / height;
     // Preserve the face/shoulder framing on narrow mobile stages.
     this.camera.fov = avatarView(this.rig.diagnostics.kind, this.framing, this.camera.aspect).fov;
@@ -180,10 +244,12 @@ export class AvatarRenderer {
 
   private onVisibility = (): void => {
     this.visible = !document.hidden;
+    if (!this.visible) this.stopAudition('document_hidden');
     if (this.visible) { this.previousFrame = 0; if (!this.raf && !this.contextLost) this.raf = requestAnimationFrame(this.frame); }
   };
 
   private onContextLost = (event: Event): void => {
+    this.stopAudition('graphics_context_lost');
     event.preventDefault(); this.contextLost = true;
     cancelAnimationFrame(this.raf); this.raf = 0;
     this.callbacks.onError?.(new Error('The graphics context was interrupted. Reload the avatar to continue.'));
@@ -205,10 +271,17 @@ export class AvatarRenderer {
       this.callbacks.onTelemetry?.(this.calibrationPose ? { ...sample.telemetry, faceSource: 'calibration', boneSource: 'calibration', speechSource: 'silent' } : sample.telemetry);
     }
     this.controls.update(); this.renderer.render(this.scene, this.camera);
+    if (this.audition?.recording) {
+      this.audition.add({ monotonicMs: now, audioMs: this.playback.audioElapsedMs ?? null, speaking: this.playback.speaking,
+        telemetry: sample.telemetry, drawCalls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles,
+        geometryCount: this.renderer.info.memory.geometries, textureCount: this.renderer.info.memory.textures }, this.playback.audioSha256);
+      if (!this.audition.recording) { this.controls.enabled = true; this.callbacks.onAuditionState?.(false); }
+    }
     this.raf = requestAnimationFrame(this.frame);
   };
 
   resetView(): void {
+    this.stopAudition('view_reset');
     const view = avatarView(this.rig.diagnostics.kind, this.framing, this.camera.aspect);
     this.camera.position.fromArray(view.position); this.controls.target.fromArray(view.target);
     this.camera.fov = view.fov; this.camera.updateProjectionMatrix(); this.controls.update();
@@ -216,6 +289,7 @@ export class AvatarRenderer {
 
   dispose(): void {
     if (this.disposed) return;
+    this.stopAudition('renderer_disposed');
     this.disposed = true; ++this.modelSerial; this.modelAbort?.abort();
     cancelAnimationFrame(this.raf); this.raf = 0;
     this.resizeObserver.disconnect(); this.controls.dispose();

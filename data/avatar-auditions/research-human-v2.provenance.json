@@ -1,0 +1,11 @@
+{
+  "status": "project_authored",
+  "creator": "MakeHuman/MPFB contributors; project-authored assembly and calibration",
+  "source_url": "https://github.com/Dindb-dong/who-is-your-bias/blob/main/docs/humanoid-avatar.md",
+  "license": "CC0-1.0 graphical inputs; MPFB executable build tool has a separate GPL-3.0 license",
+  "license_sha256": "f6089cba01cb570a24712b41ab8a586ccd3cc5ef53dc266ca50b95c288956d2c",
+  "source_input_manifest_sha256": "408aa0191f665fe1b375ce0b7b91eb1a4ffaa95a4e47099cef91343adb0ec25c",
+  "permitted_distribution": "bundled",
+  "appearance_reference_period": "none; authored generic anatomical proxy",
+  "identity_claim": "No verified Elon Musk likeness or 2026 appearance"
+}
