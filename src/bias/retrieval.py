@@ -10,6 +10,10 @@ from dataclasses import dataclass
 
 from .corpus import Corpus
 from .models import Evidence
+from .situations import classify_situation
+
+RETRIEVER_VERSION = "qa-bm25-situation.v1"
+SITUATION_MULTIPLIER = 1.35
 
 # Generic comparative wording is not topical evidence: "more power" alone must
 # not connect an electric-car efficiency question to a tunnel-machine passage.
@@ -44,12 +48,6 @@ ALIASES = {
     "기억": "memory memorable", "바꿔": "transform change",
 }
 KOREAN_PARTICLES = ("들에게", "들에서", "이라고", "에서는", "에게", "부터", "라고", "에서", "으로", "적인", "은", "는", "이", "가", "을", "를", "로", "과", "와", "에")
-SITUATIONS = {
-    "explanation": ("why", "how", "explain", "왜", "어떻게", "설명"),
-    "reflection": ("regret", "failure", "learn", "실패", "배웠", "후회"),
-    "praise": ("admire", "amazing", "inspiring", "멋져", "대단", "존경"),
-    "challenge": ("disagree", "wrong", "critic", "반대", "틀렸", "비판"),
-}
 LIVE_QUERY = re.compile(r"\b(today|currently|latest|right now|(?:this|next) (?:week|month)|stock price|net worth)\b|오늘|현재|최신|지금 주가|최근 소식|다음 주", re.I)
 
 
@@ -91,19 +89,13 @@ def tokenize(text: str) -> list[str]:
     return result
 
 
-def classify_situation(text: str) -> str:
-    lower = text.lower()
-    for situation, phrases in SITUATIONS.items():
-        if any(phrase in lower for phrase in phrases):
-            return situation
-    return "conversation"
-
-
 @dataclass(frozen=True)
 class SearchHit:
     evidence: Evidence
     score: float
     matched_terms: tuple[str, ...]
+    topical_score: float | None = None
+    situation_match: bool = False
 
 
 @dataclass(frozen=True)
@@ -118,7 +110,10 @@ class Retriever:
         self.records = tuple(corpus.training_evidence)
         self.source_years = {source.id: {source.published_at.year, *([source.recorded_at.year] if source.recorded_at else [])} for source in corpus.sources.values()}
         self.topic_terms = {record.id: set(tokenize(" ".join(record.topics))) for record in self.records}
-        self.term_counts = [Counter(tokenize(record.text + " " + " ".join(record.topics + record.topics))) for record in self.records]
+        # Match incoming questions against original questions as well as answers.
+        # Both B and C use exactly this topical index; only C reranks its eligible
+        # candidates. An annotation summary is never substituted for source text.
+        self.term_counts = [Counter(tokenize(record.text + " " + (record.question_answer.question + " " + record.question_answer.question if record.question_answer else "") + " " + " ".join(record.topics + record.topics))) for record in self.records]
         self.lengths = [sum(count.values()) for count in self.term_counts]
         self.average_length = sum(self.lengths) / max(1, len(self.lengths))
         self.df: Counter[str] = Counter()
@@ -151,10 +146,7 @@ class Retriever:
                 tf = counts[term]
                 denominator = tf + 1.5 * (1 - 0.75 + 0.75 * length / max(1, self.average_length))
                 score += idf * tf * 2.5 / denominator
-            if behavior and situation in record.situations:
-                score *= 1.15
-            hits.append(SearchHit(record, round(score, 6), matched))
-        hits.sort(key=lambda hit: (-hit.score, hit.evidence.id))
+            hits.append(SearchHit(record, round(score, 6), matched, round(score, 6), situation in record.situations))
         # A weak, generic match must not be promoted into a factual response.
         hits = [
             hit for hit in hits
@@ -164,6 +156,12 @@ class Retriever:
         ]
         if not hits:
             return SearchResult((), 0, "Matches are too weak to support an answer.")
+        # Apply the same confidence floor before situation reranking. A matching
+        # situation cannot promote irrelevant evidence into an answer.
+        if behavior:
+            hits = [SearchHit(hit.evidence, round(hit.score * (SITUATION_MULTIPLIER if hit.situation_match else 1), 6),
+                              hit.matched_terms, hit.topical_score, hit.situation_match) for hit in hits]
+        hits.sort(key=lambda hit: (-hit.score, hit.evidence.id))
         best_terms = set(hits[0].matched_terms)
         coverage = len(best_terms) / max(1, len(terms))
         confidence = min(1.0, 0.35 + min(0.35, hits[0].score / 12) + 0.30 * coverage)
