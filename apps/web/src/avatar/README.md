@@ -13,6 +13,10 @@ For the humanoid's exact asset measurements, licenses, build commands, and nativ
 deformation checks, see [Bundled humanoid](../../../../docs/humanoid-avatar.md).
 For local package conversion, actual geometry inspection, and fixed-camera
 same-audio recording/export, see [Avatar audition](../../../../docs/avatar-audition.md).
+For the planned new identity, face/body/finger authoring, multi-photo/video
+reconstruction and required runtime extensions, see
+[New avatar generation](../../../../docs/avatar-generation-pipeline.md).
+That plan does not add finger controls, new framing or a new persona to this runtime.
 
 ## Runtime contract
 
@@ -143,3 +147,4 @@ References:
 - [MediaPipe Face Landmarker](https://developers.google.com/edge/mediapipe/solutions/vision/face_landmarker)
 - [MediaPipe Pose Landmarker](https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker)
 - [Rhubarb mouth cues](https://github.com/DanielSWolf/rhubarb-lip-sync)
+

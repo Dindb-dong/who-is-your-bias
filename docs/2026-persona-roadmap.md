@@ -4,6 +4,13 @@ Status: **implementation plan; not a completed capability claim**. Recorded on *
 
 **Implementation follow-up (2026-11-11):** the user subsequently authorized implementation and merging the existing PRs. PRs #10–#13 are now merged. See [the PR #13 implementation record](2026-implementation.md) and [continued implementation and actual execution evidence](2026-continuation.md). The plan and authoring-time status below remain a dated record.
 
+**New-avatar direction (2026-11-12):** for the Jensen Huang visual-avatar
+workstream, the user now requests a newly generated avatar from multiple photos
+and video. Its active design is the [avatar generation pipeline](avatar-generation-pipeline.md),
+including full upper-body/finger control and subject binding to the existing
+application. The acquisition-first priority below records the earlier Musk plan;
+it does not select ready-made candidates for the new workstream.
+
 The goal is a convincing, source-grounded conversation with a recognizable Musk avatar: relevant answers, characteristic language and speech, coherent dialogue, and natural audiovisual behavior. The existing engineering pilot provides reusable infrastructure, but its small original-Q&A dataset, short voice reference, and generic face do not establish that experience.
 
 Read the [3D avatar shortlist](research/musk-3d-avatar-shortlist.md) alongside this plan. Existing Musk-specific assets advertised with facial rigs make **3D asset evaluation a priority**. Image/video-based rendering remains a comparison path; it is not a predetermined replacement for 3D.
@@ -262,3 +269,4 @@ The repository already documents runnable setup, ingestion, reference preparatio
 - Which hardware/runtime configuration meets conversational latency while all components run together?
 
 The next implementation priority is **broader aligned data plus hybrid retrieval, in parallel with an actual Musk 3D asset audition**. The completion criterion is a measured improvement in the user's conversation experience, supported by reproducible evidence.
+
