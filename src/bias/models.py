@@ -143,6 +143,12 @@ class Grounding(Record):
     retrieved_ids: list[str]
     invalid_citation_ids: list[str] = Field(default_factory=list)
     reason: str | None = None
+    # Syntax and coverage do not constitute a semantic grounding verdict.
+    citation_status: Literal["complete", "partial", "missing", "invalid", "not_required"] = "not_required"
+    citation_unit_count: int = Field(default=0, ge=0)
+    cited_unit_count: int = Field(default=0, ge=0)
+    malformed_citations: list[str] = Field(default_factory=list)
+    semantic_status: Literal["unreviewed", "curated_source"] = "unreviewed"
 
 
 class TurnMetrics(Record):

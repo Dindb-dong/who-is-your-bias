@@ -7,7 +7,6 @@ import asyncio
 import hashlib
 import json
 import math
-import re
 import statistics
 import time
 from collections import Counter
@@ -20,8 +19,10 @@ import httpx
 
 from bias.config import Settings
 from bias.corpus import Corpus, source_event_id
-from bias.engine import CITATION, Engine, validate_citations
+from bias.engine import Engine
+from bias.grounding import audit_citations
 from bias.models import ChatRequest, ChatTurn
+from bias.prompts import PROMPT_BUILDERS
 from bias.providers import ProviderError
 
 from .cases import GenerationCase, GenerationSuite, read_suite, suite_fingerprint, validate_suite
@@ -30,7 +31,9 @@ from .observe import AuditedLLM, ObservedTransport, StreamObservation
 CONDITIONS = {"profile": "A", "rag": "B", "behavior": "C"}
 LIMITATIONS = [
     "These are declared development cases, not a blinded generalization or persona-fidelity benchmark.",
-    "Citation format and retrieved identifiers are checked mechanically; factual entailment, relevance, persona resemblance, Korean quality, and injection resistance remain ungraded.",
+    "Citation format, identifiers, and sentence-like trailing-marker coverage are checked mechanically; factual entailment, relevance, persona resemblance, Korean quality, and injection resistance remain ungraded.",
+    "Citation units are a formatting heuristic, not extracted or verified factual claims. Disclaimers and unusual abbreviations can produce uncited units.",
+    "No repair request or automatic citation insertion occurs. The raw model response is retained even when incomplete or unsupported.",
     "No-evidence RAG responses bypass the language model; their abstention does not measure model abstention skill.",
     "Withheld references never enter application prompts. Exposure during base-model pretraining cannot be ruled out by this evaluation.",
     "Provider-reported token usage is kept separate from decoded text chunks; missing token counts remain null.",
@@ -44,11 +47,9 @@ def fingerprint_corpus(corpus: Corpus) -> str:
 
 
 def citation_report(raw: str, allowed: set[str], required: bool) -> dict:
-    _, valid, invalid = validate_citations(raw, allowed)
-    candidates = re.findall(r"\[source:[^\]\n]*(?:\]|$)", raw)
-    malformed = [marker for marker in candidates if CITATION.fullmatch(marker) is None]
-    status = "invalid" if invalid or malformed else "valid" if valid else "missing" if required else "not_required"
-    return {"required": required, "status": status, "valid_ids": valid, "invalid_ids": invalid, "malformed_markers": malformed, "semantic_entailment": "ungraded"}
+    audit = audit_citations(raw, allowed, required=required)
+    status = "invalid" if audit.invalid_ids or audit.malformed_markers else "valid" if audit.valid_ids else "missing" if required else "not_required"
+    return {"required": required, "status": status, "valid_ids": list(audit.valid_ids), "invalid_ids": list(audit.invalid_ids), "malformed_markers": list(audit.malformed_markers), "coverage": audit.as_dict(), "semantic_entailment": "ungraded"}
 
 
 def retrieval_check(case: GenerationCase, mode: str, retrieved: list[str], corpus: Corpus) -> dict:
@@ -63,10 +64,10 @@ def retrieval_check(case: GenerationCase, mode: str, retrieved: list[str], corpu
     return {"status": "pass" if hit else "fail", "check": "declared_top_k_target", "semantic_answer_quality": "ungraded"}
 
 
-async def run_case(settings: Settings, corpus: Corpus, case: GenerationCase, mode: str, repetition: int, transport_factory: Callable[[], httpx.AsyncBaseTransport] | None = None, total_budget_seconds: float | None = None) -> dict:
+async def run_case(settings: Settings, corpus: Corpus, case: GenerationCase, mode: str, repetition: int, transport_factory: Callable[[], httpx.AsyncBaseTransport] | None = None, total_budget_seconds: float | None = None, *, prompt_version: str = "compact") -> dict:
     observation = StreamObservation()
     provider = AuditedLLM(settings.llm, timeout=settings.request_timeout, max_chars=settings.max_response_chars, max_tokens=settings.llm_max_tokens, corpus=corpus, transport=ObservedTransport(observation, transport_factory))
-    engine = Engine(settings, corpus, llm=provider)
+    engine = Engine(settings, corpus, llm=provider, prompt_builder=PROMPT_BUILDERS[prompt_version])
     request = ChatRequest(message=case.question, mode=mode, language=case.language)
     started = time.perf_counter()
     first_text_ms = None
@@ -111,8 +112,8 @@ async def run_case(settings: Settings, corpus: Corpus, case: GenerationCase, mod
         "question": case.question, "language": case.language, "category": case.category, "expected_action": case.expected_action,
         "execution": {"completed": turn is not None, "language_model_requested": inference, "provider": turn.provider if turn else "openai" if inference else None, "http_requests": observation.requests, "http_statuses": observation.http_statuses, "error": error, "events": events},
         "latency": {"wall_ms": round(wall_ms, 3), "first_visible_text_ms": round(first_text_ms, 3) if first_text_ms is not None else None, "engine_metrics": turn.metrics.model_dump() if turn else None},
-        "tokens": {"usage": observation.usage, "usage_status": observation.usage_status, "visible_characters": len(raw), "visible_chunks": len(fragments), "finish_reason": observation.finish_reason, "requested_max_tokens": settings.llm_max_tokens},
-        "prompt_audit": {"sha256": provider.prompt_sha256, "characters": provider.prompt_chars, "evidence_ids": prompt_ids, "held_out_or_forbidden_ids": leaks, "reference_metadata_forwarded": False, "fresh_session": True},
+        "tokens": {"usage": observation.usage, "usage_status": observation.usage_status, "visible_characters": len(raw), "visible_chunks": len(fragments), "finish_reason": observation.finish_reason, "requested_max_tokens": settings.llm_max_tokens, "response_model": observation.response_model},
+        "prompt_audit": {"version": prompt_version, "sha256": provider.prompt_sha256, "characters": provider.prompt_chars, "evidence_ids": prompt_ids, "evidence_text_sha256": provider.evidence_text_sha256, "held_out_or_forbidden_ids": leaks, "reference_metadata_forwarded": False, "fresh_session": True},
         "retrieved_ids": retrieved,
         "retrieval_check": retrieval_check(case, mode, retrieved, corpus),
         "citation_format": citations,
@@ -139,6 +140,8 @@ def summarize(rows: list[dict]) -> dict:
             "model_requests": sum(row["execution"]["language_model_requested"] for row in group),
             "errors": dict(Counter(row["execution"]["error"]["code"] for row in group if row["execution"]["error"])),
             "required_citation_format_checks": len(required), "valid_citation_format": sum(row["citation_format"]["status"] == "valid" for row in required),
+            "complete_citation_coverage": sum(row["citation_format"]["coverage"]["status"] == "complete" for row in required),
+            "citation_coverage_status_counts": dict(Counter(row["citation_format"]["coverage"]["status"] for row in required)),
             "citation_status_counts": dict(Counter(row["citation_format"]["status"] for row in group)),
             "prompt_split_leaks": sum(bool(row["prompt_audit"]["held_out_or_forbidden_ids"]) for row in group),
             "wall_ms_median": round(statistics.median(latency), 3), "wall_ms_min": min(latency), "wall_ms_max": max(latency),
@@ -148,8 +151,10 @@ def summarize(rows: list[dict]) -> dict:
     return summary
 
 
-async def run_suite(settings: Settings, corpus: Corpus, suite: GenerationSuite, *, modes: tuple[str, ...] = ("profile", "rag", "behavior"), repetitions: int = 1, allow_preview: bool = False, max_total_seconds: float = 600, transport_factory: Callable[[], httpx.AsyncBaseTransport] | None = None, progress: Callable[[dict], None] | None = None, checkpoint: Callable[[dict], None] | None = None) -> dict:
+async def run_suite(settings: Settings, corpus: Corpus, suite: GenerationSuite, *, modes: tuple[str, ...] = ("profile", "rag", "behavior"), repetitions: int = 1, allow_preview: bool = False, max_total_seconds: float = 600, transport_factory: Callable[[], httpx.AsyncBaseTransport] | None = None, progress: Callable[[dict], None] | None = None, checkpoint: Callable[[dict], None] | None = None, prompt_version: str = "compact") -> dict:
     validate_suite(suite, corpus)
+    if prompt_version not in PROMPT_BUILDERS:
+        raise ValueError("Choose legacy or compact prompts")
     if not modes or len(set(modes)) != len(modes) or any(mode not in CONDITIONS for mode in modes):
         raise ValueError("Choose distinct profile, rag, or behavior conditions")
     if not 1 <= repetitions <= 5:
@@ -172,7 +177,7 @@ async def run_suite(settings: Settings, corpus: Corpus, suite: GenerationSuite, 
         remaining = deadline - time.perf_counter()
         if remaining <= 0:
             break
-        row = await run_case(settings, corpus, case, mode, repetition, transport_factory, remaining)
+        row = await run_case(settings, corpus, case, mode, repetition, transport_factory, remaining, prompt_version=prompt_version)
         rows.append(row)
         if checkpoint:
             checkpoint(row)
@@ -183,7 +188,7 @@ async def run_suite(settings: Settings, corpus: Corpus, suite: GenerationSuite, 
         "suite_id": suite.id, "suite_sha256": hashlib.sha256(suite_fingerprint(suite)).hexdigest(), "corpus_sha256": fingerprint_corpus(corpus),
         "declaration": suite.declaration, "development_only": True,
         "execution_scope": {"planned_runs": len(plan), "attempted_runs": len(rows), "max_total_seconds": max_total_seconds, "wall_ms": round((time.perf_counter() - started) * 1000, 3), "skipped_runs": [{"case_id": case.id, "condition": CONDITIONS[mode], "mode": mode, "repetition": repetition, "reason": "total_deadline"} for case, mode, repetition in plan[len(rows):]]},
-        "configuration": {"model": settings.llm.model, "llm_configured": settings.llm.configured, "max_tokens": settings.llm_max_tokens, "timeout_seconds": settings.request_timeout, "retrieval_limit": settings.retrieval_limit, "modes": list(modes), "repetitions": repetitions, "transport": "test_injected" if transport_factory else "actual_http", "condition_order": "rotating_sequential", "session_policy": "new_engine_and_session_per_condition"},
+        "configuration": {"model": settings.llm.model, "prompt_version": prompt_version, "llm_configured": settings.llm.configured, "max_tokens": settings.llm_max_tokens, "timeout_seconds": settings.request_timeout, "retrieval_limit": settings.retrieval_limit, "modes": list(modes), "repetitions": repetitions, "transport": "test_injected" if transport_factory else "actual_http", "condition_order": "rotating_sequential", "session_policy": "new_engine_and_session_per_condition"},
         "corpus": corpus.stats(), "quality": corpus.quality_report(), "summary": summarize(rows), "runs": rows, "limitations": LIMITATIONS,
     }
 
@@ -194,6 +199,7 @@ def main() -> int:
     parser.add_argument("--case", action="append", dest="case_ids", help="Select a declared case; may be repeated")
     parser.add_argument("--modes", nargs="+", choices=list(CONDITIONS), default=list(CONDITIONS))
     parser.add_argument("--repetitions", type=int, choices=range(1, 6), default=1)
+    parser.add_argument("--prompt-version", choices=list(PROMPT_BUILDERS), default="compact", help="Freeze the legacy PR6 prompt or use the compact production prompt")
     parser.add_argument("--max-total-seconds", type=float, default=600)
     parser.add_argument("--allow-preview", action="store_true")
     parser.add_argument("--validate-only", action="store_true")
@@ -227,7 +233,7 @@ def main() -> int:
             checkpoint_stream.flush()
 
         try:
-            report = asyncio.run(run_suite(settings, corpus, suite, modes=tuple(args.modes), repetitions=args.repetitions, allow_preview=args.allow_preview, max_total_seconds=args.max_total_seconds, transport_factory=None, progress=lambda row: print(json.dumps(row, ensure_ascii=False), flush=True), checkpoint=save_checkpoint))
+            report = asyncio.run(run_suite(settings, corpus, suite, modes=tuple(args.modes), repetitions=args.repetitions, allow_preview=args.allow_preview, max_total_seconds=args.max_total_seconds, transport_factory=None, progress=lambda row: print(json.dumps(row, ensure_ascii=False), flush=True), checkpoint=save_checkpoint, prompt_version=args.prompt_version))
         except KeyboardInterrupt:
             print(json.dumps({"status": "cancelled", "completed_runs_checkpoint": str(checkpoint_path), "semantic_review": "ungraded"}), flush=True)
             return 130

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import asyncio
-import re
 import time
 import uuid
 from collections.abc import AsyncIterator
@@ -12,24 +11,12 @@ from contextlib import aclosing
 from .behavior import plan_behavior
 from .config import Settings
 from .corpus import Corpus
+from .grounding import CITATION, audit_citations, validate_citations
 from .models import ChatRequest, ChatTurn, Grounding, TurnMetrics
-from .prompts import build_messages
+from .prompts import PromptBuilder, build_messages
 from .providers import OpenAICompatibleLLM
 from .retrieval import Retriever, SearchResult, tokenize
 from .sessions import Session, SessionStore
-
-CITATION = re.compile(r"\[source:([A-Za-z0-9_.-]+)\]")
-
-
-def validate_citations(text: str, allowed_ids: set[str]) -> tuple[str, list[str], list[str]]:
-    mentioned = list(dict.fromkeys(CITATION.findall(text)))
-    valid = [identifier for identifier in mentioned if identifier in allowed_ids]
-    invalid = [identifier for identifier in mentioned if identifier not in allowed_ids]
-    cleaned = CITATION.sub("", text)
-    cleaned = re.sub(r"[ \t]+([.,!?])", r"\1", cleaned)
-    cleaned = re.sub(r"[ \t]{2,}", " ", cleaned).strip()
-    return cleaned, valid, invalid
-
 
 def evidence_preview(request: ChatRequest, result: SearchResult) -> str:
     if request.mode == "profile":
@@ -53,9 +40,10 @@ def evidence_preview(request: ChatRequest, result: SearchResult) -> str:
 
 
 class Engine:
-    def __init__(self, settings: Settings, corpus: Corpus, *, llm: OpenAICompatibleLLM | None = None):
+    def __init__(self, settings: Settings, corpus: Corpus, *, llm: OpenAICompatibleLLM | None = None, prompt_builder: PromptBuilder = build_messages):
         self.settings = settings
         self.corpus = corpus
+        self.prompt_builder = prompt_builder
         self.retriever = Retriever(corpus)
         self.sessions = SessionStore(ttl=settings.session_ttl, max_sessions=settings.max_sessions, max_turns=settings.max_turns)
         self.llm = llm or OpenAICompatibleLLM(settings.llm, timeout=settings.request_timeout, max_chars=settings.max_response_chars, max_tokens=settings.llm_max_tokens)
@@ -90,7 +78,7 @@ class Engine:
                 use_llm = self.settings.llm.configured and (request.mode == "profile" or bool(result.hits))
                 fragments: list[str] = []
                 if use_llm:
-                    messages = build_messages(self.corpus.persona, request, result, list(session.history))
+                    messages = self.prompt_builder(self.corpus.persona, request, result, list(session.history), self.corpus.sources)
                     async with aclosing(self.llm.stream(messages)) as tokens:
                         async for token in tokens:
                             fragments.append(token)
@@ -104,15 +92,25 @@ class Engine:
                 raw = "".join(fragments)
                 allowed_ids = {hit.evidence.id for hit in result.hits}
                 text, valid, invalid = validate_citations(raw, allowed_ids)
+                audit = audit_citations(raw, allowed_ids, required=use_llm and request.mode != "profile")
                 if request.mode != "profile" and not result.hits:
                     status = "insufficient"
                     reason = result.reason
+                elif use_llm:
+                    status = "unverified"
+                    reason = (
+                        "Sentence-level citation markers were checked; factual entailment still requires review."
+                        if audit.coverage_status == "complete" else
+                        "Profile-only responses have no source support; factual entailment still requires review."
+                        if request.mode == "profile" else
+                        "Citation coverage is incomplete or invalid; factual entailment still requires review."
+                    )
                 elif request.mode == "profile" or not valid or invalid:
                     status = "unverified"
                     reason = "No complete set of valid retrieved citation identifiers accompanies the response."
                 else:
                     status = "grounded"
-                    reason = "Citation identifiers were validated; factual entailment still requires review." if use_llm else "Curated evidence preview; no language-model inference was performed."
+                    reason = "Curated evidence preview; no language-model inference was performed."
                 turn = ChatTurn(
                     id=uuid.uuid4().hex,
                     session_id=session.id,
@@ -122,7 +120,11 @@ class Engine:
                     provider="openai" if use_llm else "evidence",
                     citations=[self.corpus.citation(identifier) for identifier in valid],
                     behavior=plan_behavior(text, request.message, mode=request.mode, language=request.language),
-                    grounding=Grounding(status=status, retrieved_ids=[hit.evidence.id for hit in result.hits], invalid_citation_ids=invalid, reason=reason),
+                    grounding=Grounding(
+                        status=status, retrieved_ids=[hit.evidence.id for hit in result.hits], invalid_citation_ids=invalid, reason=reason,
+                        citation_status=audit.coverage_status, citation_unit_count=len(audit.units), cited_unit_count=audit.cited_unit_count,
+                        malformed_citations=list(audit.malformed_markers), semantic_status="curated_source" if status == "grounded" else "unreviewed",
+                    ),
                     metrics=TurnMetrics(retrieval_ms=round(retrieval_ms, 3), generation_ms=round(generation_ms, 3), total_ms=round((time.perf_counter() - started) * 1000, 3)),
                 )
                 # Failed or cancelled generations never enter conversation memory.

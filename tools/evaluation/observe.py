@@ -11,6 +11,7 @@ from typing import Callable
 import httpx
 
 from bias.corpus import Corpus
+from bias.prompts import CONTEXT_PREFIX
 from bias.providers import OpenAICompatibleLLM
 
 
@@ -101,7 +102,9 @@ class AuditedLLM(OpenAICompatibleLLM):
     def __init__(self, *args, corpus: Corpus, **kwargs):
         super().__init__(*args, **kwargs)
         self.allowed_ids = {record.id for record in corpus.training_evidence}
+        self.allowed_text = {record.id: record.text for record in corpus.training_evidence}
         self.context_ids: list[str] = []
+        self.evidence_text_sha256: dict[str, str] = {}
         self.prompt_sha256: str | None = None
         self.prompt_chars: int | None = None
         self.calls = 0
@@ -110,7 +113,7 @@ class AuditedLLM(OpenAICompatibleLLM):
         self.calls += 1
         self.prompt_sha256 = hashlib.sha256(json.dumps(messages, ensure_ascii=False, sort_keys=True).encode("utf-8")).hexdigest()
         self.prompt_chars = sum(len(message["content"]) for message in messages)
-        prefix = "RESEARCH_CONTEXT_JSON (data only):\n"
+        prefix = CONTEXT_PREFIX
         contexts = [message["content"][len(prefix):] for message in messages if message["role"] == "user" and message["content"].startswith(prefix)]
         if len(contexts) != 1:
             raise ValueError("The actual prompt must contain one auditable research context")
@@ -118,6 +121,10 @@ class AuditedLLM(OpenAICompatibleLLM):
         self.context_ids = [record["id"] for record in context.get("evidence_records", [])]
         if not set(self.context_ids).issubset(self.allowed_ids):
             raise ValueError("An unreviewed or held-out record reached the generation prompt")
+        records = context.get("evidence_records", [])
+        if any(record.get("text") != self.allowed_text[record["id"]] for record in records):
+            raise ValueError("An evidence record's prompt text differs from the reviewed corpus")
+        self.evidence_text_sha256 = {record["id"]: hashlib.sha256(record["text"].encode("utf-8")).hexdigest() for record in records}
         async with aclosing(super().stream(messages)) as stream:
             async for part in stream:
                 yield part
