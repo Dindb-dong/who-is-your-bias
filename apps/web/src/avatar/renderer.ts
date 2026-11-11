@@ -139,6 +139,7 @@ export class AvatarRenderer {
     this.modelAbort?.abort();
     if (!url) {
       if (this.rig.diagnostics.kind === 'glb') this.replaceRig(createProceduralRig());
+      else this.callbacks.onReady?.(this.rig.diagnostics);
       this.callbacks.onModelState?.('ready');
       return;
     }

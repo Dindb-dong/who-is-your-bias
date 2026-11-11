@@ -39,6 +39,20 @@ test('loads the bundled human and switches camera framing and avatar assets', as
   expect(errors).toEqual([]);
 });
 
+test('recovers from a failed human asset without leaving the portrait loading', async ({ page }) => {
+  await page.route('**/models/research-human-v2.glb', (route) => route.fulfill({ status: 500, body: 'Unavailable' }));
+  await page.goto('/');
+  await expect(page.getByRole('alert')).toContainText('The model could not be loaded (500).');
+  await page.getByRole('button', { name: 'Use stylized portrait', exact: true }).click();
+  const stage = page.getByTestId('avatar-stage');
+  await expect(stage).toHaveAttribute('data-rig-kind', 'procedural');
+  await expect(stage).toHaveAttribute('data-model-state', 'ready');
+  await expect(page.locator('.stage-caption')).toHaveText('STYLIZED PORTRAIT RIG');
+  await expect(page.getByRole('alert')).toHaveCount(0);
+  await expect(page.locator('.avatar-loading')).toHaveCount(0);
+  await expect(page.getByText('Loading your avatar…', { exact: true })).toHaveCount(0);
+});
+
 test('replays selected source geometry only after explicit conversation opt-in', async ({ page }, info) => {
   const clips: string[] = [];
   page.on('request', (request) => { if (request.url().includes('/api/motion/clip/')) clips.push(request.url()); });
