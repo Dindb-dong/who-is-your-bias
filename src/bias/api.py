@@ -133,6 +133,7 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
             "capabilities": {"llm": config.llm.configured, "speech": config.tts.configured, "transcription": config.asr.configured},
             "providers": {"llm": {"configured": config.llm.configured, "model": config.llm.model}, "speech": {"configured": config.tts.configured, "model": config.tts.model}, "transcription": {"configured": config.asr.configured, "model": config.asr.model}},
             "corpus": engine.corpus.stats(),
+            "qa_corpus": engine.corpus.qa_report(),
             "configuration_only": True,
         }
 
@@ -140,7 +141,7 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
     async def persona(request: Request):
         loaded: Corpus = request.app.state.engine.corpus
         item = loaded.persona
-        return {"id": item.id, "name": item.name, "tagline": item.tagline, "description": item.description, "example_questions": item.example_questions, "stats": loaded.stats(), "capabilities": {"llm": config.llm.configured, "speech": config.tts.configured, "transcription": config.asr.configured}, "notice": item.notice}
+        return {"id": item.id, "name": item.name, "tagline": item.tagline, "description": item.description, "example_questions": item.example_questions, "stats": loaded.stats(), "qa_corpus": loaded.qa_report(), "capabilities": {"llm": config.llm.configured, "speech": config.tts.configured, "transcription": config.asr.configured}, "notice": item.notice}
 
     @application.get("/api/sources")
     async def sources(request: Request):

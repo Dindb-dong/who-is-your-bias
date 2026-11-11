@@ -31,7 +31,7 @@ jobs:
       - run: npm ci
       - run: uv run pytest
       - run: uv run bias validate
-      - run: uv run bias evaluate --fail-on-regression --output reports/local/retrieval.json
+      - run: uv run bias --corpus data/personas/elon-musk evaluate --fail-on-regression --output reports/local/retrieval.json
       - run: npm run check
       - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e

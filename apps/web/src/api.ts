@@ -6,7 +6,7 @@ export type Language = 'en' | 'ko';
 export type ExperimentMode = 'profile' | 'rag' | 'behavior';
 export interface Source {
   id: string; title: string; url: string; publisher: string; published_at: string;
-  source_type: string; split: 'train' | 'test'; attribution: string;
+  source_type: string; split: 'train' | 'validation' | 'test'; attribution: string;
 }
 export interface Locator { label: string; start_seconds?: number | null; end_seconds?: number | null; timeline?: string | null }
 export interface Citation { evidence_id: string; source_id: string; title: string; url: string; locator: Locator; text: string }
@@ -27,6 +27,7 @@ export interface Persona {
   id: string; name: string; tagline: string; description: string;
   example_questions: { en: string[]; ko: string[] };
   stats: { sources: number; evidence: number; held_out_sources: number };
+  qa_corpus?: { corpus_id: string | null; materialization: string; question_answer_records: number; training_question_answers: number; complete_exchanges: number; excerpts: number };
   capabilities: { llm: boolean; speech: boolean; transcription?: boolean };
   notice: string;
 }

@@ -18,7 +18,7 @@ import { useMeasuredMotion } from './hooks/useMeasuredMotion';
 
 interface Message { id: string; role: 'user' | 'assistant'; text: string; turn?: Turn; pending?: boolean; error?: string }
 type Page = 'studio' | 'sources' | 'lab';
-const defaultQuestions = ['Why did Tesla start with a sports car?', 'How do you solve difficult problems?', 'What makes an idea worth pursuing?'];
+const defaultQuestions = ['Why are you boring?', 'How do tunnels reduce traffic congestion?', 'How can we reduce tunneling costs?'];
 const stages: Record<string, string> = { retrieving: 'Finding relevant sources', generating: 'Composing a response', planning: 'Planning expression', complete: 'Response ready' };
 
 function Mark({ small = false }: { small?: boolean }) {
@@ -26,7 +26,7 @@ function Mark({ small = false }: { small?: boolean }) {
 }
 
 function EvidencePanel({ citations, onClose }: { citations: Citation[]; onClose: () => void }) {
-  return <aside className="evidence-drawer" aria-label="Response evidence"><div className="drawer-header"><div><span className="eyebrow">FOLLOW THE THOUGHT</span><h2>Response evidence</h2></div><button className="icon-button" onClick={onClose} aria-label="Close evidence"><X size={18}/></button></div><p className="drawer-intro">Source notes used for this response. These are paraphrases, not direct quotations.</p>{citations.length ? citations.map((citation, index) => <article className="evidence-card" key={citation.evidence_id}><div className="evidence-index">{String(index + 1).padStart(2, '0')}<span>{citation.locator.label}</span></div><h3>{citation.title}</h3><p>{citation.text}</p><a href={citation.url} target="_blank" rel="noreferrer">Read original source <ArrowUpRight size={14}/></a></article>) : <div className="empty-state"><BookOpen size={24}/><p>This response does not have supporting source records.</p></div>}</aside>;
+  return <aside className="evidence-drawer" aria-label="Response evidence"><div className="drawer-header"><div><span className="eyebrow">FOLLOW THE THOUGHT</span><h2>Response evidence</h2></div><button className="icon-button" onClick={onClose} aria-label="Close evidence"><X size={18}/></button></div><p className="drawer-intro">Source records used for this response. Original interview excerpts and editorial summaries retain their source attribution.</p>{citations.length ? citations.map((citation, index) => <article className="evidence-card" key={citation.evidence_id}><div className="evidence-index">{String(index + 1).padStart(2, '0')}<span>{citation.locator.label}</span></div><h3>{citation.title}</h3><p>{citation.text}</p><a href={citation.url} target="_blank" rel="noreferrer">Read original source <ArrowUpRight size={14}/></a></article>) : <div className="empty-state"><BookOpen size={24}/><p>This response does not have supporting source records.</p></div>}</aside>;
 }
 
 export default function App() {
@@ -163,7 +163,7 @@ export default function App() {
       <main>
         {infoOpen && <div className="about-banner"><Sparkles size={19}/><p><strong>Who Is Your Bias?</strong> A research workspace for source-grounded dialogue, voice, and embodied behavior. This is an AI simulation, not Elon Musk or an official representative. The reference avatar and its movement rules are designed prototypes.</p><button className="icon-button" onClick={() => setInfoOpen(false)} aria-label="Close project information"><X size={17}/></button></div>}
         {connection === 'error' && <div className="connection-error" role="alert"><span><strong>The conversation service is offline.</strong> {connectionError}</span><button onClick={() => setReload((value) => value + 1)}><RotateCcw size={14}/> Reconnect</button></div>}
-        {page === 'sources' ? <SourcesView sources={sources}/> : page === 'lab' ? <><ResearchLab language={language}/><MotionLab modelUrl={modelUrl} reducedMotion={reducedMotion}/></> : <>
+        {page === 'sources' ? <SourcesView sources={sources} corpusInfo={persona?.qa_corpus}/> : page === 'lab' ? <><ResearchLab language={language}/><MotionLab modelUrl={modelUrl} reducedMotion={reducedMotion}/></> : <>
           <div className="studio-heading"><div><div className="eyebrow">CURIOSITY, IN CONVERSATION</div><h1>Meet the mind. <span>Explore the ideas.</span></h1><p>A conversation with an evidence-grounded Elon Musk persona.</p></div><button className="secondary-button" onClick={reset}><Plus size={16}/> New conversation</button></div>
           <div className="studio-grid">
             <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}><section className="stage-card" aria-label="Avatar studio" style={{ flex: 1 }}>

@@ -70,7 +70,7 @@ test('replays selected source geometry only after explicit conversation opt-in',
     await page.getByRole('button', { name: 'Send message', exact: true }).click();
     await expect(page.getByRole('button', { name: 'Stop response', exact: true })).toHaveCount(0);
     await expect(page.getByRole('button', { name: /evidence records/ }).last()).toBeVisible();
-    await expect(page.getByText(/electricity generation and transmission losses/).last()).toBeVisible();
+    await expect(page.getByText(/you’re still better off\.|you're still better off\./).last()).toBeVisible();
     await expect(page.getByText(/tunnel-cost/)).toHaveCount(0);
   };
   await ask();
