@@ -100,6 +100,25 @@ took about 117 seconds including cold indexing, model loading and first rerank;
 this was not an isolated index measurement or conversational latency. The index
 is process-local and rebuilt on restart. Set `BIAS_RETRIEVAL_PREWARM=false` only
 when intentionally measuring cold request behavior. Keep a single API worker.
+The measured runs used an isolated CPU Torch environment. The ordinary hybrid
+lock includes CUDA dependencies on Linux; the [pinned CPU environment recipe](hybrid-retrieval.md#optional-isolated-cpu-environment)
+documents the actual package selection and avoids treating a default lockfile
+installation as an identical benchmark environment.
+
+The [actual expanded-API smoke](../reports/runtime/2026-v1/preview-api-smoke.json)
+then exercised the final startup path with these real models through an
+in-process ASGI client: warmup took **65.940 seconds**, and all six source-preview
+turns completed in **78.807 seconds including startup**. The first question and
+two follow-ups retained the expected original passage; the Korean current-plan
+question and its two follow-ups all abstained without citing old evidence.
+The three searched turns took 3.234–3.736 seconds each on that CPU run. This is
+an integration check without LLM/TTS inference, external network transport or
+speaker latency. Reproduce after materializing the example's corpus/snapshot:
+
+```bash
+uv run --extra hybrid --env-file config/persona-2026.env.example \
+  python -m tools.persona_runtime_smoke --output reports/local/preview-api-smoke-new.json
+```
 
 ## Temporal evidence and dialogue state
 
@@ -149,6 +168,10 @@ bounded dialogue history and the current question. They preserve complete
 selected passages and reserve the configured output budget. An evidence passage
 that does not fit is dropped whole, and its ID cannot authorize a citation.
 If no complete evidence fits, the request fails explicitly before inference.
+The bounded user reference and supporting user turn IDs are reserved in the
+base context, so dropping an oversized history pair cannot erase the subject
+or audience needed to interpret a short follow-up. They remain unverified user
+context and never authorize citations.
 
 Set `BIAS_LLM_CONTEXT_WINDOW` to the actual model window and optionally
 `BIAS_LLM_TOKENIZER_PATH` to its matching local tokenizer with a chat template.

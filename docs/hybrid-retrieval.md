@@ -181,14 +181,62 @@ unchanged warmed/cold retrieval results are covered by focused contract tests.
 The application retains lexical retrieval unless hybrid retrieval is explicitly
 selected. Local model packages are optional: the base Python install does not
 pull Torch or download model weights. Install the `hybrid` extra for local
-embeddings/reranking. For a CPU environment, the following dependency install
-was exercised during validation:
+embeddings/reranking. **`uv sync --extra hybrid` is not the CPU benchmark's
+environment recipe.** The repository's current `uv.lock` selects PyPI
+`torch==2.15.0`, including NVIDIA/CUDA dependencies on Linux. It has no CPU-index
+override. A normal hybrid sync can therefore install GPU runtime packages even
+when inference is configured with `device="cpu"`.
+
+The benchmark used a separate `retrieval-venv`, Python **3.12.14**, and an
+explicit CPU backend with `uv pip`, not the project's lockfile sync. Its original
+model dependency installation used the following command shape (the environment
+path is normalized here):
 
 ```bash
 uv venv .venv-retrieval
 uv pip install --python .venv-retrieval/bin/python --torch-backend cpu \
   'sentence-transformers>=5,<6' 'httpx[socks]>=0.27,<1' pytest
 ```
+
+The resolved versions were verified from the installed environment:
+**Torch 2.15.0+cpu**, Sentence Transformers 5.7.0,
+Transformers 5.22.2, NumPy 2.5.4, Tokenizers 0.23.3, Hugging Face Hub 2.4.0,
+Safetensors 0.8.0, HTTPX 0.28.1, socksio 1.0.0, and pytest 9.2.0. The reports also
+record the model runtime package versions. The broad constraints in the original
+command are historical installation provenance; running them again can resolve
+newer packages.
+
+### Optional isolated CPU environment
+
+For a Linux CPU environment with those recorded inference versions, use the
+official [PyTorch CPU wheel index](https://download.pytorch.org/whl/cpu) explicitly
+and retain the CPU Torch pin when installing the project and model packages:
+
+```bash
+uv venv --python 3.12.14 .venv-retrieval
+uv pip install --python .venv-retrieval/bin/python \
+  --index-url https://download.pytorch.org/whl/cpu \
+  'torch==2.15.0+cpu'
+uv pip install --python .venv-retrieval/bin/python --torch-backend cpu \
+  -e . 'torch==2.15.0+cpu' \
+  'sentence-transformers==5.7.0' 'transformers==5.22.2' \
+  'numpy==2.5.4' 'tokenizers==0.23.3' \
+  'huggingface-hub==2.4.0' 'safetensors==0.8.0' \
+  'httpx[socks]==0.28.1' 'socksio==1.0.0' 'pytest==9.2.0'
+.venv-retrieval/bin/python -c \
+  "import torch; assert torch.__version__ == '2.15.0+cpu'; assert torch.version.cuda is None; print(torch.__version__)"
+```
+
+This optional recipe pins the measured inference packages, not every transitive
+dependency or platform wheel. It is documented from the existing environment;
+no new model evaluation was run for this installation clarification. Use this
+environment's Python directly for evaluation or the API. A subsequent project
+`uv sync --extra hybrid` uses the repository lock again and does not reproduce
+this separate CPU package selection. The lockfile and project dependency
+defaults are unchanged by the recipe. The index and `uv pip` backend options are
+described in [uv's official PyTorch integration guide](https://docs.astral.sh/uv/guides/integration/pytorch/).
+
+### Model and evaluation settings
 
 The optional [expanded-corpus application recipe](../config/persona-2026.env.example)
 uses explicit model revisions, the E5 query/passage prefixes, dense floor 0.78,

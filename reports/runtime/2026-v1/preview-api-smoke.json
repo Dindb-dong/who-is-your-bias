@@ -1,0 +1,215 @@
+{
+  "schema_version": "persona-runtime-smoke.v1",
+  "started_at": "2026-11-11T10:49:29.088704+00:00",
+  "transport": "in_process_asgi_testclient",
+  "llm_inference": false,
+  "tts_inference": false,
+  "acoustic_latency_ms": null,
+  "runtime": {
+    "python": "3.12.14",
+    "torch": "2.15.0+cpu",
+    "sentence_transformers": "5.7.0"
+  },
+  "implementation_sha256": {
+    "tools/persona_runtime_smoke.py": "7d9461b9b16c95e9205d0e5cbaa8dcb0329d9b331f5af5d58d9ad218eb89f881",
+    "src/bias/__init__.py": "5ce8591bb917837fe2b6d12beffc1b632ccff7e15b44c23aefcaa76da7d1cf42",
+    "src/bias/api.py": "f1389a67ecc32e966a9153b908880cfdb4487d3707ad093fedba9830c883040f",
+    "src/bias/behavior.py": "58810783d5e7010ff153303608c8db8cf3c0c16b4a74c7ac4c75695ce84cf1f4",
+    "src/bias/cli.py": "9c78fdde8b0fa4fd89abb2f27c95ee957bded68fc25e2251e8914fcc708b04b4",
+    "src/bias/compact_prompts.py": "032013e9c1a1c2420868cff31833628b25391e2a161ce5cd4435dd046ae5110e",
+    "src/bias/config.py": "c5a286c9c32cc18e7409075b87094ed1c7ff7cdd5f94f3cc359341a7df6aec3b",
+    "src/bias/context_budget.py": "9e8d6d4d7cdfefaf483689c776b3a8335da330dbda47725c84c1ab37344120ba",
+    "src/bias/corpus.py": "16b9eef8a6fef0e20a7dd4099b470724e793dc14c698313d06fb679b87e9aeb0",
+    "src/bias/dialogue.py": "222653d21a691679abebca7dfae8de3662d60af02ef1e9b3a7bdc04a32859484",
+    "src/bias/engine.py": "2e4850e02304b17902d1964fee93ff0d3f25c6d2701ecf6ea9e50884aa042f11",
+    "src/bias/evaluate.py": "757b7a0fc4b703b22c5555a84e2b17d31c847ca5867b27ca1f18d4ff8285b500",
+    "src/bias/grounding.py": "a3098cc9d39914226e89b3e6dad8c6b770f0c0eda3d28a3e3f8192d3488bf8a0",
+    "src/bias/hybrid_retrieval.py": "d2bf0892205da0304187f421fd582e4aa23da6efe3fb78c2a56b2d69f1389095",
+    "src/bias/ingest.py": "6136b8039f9326852cb8ddcd07ba1d2ee4fba2ce3ff2e74edd30d7793c3d31bc",
+    "src/bias/legacy_prompts.py": "c6b6e84ed4c9a8da6f01c6d9ada07934b8548bca8530f7f39d79ad8cb8a14dd7",
+    "src/bias/legacy_situations.py": "3f1a182e6c095bf30a00b0ead537fd1a8d4a80277b635d149a10b356ed2b0524",
+    "src/bias/lipsync.py": "05feac2d1041b4a6a09929227fba680ebbd669bca169807cac3976b1dd304063",
+    "src/bias/live.py": "cd64d536466fd2cde5c8a76b5562aecbed57ae779cde2721013b6fac0ea54b43",
+    "src/bias/models.py": "1342ef5660b903e2bed04ed28f52e06ec1b1b39fddfb97f8c4b58f36fe13caca",
+    "src/bias/motion.py": "8f0922adab913a33472dbb6920bbfb2ad5d82c0eb34ce7a7040435315bc4f288",
+    "src/bias/prompts.py": "baa7c142b293d27b612e00c14d2a316e2c6faffc82b4dd7578e9fa6a58f66edc",
+    "src/bias/providers.py": "e92f428eeefff17a35d0992a0951d9a1fb31620aed9d5516d8402712aef1b083",
+    "src/bias/qa_prompts.py": "040e790013e68c274487096cce889855ab3b1d5b3176c3c187d3244ec414e254",
+    "src/bias/request_work.py": "15fa420d3fdbe74651fa2dc73948ab2ef314ea83e5b089aece77375063506423",
+    "src/bias/retrieval.py": "72b7b06718b762068fb932131fd6102cd3d8c5e54190b514ee27158aea8b86d9",
+    "src/bias/segments.py": "49ae6689c25986335ed79770d0d3a89c0bece75df5d64938ab5f09c345a4a88b",
+    "src/bias/sessions.py": "b0f8b1725886250b919e321fa6eda142737088e782ba13f4f96ee3fc33b1fac6",
+    "src/bias/situations.py": "64ac395448105ced33a5249adef4125704c6acfb6aa1274bc29fc18b521a86a1",
+    "src/bias/snapshots.py": "e3f3ea7976c38b5de33a06ed1b504bae8e2971eea44ce32418d40239c7d6dfbc",
+    "src/bias/speech.py": "7948a52419250b08d40ac7851cafe58c432210cd5d19ed3f2467d99ebb6c11ff"
+  },
+  "checks": [
+    {
+      "kind": "original",
+      "query": "How did you first learn to write computer programs as a child?",
+      "language": "en",
+      "elapsed_ms": 3233.603,
+      "provider": "evidence",
+      "grounding_status": "grounded",
+      "temporal_mode": "general",
+      "retrieved_ids": [
+        "qa26-henry-ford-2008-turn-00015"
+      ],
+      "citation_ids": [
+        "qa26-henry-ford-2008-turn-00015"
+      ],
+      "resolved_query": {
+        "original": "How did you first learn to write computer programs as a child?",
+        "query": "How did you first learn to write computer programs as a child?",
+        "method": "original",
+        "supporting_turn_ids": []
+      },
+      "response_text_sha256": "b258586323469afc1d259d8f5ed4b0a3c775b505084fcf7111142ff9a34d8068"
+    },
+    {
+      "kind": "followup",
+      "query": "Why that approach?",
+      "language": "en",
+      "elapsed_ms": 3736.049,
+      "provider": "evidence",
+      "grounding_status": "grounded",
+      "temporal_mode": "general",
+      "retrieved_ids": [
+        "qa26-henry-ford-2008-turn-00015"
+      ],
+      "citation_ids": [
+        "qa26-henry-ford-2008-turn-00015"
+      ],
+      "resolved_query": {
+        "original": "Why that approach?",
+        "query": "How did you first learn to write computer programs as a child?\nFollow-up question: Why that approach?",
+        "method": "previous_user_reference",
+        "supporting_turn_ids": [
+          "d29473c1866e4f009a0a0d8ba22aeec0"
+        ]
+      },
+      "response_text_sha256": "b258586323469afc1d259d8f5ed4b0a3c775b505084fcf7111142ff9a34d8068"
+    },
+    {
+      "kind": "chained_followup",
+      "query": "How so?",
+      "language": "en",
+      "elapsed_ms": 3722.701,
+      "provider": "evidence",
+      "grounding_status": "grounded",
+      "temporal_mode": "general",
+      "retrieved_ids": [
+        "qa26-henry-ford-2008-turn-00015"
+      ],
+      "citation_ids": [
+        "qa26-henry-ford-2008-turn-00015"
+      ],
+      "resolved_query": {
+        "original": "How so?",
+        "query": "How did you first learn to write computer programs as a child?\nPrevious user question: Why that approach?\nFollow-up question: How so?",
+        "method": "previous_user_reference",
+        "supporting_turn_ids": [
+          "d29473c1866e4f009a0a0d8ba22aeec0",
+          "9a2c76aa027743f48270393d389a7532"
+        ]
+      },
+      "response_text_sha256": "b258586323469afc1d259d8f5ed4b0a3c775b505084fcf7111142ff9a34d8068"
+    },
+    {
+      "kind": "current_future_plan",
+      "query": "현재 2030년 화성 탐사 계획은 뭐야?",
+      "language": "ko",
+      "elapsed_ms": 53.727,
+      "provider": "evidence",
+      "grounding_status": "insufficient",
+      "temporal_mode": "current",
+      "retrieved_ids": [],
+      "citation_ids": [],
+      "resolved_query": {
+        "original": "현재 2030년 화성 탐사 계획은 뭐야?",
+        "query": "현재 2030년 화성 탐사 계획은 뭐야?",
+        "method": "original",
+        "supporting_turn_ids": []
+      },
+      "response_text_sha256": "37e19ce910034401f6e1d66d7e5ff77f085b5dcc95ba8a9ffcfc073b9402d89b"
+    },
+    {
+      "kind": "current_followup",
+      "query": "그 방법은 왜 그래?",
+      "language": "ko",
+      "elapsed_ms": 21.218,
+      "provider": "evidence",
+      "grounding_status": "insufficient",
+      "temporal_mode": "current",
+      "retrieved_ids": [],
+      "citation_ids": [],
+      "resolved_query": {
+        "original": "그 방법은 왜 그래?",
+        "query": "현재 2030년 화성 탐사 계획은 뭐야?\nFollow-up question: 그 방법은 왜 그래?",
+        "method": "previous_user_reference",
+        "supporting_turn_ids": [
+          "8058145a55ad491a942ce93fcc5e792b"
+        ]
+      },
+      "response_text_sha256": "37e19ce910034401f6e1d66d7e5ff77f085b5dcc95ba8a9ffcfc073b9402d89b"
+    },
+    {
+      "kind": "current_chained_followup",
+      "query": "How so?",
+      "language": "en",
+      "elapsed_ms": 23.427,
+      "provider": "evidence",
+      "grounding_status": "insufficient",
+      "temporal_mode": "current",
+      "retrieved_ids": [],
+      "citation_ids": [],
+      "resolved_query": {
+        "original": "How so?",
+        "query": "현재 2030년 화성 탐사 계획은 뭐야?\nPrevious user question: 그 방법은 왜 그래?\nFollow-up question: How so?",
+        "method": "previous_user_reference",
+        "supporting_turn_ids": [
+          "8058145a55ad491a942ce93fcc5e792b",
+          "8dfed9e6a2d84f898a98c7464e930544"
+        ]
+      },
+      "response_text_sha256": "d31f6719539a1a00c28f17b974da05397789cf27b499370f234fbe3cf1981771"
+    }
+  ],
+  "snapshot": {
+    "id": "elon-musk-original-2026.v3",
+    "as_of": "2026-11-11T10:37:37.104004+00:00",
+    "corpus_sha256": "ff732e295f6b5488e4c746bca31d4d13852c9b2d480bf083ea3a7dd19978f2a6",
+    "current_evidence_since": "2026-01-01",
+    "current_dated_training_sources": 0,
+    "coverage_note": "Snapshot date limits availability; it does not imply contemporary coverage. Unknown event dates remain unknown.",
+    "knowledge_version": "elon-musk-original-2026.v1",
+    "style_version": "attributed-examples.v1-no-trained-adapter",
+    "voice_version": "reference-conditioned-baseline",
+    "appearance_version": "research-human-v2-proxy-not-2026-likeness"
+  },
+  "retrieval": {
+    "backend": "hybrid",
+    "embedding_model": "intfloat/multilingual-e5-small",
+    "embedding_revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "style_examples": false,
+    "prewarmed": true,
+    "startup_warmup_ms": 65939.573
+  },
+  "corpus": {
+    "sources": 9,
+    "evidence": 745,
+    "held_out_sources": 0,
+    "total_evidence": 977
+  },
+  "context_turn_count": 6,
+  "elapsed_seconds": 78.807,
+  "completed_at": "2026-11-11T10:50:47.895709+00:00",
+  "passed": true,
+  "limitations": [
+    "Source previews only; no language generation or speech inference.",
+    "In-process ASGI transport does not measure network or speaker latency.",
+    "Six deterministic turns are not a fresh human persona or 20-scenario acceptance evaluation."
+  ],
+  "runtime_modules_commit": "c9e480f47dab9db14d7eb7923280bd530216e34d",
+  "runner_note": "The accompanying tools/persona_runtime_smoke.py was captured by its exact content digest; runtime modules are available at runtime_modules_commit. This source-preview run precedes the separately tested LLM prompt-budget reference fix."
+}
