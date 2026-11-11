@@ -20,7 +20,7 @@ Foundation PRs 1–4 were merged into `main` in order on 2026-11-10 UTC after th
 | Local inference and generated-answer evaluation | Local language runtime and A/B/C evaluation PR | Actual HTTP/SSE model connection, bounded lazy runtime, token/timing observations, separate ungraded semantic review |
 | Audio-timed embodiment and measured media | Dependent speech/motion PR | Reference-candidate workflow, real ASR and voice HTTP smoke, audio-bound mouth timing, measured clip replay, calibration, browser checks |
 
-Intermediate changes are committed by coherent capability. Completed milestones are published to their branches and opened as pull requests. New follow-up PRs remain available for review; the prior merge instruction is recorded against the four existing foundation PRs.
+Intermediate changes are committed by coherent capability. Completed milestones are published to their branches and opened as pull requests. PRs #5 and #6 were merged into `main` on 2026-11-11 UTC following the next explicit merge instruction. The resumed quality work is divided into three further review units: citation/semantic evaluation, multilingual voice quality and review audio, and human-avatar/measured-motion integration. Each is preserved in coherent commits and a dependent pull request. These new pull requests remain available for review.
 
 ## Fidelity ladder
 

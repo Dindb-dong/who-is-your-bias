@@ -18,6 +18,7 @@ export default defineConfig({
   ],
   webServer: {
     command: 'uv run bias serve --host 127.0.0.1 --port 8000',
+    env: { BIAS_MOTION_CATALOG: 'data/motion/elon-musk-ted-v1.json' },
     url: 'http://127.0.0.1:8000/api/health',
     reuseExistingServer: !process.env.CI,
     timeout: 30_000,

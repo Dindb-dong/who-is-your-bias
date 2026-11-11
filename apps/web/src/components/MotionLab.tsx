@@ -3,6 +3,7 @@ import { Play, RotateCcw, SlidersHorizontal, Square, Upload } from 'lucide-react
 import { AvatarStage } from './AvatarStage';
 import { parseAvatarClip, parseRigMapping } from '../avatar/validation';
 import type { AvatarClip, RigMapping } from '../avatar/types';
+import type { AvatarFraming } from '../avatar/builtin';
 
 /** Imported measurements have their own source clock, separate from conversation cues. */
 export function MotionLab({ modelUrl, reducedMotion }: { modelUrl?: string; reducedMotion: boolean }) {
@@ -16,6 +17,7 @@ export function MotionLab({ modelUrl, reducedMotion }: { modelUrl?: string; redu
   const [elapsed, setElapsed] = useState(0);
   const [allowPreview, setAllowPreview] = useState(false);
   const [showCalibration, setShowCalibration] = useState(true);
+  const [framing, setFraming] = useState<AvatarFraming>('full_body');
   const [loadingSample, setLoadingSample] = useState<'face' | 'body' | null>(null);
   const clock = useRef(0); clock.current = elapsed;
   const sampleRequest = useRef<AbortController | null>(null);
@@ -71,10 +73,11 @@ export function MotionLab({ modelUrl, reducedMotion }: { modelUrl?: string; redu
   return <section className="motion-lab" aria-labelledby="motion-lab-heading">
     <div className="motion-heading"><div><span className="eyebrow">FROM SOURCE VIDEO TO MOVEMENT</span><h2 id="motion-lab-heading">Motion & rig calibration</h2><p>Replay measured face and pose tracks on the reference rig or your own avatar.</p></div><SlidersHorizontal size={27}/></div>
     <div className="motion-layout">
-      <div className="motion-stage"><AvatarStage speaking={false} modelUrl={modelUrl} rigMapping={mapping}
+      <div className="motion-stage"><AvatarStage speaking={false} modelUrl={modelUrl} rigMapping={mapping} framing={framing}
         reducedMotion={reducedMotion} performanceClip={permitted ? clip : undefined}
         observationElapsedMs={elapsed} allowGeometryPreview={allowPreview} showCalibration={showCalibration}/></div>
       <div className="motion-controls">
+        <label className="switch-row"><span>Camera framing</span><select aria-label="Motion lab camera framing" value={framing} onChange={(event) => setFraming(event.target.value as AvatarFraming)}><option value="portrait">Portrait</option><option value="full_body">Full body</option></select></label>
         <button className="secondary-button" disabled={loadingSample !== null} onClick={() => void loadSample()}><Play size={15}/>{loadingSample === 'face' ? 'Loading measured sample…' : 'Load measured sample'}</button>
         <button className="secondary-button" disabled={loadingSample !== null} onClick={() => void loadSample('body')}><Play size={15}/>{loadingSample === 'body' ? 'Loading arm-motion sample…' : 'Load arm-motion sample'}</button>
         <label className="motion-upload"><Upload size={17}/><span>Import motion clip<small>{clipName || 'Source-linked animation JSON · up to 8 MB'}</small></span><input type="file" accept=".json,application/json" aria-label="Import motion clip" onChange={(event) => { const file = event.target.files?.[0]; if (file) void importFile(file, 'clip'); event.target.value = ''; }}/></label>
