@@ -1,0 +1,20 @@
+{
+  "schema_version": "persona-replay-check.v1",
+  "matched_files": {
+    "corpus/evidence.jsonl": "27675695d1c2e4d83cbdc75ad33fec99a6ff59c628ad6208af5feb52ebb21ebc",
+    "corpus/sources.json": "0340b7a740f9dc07bd01b6c1f559d06e3c0e8fcc8af1e660bbb7f6b2813c36a5",
+    "corpus/profile.json": "37e12d59c72ce37791a6ef52af17556a3d0ffd7a5b45b9a3bbc44360b62e648a",
+    "corpus/split-manifest.json": "43f9e23ae610c007c2b84101accbb2231826747bdc77bda7f4cfe484ad9b0a5e",
+    "corpus/corpus-manifest.json": "edafc1f5f2421c93743edf430a979d86f588dd0e68ae2b414e3a4bb95b3b0284",
+    "segments.jsonl": "27675695d1c2e4d83cbdc75ad33fec99a6ff59c628ad6208af5feb52ebb21ebc",
+    "projections/factual.jsonl": "3d6c296031d4a4f9c10c41eed68805df937468f85bbf6d145ed9ba33afa803ac",
+    "projections/text_style.jsonl": "9954aa9d93d9562237819805da5a8b787425e1469edf5a239c3b147c89b408a8",
+    "projections/aligned_speech.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "projections/visible_behavior.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "original_wording_redistributed": false,
+  "source_cache": "data/local/persona-2026-acquisition",
+  "meaning": "Same acquired artifacts and pinned source recipes reproduce identical corpus/projection bytes. This does not guarantee a publisher page never changes.",
+  "source_metadata": "Original-publisher QA metadata including per-source acquisition times; unknown recording dates remain unknown.",
+  "runtime_projection_contract": "Every retained original QA carries independent factual/text_style/aligned_speech/visible_behavior booleans; factual false does not exclude text-style eligibility."
+}

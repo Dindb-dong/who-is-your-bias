@@ -18,6 +18,16 @@ class CorpusError(ValueError):
     pass
 
 
+def projection_eligible(record: Evidence, projection: str) -> bool:
+    flags = (record.model_extra or {}).get("projection_eligibility")
+    if flags is None:
+        return True  # Historical corpora retain their frozen eligibility.
+    expected = {"factual", "text_style", "aligned_speech", "visible_behavior"}
+    if not isinstance(flags, dict) or set(flags) != expected or any(type(value) is not bool for value in flags.values()):
+        raise CorpusError(f"Invalid independent projection eligibility: {record.id}")
+    return flags[projection]
+
+
 def source_event_id(source: Source) -> str:
     """Return the reviewed event identity, or a source-local legacy identity.
 
@@ -128,7 +138,17 @@ class Corpus:
             if self.sources[record.source_id].split == "train"
             and record.review_status == "reviewed"
             and record.confidence == "source_grounded"
+            and projection_eligible(record, "factual")
         ]
+
+    @property
+    def style_evidence(self) -> list[Evidence]:
+        self.validate_split_isolation()
+        return [record for record in self.evidence.values()
+                if self.sources[record.source_id].split == "train" and record.review_status == "reviewed"
+                and record.confidence == "source_grounded" and record.question_answer is not None
+                and record.question_answer.completeness == "complete_exchange"
+                and projection_eligible(record, "text_style")]
 
     def quality_report(self) -> dict:
         """Report exact normalized duplicates and known event-family overlap.
@@ -181,6 +201,7 @@ class Corpus:
             raise CorpusError(f"Canonical source URL spans multiple splits: {sources}")
         # Programmatic construction must not bypass the same Q&A contract.
         for record in self.evidence.values():
+            projection_eligible(record, "factual")
             if record.question_answer:
                 if record.question_answer.source_event_id != source_event_id(self.sources[record.source_id]):
                     raise CorpusError(f"Q&A event differs from its source: {record.id}")
