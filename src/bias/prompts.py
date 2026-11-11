@@ -6,6 +6,7 @@ import json
 from collections.abc import Callable, Mapping
 
 from .compact_prompts import CONTEXT_PREFIX, build_compact_messages
+from .grounding import KOREAN_CITATION_INSTRUCTION
 from .legacy_prompts import build_legacy_messages
 from .models import ChatRequest, Persona, Source
 from .retrieval import SearchResult
@@ -47,7 +48,10 @@ filter. The profile-only ablation is held identical to compact v1.
 # Keep the current default unchanged while grounded_v2 is measured.
 def build_messages(persona: Persona, request: ChatRequest, result: SearchResult, history: list[dict[str, str]], sources: Mapping[str, Source] | None = None) -> list[dict[str, str]]:
     builder = build_qa_messages if (persona.model_extra or {}).get("qa_corpus_id") or any(hit.evidence.question_answer for hit in result.hits) else build_compact_messages
-    return builder(persona, request, result, history, sources)
+    messages = builder(persona, request, result, history, sources)
+    if request.language == "ko" and request.mode != "profile" and result.hits:
+        messages[0]["content"] += KOREAN_CITATION_INSTRUCTION
+    return messages
 
 
 PROMPT_BUILDERS: dict[str, PromptBuilder] = {"legacy": build_legacy_messages, "compact": build_compact_messages, "grounded_v2": build_grounded_messages, "original_qa": build_qa_messages}
