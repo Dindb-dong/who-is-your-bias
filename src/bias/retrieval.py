@@ -11,7 +11,9 @@ from dataclasses import dataclass
 from .corpus import Corpus
 from .models import Evidence
 
-STOPWORDS = frozenset("a an the and or of to in on for is are was were be been being that this it its as at by with from i you your me my we our he his they their what why how when where which do did does would could should can about tell explain please elon musk think thoughts opinion question have has had will might may need said say described describe back suggest compare".split())
+# Generic comparative wording is not topical evidence: "more power" alone must
+# not connect an electric-car efficiency question to a tunnel-machine passage.
+STOPWORDS = frozenset("a an the and or of to in on for is are was were be been being that this it its as at by with from i you your me my we our he his they their what why how when where which do did does would could should can about tell explain please elon musk think thoughts opinion question have has had will might may need said say described describe back suggest compare more".split())
 KOREAN_STOPWORDS = frozenset("어떤 어떻게 왜 무엇 무슨 했는데 대해 관해 알려줘 설명해줘 했어 말했어 이유 뭐야 있어 받았어 다뤘어".split())
 ALIASES = {
     "화성": "mars multiplanetary", "우주": "space spacex", "스페이스엑스": "spacex rocket",

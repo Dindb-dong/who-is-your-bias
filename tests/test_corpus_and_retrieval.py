@@ -117,6 +117,24 @@ def test_unsupported_or_live_questions_abstain(actual_corpus, question):
     assert not Retriever(actual_corpus).search(question).hits
 
 
+@pytest.mark.parametrize("behavior", [False, True])
+def test_generic_comparative_word_cannot_make_tunnel_note_answer_car_efficiency(actual_corpus, behavior):
+    retriever = Retriever(actual_corpus)
+    unsupported = retriever.search(
+        "Why can power plants charge electric cars more efficiently?", behavior=behavior
+    )
+    # The reviewed corpus lacks the requested power-plant mechanism. Previously,
+    # "more" plus "power" promoted the unrelated tunnel-cost note at 0.786.
+    assert not unsupported.hits
+    assert unsupported.confidence == 0
+    # The broader system-comparison summary is available when it matches the
+    # question; rejecting the false positive must not disable this topic.
+    supported = retriever.search(
+        "Why compare power plants and electric cars for efficiency?", behavior=behavior
+    )
+    assert [hit.evidence.id for hit in supported.hits] == ["elon-tesla06-system"]
+
+
 def test_recording_year_is_distinct_from_publication_year(corpus):
     source = corpus.sources["rocket-interview"].model_copy(update={"recorded_at": date(2018, 1, 1)})
     corpus.sources[source.id] = source

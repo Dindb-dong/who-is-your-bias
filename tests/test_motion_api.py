@@ -21,7 +21,7 @@ def library():
 
 
 @pytest.mark.parametrize("language,question", [
-    ("en", "Why can power plants charge electric cars more efficiently?"),
+    ("en", "Why compare power plants and electric cars for efficiency?"),
     ("ko", "전기차와 발전소의 에너지 효율은 어떻게 달라?"),
 ])
 def test_evidence_behavior_request_selects_only_explicit_preview_motion(library, actual_corpus, language, question, tmp_path):
@@ -34,7 +34,7 @@ def test_evidence_behavior_request_selects_only_explicit_preview_motion(library,
         response = client.post("/api/chat", json=base | {"motion_mode": "geometry_preview"})
         turn = response.json()
         assert response.status_code == 200
-        assert turn["grounding"]["retrieved_ids"]
+        assert turn["grounding"]["retrieved_ids"][0] == "elon-tesla06-system"
         chosen = turn["behavior"]["motion"]
         assert chosen["source_event_id"] == "ted-2013"
         assert chosen["review_status"] == "geometry_preview"
@@ -48,6 +48,22 @@ def test_profile_rag_and_evidence_abstention_never_attach_motion(library, actual
         result = client.post("/api/chat", json={"message": message, "mode": mode, "motion_mode": "geometry_preview"})
         assert result.status_code == 200
         assert result.json()["behavior"]["motion"] is None
+
+
+def test_matching_motion_context_does_not_replace_missing_answer_evidence(library, actual_corpus, tmp_path):
+    question = "Why can power plants charge electric cars more efficiently?"
+    assert library.select(question, allow_geometry_preview=True) is not None
+    with TestClient(create_app(Settings(web_dir=tmp_path / "absent"), corpus=actual_corpus, motion_library=library)) as client:
+        response = client.post("/api/chat", json={
+            "message": question, "mode": "behavior", "motion_mode": "geometry_preview",
+        })
+        assert response.status_code == 200
+        turn = response.json()
+        assert turn["grounding"]["status"] == "insufficient"
+        assert turn["grounding"]["retrieved_ids"] == []
+        assert turn["citations"] == []
+        assert turn["behavior"]["motion"] is None
+        assert "tunnel" not in turn["text"].lower()
 
 
 def test_clip_gate_and_canonical_bytes_are_the_selection_hash(library, actual_corpus, tmp_path):
