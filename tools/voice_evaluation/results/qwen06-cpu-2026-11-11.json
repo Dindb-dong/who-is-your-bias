@@ -1,0 +1,440 @@
+{
+  "schema_version": "voice_quality_measurement.v1",
+  "measured_at_utc": "2026-11-11T00:38:45.249017+00:00",
+  "model": {
+    "repo": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+    "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+    "speech_tokenizer_revision": "7dd38ad4e9bad454aae9cd937d0cd577604fe229",
+    "non_streaming_mode": false,
+    "runtime": {
+      "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+      "device": "cpu",
+      "dtype": "bfloat16",
+      "attention": "sdpa",
+      "local_files_only": true,
+      "threads": 4,
+      "seed": 42,
+      "max_new_tokens": 512,
+      "do_sample": true,
+      "temperature": 0.9,
+      "top_k": 50,
+      "top_p": 1.0,
+      "repetition_penalty": 1.05
+    },
+    "packages": {
+      "qwen-tts": "0.1.1",
+      "torch": "2.11.0+cpu",
+      "transformers": "4.57.3",
+      "accelerate": "1.12.0",
+      "tokenizers": "0.22.2",
+      "numpy": "2.5.4",
+      "fastapi": "0.162.4",
+      "uvicorn": "0.54.0",
+      "python": "3.12.14"
+    }
+  },
+  "reference": {
+    "publisher_page": "https://www.ted.com/talks/elon_musk_the_mind_behind_tesla_spacex_solarcity?view=transcript",
+    "source_timeline": "ted_native_mp4",
+    "source_start_seconds": 21.45,
+    "source_end_seconds": 31.280041666666666,
+    "duration_seconds": 9.830042,
+    "mode": "audio_and_transcript",
+    "publisher_speaker_label": "Elon Musk",
+    "audio_sha256": "1be054dd5090ad2e59de1d26ff1f666e84aa1fa7475f69de8a2d924b7f5cf66b",
+    "text_sha256": "0e75c3c62963a9a06932a87113f14d8ac206d1cad4fbb409a484b552fcc5f83d",
+    "byte_identical_to_prior_candidate": false,
+    "new_actual_asr_tokens": 32,
+    "publisher_tokens": 32,
+    "new_actual_asr_matches_publisher": true,
+    "asr_elapsed_seconds": 5.517,
+    "asr_concurrency_note": "Reference ASR ran while the root language 0.6B runtime and light MediaPipe work were permitted; this elapsed time is not an isolated performance benchmark.",
+    "review_status": "candidate",
+    "human_listening_completed": false,
+    "single_speaker_acoustic_review": null,
+    "perceptual_quality": null,
+    "restoration_sha256": "5d4fd4028fb0f281eee23bb9814c2b9fff0a5e81767f9c12a2d30fccb8365636",
+    "restoration_at_synthesis_sha256": "b6e61c61d753d55856f66bc60ed55e6f684ae1a42edf5b54ef012ada251411f5"
+  },
+  "execution": {
+    "status": "completed",
+    "elapsed_seconds": 116.186633,
+    "sequential_requests": true,
+    "limits": {
+      "per_case_timeout_seconds": 300,
+      "total_timeout_seconds": 900,
+      "response_bytes": 20000000
+    },
+    "generation_completed_eos": null,
+    "streaming_audio": false,
+    "tts_process_returncode": -15,
+    "child_peak_rss_bytes": 2848436224,
+    "rss_scope": "This orchestrator had one child: uvicorn voice process; high-water RSS is not concurrent total memory.",
+    "reference_audio_sha256": "1be054dd5090ad2e59de1d26ff1f666e84aa1fa7475f69de8a2d924b7f5cf66b",
+    "reference_text_sha256": "0e75c3c62963a9a06932a87113f14d8ac206d1cad4fbb409a484b552fcc5f83d",
+    "reference_restoration_sha256": "b6e61c61d753d55856f66bc60ed55e6f684ae1a42edf5b54ef012ada251411f5",
+    "speech_tokenizer_revision": "7dd38ad4e9bad454aae9cd937d0cd577604fe229",
+    "service_log_sha256": "fc765498242236ca9e071766c306e1f64c86b2991fda975fef8fae50b18ce947",
+    "TTS_stopped_before_ASR": true,
+    "reference_restoration_snapshot": "data/local/references/ted-2013-restored/restoration-at-synthesis.json"
+  },
+  "cases_sha256": "dc00ae852aeac5028914c68fbcbb019c00d85b46575912379976345752efe649",
+  "cases": [
+    {
+      "id": "en_short",
+      "language": "English",
+      "text": "This is a research simulation.",
+      "status": "succeeded",
+      "request_wall_seconds": 18.58447,
+      "time_to_response_headers_seconds": 18.583433,
+      "real_time_factor": 12.226625,
+      "signal": {
+        "sample_rate": 24000,
+        "channels": 1,
+        "frames": 36480,
+        "duration_seconds": 1.52,
+        "bytes": 73004,
+        "peak_dbfs": -5.754,
+        "rms_dbfs": -23.738,
+        "clipped_sample_fraction": 0.0,
+        "near_silent_sample_fraction": 0.06811952,
+        "tail_100ms_rms_dbfs": -31.737,
+        "signal_present": true,
+        "note": "Signal statistics cannot establish quality or completeness; tail energy is descriptive, not a truncation detector."
+      },
+      "termination_reason": "not_exposed_by_backend",
+      "requested_word_units": 5,
+      "requested_character_units": 25,
+      "audio_sha256": "9b9204ef4c5f6074a6f97550802e56b43574666f197b9e7c9a5c985514e7d9d6",
+      "backend_generation": {
+        "language": "English",
+        "input_chars": 30,
+        "cold_start": true,
+        "elapsed_seconds": 18.567746,
+        "audio_seconds": 1.52,
+        "real_time_factor": 12.215622,
+        "termination_reason": "not_exposed_by_backend"
+      },
+      "asr": {
+        "status": "succeeded",
+        "recognized_text": "This is a research simulation.",
+        "elapsed_seconds": 1.537799,
+        "metrics": {
+          "normalization": "NFC, casefold, punctuation removed; no semantic or numeric rewriting",
+          "primary_metric": "wer",
+          "wer": {
+            "reference_units": 5,
+            "hypothesis_units": 5,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "distance": 0,
+            "error_rate": 0.0
+          },
+          "cer": {
+            "reference_units": 25,
+            "hypothesis_units": 25,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "distance": 0,
+            "error_rate": 0.0
+          },
+          "screens": {
+            "missing_expected_suffix": false,
+            "excess_repeated_ngrams": 0,
+            "ngram_size": 3,
+            "substantial_deletions": false
+          },
+          "limitations": "ASR is an independent recognizer, not ground truth. Screens may reflect ASR errors; they do not prove audio truncation, EOS, naturalness, speaker identity, or likeness. Korean spacing and digit-vs-word formatting affect WER."
+        }
+      }
+    },
+    {
+      "id": "en_multisentence",
+      "language": "English",
+      "text": "This is a research simulation. Before changing the design, write down the assumptions and compare them with the measurements. If the evidence is weak, explain the uncertainty and describe the next useful experiment.",
+      "status": "succeeded",
+      "request_wall_seconds": 38.320099,
+      "time_to_response_headers_seconds": 38.305769,
+      "real_time_factor": 3.742197,
+      "signal": {
+        "sample_rate": 24000,
+        "channels": 1,
+        "frames": 245760,
+        "duration_seconds": 10.24,
+        "bytes": 491564,
+        "peak_dbfs": -4.76,
+        "rms_dbfs": -23.452,
+        "clipped_sample_fraction": 0.0,
+        "near_silent_sample_fraction": 0.04708252,
+        "tail_100ms_rms_dbfs": -35.859,
+        "signal_present": true,
+        "note": "Signal statistics cannot establish quality or completeness; tail energy is descriptive, not a truncation detector."
+      },
+      "termination_reason": "not_exposed_by_backend",
+      "requested_word_units": 33,
+      "requested_character_units": 178,
+      "audio_sha256": "15f9916febb709de71bf111a0999e2fd7b4317428a5c3c1bb23c465642863a8d",
+      "backend_generation": {
+        "language": "English",
+        "input_chars": 215,
+        "cold_start": false,
+        "elapsed_seconds": 38.275804,
+        "audio_seconds": 10.24,
+        "real_time_factor": 3.737872,
+        "termination_reason": "not_exposed_by_backend"
+      },
+      "asr": {
+        "status": "succeeded",
+        "recognized_text": "This is a research simulation before changing the design, write down the assumptions and compare them with the measurements. If the evidence is weak, explain the uncertainty and describe the next useful experiment.",
+        "elapsed_seconds": 1.93711,
+        "metrics": {
+          "normalization": "NFC, casefold, punctuation removed; no semantic or numeric rewriting",
+          "primary_metric": "wer",
+          "wer": {
+            "reference_units": 33,
+            "hypothesis_units": 33,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "distance": 0,
+            "error_rate": 0.0
+          },
+          "cer": {
+            "reference_units": 178,
+            "hypothesis_units": 178,
+            "substitutions": 0,
+            "deletions": 0,
+            "insertions": 0,
+            "distance": 0,
+            "error_rate": 0.0
+          },
+          "screens": {
+            "missing_expected_suffix": false,
+            "excess_repeated_ngrams": 0,
+            "ngram_size": 3,
+            "substantial_deletions": false
+          },
+          "limitations": "ASR is an independent recognizer, not ground truth. Screens may reflect ASR errors; they do not prove audio truncation, EOS, naturalness, speaker identity, or likeness. Korean spacing and digit-vs-word formatting affect WER."
+        }
+      }
+    },
+    {
+      "id": "ko_multisentence",
+      "language": "Korean",
+      "text": "이 음성은 연구용 시뮬레이션입니다. 먼저 가정을 적고 측정 결과와 비교해 보겠습니다. 근거가 부족하면 모르는 부분을 분명하게 말하겠습니다.",
+      "status": "succeeded",
+      "request_wall_seconds": 33.950089,
+      "time_to_response_headers_seconds": 33.939244,
+      "real_time_factor": 3.507225,
+      "signal": {
+        "sample_rate": 24000,
+        "channels": 1,
+        "frames": 232321,
+        "duration_seconds": 9.680042,
+        "bytes": 464686,
+        "peak_dbfs": -3.505,
+        "rms_dbfs": -22.201,
+        "clipped_sample_fraction": 0.0,
+        "near_silent_sample_fraction": 0.04767111,
+        "tail_100ms_rms_dbfs": -40.548,
+        "signal_present": true,
+        "note": "Signal statistics cannot establish quality or completeness; tail energy is descriptive, not a truncation detector."
+      },
+      "termination_reason": "not_exposed_by_backend",
+      "requested_word_units": 17,
+      "requested_character_units": 58,
+      "audio_sha256": "47fa7aac63d0e31b80a445eb8420616221a356a70a038f34392d9586205d05cf",
+      "backend_generation": {
+        "language": "Korean",
+        "input_chars": 77,
+        "cold_start": false,
+        "elapsed_seconds": 33.903432,
+        "audio_seconds": 9.680042,
+        "real_time_factor": 3.502406,
+        "termination_reason": "not_exposed_by_backend"
+      },
+      "asr": {
+        "status": "succeeded",
+        "recognized_text": "이 음성은 연구형 시뮬레이신입니다. 먼저 가정을 적고 측정 결과와 비교해 보겠습니다. 근거가 부족하면 모르는 부분을 분명하게 말하겠습니다.",
+        "elapsed_seconds": 2.012609,
+        "metrics": {
+          "normalization": "NFC, casefold, punctuation removed; no semantic or numeric rewriting",
+          "primary_metric": "cer",
+          "wer": {
+            "reference_units": 17,
+            "hypothesis_units": 17,
+            "substitutions": 2,
+            "deletions": 0,
+            "insertions": 0,
+            "distance": 2,
+            "error_rate": 0.117647
+          },
+          "cer": {
+            "reference_units": 58,
+            "hypothesis_units": 58,
+            "substitutions": 2,
+            "deletions": 0,
+            "insertions": 0,
+            "distance": 2,
+            "error_rate": 0.034483
+          },
+          "screens": {
+            "missing_expected_suffix": false,
+            "excess_repeated_ngrams": 0,
+            "ngram_size": 3,
+            "substantial_deletions": false
+          },
+          "limitations": "ASR is an independent recognizer, not ground truth. Screens may reflect ASR errors; they do not prove audio truncation, EOS, naturalness, speaker identity, or likeness. Korean spacing and digit-vs-word formatting affect WER."
+        }
+      },
+      "interpretation": "Recognizer substituted 연구형 for requested 연구용 and 시뮬레이신 for requested 시뮬레이션: two character substitutions. This run does not determine whether the acoustic pronunciation or the recognizer caused them."
+    },
+    {
+      "id": "en_numbers",
+      "language": "English",
+      "text": "At nine thirty, compare twelve trials with twenty four trials. Pause, check the measurements, and explain why the two results differ.",
+      "status": "succeeded",
+      "request_wall_seconds": 25.074748,
+      "time_to_response_headers_seconds": 25.06814,
+      "real_time_factor": 3.776294,
+      "signal": {
+        "sample_rate": 24000,
+        "channels": 1,
+        "frames": 159361,
+        "duration_seconds": 6.640042,
+        "bytes": 318766,
+        "peak_dbfs": -1.006,
+        "rms_dbfs": -22.049,
+        "clipped_sample_fraction": 0.0,
+        "near_silent_sample_fraction": 0.04487296,
+        "tail_100ms_rms_dbfs": -25.477,
+        "signal_present": true,
+        "note": "Signal statistics cannot establish quality or completeness; tail energy is descriptive, not a truncation detector."
+      },
+      "termination_reason": "not_exposed_by_backend",
+      "requested_word_units": 21,
+      "requested_character_units": 108,
+      "audio_sha256": "20a22caa3d34c0e49b6a14714f464accbb2a0b5536de36984656ee62be26fc58",
+      "backend_generation": {
+        "language": "English",
+        "input_chars": 133,
+        "cold_start": false,
+        "elapsed_seconds": 25.046096,
+        "audio_seconds": 6.640042,
+        "real_time_factor": 3.771979,
+        "termination_reason": "not_exposed_by_backend"
+      },
+      "asr": {
+        "status": "succeeded",
+        "recognized_text": "At 9.30, compare 12 trials with 24 trials, pause, check the measurements, and explain why the two results differ.",
+        "elapsed_seconds": 1.665642,
+        "metrics": {
+          "normalization": "NFC, casefold, punctuation removed; no semantic or numeric rewriting",
+          "primary_metric": "wer",
+          "wer": {
+            "reference_units": 21,
+            "hypothesis_units": 20,
+            "substitutions": 4,
+            "deletions": 1,
+            "insertions": 0,
+            "distance": 5,
+            "error_rate": 0.238095
+          },
+          "cer": {
+            "reference_units": 108,
+            "hypothesis_units": 89,
+            "substitutions": 7,
+            "deletions": 19,
+            "insertions": 0,
+            "distance": 26,
+            "error_rate": 0.240741
+          },
+          "screens": {
+            "missing_expected_suffix": false,
+            "excess_repeated_ngrams": 0,
+            "ngram_size": 3,
+            "substantial_deletions": false
+          },
+          "limitations": "ASR is an independent recognizer, not ground truth. Screens may reflect ASR errors; they do not prove audio truncation, EOS, naturalness, speaker identity, or likeness. Korean spacing and digit-vs-word formatting affect WER."
+        }
+      },
+      "interpretation": "All literal token differences in the observed transcript occur at number formatting: nine thirty→9.30, twelve→12, twenty four→24. The raw WER is retained; no semantic-normalized score or human intelligibility claim is substituted."
+    }
+  ],
+  "asr_engine": {
+    "name": "faster-whisper",
+    "version": "1.2.1",
+    "ctranslate2_version": "4.8.5",
+    "model": "Systran/faster-whisper-small",
+    "revision": "536b0662742c02347bc0e980a01041f333bce120",
+    "weights_sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+    "device": "cpu",
+    "compute_type": "int8",
+    "cpu_threads": 4,
+    "num_workers": 1,
+    "beam_size": 5,
+    "initial_prompt": null,
+    "prefix": null,
+    "hotwords": null,
+    "condition_on_previous_text": false,
+    "vad_filter": false,
+    "word_timestamps": true,
+    "decoder": "ffmpeg_pcm16_mono_16khz_to_numpy",
+    "telemetry_disabled_before_import": true
+  },
+  "asr_model_load_seconds": 1.671282,
+  "asr_total_elapsed_seconds": 9.260508,
+  "listening": {
+    "manifest_sha256": "d080a0cdb728c29be91c83733c6b47431caf3d3b6948157d8198f77d8718c4e2",
+    "samples": 4,
+    "status": "unrated",
+    "human_review_performed": false,
+    "intelligibility_rating": null,
+    "naturalness_rating": null,
+    "reference_similarity_rating": null
+  },
+  "artifacts": {
+    "synthesis_sha256": "23a0c2be7c3cbd6fa33569ced665ca9ad7c613bd64b17a8a0eff626193482f2c",
+    "asr_sha256": "521a1cfa613633e86acc225f5dbfbe678edd96394365cb4a773523d0cc542d46",
+    "execution_sha256": "e4cbe5f184298305bff7007ea032a0ae27f72c47c920f930688e60113198585a",
+    "local_synthesis_directory": "reports/local/voice-quality-qwen06",
+    "local_listening_directory": "reports/local/voice-quality-listening",
+    "source_audio_or_source_transcript_committed": false,
+    "generated_audio_in_repository_bundle": true,
+    "local_listening_zip": "reports/local/voice-quality-listening/voice-listening-bundle.zip",
+    "listening_zip_sha256": "57924d6f5b3f3ac7e1fb9b1b2dc7969b2a7f688f392add4b54debdab5610b896"
+  },
+  "limitations": [
+    "Four single samples from one seed/reference/configuration are not a population benchmark.",
+    "The first request is cold; later requests reuse the loaded model and prompt.",
+    "ASR is fallible. WER/CER and suffix/repetition screens do not measure human intelligibility, naturalness, identity, or likeness.",
+    "Korean spacing and number word/digit formatting can change literal error rates.",
+    "The public TTS backend does not expose EOS or codec completion, so truncation/completion is not verified.",
+    "Process peak RSS is not concurrent total memory or deployment capacity.",
+    "The restored candidate is not byte-identical to the previous reference; historical output comparisons are not controlled A/B experiments.",
+    "No human listening or identity evaluation has been performed."
+  ],
+  "verification": {
+    "targeted_tests_passed": 85,
+    "actual_TTS_HTTP_cases": 4,
+    "actual_generated_audio_ASR_cases": 4,
+    "actual_restored_reference_ASR_cases": 1,
+    "listener_script_syntax_check": "passed",
+    "listener_browser_check": "not_completed: Playwright browser missing; installed system Chromium launch rejected socket syscall",
+    "human_listening_performed": false,
+    "recovery_hash_check": "passed: synthesis, ASR, execution, all four generated WAVs and both listening manifests match the recorded artifacts"
+  },
+  "repository_listening": {
+    "directory": "tools/voice_evaluation/results/qwen06-cpu-2026-11-11-listening",
+    "listener_manifest_sha256": "dfbbf66079a3684de126ce4af9165c5d51c518caf3b643f1a3eb50efa27010d2",
+    "samples": 4,
+    "audio_bytes": 1348020,
+    "audio_kind": "generated_synthesis_outputs_only",
+    "reference_recording_included": false,
+    "reference_similarity_available": false,
+    "status": "unrated",
+    "human_review_performed": false
+  }
+}

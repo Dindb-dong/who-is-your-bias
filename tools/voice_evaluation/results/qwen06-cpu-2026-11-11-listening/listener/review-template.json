@@ -1,0 +1,62 @@
+{
+  "schema_version": "voice_listening_review.v1",
+  "listener_manifest_sha256": "dfbbf66079a3684de126ce4af9165c5d51c518caf3b643f1a3eb50efa27010d2",
+  "reviewer": null,
+  "created_at": null,
+  "human_review_performed": false,
+  "reference_listened": false,
+  "samples": [
+    {
+      "id": "sample001",
+      "audio_sha256": "47fa7aac63d0e31b80a445eb8420616221a356a70a038f34392d9586205d05cf",
+      "listened": false,
+      "understood_language": null,
+      "heard_text": null,
+      "intelligibility": null,
+      "naturalness": null,
+      "reference_similarity": null,
+      "unexpected_repetition": null,
+      "audible_cutoff": null,
+      "notes": null
+    },
+    {
+      "id": "sample002",
+      "audio_sha256": "15f9916febb709de71bf111a0999e2fd7b4317428a5c3c1bb23c465642863a8d",
+      "listened": false,
+      "understood_language": null,
+      "heard_text": null,
+      "intelligibility": null,
+      "naturalness": null,
+      "reference_similarity": null,
+      "unexpected_repetition": null,
+      "audible_cutoff": null,
+      "notes": null
+    },
+    {
+      "id": "sample003",
+      "audio_sha256": "20a22caa3d34c0e49b6a14714f464accbb2a0b5536de36984656ee62be26fc58",
+      "listened": false,
+      "understood_language": null,
+      "heard_text": null,
+      "intelligibility": null,
+      "naturalness": null,
+      "reference_similarity": null,
+      "unexpected_repetition": null,
+      "audible_cutoff": null,
+      "notes": null
+    },
+    {
+      "id": "sample004",
+      "audio_sha256": "9b9204ef4c5f6074a6f97550802e56b43574666f197b9e7c9a5c985514e7d9d6",
+      "listened": false,
+      "understood_language": null,
+      "heard_text": null,
+      "intelligibility": null,
+      "naturalness": null,
+      "reference_similarity": null,
+      "unexpected_repetition": null,
+      "audible_cutoff": null,
+      "notes": null
+    }
+  ]
+}
