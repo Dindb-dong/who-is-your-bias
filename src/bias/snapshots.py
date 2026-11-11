@@ -159,6 +159,10 @@ def temporal_intent(query: str, as_of: datetime) -> TemporalIntent:
     if any(y > as_of.year for y in years):
         if not FORECAST.search(query):
             return TemporalIntent("future", years)
+        if CURRENT.search(query):
+            # A future goal does not turn a request for today's plan into a
+            # historical question or waive current-position attribution.
+            return TemporalIntent("current", years, "forecast")
         # A future target date is not the date of the original statement.
         # If an earlier interview year is also named, retain that event filter.
         earlier = tuple(y for y in years if y <= as_of.year)

@@ -31,6 +31,8 @@ def snapshot(corpus):
     ("What did Musk say in the 2026 Dwarkesh interview?", "historical"),
     ("2026년 인터뷰에서 말했던 계획은?", "historical"),
     ("What were the plans for 2030?", "historical"),
+    ("What are your current plans for Mars in 2030?", "current"),
+    ("현재 2030년 화성 탐사 계획은 뭐야?", "current"),
 ])
 def test_explicit_temporal_intents_include_korean_year_suffixes(question, mode):
     assert temporal_intent(question, CUTOFF).mode == mode
@@ -51,6 +53,14 @@ def test_current_requires_dated_firsthand_event_not_new_publication(corpus):
     assert not select_temporal(corpus, snapshot(corpus), "your current rocket approach").eligible_ids
     corpus.sources[source.id] = source.model_copy(update={"published_at": date(2026, 2, 1), "recorded_at": date(2026, 1, 30)})
     assert select_temporal(corpus, snapshot(corpus), "your current rocket approach").eligible_ids == {"rocket-reuse"}
+
+
+@pytest.mark.parametrize("query", ["What are your current plans for Mars in 2030?", "현재 2030년 화성 탐사 계획은 뭐야?"])
+def test_future_plan_target_cannot_bypass_current_position_gate(corpus, query):
+    selection = select_temporal(corpus, snapshot(corpus), query)
+    assert selection.intent.mode == "current"
+    assert not selection.eligible_ids
+    assert set(selection.exclusion_reasons.values()) == {"no_dated_current_position"}
 
 
 @pytest.mark.parametrize("query,expected", [
