@@ -4,6 +4,31 @@
 
 Build a real-time research studio that models Elon Musk's publicly documented statements and, as observable media becomes available, his speaking and movement patterns. A response combines evidence selection, dialogue, voice, timed behavior, and a controllable avatar. The interface identifies the simulation and distinguishes generated dialogue, factual source notes, generic speech, and learned assets.
 
+## New avatar generation workstream — 2026-11-12
+
+The user selected **new avatar creation from multiple photographs and video**
+for the Jensen Huang visual-avatar workstream and excluded the previously
+suggested ready-made celebrity assets. Follow the
+[generation pipeline](avatar-generation-pipeline.md) and
+[primary-source method evidence](research/avatar-generation-methods.md).
+The earlier acquisition records are historical context, not the candidate list
+for this workstream.
+
+The output must include a complete upper torso, both arms and hands, articulated
+fingers, facial expressions, lip sync and new gestures. The product baseline is
+an editable master plus a skinned, morph-enabled GLB. Video-based ExAvatar and
+multi-image LHM++ are bounded Gaussian reconstruction experiments with separate
+renderer/export requirements; neither is assumed to produce a drop-in GLB.
+
+Implementation order: source coverage and splits; reconstruction pilots; neutral
+identity and appearance; face/body/finger rig; runtime finger controls, framing,
+speech-expression composition and persona binding; fresh-dialogue auditions;
+then qualification and promotion. All stages are **planned**. The document is
+grounded in the runtime at `0ef4e8b`; it does not report a generated Jensen model,
+training run or completed likeness evaluation. The currently configured Musk
+persona also requires an explicit subject-binding boundary before a new visual
+can enter a conversational session.
+
 ## Review boundaries
 
 | Milestone | Review unit | Acceptance |
@@ -60,4 +85,5 @@ These remaining quality/evaluation states are not filled with synthetic user rat
 - Unknown, unobservable, and unverified are explicit states.
 - Never invent interview quotations, motion captures, audio timestamps, trained checkpoints, or benchmark results.
 - Run capability tests independently of paid providers; report separately which external model paths were exercised.
+
 

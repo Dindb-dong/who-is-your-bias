@@ -145,6 +145,8 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 
 ## Documentation
 
+- [New avatar generation pipeline](docs/avatar-generation-pipeline.md): the active plan for creating a new Jensen Huang avatar from multiple photographs and video, including complete arms/hands, facial and finger rigs, new performances, runtime work and acceptance gates.
+- [Avatar generation method evidence](docs/research/avatar-generation-methods.md): mesh authoring, expressive video and multi-image reconstruction, output-format boundaries, hardware and separate code/model licenses.
 - [2026 continuation and execution evidence](docs/2026-continuation.md): merged PR #13, verified adapter serving, real training/comparison boundaries, dialogue regressions, and remaining acceptance work.
 - [Congressional source extension](docs/congressional-data.md): six additional official hearing events, source-bound parsing, combined corpus replay, and actual API availability limits.
 - [Verified text adapter runtime](docs/text-adapter-runtime.md): hash-bound LoRA training, tokenizer compatibility, operator-selected loading, and actual runtime identity.
@@ -156,9 +158,9 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 - [Original-data expansion and adaptation](docs/persona-data.md): ten actual acquisitions, nine dialogue events, independent modality eligibility, pinned replay and training exports/launchers.
 - [Hybrid retrieval](docs/hybrid-retrieval.md): actual multilingual embedding/reranker runs, false-candidate tradeoffs and reproducible optional configuration.
 - [Avatar audition](docs/avatar-audition.md): decoded GLB qualification, Blender conversion, same-audio recording and actual acquisition boundaries.
-- [Avatar acquisition follow-up](docs/avatar-acquisition-followup.md): current official free-candidate metadata and the authenticated-download requirement before actual asset qualification.
+- [Historical avatar acquisition follow-up](docs/avatar-acquisition-followup.md): the earlier asset-search record and authenticated-download boundary; the new-avatar workstream follows the generation plan above.
 - [2026 persona roadmap](docs/2026-persona-roadmap.md): current-pilot limits, the 2026 snapshot, data and learning expansion, retrieval, dialogue, streaming, and acceptance criteria.
-- [Musk 3D avatar shortlist](docs/research/musk-3d-avatar-shortlist.md): researched facially rigged models, free candidates, detailed portraits, licensing evidence, and an asset qualification plan.
+- [Historical Musk 3D avatar shortlist](docs/research/musk-3d-avatar-shortlist.md): the dated research record for the earlier Musk asset-acquisition plan.
 - [Proposal implementation status](docs/proposal-alignment.md): requirement mapping, completed evidence and remaining review boundaries.
 - [Original Q&A corpus](docs/original-qa.md): pinned publisher selections, event splits and working situation retrieval.
 - [Actual-answer evaluation](docs/reference-evaluation.md): the complete 24-response run, negative coverage result and reconstructable blinded review.
@@ -188,3 +190,4 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 - [Integration validation](docs/integration-validation.md): actual ASR, local HTTP inference, speech packages, and video observations.
 
 Run locally by default. Internet-facing deployment needs application authentication, inference quotas, and a considered persistence policy. The current session store is process-local and intentionally ephemeral; run a single API worker.
+
