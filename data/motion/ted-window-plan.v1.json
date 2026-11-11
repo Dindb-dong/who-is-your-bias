@@ -1,0 +1,344 @@
+{
+  "schema_version": "motion-measurement-plan.v1",
+  "id": "elon-musk-ted-geometry",
+  "runtime": "mediapipe",
+  "runtime_version": "0.10.21",
+  "sample_fps": 8,
+  "face_model_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+  "pose_model_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a",
+  "sources": [
+    {
+      "id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "url": "https://www.ted.com/talks/elon_musk_the_mind_behind_tesla_spacex_solarcity",
+      "corpus_split": "train",
+      "motion_split": "train"
+    },
+    {
+      "id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "url": "https://www.ted.com/talks/elon_musk_the_future_we_re_building_and_boring",
+      "corpus_split": "train",
+      "motion_split": "validation"
+    }
+  ],
+  "acquisitions": [
+    {
+      "source_id": "ted-2013",
+      "input_basename": "ted-2013-native-0-180.mp4",
+      "input_sha256": "e882d00dfdf067f8a6d4293fa687d59434390202164e187ebd4ad9b92827a65a",
+      "input_bytes": 28044724,
+      "source_timeline": "ted_h264_zero_start_capture",
+      "source_offset_seconds": 0,
+      "publisher_media_url": "https://py.tedcdn.com/consus/projects/00/03/56/011/products/2013-elon-musk-011-fallback-ac0208b9ee7c6d6d53feec1fec06c734-1200k.mp4",
+      "publisher_document_sha256": "8336c3c63a307cd4978c622c7fc75e7fb9b9e63be50730a6387a66107f7b326b",
+      "acquisition": "sequential native start 0, stream copy bounded to 180s; no input seek",
+      "duration_seconds": 180.119756,
+      "video_first_pts_seconds": 0.023,
+      "audio_first_pts_seconds": 0.0
+    },
+    {
+      "source_id": "ted-2017",
+      "input_basename": "ted-2017-native-0-180.mp4",
+      "input_sha256": "59a28857f664181825d704c4e1cad77069c636e367c4cbbc633653c9fa248d15",
+      "input_bytes": 25956971,
+      "source_timeline": "ted_h264_zero_start_capture",
+      "source_offset_seconds": 0,
+      "publisher_media_url": "https://py.tedcdn.com/consus/projects/00/28/36/004/products/2017-elon-musk-004-fallback-606b8b851116d03fb0026f17f6cbc6e1-1200k.mp4",
+      "publisher_document_sha256": "31b29ab2e6f38d73ffd6902ed9c359dd903b71d5c0a1d3fb745ed32c096ca90b",
+      "acquisition": "sequential native start 0, stream copy bounded to 180s; no input seek",
+      "duration_seconds": 180.119578,
+      "video_first_pts_seconds": 0.023,
+      "audio_first_pts_seconds": 0.0
+    }
+  ],
+  "windows": [
+    {
+      "id": "ted-2013-close-035",
+      "source_id": "ted-2013",
+      "start_seconds": 35,
+      "duration_seconds": 5,
+      "crop": null,
+      "neutral_ms": 0.0,
+      "accepted_end_ms": 5000,
+      "review_path": "reviews/ted-2013-close-035.json"
+    },
+    {
+      "id": "ted-2013-close-059",
+      "source_id": "ted-2013",
+      "start_seconds": 59,
+      "duration_seconds": 4,
+      "crop": null,
+      "neutral_ms": 0.0,
+      "accepted_end_ms": 4000,
+      "review_path": "reviews/ted-2013-close-059.json"
+    },
+    {
+      "id": "ted-2013-body-065",
+      "source_id": "ted-2013",
+      "start_seconds": 65,
+      "duration_seconds": 2.5,
+      "crop": [
+        170,
+        50,
+        280,
+        350
+      ],
+      "neutral_ms": 0.0,
+      "accepted_end_ms": 2500.0,
+      "review_path": "reviews/ted-2013-body-065.json"
+    },
+    {
+      "id": "ted-2013-body-068",
+      "source_id": "ted-2013",
+      "start_seconds": 68.5,
+      "duration_seconds": 2.5,
+      "crop": [
+        170,
+        50,
+        280,
+        350
+      ],
+      "neutral_ms": 125.133,
+      "accepted_end_ms": 2500.0,
+      "review_path": "reviews/ted-2013-body-068.json"
+    },
+    {
+      "id": "ted-2013-close-083",
+      "source_id": "ted-2013",
+      "start_seconds": 83,
+      "duration_seconds": 5,
+      "crop": null,
+      "neutral_ms": 0.0,
+      "accepted_end_ms": 4375,
+      "review_path": "reviews/ted-2013-close-083.json"
+    },
+    {
+      "id": "ted-2013-close-104",
+      "source_id": "ted-2013",
+      "start_seconds": 104,
+      "duration_seconds": 7.5,
+      "crop": null,
+      "neutral_ms": 0.0,
+      "accepted_end_ms": 5875,
+      "review_path": "reviews/ted-2013-close-104.json"
+    },
+    {
+      "id": "ted-2013-body-113",
+      "source_id": "ted-2013",
+      "start_seconds": 113,
+      "duration_seconds": 5,
+      "crop": [
+        100,
+        0,
+        360,
+        480
+      ],
+      "neutral_ms": 0.0,
+      "accepted_end_ms": 5000,
+      "review_path": "reviews/ted-2013-body-113.json"
+    },
+    {
+      "id": "ted-2017-close-025",
+      "source_id": "ted-2017",
+      "start_seconds": 25,
+      "duration_seconds": 17.5,
+      "crop": null,
+      "neutral_ms": 1000.9999999999999,
+      "accepted_end_ms": 17125,
+      "review_path": "reviews/ted-2017-close-025.json"
+    },
+    {
+      "id": "ted-2017-close-054",
+      "source_id": "ted-2017",
+      "start_seconds": 54,
+      "duration_seconds": 7.5,
+      "crop": null,
+      "neutral_ms": 0.0,
+      "accepted_end_ms": 7500.0,
+      "review_path": "reviews/ted-2017-close-054.json"
+    },
+    {
+      "id": "ted-2017-body-065",
+      "source_id": "ted-2017",
+      "start_seconds": 65,
+      "duration_seconds": 7.5,
+      "crop": [
+        410,
+        0,
+        440,
+        480
+      ],
+      "neutral_ms": 4254.244,
+      "accepted_end_ms": 7125,
+      "review_path": "reviews/ted-2017-body-065.json"
+    },
+    {
+      "id": "ted-2017-body-139",
+      "source_id": "ted-2017",
+      "start_seconds": 139,
+      "duration_seconds": 7.5,
+      "crop": [
+        410,
+        0,
+        440,
+        480
+      ],
+      "neutral_ms": 125.12200000000001,
+      "accepted_end_ms": 7500.0,
+      "review_path": "reviews/ted-2017-body-139.json"
+    },
+    {
+      "id": "ted-2017-close-149",
+      "source_id": "ted-2017",
+      "start_seconds": 149,
+      "duration_seconds": 7.5,
+      "crop": null,
+      "neutral_ms": 500.49999999999994,
+      "accepted_end_ms": 7500.0,
+      "review_path": "reviews/ted-2017-close-149.json"
+    },
+    {
+      "id": "ted-2017-close-172",
+      "source_id": "ted-2017",
+      "start_seconds": 172,
+      "duration_seconds": 5,
+      "crop": null,
+      "neutral_ms": 0.0,
+      "accepted_end_ms": 5000,
+      "review_path": "reviews/ted-2017-close-172.json"
+    }
+  ],
+  "measurement_qa": [
+    {
+      "id": "ted-2013-close-035",
+      "sampled_frames": 40,
+      "accepted_frames": 40,
+      "accepted_duration_ms": 5000,
+      "frames_with_exactly_one_face": 40,
+      "frames_with_exactly_one_pose": 40,
+      "reference_ms": 0.0,
+      "output_bytes": 109264
+    },
+    {
+      "id": "ted-2013-close-059",
+      "sampled_frames": 32,
+      "accepted_frames": 32,
+      "accepted_duration_ms": 4000,
+      "frames_with_exactly_one_face": 32,
+      "frames_with_exactly_one_pose": 32,
+      "reference_ms": 0.0,
+      "output_bytes": 87958
+    },
+    {
+      "id": "ted-2013-body-065",
+      "sampled_frames": 20,
+      "accepted_frames": 20,
+      "accepted_duration_ms": 2500.0,
+      "frames_with_exactly_one_face": 0,
+      "frames_with_exactly_one_pose": 20,
+      "reference_ms": 0.0,
+      "output_bytes": 27174
+    },
+    {
+      "id": "ted-2013-body-068",
+      "sampled_frames": 20,
+      "accepted_frames": 20,
+      "accepted_duration_ms": 2500.0,
+      "frames_with_exactly_one_face": 9,
+      "frames_with_exactly_one_pose": 20,
+      "reference_ms": 125.133,
+      "output_bytes": 50645
+    },
+    {
+      "id": "ted-2013-close-083",
+      "sampled_frames": 40,
+      "accepted_frames": 35,
+      "accepted_duration_ms": 4375,
+      "frames_with_exactly_one_face": 37,
+      "frames_with_exactly_one_pose": 40,
+      "reference_ms": 0.0,
+      "output_bytes": 95845
+    },
+    {
+      "id": "ted-2013-close-104",
+      "sampled_frames": 60,
+      "accepted_frames": 47,
+      "accepted_duration_ms": 5875,
+      "frames_with_exactly_one_face": 52,
+      "frames_with_exactly_one_pose": 53,
+      "reference_ms": 0.0,
+      "output_bytes": 127849
+    },
+    {
+      "id": "ted-2013-body-113",
+      "sampled_frames": 40,
+      "accepted_frames": 40,
+      "accepted_duration_ms": 5000,
+      "frames_with_exactly_one_face": 40,
+      "frames_with_exactly_one_pose": 40,
+      "reference_ms": 0.0,
+      "output_bytes": 146156
+    },
+    {
+      "id": "ted-2017-close-025",
+      "sampled_frames": 140,
+      "accepted_frames": 137,
+      "accepted_duration_ms": 17125,
+      "frames_with_exactly_one_face": 139,
+      "frames_with_exactly_one_pose": 140,
+      "reference_ms": 1000.9999999999999,
+      "output_bytes": 423849
+    },
+    {
+      "id": "ted-2017-close-054",
+      "sampled_frames": 60,
+      "accepted_frames": 60,
+      "accepted_duration_ms": 7500.0,
+      "frames_with_exactly_one_face": 59,
+      "frames_with_exactly_one_pose": 60,
+      "reference_ms": 0.0,
+      "output_bytes": 204268
+    },
+    {
+      "id": "ted-2017-body-065",
+      "sampled_frames": 60,
+      "accepted_frames": 57,
+      "accepted_duration_ms": 7125,
+      "frames_with_exactly_one_face": 24,
+      "frames_with_exactly_one_pose": 60,
+      "reference_ms": 4254.244,
+      "output_bytes": 128197
+    },
+    {
+      "id": "ted-2017-body-139",
+      "sampled_frames": 60,
+      "accepted_frames": 60,
+      "accepted_duration_ms": 7500.0,
+      "frames_with_exactly_one_face": 45,
+      "frames_with_exactly_one_pose": 60,
+      "reference_ms": 125.12200000000001,
+      "output_bytes": 185338
+    },
+    {
+      "id": "ted-2017-close-149",
+      "sampled_frames": 60,
+      "accepted_frames": 60,
+      "accepted_duration_ms": 7500.0,
+      "frames_with_exactly_one_face": 60,
+      "frames_with_exactly_one_pose": 60,
+      "reference_ms": 500.49999999999994,
+      "output_bytes": 193840
+    },
+    {
+      "id": "ted-2017-close-172",
+      "sampled_frames": 40,
+      "accepted_frames": 40,
+      "accepted_duration_ms": 5000,
+      "frames_with_exactly_one_face": 40,
+      "frames_with_exactly_one_pose": 40,
+      "reference_ms": 0.0,
+      "output_bytes": 132617
+    }
+  ]
+}

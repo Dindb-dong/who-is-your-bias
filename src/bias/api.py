@@ -20,6 +20,7 @@ from .corpus import Corpus
 from .engine import Engine
 from .lipsync import LipsyncEngine
 from .models import ChatRequest, ChatTurn, SpeechPackageRequest, SpeechRequest
+from .motion import MotionError, MotionLibrary
 from .providers import OpenAICompatibleLLM, ProviderError, SpeechProvider, TranscriptionProvider
 from .sessions import SessionCapacityError, SessionNotFound
 from .speech import SpeechPackages
@@ -79,12 +80,22 @@ def _public_error(exc: Exception) -> tuple[int, dict[str, str]]:
     return 500, {"code": "internal_error", "message": "The response could not be completed."}
 
 
-def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None, llm: OpenAICompatibleLLM | None = None) -> FastAPI:
+def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None, llm: OpenAICompatibleLLM | None = None, motion_library: MotionLibrary | None = None) -> FastAPI:
     config = settings or Settings.from_env()
 
     @asynccontextmanager
     async def lifespan(application: FastAPI) -> AsyncIterator[None]:
-        application.state.engine = Engine(config, corpus or Corpus.load(config.corpus_dir), llm=llm)
+        loaded_motion = motion_library
+        motion_status = "not_configured"
+        if loaded_motion is None and config.motion_catalog is not None:
+            try:
+                loaded_motion = MotionLibrary.load(config.motion_catalog, config.motion_asset_root)
+            except (ValueError, OSError) as exc:
+                logger.warning("Optional motion library unavailable (%s)", type(exc).__name__)
+                motion_status = "invalid_catalog"
+        application.state.motion_library = loaded_motion
+        application.state.motion_status = "available" if loaded_motion else motion_status
+        application.state.engine = Engine(config, corpus or Corpus.load(config.corpus_dir), llm=llm, motion_library=loaded_motion)
         application.state.speech = SpeechProvider(config.tts, voice=config.tts_voice, timeout=config.request_timeout, language_hint=config.tts_language_hint)
         application.state.transcription = TranscriptionProvider(config.asr, timeout=config.request_timeout)
         application.state.lipsync = LipsyncEngine.from_env()
@@ -136,6 +147,27 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
         loaded: Corpus = request.app.state.engine.corpus
         records = list(loaded.sources.values())
         return {"sources": [source.model_dump(mode="json") for source in records], "counts": {split: sum(source.split == split for source in records) for split in ("train", "validation", "test")}}
+
+    @application.get("/api/motion/library")
+    async def motion_summary(request: Request):
+        library: MotionLibrary | None = request.app.state.motion_library
+        if library is None:
+            return {"available": False, "status": request.app.state.motion_status,
+                "reviewed_runtime_primitives": 0, "preview_runtime_primitives": 0}
+        return {"available": True, "status": "available", **library.summary()}
+
+    @application.get("/api/motion/clip/{primitive_id}")
+    async def motion_clip(primitive_id: str, request: Request, preview: bool = False):
+        library: MotionLibrary | None = request.app.state.motion_library
+        if library is None or not re.fullmatch(r"[a-z0-9][a-z0-9_.-]{0,119}", primitive_id):
+            raise HTTPException(status_code=404, detail="The motion clip is unavailable under the requested review gate.")
+        try:
+            clip = library.clip(primitive_id, allow_geometry_preview=preview)
+        except MotionError as exc:
+            raise HTTPException(status_code=404, detail="The motion clip is unavailable under the requested review gate.") from exc
+        # Match MotionLibrary.clip_digest byte-for-byte, including Unicode.
+        payload = json.dumps(clip, ensure_ascii=False, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")
+        return Response(content=payload, media_type="application/json")
 
     @application.post("/api/chat", response_model=ChatTurn)
     async def chat(body: ChatRequest, request: Request):

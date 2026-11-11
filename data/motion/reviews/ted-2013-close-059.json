@@ -1,0 +1,206 @@
+{
+  "schema_version": "motion-review.v1",
+  "observations_sha256": "57f00a2a53bf72078406636cbdff08a74e0ae778a2f173167c3456cf3dd1d950",
+  "status": "geometry_preview",
+  "reviewer": "assistant-contact-sheet-screening",
+  "track_id": "ted-2013-close-059-image-track",
+  "track_continuity_reviewed": false,
+  "source_clock_reviewed": false,
+  "speaker_association_reviewed": false,
+  "attribution_basis": "Publisher page identifies the event, not a detected face. Single detections in the selected spatial crop are retained; multiple detections are omitted. Sequential decoded contact sheets plus frame-difference peaks screened gross cuts; declared tail exclusions remove four observed camera transitions. Full-frame continuity and image-to-audio-speaker association remain unreviewed. Time refers to the zero-start acquired h264 clock, not publisher captions.",
+  "selections": [
+    {
+      "start_ms": 0.0,
+      "end_ms": 125.133,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 125.133,
+      "end_ms": 250.256,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 250.256,
+      "end_ms": 375.378,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 375.378,
+      "end_ms": 500.5,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 500.5,
+      "end_ms": 625.633,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 625.633,
+      "end_ms": 750.756,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 750.756,
+      "end_ms": 875.878,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 875.878,
+      "end_ms": 1001.0,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 1001.0,
+      "end_ms": 1126.133,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 1126.133,
+      "end_ms": 1251.256,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 1251.256,
+      "end_ms": 1376.378,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 1376.378,
+      "end_ms": 1501.5,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 1501.5,
+      "end_ms": 1626.633,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 1626.633,
+      "end_ms": 1751.756,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 1751.756,
+      "end_ms": 1876.878,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 1876.878,
+      "end_ms": 2002.0,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 2002.0,
+      "end_ms": 2127.133,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 2127.133,
+      "end_ms": 2252.256,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 2252.256,
+      "end_ms": 2377.378,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 2377.378,
+      "end_ms": 2502.5,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 2502.5,
+      "end_ms": 2627.633,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 2627.633,
+      "end_ms": 2752.756,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 2752.756,
+      "end_ms": 2877.878,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 2877.878,
+      "end_ms": 3003.011,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 3003.011,
+      "end_ms": 3128.133,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 3128.133,
+      "end_ms": 3253.256,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 3253.256,
+      "end_ms": 3378.378,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 3378.378,
+      "end_ms": 3503.511,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 3503.511,
+      "end_ms": 3628.633,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 3628.633,
+      "end_ms": 3753.756,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 3753.756,
+      "end_ms": 3878.878,
+      "face_index": 0,
+      "pose_index": 0
+    },
+    {
+      "start_ms": 3878.878,
+      "end_ms": 4000,
+      "face_index": 0,
+      "pose_index": 0
+    }
+  ],
+  "accepted_end_ms": 4000
+}
