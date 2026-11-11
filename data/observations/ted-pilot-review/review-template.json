@@ -1,0 +1,101 @@
+{
+  "schema_version": "exchange-observation-review.v1",
+  "report_sha256": "582333582827dd2af2d81a7452025915d2d01d469e564afd96f83b9c8565f60b",
+  "reviewer": null,
+  "reviewer_type": null,
+  "reviewed_at": null,
+  "entries": [
+    {
+      "exchange_id": "qa-ted-2013-energy",
+      "exchange_sha256": "d3c6f01fefb7236e72ed9584f4b7036662d244c348854ffb541acbbade9f08b1",
+      "source_event_id": "ted-2013",
+      "decision": "not_reviewed",
+      "checks": {
+        "watched_source": false,
+        "listened_to_source": false,
+        "source_clock_verified": false,
+        "image_speaker_association_verified": false,
+        "track_continuity_verified": false,
+        "camera_motion_and_cuts_reviewed": false,
+        "recording_continuity_verified": false,
+        "acoustic_turn_boundaries_verified": false
+      },
+      "evidence_note": "",
+      "acoustic_boundaries": {
+        "question_end_seconds": null,
+        "answer_start_seconds": null,
+        "answer_end_seconds": null
+      },
+      "annotations": []
+    },
+    {
+      "exchange_id": "qa-ted-2013-efficiency",
+      "exchange_sha256": "d367c837e97717df2349b4787b13754ff1ac7509b4e3942c7bdf045427898b5b",
+      "source_event_id": "ted-2013",
+      "decision": "not_reviewed",
+      "checks": {
+        "watched_source": false,
+        "listened_to_source": false,
+        "source_clock_verified": false,
+        "image_speaker_association_verified": false,
+        "track_continuity_verified": false,
+        "camera_motion_and_cuts_reviewed": false,
+        "recording_continuity_verified": false,
+        "acoustic_turn_boundaries_verified": false
+      },
+      "evidence_note": "",
+      "acoustic_boundaries": {
+        "question_end_seconds": null,
+        "answer_start_seconds": null,
+        "answer_end_seconds": null
+      },
+      "annotations": []
+    },
+    {
+      "exchange_id": "qa-ted-2017-tunnels",
+      "exchange_sha256": "62f70828e94fbcb37cf9be4e43ab6e1813da3443f83ac2960e06a9d3d32d366b",
+      "source_event_id": "ted-2017",
+      "decision": "not_reviewed",
+      "checks": {
+        "watched_source": false,
+        "listened_to_source": false,
+        "source_clock_verified": false,
+        "image_speaker_association_verified": false,
+        "track_continuity_verified": false,
+        "camera_motion_and_cuts_reviewed": false,
+        "recording_continuity_verified": false,
+        "acoustic_turn_boundaries_verified": false
+      },
+      "evidence_note": "",
+      "acoustic_boundaries": {
+        "question_end_seconds": null,
+        "answer_start_seconds": null,
+        "answer_end_seconds": null
+      },
+      "annotations": []
+    },
+    {
+      "exchange_id": "qa-ted-2017-capacity",
+      "exchange_sha256": "719547115a063bf34214e7696b1c6398ac0c43d8fddc23c2739bd5204fb832a9",
+      "source_event_id": "ted-2017",
+      "decision": "not_reviewed",
+      "checks": {
+        "watched_source": false,
+        "listened_to_source": false,
+        "source_clock_verified": false,
+        "image_speaker_association_verified": false,
+        "track_continuity_verified": false,
+        "camera_motion_and_cuts_reviewed": false,
+        "recording_continuity_verified": false,
+        "acoustic_turn_boundaries_verified": false
+      },
+      "evidence_note": "",
+      "acoustic_boundaries": {
+        "question_end_seconds": null,
+        "answer_start_seconds": null,
+        "answer_end_seconds": null
+      },
+      "annotations": []
+    }
+  ]
+}

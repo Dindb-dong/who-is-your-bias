@@ -1,0 +1,1660 @@
+{
+  "schema_version": "exchange-observations.v1",
+  "id": "elon-musk-exchange-observations-v1",
+  "implementation_version": "1.0.0",
+  "inputs": {
+    "plan_sha256": "05480b912a71f51893402bccf6141e56637c7274a696f4da16a2eae17d505e6e",
+    "qa_corpus_sha256": "bb9276d5c1b270532f7e15eb4a43a89d4af791737e6f161504b179a25638a04a",
+    "source_event_split_sha256": "d9ef0051c278e376074dbe8cc12de1c67658774930c32e0b5ab1a526f6355295",
+    "motion_plan_sha256": "b65ab0bc49b6827c07516a33b4545c818ed4e77ae2098e9644e4a7a403927ea2",
+    "features_implementation_sha256": "d85745d1b4ab4cbe50c338095316772227879db57f128f20b8207e41542519fc",
+    "runner_implementation_sha256": "567597927da543245e57d62a4f2b9bb1b0ec428ff7ac0296fc832c53b9c3f7b9"
+  },
+  "thresholds": {
+    "smile_threshold": 0.5,
+    "minimum_smile_seconds": 0.25,
+    "visibility_threshold": 0.7,
+    "sample_fps": 8
+  },
+  "threshold_origin": "Fixed engineering thresholds declared before this feature extraction. They were not fitted on validation-event behavior or tuned to claim semantic accuracy. A threshold crossing creates a review candidate only.",
+  "event_inventory": [
+    {
+      "source_event_id": "ted-2013",
+      "split": "train",
+      "source_ids": [
+        "ted-2013"
+      ]
+    },
+    {
+      "source_event_id": "ted-2017",
+      "split": "train",
+      "source_ids": [
+        "ted-2017"
+      ]
+    },
+    {
+      "source_event_id": "ted-2022-recorded",
+      "split": "validation",
+      "source_ids": [
+        "ted-2022-recorded"
+      ]
+    },
+    {
+      "source_event_id": "lex-400-2023",
+      "split": "test",
+      "source_ids": [
+        "lex-400-2023"
+      ]
+    },
+    {
+      "source_event_id": "lex-438-2024",
+      "split": "test",
+      "source_ids": [
+        "lex-438-2024"
+      ]
+    }
+  ],
+  "observation_split_note": "Observation validation retains whole source events. A text-training event may be held out separately for motion; it is not thereby an unseen text event.",
+  "provenance": [
+    {
+      "source_id": "ted-2013",
+      "publisher_artifact_sha256": "9075ba7547f87a08af0cc4080c9885101d12e2012db4411c04e1ad0b93276c61",
+      "publisher_transcript_digest": "027627200493d6296349b9eeb4c74ce4d5ee248263915caeb15d180a24f03241",
+      "asr_runs": [
+        {
+          "run_id": "ted-2013-30-120",
+          "asr_sha256": "c8f861fd09c78e22552e0639acc88f86e7f4333d202d64c3d47ee59564b5a16c",
+          "alignment_sha256": "1b3bae3f2a1f8cdf4a1193cd09c2287fbd03832e8c06c9dab1c903a12f6cb8cf",
+          "media_manifest_sha256": "67535117a527dfcef56a0a62ed8f256707d39643a2490d0258188ed7667af25d",
+          "audio_sha256": "614e40f6823b2eb5d065e826b134217eb19cc28ab289f835f527a9987d8cd2c3",
+          "input_sha256": "e882d00dfdf067f8a6d4293fa687d59434390202164e187ebd4ad9b92827a65a",
+          "engine": {
+            "name": "faster-whisper",
+            "version": "1.2.1",
+            "ctranslate2_version": "4.8.5",
+            "model": "Systran/faster-whisper-small",
+            "revision": "536b0662742c02347bc0e980a01041f333bce120",
+            "model_sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+            "device": "cpu",
+            "compute_type": "int8",
+            "cpu_threads": 2,
+            "num_workers": 1,
+            "beam_size": 5,
+            "initial_prompt": null,
+            "prefix": null,
+            "hotwords": null,
+            "vad_filter": false,
+            "word_timestamps": true,
+            "condition_on_previous_text": false,
+            "input_decoder": "stdlib_wave_pcm16_float32",
+            "telemetry_disabled_before_import": true
+          }
+        }
+      ],
+      "visual_windows": [
+        {
+          "window_id": "ted-2013-close-035",
+          "observations_sha256": "dbe1717f268f2a87b17cda14da466e1e073e451ec0817ddc693c0639a200df82",
+          "observations_manifest_sha256": "1940f0ad6580432045bc39e0b047dc64a786979ca50a3af04c27aa87f400306e",
+          "geometry_sha256": "0e2a100118c041ab04f91f2a741d7d3aa1572f98e914ee2a9a795d26c9c2a02e",
+          "prepared_video_sha256": "55f248fdd70556d12ecca638206b20fc0aa8f31c3573117649c0401c913f6fc0",
+          "input_sha256": "e882d00dfdf067f8a6d4293fa687d59434390202164e187ebd4ad9b92827a65a",
+          "runtime": {
+            "name": "mediapipe",
+            "version": "0.10.21"
+          },
+          "models": {
+            "face_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+            "pose_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+          }
+        },
+        {
+          "window_id": "ted-2013-close-059",
+          "observations_sha256": "57f00a2a53bf72078406636cbdff08a74e0ae778a2f173167c3456cf3dd1d950",
+          "observations_manifest_sha256": "87460418921a44335911576be69cc327f2c822353cf19c9d1ca0c2e833c14362",
+          "geometry_sha256": "5dcd1b8b40ea0439d5dacbbcb4605b9910eea3f52ade6606d0ee2be21ee73c13",
+          "prepared_video_sha256": "13e66ba062cb1fd3f598f33a8c5c4d0c7bb4710ab9c58fbea6d5ed4836d2fc02",
+          "input_sha256": "e882d00dfdf067f8a6d4293fa687d59434390202164e187ebd4ad9b92827a65a",
+          "runtime": {
+            "name": "mediapipe",
+            "version": "0.10.21"
+          },
+          "models": {
+            "face_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+            "pose_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+          }
+        },
+        {
+          "window_id": "ted-2013-body-065",
+          "observations_sha256": "a756b6a8c42c823435273507ad6c36f3a279db7c3dc9c16b629fda39993682a6",
+          "observations_manifest_sha256": "27308ea98c76315fce59727bea9c3b151576c258acdca64f8ed0ad7e4a2abfc0",
+          "geometry_sha256": "32f7387b93fbdd70f303d19e4a612d47b7b30a20466a6f4231ca81e77fdcc698",
+          "prepared_video_sha256": "dcd0fe009b17ad0317d6a2a31400def01ba3b9686b7805d67145aa6495763c3d",
+          "input_sha256": "e882d00dfdf067f8a6d4293fa687d59434390202164e187ebd4ad9b92827a65a",
+          "runtime": {
+            "name": "mediapipe",
+            "version": "0.10.21"
+          },
+          "models": {
+            "face_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+            "pose_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+          }
+        },
+        {
+          "window_id": "ted-2013-body-068",
+          "observations_sha256": "b4865d49ec5941dc606339ad63aec921fb047c15342db3d997e80d44da70eb7a",
+          "observations_manifest_sha256": "a5973e6efdeef0576cb120320cfaf4a0c2a7a18340cfd69dff47b3f47bd2b2f5",
+          "geometry_sha256": "0522ee0dcba90d60e81e20e4f6c97e9c35448ef7e8230774d690d2ad99f5d322",
+          "prepared_video_sha256": "92b76d3c7e74554890a13b4936f6c9e9159adebd29e0d19e2a1e5a24f0b1a2f8",
+          "input_sha256": "e882d00dfdf067f8a6d4293fa687d59434390202164e187ebd4ad9b92827a65a",
+          "runtime": {
+            "name": "mediapipe",
+            "version": "0.10.21"
+          },
+          "models": {
+            "face_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+            "pose_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+          }
+        },
+        {
+          "window_id": "ted-2013-close-083",
+          "observations_sha256": "97d0f3381b8ffbc09835691f3becfaa7b54e0221340e866d396c4c24987c85d9",
+          "observations_manifest_sha256": "5e0f37a4d585d63d67eee5ebb4abf5d035aa9e3016a15120b4b589bb3f13bb13",
+          "geometry_sha256": "ea69bfb2b8e76513fbe85c169f31336e77253de238bdf7fd1432f5a51bb5aa09",
+          "prepared_video_sha256": "27c4e7ea7109163c0087ea002df887561c5a0d91b79e5d6bc00151959ed5bc73",
+          "input_sha256": "e882d00dfdf067f8a6d4293fa687d59434390202164e187ebd4ad9b92827a65a",
+          "runtime": {
+            "name": "mediapipe",
+            "version": "0.10.21"
+          },
+          "models": {
+            "face_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+            "pose_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+          }
+        },
+        {
+          "window_id": "ted-2013-close-104",
+          "observations_sha256": "f7cb31943520c5229f2b6382fa0135850e29e72b648c7801c7c1d432a6d7bcc9",
+          "observations_manifest_sha256": "224b8f3a52c656cec79c3c0a229d447249bf7a62aff19ae4016a2dfc32a0e636",
+          "geometry_sha256": "e1f5ab30b70a8271f63b6aa6586d442f47b8a903d98513d846c0d6ae889e8107",
+          "prepared_video_sha256": "e1b09f792412785c205c448f3710159d2845038b4398f5acfaa6b86858ff12ea",
+          "input_sha256": "e882d00dfdf067f8a6d4293fa687d59434390202164e187ebd4ad9b92827a65a",
+          "runtime": {
+            "name": "mediapipe",
+            "version": "0.10.21"
+          },
+          "models": {
+            "face_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+            "pose_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+          }
+        },
+        {
+          "window_id": "ted-2013-body-113",
+          "observations_sha256": "89ac1c23948b7013fefcb5ab55dde50692bac4a029866c1dbcabfd7f3ab3e187",
+          "observations_manifest_sha256": "6c1ea11094da86ae9b7d5b868f8a3b2b6bbfbc5ae1c3064a5d9525f8305aab64",
+          "geometry_sha256": "1f369f108bdc358e61f85f1a53b57082a2fd3bf5f544f04c9e9d8e4140874c1d",
+          "prepared_video_sha256": "034b1af7056889e67d50d2f31b6dc17b50c2ad1b4dbb366326708c883e7b9896",
+          "input_sha256": "e882d00dfdf067f8a6d4293fa687d59434390202164e187ebd4ad9b92827a65a",
+          "runtime": {
+            "name": "mediapipe",
+            "version": "0.10.21"
+          },
+          "models": {
+            "face_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+            "pose_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+          }
+        }
+      ]
+    },
+    {
+      "source_id": "ted-2017",
+      "publisher_artifact_sha256": "f648129841ede4ef94e458f61d12ef42ca1f1bac5e56dee57eee8e0e8792a4fa",
+      "publisher_transcript_digest": "e74456a65979d229efbc3b4dd2c621c43ba2f5355408c160f198247b7a205e9a",
+      "asr_runs": [
+        {
+          "run_id": "ted-2017-20-120",
+          "asr_sha256": "9d90b096d09ea21b6c95f74604518aab40f7167a1deb499f215e89b56ece886c",
+          "alignment_sha256": "ffaa0f8f0cd8a35b0e4acfa759b43cc55a2d8a95b6b6d5f16428afb0101dddfa",
+          "media_manifest_sha256": "46a5f9807574084c8a05d688f03a5893bb698bff5f3579516c8494655c96b43d",
+          "audio_sha256": "3bdf84fb135b137ca4b427078c013a8913985d95e0a4b23e1d032f4fc7093d79",
+          "input_sha256": "59a28857f664181825d704c4e1cad77069c636e367c4cbbc633653c9fa248d15",
+          "engine": {
+            "name": "faster-whisper",
+            "version": "1.2.1",
+            "ctranslate2_version": "4.8.5",
+            "model": "Systran/faster-whisper-small",
+            "revision": "536b0662742c02347bc0e980a01041f333bce120",
+            "model_sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+            "device": "cpu",
+            "compute_type": "int8",
+            "cpu_threads": 2,
+            "num_workers": 1,
+            "beam_size": 5,
+            "initial_prompt": null,
+            "prefix": null,
+            "hotwords": null,
+            "vad_filter": false,
+            "word_timestamps": true,
+            "condition_on_previous_text": false,
+            "input_decoder": "stdlib_wave_pcm16_float32",
+            "telemetry_disabled_before_import": true
+          }
+        },
+        {
+          "run_id": "ted-2017-120-179",
+          "asr_sha256": "4206e8183b0856a627c77d9940ec58ba313f06d3a52c09af78f985bed849f52c",
+          "alignment_sha256": "1d4a65445bd781c7bd0873339b5245f7c232ff7ac826172d48d1415bd8c21d60",
+          "media_manifest_sha256": "4e23406ed3a10b4409c86c9f88c9bee16372f2df9c9a8fde079b6149b5637c51",
+          "audio_sha256": "f7d0bda3f7a63d10710158e76fe11250e4d3514dc335a5688ac1d5accaca685e",
+          "input_sha256": "59a28857f664181825d704c4e1cad77069c636e367c4cbbc633653c9fa248d15",
+          "engine": {
+            "name": "faster-whisper",
+            "version": "1.2.1",
+            "ctranslate2_version": "4.8.5",
+            "model": "Systran/faster-whisper-small",
+            "revision": "536b0662742c02347bc0e980a01041f333bce120",
+            "model_sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+            "device": "cpu",
+            "compute_type": "int8",
+            "cpu_threads": 2,
+            "num_workers": 1,
+            "beam_size": 5,
+            "initial_prompt": null,
+            "prefix": null,
+            "hotwords": null,
+            "vad_filter": false,
+            "word_timestamps": true,
+            "condition_on_previous_text": false,
+            "input_decoder": "stdlib_wave_pcm16_float32",
+            "telemetry_disabled_before_import": true
+          }
+        }
+      ],
+      "visual_windows": [
+        {
+          "window_id": "ted-2017-close-025",
+          "observations_sha256": "84fb768bd2d74784a21e2ff8148291419e0b6e3656f32069c0e89a81e4d9c712",
+          "observations_manifest_sha256": "2ec211a7a397d4074045d4a029aa3a635eb6f64757c15fa061d753954669cd65",
+          "geometry_sha256": "00d51aa00389c3ecd36f7f418c35a7fb51b8fcf00c0562ab48a520cb720abe0e",
+          "prepared_video_sha256": "23c5542c9630851858ad0fb3cc643c13f46fb9c1ebaffb8612926f37f94c6f51",
+          "input_sha256": "59a28857f664181825d704c4e1cad77069c636e367c4cbbc633653c9fa248d15",
+          "runtime": {
+            "name": "mediapipe",
+            "version": "0.10.21"
+          },
+          "models": {
+            "face_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+            "pose_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+          }
+        },
+        {
+          "window_id": "ted-2017-close-054",
+          "observations_sha256": "a41ee465548194aae0a6f492ed2d9ab83f32413fdb0e912240abcfa8aef84944",
+          "observations_manifest_sha256": "cc8391b95f7d2f719a77c4477c323180b9c54c032e9997df56ab69607465e5f3",
+          "geometry_sha256": "bc1ff14dcad7aa6078255bc4494a20ecd92774523e5060b9aaf1ac97da9373be",
+          "prepared_video_sha256": "f98c5ad7c03950162c3ce18286f39bb74118dbe8311d040ffbe049c071413ecb",
+          "input_sha256": "59a28857f664181825d704c4e1cad77069c636e367c4cbbc633653c9fa248d15",
+          "runtime": {
+            "name": "mediapipe",
+            "version": "0.10.21"
+          },
+          "models": {
+            "face_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+            "pose_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+          }
+        },
+        {
+          "window_id": "ted-2017-body-065",
+          "observations_sha256": "1078e2053965ec1d16292b98944be290ce7a9ed05f36fcb32fa15190648af205",
+          "observations_manifest_sha256": "e3a1507f7530159080d1982a96ba26acdb9a2948cddc2578de4f9ed8a61312a9",
+          "geometry_sha256": "ec9dbc95da0370ff0b22d8f601a576053f8d943423ffd525de14441aa6a6f50e",
+          "prepared_video_sha256": "a9eba5adfa45a8e9d379bc09f754abf9cb899f853943cff91431b8e460c7dfd5",
+          "input_sha256": "59a28857f664181825d704c4e1cad77069c636e367c4cbbc633653c9fa248d15",
+          "runtime": {
+            "name": "mediapipe",
+            "version": "0.10.21"
+          },
+          "models": {
+            "face_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+            "pose_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+          }
+        },
+        {
+          "window_id": "ted-2017-body-139",
+          "observations_sha256": "d5223f78a4225283a0ef2f20495f3ed1c8536edd6bcc103795953212a9a0d252",
+          "observations_manifest_sha256": "04a60fb58510382d4fba6874f9d9525db435a8b1fd37e141a10d09f4e5bf2b00",
+          "geometry_sha256": "1c7ce10d4a07fe2b2019674d42b1a7fb365d6a59603fd921b2d59fd224cad6b2",
+          "prepared_video_sha256": "4fcca18f4c6a8fb2dfaf3f84dc30434de0eb4ec2f350fe897434da5b63d86251",
+          "input_sha256": "59a28857f664181825d704c4e1cad77069c636e367c4cbbc633653c9fa248d15",
+          "runtime": {
+            "name": "mediapipe",
+            "version": "0.10.21"
+          },
+          "models": {
+            "face_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+            "pose_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+          }
+        },
+        {
+          "window_id": "ted-2017-close-149",
+          "observations_sha256": "1ac57143592dc36e97d7fbe7cf8e1c5d156cef0110f606148d37dd49905ed718",
+          "observations_manifest_sha256": "6125ffeca2d0984edfd0a7d0db7dcf17f76ebddcbd779e24e49fb5f21784383b",
+          "geometry_sha256": "8bfe0d95f8f35bfded4d501b4ebadd4743e33188905ed9fa65152beeccb6855d",
+          "prepared_video_sha256": "c2864454c584150eb18085620a42b053896eb402353116b7281d9ff1bc98aa00",
+          "input_sha256": "59a28857f664181825d704c4e1cad77069c636e367c4cbbc633653c9fa248d15",
+          "runtime": {
+            "name": "mediapipe",
+            "version": "0.10.21"
+          },
+          "models": {
+            "face_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+            "pose_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+          }
+        },
+        {
+          "window_id": "ted-2017-close-172",
+          "observations_sha256": "ac8a81e963d886c45cc254fb2fbc440961f5a40e1ea85b40ba2a9f9bf86f89b2",
+          "observations_manifest_sha256": "40d28c0119894c87b26507b34f46a50d7cfd5ef42a00364d343e0ff40815d069",
+          "geometry_sha256": "a15569234d6694a9dff9c8033681b8ba3e28f1b00df89d7d98afff906514fde6",
+          "prepared_video_sha256": "ee421ee3b6f1823b6c20e855bda86d50c075e30cad053575a4ddb8dad03c6f69",
+          "input_sha256": "59a28857f664181825d704c4e1cad77069c636e367c4cbbc633653c9fa248d15",
+          "runtime": {
+            "name": "mediapipe",
+            "version": "0.10.21"
+          },
+          "models": {
+            "face_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+            "pose_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+          }
+        }
+      ]
+    }
+  ],
+  "entries": [
+    {
+      "exchange_id": "qa-ted-2013-energy",
+      "exchange_sha256": "d3c6f01fefb7236e72ed9584f4b7036662d244c348854ffb541acbbade9f08b1",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "source_url": "https://www.ted.com/talks/elon_musk_the_mind_behind_tesla_spacex_solarcity",
+      "text_split": "train",
+      "observation_split": "train",
+      "situations": [
+        "explanation"
+      ],
+      "topics": [
+        "energy",
+        "electric cars",
+        "future"
+      ],
+      "original_language": "en",
+      "text_review": {
+        "reviewer_type": "agent",
+        "reviewer": "OpenAI coding agent",
+        "reviewed_at": "2026-11-11",
+        "basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+        "speaker_status": "publisher_labels_checked",
+        "timing_status": "not_audio_verified"
+      },
+      "exchange_completeness": "complete_exchange",
+      "observation_scope": "original_cue_window_not_only_quoted_excerpt",
+      "speech": {
+        "status": "measured_asr_candidates",
+        "source_timeline": "ted_h264_zero_start_capture",
+        "runs": [
+          {
+            "source_timeline": "ted_h264_zero_start_capture",
+            "publisher_timeline": "ted_transcript_cue",
+            "question_cue_ids": [
+              "cue-00001",
+              "cue-00002",
+              "cue-00003"
+            ],
+            "answer_cue_ids": [
+              "cue-00004",
+              "cue-00005",
+              "cue-00006",
+              "cue-00007",
+              "cue-00008",
+              "cue-00009",
+              "cue-00010",
+              "cue-00011",
+              "cue-00012",
+              "cue-00013",
+              "cue-00014"
+            ],
+            "question_end_seconds_candidate": null,
+            "answer_start_seconds_candidate": null,
+            "answer_end_seconds_candidate": 43.44,
+            "answer_boundary_coverage": {
+              "first_token": false,
+              "last_token": true
+            },
+            "matched_question_words": 0,
+            "matched_answer_words": 37,
+            "matched_answer_token_fraction": 0.377551,
+            "answer_window_seconds": [
+              30.0,
+              43.44
+            ],
+            "question_window_seconds": null,
+            "speech_rate": {
+              "value": null,
+              "unit": null,
+              "unit_count": null,
+              "window_start_seconds": null,
+              "window_end_seconds": null,
+              "window_duration_seconds": null,
+              "status": "intervening_unmatched_or_other_speaker_words",
+              "scope": "matched_source_window_including_internal_pauses"
+            },
+            "speech_rate_windows": [
+              {
+                "value": 6.896552,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 4,
+                "window_start_seconds": 30.0,
+                "window_end_seconds": 30.58,
+                "window_duration_seconds": 0.58,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              },
+              {
+                "value": 2.148437,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 11,
+                "window_start_seconds": 30.76,
+                "window_end_seconds": 35.88,
+                "window_duration_seconds": 5.12,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              },
+              {
+                "value": 2.96496,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 22,
+                "window_start_seconds": 36.02,
+                "window_end_seconds": 43.44,
+                "window_duration_seconds": 7.42,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              }
+            ],
+            "pre_answer_pause": {
+              "seconds": null,
+              "status": "unreviewed_continuity_and_acoustic_boundaries",
+              "candidate_gap_seconds": null
+            },
+            "speaker_basis": "publisher_text_labels_plus_exact_asr_token_matches",
+            "audio_listening_review_completed": false,
+            "limitations": [
+              "Word timestamps are ASR estimates, not verified acoustic boundaries.",
+              "The original recording may contain edits; a candidate turn gap is not a validated pre-answer pause.",
+              "Speech rate includes pauses within the matched window and is not articulation rate.",
+              "Speech rate is not computed across unmatched or other-speaker words."
+            ],
+            "asr_run_id": "ted-2013-30-120"
+          }
+        ],
+        "pre_answer_pause": {
+          "seconds": null,
+          "status": "requires_recording_continuity_and_boundary_review"
+        }
+      },
+      "visual_windows": [
+        {
+          "source_timeline": "ted_h264_zero_start_capture",
+          "window_start_seconds": 35.0,
+          "window_end_seconds": 40.0,
+          "phase": "speaking_candidate",
+          "sampled_frames": 40,
+          "excluded_frames": 0,
+          "visible_smile": {
+            "status": "geometry_candidates",
+            "threshold": 0.5,
+            "minimum_duration_seconds": 0.25,
+            "observed_frames": 40,
+            "mean_bilateral_score": 0.003692,
+            "intervals": [],
+            "human_visual_review_completed": false
+          },
+          "audible_laughter": {
+            "status": "not_listened",
+            "intervals": null,
+            "reason": "Visible smile scores and publisher stage directions cannot identify audible laughter by the respondent."
+          },
+          "head_movement": {
+            "status": "relative_geometry_candidate",
+            "observed_frames": 40,
+            "rotation_path_radians": 2.439591,
+            "semantic_gesture": null,
+            "camera_motion_reviewed": false,
+            "reason": "Head rotation candidates require camera/cut review before a nod or tilt can be assigned."
+          },
+          "hands": {
+            "left": {
+              "status": "unobservable",
+              "frame_states": {
+                "off_screen": 40
+              },
+              "observed_frame_fraction": 0.0,
+              "wrist_path_in_normalized_image_units": null,
+              "semantic_gesture": null
+            },
+            "right": {
+              "status": "unobservable",
+              "frame_states": {
+                "off_screen": 40
+              },
+              "observed_frame_fraction": 0.0,
+              "wrist_path_in_normalized_image_units": null,
+              "semantic_gesture": null
+            }
+          },
+          "exclusions": [],
+          "speaker_association_reviewed": false,
+          "track_continuity_reviewed": false,
+          "camera_motion_reviewed": false,
+          "window_id": "ted-2013-close-035",
+          "status": "exchange_context_candidate_not_speaker_attributed"
+        }
+      ],
+      "review_status": "candidate",
+      "human_listening_completed": false,
+      "runtime_eligible": false
+    },
+    {
+      "exchange_id": "qa-ted-2013-efficiency",
+      "exchange_sha256": "d367c837e97717df2349b4787b13754ff1ac7509b4e3942c7bdf045427898b5b",
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "source_url": "https://www.ted.com/talks/elon_musk_the_mind_behind_tesla_spacex_solarcity",
+      "text_split": "train",
+      "observation_split": "train",
+      "situations": [
+        "challenge"
+      ],
+      "topics": [
+        "electric cars",
+        "energy",
+        "efficiency",
+        "fossil fuels"
+      ],
+      "original_language": "en",
+      "text_review": {
+        "reviewer_type": "agent",
+        "reviewer": "OpenAI coding agent",
+        "reviewed_at": "2026-11-11",
+        "basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+        "speaker_status": "publisher_labels_checked",
+        "timing_status": "not_audio_verified"
+      },
+      "exchange_completeness": "complete_exchange",
+      "observation_scope": "original_cue_window_not_only_quoted_excerpt",
+      "speech": {
+        "status": "measured_asr_candidates",
+        "source_timeline": "ted_h264_zero_start_capture",
+        "runs": [
+          {
+            "source_timeline": "ted_h264_zero_start_capture",
+            "publisher_timeline": "ted_transcript_cue",
+            "question_cue_ids": [
+              "cue-00015",
+              "cue-00016",
+              "cue-00017"
+            ],
+            "answer_cue_ids": [
+              "cue-00018",
+              "cue-00019",
+              "cue-00020",
+              "cue-00021",
+              "cue-00022",
+              "cue-00023",
+              "cue-00024",
+              "cue-00025",
+              "cue-00026",
+              "cue-00027",
+              "cue-00028",
+              "cue-00029",
+              "cue-00030",
+              "cue-00031",
+              "cue-00032",
+              "cue-00033",
+              "cue-00034",
+              "cue-00035",
+              "cue-00036",
+              "cue-00037"
+            ],
+            "question_end_seconds_candidate": 53.68,
+            "answer_start_seconds_candidate": 54.54,
+            "answer_end_seconds_candidate": 100.98,
+            "answer_boundary_coverage": {
+              "first_token": true,
+              "last_token": true
+            },
+            "matched_question_words": 20,
+            "matched_answer_words": 154,
+            "matched_answer_token_fraction": 0.939024,
+            "answer_window_seconds": [
+              54.54,
+              100.98
+            ],
+            "question_window_seconds": [
+              43.92,
+              53.68
+            ],
+            "speech_rate": {
+              "value": null,
+              "unit": null,
+              "unit_count": null,
+              "window_start_seconds": null,
+              "window_end_seconds": null,
+              "window_duration_seconds": null,
+              "status": "intervening_unmatched_or_other_speaker_words",
+              "scope": "matched_source_window_including_internal_pauses"
+            },
+            "speech_rate_windows": [
+              {
+                "value": 3.224254,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 67,
+                "window_start_seconds": 54.54,
+                "window_end_seconds": 75.32,
+                "window_duration_seconds": 20.78,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              },
+              {
+                "value": 4.009434,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 17,
+                "window_start_seconds": 75.56,
+                "window_end_seconds": 79.8,
+                "window_duration_seconds": 4.24,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              },
+              {
+                "value": 3.829322,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 35,
+                "window_start_seconds": 79.96,
+                "window_end_seconds": 89.1,
+                "window_duration_seconds": 9.14,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              },
+              {
+                "value": 2.5,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 9,
+                "window_start_seconds": 89.24,
+                "window_end_seconds": 92.84,
+                "window_duration_seconds": 3.6,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              },
+              {
+                "value": 4.166667,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 9,
+                "window_start_seconds": 94.58,
+                "window_end_seconds": 96.74,
+                "window_duration_seconds": 2.16,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              },
+              {
+                "value": 4.464286,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 10,
+                "window_start_seconds": 97.18,
+                "window_end_seconds": 99.42,
+                "window_duration_seconds": 2.24,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              },
+              {
+                "value": 4.285714,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 6,
+                "window_start_seconds": 99.58,
+                "window_end_seconds": 100.98,
+                "window_duration_seconds": 1.4,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              }
+            ],
+            "pre_answer_pause": {
+              "seconds": null,
+              "status": "unreviewed_continuity_and_acoustic_boundaries",
+              "candidate_gap_seconds": 0.86
+            },
+            "speaker_basis": "publisher_text_labels_plus_exact_asr_token_matches",
+            "audio_listening_review_completed": false,
+            "limitations": [
+              "Word timestamps are ASR estimates, not verified acoustic boundaries.",
+              "The original recording may contain edits; a candidate turn gap is not a validated pre-answer pause.",
+              "Speech rate includes pauses within the matched window and is not articulation rate.",
+              "Speech rate is not computed across unmatched or other-speaker words."
+            ],
+            "asr_run_id": "ted-2013-30-120"
+          }
+        ],
+        "pre_answer_pause": {
+          "seconds": null,
+          "status": "requires_recording_continuity_and_boundary_review"
+        }
+      },
+      "visual_windows": [
+        {
+          "source_timeline": "ted_h264_zero_start_capture",
+          "window_start_seconds": 59.0,
+          "window_end_seconds": 63.0,
+          "phase": "speaking_candidate",
+          "sampled_frames": 32,
+          "excluded_frames": 0,
+          "visible_smile": {
+            "status": "geometry_candidates",
+            "threshold": 0.5,
+            "minimum_duration_seconds": 0.25,
+            "observed_frames": 32,
+            "mean_bilateral_score": 0.001263,
+            "intervals": [],
+            "human_visual_review_completed": false
+          },
+          "audible_laughter": {
+            "status": "not_listened",
+            "intervals": null,
+            "reason": "Visible smile scores and publisher stage directions cannot identify audible laughter by the respondent."
+          },
+          "head_movement": {
+            "status": "relative_geometry_candidate",
+            "observed_frames": 32,
+            "rotation_path_radians": 1.363521,
+            "semantic_gesture": null,
+            "camera_motion_reviewed": false,
+            "reason": "Head rotation candidates require camera/cut review before a nod or tilt can be assigned."
+          },
+          "hands": {
+            "left": {
+              "status": "unobservable",
+              "frame_states": {
+                "off_screen": 32
+              },
+              "observed_frame_fraction": 0.0,
+              "wrist_path_in_normalized_image_units": null,
+              "semantic_gesture": null
+            },
+            "right": {
+              "status": "unobservable",
+              "frame_states": {
+                "occluded_or_low_confidence": 1,
+                "off_screen": 31
+              },
+              "observed_frame_fraction": 0.0,
+              "wrist_path_in_normalized_image_units": null,
+              "semantic_gesture": null
+            }
+          },
+          "exclusions": [],
+          "speaker_association_reviewed": false,
+          "track_continuity_reviewed": false,
+          "camera_motion_reviewed": false,
+          "window_id": "ted-2013-close-059",
+          "status": "exchange_context_candidate_not_speaker_attributed"
+        },
+        {
+          "source_timeline": "ted_h264_zero_start_capture",
+          "window_start_seconds": 65.0,
+          "window_end_seconds": 67.5,
+          "phase": "speaking_candidate",
+          "sampled_frames": 20,
+          "excluded_frames": 0,
+          "visible_smile": {
+            "status": "unobservable",
+            "threshold": 0.5,
+            "minimum_duration_seconds": 0.25,
+            "observed_frames": 0,
+            "mean_bilateral_score": null,
+            "intervals": [],
+            "human_visual_review_completed": false
+          },
+          "audible_laughter": {
+            "status": "not_listened",
+            "intervals": null,
+            "reason": "Visible smile scores and publisher stage directions cannot identify audible laughter by the respondent."
+          },
+          "head_movement": {
+            "status": "unobservable",
+            "observed_frames": 0,
+            "rotation_path_radians": null,
+            "semantic_gesture": null,
+            "camera_motion_reviewed": false,
+            "reason": "Head rotation candidates require camera/cut review before a nod or tilt can be assigned."
+          },
+          "hands": {
+            "left": {
+              "status": "relative_geometry_candidate",
+              "frame_states": {
+                "observed": 20
+              },
+              "observed_frame_fraction": 1.0,
+              "wrist_path_in_normalized_image_units": 0.462395,
+              "semantic_gesture": null
+            },
+            "right": {
+              "status": "relative_geometry_candidate",
+              "frame_states": {
+                "observed": 20
+              },
+              "observed_frame_fraction": 1.0,
+              "wrist_path_in_normalized_image_units": 0.306221,
+              "semantic_gesture": null
+            }
+          },
+          "exclusions": [],
+          "speaker_association_reviewed": false,
+          "track_continuity_reviewed": false,
+          "camera_motion_reviewed": false,
+          "window_id": "ted-2013-body-065",
+          "status": "exchange_context_candidate_not_speaker_attributed"
+        },
+        {
+          "source_timeline": "ted_h264_zero_start_capture",
+          "window_start_seconds": 68.5,
+          "window_end_seconds": 71.0,
+          "phase": "speaking_candidate",
+          "sampled_frames": 20,
+          "excluded_frames": 0,
+          "visible_smile": {
+            "status": "geometry_candidates",
+            "threshold": 0.5,
+            "minimum_duration_seconds": 0.25,
+            "observed_frames": 9,
+            "mean_bilateral_score": 0.001014,
+            "intervals": [],
+            "human_visual_review_completed": false
+          },
+          "audible_laughter": {
+            "status": "not_listened",
+            "intervals": null,
+            "reason": "Visible smile scores and publisher stage directions cannot identify audible laughter by the respondent."
+          },
+          "head_movement": {
+            "status": "relative_geometry_candidate",
+            "observed_frames": 9,
+            "rotation_path_radians": 0.460169,
+            "semantic_gesture": null,
+            "camera_motion_reviewed": false,
+            "reason": "Head rotation candidates require camera/cut review before a nod or tilt can be assigned."
+          },
+          "hands": {
+            "left": {
+              "status": "relative_geometry_candidate",
+              "frame_states": {
+                "observed": 20
+              },
+              "observed_frame_fraction": 1.0,
+              "wrist_path_in_normalized_image_units": 0.258942,
+              "semantic_gesture": null
+            },
+            "right": {
+              "status": "relative_geometry_candidate",
+              "frame_states": {
+                "observed": 20
+              },
+              "observed_frame_fraction": 1.0,
+              "wrist_path_in_normalized_image_units": 0.200051,
+              "semantic_gesture": null
+            }
+          },
+          "exclusions": [],
+          "speaker_association_reviewed": false,
+          "track_continuity_reviewed": false,
+          "camera_motion_reviewed": false,
+          "window_id": "ted-2013-body-068",
+          "status": "exchange_context_candidate_not_speaker_attributed"
+        },
+        {
+          "source_timeline": "ted_h264_zero_start_capture",
+          "window_start_seconds": 83.0,
+          "window_end_seconds": 88.0,
+          "phase": "speaking_candidate",
+          "sampled_frames": 40,
+          "excluded_frames": 5,
+          "visible_smile": {
+            "status": "geometry_candidates",
+            "threshold": 0.5,
+            "minimum_duration_seconds": 0.25,
+            "observed_frames": 35,
+            "mean_bilateral_score": 0.003578,
+            "intervals": [],
+            "human_visual_review_completed": false
+          },
+          "audible_laughter": {
+            "status": "not_listened",
+            "intervals": null,
+            "reason": "Visible smile scores and publisher stage directions cannot identify audible laughter by the respondent."
+          },
+          "head_movement": {
+            "status": "relative_geometry_candidate",
+            "observed_frames": 35,
+            "rotation_path_radians": 2.487568,
+            "semantic_gesture": null,
+            "camera_motion_reviewed": false,
+            "reason": "Head rotation candidates require camera/cut review before a nod or tilt can be assigned."
+          },
+          "hands": {
+            "left": {
+              "status": "unobservable",
+              "frame_states": {
+                "excluded_camera_interval": 5,
+                "off_screen": 35
+              },
+              "observed_frame_fraction": 0.0,
+              "wrist_path_in_normalized_image_units": null,
+              "semantic_gesture": null
+            },
+            "right": {
+              "status": "unobservable",
+              "frame_states": {
+                "excluded_camera_interval": 5,
+                "off_screen": 35
+              },
+              "observed_frame_fraction": 0.0,
+              "wrist_path_in_normalized_image_units": null,
+              "semantic_gesture": null
+            }
+          },
+          "exclusions": [
+            {
+              "start_seconds": 87.375,
+              "end_seconds": 88,
+              "reason": "camera_cut_or_unreviewable_camera_motion"
+            }
+          ],
+          "speaker_association_reviewed": false,
+          "track_continuity_reviewed": false,
+          "camera_motion_reviewed": false,
+          "window_id": "ted-2013-close-083",
+          "status": "exchange_context_candidate_not_speaker_attributed"
+        }
+      ],
+      "review_status": "candidate",
+      "human_listening_completed": false,
+      "runtime_eligible": false
+    },
+    {
+      "exchange_id": "qa-ted-2017-tunnels",
+      "exchange_sha256": "62f70828e94fbcb37cf9be4e43ab6e1813da3443f83ac2960e06a9d3d32d366b",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "source_url": "https://www.ted.com/talks/elon_musk_the_future_we_re_building_and_boring",
+      "text_split": "train",
+      "observation_split": "validation",
+      "situations": [
+        "humor"
+      ],
+      "topics": [
+        "tunnel",
+        "boring",
+        "traffic",
+        "congestion"
+      ],
+      "original_language": "en",
+      "text_review": {
+        "reviewer_type": "agent",
+        "reviewer": "OpenAI coding agent",
+        "reviewed_at": "2026-11-11",
+        "basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+        "speaker_status": "publisher_labels_checked",
+        "timing_status": "not_audio_verified"
+      },
+      "exchange_completeness": "complete_exchange",
+      "observation_scope": "original_cue_window_not_only_quoted_excerpt",
+      "speech": {
+        "status": "measured_asr_candidates",
+        "source_timeline": "ted_h264_zero_start_capture",
+        "runs": [
+          {
+            "source_timeline": "ted_h264_zero_start_capture",
+            "publisher_timeline": "ted_transcript_cue",
+            "question_cue_ids": [
+              "cue-00004",
+              "cue-00005",
+              "cue-00006",
+              "cue-00007",
+              "cue-00008"
+            ],
+            "answer_cue_ids": [
+              "cue-00009",
+              "cue-00010",
+              "cue-00011",
+              "cue-00012",
+              "cue-00013",
+              "cue-00014",
+              "cue-00015",
+              "cue-00016",
+              "cue-00017",
+              "cue-00018",
+              "cue-00019"
+            ],
+            "question_end_seconds_candidate": 23.52,
+            "answer_start_seconds_candidate": 24.62,
+            "answer_end_seconds_candidate": 60.76,
+            "answer_boundary_coverage": {
+              "first_token": true,
+              "last_token": true
+            },
+            "matched_question_words": 8,
+            "matched_answer_words": 69,
+            "matched_answer_token_fraction": 0.985714,
+            "answer_window_seconds": [
+              24.62,
+              60.76
+            ],
+            "question_window_seconds": [
+              20.0,
+              23.52
+            ],
+            "speech_rate": {
+              "value": null,
+              "unit": null,
+              "unit_count": null,
+              "window_start_seconds": null,
+              "window_end_seconds": null,
+              "window_duration_seconds": null,
+              "status": "intervening_unmatched_or_other_speaker_words",
+              "scope": "matched_source_window_including_internal_pauses"
+            },
+            "speech_rate_windows": [
+              {
+                "value": 1.681076,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 35,
+                "window_start_seconds": 24.62,
+                "window_end_seconds": 45.44,
+                "window_duration_seconds": 20.82,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              },
+              {
+                "value": 2.890173,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 10,
+                "window_start_seconds": 46.12,
+                "window_end_seconds": 49.58,
+                "window_duration_seconds": 3.46,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              },
+              {
+                "value": 2.961672,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 17,
+                "window_start_seconds": 50.94,
+                "window_end_seconds": 56.68,
+                "window_duration_seconds": 5.74,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              },
+              {
+                "value": 1.785714,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 7,
+                "window_start_seconds": 56.84,
+                "window_end_seconds": 60.76,
+                "window_duration_seconds": 3.92,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              }
+            ],
+            "pre_answer_pause": {
+              "seconds": null,
+              "status": "unreviewed_continuity_and_acoustic_boundaries",
+              "candidate_gap_seconds": 1.1
+            },
+            "speaker_basis": "publisher_text_labels_plus_exact_asr_token_matches",
+            "audio_listening_review_completed": false,
+            "limitations": [
+              "Word timestamps are ASR estimates, not verified acoustic boundaries.",
+              "The original recording may contain edits; a candidate turn gap is not a validated pre-answer pause.",
+              "Speech rate includes pauses within the matched window and is not articulation rate.",
+              "Speech rate is not computed across unmatched or other-speaker words."
+            ],
+            "asr_run_id": "ted-2017-20-120"
+          }
+        ],
+        "pre_answer_pause": {
+          "seconds": null,
+          "status": "requires_recording_continuity_and_boundary_review"
+        }
+      },
+      "visual_windows": [
+        {
+          "source_timeline": "ted_h264_zero_start_capture",
+          "window_start_seconds": 25.0,
+          "window_end_seconds": 42.5,
+          "phase": "speaking_candidate",
+          "sampled_frames": 140,
+          "excluded_frames": 3,
+          "visible_smile": {
+            "status": "geometry_candidates",
+            "threshold": 0.5,
+            "minimum_duration_seconds": 0.25,
+            "observed_frames": 137,
+            "mean_bilateral_score": 0.041813,
+            "intervals": [],
+            "human_visual_review_completed": false
+          },
+          "audible_laughter": {
+            "status": "not_listened",
+            "intervals": null,
+            "reason": "Visible smile scores and publisher stage directions cannot identify audible laughter by the respondent."
+          },
+          "head_movement": {
+            "status": "relative_geometry_candidate",
+            "observed_frames": 137,
+            "rotation_path_radians": 5.56283,
+            "semantic_gesture": null,
+            "camera_motion_reviewed": false,
+            "reason": "Head rotation candidates require camera/cut review before a nod or tilt can be assigned."
+          },
+          "hands": {
+            "left": {
+              "status": "relative_geometry_candidate",
+              "frame_states": {
+                "excluded_camera_interval": 3,
+                "observed": 31,
+                "occluded_or_low_confidence": 22,
+                "off_screen": 84
+              },
+              "observed_frame_fraction": 0.221429,
+              "wrist_path_in_normalized_image_units": 0.869159,
+              "semantic_gesture": null
+            },
+            "right": {
+              "status": "relative_geometry_candidate",
+              "frame_states": {
+                "excluded_camera_interval": 3,
+                "observed": 73,
+                "occluded_or_low_confidence": 54,
+                "off_screen": 10
+              },
+              "observed_frame_fraction": 0.521429,
+              "wrist_path_in_normalized_image_units": 1.097095,
+              "semantic_gesture": null
+            }
+          },
+          "exclusions": [
+            {
+              "start_seconds": 42.125,
+              "end_seconds": 42.5,
+              "reason": "camera_cut_or_unreviewable_camera_motion"
+            }
+          ],
+          "speaker_association_reviewed": false,
+          "track_continuity_reviewed": false,
+          "camera_motion_reviewed": false,
+          "window_id": "ted-2017-close-025",
+          "status": "exchange_context_candidate_not_speaker_attributed"
+        },
+        {
+          "source_timeline": "ted_h264_zero_start_capture",
+          "window_start_seconds": 54.0,
+          "window_end_seconds": 61.5,
+          "phase": "unknown",
+          "sampled_frames": 60,
+          "excluded_frames": 0,
+          "visible_smile": {
+            "status": "geometry_candidates",
+            "threshold": 0.5,
+            "minimum_duration_seconds": 0.25,
+            "observed_frames": 59,
+            "mean_bilateral_score": 0.116115,
+            "intervals": [],
+            "human_visual_review_completed": false
+          },
+          "audible_laughter": {
+            "status": "not_listened",
+            "intervals": null,
+            "reason": "Visible smile scores and publisher stage directions cannot identify audible laughter by the respondent."
+          },
+          "head_movement": {
+            "status": "relative_geometry_candidate",
+            "observed_frames": 59,
+            "rotation_path_radians": 6.505839,
+            "semantic_gesture": null,
+            "camera_motion_reviewed": false,
+            "reason": "Head rotation candidates require camera/cut review before a nod or tilt can be assigned."
+          },
+          "hands": {
+            "left": {
+              "status": "relative_geometry_candidate",
+              "frame_states": {
+                "observed": 25,
+                "occluded_or_low_confidence": 29,
+                "off_screen": 6
+              },
+              "observed_frame_fraction": 0.416667,
+              "wrist_path_in_normalized_image_units": 0.350366,
+              "semantic_gesture": null
+            },
+            "right": {
+              "status": "relative_geometry_candidate",
+              "frame_states": {
+                "observed": 52,
+                "occluded_or_low_confidence": 7,
+                "off_screen": 1
+              },
+              "observed_frame_fraction": 0.866667,
+              "wrist_path_in_normalized_image_units": 0.565355,
+              "semantic_gesture": null
+            }
+          },
+          "exclusions": [],
+          "speaker_association_reviewed": false,
+          "track_continuity_reviewed": false,
+          "camera_motion_reviewed": false,
+          "window_id": "ted-2017-close-054",
+          "status": "exchange_context_candidate_not_speaker_attributed"
+        }
+      ],
+      "review_status": "candidate",
+      "human_listening_completed": false,
+      "runtime_eligible": false
+    },
+    {
+      "exchange_id": "qa-ted-2017-capacity",
+      "exchange_sha256": "719547115a063bf34214e7696b1c6398ac0c43d8fddc23c2739bd5204fb832a9",
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "source_url": "https://www.ted.com/talks/elon_musk_the_future_we_re_building_and_boring",
+      "text_split": "train",
+      "observation_split": "validation",
+      "situations": [
+        "explanation"
+      ],
+      "topics": [
+        "tunnel",
+        "traffic",
+        "congestion",
+        "levels"
+      ],
+      "original_language": "en",
+      "text_review": {
+        "reviewer_type": "agent",
+        "reviewer": "OpenAI coding agent",
+        "reviewed_at": "2026-11-11",
+        "basis": "AI agent read the original publisher transcript, checked explicit questioner/respondent labels, selected contiguous turns and nearby conversational context. Caption onsets and interval end proxies were retained without acoustic verification. No human review is claimed.",
+        "speaker_status": "publisher_labels_checked",
+        "timing_status": "not_audio_verified"
+      },
+      "exchange_completeness": "complete_exchange",
+      "observation_scope": "original_cue_window_not_only_quoted_excerpt",
+      "speech": {
+        "status": "measured_asr_candidates",
+        "source_timeline": "ted_h264_zero_start_capture",
+        "runs": [
+          {
+            "source_timeline": "ted_h264_zero_start_capture",
+            "publisher_timeline": "ted_transcript_cue",
+            "question_cue_ids": [
+              "cue-00046",
+              "cue-00047"
+            ],
+            "answer_cue_ids": [
+              "cue-00048",
+              "cue-00049",
+              "cue-00050",
+              "cue-00051",
+              "cue-00052",
+              "cue-00053",
+              "cue-00054",
+              "cue-00055",
+              "cue-00056",
+              "cue-00057",
+              "cue-00058",
+              "cue-00059"
+            ],
+            "question_end_seconds_candidate": 137.46,
+            "answer_start_seconds_candidate": null,
+            "answer_end_seconds_candidate": 176.88,
+            "answer_boundary_coverage": {
+              "first_token": false,
+              "last_token": true
+            },
+            "matched_question_words": 12,
+            "matched_answer_words": 113,
+            "matched_answer_token_fraction": 0.941667,
+            "answer_window_seconds": [
+              138.07999999999998,
+              176.88
+            ],
+            "question_window_seconds": [
+              133.82,
+              137.46
+            ],
+            "speech_rate": {
+              "value": null,
+              "unit": null,
+              "unit_count": null,
+              "window_start_seconds": null,
+              "window_end_seconds": null,
+              "window_duration_seconds": null,
+              "status": "intervening_unmatched_or_other_speaker_words",
+              "scope": "matched_source_window_including_internal_pauses"
+            },
+            "speech_rate_windows": [
+              {
+                "value": 2.298851,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 4,
+                "window_start_seconds": 138.08,
+                "window_end_seconds": 139.82,
+                "window_duration_seconds": 1.74,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              },
+              {
+                "value": 3.035936,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 49,
+                "window_start_seconds": 140.2,
+                "window_end_seconds": 156.34,
+                "window_duration_seconds": 16.14,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              },
+              {
+                "value": 3.140704,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 25,
+                "window_start_seconds": 158.86,
+                "window_end_seconds": 166.82,
+                "window_duration_seconds": 7.96,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              },
+              {
+                "value": 3.968254,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 5,
+                "window_start_seconds": 167.76,
+                "window_end_seconds": 169.02,
+                "window_duration_seconds": 1.26,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              },
+              {
+                "value": 3.636364,
+                "unit": "orthographic_words_per_second",
+                "unit_count": 28,
+                "window_start_seconds": 169.18,
+                "window_end_seconds": 176.88,
+                "window_duration_seconds": 7.7,
+                "status": "asr_candidate",
+                "scope": "contiguous_matched_window_including_internal_pauses"
+              }
+            ],
+            "pre_answer_pause": {
+              "seconds": null,
+              "status": "unreviewed_continuity_and_acoustic_boundaries",
+              "candidate_gap_seconds": null
+            },
+            "speaker_basis": "publisher_text_labels_plus_exact_asr_token_matches",
+            "audio_listening_review_completed": false,
+            "limitations": [
+              "Word timestamps are ASR estimates, not verified acoustic boundaries.",
+              "The original recording may contain edits; a candidate turn gap is not a validated pre-answer pause.",
+              "Speech rate includes pauses within the matched window and is not articulation rate.",
+              "Speech rate is not computed across unmatched or other-speaker words."
+            ],
+            "asr_run_id": "ted-2017-120-179"
+          }
+        ],
+        "pre_answer_pause": {
+          "seconds": null,
+          "status": "requires_recording_continuity_and_boundary_review"
+        }
+      },
+      "visual_windows": [
+        {
+          "source_timeline": "ted_h264_zero_start_capture",
+          "window_start_seconds": 139.0,
+          "window_end_seconds": 146.5,
+          "phase": "speaking_candidate",
+          "sampled_frames": 60,
+          "excluded_frames": 0,
+          "visible_smile": {
+            "status": "geometry_candidates",
+            "threshold": 0.5,
+            "minimum_duration_seconds": 0.25,
+            "observed_frames": 45,
+            "mean_bilateral_score": 0.009642,
+            "intervals": [],
+            "human_visual_review_completed": false
+          },
+          "audible_laughter": {
+            "status": "not_listened",
+            "intervals": null,
+            "reason": "Visible smile scores and publisher stage directions cannot identify audible laughter by the respondent."
+          },
+          "head_movement": {
+            "status": "relative_geometry_candidate",
+            "observed_frames": 44,
+            "rotation_path_radians": 4.06476,
+            "semantic_gesture": null,
+            "camera_motion_reviewed": false,
+            "reason": "Head rotation candidates require camera/cut review before a nod or tilt can be assigned."
+          },
+          "hands": {
+            "left": {
+              "status": "relative_geometry_candidate",
+              "frame_states": {
+                "observed": 60
+              },
+              "observed_frame_fraction": 1.0,
+              "wrist_path_in_normalized_image_units": 0.237606,
+              "semantic_gesture": null
+            },
+            "right": {
+              "status": "relative_geometry_candidate",
+              "frame_states": {
+                "observed": 48,
+                "occluded_or_low_confidence": 12
+              },
+              "observed_frame_fraction": 0.8,
+              "wrist_path_in_normalized_image_units": 0.445628,
+              "semantic_gesture": null
+            }
+          },
+          "exclusions": [],
+          "speaker_association_reviewed": false,
+          "track_continuity_reviewed": false,
+          "camera_motion_reviewed": false,
+          "window_id": "ted-2017-body-139",
+          "status": "exchange_context_candidate_not_speaker_attributed"
+        },
+        {
+          "source_timeline": "ted_h264_zero_start_capture",
+          "window_start_seconds": 149.0,
+          "window_end_seconds": 156.5,
+          "phase": "speaking_candidate",
+          "sampled_frames": 60,
+          "excluded_frames": 0,
+          "visible_smile": {
+            "status": "geometry_candidates",
+            "threshold": 0.5,
+            "minimum_duration_seconds": 0.25,
+            "observed_frames": 60,
+            "mean_bilateral_score": 0.054075,
+            "intervals": [
+              {
+                "start_seconds": 154.255256,
+                "end_seconds": 154.505378,
+                "phase": "speaking_candidate",
+                "status": "geometry_candidate"
+              }
+            ],
+            "human_visual_review_completed": false
+          },
+          "audible_laughter": {
+            "status": "not_listened",
+            "intervals": null,
+            "reason": "Visible smile scores and publisher stage directions cannot identify audible laughter by the respondent."
+          },
+          "head_movement": {
+            "status": "relative_geometry_candidate",
+            "observed_frames": 60,
+            "rotation_path_radians": 3.703198,
+            "semantic_gesture": null,
+            "camera_motion_reviewed": false,
+            "reason": "Head rotation candidates require camera/cut review before a nod or tilt can be assigned."
+          },
+          "hands": {
+            "left": {
+              "status": "relative_geometry_candidate",
+              "frame_states": {
+                "observed": 10,
+                "occluded_or_low_confidence": 19,
+                "off_screen": 31
+              },
+              "observed_frame_fraction": 0.166667,
+              "wrist_path_in_normalized_image_units": 0.129869,
+              "semantic_gesture": null
+            },
+            "right": {
+              "status": "relative_geometry_candidate",
+              "frame_states": {
+                "observed": 44,
+                "off_screen": 16
+              },
+              "observed_frame_fraction": 0.733333,
+              "wrist_path_in_normalized_image_units": 0.514559,
+              "semantic_gesture": null
+            }
+          },
+          "exclusions": [],
+          "speaker_association_reviewed": false,
+          "track_continuity_reviewed": false,
+          "camera_motion_reviewed": false,
+          "window_id": "ted-2017-close-149",
+          "status": "exchange_context_candidate_not_speaker_attributed"
+        },
+        {
+          "source_timeline": "ted_h264_zero_start_capture",
+          "window_start_seconds": 172.0,
+          "window_end_seconds": 177.0,
+          "phase": "unknown",
+          "sampled_frames": 40,
+          "excluded_frames": 0,
+          "visible_smile": {
+            "status": "geometry_candidates",
+            "threshold": 0.5,
+            "minimum_duration_seconds": 0.25,
+            "observed_frames": 40,
+            "mean_bilateral_score": 0.097792,
+            "intervals": [
+              {
+                "start_seconds": 174.252256,
+                "end_seconds": 174.752622,
+                "phase": "speaking_candidate",
+                "status": "geometry_candidate"
+              }
+            ],
+            "human_visual_review_completed": false
+          },
+          "audible_laughter": {
+            "status": "not_listened",
+            "intervals": null,
+            "reason": "Visible smile scores and publisher stage directions cannot identify audible laughter by the respondent."
+          },
+          "head_movement": {
+            "status": "relative_geometry_candidate",
+            "observed_frames": 40,
+            "rotation_path_radians": 3.283937,
+            "semantic_gesture": null,
+            "camera_motion_reviewed": false,
+            "reason": "Head rotation candidates require camera/cut review before a nod or tilt can be assigned."
+          },
+          "hands": {
+            "left": {
+              "status": "relative_geometry_candidate",
+              "frame_states": {
+                "observed": 13,
+                "occluded_or_low_confidence": 20,
+                "off_screen": 7
+              },
+              "observed_frame_fraction": 0.325,
+              "wrist_path_in_normalized_image_units": 0.112378,
+              "semantic_gesture": null
+            },
+            "right": {
+              "status": "relative_geometry_candidate",
+              "frame_states": {
+                "observed": 26,
+                "occluded_or_low_confidence": 9,
+                "off_screen": 5
+              },
+              "observed_frame_fraction": 0.65,
+              "wrist_path_in_normalized_image_units": 0.613408,
+              "semantic_gesture": null
+            }
+          },
+          "exclusions": [],
+          "speaker_association_reviewed": false,
+          "track_continuity_reviewed": false,
+          "camera_motion_reviewed": false,
+          "window_id": "ted-2017-close-172",
+          "status": "exchange_context_candidate_not_speaker_attributed"
+        }
+      ],
+      "review_status": "candidate",
+      "human_listening_completed": false,
+      "runtime_eligible": false
+    }
+  ],
+  "summary": {
+    "exchanges": 4,
+    "independent_source_events": 2,
+    "exchanges_by_observation_split": {
+      "train": 2,
+      "validation": 2
+    },
+    "speech_runs": 4,
+    "speech_rate_windows": 19,
+    "visual_windows_unique": 10,
+    "sampled_visual_frames_unique": 512,
+    "excluded_visual_frames_unique": 8,
+    "smile_candidate_intervals": 2,
+    "reviewed_pre_answer_pauses": 0,
+    "reviewed_laughter_intervals": 0,
+    "human_voice_ratings": 0,
+    "runtime_eligible_exchanges": 0,
+    "unmeasured_source_events": [
+      "ted-2022-recorded",
+      "lex-400-2023",
+      "lex-438-2024"
+    ]
+  },
+  "execution": {
+    "python": "3.12.14",
+    "platform": "Linux",
+    "machine": "x86_64",
+    "wall_seconds": 0.812537,
+    "process_cpu_seconds": 0.804984,
+    "peak_rss_bytes": 168386560,
+    "scope": "Recomputation from existing hashed ASR and visual model outputs; excludes original media acquisition/model inference. Shared-host timing is not an isolated throughput benchmark."
+  },
+  "limitations": [
+    "The pilot has only two observed events; correlated frames are not independent samples.",
+    "No human listening, acoustic-boundary review, image-to-speaker association, or semantic gesture accuracy is claimed.",
+    "Smiles are visual geometry candidates, audible laughter requires listening, and emotional state is never inferred.",
+    "Known camera-cut tails are excluded; camera-motion review remains required before accepting nod/tilt or hand gestures.",
+    "No raw interview text, original audio or video is copied into this report.",
+    "The language-specific speech units are not interchangeable; cross-language rate comparisons require a shared acoustic annotation method.",
+    "Candidate observations never automatically enter runtime voice or motion selection."
+  ]
+}

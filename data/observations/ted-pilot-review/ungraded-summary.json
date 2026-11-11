@@ -1,0 +1,33 @@
+{
+  "schema_version": "reviewed-exchange-observations.v1",
+  "report_sha256": "582333582827dd2af2d81a7452025915d2d01d469e564afd96f83b9c8565f60b",
+  "annotations_sha256": "a59a185d156015845345a9a8647a316861d441c5b8b33a7bd938c7c10448bbcb",
+  "reviewer": null,
+  "reviewer_type": null,
+  "reviewed_at": null,
+  "accepted": [],
+  "rejected": [],
+  "unreviewed": [
+    "qa-ted-2013-energy",
+    "qa-ted-2013-efficiency",
+    "qa-ted-2017-tunnels",
+    "qa-ted-2017-capacity"
+  ],
+  "runtime_index": [],
+  "summary": {
+    "accepted": 0,
+    "rejected": 0,
+    "unreviewed": 4,
+    "human_reviewed": 0,
+    "agent_reviewed": 0,
+    "runtime_eligible": 0,
+    "accepted_by_event": {}
+  },
+  "limitations": [
+    "Review records explicit supplied judgments; it cannot prove a reviewer listened merely from a checkbox.",
+    "Agent judgments remain distinct from human judgments and cannot populate the runtime index.",
+    "Validation/test events remain excluded even after a positive review.",
+    "Observed source behavior is not a prediction of the person's reaction to a new question."
+  ],
+  "review_fingerprint": "108c477f4678234e2fbaf21a8d364a4628fb7e6e4722fc95ee66de8925625c42"
+}
