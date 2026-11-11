@@ -7,6 +7,16 @@ completed successfully at that revision.
 
 The historical checks below establish engineering functionality at the stated merged revision. The new [original-Q&A study](reference-evaluation.md) is recorded separately: 24/24 real model calls completed, but zero held-out questions obtained retrieved examples. Its negative coverage result does not establish C superiority. See [current proposal status](proposal-alignment.md) for subsequent implementation and review boundaries.
 
+## Subsequent proposal implementation validation
+
+The implementation after `5559eda` is delivered in dependent review branches. It includes the [actual-answer pilot](reference-evaluation.md), [prepared neural video](presentation.md), [real live transport measurements](live-demo-latency.md), and [source-linked observations](situation-observations.md). The historical merged-main measurements below retain their original scope.
+
+Local integrated verification of the final observation branch passed **459 Python tests**. Two optional test modules are skipped by the lightweight environment because it omits Torch/Pillow; all **six tests in those modules passed separately** with the existing inference dependencies. The presentation agent also ran its full 18-test optional suite. Frontend verification passed **115 tests**, TypeScript checking and the production build. Full media decode, committed package/UI copy hashes and generated-WAV hashes were checked. The 31 observation cases include the same-audio-run acoustic-boundary regressions, and ten ASGI cancellation cases verify cleanup on real disconnect events.
+
+Local Chromium could not launch because the managed execution host disallows its process-singleton socket. Browser assertions are retained and run with normally installed Chromium in GitHub Actions. The expanded suite has **20 desktop/mobile scenarios**, including actual prepared-video playback, timing JSON export and a fresh live-session handoff. Consult the exact current PR workflow for its terminal result; a historical success is not substituted for a new branch result.
+
+The frozen reference experiment still validates against its exact corpus and implementation hashes. Its 24 completed outputs, negative retrieval-coverage result, separate model-assisted reviews and ungraded human state are unchanged. New media and observation integration do not relabel those text results.
+
 ## Merged milestones
 
 | PR | Scope | Merged into | Merge commit |

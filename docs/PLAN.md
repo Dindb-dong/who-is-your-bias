@@ -34,6 +34,17 @@ The [proposal alignment audit](proposal-alignment.md) maps the original **2026-2
 
 The original-Q&A and shared-taxonomy milestone is implemented. Full v2 materialization contains 80 train / four development / eight test exchanges. The first frozen same-model experiment completed 24/24 responses; B/C retrieved no examples on all eight held-out questions, so C superiority is not established. See [the recorded experiment](reference-evaluation.md). Subsequent retrieval changes need a new version and fresh independent evaluation. Preserve existing results as historical runs of their original conditions.
 
+## Executed proposal follow-ups
+
+The three follow-up implementation units are now present: original-Q&A/reference evaluation, prepared presentation/live measurement, and situation-linked observations. The first two are published as [PR #10](https://github.com/Dindb-dong/who-is-your-bias/pull/10) and [PR #11](https://github.com/Dindb-dong/who-is-your-bias/pull/11); observation delivery depends on both. They are review branches, not new merged-main claims.
+
+- The frozen text experiment completed 24 actual calls but produced no retrieval contrast on its eight questions. C efficacy remains inconclusive; redesigning retrieval requires a new version and fresh independent holdouts.
+- The prepared Qwen3-TTS → MuseTalk video is 12.24 seconds, 306 frames, and fully decoded with matched audio/video timing. It is English narration over the fixed artistic portrait.
+- Two actual CPU language-to-voice requests completed; complete WAV acquisition took 128.284 s and 109.324 s. The longer-answer timeout is preserved. This configuration is not responsive conversational voice; browser/acoustic timings on the intended demonstration device are still unmeasured.
+- Observation extraction measured four Q&A links across two events, 19 speech-rate windows, ten linked visual windows and 512 frames. Validated pauses, audible laughter, accepted speaker/movement annotations and human perceptual ratings remain ungraded. The runtime observation index stays empty until review requirements are met.
+
+These remaining quality/evaluation states are not filled with synthetic user ratings. The review bundles, strict importers and target-device export are the concrete handoff for obtaining that evidence. See [current requirement mapping](proposal-alignment.md).
+
 ## Fidelity ladder
 
 1. **Runnable without model credentials:** a source-note preview retrieves documented evidence. It does not claim to be an LLM or a personality clone. A procedural, rigged avatar previews synchronized, explicitly designed behaviors.
