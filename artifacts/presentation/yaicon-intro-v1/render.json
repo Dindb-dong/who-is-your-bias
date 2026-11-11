@@ -1,0 +1,51 @@
+{
+  "schema_version": "musetalk-render.v1",
+  "status": "completed",
+  "started_at": "2026-11-11T04:09:14.892874+00:00",
+  "backend": "musetalk-1.5-fixed-crop",
+  "upstream_revision": "0a89dec45a0192b824e3cf4daf96c239440c5ed8",
+  "device": "cpu",
+  "dtype": "bfloat16",
+  "threads": 4,
+  "seed": 42,
+  "fps": 25,
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "portrait_sha256": "ae0a70f4e000c650cba5d52e865f2b48ec24e1598f99515596e62b7759ae8822",
+  "audio_sha256": "f3e3fb41fca380073cb9d4fdb0209e4062b1e5d60da988e2f58d419c09635e0a",
+  "audio_seconds": 12.24,
+  "model_lock_sha256": "1669373dc7516bb99e12cbcf15dd7561b58d266907b7a7ff736beb6a55b8691a",
+  "models": {
+    "musetalk": {
+      "repo": "TMElyralab/MuseTalk",
+      "revision": "2bcb936e2fddb4d86db4c62fd45b387d0c061571"
+    },
+    "vae": {
+      "repo": "stabilityai/sd-vae-ft-mse",
+      "revision": "31f26fdeee1355a5c34592e401dd41e45d25a493"
+    },
+    "whisper": {
+      "repo": "openai/whisper-tiny",
+      "revision": "169d4a4341b33bc18d8881c4b69c2e104e1cc0af"
+    }
+  },
+  "crop": [
+    266,
+    250,
+    454,
+    460
+  ],
+  "crop_review": "assistant visually inspected the static portrait; fixed crop, no motion tracking",
+  "blending": "geometric_lower_face_feather.v1",
+  "generated_frames": 306,
+  "human_visual_sync_review": "unrated",
+  "stage_seconds": {
+    "audio_features": 0.4680356489989208,
+    "image_and_model_load": 2.819091027999093,
+    "frame_inference_and_encoding": 487.763279756
+  },
+  "parameter_count": 849947844,
+  "requested_frames": 306,
+  "elapsed_seconds": 491.06990769800177,
+  "silent_video_sha256": "11935353b6ddcfc1dc8aeac2912a5a1c8b23b4357ea880285457753b0874df8f",
+  "completion_scope": "Actual MuseTalk neural inference; fixed portrait and explicit geometric blending adaptation."
+}

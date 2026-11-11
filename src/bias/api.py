@@ -13,6 +13,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.requests import ClientDisconnect
 
 from . import __version__
 from .config import Settings
@@ -22,6 +23,7 @@ from .lipsync import LipsyncEngine
 from .models import ChatRequest, ChatTurn, SpeechPackageRequest, SpeechRequest
 from .motion import MotionError, MotionLibrary
 from .providers import OpenAICompatibleLLM, ProviderError, SpeechProvider, TranscriptionProvider
+from .request_work import run_until_disconnect
 from .sessions import SessionCapacityError, SessionNotFound
 from .speech import SpeechPackages
 
@@ -205,8 +207,12 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
     @application.post("/api/speech")
     async def speech(body: SpeechRequest, request: Request):
         try:
-            data, mime = await request.app.state.speech.synthesize(body.text, body.voice, language=body.language)
+            data, mime = await run_until_disconnect(
+                request, request.app.state.speech.synthesize(body.text, body.voice, language=body.language),
+            )
             return Response(content=data, media_type=mime, headers={"X-Speech-Timing": "unavailable", "X-Voice-Mode": "configured-provider"})
+        except ClientDisconnect:
+            return Response(status_code=499)
         except ProviderError as exc:
             status, error = _public_error(exc)
             return JSONResponse(status_code=status, content={"error": error})
@@ -214,10 +220,14 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
     @application.post("/api/speech/prepare")
     async def prepare_speech(body: SpeechPackageRequest, request: Request):
         try:
-            return await request.app.state.speech_packages.prepare(
-                request.app.state.speech, request.app.state.lipsync,
-                text=body.text, voice=body.voice, language=body.language,
+            return await run_until_disconnect(
+                request, request.app.state.speech_packages.prepare(
+                    request.app.state.speech, request.app.state.lipsync,
+                    text=body.text, voice=body.voice, language=body.language,
+                ),
             )
+        except ClientDisconnect:
+            return Response(status_code=499)
         except ProviderError as exc:
             status, error = _public_error(exc)
             return JSONResponse(status_code=status, content={"error": error})

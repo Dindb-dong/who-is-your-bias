@@ -32,3 +32,18 @@ apps/web/public/models/*
 
 # Bounded generated evaluation speech; source/reference recordings stay ignored.
 !tools/voice_evaluation/results/qwen06-cpu-2026-11-11-listening/listener/sample*.wav
+
+# Bounded generated presentation assets; source recordings and weights stay ignored.
+!apps/web/public/presentation/presentation.mp4
+!apps/web/public/presentation/narration.wav
+!artifacts/presentation/yaicon-intro-v1/*.wav
+!artifacts/presentation/yaicon-intro-v1/presentation.mp4
+
+# Bounded newly generated presentation media; source recordings/weights stay ignored.
+!artifacts/presentation/yaicon-intro-v1/*.wav
+!artifacts/presentation/yaicon-intro-v1/presentation.mp4
+
+# Raw live responses contain complete local source passages; publish summaries.
+artifacts/demo-latency/
+# Bounded generated audio from the actual CPU transport pilot.
+!tools/demo_latency/results/qwen4b-qwen06-cpu-2026-11-11/turn-*.wav

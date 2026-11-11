@@ -1,6 +1,7 @@
 import { getPreparedSpeech, getSpeech } from '../api';
 import type { Turn } from '../api';
 import type { SpeechTiming } from '../avatar/types';
+import type { PlaybackEvent, PlaybackMark } from './liveMetrics';
 
 export type VoiceMode = 'off' | 'browser' | 'provider';
 export type PlaybackState = {
@@ -41,7 +42,7 @@ export function browserPlaybackEnvironment(): PlaybackEnvironment {
 }
 
 export interface PlaybackController {
-  play(turn: Turn, mode: VoiceMode): Promise<void>;
+  play(turn: Turn, mode: VoiceMode, observe?: (event: PlaybackEvent) => void): Promise<void>;
   stop(): void;
   dispose(): void;
 }
@@ -61,12 +62,15 @@ export function createPlaybackController(emit: (state: PlaybackState) => void, e
   return {
     stop,
     dispose() { disposed = true; ++generation; const release = cleanup; cleanup = noop; release(); },
-    async play(turn, mode) {
+    async play(turn, mode, observe) {
       if (disposed) return;
       stop();
       if (mode === 'off') return;
       const ticket = generation;
       let settled = false; let released = false;
+      let signalled = false;
+      const mark = (type: PlaybackMark, speechServer?: PlaybackEvent['speechServer']) => observe?.({ type, atMs: environment.now(), turnId: turn.id, voiceMode: mode, speechServer });
+      const speechText = turn.text.replace(/\[source:[A-Za-z0-9_.-]+\]/g, '').trim();
       const isCurrent = () => !disposed && !settled && ticket === generation;
       const abort = new AbortController();
       let raf = 0;
@@ -80,6 +84,7 @@ export function createPlaybackController(emit: (state: PlaybackState) => void, e
       const release = () => {
         if (released) return;
         released = true;
+        if (!settled) mark('cancelled');
         clearTimeout(startTimer);
         // Detach first: load(), pause(), and cancel() may synchronously emit
         // media events, and stale callbacks must never reenter finish().
@@ -93,22 +98,25 @@ export function createPlaybackController(emit: (state: PlaybackState) => void, e
         if (audioUrl) environment.revokeUrl(audioUrl);
       };
       cleanup = release;
-      const finish = (error: string | null = null) => {
+      const finish = (error: string | null = null, cancelled = false) => {
         if (!isCurrent()) return;
+        mark(cancelled ? 'cancelled' : error ? 'failed' : 'playback_completed');
         settled = true; ++generation;
         cleanup = noop; release(); publish({ ...initialPlayback, error });
       };
       publish({ ...initialPlayback, status: 'loading' });
+      mark('preparation_started');
       try {
         if (mode === 'provider') {
           // Every await is followed by an ownership check before more work.
           audioContext = environment.createContext();
           await audioContext.resume();
           if (!isCurrent()) return;
-          const prepared = environment.prepareSpeech ? await environment.prepareSpeech(turn.text, turn.language, abort.signal) : undefined;
+          const prepared = environment.prepareSpeech ? await environment.prepareSpeech(speechText, turn.language, abort.signal) : undefined;
           if (!isCurrent()) return;
-          const blob = prepared?.audio ?? await environment.getSpeech(turn.text, abort.signal);
+          const blob = prepared?.audio ?? await environment.getSpeech(speechText, abort.signal);
           if (!isCurrent()) return;
+          mark('audio_ready', prepared?.serverTiming);
           audioUrl = environment.createUrl(blob);
           audio = environment.createAudio(audioUrl);
           source = audioContext.createMediaElementSource(audio);
@@ -120,6 +128,9 @@ export function createPlaybackController(emit: (state: PlaybackState) => void, e
             analyser.getByteTimeDomainData(samples);
             let squareSum = 0;
             for (const value of samples) squareSum += ((value - 128) / 128) ** 2;
+            // This measures a non-silent Web Audio frame, not the listener's
+            // speaker volume or acoustic output. Silent lead-in stays visible.
+            if (!signalled && Math.sqrt(squareSum / samples.length) > 0.002) { signalled = true; mark('first_signal'); }
             publish({ status: 'playing', elapsedMs: planTime(audio.currentTime, audio.duration, turn.behavior.duration_ms),
               audioElapsedMs: Number.isFinite(audio.currentTime) ? Math.max(0, audio.currentTime * 1000) : 0,
               amplitude: Math.min(1, Math.sqrt(squareSum / samples.length) * 5), error: null,
@@ -130,11 +141,11 @@ export function createPlaybackController(emit: (state: PlaybackState) => void, e
           audio.onended = () => finish();
           audio.onerror = () => finish('The audio could not be played. Check the speech service format.');
           await audio.play();
-          if (isCurrent()) tick();
+          if (isCurrent()) { mark('playback_started'); tick(); }
         } else {
           const synthesis = environment.synthesis;
           if (!synthesis) throw new Error('This browser does not support built-in speech.');
-          utterance = environment.createUtterance(turn.text);
+          utterance = environment.createUtterance(speechText);
           utterance.lang = turn.language === 'ko' ? 'ko-KR' : 'en-US';
           const rate = turn.behavior.speech?.rate ?? 1; const pitch = turn.behavior.speech?.pitch ?? 1;
           utterance.rate = Number.isFinite(rate) ? Math.min(2, Math.max(0.5, rate)) : 1;
@@ -154,11 +165,11 @@ export function createPlaybackController(emit: (state: PlaybackState) => void, e
           };
           utterance.onstart = () => {
             if (!isCurrent()) return;
-            clearTimeout(startTimer); startedAt = environment.now(); tick();
+            clearTimeout(startTimer); startedAt = environment.now(); mark('audio_ready'); mark('playback_started'); tick();
           };
           utterance.onend = () => finish();
-          utterance.onerror = (event) => finish(event.error === 'canceled' || event.error === 'interrupted'
-            ? null : 'Built-in speech is unavailable. Try another voice or use text.');
+          utterance.onerror = (event) => event.error === 'canceled' || event.error === 'interrupted'
+            ? finish(null, true) : finish('Built-in speech is unavailable. Try another voice or use text.');
           startTimer = setTimeout(() => finish('The browser did not start speech. Select Listen to try again.'), 12_000);
           synthesis.speak(utterance);
         }

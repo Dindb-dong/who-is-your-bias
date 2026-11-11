@@ -1,0 +1,283 @@
+{
+  "schema_version": "voice_asr.v1",
+  "created_at": "2026-11-11T04:12:58.112696+00:00",
+  "status": "completed",
+  "synthesis_sha256": "ff3371e2cf45c3646e20b15d55234061ae766673fa235a48bca2c38e94fc6a48",
+  "condition": "prepared-presentation",
+  "engine": {
+    "name": "faster-whisper",
+    "version": "1.2.1",
+    "ctranslate2_version": "4.8.5",
+    "model": "Systran/faster-whisper-small",
+    "revision": "536b0662742c02347bc0e980a01041f333bce120",
+    "weights_sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+    "device": "cpu",
+    "compute_type": "int8",
+    "cpu_threads": 1,
+    "num_workers": 1,
+    "beam_size": 5,
+    "initial_prompt": null,
+    "prefix": null,
+    "hotwords": null,
+    "condition_on_previous_text": false,
+    "vad_filter": false,
+    "word_timestamps": true,
+    "decoder": "ffmpeg_pcm16_mono_16khz_to_numpy",
+    "telemetry_disabled_before_import": true
+  },
+  "human_listening": "not_performed",
+  "cases": [
+    {
+      "id": "presentation",
+      "audio_sha256": "f3e3fb41fca380073cb9d4fdb0209e4062b1e5d60da988e2f58d419c09635e0a",
+      "asr_language": "en",
+      "status": "succeeded",
+      "recognized_text": "This is an AI research simulation, not the real person. We compare profile, interview examples, and situation matching. The answers need independent review. Better performance is a question, not a promise.",
+      "expected_text": "This is an A I research simulation, not the real person. We compare a profile, interview examples, and situation matching. The answers need independent review. Better performance is a question, not a promise.",
+      "detected_language": "en",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 2.8,
+          "text": " This is an AI research simulation, not the real person.",
+          "words": [
+            {
+              "word": " This",
+              "start": 0.0,
+              "end": 0.36,
+              "probability": 0.8896414637565613
+            },
+            {
+              "word": " is",
+              "start": 0.36,
+              "end": 0.48,
+              "probability": 0.9925447106361389
+            },
+            {
+              "word": " an",
+              "start": 0.48,
+              "end": 0.56,
+              "probability": 0.933250904083252
+            },
+            {
+              "word": " AI",
+              "start": 0.56,
+              "end": 0.8,
+              "probability": 0.9313840270042419
+            },
+            {
+              "word": " research",
+              "start": 0.8,
+              "end": 1.2,
+              "probability": 0.9582020044326782
+            },
+            {
+              "word": " simulation,",
+              "start": 1.2,
+              "end": 1.78,
+              "probability": 0.996775209903717
+            },
+            {
+              "word": " not",
+              "start": 2.08,
+              "end": 2.26,
+              "probability": 0.995763897895813
+            },
+            {
+              "word": " the",
+              "start": 2.26,
+              "end": 2.4,
+              "probability": 0.9839479327201843
+            },
+            {
+              "word": " real",
+              "start": 2.4,
+              "end": 2.5,
+              "probability": 0.997929573059082
+            },
+            {
+              "word": " person.",
+              "start": 2.5,
+              "end": 2.8,
+              "probability": 0.9969955682754517
+            }
+          ]
+        },
+        {
+          "start": 3.44,
+          "end": 6.78,
+          "text": " We compare profile, interview examples, and situation matching.",
+          "words": [
+            {
+              "word": " We",
+              "start": 3.44,
+              "end": 3.62,
+              "probability": 0.991236686706543
+            },
+            {
+              "word": " compare",
+              "start": 3.62,
+              "end": 3.94,
+              "probability": 0.9909591674804688
+            },
+            {
+              "word": " profile,",
+              "start": 3.94,
+              "end": 4.36,
+              "probability": 0.8423349857330322
+            },
+            {
+              "word": " interview",
+              "start": 4.92,
+              "end": 5.1,
+              "probability": 0.9979140162467957
+            },
+            {
+              "word": " examples,",
+              "start": 5.1,
+              "end": 5.56,
+              "probability": 0.9871987700462341
+            },
+            {
+              "word": " and",
+              "start": 5.9,
+              "end": 6.04,
+              "probability": 0.9986380934715271
+            },
+            {
+              "word": " situation",
+              "start": 6.04,
+              "end": 6.36,
+              "probability": 0.9862254858016968
+            },
+            {
+              "word": " matching.",
+              "start": 6.36,
+              "end": 6.78,
+              "probability": 0.9484176635742188
+            }
+          ]
+        },
+        {
+          "start": 7.56,
+          "end": 12.02,
+          "text": " The answers need independent review. Better performance is a question, not a promise.",
+          "words": [
+            {
+              "word": " The",
+              "start": 7.56,
+              "end": 7.72,
+              "probability": 0.9963578581809998
+            },
+            {
+              "word": " answers",
+              "start": 7.72,
+              "end": 8.14,
+              "probability": 0.993876039981842
+            },
+            {
+              "word": " need",
+              "start": 8.14,
+              "end": 8.72,
+              "probability": 0.945074200630188
+            },
+            {
+              "word": " independent",
+              "start": 8.72,
+              "end": 9.12,
+              "probability": 0.9951490759849548
+            },
+            {
+              "word": " review.",
+              "start": 9.12,
+              "end": 9.58,
+              "probability": 0.9935920834541321
+            },
+            {
+              "word": " Better",
+              "start": 9.98,
+              "end": 10.18,
+              "probability": 0.9884251356124878
+            },
+            {
+              "word": " performance",
+              "start": 10.18,
+              "end": 10.6,
+              "probability": 0.9968591928482056
+            },
+            {
+              "word": " is",
+              "start": 10.6,
+              "end": 10.92,
+              "probability": 0.9969673752784729
+            },
+            {
+              "word": " a",
+              "start": 10.92,
+              "end": 11.0,
+              "probability": 0.9957969188690186
+            },
+            {
+              "word": " question,",
+              "start": 11.0,
+              "end": 11.38,
+              "probability": 0.9993071556091309
+            },
+            {
+              "word": " not",
+              "start": 11.54,
+              "end": 11.64,
+              "probability": 0.9975104331970215
+            },
+            {
+              "word": " a",
+              "start": 11.64,
+              "end": 11.72,
+              "probability": 0.9982600808143616
+            },
+            {
+              "word": " promise.",
+              "start": 11.72,
+              "end": 12.02,
+              "probability": 0.9984716773033142
+            }
+          ]
+        }
+      ],
+      "elapsed_seconds": 4.8891,
+      "audio_seconds": 12.24,
+      "metrics": {
+        "normalization": "NFC, casefold, punctuation removed; no semantic or numeric rewriting",
+        "primary_metric": "wer",
+        "wer": {
+          "reference_units": 33,
+          "hypothesis_units": 31,
+          "substitutions": 1,
+          "deletions": 2,
+          "insertions": 0,
+          "distance": 3,
+          "error_rate": 0.090909
+        },
+        "cer": {
+          "reference_units": 168,
+          "hypothesis_units": 167,
+          "substitutions": 0,
+          "deletions": 1,
+          "insertions": 0,
+          "distance": 1,
+          "error_rate": 0.005952
+        },
+        "screens": {
+          "missing_expected_suffix": false,
+          "excess_repeated_ngrams": 0,
+          "ngram_size": 3,
+          "substantial_deletions": false
+        },
+        "limitations": "ASR is an independent recognizer, not ground truth. Screens may reflect ASR errors; they do not prove audio truncation, EOS, naturalness, speaker identity, or likeness. Korean spacing and digit-vs-word formatting affect WER."
+      }
+    }
+  ],
+  "model_load_seconds": 1.503882,
+  "completed_at": "2026-11-11T04:13:04.893017+00:00",
+  "elapsed_seconds": 6.780341
+}

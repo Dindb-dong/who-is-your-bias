@@ -1,0 +1,72 @@
+{
+  "schema_version": "demo-latency-evidence-bundle.v1",
+  "measured_harness_commit": "abf2a54",
+  "publication_tool_commit": "c6230b9",
+  "completed_actual_language_and_speech_turns": 2,
+  "human_listening": "not_performed",
+  "browser_timing": "not_measured",
+  "acoustic_timing": "not_measured",
+  "asr_interpretation": {
+    "engine": "Independent unprompted faster-whisper-small CPU INT8; full engine identity/settings in asr.json",
+    "turn-01": "The recognizer wrote the final number as 4 instead of four. The raw WER and suffix screen are retained; the transcript contains the ending number.",
+    "turn-02": "Normalized transcript matches the generated speech input.",
+    "scope": "Content screening only; not a perceptual or speaker-fidelity review."
+  },
+  "files": [
+    {
+      "path": "app.log",
+      "bytes": 885,
+      "sha256": "533884130a1d3e4460bad5cc2e243fc84f78eb9fc35efd437d59c680592436a5"
+    },
+    {
+      "path": "asr-input.json",
+      "bytes": 1195,
+      "sha256": "49b099681a364b517f37dc49fd16fef8eede59f815f41857ede5423aa796e1ed"
+    },
+    {
+      "path": "asr.json",
+      "bytes": 9163,
+      "sha256": "74a66e1b07ca3f268273c7abe5f69af46b730fa6761d83935be27fc2027c3d5b"
+    },
+    {
+      "path": "llama-metrics.txt",
+      "bytes": 2588,
+      "sha256": "cc810183ef15c9ef88f639f3b3c99aa43cf63a5d7f73f94f53805e80cf1cd285"
+    },
+    {
+      "path": "llm.log",
+      "bytes": 4590,
+      "sha256": "3f2bd76c110662d1f84ab08fc01fb64c731ee98aefbcc242d3a717cf1fb462b6"
+    },
+    {
+      "path": "process-memory.jsonl",
+      "bytes": 85536,
+      "sha256": "584c061ea80f2c276e1d9bb656ffffa4fdfb2f66a78a02549c407df70727352c"
+    },
+    {
+      "path": "runtime-versions.json",
+      "bytes": 378,
+      "sha256": "d407dca53b16050a2dd1d43dcd0f162313df21759eac4dc8dbb4d2e40b2b90b8"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 41743,
+      "sha256": "05557d2c93735e72224beddfe272360b5a91328a695a03d38650df9c0b791c40"
+    },
+    {
+      "path": "turn-01.wav",
+      "bytes": 218924,
+      "sha256": "ed0e70668ab90ed738583b0b34353a648cac1620876190077afad774dc4eb65b"
+    },
+    {
+      "path": "turn-02.wav",
+      "bytes": 268844,
+      "sha256": "04aa04bfb30c309163fea0b98aa6b9c2046a90cb596cd117bd4bdbca25c7dd42"
+    },
+    {
+      "path": "voice.log",
+      "bytes": 1294,
+      "sha256": "b8255189d4f6ffb89e4c5a5d631ca1e95091e24234da109a732f50a2398fbdae"
+    }
+  ]
+}

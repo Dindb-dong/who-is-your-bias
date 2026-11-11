@@ -12,14 +12,14 @@ The central implementation now uses original interview question/answer pairs, a 
 | R2 | Topic-relevant original Q&A | 92 locally materialized exchanges: 80 train, four development, eight test; bounded excerpt default and pinned full-text recipes. Publisher attribution reviewed by an AI agent, not independently by humans. |
 | R3 | Topic plus conversational situation | Shared eight-label taxonomy and working 1.35 reranking after a common topical gate; meaningful development ranking regression. No eligible examples on the eight final pilot questions. |
 | R4 | Compare against actual withheld answers | 24/24 real Qwen4B responses completed; hashes, requests, raw outputs, timing and failures retained. Condition-blinded review and reconstruction tooling separates source support, model-assisted judgments and ungraded human judgments. |
-| R5 | Qwen3-TTS Base speech | Existing measured speech integration retained. New prepared media and live measurements are a dependent delivery. Human naturalness and likeness remain ungraded. |
-| R6 | MuseTalk presentation | Dependent presentation delivery; see the ordered milestones below. |
-| R7 | Prepared presentation plus live audience Q&A | Existing studio retained; prepared media and measured text-to-speech path are delivered together in the presentation milestone. Intended demonstration-device measurements remain a separate observation. |
+| R5 | Qwen3-TTS Base speech | Fresh 12.24-second narration synthesized in 79.27 s on CPU, with three generated segments and an independent unprompted ASR report. Human naturalness and likeness remain ungraded. |
+| R6 | MuseTalk presentation | Actual MuseTalk 1.5 inference generated 306 frames at 25 fps in 491.07 s. Packaged H.264/AAC timing and full decode verified. Fixed artistic portrait and geometric blend are explicit adaptations; perceptual lip-sync remains unrated. |
+| R7 | Prepared presentation plus live audience Q&A | Bundled player, captions, downloads and fresh live-session handoff implemented. Browser timing export and real HTTP language-to-voice benchmark distinguish digital/server measurements from unmeasured target-device/acoustic output; see the actual live report. |
 | R8 | Situation-linked observable voice and motion | Dependent observations delivery must retain source clocks, unknown acoustic boundaries, visible/audible distinctions and review gates. |
 
 ## Delivered experiment
 
-[Original Q&A](original-qa.md) explains attribution, context, complete versus partial exchanges, source-wide training selection and the exact split manifest. [Reference-answer evaluation](reference-evaluation.md) records the real run and interpretation.
+[Original Q&A](original-qa.md) explains attribution, context, complete versus partial exchanges, source-wide training selection and the exact split manifest. [Reference-answer evaluation](reference-evaluation.md) records the real run and interpretation. [Prepared media](presentation.md) and [live measurement](live-demo-latency.md) record the separate speech/video path.
 
 The five source events have fixed roles: TED2013 and TED2017 train, TED2022 recorded development, and Lex #400/#438 test. Old summary-corpus material is not mixed into this study because its historical split assignments differ. All original v1 selections are retained by the expanded v2 corpus. Full source text remains local, reconstructed from publisher material whose canonical transcript and selection hashes are pinned.
 

@@ -1,0 +1,15 @@
+INFO:     Started server process [27]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8122 (Press CTRL+C to quit)
+INFO:     127.0.0.1:33118 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33118 - "POST /api/chat/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33118 - "POST /api/speech/prepare HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33118 - "GET /api/speech/clips/42d88ce9bef247c1857d76b73bdc5b8c HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33118 - "POST /api/chat/stream HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33118 - "POST /api/speech/prepare HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33118 - "GET /api/speech/clips/4723418dd16b43c3b8ef8bfabcdc60b5 HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [27]

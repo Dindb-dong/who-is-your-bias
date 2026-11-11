@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { ArrowDown, ArrowRight, ArrowUp, ArrowUpRight, BookOpen, ChevronDown, ChevronRight, CircleHelp, FlaskConical, Globe2, Layers3, LoaderCircle, MessageCircle, Mic, Plus, Radio, RotateCcw, Settings2, Sparkles, Square, Volume2, VolumeX, X } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUp, ArrowUpRight, BookOpen, ChevronDown, ChevronRight, CircleHelp, Clapperboard, FlaskConical, Globe2, Layers3, LoaderCircle, MessageCircle, Mic, Plus, Radio, RotateCcw, Settings2, Sparkles, Square, Volume2, VolumeX, X } from 'lucide-react';
 import { getJson, getMotionLibrary, streamChat } from './api';
 import type { Citation, ExperimentMode, Language, MotionLibraryStatus, Persona, Source, Turn } from './api';
 import type { MotionMode } from './avatar/types';
@@ -15,9 +15,13 @@ import { usePlayback } from './hooks/usePlayback';
 import type { VoiceMode } from './hooks/usePlayback';
 import { useMicrophone } from './hooks/useMicrophone';
 import { useMeasuredMotion } from './hooks/useMeasuredMotion';
+import { LiveTurnClock } from './hooks/liveMetrics';
+import type { LiveMeasurement } from './hooks/liveMetrics';
+import { LiveTiming } from './components/LiveTiming';
+import { PresentationView } from './components/PresentationView';
 
 interface Message { id: string; role: 'user' | 'assistant'; text: string; turn?: Turn; pending?: boolean; error?: string }
-type Page = 'studio' | 'sources' | 'lab';
+type Page = 'studio' | 'sources' | 'lab' | 'presentation';
 const defaultQuestions = ['Why are you boring?', 'How do tunnels reduce traffic congestion?', 'How can we reduce tunneling costs?'];
 const stages: Record<string, string> = { retrieving: 'Finding relevant sources', generating: 'Composing a response', planning: 'Planning expression', complete: 'Response ready' };
 
@@ -51,6 +55,8 @@ export default function App() {
   const [settings, setSettings] = useState(false);
   const [voice, setVoice] = useState<VoiceMode>('off');
   const [autoPlay, setAutoPlay] = useState(false);
+  const [liveMeasurement, setLiveMeasurement] = useState<LiveMeasurement | null>(null);
+  const liveClock = useRef<LiveTurnClock | null>(null);
   const [reducedMotion, setReducedMotion] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches);
   const [model, setModel] = useState<{ name: string; url: string } | undefined>();
   const [builtinAvatar, setBuiltinAvatar] = useState<'human' | 'portrait'>('human');
@@ -93,6 +99,8 @@ export default function App() {
   useEffect(() => () => { if (model) URL.revokeObjectURL(model.url); }, [model]);
 
   function cancel() {
+    liveClock.current?.finish('cancelled');
+    if (liveClock.current) setLiveMeasurement(liveClock.current.snapshot());
     generation.current += 1;
     currentRequest.current?.abort(); currentRequest.current = null;
     setMessages((previous) => previous.map((message) => message.pending ? { ...message, pending: false, text: message.text || 'Response stopped.' } : message));
@@ -100,6 +108,7 @@ export default function App() {
   }
   function reset() {
     cancel(); setMessages([]); setSessionId(undefined); setActiveTurn(undefined); setEvidence(null); setDraft('');
+    liveClock.current = null; setLiveMeasurement(null);
     composer.current?.focus();
   }
   function navigate(next: Page) { cancel(); setPage(next); setEvidence(null); }
@@ -110,6 +119,10 @@ export default function App() {
     const ticket = ++generation.current;
     const controller = new AbortController(); currentRequest.current = controller;
     const answerId = crypto.randomUUID();
+    const preferences = playbackPreferences.current;
+    const clock = new LiveTurnClock(answerId, performance.now(), preferences.autoPlay ? preferences.voice : 'off');
+    liveClock.current = clock; setLiveMeasurement(clock.snapshot());
+    let paintScheduled = false;
     setMessages((previous) => [...previous, { id: crypto.randomUUID(), role: 'user', text: question }, { id: answerId, role: 'assistant', text: '', pending: true }]);
     setBusy(true); setStatus('Finding relevant sources');
     let received: Turn | undefined;
@@ -118,17 +131,34 @@ export default function App() {
         if (ticket !== generation.current) return;
         if (event.event === 'meta') setSessionId(event.data.session_id);
         if (event.event === 'status') setStatus(stages[event.data.stage] ?? event.data.stage.replaceAll('_', ' '));
-        if (event.event === 'token') setMessages((previous) => previous.map((message) => message.id === answerId ? { ...message, text: message.text + event.data.text } : message));
+        if (event.event === 'token') {
+          setMessages((previous) => previous.map((message) => message.id === answerId ? { ...message, text: message.text + event.data.text } : message));
+          if (event.data.text.trim() && !paintScheduled) {
+            paintScheduled = true;
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+              if (ticket === generation.current) { clock.visible(performance.now()); setLiveMeasurement(clock.snapshot()); }
+            }));
+          }
+        }
         if (event.event === 'result') {
           received = event.data.turn; setActiveTurn(received);
+          const current = playbackPreferences.current;
+          clock.configureVoice(current.autoPlay ? current.voice : 'off');
+          clock.answer(performance.now(), received.provider, received.metrics); setLiveMeasurement(clock.snapshot());
           void measuredMotion.play(received.behavior.motion);
           setMessages((previous) => previous.map((message) => message.id === answerId ? { ...message, text: event.data.turn.text, turn: event.data.turn, pending: false } : message));
         }
       });
       const current = playbackPreferences.current;
-      if (ticket === generation.current && received && current.autoPlay && current.voice !== 'off') void playback.play(received, current.voice);
+      if (ticket === generation.current && received) {
+        clock.streamComplete(performance.now()); clock.configureVoice(current.autoPlay ? current.voice : 'off'); setLiveMeasurement(clock.snapshot());
+        if (current.autoPlay && current.voice !== 'off') void playback.play(received, current.voice, (event) => {
+          if (ticket === generation.current && event.turnId === received?.id) { clock.playback(event); setLiveMeasurement(clock.snapshot()); }
+        });
+      }
     } catch (error) {
       if (ticket === generation.current && !controller.signal.aborted) {
+        clock.finish('failed'); setLiveMeasurement(clock.snapshot());
         const message = error instanceof Error ? error.message : 'The response could not be completed.';
         setMessages((previous) => previous.map((item) => item.id === answerId ? { ...item, pending: false, error: message } : item));
       }
@@ -154,16 +184,16 @@ export default function App() {
     <aside className="sidebar">
       <a className="brand" href="#" onClick={(event) => { event.preventDefault(); navigate('studio'); }} aria-label="Who is your bias home"><Mark/><span>who is<br/>your <b>bias?</b></span></a>
       <div className="workspace-label">PERSONA WORKSPACE<span>01</span></div>
-      <nav aria-label="Main navigation"><button className={page === 'studio' ? 'nav-item active' : 'nav-item'} onClick={() => navigate('studio')}><MessageCircle size={19}/><span>Conversation</span>{page === 'studio' && <i/>}</button><button className={page === 'sources' ? 'nav-item active' : 'nav-item'} onClick={() => navigate('sources')}><BookOpen size={19}/><span>Source library</span><span className="nav-count">{sources.length || '—'}</span></button><button className={page === 'lab' ? 'nav-item active' : 'nav-item'} onClick={() => navigate('lab')}><FlaskConical size={19}/><span>Research lab</span></button></nav>
+      <nav aria-label="Main navigation"><button className={page === 'studio' ? 'nav-item active' : 'nav-item'} onClick={() => navigate('studio')}><MessageCircle size={19}/><span>Conversation</span>{page === 'studio' && <i/>}</button><button className={page === 'sources' ? 'nav-item active' : 'nav-item'} onClick={() => navigate('sources')}><BookOpen size={19}/><span>Source library</span><span className="nav-count">{sources.length || '—'}</span></button><button className={page === 'lab' ? 'nav-item active' : 'nav-item'} onClick={() => navigate('lab')}><FlaskConical size={19}/><span>Research lab</span></button><button className={page === 'presentation' ? 'nav-item active' : 'nav-item'} onClick={() => navigate('presentation')}><Clapperboard size={19}/><span>Presentation</span></button></nav>
       <div className="sidebar-subject"><span className="eyebrow">IN THE STUDIO</span><div className="subject-mini"><div className="monogram">EM</div><div><strong>Elon Musk</strong><span>Public-source persona</span></div></div><div className="subject-lines"><span>Engineering</span><span>Space</span><span>Ideas</span></div></div>
       <div className="sidebar-bottom"><button className="nav-item" onClick={() => setSettings(true)}><Settings2 size={18}/><span>Studio settings</span></button><button className="nav-item" onClick={() => setInfoOpen(!infoOpen)}><CircleHelp size={18}/><span>About this project</span></button><div className="simulation-note"><span className="tiny-dot"/> An AI simulation, openly labeled.</div></div>
     </aside>
     <div className="workspace">
-      <header className="topbar"><div className="breadcrumb"><span>Workspace</span><ChevronRight size={14}/><strong>{page === 'studio' ? 'Conversation' : page === 'sources' ? 'Source library' : 'Research lab'}</strong></div><div className="topbar-actions"><span className={`connection ${connection}`}><i/>{connection === 'ready' ? 'Studio connected' : connection === 'connecting' ? 'Connecting' : 'Service offline'}</span><label className="language-select"><Globe2 size={15}/><select aria-label="Response language" value={language} onChange={(event) => setLanguage(event.target.value as Language)}><option value="en">English</option><option value="ko">한국어</option></select><ChevronDown size={12}/></label><button className="icon-button mobile-settings" onClick={() => setSettings(true)} aria-label="Studio settings"><Settings2 size={18}/></button><div className="user-avatar">Y</div></div></header>
+      <header className="topbar"><div className="breadcrumb"><span>Workspace</span><ChevronRight size={14}/><strong>{page === 'studio' ? 'Conversation' : page === 'sources' ? 'Source library' : page === 'presentation' ? 'Presentation' : 'Research lab'}</strong></div><div className="topbar-actions"><span className={`connection ${connection}`}><i/>{connection === 'ready' ? 'Studio connected' : connection === 'connecting' ? 'Connecting' : 'Service offline'}</span><label className="language-select"><Globe2 size={15}/><select aria-label="Response language" value={language} onChange={(event) => setLanguage(event.target.value as Language)}><option value="en">English</option><option value="ko">한국어</option></select><ChevronDown size={12}/></label><button className="icon-button mobile-settings" onClick={() => setSettings(true)} aria-label="Studio settings"><Settings2 size={18}/></button><div className="user-avatar">Y</div></div></header>
       <main>
         {infoOpen && <div className="about-banner"><Sparkles size={19}/><p><strong>Who Is Your Bias?</strong> A research workspace for source-grounded dialogue, voice, and embodied behavior. This is an AI simulation, not Elon Musk or an official representative. The reference avatar and its movement rules are designed prototypes.</p><button className="icon-button" onClick={() => setInfoOpen(false)} aria-label="Close project information"><X size={17}/></button></div>}
         {connection === 'error' && <div className="connection-error" role="alert"><span><strong>The conversation service is offline.</strong> {connectionError}</span><button onClick={() => setReload((value) => value + 1)}><RotateCcw size={14}/> Reconnect</button></div>}
-        {page === 'sources' ? <SourcesView sources={sources} corpusInfo={persona?.qa_corpus}/> : page === 'lab' ? <><ResearchLab language={language}/><MotionLab modelUrl={modelUrl} reducedMotion={reducedMotion}/></> : <>
+        {page === 'presentation' ? <PresentationView onAsk={() => { reset(); navigate('studio'); setTimeout(() => composer.current?.focus(), 0); }}/> : page === 'sources' ? <SourcesView sources={sources} corpusInfo={persona?.qa_corpus}/> : page === 'lab' ? <><ResearchLab language={language}/><MotionLab modelUrl={modelUrl} reducedMotion={reducedMotion}/></> : <>
           <div className="studio-heading"><div><div className="eyebrow">CURIOSITY, IN CONVERSATION</div><h1>Meet the mind. <span>Explore the ideas.</span></h1><p>A conversation with an evidence-grounded Elon Musk persona.</p></div><button className="secondary-button" onClick={reset}><Plus size={16}/> New conversation</button></div>
           <div className="studio-grid">
             <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}><section className="stage-card" aria-label="Avatar studio" style={{ flex: 1 }}>
@@ -188,9 +218,10 @@ export default function App() {
           </div>
           <section className="session-strip"><div className="session-evidence"><div className="strip-icon"><Layers3 size={20}/></div><div><span className="eyebrow">GROUNDED IN PUBLIC MATERIAL</span><strong>{persona?.stats.sources ?? '—'} sources <i/> {persona?.stats.evidence ?? '—'} evidence records</strong></div><button onClick={() => navigate('sources')} aria-label="Explore source library"><ArrowRight size={18}/></button></div><div className="session-model"><div><span className="eyebrow">CONVERSATION APPROACH</span><label><select value={mode} onChange={(event) => setMode(event.target.value as ExperimentMode)} disabled={busy} aria-label="Conversation approach">{experiments.map((experiment) => <option key={experiment.id} value={experiment.id}>{experiment.letter} · {experiment.name}</option>)}</select><ChevronDown size={14}/></label></div><button className="text-button" onClick={() => navigate('lab')}>Compare <ArrowUpRight size={14}/></button></div></section>
           <div className="studio-footnote"><span><Radio size={13}/> {activeTurn ? `${Math.round(activeTurn.metrics.total_ms)} ms server response · designed behavior cues` : 'Designed motion · reference avatar · source-grounded conversation'}</span><button onClick={() => setInfoOpen(!infoOpen)}>How this works <ArrowDown size={12}/></button></div>
+          <LiveTiming measurement={liveMeasurement}/>
         </>}
       </main>
-      <nav className="mobile-nav" aria-label="Mobile navigation"><button className={page === 'studio' ? 'active' : ''} onClick={() => navigate('studio')}><MessageCircle size={19}/>Studio</button><button className={page === 'sources' ? 'active' : ''} onClick={() => navigate('sources')}><BookOpen size={19}/>Sources</button><button className={page === 'lab' ? 'active' : ''} onClick={() => navigate('lab')}><FlaskConical size={19}/>Lab</button></nav>
+      <nav className="mobile-nav" aria-label="Mobile navigation"><button className={page === 'studio' ? 'active' : ''} onClick={() => navigate('studio')}><MessageCircle size={19}/>Studio</button><button className={page === 'sources' ? 'active' : ''} onClick={() => navigate('sources')}><BookOpen size={19}/>Sources</button><button className={page === 'lab' ? 'active' : ''} onClick={() => navigate('lab')}><FlaskConical size={19}/>Lab</button><button className={page === 'presentation' ? 'active' : ''} onClick={() => navigate('presentation')}><Clapperboard size={19}/>Present</button></nav>
     </div>
     {evidence && <><button className="drawer-scrim" onClick={() => setEvidence(null)} aria-label="Close response evidence"/><EvidencePanel citations={evidence} onClose={() => setEvidence(null)}/></>}
     <SettingsDialog open={settings} close={() => setSettings(false)} persona={persona} voice={voice} setVoice={(next) => { playback.stop(); setVoice(next); }} autoPlay={autoPlay} setAutoPlay={setAutoPlay} reducedMotion={reducedMotion} setReducedMotion={(value) => { measuredMotion.stop(); setReducedMotion(value); }} modelName={model?.name} loadModel={loadModel} resetModel={() => selectBuiltinAvatar('human')} builtinAvatar={builtinAvatar} setBuiltinAvatar={selectBuiltinAvatar} framing={framing} setFraming={setFraming} motionMode={motionMode} setMotionMode={(value) => { measuredMotion.stop(); setMotionMode(value); }} motionLibrary={motionLibrary} motionLibraryError={motionLibraryError}/>

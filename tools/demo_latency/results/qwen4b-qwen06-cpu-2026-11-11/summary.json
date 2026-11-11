@@ -1,0 +1,1270 @@
+{
+  "schema_version": "demo-http-latency-summary.v1",
+  "started_at": "2026-11-11T04:33:31.552036+00:00",
+  "execution": "actual_localhost_http",
+  "scope": "Server transport and complete WAV acquisition, not browser or acoustic latency",
+  "host": {
+    "scope": "Assistant execution host; not the user's device",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "machine": "x86_64",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+    "logical_cpus": 9,
+    "available_cpu_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "memory": {
+      "MemTotal": "10206472 kB",
+      "MemAvailable": "5530484 kB"
+    },
+    "python": "3.12.14",
+    "inference_device": "cpu"
+  },
+  "runs": [
+    {
+      "id": "turn-01",
+      "status": "completed",
+      "new_conversation": true,
+      "request": {
+        "message": "How does tunnel diameter affect cost? In 12 words.",
+        "mode": "behavior",
+        "language": "en",
+        "motion_mode": "disabled"
+      },
+      "voice_before": {
+        "status": "not_loaded",
+        "reference_configured": true,
+        "reference_mode": "audio_and_transcript",
+        "model_loaded": false,
+        "busy": false,
+        "voice": "reference",
+        "synthesis": "reference_conditioned",
+        "streaming": false,
+        "runtime": {
+          "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+          "device": "cpu",
+          "dtype": "bfloat16",
+          "attention": "sdpa",
+          "local_files_only": true,
+          "threads": 2,
+          "seed": 42,
+          "max_new_tokens": 384,
+          "do_sample": true,
+          "temperature": 0.9,
+          "top_k": 50,
+          "top_p": 1.0,
+          "repetition_penalty": 1.05
+        },
+        "last_generation": null
+      },
+      "condition": "first_request_after_llm_startup_warmup_voice_cold",
+      "submitted_at": "2026-11-11T04:33:45.161627+00:00",
+      "transport": {
+        "first_token_received_ms": 26183.206,
+        "first_content_text_received_ms": 26183.206,
+        "answer_received_ms": 28414.606,
+        "stream_complete_ms": 28417.82,
+        "speech_request_started_ms": 28419.09,
+        "speech_package_received_ms": 128271.489,
+        "audio_request_started_ms": 128272.884,
+        "audio_first_byte_received_ms": 128283.28,
+        "audio_available_ms": 128283.779,
+        "inspection_complete_ms": 128295.37
+      },
+      "browser": {
+        "first_visible_text_ms": null,
+        "audio_start_ms": null,
+        "first_audio_signal_ms": null,
+        "turn_complete_ms": null,
+        "status": "not_measured"
+      },
+      "acoustic_first_audible_ms": null,
+      "events": [
+        "meta",
+        "status",
+        "status",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "status",
+        "result",
+        "done"
+      ],
+      "streamed_text": "Halving diameter quarters cross-sectional area, reducing cost by a factor of four. [source:qa-ted-2017-cost-method]",
+      "chat_http_status": 200,
+      "turn": {
+        "id": "9a1297286d1f487d849e99f1f901e94f",
+        "session_id": "63ab2b2b00a543fcbfef5d4d342f2937",
+        "text": "Halving diameter quarters cross-sectional area, reducing cost by a factor of four.",
+        "language": "en",
+        "mode": "behavior",
+        "provider": "openai",
+        "citations": [
+          {
+            "evidence_id": "qa-ted-2017-cost-method",
+            "source_id": "ted-2017",
+            "title": "The future we're building -- and boring",
+            "url": "https://www.ted.com/talks/elon_musk_the_future_we_re_building_and_boring?view=transcript",
+            "locator": {
+              "label": "Original question cue-00072–cue-00072; answer cue-00073–cue-00105. Publisher onset, not acoustic alignment.",
+              "start_seconds": 216.24,
+              "end_seconds": null,
+              "timeline": "ted_transcript_cue"
+            },
+            "text_sha256": "17620716fe70b6f90ef13ef7b71ceb45ef38d9f6de8170d89783727b51f61124",
+            "text_distribution": "Original publisher passage omitted; retained in the local raw response."
+          }
+        ],
+        "behavior": {
+          "cues": [
+            {
+              "start_ms": 0,
+              "duration_ms": 900,
+              "channel": "face",
+              "name": "brow_raise",
+              "intensity": 0.3,
+              "provenance": "designed",
+              "evidence_ids": []
+            },
+            {
+              "start_ms": 0,
+              "duration_ms": 550,
+              "channel": "gaze",
+              "name": "center",
+              "intensity": 0.2,
+              "provenance": "designed",
+              "evidence_ids": []
+            },
+            {
+              "start_ms": 350,
+              "duration_ms": 850,
+              "channel": "head",
+              "name": "nod",
+              "intensity": 0.25,
+              "provenance": "designed",
+              "evidence_ids": []
+            },
+            {
+              "start_ms": 1200,
+              "duration_ms": 1600,
+              "channel": "gesture",
+              "name": "open_palm",
+              "intensity": 0.4,
+              "provenance": "designed",
+              "evidence_ids": []
+            }
+          ],
+          "speech": {
+            "rate": 1.0,
+            "pitch": 1.0,
+            "pause_ms": 260
+          },
+          "duration_ms": 5420,
+          "timing_basis": "estimated_text",
+          "motion": null
+        },
+        "grounding": {
+          "status": "unverified",
+          "retrieved_ids": [
+            "qa-ted-2017-cost-method",
+            "qa-ted-2017-q00038",
+            "qa-ted-2017-cost",
+            "qa-ted-2017-tunnels"
+          ],
+          "invalid_citation_ids": [],
+          "reason": "Sentence-level citation markers were checked; factual entailment still requires review.",
+          "citation_status": "complete",
+          "citation_unit_count": 1,
+          "cited_unit_count": 1,
+          "malformed_citations": [],
+          "semantic_status": "unreviewed"
+        },
+        "metrics": {
+          "retrieval_ms": 1.264,
+          "generation_ms": 28401.785,
+          "total_ms": 28409.297
+        }
+      },
+      "speech_input": "Halving diameter quarters cross-sectional area, reducing cost by a factor of four.",
+      "server_chat_timing": {
+        "retrieval_ms": 1.264,
+        "generation_ms": 28401.785,
+        "total_ms": 28409.297
+      },
+      "speech_http_status": 200,
+      "speech_package": {
+        "id": "42d88ce9bef247c1857d76b73bdc5b8c",
+        "audio_url": "/api/speech/clips/42d88ce9bef247c1857d76b73bdc5b8c",
+        "audio_sha256": "ed0e70668ab90ed738583b0b34353a648cac1620876190077afad774dc4eb65b",
+        "mime_type": "audio/wav",
+        "audio_duration_ms": 4560.0,
+        "expires_in_seconds": 120,
+        "speech_timing": null,
+        "timing_status": "not_configured",
+        "timing_message": "Audio-based lip sync is not configured; playback uses approximate mouth movement.",
+        "server_timing": {
+          "synthesis_ms": 99830.661,
+          "alignment_ms": 0.154,
+          "total_ms": 99832.128
+        },
+        "voice_mode": "configured-provider"
+      },
+      "server_speech_timing": {
+        "synthesis_ms": 99830.661,
+        "alignment_ms": 0.154,
+        "total_ms": 99832.128
+      },
+      "audio_http_status": 200,
+      "audio": {
+        "path": "turn-01.wav",
+        "sha256": "ed0e70668ab90ed738583b0b34353a648cac1620876190077afad774dc4eb65b",
+        "bytes": 218924,
+        "sample_rate": 24000,
+        "channels": 1,
+        "frames": 109440,
+        "duration_ms": 4560.0,
+        "offline_pcm_onset_offset_ms": 60.0,
+        "offline_pcm_peak_window_rms": 0.22677060600828214,
+        "offline_pcm_detector": {
+          "rms_threshold": 0.002,
+          "window_frames": 240,
+          "window_ms": 10.0,
+          "basis": "Decoded complete WAV, consecutive non-overlapping PCM windows; no playback."
+        }
+      },
+      "voice_after": {
+        "status": "ready",
+        "reference_configured": true,
+        "reference_mode": "audio_and_transcript",
+        "model_loaded": true,
+        "busy": false,
+        "voice": "reference",
+        "synthesis": "reference_conditioned",
+        "streaming": false,
+        "runtime": {
+          "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+          "device": "cpu",
+          "dtype": "bfloat16",
+          "attention": "sdpa",
+          "local_files_only": true,
+          "threads": 2,
+          "seed": 42,
+          "max_new_tokens": 384,
+          "do_sample": true,
+          "temperature": 0.9,
+          "top_k": 50,
+          "top_p": 1.0,
+          "repetition_penalty": 1.05
+        },
+        "last_generation": {
+          "language": "English",
+          "input_chars": 82,
+          "cold_start": true,
+          "elapsed_seconds": 99.773443,
+          "audio_seconds": 4.56,
+          "real_time_factor": 21.880141,
+          "termination_reason": "not_exposed_by_backend"
+        }
+      }
+    },
+    {
+      "id": "turn-02",
+      "status": "completed",
+      "new_conversation": true,
+      "request": {
+        "message": "How does tunnel diameter affect cost? In 12 words.",
+        "mode": "behavior",
+        "language": "en",
+        "motion_mode": "disabled"
+      },
+      "voice_before": {
+        "status": "ready",
+        "reference_configured": true,
+        "reference_mode": "audio_and_transcript",
+        "model_loaded": true,
+        "busy": false,
+        "voice": "reference",
+        "synthesis": "reference_conditioned",
+        "streaming": false,
+        "runtime": {
+          "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+          "device": "cpu",
+          "dtype": "bfloat16",
+          "attention": "sdpa",
+          "local_files_only": true,
+          "threads": 2,
+          "seed": 42,
+          "max_new_tokens": 384,
+          "do_sample": true,
+          "temperature": 0.9,
+          "top_k": 50,
+          "top_p": 1.0,
+          "repetition_penalty": 1.05
+        },
+        "last_generation": {
+          "language": "English",
+          "input_chars": 82,
+          "cold_start": true,
+          "elapsed_seconds": 99.773443,
+          "audio_seconds": 4.56,
+          "real_time_factor": 21.880141,
+          "termination_reason": "not_exposed_by_backend"
+        }
+      },
+      "condition": "warm_processes_repeated_prompt_new_conversation",
+      "submitted_at": "2026-11-11T04:35:53.471074+00:00",
+      "transport": {
+        "first_token_received_ms": 2141.437,
+        "first_content_text_received_ms": 2141.437,
+        "answer_received_ms": 34767.898,
+        "stream_complete_ms": 34770.458,
+        "speech_request_started_ms": 34770.639,
+        "speech_package_received_ms": 109314.765,
+        "audio_request_started_ms": 109315.176,
+        "audio_first_byte_received_ms": 109322.74,
+        "audio_available_ms": 109323.855,
+        "inspection_complete_ms": 109339.47
+      },
+      "browser": {
+        "first_visible_text_ms": null,
+        "audio_start_ms": null,
+        "first_audio_signal_ms": null,
+        "turn_complete_ms": null,
+        "status": "not_measured"
+      },
+      "acoustic_first_audible_ms": null,
+      "events": [
+        "meta",
+        "status",
+        "status",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "token",
+        "status",
+        "result",
+        "done"
+      ],
+      "streamed_text": "Halving diameter quarters cross-sectional area, reducing tunneling cost by a factor of four. [source:qa-ted-2017-cost-method]",
+      "chat_http_status": 200,
+      "turn": {
+        "id": "301c2fd2187f40d9b8a68e3be45fd115",
+        "session_id": "4a005c39f32a456ebbbcc15ee36da513",
+        "text": "Halving diameter quarters cross-sectional area, reducing tunneling cost by a factor of four.",
+        "language": "en",
+        "mode": "behavior",
+        "provider": "openai",
+        "citations": [
+          {
+            "evidence_id": "qa-ted-2017-cost-method",
+            "source_id": "ted-2017",
+            "title": "The future we're building -- and boring",
+            "url": "https://www.ted.com/talks/elon_musk_the_future_we_re_building_and_boring?view=transcript",
+            "locator": {
+              "label": "Original question cue-00072–cue-00072; answer cue-00073–cue-00105. Publisher onset, not acoustic alignment.",
+              "start_seconds": 216.24,
+              "end_seconds": null,
+              "timeline": "ted_transcript_cue"
+            },
+            "text_sha256": "17620716fe70b6f90ef13ef7b71ceb45ef38d9f6de8170d89783727b51f61124",
+            "text_distribution": "Original publisher passage omitted; retained in the local raw response."
+          }
+        ],
+        "behavior": {
+          "cues": [
+            {
+              "start_ms": 0,
+              "duration_ms": 900,
+              "channel": "face",
+              "name": "brow_raise",
+              "intensity": 0.3,
+              "provenance": "designed",
+              "evidence_ids": []
+            },
+            {
+              "start_ms": 0,
+              "duration_ms": 550,
+              "channel": "gaze",
+              "name": "center",
+              "intensity": 0.2,
+              "provenance": "designed",
+              "evidence_ids": []
+            },
+            {
+              "start_ms": 350,
+              "duration_ms": 850,
+              "channel": "head",
+              "name": "nod",
+              "intensity": 0.25,
+              "provenance": "designed",
+              "evidence_ids": []
+            },
+            {
+              "start_ms": 1200,
+              "duration_ms": 1600,
+              "channel": "gesture",
+              "name": "open_palm",
+              "intensity": 0.4,
+              "provenance": "designed",
+              "evidence_ids": []
+            }
+          ],
+          "speech": {
+            "rate": 1.0,
+            "pitch": 1.0,
+            "pause_ms": 260
+          },
+          "duration_ms": 5804,
+          "timing_basis": "estimated_text",
+          "motion": null
+        },
+        "grounding": {
+          "status": "unverified",
+          "retrieved_ids": [
+            "qa-ted-2017-cost-method",
+            "qa-ted-2017-q00038",
+            "qa-ted-2017-cost",
+            "qa-ted-2017-tunnels"
+          ],
+          "invalid_citation_ids": [],
+          "reason": "Sentence-level citation markers were checked; factual entailment still requires review.",
+          "citation_status": "complete",
+          "citation_unit_count": 1,
+          "cited_unit_count": 1,
+          "malformed_citations": [],
+          "semantic_status": "unreviewed"
+        },
+        "metrics": {
+          "retrieval_ms": 2.737,
+          "generation_ms": 34755.843,
+          "total_ms": 34764.235
+        }
+      },
+      "speech_input": "Halving diameter quarters cross-sectional area, reducing tunneling cost by a factor of four.",
+      "server_chat_timing": {
+        "retrieval_ms": 2.737,
+        "generation_ms": 34755.843,
+        "total_ms": 34764.235
+      },
+      "speech_http_status": 200,
+      "speech_package": {
+        "id": "4723418dd16b43c3b8ef8bfabcdc60b5",
+        "audio_url": "/api/speech/clips/4723418dd16b43c3b8ef8bfabcdc60b5",
+        "audio_sha256": "04aa04bfb30c309163fea0b98aa6b9c2046a90cb596cd117bd4bdbca25c7dd42",
+        "mime_type": "audio/wav",
+        "audio_duration_ms": 5600.0,
+        "expires_in_seconds": 120,
+        "speech_timing": null,
+        "timing_status": "not_configured",
+        "timing_message": "Audio-based lip sync is not configured; playback uses approximate mouth movement.",
+        "server_timing": {
+          "synthesis_ms": 74521.927,
+          "alignment_ms": 0.183,
+          "total_ms": 74523.596
+        },
+        "voice_mode": "configured-provider"
+      },
+      "server_speech_timing": {
+        "synthesis_ms": 74521.927,
+        "alignment_ms": 0.183,
+        "total_ms": 74523.596
+      },
+      "audio_http_status": 200,
+      "audio": {
+        "path": "turn-02.wav",
+        "sha256": "04aa04bfb30c309163fea0b98aa6b9c2046a90cb596cd117bd4bdbca25c7dd42",
+        "bytes": 268844,
+        "sample_rate": 24000,
+        "channels": 1,
+        "frames": 134400,
+        "duration_ms": 5600.0,
+        "offline_pcm_onset_offset_ms": 60.0,
+        "offline_pcm_peak_window_rms": 0.2125575057560986,
+        "offline_pcm_detector": {
+          "rms_threshold": 0.002,
+          "window_frames": 240,
+          "window_ms": 10.0,
+          "basis": "Decoded complete WAV, consecutive non-overlapping PCM windows; no playback."
+        }
+      },
+      "voice_after": {
+        "status": "ready",
+        "reference_configured": true,
+        "reference_mode": "audio_and_transcript",
+        "model_loaded": true,
+        "busy": false,
+        "voice": "reference",
+        "synthesis": "reference_conditioned",
+        "streaming": false,
+        "runtime": {
+          "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+          "device": "cpu",
+          "dtype": "bfloat16",
+          "attention": "sdpa",
+          "local_files_only": true,
+          "threads": 2,
+          "seed": 42,
+          "max_new_tokens": 384,
+          "do_sample": true,
+          "temperature": 0.9,
+          "top_k": 50,
+          "top_p": 1.0,
+          "repetition_penalty": 1.05
+        },
+        "last_generation": {
+          "language": "English",
+          "input_chars": 92,
+          "cold_start": false,
+          "elapsed_seconds": 74.482817,
+          "audio_seconds": 5.6,
+          "real_time_factor": 13.300503,
+          "termination_reason": "not_exposed_by_backend"
+        }
+      }
+    }
+  ],
+  "completed": true,
+  "limitations": [
+    "HTTP first-token receipt does not measure visible browser text.",
+    "WAV availability is a transport prerequisite for this full-buffer playback path, not first audible sound.",
+    "The PCM onset offset is measured within the saved waveform; it is not a playback timestamp.",
+    "No microphone capture, ASR input, acoustic output, human listening, or target-device timing is measured.",
+    "Two repetitions are an execution pilot, not a percentile or performance benchmark distribution.",
+    "The first measured LLM request follows llama.cpp startup warmup. The first voice request includes lazy load and reference prompt preparation.",
+    "Model output is preserved unchanged; semantic support and voice fidelity require independent review."
+  ],
+  "models": {
+    "llm": {
+      "source": {
+        "model": "ggml-org/Qwen3-4B-Instruct-2507-Q8_0-GGUF",
+        "revision": "e6f794d44f9395d0184a966c27b5ae99ea356fcb",
+        "path": "/workspace/scratch/c1b92f2891f9/work/hf-cache/models--ggml-org--Qwen3-4B-Instruct-2507-Q8_0-GGUF/snapshots/e6f794d44f9395d0184a966c27b5ae99ea356fcb/qwen3-4b-instruct-2507-q8_0.gguf",
+        "sha256": "ae916ede1c010a26955ee8ae2e908bf8815a3f135ec860439ab924701c69d5f1",
+        "bytes": 4280403520,
+        "download_verify_seconds": 108.90665719399976
+      },
+      "path": "/workspace/scratch/c1b92f2891f9/work/qwen3-4b-instruct-2507-local-q4_k_m.gguf",
+      "quantization": "Q4_K_M",
+      "requantized_from": "Q8_0",
+      "sha256": "9b7d1268c8d2953d4d8ba24c8ba5ab211d18b8511b61d6ecb2c15d56e4fb875c",
+      "bytes": 2497279040,
+      "runtime": "llama.cpp b12110",
+      "verified_local_file": {
+        "path": "/workspace/scratch/c1b92f2891f9/work/qwen3-4b-instruct-2507-local-q4_k_m.gguf",
+        "bytes": 2497279040,
+        "sha256": "9b7d1268c8d2953d4d8ba24c8ba5ab211d18b8511b61d6ecb2c15d56e4fb875c"
+      }
+    },
+    "voice": [
+      {
+        "model": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+        "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+        "files": [
+          {
+            "path": "config.json",
+            "bytes": 4494,
+            "sha256": "2e714c787c8edb98b05432685cddb634add2de4d4e645f653d68251ef72ba011"
+          },
+          {
+            "path": "generation_config.json",
+            "bytes": 245,
+            "sha256": "f1b90b4513f3b34c62851049e2492d7b4c5940daf1276f89c82b8ef04127f3aa"
+          },
+          {
+            "path": "merges.txt",
+            "bytes": 1671839,
+            "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+          },
+          {
+            "path": "model.safetensors",
+            "bytes": 1829344272,
+            "sha256": "180b3b10eb1c9f1b4db7806d5475bae3071c0243c299d49926bab1da3b6946f6"
+          },
+          {
+            "path": "preprocessor_config.json",
+            "bytes": 127,
+            "sha256": "efdde1022ea9d76928bf7a9cd53139138f5ba2e466e837f08f6105ab1af1c119"
+          },
+          {
+            "path": "speech_tokenizer/config.json",
+            "bytes": 2336,
+            "sha256": "ee65bb901c876664ab8707c487157aa1a6ee57c65969b28fb5ec9dc211e68167"
+          },
+          {
+            "path": "speech_tokenizer/configuration.json",
+            "bytes": 76,
+            "sha256": "6bc26d64eb5024b4d1dab5a52371958b429256d6c9d59787f1f5294a54e0cebd"
+          },
+          {
+            "path": "speech_tokenizer/model.safetensors",
+            "bytes": 682293092,
+            "sha256": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258"
+          },
+          {
+            "path": "speech_tokenizer/preprocessor_config.json",
+            "bytes": 234,
+            "sha256": "fcb3805e597e786d4067706e602f6688524640f8d3396790e2e09b5942fcbdfb"
+          },
+          {
+            "path": "tokenizer_config.json",
+            "bytes": 7344,
+            "sha256": "dc3c31c3bdaedd5016382bb3cbe07323026775ad51f5a4fb564505992ae4a670"
+          },
+          {
+            "path": "vocab.json",
+            "bytes": 2776833,
+            "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+          }
+        ]
+      },
+      {
+        "model": "Qwen/Qwen3-TTS-Tokenizer-12Hz",
+        "revision": "7dd38ad4e9bad454aae9cd937d0cd577604fe229",
+        "files": [
+          {
+            "path": "config.json",
+            "bytes": 2336,
+            "sha256": "ee65bb901c876664ab8707c487157aa1a6ee57c65969b28fb5ec9dc211e68167"
+          },
+          {
+            "path": "configuration.json",
+            "bytes": 76,
+            "sha256": "6bc26d64eb5024b4d1dab5a52371958b429256d6c9d59787f1f5294a54e0cebd"
+          },
+          {
+            "path": "model.safetensors",
+            "bytes": 682293092,
+            "sha256": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258"
+          },
+          {
+            "path": "preprocessor_config.json",
+            "bytes": 234,
+            "sha256": "fcb3805e597e786d4067706e602f6688524640f8d3396790e2e09b5942fcbdfb"
+          }
+        ]
+      }
+    ],
+    "reference_wav": {
+      "path": "/workspace/scratch/c1b92f2891f9/who-is-your-bias/data/local/references/ted-2013-restored/audio.wav",
+      "bytes": 471886,
+      "sha256": "1be054dd5090ad2e59de1d26ff1f666e84aa1fa7475f69de8a2d924b7f5cf66b"
+    },
+    "reference_text": {
+      "path": "/workspace/scratch/c1b92f2891f9/who-is-your-bias/data/local/references/ted-2013-restored/reference.txt",
+      "bytes": 210,
+      "sha256": "0e75c3c62963a9a06932a87113f14d8ac206d1cad4fbb409a484b552fcc5f83d"
+    },
+    "reference_review": "Engineering candidate; human listening and speaker fidelity ungraded"
+  },
+  "application": {
+    "repository": "/workspace/scratch/54528fc6b320/who-is-your-bias",
+    "git_head": "52e27ec7e469441800c80d5e69ab79bac7c83d09",
+    "source_files": [
+      {
+        "path": "services/voice/__init__.py",
+        "bytes": 56,
+        "sha256": "31556f5910bdc7df312d151b736d2768db4812ce09cedb9e96edc2491ca7b9ad"
+      },
+      {
+        "path": "services/voice/app.py",
+        "bytes": 5802,
+        "sha256": "54cf248527e9e3f491b5e82c8761b827987de066eaf7a9c79ed44fd570fb8736"
+      },
+      {
+        "path": "services/voice/engine.py",
+        "bytes": 16243,
+        "sha256": "f67e0eba644985f8aed86273316becd26bd55a3f05a55b9291667fb900884e91"
+      },
+      {
+        "path": "src/bias/__init__.py",
+        "bytes": 84,
+        "sha256": "5ce8591bb917837fe2b6d12beffc1b632ccff7e15b44c23aefcaa76da7d1cf42"
+      },
+      {
+        "path": "src/bias/api.py",
+        "bytes": 13703,
+        "sha256": "ecf8440a7e8723f03bd17561c690ef2b7649c4c4720f4b1c8eba7a377e81739b"
+      },
+      {
+        "path": "src/bias/behavior.py",
+        "bytes": 2141,
+        "sha256": "58810783d5e7010ff153303608c8db8cf3c0c16b4a74c7ac4c75695ce84cf1f4"
+      },
+      {
+        "path": "src/bias/cli.py",
+        "bytes": 4540,
+        "sha256": "2e8561f4581810aa387ed7e722b0ddc500e58e4ca7b49d335769eaec42701fb6"
+      },
+      {
+        "path": "src/bias/compact_prompts.py",
+        "bytes": 3363,
+        "sha256": "032013e9c1a1c2420868cff31833628b25391e2a161ce5cd4435dd046ae5110e"
+      },
+      {
+        "path": "src/bias/config.py",
+        "bytes": 4850,
+        "sha256": "6a3477a5107f791dbd624f47a0b1779dcf115b0c6fbbe6c1971194c4cb5f153b"
+      },
+      {
+        "path": "src/bias/corpus.py",
+        "bytes": 12467,
+        "sha256": "8ddf6b10a58aef56dcd52aa9881ad350d18c1df91667c52987b470909bf1cdcb"
+      },
+      {
+        "path": "src/bias/engine.py",
+        "bytes": 10685,
+        "sha256": "ccaaf3e87d19db90bd62c403735cabd29f86f1fb2f274baa676a56627f4cc0f3"
+      },
+      {
+        "path": "src/bias/evaluate.py",
+        "bytes": 5229,
+        "sha256": "757b7a0fc4b703b22c5555a84e2b17d31c847ca5867b27ca1f18d4ff8285b500"
+      },
+      {
+        "path": "src/bias/grounding.py",
+        "bytes": 6173,
+        "sha256": "a3098cc9d39914226e89b3e6dad8c6b770f0c0eda3d28a3e3f8192d3488bf8a0"
+      },
+      {
+        "path": "src/bias/ingest.py",
+        "bytes": 5833,
+        "sha256": "6136b8039f9326852cb8ddcd07ba1d2ee4fba2ce3ff2e74edd30d7793c3d31bc"
+      },
+      {
+        "path": "src/bias/legacy_prompts.py",
+        "bytes": 3282,
+        "sha256": "c6b6e84ed4c9a8da6f01c6d9ada07934b8548bca8530f7f39d79ad8cb8a14dd7"
+      },
+      {
+        "path": "src/bias/legacy_situations.py",
+        "bytes": 774,
+        "sha256": "3f1a182e6c095bf30a00b0ead537fd1a8d4a80277b635d149a10b356ed2b0524"
+      },
+      {
+        "path": "src/bias/lipsync.py",
+        "bytes": 7207,
+        "sha256": "05feac2d1041b4a6a09929227fba680ebbd669bca169807cac3976b1dd304063"
+      },
+      {
+        "path": "src/bias/models.py",
+        "bytes": 12382,
+        "sha256": "66aacccfb0751ddf38f1f1f02e6c23d732ad1392b2ac13f5e6c971d1dd439fd7"
+      },
+      {
+        "path": "src/bias/motion.py",
+        "bytes": 24025,
+        "sha256": "8f0922adab913a33472dbb6920bbfb2ad5d82c0eb34ce7a7040435315bc4f288"
+      },
+      {
+        "path": "src/bias/prompts.py",
+        "bytes": 3530,
+        "sha256": "baa7c142b293d27b612e00c14d2a316e2c6faffc82b4dd7578e9fa6a58f66edc"
+      },
+      {
+        "path": "src/bias/providers.py",
+        "bytes": 11346,
+        "sha256": "e92f428eeefff17a35d0992a0951d9a1fb31620aed9d5516d8402712aef1b083"
+      },
+      {
+        "path": "src/bias/qa_prompts.py",
+        "bytes": 3698,
+        "sha256": "040e790013e68c274487096cce889855ab3b1d5b3176c3c187d3244ec414e254"
+      },
+      {
+        "path": "src/bias/request_work.py",
+        "bytes": 1827,
+        "sha256": "15fa420d3fdbe74651fa2dc73948ab2ef314ea83e5b089aece77375063506423"
+      },
+      {
+        "path": "src/bias/retrieval.py",
+        "bytes": 11273,
+        "sha256": "72b7b06718b762068fb932131fd6102cd3d8c5e54190b514ee27158aea8b86d9"
+      },
+      {
+        "path": "src/bias/sessions.py",
+        "bytes": 2561,
+        "sha256": "b9fab738eb4f5ae65da39fcb277c8842841de50f978f0789be2ec30c56f0c1f5"
+      },
+      {
+        "path": "src/bias/situations.py",
+        "bytes": 2247,
+        "sha256": "64ac395448105ced33a5249adef4125704c6acfb6aa1274bc29fc18b521a86a1"
+      },
+      {
+        "path": "src/bias/speech.py",
+        "bytes": 3606,
+        "sha256": "7948a52419250b08d40ac7851cafe58c432210cd5d19ed3f2467d99ebb6c11ff"
+      }
+    ],
+    "corpus_files": [
+      {
+        "path": "corpus-manifest.json",
+        "bytes": 1016,
+        "sha256": "7c8a1b331da82bab7167a8d2210fd507ace89131ce7bf32c06c96956cc65861b"
+      },
+      {
+        "path": "evidence.jsonl",
+        "bytes": 246672,
+        "sha256": "fe331ba1bfabcedac8ba2a3dc20595dbc4edba1b235918727f64ee768c4f5590"
+      },
+      {
+        "path": "materialization-report.json",
+        "bytes": 621,
+        "sha256": "ad0ed88ea0dc6980cce3882473e9bd0b7e4caec84dbf7f15439dd8d44e4a8ca3"
+      },
+      {
+        "path": "profile.json",
+        "bytes": 1044,
+        "sha256": "a8102f436bbd3cc58912fc81107835f8b8a242925b51afce9d0812ff7ff4c8d8"
+      },
+      {
+        "path": "selection-recipes.json",
+        "bytes": 168959,
+        "sha256": "d2dcbb00c6877ef1eff30f07515633fe737ea2ddeed9b3f5db0c107c75be254e"
+      },
+      {
+        "path": "sources.json",
+        "bytes": 7665,
+        "sha256": "6eb1031c09784bfdb563649f06ecfba163fb9fc187f608fee3c98f1d79fc222b"
+      },
+      {
+        "path": "split-manifest.json",
+        "bytes": 1382,
+        "sha256": "d9ef0051c278e376074dbe8cc12de1c67658774930c32e0b5ab1a526f6355295"
+      }
+    ]
+  },
+  "harness_files": [
+    {
+      "path": "__init__.py",
+      "bytes": 82,
+      "sha256": "a1883f8e97dfe4d833872634fb2c24b1701937402a4e9c2cbefcf39bc6befe51"
+    },
+    {
+      "path": "__main__.py",
+      "bytes": 48,
+      "sha256": "554f8b7213c6212748e01b23467b7539aa7b14827dc2bfa4ba0982369a4b69fb"
+    },
+    {
+      "path": "protocol.py",
+      "bytes": 3606,
+      "sha256": "31f4ecdf9dd2dd4bfd79fc333166c3df18e711f4477e707db0fea3b2bf396330"
+    },
+    {
+      "path": "run.py",
+      "bytes": 22362,
+      "sha256": "923bc8eef0edf52c987cf9746f1d4b8d27e03656d192c3e382d4df0e1a98bbdf"
+    }
+  ],
+  "runtime": {
+    "llama_binary": {
+      "path": "/workspace/scratch/c1b92f2891f9/work/llama-cpp/llama-b12110/llama-server",
+      "bytes": 17864,
+      "sha256": "eaf9c1c664cc0ae1f4dea4b171bb91aac8409fcfea0574c9b6bcc93792ce2400"
+    },
+    "commands": {
+      "llm": [
+        "/workspace/scratch/c1b92f2891f9/work/llama-cpp/llama-b12110/llama-server",
+        "--model",
+        "/workspace/scratch/c1b92f2891f9/work/qwen3-4b-instruct-2507-local-q4_k_m.gguf",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8120",
+        "--alias",
+        "qwen3-4b-instruct-q4",
+        "--ctx-size",
+        "4096",
+        "--parallel",
+        "1",
+        "--threads",
+        "4",
+        "--threads-batch",
+        "4",
+        "--batch-size",
+        "128",
+        "--ubatch-size",
+        "64",
+        "--n-gpu-layers",
+        "0",
+        "--seed",
+        "42",
+        "--temp",
+        "0.7",
+        "--top-k",
+        "20",
+        "--top-p",
+        "0.8",
+        "--predict",
+        "96",
+        "--offline",
+        "--no-webui",
+        "--metrics"
+      ],
+      "voice": [
+        "/workspace/scratch/c1b92f2891f9/work/inference-venv/bin/python",
+        "-m",
+        "uvicorn",
+        "services.voice.app:app",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8121"
+      ],
+      "app": [
+        "/workspace/scratch/c1b92f2891f9/who-is-your-bias/.venv/bin/python",
+        "-m",
+        "uvicorn",
+        "bias.api:app",
+        "--host",
+        "127.0.0.1",
+        "--port",
+        "8122"
+      ]
+    },
+    "voice_settings": {
+      "MODEL": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+      "REVISION": "5d83992436eae1d760afd27aff78a71d676296fc",
+      "CACHE_DIR": "/workspace/scratch/c1b92f2891f9/work/hf-cache",
+      "LOCAL_FILES_ONLY": "true",
+      "DEVICE": "cpu",
+      "DTYPE": "bfloat16",
+      "ATTENTION": "sdpa",
+      "REFERENCE_WAV": "/workspace/scratch/c1b92f2891f9/who-is-your-bias/data/local/references/ted-2013-restored/audio.wav",
+      "REFERENCE_TEXT_FILE": "/workspace/scratch/c1b92f2891f9/who-is-your-bias/data/local/references/ted-2013-restored/reference.txt",
+      "X_VECTOR_ONLY_MODE": "false",
+      "THREADS": "2",
+      "SEED": "42",
+      "MAX_NEW_TOKENS": "384",
+      "MAX_AUDIO_SECONDS": "60",
+      "DO_SAMPLE": "true",
+      "TEMPERATURE": "0.9",
+      "TOP_P": "1.0",
+      "TOP_K": "50",
+      "REPETITION_PENALTY": "1.05"
+    },
+    "request_timeout_seconds": 180,
+    "lipsync": "not_configured",
+    "max_output_tokens": 96,
+    "startup_warmup": "llama.cpp default enabled",
+    "speech_streaming": false
+  },
+  "llm_initial_health": {
+    "status": "ok"
+  },
+  "startup_seconds": {
+    "llm": 5.695081,
+    "voice": 0.416972,
+    "app": 0.624166
+  },
+  "voice_initial_health": {
+    "status": "not_loaded",
+    "reference_configured": true,
+    "reference_mode": "audio_and_transcript",
+    "model_loaded": false,
+    "busy": false,
+    "voice": "reference",
+    "synthesis": "reference_conditioned",
+    "streaming": false,
+    "runtime": {
+      "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+      "device": "cpu",
+      "dtype": "bfloat16",
+      "attention": "sdpa",
+      "local_files_only": true,
+      "threads": 2,
+      "seed": 42,
+      "max_new_tokens": 384,
+      "do_sample": true,
+      "temperature": 0.9,
+      "top_k": 50,
+      "top_p": 1.0,
+      "repetition_penalty": 1.05
+    },
+    "last_generation": null
+  },
+  "app_initial_health": {
+    "status": "ok",
+    "version": "0.1.0",
+    "provider": "openai",
+    "capabilities": {
+      "llm": true,
+      "speech": true,
+      "transcription": false
+    },
+    "providers": {
+      "llm": {
+        "configured": true,
+        "model": "qwen3-4b-instruct-q4"
+      },
+      "speech": {
+        "configured": true,
+        "model": "qwen3-tts"
+      },
+      "transcription": {
+        "configured": false,
+        "model": null
+      }
+    },
+    "corpus": {
+      "sources": 5,
+      "evidence": 80,
+      "held_out_sources": 3,
+      "total_evidence": 92
+    },
+    "qa_corpus": {
+      "schema_version": "qa-corpus-report.v1",
+      "corpus_id": "elon-musk-original-qa.v2",
+      "materialization": "full_selected_exchanges_local",
+      "question_answer_records": 92,
+      "training_question_answers": 80,
+      "complete_exchanges": 84,
+      "excerpts": 8,
+      "taxonomy_version": "situations.v1",
+      "covered_training_situations": [
+        "advice",
+        "challenge",
+        "conversation",
+        "disclosure_request",
+        "explanation",
+        "humor",
+        "praise",
+        "reflection"
+      ],
+      "uncovered_situations": [],
+      "reviewer_types": [
+        "agent"
+      ]
+    },
+    "configuration_only": true
+  },
+  "process_observation": {
+    "peak_sampled_sum_rss_kib": 4361332,
+    "sampling_interval_seconds": 1,
+    "scope": "Sum of three direct server RSS values; shared memory may be counted twice, and unsampled spikes are not captured."
+  },
+  "finished_at": "2026-11-11T04:37:43.587304+00:00",
+  "publication": {
+    "created_at": "2026-11-11T04:37:51.069563+00:00",
+    "raw_report_sha256": "5533d76a092a8089de602ae7b6a5fc3755f32b27b4e8226e26665fdc9bc3532b",
+    "publisher_source_passages": "Omitted from citation.text; exact UTF-8 text hashes and source IDs/URLs/locators remain.",
+    "generated_outputs": "Unchanged",
+    "timings": "Unchanged",
+    "raw_report_retention": "Local execution output directory",
+    "packager_sha256": "f52765f0a3daf2c0aa18bcd68dce7aaf6cf0e152b9ec8a54c3a966ed60dffabb"
+  },
+  "raw_artifact_identities": [
+    {
+      "path": "app.log",
+      "bytes": 885,
+      "sha256": "533884130a1d3e4460bad5cc2e243fc84f78eb9fc35efd437d59c680592436a5"
+    },
+    {
+      "path": "llama-metrics.txt",
+      "bytes": 2588,
+      "sha256": "cc810183ef15c9ef88f639f3b3c99aa43cf63a5d7f73f94f53805e80cf1cd285"
+    },
+    {
+      "path": "llm.log",
+      "bytes": 4590,
+      "sha256": "3f2bd76c110662d1f84ab08fc01fb64c731ee98aefbcc242d3a717cf1fb462b6"
+    },
+    {
+      "path": "process-memory.jsonl",
+      "bytes": 85536,
+      "sha256": "584c061ea80f2c276e1d9bb656ffffa4fdfb2f66a78a02549c407df70727352c"
+    },
+    {
+      "path": "turn-01-events.jsonl",
+      "bytes": 5919,
+      "sha256": "bc56f46ff39c053b6ead030dd59082485e1faa3bffeb10139c1183192534d751"
+    },
+    {
+      "path": "turn-01.wav",
+      "bytes": 218924,
+      "sha256": "ed0e70668ab90ed738583b0b34353a648cac1620876190077afad774dc4eb65b"
+    },
+    {
+      "path": "turn-02-events.jsonl",
+      "bytes": 6053,
+      "sha256": "0785d62a317a55a9a28b7bfe9d85e497690a58fa63761d5f50b9e8dacc3d24aa"
+    },
+    {
+      "path": "turn-02.wav",
+      "bytes": 268844,
+      "sha256": "04aa04bfb30c309163fea0b98aa6b9c2046a90cb596cd117bd4bdbca25c7dd42"
+    },
+    {
+      "path": "voice.log",
+      "bytes": 1294,
+      "sha256": "b8255189d4f6ffb89e4c5a5d631ca1e95091e24234da109a732f50a2398fbdae"
+    }
+  ],
+  "earlier_attempts": [
+    {
+      "raw_report_sha256": "accc8a2174aae8c250b96f711d5240cb946600ea774744d3d2c77be73ce31392",
+      "started_at": "2026-11-11T04:27:50.727183+00:00",
+      "failure": {
+        "type": "ValueError",
+        "message": "Expected a completed actual model answer"
+      },
+      "runs": [
+        {
+          "request": {
+            "message": "How could smaller tunnels reduce construction costs? Answer in one sentence of at most 25 words.",
+            "mode": "behavior",
+            "language": "en",
+            "motion_mode": "disabled"
+          },
+          "status": "failed",
+          "transport": {
+            "first_token_received_ms": 3.519,
+            "first_content_text_received_ms": 3.519,
+            "answer_received_ms": 4.613,
+            "stream_complete_ms": 4.904
+          },
+          "generated_or_fallback_text": "I couldn't find reviewed public evidence that answers this question. This archive contains historical interviews and articles; it cannot verify current facts or private experiences.",
+          "provider": "evidence",
+          "failure": {
+            "type": "ValueError",
+            "message": "Expected a completed actual model answer"
+          },
+          "speech_http_status": null
+        }
+      ]
+    },
+    {
+      "raw_report_sha256": "c54a601a5a71753cb0d145b17e8547189cb7ed90b30cc12d2fbc6ac20f4662ed",
+      "started_at": "2026-11-11T04:29:24.337939+00:00",
+      "failure": {
+        "type": "HTTPStatusError",
+        "message": "Server error '504 Gateway Timeout' for url 'http://127.0.0.1:8122/api/speech/prepare'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504"
+      },
+      "runs": [
+        {
+          "request": {
+            "message": "How does tunnel diameter affect cost? One sentence, please.",
+            "mode": "behavior",
+            "language": "en",
+            "motion_mode": "disabled"
+          },
+          "status": "failed",
+          "transport": {
+            "first_token_received_ms": 28517.164,
+            "first_content_text_received_ms": 28517.164,
+            "answer_received_ms": 33692.512,
+            "stream_complete_ms": 33696.143,
+            "speech_request_started_ms": 33697.356,
+            "speech_package_received_ms": 213731.033
+          },
+          "generated_or_fallback_text": "Reducing the tunnel diameter by a factor of two or more cuts the cross-sectional area by a factor of four, and since tunneling cost scales with cross-sectional area, this results in a roughly half-order-of-magnitude reduction in cost.",
+          "provider": "openai",
+          "failure": {
+            "type": "HTTPStatusError",
+            "message": "Server error '504 Gateway Timeout' for url 'http://127.0.0.1:8122/api/speech/prepare'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/504"
+          },
+          "speech_http_status": 504
+        }
+      ]
+    }
+  ],
+  "published_artifacts": [
+    {
+      "path": "app.log",
+      "bytes": 885,
+      "sha256": "533884130a1d3e4460bad5cc2e243fc84f78eb9fc35efd437d59c680592436a5"
+    },
+    {
+      "path": "llama-metrics.txt",
+      "bytes": 2588,
+      "sha256": "cc810183ef15c9ef88f639f3b3c99aa43cf63a5d7f73f94f53805e80cf1cd285"
+    },
+    {
+      "path": "llm.log",
+      "bytes": 4590,
+      "sha256": "3f2bd76c110662d1f84ab08fc01fb64c731ee98aefbcc242d3a717cf1fb462b6"
+    },
+    {
+      "path": "process-memory.jsonl",
+      "bytes": 85536,
+      "sha256": "584c061ea80f2c276e1d9bb656ffffa4fdfb2f66a78a02549c407df70727352c"
+    },
+    {
+      "path": "turn-01.wav",
+      "bytes": 218924,
+      "sha256": "ed0e70668ab90ed738583b0b34353a648cac1620876190077afad774dc4eb65b"
+    },
+    {
+      "path": "turn-02.wav",
+      "bytes": 268844,
+      "sha256": "04aa04bfb30c309163fea0b98aa6b9c2046a90cb596cd117bd4bdbca25c7dd42"
+    },
+    {
+      "path": "voice.log",
+      "bytes": 1294,
+      "sha256": "b8255189d4f6ffb89e4c5a5d631ca1e95091e24234da109a732f50a2398fbdae"
+    }
+  ]
+}

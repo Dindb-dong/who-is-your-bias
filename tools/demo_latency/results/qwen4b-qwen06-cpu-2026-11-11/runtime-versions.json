@@ -1,0 +1,14 @@
+{
+  "scope": "Package metadata from the same unchanged voice interpreter after the actual run; no extra model execution.",
+  "versions": {
+    "torch": "2.11.0+cpu",
+    "qwen-tts": "0.1.1",
+    "transformers": "4.57.3",
+    "accelerate": "1.12.0",
+    "safetensors": "0.8.0",
+    "numpy": "2.5.4",
+    "fastapi": "0.162.4",
+    "uvicorn": "0.54.0",
+    "httpx": "0.28.1"
+  }
+}

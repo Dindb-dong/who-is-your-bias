@@ -15,7 +15,7 @@ npm run build
 uv run bias serve
 ```
 
-Open `http://127.0.0.1:8000`. The studio includes conversation, source inspection, A/B/C comparison, voice playback controls, a bundled human avatar, a lightweight portrait, local GLB loading, and a motion/calibration lab. See [studio guide](docs/studio.md) for development, audio, and retargeting details.
+Open `http://127.0.0.1:8000`. The studio includes conversation, source inspection, A/B/C comparison, a prepared presentation player with live Q&A handoff, exportable turn timing, voice playback controls, a bundled human avatar, a lightweight portrait, local GLB loading, and a motion/calibration lab. See [studio guide](docs/studio.md) for development, audio, and retargeting details.
 
 ## Run the conversation engine
 
@@ -54,6 +54,8 @@ The optional [local language server](docs/language-runtime.md) runs a server-sel
 | Evidence | Per-unit citation coverage, separately labeled semantic review, original source links, frozen prompt comparisons |
 | Behavior plans | Timed face/gaze/head/gesture cues with explicit provenance and estimated timing |
 | Speech and transcription | Optional compatible provider adapters with real audio bytes and size limits |
+| Prepared presentation | Actual 12.24-second Qwen3-TTS → MuseTalk video, captions, generated WAV, verified media hashes and fresh live-session handoff |
+| Live timing | Browser text/PCM events and JSON export; separate actual-service HTTP benchmark; acoustic speaker output remains unmeasured |
 | Local reference voice | Optional Qwen3-TTS service with cached prompts, bounded requests, and a fixed server-side reference |
 | Speech timing | Optional Rhubarb mouth-cue recognition, SHA-256-bound audio packages, actual playback clock, explicit amplitude fallback |
 | Avatar calibration | Bundled compressed human mesh with 163 bones and 67 named face/viseme targets; calibrated controls, portrait/full-body cameras, and local GLB support |
@@ -157,6 +159,8 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 - [Reference preparation](docs/research/voice-reference.md): publisher-linked audio candidates, clock matching, and review evidence.
 - [Speech timing](docs/speech-timing.md): real audio transport, recognized mouth cues, and failure behavior.
 - [Grounding quality](docs/grounding-quality.md): frozen prompt comparisons, exact generated responses, citation coverage, and separate semantic review.
+- [Prepared presentation](docs/presentation.md): actual Qwen3-TTS → MuseTalk artifact, verified timing and reproduction.
+- [Live measurements](docs/live-demo-latency.md): browser timing export and real LLM-to-voice transport evidence.
 - [Voice evaluation](docs/voice-evaluation.md): four real synthesized cases, independent ASR, runtime measurements, and a generated-output listening bundle.
 - [Bundled human avatar](docs/humanoid-avatar.md): asset licenses, compressed GLB build, named controls, and actual deformation checks.
 - [Motion library](docs/motion-library.md): two-event measurements, source-context selection, validation results, and reproduction.

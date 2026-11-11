@@ -1,0 +1,72 @@
+{
+  "schema_version": "prepared-speech.v1",
+  "status": "completed",
+  "started_at": "2026-11-11T04:05:41.650297+00:00",
+  "backend": "qwen3-tts-base",
+  "model": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+  "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+  "device": "cpu",
+  "dtype": "bfloat16",
+  "threads": 2,
+  "seed": 42,
+  "plan_sha256": "b3c864004bd5e63e5d6a4031346ad07dd2d05a013860229fa2ce8c9f1cef16fb",
+  "reference_audio_sha256": "1be054dd5090ad2e59de1d26ff1f666e84aa1fa7475f69de8a2d924b7f5cf66b",
+  "reference_transcript_sha256": "b5e4502a4491fdedd7869e48c2f420e6448a33bea945a46796311a2dd78af714",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "segments": [
+    {
+      "id": "disclosure",
+      "text": "This is an A I research simulation, not the real person.",
+      "source_refs": [
+        "README.md#who-is-your-bias"
+      ],
+      "path": "disclosure.wav",
+      "sample_rate": 24000,
+      "frames": 71040,
+      "seconds": 2.96,
+      "sha256": "f8a2fb22f40c36ce04f86586643680481a3ca5a254678a492c4938330a8af6e0",
+      "start_seconds": 0.0,
+      "end_seconds": 2.96,
+      "request_seconds": 27.839405982000244
+    },
+    {
+      "id": "experiment",
+      "text": "We compare a profile, interview examples, and situation matching.",
+      "source_refs": [
+        "docs/proposal-alignment.md#controlled-abc-conditions"
+      ],
+      "path": "experiment.wav",
+      "sample_rate": 24000,
+      "frames": 92160,
+      "seconds": 3.84,
+      "sha256": "75b2c145db5549095ad991c79488994254d5ece83f922deb4abc269f0421bf66",
+      "start_seconds": 3.16,
+      "end_seconds": 7.0,
+      "request_seconds": 23.128611606998675
+    },
+    {
+      "id": "review",
+      "text": "The answers need independent review. Better performance is a question, not a promise.",
+      "source_refs": [
+        "docs/proposal-alignment.md#evaluation-and-acceptance"
+      ],
+      "path": "review.wav",
+      "sample_rate": 24000,
+      "frames": 120960,
+      "seconds": 5.04,
+      "sha256": "7b992ad6e8fb0972560dfd345c5dd0b72a1797f196ba2fc8d3e04fdd174f35e4",
+      "start_seconds": 7.2,
+      "end_seconds": 12.24,
+      "request_seconds": 28.29470666099951
+    }
+  ],
+  "human_listening_review": "unrated",
+  "audio": {
+    "sample_rate": 24000,
+    "frames": 293760,
+    "seconds": 12.24,
+    "sha256": "f3e3fb41fca380073cb9d4fdb0209e4062b1e5d60da988e2f58d419c09635e0a"
+  },
+  "total_seconds": 79.2704033530008,
+  "completion_scope": "Waveforms generated; token-cap/EOS and transcript accuracy need separate inspection."
+}
