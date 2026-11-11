@@ -1,0 +1,39 @@
+{
+  "schema_version": "voice_synthesis.v1",
+  "status": "completed",
+  "condition": "actual-http-live-demo-cpu-pilot",
+  "execution": "existing_actual_http_generated_audio",
+  "transport_summary_sha256": "05557d2c93735e72224beddfe272360b5a91328a695a03d38650df9c0b791c40",
+  "cases": [
+    {
+      "id": "turn-01",
+      "status": "succeeded",
+      "text": "Halving diameter quarters cross-sectional area, reducing cost by a factor of four.",
+      "language": "English",
+      "asr_language": "en",
+      "audio": {
+        "path": "turn-01.wav",
+        "sha256": "ed0e70668ab90ed738583b0b34353a648cac1620876190077afad774dc4eb65b",
+        "bytes": 218924
+      },
+      "signal": {
+        "duration_seconds": 4.56
+      }
+    },
+    {
+      "id": "turn-02",
+      "status": "succeeded",
+      "text": "Halving diameter quarters cross-sectional area, reducing tunneling cost by a factor of four.",
+      "language": "English",
+      "asr_language": "en",
+      "audio": {
+        "path": "turn-02.wav",
+        "sha256": "04aa04bfb30c309163fea0b98aa6b9c2046a90cb596cd117bd4bdbca25c7dd42",
+        "bytes": 268844
+      },
+      "signal": {
+        "duration_seconds": 5.6
+      }
+    }
+  ]
+}

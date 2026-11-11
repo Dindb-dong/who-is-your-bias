@@ -1,0 +1,294 @@
+{
+  "schema_version": "voice_asr.v1",
+  "created_at": "2026-11-11T04:38:06.488967+00:00",
+  "status": "completed",
+  "synthesis_sha256": "49b099681a364b517f37dc49fd16fef8eede59f815f41857ede5423aa796e1ed",
+  "condition": "actual-http-live-demo-cpu-pilot",
+  "engine": {
+    "name": "faster-whisper",
+    "version": "1.2.1",
+    "ctranslate2_version": "4.8.5",
+    "model": "Systran/faster-whisper-small",
+    "revision": "536b0662742c02347bc0e980a01041f333bce120",
+    "weights_sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+    "device": "cpu",
+    "compute_type": "int8",
+    "cpu_threads": 1,
+    "num_workers": 1,
+    "beam_size": 5,
+    "initial_prompt": null,
+    "prefix": null,
+    "hotwords": null,
+    "condition_on_previous_text": false,
+    "vad_filter": false,
+    "word_timestamps": true,
+    "decoder": "ffmpeg_pcm16_mono_16khz_to_numpy",
+    "telemetry_disabled_before_import": true
+  },
+  "human_listening": "not_performed",
+  "cases": [
+    {
+      "id": "turn-01",
+      "audio_sha256": "ed0e70668ab90ed738583b0b34353a648cac1620876190077afad774dc4eb65b",
+      "asr_language": "en",
+      "status": "succeeded",
+      "recognized_text": "halving diameter quarters cross-sectional area, reducing cost by a factor of 4.",
+      "expected_text": "Halving diameter quarters cross-sectional area, reducing cost by a factor of four.",
+      "detected_language": "en",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 4.32,
+          "text": " halving diameter quarters cross-sectional area, reducing cost by a factor of 4.",
+          "words": [
+            {
+              "word": " halving",
+              "start": 0.0,
+              "end": 0.38,
+              "probability": 0.7597017288208008
+            },
+            {
+              "word": " diameter",
+              "start": 0.38,
+              "end": 0.68,
+              "probability": 0.9878956079483032
+            },
+            {
+              "word": " quarters",
+              "start": 0.68,
+              "end": 1.14,
+              "probability": 0.9180260300636292
+            },
+            {
+              "word": " cross",
+              "start": 1.14,
+              "end": 1.6,
+              "probability": 0.7223076820373535
+            },
+            {
+              "word": "-sectional",
+              "start": 1.6,
+              "end": 2.1,
+              "probability": 0.8759688933690389
+            },
+            {
+              "word": " area,",
+              "start": 2.1,
+              "end": 2.44,
+              "probability": 0.9963794350624084
+            },
+            {
+              "word": " reducing",
+              "start": 2.68,
+              "end": 3.1,
+              "probability": 0.9935511350631714
+            },
+            {
+              "word": " cost",
+              "start": 3.1,
+              "end": 3.42,
+              "probability": 0.9083706736564636
+            },
+            {
+              "word": " by",
+              "start": 3.42,
+              "end": 3.62,
+              "probability": 0.9596243500709534
+            },
+            {
+              "word": " a",
+              "start": 3.62,
+              "end": 3.68,
+              "probability": 0.7716131210327148
+            },
+            {
+              "word": " factor",
+              "start": 3.68,
+              "end": 3.92,
+              "probability": 0.9994953870773315
+            },
+            {
+              "word": " of",
+              "start": 3.92,
+              "end": 4.04,
+              "probability": 0.9626802802085876
+            },
+            {
+              "word": " 4.",
+              "start": 4.04,
+              "end": 4.32,
+              "probability": 0.45630601048469543
+            }
+          ]
+        }
+      ],
+      "elapsed_seconds": 3.954194,
+      "audio_seconds": 4.56,
+      "metrics": {
+        "normalization": "NFC, casefold, punctuation removed; no semantic or numeric rewriting",
+        "primary_metric": "wer",
+        "wer": {
+          "reference_units": 13,
+          "hypothesis_units": 13,
+          "substitutions": 1,
+          "deletions": 0,
+          "insertions": 0,
+          "distance": 1,
+          "error_rate": 0.076923
+        },
+        "cer": {
+          "reference_units": 68,
+          "hypothesis_units": 65,
+          "substitutions": 1,
+          "deletions": 3,
+          "insertions": 0,
+          "distance": 4,
+          "error_rate": 0.058824
+        },
+        "screens": {
+          "missing_expected_suffix": true,
+          "excess_repeated_ngrams": 0,
+          "ngram_size": 3,
+          "substantial_deletions": false
+        },
+        "limitations": "ASR is an independent recognizer, not ground truth. Screens may reflect ASR errors; they do not prove audio truncation, EOS, naturalness, speaker identity, or likeness. Korean spacing and digit-vs-word formatting affect WER."
+      }
+    },
+    {
+      "id": "turn-02",
+      "audio_sha256": "04aa04bfb30c309163fea0b98aa6b9c2046a90cb596cd117bd4bdbca25c7dd42",
+      "asr_language": "en",
+      "status": "succeeded",
+      "recognized_text": "halving diameter quarters cross sectional area, reducing tunneling cost by a factor of four.",
+      "expected_text": "Halving diameter quarters cross-sectional area, reducing tunneling cost by a factor of four.",
+      "detected_language": "en",
+      "segments": [
+        {
+          "start": 0.0,
+          "end": 5.42,
+          "text": " halving diameter quarters cross sectional area, reducing tunneling cost by a factor of four.",
+          "words": [
+            {
+              "word": " halving",
+              "start": 0.0,
+              "end": 0.38,
+              "probability": 0.7598557472229004
+            },
+            {
+              "word": " diameter",
+              "start": 0.38,
+              "end": 0.64,
+              "probability": 0.9914510846138
+            },
+            {
+              "word": " quarters",
+              "start": 0.64,
+              "end": 1.08,
+              "probability": 0.9372850060462952
+            },
+            {
+              "word": " cross",
+              "start": 1.08,
+              "end": 1.62,
+              "probability": 0.7572743892669678
+            },
+            {
+              "word": " sectional",
+              "start": 1.62,
+              "end": 2.26,
+              "probability": 0.7198455035686493
+            },
+            {
+              "word": " area,",
+              "start": 2.26,
+              "end": 2.7,
+              "probability": 0.9960933327674866
+            },
+            {
+              "word": " reducing",
+              "start": 2.92,
+              "end": 3.34,
+              "probability": 0.9913032054901123
+            },
+            {
+              "word": " tunneling",
+              "start": 3.34,
+              "end": 3.78,
+              "probability": 0.9176410436630249
+            },
+            {
+              "word": " cost",
+              "start": 3.78,
+              "end": 4.06,
+              "probability": 0.5169825553894043
+            },
+            {
+              "word": " by",
+              "start": 4.06,
+              "end": 4.34,
+              "probability": 0.995785653591156
+            },
+            {
+              "word": " a",
+              "start": 4.34,
+              "end": 4.42,
+              "probability": 0.9939653277397156
+            },
+            {
+              "word": " factor",
+              "start": 4.42,
+              "end": 4.72,
+              "probability": 0.9992445707321167
+            },
+            {
+              "word": " of",
+              "start": 4.72,
+              "end": 5.0,
+              "probability": 0.9974850416183472
+            },
+            {
+              "word": " four.",
+              "start": 5.0,
+              "end": 5.42,
+              "probability": 0.5959770679473877
+            }
+          ]
+        }
+      ],
+      "elapsed_seconds": 3.960597,
+      "audio_seconds": 5.6,
+      "metrics": {
+        "normalization": "NFC, casefold, punctuation removed; no semantic or numeric rewriting",
+        "primary_metric": "wer",
+        "wer": {
+          "reference_units": 14,
+          "hypothesis_units": 14,
+          "substitutions": 0,
+          "deletions": 0,
+          "insertions": 0,
+          "distance": 0,
+          "error_rate": 0.0
+        },
+        "cer": {
+          "reference_units": 77,
+          "hypothesis_units": 77,
+          "substitutions": 0,
+          "deletions": 0,
+          "insertions": 0,
+          "distance": 0,
+          "error_rate": 0.0
+        },
+        "screens": {
+          "missing_expected_suffix": false,
+          "excess_repeated_ngrams": 0,
+          "ngram_size": 3,
+          "substantial_deletions": false
+        },
+        "limitations": "ASR is an independent recognizer, not ground truth. Screens may reflect ASR errors; they do not prove audio truncation, EOS, naturalness, speaker identity, or likeness. Korean spacing and digit-vs-word formatting affect WER."
+      }
+    }
+  ],
+  "model_load_seconds": 1.966544,
+  "completed_at": "2026-11-11T04:38:16.753173+00:00",
+  "elapsed_seconds": 10.264224
+}

@@ -2,6 +2,29 @@
 
 The application exposes two distinct measurement surfaces. Its **This turn → Export** button records actual browser events through `LiveTurnClock`. The `tools.demo_latency` command measures the real server path through streamed conversation, Qwen speech preparation, and complete WAV acquisition. These reports have different schemas and must not be merged into a browser latency claim.
 
+## Executed CPU pilot, 11 November 2026
+
+The [preserved measurement summary](../tools/demo_latency/results/qwen4b-qwen06-cpu-2026-11-11/summary.json) contains two successful real language-to-voice requests against the full local original-Q&A v2 corpus, including generated WAVs and process logs. Both used the question **“How does tunnel diameter affect cost? In 12 words.”** The first generated answer was “Halving diameter quarters cross-sectional area, reducing cost by a factor of four.” The second added “tunneling” before “cost.” Both identified `qa-ted-2017-cost-method`; citation structure was complete while semantic status remained explicitly unreviewed.
+
+| Observed endpoint | First request after LLM startup warmup; voice cold | Warm processes; repeated prompt; new conversation |
+| --- | ---: | ---: |
+| First content text received over HTTP | 26.183 s | 2.141 s |
+| Complete answer received | 28.415 s | 34.768 s |
+| Server voice synthesis | 99.831 s | 74.522 s |
+| Complete generated WAV received | 128.284 s | 109.324 s |
+| Generated audio duration | 4.56 s | 5.60 s |
+| Voice engine real-time factor | 21.880 | 13.301 |
+| PCM onset within the saved WAV | 60 ms | 60 ms |
+| Browser text, browser audio, acoustic first audible | Unmeasured | Unmeasured |
+
+These are actual assistant-host measurements on an AMD EPYC 9V74 CPU, with nine logical CPUs exposed, four llama generation threads, two voice inference threads, and no GPU inference. The largest sampled sum of the three server RSS values was 4,361,332 KiB, approximately 4.16 GiB. The sum can double-count shared pages and its one-second sampling interval can miss spikes.
+
+The warm repeated prompt reached its first text sooner, but its complete answer took longer. The generated answers also differed by one word. This two-request pilot cannot establish a reliable percentile, a general cold-versus-warm speedup, or a performance comparison with the isolated presentation synthesis run. It establishes that the complete live HTTP path works and that this CPU condition is too slow for responsive conversational voice.
+
+Two earlier attempts remain explicit in the summary. A longer formatting instruction diluted lexical retrieval coverage and produced a source-preview abstention; the harness rejected that as an LLM benchmark. A subsequent longer model answer reached the application's 180-second speech timeout, returning HTTP 504. Neither attempt is included in the successful timing table, and neither was replaced by cached or fabricated speech.
+
+An [independent unprompted ASR check](../tools/demo_latency/results/qwen4b-qwen06-cpu-2026-11-11/asr.json) recognized the first ending as “a factor of 4” and the second as “a factor of four.” The first file therefore has one lexical substitution, WER 1/13 = 7.69%, caused by digit-versus-word formatting; the second has WER 0/14 = 0%. The evaluator's first-file suffix flag is retained because it compares literal normalized tokens, but the transcript contains the ending number. Neither file triggered a repeated-phrase or substantial-deletion screen. ASR does not establish naturalness, speaker identity, or perceptual quality; human listening remains unperformed.
+
 ## What the HTTP harness measures
 
 The command launches three real processes in one parent execution: llama.cpp with a local Qwen3-4B Q4_K_M file, the existing Qwen3-TTS voice service, and the production application. It sends requests to the application endpoints used by the browser. No provider, response, audio file, or network request is mocked during a run.
@@ -46,11 +69,21 @@ python -m tools.demo_latency \
   --output "$PWD/artifacts/demo-latency/my-cpu-run"
 ```
 
-Hydrate the full original Q&A corpus first using the corpus workflow. The requested 12-word answer keeps this CPU pilot bounded, but the harness preserves all generated text and does not silently shorten an overlong answer. Default budgets are 96 LLM tokens and 384 voice tokens; the voice backend currently does not expose its termination reason. A successful file transfer does not prove the spoken content is complete or faithful. The earlier one-sentence instruction produced a 43-word answer whose CPU voice request exceeded the application's 180-second timeout; that attempt is preserved separately.
+Hydrate the full original Q&A corpus first using the corpus workflow. The requested 12-word answer keeps this CPU pilot bounded, but the harness preserves all generated text and does not silently shorten an overlong answer. Default budgets are 96 LLM tokens and 384 voice tokens; the voice backend currently does not expose its termination reason. A successful file transfer does not prove the spoken content is complete or faithful. The earlier one-sentence instruction produced a longer answer whose CPU voice request exceeded the application's 180-second timeout; that attempt is preserved separately.
 
 Default CPU settings use four llama threads, two voice threads, a 4,096-token context, llama logical batch 128 and physical batch 64, BF16 Qwen voice, and a 180-second provider request timeout. These settings are recorded so results cannot be mistaken for a different model run or a target-device measurement. The first LLM request follows llama.cpp's enabled startup warmup. The first voice request includes lazy model loading and reference-prompt preparation. The second repetition reuses warm processes and the same question; it can benefit from a repeated prompt cache. Two repetitions are an execution pilot, not a latency distribution.
 
 Run the entire command in one shell execution when the execution environment isolates network namespaces between tool calls. The orchestrator handles readiness, cleanup, bounded requests, partial failure preservation, and per-process logs.
+
+For repository publication, keep the raw directory local and create the same compact summary with:
+
+```bash
+python -m tools.demo_latency.publish /absolute/raw-run/report.json \
+  --failed-report /absolute/earlier-failed-run/report.json \
+  --output /absolute/new-publication-directory
+```
+
+The packager keeps generated answers, measurements, model/corpus/code identities, audio, and process logs unchanged. It replaces original publisher passages in citation objects with exact UTF-8 SHA-256 hashes while retaining evidence IDs, source URLs, and locators. The raw report hash binds the published summary to the complete local response. The independently generated ASR input/result files in the preserved bundle use the existing `tools.voice_evaluation asr` command and do not affect live latency measurements.
 
 ## Measure the browser on its intended machine
 
