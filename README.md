@@ -122,6 +122,8 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 
 ## Documentation
 
+- [2026 persona roadmap](docs/2026-persona-roadmap.md): current-pilot limits, the 2026 snapshot, data and learning expansion, retrieval, dialogue, streaming, and acceptance criteria.
+- [Musk 3D avatar shortlist](docs/research/musk-3d-avatar-shortlist.md): researched facially rigged models, free candidates, detailed portraits, licensing evidence, and an asset qualification plan.
 - [Proposal alignment and next milestones](docs/proposal-alignment.md): original YAICON requirements, current gaps, the C retrieval issue, and prioritized implementation acceptance criteria.
 - [Engineering verification and recovery](docs/quality-completion.md): merged PR status, browser evidence, recovery fixes, measured limits, and verification links.
 - [Delivery plan](docs/PLAN.md): review boundaries, acceptance criteria, fidelity ladder.
