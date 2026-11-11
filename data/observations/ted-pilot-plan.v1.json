@@ -1,0 +1,34 @@
+{
+  "schema_version": "exchange-observation-plan.v1",
+  "id": "elon-musk-exchange-observations-v1",
+  "split_manifest_path": "data/qna/elon-musk-v1/split-manifest.json",
+  "motion_plan_path": "data/motion/ted-window-plan.v1.json",
+  "thresholds": {
+    "smile_threshold": 0.5,
+    "minimum_smile_seconds": 0.25,
+    "visibility_threshold": 0.7,
+    "sample_fps": 8
+  },
+  "threshold_origin": "Fixed engineering thresholds declared before this feature extraction. They were not fitted on validation-event behavior or tuned to claim semantic accuracy. A threshold crossing creates a review candidate only.",
+  "sources": [
+    {
+      "source_id": "ted-2013",
+      "source_event_id": "ted-2013",
+      "observation_split": "train",
+      "publisher_path": "motion-acquisition/ted-2013-transcript.json",
+      "publisher_sha256": "9075ba7547f87a08af0cc4080c9885101d12e2012db4411c04e1ad0b93276c61",
+      "asr_directories": ["motion-context-asr/ted-2013-30-120"],
+      "exchange_ids": ["qa-ted-2013-energy", "qa-ted-2013-efficiency"]
+    },
+    {
+      "source_id": "ted-2017",
+      "source_event_id": "ted-2017",
+      "observation_split": "validation",
+      "publisher_path": "motion-acquisition/ted-2017-transcript.json",
+      "publisher_sha256": "f648129841ede4ef94e458f61d12ef42ca1f1bac5e56dee57eee8e0e8792a4fa",
+      "asr_directories": ["motion-context-asr/ted-2017-20-120", "motion-context-asr/ted-2017-120-179"],
+      "exchange_ids": ["qa-ted-2017-tunnels", "qa-ted-2017-capacity"]
+    }
+  ],
+  "scope": "Recompute observations against actual Q&A cue locators, using two independently recorded TED events and retaining the 2017 event as an observation holdout. Raw source media remain local. No new gesture model is trained. Text and observation splits are recorded separately."
+}
