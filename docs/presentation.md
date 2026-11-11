@@ -129,6 +129,20 @@ python -m tools.presentation.package \
 `--max-frames` exists only for a bounded neural probe. Such a run is explicitly
 `partial_probe` and cannot be packaged as a completed presentation.
 
+Run the unprompted recognition check in the existing separate ASR environment
+(`tools/voice_evaluation/requirements-asr.txt`). This reuses the hash validation,
+language hints, word timestamps, lexical diagnostics, and empty human ratings
+from the established voice evaluator:
+
+```bash
+python -m tools.presentation.inspect \
+  --plan data/presentation/intro.v1.json \
+  --speech-dir reports/local/prepared-speech \
+  --model-directory /path/to/faster-whisper-small/snapshot \
+  --revision 536b0662742c02347bc0e980a01041f333bce120 \
+  --threads 1 --output reports/local/prepared-asr
+```
+
 ## Read the verification correctly
 
 Container checks compare video/audio duration and start offsets within one

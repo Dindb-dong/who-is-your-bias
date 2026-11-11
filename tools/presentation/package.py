@@ -5,6 +5,7 @@ import argparse
 import json
 import shutil
 import subprocess
+from datetime import datetime, timezone
 from pathlib import Path
 
 from .common import check_timing, digest, probe, read_plan, save, wav_info
@@ -71,6 +72,8 @@ def package(*, plan_path: Path, speech_dir: Path, render_dir: Path, portrait: Pa
     subprocess.run(["ffmpeg", "-v", "error", "-i", str(output / "presentation.mp4"), "-f", "null", "-"],
         check=True, capture_output=True, timeout=60)
     record = {"schema_version": "presentation-package.v1", "status": "completed", "backend": render["backend"],
+        "title": plan["title"], "language": plan["language"],
+        "generated_at": datetime.now(timezone.utc).isoformat(), "duration_seconds": wav_info(audio)["seconds"],
         "disclosure": plan["disclosure"], "script_kind": plan.get("script_kind"),
         "speech_model": {"model": speech["model"], "revision": speech["revision"]},
         "video_models": render["models"], "timing": timing, "full_decode_passed": True,

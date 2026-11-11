@@ -32,3 +32,7 @@ apps/web/public/models/*
 
 # Bounded generated evaluation speech; source/reference recordings stay ignored.
 !tools/voice_evaluation/results/qwen06-cpu-2026-11-11-listening/listener/sample*.wav
+
+# Bounded newly generated presentation media; source recordings/weights stay ignored.
+!artifacts/presentation/yaicon-intro-v1/*.wav
+!artifacts/presentation/yaicon-intro-v1/presentation.mp4

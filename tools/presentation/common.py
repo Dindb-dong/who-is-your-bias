@@ -6,6 +6,7 @@ import json
 import math
 import subprocess
 import wave
+from fractions import Fraction
 from pathlib import Path
 
 
@@ -87,6 +88,12 @@ def check_timing(media: dict, audio_seconds: float, fps: int) -> dict:
         return number
     vd, ad = finite(video["duration"]), finite(audio["duration"])
     vs, ass = finite(video.get("start_time", 0)), finite(audio.get("start_time", 0))
+    actual_fps = float(Fraction(video["avg_frame_rate"]))
+    if not math.isfinite(actual_fps) or abs(actual_fps - fps) > 0.001:
+        raise ValueError("Video frame rate differs from the generated timeline")
+    frames = int(video["nb_frames"])
+    if frames < 1 or abs(frames - math.ceil(audio_seconds * fps)) > 1:
+        raise ValueError("Video frame count differs from the audio timeline")
     # AAC output can include one 1024-sample packet of rounding; no claim of
     # perceptual synchronization follows from a successful container check.
     tolerance = max(1 / fps, 1024 / int(audio["sample_rate"])) + 0.005
@@ -95,6 +102,7 @@ def check_timing(media: dict, audio_seconds: float, fps: int) -> dict:
     if video.get("codec_name") != "h264" or audio.get("codec_name") != "aac":
         raise ValueError("Portable playback requires H.264 video and AAC audio")
     return {"passed": True, "video_seconds": vd, "audio_seconds": ad,
+        "fps": actual_fps, "video_frames": frames,
         "source_audio_seconds": audio_seconds, "start_offset_seconds": abs(vs - ass),
         "duration_difference_seconds": abs(vd - ad), "tolerance_seconds": tolerance,
         "scope": "Container/timeline integrity; visual lip-sync quality requires review."}

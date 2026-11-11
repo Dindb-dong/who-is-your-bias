@@ -52,7 +52,7 @@ def test_nonfinite_subtitle_bounds_are_rejected():
 
 def media(video_seconds=12.24, audio_seconds=12.24, start=0):
     return {"streams": [
-        {"codec_type": "video", "codec_name": "h264", "duration": str(video_seconds), "start_time": str(start)},
+        {"codec_type": "video", "codec_name": "h264", "duration": str(video_seconds), "start_time": str(start), "avg_frame_rate": "25/1", "nb_frames": "306"},
         {"codec_type": "audio", "codec_name": "aac", "duration": str(audio_seconds), "sample_rate": "24000", "start_time": "0"}]}
 
 
@@ -71,6 +71,14 @@ def test_missing_or_duplicated_streams_do_not_pass():
     value["streams"].append(value["streams"][0])
     with pytest.raises(ValueError):
         check_timing(value, 12.24, 25)
+
+
+def test_incorrect_frame_rate_or_frame_count_is_rejected():
+    wrong_rate = media(); wrong_rate["streams"][0]["avg_frame_rate"] = "20/1"
+    wrong_frames = media(); wrong_frames["streams"][0]["nb_frames"] = "250"
+    for item in (wrong_rate, wrong_frames):
+        with pytest.raises(ValueError):
+            check_timing(item, 12.24, 25)
 
 
 def test_crop_rejects_outside_or_too_small_regions():
