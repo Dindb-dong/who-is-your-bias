@@ -128,6 +128,12 @@ def runtime_source(source: dict, transcript: dict, *, acquired_at: str) -> dict:
     result["timeline"] = transcript["source_timeline"]
     result["source_artifact_sha256"] = transcript["input_sha256"]
     result["transcript_sha256"] = transcript["transcript_sha256"]
+    if transcript.get("source_scope"):
+        result["summary_inventory_attribution"] = source.get("attribution")
+        result["attribution"] = transcript["source_scope"]
+        result["source_type"] = "congressional_hearing_transcript"
+        result["transcript_adapter_version"] = transcript["adapter_version"]
+        result["transcript_adapter_sha256"] = transcript["adapter_sha256"]
     if source["id"] == "dwarkesh-2026":
         result["recorded_at"] = None
         result["date_provenance"] = (
@@ -147,6 +153,10 @@ def extract_exchanges(source: dict, transcript: dict, *, acquired_at: str) -> tu
             continue
         identifier = f"qa26-{source['id']}-{question['id']}"
         qtext, atext = question["text"], answer["text"]
+        if question.get("question_eligible") is False:
+            rejected.append({"id": identifier, "reason": "not_direct_committee_question",
+                             "question_sha256": sha_text(qtext), "answer_sha256": sha_text(atext)})
+            continue
         reason = None
         if not qtext or not atext:
             reason = "empty_text"
@@ -160,7 +170,8 @@ def extract_exchanges(source: dict, transcript: dict, *, acquired_at: str) -> tu
         following = turns[index+2] if index+2 < len(turns) else None
         uncertain_end = (following is not None and following["speaker"] is None
                          and following["speaker_basis"] not in {"chapter_heading"})
-        completeness = "excerpt" if uncertain_end else "complete_exchange"
+        interrupted = answer.get("response_complete") is False
+        completeness = "excerpt" if uncertain_end or interrupted else "complete_exchange"
         context_turn = turns[index-1] if index else None
         context = context_turn["text"] if context_turn and context_turn["speaker"] and len(context_turn["text"]) <= 3000 else ""
         timeline = transcript["source_timeline"]
@@ -179,7 +190,9 @@ def extract_exchanges(source: dict, transcript: dict, *, acquired_at: str) -> tu
         qa = {"question": qtext, "answer": atext, "context_before": context, "context_kind": "original_text" if context else "none",
               "original_language": "en", "questioner": question["speaker"], "respondent": "Elon Musk",
               "source_event_id": source["source_event_id"], "completeness": completeness,
-              "excerpt_note": "An adjacent block has unknown attribution; this is only the contiguous attributed part of the published response, not a proven complete response." if uncertain_end else None,
+              "excerpt_note": ("The printed response ends at an interruption; the attributed turn is preserved, but later qualifications are not assumed complete."
+                               if interrupted else "An adjacent block has unknown attribution; this is only the contiguous attributed part of the published response, not a proven complete response."
+                               if uncertain_end else None),
               "question_start_seconds": qstart, "answer_start_seconds": astart,
               "question_end_seconds": None, "answer_end_seconds": None,
               "question_end_proxy_seconds": None, "answer_end_proxy_seconds": None,
@@ -198,7 +211,8 @@ def extract_exchanges(source: dict, transcript: dict, *, acquired_at: str) -> tu
                                 "start_seconds": astart if has_time else None, "timeline": timeline if has_time else None},
                     "event_family_id": source["event_family_id"], "event_at": source.get("recorded_at"),
                     "published_at": source["published_at"], "ingested_at": acquired_at,
-                    "source_artifact_sha256": transcript["input_sha256"], "transformation_history": [PARSER_VERSION, "adjacent-attributed-turns.v1"]})
+                    "source_artifact_sha256": transcript["input_sha256"],
+                    "transformation_history": [PARSER_VERSION, *([transcript["adapter_version"]] if transcript.get("adapter_version") else []), "adjacent-attributed-turns.v1"]})
         accepted.append(evidence.model_dump(mode="json", exclude={"text"}))
     return accepted, rejected
 
@@ -364,6 +378,9 @@ def build(registry_dir: Path, acquisition_dir: Path, output: Path, *, report_dir
                                "attributed_turns": sum(t["speaker"] is not None for t in transcript["turns"]),
                                "candidate_exchanges": len(extracted) + len(failures), "accepted_exchanges": len(included),
                                "target_speaker_words": sum(len(t["text"].split()) for t in transcript["turns"] if t["speaker"] == "Elon Musk")})
+        if transcript.get("adapter_version"):
+            source_reports[-1].update(adapter_version=transcript["adapter_version"], adapter_sha256=transcript["adapter_sha256"],
+                                      extraction_audit=transcript["extraction_audit"])
     if not records:
         raise ValueError("No original exchanges passed extraction")
     # Exact answer overlap across splits can leak held-out wording even if

@@ -1,0 +1,748 @@
+{
+  "schema_version": "persona-coverage.v1",
+  "generated_at": "2026-11-11T14:08:20.197865+00:00",
+  "corpus": {
+    "schema_version": "qa-corpus-report.v1",
+    "corpus_id": "elon-musk-original-2026.v1",
+    "materialization": "full_selected_exchanges_local",
+    "question_answer_records": 1018,
+    "training_question_answers": 777,
+    "complete_exchanges": 961,
+    "excerpts": 57,
+    "taxonomy_version": "situations.v1",
+    "covered_training_situations": [
+      "conversation"
+    ],
+    "uncovered_situations": [
+      "advice",
+      "challenge",
+      "disclosure_request",
+      "explanation",
+      "humor",
+      "praise",
+      "reflection"
+    ],
+    "reviewer_types": [
+      "agent"
+    ]
+  },
+  "source_events": 15,
+  "registered_events": 34,
+  "fresh_test_events_reserved": 3,
+  "fresh_test_exchanges_acquired": 0,
+  "projections": {
+    "factual": 777,
+    "text_style": 961,
+    "aligned_speech": 0,
+    "visible_behavior": 0
+  },
+  "accepted_speech_hours": 0,
+  "raw_recording_hours": null,
+  "target_speaker_audio_hours": null,
+  "source_reports": [
+    {
+      "source_id": "ted-2013",
+      "event_family_id": "ted-2013",
+      "status": "extracted",
+      "source_url": "https://www.ted.com/talks/elon_musk_the_mind_behind_tesla_spacex_solarcity?view=transcript",
+      "published_at": "2013-03-19",
+      "acquired_at": "2026-11-11T13:35:55.813242+00:00",
+      "artifact_sha256": "7df350bdda5c1a562b6bcf03194b6c54eb19ddac626a1131905e85740213cf43",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269",
+      "attributed_turns": 76,
+      "candidate_exchanges": 32,
+      "accepted_exchanges": 32,
+      "target_speaker_words": 2378
+    },
+    {
+      "source_id": "ted-2017",
+      "event_family_id": "ted-2017",
+      "status": "extracted",
+      "source_url": "https://www.ted.com/talks/elon_musk_the_future_we_re_building_and_boring?view=transcript",
+      "published_at": "2017-04-30",
+      "acquired_at": "2026-11-11T13:36:02.438642+00:00",
+      "artifact_sha256": "3a55e16f3cb3b51c05d90d7ed5f81bc483a2de0ba3d0d473553a9866f14fa062",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013",
+      "attributed_turns": 146,
+      "candidate_exchanges": 66,
+      "accepted_exchanges": 66,
+      "target_speaker_words": 3416
+    },
+    {
+      "source_id": "ted-2022-live",
+      "event_family_id": "ted-2022-live",
+      "status": "extracted",
+      "source_url": "https://www.ted.com/talks/elon_musk_elon_musk_talks_twitter_tesla_and_how_his_brain_works_live_at_ted2022?view=transcript",
+      "published_at": "2022-04-15",
+      "acquired_at": "2026-11-11T13:36:08.398055+00:00",
+      "artifact_sha256": "0432c88101e87552e852cf900bd0b6fa746bd4c246f8a44c7c49f346296bddb4",
+      "transcript_sha256": "ad3b3207510a1ac01c1cefdc38866e223caf49be8abd956445e130267eb7c546",
+      "attributed_turns": 144,
+      "candidate_exchanges": 59,
+      "accepted_exchanges": 59,
+      "target_speaker_words": 3381
+    },
+    {
+      "source_id": "dwarkesh-2026",
+      "event_family_id": "dwarkesh-2026",
+      "status": "extracted",
+      "source_url": "https://www.dwarkesh.com/p/elon-musk",
+      "published_at": "2026-02-05",
+      "acquired_at": "2026-11-11T13:36:14.030929+00:00",
+      "artifact_sha256": "222e772e7e9e0a0e97aa3227c564b31541382cbba313b8ea86d952cca9513c80",
+      "transcript_sha256": "d407febc5e70c644114fd992d663cebb89b56392cb2a25f951a6e3d579cf96ae",
+      "attributed_turns": 582,
+      "candidate_exchanges": 281,
+      "accepted_exchanges": 281,
+      "target_speaker_words": 15609
+    },
+    {
+      "source_id": "recode-2018",
+      "event_family_id": "recode-2018",
+      "status": "extracted",
+      "source_url": "https://www.vox.com/2018/11/2/18053428/recode-decode-full-podcast-transcript-elon-musk-tesla-spacex-boring-company-kara-swisher",
+      "published_at": "2018-11-02",
+      "acquired_at": "2026-11-11T13:36:19.874249+00:00",
+      "artifact_sha256": "93bf786899f34923854f8af1ebfe13419e22bfb7970c2beb990f8c770f2e8600",
+      "transcript_sha256": "9453e9d15d70a53c5508135e62673a1be8f01d423a43785e9c90185df068f0b3",
+      "attributed_turns": 697,
+      "candidate_exchanges": 346,
+      "accepted_exchanges": 346,
+      "target_speaker_words": 8583
+    },
+    {
+      "source_id": "yc-2016",
+      "event_family_id": "yc-2016",
+      "status": "extracted",
+      "source_url": "https://www.ycombinator.com/blog/elon-musk-on-how-to-build-the-future",
+      "published_at": "2016-09-15",
+      "acquired_at": "2026-11-11T13:36:25.485727+00:00",
+      "artifact_sha256": "e81d123b33e4043b2eff0789b331e86e515d7e35dc28dde1a3a5149f8a0e8616",
+      "transcript_sha256": "60f9e619e1dca7fa8dc9298d4b4d6d72fde15eb2736d5dd84fde799ae04fde73",
+      "attributed_turns": 84,
+      "candidate_exchanges": 42,
+      "accepted_exchanges": 42,
+      "target_speaker_words": 2515
+    },
+    {
+      "source_id": "wired-2012",
+      "event_family_id": "wired-2012",
+      "status": "extracted",
+      "source_url": "https://www.wired.com/2012/10/ff-elon-musk-qa/",
+      "published_at": "2012-10-21",
+      "acquired_at": "2026-11-11T13:36:31.243067+00:00",
+      "artifact_sha256": "a5af36af5ebb7c95e6dbcecbf39157bf8b14286f51b2a14f16595993d8576526",
+      "transcript_sha256": "093fa9d2289d68ff486e2232897c1afffd253fddf1c342ac72cd501585b43cf2",
+      "attributed_turns": 76,
+      "candidate_exchanges": 38,
+      "accepted_exchanges": 38,
+      "target_speaker_words": 1944
+    },
+    {
+      "source_id": "lex-049-2019",
+      "event_family_id": "lex-049-2019",
+      "status": "extracted",
+      "source_url": "https://lexfridman.com/wordpress/wp-content/uploads/2019/11/elon_musk_lex_fridman_2_transcript.pdf",
+      "published_at": "2019-11-12",
+      "acquired_at": "2026-11-11T13:36:38.329777+00:00",
+      "artifact_sha256": "999374c2f86694b31824dcc41bcc9f7b9c076a83a17327c6284af348416be6d2",
+      "transcript_sha256": "e35b4f32e83ce3ad7ff664a92520b2bee0d7a15c3ec78e61c284b9bb4e9df115",
+      "attributed_turns": 82,
+      "candidate_exchanges": 41,
+      "accepted_exchanges": 41,
+      "target_speaker_words": 3599
+    },
+    {
+      "source_id": "henry-ford-2008",
+      "event_family_id": "henry-ford-2008",
+      "status": "extracted",
+      "source_url": "https://thf-prod-blobs.s3.amazonaws.com/docs/thehenryfordlibraries/innovator-transcripts/transcript_musk_full-length.pdf?sfvrsn=747231ce_1",
+      "published_at": "2009-11-05",
+      "acquired_at": "2026-11-11T13:36:44.376997+00:00",
+      "artifact_sha256": "c442cc17b06ffa29192fcecb98efbbbb3be2b5aab0e841ce1e1f65b5b8c8ebe1",
+      "transcript_sha256": "29f88f31bdc2d72c83d1f51a9431a3f41992f2bd72695a02d2b3934cb507506d",
+      "attributed_turns": 144,
+      "candidate_exchanges": 72,
+      "accepted_exchanges": 72,
+      "target_speaker_words": 7140
+    },
+    {
+      "source_id": "time-2021-boca-chica",
+      "status": "not_original_qa",
+      "reason": "No reviewed original-dialogue adapter; narrative/excerpts are not fabricated Q&A",
+      "artifact_sha256": "7f3e72e4f8412199aa75207a3945e8bb6a0db735226240f3ea2870c5e5e3ea7a"
+    },
+    {
+      "source_id": "senate-launch-2014",
+      "event_family_id": "senate-launch-2014",
+      "status": "extracted",
+      "source_url": "https://www.govinfo.gov/content/pkg/CHRG-113shrg49104594/html/CHRG-113shrg49104594.htm",
+      "published_at": "2014-03-05",
+      "acquired_at": "2026-11-11T13:56:49.496376+00:00",
+      "artifact_sha256": "50d63a0e68e16c9b8850fc9d8805698971789ea65820b399b0be619d7289e7ce",
+      "transcript_sha256": "e6f535c8b14e96d0aac4802574ab5b8efecb09c6236d2840fcfb045733c58593",
+      "attributed_turns": 85,
+      "candidate_exchanges": 17,
+      "accepted_exchanges": 15,
+      "target_speaker_words": 1175,
+      "adapter_version": "govinfo-oral-discussion.v1",
+      "adapter_sha256": "c637a3ce69f9d163ba33d20074332aece2f02ba25b65b542bc071defb21080c4",
+      "extraction_audit": {
+        "window_pre_lines": {
+          "first_included": 2780,
+          "last_included": 3633,
+          "stop_exclusive": 3634
+        },
+        "window_sha256": "8b8c9c5820f4020e05f328eadf9d4bc33d4d93ab14c00f84f56c7f095c36b385",
+        "excluded_prefix_sha256": "e62133da3301122aa5d58fd7e914d0f486729ba15451480fbc644f39d3bac7d7",
+        "excluded_suffix_sha256": "489c67c6919496ac3ddff9126b8b3821001dcd077b58238e4f16bd5e87a1fa75",
+        "excluded_blocks": [
+          {
+            "pre_line": 2795,
+            "kind": "editorial_heading",
+            "text_sha256": "a91d239bd9ba5030e3914892d1e625b919c2d675406e2fa00a2075e37ddf0229"
+          },
+          {
+            "pre_line": 2859,
+            "kind": "editorial_heading",
+            "text_sha256": "595431cb6f6463789abb0bafe0aad4686a2f8be1af74a7ef1d00bb023efd1ff2"
+          },
+          {
+            "pre_line": 2897,
+            "kind": "editorial_heading",
+            "text_sha256": "9e95a099f0d82e1509eb3a990052073e2aad90130b4e33c004a87388dde38a45"
+          },
+          {
+            "pre_line": 2967,
+            "kind": "editorial_heading",
+            "text_sha256": "caca87b00f4f03dd0c779b13612a40dbba08410793b675aa6a4ccfe096922ac6"
+          },
+          {
+            "pre_line": 3114,
+            "kind": "written_insertion_boundary",
+            "text_sha256": "b64f35a2615879d3e0273929110e1adcf042c01d957ca861771eefd96d0f46a8"
+          },
+          {
+            "pre_line": 3117,
+            "kind": "written_insertion_boundary",
+            "text_sha256": "5eb57d972c9c6a2aabdad7e35b11728c502e097a79ca265e279a0c29ab1e4472"
+          },
+          {
+            "pre_line": 3135,
+            "kind": "editorial_heading",
+            "text_sha256": "99b1f667c9b02a81a0ff283deee3eef4b55a797b79ff79d2bc195d31193d39fc"
+          },
+          {
+            "pre_line": 3174,
+            "kind": "editorial_heading",
+            "text_sha256": "dd3e4348d5e5d56eb29167229b1adcbde2d3bdec57dbdb2b997a4041c30a1156"
+          },
+          {
+            "pre_line": 3214,
+            "kind": "editorial_heading",
+            "text_sha256": "b38aa1d499e20d288a6f38da7b8fa966acbe65a7be5f5e430e6cc7cf9b2979d3"
+          },
+          {
+            "pre_line": 3255,
+            "kind": "editorial_heading",
+            "text_sha256": "686e237744348f4a192f2571904943dab770ec078d21163aa183465d4fcbc89f"
+          },
+          {
+            "pre_line": 3335,
+            "kind": "editorial_heading",
+            "text_sha256": "8542e08e30151905d2ec2f227b4783452ae93c7c7f3554daefa4c3415c8f8bdf"
+          }
+        ],
+        "projection_rule": "adjacent_direct_committee_question_with_question_mark_then_labeled_musk_turn",
+        "interrupted_answers": "retained_as_excerpts_ineligible_for_style",
+        "text_normalization": "collapse_whitespace_only; retain_published_spelling_and_hard_wrap_hyphens",
+        "written_testimony_and_appendices_projected": false,
+        "human_review_completed": false
+      }
+    },
+    {
+      "source_id": "house-space-cooperation-2004",
+      "event_family_id": "house-space-cooperation-2004",
+      "status": "extracted",
+      "source_url": "https://www.govinfo.gov/content/pkg/CHRG-108hhrg92514/html/CHRG-108hhrg92514.htm",
+      "published_at": "2004-03-18",
+      "acquired_at": "2026-11-11T13:56:57.017361+00:00",
+      "artifact_sha256": "d10833cf833e41f5abdd1afef678b2fa0b4f2fcdbc027bb565e7b9bdabc55b68",
+      "transcript_sha256": "3eb870b702aa548181f468a5ecc7f211470d8277b800e8054e65378bffc8ca20",
+      "attributed_turns": 168,
+      "candidate_exchanges": 15,
+      "accepted_exchanges": 7,
+      "target_speaker_words": 700,
+      "adapter_version": "govinfo-oral-discussion.v1",
+      "adapter_sha256": "c637a3ce69f9d163ba33d20074332aece2f02ba25b65b542bc071defb21080c4",
+      "extraction_audit": {
+        "window_pre_lines": {
+          "first_included": 2520,
+          "last_included": 3639,
+          "stop_exclusive": 3640
+        },
+        "window_sha256": "d4abdb19f1901c5563a15d546bf2cfdc5cae37f20436902b3cb752404d21e5d4",
+        "excluded_prefix_sha256": "f838fd8903cebba3a898220cedc1758dbcc29ca36c4de7fc85fefbe25df0073a",
+        "excluded_suffix_sha256": "32b790086e54d23c4d4293422d1b696f79c8f4ed7af87422d77d49852c07458a",
+        "excluded_blocks": [
+          {
+            "pre_line": 2756,
+            "kind": "editorial_heading",
+            "text_sha256": "b1f0441be00ca60898ec054fdd4fe84249e5b546b031bba963b4f6ee0cbca6d1"
+          },
+          {
+            "pre_line": 2757,
+            "kind": "editorial_heading",
+            "text_sha256": "27bd063859de5128b0daa78e6f186066a0bb7f0b0f5945445c031a1f5ab69ac3"
+          },
+          {
+            "pre_line": 2847,
+            "kind": "editorial_heading",
+            "text_sha256": "63c69a14d6c86e58bbb42fb6b39f790cc441e943fe493acd3ddbeac08c3bd94c"
+          },
+          {
+            "pre_line": 2880,
+            "kind": "editorial_heading",
+            "text_sha256": "8d88dfd1dfabd467b6faac9320b20e9206664dfc2978b968c8821a6a8e7c84fa"
+          },
+          {
+            "pre_line": 2925,
+            "kind": "editorial_heading",
+            "text_sha256": "b2d575e1db11371c62e7b1677ed08f17b0c7c778d00621d7446f6379272bc827"
+          },
+          {
+            "pre_line": 3025,
+            "kind": "editorial_heading",
+            "text_sha256": "b182401c3a65ddfc4d6058894efa80422af0921bbdfe66e3c1899d7c2f439445"
+          },
+          {
+            "pre_line": 3071,
+            "kind": "editorial_heading",
+            "text_sha256": "46da9363798f74661424983d34669c2d652332099fcd93906d84e640405d342f"
+          },
+          {
+            "pre_line": 3119,
+            "kind": "editorial_heading",
+            "text_sha256": "25dbe9ae6108cc38b57e1676252b1370f887e885550ee693e21802a3f32f2235"
+          },
+          {
+            "pre_line": 3246,
+            "kind": "editorial_heading",
+            "text_sha256": "988312cd0af0e5df9bd38f13d849af5d20567528a0c36440cbf1ace1bcac56be"
+          },
+          {
+            "pre_line": 3350,
+            "kind": "editorial_heading",
+            "text_sha256": "45cd0103c25bfbf6cef52581d2b428a0a3a02ac8629e7366e5050cfb12881039"
+          },
+          {
+            "pre_line": 3364,
+            "kind": "editorial_heading",
+            "text_sha256": "25dbe9ae6108cc38b57e1676252b1370f887e885550ee693e21802a3f32f2235"
+          },
+          {
+            "pre_line": 3400,
+            "kind": "editorial_heading",
+            "text_sha256": "af00f56d93eb2c733cfaad8b12a3e4abf8b5fe3b3fe63ba843a195e48323228a"
+          },
+          {
+            "pre_line": 3470,
+            "kind": "editorial_heading",
+            "text_sha256": "701febbfe98adbb85a9fef1f254baae3e8c800d32e4b625e59769016ccf18f67"
+          },
+          {
+            "pre_line": 3502,
+            "kind": "editorial_heading",
+            "text_sha256": "f8b382e8558271341799cf71a56ef936e113736a4e64cab6fa08c6d5859ea1cc"
+          },
+          {
+            "pre_line": 3550,
+            "kind": "editorial_heading",
+            "text_sha256": "bb0e391ad1f5e9aea834803d78396f6a067c5eb99e269baf1a66db91afc4112c"
+          },
+          {
+            "pre_line": 3581,
+            "kind": "editorial_heading",
+            "text_sha256": "ffa7675cc6fcf8e678ee4137ba32cd4d3f7f5363ec3e0228f7992c65100a32b9"
+          },
+          {
+            "pre_line": 3582,
+            "kind": "editorial_heading",
+            "text_sha256": "021381b018dea873bdd1bca8c9f880d2f1dd615359badb4c8b8f67bec7f34760"
+          }
+        ],
+        "projection_rule": "adjacent_direct_committee_question_with_question_mark_then_labeled_musk_turn",
+        "interrupted_answers": "retained_as_excerpts_ineligible_for_style",
+        "text_normalization": "collapse_whitespace_only; retain_published_spelling_and_hard_wrap_hyphens",
+        "written_testimony_and_appendices_projected": false,
+        "human_review_completed": false
+      }
+    },
+    {
+      "source_id": "senate-future-launch-2004",
+      "event_family_id": "senate-future-launch-2004",
+      "status": "extracted",
+      "source_url": "https://www.govinfo.gov/content/pkg/CHRG-108shrg20624/html/CHRG-108shrg20624.htm",
+      "published_at": "2004-05-05",
+      "acquired_at": "2026-11-11T13:57:03.136290+00:00",
+      "artifact_sha256": "afe10e5b07293c05edf212f1e29df22b0e02f04fdf5488d16cf60102752b4700",
+      "transcript_sha256": "797486a15577c1a307efccd7f7ec8955739b878652533872db725a68f69cb2cc",
+      "attributed_turns": 30,
+      "candidate_exchanges": 1,
+      "accepted_exchanges": 1,
+      "target_speaker_words": 88,
+      "adapter_version": "govinfo-oral-discussion.v1",
+      "adapter_sha256": "c637a3ce69f9d163ba33d20074332aece2f02ba25b65b542bc071defb21080c4",
+      "extraction_audit": {
+        "window_pre_lines": {
+          "first_included": 2868,
+          "last_included": 3006,
+          "stop_exclusive": 3007
+        },
+        "window_sha256": "c82e7ce0725a886b1d12e2bff35b58bc6f339da01368018f1643259401d3d5f8",
+        "excluded_prefix_sha256": "9e84f9bd86492bc506aee66439a0fdfbdc271a5c7a42a94e7b129df2f41b95cf",
+        "excluded_suffix_sha256": "b8fbb9eb25f6731ba0945b8625b1a2c53eab4751962d810243cab651bcab7fe9",
+        "excluded_blocks": [],
+        "projection_rule": "adjacent_direct_committee_question_with_question_mark_then_labeled_musk_turn",
+        "interrupted_answers": "retained_as_excerpts_ineligible_for_style",
+        "text_normalization": "collapse_whitespace_only; retain_published_spelling_and_hard_wrap_hyphens",
+        "written_testimony_and_appendices_projected": false,
+        "human_review_completed": false
+      }
+    },
+    {
+      "source_id": "house-commercial-space-2005",
+      "event_family_id": "house-commercial-space-2005",
+      "status": "extracted",
+      "source_url": "https://www.govinfo.gov/content/pkg/CHRG-109hhrg20541/html/CHRG-109hhrg20541.htm",
+      "published_at": "2005-04-20",
+      "acquired_at": "2026-11-11T13:57:08.846132+00:00",
+      "artifact_sha256": "58d2de1eefb2966c940b89a8ea71af9a1a2448276b3d0be85ff69e1e033db1b4",
+      "transcript_sha256": "a676e6a62fe9a1f4bcc45ee3b7954751e5488261d65df89387b6eb94bd41f38a",
+      "attributed_turns": 35,
+      "candidate_exchanges": 8,
+      "accepted_exchanges": 5,
+      "target_speaker_words": 907,
+      "adapter_version": "govinfo-oral-discussion.v1",
+      "adapter_sha256": "c637a3ce69f9d163ba33d20074332aece2f02ba25b65b542bc071defb21080c4",
+      "extraction_audit": {
+        "window_pre_lines": {
+          "first_included": 4263,
+          "last_included": 4565,
+          "stop_exclusive": 4566
+        },
+        "window_sha256": "f60703b0e6a6ea49f3e5f7a0105dca8dbd9df8db5ce89458cdb400617acbaf0b",
+        "excluded_prefix_sha256": "50bd39b812b3931146e70ffebf9a5fc164dfa9953d818ffefe22d6c5e30e0ac3",
+        "excluded_suffix_sha256": "17330d41b38e7c97db9b67b2dc02824084bd32f8f12a8947f7451962fe36ce51",
+        "excluded_blocks": [
+          {
+            "pre_line": 4460,
+            "kind": "editorial_heading",
+            "text_sha256": "79eda09d567fc1620e472898d6cd4a287aee88e39bb84064aca485d5b87d5293"
+          }
+        ],
+        "projection_rule": "adjacent_direct_committee_question_with_question_mark_then_labeled_musk_turn",
+        "interrupted_answers": "retained_as_excerpts_ineligible_for_style",
+        "text_normalization": "collapse_whitespace_only; retain_published_spelling_and_hard_wrap_hyphens",
+        "written_testimony_and_appendices_projected": false,
+        "human_review_completed": false
+      }
+    },
+    {
+      "source_id": "senate-advanced-energy-2007",
+      "event_family_id": "senate-advanced-energy-2007",
+      "status": "extracted",
+      "source_url": "https://www.govinfo.gov/content/pkg/CHRG-110shrg36077/html/CHRG-110shrg36077.htm",
+      "published_at": "2007-03-07",
+      "acquired_at": "2026-11-11T13:57:15.192121+00:00",
+      "artifact_sha256": "b0133085394b7e04c7bf1831c8c24bb0b84b6f51e7c40570a78bd3fd92e17232",
+      "transcript_sha256": "1bd7857d24dd57b162fb315cf0652867d0056e1917162fc248f2222ea8dc314f",
+      "attributed_turns": 160,
+      "candidate_exchanges": 12,
+      "accepted_exchanges": 8,
+      "target_speaker_words": 930,
+      "adapter_version": "govinfo-oral-discussion.v1",
+      "adapter_sha256": "c637a3ce69f9d163ba33d20074332aece2f02ba25b65b542bc071defb21080c4",
+      "extraction_audit": {
+        "window_pre_lines": {
+          "first_included": 2293,
+          "last_included": 3572,
+          "stop_exclusive": 3573
+        },
+        "window_sha256": "0f6e626419cc02b7e9fc9dc0ab6ff11e8c37491c9e3fbbe711d9a686821dbc0e",
+        "excluded_prefix_sha256": "63d02cb2fe432f9bd8a81116ba35241c826ab89bae3e46d7dd365209f8d8fd83",
+        "excluded_suffix_sha256": "b44d49ac86796ff69c2b613473aa07c42be8e20c2a1b30742b6c8043ecf29e70",
+        "excluded_blocks": [
+          {
+            "pre_line": 3101,
+            "kind": "stage_direction",
+            "text_sha256": "69f58162b58c4ba8981e3b0753c2ac97954615cb4181471519e2cb4c4b7f0050"
+          }
+        ],
+        "projection_rule": "adjacent_direct_committee_question_with_question_mark_then_labeled_musk_turn",
+        "interrupted_answers": "retained_as_excerpts_ineligible_for_style",
+        "text_normalization": "collapse_whitespace_only; retain_published_spelling_and_hard_wrap_hyphens",
+        "written_testimony_and_appendices_projected": false,
+        "human_review_completed": false
+      }
+    },
+    {
+      "source_id": "house-commercial-crew-2011",
+      "event_family_id": "house-commercial-crew-2011",
+      "status": "extracted",
+      "source_url": "https://www.govinfo.gov/content/pkg/CHRG-112hhrg70800/html/CHRG-112hhrg70800.htm",
+      "published_at": "2011-10-26",
+      "acquired_at": "2026-11-11T13:57:20.848463+00:00",
+      "artifact_sha256": "c2bee57ee1f9d8fffadca86fa231b032b6669e62247e4034499a91a5dbd09954",
+      "transcript_sha256": "eb4ebcd10c53f76e40e5c65c014d56f5a028be2eadeb5f19db3561a467fd526c",
+      "attributed_turns": 130,
+      "candidate_exchanges": 17,
+      "accepted_exchanges": 5,
+      "target_speaker_words": 1762,
+      "adapter_version": "govinfo-oral-discussion.v1",
+      "adapter_sha256": "c637a3ce69f9d163ba33d20074332aece2f02ba25b65b542bc071defb21080c4",
+      "extraction_audit": {
+        "window_pre_lines": {
+          "first_included": 2626,
+          "last_included": 3864,
+          "stop_exclusive": 3865
+        },
+        "window_sha256": "e6b078b89ff765c6596201d6fc48a566507e39688be8141908d472c024ac7348",
+        "excluded_prefix_sha256": "4ff2099924a5e3caea6f1ec65e3623f36a68a8371bda5a2c6d4b0f1d4766332c",
+        "excluded_suffix_sha256": "f32d785807f43808722816bffcdaf52fed24f444e522ef0a3285ef4e40d0ad6e",
+        "excluded_blocks": [
+          {
+            "pre_line": 2963,
+            "kind": "written_insertion_boundary",
+            "text_sha256": "51cd5a7de1cdb95fecaa1dffe2843825574d5d0bc2f62d4fef1e484937e1bc14"
+          }
+        ],
+        "projection_rule": "adjacent_direct_committee_question_with_question_mark_then_labeled_musk_turn",
+        "interrupted_answers": "retained_as_excerpts_ineligible_for_style",
+        "text_normalization": "collapse_whitespace_only; retain_published_spelling_and_hard_wrap_hyphens",
+        "written_testimony_and_appendices_projected": false,
+        "human_review_completed": false
+      }
+    }
+  ],
+  "rejection_counts": {
+    "not_direct_committee_question": 29
+  },
+  "rejected": [
+    {
+      "id": "qa26-senate-launch-2014-turn-l03211",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "03b25bed61dad2fc92bb7ca539a0f5abb89e97a767e3ca68789d47009f9fa5c3",
+      "answer_sha256": "5f9a2b795615ba6a3d5455fd5624d773fbca5bcd16249c421fd37411dc9837da"
+    },
+    {
+      "id": "qa26-senate-launch-2014-turn-l03494",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "724f4ec9e590bc514fe779fbf8f12da29af2d0623d3b8ef39da022b48c79642d",
+      "answer_sha256": "ba761eccebcb89f69cce4619694f11710dde1fa45a54ee44fe3c94a25c1faf67"
+    },
+    {
+      "id": "qa26-house-space-cooperation-2004-turn-l02546",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "dc6519a737823ec78a22f65b95374f2eaf62cf0259b15314289390fc76fb3f9d",
+      "answer_sha256": "20768f5ffd361d97df9a1e71a5d94c00c9a9304f9f815785d1bc1ed505145ebf"
+    },
+    {
+      "id": "qa26-house-space-cooperation-2004-turn-l02553",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "911085df737fd96ef4a0c0b019c9ab2eb381ae551c1c6890a4c0dfee3a245e69",
+      "answer_sha256": "ed5c08fc13f53949e99a8f688bac38515a6423923a59a40d9b5b63f7c0f67a0a"
+    },
+    {
+      "id": "qa26-house-space-cooperation-2004-turn-l02663",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "97f567fd93955d8f293d72771fa9d3d66ff57c6aeaf60700e361b6d6f5b6ef4d",
+      "answer_sha256": "1d75005701f3e2469abce8b4e5f7223d14e40dc1eb0019070eba51382dcdc2b2"
+    },
+    {
+      "id": "qa26-house-space-cooperation-2004-turn-l03029",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "8f37f82d7cd8282102911559abf9cd94209f446c692e94521f87ee89ba7ec517",
+      "answer_sha256": "2f4f433869b2e5b7d567f8980f71049f8e58fc95906ef63a05bfde54b95cf3c6"
+    },
+    {
+      "id": "qa26-house-space-cooperation-2004-turn-l03035",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "7fc366890b74fd239f8ad162c0457a5003bf32cb75b413090a8c9741d24f5894",
+      "answer_sha256": "56a0efa7a23dca22c90401c2f59974662cefb6c68b17f4772e45882d37d2b8d8"
+    },
+    {
+      "id": "qa26-house-space-cooperation-2004-turn-l03061",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "8bef7308610bbf34d74e73f7c493d36b3f97c7e14cc3ce7392c5dae12c720887",
+      "answer_sha256": "c829a25c6e12edb796efabf0d1c669f8a56e138c5279fdcc6ee40276bd672af7"
+    },
+    {
+      "id": "qa26-house-space-cooperation-2004-turn-l03162",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "588dd9a796b07520986fc3c889a9c76e01bbaece793c1cdab268d71d25620141",
+      "answer_sha256": "a9a796b673fcdb21b65d9fc511f0007f97155b516e292a6dfc1674f35b09c0aa"
+    },
+    {
+      "id": "qa26-house-space-cooperation-2004-turn-l03513",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "972a44ddba52380256d10ed095f0456b4f204166ddfc4fd477b08a59bcdce606",
+      "answer_sha256": "8075d64ba23a0a53cbaffe1ba78ea253191c4e5d650e824621aab02dfff5a507"
+    },
+    {
+      "id": "qa26-house-commercial-space-2005-turn-l04320",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "f301869610d3fc8d36615ba6c2b039419105f8febaae8831878e252ff94e0a29",
+      "answer_sha256": "1ef0cd26c109939c246f1dad5d6a358e02879e16fbd64fe65ed299f996f31e42"
+    },
+    {
+      "id": "qa26-house-commercial-space-2005-turn-l04356",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "1b334cd96fdbeb680da1a175aabb8bb7b73bb2238e4b75f7eebfcdfc198b4ef5",
+      "answer_sha256": "f4cec28b84f04850f09be9807bf518d32e2befe7357fa85f07af02f973dfde41"
+    },
+    {
+      "id": "qa26-house-commercial-space-2005-turn-l04486",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "1153a533a72b5fe3462cf44d9b6d4431479b1e106351f69bfec674d1b86ddbe2",
+      "answer_sha256": "c69e5d3442edcd63e08332a657465af24c916f30dada1b6e4ecc18ab2eb960c8"
+    },
+    {
+      "id": "qa26-senate-advanced-energy-2007-turn-l02338",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "0ad72c16f381a0320fb8dc1eeb54f201a28ac9ae7b4aee56e9171b838896bc52",
+      "answer_sha256": "03b25bed61dad2fc92bb7ca539a0f5abb89e97a767e3ca68789d47009f9fa5c3"
+    },
+    {
+      "id": "qa26-senate-advanced-energy-2007-turn-l03076",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "8d0cc360e34221918cc9fae7cf051963867d762a36572596a24cb1567ad32d75",
+      "answer_sha256": "1848ee5850037eae9d6b523a1455c4b477bd92b578b5f3e65053b48ef45deae7"
+    },
+    {
+      "id": "qa26-senate-advanced-energy-2007-turn-l03103",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "ab25444d87cc3d225305bddceae9c08ba97e79a8b859ed87acae775c982f843f",
+      "answer_sha256": "29a2b913d893a96b9aaf03b2e3a7aa63fe4284d618728c6b2c7840c2b0abfce3"
+    },
+    {
+      "id": "qa26-senate-advanced-energy-2007-turn-l03369",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "c68ee13d362d535b8338b91d122b8cac45ba83c734e0551dd0698b78c0335542",
+      "answer_sha256": "d9ecc03260a25c19aa396ec4ab34942ea832862fc0c724c065acaa01cfbad346"
+    },
+    {
+      "id": "qa26-house-commercial-crew-2011-turn-l02689",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "a5ef0bb4eff7f05faa09edbaea01e8ad3d3995894952e043679b9eb041314c3f",
+      "answer_sha256": "47a36ff577a2d3541d94d7a63dac448c72d77290b263fff322c36a53c78ffebb"
+    },
+    {
+      "id": "qa26-house-commercial-crew-2011-turn-l02771",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "ac75eeee70107b7fc5327177c2d3b3c9c4e20e7e87a3bf22f20ac31258b27bd6",
+      "answer_sha256": "f7cf49ad132495491bd70d3e90dfd9ea5633ff08c7e8145107ce3d086f605e0a"
+    },
+    {
+      "id": "qa26-house-commercial-crew-2011-turn-l02908",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "c908f26b2e46792f7f58ae444bd3642dfa81d2b195868d4ba8d1e5d2707b9642",
+      "answer_sha256": "6920d37d87662d2d421c89fc32a15484414dd35806476a45a184bc915a1675ca"
+    },
+    {
+      "id": "qa26-house-commercial-crew-2011-turn-l03106",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "0758477925020d2a2b25c50374c92243a28e727b1c8da572d62d6e96f8162743",
+      "answer_sha256": "b803a561068865774be0c084f367b653abca59cab67fc041e936ba3529731f83"
+    },
+    {
+      "id": "qa26-house-commercial-crew-2011-turn-l03152",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "a9a6f5108621afb934231e56bd1b8dc2506c5d9b1c88668f935796c071356c70",
+      "answer_sha256": "302c551474da0409058da9b67471d8029b0e18abc628919977b4dc398d5355dd"
+    },
+    {
+      "id": "qa26-house-commercial-crew-2011-turn-l03235",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "f899a2fa2566d9991d630cb4f30b3290764650fe5b7fb3d53110359973703186",
+      "answer_sha256": "9bf3ce6d5b5bc01ca53094d69c306a78f3fa29d4e98b77874bd604c47cfb0d5d"
+    },
+    {
+      "id": "qa26-house-commercial-crew-2011-turn-l03268",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "89aa86781c18039dc91b95a04610753199d908fb98362914c889c80811ed07d2",
+      "answer_sha256": "9a53048298b99c91936383b7bc7dbd78a4506386c604c3c4f5c77484f2dbe8b6"
+    },
+    {
+      "id": "qa26-house-commercial-crew-2011-turn-l03310",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "d4d0f3a1dffef9363a2442b5b0ddf0201eee681ec06c40a8e53260c18648c3a8",
+      "answer_sha256": "9a3e384f4bbda43ad2ca8444611760cb78a64007c0ec6aedbfcaa93d61b77110"
+    },
+    {
+      "id": "qa26-house-commercial-crew-2011-turn-l03433",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "700f8a8480b9eca50d0d19144f21d6ce1baeb429b6498421c986a1d5396be67d",
+      "answer_sha256": "dedc2877b9ed1153153bfa0e1ae05340e5957df3ea9d1ee6e2dd95b0a5863804"
+    },
+    {
+      "id": "qa26-house-commercial-crew-2011-turn-l03573",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "8db9d9c2ab571fc00fc05d1ed6ab7e71762ae62befde0f3915c40408816d6777",
+      "answer_sha256": "071b6ba794f5606cb1fa556938eb39cb6022b8704f4cb0590f36b6d51793a287"
+    },
+    {
+      "id": "qa26-house-commercial-crew-2011-turn-l03647",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "38eda6bf9a7d5efbae23959de5ebb9b646f1adab582519c33746a793f90ca76b",
+      "answer_sha256": "1e504132585437b258c60dceb2079a26606ac23692c57a5dab5a9aab4fd09a2f"
+    },
+    {
+      "id": "qa26-house-commercial-crew-2011-turn-l03704",
+      "reason": "not_direct_committee_question",
+      "question_sha256": "b1ba97378260e67e21c0399679c63044b820cdef65643266a28f8656b1f88ce0",
+      "answer_sha256": "bfd1c6e2e186b559ba3043f44dbc23859763a38e61a123f7eaef3afe6758c64b"
+    }
+  ],
+  "temporal_coverage": {
+    "2026": 1,
+    "2009": 1,
+    "2011": 1,
+    "2005": 1,
+    "2004": 2,
+    "2019": 1,
+    "2018": 1,
+    "2007": 1,
+    "2014": 1,
+    "2013": 1,
+    "2017": 1,
+    "2022": 1,
+    "2012": 1,
+    "2016": 1
+  },
+  "event_dominance": {
+    "dwarkesh-2026": 281,
+    "henry-ford-2008": 72,
+    "house-commercial-crew-2011": 5,
+    "house-commercial-space-2005": 5,
+    "house-space-cooperation-2004": 7,
+    "lex-049-2019": 41,
+    "recode-2018": 346,
+    "senate-advanced-energy-2007": 8,
+    "senate-future-launch-2004": 1,
+    "senate-launch-2014": 15,
+    "ted-2013": 32,
+    "ted-2017": 66,
+    "ted-2022-live": 59,
+    "wired-2012": 38,
+    "yc-2016": 42
+  },
+  "recipe_sha256": "fff9bb4bc9e548d1c173568901086df200ade52617805221fd9a3113a6e7927a",
+  "source_registry_sha256": "019683ba595e2638a5f4ea2fb8816c029a875f58c4e5883152f05a9157ea8bb9",
+  "limitations": [
+    "Structural agent review is not human review or factual-entailment evaluation.",
+    "Repeated/quoted semantic duplicates beyond exact normalized wording remain to be reviewed.",
+    "Source text does not establish clean speech duration, 2026 appearance, trained identity or efficacy.",
+    "New holdouts remain reserved and unacquired; this is a development data expansion."
+  ]
+}

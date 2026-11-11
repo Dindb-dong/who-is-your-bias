@@ -1,0 +1,53 @@
+{
+  "schema_version": "congress-combination-consistency.v1",
+  "verified_at": "2026-11-11T14:18:39.159777+00:00",
+  "existing_record_count": 977,
+  "combined_record_count": 1018,
+  "new_records": 41,
+  "existing_records_exactly_preserved": true,
+  "current_canonical_transcripts_exactly_preserved": [
+    {
+      "source_id": "ted-2013",
+      "transcript_sha256": "6fcddb1db5b481f178f92201d3ed2d28b4c052068c269ca82d91f968b3257269"
+    },
+    {
+      "source_id": "ted-2017",
+      "transcript_sha256": "922eddce5f45be92d4fe9074c3d860b56989992d63a60f1ee20a5bde4d41d013"
+    },
+    {
+      "source_id": "ted-2022-live",
+      "transcript_sha256": "ad3b3207510a1ac01c1cefdc38866e223caf49be8abd956445e130267eb7c546"
+    },
+    {
+      "source_id": "dwarkesh-2026",
+      "transcript_sha256": "d407febc5e70c644114fd992d663cebb89b56392cb2a25f951a6e3d579cf96ae"
+    },
+    {
+      "source_id": "recode-2018",
+      "transcript_sha256": "9453e9d15d70a53c5508135e62673a1be8f01d423a43785e9c90185df068f0b3"
+    },
+    {
+      "source_id": "yc-2016",
+      "transcript_sha256": "60f9e619e1dca7fa8dc9298d4b4d6d72fde15eb2736d5dd84fde799ae04fde73"
+    },
+    {
+      "source_id": "wired-2012",
+      "transcript_sha256": "093fa9d2289d68ff486e2232897c1afffd253fddf1c342ac72cd501585b43cf2"
+    },
+    {
+      "source_id": "lex-049-2019",
+      "transcript_sha256": "e35b4f32e83ce3ad7ff664a92520b2bee0d7a15c3ec78e61c284b9bb4e9df115"
+    },
+    {
+      "source_id": "henry-ford-2008",
+      "transcript_sha256": "29f88f31bdc2d72c83d1f51a9431a3f41992f2bd72695a02d2b3934cb507506d"
+    }
+  ],
+  "input_sha256": {
+    "data/local/persona-2026-current/segments.jsonl": "11a4d4ca81e11a87e46dd3b1029f36f466006d97036ed2dd4c0ae4a4b94dc89e",
+    "data/local/persona-combined-2026-v2/segments.jsonl": "ca8464f48ddaee2b79dc34eea1da887b015eecb48e7e633b58ed7c16a5ce128f",
+    "data/acquisition/elon-musk-2026/source-families.json": "efd6bc70fc8b5697c6046b4bc333229b73b5cf086ce25bbbf6b6d25f3c2f2b9a",
+    "data/acquisition/elon-musk-2026/split-registration.json": "43f9e23ae610c007c2b84101accbb2231826747bdc77bda7f4cfe484ad9b0a5e"
+  },
+  "comparison_scope": "Current nine-event acquisition/materialization; no changes to frozen training or model-comparison inputs."
+}

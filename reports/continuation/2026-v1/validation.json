@@ -1,0 +1,50 @@
+{
+  "schema_version": "continuation-validation.v1",
+  "recorded_at": "2026-11-11T14:17:14.325449+00:00",
+  "default_python": {
+    "command": "uv run pytest",
+    "actual_equivalent_command": ".venv/bin/python -m pytest -q",
+    "passed": 786,
+    "skipped": 2,
+    "warning_count": 1,
+    "skips": [
+      "presentation Torch tests; Torch absent in default environment",
+      "presentation package tests; Pillow absent in default environment"
+    ],
+    "warnings": [
+      "upstream Starlette/httpx deprecation"
+    ],
+    "receipt_sha256": "7dcab906570c127205d7204fa6ba3c09075ff91ab6f4b2fa82a632fe8fd6f39c"
+  },
+  "frontend": {
+    "command": "npm run check",
+    "typescript": "passed",
+    "web_tests": 181,
+    "production_build": "passed",
+    "exit_code": 0
+  },
+  "avatar_structure": {
+    "command": "node --test tools/avatar_audition.test.mjs",
+    "passed": 4,
+    "exit_code": 0,
+    "setup": "npm ci --prefix tools/avatar --ignore-scripts"
+  },
+  "corpus_validate": true,
+  "historical_retrieval_regression": true,
+  "dialogue": {
+    "scenarios": 29,
+    "steps": 100,
+    "passed": true,
+    "neural_inference_turns": 0
+  },
+  "browser": {
+    "new_head_status": "tracked_in_pull_request_ci",
+    "previous_pr13_final_passed_scenarios": 30,
+    "previous_run": "https://github.com/Dindb-dong/who-is-your-bias/actions/runs/43008779666"
+  },
+  "earlier_local_setup_failures": [
+    "npm ENOSPC on home tmpfs; cleared reproducible uv cache and reran successfully",
+    "avatar dependency not installed initially; installed exact tools/avatar lock and all4 tests passed"
+  ],
+  "scope": "Python/frontend checks are engineering regressions; actual model experiments have separate success/failure records and no inferred quality score."
+}

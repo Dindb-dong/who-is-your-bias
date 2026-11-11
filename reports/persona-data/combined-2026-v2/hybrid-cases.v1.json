@@ -1,0 +1,76 @@
+{
+  "schema_version": "congress-hybrid-api-cases.v1",
+  "id": "congress-natural-paraphrases.v1",
+  "registered_at": "2026-11-11T14:16:05.990800+00:00",
+  "exposure": "development",
+  "lexical_results_already_observed": true,
+  "hybrid_results_observed_before_registration": false,
+  "policy": {
+    "embedding_model": "intfloat/multilingual-e5-small",
+    "embedding_revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "reranker_model": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "reranker_revision": "1427fd652930e4ba29e8149678df786c240d8825",
+    "dense_min_similarity": 0.78,
+    "reranker_min_score": -3,
+    "retrieval_limit": 4,
+    "style_examples": false,
+    "device": "cpu",
+    "threads": 2
+  },
+  "cases": [
+    {
+      "id": "congress-paraphrase-01",
+      "query": "In 2014, how would fixed-price competition for the basic launch vehicle relate to cost-plus?",
+      "language": "en",
+      "expected_source_id": "senate-launch-2014",
+      "expected_evidence_id": "qa26-senate-launch-2014-turn-l03561",
+      "support_text_sha256": "fa67c9ca10204af9f69a03b406c207b1c13b6a3e49bf65fc26342f5792aa15ee",
+      "review_basis": "Agent inspected the complete printed source response to bind the intended passage; no human relevance or entailment rating."
+    },
+    {
+      "id": "congress-paraphrase-02",
+      "query": "In March 2004, did satellites intended for the Shuttle have to be done on the Shuttle?",
+      "language": "en",
+      "expected_source_id": "house-space-cooperation-2004",
+      "expected_evidence_id": "qa26-house-space-cooperation-2004-turn-l02703",
+      "support_text_sha256": "d3c716d6a9421d1dc7ab6c5d7b317ce405bbca289aecee50d24b5cc1a82eff4e",
+      "review_basis": "Agent inspected the complete printed source response to bind the intended passage; no human relevance or entailment rating."
+    },
+    {
+      "id": "congress-paraphrase-03",
+      "query": "In 2004, what is a meaningful prize to engage the private sector in space?",
+      "language": "en",
+      "expected_source_id": "senate-future-launch-2004",
+      "expected_evidence_id": "qa26-senate-future-launch-2004-turn-l02989",
+      "support_text_sha256": "1e2ffb160a317d8a5e7f9b8880fec636750d413ee28d7fb4fe3290f19f456dae",
+      "review_basis": "Agent inspected the complete printed source response to bind the intended passage; no human relevance or entailment rating."
+    },
+    {
+      "id": "congress-paraphrase-04",
+      "query": "In 2005, what price did the Falcon I have compared to the Pegasus launch vehicle?",
+      "language": "en",
+      "expected_source_id": "house-commercial-space-2005",
+      "expected_evidence_id": "qa26-house-commercial-space-2005-turn-l04263",
+      "support_text_sha256": "538caa8744286ab51fc940235a6521640842318cb2af740745a546e5489a6c8b",
+      "review_basis": "Agent inspected the complete printed source response to bind the intended passage; no human relevance or entailment rating."
+    },
+    {
+      "id": "congress-paraphrase-05",
+      "query": "In 2007, why did Tesla need lithium-ion cell and pack manufacturing in the United States?",
+      "language": "en",
+      "expected_source_id": "senate-advanced-energy-2007",
+      "expected_evidence_id": "qa26-senate-advanced-energy-2007-turn-l02293",
+      "support_text_sha256": "aaef70ea417fdc8cdb9b6bb2819bfc11a8b9d317ee867e441eb9c680453c7fb8",
+      "review_basis": "Agent inspected the complete printed source response to bind the intended passage; no human relevance or entailment rating."
+    },
+    {
+      "id": "congress-paraphrase-06",
+      "query": "In 2011, why were SpaceX launch vehicles sourced 100 percent in the United States?",
+      "language": "en",
+      "expected_source_id": "house-commercial-crew-2011",
+      "expected_evidence_id": "qa26-house-commercial-crew-2011-turn-l03773",
+      "support_text_sha256": "2b02d74a83dfcf0b181143304d68cabfc4327bb7c804a64aabaf4bec641c071a",
+      "review_basis": "Agent inspected the complete printed source response to bind the intended passage; no human relevance or entailment rating."
+    }
+  ]
+}

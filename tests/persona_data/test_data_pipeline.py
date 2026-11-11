@@ -210,7 +210,8 @@ def test_voice_export_uses_identical_real_reference_and_hashes(tmp_path):
 
 
 class ToyTokenizer:
-    def apply_chat_template(self, messages, tokenize, add_generation_prompt):
+    def apply_chat_template(self, messages, tokenize, add_generation_prompt, enable_thinking):
+        assert enable_thinking is False
         return [1, 2, 3] if add_generation_prompt else [1, 2, 3, 4, 5]
 
 
@@ -222,7 +223,8 @@ def test_assistant_only_loss_and_no_silent_truncation():
 
 def test_mismatched_chat_template_prefix_is_rejected():
     class Wrong(ToyTokenizer):
-        def apply_chat_template(self, messages, tokenize, add_generation_prompt):
+        def apply_chat_template(self, messages, tokenize, add_generation_prompt, enable_thinking):
+            assert enable_thinking is False
             return [9, 9] if add_generation_prompt else [1, 2, 3]
     with pytest.raises(ValueError, match="loss masking"):
         encode_example(Wrong(), [], 10)

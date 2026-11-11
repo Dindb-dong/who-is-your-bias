@@ -7,6 +7,7 @@ client cannot admit overlapping model work while a forward pass is still active.
 from __future__ import annotations
 
 import logging
+import importlib.metadata
 import math
 import os
 import queue
@@ -19,6 +20,10 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Literal, Protocol
 
+from .adapters import (
+    CHAT_TEMPLATE_OPTIONS, AdapterArtifactError, artifact_manifest, checkpoint_manifest,
+    immutable_revision, json_digest, repository_id, tokenizer_contract, validate_adapter_run,
+)
 from .schemas import CompletionRequest
 
 logger = logging.getLogger(__name__)
@@ -54,6 +59,8 @@ class LanguageSettings:
     dtype: str = "float32"
     local_files_only: bool = True
     api_key: str | None = field(default=None, repr=False)
+    adapter_run: Path | None = field(default=None, repr=False)
+    adapter_run_sha256: str | None = None
     max_input_chars: int = 32_000
     max_input_tokens: int = 8192
     max_output_tokens: int = 1024
@@ -76,6 +83,12 @@ class LanguageSettings:
             raise ValueError("Unsupported language dtype")
         if not isinstance(self.local_files_only, bool):
             raise ValueError("local_files_only must be a boolean")
+        if self.adapter_run is not None:
+            if not isinstance(self.adapter_run, Path) or not repository_id(self.model_id) or Path(self.model_id).is_dir() or not immutable_revision(self.revision):
+                raise ValueError("An adapter run requires a local Path and the same base repository with an immutable revision")
+        if self.adapter_run_sha256 is not None:
+            if self.adapter_run is None or not isinstance(self.adapter_run_sha256, str) or not re.fullmatch(r"[a-f0-9]{64}", self.adapter_run_sha256):
+                raise ValueError("An adapter receipt SHA-256 requires an adapter run and 64 lowercase hex characters")
         for name, low, high in (("max_input_chars", 1, 64_000), ("max_input_tokens", 1, 32_768), ("max_output_tokens", 1, 4096), ("max_output_chars", 1, 64_000), ("max_body_bytes", 1024, 1_048_576), ("queue_size", 1, 256), ("threads", 1, 64), ("top_k", 1, 100), ("seed", 0, 2**32 - 1)):
             value = getattr(self, name)
             if isinstance(value, bool) or not isinstance(value, int) or not low <= value <= high:
@@ -89,6 +102,7 @@ class LanguageSettings:
     def from_env(cls) -> "LanguageSettings":
         prefix = "BIAS_LANGUAGE_"
         cache = os.getenv(prefix + "CACHE_DIR")
+        adapter = os.getenv(prefix + "ADAPTER_RUN")
         local = os.getenv(prefix + "LOCAL_FILES_ONLY", "true").lower().strip()
         if local not in {"true", "false", "1", "0"}:
             raise ValueError("BIAS_LANGUAGE_LOCAL_FILES_ONLY must be true, false, 1, or 0")
@@ -101,6 +115,8 @@ class LanguageSettings:
             dtype=os.getenv(prefix + "DTYPE", "float32"),
             local_files_only=local in {"true", "1"},
             api_key=os.getenv(prefix + "API_KEY") or None,
+            adapter_run=Path(adapter).expanduser() if adapter else None,
+            adapter_run_sha256=os.getenv(prefix + "ADAPTER_RUN_SHA256") or None,
             **{name: int(os.getenv(prefix + name.upper(), str(default))) for name, default in (("max_input_chars", 32_000), ("max_input_tokens", 8192), ("max_output_tokens", 1024), ("max_output_chars", 12_000), ("max_body_bytes", 131_072), ("queue_size", 64), ("threads", 4), ("top_k", 20), ("seed", 42))},
             **{name: float(os.getenv(prefix + name.upper(), str(default))) for name, default in (("generation_timeout", 120), ("temperature", 0.7), ("top_p", 0.8))},
         )
@@ -191,10 +207,10 @@ def model_location(settings: LanguageSettings) -> str:
     local = Path(settings.model_id).expanduser()
     if local.is_dir():
         return str(local.resolve())
-    if not settings.local_files_only:
+    if not settings.local_files_only and settings.adapter_run is None and not immutable_revision(settings.revision):
         return settings.model_id
     from huggingface_hub import snapshot_download
-    return snapshot_download(settings.model_id, revision=settings.revision, cache_dir=str(settings.cache_dir) if settings.cache_dir else None, local_files_only=True)
+    return snapshot_download(settings.model_id, revision=settings.revision, cache_dir=str(settings.cache_dir) if settings.cache_dir else None, local_files_only=settings.local_files_only)
 
 
 class TransformersBackend:
@@ -202,6 +218,14 @@ class TransformersBackend:
         # Optional dependency trees may import ONNX Runtime. Disable telemetry
         # before their first import, including its process-start event.
         os.environ["ORT_DISABLE_TELEMETRY"] = "1"
+        adapter = None
+        if settings.adapter_run is not None:
+            try:
+                adapter = validate_adapter_run(settings.adapter_run, base_model=settings.model_id, base_revision=settings.revision,
+                                               expected_run_sha256=settings.adapter_run_sha256)
+            except (AdapterArtifactError, OSError) as exc:
+                logger.error("Text adapter receipt validation failed (%s)", type(exc).__name__)
+                raise LanguageError("adapter_invalid", "The configured adapter requires an unchanged completed v2 training run matching the base revision. Legacy v1 runs must be retrained; inspect the receipt locally.", 503) from exc
         try:
             import torch
             from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -213,12 +237,56 @@ class TransformersBackend:
             raise LanguageError("device_unavailable", "The configured MPS device is unavailable.", 503)
         self.settings = settings
         self.torch = torch
+        self.runtime_identity = configured_identity(settings)
+        self.adapter_identity = {"configured": settings.adapter_run is not None, "loaded": False, "verified": False}
+        self.runtime = configured_runtime(settings)
         torch.set_num_threads(settings.threads)
         kwargs = {"revision": settings.revision, "cache_dir": str(settings.cache_dir) if settings.cache_dir else None, "local_files_only": settings.local_files_only, "trust_remote_code": False}
         try:
             location = model_location(settings)
-            self.tokenizer = AutoTokenizer.from_pretrained(location, **kwargs)
-            self.model = AutoModelForCausalLM.from_pretrained(location, dtype=getattr(torch, settings.dtype), use_safetensors=True, attn_implementation="sdpa", low_cpu_mem_usage=True, **kwargs).to(settings.device).eval()
+            base_files = adapter.verify_base_checkpoint(Path(location)) if adapter else checkpoint_manifest(Path(location)) if Path(location).is_dir() else None
+            base_tokenizer = AutoTokenizer.from_pretrained(location, **kwargs)
+            base_contract = tokenizer_contract(base_tokenizer)
+            self.tokenizer = base_tokenizer
+            if adapter:
+                adapter.verify_tokenizer(base_tokenizer)
+                self.tokenizer = AutoTokenizer.from_pretrained(str(adapter.directory / "tokenizer"), local_files_only=True, trust_remote_code=False)
+                adapter.verify_tokenizer(self.tokenizer)
+            self.model = AutoModelForCausalLM.from_pretrained(location, dtype=getattr(torch, settings.dtype), use_safetensors=True, attn_implementation="sdpa", low_cpu_mem_usage=True, **kwargs)
+            # Count the loaded base before PEFT adds adapter parameters. This
+            # permits a larger-base control to prove its size independently of
+            # a repository name or served alias.
+            self.runtime["base_parameters"] = sum(parameter.numel() for parameter in self.model.parameters())
+            if adapter:
+                try:
+                    from peft import PeftModel
+                except ImportError as exc:
+                    raise LanguageError("adapter_dependencies_missing", "Install the optional language adapter requirements to serve a verified LoRA run.", 503) from exc
+                self.model = PeftModel.from_pretrained(self.model, str(adapter.directory / "adapter"),
+                    is_trainable=False, local_files_only=True, use_safetensors=True)
+                if artifact_manifest(adapter.directory) != adapter.report["artifact_sha256"]:
+                    raise AdapterArtifactError("Adapter artifacts changed while loading")
+                self.adapter_identity.update(adapter.public_identity(), loaded=True, verified=True)
+            self.model = self.model.to(settings.device).eval()
+            # Training turns caching off; inference can safely use it. The
+            # adapter is loaded frozen and is never selected by request fields.
+            self.model.config.use_cache = True
+            parameter = next(self.model.parameters())
+            self.runtime.update(device=str(parameter.device), dtype=str(parameter.dtype).removeprefix("torch."),
+                                context_window=getattr(self.model.config, "max_position_embeddings", None))
+            self.runtime["versions"] = {}
+            for name in ("torch", "transformers", "peft") if adapter else ("torch", "transformers"):
+                try:
+                    self.runtime["versions"][name] = importlib.metadata.version(name)
+                except importlib.metadata.PackageNotFoundError:
+                    self.runtime["versions"][name] = None
+            self.runtime_identity.update(base_checkpoint_manifest_sha256=json_digest(base_files) if base_files else None,
+                                         tokenizer_contract_sha256=json_digest(base_contract))
+        except LanguageError:
+            raise
+        except AdapterArtifactError as exc:
+            logger.error("Language artifact compatibility failed (%s)", type(exc).__name__)
+            raise LanguageError("adapter_incompatible" if adapter else "tokenizer_incompatible", "The model/tokenizer artifacts differ from the configured token contract; inspect the local checkpoint and completed training receipt.", 503) from exc
         except Exception as exc:
             logger.error("Language model loading failed (%s)", type(exc).__name__)
             raise LanguageError("model_unavailable", "The configured model could not be loaded; inspect its cache, revision, dependencies, and device.", 503) from exc
@@ -231,7 +299,7 @@ class TransformersBackend:
         job.check()
         job.stage = "tokenizing"
         try:
-            prompt = self.tokenizer.apply_chat_template([message.model_dump() for message in request.messages], tokenize=False, add_generation_prompt=True, enable_thinking=False)
+            prompt = self.tokenizer.apply_chat_template([message.model_dump() for message in request.messages], tokenize=False, add_generation_prompt=True, **CHAT_TEMPLATE_OPTIONS)
             inputs = self.tokenizer(prompt, return_tensors="pt", add_special_tokens=False)
         except Exception as exc:
             raise LanguageError("template_error", "The configured chat template could not encode these messages.", 422) from exc
@@ -274,6 +342,23 @@ def load_backend(settings: LanguageSettings) -> Backend:
     return TransformersBackend(settings)
 
 
+def configured_identity(settings: LanguageSettings) -> dict:
+    """Before lazy loading, observed artifact hashes remain unknown."""
+    return {"schema_version": "language-model-identity.v1",
+            "base_model": settings.model_id if repository_id(settings.model_id) and not Path(settings.model_id).is_dir() else None,
+            "base_revision": settings.revision if immutable_revision(settings.revision) else None,
+            "base_checkpoint_manifest_sha256": None, "tokenizer_contract_sha256": None,
+            "chat_template_options": dict(CHAT_TEMPLATE_OPTIONS)}
+
+
+def configured_runtime(settings: LanguageSettings) -> dict:
+    return {"backend": "transformers", "requested_device": settings.device, "requested_dtype": settings.dtype,
+            "device": None, "dtype": None, "context_window": None, "base_parameters": None, "versions": None,
+            "threads": settings.threads, "attention": "sdpa",
+            "generation_defaults": {"seed": settings.seed, "temperature": settings.temperature,
+                                    "top_p": settings.top_p, "top_k": settings.top_k}}
+
+
 class LanguageEngine:
     def __init__(self, settings: LanguageSettings, loader: Callable[[LanguageSettings], Backend] = load_backend):
         self.settings = settings
@@ -285,7 +370,12 @@ class LanguageEngine:
 
     def status(self) -> dict[str, Any]:
         active = self._active
-        return {"status": "ready" if self._backend is not None else "not_loaded", "model": self.settings.served_model, "model_loaded": self._backend is not None, "busy": self._admission.locked(), "stage": ("stopping" if active.cancelled.is_set() else active.stage) if active else None, "concurrency": 1, "cancellation": "cooperative_between_model_steps", "load_ms": self._load_ms, "process_peak_rss_bytes": process_peak_rss_bytes(), "limits": {"input_tokens": self.settings.max_input_tokens, "output_tokens": self.settings.max_output_tokens, "generation_seconds": self.settings.generation_timeout}}
+        identity = getattr(self._backend, "runtime_identity", configured_identity(self.settings))
+        adapter = getattr(self._backend, "adapter_identity", {"configured": self.settings.adapter_run is not None, "loaded": False, "verified": False})
+        runtime = getattr(self._backend, "runtime", configured_runtime(self.settings))
+        return {"status": "ready" if self._backend is not None else "not_loaded", "model": self.settings.served_model, "model_loaded": self._backend is not None,
+                "identity": identity, "adapter": adapter, "runtime": runtime,
+                "busy": self._admission.locked(), "stage": ("stopping" if active.cancelled.is_set() else active.stage) if active else None, "concurrency": 1, "cancellation": "cooperative_between_model_steps", "load_ms": self._load_ms, "process_peak_rss_bytes": process_peak_rss_bytes(), "limits": {"input_tokens": self.settings.max_input_tokens, "output_tokens": self.settings.max_output_tokens, "generation_seconds": self.settings.generation_timeout}}
 
     def start(self, request: CompletionRequest) -> GenerationJob:
         if request.model != self.settings.served_model:

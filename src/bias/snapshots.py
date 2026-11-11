@@ -155,7 +155,11 @@ class TemporalIntent:
 
 
 def temporal_intent(query: str, as_of: datetime) -> TemporalIntent:
-    years = tuple(sorted({int(y) for y in re.findall(r"(?<!\d)((?:19|20)\d{2})(?!\d)", query)}))
+    # Explicitly rejected dates are not a second requested historical period.
+    # Preserve the original user text everywhere else for auditability.
+    requested = re.sub(r"\b(?:not|instead of|rather than)\s+(?:in\s+)?(?:19|20)\d{2}(?!\d)", "", query, flags=re.I)
+    requested = re.sub(r"(?<!\d)(?:19|20)\d{2}\s*년?\s*(?:이\s*)?(?:아니라|아니고|말고)", "", requested)
+    years = tuple(sorted({int(y) for y in re.findall(r"(?<!\d)((?:19|20)\d{2})(?!\d)", requested)}))
     if any(y > as_of.year for y in years):
         if not FORECAST.search(query):
             return TemporalIntent("future", years)

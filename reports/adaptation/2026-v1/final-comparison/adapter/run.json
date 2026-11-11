@@ -1,0 +1,492 @@
+{
+  "schema_version": "text-adaptation-condition-run.v1",
+  "condition": "adapter",
+  "plan_sha256": "a10a6f8f764127e964fca7c2229577b49332c78449a2a85ece8999249c2a9f30",
+  "exposure": "development",
+  "started_at": "2026-11-11T14:10:47.644648+00:00",
+  "status": "completed",
+  "model": {
+    "identity": {
+      "base_model": "Qwen/Qwen3-0.6B",
+      "base_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "base_checkpoint_manifest_sha256": "052d8c0b8c31f61d79bcbbcca49c85414118746986773d57fb6a56f58e5a0c09",
+      "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+      "chat_template_options": {
+        "enable_thinking": false
+      }
+    },
+    "adapter": {
+      "configured": true,
+      "loaded": true,
+      "verified": true,
+      "schema_version": "text-adapter-identity.v1",
+      "run_sha256": "dd1e049aa38ea22e97188da4ee001b0ac0df1e493af22aef30177dc70cb06cf6",
+      "artifact_manifest_sha256": "e4ae429b4cca5129ef43943e96ba036b442b9656ecca74b4009529e5f4f46dcb",
+      "base_model": "Qwen/Qwen3-0.6B",
+      "base_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "base_checkpoint_manifest_sha256": "052d8c0b8c31f61d79bcbbcca49c85414118746986773d57fb6a56f58e5a0c09",
+      "dataset_sha256": "f47f5f96c37271b529d043c6fd5e1301739b8ab7552df10e8e2f04ecc307d387",
+      "training_event_families": [
+        "dwarkesh-2026",
+        "henry-ford-2008",
+        "lex-049-2019",
+        "recode-2018",
+        "ted-2013",
+        "ted-2017",
+        "ted-2022-live",
+        "wired-2012",
+        "yc-2016"
+      ],
+      "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+      "optimizer_steps": 11,
+      "efficacy_evaluated": false
+    },
+    "runtime": {
+      "device": "cpu",
+      "dtype": "bfloat16",
+      "backend": "transformers",
+      "context_window": 40960,
+      "threads": 2,
+      "attention": "sdpa",
+      "base_parameters": 596049920,
+      "versions": {
+        "torch": "2.11.0+cpu",
+        "transformers": "4.57.3"
+      },
+      "generation_defaults": {
+        "seed": 42,
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20
+      }
+    }
+  },
+  "served_model": "comparison-local",
+  "requested_adapter_run_sha256": "dd1e049aa38ea22e97188da4ee001b0ac0df1e493af22aef30177dc70cb06cf6",
+  "policy": {
+    "conditions": [
+      "facts",
+      "style",
+      "adapter"
+    ],
+    "max_tokens": 192,
+    "context_window": 8192,
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 42,
+    "factual_policy": "identical_complete_passages_all_conditions",
+    "adapter_style_policy": "identical_prompts",
+    "reference_answer_supplied": false,
+    "history_policy": "same_frozen_context_all_conditions"
+  },
+  "planned_case_ids": [
+    "original-positive-001-ko",
+    "original-positive-002-en",
+    "original-positive-003-en",
+    "current-2030-unavailable"
+  ],
+  "transport": "actual_http",
+  "environment": {
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "python": "3.12.14"
+  },
+  "timing_scope": "warm_model_http_generation_no_speech_or_acoustic_measurement",
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "runs": [
+    {
+      "case_id": "original-positive-001-ko",
+      "condition": "adapter",
+      "prompt_sha256": "99437b189810789275d0a6cb4c97246b0f44e071ddcd22599fab00e0096b7dd2",
+      "factual_sha256": "2edd66ec3b3760b9714e9d6c8d7e58202a8180d6de2804385ed18e1b95889895",
+      "factual_ids": [
+        "qa26-henry-ford-2008-turn-00015"
+      ],
+      "style_ids": [
+        "qa26-dwarkesh-2026-turn-00046"
+      ],
+      "provider_generation": {
+        "text": "어릴 때 프로그래밍은 흔히 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로",
+        "completed": false,
+        "error": "provider_finish_length",
+        "first_text_ms": 6850.688,
+        "wall_ms": 47242.496,
+        "finish_reason": "length",
+        "response_model": "comparison-local",
+        "usage": {
+          "prompt_tokens": 892,
+          "completion_tokens": 192,
+          "total_tokens": 1084
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "9ed0fb0e72f7b618c091ea223f763777bc79a124a5b3624696ba7c525b0731d1"
+      },
+      "generation": {
+        "text": "어릴 때 프로그래밍은 흔히 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로",
+        "completed": false,
+        "error": "provider_finish_length",
+        "first_text_ms": 6850.688,
+        "wall_ms": 47242.496,
+        "finish_reason": "length",
+        "response_model": "comparison-local",
+        "usage": {
+          "prompt_tokens": 892,
+          "completion_tokens": 192,
+          "total_tokens": 1084
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "9ed0fb0e72f7b618c091ea223f763777bc79a124a5b3624696ba7c525b0731d1"
+      },
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "missing",
+          "unit_count": 1,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "어릴 때 프로그래밍은 흔히 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로",
+              "raw_text": "어릴 때 프로그래밍은 흔히 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로는 프로그래밍을 배우는 방법은 컴퓨터를 만들기 위해 프로그래밍을 배우는 것처럼 보이지만, 실제로",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "reference_surface_overlap": {
+        "token_unigram_f1": 0,
+        "generated_tokens": 69,
+        "reference_tokens": 31,
+        "interpretation": "surface_overlap_only_not_persona_quality"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "original-positive-002-en",
+      "condition": "adapter",
+      "prompt_sha256": "5e79ef8cbdbe9053d98dc2f5c75915e844db21c3fec29e17ec3ea71bd416b29a",
+      "factual_sha256": "6eb932e962a508d821b11a91a3cf0149cbc71e9e6135f9e08da023269a3b8ab0",
+      "factual_ids": [
+        "qa26-henry-ford-2008-turn-00056"
+      ],
+      "style_ids": [
+        "qa26-dwarkesh-2026-turn-00046"
+      ],
+      "provider_generation": {
+        "text": "It’s different because it’s not just about the process, but also about the outcome.",
+        "completed": true,
+        "error": null,
+        "first_text_ms": 7446.44,
+        "wall_ms": 10947.866,
+        "finish_reason": "stop",
+        "response_model": "comparison-local",
+        "usage": {
+          "prompt_tokens": 918,
+          "completion_tokens": 19,
+          "total_tokens": 937
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "64967546abbbeca77d6c4cb1e1c2827ae13809e61fc926fb5c2419b1d9378083"
+      },
+      "generation": {
+        "text": "It’s different because it’s not just about the process, but also about the outcome.",
+        "completed": true,
+        "error": null,
+        "first_text_ms": 7446.44,
+        "wall_ms": 10947.866,
+        "finish_reason": "stop",
+        "response_model": "comparison-local",
+        "usage": {
+          "prompt_tokens": 918,
+          "completion_tokens": 19,
+          "total_tokens": 937
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "64967546abbbeca77d6c4cb1e1c2827ae13809e61fc926fb5c2419b1d9378083"
+      },
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "missing",
+          "unit_count": 1,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "It’s different because it’s not just about the process, but also about the outcome.",
+              "raw_text": "It’s different because it’s not just about the process, but also about the outcome.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "reference_surface_overlap": {
+        "token_unigram_f1": 0.140351,
+        "generated_tokens": 16,
+        "reference_tokens": 155,
+        "interpretation": "surface_overlap_only_not_persona_quality"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "original-positive-003-en",
+      "condition": "adapter",
+      "prompt_sha256": "f1004922367af1f9dd905fac872c1c61a6e9d43dfa08cd22d2e6d89e9697f112",
+      "factual_sha256": "9db6ba7372206992201cc3ee4e77aa6cc35f33f435d97ad98ce394389f289ed8",
+      "factual_ids": [
+        "qa26-dwarkesh-2026-turn-00937"
+      ],
+      "style_ids": [
+        "qa26-dwarkesh-2026-turn-00046"
+      ],
+      "provider_generation": {
+        "text": "I think it’s the ability to be flexible but not too flexible.",
+        "completed": true,
+        "error": null,
+        "first_text_ms": 7360.641,
+        "wall_ms": 10458.244,
+        "finish_reason": "stop",
+        "response_model": "comparison-local",
+        "usage": {
+          "prompt_tokens": 999,
+          "completion_tokens": 15,
+          "total_tokens": 1014
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "6027320be76cb25aa89fca23e7575bc01c7cc1697686a22a19d4dfc6bc45d135"
+      },
+      "generation": {
+        "text": "I think it’s the ability to be flexible but not too flexible.",
+        "completed": true,
+        "error": null,
+        "first_text_ms": 7360.641,
+        "wall_ms": 10458.244,
+        "finish_reason": "stop",
+        "response_model": "comparison-local",
+        "usage": {
+          "prompt_tokens": 999,
+          "completion_tokens": 15,
+          "total_tokens": 1014
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "6027320be76cb25aa89fca23e7575bc01c7cc1697686a22a19d4dfc6bc45d135"
+      },
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "missing",
+          "unit_count": 1,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "I think it’s the ability to be flexible but not too flexible.",
+              "raw_text": "I think it’s the ability to be flexible but not too flexible.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "reference_surface_overlap": {
+        "token_unigram_f1": 0.104046,
+        "generated_tokens": 13,
+        "reference_tokens": 160,
+        "interpretation": "surface_overlap_only_not_persona_quality"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "current-2030-unavailable",
+      "condition": "adapter",
+      "prompt_sha256": "293089a50e55c269cd99df0dcfe213c149fa8db58e4d80a074c7eab69705a1ff",
+      "factual_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "factual_ids": [],
+      "style_ids": [],
+      "provider_generation": {
+        "text": "I don't have a current plan.",
+        "completed": true,
+        "error": null,
+        "first_text_ms": 3521.968,
+        "wall_ms": 4827.447,
+        "finish_reason": "stop",
+        "response_model": "comparison-local",
+        "usage": {
+          "prompt_tokens": 493,
+          "completion_tokens": 9,
+          "total_tokens": 502
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "023bf11f288ed2d62fcc1741be5d2bfb683118ad2ea64aebea721475a60f9992"
+      },
+      "generation": {
+        "text": "I don't have a current plan.",
+        "completed": true,
+        "error": null,
+        "first_text_ms": 3521.968,
+        "wall_ms": 4827.447,
+        "finish_reason": "stop",
+        "response_model": "comparison-local",
+        "usage": {
+          "prompt_tokens": 493,
+          "completion_tokens": 9,
+          "total_tokens": 502
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "023bf11f288ed2d62fcc1741be5d2bfb683118ad2ea64aebea721475a60f9992"
+      },
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "not_required",
+          "unit_count": 1,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "I don't have a current plan.",
+              "raw_text": "I don't have a current plan.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "reference_surface_overlap": null,
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    }
+  ],
+  "elapsed_seconds": 73.55,
+  "skipped_case_ids": [],
+  "run_sha256": "0e9766bdf5b3b85ee31b5e42fe65b71a54242a213662d2038095511b106aa648"
+}

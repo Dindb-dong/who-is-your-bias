@@ -282,6 +282,7 @@ def parse(source: dict, artifact: Path) -> dict:
         raise ValueError("Source artifact exceeds 16 MiB")
     identifier = source["id"]
     timeline = None
+    metadata = {}
     if identifier.startswith("ted-"):
         canonical = canonical_ted(raw, source_id=identifier)
         rows = _canonical_turns(canonical)
@@ -300,6 +301,11 @@ def parse(source: dict, artifact: Path) -> dict:
             rows = _lex_pdf(_pdf_text(artifact))
         elif identifier == "henry-ford-2008":
             rows = _ford_pdf(_pdf_text(artifact))
+        elif identifier in {"senate-launch-2014", "house-space-cooperation-2004", "senate-future-launch-2004",
+                            "house-commercial-space-2005", "senate-advanced-energy-2007", "house-commercial-crew-2011"}:
+            from .congress import parse_congress
+            metadata = parse_congress(raw, identifier)
+            rows = metadata.pop("turns")
         else:
             raise ValueError("No reviewed original-dialogue adapter; narrative/excerpts are not fabricated Q&A")
         content_hash = digest(rows)
@@ -308,4 +314,4 @@ def parse(source: dict, artifact: Path) -> dict:
     return {"schema_version": "persona-original-turns.v1", "parser_version": PARSER_VERSION,
             "source_id": identifier, "input_sha256": hashlib.sha256(raw).hexdigest(),
             "transcript_sha256": content_hash, "source_timeline": timeline, "turns": rows,
-            "audio_alignment_verified": False}
+            "audio_alignment_verified": False, **metadata}

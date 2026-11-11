@@ -1,0 +1,582 @@
+{
+  "schema_version": "live-local-execution.v1",
+  "started_at": "2026-11-11T14:05:06.886447+00:00",
+  "status": "failed",
+  "measured_inference_complete": false,
+  "host": {
+    "scope": "Assistant execution host; not the user's device",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "machine": "x86_64",
+    "cpu_model": "AMD EPYC 9V74 80-Core Processor",
+    "logical_cpus": 9,
+    "available_cpu_affinity": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "memory": {
+      "MemTotal": "10206472 kB",
+      "MemAvailable": "5690836 kB"
+    },
+    "python": "3.12.14",
+    "inference_device": "cpu"
+  },
+  "concurrency_note": "Concurrent parent small-LLM training and comparison jobs on the shared host; timings are not isolated performance measurements.",
+  "limitations": [
+    "One request is an execution measurement, not a latency distribution or isolated hardware benchmark.",
+    "Reference candidate status and prior checks do not establish human listening or speaker similarity.",
+    "No new ASR, speech training, browser playback, avatar rendering or acoustic measurement is performed.",
+    "The first measured request includes lazy model loading; no synthetic warmup is substituted.",
+    "A full returned waveform does not prove the TTS backend terminated at EOS; the backend does not expose that reason."
+  ],
+  "models": {
+    "language": {
+      "model": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "files": [
+        {
+          "path": "config.json",
+          "bytes": 726,
+          "sha256": "660db3b73d788119c04535e48cf9be5f55bc3100841a718637ae695b442f27dd"
+        },
+        {
+          "path": "generation_config.json",
+          "bytes": 239,
+          "sha256": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2"
+        },
+        {
+          "path": "merges.txt",
+          "bytes": 1671853,
+          "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+        },
+        {
+          "path": "model.safetensors",
+          "bytes": 1503300328,
+          "sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b"
+        },
+        {
+          "path": "tokenizer.json",
+          "bytes": 11422654,
+          "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+        },
+        {
+          "path": "tokenizer_config.json",
+          "bytes": 9732,
+          "sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+        },
+        {
+          "path": "vocab.json",
+          "bytes": 2776833,
+          "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      ]
+    },
+    "voice": {
+      "model": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+      "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+      "files": [
+        {
+          "path": "config.json",
+          "bytes": 4494,
+          "sha256": "2e714c787c8edb98b05432685cddb634add2de4d4e645f653d68251ef72ba011"
+        },
+        {
+          "path": "generation_config.json",
+          "bytes": 245,
+          "sha256": "f1b90b4513f3b34c62851049e2492d7b4c5940daf1276f89c82b8ef04127f3aa"
+        },
+        {
+          "path": "merges.txt",
+          "bytes": 1671839,
+          "sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+        },
+        {
+          "path": "model.safetensors",
+          "bytes": 1829344272,
+          "sha256": "180b3b10eb1c9f1b4db7806d5475bae3071c0243c299d49926bab1da3b6946f6"
+        },
+        {
+          "path": "preprocessor_config.json",
+          "bytes": 127,
+          "sha256": "efdde1022ea9d76928bf7a9cd53139138f5ba2e466e837f08f6105ab1af1c119"
+        },
+        {
+          "path": "speech_tokenizer/config.json",
+          "bytes": 2336,
+          "sha256": "ee65bb901c876664ab8707c487157aa1a6ee57c65969b28fb5ec9dc211e68167"
+        },
+        {
+          "path": "speech_tokenizer/configuration.json",
+          "bytes": 76,
+          "sha256": "6bc26d64eb5024b4d1dab5a52371958b429256d6c9d59787f1f5294a54e0cebd"
+        },
+        {
+          "path": "speech_tokenizer/model.safetensors",
+          "bytes": 682293092,
+          "sha256": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258"
+        },
+        {
+          "path": "speech_tokenizer/preprocessor_config.json",
+          "bytes": 234,
+          "sha256": "fcb3805e597e786d4067706e602f6688524640f8d3396790e2e09b5942fcbdfb"
+        },
+        {
+          "path": "tokenizer_config.json",
+          "bytes": 7344,
+          "sha256": "dc3c31c3bdaedd5016382bb3cbe07323026775ad51f5a4fb564505992ae4a670"
+        },
+        {
+          "path": "vocab.json",
+          "bytes": 2776833,
+          "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      ]
+    },
+    "speech_tokenizer": {
+      "model": "Qwen/Qwen3-TTS-Tokenizer-12Hz",
+      "revision": "7dd38ad4e9bad454aae9cd937d0cd577604fe229",
+      "files": [
+        {
+          "path": "config.json",
+          "bytes": 2336,
+          "sha256": "ee65bb901c876664ab8707c487157aa1a6ee57c65969b28fb5ec9dc211e68167"
+        },
+        {
+          "path": "configuration.json",
+          "bytes": 76,
+          "sha256": "6bc26d64eb5024b4d1dab5a52371958b429256d6c9d59787f1f5294a54e0cebd"
+        },
+        {
+          "path": "model.safetensors",
+          "bytes": 682293092,
+          "sha256": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258"
+        },
+        {
+          "path": "preprocessor_config.json",
+          "bytes": 234,
+          "sha256": "fcb3805e597e786d4067706e602f6688524640f8d3396790e2e09b5942fcbdfb"
+        }
+      ]
+    },
+    "embedded_speech_tokenizer_matches_pinned_files": true
+  },
+  "reference": {
+    "wav": {
+      "path": "/workspace/scratch/9147639aa8a5/who-is-your-bias/data/local/live-neural-2026-v1/reference/audio.wav",
+      "bytes": 471920,
+      "sha256": "f20f897fde67d14d2fb77d42d98b0890bf3c1d1fd121b41879dfd448f0d47e4c"
+    },
+    "text": {
+      "path": "/workspace/scratch/9147639aa8a5/who-is-your-bias/data/local/live-neural-2026-v1/reference/reference.txt",
+      "bytes": 210,
+      "sha256": "0e75c3c62963a9a06932a87113f14d8ac206d1cad4fbb409a484b552fcc5f83d"
+    },
+    "provenance": {
+      "path": "/workspace/scratch/9147639aa8a5/who-is-your-bias/data/local/live-neural-2026-v1/reference/restoration.json",
+      "bytes": 2302,
+      "sha256": "fd9efe819361395dec799d1d7eb2839129ebff30eecd78b23124c9d4dfae79fd"
+    },
+    "review_status": "candidate",
+    "human_listening_completed": false
+  },
+  "packages": {
+    "app": {
+      "python": "3.12.14",
+      "torch": "2.11.0+cpu",
+      "transformers": "4.57.3",
+      "huggingface-hub": "0.36.2",
+      "peft": "0.18.1",
+      "accelerate": "1.15.0",
+      "numpy": "2.5.4",
+      "fastapi": "0.162.4",
+      "uvicorn": "0.54.0"
+    },
+    "language": {
+      "python": "3.12.14",
+      "torch": "2.11.0+cpu",
+      "transformers": "4.57.3",
+      "huggingface-hub": "0.36.2",
+      "peft": "0.18.1",
+      "accelerate": "1.15.0",
+      "numpy": "2.5.4",
+      "fastapi": "0.162.4",
+      "uvicorn": "0.54.0"
+    },
+    "voice": {
+      "python": "3.12.14",
+      "torch": "2.11.0+cpu",
+      "torchaudio": "2.11.0+cpu",
+      "transformers": "4.57.3",
+      "huggingface-hub": "0.36.2",
+      "qwen-tts": "0.1.1",
+      "accelerate": "1.12.0",
+      "numpy": "2.5.4",
+      "librosa": "1.0.0",
+      "soundfile": "0.14.0",
+      "sox": "1.5.0",
+      "fastapi": "0.162.4",
+      "uvicorn": "0.54.0"
+    }
+  },
+  "application": {
+    "git_head": "13210fe0d26feeac3b8e3b5ed1a249a3b19e3f1f",
+    "source_files": [
+      {
+        "path": "services/language/__init__.py",
+        "bytes": 87,
+        "sha256": "43cbbfb270499d74ee00b23f0e50f0720528d815ffe3fc7af9ef4f9524432bcc"
+      },
+      {
+        "path": "services/language/adapters.py",
+        "bytes": 14239,
+        "sha256": "ccd92dace3db5065f9af73d26958fcb045fbb3d650f0ead0b10636fe36a185c1"
+      },
+      {
+        "path": "services/language/app.py",
+        "bytes": 8210,
+        "sha256": "8e9ae8d0b2e3be25d6fdbbac830f38c827f567d8bb2e26fb86cb7402ae8ff799"
+      },
+      {
+        "path": "services/language/engine.py",
+        "bytes": 24134,
+        "sha256": "4de8fb45c173620e502539273a76ce9e708e8e12fee51060ae61fca8845a633c"
+      },
+      {
+        "path": "services/language/schemas.py",
+        "bytes": 1397,
+        "sha256": "f9bea7bde3338b9b5c2e2c670a9ff7ad26d1857777e9d35c787b7f5ffa75da5e"
+      },
+      {
+        "path": "services/voice/__init__.py",
+        "bytes": 56,
+        "sha256": "31556f5910bdc7df312d151b736d2768db4812ce09cedb9e96edc2491ca7b9ad"
+      },
+      {
+        "path": "services/voice/app.py",
+        "bytes": 5802,
+        "sha256": "54cf248527e9e3f491b5e82c8761b827987de066eaf7a9c79ed44fd570fb8736"
+      },
+      {
+        "path": "services/voice/engine.py",
+        "bytes": 16243,
+        "sha256": "f67e0eba644985f8aed86273316becd26bd55a3f05a55b9291667fb900884e91"
+      },
+      {
+        "path": "src/bias/__init__.py",
+        "bytes": 84,
+        "sha256": "5ce8591bb917837fe2b6d12beffc1b632ccff7e15b44c23aefcaa76da7d1cf42"
+      },
+      {
+        "path": "src/bias/api.py",
+        "bytes": 17530,
+        "sha256": "f1389a67ecc32e966a9153b908880cfdb4487d3707ad093fedba9830c883040f"
+      },
+      {
+        "path": "src/bias/behavior.py",
+        "bytes": 2141,
+        "sha256": "58810783d5e7010ff153303608c8db8cf3c0c16b4a74c7ac4c75695ce84cf1f4"
+      },
+      {
+        "path": "src/bias/cli.py",
+        "bytes": 5796,
+        "sha256": "9c78fdde8b0fa4fd89abb2f27c95ee957bded68fc25e2251e8914fcc708b04b4"
+      },
+      {
+        "path": "src/bias/compact_prompts.py",
+        "bytes": 3363,
+        "sha256": "032013e9c1a1c2420868cff31833628b25391e2a161ce5cd4435dd046ae5110e"
+      },
+      {
+        "path": "src/bias/config.py",
+        "bytes": 8859,
+        "sha256": "c5a286c9c32cc18e7409075b87094ed1c7ff7cdd5f94f3cc359341a7df6aec3b"
+      },
+      {
+        "path": "src/bias/context_budget.py",
+        "bytes": 6681,
+        "sha256": "cffce0af28994922cb50f1e2564456e99e6d0aef0c13893572ffae85c0a8eff9"
+      },
+      {
+        "path": "src/bias/corpus.py",
+        "bytes": 13634,
+        "sha256": "16b9eef8a6fef0e20a7dd4099b470724e793dc14c698313d06fb679b87e9aeb0"
+      },
+      {
+        "path": "src/bias/dialogue.py",
+        "bytes": 8337,
+        "sha256": "3c5aa9b2e959ce501a807711760683c89b069ebff3f0706b3e3bfd1d88c7455e"
+      },
+      {
+        "path": "src/bias/engine.py",
+        "bytes": 20575,
+        "sha256": "1cccb003c81ebfcf5ad94b5e2b0a3d04380195454e7ebe28c52aef7b0246d51a"
+      },
+      {
+        "path": "src/bias/evaluate.py",
+        "bytes": 5229,
+        "sha256": "757b7a0fc4b703b22c5555a84e2b17d31c847ca5867b27ca1f18d4ff8285b500"
+      },
+      {
+        "path": "src/bias/grounding.py",
+        "bytes": 6173,
+        "sha256": "a3098cc9d39914226e89b3e6dad8c6b770f0c0eda3d28a3e3f8192d3488bf8a0"
+      },
+      {
+        "path": "src/bias/hybrid_retrieval.py",
+        "bytes": 35605,
+        "sha256": "d2bf0892205da0304187f421fd582e4aa23da6efe3fb78c2a56b2d69f1389095"
+      },
+      {
+        "path": "src/bias/ingest.py",
+        "bytes": 5833,
+        "sha256": "6136b8039f9326852cb8ddcd07ba1d2ee4fba2ce3ff2e74edd30d7793c3d31bc"
+      },
+      {
+        "path": "src/bias/legacy_prompts.py",
+        "bytes": 3282,
+        "sha256": "c6b6e84ed4c9a8da6f01c6d9ada07934b8548bca8530f7f39d79ad8cb8a14dd7"
+      },
+      {
+        "path": "src/bias/legacy_situations.py",
+        "bytes": 774,
+        "sha256": "3f1a182e6c095bf30a00b0ead537fd1a8d4a80277b635d149a10b356ed2b0524"
+      },
+      {
+        "path": "src/bias/lipsync.py",
+        "bytes": 7207,
+        "sha256": "05feac2d1041b4a6a09929227fba680ebbd669bca169807cac3976b1dd304063"
+      },
+      {
+        "path": "src/bias/live.py",
+        "bytes": 8667,
+        "sha256": "730cf102e458f3f5ea48fc8cc604bd15ad994d54cc97d1771d1999891573fcfc"
+      },
+      {
+        "path": "src/bias/models.py",
+        "bytes": 12414,
+        "sha256": "1342ef5660b903e2bed04ed28f52e06ec1b1b39fddfb97f8c4b58f36fe13caca"
+      },
+      {
+        "path": "src/bias/motion.py",
+        "bytes": 24025,
+        "sha256": "8f0922adab913a33472dbb6920bbfb2ad5d82c0eb34ce7a7040435315bc4f288"
+      },
+      {
+        "path": "src/bias/prompts.py",
+        "bytes": 3530,
+        "sha256": "baa7c142b293d27b612e00c14d2a316e2c6faffc82b4dd7578e9fa6a58f66edc"
+      },
+      {
+        "path": "src/bias/providers.py",
+        "bytes": 11346,
+        "sha256": "e92f428eeefff17a35d0992a0951d9a1fb31620aed9d5516d8402712aef1b083"
+      },
+      {
+        "path": "src/bias/qa_prompts.py",
+        "bytes": 3698,
+        "sha256": "040e790013e68c274487096cce889855ab3b1d5b3176c3c187d3244ec414e254"
+      },
+      {
+        "path": "src/bias/request_work.py",
+        "bytes": 1827,
+        "sha256": "15fa420d3fdbe74651fa2dc73948ab2ef314ea83e5b089aece77375063506423"
+      },
+      {
+        "path": "src/bias/retrieval.py",
+        "bytes": 11273,
+        "sha256": "72b7b06718b762068fb932131fd6102cd3d8c5e54190b514ee27158aea8b86d9"
+      },
+      {
+        "path": "src/bias/segments.py",
+        "bytes": 3353,
+        "sha256": "49ae6689c25986335ed79770d0d3a89c0bece75df5d64938ab5f09c345a4a88b"
+      },
+      {
+        "path": "src/bias/sessions.py",
+        "bytes": 2799,
+        "sha256": "b0f8b1725886250b919e321fa6eda142737088e782ba13f4f96ee3fc33b1fac6"
+      },
+      {
+        "path": "src/bias/situations.py",
+        "bytes": 2247,
+        "sha256": "64ac395448105ced33a5249adef4125704c6acfb6aa1274bc29fc18b521a86a1"
+      },
+      {
+        "path": "src/bias/snapshots.py",
+        "bytes": 14184,
+        "sha256": "28659167b62d4de7354ccbe83ab4cc3c924891d8c6df2418a33d8755e7b51fc2"
+      },
+      {
+        "path": "src/bias/speech.py",
+        "bytes": 3606,
+        "sha256": "7948a52419250b08d40ac7851cafe58c432210cd5d19ed3f2467d99ebb6c11ff"
+      },
+      {
+        "path": "tools/demo_latency/protocol.py",
+        "bytes": 3606,
+        "sha256": "31f4ecdf9dd2dd4bfd79fc333166c3df18e711f4477e707db0fea3b2bf396330"
+      },
+      {
+        "path": "tools/demo_latency/run.py",
+        "bytes": 22362,
+        "sha256": "923bc8eef0edf52c987cf9746f1d4b8d27e03656d192c3e382d4df0e1a98bbdf"
+      },
+      {
+        "path": "tools/live_benchmark.py",
+        "bytes": 32936,
+        "sha256": "403096cb0064752c69d03bdd2843be099b8b0094db2db6bbac75260e8f95a4ce"
+      },
+      {
+        "path": "tools/live_benchmark_local.py",
+        "bytes": 14726,
+        "sha256": "97f1516bf79d59744d9f0d099223e21abfd28b4caa3d183e2390f767a5006418"
+      }
+    ],
+    "corpus_files": [
+      {
+        "path": "corpus-manifest.json",
+        "bytes": 1003,
+        "sha256": "367ce0191d4f26a5b4a8ee7f798d8d518240d539c4ba3befb2a032a2c9cbdeb2"
+      },
+      {
+        "path": "evidence.jsonl",
+        "bytes": 22281,
+        "sha256": "c9ea6f75e07d08aad8931086e26c76d83944407fe10d59e62efe317aad005a9f"
+      },
+      {
+        "path": "materialization-report.json",
+        "bytes": 608,
+        "sha256": "9a49aa7546981898a9be8e792c4cba735083395fda398b97a8270365189e9220"
+      },
+      {
+        "path": "profile.json",
+        "bytes": 1044,
+        "sha256": "2d887ec546a631c3b7a8158e26bc62a63a0d2b9ca1fe22d73f3f1be8071788c1"
+      },
+      {
+        "path": "retrieval-development.json",
+        "bytes": 4871,
+        "sha256": "7d2781f69dc70c5bc1384360bbc4d7882e0e6c42367674814082ae900c34052d"
+      },
+      {
+        "path": "selection-recipes.json",
+        "bytes": 55453,
+        "sha256": "65954d160d2e2bb0d273ce9064f95b18fa603f681345d0689f52a47d23aa07dd"
+      },
+      {
+        "path": "selection-recipes.v2.json",
+        "bytes": 168959,
+        "sha256": "d2dcbb00c6877ef1eff30f07515633fe737ea2ddeed9b3f5db0c107c75be254e"
+      },
+      {
+        "path": "sources.json",
+        "bytes": 7665,
+        "sha256": "6eb1031c09784bfdb563649f06ecfba163fb9fc187f608fee3c98f1d79fc222b"
+      },
+      {
+        "path": "split-manifest.json",
+        "bytes": 1382,
+        "sha256": "d9ef0051c278e376074dbe8cc12de1c67658774930c32e0b5ab1a526f6355295"
+      },
+      {
+        "path": "training-inventory.v2.json",
+        "bytes": 22413,
+        "sha256": "5ab019521552f1ccef54f6c0b5bbc0e94057674bab8bf3a148a1f704b21aa523"
+      }
+    ],
+    "source_files_unchanged": true
+  },
+  "configuration": {
+    "language_settings": {
+      "MODEL": "Qwen/Qwen3-0.6B",
+      "REVISION": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "CACHE_DIR": "/home/agent/.cache/huggingface/hub",
+      "SERVED_MODEL": "qwen3-local",
+      "DEVICE": "cpu",
+      "DTYPE": "bfloat16",
+      "LOCAL_FILES_ONLY": "true",
+      "THREADS": "2",
+      "MAX_INPUT_TOKENS": "8192",
+      "MAX_OUTPUT_TOKENS": "96",
+      "GENERATION_TIMEOUT": "180.0",
+      "TEMPERATURE": "0",
+      "SEED": "42"
+    },
+    "voice_settings": {
+      "MODEL": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+      "REVISION": "5d83992436eae1d760afd27aff78a71d676296fc",
+      "CACHE_DIR": "/workspace/scratch/9147639aa8a5/who-is-your-bias/data/local/live-neural-2026-v1/model-cache",
+      "DEVICE": "cpu",
+      "DTYPE": "bfloat16",
+      "ATTENTION": "sdpa",
+      "LOCAL_FILES_ONLY": "true",
+      "REFERENCE_WAV": "/workspace/scratch/9147639aa8a5/who-is-your-bias/data/local/live-neural-2026-v1/reference/audio.wav",
+      "REFERENCE_TEXT_FILE": "/workspace/scratch/9147639aa8a5/who-is-your-bias/data/local/live-neural-2026-v1/reference/reference.txt",
+      "X_VECTOR_ONLY_MODE": "false",
+      "THREADS": "2",
+      "SEED": "42",
+      "DO_SAMPLE": "true",
+      "MAX_NEW_TOKENS": "384",
+      "MAX_AUDIO_SECONDS": "60",
+      "TEMPERATURE": "0.9",
+      "TOP_K": "50",
+      "TOP_P": "1.0",
+      "REPETITION_PENALTY": "1.05"
+    },
+    "max_output_tokens": 96,
+    "request_timeout_seconds": 180.0,
+    "retrieval_backend": "lexical",
+    "retrieval_limit": 2,
+    "style_examples": false,
+    "persona_snapshot": null,
+    "question": "Why reuse rockets? Answer in one sentence of at most 12 words.",
+    "language": "en",
+    "mode": "behavior",
+    "lipsync": "not_configured"
+  },
+  "http_report": {
+    "path": "http.json",
+    "sha256": "7ddfa81dad63dc3b39f8f77daec9a5c509a4db66a5ff0c6806c6942fb04a421a"
+  },
+  "processes": {
+    "language": {
+      "returncode_after_cleanup": -15
+    },
+    "voice": {
+      "returncode_after_cleanup": -9
+    },
+    "app": {
+      "returncode_after_cleanup": -15
+    }
+  },
+  "peak_sampled_service_sum_rss_bytes": 3000647680,
+  "logs": [
+    {
+      "path": "app.log",
+      "bytes": 695,
+      "sha256": "2892570f14408e67db2d76501a46f35ac7fdbca2a2de18950986d1dd3c801624"
+    },
+    {
+      "path": "language.log",
+      "bytes": 517,
+      "sha256": "77e050b7ecc90c638e9bf67c771ca655331f3d2a5975f9639693f88c9fc7d819"
+    },
+    {
+      "path": "process-memory.jsonl",
+      "bytes": 4938,
+      "sha256": "a6fdfe9a4ee6ee17f9ede3887c6db07d0d5c5650de5ee83de832dc33593b4fe9"
+    },
+    {
+      "path": "voice.log",
+      "bytes": 922,
+      "sha256": "ada97255d0ffbbac6099bb274183e0daafc0be68b89d8d6e05d530dfdd778070"
+    }
+  ],
+  "completed_at": "2026-11-11T14:05:29.228582+00:00"
+}

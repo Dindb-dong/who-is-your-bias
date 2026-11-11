@@ -1,0 +1,45 @@
+{
+  "schema_version": "reference-restoration.v1",
+  "prepared_at": "2026-11-11T14:04:30.873005+00:00",
+  "review_status": "candidate",
+  "human_listening_completed": false,
+  "new_asr_performed": false,
+  "speaker_similarity_evaluated": false,
+  "source_id": "ted-2013",
+  "publisher_page": "https://www.ted.com/talks/elon_musk_the_mind_behind_tesla_spacex_solarcity?view=transcript",
+  "public_media_url": "https://py.tedcdn.com/consus/projects/00/03/56/011/products/2013-elon-musk-011-fallback-ac0208b9ee7c6d6d53feec1fec06c734-1200k.mp4",
+  "source_timeline": "ted_native_mp4",
+  "source_start_seconds": 21.45,
+  "source_end_seconds": 31.280041666666666,
+  "duration_seconds": 9.830041666666666,
+  "sample_rate": 24000,
+  "channels": 1,
+  "frames": 235921,
+  "publisher_speaker_label": "Elon Musk",
+  "publisher_cue_ids": [
+    "cue-00007",
+    "cue-00008",
+    "cue-00009",
+    "cue-00010"
+  ],
+  "normalized_reference_words": 32,
+  "publisher_html_sha256": "7df350bdda5c1a562b6bcf03194b6c54eb19ddac626a1131905e85740213cf43",
+  "source_media_sha256": "b4ab286ff7642adfc0f921ae72e3a64ed7031201b29d38a2603e7b68ac485ec8",
+  "source_media_bytes": 7320515,
+  "audio_sha256": "f20f897fde67d14d2fb77d42d98b0890bf3c1d1fd121b41879dfd448f0d47e4c",
+  "text_sha256": "0e75c3c62963a9a06932a87113f14d8ac206d1cad4fbb409a484b552fcc5f83d",
+  "source_media_matches_prior_validation": true,
+  "audio_matches_prior_canonical_candidate": true,
+  "text_origin": "Exact joined selected publisher cues, plus final newline; no new ASR transcript",
+  "text_matches_prior_voice_evaluation_reference": true,
+  "prior_validation_receipt": {
+    "path": "tools/references/validation.json",
+    "sha256": "254e585966a6b05999185adc02912be4a77c58932389a7ac370b13b65f5c0f34"
+  },
+  "limitations": [
+    "Source MP4 and extracted WAV are byte-identical to prior canonical candidate; prior ASR alignment is cited, not relabeled as a new decoding.",
+    "Text punctuation differs from the canonical ASR-derived text; current file is identical to the separately documented publisher-derived reference text.",
+    "Human listening, acoustic single-speaker review and perceptual suitability remain unverified.",
+    "Engineering reference only; this run does not establish named-speaker similarity or authorization for another use."
+  ]
+}

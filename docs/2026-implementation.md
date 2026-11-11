@@ -2,6 +2,12 @@
 
 Implementation record for the [2026 roadmap](2026-persona-roadmap.md), dated
 2026-11-11. The original roadmap and failed pilot remain historical records.
+This document preserves the implementation and measurements delivered in
+[PR #13](https://github.com/Dindb-dong/who-is-your-bias/pull/13), now merged at
+`cc23f47f5dfa25cced290e90a8f8c4ef9db22181`. The later
+[continuation record](2026-continuation.md) covers actual text training, verified
+adapter serving, additional original-source acquisition, controlled generation,
+and dialogue/streaming acceptance work. Counts below describe the PR #13 build.
 The previously open, dependent PRs [#10](https://github.com/Dindb-dong/who-is-your-bias/pull/10),
 [#11](https://github.com/Dindb-dong/who-is-your-bias/pull/11) and
 [#12](https://github.com/Dindb-dong/who-is-your-bias/pull/12) were merged, ending at
@@ -22,7 +28,9 @@ evaluation, speech and presentation artifacts were preserved.
 This is a working research implementation with measured development results.
 It is not a completed or perceptually validated Musk replica. In particular,
 the trained text adapter, trained voice adapter and qualified Musk likeness
-counts remain zero.
+counts were all zero at the PR #13 snapshot. Consult the continuation record for
+subsequent executions; artifact completion and measured persona fidelity remain
+separate claims.
 
 ## Data, retrieval and the actual experiment
 

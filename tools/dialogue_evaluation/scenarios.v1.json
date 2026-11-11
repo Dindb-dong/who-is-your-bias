@@ -1,0 +1,1496 @@
+{
+  "schema_version": "dialogue-scenarios.v1",
+  "id": "dialogue-runtime-development.v1",
+  "purpose": "Deterministic runtime development/acceptance scenarios; not fresh persona efficacy evidence.",
+  "preview_corpus_sha256": "0fd9dc28535469d569138252e032d0844b552ea0b804933d6a67ca03165cd0b7",
+  "categories": [
+    "absent_evidence",
+    "bounded_state",
+    "correction",
+    "cross_language",
+    "current_abstention",
+    "deictic_time",
+    "earlier_reference",
+    "ellipsis",
+    "followup",
+    "forecast",
+    "future",
+    "interruption",
+    "no_false_reference",
+    "session_isolation",
+    "temporal_change",
+    "topic_switch"
+  ],
+  "scenarios": [
+    {
+      "id": "en-chained-audience",
+      "category": "followup",
+      "steps": [
+        {
+          "message": "Why are tunnels so expensive? Explain for a school audience.",
+          "language": "en",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "Why that approach?",
+          "language": "en",
+          "label": "turn-2",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ],
+            "supports": [
+              "initial"
+            ]
+          }
+        },
+        {
+          "message": "How so?",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ],
+            "supports": [
+              "initial"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko-chained-audience",
+      "category": "followup",
+      "steps": [
+        {
+          "message": "터널을 파는 비용이 왜 비싼 거야? 초등학생도 이해하게 설명해줘.",
+          "language": "ko",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "그 방법은 왜 그래?",
+          "language": "ko",
+          "label": "turn-2",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "터널",
+              "초등학생"
+            ],
+            "supports": [
+              "initial"
+            ]
+          }
+        },
+        {
+          "message": "더 자세히 설명해줘.",
+          "language": "ko",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "터널",
+              "초등학생"
+            ],
+            "supports": [
+              "initial"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "en-short-elaboration",
+      "category": "ellipsis",
+      "steps": [
+        {
+          "message": "Why are tunnels so expensive? Explain for a school audience.",
+          "language": "en",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "Why?",
+          "language": "en",
+          "label": "turn-2",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels"
+            ],
+            "supports": [
+              "initial"
+            ]
+          }
+        },
+        {
+          "message": "Tell me more.",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "school audience"
+            ],
+            "supports": [
+              "initial"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko-short-elaboration",
+      "category": "ellipsis",
+      "steps": [
+        {
+          "message": "터널을 파는 비용이 왜 비싼 거야? 초등학생도 이해하게 설명해줘.",
+          "language": "ko",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "왜?",
+          "language": "ko",
+          "label": "turn-2",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "터널"
+            ],
+            "supports": [
+              "initial"
+            ]
+          }
+        },
+        {
+          "message": "좀 더 설명해줘.",
+          "language": "ko",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "초등학생"
+            ],
+            "supports": [
+              "initial"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "en-year-change",
+      "category": "temporal_change",
+      "steps": [
+        {
+          "message": "What did you say in the 2017 interview about tunnels?",
+          "language": "en",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "And in 2013?",
+          "language": "en",
+          "label": "turn-2",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "historical",
+            "years": [
+              2013
+            ],
+            "query_contains": [
+              "tunnels"
+            ],
+            "supports": [
+              "initial"
+            ]
+          }
+        },
+        {
+          "message": "Why?",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "historical",
+            "years": [
+              2013
+            ],
+            "query_contains": [
+              "tunnels"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko-year-change",
+      "category": "temporal_change",
+      "steps": [
+        {
+          "message": "2017년 인터뷰에서 터널 비용을 어떻게 말했어?",
+          "language": "ko",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "2013년에는?",
+          "language": "ko",
+          "label": "turn-2",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "historical",
+            "years": [
+              2013
+            ],
+            "query_contains": [
+              "터널"
+            ],
+            "supports": [
+              "initial"
+            ]
+          }
+        },
+        {
+          "message": "왜?",
+          "language": "ko",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "historical",
+            "years": [
+              2013
+            ],
+            "query_contains": [
+              "터널"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "en-current-transition",
+      "category": "current_abstention",
+      "steps": [
+        {
+          "message": "Why are tunnels so expensive? Explain for a school audience.",
+          "language": "en",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "And now?",
+          "language": "en",
+          "label": "turn-2",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "current",
+            "query_contains": [
+              "tunnels"
+            ],
+            "supports": [
+              "initial"
+            ],
+            "preview_empty_evidence": true
+          }
+        },
+        {
+          "message": "Why?",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "current",
+            "preview_empty_evidence": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko-current-transition",
+      "category": "current_abstention",
+      "steps": [
+        {
+          "message": "터널을 파는 비용이 왜 비싼 거야? 초등학생도 이해하게 설명해줘.",
+          "language": "ko",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "지금은?",
+          "language": "ko",
+          "label": "turn-2",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "current",
+            "query_contains": [
+              "터널"
+            ],
+            "supports": [
+              "initial"
+            ],
+            "preview_empty_evidence": true
+          }
+        },
+        {
+          "message": "그건 왜?",
+          "language": "ko",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "current",
+            "preview_empty_evidence": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "en-return-to-history",
+      "category": "temporal_change",
+      "steps": [
+        {
+          "message": "What did you say in 2017 about tunnels?",
+          "language": "en",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "What are your current tunnel plans?",
+          "language": "en",
+          "label": "turn-2",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "current",
+            "preview_empty_evidence": true
+          }
+        },
+        {
+          "message": "Back to the earlier tunnel question, why that approach?",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "initial"
+            ],
+            "temporal_mode": "historical",
+            "years": [
+              2017
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "en-future-outcome",
+      "category": "future",
+      "steps": [
+        {
+          "message": "What were your Mars plans in the 2013 interview?",
+          "language": "en",
+          "label": "turn-1",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "Did you reach Mars in 2030?",
+          "language": "en",
+          "label": "future",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "future",
+            "preview_empty_evidence": true
+          }
+        },
+        {
+          "message": "How so?",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "future"
+            ],
+            "temporal_mode": "future",
+            "preview_empty_evidence": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "en-future-plan",
+      "category": "forecast",
+      "steps": [
+        {
+          "message": "What were your plans for Mars in 2030?",
+          "language": "en",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "historical",
+            "period": "forecast"
+          }
+        },
+        {
+          "message": "Why?",
+          "language": "en",
+          "label": "turn-2",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "initial"
+            ],
+            "temporal_mode": "historical",
+            "period": "forecast"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko-current-future-plan",
+      "category": "forecast",
+      "steps": [
+        {
+          "message": "현재 2030년 화성 탐사 계획은 뭐야?",
+          "language": "ko",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "current",
+            "period": "forecast",
+            "preview_empty_evidence": true
+          }
+        },
+        {
+          "message": "그 계획은 왜 그래?",
+          "language": "ko",
+          "label": "turn-2",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "current",
+            "period": "forecast",
+            "supports": [
+              "initial"
+            ],
+            "preview_empty_evidence": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "en-temporal-correction",
+      "category": "correction",
+      "steps": [
+        {
+          "message": "What did you say in 2017 about tunnels? Explain for children.",
+          "language": "en",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "No, I meant 2013, not 2017.",
+          "language": "en",
+          "label": "corrected",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "children"
+            ],
+            "supports": [
+              "initial"
+            ],
+            "temporal_mode": "historical",
+            "years": [
+              2013
+            ],
+            "is_correction": true
+          }
+        },
+        {
+          "message": "Why that approach?",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "corrected"
+            ],
+            "temporal_mode": "historical",
+            "years": [
+              2013
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko-temporal-correction",
+      "category": "correction",
+      "steps": [
+        {
+          "message": "2017년 인터뷰에서 터널 비용을 어떻게 설명했어?",
+          "language": "ko",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "아니, 2017년 말고 2013년 인터뷰 얘기였어.",
+          "language": "ko",
+          "label": "turn-2",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "터널"
+            ],
+            "supports": [
+              "initial"
+            ],
+            "temporal_mode": "historical",
+            "years": [
+              2013
+            ],
+            "is_correction": true
+          }
+        },
+        {
+          "message": "그 방법은?",
+          "language": "ko",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "historical",
+            "years": [
+              2013
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "en-topic-correction",
+      "category": "correction",
+      "steps": [
+        {
+          "message": "Why are tunnels so expensive? Explain for a school audience.",
+          "language": "en",
+          "label": "old",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "I meant electric cars, not tunnels.",
+          "language": "en",
+          "label": "new",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [],
+            "is_correction": true
+          }
+        },
+        {
+          "message": "Why that approach?",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "new"
+            ],
+            "forbidden_supports": [
+              "old"
+            ],
+            "query_contains": [
+              "electric cars"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko-topic-correction",
+      "category": "correction",
+      "steps": [
+        {
+          "message": "터널을 파는 비용이 왜 비싼 거야? 초등학생도 이해하게 설명해줘.",
+          "language": "ko",
+          "label": "old",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "정정할게, 테슬라 전기차 얘기야.",
+          "language": "ko",
+          "label": "new",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [],
+            "is_correction": true
+          }
+        },
+        {
+          "message": "그 방법은?",
+          "language": "ko",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "new"
+            ],
+            "forbidden_supports": [
+              "old"
+            ],
+            "query_contains": [
+              "전기차"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "same-entity-new-question",
+      "category": "topic_switch",
+      "steps": [
+        {
+          "message": "What did Tesla say about electric car efficiency in 2013?",
+          "language": "en",
+          "label": "old",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "What did Tesla plan about batteries in 2016?",
+          "language": "en",
+          "label": "new",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [],
+            "temporal_mode": "historical",
+            "years": [
+              2016
+            ]
+          }
+        },
+        {
+          "message": "Why?",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "batteries"
+            ],
+            "supports": [
+              "new"
+            ],
+            "forbidden_supports": [
+              "old"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "explicit-same-entity-switch",
+      "category": "topic_switch",
+      "steps": [
+        {
+          "message": "What did Tesla say about electric car efficiency in 2013?",
+          "language": "en",
+          "label": "old",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "Different question: is that Tesla solar roof safe?",
+          "language": "en",
+          "label": "new",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [],
+            "query_excludes": [
+              "efficiency"
+            ]
+          }
+        },
+        {
+          "message": "Tell me more.",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "new"
+            ],
+            "forbidden_supports": [
+              "old"
+            ],
+            "query_contains": [
+              "solar roof"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "absent-private-question",
+      "category": "absent_evidence",
+      "steps": [
+        {
+          "message": "What did you privately eat for breakfast yesterday?",
+          "language": "en",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "preview_empty_evidence": true
+          }
+        },
+        {
+          "message": "Why?",
+          "language": "en",
+          "label": "turn-2",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "initial"
+            ],
+            "query_contains": [
+              "privately eat"
+            ],
+            "preview_empty_evidence": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "isolated-bare-followup",
+      "category": "session_isolation",
+      "steps": [
+        {
+          "message": "Why are tunnels so expensive? Explain for a school audience.",
+          "language": "en",
+          "label": "one",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "Why?",
+          "language": "en",
+          "label": "turn-2",
+          "session": "other",
+          "action": "chat",
+          "expect": {
+            "supports": []
+          }
+        },
+        {
+          "message": "How so?",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "one"
+            ],
+            "query_contains": [
+              "tunnels"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "isolated-topic-memory",
+      "category": "session_isolation",
+      "steps": [
+        {
+          "message": "What is the current Mars plan?",
+          "language": "en",
+          "label": "mars",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "Why are tunnels so expensive?",
+          "language": "en",
+          "label": "tunnel",
+          "session": "other",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "Why?",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "mars"
+            ],
+            "forbidden_supports": [
+              "tunnel"
+            ],
+            "query_contains": [
+              "Mars"
+            ],
+            "temporal_mode": "current"
+          }
+        },
+        {
+          "message": "Why?",
+          "language": "en",
+          "label": "turn-4",
+          "session": "other",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "tunnel"
+            ],
+            "forbidden_supports": [
+              "mars"
+            ],
+            "query_contains": [
+              "tunnels"
+            ],
+            "temporal_mode": "general"
+          }
+        }
+      ]
+    },
+    {
+      "id": "earlier-dated-topic",
+      "category": "earlier_reference",
+      "steps": [
+        {
+          "message": "What did you say about tunnels in the 2017 interview?",
+          "language": "en",
+          "label": "tunnel",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "What did Tesla say about electric cars in 2013?",
+          "language": "en",
+          "label": "tesla",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "Back to tunnels, why that approach?",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "tunnel"
+            ],
+            "forbidden_supports": [
+              "tesla"
+            ],
+            "temporal_mode": "historical",
+            "years": [
+              2017
+            ],
+            "query_contains": [
+              "2017"
+            ]
+          }
+        },
+        {
+          "message": "How so?",
+          "language": "en",
+          "label": "turn-4",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "historical",
+            "years": [
+              2017
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko-earlier-dated-topic",
+      "category": "earlier_reference",
+      "steps": [
+        {
+          "message": "2017년 인터뷰에서 터널 비용을 어떻게 말했어?",
+          "language": "ko",
+          "label": "tunnel",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "2013년 테슬라 전기차 효율은 어떻게 말했어?",
+          "language": "ko",
+          "label": "tesla",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "아까 터널 질문으로 돌아가서, 그 방법은 왜 그래?",
+          "language": "ko",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "tunnel"
+            ],
+            "forbidden_supports": [
+              "tesla"
+            ],
+            "temporal_mode": "historical",
+            "years": [
+              2017
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "cross-language-followup",
+      "category": "cross_language",
+      "steps": [
+        {
+          "message": "What did you say about tunnels in 2017? Explain for children.",
+          "language": "en",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "그 방법은 왜 그래?",
+          "language": "ko",
+          "label": "turn-2",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "initial"
+            ],
+            "query_contains": [
+              "tunnels",
+              "children"
+            ],
+            "temporal_mode": "historical",
+            "years": [
+              2017
+            ]
+          }
+        },
+        {
+          "message": "Tell me more.",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "initial"
+            ],
+            "temporal_mode": "historical",
+            "years": [
+              2017
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "stream-interruption",
+      "category": "interruption",
+      "steps": [
+        {
+          "message": "Why are tunnels so expensive? Explain for a school audience.",
+          "language": "en",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "Tell me about Tesla electric cars.",
+          "language": "en",
+          "label": "cancelled",
+          "session": "main",
+          "action": "interrupt",
+          "expect": {}
+        },
+        {
+          "message": "Why?",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "initial"
+            ],
+            "forbidden_supports": [
+              "cancelled"
+            ],
+            "query_contains": [
+              "tunnels"
+            ],
+            "state_count": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "bounded-long-conversation",
+      "category": "bounded_state",
+      "steps": [
+        {
+          "message": "Why are tunnels so expensive? Explain for a school audience.",
+          "language": "en",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "How so?",
+          "language": "en",
+          "label": "turn-2",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ]
+          }
+        },
+        {
+          "message": "Why that approach?",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ]
+          }
+        },
+        {
+          "message": "How so?",
+          "language": "en",
+          "label": "turn-4",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ]
+          }
+        },
+        {
+          "message": "Why that approach?",
+          "language": "en",
+          "label": "turn-5",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ]
+          }
+        },
+        {
+          "message": "How so?",
+          "language": "en",
+          "label": "turn-6",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ]
+          }
+        },
+        {
+          "message": "Why that approach?",
+          "language": "en",
+          "label": "turn-7",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ]
+          }
+        },
+        {
+          "message": "How so?",
+          "language": "en",
+          "label": "turn-8",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ]
+          }
+        },
+        {
+          "message": "Why that approach?",
+          "language": "en",
+          "label": "turn-9",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ]
+          }
+        },
+        {
+          "message": "How so?",
+          "language": "en",
+          "label": "turn-10",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ]
+          }
+        },
+        {
+          "message": "Why that approach?",
+          "language": "en",
+          "label": "turn-11",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ]
+          }
+        },
+        {
+          "message": "How so?",
+          "language": "en",
+          "label": "turn-12",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ]
+          }
+        },
+        {
+          "message": "Why that approach?",
+          "language": "en",
+          "label": "turn-13",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ]
+          }
+        },
+        {
+          "message": "How so?",
+          "language": "en",
+          "label": "turn-14",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ]
+          }
+        },
+        {
+          "message": "Why that approach?",
+          "language": "en",
+          "label": "turn-15",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ]
+          }
+        },
+        {
+          "message": "How so?",
+          "language": "en",
+          "label": "turn-16",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ]
+          }
+        },
+        {
+          "message": "Why that approach?",
+          "language": "en",
+          "label": "turn-17",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ]
+          }
+        },
+        {
+          "message": "Why?",
+          "language": "en",
+          "label": "turn-18",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "query_contains": [
+              "tunnels",
+              "school audience"
+            ],
+            "bounded_state": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "short-independent-question",
+      "category": "no_false_reference",
+      "steps": [
+        {
+          "message": "Why are tunnels so expensive? Explain for a school audience.",
+          "language": "en",
+          "label": "old",
+          "session": "main",
+          "action": "chat",
+          "expect": {}
+        },
+        {
+          "message": "How are you?",
+          "language": "en",
+          "label": "new",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [],
+            "query_excludes": [
+              "tunnels"
+            ]
+          }
+        },
+        {
+          "message": "Why?",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "new"
+            ],
+            "forbidden_supports": [
+              "old"
+            ],
+            "query_contains": [
+              "How are you?"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "en-deictic-historical-period",
+      "category": "deictic_time",
+      "steps": [
+        {
+          "message": "What had you said about tunnels by 2017?",
+          "language": "en",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "historical",
+            "years": [
+              2017
+            ],
+            "period": "through"
+          }
+        },
+        {
+          "message": "And back then?",
+          "language": "en",
+          "label": "turn-2",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "initial"
+            ],
+            "temporal_mode": "historical",
+            "years": [
+              2017
+            ],
+            "period": "through"
+          }
+        },
+        {
+          "message": "Why?",
+          "language": "en",
+          "label": "turn-3",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "historical",
+            "years": [
+              2017
+            ],
+            "period": "through"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ko-deictic-historical-period",
+      "category": "deictic_time",
+      "steps": [
+        {
+          "message": "2017년 이전 터널 관련 발언은?",
+          "language": "ko",
+          "label": "initial",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "temporal_mode": "historical",
+            "years": [
+              2017
+            ],
+            "period": "before"
+          }
+        },
+        {
+          "message": "그때는?",
+          "language": "ko",
+          "label": "turn-2",
+          "session": "main",
+          "action": "chat",
+          "expect": {
+            "supports": [
+              "initial"
+            ],
+            "temporal_mode": "historical",
+            "years": [
+              2017
+            ],
+            "period": "before"
+          }
+        }
+      ]
+    }
+  ]
+}

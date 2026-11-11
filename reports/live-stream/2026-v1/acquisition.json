@@ -1,0 +1,30 @@
+{
+  "schema_version": "live-acquisition-attempts.v1",
+  "updated_at": "2026-11-11T14:04:30.898516+00:00",
+  "attempts": [
+    {
+      "kind": "voice_model_snapshot_download",
+      "model": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+      "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+      "cache": "default_huggingface_cache_under_home",
+      "status": "failed",
+      "failure_type": "OSError_ENOSPC",
+      "available_before_weight_download_bytes": 40300000,
+      "available_bytes_precision": "warning_rounded_megabytes",
+      "removed_own_incomplete_blob_bytes": 40235008,
+      "neural_inference_attempted": false,
+      "recovery": "Removed only own incomplete TTS blobs; parent cleared reproducible uv cache; retry uses explicit workspace cache on separate mount."
+    },
+    {
+      "kind": "voice_model_snapshot_download",
+      "cache": "data/local/live-neural-2026-v1/model-cache",
+      "status": "completed",
+      "neural_inference_attempted": false,
+      "started_at": "2026-11-11T14:01:30.670323+00:00",
+      "voice_completed_at": "2026-11-11T14:02:37.863556+00:00",
+      "tokenizer_completed_at": "2026-11-11T14:02:53.019305+00:00",
+      "voice_revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+      "tokenizer_revision": "7dd38ad4e9bad454aae9cd937d0cd577604fe229"
+    }
+  ]
+}

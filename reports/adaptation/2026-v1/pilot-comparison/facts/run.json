@@ -1,0 +1,585 @@
+{
+  "schema_version": "text-adaptation-condition-run.v1",
+  "condition": "facts",
+  "plan_sha256": "4bb2a3856ada4fec56db9df27e360f36d4b2d9ddde940b0461766b502f979193",
+  "exposure": "development",
+  "started_at": "2026-11-11T13:55:15.650882+00:00",
+  "status": "completed",
+  "model": {
+    "identity": {
+      "base_model": "Qwen/Qwen3-0.6B",
+      "base_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "base_checkpoint_manifest_sha256": "052d8c0b8c31f61d79bcbbcca49c85414118746986773d57fb6a56f58e5a0c09",
+      "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+      "chat_template_options": {
+        "enable_thinking": false
+      }
+    },
+    "adapter": {
+      "configured": false,
+      "loaded": false,
+      "verified": false
+    },
+    "runtime": {
+      "device": "cpu",
+      "dtype": "bfloat16",
+      "backend": "transformers",
+      "context_window": 40960,
+      "threads": 2,
+      "attention": "sdpa",
+      "base_parameters": 596049920,
+      "versions": {
+        "torch": "2.11.0+cpu",
+        "transformers": "4.57.3"
+      },
+      "generation_defaults": {
+        "seed": 42,
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20
+      }
+    }
+  },
+  "served_model": "comparison-local",
+  "requested_adapter_run_sha256": null,
+  "policy": {
+    "conditions": [
+      "facts",
+      "style",
+      "adapter"
+    ],
+    "max_tokens": 192,
+    "context_window": 8192,
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 42,
+    "factual_policy": "identical_complete_passages_all_conditions",
+    "adapter_style_policy": "identical_prompts",
+    "reference_answer_supplied": false,
+    "history_policy": "same_frozen_context_all_conditions"
+  },
+  "planned_case_ids": [
+    "original-positive-001-ko",
+    "original-positive-002-en",
+    "original-positive-003-en",
+    "current-2030-unavailable"
+  ],
+  "transport": "actual_http",
+  "environment": {
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "python": "3.12.14"
+  },
+  "timing_scope": "warm_model_http_generation_no_speech_or_acoustic_measurement",
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "runs": [
+    {
+      "case_id": "original-positive-001-ko",
+      "condition": "facts",
+      "prompt_sha256": "6bf040d625bcc8128fd5bac15e073401ce62176c9bae51a4ec984db15e0e22c7",
+      "factual_sha256": "2edd66ec3b3760b9714e9d6c8d7e58202a8180d6de2804385ed18e1b95889895",
+      "factual_ids": [
+        "qa26-henry-ford-2008-turn-00015"
+      ],
+      "style_ids": [],
+      "provider_generation": {
+        "text": "어릴 때 프로그래밍은 컴퓨터를 처음 접하는 시기와, 처음 상업용 프로그램을 상품화하는 시기는 다음과 같습니다.  \n어릴 때 프로그래밍을 배우려는 이유는 컴퓨터가 처음 접할 때의 기술적 어려움 때문입니다.  \n예를 들어, 어린 시절에 컴퓨터를 처음 접했을 때는 단순한 텍스트 기반의 인터넷을 사용해야 했고, 그 이후로는 상업용 프로그램을 상품화하는 것은 어려웠습니다.  \n이러한 경험은 1995년에 인터넷이 확산되면서, 사람들이 접근성이 향상되었음을 깨달았음을 의미합니다.",
+        "completed": true,
+        "error": null,
+        "first_text_ms": 4125.66,
+        "wall_ms": 61865.829,
+        "finish_reason": "stop",
+        "response_model": "comparison-local",
+        "usage": {
+          "prompt_tokens": 799,
+          "completion_tokens": 165,
+          "total_tokens": 964
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "123e7f9d41e46038b4cf7de1145878d5d681c24952e32725e58499c9067251d1"
+      },
+      "generation": {
+        "text": "어릴 때 프로그래밍은 컴퓨터를 처음 접하는 시기와, 처음 상업용 프로그램을 상품화하는 시기는 다음과 같습니다.  \n어릴 때 프로그래밍을 배우려는 이유는 컴퓨터가 처음 접할 때의 기술적 어려움 때문입니다.  \n예를 들어, 어린 시절에 컴퓨터를 처음 접했을 때는 단순한 텍스트 기반의 인터넷을 사용해야 했고, 그 이후로는 상업용 프로그램을 상품화하는 것은 어려웠습니다.  \n이러한 경험은 1995년에 인터넷이 확산되면서, 사람들이 접근성이 향상되었음을 깨달았음을 의미합니다.",
+        "completed": true,
+        "error": null,
+        "first_text_ms": 4125.66,
+        "wall_ms": 61865.829,
+        "finish_reason": "stop",
+        "response_model": "comparison-local",
+        "usage": {
+          "prompt_tokens": 799,
+          "completion_tokens": 165,
+          "total_tokens": 964
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "123e7f9d41e46038b4cf7de1145878d5d681c24952e32725e58499c9067251d1"
+      },
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "missing",
+          "unit_count": 4,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "어릴 때 프로그래밍은 컴퓨터를 처음 접하는 시기와, 처음 상업용 프로그램을 상품화하는 시기는 다음과 같습니다.",
+              "raw_text": "어릴 때 프로그래밍은 컴퓨터를 처음 접하는 시기와, 처음 상업용 프로그램을 상품화하는 시기는 다음과 같습니다.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 1,
+              "text": "어릴 때 프로그래밍을 배우려는 이유는 컴퓨터가 처음 접할 때의 기술적 어려움 때문입니다.",
+              "raw_text": "어릴 때 프로그래밍을 배우려는 이유는 컴퓨터가 처음 접할 때의 기술적 어려움 때문입니다.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 2,
+              "text": "예를 들어, 어린 시절에 컴퓨터를 처음 접했을 때는 단순한 텍스트 기반의 인터넷을 사용해야 했고, 그 이후로는 상업용 프로그램을 상품화하는 것은 어려웠습니다.",
+              "raw_text": "예를 들어, 어린 시절에 컴퓨터를 처음 접했을 때는 단순한 텍스트 기반의 인터넷을 사용해야 했고, 그 이후로는 상업용 프로그램을 상품화하는 것은 어려웠습니다.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 3,
+              "text": "이러한 경험은 1995년에 인터넷이 확산되면서, 사람들이 접근성이 향상되었음을 깨달았음을 의미합니다.",
+              "raw_text": "이러한 경험은 1995년에 인터넷이 확산되면서, 사람들이 접근성이 향상되었음을 깨달았음을 의미합니다.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "reference_surface_overlap": {
+        "token_unigram_f1": 0,
+        "generated_tokens": 57,
+        "reference_tokens": 31,
+        "interpretation": "surface_overlap_only_not_persona_quality"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "original-positive-002-en",
+      "condition": "facts",
+      "prompt_sha256": "8036bad57b57b576d228b38c5aa59d12353959fb1177df9710a0a995b1a1a37e",
+      "factual_sha256": "6eb932e962a508d821b11a91a3cf0149cbc71e9e6135f9e08da023269a3b8ab0",
+      "factual_ids": [
+        "qa26-henry-ford-2008-turn-00056"
+      ],
+      "style_ids": [],
+      "provider_generation": {
+        "text": "Reasoning from first principles is different from following what has always been done because it involves starting from the fundamental principles and constructing a solution based on those principles, rather than relying on prior experiences or established methods. This approach is often used in fields like physics, engineering, and mathematics, where the solution must be derived from the core concepts rather than being built upon existing frameworks. For example, in physics, instead of following a set of rules or assumptions that have been used in the past, scientists might begin by identifying the underlying laws and then apply them to solve problems. This process is often described as \"first principles thinking,\" which emphasizes originality and innovation. While this method can lead to different results from what has been done in the past, it is generally considered more rigorous and less reliant on convention.",
+        "completed": true,
+        "error": null,
+        "first_text_ms": 8626.728,
+        "wall_ms": 70026.389,
+        "finish_reason": "stop",
+        "response_model": "comparison-local",
+        "usage": {
+          "prompt_tokens": 825,
+          "completion_tokens": 161,
+          "total_tokens": 986
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "2ababf55e40ec1e4d4320baa3a448ba2915f5288c4d0e67c8f5d5538be3c3aef"
+      },
+      "generation": {
+        "text": "Reasoning from first principles is different from following what has always been done because it involves starting from the fundamental principles and constructing a solution based on those principles, rather than relying on prior experiences or established methods. This approach is often used in fields like physics, engineering, and mathematics, where the solution must be derived from the core concepts rather than being built upon existing frameworks. For example, in physics, instead of following a set of rules or assumptions that have been used in the past, scientists might begin by identifying the underlying laws and then apply them to solve problems. This process is often described as \"first principles thinking,\" which emphasizes originality and innovation. While this method can lead to different results from what has been done in the past, it is generally considered more rigorous and less reliant on convention.",
+        "completed": true,
+        "error": null,
+        "first_text_ms": 8626.728,
+        "wall_ms": 70026.389,
+        "finish_reason": "stop",
+        "response_model": "comparison-local",
+        "usage": {
+          "prompt_tokens": 825,
+          "completion_tokens": 161,
+          "total_tokens": 986
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "2ababf55e40ec1e4d4320baa3a448ba2915f5288c4d0e67c8f5d5538be3c3aef"
+      },
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "missing",
+          "unit_count": 5,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "Reasoning from first principles is different from following what has always been done because it involves starting from the fundamental principles and constructing a solution based on those principles, rather than relying on prior experiences or established methods.",
+              "raw_text": "Reasoning from first principles is different from following what has always been done because it involves starting from the fundamental principles and constructing a solution based on those principles, rather than relying on prior experiences or established methods.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 1,
+              "text": "This approach is often used in fields like physics, engineering, and mathematics, where the solution must be derived from the core concepts rather than being built upon existing frameworks.",
+              "raw_text": "This approach is often used in fields like physics, engineering, and mathematics, where the solution must be derived from the core concepts rather than being built upon existing frameworks.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 2,
+              "text": "For example, in physics, instead of following a set of rules or assumptions that have been used in the past, scientists might begin by identifying the underlying laws and then apply them to solve problems.",
+              "raw_text": "For example, in physics, instead of following a set of rules or assumptions that have been used in the past, scientists might begin by identifying the underlying laws and then apply them to solve problems.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 3,
+              "text": "This process is often described as \"first principles thinking,\" which emphasizes originality and innovation.",
+              "raw_text": "This process is often described as \"first principles thinking,\" which emphasizes originality and innovation.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 4,
+              "text": "While this method can lead to different results from what has been done in the past, it is generally considered more rigorous and less reliant on convention.",
+              "raw_text": "While this method can lead to different results from what has been done in the past, it is generally considered more rigorous and less reliant on convention.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "reference_surface_overlap": {
+        "token_unigram_f1": 0.369128,
+        "generated_tokens": 143,
+        "reference_tokens": 155,
+        "interpretation": "surface_overlap_only_not_persona_quality"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "original-positive-003-en",
+      "condition": "facts",
+      "prompt_sha256": "dcf62e55f1e2806209894edd5c01bd65e649010a1f9ce44e4e11363d9d3f5932",
+      "factual_sha256": "9db6ba7372206992201cc3ee4e77aa6cc35f33f435d97ad98ce394389f289ed8",
+      "factual_ids": [
+        "qa26-dwarkesh-2026-turn-00937"
+      ],
+      "style_ids": [],
+      "provider_generation": {
+        "text": "In the 2026 interview, I think it's important to prioritize **talent, drive, and trustworthiness** when hiring. These are the qualities that matter most, as they are essential for success in technical roles. I also believe that **goodness of heart** is important, but I underweighted that at one point. However, I still believe that these fundamental traits cannot be changed, and they are critical for long-term success.",
+        "completed": true,
+        "error": null,
+        "first_text_ms": 12335.672,
+        "wall_ms": 50765.123,
+        "finish_reason": "stop",
+        "response_model": "comparison-local",
+        "usage": {
+          "prompt_tokens": 906,
+          "completion_tokens": 93,
+          "total_tokens": 999
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "b2d1a74ceab08ea542671cbd6a4eb13c26ecb9d24e5ab0314df7155419c525c0"
+      },
+      "generation": {
+        "text": "In the 2026 interview, I think it's important to prioritize **talent, drive, and trustworthiness** when hiring. These are the qualities that matter most, as they are essential for success in technical roles. I also believe that **goodness of heart** is important, but I underweighted that at one point. However, I still believe that these fundamental traits cannot be changed, and they are critical for long-term success.",
+        "completed": true,
+        "error": null,
+        "first_text_ms": 12335.672,
+        "wall_ms": 50765.123,
+        "finish_reason": "stop",
+        "response_model": "comparison-local",
+        "usage": {
+          "prompt_tokens": 906,
+          "completion_tokens": 93,
+          "total_tokens": 999
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "b2d1a74ceab08ea542671cbd6a4eb13c26ecb9d24e5ab0314df7155419c525c0"
+      },
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "missing",
+          "unit_count": 4,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "In the 2026 interview, I think it's important to prioritize **talent, drive, and trustworthiness** when hiring.",
+              "raw_text": "In the 2026 interview, I think it's important to prioritize **talent, drive, and trustworthiness** when hiring.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 1,
+              "text": "These are the qualities that matter most, as they are essential for success in technical roles.",
+              "raw_text": "These are the qualities that matter most, as they are essential for success in technical roles.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 2,
+              "text": "I also believe that **goodness of heart** is important, but I underweighted that at one point.",
+              "raw_text": "I also believe that **goodness of heart** is important, but I underweighted that at one point.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 3,
+              "text": "However, I still believe that these fundamental traits cannot be changed, and they are critical for long-term success.",
+              "raw_text": "However, I still believe that these fundamental traits cannot be changed, and they are critical for long-term success.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "reference_surface_overlap": {
+        "token_unigram_f1": 0.324561,
+        "generated_tokens": 68,
+        "reference_tokens": 160,
+        "interpretation": "surface_overlap_only_not_persona_quality"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "current-2030-unavailable",
+      "condition": "facts",
+      "prompt_sha256": "293089a50e55c269cd99df0dcfe213c149fa8db58e4d80a074c7eab69705a1ff",
+      "factual_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "factual_ids": [],
+      "style_ids": [],
+      "provider_generation": {
+        "text": "I currently plan to develop and launch a new Mars colonization project by 2030, focusing on building a sustainable habitat and establishing a base for long-term human presence. This initiative will involve significant investment in research, technology, and infrastructure to support human survival and exploration. While I am not currently in a position to provide specific details about the project, my vision for Mars colonization is aligned with my broader goals of advancing space exploration and addressing global challenges.",
+        "completed": true,
+        "error": null,
+        "first_text_ms": 7155.359,
+        "wall_ms": 36745.437,
+        "finish_reason": "stop",
+        "response_model": "comparison-local",
+        "usage": {
+          "prompt_tokens": 493,
+          "completion_tokens": 92,
+          "total_tokens": 585
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "023bf11f288ed2d62fcc1741be5d2bfb683118ad2ea64aebea721475a60f9992"
+      },
+      "generation": {
+        "text": "I currently plan to develop and launch a new Mars colonization project by 2030, focusing on building a sustainable habitat and establishing a base for long-term human presence. This initiative will involve significant investment in research, technology, and infrastructure to support human survival and exploration. While I am not currently in a position to provide specific details about the project, my vision for Mars colonization is aligned with my broader goals of advancing space exploration and addressing global challenges.",
+        "completed": true,
+        "error": null,
+        "first_text_ms": 7155.359,
+        "wall_ms": 36745.437,
+        "finish_reason": "stop",
+        "response_model": "comparison-local",
+        "usage": {
+          "prompt_tokens": 493,
+          "completion_tokens": 92,
+          "total_tokens": 585
+        },
+        "usage_status": "provider_reported",
+        "http_statuses": [
+          200
+        ],
+        "request_sha256": "023bf11f288ed2d62fcc1741be5d2bfb683118ad2ea64aebea721475a60f9992"
+      },
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "not_required",
+          "unit_count": 3,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0,
+            1,
+            2
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "I currently plan to develop and launch a new Mars colonization project by 2030, focusing on building a sustainable habitat and establishing a base for long-term human presence.",
+              "raw_text": "I currently plan to develop and launch a new Mars colonization project by 2030, focusing on building a sustainable habitat and establishing a base for long-term human presence.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 1,
+              "text": "This initiative will involve significant investment in research, technology, and infrastructure to support human survival and exploration.",
+              "raw_text": "This initiative will involve significant investment in research, technology, and infrastructure to support human survival and exploration.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 2,
+              "text": "While I am not currently in a position to provide specific details about the project, my vision for Mars colonization is aligned with my broader goals of advancing space exploration and addressing global challenges.",
+              "raw_text": "While I am not currently in a position to provide specific details about the project, my vision for Mars colonization is aligned with my broader goals of advancing space exploration and addressing global challenges.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "reference_surface_overlap": null,
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    }
+  ],
+  "elapsed_seconds": 219.56,
+  "skipped_case_ids": [],
+  "run_sha256": "ca1469cf88241ebb984e5ee7527dd994febb4a40b547d181cd0ced4d0e748f54"
+}

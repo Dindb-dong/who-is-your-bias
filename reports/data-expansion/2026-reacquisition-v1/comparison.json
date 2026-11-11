@@ -1,0 +1,56 @@
+{
+  "schema_version": "source-reacquisition-comparison.v1",
+  "recorded_at": "2026-11-11T14:12:24.665460+00:00",
+  "previous_recipe_sha256": "81ee201d048423b92e982242f9e9e4b11d037f902665f40f463ae74be685aa78",
+  "current_recipe_sha256": "e57f9f53b1b329974975face0ab90675dbb32bcf9857262c6e147d2d212587bf",
+  "previous_selection_count": 977,
+  "current_selection_count": 977,
+  "added_ids": [],
+  "removed_ids": [],
+  "changed_selected_wording_or_completeness": [],
+  "source_document_changes": [
+    {
+      "source_id": "dwarkesh-2026",
+      "changes": {
+        "artifact_sha256": {
+          "before": "079b5d230ccbe406de1897fa369e811fc537d4a1c028733e9ab4ad0a66703cdb",
+          "after": "222e772e7e9e0a0e97aa3227c564b31541382cbba313b8ea86d952cca9513c80"
+        }
+      }
+    },
+    {
+      "source_id": "recode-2018",
+      "changes": {
+        "artifact_sha256": {
+          "before": "a17c9b7ba3f541b3810a53d1c641395983de2dd90d307c531ba697e90952f71a",
+          "after": "93bf786899f34923854f8af1ebfe13419e22bfb7970c2beb990f8c770f2e8600"
+        }
+      }
+    },
+    {
+      "source_id": "yc-2016",
+      "changes": {
+        "artifact_sha256": {
+          "before": "3300350f2ed1b70bab27341e1a6534037028afd8feb2174bb11b28383ffd6c43",
+          "after": "e81d123b33e4043b2eff0789b331e86e515d7e35dc28dde1a3a5149f8a0e8616"
+        },
+        "transcript_sha256": {
+          "before": "b07dfb2c3828d655be313192245e7d25cdd00bad34e0ec3ccfaea19f752e0221",
+          "after": "60f9e619e1dca7fa8dc9298d4b4d6d72fde15eb2736d5dd84fde799ae04fde73"
+        }
+      }
+    },
+    {
+      "source_id": "wired-2012",
+      "changes": {
+        "artifact_sha256": {
+          "before": "7e4d517c1592068ada66df59974ba5386e61301a96471abea1184841b19582af",
+          "after": "a5af36af5ebb7c95e6dbcecbf39157bf8b14286f51b2a14f16595993d8576526"
+        }
+      }
+    }
+  ],
+  "old_recipe_replay": "rejected_current_yc_2016_transcript_hash",
+  "interpretation": "All 977 selected question/answer hashes and completeness labels are unchanged. Publisher document/canonical transcript drift is preserved in a new recipe and snapshot; the old hash check was not disabled.",
+  "original_wording_distributed": false
+}

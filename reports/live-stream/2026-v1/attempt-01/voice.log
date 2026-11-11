@@ -1,0 +1,24 @@
+INFO:     Started server process [13]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8141 (Press CTRL+C to quit)
+INFO:     127.0.0.1:60880 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60892 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60908 - "GET /health HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for background tasks to complete. (CTRL+C to force quit)
+
+********
+Warning: flash-attn is not installed. Will only run the manual PyTorch version. Please install flash-attn for faster inference.
+********
+ 
+/bin/sh: 1: sox: not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.

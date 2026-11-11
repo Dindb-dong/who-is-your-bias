@@ -110,7 +110,8 @@ async def _live_events(engine, speech, request, *, session, deadline, started, q
                 digest = hashlib.sha256(data).hexdigest()
                 segment_offset = total_frames
                 await output.put(("audio_segment", {"turn_id": turn_id, "segment_id": segment["segment_id"],
-                    "sequence": segment["sequence"], "audio_sha256": digest, "sample_rate": rate, "channels": channels,
+                    "sequence": segment["sequence"], "audio_sha256": digest, "pcm_sha256": hashlib.sha256(pcm).hexdigest(),
+                    "sample_rate": rate, "channels": channels,
                     "sample_offset": segment_offset, "sample_count": len(pcm) // (channels * 2),
                     "timing_basis": "pcm_clock_energy_articulation", "speech_timing": None,
                     "synthesis_ms": synthesis_ms[-1], "state": "ready"}))

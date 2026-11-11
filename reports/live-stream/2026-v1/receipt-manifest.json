@@ -1,0 +1,91 @@
+{
+  "schema_version": "live-stream-receipts.v1",
+  "created_at": "2026-11-11T14:11:21.054179+00:00",
+  "files": [
+    {
+      "path": "acquisition.json",
+      "bytes": 1308,
+      "sha256": "04dd8d265a410bb5dd5f13fe98cacbbff10ddbc97c402d6e2ce7f2b6840ef589"
+    },
+    {
+      "path": "attempt-01/app.log",
+      "bytes": 695,
+      "sha256": "2892570f14408e67db2d76501a46f35ac7fdbca2a2de18950986d1dd3c801624"
+    },
+    {
+      "path": "attempt-01/execution.json",
+      "bytes": 19260,
+      "sha256": "e63cecb2ae7c4867fb9f4620175c1aa745f679342d7f74b0d9c63e07d90d9f71"
+    },
+    {
+      "path": "attempt-01/http.json",
+      "bytes": 11646,
+      "sha256": "7ddfa81dad63dc3b39f8f77daec9a5c509a4db66a5ff0c6806c6942fb04a421a"
+    },
+    {
+      "path": "attempt-01/language.log",
+      "bytes": 517,
+      "sha256": "77e050b7ecc90c638e9bf67c771ca655331f3d2a5975f9639693f88c9fc7d819"
+    },
+    {
+      "path": "attempt-01/process-memory.jsonl",
+      "bytes": 4938,
+      "sha256": "a6fdfe9a4ee6ee17f9ede3887c6db07d0d5c5650de5ee83de832dc33593b4fe9"
+    },
+    {
+      "path": "attempt-01/voice.log",
+      "bytes": 922,
+      "sha256": "ada97255d0ffbbac6099bb274183e0daafc0be68b89d8d6e05d530dfdd778070"
+    },
+    {
+      "path": "attempt-02/app.log",
+      "bytes": 695,
+      "sha256": "caac09e1b4c334446798f0a11b5a971dcbf09500a37d6aae4ac85436a4852f88"
+    },
+    {
+      "path": "attempt-02/execution.json",
+      "bytes": 19425,
+      "sha256": "e393c74eeecec815914d05cc5fdcf53055e7c63c7ec6e5ba682cb77f0a617181"
+    },
+    {
+      "path": "attempt-02/http.json",
+      "bytes": 26230,
+      "sha256": "5d955b174ceba8b8c5240bf0b80dd12cbdd8753686ed48a1fc20f1f0d7d4e36f"
+    },
+    {
+      "path": "attempt-02/language.log",
+      "bytes": 741,
+      "sha256": "9d9fe664f10780816e7f5c8b8da1580b057f4f2b3aa7878ca713cc2fd567a636"
+    },
+    {
+      "path": "attempt-02/process-memory.jsonl",
+      "bytes": 21111,
+      "sha256": "7bb709ce354eca8c2a613f2a4016df17ab02e8b396663661afe7ffb70ec09d2f"
+    },
+    {
+      "path": "attempt-02/voice.log",
+      "bytes": 1039,
+      "sha256": "9438033528725090ca960bf4becfe04af5fe1d0e639ede799dde8426c9c34765"
+    },
+    {
+      "path": "reference-restoration.json",
+      "bytes": 2302,
+      "sha256": "fd9efe819361395dec799d1d7eb2839129ebff30eecd78b23124c9d4dfae79fd"
+    },
+    {
+      "path": "report.md",
+      "bytes": 7435,
+      "sha256": "e05210eb9e9c278d1a077fbccdd38846d9949ed90e151737a78141218e4b95fb"
+    },
+    {
+      "path": "run-context.json",
+      "bytes": 1332,
+      "sha256": "000e09a60a558c952ff950036007bbd53460bb3c9104a988b047dbf81058af07"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 3718,
+      "sha256": "d5d7953346c4196a18b06f2e7025499cfd5a6350c90985417621352dd2f93967"
+    }
+  ]
+}

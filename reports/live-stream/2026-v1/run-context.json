@@ -1,0 +1,19 @@
+{
+  "schema_version": "live-execution-context.v1",
+  "recorded_at": "2026-11-11T14:10:12.289799+00:00",
+  "scope": "attempt-02",
+  "operator_note_at_launch": "Concurrent parent small-LLM training and comparison jobs on the shared host; timings are not isolated performance measurements.",
+  "corrected_observed_concurrency": "The parent final four-case model comparison ran with two CPU threads concurrently. Training completed before this neural request.",
+  "correction_basis": "Parent executor task report after the measured request; no claim of CPU isolation.",
+  "measurement_fields_changed": false,
+  "postrun_preflight_hardening": {
+    "description": "Require exact embedded-tokenizer path/hash map equality instead of a nonempty matching subset.",
+    "runtime_neural_code_changed": false,
+    "current_run_support": "All four embedded tokenizer files already exactly matched the four separately pinned files; the measurement is unaffected.",
+    "harness_sha256_after_hardening": "b3cffb9c91578e61f118c7903daaaaf1d8f7b4ebc39069e447ac5e56dc2f452b"
+  },
+  "audio_retention": {
+    "reference_and_publisher_media": "Ignored local artifacts retained.",
+    "generated_pcm_wav": "The HTTP recorder retained digests and sample metadata, not waveform/base64 payloads. No generated waveform file was produced or published."
+  }
+}

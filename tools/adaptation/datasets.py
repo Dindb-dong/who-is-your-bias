@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import random
+import re
 import wave
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -21,6 +22,8 @@ def file_hash(path: Path) -> str:
 
 def read_projection(path: Path) -> list[dict]:
     rows = [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
+    if any(row.get("purpose") == "evaluation_only" or row.get("schema_version") == "persona-heldout-case.v1" for row in rows):
+        raise ValueError("Evaluation-only held-out cases cannot enter adaptation exports")
     ids = [row["segment_id"] for row in rows]
     if len(ids) != len(set(ids)):
         raise ValueError("Duplicate projection segment")
@@ -138,15 +141,33 @@ def validate_dataset(directory: Path, kind: str) -> tuple[dict, list[dict]]:
     if manifest.get("schema_version") != expected_schema or file_hash(path) != manifest.get("dataset_sha256"):
         raise ValueError("Frozen training dataset manifest/hash mismatch")
     rows = [json.loads(line) for line in path.read_text().splitlines() if line.strip()]
-    if len(rows) != manifest.get("samples") or not rows:
+    if type(manifest.get("samples")) is not int or len(rows) != manifest["samples"] or not rows:
         raise ValueError("Training requires a nonempty frozen dataset")
     if kind == "text":
+        if type(manifest.get("test_or_validation_samples")) is not int or manifest["test_or_validation_samples"] != 0:
+            raise ValueError("Text adaptation requires a training-only dataset manifest")
+        identifiers, source_families = set(), {}
         for row in rows:
+            if (not isinstance(row, dict) or any(not isinstance(row.get(key), str)
+                    or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,199}", row[key])
+                    for key in ("id", "source_id", "event_family_id"))):
+                raise ValueError("Text adaptation rows require original sample, source and event-family lineage")
+            if row["id"] in identifiers:
+                raise ValueError("Text adaptation sample IDs must be unique")
+            identifiers.add(row["id"])
+            prior_family = source_families.setdefault(row["source_id"], row["event_family_id"])
+            if prior_family != row["event_family_id"]:
+                raise ValueError("One text source cannot claim different event families")
             messages = row.get("messages", [])
-            if ([item.get("role") for item in messages] != ["system", "user", "assistant"]
+            if (not isinstance(messages, list) or any(not isinstance(item, dict) for item in messages)
+                    or [item.get("role") for item in messages] != ["system", "user", "assistant"]
                     or any(not isinstance(item.get("content"), str) or not item["content"].strip() for item in messages)
                     or row.get("split") != "train" or row.get("answer_sha256") != sha_text(messages[-1]["content"])):
                 raise ValueError("Training data includes held-out, malformed or changed answer text")
+        counts = manifest.get("event_counts")
+        if (not isinstance(counts, dict) or any(type(count) is not int or count < 1 for count in counts.values())
+                or dict(Counter(row["event_family_id"] for row in rows)) != counts):
+            raise ValueError("Training event-family counts differ from the actual exported rows")
     if kind == "voice":
         if manifest.get("ready") is not True:
             raise ValueError("Voice training data is not accepted")
