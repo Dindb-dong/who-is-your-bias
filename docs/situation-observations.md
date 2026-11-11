@@ -5,6 +5,12 @@ recorded interview. It computes observable source features and prepares review
 records. Its outputs do not train a gesture policy or establish that a generated
 voice sounds like the respondent.
 
+**Status:** the measurement pilot and review tooling have run; human observation
+review, perceptual voice judgments and a validated personal movement policy have
+not been completed. The [artifact and version audit](research/observation-pilot-status.md)
+records the verified counts, immutable hashes and compatibility with the expanded
+92-exchange text corpus. More text records do not imply more measured media.
+
 The implementation is in [`tools/observations`](../tools/observations). Its
 [frozen pilot plan](../data/observations/ted-pilot-plan.v1.json) uses the TED 2013
 and TED 2017 recordings already acquired and measured by the project. It retains
@@ -42,6 +48,11 @@ The extraction took 0.813 s wall time and 0.805 s process CPU time on the shared
 Linux x86-64 host, with 160.6 MiB process high-water RSS. This is lightweight
 feature recomputation; the already-completed ASR and MediaPipe runs are separate
 costs. Exact hashes and original model settings are retained in the report.
+The four exchange-to-ASR links reuse three distinct ASR runs. The report verifies
+13 cached visual windows in its provenance; only the ten windows overlapping the
+four selected exchanges enter the stated frame and feature counts. All measured
+source speech in this pilot is English. Korean unit handling is implemented and
+tested, but no Korean source-speaking-rate measurement is claimed.
 
 The [review page](../data/observations/ted-pilot-review/index.html) and
 [empty review template](../data/observations/ted-pilot-review/review-template.json)
@@ -193,8 +204,11 @@ PYTHONPATH=src:. python -m tools.observations review \
 The importer rejects wrong report hashes, duplicate exchanges, changed event
 identity, annotations beyond the observed modality's intervals, gestures across
 camera exclusions, laughter without listening, and head/hand gesture labels
-without camera review. Review metadata records the supplied judgments; a
-checkbox itself is not independent proof that review occurred.
+without camera review. All three reviewed acoustic boundaries must lie inside
+one audio run that covers the complete question-end, answer-onset and answer-end
+boundaries. Video coverage, a second audio run or an unrecorded gap cannot justify
+a pause measurement. Review metadata records the supplied judgments; a checkbox
+itself is not independent proof that review occurred.
 
 Accepted agent and human judgments are reported separately. Only accepted
 **human-reviewed training-event** observations can enter the exported
