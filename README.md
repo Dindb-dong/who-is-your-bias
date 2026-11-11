@@ -170,7 +170,7 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 - [Publisher acquisition](docs/research/collection.md): explicit document collection, component links, and provenance manifests.
 - [Full transcript extraction](docs/research/transcript-acquisition.md): complete TED conversation drafts, speaker-label rules, and measured coverage.
 - [Media and voice pipeline](docs/media-pipeline.md): local clips, optional transcription/observations, and the reference-voice server.
-- [Execution and deployment](docs/deployment.md): coordinated development servers, container configuration, and CI artifacts.
+- [Execution and deployment](docs/deployment.md): coordinated development servers, container configuration, and local validation.
 - [Inference validation](docs/inference-validation.md): real model smoke results, reproducible commands, and measured limitations.
 - [Local language server](docs/language-runtime.md): model loading, bounded generation, and main-app connection.
 - [Generation evaluation](docs/evaluation.md): A/B/C execution, token usage, citation checks, and human-review fields.

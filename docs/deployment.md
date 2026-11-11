@@ -27,11 +27,20 @@ The language/speech services run separately. A URL containing `127.0.0.1` inside
 
 Heavy model dependencies have separate requirement files so the ordinary studio remains lightweight. Follow [media pipeline](media-pipeline.md) to prepare recordings, extract optional observations, and configure the local reference-voice service. Model downloads and inference can need considerably more memory than the web/API application.
 
-## CI
+## Local validation
 
-The workflow validates locked Python/Node installs, core and optional-lightweight media tests, corpus integrity, retrieval cases, type checking, frontend tests, production build, and desktop/mobile browser tests. Provider integration tests use explicit protocol fakes unless the separately documented inference smoke was run. CI does not download speech/language model weights or use account secrets.
+Use Python 3.12 with uv, Node 24, and FFmpeg on PATH.
 
-Screenshots and traces are retained in the `validation-results` workflow artifact for 14 days. Confirm the actual workflow conclusion on the exact branch head; a configured test is not evidence of a passing run.
+```bash
+make setup
+make test
+npx playwright install chromium
+make test-e2e
+```
+
+`make test` checks the Python suite, corpus integrity, historical retrieval regressions, TypeScript, frontend unit tests, production build, and avatar fixtures. Run it before `make test-e2e` so Playwright serves the production build. Free port 8000 and run the browser suite from a shell without model provider configuration. To use an installed browser, set `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH` to its executable instead of installing Playwright Chromium.
+
+The retrieval report is written to `reports/local/retrieval.json`. Browser reports, screenshots and failure traces are under `playwright-report/` and `test-results/`. Record the commands and results on the PR head you tested. Model inference is checked separately.
 
 ## Remaining production work
 
