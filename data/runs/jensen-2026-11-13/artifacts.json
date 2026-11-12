@@ -510,6 +510,17 @@
       "sha256": "a2cb10262fff00ea4e039148af329d2862a073c94ec070d0178ed2864f88a949",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-m6-development-facts-bf16-partial0005",
+      "role": "Partial immutable prefix of first five real BF16 development facts attempts, including incomplete responses; not a completed condition",
+      "file_name": "jensen-m6-development-facts-bf16-partial0005.tar.gz",
+      "file_id": "file_00000000b2b881fd804c5d29ab79d270",
+      "library_file_id": "libfile_fde3_f-3c6d0fcf6c148191966d40871ac03e3e_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 10351,
+      "sha256": "c939f6c67e9772722ffd82a2039d428a2457d16a0ce2e8997394380df1230ff3",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {

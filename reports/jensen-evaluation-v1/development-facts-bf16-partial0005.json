@@ -1,0 +1,81 @@
+{
+  "schema_version": "jensen-condition-partial-checkpoint.v1",
+  "recorded_at": "2026-11-12T20:16:31.158556+00:00",
+  "status": "partial_finished_attempt_prefix",
+  "source_run_status": "running",
+  "eligible_for_final_collection": false,
+  "plan_sha256": "cd2bd7340c3eb7d9c1ddc248b78e25d69b8e00c9d246454cf5925e082a1dd030",
+  "condition": "facts",
+  "exposure": "development",
+  "attempted": 5,
+  "completed": 1,
+  "records": [
+    {
+      "case_id": "dev-ko-cuda",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 56347.811,
+      "wall_ms": 131432.348
+    },
+    {
+      "case_id": "dev-ko-sega",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 21462.504,
+      "wall_ms": 58781.868
+    },
+    {
+      "case_id": "dev-ko-tsmc",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 20328.906,
+      "wall_ms": 69770.879
+    },
+    {
+      "case_id": "dev-ko-values",
+      "completed": true,
+      "error": null,
+      "finish_reason": "stop",
+      "first_text_ms": 16289.397,
+      "wall_ms": 46038.247
+    },
+    {
+      "case_id": "dev-en-accelerated",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 18755.824,
+      "wall_ms": 60583.752
+    }
+  ],
+  "source_run_sha256": "a2b82f7053916daa620f5b3664655cbc67f176afc0490e7805efb37c8ff24692",
+  "snapshot_note": "Captured complete immutable attempt prefixes while later cases may be running. Server log and supervisor are point-in-time copies. Final full condition archive/readback and collector gates remain required.",
+  "files_sha256": {
+    "server.log": "007f53e4cbd97fb22a3802c71dccfc4c876fae5a9ebdfb107bd61f466f1e495f",
+    "launcher.json": "60be034a7792d8cfc1a92afd0c4687d61305df068b33b06fdf82b0ad7fab426f",
+    "supervisor.json": "c96de12f020a2f1f31572f0a4d48263648987e0d720c6ade04516318f8466fea",
+    "warmup.json": "e262a0e6b06bb55f3d62baaea75c2f621fd4d7e1032b62fa47e22df9895795ba",
+    "observed-before.json": "e73bf1d5894dcadbfe770dfd51ea273fd7ef05356bd227a5a7a5a3e190609991",
+    "condition/raw-generations.jsonl": "54fc32c7241ee1859d28b64c4af59ea770870e7d1857fb75baf08f6f4fa863d1",
+    "condition/run.json": "d2367733933788295c8c4a7178d98ab97fc5e5bd7fdac8b8cf4adefb65fbbb91",
+    "condition/attempts.jsonl": "427d3ed902a330c620417faa2287b6eacefa9b2450926191fbe3669ec68653c4"
+  },
+  "artifact": {
+    "artifact_id": "jensen-m6-development-facts-bf16-partial0005",
+    "role": "Partial immutable prefix of first five real BF16 development facts attempts, including incomplete responses; not a completed condition",
+    "file_name": "jensen-m6-development-facts-bf16-partial0005.tar.gz",
+    "file_id": "file_00000000b2b881fd804c5d29ab79d270",
+    "library_file_id": "libfile_fde3_f-3c6d0fcf6c148191966d40871ac03e3e_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 10351,
+    "sha256": "c939f6c67e9772722ffd82a2039d428a2457d16a0ce2e8997394380df1230ff3",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "fresh_archive_and_all_members_verified": true,
+  "raw_answers_public": false,
+  "semantic_support_review": "not yet performed",
+  "human_review": "ungraded"
+}
