@@ -709,6 +709,21 @@
       "sha256": "cad9035b9e17b6acd92f0d709035d0a70aa62ef7b2614e1bc1e25b353246e031",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-m6-development-style-bf16-v2-partial0008",
+      "role": "partial-frozen-matched-response-attempts",
+      "exposure": "development",
+      "condition": "style",
+      "captured_attempts": 8,
+      "collectible": false,
+      "file_name": "jensen-m6-development-style-bf16-v2-partial0008.tar.gz",
+      "file_id": "file_00000000702481fd8cef965407bb1183",
+      "library_file_id": "libfile_fde3_f-a3e8bc3dd9688191affc024fb334ca50_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 17625,
+      "sha256": "c9b1b530f1abe3ae2ea360b7810678474f7c2701b0848e11da603cf19b6550dd",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {
