@@ -1,0 +1,19 @@
+{
+  "schema_version": "jensen-artifact-manifest.v1",
+  "run_id": "jensen-2026-11-13",
+  "subject_id": "jensen-huang",
+  "artifacts": [
+    {
+      "artifact_id": "m0-persistence-probe",
+      "role": "persistence-engineering-probe",
+      "library_file_id": "libfile_fde3_f-d06aa5437ee481918cebdaaf20c72f71_a18ece08681081918d81df44f69c4b1f",
+      "file_id": "file_00000000259c8209a4db5d4c7cfa656d",
+      "file_name": "jensen-persistence-probe.json",
+      "size_bytes": 269,
+      "sha256": "b04c45379b743e5219c08086e124c5abdf2037c7a09b0dfc3ae452165f167037",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified",
+      "training_evidence": false
+    }
+  ]
+}

@@ -1,5 +1,9 @@
 # Jensen persona, speech, and avatar execution
 
+> A new run is active on 2026-11-13. Read the
+> [current execution status](jensen-replication-status.md) for saved code,
+> artifact receipts, checks and exact continuation state.
+
 > Status as of 2026-11-13: the execution session was interrupted. This file
 > preserves the original plan. Read the [recovery and remaining-work handoff](jensen-replication-handoff.md)
 > for verified baseline evidence, reported intermediate progress, and resumption gates.
