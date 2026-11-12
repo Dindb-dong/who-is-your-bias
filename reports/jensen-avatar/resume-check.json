@@ -1,0 +1,18 @@
+{
+  "schema_version": "avatar-fit-resume-check.v1",
+  "resumed_from_external_readback": true,
+  "restored_iteration": 20,
+  "completed_iteration": 80,
+  "restored_state_sha256": "72150797765e609346aaa14935626688e9b2dbf4642b59ef5ea0873aca3846fc",
+  "resumed_final_sha256": "b4f79c30ebe75adb7dbd2929de210ed331320c37429bc84030b45b8dfceab0fc",
+  "uninterrupted_final_sha256": "b4f79c30ebe75adb7dbd2929de210ed331320c37429bc84030b45b8dfceab0fc",
+  "exact_final_state_equal": true,
+  "comparison_includes": [
+    "inputs",
+    "parameters",
+    "iteration",
+    "history",
+    "step_size"
+  ],
+  "claim": "Deterministic coarse optimizer state restoration only; no likeness acceptance."
+}

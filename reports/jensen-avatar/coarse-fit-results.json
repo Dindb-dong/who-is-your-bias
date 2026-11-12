@@ -1,0 +1,503 @@
+{
+  "schema_version": "avatar-identity-fit.v1",
+  "persona_id": "jensen-huang",
+  "asset_kind": "coarse_landmark_fitted_candidate",
+  "inputs": {
+    "measurement_sha256": "7f63c078dee417e2154aad9e5307f811b7c933591503f8beb14563de8d32649e",
+    "template_binding_sha256": "cd6d6b0d431b87ab7e4fbf4a417600b9a9f304809656a90977f18c5973e24fba",
+    "template_landmarks_sha256": "7879e563d9a974088540b7f6e405d9e3a434c61a29357b3f715afd5bbf753f43",
+    "source_photo_ids": [
+      "nvidia-headshot-2026",
+      "nvidia-portrait-2026",
+      "stanford-2026-010",
+      "stanford-2026-008",
+      "goldman-0130",
+      "goldman-0150",
+      "goldman-0170"
+    ]
+  },
+  "method": "six-parameter bounded regional deformation fitted to event-balanced photo/video landmark ratios",
+  "iterations": 80,
+  "parameter_names": [
+    "head_width",
+    "jaw_width",
+    "nose_width",
+    "mouth_width",
+    "eye_spacing",
+    "lower_face_length"
+  ],
+  "parameters": [
+    0.040067644129646945,
+    -0.023385011606151234,
+    0.11680626162793487,
+    0.09471460391413984,
+    -0.03752231021888748,
+    -0.01128728518199733
+  ],
+  "target_ratios": {
+    "face_aspect": 0.9462646120877413,
+    "jaw_to_cheek": 0.8115704818272699,
+    "nose_to_face": 0.2599663728213385,
+    "mouth_to_face": 0.3750136136570068,
+    "eyes_to_face": 0.5732398709405044,
+    "lower_face_to_face": 0.4360958604637768
+  },
+  "baseline_ratios": {
+    "face_aspect": 0.9111079964332088,
+    "jaw_to_cheek": 0.8072475218103052,
+    "nose_to_face": 0.24204723053199717,
+    "mouth_to_face": 0.34579830264057965,
+    "eyes_to_face": 0.5894892526246228,
+    "lower_face_to_face": 0.43801909157057745
+  },
+  "fitted_ratios": {
+    "face_aspect": 0.9461931841874128,
+    "jaw_to_cheek": 0.8118503219262992,
+    "nose_to_face": 0.25992105564288925,
+    "mouth_to_face": 0.3749396823157533,
+    "eyes_to_face": 0.5732566804925503,
+    "lower_face_to_face": 0.4360881780171647
+  },
+  "baseline_objective": 0.01305200122267739,
+  "final_objective": 2.6497177149874706e-05,
+  "history": [
+    {
+      "iteration": 1,
+      "objective": 0.003172857552292765,
+      "step_size": 0.08
+    },
+    {
+      "iteration": 2,
+      "objective": 0.003172857552292765,
+      "step_size": 0.06
+    },
+    {
+      "iteration": 3,
+      "objective": 0.003157634359500828,
+      "step_size": 0.06
+    },
+    {
+      "iteration": 4,
+      "objective": 0.003157634359500828,
+      "step_size": 0.045
+    },
+    {
+      "iteration": 5,
+      "objective": 0.001720000049041892,
+      "step_size": 0.045
+    },
+    {
+      "iteration": 6,
+      "objective": 0.0007244003685507363,
+      "step_size": 0.045
+    },
+    {
+      "iteration": 7,
+      "objective": 0.0002561613547783674,
+      "step_size": 0.045
+    },
+    {
+      "iteration": 8,
+      "objective": 0.0002561613547783674,
+      "step_size": 0.03375
+    },
+    {
+      "iteration": 9,
+      "objective": 0.0002561613547783674,
+      "step_size": 0.0253125
+    },
+    {
+      "iteration": 10,
+      "objective": 0.00020561602178197156,
+      "step_size": 0.0253125
+    },
+    {
+      "iteration": 11,
+      "objective": 0.00020561602178197156,
+      "step_size": 0.018984375
+    },
+    {
+      "iteration": 12,
+      "objective": 0.00011949077968668237,
+      "step_size": 0.018984375
+    },
+    {
+      "iteration": 13,
+      "objective": 0.00011949077968668237,
+      "step_size": 0.014238281250000002
+    },
+    {
+      "iteration": 14,
+      "objective": 8.485742359243105e-05,
+      "step_size": 0.014238281250000002
+    },
+    {
+      "iteration": 15,
+      "objective": 8.485742359243105e-05,
+      "step_size": 0.010678710937500002
+    },
+    {
+      "iteration": 16,
+      "objective": 6.98615563149686e-05,
+      "step_size": 0.010678710937500002
+    },
+    {
+      "iteration": 17,
+      "objective": 6.98615563149686e-05,
+      "step_size": 0.008009033203125002
+    },
+    {
+      "iteration": 18,
+      "objective": 5.863061238350484e-05,
+      "step_size": 0.008009033203125002
+    },
+    {
+      "iteration": 19,
+      "objective": 5.863061238350484e-05,
+      "step_size": 0.006006774902343751
+    },
+    {
+      "iteration": 20,
+      "objective": 3.420513315111286e-05,
+      "step_size": 0.006006774902343751
+    },
+    {
+      "iteration": 21,
+      "objective": 3.337276358218681e-05,
+      "step_size": 0.006006774902343751
+    },
+    {
+      "iteration": 22,
+      "objective": 3.337276358218681e-05,
+      "step_size": 0.0045050811767578134
+    },
+    {
+      "iteration": 23,
+      "objective": 3.186001587251377e-05,
+      "step_size": 0.0045050811767578134
+    },
+    {
+      "iteration": 24,
+      "objective": 3.186001587251377e-05,
+      "step_size": 0.00337881088256836
+    },
+    {
+      "iteration": 25,
+      "objective": 2.8916698201532738e-05,
+      "step_size": 0.00337881088256836
+    },
+    {
+      "iteration": 26,
+      "objective": 2.8916698201532738e-05,
+      "step_size": 0.00253410816192627
+    },
+    {
+      "iteration": 27,
+      "objective": 2.8916698201532738e-05,
+      "step_size": 0.0019005811214447025
+    },
+    {
+      "iteration": 28,
+      "objective": 2.8049332470781173e-05,
+      "step_size": 0.0019005811214447025
+    },
+    {
+      "iteration": 29,
+      "objective": 2.7721913489706297e-05,
+      "step_size": 0.0019005811214447025
+    },
+    {
+      "iteration": 30,
+      "objective": 2.7721913489706297e-05,
+      "step_size": 0.001425435841083527
+    },
+    {
+      "iteration": 31,
+      "objective": 2.7143664175183375e-05,
+      "step_size": 0.001425435841083527
+    },
+    {
+      "iteration": 32,
+      "objective": 2.7143664175183375e-05,
+      "step_size": 0.0010690768808126452
+    },
+    {
+      "iteration": 33,
+      "objective": 2.707002970323993e-05,
+      "step_size": 0.0010690768808126452
+    },
+    {
+      "iteration": 34,
+      "objective": 2.6960807481283372e-05,
+      "step_size": 0.0010690768808126452
+    },
+    {
+      "iteration": 35,
+      "objective": 2.6887149024702364e-05,
+      "step_size": 0.0010690768808126452
+    },
+    {
+      "iteration": 36,
+      "objective": 2.6887149024702364e-05,
+      "step_size": 0.0008018076606094839
+    },
+    {
+      "iteration": 37,
+      "objective": 2.6826027418050215e-05,
+      "step_size": 0.0008018076606094839
+    },
+    {
+      "iteration": 38,
+      "objective": 2.6814087815359623e-05,
+      "step_size": 0.0008018076606094839
+    },
+    {
+      "iteration": 39,
+      "objective": 2.6814087815359623e-05,
+      "step_size": 0.000601355745457113
+    },
+    {
+      "iteration": 40,
+      "objective": 2.6673742643602762e-05,
+      "step_size": 0.000601355745457113
+    },
+    {
+      "iteration": 41,
+      "objective": 2.6657091237615064e-05,
+      "step_size": 0.000601355745457113
+    },
+    {
+      "iteration": 42,
+      "objective": 2.6657091237615064e-05,
+      "step_size": 0.0004510168090928347
+    },
+    {
+      "iteration": 43,
+      "objective": 2.661846327697332e-05,
+      "step_size": 0.0004510168090928347
+    },
+    {
+      "iteration": 44,
+      "objective": 2.6519318470660198e-05,
+      "step_size": 0.0004510168090928347
+    },
+    {
+      "iteration": 45,
+      "objective": 2.6519318470660198e-05,
+      "step_size": 0.00033826260681962605
+    },
+    {
+      "iteration": 46,
+      "objective": 2.6519318470660198e-05,
+      "step_size": 0.00025369695511471955
+    },
+    {
+      "iteration": 47,
+      "objective": 2.6510401817346694e-05,
+      "step_size": 0.00025369695511471955
+    },
+    {
+      "iteration": 48,
+      "objective": 2.6510401817346694e-05,
+      "step_size": 0.00019027271633603965
+    },
+    {
+      "iteration": 49,
+      "objective": 2.6506794272042692e-05,
+      "step_size": 0.00019027271633603965
+    },
+    {
+      "iteration": 50,
+      "objective": 2.6506794272042692e-05,
+      "step_size": 0.00014270453725202974
+    },
+    {
+      "iteration": 51,
+      "objective": 2.6500645572868252e-05,
+      "step_size": 0.00014270453725202974
+    },
+    {
+      "iteration": 52,
+      "objective": 2.6500645572868252e-05,
+      "step_size": 0.0001070284029390223
+    },
+    {
+      "iteration": 53,
+      "objective": 2.6500645572868252e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 54,
+      "objective": 2.650045166367781e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 55,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 56,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 57,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 58,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 59,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 60,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 61,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 62,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 63,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 64,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 65,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 66,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 67,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 68,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 69,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 70,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 71,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 72,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 73,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 74,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 75,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 76,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 77,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 78,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 79,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    },
+    {
+      "iteration": 80,
+      "objective": 2.6497177149874706e-05,
+      "step_size": 0.0001
+    }
+  ],
+  "anchors": {
+    "2": 2369,
+    "10": 407,
+    "33": 13,
+    "48": 1456,
+    "61": 1529,
+    "152": 2169,
+    "172": 1343,
+    "234": 1654,
+    "263": 7109,
+    "278": 2354,
+    "291": 2548,
+    "397": 2238,
+    "454": 821
+  },
+  "glb": {
+    "path": "jensen-landmark-candidate-v1.glb",
+    "sha256": "bfb03106a073d199ef24dad2506511aba881ba5f6a78d9c808eb3bcfd0c46104",
+    "bytes": 17002232
+  },
+  "editable_master": {
+    "path": "jensen-landmark-candidate-v1.blend",
+    "sha256": "4563d8878b34b17d4c4d933f5c8306ecd2e89e9370c859c2c430fe8dc67e0074",
+    "bytes": 30275868
+  },
+  "authored_regions": [
+    "silver hair material",
+    "titanium-style glasses",
+    "dark jacket material"
+  ],
+  "likeness_review": "ungraded",
+  "promotion": "candidate_only",
+  "limitations": [
+    "Weak-perspective inferred face geometry is not photogrammetry or a metric scan.",
+    "Six coarse parameters cannot reproduce fine facial identity, wrinkles or facial texture.",
+    "Glasses, hair and garment details require visual refinement.",
+    "Landmark residual reduction does not demonstrate human likeness or animation quality."
+  ]
+}
