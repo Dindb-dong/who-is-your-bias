@@ -1,5 +1,6 @@
 import hashlib
 import json
+import subprocess
 
 import httpx
 import pytest
@@ -103,3 +104,34 @@ def test_ignored_range_body_is_never_consumed(tmp_path):
             200, stream=NeverRead()))) as client:
         with pytest.raises(ValueError, match="body not consumed"):
             download_range(entry(), tmp_path / "address.vob", client=client)
+
+
+@pytest.mark.parametrize("decoder_stderr,expected", [
+    ("", "passed"),
+    ("Error submitting packet to decoder: Invalid data found when processing input\n",
+     "completed_with_decoder_warnings"),
+])
+def test_successful_decoder_exit_preserves_warnings_in_saved_receipt(
+        tmp_path, monkeypatch, decoder_stderr, expected):
+    from tools.persona_data import archive_range
+
+    original_client = httpx.Client
+    transport = httpx.MockTransport(lambda _: httpx.Response(
+        206, headers={"content-range": "bytes 3-9/12"}, content=b"defghij"))
+    monkeypatch.setattr(archive_range.httpx, "Client",
+                        lambda **kwargs: original_client(transport=transport))
+    monkeypatch.setattr(archive_range.subprocess, "check_output", lambda _: json.dumps({
+        "format": {"duration": "10", "start_time": "3"},
+        "streams": [{"codec_type": "video"}],
+    }).encode())
+    monkeypatch.setattr(archive_range.subprocess, "run", lambda args, **kwargs:
+                        subprocess.CompletedProcess(args, 0, stderr=decoder_stderr))
+
+    output = tmp_path / "address.vob"
+    archive_range.acquire(entry(), output)
+    saved = json.loads((tmp_path / "address.vob.receipt.json").read_text())
+    assert saved["validation"]["tail_decode"] == expected
+    assert saved["validation"]["tail_decoder_exit_code"] == 0
+    assert saved["validation"]["tail_decoder_stderr"] == decoder_stderr
+    assert saved["full_source_archive_acquired"] is False
+    assert "semantic_completeness_requires_review" in saved["status"]

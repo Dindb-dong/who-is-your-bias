@@ -140,7 +140,10 @@ def acquire(entry: dict, output: Path, *, resume: bool = False) -> dict:
         "streams": [{k: s.get(k) for k in ("codec_type", "codec_name", "width", "height",
                     "r_frame_rate", "start_time", "duration")} for s in probe["streams"]],
         "validation": {"exact_HTTP_ranges": "passed", "ffprobe": "passed",
-                       "tail_decode": "passed", "tail_decoder_stderr": tail.stderr},
+                       "tail_decode": ("completed_with_decoder_warnings" if tail.stderr.strip()
+                                       else "passed"),
+                       "tail_decoder_exit_code": tail.returncode,
+                       "tail_decoder_stderr": tail.stderr},
     }
     _atomic_json(output.with_name(output.name + ".receipt.json"), receipt)
     return receipt

@@ -97,3 +97,39 @@ program-stream PTS clock, and makes no full-ISO claim. Decoder checks and a hash
 do not establish semantic speech completeness; that remains a separately
 recorded agent review. No YouTube-to-DVD clock offset is assumed. This work is
 outside every frozen training and evaluation input.
+
+The selected NTU range is now acquired: **752,097,280 bytes, 1,518.692466 seconds**
+(25m18.692s), SHA-256
+`0559b903a1a4ebc312866c28485b12fefc3611b0b057ced17c6bca2f56eb9f3a`.
+[ntu-acquisition.json](ntu-acquisition.json) records the exact source byte range,
+original DVD clock, actual decoder warnings, and subsequent visual review. A
+continuous opening review covers the introducer and handover to Jensen; the
+closing review shows Jensen finishing and leaving before later speakers. The
+45,508 video packets have continuous decode timestamps. This supports an agent
+claim that the full address is contained in the range, with ceremony context.
+It does not establish a speech-only duration, a publisher speaker chapter,
+perceptual quality, or a complete ceremony ISO. This is a separate derived
+address from a tenth event, alongside the nine verified complete original event
+recordings, not an increment to the full-original-recording count.
+
+The byte cut starts inside compressed streams, and full decoding completes with
+warnings. The initial partial audio packet and repeated timestamp occur during
+the preceding introduction; raw warnings and later incomplete/damaged-frame
+messages remain in the report. Human perceptual review is ungraded. The range
+collector now distinguishes a successful exit with decoder warnings from a
+clean decoder result.
+
+Whole-range chunk preservation is in progress. Three earlier bounded artifacts
+are already saved and freshly verified:
+
+- [Boundary metadata and samples](ntu-boundary-artifact.json), including all54
+  member hashes and the official Wanjiun Liao introducer-name correction.
+- [Exact64MiB resumable prefix](ntu-prefix-artifact.json), with the unchanged
+  acquisition plan, source binding, state, and recovery command.
+- [Opening review and official source pages](ntu-opening-artifact.json). The
+  NTU and NVIDIA pages are event summaries, not complete speech transcripts.
+
+These receipts were remotely verified in checkpoints`25bc7194817cfdb066dcfa59d994060412f54e2a`,
+`f3ea103ff554ee89245371318a08948581cad7ca`, and
+`9d9a406a693de33f683fd04cdb4fc379c2563535`, respectively. New source material
+remains outside every frozen v4, text-adapter-v1, M6, and heldout RAG input.
