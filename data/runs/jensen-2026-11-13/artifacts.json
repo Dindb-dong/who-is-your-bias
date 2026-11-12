@@ -809,6 +809,19 @@
       "sha256": "979c8c3c45115d1dab08ea7a4a688dc5055820df64f4effbe16677fe68f6c784",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-m6-development-adapter-bf16-v2",
+      "role": "complete-frozen-matched-response-condition",
+      "exposure": "development",
+      "condition": "adapter",
+      "file_name": "jensen-m6-development-adapter-bf16-v2.tar.gz",
+      "file_id": "file_00000000b44081fda2796158d378e4fe",
+      "library_file_id": "libfile_fde3_f-984a5eae272c8191835556c72cd4ea13_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 29193,
+      "sha256": "404c784123e7f61ef4f603cac856e1a663b4dde88df48a241143bdc499b6c1f8",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {
