@@ -7,7 +7,7 @@ Repository: `Dindb-dong/who-is-your-bias`. Integration branch:
 `8515b5f30f3cd412e18db3d54ee28bf2a4c28694`.
 Implementation review: [PR #19](https://github.com/Dindb-dong/who-is-your-bias/pull/19).
 Last verified code checkpoint before this status update:
-`c1741e952edeec1dde154c25efe2115454225506`.
+`52b6283f902769024250f0de1591bd84009affc3`.
 
 The [historical handoff](jensen-replication-handoff.md) defines M0–M7.
 This is a new reproducible run; unverified earlier acquisition/training counts
@@ -101,23 +101,31 @@ separately. The prior unverified eight-video claim is not inherited by this run.
   The separate [reflection expansion](../reports/jensen-recovery/reflection-expansion-v1/README.md)
   adds a freshly reconstructed 653,931,658-byte, 4,344.825034-second Computer
   History Museum oral-history video and its publisher transcript PDF. Combined,
-  **nine distinct complete publisher videos** are saved: **5,066,419,711 bytes /
-  42,473.925525 seconds (11h47m54s)**. The CHM event remains outside frozen v4,
-  text training and M6. The NTU commencement expansion is also saved and freshly reconstructed:
+  the original MP4 group totals nine events, 5,066,419,711 bytes /
+  42,473.925525 seconds. The [official regional GTC and CES 2026 replays](../reports/jensen-recovery/regional-replays-v1/README.md)
+  add two complete HLS packages, 1,402,645,064 bytes / 13,835.459555 seconds.
+  All 56 stored chunks and four final metadata objects were freshly restored;
+  both complete reconstructions match the original hashes. The combined total is
+  **11 distinct complete publisher packages, 6,469,064,775 bytes /
+  56,309.385080 seconds (15h38m29s)**. Complete published editions may be
+  Highlights or Trimmed packages; this does not mean unedited event coverage.
+  The new regional audio languages/subtitles and target-speaker durations remain
+  unreviewed, so those two recordings are not speech-training eligible. CHM
+  and both regional events remain outside frozen v4, text training and M6. The NTU commencement expansion is also saved and freshly reconstructed:
   **one additional derived address with context**, 752,097,280 bytes /
   1,518.692466 seconds (25m19s). Opening and closing review supports full address
   containment; the source-cut decode warnings remain recorded. The full ceremony
-  ISO was not acquired, so this is separate from the nine complete original videos. Transcript counts,
+  ISO was not acquired, so this is separate from the eleven complete publisher packages. Transcript counts,
   recording duration and target-speaker duration are distinct.
 
 ## Workstream checkpoints
 
 | Workstream | Saved implementation | Current gate |
 | --- | --- | --- |
-| Corpus | Authentic v4, held-out references, nine full original video restorations | Nine original videos and one additional derived NTU address verified; frozen event isolation preserved |
+| Corpus | Authentic v4, held-out references, 11 complete publisher-video restorations | Eleven event packages and one separate derived NTU address verified; frozen event isolation preserved |
 | Voice | Source clocks, four-event dataset, 16 completed updates, eight public waveforms, ASR/WavLM diagnostics and verified gateway | Candidate remains optional; human likeness is ungraded |
 | Avatar | Actual fitted model, editable master, finger controls, observed clips and actual desktop/mobile browser rendering | Human likeness remains ungraded; candidate stays optional |
-| Text | Frozen dataset, 29 saved updates and successful remote optimizer continuation | Finish bounded run and serve exact adapter |
+| Text | All 29 updates, final serving export, successful remote optimizer continuation and clean recovered-process exit | Exact saved adapter enters the frozen matched and live-text evaluations |
 | Retrieval/evaluation | Frozen lexical/concept/hybrid comparison; both candidates remain opt-in | Matched base/style/adapter and heldout response experiments |
 
 Integrated changed-path Python checks: 186 passed and two optional-Torch modules
@@ -189,17 +197,21 @@ will be recorded only after their exact pinned inputs and checkpoint paths exist
 
 ## Remaining acceptance
 
-The step-28 checkpoint survived an execution-session interruption and has been
-freshly byte-checked again. [Recovery evidence and the isolated continuation](../reports/jensen-recovery/text-v1/interrupted-owner-step0028.json)
-record the lost owner, unconsumed old gate and prepared final update. The previous
-process has no observed exit receipt; completed training is still pending.
+The step-28 checkpoint survived an execution-session interruption. The
+[interruption record](../reports/jensen-recovery/text-v1/interrupted-owner-step0028.json)
+retains the lost owner and unconsumed old gate. The subsequent isolated invocation
+restored step 28, completed update 29, passed its remote persistence gate and
+exited zero after exporting the adapter and tokenizer. The [completion receipt](../reports/jensen-recovery/text-v1/completed-serving.json)
+records that new exit and fresh serving restoration; the old owner still has no
+observed exit receipt.
 
 M0 storage readback and real optimizer/RNG equivalence tests are verified. The
 actual text checkpoint survived fresh remote retrieval and completed the next
 optimizer update in a fresh process; step 2 was again saved and freshly verified. The retrieval comparison and the voice candidate
 training/sample/diagnostic/gateway delivery have executed. Both retrieval
-candidates remain opt-in after missing their declared gate. Text training is
-still 29/29 saved updates; the first 12 of 54 matched M6 calls have executed and been saved (six normal
+candidates remain opt-in after missing their declared gate. Text training and
+the serving export are complete. The first 12 of 54 matched M6 calls have
+executed and been saved (six normal
 completions, six length-limited failures). The remaining 42 matched calls, six
 separate RAG responses and actual M7 neural-text session checks remain pending.
 See the [current response execution status](../reports/jensen-evaluation-v1/execution-status.json). Avatar/browser

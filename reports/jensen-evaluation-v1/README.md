@@ -7,7 +7,8 @@ were saved and freshly verified; see [the measured report](development-facts-bf1
 The other matched conditions and the separate RAG diagnostic are pending.
 This does not establish a semantic or model-improvement result.
 
-**Status: inputs frozen; zero model generations executed at this checkpoint.**
+**Registration history:** inputs were frozen before any model generations.
+The execution-status link above records subsequent actual calls.
 There are 12 development cases and six cases from the separately acquired No
 Priors 2023 test event. One attempt in each of three conditions is planned: 54
 generation calls. This is a controlled generation experiment with explicitly
