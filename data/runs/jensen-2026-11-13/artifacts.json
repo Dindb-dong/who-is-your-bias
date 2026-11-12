@@ -215,6 +215,60 @@
       "sha256": "bace668feff99ef3576dd389cfc2e8424088d263bbf857afa62d4db697d6a6a6",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "voice-dataset-pilot-v2",
+      "role": "frozen-candidate-speech-dataset",
+      "samples": 8,
+      "duration_seconds": 91.84,
+      "event_families": 4,
+      "listening_reviewed": 0,
+      "file_name": "voice-dataset-pilot-v2.tar.gz",
+      "file_id": "file_000000001d1c81fdaeba39ae6ae25f49",
+      "library_file_id": "libfile_fde3_f-cb59fb286ba081919698efd25e5c5373_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 9881794,
+      "sha256": "30a907a9493f0c1a0c87091fad4c49da9d4300c0990c1ca0f2744a8f1f473510",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "text-checkpoint-step0001",
+      "role": "text-optimizer-resume-state",
+      "optimizer_steps": 1,
+      "base_model": "Qwen/Qwen3-1.7B",
+      "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "file_name": "jensen-text-checkpoint-step0001.tar.gz",
+      "file_id": "file_00000000a96881fdaa3e37e41545bc53",
+      "library_file_id": "libfile_fde3_f-f9abee02793c819185f6fb2aaa6e74be_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 56811079,
+      "sha256": "a867a31cde7dc43020017d5e784d748817c158dff5f223bea16137b22a660457",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "voice-codecs-v2",
+      "role": "acoustic-code-training-input",
+      "samples": 8,
+      "codec_frames": 1151,
+      "codebooks": 16,
+      "file_name": "voice-codecs-v2.tar.gz",
+      "file_id": "file_0000000024a481fd85774f7bba3762e9",
+      "library_file_id": "libfile_fde3_f-3bfca702fcfc8191aad129e209231e90_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 42686,
+      "sha256": "fb6ee01ce5be5dd365128c98c101ba11253b0895c2c6860a6f9baaebb8e99190",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "voice-preparation-lex-extension-v1",
+      "role": "aligned-speech-candidate-extension",
+      "file_name": "voice-preparation-lex-extension-v1.tar.gz",
+      "file_id": "file_00000000126481fdb07fc452b91ee0c2",
+      "library_file_id": "libfile_fde3_f-34771fd6b918819194d551ce95cb06c4_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 7265294,
+      "sha256": "f0e818a26e3381198af71c85af64069a90c6ba06b7315d94d22d2544db8bc94d",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ]
 }

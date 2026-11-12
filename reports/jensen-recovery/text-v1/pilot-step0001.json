@@ -1,0 +1,52 @@
+{
+  "schema_version": "text-adaptation-run.v2",
+  "status": "paused",
+  "started_at": "2026-11-12T17:46:38.693320+00:00",
+  "base_model": "Qwen/Qwen3-1.7B",
+  "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+  "seed": 42,
+  "epochs": 1,
+  "max_length": 768,
+  "adapter": {
+    "alpha": 16,
+    "dropout": 0.05,
+    "rank": 8,
+    "targets": "all-linear",
+    "type": "LoRA"
+  },
+  "optimization": {
+    "batch_size": 1,
+    "checkpoint_use_reentrant": false,
+    "gradient_accumulation": 4,
+    "gradient_checkpointing": true,
+    "learning_rate": 0.0002,
+    "max_steps": 29
+  },
+  "precision": "bfloat16",
+  "accepted_examples": 113,
+  "trainable_parameters": 8716288,
+  "optimizer_steps": 1,
+  "last_local_checkpoint": "checkpoints/step-00000001",
+  "loss_statistics": {
+    "examples": 4,
+    "maximum": 6.463873386383057,
+    "minimum": 4.127119541168213,
+    "sum": 19.972933292388916
+  },
+  "elapsed_seconds": 220.19489963200022,
+  "runtime": {
+    "cpu_affinity_count": 9,
+    "cuda_runtime": null,
+    "logical_cpu_count": 9,
+    "machine": "x86_64",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "processor": null,
+    "python": "3.12.14",
+    "requested_device": "cpu",
+    "torch_interop_threads": 9,
+    "torch_threads": 4
+  },
+  "remote_checkpoint_sha256": "a867a31cde7dc43020017d5e784d748817c158dff5f223bea16137b22a660457",
+  "remote_state": "uploaded_and_fresh_readback_byte_verified",
+  "quality_claim": false
+}

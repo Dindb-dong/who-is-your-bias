@@ -5,8 +5,9 @@ Run `jensen-2026-11-13`, started 2026-11-13 (Asia/Seoul).
 Repository: `Dindb-dong/who-is-your-bias`. Integration branch:
 `feat/jensen-resumable-replication`. Base: PR #18 merge
 `8515b5f30f3cd412e18db3d54ee28bf2a4c28694`.
-Last verified code checkpoint before this receipt:
-`4f8df709f841ff2ef81ada3094a5a242dcd753fd`.
+Implementation review: [PR #19](https://github.com/Dindb-dong/who-is-your-bias/pull/19).
+Last verified code checkpoint before this status update:
+`8919adbf1878677cb08928a93f0f912e5d77b776`.
 
 The [historical handoff](jensen-replication-handoff.md) defines M0–M7.
 This is a new reproducible run; unverified earlier acquisition/training counts
@@ -32,19 +33,68 @@ search. This access audit does not establish permanent loss.
 - Locked Python development environment installed. Optional model environments
   and browser dependencies are being prepared.
 
+## Current preserved results
+
+The user reiterated that full original videos and an actual newly authored
+avatar are required, and asked to publish useful intermediate material quickly.
+Short clips, audio-only recordings, located URLs and full videos are counted
+separately. The prior unverified eight-video claim is not inherited by this run.
+
+- Original dialogue v4: **554 Q&A / 9 events**, including **551 complete
+  exchanges**, three excerpts and 410 factual projection records. A corrected
+  mixed-speaker-label parser recovers omitted YC/Sega answers; earlier v3 remains
+  explicitly superseded. Full v4 bytes were saved and freshly retrieved.
+- Text selection: **113 complete answers / all 9 events**, 24-word minimum,
+  768-token whole-exchange limit, deterministic cap of 16 per event. Dataset,
+  selection and immutable Qwen3-1.7B tokenizer/model hashes are saved.
+- Text computation: **one actual optimizer update**, 8,716,288 trainable LoRA
+  parameters, BF16 CPU, 220.2 seconds for the first invocation. The job is paused
+  at a verified remote checkpoint containing adapter weights, optimizer state,
+  RNG, cursor and bound inputs. Its 29-update plan is not reported as completed.
+- Voice: **19 publisher-matched candidates**, independently screened down to
+  **8 clips / 91.84 seconds / four events**. Human listening review is zero.
+  Actual acoustic encoding produced **1,151 frames × 16 codebooks**, saved and
+  freshly retrieved. First optimizer pilot is the next voice stage.
+- Avatar: new coarse/dense editable masters and GLB exports are saved; the
+  20→80-step restored geometry fit matches uninterrupted state exactly. The
+  coarse/dense appearance remains unaccepted because it looks too generic.
+  Attributed reference-texture refinement and rigid glasses fixes continue.
+- Motion: 240 measured face/body/hand frames from three 8-second Goldman windows;
+  three actual 30-finger preview clips and an explicit Jensen Motion Lab sample
+  are already in Git. These are source-bound previews, not learned habits.
+- Held-out evaluation: 50 original No Priors exchanges passed isolation against
+  both the v4 corpus and PR #17 summaries. WEF's former transcript URL is
+  unavailable; no replacement transcript is invented.
+- Source videos: the [live source ledger](../reports/jensen-recovery/source-progress.json)
+  and [media artifact receipts](../reports/jensen-recovery/media-artifacts.json)
+  distinguish all located events, complete local files, failed addresses,
+  partial uploads and fully reconstructed remote videos. The first complete
+  Goldman original was rebuilt from fresh remote chunks with its full SHA intact.
+  Three full original interview audio files (Stanford, Acquired and Lex) are also
+  saved and freshly verified. Continue to at least eight full event videos,
+  including four full keynotes and expressive interview footage.
+
 ## Workstream checkpoints
 
 | Workstream | Saved implementation | Current gate |
 | --- | --- | --- |
-| Corpus | Subject-aware extraction and source metadata; 14-family split registration | Acquire clean original dialogue and actual media, preserve bytes |
-| Voice | Speaker-bound exports and hash-verified named references | Align actual source speech, execute resumable candidate adaptation |
-| Avatar | 30 finger joints, compatible clip playback, hand-inclusive framing | Fit a new identity from actual references; export and inspect |
-| Text | Existing pinned-model trainer inspected | Add optimizer/RNG/cursor persistence and verify resume before fitting |
-| Retrieval/evaluation | Historical PR #17 remains baseline | Freeze new development controls and matched comparisons |
+| Corpus | Authentic v4, held-out references, full recordings, resumable media recipes | Finish full-video acquisition and verify every chunk |
+| Voice | Source clocks, screened four-event dataset, actual acoustic codes | Execute and preserve bounded optimizer pilot, EN/KO samples |
+| Avatar | Measured editable exports, full finger controls and actual preview clips | Improve identity/texture; inspect integrated desktop/mobile playback |
+| Text | Frozen dataset, actual first update and verified remote optimizer checkpoint | Resume from retrieved bytes; finish bounded run and serve exact adapter |
+| Retrieval/evaluation | Unsupported endorsement/private requests now abstain | Compare frozen candidates and matched base/style/adapter responses |
 
-First focused checks: corpus extraction 21 passed; voice export/reference
-49 passed; avatar finger/rendering 39 passed plus TypeScript typecheck.
-These are component checks, not integrated acceptance or persona-quality scores.
+Integrated changed-path Python checks: 186 passed and two optional-Torch modules
+skipped in the core environment. Separately, real Torch checkpoint/adapter checks
+passed 45 tests in the model environment. Web: TypeScript passed and 236 tests
+passed at the then-verified head. Later changes still need final focused checks.
+No Actions workflow runs were registered at the inspected PR head. These are
+component checks, not final integrated acceptance or persona-quality scores.
+
+Read the [recovery index](../reports/jensen-recovery/README.md),
+[text pilot](../reports/jensen-recovery/text-v1/pilot-step0001.json),
+[voice run](jensen-voice-adaptation.md), and
+[avatar results](../reports/jensen-avatar/README.md) before repeating work.
 
 ## Parallel ownership and resumption
 
@@ -67,7 +117,9 @@ will be recorded only after their exact pinned inputs and checkpoint paths exist
 
 ## Remaining acceptance
 
-M0 storage readback is verified; training-state resume is pending. M1–M7 are
-in progress. No Jensen text/voice model quality, source-fitted likeness, human
-ratings, or latency target is claimed by these implementation checkpoints.
+M0 storage readback and real optimizer/RNG equivalence tests are verified. The
+actual text checkpoint has also survived fresh remote retrieval; its next
+optimizer update from those bytes is pending. M1–M7 remain in progress. No Jensen
+text/voice model quality, accepted likeness, human ratings, or latency target is
+claimed by these implementation checkpoints.
 New follow-up pull requests are published for review; no new merge is authorized.
