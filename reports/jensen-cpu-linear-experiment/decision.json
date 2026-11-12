@@ -1,0 +1,20 @@
+{
+  "schema_version": "cpu-linear-experiment-decision.v1",
+  "decision": "reject_cast_wrapper_integration",
+  "implementation_installed": false,
+  "full_model_loaded": false,
+  "existing_v1_checkpoint_changed": false,
+  "m6_protocol_or_serving_files_changed": false,
+  "native_training_may_continue": true,
+  "basis": "The FP32 cast path had no material speed benefit with nonreentrant checkpoint recomputation at either tested thread count.",
+  "sample_size": "Three paired measured iterations per thread/checkpoint setting after one warmup per condition; high host variance and possible concurrent work.",
+  "executed_private_script_sha256": {
+    "cpu-linear-cast-probe": "04be9cb1aa7fef2285bcf21269f9099bb12ced90e6ef990b1b87d6f65349c806",
+    "cpu-linear-cast-diagnostics": "91702e9885384ac4163b9def3057e8f9013a198a82d6ab023e0f6785c5027103"
+  },
+  "public_script_difference": "Only the output destination is now a required --output argument with an overwrite guard; numerical and timing operations are unchanged.",
+  "references": [
+    "https://docs.pytorch.org/docs/2.11/checkpoint.html",
+    "https://docs.pytorch.org/docs/2.11/amp.html"
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "schema_version": "frozen-bf16-linear-cast-probe.v1",
+  "shape": [
+    768,
+    2048,
+    6144
+  ],
+  "torch_version": "2.11.0+cpu",
+  "cpu_capability": "AVX512",
+  "includes": [
+    "input cast",
+    "weight cast",
+    "output cast",
+    "GELU",
+    "input backward",
+    "nonreentrant checkpoint recomputation where declared"
+  ],
+  "weight_gradient": false,
+  "full_model_loaded": false,
+  "scope": "Toy kernels under possibly concurrent host work; no end-to-end speed claim.",
+  "results": [
+    {
+      "threads": 4,
+      "checkpointed": false,
+      "times_seconds": {
+        "native_bf16": [
+          0.33795227100017655,
+          0.5864246580003964,
+          0.5960550339996189
+        ],
+        "fp32_cast": [
+          0.4988950079996357,
+          0.5879093070007002,
+          0.4799452690003818
+        ]
+      },
+      "median_seconds": {
+        "native_bf16": 0.5864246580003964,
+        "fp32_cast": 0.4988950079996357
+      },
+      "native_over_cast_speed_ratio": 1.1754470351421609,
+      "numerical_difference": {
+        "output": {
+          "max_absolute": 0.015625,
+          "relative_l2": 3.4494747524149716e-05
+        },
+        "input_gradient": {
+          "max_absolute": 0.000244140625,
+          "relative_l2": 0.00017449315055273473
+        }
+      }
+    },
+    {
+      "threads": 4,
+      "checkpointed": true,
+      "times_seconds": {
+        "native_bf16": [
+          0.7571788010000091,
+          0.7158582060001208,
+          0.7551890519998778
+        ],
+        "fp32_cast": [
+          0.7881452020001234,
+          0.6121492629999921,
+          0.8123981779999667
+        ]
+      },
+      "median_seconds": {
+        "native_bf16": 0.7551890519998778,
+        "fp32_cast": 0.7881452020001234
+      },
+      "native_over_cast_speed_ratio": 0.9581851796894649,
+      "numerical_difference": {
+        "output": {
+          "max_absolute": 0.015625,
+          "relative_l2": 3.4494747524149716e-05
+        },
+        "input_gradient": {
+          "max_absolute": 0.000244140625,
+          "relative_l2": 0.00017449315055273473
+        }
+      }
+    },
+    {
+      "threads": 8,
+      "checkpointed": false,
+      "times_seconds": {
+        "native_bf16": [
+          0.4348600590001297,
+          0.35298347899970395,
+          0.2422021450001921
+        ],
+        "fp32_cast": [
+          0.5435424990000683,
+          0.5405253549997724,
+          0.3243939100002535
+        ]
+      },
+      "median_seconds": {
+        "native_bf16": 0.35298347899970395,
+        "fp32_cast": 0.5405253549997724
+      },
+      "native_over_cast_speed_ratio": 0.6530377821033994,
+      "numerical_difference": {
+        "output": {
+          "max_absolute": 0.015625,
+          "relative_l2": 3.4494747524149716e-05
+        },
+        "input_gradient": {
+          "max_absolute": 0.000244140625,
+          "relative_l2": 0.00017417658818885684
+        }
+      }
+    },
+    {
+      "threads": 8,
+      "checkpointed": true,
+      "times_seconds": {
+        "native_bf16": [
+          0.5853709289995095,
+          0.43924168899957294,
+          0.4098968000007517
+        ],
+        "fp32_cast": [
+          0.46058064400040166,
+          0.4122478709996358,
+          0.5248913860004905
+        ]
+      },
+      "median_seconds": {
+        "native_bf16": 0.43924168899957294,
+        "fp32_cast": 0.46058064400040166
+      },
+      "native_over_cast_speed_ratio": 0.9536694490339674,
+      "numerical_difference": {
+        "output": {
+          "max_absolute": 0.015625,
+          "relative_l2": 3.4494747524149716e-05
+        },
+        "input_gradient": {
+          "max_absolute": 0.000244140625,
+          "relative_l2": 0.00017417658818885684
+        }
+      }
+    }
+  ]
+}

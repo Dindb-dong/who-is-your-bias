@@ -1,0 +1,164 @@
+{
+  "schema_version": "frozen-bf16-linear-cast-diagnostics.v1",
+  "full_model_loaded": false,
+  "tiny_lora": {
+    "layers": 2,
+    "rank": 4,
+    "alpha": 8,
+    "dropout": 0.05,
+    "optimizer": "AdamW",
+    "learning_rate": 0.0002,
+    "updates": 4,
+    "checkpoint_use_reentrant": false,
+    "trainable_dtype": "float32",
+    "frozen_dtype": "bfloat16",
+    "losses": {
+      "native_bf16": [
+        1.0604926347732544,
+        1.0604114532470703,
+        1.0601301193237305,
+        1.0598454475402832
+      ],
+      "fp32_cast": [
+        1.0604926347732544,
+        1.0604114532470703,
+        1.0601301193237305,
+        1.0598454475402832
+      ]
+    },
+    "parameter_comparison_tolerance": {
+      "rtol": 0.02,
+      "atol": 2e-05
+    },
+    "loss_absolute_tolerance": 0.0001,
+    "trainable_parameter_differences": {
+      "first.lora_A.default.weight": {
+        "max_absolute": 0.0,
+        "relative_l2": 0.0
+      },
+      "first.lora_B.default.weight": {
+        "max_absolute": 0.0,
+        "relative_l2": 0.0
+      },
+      "second.lora_A.default.weight": {
+        "max_absolute": 0.0,
+        "relative_l2": 0.0
+      },
+      "second.lora_B.default.weight": {
+        "max_absolute": 0.0,
+        "relative_l2": 0.0
+      }
+    },
+    "frozen_parameters_unchanged": true,
+    "state_dict_keys_unchanged": true,
+    "finite_input_gradients": true,
+    "passed": true
+  },
+  "saved_tensor_observations": [
+    {
+      "condition": "native_bf16",
+      "checkpointed": false,
+      "saved_tensors": [
+        {
+          "shape": [
+            2048,
+            6144
+          ],
+          "dtype": "torch.bfloat16",
+          "bytes": 25165824,
+          "aliases_existing_frozen_weight": true
+        },
+        {
+          "shape": [
+            768,
+            6144
+          ],
+          "dtype": "torch.bfloat16",
+          "bytes": 9437184,
+          "aliases_existing_frozen_weight": false
+        }
+      ],
+      "saved_float32_bytes": 0
+    },
+    {
+      "condition": "fp32_cast",
+      "checkpointed": false,
+      "saved_tensors": [
+        {
+          "shape": [
+            2048,
+            6144
+          ],
+          "dtype": "torch.float32",
+          "bytes": 50331648,
+          "aliases_existing_frozen_weight": false
+        },
+        {
+          "shape": [
+            768,
+            6144
+          ],
+          "dtype": "torch.bfloat16",
+          "bytes": 9437184,
+          "aliases_existing_frozen_weight": false
+        }
+      ],
+      "saved_float32_bytes": 50331648
+    },
+    {
+      "condition": "native_bf16",
+      "checkpointed": true,
+      "saved_tensors": [
+        {
+          "shape": [
+            0
+          ],
+          "dtype": "torch.float32",
+          "bytes": 0,
+          "aliases_existing_frozen_weight": false
+        },
+        {
+          "shape": [
+            768,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "bytes": 3145728,
+          "aliases_existing_frozen_weight": false
+        }
+      ],
+      "saved_float32_bytes": 0
+    },
+    {
+      "condition": "fp32_cast",
+      "checkpointed": true,
+      "saved_tensors": [
+        {
+          "shape": [
+            0
+          ],
+          "dtype": "torch.float32",
+          "bytes": 0,
+          "aliases_existing_frozen_weight": false
+        },
+        {
+          "shape": [
+            768,
+            2048
+          ],
+          "dtype": "torch.bfloat16",
+          "bytes": 3145728,
+          "aliases_existing_frozen_weight": false
+        }
+      ],
+      "saved_float32_bytes": 0
+    }
+  ],
+  "memory_limitations": [
+    "FP32 weight casts can remain alive for input backward even though weights are frozen.",
+    "Nonreentrant checkpointing avoids retaining these casts between block forward and backward in this toy probe; backward still allocates temporary FP32 weights/input/output.",
+    "Saved-tensor bytes are not peak process memory; GEMM workspace, allocator behavior, other layers and output logits are not measured.",
+    "A blanket wrapper over an uncheckpointed large LM head could add a substantial FP32 weight/logit allocation."
+  ],
+  "decision": "reject_integration_no_material_checkpointed_speed_gain"
+}
