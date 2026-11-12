@@ -29,6 +29,9 @@ def reference_bundle(root: Path, *, label="Jensen Huang") -> tuple[Path, Path]:
         path.write_text(text if name == "reference_text" else "synthetic fixture")
         files[name] = path
     manifest = {"schema_version": "voice_reference.v1", "source_id": "synthetic-test",
+                "source_url": "https://example.org/synthetic-test", "source_timeline": "fixture-native",
+                "source_start_seconds": 0, "source_end_seconds": 1,
+                "automatic_checks": {"exact_normalized_text_agreement": True, "word_boundaries_not_cut": True},
                 "publisher_attribution": {"speaker_label": label},
                 "artifacts": {name: {"path": path.name, "sha256": file_hash(path), "bytes": path.stat().st_size}
                               for name, path in files.items()}}
