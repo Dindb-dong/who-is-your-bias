@@ -56,6 +56,20 @@
       "github_run_id": 43287361386,
       "github_artifact_id": 13975183687,
       "github_head": "e4b05f88757bc9e9a07a1dfe065d2e9c8e9d7a05"
+    },
+    {
+      "run_id": "jensen-recorded-audio-browser-attempt-2",
+      "role": "Actual intermediate desktop pass and mobile screenshot-expiry failure, before screenshot-order correction",
+      "file_name": "studio-browser-9fe8532-intermediate.zip",
+      "file_id": "file_00000000998c81fd8ed8085140948bfa",
+      "library_file_id": "libfile_fde3_f-47624eb96eac8191bed4ada80de7c96e_a18ece08681081918d81df44f69c4b1f",
+      "bytes": 21133105,
+      "sha256": "bc9d4b8ad8eab2c795b181edc05609a1f468b0b199c5f9515fafd1db78124cf3",
+      "status": "uploaded_and_fresh_readback_sha256_verified",
+      "verified_at": "2026-11-12T19:27:21.704925+00:00",
+      "github_run_id": 43288581728,
+      "github_artifact_id": 13976028257,
+      "github_head": "9fe8532149830c8f304eea15c88b284386a528f6"
     }
   ]
 }
