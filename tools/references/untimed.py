@@ -15,20 +15,21 @@ from tools.media.common import MediaError, sha256, source_identity, write_json
 from .workflow import align_transcripts, asr_words, prepare_reference, publisher_words, tokens
 
 
-def publisher_from_turns(canonical: Path, *, source_url: str) -> dict:
+def publisher_from_turns(canonical: Path, *, source_url: str, ignore_publisher_clock: bool = False) -> dict:
     source = json.loads(canonical.read_text())
-    if source.get("schema_version") != "persona-original-turns.v1" or source.get("source_timeline") is not None:
+    if source.get("schema_version") != "persona-original-turns.v1" or (source.get("source_timeline") is not None and not ignore_publisher_clock):
         raise MediaError("Supply canonical original turns explicitly lacking a media clock")
     source_identity(source.get("source_id"), source_url, "untimed_text")
     segments = []
     for turn in source.get("turns", []):
-        if turn.get("start") is not None or turn.get("end") is not None:
+        if (turn.get("start") is not None or turn.get("end") is not None) and not ignore_publisher_clock:
             raise MediaError("Untimed conversion must not discard existing timing")
         text = turn.get("text", "")
         speaker = turn.get("speaker")
         basis = turn.get("speaker_basis")
         attributed = isinstance(speaker, str) and bool(speaker) and basis in {
-            "explicit_pdf_speaker_label", "explicit_label", "explicit_publisher_label", "explicit_publisher_speaker_label"}
+            "explicit_pdf_speaker_label", "explicit_label", "explicit_publisher_label", "explicit_publisher_speaker_label",
+            "explicit_publisher_text_labels"}
         for index, match in enumerate(re.finditer(r"\S.*?(?:[.!?](?=\s|$)|$)", text, flags=re.DOTALL)):
             passage = match.group().strip()
             if not passage:
@@ -37,10 +38,13 @@ def publisher_from_turns(canonical: Path, *, source_url: str) -> dict:
                 "speaker": speaker if attributed else None,
                 "speaker_basis": "explicit_publisher_label" if attributed else "unknown",
                 "text": passage, "source_turn_id": turn["id"], "source_character_span": [match.start(), match.end()],
+                "original_publisher_turn_start": turn.get("start"), "original_publisher_turn_end": turn.get("end"),
                 "source_speaker_basis": basis,
                 "speaker_spans": [{"kind": "caption_text", "text": passage, "speaker": speaker if attributed else None}]})
     result = {"schema_version": "publisher_transcript.v1", "source_id": source["source_id"], "source_url": source_url,
         "source_timeline": None, "timing_kind": "untimed_text", "segments": segments,
+        "original_publisher_timeline": source.get("source_timeline"),
+        "publisher_clock_ignored_for_audio_alignment": ignore_publisher_clock,
         "canonical_sha256": sha256(canonical), "original_input_sha256": source.get("input_sha256"),
         "segmentation": "Original punctuation sentence spans; text retained from canonical publisher turns.",
         "audio_alignment_verified": False}
@@ -95,10 +99,12 @@ def main(argv=None):
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--speaker", required=True)
     parser.add_argument("--limit", type=int, default=10)
+    parser.add_argument("--ignore-publisher-clock", action="store_true",
+        help="Retain publisher times as locators only when aligning a different audio edition")
     args = parser.parse_args(argv)
     if args.output.exists():
         parser.error("Choose a new candidate output directory")
-    publisher = publisher_from_turns(args.canonical, source_url=args.source_url)
+    publisher = publisher_from_turns(args.canonical, source_url=args.source_url, ignore_publisher_clock=args.ignore_publisher_clock)
     asr = json.loads(args.asr.read_text())
     intervals = candidate_intervals(publisher, asr, speaker=args.speaker, limit=args.limit)
     args.output.mkdir(parents=True)

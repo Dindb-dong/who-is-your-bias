@@ -52,3 +52,10 @@ def test_untimed_converter_must_not_drop_known_timestamps(tmp_path):
     path.write_text(json.dumps(payload))
     with pytest.raises(MediaError, match="discard existing timing"):
         publisher_from_turns(path, source_url="https://example.org/synthetic")
+    payload["source_timeline"] = "publisher_video"
+    path.write_text(json.dumps(payload))
+    output = publisher_from_turns(path, source_url="https://example.org/synthetic", ignore_publisher_clock=True)
+    assert output["source_timeline"] is None
+    assert output["original_publisher_timeline"] == "publisher_video"
+    assert output["publisher_clock_ignored_for_audio_alignment"] is True
+    assert all(row["original_publisher_turn_start"] == 90 for row in output["segments"])
