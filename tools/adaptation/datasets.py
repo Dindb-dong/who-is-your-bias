@@ -93,12 +93,17 @@ def _crop_wave(source: Path, target: Path, start: float, end: float):
             out.writeframes(pcm)
 
 
-def export_voice(projection: Path, output: Path, *, asset_root: Path, reference_id: str | None = None) -> dict:
+def export_voice(projection: Path, output: Path, *, asset_root: Path, reference_id: str | None = None,
+                 speaker: str | None = None, persona_id: str | None = None) -> dict:
     if output.exists():
         raise ValueError("Choose a new voice export directory")
     rows = read_projection(projection)
-    output.mkdir(parents=True)
+    if speaker is not None and (not isinstance(speaker, str) or not speaker.strip() or len(speaker) > 200):
+        raise ValueError("Supply an explicit publisher speaker label")
+    if persona_id is not None and not re.fullmatch(r"[a-z0-9][a-z0-9_.-]{0,119}", persona_id):
+        raise ValueError("Supply a valid persona ID")
     if not rows:
+        output.mkdir(parents=True)
         write_jsonl(output / "train_raw.jsonl", [])
         manifest = {"schema_version": "qwen3-tts-dataset.v1", "ready": False, "samples": 0,
                     "reason": "No independently accepted, aligned original target-speaker recordings; publisher text is insufficient.",
@@ -107,14 +112,33 @@ def export_voice(projection: Path, output: Path, *, asset_root: Path, reference_
         return manifest
     if reference_id not in {row["segment_id"] for row in rows}:
         raise ValueError("Choose one accepted segment as the consistent reference")
-    clips = {}
+    speakers = {row.get("media", {}).get("speaker") for row in rows}
+    # Legacy callers can infer the one explicitly reviewed publisher label;
+    # neither the active persona nor historical Musk fixtures supply a default.
+    if len(speakers) != 1 or None in speakers or "" in speakers:
+        raise ValueError("Voice export requires exactly one explicitly attributed speaker")
+    inferred_speaker = next(iter(speakers))
+    if speaker is not None and inferred_speaker != speaker:
+        raise ValueError("Reviewed speech does not match the requested speaker")
+    speaker = inferred_speaker
+    verified = []
     for row in rows:
         media = row["media"]
-        if media.get("review_status") != "accepted" or media.get("alignment_basis") != "acoustically_reviewed" or media.get("speaker") != "Elon Musk":
+        if media.get("review_status") != "accepted" or media.get("alignment_basis") != "acoustically_reviewed":
             raise ValueError("Voice export requires accepted acoustic speaker review")
+        if persona_id is not None and row.get("persona_id") not in {None, persona_id}:
+            raise ValueError("Voice projection belongs to a different persona")
+        if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,199}", row["segment_id"]):
+            raise ValueError("Voice segment identifiers must be safe filenames")
         source = (asset_root / media["file"]).resolve()
         if not source.is_relative_to(asset_root.resolve()) or file_hash(source) != media["sha256"]:
             raise ValueError("Accepted speech source hash/path changed")
+        verified.append((row, source))
+    # Validate the entire selection before producing any reusable output.
+    output.mkdir(parents=True)
+    clips = {}
+    for row, source in verified:
+        media = row["media"]
         clip = output / (row["segment_id"] + ".wav")
         _crop_wave(source, clip, media["start_seconds"], media["end_seconds"])
         clips[row["segment_id"]] = clip.resolve()
@@ -124,6 +148,13 @@ def export_voice(projection: Path, output: Path, *, asset_root: Path, reference_
     examples = [{"audio": str(clips[row["segment_id"]]), "text": row["text"], "ref_audio": reference} for row in rows]
     write_jsonl(output / "train_raw.jsonl", examples)
     manifest = {"schema_version": "qwen3-tts-dataset.v1", "ready": True, "samples": len(examples),
+                "speaker": speaker, "persona_id": persona_id,
+                "event_counts": dict(Counter(row["event_family_id"] for row in rows)),
+                "source_intervals": [{"segment_id": row["segment_id"], "source_id": row["source_id"],
+                    "event_family_id": row["event_family_id"], "split": row["split"],
+                    "source_sha256": row["media"]["sha256"], "source_timeline": row["media"].get("source_timeline"),
+                    "start_seconds": row["media"]["start_seconds"], "end_seconds": row["media"]["end_seconds"],
+                    "text_sha256": row["answer_sha256"]} for row in rows],
                 "projection_sha256": file_hash(projection), "dataset_sha256": file_hash(output / "train_raw.jsonl"),
                 "reference_segment_id": reference_id, "reference_sha256": file_hash(Path(reference)),
                 "audio_sha256": {key: file_hash(path) for key, path in clips.items()},

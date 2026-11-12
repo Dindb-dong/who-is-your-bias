@@ -21,6 +21,8 @@ def main(argv=None):
     voice_export.add_argument("--output", type=Path, required=True)
     voice_export.add_argument("--asset-root", type=Path, default=Path("."))
     voice_export.add_argument("--reference-id")
+    voice_export.add_argument("--speaker", help="Exact publisher label from accepted speech review")
+    voice_export.add_argument("--persona-id", help="Subject binding, for example jensen-huang")
     text_train = commands.add_parser("train-text")
     text_train.add_argument("--dataset", type=Path, required=True)
     text_train.add_argument("--output", type=Path, required=True)

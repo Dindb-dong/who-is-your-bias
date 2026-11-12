@@ -13,6 +13,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable
 
+from .provenance import ReferenceBindingError, verify_binding
+
 # The official ONNX Runtime opt-out must precede initialization, including
 # transitive imports by model libraries. Local inference needs no telemetry.
 os.environ.setdefault("ORT_DISABLE_TELEMETRY", "1")
@@ -42,6 +44,10 @@ class VoiceSettings:
     attention: str = "sdpa"
     reference_wav: Path | None = field(default=None, repr=False)
     reference_text: str | None = field(default=None, repr=False)
+    persona_id: str | None = None
+    speaker_label: str | None = None
+    reference_manifest: Path | None = field(default=None, repr=False)
+    allow_candidate_reference: bool = False
     x_vector_only_mode: bool = False
     api_key: str | None = field(default=None, repr=False)
     max_input_chars: int = 2000
@@ -57,13 +63,17 @@ class VoiceSettings:
     repetition_penalty: float = 1.05
 
     def __post_init__(self) -> None:
-        for name in ("x_vector_only_mode", "local_files_only", "do_sample"):
+        for name in ("x_vector_only_mode", "local_files_only", "do_sample", "allow_candidate_reference"):
             if not isinstance(getattr(self, name), bool):
                 raise ValueError(f"{name} must be a boolean")
         if not isinstance(self.model_id, str) or not self.model_id.strip():
             raise ValueError("Configure a voice model")
         if self.revision is not None and not re.fullmatch(r"[0-9a-f]{40,64}", self.revision):
             raise ValueError("Voice revision must be an immutable commit hash")
+        if self.persona_id is not None and (not isinstance(self.persona_id, str) or not re.fullmatch(r"[a-z0-9][a-z0-9_.-]{0,119}", self.persona_id)):
+            raise ValueError("Voice persona ID must be a stable subject identifier")
+        if self.speaker_label is not None and (not isinstance(self.speaker_label, str) or not self.speaker_label.strip() or len(self.speaker_label) > 200):
+            raise ValueError("Voice speaker label must be the exact publisher label")
         if not re.fullmatch(r"cpu|mps|cuda(?::[0-9]+)?", self.device):
             raise ValueError("Voice device must be cpu, mps, cuda, or cuda:N")
         if self.dtype not in {"float32", "float16", "bfloat16"}:
@@ -103,6 +113,7 @@ class VoiceSettings:
                 raise ValueError(f"BIAS_VOICE_{name} must be true, false, 1, or 0")
             return value in {"true", "1"}
         cache = os.getenv("BIAS_VOICE_CACHE_DIR")
+        manifest = os.getenv("BIAS_VOICE_REFERENCE_MANIFEST")
         return cls(
             model_id=os.getenv("BIAS_VOICE_MODEL", "Qwen/Qwen3-TTS-12Hz-0.6B-Base"),
             revision=os.getenv("BIAS_VOICE_REVISION") or None,
@@ -113,6 +124,10 @@ class VoiceSettings:
             attention=os.getenv("BIAS_VOICE_ATTENTION", "sdpa"),
             reference_wav=Path(reference).expanduser().resolve() if reference else None,
             reference_text=transcript,
+            persona_id=os.getenv("BIAS_VOICE_PERSONA_ID") or None,
+            speaker_label=os.getenv("BIAS_VOICE_SPEAKER_LABEL") or None,
+            reference_manifest=Path(manifest).expanduser().resolve() if manifest else None,
+            allow_candidate_reference=boolean("ALLOW_CANDIDATE_REFERENCE", "false"),
             x_vector_only_mode=x_vector_only in {"true", "1"},
             api_key=os.getenv("BIAS_VOICE_API_KEY"),
             max_input_chars=int(os.getenv("BIAS_VOICE_MAX_INPUT_CHARS", "2000")),
@@ -242,10 +257,22 @@ class VoiceEngine:
         self._prompt: Any = None
         self._generation_lock = threading.Lock()
         self._last_generation: dict[str, Any] | None = None
+        self._reference_identity: dict[str, Any] | None = None
+
+    def _verify_reference_binding(self) -> dict:
+        try:
+            return verify_binding(manifest_path=self.settings.reference_manifest,
+                persona_id=self.settings.persona_id, speaker=self.settings.speaker_label,
+                audio_path=self.settings.reference_wav, text=self.settings.reference_text,
+                embedding_only=self.settings.x_vector_only_mode,
+                allow_candidate=self.settings.allow_candidate_reference)
+        except ReferenceBindingError as exc:
+            raise VoiceUnavailable(str(exc)) from exc
 
     def status(self) -> dict[str, Any]:
         reference_configured = bool(self.settings.reference_wav and (self.settings.x_vector_only_mode or (self.settings.reference_text and self.settings.reference_text.strip())))
         return {"status": "ready" if self._prompt is not None else "not_loaded", "reference_configured": reference_configured, "reference_mode": "speaker_embedding_only" if self.settings.x_vector_only_mode else "audio_and_transcript", "model_loaded": self._model is not None, "busy": self._generation_lock.locked(), "voice": "reference", "synthesis": "reference_conditioned", "streaming": False,
+            "persona_id": self.settings.persona_id, "reference_identity": self._reference_identity,
             "runtime": {"revision": self.settings.revision, "device": self.settings.device,
                 "dtype": self.settings.dtype, "attention": self.settings.attention,
                 "local_files_only": self.settings.local_files_only, "threads": self.settings.threads,
@@ -266,6 +293,10 @@ class VoiceEngine:
             started = time.monotonic()
             cold_start = self._prompt is None
             self._last_generation = None
+            identity = self._verify_reference_binding()
+            if self._reference_identity is not None and identity != self._reference_identity:
+                raise VoiceUnavailable("Reference provenance changed after the voice prompt was loaded")
+            self._reference_identity = identity
             if self._prompt is None:
                 reference = read_reference(self.settings)
                 if self._model is None:
