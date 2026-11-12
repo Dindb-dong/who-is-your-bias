@@ -7,7 +7,7 @@ Repository: `Dindb-dong/who-is-your-bias`. Integration branch:
 `8515b5f30f3cd412e18db3d54ee28bf2a4c28694`.
 Implementation review: [PR #19](https://github.com/Dindb-dong/who-is-your-bias/pull/19).
 Last verified code checkpoint before this status update:
-`8919adbf1878677cb08928a93f0f912e5d77b776`.
+`6ea11b6df8296e008e866b74fe1ed0e5f3aa0b0c`.
 
 The [historical handoff](jensen-replication-handoff.md) defines M0–M7.
 This is a new reproducible run; unverified earlier acquisition/training counts
@@ -54,14 +54,19 @@ separately. The prior unverified eight-video claim is not inherited by this run.
 - Voice: **19 publisher-matched candidates**, independently screened down to
   **8 clips / 91.84 seconds / four events**. Human listening review is zero.
   Actual acoustic encoding produced **1,151 frames × 16 codebooks**, saved and
-  freshly retrieved. First optimizer pilot is the next voice stage.
-- Avatar: new coarse/dense editable masters and GLB exports are saved; the
-  20→80-step restored geometry fit matches uninterrupted state exactly. The
-  coarse/dense appearance remains unaccepted because it looks too generic.
-  Attributed reference-texture refinement and rigid glasses fixes continue.
-- Motion: 240 measured face/body/hand frames from three 8-second Goldman windows;
-  three actual 30-finger preview clips and an explicit Jensen Motion Lab sample
-  are already in Git. These are source-bound previews, not learned habits.
+  freshly retrieved. **14 actual LoRA updates** are durably saved, with 16 planned.
+  A fresh process restored remote step 1 and completed step 2; subsequent 6/10/14
+  checkpoints were also freshly retrieved. The interrupted final block resumes
+  from verified step 14 rather than inheriting an uncompleted step.
+- Avatar: a **2,530,256-byte fitted Jensen GLB** is committed with an explicit
+  optional Settings selection and source license. Its measured geometry, licensed
+  face texture, dark iris and authored salt-and-pepper material are preserved in
+  editable masters. The 20→80-step restored fit matches uninterrupted state.
+  Likeness remains imperfect and ungraded; the candidate is not the default.
+- Motion: **480 measured face/body/hand frames across five Goldman/Stripe
+  windows**, five source-bound clips and explicit Motion Lab source choices are
+  already in Git. Thirty finger controls preserve confidence/occlusion exclusions.
+  A third WIRED event is being exported. These previews do not establish habits.
 - Held-out evaluation: 50 original No Priors exchanges passed isolation against
   both the v4 corpus and PR #17 summaries. WEF's former transcript URL is
   unavailable; no replacement transcript is invented.
@@ -69,27 +74,37 @@ separately. The prior unverified eight-video claim is not inherited by this run.
   and [media artifact receipts](../reports/jensen-recovery/media-artifacts.json)
   distinguish all located events, complete local files, failed addresses,
   partial uploads and fully reconstructed remote videos. The first complete
-  Goldman original was rebuilt from fresh remote chunks with its full SHA intact.
-  Three full original interview audio files (Stanford, Acquired and Lex) are also
-  saved and freshly verified. Continue to at least eight full event videos,
-  including four full keynotes and expressive interview footage.
+  **eight complete recordings are now reconstructed from fresh remote chunks**:
+  4,412,488,053 original bytes / 10h35m29s, including four complete keynotes
+  totaling 7h34m46s. All full SHA-256 values match. Three full original interview
+  audio files (Stanford, Acquired and Lex) are separately saved and verified.
+  Transcript counts, recording duration and target-speaker duration are distinct.
 
 ## Workstream checkpoints
 
 | Workstream | Saved implementation | Current gate |
 | --- | --- | --- |
-| Corpus | Authentic v4, held-out references, full recordings, resumable media recipes | Finish full-video acquisition and verify every chunk |
-| Voice | Source clocks, screened four-event dataset, actual acoustic codes | Execute and preserve bounded optimizer pilot, EN/KO samples |
-| Avatar | Measured editable exports, full finger controls and actual preview clips | Improve identity/texture; inspect integrated desktop/mobile playback |
+| Corpus | Authentic v4, held-out references, all eight full video restorations | Source/media acquisition batch complete; preserve event isolation |
+| Voice | Source clocks, screened four-event dataset, actual codes and 14 saved updates | Finish bounded 16-step run, EN/KO samples and diagnostics |
+| Avatar | Actual fitted model, editable master, finger controls and observed clips | Final camera and candidate-specific desktop/mobile playback |
 | Text | Frozen dataset, actual first update and verified remote optimizer checkpoint | Resume from retrieved bytes; finish bounded run and serve exact adapter |
-| Retrieval/evaluation | Unsupported endorsement/private requests now abstain | Compare frozen candidates and matched base/style/adapter responses |
+| Retrieval/evaluation | Frozen lexical/concept/hybrid comparison; both candidates remain opt-in | Matched base/style/adapter and heldout response experiments |
 
 Integrated changed-path Python checks: 186 passed and two optional-Torch modules
 skipped in the core environment. Separately, real Torch checkpoint/adapter checks
 passed 45 tests in the model environment. Web: TypeScript passed and 236 tests
 passed at the then-verified head. Later changes still need final focused checks.
-No Actions workflow runs were registered at the inspected PR head. These are
-component checks, not final integrated acceptance or persona-quality scores.
+Actual GitHub Actions run [43278388296](https://github.com/Dindb-dong/who-is-your-bias/actions/runs/43278388296)
+passed web checks/build, 96 focused Python tests and **50 desktop/mobile browser
+cases** at head `05d4062`. That head predates the fitted model; its explicit browser
+case and final camera checks are queued separately. Synthetic PCM/detection
+fixtures test transport behavior, not neural inference speed or human likeness.
+
+On 16 supported + eight unsupported frozen development questions, relevant
+top-four hits were 3/16 archived lexical, 11/16 concept lexical and 12/16 pinned
+multilingual hybrid. All had zero false-hit controls; both candidates failed
+the predeclared 80% recall gate and remain opt-in. Full failures and hashes are
+in the [retrieval report](../reports/jensen-retrieval-v2/README.md).
 
 Read the [recovery index](../reports/jensen-recovery/README.md),
 [text pilot](../reports/jensen-recovery/text-v1/pilot-step0001.json),
@@ -98,12 +113,12 @@ Read the [recovery index](../reports/jensen-recovery/README.md),
 
 ## Parallel ownership and resumption
 
-- Corpus: source ledger, acquisition/parser code, source-family splits,
-  retrieval improvements and focused data checks.
+- Corpus: completed source ledger/acquisition and source-family splits; now
+  frozen matched generation and heldout answerability preparation.
 - Voice: voice export/reference provenance, alignment and voice adaptation.
 - Avatar: web rig/fingers/framing, media observation and authored avatar assets.
-- Coordinator: artifact manifests, text checkpoints/training, matched response
-  experiments, integration and remote readback of every checkpoint.
+- Coordinator: artifact manifests, text checkpoints/training, completed retrieval
+  comparison, model execution, integration and remote checkpoint verification.
 
 Each meaningful implementation batch is preserved before the whole workstream
 finishes. Raw media/full transcripts/weights stay outside public Git; actual
