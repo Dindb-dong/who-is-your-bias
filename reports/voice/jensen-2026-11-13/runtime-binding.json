@@ -1,0 +1,22 @@
+{
+  "schema_version": "voice-experiment-binding.v1",
+  "run_id": "jensen-2026-11-13",
+  "protocol": {
+    "path": "evaluation-protocol.json",
+    "sha256": "9be120358c86e4d878ea2a12a760817b6ea57ed07db1753d978f2359f0231adb"
+  },
+  "training": {
+    "path": "training-completed.json",
+    "sha256": "80942c9381f0641831f7c4f80ce8499f260e16314505e25a681657f521092bb3"
+  },
+  "base_directory": "models/qwen-tts06-base",
+  "reference_directory": "voice/candidates-v2/goldman-context/reference-001",
+  "adapter_directory": "voice/lora-v2/step-00000016",
+  "conditions": {
+    "reference": "jensen-reference",
+    "adapted": "jensen-lora-candidate"
+  },
+  "promotion_status": "candidate",
+  "application_default_changed": false,
+  "human_listening_completed": false
+}

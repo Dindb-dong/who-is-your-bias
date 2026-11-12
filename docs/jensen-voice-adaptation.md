@@ -165,6 +165,25 @@ workflow records actual HTTP behavior, output WAV hashes, latency, and health
 metadata. The health snapshot now retains subject, reference identity, actual
 adapter identity, and synthesis kind.
 
+The concrete [runtime binding](../reports/voice/jensen-2026-11-13/runtime-binding.json)
+pins the frozen protocol and completed training receipt. It selects the exact
+Goldman reference and step 16 adapter, verifies the base model and artifact bytes,
+and requires explicit candidate opt-in. Run the check without loading a model:
+
+```bash
+python -m tools.voice_evaluation.serve_candidate \
+  --binding reports/voice/jensen-2026-11-13/runtime-binding.json \
+  --artifacts "$ART" --condition adapted --allow-candidates --verify-only
+```
+
+Remove `--verify-only` to start the loopback service on port 8092. Use
+`--condition reference` for the matched base model, and stop that service before
+starting the adapted condition. The launcher uses the frozen float32 CPU settings
+and discards stale voice environment defaults. It preserves an optional
+`BIAS_VOICE_API_KEY`, exposes the simulation header, and does not change application
+defaults. A passed byte/subject preflight establishes the selected artifacts;
+actual model loading and waveform generation remain separately measured stages.
+
 Generate the frozen English and Korean cases, stop the TTS service to release
 memory, and transcribe the generated waveforms with the independent ASR model.
 Report English WER, Korean CER, cold/warm wall time, failures, and raw outputs.
