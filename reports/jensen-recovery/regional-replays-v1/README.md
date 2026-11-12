@@ -5,7 +5,7 @@ and GTC 2026 public replays. Both event families were assigned to `train` before
 media acquisition. The frozen text/voice datasets and evaluation inputs are not
 modified by this acquisition.
 
-## First durable media-prefix checkpoint
+## Durable media-prefix checkpoints
 
 [gtc-prefix007.json](gtc-prefix007.json) records 168 MiB (176,160,768 bytes)
 from the beginning of the GTC replay, stored as seven lossless chunks plus a
@@ -13,6 +13,12 @@ reconstruction manifest. All eight objects were freshly materialized; container
 hashes, decoded chunk hashes and the reconstructed ordered prefix hash matched.
 This is an incomplete prefix, not a complete video. Whole-replay duration and
 continuity validation are still pending. Later chunks continue downloading.
+
+[gtc-prefix019.json](gtc-prefix019.json) extends the saved, freshly reconstructed
+prefix to 19 chunks: 456 MiB (478,150,656 bytes). Its full-prefix SHA-256 is
+`f4577e83ea2d1ffb58fb27ba94d317eeae222d6a8c7c90157899e418947ca46a`.
+Every added object was independently materialized before checking the complete
+ordered prefix. This checkpoint still counts zero complete videos.
 
 The CES first-fragment bounded retry subsequently returned HTTP 200 with
 456,088 bytes, after the initial HTTP 503 responses. Its first-fragment probe
