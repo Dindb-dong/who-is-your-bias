@@ -1,0 +1,467 @@
+{
+  "schema_version": "jensen-hybrid-comparison.v1",
+  "exposure": "development",
+  "settings_sha256": "6cf11ef0475103cf58f28a02494fa4fb78b84352dd2eaa5bef03ec3028b114eb",
+  "protocol_sha256": "95ace25c667b76ac6e69e73b1ae47a42ef13ed0120213f7bf29426346a05a953",
+  "corpus_files_sha256": {
+    "corpus-manifest.json": "a6b5b353a0eb664e0c9e16b05910e1c0d6e8e4b1b5c0907b59a17f984a6e09f3",
+    "evidence.jsonl": "c64b78d1979d3700c060205293a22272ac2b77ff290bc1387057ecae84bcf526",
+    "profile.json": "11e7078ab047aafa73460a760df8dc4ba74c4a045d78e2d3e18a6a72b851896a",
+    "sources.json": "6baf3e7d6e55f6edccd8ab8551be7525aa86c5682d9ca3fae5f0a5b859bef347",
+    "split-manifest.json": "c5f6831dfd5212153749d7b683e3c0e80d0ee5340a60dbb1023cac1fb39b2aa9"
+  },
+  "embedding": {
+    "provider": "sentence-transformers",
+    "model": "intfloat/multilingual-e5-small",
+    "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "device": "cpu",
+    "query_prefix": "query: ",
+    "passage_prefix": "passage: ",
+    "max_tokens": 512,
+    "token_count_basis": "model_tokenizer"
+  },
+  "policy": {
+    "dense_min_similarity": 0.84,
+    "candidate_limit": 24,
+    "rrf_constant": 60,
+    "max_per_event": 2,
+    "max_style_examples": 0,
+    "situation_multiplier": 1.15,
+    "temporal_weight": 0.1,
+    "reranker_min_score": null,
+    "max_chunk_tokens": 240
+  },
+  "index_build_seconds": 80.557,
+  "indexed_records": 410,
+  "indexed_units": 1251,
+  "versions": {
+    "torch": "2.11.0+cpu",
+    "transformers": "4.57.3",
+    "sentence-transformers": "5.7.0"
+  },
+  "supported_recall_at_1": 0.6875,
+  "supported_recall_at_k": 0.75,
+  "unsupported_false_hit_count": 0,
+  "regressions_from_baseline": [],
+  "development_gates_passed": false,
+  "promotion": "retain_default_lexical_keep_hybrid_opt_in",
+  "runs": [
+    {
+      "id": "cuda-ko",
+      "kind": "supported",
+      "language": "ko",
+      "retrieved_ids": [
+        "qa26-lex-494-cue-00038",
+        "qa26-stripe-sessions-2024-turn-00191",
+        "qa26-lex-494-cue-00035",
+        "qa26-yc-startup-school-2026-turn-00010"
+      ],
+      "gold_hit_at_1": true,
+      "gold_hit_at_k": true,
+      "abstained": false,
+      "reason": null,
+      "cold_query_ms": 231.399,
+      "warm_query_median_ms": 53.1012,
+      "indexed_units": 1251,
+      "abstention_reason": null
+    },
+    {
+      "id": "cuda-en",
+      "kind": "supported",
+      "language": "en",
+      "retrieved_ids": [
+        "qa26-lex-494-cue-00035",
+        "qa26-dwarkesh-2026-turn-00089",
+        "qa26-lex-494-cue-00200",
+        "qa26-goldman-sachs-2024-turn-00003"
+      ],
+      "gold_hit_at_1": true,
+      "gold_hit_at_k": true,
+      "abstained": false,
+      "reason": null,
+      "cold_query_ms": 176.7486,
+      "warm_query_median_ms": 80.1317,
+      "indexed_units": 1251,
+      "abstention_reason": null
+    },
+    {
+      "id": "sega-ko",
+      "kind": "supported",
+      "language": "ko",
+      "retrieved_ids": [
+        "qa26-yc-startup-school-2026-turn-00010"
+      ],
+      "gold_hit_at_1": true,
+      "gold_hit_at_k": true,
+      "abstained": false,
+      "reason": null,
+      "cold_query_ms": 90.9135,
+      "warm_query_median_ms": 34.6268,
+      "indexed_units": 1251,
+      "abstention_reason": null
+    },
+    {
+      "id": "sega-en",
+      "kind": "supported",
+      "language": "en",
+      "retrieved_ids": [
+        "qa26-yc-startup-school-2026-turn-00010",
+        "qa26-stanford-vftt-2024-turn-00030",
+        "qa26-acquired-2023-turn-00029",
+        "qa26-yc-startup-school-2026-turn-00004"
+      ],
+      "gold_hit_at_1": true,
+      "gold_hit_at_k": true,
+      "abstained": false,
+      "reason": null,
+      "cold_query_ms": 62.1888,
+      "warm_query_median_ms": 33.6803,
+      "indexed_units": 1251,
+      "abstention_reason": null
+    },
+    {
+      "id": "tsmc-ko",
+      "kind": "supported",
+      "language": "ko",
+      "retrieved_ids": [
+        "qa26-lex-494-cue-00187",
+        "qa26-goldman-sachs-2024-turn-00025",
+        "qa26-dwarkesh-2026-turn-00041"
+      ],
+      "gold_hit_at_1": true,
+      "gold_hit_at_k": true,
+      "abstained": false,
+      "reason": null,
+      "cold_query_ms": 62.8031,
+      "warm_query_median_ms": 35.4384,
+      "indexed_units": 1251,
+      "abstention_reason": null
+    },
+    {
+      "id": "tsmc-en",
+      "kind": "supported",
+      "language": "en",
+      "retrieved_ids": [
+        "qa26-lex-494-cue-00187",
+        "qa26-dwarkesh-2026-turn-00061",
+        "qa26-lex-494-cue-00114",
+        "qa26-dwarkesh-2026-turn-00016"
+      ],
+      "gold_hit_at_1": true,
+      "gold_hit_at_k": true,
+      "abstained": false,
+      "reason": null,
+      "cold_query_ms": 65.4616,
+      "warm_query_median_ms": 34.5426,
+      "indexed_units": 1251,
+      "abstention_reason": null
+    },
+    {
+      "id": "principles-ko",
+      "kind": "supported",
+      "language": "ko",
+      "retrieved_ids": [],
+      "gold_hit_at_1": false,
+      "gold_hit_at_k": false,
+      "abstained": true,
+      "reason": "No reviewed candidate passed topical and temporal eligibility gates.",
+      "cold_query_ms": 63.4005,
+      "warm_query_median_ms": 37.7949,
+      "indexed_units": 1251,
+      "abstention_reason": "no_candidate_passed_all_gates"
+    },
+    {
+      "id": "principles-en",
+      "kind": "supported",
+      "language": "en",
+      "retrieved_ids": [
+        "qa26-stanford-vftt-2024-turn-00030",
+        "qa26-yc-startup-school-2026-turn-00010",
+        "qa26-stanford-vftt-2024-turn-00085",
+        "qa26-acquired-2023-turn-00093"
+      ],
+      "gold_hit_at_1": true,
+      "gold_hit_at_k": true,
+      "abstained": false,
+      "reason": null,
+      "cold_query_ms": 66.7396,
+      "warm_query_median_ms": 36.9523,
+      "indexed_units": 1251,
+      "abstention_reason": null
+    },
+    {
+      "id": "leadership-ko",
+      "kind": "supported",
+      "language": "ko",
+      "retrieved_ids": [],
+      "gold_hit_at_1": false,
+      "gold_hit_at_k": false,
+      "abstained": true,
+      "reason": "No reviewed candidate passed topical and temporal eligibility gates.",
+      "cold_query_ms": 59.737,
+      "warm_query_median_ms": 23.9974,
+      "indexed_units": 1251,
+      "abstention_reason": "no_candidate_passed_all_gates"
+    },
+    {
+      "id": "leadership-en",
+      "kind": "supported",
+      "language": "en",
+      "retrieved_ids": [
+        "qa26-strange-loop-2025-turn-00263",
+        "qa26-stanford-vftt-2024-turn-00074",
+        "qa26-lex-494-cue-00270",
+        "qa26-stripe-sessions-2024-turn-00140"
+      ],
+      "gold_hit_at_1": true,
+      "gold_hit_at_k": true,
+      "abstained": false,
+      "reason": null,
+      "cold_query_ms": 65.5568,
+      "warm_query_median_ms": 37.0822,
+      "indexed_units": 1251,
+      "abstention_reason": null
+    },
+    {
+      "id": "founder-ko",
+      "kind": "supported",
+      "language": "ko",
+      "retrieved_ids": [
+        "qa26-yc-startup-school-2026-turn-00070",
+        "qa26-acquired-2023-turn-00339",
+        "qa26-acquired-2023-turn-00291"
+      ],
+      "gold_hit_at_1": false,
+      "gold_hit_at_k": true,
+      "abstained": false,
+      "reason": null,
+      "cold_query_ms": 62.6898,
+      "warm_query_median_ms": 35.2393,
+      "indexed_units": 1251,
+      "abstention_reason": null
+    },
+    {
+      "id": "founder-en",
+      "kind": "supported",
+      "language": "en",
+      "retrieved_ids": [
+        "qa26-acquired-2023-turn-00339",
+        "qa26-yc-startup-school-2026-turn-00004",
+        "qa26-yc-startup-school-2026-turn-00070",
+        "qa26-lex-494-cue-00205"
+      ],
+      "gold_hit_at_1": true,
+      "gold_hit_at_k": true,
+      "abstained": false,
+      "reason": null,
+      "cold_query_ms": 70.3737,
+      "warm_query_median_ms": 36.8924,
+      "indexed_units": 1251,
+      "abstention_reason": null
+    },
+    {
+      "id": "updates-ko",
+      "kind": "supported",
+      "language": "ko",
+      "retrieved_ids": [
+        "qa26-strange-loop-2025-turn-00205",
+        "qa26-lex-494-cue-00379",
+        "qa26-stripe-sessions-2024-turn-00126"
+      ],
+      "gold_hit_at_1": false,
+      "gold_hit_at_k": false,
+      "abstained": false,
+      "reason": null,
+      "cold_query_ms": 66.7335,
+      "warm_query_median_ms": 38.702,
+      "indexed_units": 1251,
+      "abstention_reason": null
+    },
+    {
+      "id": "updates-en",
+      "kind": "supported",
+      "language": "en",
+      "retrieved_ids": [
+        "qa26-strange-loop-2025-turn-00221",
+        "qa26-strange-loop-2025-turn-00231",
+        "qa26-acquired-2023-turn-00299",
+        "qa26-stripe-sessions-2024-turn-00126"
+      ],
+      "gold_hit_at_1": true,
+      "gold_hit_at_k": true,
+      "abstained": false,
+      "reason": null,
+      "cold_query_ms": 133.6047,
+      "warm_query_median_ms": 38.4877,
+      "indexed_units": 1251,
+      "abstention_reason": null
+    },
+    {
+      "id": "tpu-ko",
+      "kind": "supported",
+      "language": "ko",
+      "retrieved_ids": [
+        "qa26-yc-startup-school-2026-turn-00004",
+        "qa26-yc-startup-school-2026-turn-00046"
+      ],
+      "gold_hit_at_1": false,
+      "gold_hit_at_k": false,
+      "abstained": false,
+      "reason": null,
+      "cold_query_ms": 99.918,
+      "warm_query_median_ms": 33.8193,
+      "indexed_units": 1251,
+      "abstention_reason": null
+    },
+    {
+      "id": "tpu-en",
+      "kind": "supported",
+      "language": "en",
+      "retrieved_ids": [
+        "qa26-dwarkesh-2026-turn-00072",
+        "qa26-dwarkesh-2026-turn-00080",
+        "qa26-lex-494-cue-00060",
+        "qa26-acquired-2023-turn-00201"
+      ],
+      "gold_hit_at_1": true,
+      "gold_hit_at_k": true,
+      "abstained": false,
+      "reason": null,
+      "cold_query_ms": 68.9597,
+      "warm_query_median_ms": 34.6712,
+      "indexed_units": 1251,
+      "abstention_reason": null
+    },
+    {
+      "id": "endorsement-ko",
+      "kind": "unsupported",
+      "language": "ko",
+      "retrieved_ids": [],
+      "gold_hit_at_1": false,
+      "gold_hit_at_k": false,
+      "abstained": true,
+      "reason": "No reviewed candidate passed topical and temporal eligibility gates.",
+      "cold_query_ms": 66.9049,
+      "warm_query_median_ms": 32.6916,
+      "indexed_units": 1251,
+      "abstention_reason": "no_candidate_passed_all_gates"
+    },
+    {
+      "id": "endorsement-en",
+      "kind": "unsupported",
+      "language": "en",
+      "retrieved_ids": [],
+      "gold_hit_at_1": false,
+      "gold_hit_at_k": false,
+      "abstained": true,
+      "reason": "A public-source archive cannot verify a personal endorsement or approval of the user's product.",
+      "cold_query_ms": 0.0524,
+      "warm_query_median_ms": 0.0074,
+      "indexed_units": null,
+      "abstention_reason": "unsupported_private_or_user_endorsement"
+    },
+    {
+      "id": "private-ko",
+      "kind": "unsupported",
+      "language": "ko",
+      "retrieved_ids": [],
+      "gold_hit_at_1": false,
+      "gold_hit_at_k": false,
+      "abstained": true,
+      "reason": "This public-source archive cannot verify private contact details or the user's private interactions.",
+      "cold_query_ms": 0.0291,
+      "warm_query_median_ms": 0.0076,
+      "indexed_units": null,
+      "abstention_reason": "unsupported_private_or_user_endorsement"
+    },
+    {
+      "id": "private-en",
+      "kind": "unsupported",
+      "language": "en",
+      "retrieved_ids": [],
+      "gold_hit_at_1": false,
+      "gold_hit_at_k": false,
+      "abstained": true,
+      "reason": "This public-source archive cannot verify private contact details or the user's private interactions.",
+      "cold_query_ms": 0.3733,
+      "warm_query_median_ms": 0.0128,
+      "indexed_units": null,
+      "abstention_reason": "unsupported_private_or_user_endorsement"
+    },
+    {
+      "id": "current-ko",
+      "kind": "unsupported",
+      "language": "ko",
+      "retrieved_ids": [],
+      "gold_hit_at_1": false,
+      "gold_hit_at_k": false,
+      "abstained": true,
+      "reason": "The curated corpus cannot verify current information without a temporal policy.",
+      "cold_query_ms": 0.1056,
+      "warm_query_median_ms": 0.014,
+      "indexed_units": null,
+      "abstention_reason": "current_information_requires_snapshot_policy"
+    },
+    {
+      "id": "future-en",
+      "kind": "unsupported",
+      "language": "en",
+      "retrieved_ids": [],
+      "gold_hit_at_1": false,
+      "gold_hit_at_k": false,
+      "abstained": true,
+      "reason": "No reviewed candidate passed topical and temporal eligibility gates.",
+      "cold_query_ms": 62.2643,
+      "warm_query_median_ms": 31.74,
+      "indexed_units": 1251,
+      "abstention_reason": "no_candidate_passed_all_gates"
+    },
+    {
+      "id": "name-only-ko",
+      "kind": "unsupported",
+      "language": "ko",
+      "retrieved_ids": [],
+      "gold_hit_at_1": false,
+      "gold_hit_at_k": false,
+      "abstained": true,
+      "reason": "No reviewed candidate passed topical and temporal eligibility gates.",
+      "cold_query_ms": 47.4284,
+      "warm_query_median_ms": 23.6391,
+      "indexed_units": 1251,
+      "abstention_reason": "no_candidate_passed_all_gates"
+    },
+    {
+      "id": "unrelated-en",
+      "kind": "unsupported",
+      "language": "en",
+      "retrieved_ids": [],
+      "gold_hit_at_1": false,
+      "gold_hit_at_k": false,
+      "abstained": true,
+      "reason": "No reviewed candidate passed topical and temporal eligibility gates.",
+      "cold_query_ms": 61.8827,
+      "warm_query_median_ms": 38.3684,
+      "indexed_units": 1251,
+      "abstention_reason": "no_candidate_passed_all_gates"
+    }
+  ],
+  "median_cold_query_ms": 64.431,
+  "median_warm_query_ms": 34.649,
+  "citation_entailment_evaluated": false,
+  "human_fidelity_evaluated": false,
+  "implementation_sha256": {
+    "src/bias/hybrid_retrieval.py": "6d35a45b60473886ae6bcaf40a7b2098a3bab17b944369f033b357afe58b6697",
+    "src/bias/retrieval.py": "7a1c316aecdcfcd1b3bffc25430080b2a4c57738708efe61de9237e0acd5627c",
+    "src/bias/query_policy.py": "95d25a25696cb868d97f7366b033c3e2c425d876181da374c6ec62e48366f30b",
+    "tools/retrieval_hybrid_development.py": "d9de43e1c77fdfeb426b48320a62c59df6bc7ca486e2a6371290e6feda1a7f79"
+  },
+  "limitations": [
+    "Model and policy fixed after lexical development results but before this model inference.",
+    "No claim of calibrated 0.84 probability; this is the existing configured cosine gate.",
+    "No heldout source text enters index or tuning.",
+    "These concepts and historical Korean gaps were already development-exposed.",
+    "Relevant IDs are a reviewed non-exhaustive set, not claim-level entailment labels.",
+    "Corpus size is identical across candidates; no heldout reference enters either index.",
+    "Retrieval timing excludes model generation and is not target-device latency."
+  ]
+}

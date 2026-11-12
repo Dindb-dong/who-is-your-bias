@@ -1,0 +1,41 @@
+{
+  "schema_version": "studio-ci-checkpoint.v1",
+  "head_sha": "05d4062437d372eaa9730da57a2c90785a4084c2",
+  "workflow_run_id": 43278388296,
+  "job_id": 131392870744,
+  "url": "https://github.com/Dindb-dong/who-is-your-bias/actions/runs/43278388296",
+  "conclusion": "success",
+  "checks": {
+    "web_typecheck": "passed",
+    "web_unit_tests": "passed",
+    "production_build": "passed",
+    "focused_python": "passed",
+    "historical_browser": {
+      "passed": 30,
+      "projects": [
+        "desktop",
+        "mobile"
+      ]
+    },
+    "jensen_browser": {
+      "passed": 20,
+      "projects": [
+        "desktop",
+        "mobile"
+      ]
+    }
+  },
+  "scope": [
+    "Actual GitHub-hosted Chromium and software WebGL",
+    "Jensen attention, source isolation, hand-preview consent and reset",
+    "Historical fixtures include synthetic live PCM and mocked detections",
+    "Fitted Jensen GLB was published after this head; its explicit browser case is pending",
+    "No live model latency, human likeness or target-device performance claim"
+  ],
+  "reported_test_totals": [
+    "2026-11-12T18:19:10.9009175Z \u001b[2m Test Files \u001b[22m \u001b[1m\u001b[32m22 passed\u001b[39m\u001b[22m\u001b[90m (22)\u001b[39m",
+    "2026-11-12T18:19:16.1237833Z 96 passed, 1 warning in 2.09s",
+    "2026-11-12T18:24:22.5686437Z   30 passed (5.1m)",
+    "2026-11-12T18:26:21.6377386Z   20 passed (2.0m)"
+  ]
+}

@@ -28,7 +28,7 @@ It is not an embedding model or a claim-support judge.
 
 Checks at this checkpoint: 111 focused tests passed, including source isolation,
 unsupported relationships, unknown-word coverage, subject binding and default
-retrieval regression. A pinned multilingual embedding comparison is next; this
+retrieval regression. The pinned multilingual comparison below is a separate actual measurement; this
 report does not inherit the old PR #17 model/API scores as a new measurement.
 
 Reproduce the source-text-free report after restoring the v4 corpus:
@@ -42,3 +42,24 @@ PYTHONPATH=src uv run python -m tools.retrieval_development \
 
 No held-out No Priors reference was indexed or used for tuning. Citation support,
 generated response quality and human persona fidelity remain separate evaluations.
+
+## Pinned multilingual candidate
+
+The existing hybrid runtime was executed with `intfloat/multilingual-e5-small`
+at revision `614241f622f53c4eeff9890bdc4f31cfecc418b3`, documented query/passage
+prefixes, CPU float32, two threads and the predeclared 0.84 cosine threshold.
+All conditions share the same 410 eligible factual records and the same frozen
+24 questions; style-only records were excluded from dense index construction.
+
+The hybrid achieved **11/16 top-one and 12/16 top-four relevant hits**, with
+**0/8 control false hits** and no baseline hit regressions. Korean first
+principles, leadership, top-five updates and TPU questions still missed their
+recorded relevant IDs. It also fails the predeclared 80% gate, so the runtime
+default remains lexical; both improved candidates stay explicit options.
+
+Index preparation took 80.557 seconds. Median first-query lookup was 64.431 ms;
+median repeated cached lookup was 34.649 ms. These include dense scoring and
+exclude language generation. Seven searches per question do not establish
+request concurrency or target-device latency. Full candidate traces were saved
+separately; `comparison-hybrid-v1.json` contains IDs, metrics and code/model hashes.
+No cosine score is treated as a calibrated probability or proof of citation support.
