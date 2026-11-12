@@ -1,0 +1,74 @@
+{
+  "schema_version": "jensen-reflection-expansion-sources.v1",
+  "registered_at": "2026-11-12T19:20:48.905907+00:00",
+  "status": "preparation_no_media_download_started",
+  "isolation": {
+    "included_in_frozen_v4": false,
+    "included_in_text_adapter_v1": false,
+    "included_in_M6": false,
+    "future_partition": "train_or_development_only_after_separate_review; not fresh heldout after this inspection"
+  },
+  "source_policy": "Public authorized original-publisher pages/players/downloads only; no access-control bypass or unofficial mirror substitutions.",
+  "persistence_policy": "Download one full source at a time; hash/probe actual bytes, split losslessly into 24 MiB tar.gz chunks when needed, save each batch and fresh-readback reconstruct full bytes before continuing. Existing verified Library destination/profile is reused.",
+  "sources": [
+    {
+      "event_family_id": "ntu-commencement-2023-05-27",
+      "format": "commencement_address",
+      "event_date": "2023-05-27",
+      "publisher": "National Taiwan University",
+      "source_url": "https://www.ntu.edu.tw/english/spotlight/2023/2164_20230529.html",
+      "official_player_url": "https://www.youtube.com/watch?v=ZzTSNQV8GXg",
+      "publisher_player_link_page": "https://www.active.ntu.edu.tw/board/detail/sn/914",
+      "official_full_download_index": "https://ftp.ntu.edu.tw/NTU/ceremony/2023/",
+      "official_full_download_url": "https://ftp.ntu.edu.tw/NTU/ceremony/2023/GC2023.iso",
+      "listed_full_download_bytes": 4472338432,
+      "scope": "Full university ceremony ISO fallback; exact Jensen interval must be inspected separately",
+      "status": "located_no_media_acquired",
+      "player_access_status": "Official linked YouTube video is private; no sign-in or cookie workaround attempted. Public university ISO remains a separate authorized source."
+    },
+    {
+      "event_family_id": "caltech-commencement-2024-06-14",
+      "format": "commencement_address",
+      "event_date": "2024-06-14",
+      "publisher": "California Institute of Technology",
+      "source_url": "https://www.caltech.edu/about/news/caltech-commencement-2024",
+      "official_player_url": "https://www.youtube.com/watch?v=-qXDdToZHzE",
+      "publisher_player_link_page": "https://commencement.caltech.edu/commencement-speaker/commencement-archive",
+      "scope": "Full official ceremony; publisher chapter locates Jensen address52:18 to following choral selection1:24:48, pending acquired-clock verification",
+      "status": "public_official_metadata_acquired_media_not_yet_acquired",
+      "youtube_duration_seconds": 11690,
+      "youtube_publication_date": "2024-06-14",
+      "metadata_limitations": "Extractor reports signature/challenge warnings; actual media delivery is not yet verified."
+    },
+    {
+      "event_family_id": "chm-oral-history-2024-08-09",
+      "format": "formal_oral_history",
+      "event_date": "2024-08-09",
+      "publisher": "Computer History Museum",
+      "source_url": "https://www.computerhistory.org/collections/catalog/102809035",
+      "official_player_url": "https://www.youtube.com/watch?v=0c8i4T9BSqY",
+      "official_media_url": "https://s3.us-west-1.wasabisys.com/chm-cms-media/media-live/_multimedia/102809035-02-01.mp4",
+      "transcript_catalog_url": "https://www.computerhistory.org/collections/catalog/102809034",
+      "official_transcript_url": "https://s3.us-west-1.wasabisys.com/chm-cms-media/media-live/_file/102809034-05-01.src.pdf",
+      "youtube_publication_date": "2025-12-09",
+      "youtube_duration_seconds": 4345,
+      "interviewers": [
+        "Douglas Fairbairn",
+        "Hansen Hsu"
+      ],
+      "transcript_warning": "Publisher says interviewees may edit transcripts afterward; words and clocks must not be assumed identical to video.",
+      "status": "official_direct_mp4_and_pdf_located_no_media_acquired"
+    },
+    {
+      "event_family_id": "cmu-commencement-2026-05-10",
+      "format": "commencement_address",
+      "event_date": "2026-05-10",
+      "publisher": "Carnegie Mellon University",
+      "source_url": "https://www.cmu.edu/commencement/",
+      "official_player_url": "https://www.youtube.com/watch?v=FZh_0uRgrg4",
+      "scope": "Official separate keynote-address video; additional fallback lead",
+      "status": "located_no_media_acquired"
+    }
+  ],
+  "actual_media_files_acquired": 0
+}

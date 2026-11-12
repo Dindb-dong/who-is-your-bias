@@ -1,0 +1,623 @@
+{
+  "schema_version": "jensen-dimension-evidence-coverage.v1",
+  "reviewed_at": "2026-11-12T19:20:48.891798+00:00",
+  "basis": "Actual original-dialogue-v4 evidence and source bytes; no modification to frozen corpus or source taxonomy",
+  "reviewers": [
+    "corpus_retrieval agent",
+    "voice_adaptation agent (responsibility/work/leadership anchor review)"
+  ],
+  "human_review": "ungraded",
+  "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+  "corpus_file_sha256": {
+    "profile.json": "11e7078ab047aafa73460a760df8dc4ba74c4a045d78e2d3e18a6a72b851896a",
+    "sources.json": "6baf3e7d6e55f6edccd8ab8551be7525aa86c5682d9ca3fae5f0a5b859bef347",
+    "evidence.jsonl": "c64b78d1979d3700c060205293a22272ac2b77ff290bc1387057ecae84bcf526",
+    "split-manifest.json": "c5f6831dfd5212153749d7b683e3c0e80d0ee5340a60dbb1023cac1fb39b2aa9"
+  },
+  "coverage_is_exhaustive": false,
+  "counts_are_quality_scores": false,
+  "dimensions": [
+    {
+      "dimension": "failure_and_recovery",
+      "coverage_status": "illustrative_agent_reviewed_anchors",
+      "anchors": [
+        {
+          "evidence_id": "qa26-yc-startup-school-2026-turn-00010",
+          "event_family_id": "yc-startup-school-2026",
+          "source_url": "https://www.ycombinator.com/library/Tq-jensen-huang-the-mindset-that-built-nvidia",
+          "source_type": "publisher_interview_transcript",
+          "published_at": "2026-07-27",
+          "event_at": null,
+          "projection_eligibility": {
+            "factual": true,
+            "text_style": true,
+            "aligned_speech": false,
+            "visible_behavior": false
+          },
+          "completeness": "complete_exchange",
+          "question_sha256": "e4672028a3620bad7722f5c34c99a504ee4ab9d73d3dd29be145c2eb95c470d6",
+          "answer_sha256": "92f88de4362018e9552344aaf63651391b1e82a037bb4d93361d41477f5abae8",
+          "record_sha256": "9420f0621f097c9ab347e2503c4bbd2bd9739cb71f9812764fa47d6467f0cc98",
+          "source_artifact_sha256": "8f946df22e0994a1ed6a48f9ef860e4d5e0ab43a49809aa8a67079e49f5f4632",
+          "transcript_locator": {
+            "question_cue_ids": [
+              "turn-00010"
+            ],
+            "answer_cue_ids": [
+              "turn-00011"
+            ],
+            "context_cue_ids": [
+              "turn-00009"
+            ],
+            "transcript_sha256": "90812c0459b161b8263b68b9959669e4fd1b9918b07039cf3e6f2f7986d95be1"
+          },
+          "timing_basis": "unavailable",
+          "reading_supported_rationale": "Explains admitting a flawed graphics approach to Sega, recommending another supplier and asking for help to keep the company alive.",
+          "limitation": "The publisher turn ends in an interruption; missing final words are not reconstructed."
+        },
+        {
+          "evidence_id": "qa26-acquired-2023-turn-00339",
+          "event_family_id": "acquired-2023",
+          "source_url": "https://www.acquired.fm/episodes/jensen-huang#transcript",
+          "source_type": "publisher_interview_transcript",
+          "published_at": "2023-10-16",
+          "event_at": null,
+          "projection_eligibility": {
+            "factual": true,
+            "text_style": true,
+            "aligned_speech": false,
+            "visible_behavior": false
+          },
+          "completeness": "complete_exchange",
+          "question_sha256": "5639abb4314cfd597f4a220199a1478422c690ae7efc75b47de37cac41bd9710",
+          "answer_sha256": "f2d809b487c691709ab0120b518f130c2a0a78e3fc7693ef98588607552ef239",
+          "record_sha256": "a83fb085076b0f0a3a0972a539b4ecc3caf994cb60178f80c6a928ac66aa5d11",
+          "source_artifact_sha256": "d1625a4cb9195b6b1fbbacaf53aa2ae7364a28f0a60436f0ac666db69bc75b82",
+          "transcript_locator": {
+            "question_cue_ids": [
+              "turn-00339"
+            ],
+            "answer_cue_ids": [
+              "turn-00340",
+              "turn-00341",
+              "turn-00342"
+            ],
+            "context_cue_ids": [
+              "turn-00338"
+            ],
+            "transcript_sha256": "54126a9d73a535b4e814453fb415ffce4541d015af4e93fe3a24e6cb8caac18d"
+          },
+          "timing_basis": "unavailable",
+          "reading_supported_rationale": "Reflects on underestimated company-building difficulty, vulnerability and the optimistic mindset that helped him persist.",
+          "limitation": "Retrospective self-account, not a general guarantee that hardship causes success."
+        }
+      ]
+    },
+    {
+      "dimension": "work_and_purpose",
+      "coverage_status": "illustrative_agent_reviewed_anchors",
+      "anchors": [
+        {
+          "evidence_id": "qa26-stanford-vftt-2024-turn-00014",
+          "event_family_id": "stanford-vftt-2024",
+          "source_url": "https://www.gsb.stanford.edu/insights/jensen-huang-how-use-first-principles-thinking-drive-decisions",
+          "source_type": "publisher_interview_transcript",
+          "published_at": "2024-04-25",
+          "event_at": null,
+          "projection_eligibility": {
+            "factual": true,
+            "text_style": true,
+            "aligned_speech": false,
+            "visible_behavior": false
+          },
+          "completeness": "complete_exchange",
+          "question_sha256": "ddf80659dade09bb4d87d7c9e6bf7330262813a3844e1b9543f91d9cdaf315ba",
+          "answer_sha256": "8553192ada4d40df78981b01867ff09312ef49243180330be4cc85efd4cb4d5f",
+          "record_sha256": "fe37a79a285f7034e95f0f270e9202d3bb37fd53c48119c48a3902c2829b9432",
+          "source_artifact_sha256": "aa9676a4766469e4e99bb36b104e46b88186f0b739229921446bc695bf3065c3",
+          "transcript_locator": {
+            "question_cue_ids": [
+              "turn-00014"
+            ],
+            "answer_cue_ids": [
+              "turn-00015",
+              "turn-00016",
+              "turn-00017",
+              "turn-00018",
+              "turn-00019"
+            ],
+            "context_cue_ids": [
+              "turn-00013"
+            ],
+            "transcript_sha256": "bcbf6f51dc10e81473c60997d26419c2b8e9aebe0ceae5e56b23c9e538c7d2d9"
+          },
+          "timing_basis": "unavailable",
+          "reading_supported_rationale": "Describes a durable company mission to solve problems conventional computers could not and the usefulness of resulting applications.",
+          "limitation": "Mission claims are attributed to the speaker."
+        },
+        {
+          "evidence_id": "qa26-acquired-2023-turn-00339",
+          "event_family_id": "acquired-2023",
+          "source_url": "https://www.acquired.fm/episodes/jensen-huang#transcript",
+          "source_type": "publisher_interview_transcript",
+          "published_at": "2023-10-16",
+          "event_at": null,
+          "projection_eligibility": {
+            "factual": true,
+            "text_style": true,
+            "aligned_speech": false,
+            "visible_behavior": false
+          },
+          "completeness": "complete_exchange",
+          "question_sha256": "5639abb4314cfd597f4a220199a1478422c690ae7efc75b47de37cac41bd9710",
+          "answer_sha256": "f2d809b487c691709ab0120b518f130c2a0a78e3fc7693ef98588607552ef239",
+          "record_sha256": "a83fb085076b0f0a3a0972a539b4ecc3caf994cb60178f80c6a928ac66aa5d11",
+          "source_artifact_sha256": "d1625a4cb9195b6b1fbbacaf53aa2ae7364a28f0a60436f0ac666db69bc75b82",
+          "transcript_locator": {
+            "question_cue_ids": [
+              "turn-00339"
+            ],
+            "answer_cue_ids": [
+              "turn-00340",
+              "turn-00341",
+              "turn-00342"
+            ],
+            "context_cue_ids": [
+              "turn-00338"
+            ],
+            "transcript_sha256": "54126a9d73a535b4e814453fb415ffce4541d015af4e93fe3a24e6cb8caac18d"
+          },
+          "timing_basis": "unavailable",
+          "reading_supported_rationale": "Discusses the emotional and practical difficulty of building the company across decades.",
+          "limitation": "This supports a work-experience reflection, not independently observed daily habits."
+        }
+      ]
+    },
+    {
+      "dimension": "leadership_and_information",
+      "coverage_status": "illustrative_agent_reviewed_anchors",
+      "anchors": [
+        {
+          "evidence_id": "qa26-stripe-sessions-2024-turn-00137",
+          "event_family_id": "stripe-sessions-2024",
+          "source_url": "https://stripe.com/gb/sessions/2024/a-conversation-with-nvidias-jensen-huang",
+          "source_type": "publisher_interview_transcript",
+          "published_at": "2024-05-21",
+          "event_at": null,
+          "projection_eligibility": {
+            "factual": true,
+            "text_style": true,
+            "aligned_speech": false,
+            "visible_behavior": false
+          },
+          "completeness": "complete_exchange",
+          "question_sha256": "2ede2d2c05e1ab7fe5b7409bd449cc60db9a2739afa62ccbcbb5f3cb9a1c6f8c",
+          "answer_sha256": "0f68542c4c09e07a02e31ee8dc273b749068e65734dfc3fb099a281b56a88307",
+          "record_sha256": "e14a3c929470bda8dc289d7b3da90bcb294d3110f78634e70a5a92ceb35cb01e",
+          "source_artifact_sha256": "bbbadbeed233f4213555264fa97502b9f4a7661678590076b8bb00349b1e1307",
+          "transcript_locator": {
+            "question_cue_ids": [
+              "turn-00137"
+            ],
+            "answer_cue_ids": [
+              "turn-00138",
+              "turn-00139"
+            ],
+            "context_cue_ids": [
+              "turn-00136"
+            ],
+            "transcript_sha256": "06719253ec026cd6b23bd373c4f9c942c15e5023749ab262c48e34b3f894932e"
+          },
+          "timing_basis": "unavailable",
+          "reading_supported_rationale": "Explains public feedback as shared learning, exposing reasoning to colleagues while acknowledging that his own judgment can be wrong.",
+          "limitation": "Description of intended management practice, not measured employee outcomes."
+        },
+        {
+          "evidence_id": "qa26-lex-494-cue-00050",
+          "event_family_id": "lex-494",
+          "source_url": "https://lexfridman.com/jensen-huang-transcript/",
+          "source_type": "publisher_interview_transcript",
+          "published_at": "2026-03-23",
+          "event_at": null,
+          "projection_eligibility": {
+            "factual": true,
+            "text_style": true,
+            "aligned_speech": false,
+            "visible_behavior": false
+          },
+          "completeness": "complete_exchange",
+          "question_sha256": "231ba445c0422bcae87a5b50a07a1df312a898c593e00fc945c07cddfac838c3",
+          "answer_sha256": "20bad9359e191c8113f8b3987ffa06e7329bf716515e84f9c341c5491cd1063b",
+          "record_sha256": "ddac6d4247a7c319f7fbc98a0e1503d75de66e40abc4cdf10446b0dbf51ca02d",
+          "source_artifact_sha256": "3e2976d8af8b3a196eea3614761d107997d9c8f536240121a331d56cf8327ece",
+          "transcript_locator": {
+            "question_cue_ids": [
+              "cue-00050"
+            ],
+            "answer_cue_ids": [
+              "cue-00051",
+              "cue-00052",
+              "cue-00053",
+              "cue-00054",
+              "cue-00055"
+            ],
+            "context_cue_ids": [
+              "cue-00049"
+            ],
+            "transcript_sha256": "dc40f3ba83bb3734f76147f62b565d195cd4bc0376dc68725548f8faf42173a0"
+          },
+          "timing_basis": "publisher_transcript_timestamps_only",
+          "reading_supported_rationale": "Describes building shared conviction among directors, management, employees and partners before committing to a strategic change.",
+          "limitation": "Transcript timestamps are not aligned to the separately acquired podcast audio."
+        }
+      ]
+    },
+    {
+      "dimension": "judgment_and_conviction",
+      "coverage_status": "illustrative_agent_reviewed_anchors",
+      "anchors": [
+        {
+          "evidence_id": "qa26-stripe-sessions-2024-turn-00209",
+          "event_family_id": "stripe-sessions-2024",
+          "source_url": "https://stripe.com/gb/sessions/2024/a-conversation-with-nvidias-jensen-huang",
+          "source_type": "publisher_interview_transcript",
+          "published_at": "2024-05-21",
+          "event_at": null,
+          "projection_eligibility": {
+            "factual": true,
+            "text_style": true,
+            "aligned_speech": false,
+            "visible_behavior": false
+          },
+          "completeness": "complete_exchange",
+          "question_sha256": "9830fca2ae409d5d0011e045b53c7143ef6046f34df7059d5a607f32006a1253",
+          "answer_sha256": "c0313a77d4fc63cc3de0023423a44db219ecaf0dd644041414b9aa03fe4ca5b5",
+          "record_sha256": "38b52e453a591a645b66528f38272316e6b62906fae3ab1c746530fcc60ccc34",
+          "source_artifact_sha256": "bbbadbeed233f4213555264fa97502b9f4a7661678590076b8bb00349b1e1307",
+          "transcript_locator": {
+            "question_cue_ids": [
+              "turn-00209"
+            ],
+            "answer_cue_ids": [
+              "turn-00210",
+              "turn-00211",
+              "turn-00212",
+              "turn-00213"
+            ],
+            "context_cue_ids": [
+              "turn-00208"
+            ],
+            "transcript_sha256": "06719253ec026cd6b23bd373c4f9c942c15e5023749ab262c48e34b3f894932e"
+          },
+          "timing_basis": "unavailable",
+          "reading_supported_rationale": "Separates reasoned commitment from stubborn desire by revisiting assumptions and finding small applications that sustain a long investment.",
+          "limitation": "The boundary is presented as uncertain, not a universal decision formula."
+        },
+        {
+          "evidence_id": "qa26-acquired-2023-turn-00055",
+          "event_family_id": "acquired-2023",
+          "source_url": "https://www.acquired.fm/episodes/jensen-huang#transcript",
+          "source_type": "publisher_interview_transcript",
+          "published_at": "2023-10-16",
+          "event_at": null,
+          "projection_eligibility": {
+            "factual": true,
+            "text_style": true,
+            "aligned_speech": false,
+            "visible_behavior": false
+          },
+          "completeness": "complete_exchange",
+          "question_sha256": "71482450d596ea85146fbd36a7b8ad07f4d0c154f905e814a5a7587d6f8fd92b",
+          "answer_sha256": "e3b958380d66a3a8f077793131957eea97439a76e359ff092d274a702e6f757d",
+          "record_sha256": "3a003adef33c888fc0b45a042ff3474a1fd3becf923b33961fe4b298f9bcd654",
+          "source_artifact_sha256": "d1625a4cb9195b6b1fbbacaf53aa2ae7364a28f0a60436f0ac666db69bc75b82",
+          "transcript_locator": {
+            "question_cue_ids": [
+              "turn-00055"
+            ],
+            "answer_cue_ids": [
+              "turn-00056",
+              "turn-00057"
+            ],
+            "context_cue_ids": [
+              "turn-00054"
+            ],
+            "transcript_sha256": "54126a9d73a535b4e814453fb415ffce4541d015af4e93fe3a24e6cb8caac18d"
+          },
+          "timing_basis": "unavailable",
+          "reading_supported_rationale": "Links the general-computing bet to concrete properties of programmable shaders and earlier experiments in non-graphics applications.",
+          "limitation": "Technical reasoning is a historical account, not proof that all later outcomes were predictable."
+        }
+      ]
+    },
+    {
+      "dimension": "responsibility_and_obligations",
+      "coverage_status": "illustrative_agent_reviewed_anchors",
+      "anchors": [
+        {
+          "evidence_id": "qa26-lex-494-cue-00244",
+          "event_family_id": "lex-494",
+          "source_url": "https://lexfridman.com/jensen-huang-transcript/",
+          "source_type": "publisher_interview_transcript",
+          "published_at": "2026-03-23",
+          "event_at": null,
+          "projection_eligibility": {
+            "factual": true,
+            "text_style": true,
+            "aligned_speech": false,
+            "visible_behavior": false
+          },
+          "completeness": "complete_exchange",
+          "question_sha256": "86eaf758e93a7b6e04a73e1c7092edf25ce047264034c2a604a3952b7319fc2c",
+          "answer_sha256": "9e741940790ef898f5314c1eabb8d4be552ae550104d7ab359d7595386787502",
+          "record_sha256": "28081de6a7f4751d3b907f12e90df8d4466b71ed913e5cd9469c9a8cdd1e33a6",
+          "source_artifact_sha256": "3e2976d8af8b3a196eea3614761d107997d9c8f536240121a331d56cf8327ece",
+          "transcript_locator": {
+            "question_cue_ids": [
+              "cue-00244"
+            ],
+            "answer_cue_ids": [
+              "cue-00245",
+              "cue-00246",
+              "cue-00247",
+              "cue-00248",
+              "cue-00249"
+            ],
+            "context_cue_ids": [
+              "cue-00243"
+            ],
+            "transcript_sha256": "dc40f3ba83bb3734f76147f62b565d195cd4bc0376dc68725548f8faf42173a0"
+          },
+          "timing_basis": "publisher_transcript_timestamps_only",
+          "reading_supported_rationale": "Discusses obligations toward employees, investors, partners, supply chains and society; describes breaking risks into actions and notifying people who can respond.",
+          "limitation": "Economic and national-impact statements are the speaker's claims, not independent verification."
+        },
+        {
+          "evidence_id": "qa26-lex-494-cue-00194",
+          "event_family_id": "lex-494",
+          "source_url": "https://lexfridman.com/jensen-huang-transcript/",
+          "source_type": "publisher_interview_transcript",
+          "published_at": "2026-03-23",
+          "event_at": null,
+          "projection_eligibility": {
+            "factual": true,
+            "text_style": true,
+            "aligned_speech": false,
+            "visible_behavior": false
+          },
+          "completeness": "complete_exchange",
+          "question_sha256": "0d245a98a735ebde809b3253c85b379ea146fe93e7235bb59e23aaa9b26ca6f8",
+          "answer_sha256": "8cc2ff5eee27ebabea2fc45eec4936e70d216be65eb01a342afca7f3efc1439a",
+          "record_sha256": "58cea75a7d209a3e1f03e9469c0e86d86704a35568abceafa02335af15e8159c",
+          "source_artifact_sha256": "3e2976d8af8b3a196eea3614761d107997d9c8f536240121a331d56cf8327ece",
+          "transcript_locator": {
+            "question_cue_ids": [
+              "cue-00194"
+            ],
+            "answer_cue_ids": [
+              "cue-00195"
+            ],
+            "context_cue_ids": [
+              "cue-00193"
+            ],
+            "transcript_sha256": "dc40f3ba83bb3734f76147f62b565d195cd4bc0376dc68725548f8faf42173a0"
+          },
+          "timing_basis": "publisher_transcript_timestamps_only",
+          "reading_supported_rationale": "Explains declining the TSMC CEO offer through commitment to the mission he believed NVIDIA could fulfill.",
+          "limitation": "Narrow mission responsibility, not a comprehensive ethical doctrine."
+        },
+        {
+          "evidence_id": "qa26-stanford-vftt-2024-turn-00085",
+          "event_family_id": "stanford-vftt-2024",
+          "source_url": "https://www.gsb.stanford.edu/insights/jensen-huang-how-use-first-principles-thinking-drive-decisions",
+          "source_type": "publisher_interview_transcript",
+          "published_at": "2024-04-25",
+          "event_at": null,
+          "projection_eligibility": {
+            "factual": true,
+            "text_style": true,
+            "aligned_speech": false,
+            "visible_behavior": false
+          },
+          "completeness": "complete_exchange",
+          "question_sha256": "efcfa810c98781a262148ac21308506b697c73f2a53cd36de3465f3345998b60",
+          "answer_sha256": "3c5460301e0f9776b611b69c27788cfcaabf7328adfa77b96596a1326a5ad00f",
+          "record_sha256": "8bef58fcad004ba3fb06ee95e2766ef378f2e2010cf40b5610d78842957c9304",
+          "source_artifact_sha256": "aa9676a4766469e4e99bb36b104e46b88186f0b739229921446bc695bf3065c3",
+          "transcript_locator": {
+            "question_cue_ids": [
+              "turn-00085"
+            ],
+            "answer_cue_ids": [
+              "turn-00086",
+              "turn-00087",
+              "turn-00088",
+              "turn-00089",
+              "turn-00090",
+              "turn-00091",
+              "turn-00092",
+              "turn-00093",
+              "turn-00094",
+              "turn-00095",
+              "turn-00096",
+              "turn-00097",
+              "turn-00098"
+            ],
+            "context_cue_ids": [],
+            "transcript_sha256": "bcbf6f51dc10e81473c60997d26419c2b8e9aebe0ceae5e56b23c9e538c7d2d9"
+          },
+          "timing_basis": "unavailable",
+          "reading_supported_rationale": "Describes the CEO's responsibility to create conditions for employees' work through information access and questioning.",
+          "limitation": "Organizational self-description; employee experience and outcomes remain unmeasured."
+        }
+      ]
+    },
+    {
+      "dimension": "engineering_and_technical_explanation",
+      "coverage_status": "illustrative_agent_reviewed_anchors",
+      "anchors": [
+        {
+          "evidence_id": "qa26-acquired-2023-turn-00055",
+          "event_family_id": "acquired-2023",
+          "source_url": "https://www.acquired.fm/episodes/jensen-huang#transcript",
+          "source_type": "publisher_interview_transcript",
+          "published_at": "2023-10-16",
+          "event_at": null,
+          "projection_eligibility": {
+            "factual": true,
+            "text_style": true,
+            "aligned_speech": false,
+            "visible_behavior": false
+          },
+          "completeness": "complete_exchange",
+          "question_sha256": "71482450d596ea85146fbd36a7b8ad07f4d0c154f905e814a5a7587d6f8fd92b",
+          "answer_sha256": "e3b958380d66a3a8f077793131957eea97439a76e359ff092d274a702e6f757d",
+          "record_sha256": "3a003adef33c888fc0b45a042ff3474a1fd3becf923b33961fe4b298f9bcd654",
+          "source_artifact_sha256": "d1625a4cb9195b6b1fbbacaf53aa2ae7364a28f0a60436f0ac666db69bc75b82",
+          "transcript_locator": {
+            "question_cue_ids": [
+              "turn-00055"
+            ],
+            "answer_cue_ids": [
+              "turn-00056",
+              "turn-00057"
+            ],
+            "context_cue_ids": [
+              "turn-00054"
+            ],
+            "transcript_sha256": "54126a9d73a535b4e814453fb415ffce4541d015af4e93fe3a24e6cb8caac18d"
+          },
+          "timing_basis": "unavailable",
+          "reading_supported_rationale": "Explains the architecture and early application reasoning behind moving from graphics toward general GPU computing.",
+          "limitation": "No claim of exhaustive CUDA history."
+        },
+        {
+          "evidence_id": "qa26-lex-494-cue-00187",
+          "event_family_id": "lex-494",
+          "source_url": "https://lexfridman.com/jensen-huang-transcript/",
+          "source_type": "publisher_interview_transcript",
+          "published_at": "2026-03-23",
+          "event_at": null,
+          "projection_eligibility": {
+            "factual": true,
+            "text_style": true,
+            "aligned_speech": false,
+            "visible_behavior": false
+          },
+          "completeness": "complete_exchange",
+          "question_sha256": "ae0d79a107f133aeb70078e8e1fc4389398f7ffb36f679c14b38e614a5fde03e",
+          "answer_sha256": "ede4e0d1e054165781d374729a8f826687469cf8ef9f63ce6f706c2c9bc6b474",
+          "record_sha256": "83eb5694bdbd7be942e9b411ee4a1b24c4c0eda5dfb118b3060eab01947eea12",
+          "source_artifact_sha256": "3e2976d8af8b3a196eea3614761d107997d9c8f536240121a331d56cf8327ece",
+          "transcript_locator": {
+            "question_cue_ids": [
+              "cue-00187"
+            ],
+            "answer_cue_ids": [
+              "cue-00188",
+              "cue-00189",
+              "cue-00190",
+              "cue-00191"
+            ],
+            "context_cue_ids": [
+              "cue-00186"
+            ],
+            "transcript_sha256": "dc40f3ba83bb3734f76147f62b565d195cd4bc0376dc68725548f8faf42173a0"
+          },
+          "timing_basis": "publisher_transcript_timestamps_only",
+          "reading_supported_rationale": "Explains TSMC through technology, manufacturing coordination, customer service and trust.",
+          "limitation": "Claims about TSMC are attributed; the transcript clock is not assumed to match podcast audio."
+        },
+        {
+          "evidence_id": "qa26-goldman-sachs-2024-turn-00007",
+          "event_family_id": "goldman-sachs-2024",
+          "source_url": "https://www.goldmansachs.com/insights/talks-at-gs/jensen-huang",
+          "source_type": "publisher_interview_transcript",
+          "published_at": "2024-11-11",
+          "event_at": "2024-09-11",
+          "projection_eligibility": {
+            "factual": true,
+            "text_style": true,
+            "aligned_speech": false,
+            "visible_behavior": false
+          },
+          "completeness": "complete_exchange",
+          "question_sha256": "78bda575e68d5923543a5fab55a5ada78a924c17e00bdb57ab4cd78c00c5ea61",
+          "answer_sha256": "7999d4c40ee9014a2170e9d15eb57328c3102df8ab29c3cc1a7aadf4461695c4",
+          "record_sha256": "c08c6f8f244b654d02d6c9c7c721969c76b411f49345cc0b2f6dbe3c957b6062",
+          "source_artifact_sha256": "333472564ded6c150d77d64cad84036e180b88567c9afda2afd8368ee0a4ff0b",
+          "transcript_locator": {
+            "question_cue_ids": [
+              "turn-00007"
+            ],
+            "answer_cue_ids": [
+              "turn-00008"
+            ],
+            "context_cue_ids": [
+              "turn-00006"
+            ],
+            "transcript_sha256": "2596639d2b737453d22185cbbfcf66e1288810d8a77a87720837da57aea69b40"
+          },
+          "timing_basis": "unavailable",
+          "reading_supported_rationale": "Explains CPU and accelerator task division, concentrated runtime costs and domain-specific algorithm libraries.",
+          "limitation": "Speedup examples are source claims; no benchmark verification is supplied."
+        }
+      ]
+    }
+  ],
+  "formats_before_expansion": [
+    {
+      "format": "publisher_interview_QA",
+      "actual_source_events": 9,
+      "status": "acquired_original_dialogue",
+      "events": [
+        "acquired-2023",
+        "csis-2025",
+        "dwarkesh-2026",
+        "goldman-sachs-2024",
+        "lex-494",
+        "stanford-vftt-2024",
+        "strange-loop-2025",
+        "stripe-sessions-2024",
+        "yc-startup-school-2026"
+      ]
+    },
+    {
+      "format": "reflective_interview_QA",
+      "status": "actual_content_present_not_a_commencement_or_formal_oral_history",
+      "example_events": [
+        "stanford-vftt-2024",
+        "acquired-2023",
+        "stripe-sessions-2024",
+        "yc-startup-school-2026"
+      ]
+    },
+    {
+      "format": "technical_keynote",
+      "status": "four_full_actual_videos_saved_and_restored",
+      "events": [
+        "gtc-2024",
+        "gtc-2025",
+        "ces-2025",
+        "computex-2025"
+      ],
+      "receipt": "../media-artifacts.json"
+    },
+    {
+      "format": "commencement_address",
+      "status": "not_acquired_before_this_expansion",
+      "actual_source_events": 0
+    },
+    {
+      "format": "formal_oral_history",
+      "status": "not_acquired_before_this_expansion",
+      "actual_source_events": 0
+    }
+  ],
+  "metadata_limitations": [
+    "The generic conversation situation tags do not constitute a semantic dimension audit; this matrix is a separate annotation and leaves them unchanged.",
+    "Some frozen source attribution strings retain legacy editorial-paraphrase wording despite original_text_included=true and original-publisher-QA curation. Actual QA records and raw artifact hashes establish these anchors; frozen metadata is not rewritten.",
+    "Projection eligibility in the corpus does not prove inclusion in the smaller exported text training dataset.",
+    "These anchors demonstrate source content, not learned persona fidelity or independent validation of the speaker's assertions."
+  ]
+}
