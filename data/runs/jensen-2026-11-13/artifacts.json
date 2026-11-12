@@ -620,6 +620,28 @@
       "sha256": "9c13e88b354b5d1a78ddff6105a7ea30c2faab1e7eb8c839eb1e5f09a1235f0b",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-text-checkpoint-step0028",
+      "role": "Actual optimizer step28 checkpoint with adapter, AdamW, RNG and data cursor; training target29 remains incomplete",
+      "file_name": "jensen-text-checkpoint-step0028.tar.gz",
+      "file_id": "file_00000000331081fd9a014b9e30705558",
+      "library_file_id": "libfile_fde3_f-417f35429c3c8191b3e33f0314e12e81_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 97097705,
+      "sha256": "73d5cc8ab38d9187974e53e0efd9acd4c3be6005cc0c0852ffb0686cd6b83baa",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-text-interrupted-owner-step28-v1",
+      "role": "Preserved lost execution evidence and exact proposed 28-to-29 recovery; no clean exit or OOM inference",
+      "file_name": "jensen-text-interrupted-owner-step28-v1.tar.gz",
+      "file_id": "file_00000000401881fd8bcb0b003d8c0f78",
+      "library_file_id": "libfile_fde3_f-c90780f418a88191b3e87669a99d9236_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 10403,
+      "sha256": "14079b1d84b32b96ccdc18497c4240c17fced4f8b14ce0b763ad1484e4a359c5",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {

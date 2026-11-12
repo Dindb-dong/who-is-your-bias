@@ -1,5 +1,12 @@
 # Jensen text adapter: bounded execution and continuation
 
+The original supervised execution connection was lost after the actual step-28
+checkpoint was saved and freshly restored, before its Git publication and ACK.
+The [interruption record](interrupted-owner-step0028.json) preserves the stale
+owner, released advisory-lock observation, exact checkpoint and proposed isolated
+28-to-29 continuation. No clean exit or OOM is inferred. The new invocation is
+prepared and has not run at this checkpoint.
+
 The immutable experiment uses 113 complete original exchanges across all nine
 eligible training events. The earlier interrupted 105-answer selection was not
 recovered. This version caps each event at 16 examples, requires at least 24
@@ -10,8 +17,8 @@ dataset and pinned tokenizer hashes are in `dataset-selection.json` and
 ## Verified checkpoint
 
 The current saved counter and resume path are in [latest.json](latest.json).
-26 optimizer updates have been preserved and freshly retrieved. The latest
-actual state is in [checkpoint-step0026.json](checkpoint-step0026.json); connection recovery is recorded
+28 optimizer updates have been preserved and freshly retrieved. The latest
+actual state is in [checkpoint-step0028.json](checkpoint-step0028.json); connection recovery is recorded
 in `session-recovery-step0008.json`. The supervised recovery restored step 8
 and completed updates 9 and 10 with the same optimizer/data binding. The actual
 second update ran in a new process restored from the remotely retrieved first

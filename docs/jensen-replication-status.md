@@ -47,7 +47,7 @@ separately. The prior unverified eight-video claim is not inherited by this run.
 - Text selection: **113 complete answers / all 9 events**, 24-word minimum,
   768-token whole-exchange limit, deterministic cap of 16 per event. Dataset,
   selection and immutable Qwen3-1.7B tokenizer/model hashes are saved.
-- Text computation: **26 actual saved optimizer updates**, 8,716,288 trainable LoRA
+- Text computation: **28 actual saved optimizer updates**, 8,716,288 trainable LoRA
   parameters, BF16 CPU. The actual fresh-process continuation from remote step 1
   to step 2 passed (282.0 seconds for that invocation). Step 2 was then uploaded,
   freshly retrieved and extracted for continuation. Steps 4, 6 and 8 were also saved,
@@ -111,7 +111,7 @@ separately. The prior unverified eight-video claim is not inherited by this run.
 | Corpus | Authentic v4, held-out references, nine full original video restorations | Nine original videos and one additional derived NTU address verified; frozen event isolation preserved |
 | Voice | Source clocks, four-event dataset, 16 completed updates, eight public waveforms, ASR/WavLM diagnostics and verified gateway | Candidate remains optional; human likeness is ungraded |
 | Avatar | Actual fitted model, editable master, finger controls, observed clips and actual desktop/mobile browser rendering | Human likeness remains ungraded; candidate stays optional |
-| Text | Frozen dataset, 26 saved updates and successful remote optimizer continuation | Finish bounded run and serve exact adapter |
+| Text | Frozen dataset, 28 saved updates and successful remote optimizer continuation | Finish bounded run and serve exact adapter |
 | Retrieval/evaluation | Frozen lexical/concept/hybrid comparison; both candidates remain opt-in | Matched base/style/adapter and heldout response experiments |
 
 Integrated changed-path Python checks: 186 passed and two optional-Torch modules
@@ -183,12 +183,17 @@ will be recorded only after their exact pinned inputs and checkpoint paths exist
 
 ## Remaining acceptance
 
+The step-28 checkpoint survived an execution-session interruption and has been
+freshly byte-checked again. [Recovery evidence and the isolated continuation](../reports/jensen-recovery/text-v1/interrupted-owner-step0028.json)
+record the lost owner, unconsumed old gate and prepared final update. The previous
+process has no observed exit receipt; completed training is still pending.
+
 M0 storage readback and real optimizer/RNG equivalence tests are verified. The
 actual text checkpoint survived fresh remote retrieval and completed the next
 optimizer update in a fresh process; step 2 was again saved and freshly verified. The retrieval comparison and the voice candidate
 training/sample/diagnostic/gateway delivery have executed. Both retrieval
 candidates remain opt-in after missing their declared gate. Text training is
-still 26/29 saved updates; the first 12 of 54 matched M6 calls have executed and been saved (six normal
+still 28/29 saved updates; the first 12 of 54 matched M6 calls have executed and been saved (six normal
 completions, six length-limited failures). The remaining 42 matched calls, six
 separate RAG responses and actual M7 neural-text session checks remain pending.
 See the [current response execution status](../reports/jensen-evaluation-v1/execution-status.json). Avatar/browser
