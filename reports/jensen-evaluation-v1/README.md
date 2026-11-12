@@ -85,8 +85,11 @@ training evidence supports only a broader or partial answer.
 
 Execution waits for the shared model-memory slot. Adapter execution additionally
 requires the exact completed, compatible adapter receipt. The additive
-[execution contract](execution-contract.json) now registers **CPU float32 with
-eight threads** for all conditions. This updates the four-thread runtime plan
+[current execution contract](execution-contract-bf16-v2.json) registers **CPU
+BF16 with eight threads** for all conditions. The original FP32 loading process
+was killed before its warmup or any frozen question completed; the preserved
+[failure and pre-output amendment](runtime-amendment-bf16-v2.json) record that
+observation. The original FP32 contract and every plan remain unchanged. This also retains the eight-thread update to the four-thread runtime plan
 in the earlier registration without changing either v2 plan, its questions,
 messages or decoding. If the excluded loading/warmup preflight cannot fit,
 preserve that failure and explicitly register a new common runtime before

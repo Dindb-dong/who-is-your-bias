@@ -145,3 +145,14 @@ bytes; a fresh remote materialization matched its SHA-256, all five restored
 files matched the original bytes, and both `validate_rag_plan` and
 `validate_execution_contract` passed on the restored artifact. These are
 preparation and durability checks, not model quality results.
+
+## Execution runtime amendment before outputs
+
+The separate matched comparison's first FP32 warmup process was killed during
+weight loading before any question ran. The [saved failure and amendment](../runtime-amendment-bf16-v2.json)
+register BF16 with eight CPU threads for this same base model as well. Use
+[execution-contract-bf16-v2.json](execution-contract-bf16-v2.json) for actual
+execution; retain the original private plan and original contract unchanged.
+The captured runtime prompts, zero-evidence cases, six original questions,
+reference isolation, decoding limits and base/tokenizer hashes are unchanged.
+No actual RAG response or BF16 suitability result is claimed by this amendment.

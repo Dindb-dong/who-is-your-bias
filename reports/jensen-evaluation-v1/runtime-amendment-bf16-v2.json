@@ -1,0 +1,89 @@
+{
+  "schema_version": "jensen-evaluation-pre-output-runtime-amendment.v1",
+  "recorded_at": "2026-11-12T20:07:45.564843+00:00",
+  "reason": "FP32 loading process was SIGKILLed before warmup completed. The observation is consistent with memory pressure; no kernel OOM attribution was available.",
+  "failed_attempt": {
+    "condition": "facts",
+    "exposure": "development",
+    "supervisor": {
+      "schema_version": "text-single-condition-supervisor.v1",
+      "condition": "facts",
+      "status": "failed",
+      "plan_sha256": "cd2bd7340c3eb7d9c1ddc248b78e25d69b8e00c9d246454cf5925e082a1dd030",
+      "plan_file_sha256": "8e2c7d269ff12d29d260ffdd4212de5ae4afe1c5862a0c1ea57cf8b023916bbe",
+      "contract_sha256": "104075657b98901dd52c0b0a47e144b05907e89fda82f739242b9b4985c12bd0",
+      "contract_file_sha256": "fece3992498ad096e64853e0f10ced60cb370a7b403efc6c7d013b417be7d21a",
+      "wrapper_sha256": "f1fda11d0f7f4f5d5de6dcee20d51bb0c3230d1b32509267915977808a16b5da",
+      "started_at": "2026-11-12T20:04:00.079352+00:00",
+      "requested_runtime": {
+        "device": "cpu",
+        "dtype": "float32",
+        "threads": 8,
+        "input_limit": 4096,
+        "output_limit": 160
+      },
+      "time_budget": {
+        "per_case_seconds": 180.0,
+        "condition_seconds": 2280.0,
+        "startup_seconds": 30,
+        "warmup_seconds": 180.0
+      },
+      "adapter_run_sha256": null,
+      "server_stopped": true,
+      "timing_scope": "separate model launch and excluded warmup for each condition; sequential order is not counterbalanced",
+      "warmup_included_in_condition_metrics": false,
+      "next_action": "save the complete condition directory and verify fresh readback before starting another condition",
+      "human_review": "ungraded",
+      "efficacy_claim": false,
+      "launcher_sha256": "51b412a81c63410ae9c4ca01397a6869e7d96585734f6a6463d534bca3b10af8",
+      "server_pid": 7,
+      "startup_ready_ms": 1371.933,
+      "failure_type": "RemoteProtocolError",
+      "server_returncode": -9,
+      "elapsed_seconds": 91.894,
+      "finished_at": "2026-11-12T20:05:31.973067+00:00",
+      "files_sha256": {
+        "launcher.json": "27ff256abb538a7d156cfb4105e85a558117734a82e3bd756e833a6139baf53e",
+        "server.log": "f13b0c0f0a3482fbf943ef0fd6f1a917df46784e51a506399b8da3a8e2d0d1b4"
+      },
+      "supervisor_sha256": "837b6135c7c4c6640c792c91d8ef70c7208775246beda60eb58b5815eae842f6"
+    },
+    "process_owner_max_waited_child_rss_bytes": 8191066112,
+    "failed_archive": {
+      "artifact_id": "jensen-text-eval-fp32-preflight-failed",
+      "role": "Failed pre-output FP32 M6 warmup, actual server SIGKILL and process ownership diagnostics; zero evaluation cases",
+      "file_name": "jensen-text-eval-fp32-preflight-failed.tar.gz",
+      "file_id": "file_00000000e92c81fda45c471d47a75a84",
+      "library_file_id": "libfile_fde3_f-38f95d8a47d881919d1cbf3a89eebf38_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 2619,
+      "sha256": "a2cb10262fff00ea4e039148af329d2862a073c94ec070d0178ed2864f88a949",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    "fresh_archive_and_all_attempt_files_verified": true,
+    "evaluation_questions_attempted": 0,
+    "evaluation_answers_generated": 0
+  },
+  "original_common_contract_sha256": "104075657b98901dd52c0b0a47e144b05907e89fda82f739242b9b4985c12bd0",
+  "new_common_contract_sha256": "9c79398b54118f284ffdc6e4592d501e1cc214e77f6a895152ae91019286b6c0",
+  "original_rag_contract_sha256": "ed1ab9d562759c715d2114a6d584639e2d5f177ce7ca8b130752c8311420048c",
+  "new_rag_contract_sha256": "7c3c0bc535cc2f92efa582a909c01e7f44280f58fd21ae66f184408cd714464d",
+  "new_runtime": {
+    "device": "cpu",
+    "dtype": "bfloat16",
+    "threads": 8
+  },
+  "changed": [
+    "common floating-point dtype from float32 to bfloat16 before any frozen case output"
+  ],
+  "unchanged": [
+    "base repository/revision/file hashes",
+    "tokenizer and chat template",
+    "all original v2 questions, factual passages, style examples, reference isolation and plan seals",
+    "context4096, output160, temperature0, top_p1, seed42, threads8",
+    "original contracts and failed attempt remain preserved"
+  ],
+  "prospective_scope": "All three matched conditions and the separate six-case RAG diagnostic use their new sealed common BF16 contracts. M7 has a separately versioned protocol amendment.",
+  "bf16_actual_preflight_suitability": "not yet executed",
+  "human_review": "ungraded"
+}

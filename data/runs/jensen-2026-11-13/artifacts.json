@@ -499,6 +499,17 @@
       "sha256": "12f99e96a4c8c8e1d58570650aaf8f6b617e1c43e199b2505d5488db55435561",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-text-eval-fp32-preflight-failed",
+      "role": "Failed pre-output FP32 M6 warmup, actual server SIGKILL and process ownership diagnostics; zero evaluation cases",
+      "file_name": "jensen-text-eval-fp32-preflight-failed.tar.gz",
+      "file_id": "file_00000000e92c81fda45c471d47a75a84",
+      "library_file_id": "libfile_fde3_f-38f95d8a47d881919d1cbf3a89eebf38_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 2619,
+      "sha256": "a2cb10262fff00ea4e039148af329d2862a073c94ec070d0178ed2864f88a949",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {

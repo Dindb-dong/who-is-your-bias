@@ -1,9 +1,12 @@
 # One-condition execution with durable boundaries
 
-**Preparation only: no model generations were executed for this change.** The
-separate [execution contract](execution-contract.json) pins the new supervisor's
-SHA-256, both existing v2 plan hashes, exact base/tokenizer hashes and CPU
-float32/eight threads. Existing frozen implementation and plan files are
+**Current runtime: BF16 / eight CPU threads.** The original FP32 warmup process
+was killed during weight loading before any frozen evaluation question ran. Its
+failed attempt was saved and freshly verified. The [pre-output amendment](runtime-amendment-bf16-v2.json)
+registers one common BF16 runtime for all three conditions; the original
+[FP32 contract](execution-contract.json) remains unchanged. The current
+[execution contract](execution-contract-bf16-v2.json) pins the same supervisor
+SHA-256, both existing v2 plan hashes and exact base/tokenizer hashes. Existing frozen implementation and plan files are
 unchanged. Questions, factual selection, wording examples, reference isolation,
 160 output tokens, seed 42 and 4,096-token context remain fixed.
 
@@ -39,13 +42,13 @@ directories; existing attempts must never be overwritten.
 
 ```sh
 EVAL_PLAN="$ART/text-evaluation-v1/frozen-v2/development/plan.json"
-EVAL_CONTRACT="reports/jensen-evaluation-v1/execution-contract.json"
-EVAL_OUTPUT="$ART/text-evaluation-v1/execution-development-v2"
+EVAL_CONTRACT="reports/jensen-evaluation-v1/execution-contract-bf16-v2.json"
+EVAL_OUTPUT="$ART/text-evaluation-v1/execution-development-bf16-v2"
 
 PYTHONPATH=src:. .venv-inference/bin/python \
   -m tools.adaptation_evaluation.local_condition run \
   --condition facts --plan "$EVAL_PLAN" --contract "$EVAL_CONTRACT" \
-  --dtype float32 --threads 8 --timeout 180 --output "$EVAL_OUTPUT/facts"
+  --dtype bfloat16 --threads 8 --timeout 180 --output "$EVAL_OUTPUT/facts"
 ```
 
 Inspect `supervisor.json`, `condition/run.json` and the server log, including
@@ -59,7 +62,7 @@ then freshly restore and compare its bytes before the next command.
 PYTHONPATH=src:. .venv-inference/bin/python \
   -m tools.adaptation_evaluation.local_condition run \
   --condition style --plan "$EVAL_PLAN" --contract "$EVAL_CONTRACT" \
-  --dtype float32 --threads 8 --timeout 180 --output "$EVAL_OUTPUT/style"
+  --dtype bfloat16 --threads 8 --timeout 180 --output "$EVAL_OUTPUT/style"
 ```
 
 Save and freshly verify this condition too. The adapter command additionally
@@ -73,12 +76,12 @@ PYTHONPATH=src:. .venv-inference/bin/python \
   -m tools.adaptation_evaluation.local_condition run \
   --condition adapter --plan "$EVAL_PLAN" --contract "$EVAL_CONTRACT" \
   --adapter-run "$ART/text-adapter-v1" --adapter-run-sha256 "$EVAL_ADAPTER_SHA256" \
-  --dtype float32 --threads 8 --timeout 180 --output "$EVAL_OUTPUT/adapter"
+  --dtype bfloat16 --threads 8 --timeout 180 --output "$EVAL_OUTPUT/adapter"
 ```
 
 For the six heldout cases, repeat this procedure with
 `EVAL_PLAN="$ART/text-evaluation-v1/frozen-v2/heldout/plan.json"` and a distinct
-`EVAL_OUTPUT="$ART/text-evaluation-v1/execution-heldout-v2"`. These heldout
+`EVAL_OUTPUT="$ART/text-evaluation-v1/execution-heldout-bf16-v2"`. These heldout
 plans use explicitly selected training evidence; this is a generation
 comparison, not an end-to-end retrieval measurement.
 
