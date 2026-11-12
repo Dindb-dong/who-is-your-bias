@@ -682,6 +682,18 @@
       "sha256": "1068a1559bfd264296173cc343f54de4b817e73bc45b5c1e0dc45bd1ca047d12",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-m7-preparation-completed29-v1",
+      "role": "m7-completed29-operational-preparation",
+      "file_id": "file_0000000061488209b449175fc38253bf",
+      "library_file_id": "libfile_fde3_f-ee9167e7f96c8191954153942871c8f1_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "jensen-m7-preparation-completed29-v1.tar.gz",
+      "size_bytes": 10798,
+      "sha256": "1c6ae0e06d74e06688cc6e447cfa85babba25b9ca8e557f4ef0d4ada39c95621",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified",
+      "generation_executed": false
     }
   ],
   "artifact_indexes": {

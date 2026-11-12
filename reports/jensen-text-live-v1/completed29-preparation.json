@@ -1,0 +1,65 @@
+{
+  "schema_version": "m7-completed29-preparation.v1",
+  "checked_at": "2026-11-12T21:57:31.453566+00:00",
+  "status": "no_model_preflights_passed_awaiting_coordinator_release",
+  "bindings_sha256": "ec41bbdd94ee21d6ab7cf21781e8b87e5e803f8b72e388a74f6600bc139837a5",
+  "operational_helper_sha256": "1d543d3983fb0e1d2536eec8e041780a95cd6f49c2d5e7efd68ae7edeeceebf7",
+  "conditions": {
+    "base": {
+      "file": "preflight-base.json",
+      "sha256": "d7590d3f067bb514197c30704a9f4635a34e4d28a7fffa1963501e1711e26d0e",
+      "weights_loaded": false,
+      "returncode": 0
+    },
+    "adapter": {
+      "file": "preflight-adapter.json",
+      "sha256": "56e3178e20720f367850058f9c0dfb782a14c482ec28507b3fd1f7682276be37",
+      "weights_loaded": false,
+      "returncode": 0
+    }
+  },
+  "model_loaded": false,
+  "generation_executed": false,
+  "adapter_run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+  "protocol_sha256": "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+  "artifact": {
+    "artifact_id": "jensen-m7-preparation-completed29-v1",
+    "role": "m7-completed29-operational-preparation",
+    "file_id": "file_0000000061488209b449175fc38253bf",
+    "library_file_id": "libfile_fde3_f-ee9167e7f96c8191954153942871c8f1_a18ece08681081918d81df44f69c4b1f",
+    "file_name": "jensen-m7-preparation-completed29-v1.tar.gz",
+    "size_bytes": 10798,
+    "sha256": "1c6ae0e06d74e06688cc6e447cfa85babba25b9ca8e557f4ef0d4ada39c95621",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified",
+    "generation_executed": false
+  },
+  "fresh_readback": {
+    "schema_version": "m7-operational-fresh-readback.v1",
+    "verified_at": "2026-11-12T21:58:26.290863+00:00",
+    "file_id": "file_0000000061488209b449175fc38253bf",
+    "library_file_id": "libfile_fde3_f-ee9167e7f96c8191954153942871c8f1_a18ece08681081918d81df44f69c4b1f",
+    "file_name": "jensen-m7-preparation-completed29-v1.tar.gz",
+    "bytes": 10798,
+    "sha256": "1c6ae0e06d74e06688cc6e447cfa85babba25b9ca8e557f4ef0d4ada39c95621",
+    "verified_payload_files": 7,
+    "metadata": {
+      "role": "m7-completed29-operational-preparation",
+      "model_loaded": false,
+      "generation_executed": false,
+      "protocol_sha256": "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+      "adapter_run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42"
+    },
+    "status": "fresh_readback_archive_and_every_payload_verified"
+  },
+  "payload_sha256": {
+    "preparation/bindings.json": "ec41bbdd94ee21d6ab7cf21781e8b87e5e803f8b72e388a74f6600bc139837a5",
+    "preparation/execution-plan.json": "69146928737c5aebd4f9ccf9be100f7d3dafb0d9923ae345d1ab09f4c62d3fad",
+    "preparation/m7_delivery.py": "1d543d3983fb0e1d2536eec8e041780a95cd6f49c2d5e7efd68ae7edeeceebf7",
+    "preparation/preflight-adapter.json": "56e3178e20720f367850058f9c0dfb782a14c482ec28507b3fd1f7682276be37",
+    "preparation/preflight-base.json": "d7590d3f067bb514197c30704a9f4635a34e4d28a7fffa1963501e1711e26d0e",
+    "preparation/preparation.json": "b3d84ba6ad2769ac7110ec16d3ddda21fa9ea01f9de206431116d1d9122b8eb1",
+    "preparation/repository-observation.json": "c1ce3aa047feaf2415bb1173d87881fa1461b88bac54a2e6e1406b2fd81ddcc1"
+  },
+  "neural_results_pending": true
+}

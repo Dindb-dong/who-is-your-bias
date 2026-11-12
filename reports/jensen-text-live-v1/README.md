@@ -67,6 +67,13 @@ direct provider health receipt identifies the actual local Qwen model.
 
 ## Verified preparation and next commands
 
+The [completed-29 preparation](completed29-preparation.json) binds the now-saved
+serving export. Both base and exact-adapter configuration-only preflights pass;
+no weights or neural responses were produced. Its seven preparation payloads
+were saved and freshly restored. The serving run SHA is
+`e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42`;
+actual neural execution still waits for the shared model slot.
+
 The original preparation passed Python compilation, whitespace checking, thirteen
 focused harness tests and the base preflight. The tests cover exact observed model/adapter rejection, actual
 TCP first-nonempty-token disconnect, generator cancellation, normal SSE, HTTP
@@ -104,8 +111,8 @@ PYTHONPATH=src:. "$INFERENCE_PYTHON" -m tools.runtime_checks.text_live \
 Actual execution waits for the coordinating job to release model memory. The
 candidate execution command below additionally requires `ADAPTER_RUN` to name a
 freshly restored, completed text training run and `ADAPTER_RUN_SHA` to contain
-the exact SHA-256 of its `run.json`. These two values are not known at this
-preparation checkpoint and must come from the completed durable training receipt.
+the exact SHA-256 of its `run.json`. The completed-29 preparation above now records both values from the
+freshly verified durable training receipt.
 An intermediate checkpoint or a manually relabeled receipt is rejected.
 
 ```bash
