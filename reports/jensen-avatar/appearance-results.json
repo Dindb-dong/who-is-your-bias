@@ -1,0 +1,48 @@
+{
+  "schema_version": "avatar-authored-appearance.v1",
+  "persona_id": "jensen-huang",
+  "input_master_sha256": "9f08cd7abebca4a610683acc730bad9c69c6874996d82a9ffd5a1f237867b0aa",
+  "license": "CC-BY-SA-4.0",
+  "source_texture_unchanged": true,
+  "basis": "authored reference-informed edits; not measured identity fitting",
+  "iris_pixels": 96738,
+  "iris_atlas_centers": [
+    [
+      0.295,
+      0.3
+    ],
+    [
+      0.704,
+      0.705
+    ]
+  ],
+  "iris_radius": 0.122,
+  "hair_texture_range": [
+    0.065,
+    0.385
+  ],
+  "hair_trimmed_vertices": 2942,
+  "maximum_hair_shift": 0.008895452298438656,
+  "hair_surface_clearance": 0.002,
+  "authored_brow_height_scale": 0.48,
+  "restored_brow_meshes": [
+    "ResearchHumanSkin.eyebrow001"
+  ],
+  "glb": {
+    "filename": "jensen-source-fitted-candidate-v3.glb",
+    "sha256": "2cf828302d38da0c4b2409845c1fbd092bf507bc6b05d41101019f7741a91978",
+    "bytes": 17951068
+  },
+  "editable_master": {
+    "filename": "jensen-source-fitted-candidate-v3.blend",
+    "sha256": "a67ecf8d7b12055939ec64d4d6df627bbe054942282b694292d46f058457e02d",
+    "bytes": 28495448
+  },
+  "promotion": "candidate_only",
+  "likeness_review": "pending_visual_review",
+  "limitations": [
+    "Hair and brows remain authored generic geometry with source-informed appearance.",
+    "Reference-photo lighting remains baked into the facial texture.",
+    "No identity-recognition or human likeness threshold has passed."
+  ]
+}
