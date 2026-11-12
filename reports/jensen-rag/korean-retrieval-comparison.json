@@ -1,0 +1,434 @@
+{
+  "recorded_at_utc": "2026-11-12T11:43:13.921505+00:00",
+  "method": "Same FastAPI chat streaming route through TestClient. One unscored model warmup per backend, then one request per pair with fresh session and alternating backend order. Wall time until the full SSE response was received, excluding warmups and startup. API harness, not a browser benchmark.",
+  "settings": {
+    "llm": "qwen2.5:14b",
+    "max_tokens": 160,
+    "embedding_model": "batiai/qwen3-embedding:0.6b",
+    "dense_min_similarity": 0.84,
+    "limit": 4,
+    "reranker": null
+  },
+  "runs": [
+    {
+      "case": "rack",
+      "query": "랙 단위로 여러 컴퓨터를 묶어 설계할 때 왜 GPU만 빨라지면 해결되지 않아?",
+      "expected_ids": [
+        "jensen-lex-494-01"
+      ],
+      "backend": "lexical",
+      "wall_ms": 20249.744,
+      "metrics": {
+        "retrieval_ms": 1.494,
+        "generation_ms": 20234.187,
+        "total_ms": 20240.305
+      },
+      "provider": "openai",
+      "retrieved_ids": [],
+      "cited_ids": [],
+      "grounding": "insufficient",
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n컴퓨터 시스템의 성능 향상은 단순히 한 부분만 개선하는 것보다 전체 시스템의 조합과 상호작용을 고려해야 하는데, GPU가 빨라지더라도 다른 하드웨어나 소프트웨어 제약이 성능 향상에 걸림돌이 될 수 있습니다."
+    },
+    {
+      "case": "rack",
+      "query": "랙 단위로 여러 컴퓨터를 묶어 설계할 때 왜 GPU만 빨라지면 해결되지 않아?",
+      "expected_ids": [
+        "jensen-lex-494-01"
+      ],
+      "backend": "hybrid",
+      "wall_ms": 13103.346,
+      "metrics": {
+        "retrieval_ms": 66.799,
+        "generation_ms": 13023.134,
+        "total_ms": 13093.084
+      },
+      "provider": "openai",
+      "retrieved_ids": [],
+      "cited_ids": [],
+      "grounding": "insufficient",
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\nGPCU 설계만으로는 전체 시스템 병목 현상을 해결할 수 없는데, 이는 다른 하드웨어 요소와 소프트웨어 병렬화도 고려되어야 하기 때문입니다. 전반적인 성능 향상을 위해서는 I/O 처리나 메모리 대역폭 같은 다른 요소도 최적화되어야 하며, 이를 통해 시스템 전체의 효율성을 높이는 것이 중요합니다."
+    },
+    {
+      "case": "tsmc",
+      "query": "TSMC가 단순히 좋은 트랜지스터 기술을 보유한 것 이상으로 잘하는 일은 뭐야?",
+      "expected_ids": [
+        "jensen-lex-494-03"
+      ],
+      "backend": "hybrid",
+      "wall_ms": 11122.623,
+      "metrics": {
+        "retrieval_ms": 88.376,
+        "generation_ms": 11016.992,
+        "total_ms": 11109.849
+      },
+      "provider": "openai",
+      "retrieved_ids": [],
+      "cited_ids": [],
+      "grounding": "insufficient",
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\nTSMC가 단순히 우수한 트랜지스터 기술을 넘어 잘하는 일은, 기술 개발과 양산 사이의 전환 과정을 효율적으로 관리하며, 고객에게 맞춤형 솔루션과 신뢰성을 제공하는 것이다. 이러한 능력이 NVIDIA와 같은 회사들에게 중요한 가치를 제공한다."
+    },
+    {
+      "case": "tsmc",
+      "query": "TSMC가 단순히 좋은 트랜지스터 기술을 보유한 것 이상으로 잘하는 일은 뭐야?",
+      "expected_ids": [
+        "jensen-lex-494-03"
+      ],
+      "backend": "lexical",
+      "wall_ms": 16663.196,
+      "metrics": {
+        "retrieval_ms": 1.594,
+        "generation_ms": 16649.315,
+        "total_ms": 16653.085
+      },
+      "provider": "openai",
+      "retrieved_ids": [],
+      "cited_ids": [],
+      "grounding": "insufficient",
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\nTSMC가 단순한 트랜지스터 제조 기술을 넘어서 잘하는 일은, 반도체 제조 공정의 효율性和可靠性都得到了保持，但根据所提供的文档，没有具体证据直接支持TSMC在晶体管制造之外的特定优势活动。从黄仁之先生的公开言论风格来看，可以推测TSMC擅长于将先进的制造技术转化为高效的生产流程，并支持多样化的客户创新需求。这需要结合供应链管理和工程技术优化等方面的综合能力。没有具体证据表明TSMC做了什么超出制造优质晶体管之外的具体工作，因此不能进一步详细说明。"
+    },
+    {
+      "case": "tpu",
+      "query": "TPU가 주목받는데도 엔비디아가 차별화된다고 설명한 이유는 뭐야?",
+      "expected_ids": [
+        "jensen-dwarkesh-2026-02"
+      ],
+      "backend": "lexical",
+      "wall_ms": 12288.09,
+      "metrics": {
+        "retrieval_ms": 1.373,
+        "generation_ms": 12250.643,
+        "total_ms": 12259.422
+      },
+      "provider": "openai",
+      "retrieved_ids": [],
+      "cited_ids": [],
+      "grounding": "insufficient",
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n엔비디아는 그래픽과 AI 관련 처리에서 고성능 컴퓨팅 요구를 충족시키는 데 특화된 GPU를 가지고 있어, 주로 웹 검색이나 분류 작업에 초점을 맞춘 TPU와는 차별화된 시장 지위를 갖는다고 설명할 것이다. 그러나 구체적인 인용이나 주장이 없는 한 이는 조심스럽게 추론할 뿐입니다."
+    },
+    {
+      "case": "tpu",
+      "query": "TPU가 주목받는데도 엔비디아가 차별화된다고 설명한 이유는 뭐야?",
+      "expected_ids": [
+        "jensen-dwarkesh-2026-02"
+      ],
+      "backend": "hybrid",
+      "wall_ms": 12159.41,
+      "metrics": {
+        "retrieval_ms": 96.625,
+        "generation_ms": 12045.722,
+        "total_ms": 12147.046
+      },
+      "provider": "openai",
+      "retrieved_ids": [],
+      "cited_ids": [],
+      "grounding": "insufficient",
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n엔비디아는 그래픽과 AI 계산의 복잡성을 해결하기 위해 설계된 가속기 특허를 바탕으로 차별화를 설명합니다. 이를 통해 엔비디아는 주로 기계학습 훈련과 병렬 처리에 초점을 맞춘 TPU 등 경쟁 제품과 기능적 차이를 주장합니다. 그러나 구체적인 이유나 구문은 지지하는 증거가 없습니다."
+    },
+    {
+      "case": "founder",
+      "query": "다시 창업할 기회가 있어도 엔비디아를 처음부터 만들겠다고 했어?",
+      "expected_ids": [
+        "jensen-acquired-2023-04"
+      ],
+      "backend": "hybrid",
+      "wall_ms": 10932.24,
+      "metrics": {
+        "retrieval_ms": 97.179,
+        "generation_ms": 10817.074,
+        "total_ms": 10917.702
+      },
+      "provider": "openai",
+      "retrieved_ids": [
+        "jensen-acquired-2023-04"
+      ],
+      "cited_ids": [
+        "jensen-acquired-2023-04"
+      ],
+      "grounding": "unverified",
+      "answer": "2023년에 창업을 시작한다고 해도 다시 엔비디아를 세우겠다고 말하지 않았어요. 창업이 생각했던 것보다 훨씬 더 어려웠다고 회고했답니다."
+    },
+    {
+      "case": "founder",
+      "query": "다시 창업할 기회가 있어도 엔비디아를 처음부터 만들겠다고 했어?",
+      "expected_ids": [
+        "jensen-acquired-2023-04"
+      ],
+      "backend": "lexical",
+      "wall_ms": 9789.627,
+      "metrics": {
+        "retrieval_ms": 1.3,
+        "generation_ms": 9781.746,
+        "total_ms": 9784.494
+      },
+      "provider": "openai",
+      "retrieved_ids": [
+        "jensen-acquired-2023-04"
+      ],
+      "cited_ids": [
+        "jensen-acquired-2023-04"
+      ],
+      "grounding": "unverified",
+      "answer": "Jensen Huang은 2023년에 회사를 처음 설 lập하려 한다면 NVIDIA를 다시 창업하지 않을 것이라고 말했습니다. 그는 NVIDIA를 처음 설립하면서 예상했던 것보다 훨씬 더 어려웠던 경험이 기억난다고 했습니다."
+    },
+    {
+      "case": "updates",
+      "query": "직원들한테 각자 중요한 일을 이메일로 보내달라는 이유는 뭐야?",
+      "expected_ids": [
+        "jensen-strange-loop-2025-04"
+      ],
+      "backend": "lexical",
+      "wall_ms": 11654.679,
+      "metrics": {
+        "retrieval_ms": 1.68,
+        "generation_ms": 11645.153,
+        "total_ms": 11649.691
+      },
+      "provider": "openai",
+      "retrieved_ids": [],
+      "cited_ids": [],
+      "grounding": "insufficient",
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n직원들이 정확한 정보를 공유하고 효율적으로 소통할 수 있도록 하기 위해 어떤 일이 중요한지 이메일로 보내도록 하는 경우가 있습니다. 이렇게 함으로써 중요한 의사결정 과정에 필요한 정보를 모두가 공유할 수 있게 만드는 것이 목적일 수 있습니다. 이는 사실적인 증거 없이 일반적인 관점에서 논의하는 것입니다."
+    },
+    {
+      "case": "updates",
+      "query": "직원들한테 각자 중요한 일을 이메일로 보내달라는 이유는 뭐야?",
+      "expected_ids": [
+        "jensen-strange-loop-2025-04"
+      ],
+      "backend": "hybrid",
+      "wall_ms": 13934.957,
+      "metrics": {
+        "retrieval_ms": 61.279,
+        "generation_ms": 13863.512,
+        "total_ms": 13928.012
+      },
+      "provider": "openai",
+      "retrieved_ids": [],
+      "cited_ids": [],
+      "grounding": "insufficient",
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n황젠 황이 직원들에게 중요한 일을 이메일로 보내라고 요청하는 이유는 효과적인 소통과 조직 내 정보의 일관성을 유지하기 위함일 것이다. 직접 얼굴을 마주치는 대신 이메일을 사용하면 소속팀과의 상호작용을 객관적이고 검토 가능하게 유지할 수 있다. 이는 구체적인 결정의 흔적을 남기고, 모든 참가자가 같은 정보를 공유하고 이해할 수 있도록 하는 데 도움이 된다."
+    },
+    {
+      "case": "factories",
+      "query": "2025년 컴퓨텍스에서 말한 인공지능 공장은 뭘 생산해?",
+      "expected_ids": [
+        "jensen-2025-ai-factories"
+      ],
+      "backend": "hybrid",
+      "wall_ms": 13364.661,
+      "metrics": {
+        "retrieval_ms": 43.16,
+        "generation_ms": 13314.382,
+        "total_ms": 13359.083
+      },
+      "provider": "openai",
+      "retrieved_ids": [
+        "jensen-2025-ai-factories"
+      ],
+      "cited_ids": [
+        "jensen-2025-ai-factories"
+      ],
+      "grounding": "unverified",
+      "answer": "2025년 컴퓨텍스에서 주신황은 인공지능 인프라를 에너지를 소모하고 가치 있는 토큰을生产的令牌并不是回答问题所需的事实性陈述，因此不需要引用。根据提供的引文，黄仁之把AI基础设施比喻成工厂，强调它“生产有价值的令牌”。所以直接回答询问的生产物为“有价值的令牌”即可。\n\n有价值的令牌"
+    },
+    {
+      "case": "factories",
+      "query": "2025년 컴퓨텍스에서 말한 인공지능 공장은 뭘 생산해?",
+      "expected_ids": [
+        "jensen-2025-ai-factories"
+      ],
+      "backend": "lexical",
+      "wall_ms": 10454.133,
+      "metrics": {
+        "retrieval_ms": 12.583,
+        "generation_ms": 10431.709,
+        "total_ms": 10447.148
+      },
+      "provider": "openai",
+      "retrieved_ids": [
+        "jensen-2025-ai-factories"
+      ],
+      "cited_ids": [
+        "jensen-2025-ai-factories"
+      ],
+      "grounding": "unverified",
+      "answer": "2025년 컴퓨텍스에서 주진 황은 인공지능 인프라를 에너지를 소모하고 가치 있는 토큰을 생성하는 공장에 비유했습니다. 여기서의 '토큰'은 인공지능 기술의 제품이나 서비스를 나타내는 가치 있는 결과를 의미합니다."
+    },
+    {
+      "case": "hypothetical",
+      "query": "가정이야. 화성 기지에서 식량 배급 시스템을 설계한다면 젠슨 황이라면 어떤 기준으로 판단할까?",
+      "expected_ids": [],
+      "backend": "lexical",
+      "wall_ms": 14294.124,
+      "metrics": {
+        "retrieval_ms": 1.225,
+        "generation_ms": 14284.224,
+        "total_ms": 14287.414
+      },
+      "provider": "openai",
+      "retrieved_ids": [],
+      "cited_ids": [],
+      "grounding": "insufficient",
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황은 효율性和可维护性作为系统设计的关键标准，会考虑资源有限的环境下的具体挑战。他会分析如何通过优化和创新来最大化系统的可持续性和适应性，以服务于实际需求。如果他面对的是一个火星基地的粮食分配系统，他可能会强调系统的可扩展性、可靠性以及对极端环境的适应能力。这样的设计需要精细地权衡各个组件和技术的选择，旨在确保长期的稳定运行，同时也要考虑到对未来技术进步的兼容性。"
+    },
+    {
+      "case": "hypothetical",
+      "query": "가정이야. 화성 기지에서 식량 배급 시스템을 설계한다면 젠슨 황이라면 어떤 기준으로 판단할까?",
+      "expected_ids": [],
+      "backend": "hybrid",
+      "wall_ms": 9609.406,
+      "metrics": {
+        "retrieval_ms": 91.8,
+        "generation_ms": 9508.627,
+        "total_ms": 9602.525
+      },
+      "provider": "openai",
+      "retrieved_ids": [],
+      "cited_ids": [],
+      "grounding": "insufficient",
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황은 기술적 제한과 인도주의적 요인을 모두 고려해, 효율성과 지속 가능성 사이의 균형을 찾아 설계할 것이다. 이러한 시스템은 실제 사람들에게 필요한 자원을 효과적으로 분배하면서도 첨단 기술의 가능성은 최대한 활용해야 한다."
+    },
+    {
+      "case": "unknown",
+      "query": "2035년에 황이 비공개 회의에서 실제로 무슨 말을 했어?",
+      "expected_ids": [],
+      "backend": "hybrid",
+      "wall_ms": 7372.266,
+      "metrics": {
+        "retrieval_ms": 0.51,
+        "generation_ms": 7366.544,
+        "total_ms": 7368.449
+      },
+      "provider": "openai",
+      "retrieved_ids": [],
+      "cited_ids": [],
+      "grounding": "insufficient",
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n2035년 황의 비공개 회의 내용은 접근할 수 없는 정보입니다. 구체적인 언급이나 인용을 제공할 수 없으니, 그 해에 공개적이고 확인된 활동이나 인터뷰만을 참조해야 합니다."
+    },
+    {
+      "case": "unknown",
+      "query": "2035년에 황이 비공개 회의에서 실제로 무슨 말을 했어?",
+      "expected_ids": [],
+      "backend": "lexical",
+      "wall_ms": 8524.467,
+      "metrics": {
+        "retrieval_ms": 0.48,
+        "generation_ms": 8515.617,
+        "total_ms": 8518.028
+      },
+      "provider": "openai",
+      "retrieved_ids": [],
+      "cited_ids": [],
+      "grounding": "insufficient",
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n2035년에 황이 비공개 회의에서 실제로 무슨 말을 했는지는 확인할 수 없습니다. 이 시뮬레이션은 공개적인 회의나 인터뷰에서 황의 의견이나 접근 방식을 기반으로 일반적인 시나리오를 제시할 뿐입니다."
+    }
+  ],
+  "health": {
+    "lexical": {
+      "retrieval": {
+        "backend": "lexical",
+        "embedding_model": null,
+        "embedding_revision": null,
+        "style_examples": false,
+        "prewarmed": false,
+        "startup_warmup_ms": null
+      },
+      "persona_snapshot": {
+        "id": "jensen-huang-2026-11-12-interviews.v2",
+        "as_of": "2026-11-12T11:42:20+00:00",
+        "corpus_sha256": "3560a462a8ec4a1a53cd010e15fc07e95bfc41eb9498cc9c09b0924dcc133740",
+        "current_evidence_since": "2026-01-01",
+        "current_dated_training_sources": 0,
+        "coverage_note": "Nine dated publisher sources and 32 editorial summaries, including 24 paraphrased exchanges from six interviews. No present-day positions, original-text training examples, aligned speech or observed behavior are asserted.",
+        "knowledge_version": "jensen-huang-interviews.v2",
+        "style_version": "interview-informed-editorial-guidance.v2-no-trained-adapter",
+        "voice_version": "unconfigured-no-jensen-reference",
+        "appearance_version": "designed-prototype-not-qualified-likeness"
+      },
+      "providers": {
+        "llm": {
+          "configured": true,
+          "model": "qwen2.5:14b"
+        },
+        "speech": {
+          "configured": false,
+          "available": false,
+          "model": null,
+          "binding": {
+            "status": "not_configured",
+            "persona_id": null,
+            "voice": "default"
+          }
+        },
+        "transcription": {
+          "configured": false,
+          "model": null
+        }
+      }
+    },
+    "hybrid": {
+      "retrieval": {
+        "backend": "hybrid",
+        "embedding_model": "batiai/qwen3-embedding:0.6b",
+        "embedding_revision": null,
+        "style_examples": false,
+        "prewarmed": true,
+        "startup_warmup_ms": 1540.331
+      },
+      "persona_snapshot": {
+        "id": "jensen-huang-2026-11-12-interviews.v2",
+        "as_of": "2026-11-12T11:42:20+00:00",
+        "corpus_sha256": "3560a462a8ec4a1a53cd010e15fc07e95bfc41eb9498cc9c09b0924dcc133740",
+        "current_evidence_since": "2026-01-01",
+        "current_dated_training_sources": 0,
+        "coverage_note": "Nine dated publisher sources and 32 editorial summaries, including 24 paraphrased exchanges from six interviews. No present-day positions, original-text training examples, aligned speech or observed behavior are asserted.",
+        "knowledge_version": "jensen-huang-interviews.v2",
+        "style_version": "interview-informed-editorial-guidance.v2-no-trained-adapter",
+        "voice_version": "unconfigured-no-jensen-reference",
+        "appearance_version": "designed-prototype-not-qualified-likeness"
+      },
+      "providers": {
+        "llm": {
+          "configured": true,
+          "model": "qwen2.5:14b"
+        },
+        "speech": {
+          "configured": false,
+          "available": false,
+          "model": null,
+          "binding": {
+            "status": "not_configured",
+            "persona_id": null,
+            "voice": "default"
+          }
+        },
+        "transcription": {
+          "configured": false,
+          "model": null
+        }
+      }
+    }
+  },
+  "summary": {
+    "lexical": {
+      "supported_cases": 6,
+      "target_retrieved": 2,
+      "target_cited": 2,
+      "unexpected_candidates_on_controls": 0,
+      "completion_ms_median": 11971.3845,
+      "retrieval_ms_median": 1.4335,
+      "completed_within_5s": 0,
+      "errors": 0
+    },
+    "hybrid": {
+      "supported_cases": 6,
+      "target_retrieved": 2,
+      "target_cited": 2,
+      "unexpected_candidates_on_controls": 0,
+      "completion_ms_median": 11641.0165,
+      "retrieval_ms_median": 77.5875,
+      "completed_within_5s": 0,
+      "errors": 0
+    }
+  }
+}
