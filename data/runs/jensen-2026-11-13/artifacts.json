@@ -838,6 +838,21 @@
       "sha256": "d45f6194444c65d1434f2ba3e6ef9849751526970cddf146e45ee5fa5bfd1b5b",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-m6-heldout-facts-bf16-v2-partial0004",
+      "role": "partial-frozen-matched-response-attempts",
+      "exposure": "heldout",
+      "condition": "facts",
+      "captured_attempts": 4,
+      "collectible": false,
+      "file_name": "jensen-m6-heldout-facts-bf16-v2-partial0004.tar.gz",
+      "file_id": "file_00000000dfec81f594a8a341f57e6275",
+      "library_file_id": "libfile_fde3_f-4fbff596a0ac8191a36bb60dc8f2b226_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 16098,
+      "sha256": "a9b349a7b366f2b8599f3946a46cfd76c5e6f313462b6dadbedc04b4f1e1ac7a",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {

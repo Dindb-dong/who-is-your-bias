@@ -1,0 +1,78 @@
+{
+  "schema_version": "jensen-matched-condition-partial-result.v1",
+  "recorded_at": "2026-11-12T22:26:26.194272+00:00",
+  "recorded_at_basis": "immutable_snapshot_creation",
+  "exposure": "heldout",
+  "condition": "facts",
+  "status": "partial_saved_and_fresh_readback_verified",
+  "collectible": false,
+  "final_full_condition_save_required": true,
+  "planned_case_count": 6,
+  "captured_attempts": 4,
+  "captured_completed": 2,
+  "captured_failed": 2,
+  "case_ids": [
+    "heldout-qa26-no-priors-2023-turn-00072",
+    "heldout-qa26-no-priors-2023-turn-00078",
+    "heldout-qa26-no-priors-2023-turn-00186",
+    "heldout-qa26-no-priors-2023-turn-00190"
+  ],
+  "plan_sha256": "7fd35de01ea1a364aa7b5a2bf8547bf3a4a6cd3ebee4b3764b8ce7c8957e5c7c",
+  "plan_file_sha256": "6392f58bde3a2ac49d41ab76f19d88d15fa9a9f686abaabcc4a1bf90e6f4a6ba",
+  "contract_sha256": "9c79398b54118f284ffdc6e4592d501e1cc214e77f6a895152ae91019286b6c0",
+  "contract_file_sha256": "5dbe9a114d081e10ac689160e59988c255a9d15a901f2e90e44dd9ff53482d15",
+  "completed_case_ids": [
+    "heldout-qa26-no-priors-2023-turn-00078",
+    "heldout-qa26-no-priors-2023-turn-00190"
+  ],
+  "failed_case_ids": [
+    "heldout-qa26-no-priors-2023-turn-00072",
+    "heldout-qa26-no-priors-2023-turn-00186"
+  ],
+  "uncaptured_case_ids": [
+    "heldout-qa26-no-priors-2023-turn-00253",
+    "heldout-qa26-no-priors-2023-turn-00297"
+  ],
+  "model_identity_hashes": {
+    "identity_sha256": "300560a54349d92f85d9bebd2f16a9d1afe2edc430ec39bef4ccb4d981c0ca97",
+    "adapter_sha256": "1229fcd3639560d466635395f34e8707c8c7954131ea460be99228198f66ca2a",
+    "runtime_sha256": "f09c338c9e491f5bd94d33a9a6cd8040303fb2670080e6a43013257406072a23"
+  },
+  "snapshot_manifest_sha256": "64ec80cb4d98d68d57f6dba60f598d0208fbf9b925aaea29e5ba3e8db2b5090e",
+  "snapshot_manifest_file_sha256": "c2437dd0b85da9ea7edd16edf2236dca148fefa42ec42e1dd39796b2b57cbd80",
+  "partial_sha256": "152e252288207a49682e24d8854f605d612f0d01c85004274c3d1c56f1f68c2f",
+  "helper_source_sha256": "33b244c32af6fd1ed89b794f5d295ea20f2a7ab97a160972fa81b09df93ac7fe",
+  "snapshot_tool_sha256": "5f18454919f7387a6bf1add4c18b66faaeb5329ff34f1ecae23c6a1afb276a56",
+  "payload_files_sha256": {
+    "attempts.prefix.jsonl": "8ea7aa25bc066363ce6044299949c5478b2a04d8bdb2301471cf47a883802864",
+    "manifest.json": "c2437dd0b85da9ea7edd16edf2236dca148fefa42ec42e1dd39796b2b57cbd80",
+    "metadata/launcher.json": "c64f85a8297f46595d2a26cd596a523e8907469a348a6110645a2524efbff15e",
+    "metadata/observed-before.json": "e73bf1d5894dcadbfe770dfd51ea273fd7ef05356bd227a5a7a5a3e190609991",
+    "metadata/supervisor-observed.json": "ac9d765df2dc0f4157a67caf30cc0314688c564d686a3db46ccfb1d1d2da5af9",
+    "metadata/warmup.json": "ad41acf90968f203c4774e0c2de64e8c256218e5540a94be15b10d0ea102f0db",
+    "partial-run.json": "9725e86db11901e67e30b14c2bd656e73c815a7bb48b3d786d33cfa2a8ffdbde",
+    "raw-generations.prefix.jsonl": "143fb35e9cac492fec2a90956cd6f82ab999a2ac601496bd9d4b4d086af00c5e"
+  },
+  "artifact": {
+    "artifact_id": "jensen-m6-heldout-facts-bf16-v2-partial0004",
+    "file_name": "jensen-m6-heldout-facts-bf16-v2-partial0004.tar.gz",
+    "file_id": "file_00000000dfec81f594a8a341f57e6275",
+    "library_file_id": "libfile_fde3_f-4fbff596a0ac8191a36bb60dc8f2b226_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 16098,
+    "sha256": "a9b349a7b366f2b8599f3946a46cfd76c5e6f313462b6dadbedc04b4f1e1ac7a",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "verification": {
+    "fresh_archive_bytes_and_sha256": true,
+    "exact_regular_member_inventory": true,
+    "all_archive_member_hashes": true,
+    "snapshot_manifest_and_prefix_seals": true,
+    "captured_rows_and_metadata_revalidated": true,
+    "original_full_report_revalidated": false
+  },
+  "scope": "Immutable finalized attempt prefix only. The active condition may have advanced. This is not a final condition, collector input or generation resume cursor.",
+  "full_raw_outputs": "Preserved only inside the private verified partial artifact.",
+  "human_review": "ungraded",
+  "efficacy_claim": false
+}
