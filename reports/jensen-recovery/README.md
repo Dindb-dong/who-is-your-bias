@@ -29,11 +29,20 @@ Use the current Library skill to materialize the **exact** `file_id`,
 returned identity and transfer metadata. The heldout archive was freshly
 materialized and hash checked, so it can already be restored.
 
-Large media uses contiguous 200 MiB raw byte chunks, wrapped in ordinary gzip
-containers for transfer. Initial unwrapped `.bin` transfers failed definitively;
-the same first chunk in gzip passed a 207,929,911-byte upload/readback and an
-independent decompressed SHA-256 comparison. The remaining gzip transfers are
-listed in `source-progress.json`; inspect each receipt before retrying.
+Eight complete published videos have been acquired and validated: four keynote
+replays and four interviews, totaling 10 h 35 min 29 s. Five have already passed
+complete recovery from fresh remote copies. Every chunk for the remaining three
+has uploaded successfully; their fresh readback and full reconstruction are the
+remaining durability checks. Use the machine-readable count for newer updates.
+
+Large media uses lossless contiguous raw byte chunks, wrapped in ordinary gzip
+or single-member tar.gz containers. Initial unwrapped `.bin` transfers failed;
+the first gzip chunk passed a 207,929,911-byte upload/readback and an independent
+decoded SHA-256 comparison. Larger containers still transferred unreliably.
+The final four videos use 24 MiB raw chunks: all 79 chunk, manifest and receipt
+objects uploaded successfully on the first attempt. Retain the original
+200 MiB profiles for Goldman, Stripe and GTC 2025, and the 80 MiB mixed gzip/tar
+profile for WIRED. Do not substitute a partially saved earlier chunk profile.
 
 For a fully saved video, materialize every listed gzip chunk into a new local
 directory. Verify each **stored gzip** SHA-256 against its durable receipt,
@@ -64,14 +73,16 @@ uv tool run --from yt-dlp yt-dlp --dump-single-json --no-playlist kaltura:293577
 ```
 
 Select an actually available moderate-resolution public rendition. Metadata
-format availability does not guarantee downloadable bytes: the current
-checkpoint records 404 delivery failures separately. Store the resolved URL in
+format availability does not guarantee downloadable bytes. The NVIDIA Kaltura
+recordings became downloadable when requests included the ordinary public
+landing-page `Referer` and `User-Agent: Mozilla/5.0`; earlier headerless 404
+failures remain in the record. Store these in `http_headers` and the resolved URL in
 a private entry JSON with `source_id`, `event_family_id`, `split`,
 `discovery_url`, and `url`; preserve publisher edit notes where present.
 
 ```sh
 PYTHONPATH=src:. python -m tools.persona_data.media_acquire PRIVATE_ENTRY.json NEW_VIDEO.mp4
-PYTHONPATH=src:. python -m tools.persona_data.media_chunks split NEW_VIDEO.mp4 NEW_CHUNK_DIRECTORY
+PYTHONPATH=src:. python -m tools.persona_data.media_chunks split NEW_VIDEO.mp4 NEW_CHUNK_DIRECTORY --chunk-bytes 25165824
 ```
 
 The downloader retains incomplete bytes with `.part` and refuses to overwrite
@@ -83,9 +94,11 @@ separate podcast or transcript clock. Preserve every completed batch promptly.
 
 ## Checks at this checkpoint
 
-The Jensen adapters and heldout workflow passed 34 focused tests; the byte-chunk
-recovery helper passed two corruption/order tests. The actual heldout loader
+The Jensen adapters and heldout workflow passed 34 focused tests; media recovery
+and complete HLS validation passed five focused tests, including corruption,
+ordering and tar-member validation. The actual heldout loader
 passed and the saved heldout archive passed fresh byte/hash readback. Retrieval
 endorsement/private-interaction guards passed the earlier 104 affected tests.
-The opt-in bilingual retriever is not implemented or promoted: full source
-video acquisition became the user's immediate priority.
+The coordinating text workstream owns the opt-in bilingual retriever and its
+frozen development comparison. Media acquisition does not establish retrieval,
+voice, avatar or likeness quality.

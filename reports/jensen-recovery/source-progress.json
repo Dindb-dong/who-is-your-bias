@@ -1,13 +1,13 @@
 {
   "schema_version": "jensen-source-progress.v1",
   "run_id": "jensen-2026-11-13",
-  "recorded_at": "2026-11-12T18:02:22.542909+00:00",
+  "recorded_at": "2026-11-12T18:15:54.527738+00:00",
   "video_counts": {
     "located_public_player_events": 13,
     "complete_published_renditions_locally_validated": 8,
     "locally_validated_seconds": 38129.100491,
     "locally_validated_bytes": 4412488053,
-    "whole_videos_durably_verified": 3,
+    "whole_videos_durably_verified": 5,
     "full_keynote_replays": 4,
     "keynote_seconds": 27285.606191
   },
@@ -186,7 +186,7 @@
       "player_partner_id": "2935771",
       "rendition_format_id": "mp4-539",
       "role": "full_source_video",
-      "source_title": "NVIDIA GTC Taipei 2026 Keynote \uff5c Full Replay [wSp6AiNIrsY]",
+      "source_title": "NVIDIA GTC Taipei 2026 Keynote ｜ Full Replay [wSp6AiNIrsY]",
       "expected_duration_seconds": 7073,
       "landing_sha256": "2cfae4e2af13870772f9645a5b1b0b705c9cf3395e32a962e8028ec27ea62f0e",
       "acquisition_status": "public_flavor_delivery_returned_404",
@@ -257,7 +257,7 @@
           "duration": "3565.493696"
         }
       ],
-      "durable_status": "save_pending",
+      "durable_status": "all_canonical_chunks_uploaded_fresh_readback_pending",
       "earlier_headerless_failure": "yt-dlp public HTTP format/url flavors; https transport/protocol and public HLS manifest also404; no complete media bytes acquired",
       "public_media_url": "http://cdnapi.kaltura.com/p/2935771/sp/293577100/playManifest/entryId/1_mchywbeo/format/url/protocol/http/flavorId/1_fusm2e3j",
       "required_public_request_headers": {
@@ -311,7 +311,7 @@
           "duration": "7387.567891"
         }
       ],
-      "durable_status": "save_pending",
+      "durable_status": "all_canonical_chunks_uploaded_fresh_readback_pending",
       "earlier_headerless_failure": "yt-dlp public HTTP format/url flavors; https transport/protocol and public HLS manifest also404; no complete media bytes acquired",
       "public_media_url": "http://cdnapi.kaltura.com/p/2935771/sp/293577100/playManifest/entryId/1_f91o5wo1/format/url/protocol/http/flavorId/1_g9ovnwvu",
       "required_public_request_headers": {
@@ -365,7 +365,7 @@
           "duration": "6171.376327"
         }
       ],
-      "durable_status": "save_pending",
+      "durable_status": "all_canonical_chunks_uploaded_fresh_readback_pending",
       "earlier_headerless_failure": "yt-dlp public HTTP format/url flavors; https transport/protocol and public HLS manifest also404; no complete media bytes acquired",
       "public_media_url": "http://cdnapi.kaltura.com/p/2935771/sp/293577100/playManifest/entryId/1_p33ptvnj/format/url/protocol/http/flavorId/1_gvdmhkcn",
       "required_public_request_headers": {
@@ -419,7 +419,7 @@
           "duration": "5818.734898"
         }
       ],
-      "durable_status": "save_pending",
+      "durable_status": "full_reconstruction_verified",
       "earlier_headerless_failure": "yt-dlp public HTTP format/url flavors; https transport/protocol and public HLS manifest also404; no complete media bytes acquired",
       "public_media_url": "http://cdnapi.kaltura.com/p/2935771/sp/293577100/playManifest/entryId/1_rtiv08b6/format/url/protocol/http/flavorId/1_mfm5x1ox",
       "required_public_request_headers": {
@@ -436,7 +436,7 @@
       "player_entry": "6750af490f90d54095d22177",
       "rendition_format_id": "mp4",
       "role": "full_published_video_package",
-      "source_title": "NVIDIA\u2019s Global Takeover: A Conversation with Jensen Huang",
+      "source_title": "NVIDIA’s Global Takeover: A Conversation with Jensen Huang",
       "expected_duration_seconds": 1605,
       "acquisition_status": "complete_published_rendition_locally_verified",
       "registered_at": "2026-11-12T17:43:42.195575+00:00",
@@ -471,7 +471,7 @@
           "duration": "1605.066667"
         }
       ],
-      "durable_status": "save_pending"
+      "durable_status": "full_reconstruction_verified"
     },
     {
       "source_id": "ces-2026-cn-video",
@@ -508,15 +508,20 @@
   ],
   "pending_jobs": [
     {
-      "name": "remaining_five_videos_durable_save",
-      "scope": "WIRED plusCES2025,SIGGRAPH2024,COMPUTEX2025,GTC2024",
-      "status": "acquired_and_validated;chunk_container/transfers/readback inprogress",
-      "previous_attempts": "media-upload-wired-result.json,media-upload-wired-retry/0.json",
-      "tar_container_probe": "media-upload-tar-probe-result.json"
+      "name": "remaining_full_video_readback",
+      "scope": [
+        "siggraph-wired-2024-video",
+        "gtc-2024-video",
+        "computex-2025-video"
+      ],
+      "status": "all chunks uploaded; fresh readback and full reconstruction pending",
+      "private_upload_receipt": "media-upload-final3-24mib-result.json",
+      "private_readback_transfers": "media-readback-final3-24mib-transfers-{1,2,3,4}.json",
+      "recovery_profile": "24 MiB lossless raw chunks in single-member tar.gz"
     },
     {
       "name": "optional_regional_replays",
-      "scope": "CES2026,GTC2026 complete550/834fragment HLS manifests acquired; media notyetacquired",
+      "scope": "CES 2026 and GTC 2026 complete 550/834-fragment HLS manifests acquired; media not acquired",
       "registration": "data/acquisition/jensen-huang/media-event-registration.json"
     }
   ],
