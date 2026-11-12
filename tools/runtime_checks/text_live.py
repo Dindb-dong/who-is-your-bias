@@ -82,6 +82,11 @@ def prepare(args):
         verified = validate_adapter_run(args.adapter_run, base_model=identity["base_model"],
             base_revision=identity["base_revision"], expected_run_sha256=args.adapter_run_sha256)
         adapter = verified.public_identity()
+        training = protocol["adapter_training"]
+        dataset = verified.report["dataset_manifest"]
+        if (any(dataset.get(key) != training[key] for key in ("dataset_sha256", "samples", "event_counts"))
+                or adapter["optimizer_steps"] != training["optimizer_steps"]):
+            raise ValueError("The completed adapter must match the frozen Jensen dataset, event counts and optimizer work")
         if any(adapter[key] != identity[key] for key in identity if key != "chat_template_options"):
             raise ValueError("The completed adapter differs from the frozen base/tokenizer identity")
         tokenizer_path = verified.directory / "tokenizer"
@@ -118,8 +123,12 @@ def observed_identity(health: dict, protocol: dict, condition: str, adapter: dic
         raise ValueError("Actual loaded neural model/tokenizer/runtime differs from the frozen protocol")
     actual = health.get("adapter", {})
     if condition == "adapter":
+        training = protocol["adapter_training"]
         if (not all(actual.get(key) is True for key in ("configured", "loaded", "verified"))
-                or any(actual.get(key) != value for key, value in adapter.items())):
+                or any(actual.get(key) != value for key, value in adapter.items())
+                or actual.get("dataset_sha256") != training["dataset_sha256"]
+                or actual.get("training_event_families") != sorted(training["event_counts"])
+                or actual.get("optimizer_steps") != training["optimizer_steps"]):
             raise ValueError("The live provider did not load the exact completed candidate adapter")
     elif any(actual.get(key) for key in ("configured", "loaded", "verified")):
         raise ValueError("The base condition unexpectedly loaded an adapter")

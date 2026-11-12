@@ -10,7 +10,7 @@ The [frozen protocol](protocol.json) binds Qwen3-1.7B revision
 and tokenizer hashes, original-dialogue-v4, and distinct
 [base](base.snapshot.json) / [candidate adapter](adapter.snapshot.json)
 snapshots. Its exact file SHA-256 is
-`adae86b7ca3fb82bd36c05daf49c115c1962b0e645e3659393d33b97a6223802`.
+`edac6dfc7fb1545fc164fc5070ae3fdbc52a0a6dd82f7c10082fa88a58aa1210`.
 
 The runtime uses CPU float32, eight threads, a 4,096-token input/output context,
 160 output tokens, deterministic decoding, a 240-second per-request budget and
@@ -42,7 +42,7 @@ direct provider health receipt identifies the actual local Qwen model.
 
 ## Verified preparation and next commands
 
-Python compilation, whitespace checking, ten focused harness tests and the base
+Python compilation, whitespace checking, thirteen focused harness tests and the base
 preflight passed. The tests cover exact observed model/adapter rejection, actual
 TCP first-nonempty-token disconnect, generator cancellation, normal SSE, HTTP
 error retention and server teardown after a body exception. Their small HTTP
@@ -59,7 +59,7 @@ base Python without the model dependencies.
 ART=/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13
 CACHE=/workspace/scratch/6f64e1b53384/model-cache/hub
 INFERENCE_PYTHON=/workspace/scratch/6f64e1b53384/who-is-your-bias/.venv-inference/bin/python
-PROTOCOL_SHA=adae86b7ca3fb82bd36c05daf49c115c1962b0e645e3659393d33b97a6223802
+PROTOCOL_SHA=edac6dfc7fb1545fc164fc5070ae3fdbc52a0a6dd82f7c10082fa88a58aa1210
 
 PYTHONPATH=src:. "$INFERENCE_PYTHON" -m tools.runtime_checks.text_live \
   --artifacts "$ART" --cache-dir "$CACHE" \
@@ -86,6 +86,9 @@ PYTHONPATH=src:. "$INFERENCE_PYTHON" -m tools.runtime_checks.text_live \
 
 For an explicitly selected base run, use `--condition base`, omit both adapter
 arguments and select a new output directory. There is no silent adapter fallback.
+The protocol also pins the exact Jensen training JSONL hash, 113 examples, each of
+the nine event counts and 29 optimizer updates. A same-base adapter trained on
+another dataset or a shorter completed run cannot satisfy this separate gate.
 The completed local training receipt, every safe adapter/tokenizer file and the
 loaded provider's actual identity must agree before any main-API turn runs.
 

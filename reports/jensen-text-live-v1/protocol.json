@@ -109,5 +109,22 @@
     "No voice model, human rating, semantic entailment, persona fidelity or production promotion is part of this probe."
   ],
   "persistence_boundary": "Save the complete private output and verify fresh readback before claiming the functional run is preserved.",
-  "related_experiments": "Separate from frozen M6 matched54 and six heldout retrieval diagnostic calls; these functional outputs are never merged into their scores."
+  "related_experiments": "Separate from frozen M6 matched54 and six heldout retrieval diagnostic calls; these functional outputs are never merged into their scores.",
+  "adapter_training": {
+    "dataset_sha256": "f83aea790b09631ae7b96f8f899012c879af92c73acafc81a475a49cdfe460d4",
+    "samples": 113,
+    "event_counts": {
+      "acquired-2023": 16,
+      "csis-2025": 12,
+      "dwarkesh-2026": 16,
+      "goldman-sachs-2024": 10,
+      "lex-494": 16,
+      "stanford-vftt-2024": 6,
+      "strange-loop-2025": 12,
+      "stripe-sessions-2024": 16,
+      "yc-startup-school-2026": 9
+    },
+    "optimizer_steps": 29,
+    "basis": "Frozen Jensen text experiment: 113 complete exchanges across nine events, with 29 planned optimizer updates; candidate must be completed and locally artifact-verified before serving."
+  }
 }

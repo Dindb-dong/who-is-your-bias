@@ -21,7 +21,9 @@ def identity_fixture():
     defaults = {"seed": 42, "temperature": 0, "top_p": 1, "top_k": 20}
     runtime = {"device": "cpu", "dtype": "float32", "threads": 8,
                "served_model": "functional-fixture"}
-    protocol = {"base_identity": identity, "runtime": runtime, "policy": defaults}
+    protocol = {"base_identity": identity, "runtime": runtime, "policy": defaults,
+                "adapter_training": {"dataset_sha256": "1" * 64,
+                    "event_counts": {"fixture-event": 113}, "optimizer_steps": 29}}
     health = {"status": "ready", "model_loaded": True, "model": runtime["served_model"],
               "identity": deepcopy(identity), "runtime": {**runtime, "generation_defaults": defaults},
               "adapter": {"configured": False, "loaded": False, "verified": False}}
@@ -50,12 +52,29 @@ def test_observed_identity_rejects_a_declaration_or_wrong_live_model(mutation):
 
 def test_adapter_requires_the_exact_loaded_completed_receipt_identity():
     protocol, health = identity_fixture()
-    expected = {"run_sha256": "f" * 64, "optimizer_steps": 29, "dataset_sha256": "1" * 64}
+    expected = {"run_sha256": "f" * 64, "optimizer_steps": 29, "dataset_sha256": "1" * 64,
+                "training_event_families": ["fixture-event"]}
     health["adapter"] = {**expected, "configured": True, "loaded": True, "verified": True}
     observed_identity(health, protocol, "adapter", expected)
     health["adapter"]["run_sha256"] = "2" * 64
     with pytest.raises(ValueError, match="exact completed"):
         observed_identity(health, protocol, "adapter", expected)
+
+
+@pytest.mark.parametrize("changed", ["dataset", "family", "steps"])
+def test_matching_operator_receipt_cannot_replace_frozen_subject_training(changed):
+    protocol, health = identity_fixture()
+    other = {"run_sha256": "f" * 64, "optimizer_steps": 29, "dataset_sha256": "1" * 64,
+             "training_event_families": ["fixture-event"]}
+    if changed == "dataset":
+        other["dataset_sha256"] = "3" * 64
+    elif changed == "family":
+        other["training_event_families"] = ["other-subject-event"]
+    else:
+        other["optimizer_steps"] = 1
+    health["adapter"] = {**other, "configured": True, "loaded": True, "verified": True}
+    with pytest.raises(ValueError, match="exact completed"):
+        observed_identity(health, protocol, "adapter", other)
 
 
 def encode(event, data):
