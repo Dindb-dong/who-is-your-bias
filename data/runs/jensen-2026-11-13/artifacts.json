@@ -554,6 +554,17 @@
       "sha256": "17a4730d8d2c22b57e8ad7fa61d68f3960224963377b13ed644a1705e1e65668",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-text-checkpoint-step0016",
+      "role": "Actual optimizer step16 checkpoint with adapter, AdamW, RNG and data cursor; training target29 remains incomplete",
+      "file_name": "jensen-text-checkpoint-step0016.tar.gz",
+      "file_id": "file_000000009ce081fda0e981a71a222c16",
+      "library_file_id": "libfile_fde3_f-643a86a0fe148191b1adc29e2af56ccf_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 97162415,
+      "sha256": "cb341b150f5cf19625502615c645f03f8778507f708f7086b1a18d21622a1220",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {

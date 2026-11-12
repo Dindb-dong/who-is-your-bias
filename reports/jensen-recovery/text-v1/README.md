@@ -10,8 +10,8 @@ dataset and pinned tokenizer hashes are in `dataset-selection.json` and
 ## Verified checkpoint
 
 The current saved counter and resume path are in [latest.json](latest.json).
-14 optimizer updates have been preserved and freshly retrieved. The latest
-actual state is in [checkpoint-step0014.json](checkpoint-step0014.json); connection recovery is recorded
+16 optimizer updates have been preserved and freshly retrieved. The latest
+actual state is in [checkpoint-step0016.json](checkpoint-step0016.json); connection recovery is recorded
 in `session-recovery-step0008.json`. The supervised recovery restored step 8
 and completed updates 9 and 10 with the same optimizer/data binding. The actual
 second update ran in a new process restored from the remotely retrieved first
