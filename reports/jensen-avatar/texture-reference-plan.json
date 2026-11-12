@@ -1,0 +1,34 @@
+{
+  "schema_version": "avatar-texture-reference-plan.v1",
+  "persona_id": "jensen-huang",
+  "license": "CC-BY-SA-4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "attribution": "Face texture adapted from Jensen Huang Stanford 2026-04-30 photographs 008 and 010 by Anders Eidesvik (Anderseidesvik), CC BY-SA 4.0. Warping, multi-view blending and animated-mesh UV baking by the Who Is Your Bias project. No endorsement is implied.",
+  "sources": [
+    {
+      "id": "stanford-2026-008",
+      "filename": "stanford-2026-008.jpg",
+      "sha256": "3d4f737f1936504c646e46c398972f90dfc60cdff69b8bdd1241bb3b2c873c45",
+      "creator": "Anders Eidesvik",
+      "url": "https://commons.wikimedia.org/wiki/File:Jensen_huang_stanford_2026-04-30_008.jpg",
+      "page_revision": "1298252096",
+      "event_family": "stanford-cs153-2026-04-30",
+      "split": "train",
+      "usage": "Derived facial texture under CC BY-SA 4.0; this explicitly expands the earlier reference-only acquisition plan."
+    },
+    {
+      "id": "stanford-2026-010",
+      "filename": "stanford-2026-010.jpg",
+      "sha256": "f08aa7f24227eaa6e3a964dcf676cdfe0ab85f917822ba3f668ef2641caf7838",
+      "creator": "Anders Eidesvik",
+      "url": "https://commons.wikimedia.org/wiki/File:Jensen_huang_stanford_2026-04-30_010.jpg",
+      "page_revision": "1300280320",
+      "event_family": "stanford-cs153-2026-04-30",
+      "split": "train",
+      "usage": "Derived facial texture under CC BY-SA 4.0; this explicitly expands the earlier reference-only acquisition plan."
+    }
+  ],
+  "excluded_pixel_sources": ["NVIDIA official portraits", "Goldman Sachs video frames"],
+  "geometry_sources": "The hash-bound three-family multimodal measurement report remains the geometry input.",
+  "status": "recipe_implemented_not_yet_executed"
+}
