@@ -1,11 +1,10 @@
 {
   "schema_version": "jensen-text-progress-latest.v1",
-  "recorded_at": "2026-11-12T21:36:09.453654+00:00",
-  "completed_and_persisted_optimizer_steps": 28,
+  "recorded_at": "2026-11-12T21:51:44.730333+00:00",
+  "completed_and_persisted_optimizer_steps": 29,
   "planned_optimizer_steps": 29,
-  "status": "checkpoint_verified_after_execution_interruption",
-  "report": "checkpoint-step0028.json",
-  "artifact_id": "jensen-text-checkpoint-step0028",
-  "next_resume_checkpoint": "readback/text-resume-step0028/step-00000028",
-  "interruption_record": "interrupted-owner-step0028.json"
+  "status": "checkpoint_verified_while_trainer_waits",
+  "report": "checkpoint-step0029.json",
+  "artifact_id": "jensen-text-checkpoint-step0029",
+  "next_resume_checkpoint": "readback/text-resume-step0029/step-00000029"
 }

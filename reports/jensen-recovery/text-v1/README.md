@@ -4,8 +4,10 @@ The original supervised execution connection was lost after the actual step-28
 checkpoint was saved and freshly restored, before its Git publication and ACK.
 The [interruption record](interrupted-owner-step0028.json) preserves the stale
 owner, released advisory-lock observation, exact checkpoint and proposed isolated
-28-to-29 continuation. No clean exit or OOM is inferred. The new invocation is
-prepared and has not run at this checkpoint.
+28-to-29 continuation. No clean exit or OOM is inferred. The isolated recovery invocation restored the saved step 28 and completed
+update 29. Its final optimizer checkpoint has now been uploaded, freshly
+restored and loaded with cursor epoch 1 / next index 0. Final serving export
+and clean process exit are still pending the verified-persistence acknowledgement.
 
 The immutable experiment uses 113 complete original exchanges across all nine
 eligible training events. The earlier interrupted 105-answer selection was not
@@ -17,8 +19,8 @@ dataset and pinned tokenizer hashes are in `dataset-selection.json` and
 ## Verified checkpoint
 
 The current saved counter and resume path are in [latest.json](latest.json).
-28 optimizer updates have been preserved and freshly retrieved. The latest
-actual state is in [checkpoint-step0028.json](checkpoint-step0028.json); connection recovery is recorded
+29 optimizer updates have been preserved and freshly retrieved. The latest
+actual state is in [checkpoint-step0029.json](checkpoint-step0029.json); connection recovery is recorded
 in `session-recovery-step0008.json`. The supervised recovery restored step 8
 and completed updates 9 and 10 with the same optimizer/data binding. The actual
 second update ran in a new process restored from the remotely retrieved first
@@ -27,8 +29,8 @@ See `resume-step0002.json` for that real continuation gate and
 `checkpoint-step0004.json` for the later saved checkpoint. The step-4 archive
 was freshly retrieved, all internal file hashes matched, and the real loader
 restored its AdamW, RNG and data cursor (epoch 0, next example 16).
-The target is 29 updates for the complete one-epoch dataset, not a completed
-step count. Training loss is not an answer-quality or likeness score.
+All 29 optimizer updates for the complete one-epoch dataset are saved;
+the final adapter/tokenizer serving export is a separate completion gate. Training loss is not an answer-quality or likeness score.
 
 The bounded invocation restored step 2, completed four additional updates and
 paused at step 6. Its fresh archive and real optimizer/RNG/cursor load passed.

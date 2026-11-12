@@ -642,6 +642,19 @@
       "sha256": "14079b1d84b32b96ccdc18497c4240c17fced4f8b14ce0b763ad1484e4a359c5",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-text-checkpoint-step0029",
+      "role": "text-adapter-optimizer-rng-cursor-checkpoint",
+      "optimizer_steps": 29,
+      "subject_id": "jensen-huang",
+      "file_name": "jensen-text-checkpoint-step0029.tar.gz",
+      "file_id": "file_0000000015a481fda5efea477dd769f7",
+      "library_file_id": "libfile_fde3_f-9910f7486cac81919a61c756b94d0901_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 97101556,
+      "sha256": "66356fc42e1a99c26d54fcfb99ff3b23869e3c49fde30e854ab7c757ccb92bb1",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {
