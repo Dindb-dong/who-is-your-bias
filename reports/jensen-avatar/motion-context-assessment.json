@@ -1,0 +1,204 @@
+{
+  "schema_version": "motion-text-context-assessment.v1",
+  "created_at": "2026-11-12T19:24:05.914393+00:00",
+  "persona_id": "jensen-huang",
+  "scope": "Read-only assessment of existing artifacts; no new ASR, training, video acquisition, corpus editing or runtime catalog promotion.",
+  "catalog_path": "data/motion/jensen-multievent.v1.json",
+  "catalog_sha256": "d11c99f649bdc22788f8cd0bc14808db3ce131b913b741e742d77b283a6cd3f8",
+  "reviewed_runtime_primitives": 0,
+  "runtime_catalog_unchanged": true,
+  "inputs": {
+    "media_manifest": {
+      "artifact_path": "voice/goldman-context/manifest.json",
+      "sha256": "2ead74715d607a24a970dd93b5e04cad213569007834040ea41b1656752eb9de",
+      "bytes": 1295
+    },
+    "asr": {
+      "artifact_path": "voice/goldman-context/asr.json",
+      "sha256": "ca9d6669cb3de347426c9408e296a1cd334b042b52cdfe779e97819fbc8ce2ed",
+      "bytes": 49014
+    },
+    "publisher": {
+      "artifact_path": "voice/candidates-v2/goldman-context/publisher.json",
+      "sha256": "c4140293d88d2c5b5a369602d31c4435db188478ad25fe6cd030f4b5dbe9c116",
+      "bytes": 241468
+    },
+    "alignment": {
+      "artifact_path": "voice/candidates-v2/goldman-context/alignment.json",
+      "sha256": "a857ab7e821ecbfcc40047bc160cd551b699939523d43a363ac54f93475c51fc",
+      "bytes": 67463
+    }
+  },
+  "media_sha256": "4557437ba42c8cf3b90f55210f08e4d1be399ab5fa689139b3b49735ae91da2d",
+  "audio_sha256": "649337137ba8ae72e77085e63b66c6afab7afe7481eb20add6d8653bfdf6e45f",
+  "source_url": "https://www.goldmansachs.com/insights/talks-at-gs/jensen-huang",
+  "clock": {
+    "source_timeline": "goldman_native_edited_package",
+    "source_window_seconds": [
+      95,
+      179
+    ],
+    "mapping": "source_seconds = clip_seconds + source_start_seconds",
+    "source_offset_seconds": 95,
+    "human_source_clock_reviewed": false
+  },
+  "alignment": {
+    "status": "candidate",
+    "matched_tokens": 189,
+    "asr_tokens": 195,
+    "token_coverage": 0.969231,
+    "scope": "Observed word matches in this context only. Caption onsets and ASR word onsets have different uncertainty; no global clock offset or forced alignment is established."
+  },
+  "human_listening_completed": false,
+  "human_motion_review_completed": false,
+  "continuous_image_track_to_named_speaker_review_completed": false,
+  "learned_contextual_gesture_policy": false,
+  "windows": [
+    {
+      "clip_id": "jensen-goldman-0128-8s",
+      "clip_sha256": "ece3ab917cc229bf43b3f9b3f48d754d1b6d949d19b1409449eccc3c5284857a",
+      "source_id": "goldman-sachs-2024",
+      "source_window_seconds": [
+        128,
+        136
+      ],
+      "review_kind": "agent_inspected_existing_publisher_ASR_text_alignment",
+      "status": "text_context_candidate_only",
+      "runtime_enabled": false,
+      "context_summary": "Expansion from computer graphics into adjacent image-processing work.",
+      "topic_tags": [
+        "computer graphics",
+        "image processing",
+        "adjacent applications"
+      ],
+      "publisher_cue_ids": [
+        "turn-00004-sentence-0004",
+        "turn-00004-sentence-0005"
+      ],
+      "publisher_turn_ids": [
+        "turn-00004"
+      ],
+      "asr_segment_ids": [
+        "segment-0007",
+        "segment-0008",
+        "segment-0009"
+      ],
+      "intersecting_asr_words": 22,
+      "intersecting_matched_tokens": 20,
+      "minimum_intersecting_word_ASR_confidence": 0.5531119704246521,
+      "publisher_speaker": "Jensen Huang",
+      "speaker_basis": "Explicit publisher label matched to independently transcribed audio words; no voice/face identity inference",
+      "claim_scope": "Topics of nearby source speech only; no gesture meaning, intention, causality or personal policy inferred."
+    },
+    {
+      "clip_id": "jensen-goldman-0146-8s",
+      "clip_sha256": "c66c81b77ced4fefa426e61436d912ca685e1cb454df2033e48dd28dd5b11291",
+      "source_id": "goldman-sachs-2024",
+      "source_window_seconds": [
+        146,
+        154
+      ],
+      "review_kind": "agent_inspected_existing_publisher_ASR_text_alignment",
+      "status": "text_context_candidate_only",
+      "runtime_enabled": false,
+      "context_summary": "Physics simulation for dynamic virtual worlds, followed by scientific computing and molecular dynamics.",
+      "topic_tags": [
+        "physics simulation",
+        "virtual worlds",
+        "scientific computing",
+        "molecular dynamics"
+      ],
+      "publisher_cue_ids": [
+        "turn-00004-sentence-0006",
+        "turn-00004-sentence-0007",
+        "turn-00004-sentence-0008"
+      ],
+      "publisher_turn_ids": [
+        "turn-00004"
+      ],
+      "asr_segment_ids": [
+        "segment-0015",
+        "segment-0016",
+        "segment-0017",
+        "segment-0018"
+      ],
+      "intersecting_asr_words": 30,
+      "intersecting_matched_tokens": 30,
+      "minimum_intersecting_word_ASR_confidence": 0.401602566242218,
+      "publisher_speaker": "Jensen Huang",
+      "speaker_basis": "Explicit publisher label matched to independently transcribed audio words; no voice/face identity inference",
+      "claim_scope": "Topics of nearby source speech only; no gesture meaning, intention, causality or personal policy inferred."
+    },
+    {
+      "clip_id": "jensen-goldman-0164-8s",
+      "clip_sha256": "e6dfb2a06a54dba724b88682e63dc9ffb649fd162fdcf9e4bd6158ff4c65ca95",
+      "source_id": "goldman-sachs-2024",
+      "source_window_seconds": [
+        164,
+        172
+      ],
+      "review_kind": "agent_inspected_existing_publisher_ASR_text_alignment",
+      "status": "text_context_candidate_only",
+      "runtime_enabled": false,
+      "context_summary": "Relationship between seismic processing and CT reconstruction, followed by incremental expansion across adjacent algorithms.",
+      "topic_tags": [
+        "seismic processing",
+        "CT reconstruction",
+        "inverse physics",
+        "incremental expansion"
+      ],
+      "publisher_cue_ids": [
+        "turn-00004-sentence-0010",
+        "turn-00004-sentence-0011"
+      ],
+      "publisher_turn_ids": [
+        "turn-00004"
+      ],
+      "asr_segment_ids": [
+        "segment-0020",
+        "segment-0021",
+        "segment-0022"
+      ],
+      "intersecting_asr_words": 21,
+      "intersecting_matched_tokens": 21,
+      "minimum_intersecting_word_ASR_confidence": 0.7236703783273697,
+      "publisher_speaker": "Jensen Huang",
+      "speaker_basis": "Explicit publisher label matched to independently transcribed audio words; no voice/face identity inference",
+      "claim_scope": "Topics of nearby source speech only; no gesture meaning, intention, causality or personal policy inferred."
+    },
+    {
+      "clip_id": "jensen-stripe-2396-12s",
+      "clip_sha256": "c52a28512bff876a8be94e38da81f8c881f5520bf76cd4b89f7a6e8b36760bf6",
+      "source_id": "stripe-sessions-2024",
+      "status": "unknown_text_context",
+      "runtime_enabled": false,
+      "context_summary": null,
+      "reason": "Acquired video elapsed clock is known, but no existing verified transcript-to-video mapping was found for this exact window."
+    },
+    {
+      "clip_id": "jensen-stripe-2696-12s",
+      "clip_sha256": "a1e79e017a024fda8bc1fa0d7fd2fff2ce04bef917ac18df18644f0b025c73a0",
+      "source_id": "stripe-sessions-2024",
+      "status": "unknown_text_context",
+      "runtime_enabled": false,
+      "context_summary": null,
+      "reason": "Acquired video elapsed clock is known, but no existing verified transcript-to-video mapping was found for this exact window."
+    },
+    {
+      "clip_id": "jensen-wired-1350-10s",
+      "clip_sha256": "cb1bdedd9b46cab640d83c3254160b8a58f0b3a356b6ccb95ca8e971532cf346",
+      "source_id": "wired-2024-video",
+      "status": "unknown_text_context",
+      "runtime_enabled": false,
+      "context_summary": null,
+      "reason": "Acquired video elapsed clock is known, but no existing verified transcript-to-video mapping was found for this exact window."
+    }
+  ],
+  "decision": "Retain these three Goldman text-context candidates as an inspectable sidecar. All six catalog contexts remain null and all measured motion remains geometry_preview. Do not select a personal gesture from these topics.",
+  "remaining_gates": [
+    "Verify continuous selected image track and speaker association across each motion window.",
+    "Review source-word timing and silence/scene boundaries; automatic token agreement is not human timing verification.",
+    "Define and separately evaluate contextual selection without asserting gesture semantics from topic co-occurrence.",
+    "Acquire or verify exact text clocks for Stripe and WIRED windows before proposing their context."
+  ]
+}

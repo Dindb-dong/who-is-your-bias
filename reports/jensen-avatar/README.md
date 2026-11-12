@@ -87,6 +87,18 @@ uninterrupted 80-step run, including optimizer step size and the full history.
 
 ## Hands and runtime composition
 
+The separate [motion context assessment](motion-context-assessment.json) reuses
+the existing Goldman audio transcription and publisher-word alignment. Agent
+inspection supports three candidate topic descriptions for the 128–136,
+146–154 and 164–172 second windows: graphics/image processing, simulation/scientific
+computing, and inverse physics/incremental expansion. The sidecar records the
+exact source hashes, matched sentence IDs and word-clock ranges. This is text
+context from automatic alignment, without human listening or continuous
+image-track attribution. It does not establish what a hand gesture means.
+Stripe and WIRED text clocks remain unverified for the selected windows. All six
+runtime contexts remain null, the catalog hash is unchanged, and zero primitives
+are promoted for automatic conversation selection.
+
 The runtime vocabulary now adds 30 optional finger joints to the existing
 16 body/face joints. Existing `avatar-clip.v1` files remain valid. Explicit bone
 mapping covers the foundation's actual MPFB finger chains. Missing observations
