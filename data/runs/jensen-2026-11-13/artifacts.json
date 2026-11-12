@@ -655,6 +655,33 @@
       "sha256": "66356fc42e1a99c26d54fcfb99ff3b23869e3c49fde30e854ab7c757ccb92bb1",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-text-adapter-completed29-v1",
+      "role": "completed-text-adapter-serving-export",
+      "optimizer_steps": 29,
+      "subject_id": "jensen-huang",
+      "run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+      "file_name": "jensen-text-adapter-completed29-v1.tar.gz",
+      "file_id": "file_00000000f3c881fb8f1d8083d337234e",
+      "library_file_id": "libfile_fde3_f-be585ebb2ad481918213cbeda58624ab_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 36145069,
+      "sha256": "f40b3e8dd6b2964bc87c916d414db652ee724485aa32b445f71449eaaa65177e",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-text-completion-evidence-v1",
+      "role": "actual-recovered-final-training-process-and-delivery-evidence",
+      "optimizer_steps": 29,
+      "subject_id": "jensen-huang",
+      "file_name": "jensen-text-completion-evidence-v1.tar.gz",
+      "file_id": "file_000000004c0881fda9e067550854fe94",
+      "library_file_id": "libfile_fde3_f-220a476b5dd48191a44c4fc3ae9f6a3b_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 17987,
+      "sha256": "1068a1559bfd264296173cc343f54de4b817e73bc45b5c1e0dc45bd1ca047d12",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {

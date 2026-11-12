@@ -1,13 +1,19 @@
 # Jensen text adapter: bounded execution and continuation
 
-The original supervised execution connection was lost after the actual step-28
-checkpoint was saved and freshly restored, before its Git publication and ACK.
-The [interruption record](interrupted-owner-step0028.json) preserves the stale
-owner, released advisory-lock observation, exact checkpoint and proposed isolated
-28-to-29 continuation. No clean exit or OOM is inferred. The isolated recovery invocation restored the saved step 28 and completed
-update 29. Its final optimizer checkpoint has now been uploaded, freshly
-restored and loaded with cursor epoch 1 / next index 0. Final serving export
-and clean process exit are still pending the verified-persistence acknowledgement.
+**Training completed: 29 optimizer updates over all 113 selected exchanges.**
+The final adapter, saved tokenizer and exact run receipt were uploaded and
+freshly restored; all eleven serving payload files and the instantiated saved
+tokenizer contract match. See [completed-serving.json](completed-serving.json)
+for stable artifact IDs, the exact serving identity and the actual clean exit.
+
+The earlier execution connection was lost after step 28 was preserved. The
+[interruption record](interrupted-owner-step0028.json) retains that observation
+without inventing a clean exit or an OOM. A separate invocation restored the
+fresh step-28 optimizer/RNG/cursor and completed update 29. Its final checkpoint
+was published and freshly verified before the persistence gate was acknowledged;
+the new process then exported the serving files and exited zero. The old output
+and supervision receipt remain unchanged. Text quality and default promotion
+remain separate, uncompleted evaluation gates.
 
 The immutable experiment uses 113 complete original exchanges across all nine
 eligible training events. The earlier interrupted 105-answer selection was not
@@ -30,7 +36,7 @@ See `resume-step0002.json` for that real continuation gate and
 was freshly retrieved, all internal file hashes matched, and the real loader
 restored its AdamW, RNG and data cursor (epoch 0, next example 16).
 All 29 optimizer updates for the complete one-epoch dataset are saved;
-the final adapter/tokenizer serving export is a separate completion gate. Training loss is not an answer-quality or likeness score.
+the final adapter/tokenizer serving export has also been preserved and freshly verified. Training loss is not an answer-quality or likeness score.
 
 The bounded invocation restored step 2, completed four additional updates and
 paused at step 6. Its fresh archive and real optimizer/RNG/cursor load passed.

@@ -35,6 +35,12 @@ search. This access audit does not establish permanent loss.
 
 ## Current preserved results
 
+**Latest text completion:** all 29 updates and the final serving adapter/tokenizer
+are saved and freshly verified. The isolated step-28 recovery exited zero;
+[the completion receipt](../reports/jensen-recovery/text-v1/completed-serving.json)
+binds the exact run, payloads, optimizer checkpoint and actual process evidence.
+Matched response execution and actual neural session checks continue separately.
+
 The user reiterated that full original videos and an actual newly authored
 avatar are required, and asked to publish useful intermediate material quickly.
 Short clips, audio-only recordings, located URLs and full videos are counted
