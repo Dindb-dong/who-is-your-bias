@@ -1,0 +1,89 @@
+{
+  "schema_version": "jensen-reflection-expansion-acquisition.v1",
+  "updated_at": "2026-11-12T19:28:48.596918+00:00",
+  "complete_distinct_event_videos_acquired": 1,
+  "complete_distinct_event_videos_fresh_readback_verified": 0,
+  "oral_history_events_acquired": 1,
+  "commencement_events_acquired": 0,
+  "frozen_run_membership": "excluded from v4, text-adapter-v1, matched M6 and heldout RAG diagnostic",
+  "videos": [
+    {
+      "source_id": "chm-jensen-oral-history-102809035",
+      "event_family_id": "chm-oral-history-2024-08-09",
+      "event_date": "2024-08-09",
+      "publisher": "Computer History Museum",
+      "split": "train",
+      "split_scope": "separate_reflection_expansion_only; no current frozen run membership",
+      "included_in_frozen_v4": false,
+      "included_in_text_adapter_v1": false,
+      "included_in_M6": false,
+      "discovery_url": "https://www.computerhistory.org/collections/catalog/102809035/",
+      "url": "https://s3.us-west-1.wasabisys.com/chm-cms-media/media-live/_multimedia/102809035-02-01.mp4",
+      "role": "full_original_oral_history_video",
+      "file": "chm-oral-history-2024-08-09-full.mp4",
+      "bytes": 653931658,
+      "sha256": "1840202f25adc219a166cfdc3b4968fa34ad43fe5ff33a2b27e56b22c16d85a8",
+      "duration_seconds": 4344.825034,
+      "acquired_at": "2026-11-12T19:27:06.233172+00:00",
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "30000/1001",
+          "duration": "4344.807133"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "width": null,
+          "height": null,
+          "r_frame_rate": "0/0",
+          "duration": "4344.825034"
+        }
+      ],
+      "validation": {
+        "http_content_length": "653931658",
+        "ffprobe": "passed",
+        "last_four_seconds_decode": "passed",
+        "decoder_stderr": ""
+      },
+      "transcript_warning": "Publisher allows later transcript edits; do not infer video wording or clock alignment from PDF.",
+      "durability_status": "29_artifact_ordered_upload_in_progress; no fresh readback yet"
+    }
+  ],
+  "transcripts": [
+    {
+      "schema_version": "publisher-source-artifact.v1",
+      "event_family_id": "chm-oral-history-2024-08-09",
+      "event_date": "2024-08-09",
+      "role": "publisher_oral_history_transcript",
+      "source_url": "https://www.computerhistory.org/collections/catalog/102809034/",
+      "download_url": "https://s3.us-west-1.wasabisys.com/chm-cms-media/media-live/_file/102809034-05-01.src.pdf",
+      "file": "chm-oral-history-2024-08-09-transcript.pdf",
+      "bytes": 296272,
+      "sha256": "57c69f2925f1fda10f85288e39a642e983b82b82e64ad8a216cd66861e7e359d",
+      "acquired_at": "2026-11-12T19:26:38.324461+00:00",
+      "included_in_frozen_v4": false,
+      "included_in_M6": false,
+      "source_clock": "untimed_document",
+      "transcript_video_wording_mapping_verified": false,
+      "publisher_warning": "Publisher allows later transcript edits; do not infer video wording or clock alignment from PDF."
+    }
+  ],
+  "current_save_profile": {
+    "raw_chunk_bytes": 25165824,
+    "chunk_archives": 26,
+    "container": "single-member lossless tar.gz; gzip level0",
+    "other_artifacts": 3
+  },
+  "remaining_work": [
+    "Freshly read back all CHM source chunks, reconstruct and compare full-file hash",
+    "Acquire and preserve at least one complete original commencement recording",
+    "Retain separate expansion-only event partition; no changes to frozen inputs"
+  ]
+}

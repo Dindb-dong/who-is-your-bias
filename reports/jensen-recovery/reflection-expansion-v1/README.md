@@ -54,9 +54,13 @@ reintroduced as unseen heldout material.
 
 ## Resume boundary
 
-Preparation is complete; no expansion media file has been acquired yet.
-The next step is to verify the public CHM delivery and a complete official
-commencement recording, then save the first actual source batch. Private raw
+The preparation checkpoint was remotely verified at
+`f2cf6bad53493aae7522c5b63612e654b850365d`. The complete CHM oral-history MP4
+and original PDF are now acquired and locally validated; durable readback is
+pending. [acquisition-status.json](acquisition-status.json) records the actual
+bytes, source clock, decoder checks, and remaining commencement gap. The next
+step is to finish this bounded source save and full reconstruction before
+starting another complete recording. Private raw
 publisher metadata is under `reflection-expansion-v1/discovery/` in the shared
 artifact directory. The existing lossless 24 MiB tar-chunk workflow in
 `tools/persona_data/media_chunks.py` is the verified recovery path.
