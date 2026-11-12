@@ -4,6 +4,7 @@ import io
 import json
 import os
 from pathlib import Path
+import shutil
 import tarfile
 
 import pytest
@@ -118,4 +119,107 @@ def test_package_detects_source_mutation_during_tar_write(tmp_path, monkeypatch)
     with pytest.raises(ValueError, match="payload hash"):
         delivery.package_checkpoint(checkpoint, archive, receipt)
     assert not archive.exists()
+    assert not receipt.exists()
+
+
+def materialized(tmp_path):
+    checkpoint, metadata, archive, receipt = prepared(tmp_path)
+    package = delivery.package_checkpoint(checkpoint, archive, receipt)
+    copy = tmp_path / "fresh.tar.gz"
+    shutil.copyfile(archive, copy)
+    return checkpoint, copy, receipt, package, tmp_path / "restored", tmp_path / "proof.json"
+
+
+@pytest.mark.parametrize("mutation", ["traversal", "absolute", "symlink", "hardlink", "extra", "directory", "duplicate", "missing", "changed"])
+def test_verify_rejects_archive_structure_or_payload_before_loading(tmp_path, monkeypatch, mutation):
+    checkpoint, archive, receipt, package, output, proof = materialized(tmp_path)
+    with tarfile.open(archive, "r:gz") as tar:
+        entries = [(info, tar.extractfile(info).read()) for info in tar.getmembers()]
+    extra = tarfile.TarInfo("unexpected")
+    if mutation == "traversal":
+        extra.name = "../escaped"
+    elif mutation == "absolute":
+        extra.name = str(tmp_path / "escaped")
+    elif mutation in {"symlink", "hardlink"}:
+        extra.type = tarfile.SYMTYPE if mutation == "symlink" else tarfile.LNKTYPE
+        extra.linkname = "../escaped"
+    elif mutation == "directory":
+        extra.type = tarfile.DIRTYPE
+    elif mutation == "duplicate":
+        extra, contents = entries[0]
+    elif mutation == "missing":
+        entries.pop()
+    elif mutation == "changed":
+        info, contents = entries[0]
+        entries[0] = info, b"X" * len(contents)
+    if mutation not in {"missing", "changed"}:
+        contents = entries[0][1] if mutation == "duplicate" else b""
+        entries.append((extra, contents))
+    with tarfile.open(archive, "w:gz") as tar:
+        for info, contents in entries:
+            tar.addfile(info, io.BytesIO(contents))
+    # Even a changed outer receipt cannot admit extra, linked or altered payloads.
+    package["archive"] = delivery._identity(archive)
+    save_json(receipt, package)
+    monkeypatch.setattr(delivery, "load_checkpoint", lambda *a, **kw: pytest.fail("Must reject before state load"))
+    with pytest.raises(ValueError):
+        delivery.verify_checkpoint_archive(archive, receipt, output, proof)
+    assert not proof.exists()
+    assert not output.exists()
+    assert not (tmp_path / "escaped").exists()
+
+
+def test_verify_rejects_original_corrupt_or_reused_outputs(tmp_path):
+    _, archive, receipt, package, output, proof = materialized(tmp_path)
+    with pytest.raises(ValueError, match="separately materialized"):
+        delivery.verify_checkpoint_archive(Path(package["source_archive"]), receipt, output, proof)
+    proof.write_text("retain previous proof")
+    with pytest.raises(ValueError, match="overwrite"):
+        delivery.verify_checkpoint_archive(archive, receipt, output, proof)
+    assert proof.read_text() == "retain previous proof"
+    proof.unlink()
+    archive.write_bytes(archive.read_bytes() + b"changed")
+    with pytest.raises(ValueError, match="size/hash"):
+        delivery.verify_checkpoint_archive(archive, receipt, output, proof)
+    assert not output.exists()
+
+
+def test_verify_never_emits_proof_when_actual_loader_fails(tmp_path, monkeypatch):
+    _, archive, receipt, _, output, proof = materialized(tmp_path)
+
+    def fails(*args, **kwargs):
+        raise ValueError("actual loader rejected the saved state")
+
+    monkeypatch.setattr(delivery, "load_checkpoint", fails)
+    with pytest.raises(ValueError, match="actual loader rejected"):
+        delivery.verify_checkpoint_archive(archive, receipt, output, proof)
+    assert not output.exists()
+    assert not proof.exists()
+
+
+@pytest.mark.parametrize("inside", ["output", "proof"])
+def test_verify_outputs_cannot_mutate_original_atomic_checkpoint(tmp_path, inside):
+    checkpoint, archive, receipt, _, output, proof = materialized(tmp_path)
+    if inside == "output":
+        output = checkpoint / "unexpected-restore"
+    else:
+        proof = checkpoint / "unexpected-proof.json"
+    with pytest.raises(ValueError, match="outside the source checkpoint"):
+        delivery.verify_checkpoint_archive(archive, receipt, output, proof)
+    assert not output.exists()
+    assert not proof.exists()
+
+
+def test_atomic_publication_does_not_clobber_a_competing_output(tmp_path, monkeypatch):
+    checkpoint, _, archive, receipt = prepared(tmp_path)
+    real = delivery._publish_file
+
+    def publish_after_competitor(temporary, output):
+        output.write_bytes(b"another coordinator's existing file")
+        real(temporary, output)
+
+    monkeypatch.setattr(delivery, "_publish_file", publish_after_competitor)
+    with pytest.raises(FileExistsError):
+        delivery.package_checkpoint(checkpoint, archive, receipt)
+    assert archive.read_bytes() == b"another coordinator's existing file"
     assert not receipt.exists()
