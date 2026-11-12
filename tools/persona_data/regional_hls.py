@@ -44,37 +44,76 @@ def parse_registered_playlist(raw: bytes, entry: dict) -> list[str]:
     return urls
 
 
-def packet_timeline(path: Path) -> dict:
+def stream_coverage(streams: dict, expected_duration: float, *, tolerance_seconds: float = .25) -> dict:
+    """Require each track to cover the registered VOD, allowing packet rounding."""
+    if (not math.isfinite(expected_duration) or expected_duration <= 0
+            or not math.isfinite(tolerance_seconds) or tolerance_seconds < 0 or len(streams) != 2):
+        raise ValueError("Invalid stream coverage contract")
+    for state in streams.values():
+        if (state["packets"] < 1 or not math.isfinite(state["first_dts"])
+                or not math.isfinite(state["last_dts"]) or state["last_dts"] < state["first_dts"]):
+            raise ValueError("Invalid stream endpoints")
+    anchor = min(state["first_dts"] for state in streams.values())
+    measured = {}
+    for index, state in streams.items():
+        start_offset = state["first_dts"] - anchor
+        last_elapsed = state["last_dts"] - anchor
+        end_delta = last_elapsed - expected_duration
+        if start_offset > tolerance_seconds or abs(end_delta) > tolerance_seconds:
+            raise ValueError("Audio or video does not span the registered VOD within tolerance")
+        measured[str(index)] = {"first_dts_offset_seconds": start_offset,
+                                "last_dts_elapsed_seconds": last_elapsed,
+                                "last_dts_minus_expected_end_seconds": end_delta,
+                                "dts_span_seconds": state["last_dts"] - state["first_dts"]}
+    return {"status": "passed", "anchor_dts": anchor, "expected_duration_seconds": expected_duration,
+            "endpoint_tolerance_seconds": tolerance_seconds, "streams": measured,
+            "method": "each_track_first_and_last_decode_timestamp_against_registered_VOD"}
+
+
+def packet_timeline(path: Path, *, expected_duration: float) -> dict:
     command = ["ffprobe", "-v", "error", "-show_packets", "-show_entries",
                "packet=stream_index,pts_time,dts_time,duration_time", "-of", "csv=p=0", str(path)]
     streams: dict[int, dict] = {}
     with path.with_suffix(path.suffix + ".packet-stderr.log").open("w") as err:
         process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=err, text=True)
-        assert process.stdout is not None
-        for line in process.stdout:
-            fields = line.strip().split(",")
-            if len(fields) < 4:
-                continue
-            index = int(fields[0])
-            if fields[2] == "N/A":
-                raise ValueError("Packet without decode timestamp")
-            dts = float(fields[2])
-            if not math.isfinite(dts):
-                raise ValueError("Non-finite packet timestamp")
-            state = streams.setdefault(index, {"packets": 0, "first_dts": dts, "last_dts": dts,
-                                                "backward_steps": 0, "largest_gap_seconds": 0.0})
-            if state["packets"]:
-                delta = dts - state["last_dts"]
-                state["backward_steps"] += delta < -.001
-                state["largest_gap_seconds"] = max(state["largest_gap_seconds"], delta)
-            state["last_dts"] = dts
-            state["packets"] += 1
-        if process.wait() != 0:
-            raise ValueError("Full-file packet inspection failed")
+        try:
+            assert process.stdout is not None
+            for line in process.stdout:
+                fields = line.strip().split(",")
+                if len(fields) < 4:
+                    continue
+                index = int(fields[0])
+                if fields[2] == "N/A":
+                    raise ValueError("Packet without decode timestamp")
+                dts = float(fields[2])
+                if not math.isfinite(dts):
+                    raise ValueError("Non-finite packet timestamp")
+                state = streams.setdefault(index, {"packets": 0, "first_dts": dts, "last_dts": dts,
+                                                    "backward_steps": 0, "largest_gap_seconds": 0.0})
+                if state["packets"]:
+                    delta = dts - state["last_dts"]
+                    state["backward_steps"] += delta < -.001
+                    state["largest_gap_seconds"] = max(state["largest_gap_seconds"], delta)
+                state["last_dts"] = dts
+                state["packets"] += 1
+            if process.wait() != 0:
+                raise ValueError("Full-file packet inspection failed")
+        finally:
+            if process.stdout is not None:
+                process.stdout.close()
+            if process.poll() is None:
+                process.terminate()
+                try:
+                    process.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    process.kill()
+                    process.wait(timeout=5)
     if len(streams) != 2 or any(s["backward_steps"] or s["largest_gap_seconds"] > .25 for s in streams.values()):
         raise ValueError("Unexpected stream count or packet-timeline discontinuity")
+    coverage = stream_coverage(streams, expected_duration)
     return {"method": "full_file_ffprobe_decode_timestamp_walk", "maximum_allowed_gap_seconds": .25,
-            "streams": streams, "status": "passed"}
+            "backward_step_tolerance_seconds": .001,
+            "streams": streams, "stream_coverage": coverage, "status": "passed"}
 
 
 def acquire(entry: dict, output: Path, *, maximum_bytes: int, minimum_free_bytes: int, workers: int = 4) -> dict:
@@ -142,7 +181,7 @@ def acquire(entry: dict, output: Path, *, maximum_bytes: int, minimum_free_bytes
         raise ValueError("Full transport-stream duration differs from registered VOD")
     if sorted(s["codec_type"] for s in probe["streams"]) != ["audio", "video"]:
         raise ValueError("Exactly one audio and one video stream required")
-    timeline = packet_timeline(partial)
+    timeline = packet_timeline(partial, expected_duration=entry["expected_duration_seconds"])
     for start in (0, max(0, duration - 5)):
         subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-xerror", "-threads", "1", "-ss", str(start),
                         "-i", str(partial), "-t", "4", "-f", "null", "-"], check=True, capture_output=True)
