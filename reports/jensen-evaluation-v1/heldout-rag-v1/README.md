@@ -60,8 +60,9 @@ ungraded, and the candidate counts are not relevance or quality scores.
 
 ## Execution
 
-Only the pinned Qwen3-1.7B **base** condition is registered here. Runtime is CPU
-float32/eight threads, greedy output, seed 42, 160 output tokens and context
+Only the pinned Qwen3-1.7B **base** condition is registered here. The original
+registration used FP32; the current pre-output amendment uses CPU BF16/eight
+threads, greedy output, seed 42, 160 output tokens and context
 4,096. The exact independent checkpoint/tokenizer hashes are inherited from
 the [base verification](../base-verification.json). No adapter is configured.
 
@@ -81,9 +82,9 @@ EVAL_RAG="$ART/text-evaluation-v1/heldout-rag-v1"
 PYTHONPATH=src:. .venv-inference/bin/python \
   -m tools.adaptation_evaluation.rag_diagnostic run \
   --plan "$EVAL_RAG/plan.json" \
-  --contract "$EVAL_RAG/execution-contract.json" \
+  --contract reports/jensen-evaluation-v1/heldout-rag-v1/execution-contract-bf16-v2.json \
   --timeout 180 \
-  --output "$ART/text-evaluation-v1/execution-heldout-rag-v1"
+  --output "$ART/text-evaluation-v1/execution-heldout-rag-bf16-v2"
 ```
 
 Use a new output directory. The one-condition supervisor verifies the exact
