@@ -52,6 +52,19 @@
       "file_name": "jensen-media-batch-01-metadata.tar.gz",
       "status": "uploaded_and_fresh_readback_verified",
       "readback_sha256": "d9981fed775cc9acc0c713332c5e61e61e7d7bb8ff57c1dbc21d7a9d06bf1bb8"
+    },
+    {
+      "artifact": "media-chunks/goldman-sachs-2024-full/goldman-sachs-2024-full.mp4.part001.bin.gz",
+      "bytes": 207929911,
+      "sha256": "b0c56b25c9451d1752f5661bea4de3bc8b21217efa2c2ded519610bbfd7dc089",
+      "file_id": "file_00000000f49481fd86b52d7daba6fb77",
+      "library_file_id": "libfile_fde3_f-e1477bc92e0c8191aecf0a2d8fba6ca8_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "goldman-sachs-2024-full.mp4.part001.bin.gz",
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "b0c56b25c9451d1752f5661bea4de3bc8b21217efa2c2ded519610bbfd7dc089",
+      "storage_encoding": "gzip",
+      "decoded_bytes": 209715200,
+      "decoded_sha256": "e77f8b9aca039755f05c0c00e5951caeee65eca8fc462fb3f85c919a6c923337"
     }
   ],
   "failed_transfers": {
@@ -64,5 +77,6 @@
   "notes": [
     "Only metadata, reconstruction manifests and actual heldout archive are verified at this checkpoint. Full video chunks remain pending retry; the original videos are locally acquired.",
     "Heldout archive contains50complete NoPriors2023 exchanges, frozen manifest SHA256 0c5df9f3a41371570a0fb57426bd1bd78d445ce6eddd6f00b8de941fe403682b."
-  ]
+  ],
+  "large_artifact_gate": "207929911-byte gzip upload and fresh readback plus decoded209715200-byte chunk hash verified"
 }
