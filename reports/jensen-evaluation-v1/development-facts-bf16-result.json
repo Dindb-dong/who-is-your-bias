@@ -20,11 +20,34 @@
   "unattempted": 0,
   "all_failures_retained": true,
   "timing": {
-    "first_text_median_ms": 15761.105,
-    "wall_median_ms": 52186.758,
+    "first_text_median_ms": 11544.483,
+    "wall_median_ms": 40891.797,
     "startup_and_excluded_warmup_ms": 50771.915,
     "whole_process_elapsed_seconds": 715.567,
-    "max_waited_child_rss_bytes": 4393336832
+    "max_waited_child_rss_bytes": 4393336832,
+    "median_population": "completed_only (same rule as compare_reports)",
+    "completed_only": {
+      "population_count": 6,
+      "first_text_ms": {
+        "numeric_count": 6,
+        "median": 11544.483
+      },
+      "wall_ms": {
+        "numeric_count": 6,
+        "median": 40891.797
+      }
+    },
+    "all_attempts": {
+      "population_count": 12,
+      "first_text_ms": {
+        "numeric_count": 12,
+        "median": 15761.105
+      },
+      "wall_ms": {
+        "numeric_count": 12,
+        "median": 52186.758
+      }
+    }
   },
   "observed_before": {
     "identity_sha256": "300560a54349d92f85d9bebd2f16a9d1afe2edc430ec39bef4ccb4d981c0ca97",
@@ -1055,5 +1078,10 @@
   "paired_comparison": "pending remaining conditions",
   "semantic_support_review": "ungraded",
   "human_review": "ungraded",
-  "efficacy_claim": false
+  "efficacy_claim": false,
+  "timing_aggregation_clarification": {
+    "recorded_at": "2026-11-12T21:02:33.228350+00:00",
+    "source_condition_run_file_sha256": "ba78b8e65f2f268b410851ccf80b42600d41dd6c462ac2fb7981f2b13b3d6765",
+    "note": "Earlier generic median fields described all attempted generations. They are now explicitly separated; generic median fields use normal completions, matching the frozen comparison runner. No response was rerun and the saved condition artifact is unchanged."
+  }
 }
