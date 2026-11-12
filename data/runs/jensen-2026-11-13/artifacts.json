@@ -822,6 +822,22 @@
       "sha256": "404c784123e7f61ef4f603cac856e1a663b4dde88df48a241143bdc499b6c1f8",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-m6-development-collection-review-bf16-v2",
+      "role": "complete-matched-collection-and-condition-blind-review-packet",
+      "exposure": "development",
+      "planned": 36,
+      "attempted": 36,
+      "completed": 13,
+      "failed": 23,
+      "file_name": "jensen-m6-development-collection-review-bf16-v2.tar.gz",
+      "file_id": "file_000000009c1081fd813606272ffa0440",
+      "library_file_id": "libfile_fde3_f-c367fcdeba248191989b5eaa9028391b_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 65497,
+      "sha256": "d45f6194444c65d1434f2ba3e6ef9849751526970cddf146e45ee5fa5bfd1b5b",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {

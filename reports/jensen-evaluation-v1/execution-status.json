@@ -90,5 +90,12 @@
   "collection": "pending remaining conditions and fresh-readback receipts",
   "semantic_support_review": "ungraded",
   "human_review": "ungraded",
-  "efficacy_claim": false
+  "efficacy_claim": false,
+  "development_collection": {
+    "status": "collected_saved_and_fresh_readback_verified",
+    "report": "development-collection.json",
+    "artifact_id": "jensen-m6-development-collection-review-bf16-v2",
+    "review_samples": 13,
+    "semantic_review": "pending"
+  }
 }
