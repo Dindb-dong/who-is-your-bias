@@ -161,4 +161,108 @@ Report those boundaries separately and retain an actual manual-camera checklist.
 
 ## Implementation record
 
-To be filled after execution; the sections above record the pre-implementation plan.
+The sections above retain the pre-implementation plan. The first feature commit,
+[`26c6c60`](https://github.com/Dindb-dong/who-is-your-bias/commit/26c6c60d23086d8147bb98d54deac87086e1dbc0),
+changed this document alone, before any implementation was pushed.
+
+### Delivered behavior
+
+- The default API, source library, topics and studio labels use Jensen Huang's
+  own profile, eight editorial evidence summaries and three dated NVIDIA sources.
+  An exact corpus snapshot binds that seed; it does not assert 2026 coverage.
+- Voice configuration must declare the active subject or a generic voice.
+  Foreign/unbound speech and historical Musk motion cannot enter a Jensen turn.
+  Historical corpora, presentation media and reproducibility tools retain their
+  original subject, with explicit archival labels and test configurations.
+- The authored portrait has gray hair, glasses and a black jacket. The avatar
+  production/likeness gates from PR #15 remain separate from this preview.
+- Pointer/keyboard preview and opt-in camera/screen input feed a selected target
+  to the avatar. Selection is explicit and uses geometric face boxes only; there
+  is no gender inference, identity recognition or automatic participant choice.
+- Eyes lead the head by 220 ms. The compositor bounds angles, compensates eye
+  direction for the head/neck contribution and retains speech, blink, expression
+  and body channels. Input timestamps use the live monotonic clock rather than a
+  potentially earlier RAF timestamp. Bone-route telemetry records the actual
+  composed eye rotations.
+- Real Chromium exposed a flaw in the initially planned capped frame delta:
+  at low render rates, capping elapsed time made head following and release run
+  slower than the wall clock. The final controller uses bounded exponential
+  smoothing over actual elapsed time, with only the part after the eye-lead
+  deadline contributing to head movement. This is a measured correction to the
+  earlier capped-time-step plan, not a relaxation of the browser assertions.
+- A classic worker runs the pinned local MediaPipe model. One transferred frame
+  may be in flight; obsolete results, stale targets and ambiguous tracks are
+  released. Stop, navigation, page hiding, ended tracks and late permission grants
+  all have explicit cleanup. Reduced motion suppresses new head turns.
+- Normal `make dev`, production build and Docker packaging provision the same
+  verified assets. Compose passes the voice-subject binding.
+
+See the [implementation and usage guide](jensen-attention.md) and
+[asset provenance](../apps/web/public/vision/README.md) for exact settings and paths.
+
+### Validation record
+
+The implementation tree is checked against the remote branch, using exact Git
+blob hashes for every changed frontend/deployment file. No unrelated baseline
+files or generated model binaries are included in the PR.
+
+Local execution on 2026-11-12:
+
+- Python regression suite: **805 passed, 2 skipped**. The skips require optional
+  Torch/Pillow presentation dependencies that are absent from this environment.
+- Frontend suite after the browser-discovered timing fix: **230 passed across
+  21 files**. Coverage includes actual-eye telemetry and consistent following/
+  neutral return at 1–120 FPS and irregular rendering intervals.
+- TypeScript and production build passed; avatar audition fixtures: **4 passed**.
+- Historical retrieval smoke: **39 graded cases passed**, two explicitly
+  ungraded cases; this does not establish Jensen fidelity.
+- Actual `make dev`: API/profile, Vite HTML, worker, bundle, WASM and model served
+  HTTP 200; profile identified Jensen, the model hash matched, and Ctrl-C released
+  both servers.
+
+Local Chromium could not start because its process-singleton socket was rejected
+by the execution host. A temporary workflow was scoped to PR #16 and its feature
+branch to run real Chromium and the container build. The final documentation
+commit removes it, preserving the existing local-validation default. Browser scenarios
+keep a real worker/WASM blank-frame smoke separate from synthetic capture tests.
+
+The [second verification run](https://github.com/Dindb-dong/who-is-your-bias/actions/runs/43156887553)
+at `e5f766a33e96e9ef879333bdb59c53fd433eb0bc` completed successfully:
+
+| Check | Result |
+| --- | --- |
+| Python suite | 804 passed, 3 skipped |
+| Frontend unit suite | 230 passed across 21 files |
+| Avatar audition fixtures | 4 passed |
+| TypeScript / production build | Passed |
+| Jensen browser scenarios | 18 passed, desktop and mobile viewports |
+| Historical studio browser regressions | 30 passed, desktop and mobile viewports |
+| Actual MediaPipe worker/WASM/model | Two blank frames processed in each viewport, same-origin assets |
+| Container build and startup | Passed with read-only filesystem; Jensen profile, exact snapshot, UI, worker and model digest verified |
+
+The three remote Python skips require optional Torch, Pillow and Blender. Blender
+was present for the local run, explaining its one additional passing test. No
+browser case was skipped or reported flaky. Camera/screen lifecycle scenarios
+use synthetic acquisition and detection boundaries; real worker loading/inference
+is exercised separately by the blank-frame smoke.
+
+[Browser reports and desktop/mobile screenshots](https://github.com/Dindb-dong/who-is-your-bias/actions/runs/43156887553/artifacts/13915764986)
+are retained as artifact `13915764986` (10,334,375 bytes, configured seven-day
+retention). Downloaded ZIP SHA-256:
+`cb22d76c75a2404863edfc35b1c5eb50ab6667dfed667fdf9d9cce75856e46fc`.
+The final commit changes documentation and removes the temporary runner only;
+the runtime, tests and deployment configuration are the tested `e5f766a` tree.
+
+The [initial Chromium run](https://github.com/Dindb-dong/who-is-your-bias/actions/runs/43155921858)
+at `202de25` ran all 18 Jensen cases: 11 passed and seven failed. Both actual
+worker/WASM/model tests passed. Six failures showed slow neutral return, and one
+showed slow head following. These led to the elapsed-time fix in
+[`e5f766a`](https://github.com/Dindb-dong/who-is-your-bias/commit/e5f766a33e96e9ef879333bdb59c53fd433eb0bc).
+The browser thresholds and timeouts were retained. Desktop and mobile captures
+were visually inspected; a clipped pointer indicator and overlapping helper
+text were also corrected.
+
+No real-camera accuracy, physical-device latency, trained Jensen voice, learned
+personal mannerisms or photorealistic likeness result is claimed. The real-device
+presentation checklist remains in the usage guide.
+

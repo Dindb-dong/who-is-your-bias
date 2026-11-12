@@ -57,6 +57,9 @@ Fresh coordinates for the same participant do not restart the 220 ms delay.
 Selecting another participant starts a new eye-leading transition. Existing idle
 or recorded head movement may continue before attention takes over. As the head
 turns, the eyes use the remaining angle so both contributions do not overshoot.
+Exponential smoothing uses actual elapsed time, so a low frame rate does not make
+following or release take proportionally longer. A frame that crosses the 220 ms
+deadline advances the head only for the elapsed portion after that deadline.
 
 Attention is composed after ordinary playback and damping. It owns eye/head/neck
 direction while active and preserves speech timing, visemes, mouth expression,
@@ -170,10 +173,15 @@ motion. Running a command above is not itself evidence that the corresponding
 suite passed; record the actual result with the PR's validation evidence.
 
 The initial local Chromium smoke could not start because the execution host
-rejected Chromium's process-singleton socket. It therefore provided no browser or
-real-detector execution result. Do not treat synthetic geometry or mocked media as
-a measurement of real-camera accuracy, end-to-end device latency, avatar likeness
-or learned Jensen behavior.
+rejected Chromium's process-singleton socket. The first scoped remote run executed
+the real worker/WASM/model smoke successfully on desktop and mobile and exposed
+a slow-frame animation bug, which was fixed with elapsed-time regressions. The
+final remote run passed all 18 Jensen scenarios and all 30 historical studio
+scenarios, including the real detector smoke in both viewports. The
+[plan's implementation record](jensen-attention-plan.md#validation-record) tracks
+the final tested commit and complete results. Do not treat blank input, synthetic
+geometry or mocked media as a measurement of real-camera accuracy, end-to-end
+device latency, avatar likeness or learned Jensen behavior.
 
 Before a live presentation, check a real camera and shared tab on the target device:
 select a participant, move them through all four directions, briefly occlude them,
