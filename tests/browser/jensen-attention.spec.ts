@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test';
+import { readFileSync } from 'node:fs';
 
 const pageErrors = new WeakMap<Page, string[]>();
 test.beforeEach(async ({ page }) => {
@@ -340,13 +341,27 @@ test('screen capture starts under user activation and external track end cleans 
   await expect(canvas(page)).toHaveAttribute('data-attention-phase', 'idle', { timeout: 4000 });
 });
 
-test('Jensen hand sample requires preview consent and resets cleanly', async ({ page }, info) => {
+test('Jensen fitted candidate renders its actual asset and resets preview motion cleanly', async ({ page }, info) => {
+  const expectedAsset = JSON.parse(readFileSync('reports/jensen-avatar/runtime-asset-report.json', 'utf8'));
+  const graphicsErrors: string[] = [];
+  page.on('console', (message) => { if (message.type() === 'error' && /WebGL|shader|THREE|texture/i.test(message.text())) graphicsErrors.push(message.text()); });
   await openStudio(page);
   await page.getByRole('button', { name: 'Studio settings', exact: true }).filter({ visible: true }).click();
-  await page.getByRole('button', { name: /^Research human/ }).click();
+  await page.getByRole('button', { name: /^Jensen source-fitted candidate/ }).click();
   await page.getByRole('button', { name: 'Close settings' }).click();
-  await expect(page.getByTestId('avatar-stage')).toHaveAttribute('data-mapped-joints', '46', { timeout: 15000 });
+  const stage = page.getByTestId('avatar-stage');
+  await expect(stage).toHaveAttribute('data-model-state', 'ready', { timeout: 15000 });
+  await expect(stage).toHaveAttribute('data-asset-sha256', expectedAsset.output_sha256);
+  await expect(stage).toHaveAttribute('data-mapped-joints', '46');
+  await expect(stage).toHaveAttribute('data-face-controls', '52');
+  await expect(stage).toHaveAttribute('data-framing', 'upper_body');
+  await expect(page.getByText('JENSEN · SOURCE-FITTED CANDIDATE', { exact: true })).toBeVisible();
+  expect(await canvas(page).evaluate((element) => {
+    const surface = element as HTMLCanvasElement; const gl = surface.getContext('webgl2');
+    return Boolean(gl && !gl.isContextLost() && gl.drawingBufferWidth > 0 && gl.drawingBufferHeight > 0);
+  })).toBe(true);
   await navigation(page, info.project.name === 'mobile').getByRole('button', { name: info.project.name === 'mobile' ? 'Lab' : 'Research lab', exact: true }).click();
+  await expect(stage).toHaveAttribute('data-asset-sha256', expectedAsset.output_sha256, { timeout: 15000 });
   await page.getByRole('button', { name: 'Load Jensen face & hands', exact: true }).click();
   await expect(page.getByText('goldman-sachs-2024', { exact: true })).toBeVisible();
   const replay = page.getByRole('button', { name: 'Replay source motion', exact: true });
@@ -355,12 +370,19 @@ test('Jensen hand sample requires preview consent and resets cleanly', async ({ 
   await expect(page.getByRole('combobox', { name: 'Motion lab camera framing' })).toHaveValue('upper_body');
   await page.getByRole('checkbox', { name: 'Preview geometry without speaker attribution', exact: true }).check();
   await replay.click();
-  await expect.poll(async () => Number(await page.getByRole('slider', { name: 'Source position' }).inputValue())).toBeGreaterThan(150);
+  await expect.poll(async () => Number(await page.getByRole('slider', { name: 'Source position' }).inputValue())).toBeGreaterThan(1800);
+  await page.getByRole('button', { name: 'Pause replay', exact: true }).click();
+  const evidence = info.outputPath(`jensen-fitted-hands-${info.project.name}.png`);
+  await stage.locator('.avatar-visual').screenshot({ path: evidence });
+  await info.attach('actual fitted avatar and hands', { path: evidence, contentType: 'image/png' });
   await page.getByRole('button', { name: 'Reset source replay', exact: true }).click();
+  await expect(page.getByRole('slider', { name: 'Source position' })).toHaveValue('0');
+  await page.waitForTimeout(180);
   await expect(page.getByRole('slider', { name: 'Source position' })).toHaveValue('0');
   await page.getByRole('checkbox', { name: 'Preview geometry without speaker attribution', exact: true }).uncheck();
   await expect(replay).toBeDisabled();
   await page.getByRole('button', { name: 'Clear imported files', exact: true }).click();
   await expect(page.getByText('goldman-sachs-2024', { exact: true })).toHaveCount(0);
+  expect(graphicsErrors).toEqual([]);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
 });
