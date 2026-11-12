@@ -42,7 +42,11 @@ direct provider health receipt identifies the actual local Qwen model.
 
 ## Verified preparation and next commands
 
-Python compilation, whitespace checking and the base preflight passed. The
+Python compilation, whitespace checking, ten focused harness tests and the base
+preflight passed. The tests cover exact observed model/adapter rejection, actual
+TCP first-nonempty-token disconnect, generator cancellation, normal SSE, HTTP
+error retention and server teardown after a body exception. Their small HTTP
+fixtures are explicitly not neural integration evidence. The
 preflight validated the exact corpus and snapshot, the local pinned cache,
 and the selected virtualenv's dependency availability. **No weights loaded, no
 model responses generated, and no functional run success is claimed.**

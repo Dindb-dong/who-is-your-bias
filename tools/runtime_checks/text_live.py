@@ -268,6 +268,7 @@ def public_report(report):
     value["code_sha256"] = report["code_sha256"]
     value["api_module_sha256"] = report["api_code"]["modules_sha256"]
     value["supporting_code_sha256"] = report["supporting_code_sha256"]
+    value["provider_resources"] = report.get("provider_resources")
     value["raw_trace_sha256"] = report.get("raw_trace_sha256")
     value["passed_checks"] = sum(row["passed"] for row in report["checks"])
     value["total_checks"] = len(report["checks"])
@@ -378,6 +379,8 @@ def run(args, protocol, corpus, snapshot_path, tokenizer_path, preflight):
             _, health, _ = provider.request("GET", "/health")
             report["observed_before"] = observed_identity(health, protocol, args.condition, preflight["adapter"])
             report["loaded_health"] = health
+            report["provider_resources"] = {"load_ms": health.get("load_ms"),
+                "peak_rss_bytes_after_warmup": health.get("process_peak_rss_bytes")}
             check("loaded_model_identity", True)
             settings = Settings(corpus_dir=local(args.artifacts.resolve(), protocol["corpus"]["artifact_path"]),
                 persona_snapshot=snapshot_path, retrieval_backend=protocol["runtime"]["retrieval_backend"],
@@ -429,6 +432,7 @@ def run(args, protocol, corpus, snapshot_path, tokenizer_path, preflight):
                             for event in interrupted["events"]) == 1
                     and not any(event["event"] in {"result", "done"} for event in interrupted["events"]))
                 save()
+                cancel_started = time.monotonic()
                 recover_deadline = min(deadline, time.monotonic() + policy["recovery_seconds"])
                 idle = False
                 while time.monotonic() < recover_deadline:
@@ -437,7 +441,8 @@ def run(args, protocol, corpus, snapshot_path, tokenizer_path, preflight):
                         idle = True
                         break
                     time.sleep(.1)
-                check("disconnect.provider_became_idle", idle)
+                check("disconnect.provider_became_idle", idle,
+                      observed_ms=round((time.monotonic() - cancel_started) * 1000, 3))
                 if not idle:
                     raise TimeoutError("Neural provider did not become idle after client cancellation")
                 status, after, _ = client.request("GET", f"/api/sessions/{session}/context")
@@ -453,9 +458,13 @@ def run(args, protocol, corpus, snapshot_path, tokenizer_path, preflight):
                 check("session.deleted", status == 200 and deleted.get("deleted") and absent == 404)
                 _, final_health, _ = provider.request("GET", "/health")
                 report["observed_after"] = observed_identity(final_health, protocol, args.condition, preflight["adapter"])
+                report["provider_resources"]["peak_rss_bytes_after_recovery"] = final_health.get("process_peak_rss_bytes")
                 check("loaded_identity_unchanged", report["observed_before"] == report["observed_after"])
                 check("provider_idle_after_recovery", final_health.get("busy") is False)
                 save()
+        check("cleanup.main_api_stopped", report["cleanup"]["main_api_stopped"])
+        check("cleanup.language_stopped", report["cleanup"]["language_stopped"])
+        check("cleanup.no_forced_kill", not report["cleanup"]["language_forced_kill"])
         report["status"] = "passed" if all(row["passed"] for row in checks) else "failed_checks"
     except BaseException as exc:
         report.update(status="failed", failure_type=type(exc).__name__)
