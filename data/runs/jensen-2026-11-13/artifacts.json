@@ -14,6 +14,98 @@
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified",
       "training_evidence": false
+    },
+    {
+      "artifact_id": "avatar-fit-inputs",
+      "role": "editable-template-and-multireference-measurements",
+      "file_name": "jensen-avatar-fit-inputs.tar.gz",
+      "file_id": "file_0000000058e881fdb63ae6dbc434860f",
+      "library_file_id": "libfile_fde3_f-79107ec9cfa88191940fea5d36987da8_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 23768112,
+      "sha256": "7f883c7526fc06731b9d72ad68acf0723678f25252fcadc1d240fc7860643496",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "original-dialogue-v4",
+      "role": "original-dialogue-training-projection",
+      "subject_id": "jensen-huang",
+      "event_families": 9,
+      "file_name": "jensen-original-dialogue-v4.tar.gz",
+      "file_id": "file_00000000144881fd9fb59404c43ccc75",
+      "library_file_id": "libfile_fde3_f-c60c8d1bc890819191decf45d6f9d7ed_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 1147936,
+      "sha256": "5053d76106f525bfc66c17ff507c3901ec6b5aea8d02d181a1c5d0e29a72211f",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "stanford-vftt-podcast",
+      "role": "source-audio",
+      "event_family_id": "jensen-stanford-vftt-2024",
+      "duration_seconds": 3455.94775,
+      "file_name": "stanford-vftt-2024-podcast.mp3",
+      "file_id": "file_00000000d49881fd90d274efc5af9cb6",
+      "library_file_id": "libfile_fde3_f-023420bde25481918c2cbc716e8e6572_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 55295164,
+      "sha256": "f505539cf41227178743a030038792db354cb358ec7560774f26492c0b5a3063",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "stanford-vftt-podcast-receipt",
+      "role": "source-audio-provenance",
+      "file_name": "stanford-vftt-2024-podcast.receipt.json",
+      "file_id": "file_00000000366881fd9e3902fc4c5b818c",
+      "library_file_id": "libfile_fde3_f-3c39d6c74fd081919682b4b8786e9ce9_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 1018,
+      "sha256": "e3a4835389edbaaed91b0a0d38a5c3b883d2cf7152ed024053739b5282cd0f19",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "source-html-batch01",
+      "role": "source-transcripts-html",
+      "file_name": "jensen-source-batch-01.tar.gz",
+      "file_id": "file_0000000048b881fda448a8f6df930cb2",
+      "library_file_id": "libfile_fde3_f-e66da0d596b481919d6fdb8acf2ef4c5_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 514182,
+      "sha256": "a3fdf1ff99c25b86788dc03375e2679badd6270f9c52e9f5568ddbab5f421d93",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "avatar-references-batch01",
+      "role": "source-images-and-pinned-vision-models",
+      "file_name": "jensen-avatar-reference-batch1.tar.gz",
+      "file_id": "file_00000000451082309ff6eb10256a6bdd",
+      "library_file_id": "libfile_fde3_f-cfe1f0c78f588191a1d3ef4316b395c1_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 26164438,
+      "sha256": "d454e90f9f2d9a5e906c599d7286e11fbfe55559b08a20739181dcc0ac0cff6b",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "original-dialogue-v3-superseded",
+      "role": "superseded-dialogue-projection",
+      "file_name": "jensen-original-dialogue-v3.tar.gz",
+      "file_id": "file_00000000781081fda89593ab989a48ae",
+      "library_file_id": "libfile_fde3_f-e09bfa8b3c608191aa7989d42df1a3ff_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 1213553,
+      "sha256": "ad478911b9dc0ff6388e4a5c7d131d7f94d702feef02bda2d247d5ebd32e6262",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "goldman-video-batch01",
+      "role": "source-video-and-reference-frames",
+      "file_name": "jensen-goldman-media-batch-01.tar.gz",
+      "file_id": "file_00000000ba4081fd88ed16e268c4b35f",
+      "library_file_id": "libfile_fde3_f-b044a9b5804881919cbedc10d94a432b_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 30395339,
+      "sha256": "e6cc51da71a2f9ed09deafa5fc0c53f9e497afadd2ba44281010e0876997ed5e",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ]
 }
