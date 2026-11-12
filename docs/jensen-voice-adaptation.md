@@ -184,6 +184,22 @@ and discards stale voice environment defaults. It preserves an optional
 defaults. A passed byte/subject preflight establishes the selected artifacts;
 actual model loading and waveform generation remain separately measured stages.
 
+Some execution hosts isolate loopback networking between separate commands. The
+first separate server/client invocation here failed immediately with `ConnectError`
+before any model load; its failure receipt is preserved. Run the server and real
+HTTP client in one supervised invocation on those hosts:
+
+```bash
+python -m tools.voice_evaluation.local \
+  --binding reports/voice/jensen-2026-11-13/runtime-binding.json \
+  --artifacts "$ART" --condition reference --allow-candidates \
+  --output "$ART/voice/eval-reference-v2"
+```
+
+Repeat with `--condition adapted` and a new output path after saving the first
+condition. This runner validates the frozen case bytes, checkpoints each waveform,
+keeps server logs and a process receipt, and stops its server before returning.
+
 Generate the frozen English and Korean cases, stop the TTS service to release
 memory, and transcribe the generated waveforms with the independent ASR model.
 Report English WER, Korean CER, cold/warm wall time, failures, and raw outputs.
