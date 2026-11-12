@@ -33,6 +33,11 @@ reconstructed in [ces-prefix001.json](ces-prefix001.json), with zero complete
 CES videos counted. The initial full-download attempt received HTTP 503 for
 the registered manifest before any fragment download; one normal retry with
 unchanged URL and headers succeeded and acquisition is continuing.
+The later [ces-prefix009.json](ces-prefix009.json) checkpoint preserves and
+freshly reconstructs the first 216 MiB (226,492,416 bytes) in nine contiguous
+chunks. Its SHA-256 is
+`c6be856b17e3f99a6c9bbae10ba74db3cf3ae1ae770323281b3f7a49d9277ad3`;
+it remains an incomplete prefix with zero complete CES videos counted.
 Its remaining byte budget after GTC is 1,292,032,512 bytes, with
 the 6 GiB free-space reserve still enforced.
 
