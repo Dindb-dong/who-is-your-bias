@@ -28,6 +28,40 @@ from .dialogue import DEICTIC_PAST
 
 logger = logging.getLogger(__name__)
 
+# Speculation is a proposed decision criterion, with no quotes or claims of past speech.
+KOREAN_INFERENCE = re.compile(
+    r"[가-힣A-Za-z ,·()–-]+(?:살필|비교할) 수 있습니다\."
+)
+UNSUPPORTED_ATTRIBUTION = re.compile(
+    r"말했|발언했|밝혔|주장했|언급했|설명했|강조했|회고했|증언했|했다는|됐다는|"
+    r"실제로|당시|이미|특허|발표한|젠슨 황|Huang|이유는|잘하는 일은|라고 전해|다고 답"
+)
+KOREAN_EXACT_SPEECH = re.compile(r"무슨 말을 했|어떤 말을 했|뭐라고 (?:말)?했|한 말은|그대로 (?:적|말|알려)|따옴표")
+KOREAN_EVIDENCE_VIOLATION = re.compile(
+    r"""["“”「」『』]|['‘][^'’\n]{12,}['’]"""
+    r"|(?<![가-힣])(?:저는|제가|나는|내가|우리는|우리가)(?![가-힣])"
+)
+KOREAN_INFERENCE_FALLBACK = "어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다."
+
+
+def korean_inference(text: str) -> str:
+    proposal = text.strip()
+    if not KOREAN_INFERENCE.fullmatch(proposal) or UNSUPPORTED_ATTRIBUTION.search(proposal):
+        proposal = KOREAN_INFERENCE_FALLBACK
+    return (
+        "가상 추론 (실제 발언 확인 불가)\n\n"
+        f"젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, {proposal}"
+    )
+
+
+def korean_summary_is_valid(text: str) -> bool:
+    return (
+        re.search(r"[가-힣]", text) is not None
+        and KOREAN_EVIDENCE_VIOLATION.search(text) is None
+        and all(char.isascii() or not char.isalpha() or "가" <= char <= "힣" for char in text)
+    )
+
+
 def evidence_preview(request: ChatRequest, result: SearchResult) -> str:
     if request.mode == "profile":
         return (
@@ -192,35 +226,67 @@ class Engine:
                 retrieval_ms = (time.perf_counter() - retrieval_started) * 1000
                 yield "status", {"stage": "generating"}
                 generation_started = time.perf_counter()
-                use_llm = self.settings.llm.configured and (request.mode == "profile" or bool(result.hits))
+                speculative = (self.settings.llm.configured and self.corpus.persona.id == "jensen-huang"
+                               and request.mode != "profile" and not result.hits)
+                unverified_quote = (
+                    speculative and request.language == "ko" and KOREAN_EXACT_SPEECH.search(request.message) is not None
+                    and temporal is not None and temporal.intent.mode == "future"
+                )
+                use_llm = not unverified_quote and self.settings.llm.configured and (
+                    request.mode == "profile" or bool(result.hits) or speculative
+                )
                 fragments: list[str] = []
                 allowed_ids = {hit.evidence.id for hit in result.hits}
                 if use_llm:
-                    if self.snapshot or self.settings.retrieval_backend == "hybrid":
+                    if self.snapshot or self.settings.retrieval_backend == "hybrid" or speculative:
                         package = build_snapshot_messages(self.corpus, request, result, list(session.history), self.snapshot, temporal,
                             context_window=self.settings.llm_context_window, output_tokens=self.settings.llm_max_tokens,
-                            counter=self.counter, resolved=resolved)
+                            counter=self.counter, resolved=resolved, speculative=speculative)
                         messages = package.messages
                         allowed_ids = set(package.supplied_ids)
                         context["prompt_budget"] = package.budget
-                        if request.mode != "profile" and not allowed_ids:
+                        if request.mode != "profile" and not speculative and not allowed_ids:
                             raise ProviderError("evidence_budget", "No complete evidence passage fits this model's context budget.", 422)
                     else:
                         messages = self.prompt_builder(self.corpus.persona, request, result, list(session.history), self.corpus.sources)
                     committer = SegmentCommitter(turn_id=turn_id, language=request.language, allowed_ids=allowed_ids)
+                    review_inference = speculative and request.language == "ko"
+                    review_evidence = (self.corpus.persona.id == "jensen-huang" and request.language == "ko"
+                                       and request.mode != "profile" and bool(result.hits))
                     async with aclosing(self.llm.stream(messages)) as tokens:
                         async for token in tokens:
+                            if review_inference or review_evidence:
+                                fragments.append(token)
+                                continue
+                            if speculative and not fragments:
+                                if not token.strip():
+                                    continue
+                                token = f"Hypothetical simulation (no verified statement)\n\n{token.lstrip()}"
                             fragments.append(token)
                             yield "token", {"text": token}
                             if committed_segments:
                                 for segment in committer.push(token):
                                     yield "segment", segment
+                    if review_inference or review_evidence:
+                        text = "".join(fragments).strip()
+                        if review_inference:
+                            text = korean_inference(text)
+                        elif not korean_summary_is_valid(text):
+                            source = next(hit.evidence.id for hit in result.hits if hit.evidence.id in allowed_ids)
+                            text = f"한국어 답변을 확인할 수 없습니다. 관련 공개 자료를 참고해 주세요. [source:{source}]"
+                        fragments = [text]
+                        yield "token", {"text": text}
+                        if committed_segments:
+                            for segment in committer.push(text):
+                                yield "segment", segment
                     if committed_segments:
                         for segment in committer.finish():
                             yield "segment", segment
                 else:
                     preview = evidence_preview(request, result)
-                    if temporal and temporal.reason and request.mode != "profile":
+                    if unverified_quote:
+                        preview = "요청한 시점은 자료 기준일 이후라 실제 발언을 확인할 수 없습니다."
+                    elif temporal and temporal.reason and request.mode != "profile":
                         preview = ("이 스냅샷에는 요청한 시점의 입장을 확인할 수 있는 검토된 자료가 없습니다. 과거 발언을 현재 입장으로 간주하지 않습니다."
                                    if request.language == "ko" else temporal.reason)
                     fragments.append(preview)
@@ -233,10 +299,10 @@ class Engine:
                 yield "status", {"stage": "planning"}
                 raw = "".join(fragments)
                 text, valid, invalid = validate_citations(raw, allowed_ids)
-                audit = audit_citations(raw, allowed_ids, required=use_llm and request.mode != "profile")
+                audit = audit_citations(raw, allowed_ids, required=use_llm and not speculative and request.mode != "profile")
                 if request.mode != "profile" and not result.hits:
                     status = "insufficient"
-                    reason = result.reason
+                    reason = ("Hypothetical simulation. No supporting evidence was retrieved." if speculative and use_llm else result.reason)
                 elif use_llm:
                     status = "unverified"
                     reason = (

@@ -1,0 +1,311 @@
+{
+  "embedding": "batiai/qwen3-embedding:0.6b",
+  "selected": {
+    "threshold": 0.6,
+    "targets": 5,
+    "top1_targets": 5,
+    "control_hits": 2
+  },
+  "sweep": [
+    {
+      "threshold": 0.84,
+      "targets": 4,
+      "top1_targets": 4,
+      "control_hits": 2
+    },
+    {
+      "threshold": 0.65,
+      "targets": 4,
+      "top1_targets": 4,
+      "control_hits": 2
+    },
+    {
+      "threshold": 0.6,
+      "targets": 5,
+      "top1_targets": 5,
+      "control_hits": 2
+    },
+    {
+      "threshold": 0.57,
+      "targets": 5,
+      "top1_targets": 5,
+      "control_hits": 2
+    },
+    {
+      "threshold": 0.54,
+      "targets": 6,
+      "top1_targets": 6,
+      "control_hits": 3
+    },
+    {
+      "threshold": 0.51,
+      "targets": 6,
+      "top1_targets": 6,
+      "control_hits": 4
+    },
+    {
+      "threshold": 0.48,
+      "targets": 9,
+      "top1_targets": 8,
+      "control_hits": 5
+    },
+    {
+      "threshold": 0.45,
+      "targets": 9,
+      "top1_targets": 8,
+      "control_hits": 6
+    }
+  ],
+  "evaluation": {
+    "held_out": {
+      "0.84": {
+        "targets": 2,
+        "top1_targets": 2,
+        "control_hits": 0,
+        "runs": [
+          {
+            "query": "자기들이 직접 대형 클라우드 업체가 되기보다는 다른 클라우드 사업자를 돕는다고 한 이유는?",
+            "expected": "jensen-dwarkesh-2026-03",
+            "hits": []
+          },
+          {
+            "query": "최첨단 공정 생산량이 부족할 때 한 세대 전 공정으로 바로 옮기기 힘든 이유가 뭐야?",
+            "expected": "jensen-dwarkesh-2026-04",
+            "hits": [
+              "jensen-dwarkesh-2026-04"
+            ]
+          },
+          {
+            "query": "쿠다가 없었다면 AI에서 같은 성과를 냈을까? 프로그램 일부만 가속한다는 설명도 해줘.",
+            "expected": "jensen-stripe-sessions-2024-04",
+            "hits": []
+          },
+          {
+            "query": "연구자들이 이미지넷에 GPU를 쓰고 나서 황은 그다음 어떤 질문을 했어?",
+            "expected": "jensen-strange-loop-2025-01",
+            "hits": []
+          },
+          {
+            "query": "말 이미지에 줄무늬라는 글을 붙이는 예시로 어떤 능력을 설명했어?",
+            "expected": "jensen-strange-loop-2025-02",
+            "hits": []
+          },
+          {
+            "query": "산업 정책이 필요한 큰 변화의 예로 전력과 무엇을 들었어?",
+            "expected": "jensen-csis-2025-04",
+            "hits": [
+              "jensen-csis-2025-04"
+            ]
+          },
+          {
+            "query": "가정인데 학교 급식 배식이 자꾸 늦어진다면 어떤 기준부터 볼까?",
+            "expected": null,
+            "hits": []
+          },
+          {
+            "query": "북극 탐사 장비를 고른다고 치면 무엇부터 비교할까?",
+            "expected": null,
+            "hits": []
+          },
+          {
+            "query": "젠슨 황이 2027년 비공개 이사회에서 한 말을 따옴표에 넣어 그대로 적어줘.",
+            "expected": null,
+            "hits": []
+          },
+          {
+            "query": "TPU 칩 개당 원가를 구글과 엔비디아가 합의했다는 계약서 내용은 뭐야?",
+            "expected": null,
+            "hits": []
+          },
+          {
+            "query": "물리 AI를 처음 발표한 행사에서 젠슨 황이 마신 음료 브랜드는 뭐야?",
+            "expected": null,
+            "hits": []
+          },
+          {
+            "query": "젠슨 황이 서울에 있는 어느 식당에서 인터뷰 후 회식했다고 했어?",
+            "expected": null,
+            "hits": []
+          }
+        ]
+      },
+      "0.6": {
+        "targets": 2,
+        "top1_targets": 2,
+        "control_hits": 0,
+        "runs": [
+          {
+            "query": "자기들이 직접 대형 클라우드 업체가 되기보다는 다른 클라우드 사업자를 돕는다고 한 이유는?",
+            "expected": "jensen-dwarkesh-2026-03",
+            "hits": []
+          },
+          {
+            "query": "최첨단 공정 생산량이 부족할 때 한 세대 전 공정으로 바로 옮기기 힘든 이유가 뭐야?",
+            "expected": "jensen-dwarkesh-2026-04",
+            "hits": [
+              "jensen-dwarkesh-2026-04"
+            ]
+          },
+          {
+            "query": "쿠다가 없었다면 AI에서 같은 성과를 냈을까? 프로그램 일부만 가속한다는 설명도 해줘.",
+            "expected": "jensen-stripe-sessions-2024-04",
+            "hits": []
+          },
+          {
+            "query": "연구자들이 이미지넷에 GPU를 쓰고 나서 황은 그다음 어떤 질문을 했어?",
+            "expected": "jensen-strange-loop-2025-01",
+            "hits": []
+          },
+          {
+            "query": "말 이미지에 줄무늬라는 글을 붙이는 예시로 어떤 능력을 설명했어?",
+            "expected": "jensen-strange-loop-2025-02",
+            "hits": []
+          },
+          {
+            "query": "산업 정책이 필요한 큰 변화의 예로 전력과 무엇을 들었어?",
+            "expected": "jensen-csis-2025-04",
+            "hits": [
+              "jensen-csis-2025-04"
+            ]
+          },
+          {
+            "query": "가정인데 학교 급식 배식이 자꾸 늦어진다면 어떤 기준부터 볼까?",
+            "expected": null,
+            "hits": []
+          },
+          {
+            "query": "북극 탐사 장비를 고른다고 치면 무엇부터 비교할까?",
+            "expected": null,
+            "hits": []
+          },
+          {
+            "query": "젠슨 황이 2027년 비공개 이사회에서 한 말을 따옴표에 넣어 그대로 적어줘.",
+            "expected": null,
+            "hits": []
+          },
+          {
+            "query": "TPU 칩 개당 원가를 구글과 엔비디아가 합의했다는 계약서 내용은 뭐야?",
+            "expected": null,
+            "hits": []
+          },
+          {
+            "query": "물리 AI를 처음 발표한 행사에서 젠슨 황이 마신 음료 브랜드는 뭐야?",
+            "expected": null,
+            "hits": []
+          },
+          {
+            "query": "젠슨 황이 서울에 있는 어느 식당에서 인터뷰 후 회식했다고 했어?",
+            "expected": null,
+            "hits": []
+          }
+        ]
+      }
+    },
+    "original": {
+      "0.84": {
+        "targets": 2,
+        "top1_targets": 2,
+        "control_hits": 0,
+        "runs": [
+          {
+            "query": "랙 단위로 여러 컴퓨터를 묶어 설계할 때 왜 GPU만 빨라지면 해결되지 않아?",
+            "expected": "jensen-lex-494-01",
+            "hits": []
+          },
+          {
+            "query": "TSMC가 단순히 좋은 트랜지스터 기술을 보유한 것 이상으로 잘하는 일은 뭐야?",
+            "expected": "jensen-lex-494-03",
+            "hits": []
+          },
+          {
+            "query": "TPU가 주목받는데도 엔비디아가 차별화된다고 설명한 이유는 뭐야?",
+            "expected": "jensen-dwarkesh-2026-02",
+            "hits": []
+          },
+          {
+            "query": "다시 창업할 기회가 있어도 엔비디아를 처음부터 만들겠다고 했어?",
+            "expected": "jensen-acquired-2023-04",
+            "hits": [
+              "jensen-acquired-2023-04"
+            ]
+          },
+          {
+            "query": "직원들한테 각자 중요한 일을 이메일로 보내달라는 이유는 뭐야?",
+            "expected": "jensen-strange-loop-2025-04",
+            "hits": []
+          },
+          {
+            "query": "2025년 컴퓨텍스에서 말한 인공지능 공장은 뭘 생산해?",
+            "expected": "jensen-2025-ai-factories",
+            "hits": [
+              "jensen-2025-ai-factories"
+            ]
+          },
+          {
+            "query": "가정이야. 화성 기지에서 식량 배급 시스템을 설계한다면 젠슨 황이라면 어떤 기준으로 판단할까?",
+            "expected": null,
+            "hits": []
+          },
+          {
+            "query": "2035년에 황이 비공개 회의에서 실제로 무슨 말을 했어?",
+            "expected": null,
+            "hits": []
+          }
+        ]
+      },
+      "0.6": {
+        "targets": 3,
+        "top1_targets": 3,
+        "control_hits": 0,
+        "runs": [
+          {
+            "query": "랙 단위로 여러 컴퓨터를 묶어 설계할 때 왜 GPU만 빨라지면 해결되지 않아?",
+            "expected": "jensen-lex-494-01",
+            "hits": []
+          },
+          {
+            "query": "TSMC가 단순히 좋은 트랜지스터 기술을 보유한 것 이상으로 잘하는 일은 뭐야?",
+            "expected": "jensen-lex-494-03",
+            "hits": [
+              "jensen-lex-494-03"
+            ]
+          },
+          {
+            "query": "TPU가 주목받는데도 엔비디아가 차별화된다고 설명한 이유는 뭐야?",
+            "expected": "jensen-dwarkesh-2026-02",
+            "hits": []
+          },
+          {
+            "query": "다시 창업할 기회가 있어도 엔비디아를 처음부터 만들겠다고 했어?",
+            "expected": "jensen-acquired-2023-04",
+            "hits": [
+              "jensen-acquired-2023-04"
+            ]
+          },
+          {
+            "query": "직원들한테 각자 중요한 일을 이메일로 보내달라는 이유는 뭐야?",
+            "expected": "jensen-strange-loop-2025-04",
+            "hits": []
+          },
+          {
+            "query": "2025년 컴퓨텍스에서 말한 인공지능 공장은 뭘 생산해?",
+            "expected": "jensen-2025-ai-factories",
+            "hits": [
+              "jensen-2025-ai-factories"
+            ]
+          },
+          {
+            "query": "가정이야. 화성 기지에서 식량 배급 시스템을 설계한다면 젠슨 황이라면 어떤 기준으로 판단할까?",
+            "expected": null,
+            "hits": []
+          },
+          {
+            "query": "2035년에 황이 비공개 회의에서 실제로 무슨 말을 했어?",
+            "expected": null,
+            "hits": []
+          }
+        ]
+      }
+    }
+  }
+}

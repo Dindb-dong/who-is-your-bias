@@ -1,0 +1,250 @@
+{
+  "model": "qwen2.5:14b",
+  "threshold": 0.6,
+  "runs": [
+    {
+      "backend": "lexical",
+      "case": "rack",
+      "wall_ms": 18772.866,
+      "metrics": {
+        "retrieval_ms": 4.125,
+        "generation_ms": 18711.438,
+        "total_ms": 18720.837
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 시스템 성능 향상이 GPU 햅틱스나 그래픽 처리 능력만 개선되는 것이 아니라 다른 하드웨어 요소와 소프트웨어 최적화 과정도 포함되어야 하기 때문에 모든 관련 요소 간의 상호작용을 살필 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "lexical",
+      "case": "tsmc",
+      "wall_ms": 24000.92,
+      "metrics": {
+        "retrieval_ms": 3.237,
+        "generation_ms": 23942.369,
+        "total_ms": 23965.56
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "lexical",
+      "case": "tpu",
+      "wall_ms": 4921.524,
+      "metrics": {
+        "retrieval_ms": 4.879,
+        "generation_ms": 4814.671,
+        "total_ms": 4835.294
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 헤지스 소프트웨어 시장 요구와 기술 제약 사이의 구체적인 트레이드오프를 살필 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "lexical",
+      "case": "founder",
+      "wall_ms": 11842.666,
+      "metrics": {
+        "retrieval_ms": 2.995,
+        "generation_ms": 11662.647,
+        "total_ms": 11673.364
+      },
+      "answer": "2023년에 창업을 다시 하더라도 처음부터 NVIDIA를 만들겠다고 할 것 같지 않다고 말했어요. 창업이 생각보다 훨씬 힘들어졌다고 회고했죠.",
+      "grounding": "unverified",
+      "retrieved_ids": [
+        "jensen-acquired-2023-04"
+      ],
+      "cited_ids": [
+        "jensen-acquired-2023-04"
+      ]
+    },
+    {
+      "backend": "lexical",
+      "case": "updates",
+      "wall_ms": 7971.847,
+      "metrics": {
+        "retrieval_ms": 7.099,
+        "generation_ms": 7814.838,
+        "total_ms": 7890.986
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, Huang이 직원들에게 중요한 일들을 이메일로 전달하게 한 이유를 밝히려면, 그 결정이 얼마나 효과적인 정보 교환과 생산성 향상에 초점을 맞추었는지를 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "lexical",
+      "case": "factories",
+      "wall_ms": 15594.024,
+      "metrics": {
+        "retrieval_ms": 12.593,
+        "generation_ms": 15560.475,
+        "total_ms": 15577.858
+      },
+      "answer": "2025년 컴퓨텍스에서 창의적인 비유로, 황준언은 인공지능 인프라를 에너지를 소모하여 귀중한 '토큰'을 생산하는 공장이라 설명했습니다. 이 토큰은 인공지능 시스템에서 생성되는 가치있는 데이터나 서비스를 의미합니다.",
+      "grounding": "unverified",
+      "retrieved_ids": [
+        "jensen-2025-ai-factories"
+      ],
+      "cited_ids": [
+        "jensen-2025-ai-factories"
+      ]
+    },
+    {
+      "backend": "lexical",
+      "case": "hypothetical",
+      "wall_ms": 20245.156,
+      "metrics": {
+        "retrieval_ms": 15.085,
+        "generation_ms": 19968.679,
+        "total_ms": 19997.95
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "lexical",
+      "case": "unknown",
+      "wall_ms": 110.033,
+      "metrics": {
+        "retrieval_ms": 0.492,
+        "generation_ms": 1.215,
+        "total_ms": 21.325
+      },
+      "answer": "요청한 시점은 자료 기준일 이후라 실제 발언을 확인할 수 없습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "hybrid",
+      "case": "rack",
+      "wall_ms": 7236.573,
+      "metrics": {
+        "retrieval_ms": 118.111,
+        "generation_ms": 7039.234,
+        "total_ms": 7169.381
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 시스템 성능 향상이 단일 요소 개선만으로 이루어질 수 없기 때문에 다른 하드웨어 요소들과의 호환성을 살필 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "hybrid",
+      "case": "tsmc",
+      "wall_ms": 18088.741,
+      "metrics": {
+        "retrieval_ms": 106.258,
+        "generation_ms": 17837.977,
+        "total_ms": 17956.796
+      },
+      "answer": "TSMC의 성공은 단순히 고성능 트랜지스터 기술을 가진 것 이상으로, 공정 기술과 패키징 기술, 그리고 고객의 요청에 따른 주문 조정 능력을 꼽을 수 있습니다. 이렇게 함으로써 TSMC는 주문 변경 요청을 처리하면서도 납품 Commitment를 지킬 수 있습니다.",
+      "grounding": "unverified",
+      "retrieved_ids": [
+        "jensen-lex-494-03"
+      ],
+      "cited_ids": [
+        "jensen-lex-494-03"
+      ]
+    },
+    {
+      "backend": "hybrid",
+      "case": "tpu",
+      "wall_ms": 10809.468,
+      "metrics": {
+        "retrieval_ms": 269.987,
+        "generation_ms": 10310.616,
+        "total_ms": 10618.185
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 젠슨 황이 TPU가 주목받는 상황에서 엔비디아의 기술이 어떻게 차별화되는지를 설명할 때, 먼저 엔비디아의 솔루션이 특정 시장이나 사용자 요구에 어떻게 더 효과적인지 살필 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "hybrid",
+      "case": "founder",
+      "wall_ms": 16156.27,
+      "metrics": {
+        "retrieval_ms": 208.974,
+        "generation_ms": 15670.583,
+        "total_ms": 16050.133
+      },
+      "answer": "Hương 대표는 2023년에 창업을 시작한다고 해도 엔비디아를 다시 만들겠다고는 말하지 않았습니다. 그는 처음에 예상했던 것보다 엔비디아를 세우는 일이 훨씬 더 어려웠다고 회상했습니다.",
+      "grounding": "unverified",
+      "retrieved_ids": [
+        "jensen-acquired-2023-04"
+      ],
+      "cited_ids": [
+        "jensen-acquired-2023-04"
+      ]
+    },
+    {
+      "backend": "hybrid",
+      "case": "updates",
+      "wall_ms": 6579.138,
+      "metrics": {
+        "retrieval_ms": 177.662,
+        "generation_ms": 6352.11,
+        "total_ms": 6538.912
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 이메일로 중요한 일을 전달하는 것이 모든 직원이 정보를 일관성 있게 받고, 공식 기록으로 유지하는 데 어떤 방법을 먼저 사용하는지 살필 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "hybrid",
+      "case": "factories",
+      "wall_ms": 13490.487,
+      "metrics": {
+        "retrieval_ms": 155.87,
+        "generation_ms": 13277.575,
+        "total_ms": 13442.699
+      },
+      "answer": "2025년 컴퓨텍스에서 후안은 인공지능 인프라를 에너지를 소비하고 유가토큰을 생산하는 공장과 비교하면서, 이 토큰이 값어치가 있는 것으로 언급했습니다.",
+      "grounding": "unverified",
+      "retrieved_ids": [
+        "jensen-2025-ai-factories"
+      ],
+      "cited_ids": [
+        "jensen-2025-ai-factories"
+      ]
+    },
+    {
+      "backend": "hybrid",
+      "case": "hypothetical",
+      "wall_ms": 5783.497,
+      "metrics": {
+        "retrieval_ms": 110.173,
+        "generation_ms": 5654.304,
+        "total_ms": 5771.58
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 연소자원과 재생가능한 자원 간의 균형을 고려해야 하는지를 살필 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "hybrid",
+      "case": "unknown",
+      "wall_ms": 19.602,
+      "metrics": {
+        "retrieval_ms": 0.954,
+        "generation_ms": 0.241,
+        "total_ms": 9.851
+      },
+      "answer": "요청한 시점은 자료 기준일 이후라 실제 발언을 확인할 수 없습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    }
+  ]
+}

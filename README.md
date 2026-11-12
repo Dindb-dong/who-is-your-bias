@@ -19,7 +19,7 @@ Open `http://127.0.0.1:8000`. Jensen's stylized portrait is the default. In **At
 
 Build and development startup provision a pinned local face detector. Initial setup needs network access to download its verified model; camera frames and inference remain in the browser. The studio also includes source inspection, A/B/C comparison, exportable turn timing, optional voice playback, a generic human rig, local GLB loading and historical presentation/motion labs. See [studio guide](docs/studio.md) for audio and retargeting details.
 
-The Jensen seed contains eight original editorial summaries from three dated NVIDIA sources (2024–2025), bound to an explicit snapshot. It supports source-grounded previews and does not claim current 2026 coverage, a trained Jensen voice, learned mannerisms or a photorealistic likeness. Those avatar quality gates remain in [PR #15's generation plan](docs/avatar-generation-pipeline.md).
+The Jensen corpus contains 32 editorial evidence records from nine dated sources, including 24 reviewed interview exchanges. When the model is connected and retrieval finds no evidence, the app labels the generated answer as a hypothetical simulation. See the [Jensen corpus](data/personas/jensen-huang/README.md) for provenance and the snapshot cutoff.
 
 The historical [2026 implementation report](docs/2026-implementation.md) records a reproducible 977-QA original-data build, optional multilingual hybrid retrieval, explicit temporal snapshots, follow-up resolution, early PCM speech and same-audio avatar audition for the earlier Musk workstream. Its measurements and remaining limitations do not transfer to Jensen.
 

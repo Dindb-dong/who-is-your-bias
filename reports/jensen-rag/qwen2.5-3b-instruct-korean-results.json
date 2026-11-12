@@ -1,0 +1,249 @@
+{
+  "model": "qwen2.5:3b-instruct",
+  "llm_base_url": "http://127.0.0.1:11434/v1",
+  "threshold": 0.6,
+  "max_tokens": 160,
+  "runs": [
+    {
+      "backend": "lexical",
+      "case": "rack",
+      "wall_ms": 609.121,
+      "metrics": {
+        "retrieval_ms": 1.732,
+        "generation_ms": 589.034,
+        "total_ms": 595.635
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "lexical",
+      "case": "tsmc",
+      "wall_ms": 464.427,
+      "metrics": {
+        "retrieval_ms": 1.257,
+        "generation_ms": 448.972,
+        "total_ms": 454.138
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "lexical",
+      "case": "tpu",
+      "wall_ms": 5269.187,
+      "metrics": {
+        "retrieval_ms": 1.245,
+        "generation_ms": 5240.341,
+        "total_ms": 5249.162
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "lexical",
+      "case": "founder",
+      "wall_ms": 3587.551,
+      "metrics": {
+        "retrieval_ms": 2.405,
+        "generation_ms": 3513.487,
+        "total_ms": 3550.49
+      },
+      "answer": "한국어 답변을 확인할 수 없습니다. 관련 공개 자료를 참고해 주세요.",
+      "grounding": "unverified",
+      "retrieved_ids": [
+        "jensen-acquired-2023-04"
+      ],
+      "cited_ids": [
+        "jensen-acquired-2023-04"
+      ]
+    },
+    {
+      "backend": "lexical",
+      "case": "updates",
+      "wall_ms": 401.738,
+      "metrics": {
+        "retrieval_ms": 1.578,
+        "generation_ms": 333.284,
+        "total_ms": 354.324
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "lexical",
+      "case": "factories",
+      "wall_ms": 1611.367,
+      "metrics": {
+        "retrieval_ms": 17.94,
+        "generation_ms": 1560.156,
+        "total_ms": 1591.457
+      },
+      "answer": "가상 추론: 컴퓨텍스에서 말한 인공지능 공장은 valuable tokens를 생산한다고 해석할 수 있습니다.",
+      "grounding": "unverified",
+      "retrieved_ids": [
+        "jensen-2025-ai-factories"
+      ],
+      "cited_ids": []
+    },
+    {
+      "backend": "lexical",
+      "case": "hypothetical",
+      "wall_ms": 1720.748,
+      "metrics": {
+        "retrieval_ms": 3.542,
+        "generation_ms": 1693.948,
+        "total_ms": 1714.678
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "lexical",
+      "case": "unknown",
+      "wall_ms": 29.804,
+      "metrics": {
+        "retrieval_ms": 0.862,
+        "generation_ms": 1.353,
+        "total_ms": 10.664
+      },
+      "answer": "요청한 시점은 자료 기준일 이후라 실제 발언을 확인할 수 없습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "hybrid",
+      "case": "rack",
+      "wall_ms": 833.908,
+      "metrics": {
+        "retrieval_ms": 72.045,
+        "generation_ms": 727.421,
+        "total_ms": 808.012
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 재설계를 먼저 진행해보는지 살필 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "hybrid",
+      "case": "tsmc",
+      "wall_ms": 1945.709,
+      "metrics": {
+        "retrieval_ms": 58.317,
+        "generation_ms": 1844.96,
+        "total_ms": 1912.826
+      },
+      "answer": "가상 추론: Jensen Huang이 TSMC가 단순히 좋은 트랜지스터 기술을 보유한 것 이상으로 잘하는 일을 설명할 가능성이 있습니다.",
+      "grounding": "unverified",
+      "retrieved_ids": [
+        "jensen-lex-494-03"
+      ],
+      "cited_ids": []
+    },
+    {
+      "backend": "hybrid",
+      "case": "tpu",
+      "wall_ms": 2899.836,
+      "metrics": {
+        "retrieval_ms": 104.575,
+        "generation_ms": 2761.093,
+        "total_ms": 2867.936
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "hybrid",
+      "case": "founder",
+      "wall_ms": 5119.852,
+      "metrics": {
+        "retrieval_ms": 100.012,
+        "generation_ms": 4968.255,
+        "total_ms": 5088.493
+      },
+      "answer": "한국어 답변을 확인할 수 없습니다. 관련 공개 자료를 참고해 주세요.",
+      "grounding": "unverified",
+      "retrieved_ids": [
+        "jensen-acquired-2023-04"
+      ],
+      "cited_ids": [
+        "jensen-acquired-2023-04"
+      ]
+    },
+    {
+      "backend": "hybrid",
+      "case": "updates",
+      "wall_ms": 528.307,
+      "metrics": {
+        "retrieval_ms": 83.486,
+        "generation_ms": 436.671,
+        "total_ms": 522.385
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "hybrid",
+      "case": "factories",
+      "wall_ms": 2495.227,
+      "metrics": {
+        "retrieval_ms": 68.238,
+        "generation_ms": 2418.991,
+        "total_ms": 2489.038
+      },
+      "answer": "2025년 컴퓨텍스에서 말한 인공지능 공장은 가치 있는 토큰을 생산합니다. factual_evidence:",
+      "grounding": "unverified",
+      "retrieved_ids": [
+        "jensen-2025-ai-factories"
+      ],
+      "cited_ids": [
+        "jensen-2025-ai-factories"
+      ]
+    },
+    {
+      "backend": "hybrid",
+      "case": "hypothetical",
+      "wall_ms": 3189.253,
+      "metrics": {
+        "retrieval_ms": 76.256,
+        "generation_ms": 3101.359,
+        "total_ms": 3179.417
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "hybrid",
+      "case": "unknown",
+      "wall_ms": 11.575,
+      "metrics": {
+        "retrieval_ms": 1.313,
+        "generation_ms": 0.233,
+        "total_ms": 5.543
+      },
+      "answer": "요청한 시점은 자료 기준일 이후라 실제 발언을 확인할 수 없습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    }
+  ],
+  "guard_controls": []
+}

@@ -1,0 +1,332 @@
+{
+  "model": "qwen3-4b-instruct-2507",
+  "llm_base_url": "http://127.0.0.1:18094/v1",
+  "threshold": 0.6,
+  "max_tokens": 160,
+  "runs": [
+    {
+      "backend": "lexical",
+      "case": "rack",
+      "wall_ms": 2847.975,
+      "metrics": {
+        "retrieval_ms": 4.221,
+        "generation_ms": 2797.303,
+        "total_ms": 2813.825
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "lexical",
+      "case": "tsmc",
+      "wall_ms": 1891.616,
+      "metrics": {
+        "retrieval_ms": 2.006,
+        "generation_ms": 1859.061,
+        "total_ms": 1866.453
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 공정 기술의 산업 생태계와의 융합 방식을 살필 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "lexical",
+      "case": "tpu",
+      "wall_ms": 2568.439,
+      "metrics": {
+        "retrieval_ms": 2.409,
+        "generation_ms": 2542.816,
+        "total_ms": 2550.396
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, TPU와의 비교에서 엔비디아의 아키텍처가 실제 작업 환경에 얼마나 잘 적합한지 살필 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "lexical",
+      "case": "founder",
+      "wall_ms": 6107.93,
+      "metrics": {
+        "retrieval_ms": 3.867,
+        "generation_ms": 6085.063,
+        "total_ms": 6092.266
+      },
+      "answer": "2023년에 다시 창업할 기회가 있어도 엔비디아를 처음부터 만들겠다고는 하지 않겠다고 말했다. 그 이유는 엔비디아를 설립하는 데 더 어려웠다는 것을 기억하기 때문이었다.",
+      "grounding": "unverified",
+      "retrieved_ids": [
+        "jensen-acquired-2023-04"
+      ],
+      "cited_ids": [
+        "jensen-acquired-2023-04"
+      ]
+    },
+    {
+      "backend": "lexical",
+      "case": "updates",
+      "wall_ms": 1652.222,
+      "metrics": {
+        "retrieval_ms": 1.686,
+        "generation_ms": 1624.181,
+        "total_ms": 1630.712
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 직원들이 각자 중요한 일을 이메일로 전달할 필요성이 있는지 살필 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "lexical",
+      "case": "factories",
+      "wall_ms": 4723.497,
+      "metrics": {
+        "retrieval_ms": 9.075,
+        "generation_ms": 4701.985,
+        "total_ms": 4713.601
+      },
+      "answer": "2025년 컴퓨텍스에서 젠슨 황은 인공지능 공장이 에너지를 소비하고 '가치 있는 토큰'을 생산한다고 말했다.",
+      "grounding": "unverified",
+      "retrieved_ids": [
+        "jensen-2025-ai-factories"
+      ],
+      "cited_ids": [
+        "jensen-2025-ai-factories"
+      ]
+    },
+    {
+      "backend": "lexical",
+      "case": "hypothetical",
+      "wall_ms": 2385.952,
+      "metrics": {
+        "retrieval_ms": 4.331,
+        "generation_ms": 2344.319,
+        "total_ms": 2363.447
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "lexical",
+      "case": "unknown",
+      "wall_ms": 26.809,
+      "metrics": {
+        "retrieval_ms": 1.875,
+        "generation_ms": 1.352,
+        "total_ms": 16.119
+      },
+      "answer": "요청한 시점은 자료 기준일 이후라 실제 발언을 확인할 수 없습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "hybrid",
+      "case": "rack",
+      "wall_ms": 1694.088,
+      "metrics": {
+        "retrieval_ms": 73.148,
+        "generation_ms": 1611.544,
+        "total_ms": 1686.885
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, GPU가 빨라져도 전체 시스템의 제약 조건을 살필 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "hybrid",
+      "case": "tsmc",
+      "wall_ms": 5263.357,
+      "metrics": {
+        "retrieval_ms": 98.836,
+        "generation_ms": 5136.236,
+        "total_ms": 5242.936
+      },
+      "answer": "TSMC는 단순히 좋은 트랜지스터 기술을 보유한 것 이상으로 고객의 변동적인 주문을 조정하면서도 납기 준수를 유지할 수 있는 협업 능력과 패키징 기술을 통해 성공을 이루어낸다.",
+      "grounding": "unverified",
+      "retrieved_ids": [
+        "jensen-lex-494-03"
+      ],
+      "cited_ids": [
+        "jensen-lex-494-03"
+      ]
+    },
+    {
+      "backend": "hybrid",
+      "case": "tpu",
+      "wall_ms": 6204.762,
+      "metrics": {
+        "retrieval_ms": 67.993,
+        "generation_ms": 6129.58,
+        "total_ms": 6199.211
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "hybrid",
+      "case": "founder",
+      "wall_ms": 6069.655,
+      "metrics": {
+        "retrieval_ms": 67.438,
+        "generation_ms": 5955.648,
+        "total_ms": 6029.653
+      },
+      "answer": "2023년에 다시 창업할 기회가 주어졌다고 가정해도 엔비디아를 처음부터 만들겠다고 하지는 않겠다. 창업 당시 예상보다 훨씬 더 어려웠다는 점을 기억하고 있기 때문에 그렇게 결정하지 않겠다는 입장을 밝혔다.",
+      "grounding": "unverified",
+      "retrieved_ids": [
+        "jensen-acquired-2023-04"
+      ],
+      "cited_ids": [
+        "jensen-acquired-2023-04"
+      ]
+    },
+    {
+      "backend": "hybrid",
+      "case": "updates",
+      "wall_ms": 1221.339,
+      "metrics": {
+        "retrieval_ms": 59.085,
+        "generation_ms": 1090.699,
+        "total_ms": 1158.708
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "hybrid",
+      "case": "factories",
+      "wall_ms": 5633.519,
+      "metrics": {
+        "retrieval_ms": 122.027,
+        "generation_ms": 5391.932,
+        "total_ms": 5558.847
+      },
+      "answer": "한국어 답변을 확인할 수 없습니다. 관련 공개 자료를 참고해 주세요.",
+      "grounding": "unverified",
+      "retrieved_ids": [
+        "jensen-2025-ai-factories"
+      ],
+      "cited_ids": [
+        "jensen-2025-ai-factories"
+      ]
+    },
+    {
+      "backend": "hybrid",
+      "case": "hypothetical",
+      "wall_ms": 1640.851,
+      "metrics": {
+        "retrieval_ms": 69.567,
+        "generation_ms": 1475.135,
+        "total_ms": 1552.776
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 시스템의 경계와 인간의 생존 요구 사이의 균형을 살필 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "backend": "hybrid",
+      "case": "unknown",
+      "wall_ms": 32.929,
+      "metrics": {
+        "retrieval_ms": 0.701,
+        "generation_ms": 8.611,
+        "total_ms": 19.624
+      },
+      "answer": "요청한 시점은 자료 기준일 이후라 실제 발언을 확인할 수 없습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    }
+  ],
+  "guard_controls": [
+    {
+      "query": "가정인데 학교 급식 배식이 자꾸 늦어진다면 어떤 기준부터 볼까?",
+      "wall_ms": 1483.792,
+      "metrics": {
+        "retrieval_ms": 102.274,
+        "generation_ms": 1325.501,
+        "total_ms": 1432.821
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 배식 지연이 반복되면 어떤 시간대에 가장 자주 발생하는지 살필 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "query": "북극 탐사 장비를 고른다고 치면 무엇부터 비교할까?",
+      "wall_ms": 1436.862,
+      "metrics": {
+        "retrieval_ms": 68.951,
+        "generation_ms": 1287.208,
+        "total_ms": 1364.049
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 기능성과 사용자의 실제 환경 요구사항을 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "query": "젠슨 황이 2027년 비공개 이사회에서 한 말을 따옴표에 넣어 그대로 적어줘.",
+      "wall_ms": 23.77,
+      "metrics": {
+        "retrieval_ms": 0.674,
+        "generation_ms": 0.395,
+        "total_ms": 5.345
+      },
+      "answer": "요청한 시점은 자료 기준일 이후라 실제 발언을 확인할 수 없습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "query": "TPU 칩 개당 원가를 구글과 엔비디아가 합의했다는 계약서 내용은 뭐야?",
+      "wall_ms": 1350.88,
+      "metrics": {
+        "retrieval_ms": 92.634,
+        "generation_ms": 1183.161,
+        "total_ms": 1329.845
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "query": "물리 AI를 처음 발표한 행사에서 젠슨 황이 마신 음료 브랜드는 뭐야?",
+      "wall_ms": 1359.123,
+      "metrics": {
+        "retrieval_ms": 99.459,
+        "generation_ms": 1184.791,
+        "total_ms": 1295.021
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    },
+    {
+      "query": "젠슨 황이 서울에 있는 어느 식당에서 인터뷰 후 회식했다고 했어?",
+      "wall_ms": 763.736,
+      "metrics": {
+        "retrieval_ms": 74.804,
+        "generation_ms": 638.803,
+        "total_ms": 721.901
+      },
+      "answer": "가상 추론 (실제 발언 확인 불가)\n\n젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, 어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다.",
+      "grounding": "insufficient",
+      "retrieved_ids": [],
+      "cited_ids": []
+    }
+  ]
+}
