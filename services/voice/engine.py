@@ -48,6 +48,8 @@ class VoiceSettings:
     speaker_label: str | None = None
     reference_manifest: Path | None = field(default=None, repr=False)
     allow_candidate_reference: bool = False
+    adapter_checkpoint: Path | None = field(default=None, repr=False)
+    adapter_checkpoint_sha256: str | None = None
     x_vector_only_mode: bool = False
     api_key: str | None = field(default=None, repr=False)
     max_input_chars: int = 2000
@@ -74,6 +76,10 @@ class VoiceSettings:
             raise ValueError("Voice persona ID must be a stable subject identifier")
         if self.speaker_label is not None and (not isinstance(self.speaker_label, str) or not self.speaker_label.strip() or len(self.speaker_label) > 200):
             raise ValueError("Voice speaker label must be the exact publisher label")
+        if self.adapter_checkpoint is not None and self.persona_id in {None, "generic"}:
+            raise ValueError("An adapted voice requires its named subject binding")
+        if self.adapter_checkpoint_sha256 is not None and not re.fullmatch(r"[a-f0-9]{64}", self.adapter_checkpoint_sha256):
+            raise ValueError("Voice adapter receipt SHA-256 must be a 64-character digest")
         if not re.fullmatch(r"cpu|mps|cuda(?::[0-9]+)?", self.device):
             raise ValueError("Voice device must be cpu, mps, cuda, or cuda:N")
         if self.dtype not in {"float32", "float16", "bfloat16"}:
@@ -114,6 +120,7 @@ class VoiceSettings:
             return value in {"true", "1"}
         cache = os.getenv("BIAS_VOICE_CACHE_DIR")
         manifest = os.getenv("BIAS_VOICE_REFERENCE_MANIFEST")
+        adapter = os.getenv("BIAS_VOICE_ADAPTER_CHECKPOINT")
         return cls(
             model_id=os.getenv("BIAS_VOICE_MODEL", "Qwen/Qwen3-TTS-12Hz-0.6B-Base"),
             revision=os.getenv("BIAS_VOICE_REVISION") or None,
@@ -128,6 +135,8 @@ class VoiceSettings:
             speaker_label=os.getenv("BIAS_VOICE_SPEAKER_LABEL") or None,
             reference_manifest=Path(manifest).expanduser().resolve() if manifest else None,
             allow_candidate_reference=boolean("ALLOW_CANDIDATE_REFERENCE", "false"),
+            adapter_checkpoint=Path(adapter).expanduser().resolve() if adapter else None,
+            adapter_checkpoint_sha256=os.getenv("BIAS_VOICE_ADAPTER_CHECKPOINT_SHA256") or None,
             x_vector_only_mode=x_vector_only in {"true", "1"},
             api_key=os.getenv("BIAS_VOICE_API_KEY"),
             max_input_chars=int(os.getenv("BIAS_VOICE_MAX_INPUT_CHARS", "2000")),
@@ -227,6 +236,11 @@ def load_qwen_model(settings: VoiceSettings) -> Any:
         model = Qwen3TTSModel.from_pretrained(location, device_map=settings.device,
             dtype=getattr(torch, settings.dtype), attn_implementation=settings.attention,
             local_files_only=True, trust_remote_code=False)
+        if settings.adapter_checkpoint is not None:
+            from .adapters import apply_voice_adapter
+            model._bias_voice_adaptation = apply_voice_adapter(model.model, settings.adapter_checkpoint,
+                persona_id=settings.persona_id, base_directory=Path(location),
+                expected_sha256=settings.adapter_checkpoint_sha256)
     except Exception as exc:
         raise VoiceUnavailable("Voice model could not load; check its cache, revision, device, and dependencies") from exc
     return SeededQwen(model, torch, settings.seed)
@@ -271,7 +285,9 @@ class VoiceEngine:
 
     def status(self) -> dict[str, Any]:
         reference_configured = bool(self.settings.reference_wav and (self.settings.x_vector_only_mode or (self.settings.reference_text and self.settings.reference_text.strip())))
-        return {"status": "ready" if self._prompt is not None else "not_loaded", "reference_configured": reference_configured, "reference_mode": "speaker_embedding_only" if self.settings.x_vector_only_mode else "audio_and_transcript", "model_loaded": self._model is not None, "busy": self._generation_lock.locked(), "voice": "reference", "synthesis": "reference_conditioned", "streaming": False,
+        adaptation = getattr(self._model, "_bias_voice_adaptation", None) if self._model is not None else None
+        return {"status": "ready" if self._prompt is not None else "not_loaded", "reference_configured": reference_configured, "reference_mode": "speaker_embedding_only" if self.settings.x_vector_only_mode else "audio_and_transcript", "model_loaded": self._model is not None, "busy": self._generation_lock.locked(), "voice": "reference", "synthesis": "adapted_reference_conditioned" if adaptation else "reference_conditioned", "streaming": False,
+            "adaptation": adaptation,
             "persona_id": self.settings.persona_id, "reference_identity": self._reference_identity,
             "runtime": {"revision": self.settings.revision, "device": self.settings.device,
                 "dtype": self.settings.dtype, "attention": self.settings.attention,
