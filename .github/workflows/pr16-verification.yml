@@ -38,16 +38,16 @@ jobs:
           uv sync --locked --extra dev
           npm ci
           npm ci --prefix tools/avatar --ignore-scripts
+      - name: Install Chromium and media dependencies
+        run: |
+          npx playwright install --with-deps chromium
+          sudo apt-get install -y ffmpeg
       - name: Validate code and production build
         run: |
           uv run pytest -q
           uv run bias validate
           npm run check
           node --test tools/avatar_audition.test.mjs
-      - name: Install Chromium and media dependencies
-        run: |
-          npx playwright install --with-deps chromium
-          sudo apt-get install -y ffmpeg
       - name: Jensen browser and actual detector smoke
         env:
           PLAYWRIGHT_HTML_OUTPUT_DIR: reports/local/playwright-jensen
@@ -56,8 +56,33 @@ jobs:
         env:
           PLAYWRIGHT_HTML_OUTPUT_DIR: reports/local/playwright-legacy
         run: npm run test:e2e -- --workers=2 --output=reports/local/results-legacy
-      - name: Verify container build
-        run: docker build --tag bias-pr16-verification .
+      - name: Verify container build and Jensen startup
+        run: |
+          docker build --tag bias-pr16-verification .
+          docker run --detach --rm --name bias-pr16 --read-only --tmpfs /tmp:size=64m --publish 127.0.0.1:8002:8000 bias-pr16-verification
+          trap 'docker logs bias-pr16; docker stop bias-pr16' EXIT
+          python - <<'PY'
+          import hashlib, json, time, urllib.request
+          base = 'http://127.0.0.1:8002'
+          for attempt in range(30):
+              try:
+                  with urllib.request.urlopen(base + '/api/persona', timeout=2) as response:
+                      persona = json.load(response)
+                  break
+              except OSError:
+                  if attempt == 29:
+                      raise
+                  time.sleep(1)
+          assert persona['id'] == 'jensen-huang', persona
+          assert persona['snapshot']['id'] == 'jensen-huang-2026-11-12-seed.v1'
+          for path in ['/', '/vision/attention.worker.js', '/vision/vision_bundle.mjs']:
+              with urllib.request.urlopen(base + path, timeout=3) as response:
+                  assert response.status == 200, path
+          with urllib.request.urlopen(base + '/vision/blaze_face_short_range.tflite', timeout=3) as response:
+              digest = hashlib.sha256(response.read()).hexdigest()
+          assert digest == 'b4578f35940bf5a1a655214a1cce5cab13eba73c1297cd78e1a04c2380b0152f'
+          print('Read-only container: Jensen profile, exact snapshot, UI/worker/assets and model hash passed.')
+          PY
       - name: Save browser evidence
         if: always()
         uses: actions/upload-artifact@v4

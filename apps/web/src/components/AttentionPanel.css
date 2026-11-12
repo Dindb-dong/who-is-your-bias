@@ -26,7 +26,7 @@
 .attention-demo-cross.horizontal { height: 1px; left: 12px; right: 12px; top: 50%; }
 .attention-demo-cross.vertical { width: 1px; top: 12px; bottom: 12px; left: 50%; }
 .attention-demo-target { position: absolute; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; transform: translate(-50%, -50%); border-radius: 50%; color: #e9f8d9; background: #45652e; box-shadow: 0 0 0 6px #809c6023; pointer-events: none; }
-.attention-demo-label { position: absolute; bottom: 9px; left: 12px; font-size: 9px; color: #738565; pointer-events: none; }
+.attention-demo-label { display: block; margin: 8px 2px 0; font-size: 10px; color: #738565; }
 .attention-demo-ranges { display: flex; gap: 14px; margin-top: 10px; }
 .attention-demo-ranges label { flex: 1; min-width: 0; display: grid; gap: 4px; font-size: 10px; color: #6b7c5e; }
 .attention-demo-ranges input { accent-color: #4c6c36; width: 100%; min-width: 0; }

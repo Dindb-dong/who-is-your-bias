@@ -74,7 +74,10 @@ export class AttentionController {
   sample(target: AttentionTarget | null | undefined, now: number, reducedMotion = false, headSupported = true): AttentionFrame {
     if (!Number.isFinite(now) || now < 0) { this.reset(); return { ...this.frame }; }
     if (this.previousNow !== null && now < this.previousNow) this.reset();
-    const dtMs = this.previousNow === null ? 1000 / 60 : Math.min(100, Math.max(0, now - this.previousNow));
+    const previousNow = this.previousNow;
+    // Exponential smoothing stays bounded for any elapsed interval. Capping
+    // elapsed time makes slow renderers take seconds longer to follow or stop.
+    const dtMs = previousNow === null ? 1000 / 60 : Math.max(0, now - previousNow);
     this.previousNow = now;
     const fresh = validTarget(target, now) && target.observedAtMs >= this.lastObservation;
     if (fresh) {
@@ -85,6 +88,9 @@ export class AttentionController {
     } else this.activeId = null;
 
     const turnHead = fresh && now >= this.headStartsAt && !reducedMotion && headSupported;
+    // A sparse frame may straddle the eye lead. Only the part after its deadline
+    // belongs to the head turn; time spent waiting must not advance that turn.
+    const headDtMs = turnHead ? Math.max(0, now - Math.max(previousNow ?? now, this.headStartsAt)) : dtMs;
     const goalYaw = fresh ? (target.x * 2 - 1) * ATTENTION_SETTINGS.targetYaw : 0;
     const goalPitch = fresh ? (target.y * 2 - 1) * ATTENTION_SETTINGS.targetPitch : 0;
     const eyeLimit = reducedMotion ? ATTENTION_SETTINGS.reducedEyeAngle : Infinity;
@@ -95,15 +101,15 @@ export class AttentionController {
     if (turnHead || !fresh || reducedMotion || !headSupported) {
       this.frame.headYaw = blend(this.frame.headYaw,
         turnHead ? clamp(goalYaw * 0.7, ATTENTION_SETTINGS.maxHeadYaw) : 0,
-        dtMs, fresh ? ATTENTION_SETTINGS.headTimeConstantMs : ATTENTION_SETTINGS.returnTimeConstantMs);
+        headDtMs, fresh ? ATTENTION_SETTINGS.headTimeConstantMs : ATTENTION_SETTINGS.returnTimeConstantMs);
       this.frame.headPitch = blend(this.frame.headPitch,
         turnHead ? clamp(goalPitch * 0.65, ATTENTION_SETTINGS.maxHeadPitch) : 0,
-        dtMs, fresh ? ATTENTION_SETTINGS.headTimeConstantMs : ATTENTION_SETTINGS.returnTimeConstantMs);
+        headDtMs, fresh ? ATTENTION_SETTINGS.headTimeConstantMs : ATTENTION_SETTINGS.returnTimeConstantMs);
     }
     this.frame.eyeWeight = blend(this.frame.eyeWeight, fresh ? 1 : 0, dtMs, fresh ? 65 : ATTENTION_SETTINGS.returnTimeConstantMs);
     // Preserve the original head animation until the first delayed head turn.
     if (turnHead || !fresh || reducedMotion || !headSupported) {
-      this.frame.headWeight = blend(this.frame.headWeight, turnHead ? 1 : 0, dtMs,
+      this.frame.headWeight = blend(this.frame.headWeight, turnHead ? 1 : 0, headDtMs,
         fresh ? ATTENTION_SETTINGS.headTimeConstantMs : ATTENTION_SETTINGS.returnTimeConstantMs);
     }
     this.frame.targetId = fresh ? target.id : null;

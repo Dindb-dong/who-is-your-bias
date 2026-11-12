@@ -103,27 +103,64 @@ describe('wall-clock attention controller', () => {
     expect(Math.abs(telemetry.eyePitch)).toBeLessThanOrEqual(ATTENTION_SETTINGS.reducedEyeAngle);
   });
 
-  it('handles clock resets and bounds a resumed frame instead of snapping to a new target', () => {
+  it('handles clock resets and resumes at a bounded wall-clock pose after a long gap', () => {
     const controller = new AttentionController(); trackedFrame(controller, 1008);
     const reset = controller.sample(target(0, 0), 0);
     expect(reset.phase).toBe('eyes'); expect(reset.headYaw).toBe(0);
-    const jumped = controller.sample(target(60000, 1), 60000);
-    expect(jumped.headYaw).toBeLessThan(ATTENTION_SETTINGS.maxHeadYaw * 0.5);
-    controller.reset(); expect(controller.sample(null, 60001).phase).toBe('idle');
+    const resumed = controller.sample(target(60000, 1, 1), 60000);
+    expect(resumed.phase).toBe('following');
+    expect(resumed.headYaw).toBe(ATTENTION_SETTINGS.maxHeadYaw);
+    expect(resumed.headPitch).toBe(ATTENTION_SETTINGS.maxHeadPitch);
+    expect(resumed.eyeWeight).toBe(1); expect(resumed.headWeight).toBe(1);
+    const switched = controller.sample(target(120000, 0, 0, 'new-participant'), 120000);
+    expect(switched.phase).toBe('eyes'); expect(switched.headYaw).toBe(resumed.headYaw);
+    // A long render gap cannot keep an expired observation active.
+    expect(controller.sample(target(120000, 0, 0, 'new-participant'), 180000).phase).toBe('idle');
+    controller.reset(); expect(controller.sample(null, 180001).phase).toBe('idle');
   });
 
-  it('has comparable results at 30, 60 and 120 Hz', () => {
-    const run = (hz: number) => {
+  it('uses only time after the eye-lead deadline when a sparse frame crosses it', () => {
+    const sparse = new AttentionController(); sparse.sample(target(0), 0);
+    const dense = new AttentionController();
+    for (const now of [0, 100, 200, 220]) dense.sample(target(now), now);
+    const expected = dense.sample(target(250), 250);
+    const actual = sparse.sample(target(250), 250);
+    expect(actual.phase).toBe('following');
+    expect(actual.headYaw).toBeGreaterThan(0); expect(actual.headYaw).toBeLessThan(0.05);
+    expect(actual.headYaw).toBeCloseTo(expected.headYaw, 10);
+    expect(actual.headWeight).toBeCloseTo(expected.headWeight, 10);
+  });
+
+  it('follows and returns on the same wall clock at low, high and irregular render rates', () => {
+    const run = (times: number[]) => {
       const controller = new AttentionController(); controller.sample(target(0), 0);
       let frame = controller.sample(target(0), 0);
-      for (let i = 1; i <= hz * 2; i++) frame = controller.sample(target(i * 1000 / hz), i * 1000 / hz);
-      return composeAttentionPose(neutralPose(), frame, boneDiagnostics).telemetry;
+      for (const now of times) frame = controller.sample(target(now), now);
+      const followed = composeAttentionPose(neutralPose(), frame, boneDiagnostics).telemetry;
+      const firstReturn = controller.sample(null, 2000);
+      for (const now of times) frame = controller.sample(null, now + 2000);
+      return { followed, firstReturn, returned: frame };
     };
-    const sixty = run(60);
-    for (const hz of [30, 120]) {
-      expect(run(hz).headYaw).toBeCloseTo(sixty.headYaw, 2);
-      expect(run(hz).eyeYaw).toBeCloseTo(sixty.eyeYaw, 2);
+    const times = (hz: number) => Array.from({ length: hz * 2 }, (_, i) => (i + 1) * 1000 / hz);
+    const sixty = run(times(60));
+    for (const schedule of [...[1, 2, 3, 5, 15, 30, 120].map(times), [180, 750, 940, 1500, 2000]]) {
+      const actual = run(schedule);
+      expect(actual.followed.headYaw).toBeCloseTo(sixty.followed.headYaw, 8);
+      expect(actual.followed.eyeYaw).toBeCloseTo(sixty.followed.eyeYaw, 8);
+      expect(actual.firstReturn.phase).toBe('returning');
+      expect(actual.firstReturn.headYaw).toBeGreaterThan(0.4);
+      expect(actual.returned.phase).toBe('idle');
+      expect(actual.returned.eyeWeight).toBe(0); expect(actual.returned.headWeight).toBe(0);
     }
+  });
+
+  it('turns toward the selected screen face at one rendered frame per second', () => {
+    const controller = new AttentionController(); controller.sample(target(0, 0.2, 0.375), 0);
+    const frame = controller.sample(target(1000, 0.2, 0.375), 1000);
+    const { telemetry } = composeAttentionPose(neutralPose(), frame, boneDiagnostics);
+    expect(telemetry.headYaw).toBeLessThan(-0.18);
+    expect(telemetry.eyeYaw).toBeLessThan(0);
+    expect(Math.abs(telemetry.headYaw)).toBeLessThanOrEqual(ATTENTION_SETTINGS.maxHeadYaw);
   });
 });
 
