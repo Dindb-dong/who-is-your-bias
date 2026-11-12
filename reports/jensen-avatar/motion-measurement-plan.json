@@ -1,0 +1,59 @@
+{
+  "schema_version": "motion-measurement-plan.v1",
+  "persona_id": "jensen-huang",
+  "runtime_version": "0.10.21",
+  "sample_fps": 10,
+  "sources": [
+    {
+      "id": "goldman-sachs-2024",
+      "source_event_id": "goldman-sachs-2024",
+      "url": "https://www.goldmansachs.com/insights/talks-at-gs/jensen-huang",
+      "corpus_split": "train",
+      "motion_split": "train"
+    }
+  ],
+  "acquisitions": [
+    {
+      "source_id": "goldman-sachs-2024",
+      "input_basename": "goldman-sachs-2024-0-180.mp4",
+      "input_sha256": "4557437ba42c8cf3b90f55210f08e4d1be399ab5fa689139b3b49735ae91da2d",
+      "source_timeline": "publisher_video_elapsed",
+      "source_offset_seconds": 0,
+      "clock_mapping": [
+        {
+          "local_start": 0,
+          "local_end": 180,
+          "source_start": 0,
+          "rate": 1
+        }
+      ]
+    }
+  ],
+  "windows": [
+    {
+      "id": "goldman-0128-8s",
+      "source_id": "goldman-sachs-2024",
+      "start_seconds": 128,
+      "duration_seconds": 8,
+      "selection_basis": "source contact-sheet shows seated Jensen with hand gestures; geometry and cuts require observation review"
+    },
+    {
+      "id": "goldman-0146-8s",
+      "source_id": "goldman-sachs-2024",
+      "start_seconds": 146,
+      "duration_seconds": 8,
+      "selection_basis": "source contact-sheet shows seated Jensen with hand gestures; geometry and cuts require observation review"
+    },
+    {
+      "id": "goldman-0164-8s",
+      "source_id": "goldman-sachs-2024",
+      "start_seconds": 164,
+      "duration_seconds": 8,
+      "selection_basis": "source contact-sheet shows seated Jensen with hand gestures; geometry and cuts require observation review"
+    }
+  ],
+  "claim": "Pilot measurement only; no learned characteristic motion or independent evaluation.",
+  "face_model_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+  "pose_model_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a",
+  "hand_model_sha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1"
+}

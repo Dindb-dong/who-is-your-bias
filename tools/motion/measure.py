@@ -14,7 +14,7 @@ from tools.media.observe import observe_clip
 from tools.media.prepare import prepare_clip
 
 
-def measure_plan(plan_path: str | Path, media_root: str | Path, output_root: str | Path, *, face_model: str | Path, pose_model: str | Path) -> list[dict]:
+def measure_plan(plan_path: str | Path, media_root: str | Path, output_root: str | Path, *, face_model: str | Path, pose_model: str | Path, hand_model: str | Path | None = None) -> list[dict]:
     """No downloads, identities, review promotion, or telemetry shims.
 
     Runtime version is checked before importing MediaPipe. The separately
@@ -31,6 +31,8 @@ def measure_plan(plan_path: str | Path, media_root: str | Path, output_root: str
     if version != "0.10.21":
         raise MotionError("This experiment requires the separately audited MediaPipe 0.10.21 implementation")
     models = {"face": local_file(face_model, max_bytes=10 * 1024**2), "pose": local_file(pose_model, max_bytes=10 * 1024**2)}
+    if hand_model:
+        models["hand"] = local_file(hand_model, max_bytes=10 * 1024**2)
     for name, model in models.items():
         if sha256(model) != plan.get(name + "_model_sha256"):
             raise MotionError(f"{name} model does not match the plan SHA-256")
@@ -65,6 +67,6 @@ def measure_plan(plan_path: str | Path, media_root: str | Path, output_root: str
         acquisition, file = acquisitions[source["id"]]
         out = target / window["id"]
         prepare_clip(file, out, source_id=source["id"], source_url=source["url"], source_timeline=acquisition["source_timeline"], start=window["start_seconds"], duration=window["duration_seconds"], input_source_offset=acquisition["source_offset_seconds"], crop=window.get("crop"))
-        result = observe_clip(out / "manifest.json", face_model=models["face"], pose_model=models["pose"], sample_fps=plan["sample_fps"])
+        result = observe_clip(out / "manifest.json", face_model=models["face"], pose_model=models["pose"], hand_model=models.get("hand"), sample_fps=plan["sample_fps"])
         results.append({"id": window["id"], "observed_frames": result["observed_frames"], "runtime_version": result["mediapipe_version"], "observations_sha256": result["observations"]["sha256"]})
     return results

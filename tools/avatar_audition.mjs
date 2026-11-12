@@ -70,7 +70,7 @@ async function vocabulary() {
     if (!body) throw new Error(`Cannot read the runtime's ${name} vocabulary.`);
     return [...body.matchAll(/'([^']+)'/g)].map((match) => match[1]);
   };
-  return { face: list('FACE_CHANNELS'), visemes: list('VISEMES'), bones: list('BONE_CHANNELS') };
+  return { face: list('FACE_CHANNELS'), visemes: list('VISEMES'), bones: [...list('BODY_CHANNELS'), ...['left', 'right'].flatMap((side) => list('FINGER_JOINTS').map((joint) => side + joint))] };
 }
 
 function countTriangles(mode, count) {

@@ -31,6 +31,7 @@ def main():
     parser.add_argument('template', type=Path); parser.add_argument('template_landmarks', type=Path)
     parser.add_argument('measurements', type=Path); parser.add_argument('output', type=Path)
     parser.add_argument('--steps', type=int, default=80); parser.add_argument('--resume', type=Path)
+    parser.add_argument('--fit-only', action='store_true', help='Stop after the resumable optimizer checkpoint, before rendering/export')
     args = parser.parse_args(sys.argv[sys.argv.index('--') + 1:])
     if not 1 <= args.steps <= 500:
         raise ValueError('Coarse fitting budget must be 1–500 iterations')
@@ -99,6 +100,8 @@ def main():
         if (iteration+1)%10==0 or iteration+1==args.steps:
             atomic(args.output/f'fit-step-{iteration+1:04d}.json',{'schema_version':'avatar-ratio-fit-state.v1','inputs':metadata,
                    'iteration':iteration+1,'parameters':params,'history':history,'step_size':step})
+    if args.fit_only:
+        print(json.dumps({'iterations':args.steps,'objective':loss(params),'parameters':params,'status':'checkpoint_only'})); return
     meshes=[obj for obj in bpy.data.objects if obj.type=='MESH']
     # Apply the same deformation to each base and expression vertex. Fitting a
     # neutral mesh while leaving expression shapes behind would tear the face.

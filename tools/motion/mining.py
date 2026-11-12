@@ -17,10 +17,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from bias.motion import MotionCatalog, MotionClip, MotionError, MotionPrimitive, MotionSource, validate_clip
+from bias.motion import BODY_CHANNELS, MotionCatalog, MotionClip, MotionError, MotionPrimitive, MotionSource, validate_clip
 
 VERSION = "1.0.0"
-BODY_CHANNELS = {"chest", "leftUpperArm", "rightUpperArm", "leftForearm", "rightForearm", "leftHand", "rightHand"}
 
 
 def geodesic(left: list[float], right: list[float]) -> float:

@@ -63,3 +63,12 @@ def test_export_selects_hands_explicitly_and_drops_unselected_or_missing_frames(
     data["selections"][0]["right_hand_index"] = 0; review.write_text(json.dumps(data))
     with pytest.raises(MediaError, match="both subject-relative"):
         export_clip(manifest, review, tmp_path / "bad.json", allow_geometry_preview=True)
+
+
+def test_motion_mining_retains_observed_fingers_in_upper_body_descriptors():
+    from tools.motion.mining import describe
+    import math
+    frames=[{"time_ms":i*100,"bones":{"leftIndexProximal":[math.sin(i*.1),0,0,math.cos(i*.1)]}} for i in range(4)]
+    features,coverage=describe(frames,"upper_body",250)
+    assert features["leftIndexProximal:range_rad"] == pytest.approx(.6)
+    assert coverage["leftIndexProximal"] == 1
