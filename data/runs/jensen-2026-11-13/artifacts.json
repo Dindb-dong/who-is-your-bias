@@ -474,6 +474,20 @@
       "sha256": "b9ff3cbb42cf4db4f2c5f14fbcf6857f33651c94e63205455834b2d4609bdf3c",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-text-checkpoint-step0008",
+      "role": "actual_text_optimizer_checkpoint",
+      "completed_optimizer_steps": 8,
+      "target_optimizer_steps": 29,
+      "checkpoint_metadata_sha256": "e2caa13cd05dc50a1484d3fc309d016e2f8f2ff7228d41be6097131e632376f9",
+      "file_name": "jensen-text-checkpoint-step0008.tar.gz",
+      "file_id": "file_0000000079cc81fdbdd8a74e8c7944a3",
+      "library_file_id": "libfile_fde3_f-31552bb4e7688191bd0c5617dd207b60_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 97153698,
+      "sha256": "e88b866ccd5429dbe6041af3039379817d683c4c4f610ecb0c9fa2302e62e383",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {
@@ -482,6 +496,8 @@
     "source_progress": "reports/jensen-recovery/source-progress.json",
     "response_protocols": "reports/jensen-evaluation-v1/artifacts.json",
     "runtime": "reports/jensen-runtime-v1/artifact-receipts.json",
-    "voice": "reports/voice/jensen-2026-11-13/delivery.json"
+    "voice": "reports/voice/jensen-2026-11-13/delivery.json",
+    "reflection_expansion": "reports/jensen-recovery/reflection-expansion-v1/media-artifacts.json",
+    "heldout_rag": "reports/jensen-evaluation-v1/heldout-rag-v1/artifacts.json"
   }
 }
