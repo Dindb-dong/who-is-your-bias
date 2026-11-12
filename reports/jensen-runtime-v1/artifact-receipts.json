@@ -42,6 +42,20 @@
       "optimizer_steps": 16,
       "checkpoint_sha256": "9286167534283c576c329203f010b44bbdd31ef20f679f4693875b79a91dbf5b",
       "language_model_generated": false
+    },
+    {
+      "run_id": "jensen-recorded-audio-browser-attempt-1",
+      "role": "Actual failing desktop/mobile browser traces and screenshots, retaining acquisition overhead and unmet clock gate",
+      "file_name": "studio-browser-e4b05f8-failed.zip",
+      "file_id": "file_00000000c69481fb9e69dd088ab9103b",
+      "library_file_id": "libfile_fde3_f-7227a3fd38908191abd8bd42e165c57b_a18ece08681081918d81df44f69c4b1f",
+      "bytes": 39745230,
+      "sha256": "c5dd46407be59a083191b94ef6064ca192bc319eb0464ad2ad63752b07b40acc",
+      "status": "uploaded_and_fresh_readback_sha256_verified",
+      "verified_at": "2026-11-12T19:23:33.256139+00:00",
+      "github_run_id": 43287361386,
+      "github_artifact_id": 13975183687,
+      "github_head": "e4b05f88757bc9e9a07a1dfe065d2e9c8e9d7a05"
     }
   ]
 }

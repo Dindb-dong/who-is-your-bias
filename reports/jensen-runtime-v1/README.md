@@ -142,7 +142,7 @@ evaluation's responsibility; the backend does not expose an EOS reason.
 
 ## Recorded generated-audio browser check
 
-The next bounded check replays the already generated 9.92-second adapted English
+The bounded browser check replays the already generated 9.92-second adapted English
 sample on the actual fitted GLB. `recorded-browser-protocol.json` freezes its
 exact WAV/case hashes, replaced HTTP boundaries and exclusions. The browser will
 decode actual saved audio with its normal media clock and analyser; no new
@@ -153,5 +153,17 @@ The added output reader observes actual mapped morph weights and joint angles
 after the rig applies its pose. Node references are cached and observations do
 not change animation. Its focused actual-GLB composition/reset check passed,
 web type checking passed, and Playwright discovered the new case for desktop
-and mobile. Actual browser execution remains pending; the earlier candidate
-render/replay CI result does not establish this additional audio check.
+and mobile. The first actual CI run passed the existing 20 Jensen browser cases
+and 30 historical cases, but failed both new recorded-audio cases. Its retained
+[failure report](recorded-browser-attempt-1.json) and freshly retrieved archive
+record the actual measurements: desktop maximum clock difference 898.537 ms
+against the 750 ms gate, and a mobile screenshot that took 18.189 seconds and
+outlasted the 9.92-second recording. Cancellation was not established by that run.
+
+The revised acquisition order collects the playback trace and clicks Stop before
+capturing the full studio screenshot. It keeps the 750 ms gate and actual runtime
+unchanged. Raw observations are attached before channel/timing assertions, so a
+subsequent failure retains its measurements. Screenshots now document the state
+after cancellation; frame traces document animation during playback. The revised
+browser result remains pending. The earlier candidate render/replay CI result
+does not establish this additional audio check.
