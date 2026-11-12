@@ -42,3 +42,12 @@ def test_yc_embedded_original_labels_only():
 def test_goldman_discards_legal_footer_without_deleting_spoken_bank_name():
     rows = goldman('Goldman Sachs Talks\nDavid Solomon: Question?\nJensen Huang: We work with\nGoldman Sachs on this.\n2\nThank you.\nThe opinions and views expressed in this program may not\nreflect the firm.')
     assert rows[-1]['text'] == 'We work with Goldman Sachs on this. Thank you.'
+
+
+def test_yc_mixed_guest_typography_does_not_merge_questions_and_answers():
+    data = {'transcript': 'Garry Tan (host): First?\n\nJensen Huang (guest): First answer.\n\nGarry Tan (host): Second?\n\nJensen Huang: Second answer.\n\nGarry Tan: Third?\n\nJensen Huang (guest): Third answer.'}
+    raw = ('<div data-page="' + escape(json.dumps(data), quote=True) + '"></div>').encode()
+    rows = yc(raw)
+    assert [r['speaker'] for r in rows] == ['Garry Tan', 'Jensen Huang'] * 3
+    assert rows[3]['text'] == 'Second answer.'
+    assert all('Jensen Huang:' not in r['text'] for r in rows)

@@ -10,7 +10,7 @@ from pathlib import Path
 
 from .parsers import _consecutive, _row, _canonical_turns, _pdf_text, canonical_lex, clean, digest, html_blocks
 
-VERSION = "jensen-publisher-dialogue.v1"
+VERSION = "jensen-publisher-dialogue.v2"
 
 
 def colon_turns(blocks: list[dict], names: dict[str, str], *, start: str | None = None,
@@ -136,7 +136,7 @@ def yc(raw: bytes) -> list[dict]:
     texts = list(dict.fromkeys(parser.transcripts))
     if len(texts) != 1:
         raise ValueError("Expected exactly one publisher embedded YC transcript")
-    pattern = re.compile(r"(?m)^(Garry Tan \(host\)|Jensen Huang \(guest\)):\s*")
+    pattern = re.compile(r"(?m)^(Garry Tan(?: \(host\))?|Jensen Huang(?: \(guest\))?):\s*")
     matches = list(pattern.finditer(texts[0]))
     rows = []
     for i, match in enumerate(matches):
