@@ -6,7 +6,7 @@
     "located_public_player_events": 11,
     "complete_published_renditions_locally_validated": 4,
     "locally_validated_seconds": 15185.927679,
-    "whole_videos_durably_verified": 1
+    "whole_videos_durably_verified": 2
   },
   "original_dialogue": {
     "dataset": "original-dialogue-v4",
@@ -241,22 +241,19 @@
   ],
   "pending_jobs": [
     {
-      "name": "gzip-media-readback",
-      "scope": "uploaded Goldman/Stripe/GTC2025 chunks",
-      "status": "some503_remote_readbacks_retry_sequentially_using_exact_savedIDs",
-      "report": "reports/jensen-recovery/media-artifacts.json"
+      "name": "media-readback-gtc",
+      "scope": "GTC2025 allchunks uploaded; chunks2and3 fresh readback running",
+      "receipt": "media-readback-gtc-progress.json"
     },
     {
-      "name": "missing_gtc_chunks",
-      "scope": "GTC2025 rawchunks2and3",
-      "status": "chunk2definitive_transfer_failed_retry_or_subdivide;chunk3notyetretried",
-      "plan": "media-upload-batch-02.json",
-      "result": "media-upload-sequential-01/progress.json"
+      "name": "media-upload-wired-retry",
+      "scope": "80MiB gzip chunks; retry only failed creates individually",
+      "receipts": "media-upload-wired-retry/*.json"
     },
     {
-      "name": "wired-full",
-      "status": "completed_locally_validated_chunk_save_pending",
-      "output": "media/wired-2024-full.mp4"
+      "name": "next_full_keynote_batch",
+      "scope": "CES2025/GTC2024 now return206 with ordinary publisher headers; inspect other preflight then acquire",
+      "code_checkpoint": "828cf99"
     }
   ],
   "persistence": {

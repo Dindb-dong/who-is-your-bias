@@ -1,7 +1,7 @@
 {
   "schema_version": "jensen-media-artifacts.v1",
   "run_id": "jensen-2026-11-13",
-  "complete_videos_durably_verified": 1,
+  "complete_videos_durably_verified": 2,
   "artifacts": [
     {
       "artifact": "media-chunks/goldman-sachs-2024-full/reconstruction.json",
@@ -76,7 +76,8 @@
       "storage_encoding": "gzip",
       "decoded_bytes": 209715200,
       "decoded_sha256": "c209ac8c5d73a31f96ff13318511e3dc865d8cc1bdb376560ddb5ee0d6f393fb",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "9962d7e05c9e0a48c7aa978d1ec507a8ddd2135f0f03769dd761cb326fde4a20"
     },
     {
       "artifact": "media-chunks/gtc-2025-full-480p/gtc-2025-full-480p.mp4.part001.bin.gz",
@@ -126,7 +127,8 @@
       "storage_encoding": "gzip",
       "decoded_bytes": 209715200,
       "decoded_sha256": "bcb54dbd86115f6450befa4d60b64680a96081818960b4d0930f9fa64e68a4e3",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "951124b84b65ffb74abecec9f00489b7ab9515acf15e6e6ddf7ee8c5cef0aa4a"
     },
     {
       "artifact": "media-chunks/stripe-sessions-2024-full/stripe-sessions-2024-full.mp4.part002.bin.gz",
@@ -138,7 +140,8 @@
       "storage_encoding": "gzip",
       "decoded_bytes": 209715200,
       "decoded_sha256": "89aed92111c38f92fd109a8f217ff469d8fa1e41f2721fe7d3cab8f03bab2b64",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "b3c0c8fba12eb1b8b598c6361ed0036dbc6b7f1e248b09322d248550ecd9af6f"
     },
     {
       "artifact": "media-chunks/stripe-sessions-2024-full/stripe-sessions-2024-full.mp4.part003.bin.gz",
@@ -150,7 +153,8 @@
       "storage_encoding": "gzip",
       "decoded_bytes": 209715200,
       "decoded_sha256": "7898ed94e796b7210078d3460ba0a908572ffeecefe8c5413581b5d5c7a98405",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "894bbbfef2bc2bd26c91b790247e92a52914ee1525ab35585e99a054e23be949"
     },
     {
       "artifact": "media-chunks/stripe-sessions-2024-full/stripe-sessions-2024-full.mp4.part005.bin.gz",
@@ -162,6 +166,61 @@
       "storage_encoding": "gzip",
       "decoded_bytes": 113223914,
       "decoded_sha256": "646e6ca3dcc2535d159728889d8eda3ba36ca0b09f0f39fb01ab5e82f824d966",
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "b78a4d21ca748c9b6efa12284a41407d1a8959ce9cd8a6a192526ac47ff64f81"
+    },
+    {
+      "artifact": "media-chunks/gtc-2025-full-480p/gtc-2025-full-480p.mp4.part002.bin.gz",
+      "bytes": 209731508,
+      "sha256": "8dc80b777f0408638042f1a9142dc6da15376f25c825c543ea49c09323d62f2b",
+      "file_id": "file_00000000204c81fdbd12344ffcd7d61d",
+      "library_file_id": "libfile_fde3_f-70294e8d505c8191be927505879a2f6b_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "gtc-2025-full-480p.mp4.part002.bin.gz",
+      "status": "uploaded_pending_fresh_readback",
+      "storage_encoding": "gzip",
+      "decoded_bytes": 209715200,
+      "decoded_sha256": "0ab8e6f4e55e8a7c1a2cfab07b57bd92b98a00ef4dd8d2bb8ff3e6edcaec8fb4"
+    },
+    {
+      "artifact": "media-chunks/gtc-2025-full-480p/gtc-2025-full-480p.mp4.part003.bin.gz",
+      "bytes": 163651768,
+      "sha256": "d06dce631f0dd8a273e7da98e4d48b66f33e97e23bdfb45d617a21cdbc2da601",
+      "file_id": "file_00000000a70081fd9d6e935128aa03b0",
+      "library_file_id": "libfile_fde3_f-cb587d8c4f548191af69ffd06462bb1f_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "gtc-2025-full-480p.mp4.part003.bin.gz",
+      "status": "uploaded_pending_fresh_readback",
+      "storage_encoding": "gzip",
+      "decoded_bytes": 163639030,
+      "decoded_sha256": "887735d9763d3385654ae117a64a6b407a5eaeac32d6d3630aaabda625b9403d"
+    },
+    {
+      "artifact": "media-chunks/wired-2024-full/wired-2024-full.mp4.part003.bin.gz",
+      "bytes": 83892635,
+      "sha256": "f28f9215c3c2e38fc66b175c6706b133a1f0fef7521a9b8a6337ec78c99ec987",
+      "file_id": "file_0000000005e881fd902bbe292f598310",
+      "library_file_id": "libfile_fde3_f-258a7f989c7c819199b64cc2a6978e5a_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "wired-2024-full.mp4.part003.bin.gz",
+      "status": "uploaded_pending_fresh_readback",
+      "storage_encoding": "gzip",
+      "decoded_bytes": 83886080,
+      "decoded_sha256": "6361feb09c22b4546b2612cb15c4d9d3614c012c02792197e326f4f17d52d6e9"
+    },
+    {
+      "artifact": "wired-2024-reconstruction.json",
+      "bytes": 1562,
+      "sha256": "581657d4aac2fa757668e0ee471618505b104bcb407dc496624e4d76c9aa60aa",
+      "file_id": "file_000000007e5481fdb9cea6bc95d4c910",
+      "library_file_id": "libfile_fde3_f-e47ab43b99388191839b76be5f112744_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "wired-2024-reconstruction.json",
+      "status": "uploaded_pending_fresh_readback"
+    },
+    {
+      "artifact": "media/wired-2024-full.receipt.json",
+      "bytes": 1545,
+      "sha256": "81ca939e023d9f536c5b2fdab001a71366262e9a687ade5d6f01aa52d827e7d4",
+      "file_id": "file_00000000c0e481fd805281e92cfc6bb0",
+      "library_file_id": "libfile_fde3_f-f35a391821008191bad2ae6db5d4e3f6_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "wired-2024-full.receipt.json",
       "status": "uploaded_pending_fresh_readback"
     }
   ],
@@ -197,6 +256,27 @@
         "libfile_fde3_f-52dbf02230848191ba2cc98fbd0c2953_a18ece08681081918d81df44f69c4b1f"
       ],
       "reconstruction_manifest_library_file_id": "libfile_fde3_f-9438e7da117081919eeda856adb58846_a18ece08681081918d81df44f69c4b1f"
+    },
+    {
+      "source_id": "stripe-sessions-2024",
+      "event_family_id": "stripe-sessions-2024",
+      "split": "train",
+      "full_file": "stripe-sessions-2024-full.mp4",
+      "bytes": 952084714,
+      "sha256": "0882539adca1bca58a8e64c4341a6fdca4ebca69a88c77799c882fb1dd0bfa32",
+      "duration_seconds": 3889.485604,
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "status": "all_chunks_fresh_readback_and_full_reconstruction_verified",
+      "chunk_library_file_ids": [
+        "libfile_fde3_f-1712749bd2ec819183bd857934eb11db_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-62dcd6f4ea308191810c644c4fbc09f2_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-222522352dc88191bba5a7429ae89432_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-26423d499d8481918779384f9f245af7_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-0564be7f8cb481918017d929b4c72557_a18ece08681081918d81df44f69c4b1f"
+      ],
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-a6ee1a8cd3b881919ae9c3224e4254f1_a18ece08681081918d81df44f69c4b1f"
     }
   ]
 }
