@@ -1,10 +1,32 @@
 # Jensen recovery: durable checkpoint and resume
 
-This is an intermediate implementation checkpoint. The machine-readable
-[source progress](source-progress.json) distinguishes located publisher players,
-complete local media and complete durable videos. The
-[artifact receipts](media-artifacts.json) contain exact saved object identities,
-sizes and SHA-256 values. Do not infer persistence from a source URL or manifest.
+The [canonical source inventory](source-inventory-summary.json) reconciles the
+current saved media across the original batch, reflection expansion and official
+regional replays. Every complete video below has a published fresh-readback and
+whole-file reconstruction receipt; the audio files have fresh byte/hash receipts.
+
+| Separately counted media | Count | Bytes | Measured duration |
+| --- | ---: | ---: | ---: |
+| Complete publisher event packages | 11 | 6,469,064,775 | 56,309.385080 s — 15 h 38 min 29.385080 s |
+| NTU derived address with context | 1 | 752,097,280 | 1,518.692466 s — 25 min 18.692466 s |
+| Audio-only publisher files | 3 | 259,625,424 | 18,047.309792 s — 5 h 00 min 47.309792 s |
+
+The eleven video packages cover eleven distinct event families. “Complete” means
+the selected published rendition: Goldman is labeled `HIGHLIGHTS` and SIGGRAPH
+`Trimmed`. Package durations include hosts, slides and other speakers. The NTU
+range contains the address with surrounding context; the full ceremony ISO was
+not acquired. Unknown language or speaker intervals remain ineligible for speech
+training until their own review gates pass. This inventory adds no material to
+frozen training or evaluation inputs; existing prepared intervals retain their
+separate evidence and limitations.
+
+This remains an intermediate implementation checkpoint. The dated
+[source progress](source-progress.json) and [original artifact receipts](media-artifacts.json)
+retain the original eight-video batch scope. Their earlier regional-media pending
+states are superseded by the [complete regional receipts](regional-replays-v1/artifact-manifest.json).
+The canonical inventory links every source/event, exact hash and recovery ledger,
+including the explicitly reconciled Stanford audio event-ID alias. A source URL
+or player manifest alone does not establish preserved media.
 
 ## Actual reusable corpus
 
@@ -40,8 +62,9 @@ Jensen training time.
 The separate [reflection expansion](reflection-expansion-v1/README.md) adds the
 complete Computer History Museum oral history (72 min 25 s, 653,931,658 bytes)
 and the original publisher transcript PDF. Its fresh remote reconstruction and
-whole-video hash passed. The combined total is **nine distinct complete original
-event videos, 5,066,419,711 bytes / 42,473.925525 seconds (11h47m54s)**. Expansion
+whole-video hash passed. These two batches form the earlier **nine-package
+subtotal: 5,066,419,711 bytes / 42,473.925525 seconds (11h47m54s)**; the current
+eleven-package aggregate appears above. Expansion
 receipts are in [its own artifact ledger](reflection-expansion-v1/media-artifacts.json);
 the original eight-event ledgers above retain their original scope. The [NTU address with context](reflection-expansion-v1/ntu-media-artifacts.json)
 adds one separately acquired and freshly reconstructed 25m19s derived recording
