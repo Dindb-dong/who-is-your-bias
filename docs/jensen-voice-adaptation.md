@@ -4,10 +4,11 @@ This is the M4 execution record for the [Jensen recovery handoff](jensen-replica
 The reproducible preparation is measured in
 [preparation.json](../reports/voice/jensen-2026-11-13/preparation.json).
 The current checkpoint has a persisted **candidate** dataset, completed acoustic
-tokenization, and **one actual speech optimizer update**. Its saved tensors and
-state are measured in [pilot-step1.json](../reports/voice/jensen-2026-11-13/pilot-step1.json).
-Fresh-process resume, generated speech, independent output ASR, and human
-listening remain separate completion gates. The [codec receipt](../reports/voice/jensen-2026-11-13/codecs.json)
+tokenization, and **two durably verified speech optimizer updates**. A new process
+restored the freshly retrieved first checkpoint and completed step 2; see
+[the resume receipt](../reports/voice/jensen-2026-11-13/resume-step2.json).
+A bounded block toward step 6 is now running, out of 16 planned updates. Generated
+speech, independent output ASR, and human listening remain separate completion gates. The [codec receipt](../reports/voice/jensen-2026-11-13/codecs.json)
 records all eight encodings (1,151 frames, 16 codebooks per frame). The encoding
 loop took 6.13 seconds, excluding model loading.
 
@@ -80,8 +81,10 @@ text and speech embeddings, consistent with its inference path.
 
 The planned pilot uses CPU float32, SDPA attention, rank 4 / alpha 8, LoRA dropout
 0.05, learning rate 0.00002, AdamW, seed 42, batch size one, four threads, and
-16 planned optimizer updates. **One update has completed** with codec objective
-loss 12.889015; the remaining 15 updates have not run. The first update took
+16 planned optimizer updates. **Two updates have been durably verified**, with
+codec-objective losses 12.889015 and 13.412356 on different examples. These values
+are not an efficacy comparison. The first step is measured in
+[pilot-step1.json](../reports/voice/jensen-2026-11-13/pilot-step1.json). The first update took
 21.22 seconds, including its input preparation and checkpoint save; the complete
 process block including model load took 54.21 seconds. Peak process RSS was
 6,675,206,144 bytes. All 344,064 learned LoRA-B elements are nonzero after that
@@ -105,7 +108,9 @@ a checkpoint implementation test, not evidence of Qwen speech adaptation.
 ## Execution and resume
 
 The preparation and one-update optimization commands below completed successfully.
-The fresh-process resume command remains proposed until its actual run receipt exists. Set `ART` to the private artifact root and run from the repository with
+The actual fresh-process resume loaded the remotely retrieved archive in a new
+restore directory and completed step 2. Its source-archive and resulting
+checkpoint hashes are recorded in the resume receipt. Set `ART` to the private artifact root and run from the repository with
 the pinned inference environment. The selected dataset archive must first be
 uploaded, retrieved in a fresh operation, and verified by SHA-256.
 
@@ -132,9 +137,12 @@ python -m tools.adaptation.voice_lora train \
   --max-updates 16 --stop-after 1
 ```
 
-After that actual checkpoint is saved and read back, use identical arguments,
-add `--resume "$ART/voice/lora-v2/step-00000001"`, and choose the next bounded
-`--stop-after` block. The driver rejects changed input, model, code, or optimizer
+The step 1 archive was retrieved and extracted under
+`$ART/voice/remote-step1-restore/`; the actual next process added
+`--resume "$ART/voice/remote-step1-restore/voice/lora-v2/step-00000001"` with
+`--stop-after 1`. It restored optimizer/RNG state and produced step 2. For the
+remaining run, use the identical contract, the last verified checkpoint path, and
+`--stop-after 4` (a count of additional updates, capped at 16 total). The driver rejects changed input, model, code, or optimizer
 settings. Do not edit the driver halfway through a run and bypass that check.
 
 ## Output evaluation gates
@@ -171,7 +179,8 @@ The coordinator records durable object identifiers and readback receipts in the
 run artifact manifest. The archive's creation alone is not a persistence claim.
 
 Completed gates: dataset upload and fresh readback, acoustic tokenization, codec
-upload and fresh readback, one actual optimizer update and local resumable checkpoint.
-Next gates: checkpoint persistence and fresh-process resume; remaining bounded updates; English/Korean
+upload and fresh readback, two actual optimizer updates, both persisted and
+read back, and actual fresh-process remote-checkpoint resume.
+Next gates: remaining bounded updates; English/Korean
 synthesis for both conditions; independent output ASR; and a measured report. The candidate pilot remains separate from application
 promotion and from a qualified speech likeness.
