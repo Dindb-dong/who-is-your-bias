@@ -107,6 +107,7 @@ def test_korean_interview_evidence_reaches_normal_chat(monkeypatch, tmp_path):
     ("처리량이 어디에서 막히는지 살필 수 있습니다.", True),
     ("식량 보급을 어떻게提高效率할지 살필 수 있습니다.", False),
     ("그가 특허를 냈다고 말했는지 살필 수 있습니다.", False),
+    ("이메일을 보낸 이유는 투명성 때문인지 살필 수 있습니다.", False),
     ("“내가 직접 설계했다”라고 말할지 살필 수 있습니다.", False),
 ])
 def test_missing_evidence_streams_only_reviewed_inference(monkeypatch, tmp_path, draft, accepted):
@@ -140,6 +141,8 @@ def test_missing_evidence_streams_only_reviewed_inference(monkeypatch, tmp_path,
     '그는 "제가 생산량을 결정했습니다"라고 말했다.',
     "생산량을決定합니다.",
     "Hương은 납기를 지켰다고 설명했습니다.",
+    "그는 토큰을 قيمة 있다고 설명했습니다.",
+    "그는 ‘나는 토큰 생산량을 직접 결정했다’고 설명했습니다.",
     "저는 주문 조정과 납기를 지키는 능력을 높이 평가합니다.",
 ])
 def test_korean_jensen_summary_never_streams_fabricated_quotes_or_mixed_script(monkeypatch, tmp_path, draft):

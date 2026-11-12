@@ -34,11 +34,11 @@ KOREAN_INFERENCE = re.compile(
 )
 UNSUPPORTED_ATTRIBUTION = re.compile(
     r"말했|발언했|밝혔|주장했|언급했|설명했|강조했|회고했|증언했|했다는|됐다는|"
-    r"실제로|당시|이미|특허|발표한|젠슨 황|Huang|한 이유를 밝히"
+    r"실제로|당시|이미|특허|발표한|젠슨 황|Huang|이유는|잘하는 일은|라고 전해|다고 답"
 )
 KOREAN_EXACT_SPEECH = re.compile(r"무슨 말을 했|어떤 말을 했|뭐라고 (?:말)?했|한 말은|그대로 (?:적|말|알려)|따옴표")
 KOREAN_EVIDENCE_VIOLATION = re.compile(
-    r'["“”「」『』\u00c0-\u024f\u1e00-\u1eff぀-ヿ㐀-鿿豈-﫿𠀀-𲎯]'
+    r"""["“”「」『』]|['‘][^'’\n]{12,}['’]"""
     r"|(?<![가-힣])(?:저는|제가|나는|내가|우리는|우리가)(?![가-힣])"
 )
 KOREAN_INFERENCE_FALLBACK = "어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다."
@@ -51,6 +51,14 @@ def korean_inference(text: str) -> str:
     return (
         "가상 추론 (실제 발언 확인 불가)\n\n"
         f"젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, {proposal}"
+    )
+
+
+def korean_summary_is_valid(text: str) -> bool:
+    return (
+        re.search(r"[가-힣]", text) is not None
+        and KOREAN_EVIDENCE_VIOLATION.search(text) is None
+        and all(char.isascii() or not char.isalpha() or "가" <= char <= "힣" for char in text)
     )
 
 
@@ -263,7 +271,7 @@ class Engine:
                         text = "".join(fragments).strip()
                         if review_inference:
                             text = korean_inference(text)
-                        elif KOREAN_EVIDENCE_VIOLATION.search(text) or not re.search(r"[가-힣]", text):
+                        elif not korean_summary_is_valid(text):
                             source = next(hit.evidence.id for hit in result.hits if hit.evidence.id in allowed_ids)
                             text = f"한국어 답변을 확인할 수 없습니다. 관련 공개 자료를 참고해 주세요. [source:{source}]"
                         fragments = [text]
