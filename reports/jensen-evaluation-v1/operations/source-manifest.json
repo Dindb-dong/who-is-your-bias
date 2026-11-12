@@ -20,6 +20,14 @@
     "launch_m6_rag.py": {
       "bytes": 5927,
       "sha256": "5a78a311e46d07b3c3f48468335b2a8307ed440102f76b930b6e17b904c40ced"
+    },
+    "m6_rag_delivery.py": {
+      "bytes": 20638,
+      "sha256": "1270079fff1b7636d4d9945cc7b8d07c9d44fe07badaf31eccff881b8de91fdd"
+    },
+    "m6_rag_reviewer_plan.json": {
+      "bytes": 4919,
+      "sha256": "5bf36dddb1bed1f0bd0b4d5dc61a3d068d01c999ccb7737425644ee3a8460885"
     }
   },
   "scope": "Exact source copies of archived run-specific operational scripts; frozen repository runners remain unchanged."
