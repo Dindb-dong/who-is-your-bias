@@ -164,6 +164,40 @@ The revised acquisition order collects the playback trace and clicks Stop before
 capturing the full studio screenshot. It keeps the 750 ms gate and actual runtime
 unchanged. Raw observations are attached before channel/timing assertions, so a
 subsequent failure retains its measurements. Screenshots now document the state
-after cancellation; frame traces document animation during playback. The revised
-browser result remains pending. The earlier candidate render/replay CI result
-does not establish this additional audio check.
+after cancellation; frame traces document animation during playback. An
+[intermediate run](recorded-browser-attempt-2.json) passed the new desktop case
+but retained the mobile screenshot-expiry failure. Both attempts remain saved.
+
+The corrected [actual CI run](https://github.com/Dindb-dong/who-is-your-bias/actions/runs/43289898996)
+at `a5cdcdffc1c5b4bf088baccae8f9469a9ad6f501` **passed both new cases**:
+242 web tests, 96 focused Python tests, 30 historical browser tests and all 22
+Jensen browser cases passed. The [qualification report](recorded-browser-result.json)
+binds the measured result to the exact workflow, saved archive, waveform and GLB.
+The complete archive was uploaded and freshly retrieved with matching SHA-256.
+
+| Actual observation | Desktop | Mobile emulation |
+| --- | ---: | ---: |
+| Playing frame observations | 24 | 406 |
+| Frames with concurrent mouth, smile, arm and hand output | 23 | 404 |
+| Maximum absolute renderer/media clock difference | 618.667 ms | 580.950 ms |
+| Media clock immediately before Stop | 7.433 seconds | 7.483 seconds |
+| Actual media elements / AudioContexts | 1 / 1 | 1 / 1 |
+| Cancelled before natural completion and cleared clock, source and speech/gesture channels | Passed | Passed |
+
+Jaw, blink, smile, arm, hand and finger outputs were nonzero in both projects.
+The unchanged 750 ms functional clock gate passed. These are actual software
+WebGL observations, with different layouts and scheduling; the frame counts are
+not a controlled FPS comparison, and the clock gate is not a perceptual lip-sync
+acceptance test. No physical phone, acoustic output timing, live inference or
+simultaneous neural providers were tested in this browser run.
+
+The [desktop trace](recorded-browser-desktop.json),
+[mobile trace](recorded-browser-mobile.json) and
+[plotted observations](renders/recorded-browser-trace.png) retain the measured
+composition during playback. The unmodified
+[desktop screenshot](renders/recorded-browser-desktop.png) and
+[mobile screenshot](renders/recorded-browser-mobile.png) show the fitted avatar
+and explicit replay label **after cancellation**. The screenshots were deliberately
+captured after the timed interval. Regenerate the trace plot with
+`python3 -m tools.runtime_checks.plot_browser_trace` in an environment with
+Matplotlib; that command reads committed observations and runs no model.

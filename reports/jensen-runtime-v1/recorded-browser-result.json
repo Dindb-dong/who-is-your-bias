@@ -1,0 +1,158 @@
+{
+  "schema_version": "recorded-generated-audio-browser-qualification.v1",
+  "passed": true,
+  "github_run_id": 43289898996,
+  "github_job_id": 131433101372,
+  "github_url": "https://github.com/Dindb-dong/who-is-your-bias/actions/runs/43289898996",
+  "head": "a5cdcdffc1c5b4bf088baccae8f9469a9ad6f501",
+  "archive": {
+    "run_id": "jensen-recorded-audio-browser-passed",
+    "role": "Successful actual desktop/mobile generated-audio playback, frame measurements and post-cancellation screenshots",
+    "file_name": "studio-browser-a5cdcdf-recorded-audio.zip",
+    "file_id": "file_00000000eba081fd8d7265857f7bc5d6",
+    "library_file_id": "libfile_fde3_f-a4cb6353fab48191a163b23c29cced6f_a18ece08681081918d81df44f69c4b1f",
+    "bytes": 4921492,
+    "sha256": "ccc572d43693539c9b099dc5b8e3b1073d211258161361da6a9aa6a17d3fad27",
+    "status": "uploaded_and_fresh_readback_sha256_verified",
+    "verified_at": "2026-11-12T19:36:10.123289+00:00",
+    "github_run_id": 43289898996,
+    "github_artifact_id": 13975294947,
+    "github_head": "a5cdcdffc1c5b4bf088baccae8f9469a9ad6f501"
+  },
+  "checks": {
+    "web_typecheck": true,
+    "web_build": true,
+    "web_tests": 242,
+    "focused_python_tests": 96,
+    "historical_browser_tests": 30,
+    "jensen_browser_tests": 22,
+    "actual_generated_audio_browser_cases": 2
+  },
+  "environment": {
+    "runner": "GitHub Actions ubuntu-24.04",
+    "browser": "actual Chromium with ANGLE SwiftShader software WebGL",
+    "desktop_viewport_css_pixels": [
+      1440,
+      1000
+    ],
+    "mobile_emulation": "Playwright Pixel7 device profile",
+    "physical_phone_test": false,
+    "voice_model_running": false,
+    "language_model_running": false,
+    "persona_fixture": "Jensen seed corpus; recorded chat envelope replaces generation. Frozen original-dialogue-v4 is checked separately by the real HTTP preview harness."
+  },
+  "projects": [
+    {
+      "project": "desktop",
+      "passed": true,
+      "observations": {
+        "path": "reports/jensen-runtime-v1/recorded-browser-desktop.json",
+        "sha256": "23a7bc76c3eea84ddcbd94586e4152cc3c4b7401f917ddc9f19bbc7739355537",
+        "bytes": 8538
+      },
+      "screenshot": {
+        "path": "reports/jensen-runtime-v1/renders/recorded-browser-desktop.png",
+        "sha256": "9a6395e2d85ab4733e6f11521fd0e9e13eb3e6d2a62890cb47a76c79848f81d0",
+        "bytes": 185317,
+        "state": "after Stop and verified cleanup"
+      },
+      "measurements": {
+        "schema_version": "recorded-generated-audio-browser.v1",
+        "project": "desktop",
+        "condition": "Recorded generated-audio replay \u2014 no live inference.",
+        "audio_file": "reports/voice/jensen-2026-11-13/listening/adapted-en_multisentence.wav",
+        "audio_sha256": "ca5664747699df7826d4c380c0d26f6b36ff34157df742276945ffbab62086f2",
+        "audio_duration_seconds": 9.92,
+        "avatar_sha256": "dea0c921fb7d5668527bd8ee9082f382b14e8d300c43936842e15356dc7d90cd",
+        "articulation": "actual waveform amplitude; no phoneme alignment",
+        "gestures": "authored fixture cues; not a learned personal policy",
+        "live_inference": false,
+        "simultaneous_neural_providers": false,
+        "acoustic_latency_measured": false,
+        "acquisition_order": "uninterrupted playback trace, Stop, cleanup checks, screenshot",
+        "screenshot_state": "after cancellation",
+        "cancelled_before_natural_end": true,
+        "media_ms_before_stop": 7433.461,
+        "real_media_instances": 1,
+        "real_audio_contexts": 1,
+        "playing_frames": 24,
+        "composed_frames": 23,
+        "maximum_clock_difference_ms": 618.6670000000004,
+        "channel_maxima": {
+          "jaw": 0.8407,
+          "blink": 0.3399,
+          "smile": 0.3575,
+          "arm": 0.3866,
+          "hand": 0.2668,
+          "finger": 0.0629
+        },
+        "cancelled_to_zero_clock_and_neutral_channels": true
+      }
+    },
+    {
+      "project": "mobile",
+      "passed": true,
+      "observations": {
+        "path": "reports/jensen-runtime-v1/recorded-browser-mobile.json",
+        "sha256": "04951c5b8a4fd4418c3a43c249f868b5bb78efd6e370b9bf30b2bdc2eac256fc",
+        "bytes": 103923
+      },
+      "screenshot": {
+        "path": "reports/jensen-runtime-v1/renders/recorded-browser-mobile.png",
+        "sha256": "1bcee0ea88314e6d8bd2b240ab50da549d1ebee188057f8640a56ef891e40837",
+        "bytes": 494829,
+        "state": "after Stop and verified cleanup"
+      },
+      "measurements": {
+        "schema_version": "recorded-generated-audio-browser.v1",
+        "project": "mobile",
+        "condition": "Recorded generated-audio replay \u2014 no live inference.",
+        "audio_file": "reports/voice/jensen-2026-11-13/listening/adapted-en_multisentence.wav",
+        "audio_sha256": "ca5664747699df7826d4c380c0d26f6b36ff34157df742276945ffbab62086f2",
+        "audio_duration_seconds": 9.92,
+        "avatar_sha256": "dea0c921fb7d5668527bd8ee9082f382b14e8d300c43936842e15356dc7d90cd",
+        "articulation": "actual waveform amplitude; no phoneme alignment",
+        "gestures": "authored fixture cues; not a learned personal policy",
+        "live_inference": false,
+        "simultaneous_neural_providers": false,
+        "acoustic_latency_measured": false,
+        "acquisition_order": "uninterrupted playback trace, Stop, cleanup checks, screenshot",
+        "screenshot_state": "after cancellation",
+        "cancelled_before_natural_end": true,
+        "media_ms_before_stop": 7482.667,
+        "real_media_instances": 1,
+        "real_audio_contexts": 1,
+        "playing_frames": 406,
+        "composed_frames": 404,
+        "maximum_clock_difference_ms": 580.95,
+        "channel_maxima": {
+          "jaw": 0.7297,
+          "blink": 0.7986,
+          "smile": 0.3575,
+          "arm": 0.3867,
+          "hand": 0.2668,
+          "finger": 0.063
+        },
+        "cancelled_to_zero_clock_and_neutral_channels": true
+      }
+    }
+  ],
+  "visual_inspection": {
+    "method": "Agent inspected the two actual unmodified PNGs",
+    "observed": [
+      "Fitted avatar, face, glasses, dark clothing and both hands render on both projects.",
+      "Recorded-generated-audio/no-live-inference label remains visible in the conversation.",
+      "Post-cancellation UI reads Ready when you are and displays the amplitude-mouth approximation label."
+    ],
+    "human_likeness_accepted": false
+  },
+  "limits": [
+    "The real saved neural waveform is replayed through fixture chat/package envelopes; no live inference service is involved.",
+    "Lip motion uses actual analyser amplitude; no phoneme alignment or acoustic output latency was measured.",
+    "Gesture cues are authored test fixtures, not a learned contextual or personal gesture policy.",
+    "Rendered-frame clock gaps passed the unchanged750ms functional gate; this is not a lip-sync quality acceptance or physical-device performance benchmark.",
+    "Observed frame counts belong to the two CI cases with different layouts; they are not a controlled FPS comparison.",
+    "Screenshots are taken after Stop to avoid affecting timed playback; exact frame traces preserve the actual composed outputs during playback.",
+    "First and intermediate failed attempts remain preserved separately; no threshold was widened to obtain this pass."
+  ]
+}

@@ -70,6 +70,20 @@
       "github_run_id": 43288581728,
       "github_artifact_id": 13976028257,
       "github_head": "9fe8532149830c8f304eea15c88b284386a528f6"
+    },
+    {
+      "run_id": "jensen-recorded-audio-browser-passed",
+      "role": "Successful actual desktop/mobile generated-audio playback, frame measurements and post-cancellation screenshots",
+      "file_name": "studio-browser-a5cdcdf-recorded-audio.zip",
+      "file_id": "file_00000000eba081fd8d7265857f7bc5d6",
+      "library_file_id": "libfile_fde3_f-a4cb6353fab48191a163b23c29cced6f_a18ece08681081918d81df44f69c4b1f",
+      "bytes": 4921492,
+      "sha256": "ccc572d43693539c9b099dc5b8e3b1073d211258161361da6a9aa6a17d3fad27",
+      "status": "uploaded_and_fresh_readback_sha256_verified",
+      "verified_at": "2026-11-12T19:36:10.123289+00:00",
+      "github_run_id": 43289898996,
+      "github_artifact_id": 13975294947,
+      "github_head": "a5cdcdffc1c5b4bf088baccae8f9469a9ad6f501"
     }
   ]
 }
