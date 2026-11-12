@@ -22,7 +22,7 @@ def read(path: Path):
     return json.loads(path.read_text())
 
 
-def synthetic_plan(exposure="development"):
+def synthetic_plan(exposure="development", *, empty_second=None):
     cases = []
     for index in (1, 2):
         fact = {"id": f"synthetic-fact-{index}", "citation": f"[source:synthetic-fact-{index}]",
@@ -30,8 +30,10 @@ def synthetic_plan(exposure="development"):
         style = {"example_id": f"synthetic-style-{index}", "question": "A synthetic style question.",
                  "answer": "A complete synthetic wording example.", "role": "wording_only_not_factual_support"}
         question = f"Explain synthetic mechanism {index}."
-        contexts = {"facts": {"factual_evidence": [fact], "style_examples": []},
-                    "style": {"factual_evidence": [fact], "style_examples": [style]}}
+        facts = [] if index == 2 and empty_second in {"facts", "all"} else [fact]
+        styles = [] if index == 2 and empty_second == "all" else [style]
+        contexts = {"facts": {"factual_evidence": facts, "style_examples": []},
+                    "style": {"factual_evidence": facts, "style_examples": styles}}
         messages = {condition: [{"role": "system", "content": "Use supplied facts and preserve uncertainty."},
             {"role": "user", "content": PREFIX + json.dumps(context, ensure_ascii=False, separators=(",", ":"))},
             {"role": "user", "content": question}] for condition, context in contexts.items()}
@@ -39,8 +41,9 @@ def synthetic_plan(exposure="development"):
         reference = f"PRIVATE_REFERENCE_{exposure}_{index}"
         cases.append({"id": f"case-{index}", "question": question, "language": "en",
             "event_family_id": "synthetic-heldout", "reference_answer": reference,
-            "reference_sha256": digest(reference), "factual_ids": [fact["id"]], "style_ids": [style["example_id"]],
-            "factual_sha256": digest([fact]), "style_contrast_present": True,
+            "reference_sha256": digest(reference), "factual_ids": [source["id"] for source in facts],
+            "style_ids": [source["example_id"] for source in styles],
+            "factual_sha256": digest(facts), "style_contrast_present": bool(styles),
             "messages": messages, "prompt_sha256": {condition: digest(prompt) for condition, prompt in messages.items()}})
     plan = {"schema_version": SCHEMA, "id": "synthetic-" + exposure, "exposure": exposure,
         "implementation_sha256": implementation_hashes(), "cases": cases,
@@ -65,9 +68,9 @@ def synthetic_model(condition):
     return {"identity": identity, "adapter": adapter, "runtime": runtime}
 
 
-def make_collection(directory: Path, *, exposure="development", failed=False, unattempted=False):
+def make_collection(directory: Path, *, exposure="development", failed=False, unattempted=False, empty_second=None):
     directory.mkdir(parents=True)
-    plan = synthetic_plan(exposure)
+    plan = synthetic_plan(exposure, empty_second=empty_second)
     plan_path = directory.parent / (exposure + "-plan.json")
     write(plan_path, plan)
     reports = []
@@ -78,7 +81,7 @@ def make_collection(directory: Path, *, exposure="development", failed=False, un
                 continue
             cut = failed and condition == "adapter" and index == 0
             # Long Unicode/multiline text checks that packaging never clips or normalizes output.
-            answer = (f"Synthetic {CONDITIONS.index(condition)} / {index}: 한글\n" * 50) + case["factual_ids"][0]
+            answer = (f"Synthetic {CONDITIONS.index(condition)} / {index}: 한글\n" * 50) + ",".join(case["factual_ids"])
             generated = {"text": answer, "response_model": "synthetic-served-alias", "completed": not cut,
                 "error": "provider_finish_length" if cut else None, "finish_reason": "length" if cut else "stop",
                 "wall_ms": 1, "request_sha256": digest(_expected_request(plan, condition, "synthetic-served-alias", case))}
@@ -171,6 +174,20 @@ def test_changed_failure_reason_is_not_relabelled_as_verified(tmp_path):
     write(path, failures)
     with pytest.raises(ValueError, match="denominators"):
         package_reviews([pair], tmp_path / "package")
+
+
+@pytest.mark.parametrize("empty_second", ["facts", "all"])
+def test_empty_facts_and_absent_style_contrast_remain_explicit(tmp_path, empty_second):
+    pair = make_collection(tmp_path / "collection", empty_second=empty_second)
+    output = tmp_path / "package"
+    package_reviews([pair], output)
+    pools = read(output / "reviewer/source-pools.json")["pools"]
+    pool_id, pool = next((key, value) for key, value in pools.items() if value["case_id"] == "case-2")
+    assert pool["factual_evidence"] == []
+    assert bool(pool["style_examples"]) == (empty_second == "facts")
+    assert all(pointer["role"] == "style_examples" for pointer in pool["evidence_pointers"])
+    samples = read(output / "reviewer/samples.json")["samples"]
+    assert len([sample for sample in samples if sample["source_pool_id"] == pool_id]) == 3
 
 
 @pytest.mark.parametrize("change", ["answer", "evidence", "reference", "human_rating", "missing_key", "extra_key", "duplicate_pair", "missing_sample"])
