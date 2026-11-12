@@ -68,3 +68,32 @@ unavailable. No full ceremony ISO has been downloaded. Private raw
 publisher metadata is under `reflection-expansion-v1/discovery/` in the shared
 artifact directory. The existing lossless 24 MiB tar-chunk workflow in
 `tools/persona_data/media_chunks.py` is the verified recovery path.
+
+## Bounded NTU address extraction
+
+[ntu-extraction-plan.json](ntu-extraction-plan.json) records the exact ordinary
+HTTP byte range selected from the university's public ceremony ISO. The DVD has
+one program and one cell for the whole ceremony; it has no separate publisher
+chapter for Jensen. Twelve small MPEG samples were inspected with their actual
+PTS clocks. The selected range starts while the vice president is still at the
+lectern and ends after the ceremony announcer has taken over. It is intended to
+include the complete address and surrounding ceremony, subject to a further
+continuous opening/closing review after acquisition.
+
+The separate collector `tools/persona_data/archive_range.py` refuses a server
+that ignores the requested range before consuming the response body. It checks
+the exact Content-Range, total size, observed source identity, byte count, and
+hash; it checkpoints each 16 MiB append. An explicit `--resume` verifies the
+saved prefix and discards only an uncheckpointed interrupted append. Example:
+
+```sh
+python -m tools.persona_data.archive_range \
+  reports/jensen-recovery/reflection-expansion-v1/ntu-extraction-plan.json \
+  /absolute/artifacts/ntu-commencement-2023-address-with-context.vob
+```
+
+The receipt labels the result as derived archive bytes, keeps the original DVD
+program-stream PTS clock, and makes no full-ISO claim. Decoder checks and a hash
+do not establish semantic speech completeness; that remains a separately
+recorded agent review. No YouTube-to-DVD clock offset is assumed. This work is
+outside every frozen training and evaluation input.
