@@ -97,6 +97,17 @@ observation rather than a throughput benchmark. Live generated speech/avatar
 synchronization, two simultaneous neural providers on this host, generated text
 quality and human voice/likeness acceptance remain outside this preview result.
 
-The optional main-API speech proxy check is pending the voice evaluation memory
-slot. Its waveform, actual provider identity and audio clock will be recorded
-separately. It will run with no neural text model loaded.
+## Voice gateway diagnostic
+
+The first actual main-API speech request returned HTTP 502; the child provider
+returned 503 before loading a model. The launcher had resolved the supplied
+virtualenv Python symlink to the base interpreter, which lacks `qwen_tts`.
+Direct interpreter probes established that the supplied virtualenv contains
+the module and the dereferenced base interpreter does not. Both services exited
+cleanly. `voice-attempt-1.json` preserves this failure; it produced no waveform.
+
+The launcher now preserves the executable path and checks dependency discovery
+in that exact interpreter before starting a server. This changes no shared API,
+voice service, frozen M6 input or model setting. The corrected gateway check
+will record its actual waveform, provider identity and audio clock separately,
+with no neural text model loaded.

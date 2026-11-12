@@ -56,10 +56,19 @@ def prepare(args) -> tuple[Settings, Corpus, dict, dict]:
     web_avatar = local(web, config['avatar']['public_path'].lstrip('/'))
     if not (web/'index.html').is_file() or not web_avatar.is_file() or digest(web_avatar) != config['avatar']['sha256']:
         raise ValueError('Build the current web app first; its served avatar must match the pinned GLB')
-    voice = config['voice']; provider = ProviderSettings()
+    voice = config['voice']; provider = ProviderSettings(); interpreter = None
     if args.with_voice:
         if args.inference_python is None: raise ValueError('--with-voice needs --inference-python')
         if not local(repo, voice['binding_path']).is_file(): raise ValueError('Pinned voice runtime binding is missing')
+        # Resolving this symlink discards the virtualenv and selects its base Python.
+        executable = args.inference_python.expanduser().absolute()
+        probe = subprocess.run([str(executable), '-c',
+            "import importlib.util,json,sys; print(json.dumps({'executable':sys.executable,'prefix':sys.prefix,"
+            "'modules':{name:importlib.util.find_spec(name) is not None for name in ['torch','qwen_tts']}}))"],
+            capture_output=True, text=True, timeout=15)
+        if probe.returncode != 0: raise ValueError('The selected voice Python could not complete its dependency preflight')
+        interpreter = json.loads(probe.stdout)
+        if not all(interpreter['modules'].values()): raise ValueError('The selected voice Python lacks torch or qwen_tts')
         provider = ProviderSettings(base_url=f'http://127.0.0.1:{args.voice_port}/v1', model=voice['provider_model'],
                                     api_key=os.getenv('BIAS_VOICE_API_KEY'))
     # Explicit settings avoid silently inheriting a historical provider or snapshot.
@@ -74,6 +83,7 @@ def prepare(args) -> tuple[Settings, Corpus, dict, dict]:
         'corpus_sha256':corpus_digest(corpus),'snapshot_sha256':digest(snapshot_path),'snapshot':snapshot.summary(),
         'text_mode':'evidence-preview','retrieval_backend':settings.retrieval_backend,
         'language_model_configured':False,'voice_enabled':args.with_voice,'avatar_sha256':digest(avatar_path),
+        'voice_interpreter':interpreter,
         'motion_catalog_sha256':digest(catalog_path),'motion':{key:summary[key] for key in
         ['source_events','observed_frames','observed_seconds','preview_runtime_primitives','reviewed_runtime_primitives']}}
     return settings, corpus, config, public
@@ -85,7 +95,7 @@ def managed_voice(args, config: dict):
     process = None; stream = None
     if args.with_voice:
         repo = args.repository.resolve(); voice = config['voice']
-        command = [str(args.inference_python.resolve()), '-m', voice['launcher_module'],
+        command = [str(args.inference_python.expanduser().absolute()), '-m', voice['launcher_module'],
             '--binding', str(local(repo,voice['binding_path'])), '--artifacts', str(args.artifacts.resolve()),
             '--condition', voice['condition'], '--allow-candidates', '--port', str(args.voice_port)]
         env = dict(os.environ); env['PYTHONPATH'] = str(repo/'src')+os.pathsep+str(repo)

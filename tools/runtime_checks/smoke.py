@@ -90,6 +90,8 @@ class Client:
                 'headers': dict(response.getheaders()), 'elapsed_ms': round(elapsed, 3),
                 'body_sha256': sha(payload), 'body_bytes': len(payload)}
             if not binary: record['response'] = data
+            elif response.status >= 400 and 'application/json' in response.getheader('content-type', ''):
+                record['response'] = json.loads(payload)
             self.trace.append(record)
             return response.status, data, record
         finally: connection.close()
