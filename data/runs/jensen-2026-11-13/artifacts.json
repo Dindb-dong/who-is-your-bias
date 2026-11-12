@@ -283,6 +283,88 @@
       "sha256": "6d58863b7055981501a19652a8cbc6f6619e3a10cbb638ca3381e1642f1b7d7a",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-retrieval-hybrid-v1",
+      "role": "actual_multilingual_retrieval_trace_and_results",
+      "development_cases": 24,
+      "heldout_used": false,
+      "file_name": "jensen-retrieval-hybrid-v1.tar.gz",
+      "file_id": "file_00000000f9c081fd97c7e69b13337c34",
+      "library_file_id": "libfile_fde3_f-68d2a6dede5c819184b40323f03507c9_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 93584,
+      "sha256": "fc52b728ff9653e5f22182ff5047766400b3798fd2194374510afe3c5c8e4bb6",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-voice-lora-v2-step0002",
+      "role": "actual_voice_optimizer_checkpoint",
+      "file_name": "voice-lora-v2-step2.tar.gz",
+      "file_id": "file_0000000019b081fdb9f5730d2a4fa9ad",
+      "library_file_id": "libfile_fde3_f-a6be952283c0819195d29236c51dcaaa_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 6466898,
+      "sha256": "13555a15e97381dd9eb2f18cef6db94e19ca41335e24b130902a4e6713bdec34",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified",
+      "completed_optimizer_steps": 2,
+      "target_optimizer_steps": 16,
+      "checkpoint_metadata_sha256": "c87f686106acda35c5fa73454d7c1f3dfa3bc40734d0be3c0e8b830271785ee5",
+      "contract_sha256": "9c673a2048c24b5527719bddbb2e5bcb38b8e1e0b52fe3150c893ba87c1e55b1",
+      "workstream_verification_receipt_sha256": "ae302c20deae277cb9c24f711edc79b33b703d14b9765aeb0e008fa259e6ad8d"
+    },
+    {
+      "artifact_id": "jensen-voice-lora-v2-step0006",
+      "role": "actual_voice_optimizer_checkpoint",
+      "file_name": "voice-lora-v2-step6.tar.gz",
+      "file_id": "file_00000000020c81f6945ec4ac36688153",
+      "library_file_id": "libfile_fde3_f-53edc26b18b481919fd3a08f17263e36_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 6460827,
+      "sha256": "5f9538dbcaf50d2841948d2be4a88e2a39d5176ce9e0c297fea52b29f1e71b98",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified",
+      "completed_optimizer_steps": 6,
+      "target_optimizer_steps": 16,
+      "checkpoint_metadata_sha256": "2a63b320c07b75ae28e256c656eff202cab4b24c2ecdbc0ef25b0a019a280d2f",
+      "contract_sha256": "9c673a2048c24b5527719bddbb2e5bcb38b8e1e0b52fe3150c893ba87c1e55b1",
+      "workstream_verification_receipt_sha256": "26bae387356f7fddf3740c51b737765cca1366c2961dfa34d34ac84afb774a1a"
+    },
+    {
+      "artifact_id": "jensen-voice-lora-v2-step0010",
+      "role": "actual_voice_optimizer_checkpoint",
+      "file_name": "voice-lora-v2-step10.tar.gz",
+      "file_id": "file_00000000f15c81fda1c3c952d25bb12b",
+      "library_file_id": "libfile_fde3_f-f12310f9cc5c8191849de350c690f9f1_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 6478626,
+      "sha256": "f9ac4cc5ec6092286b692f0bc09c757d85a59231097fb4e2e877ffc93d04e859",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified",
+      "completed_optimizer_steps": 10,
+      "target_optimizer_steps": 16,
+      "checkpoint_metadata_sha256": "d8470d334a6fe9be4bb7ddddef0f2dbb3bed306f472cdf04ef8b6de642c86749",
+      "contract_sha256": "9c673a2048c24b5527719bddbb2e5bcb38b8e1e0b52fe3150c893ba87c1e55b1",
+      "workstream_verification_receipt_sha256": "965ed62a832471488bce96e8be9ce73639255aa2d9ab8e45306ca45ee963725a"
+    },
+    {
+      "artifact_id": "jensen-voice-lora-v2-step0014",
+      "role": "actual_voice_optimizer_checkpoint",
+      "file_name": "voice-lora-v2-step14.tar.gz",
+      "file_id": "file_0000000044d48212be2a4c7f067e48f1",
+      "library_file_id": "libfile_fde3_f-a8aa2076937481919ffc878fa9e5cb45_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 6475774,
+      "sha256": "176b7282a6ab22060e4bf9633fca142f97fdf763e775f2c0c010c8fe14d12347",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified",
+      "completed_optimizer_steps": 14,
+      "target_optimizer_steps": 16,
+      "checkpoint_metadata_sha256": "9c75851434b21db10f8d53d8777370622aaecd5ccdf0f516240ca63696c5189c",
+      "contract_sha256": "9c673a2048c24b5527719bddbb2e5bcb38b8e1e0b52fe3150c893ba87c1e55b1",
+      "workstream_verification_receipt_sha256": "5c9f2e47e59d95c9b62bbb37456f2682221b99e545080b63f6bc27d65733c8cb"
     }
-  ]
+  ],
+  "artifact_indexes": {
+    "media": "reports/jensen-recovery/media-artifacts.json",
+    "avatar": "reports/jensen-avatar/derived-artifact-receipts.json",
+    "source_progress": "reports/jensen-recovery/source-progress.json"
+  }
 }
