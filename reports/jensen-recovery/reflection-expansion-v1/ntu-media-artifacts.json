@@ -1,14 +1,14 @@
 {
   "schema_version": "jensen-reflection-derived-media-artifacts.v1",
   "run_id": "jensen-2026-11-13",
-  "updated_at": "2026-11-12T20:10:39.582662+00:00",
+  "updated_at": "2026-11-12T20:12:29.644090+00:00",
   "event_family_id": "ntu-commencement-2023-05-27",
   "excluded_from_frozen_v4_text_v1_M6": true,
-  "status": "all_artifacts_saved; full_fresh_reconstruction_pending",
+  "status": "all_artifacts_saved_fresh_readback_and_full_reconstruction_verified",
   "artifact_count": 32,
   "saved_artifact_count": 32,
   "fresh_readback_verified_artifact_count": 32,
-  "derived_address_videos_durably_verified": 0,
+  "derived_address_videos_durably_verified": 1,
   "complete_original_event_video_count_increment": 0,
   "source_file": {
     "file": "ntu-commencement-2023-address-with-context.vob",
@@ -817,7 +817,11 @@
     }
   ],
   "full_reconstruction": {
-    "status": "pending"
+    "bytes": 752097280,
+    "sha256": "0559b903a1a4ebc312866c28485b12fefc3611b0b057ced17c6bca2f56eb9f3a",
+    "parts": 30,
+    "verified": true,
+    "verified_at": "2026-11-12T20:12:29.644090+00:00"
   },
   "failed_attempts": [],
   "prior_verified_bounded_checkpoints": [

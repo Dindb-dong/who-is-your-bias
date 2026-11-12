@@ -1,10 +1,10 @@
 {
   "schema_version": "jensen-reflection-expansion-acquisition.v1",
-  "updated_at": "2026-11-12T19:32:31.076527+00:00",
+  "updated_at": "2026-11-12T20:12:29.644090+00:00",
   "complete_distinct_event_videos_acquired": 1,
   "complete_distinct_event_videos_fresh_readback_verified": 1,
   "oral_history_events_acquired": 1,
-  "commencement_events_acquired": 0,
+  "commencement_events_acquired": 1,
   "frozen_run_membership": "excluded from v4, text-adapter-v1, matched M6 and heldout RAG diagnostic",
   "videos": [
     {
@@ -90,7 +90,86 @@
     "other_artifacts": 3
   },
   "remaining_work": [
-    "Acquire and preserve at least one complete original commencement recording",
-    "Retain separate expansion-only event partition; no changes to frozen inputs"
-  ]
+    "Human perceptual grading and exact speech-only or word-aligned boundaries were not performed; preserve the recorded decoder caveats.",
+    "No complete official commencement transcript was found on the bounded official-source pages searched. The two acquired event summaries are not full transcripts.",
+    "Any future corpus, speech, or avatar use requires a separate versioned preparation; all currently frozen inputs remain unchanged."
+  ],
+  "derived_address_videos_acquired": 1,
+  "derived_address_videos_fresh_readback_verified": 1,
+  "counting_scope": "This expansion contains1 complete original oral-history video and1 separately counted derived commencement-address video. The project total of9 complete original event recordings is unchanged by the derived range.",
+  "derived_videos": [
+    {
+      "source_id": "ntu-commencement-2023-dvd-address-range",
+      "event_family_id": "ntu-commencement-2023-05-27",
+      "event_date": "2023-05-27",
+      "publisher": "National Taiwan University",
+      "source_url": "https://ftp.ntu.edu.tw/NTU/ceremony/2023/GC2023.iso",
+      "source_landing_url": "https://www.ntu.edu.tw/english/spotlight/2023/2164_20230529.html",
+      "role": "derived_complete_address_with_surrounding_ceremony",
+      "file": "ntu-commencement-2023-address-with-context.vob",
+      "bytes": 752097280,
+      "sha256": "0559b903a1a4ebc312866c28485b12fefc3611b0b057ced17c6bca2f56eb9f3a",
+      "duration_seconds": 1518.692466,
+      "duration_scope": "entire derived range including surrounding ceremony; not Jensen speech-only duration",
+      "source_byte_start": 600688640,
+      "source_byte_count": 752097280,
+      "source_total_bytes": 4472338432,
+      "source_clock": "original_DVD_MPEG_program_stream_PTS",
+      "first_source_pts_seconds": 1211.431956,
+      "local_elapsed_to_source_pts_offset_seconds": 1211.431956,
+      "full_iso_acquired": false,
+      "excluded_from_frozen_v4_text_v1_M6": true,
+      "included_in_current_training_or_evaluation": false,
+      "transport_status": "exact_requested_range_verified",
+      "decoder_status": "completed_with_decoder_warnings",
+      "durability_status": "all32_artifacts_fresh_readback_and30_chunk_full_reconstruction_verified",
+      "durable_artifact_index": "ntu-media-artifacts.json",
+      "fresh_full_reconstruction": {
+        "bytes": 752097280,
+        "sha256": "0559b903a1a4ebc312866c28485b12fefc3611b0b057ced17c6bca2f56eb9f3a",
+        "parts": 30,
+        "verified": true,
+        "verified_at": "2026-11-12T20:12:29.644090+00:00"
+      },
+      "semantic_and_quality_review": "ntu-acquisition.json"
+    }
+  ],
+  "official_event_summaries": [
+    {
+      "file": "ntu-official-commencement-overview.html",
+      "bytes": 113925,
+      "sha256": "f98ae289fc15c847593dab20591e2a612667fbcd508327ff9b13cff9228f300b",
+      "source_url": "https://www.ntu.edu.tw/english/spotlight/2023/2164_20230529.html",
+      "retrieved_url": "https://www.ntu.edu.tw/english/spotlight/2023/2164_20230529.html",
+      "http_status": 200,
+      "content_type": "text/html",
+      "acquired_at": "2026-11-12T19:52:01.006673+00:00",
+      "role": "official_publisher_event_summary; not_full_transcript",
+      "event_family_id": "ntu-commencement-2023-05-27",
+      "source_clock": "untimed_document"
+    },
+    {
+      "file": "nvidia-official-ntu-commencement-summary.html",
+      "bytes": 106889,
+      "sha256": "3c28264269ad952794d0d8eac33dfecd319d5a26bb625dd43039f608b0be5bd0",
+      "source_url": "https://blogs.nvidia.com/blog/huang-ntu-commencement/",
+      "retrieved_url": "https://blogs.nvidia.com/blog/huang-ntu-commencement/",
+      "http_status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "acquired_at": "2026-11-12T19:52:07.476900+00:00",
+      "role": "official_publisher_event_summary; not_full_transcript",
+      "event_family_id": "ntu-commencement-2023-05-27",
+      "source_clock": "untimed_document"
+    }
+  ],
+  "full_official_commencement_transcripts_acquired": 0,
+  "derived_address_save_profile": {
+    "raw_chunk_bytes": 25165824,
+    "chunk_archives": 30,
+    "container": "single-member lossless tar.gz; gzip level0",
+    "other_artifacts": 2,
+    "all_final_artifacts_fresh_readback_verified": 32,
+    "prior_bounded_history_artifacts": 3,
+    "index": "ntu-media-artifacts.json"
+  }
 }

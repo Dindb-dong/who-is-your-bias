@@ -159,11 +159,19 @@
     },
     "checked_at": "2026-11-12T20:05:30.577655+00:00"
   },
-  "durability_status": "full_range_acquired_locally; chunk_upload_and_fresh_full_reconstruction_pending",
+  "durability_status": "all32_artifacts_fresh_readback_and30_chunk_full_reconstruction_verified",
   "existing_durable_partial_checkpoints": {
     "boundary": "ntu-boundary-artifact.json",
     "prefix_64mib": "ntu-prefix-artifact.json",
     "opening_review": "ntu-opening-artifact.json"
   },
-  "next_step": "Preserve exact whole range as30 lossless24MiB single-member tar.gz chunks plus reconstruction/source-review manifests; fresh-readback verify all artifacts and reconstruct whole source hash."
+  "next_step": "Separate future transcript/voice alignment and perceptual review may use this source after their own versioned preparation; current frozen training and evaluation inputs remain unchanged.",
+  "durable_artifact_index": "ntu-media-artifacts.json",
+  "fresh_full_reconstruction": {
+    "bytes": 752097280,
+    "sha256": "0559b903a1a4ebc312866c28485b12fefc3611b0b057ced17c6bca2f56eb9f3a",
+    "parts": 30,
+    "verified": true,
+    "verified_at": "2026-11-12T20:12:29.644090+00:00"
+  }
 }

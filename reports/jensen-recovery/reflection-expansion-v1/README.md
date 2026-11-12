@@ -60,11 +60,12 @@ and original PDF are now acquired, saved, and freshly read back. All 29 stored
 artifacts match their byte counts and SHA-256 values. The 26 restored video
 chunks reconstruct the complete 653,931,658-byte recording exactly;
 [media-artifacts.json](media-artifacts.json) records every stable identifier and
-the recovery recipe. [acquisition-status.json](acquisition-status.json) records the actual
-bytes, source clock, decoder checks, and remaining commencement gap. The next
-step is to acquire a complete official commencement recording, with DVD
-metadata/range inspection as a bounded fallback if public video players remain
-unavailable. No full ceremony ISO has been downloaded. Private raw
+the recovery recipe. The derived NTU commencement address is also now saved,
+freshly read back, and exactly reconstructed, as recorded separately in
+[ntu-media-artifacts.json](ntu-media-artifacts.json).
+[acquisition-status.json](acquisition-status.json) separates complete original
+recordings, derived address footage, transcripts, and event summaries. No full
+ceremony ISO has been downloaded. Private raw
 publisher metadata is under `reflection-expansion-v1/discovery/` in the shared
 artifact directory. The existing lossless 24 MiB tar-chunk workflow in
 `tools/persona_data/media_chunks.py` is the verified recovery path.
@@ -119,17 +120,21 @@ messages remain in the report. Human perceptual review is ungraded. The range
 collector now distinguishes a successful exit with decoder warnings from a
 clean decoder result.
 
-Whole-range chunk preservation is in progress. Three earlier bounded artifacts
-are already saved and freshly verified:
+All **32 whole-range artifacts** are saved and freshly verified. The 30 restored
+video chunks reconstruct all 752,097,280 source bytes with the exact hash above;
+the reconstruction manifest and 26-member source/review archive are also
+verified. [ntu-media-artifacts.json](ntu-media-artifacts.json) retains every
+persistent identifier, byte count, outer/raw hash, and the recovery command.
+Three earlier bounded artifacts remain available as the acquisition history:
 
-- [Boundary metadata and samples](ntu-boundary-artifact.json), including all54
+- [Boundary metadata and samples](ntu-boundary-artifact.json), including all 54
   member hashes and the official Wanjiun Liao introducer-name correction.
-- [Exact64MiB resumable prefix](ntu-prefix-artifact.json), with the unchanged
+- [Exact 64 MiB resumable prefix](ntu-prefix-artifact.json), with the unchanged
   acquisition plan, source binding, state, and recovery command.
 - [Opening review and official source pages](ntu-opening-artifact.json). The
   NTU and NVIDIA pages are event summaries, not complete speech transcripts.
 
-These receipts were remotely verified in checkpoints`25bc7194817cfdb066dcfa59d994060412f54e2a`,
+These receipts were remotely verified in checkpoints `25bc7194817cfdb066dcfa59d994060412f54e2a`,
 `f3ea103ff554ee89245371318a08948581cad7ca`, and
 `9d9a406a693de33f683fd04cdb4fc379c2563535`, respectively. New source material
 remains outside every frozen v4, text-adapter-v1, M6, and heldout RAG input.

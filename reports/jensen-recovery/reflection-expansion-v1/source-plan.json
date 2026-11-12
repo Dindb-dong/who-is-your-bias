@@ -1,7 +1,7 @@
 {
   "schema_version": "jensen-reflection-expansion-sources.v1",
   "registered_at": "2026-11-12T19:20:48.905907+00:00",
-  "status": "oral_history_durably_verified_derived_commencement_range_acquired_preservation_pending",
+  "status": "oral_history_and_derived_commencement_range_durably_verified",
   "isolation": {
     "included_in_frozen_v4": false,
     "included_in_text_adapter_v1": false,
@@ -23,9 +23,10 @@
       "official_full_download_url": "https://ftp.ntu.edu.tw/NTU/ceremony/2023/GC2023.iso",
       "listed_full_download_bytes": 4472338432,
       "scope": "Exact752097280-byte derived range from public university ISO,25m18.692466s including introduction and following ceremony. Agent review supports complete address containment; no full ceremony or exact speech-only duration claim.",
-      "status": "derived_address_with_context_acquired; full_ISO_not_acquired; durable_whole_range_pending",
+      "status": "derived_address_with_context_saved_fresh_readback_and_reconstruction_verified; full_ISO_not_acquired",
       "player_access_status": "Official linked YouTube video is private; no sign-in or cookie workaround attempted. Public university ISO remains a separate authorized source.",
-      "actual_acquisition_report": "ntu-acquisition.json"
+      "actual_acquisition_report": "ntu-acquisition.json",
+      "artifact_index": "ntu-media-artifacts.json"
     },
     {
       "event_family_id": "caltech-commencement-2024-06-14",
@@ -81,5 +82,6 @@
   "actual_media_files_acquired": 1,
   "actual_media_count_unit": "complete original event video files; transcript PDF and metadata are separate artifacts",
   "last_verified_preparation_commit": "f2cf6bad53493aae7522c5b63612e654b850365d",
-  "actual_distinct_event_videos_durably_verified": 1
+  "actual_distinct_event_videos_durably_verified": 1,
+  "last_verified_at": "2026-11-12T20:12:29.644090+00:00"
 }
