@@ -1,0 +1,47 @@
+{
+  "schema_version": "jensen-evaluation-artifacts.v1",
+  "role": "private original heldout RAG questions, references, actual retrieval traces and frozen prompts",
+  "status": "uploaded_and_fresh_readback_verified",
+  "verified_at": "2026-11-12T19:13:39.007371+00:00",
+  "archive": {
+    "file_name": "jensen-heldout-rag-v1-frozen-inputs.tar.gz",
+    "bytes": 54495,
+    "sha256": "58006db5e650dcd2562d70971e586a3fbf6dbfa385b2c9c40a9f26d56f1a5e84",
+    "file_id": "file_00000000fca482099a848868666f54f3",
+    "library_file_id": "libfile_fde3_f-90e5d815b4ac8191bf39aec99bd5bff1_a18ece08681081918d81df44f69c4b1f",
+    "version": 0
+  },
+  "files": {
+    "answerability.json": {
+      "bytes": 5287,
+      "sha256": "4ecc5eabe813bcc3b6d320c1bf0c27224dbd250ca24af26af9d901f7aedf4bb1"
+    },
+    "execution-contract.json": {
+      "bytes": 1444,
+      "sha256": "85e5de54aa01c6be642565abbead674640af41adb7576fc9e434561455811a85"
+    },
+    "plan.json": {
+      "bytes": 247457,
+      "sha256": "58338fe59a75eac2ff86e5e52fece7ea268145987957709d4df72d04ea2b7adb"
+    },
+    "retrieval-traces.json": {
+      "bytes": 88334,
+      "sha256": "e160340167f4661ac961cdefd5b6a62e2214faca0dfa66d43ebb9f8e5e7b7db7"
+    },
+    "summary.json": {
+      "bytes": 16409,
+      "sha256": "1d26f70da0cbba590f34a3a9656ce81869324b58a37687eef47636ef8d7d5efc"
+    }
+  },
+  "plan_sha256": "3e2c6409b45a67b11798c17f23c6ce869aa9d71309775bf9af8f69afcc7d02d6",
+  "contract_sha256": "ed1ab9d562759c715d2114a6d584639e2d5f177ce7ca8b130752c8311420048c",
+  "checks": {
+    "fresh_archive_size_and_sha256": true,
+    "all_five_restored_files_equal_original": true,
+    "validate_rag_plan": true,
+    "validate_execution_contract": true,
+    "no_model_generations": true
+  },
+  "source_wording_distributed_in_git": false,
+  "restore_directory_in_archive": "heldout-rag-v1"
+}

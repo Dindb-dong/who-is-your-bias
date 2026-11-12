@@ -1,0 +1,448 @@
+{
+  "schema_version": "heldout-default-lexical-generation.v1",
+  "status": "frozen_no_model_generations",
+  "plan_sha256": "3e2c6409b45a67b11798c17f23c6ce869aa9d71309775bf9af8f69afcc7d02d6",
+  "source_fixed_evidence_plan_sha256": "7fd35de01ea1a364aa7b5a2bf8547bf3a4a6cd3ebee4b3764b8ce7c8957e5c7c",
+  "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+  "execution_conditions": [
+    "facts"
+  ],
+  "scope": "Offline default retrieval-to-generation diagnostic; one base condition, no matched adapter comparison or live API latency claim",
+  "registered_cases": 6,
+  "planned_generations": 6,
+  "attempted_generations": 0,
+  "pre_generation_results": [
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00072",
+      "status": "prompt_captured_no_generation"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00078",
+      "status": "prompt_captured_no_generation"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00186",
+      "status": "prompt_captured_no_generation"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00190",
+      "status": "prompt_captured_no_generation"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00253",
+      "status": "prompt_captured_no_generation"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00297",
+      "status": "prompt_captured_no_generation"
+    }
+  ],
+  "retriever": {
+    "backend": "lexical",
+    "version": "qa-bm25-situation.v3",
+    "limit": 4,
+    "style_examples": false
+  },
+  "answerability_sha256": "734782fb146f6cb0fbce86e6d8ce9cb547382cb6cfc754f13f59f809ae207ceb",
+  "answerability_counts": {
+    "partially_answerable": 2,
+    "answerable": 3,
+    "unanswerable": 1
+  },
+  "answerability": [
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00072",
+      "answerability": "partially_answerable",
+      "question_sha256": "37d87ee3aaffff83d6426de214a9b4c47c3e12514e3f99948a4c4ec71faa7ce6",
+      "reference_sha256": "ab6a061f7f3738efab4ba94194f937cb7b7b718e8c56d067e31860d73670a509"
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00078",
+      "answerability": "answerable",
+      "question_sha256": "def664f7607bf97ccb672a0c2c914b6813746c6778104a4b09e119e9ce17c030",
+      "reference_sha256": "83a59bb6c62a5c86a9dafc5f82486079a7d0d87d48667826af9dc0a69427d47d"
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00186",
+      "answerability": "partially_answerable",
+      "question_sha256": "332729f8e2db3d61dd6fef927125b0f03334bc8396b4ed0c3c18458d4e0c6f87",
+      "reference_sha256": "b8561bbc6d32d51a2569d85b63d7929e827f6cb4c3f04a9103920c8d2276922d"
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00190",
+      "answerability": "answerable",
+      "question_sha256": "7422ed43593aff17582d720345abe072114e91b756d69049e8437340769fc3a6",
+      "reference_sha256": "7310f93d3772495151ae2dfd09580dfef0519b9445bd73e43fde10bbc4418be0"
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00253",
+      "answerability": "answerable",
+      "question_sha256": "d562be13c6962048a619d0a475c1086c972838b4dcdb3e2cff8c7d10a9976dda",
+      "reference_sha256": "be26af12fdff6f9c276c77ba0456bbbf76cebc5b6335ade903aac2cf738c7fb3"
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00297",
+      "answerability": "unanswerable",
+      "question_sha256": "c17122cfc2d23d342a3179a81950c2bf82f91649aec113a9ee2c3cd5d42bed24",
+      "reference_sha256": "95dae56a916e26258c03a3e366fd8239b2d11424e7525faf1e8017fd02b42a6f"
+    }
+  ],
+  "retrieval_trace_sha256": "d2201bd23b238bb6e1add4c3f10a398d4bde11d4e36f50216fa637f568927d0f",
+  "implementation_sha256": {
+    "tools/adaptation_evaluation/rag_diagnostic.py": "5b7a32372e8407ff8b19bfc69737b8e58cb402e1f217c82c125bcbd511c16544",
+    "src/bias/engine.py": "7aa48868dedb41aa44926987347aa6fbe8b6e377af13572ef5e1a77fd3f0fac9",
+    "src/bias/dialogue.py": "3c5aa9b2e959ce501a807711760683c89b069ebff3f0706b3e3bfd1d88c7455e",
+    "src/bias/query_policy.py": "95d25a25696cb868d97f7366b033c3e2c425d876181da374c6ec62e48366f30b",
+    "src/bias/situations.py": "64ac395448105ced33a5249adef4125704c6acfb6aa1274bc29fc18b521a86a1",
+    "src/bias/providers.py": "e92f428eeefff17a35d0992a0951d9a1fb31620aed9d5516d8402712aef1b083"
+  },
+  "cases": [
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00072",
+      "status": "prompt_captured_no_generation",
+      "retrieved_ids": [
+        "qa26-lex-494-cue-00028",
+        "qa26-dwarkesh-2026-turn-00072",
+        "qa26-stanford-vftt-2024-turn-00085",
+        "qa26-dwarkesh-2026-turn-00188"
+      ],
+      "supplied_ids": [
+        "qa26-lex-494-cue-00028",
+        "qa26-dwarkesh-2026-turn-00072",
+        "qa26-stanford-vftt-2024-turn-00085"
+      ],
+      "budget": {
+        "counter": "/workspace/scratch/6f64e1b53384/model-cache/hub/models--Qwen--Qwen3-1.7B/snapshots/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+        "exact_model_tokens": true,
+        "input_units": 3783,
+        "context_window": 4096,
+        "reserved_output_tokens": 160,
+        "dropped_evidence_ids": [
+          "qa26-dwarkesh-2026-turn-00188"
+        ],
+        "supplied_evidence_ids": [
+          "qa26-lex-494-cue-00028",
+          "qa26-dwarkesh-2026-turn-00072",
+          "qa26-stanford-vftt-2024-turn-00085"
+        ],
+        "style_example_ids": [],
+        "history_turns": 0
+      },
+      "searches": [
+        {
+          "query_sha256": "37d87ee3aaffff83d6426de214a9b4c47c3e12514e3f99948a4c4ec71faa7ce6",
+          "eligible_count": 410,
+          "eligible_ids_sha256": "89800df2ffb14874c6417e59bc0452b5af63241b86591e4e73f38758b8215a19",
+          "confidence": 0.805,
+          "reason": null,
+          "hits": [
+            {
+              "rank": 1,
+              "id": "qa26-lex-494-cue-00028",
+              "source_id": "lex-494",
+              "event_family_id": "lex-494",
+              "score": 23.277086
+            },
+            {
+              "rank": 2,
+              "id": "qa26-dwarkesh-2026-turn-00072",
+              "source_id": "dwarkesh-2026",
+              "event_family_id": "dwarkesh-2026",
+              "score": 19.477024
+            },
+            {
+              "rank": 3,
+              "id": "qa26-stanford-vftt-2024-turn-00085",
+              "source_id": "stanford-vftt-2024",
+              "event_family_id": "stanford-vftt-2024",
+              "score": 19.171981
+            },
+            {
+              "rank": 4,
+              "id": "qa26-dwarkesh-2026-turn-00188",
+              "source_id": "dwarkesh-2026",
+              "event_family_id": "dwarkesh-2026",
+              "score": 18.261324
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00078",
+      "status": "prompt_captured_no_generation",
+      "retrieved_ids": [
+        "qa26-strange-loop-2025-turn-00009",
+        "qa26-lex-494-cue-00244",
+        "qa26-goldman-sachs-2024-turn-00021",
+        "qa26-dwarkesh-2026-turn-00206"
+      ],
+      "supplied_ids": [
+        "qa26-strange-loop-2025-turn-00009",
+        "qa26-lex-494-cue-00244",
+        "qa26-goldman-sachs-2024-turn-00021",
+        "qa26-dwarkesh-2026-turn-00206"
+      ],
+      "budget": {
+        "counter": "/workspace/scratch/6f64e1b53384/model-cache/hub/models--Qwen--Qwen3-1.7B/snapshots/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+        "exact_model_tokens": true,
+        "input_units": 3685,
+        "context_window": 4096,
+        "reserved_output_tokens": 160,
+        "dropped_evidence_ids": [],
+        "supplied_evidence_ids": [
+          "qa26-strange-loop-2025-turn-00009",
+          "qa26-lex-494-cue-00244",
+          "qa26-goldman-sachs-2024-turn-00021",
+          "qa26-dwarkesh-2026-turn-00206"
+        ],
+        "style_example_ids": [],
+        "history_turns": 0
+      },
+      "searches": [
+        {
+          "query_sha256": "def664f7607bf97ccb672a0c2c914b6813746c6778104a4b09e119e9ce17c030",
+          "eligible_count": 410,
+          "eligible_ids_sha256": "89800df2ffb14874c6417e59bc0452b5af63241b86591e4e73f38758b8215a19",
+          "confidence": 0.957,
+          "reason": null,
+          "hits": [
+            {
+              "rank": 1,
+              "id": "qa26-strange-loop-2025-turn-00009",
+              "source_id": "strange-loop-2025",
+              "event_family_id": "strange-loop-2025",
+              "score": 9.495268
+            },
+            {
+              "rank": 2,
+              "id": "qa26-lex-494-cue-00244",
+              "source_id": "lex-494",
+              "event_family_id": "lex-494",
+              "score": 8.08391
+            },
+            {
+              "rank": 3,
+              "id": "qa26-goldman-sachs-2024-turn-00021",
+              "source_id": "goldman-sachs-2024",
+              "event_family_id": "goldman-sachs-2024",
+              "score": 7.11328
+            },
+            {
+              "rank": 4,
+              "id": "qa26-dwarkesh-2026-turn-00206",
+              "source_id": "dwarkesh-2026",
+              "event_family_id": "dwarkesh-2026",
+              "score": 6.880151
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00186",
+      "status": "prompt_captured_no_generation",
+      "retrieved_ids": [],
+      "supplied_ids": [],
+      "budget": {
+        "counter": "/workspace/scratch/6f64e1b53384/model-cache/hub/models--Qwen--Qwen3-1.7B/snapshots/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+        "exact_model_tokens": true,
+        "input_units": 724,
+        "context_window": 4096,
+        "reserved_output_tokens": 160,
+        "dropped_evidence_ids": [],
+        "supplied_evidence_ids": [],
+        "style_example_ids": [],
+        "history_turns": 0
+      },
+      "searches": [
+        {
+          "query_sha256": "332729f8e2db3d61dd6fef927125b0f03334bc8396b4ed0c3c18458d4e0c6f87",
+          "eligible_count": 410,
+          "eligible_ids_sha256": "89800df2ffb14874c6417e59bc0452b5af63241b86591e4e73f38758b8215a19",
+          "confidence": 0,
+          "reason": "Matches are too weak to support an answer.",
+          "hits": []
+        }
+      ]
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00190",
+      "status": "prompt_captured_no_generation",
+      "retrieved_ids": [
+        "qa26-lex-494-cue-00244",
+        "qa26-strange-loop-2025-turn-00171",
+        "qa26-dwarkesh-2026-turn-00473",
+        "qa26-stanford-vftt-2024-turn-00085"
+      ],
+      "supplied_ids": [
+        "qa26-lex-494-cue-00244",
+        "qa26-strange-loop-2025-turn-00171",
+        "qa26-dwarkesh-2026-turn-00473"
+      ],
+      "budget": {
+        "counter": "/workspace/scratch/6f64e1b53384/model-cache/hub/models--Qwen--Qwen3-1.7B/snapshots/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+        "exact_model_tokens": true,
+        "input_units": 3792,
+        "context_window": 4096,
+        "reserved_output_tokens": 160,
+        "dropped_evidence_ids": [
+          "qa26-stanford-vftt-2024-turn-00085"
+        ],
+        "supplied_evidence_ids": [
+          "qa26-lex-494-cue-00244",
+          "qa26-strange-loop-2025-turn-00171",
+          "qa26-dwarkesh-2026-turn-00473"
+        ],
+        "style_example_ids": [],
+        "history_turns": 0
+      },
+      "searches": [
+        {
+          "query_sha256": "7422ed43593aff17582d720345abe072114e91b756d69049e8437340769fc3a6",
+          "eligible_count": 410,
+          "eligible_ids_sha256": "89800df2ffb14874c6417e59bc0452b5af63241b86591e4e73f38758b8215a19",
+          "confidence": 0.82,
+          "reason": null,
+          "hits": [
+            {
+              "rank": 1,
+              "id": "qa26-lex-494-cue-00244",
+              "source_id": "lex-494",
+              "event_family_id": "lex-494",
+              "score": 22.254692
+            },
+            {
+              "rank": 2,
+              "id": "qa26-strange-loop-2025-turn-00171",
+              "source_id": "strange-loop-2025",
+              "event_family_id": "strange-loop-2025",
+              "score": 20.726516
+            },
+            {
+              "rank": 3,
+              "id": "qa26-dwarkesh-2026-turn-00473",
+              "source_id": "dwarkesh-2026",
+              "event_family_id": "dwarkesh-2026",
+              "score": 20.684163
+            },
+            {
+              "rank": 4,
+              "id": "qa26-stanford-vftt-2024-turn-00085",
+              "source_id": "stanford-vftt-2024",
+              "event_family_id": "stanford-vftt-2024",
+              "score": 16.686285
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00253",
+      "status": "prompt_captured_no_generation",
+      "retrieved_ids": [],
+      "supplied_ids": [],
+      "budget": {
+        "counter": "/workspace/scratch/6f64e1b53384/model-cache/hub/models--Qwen--Qwen3-1.7B/snapshots/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+        "exact_model_tokens": true,
+        "input_units": 720,
+        "context_window": 4096,
+        "reserved_output_tokens": 160,
+        "dropped_evidence_ids": [],
+        "supplied_evidence_ids": [],
+        "style_example_ids": [],
+        "history_turns": 0
+      },
+      "searches": [
+        {
+          "query_sha256": "d562be13c6962048a619d0a475c1086c972838b4dcdb3e2cff8c7d10a9976dda",
+          "eligible_count": 410,
+          "eligible_ids_sha256": "89800df2ffb14874c6417e59bc0452b5af63241b86591e4e73f38758b8215a19",
+          "confidence": 0,
+          "reason": "Matches are too weak to support an answer.",
+          "hits": []
+        }
+      ]
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00297",
+      "status": "prompt_captured_no_generation",
+      "retrieved_ids": [
+        "qa26-stanford-vftt-2024-turn-00099",
+        "qa26-lex-494-cue-00200",
+        "qa26-lex-494-cue-00219",
+        "qa26-csis-2025-turn-00132"
+      ],
+      "supplied_ids": [
+        "qa26-stanford-vftt-2024-turn-00099",
+        "qa26-lex-494-cue-00200",
+        "qa26-csis-2025-turn-00132"
+      ],
+      "budget": {
+        "counter": "/workspace/scratch/6f64e1b53384/model-cache/hub/models--Qwen--Qwen3-1.7B/snapshots/70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+        "exact_model_tokens": true,
+        "input_units": 2750,
+        "context_window": 4096,
+        "reserved_output_tokens": 160,
+        "dropped_evidence_ids": [
+          "qa26-lex-494-cue-00219"
+        ],
+        "supplied_evidence_ids": [
+          "qa26-stanford-vftt-2024-turn-00099",
+          "qa26-lex-494-cue-00200",
+          "qa26-csis-2025-turn-00132"
+        ],
+        "style_example_ids": [],
+        "history_turns": 0
+      },
+      "searches": [
+        {
+          "query_sha256": "c17122cfc2d23d342a3179a81950c2bf82f91649aec113a9ee2c3cd5d42bed24",
+          "eligible_count": 410,
+          "eligible_ids_sha256": "89800df2ffb14874c6417e59bc0452b5af63241b86591e4e73f38758b8215a19",
+          "confidence": 0.817,
+          "reason": null,
+          "hits": [
+            {
+              "rank": 1,
+              "id": "qa26-stanford-vftt-2024-turn-00099",
+              "source_id": "stanford-vftt-2024",
+              "event_family_id": "stanford-vftt-2024",
+              "score": 19.585432
+            },
+            {
+              "rank": 2,
+              "id": "qa26-lex-494-cue-00200",
+              "source_id": "lex-494",
+              "event_family_id": "lex-494",
+              "score": 13.338867
+            },
+            {
+              "rank": 3,
+              "id": "qa26-lex-494-cue-00219",
+              "source_id": "lex-494",
+              "event_family_id": "lex-494",
+              "score": 12.897595
+            },
+            {
+              "rank": 4,
+              "id": "qa26-csis-2025-turn-00132",
+              "source_id": "csis-2025",
+              "event_family_id": "csis-2025",
+              "score": 12.75912
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "source_wording_distributed": false,
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "limitations": [
+    "Answerability labels concern the whole eligible training corpus, not guaranteed retrieval success.",
+    "No evidence or insufficient evidence remains a diagnostic outcome; no handpicked passage replaces it.",
+    "Original earlier-speaker source context is omitted, and private reference answers are never supplied.",
+    "The three-condition plan envelope is reused for runner compatibility; only its facts condition is registered here."
+  ]
+}

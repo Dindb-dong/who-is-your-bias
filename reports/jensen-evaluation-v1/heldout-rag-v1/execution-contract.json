@@ -1,0 +1,36 @@
+{
+  "schema_version": "text-single-condition-execution-contract.v1",
+  "wrapper_file": "tools/adaptation_evaluation/local_condition.py",
+  "wrapper_sha256": "f1fda11d0f7f4f5d5de6dcee20d51bb0c3230d1b32509267915977808a16b5da",
+  "plan_sha256": [
+    "3e2c6409b45a67b11798c17f23c6ce869aa9d71309775bf9af8f69afcc7d02d6"
+  ],
+  "conditions": [
+    "facts",
+    "style",
+    "adapter"
+  ],
+  "base_identity": {
+    "base_model": "Qwen/Qwen3-1.7B",
+    "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+    "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+    "chat_template_options": {
+      "enable_thinking": false
+    }
+  },
+  "runtime": {
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 8
+  },
+  "decoding": "unchanged frozen plan policy",
+  "warmup": {
+    "max_tokens": 12,
+    "excluded_per_condition": true
+  },
+  "persistence_boundary": "one condition per process invocation; save and freshly verify its complete directory before another condition",
+  "collection": "requires three sealed condition reports and matching fresh-readback file receipts",
+  "timing_scope": "separate model launch and excluded warmup for each condition; sequential order is not counterbalanced",
+  "contract_sha256": "ed1ab9d562759c715d2114a6d584639e2d5f177ce7ca8b130752c8311420048c"
+}

@@ -13,6 +13,11 @@ publish identities, source IDs, classifications and hashes. Original questions,
 complete passages, references, prompts and detailed support rationales remain
 in the saved private artifact identified by [artifact receipts](artifacts.json).
 
+A separate [default lexical heldout RAG diagnostic](heldout-rag-v1/README.md)
+now freezes actual runtime retrieval and prompt packing for the same six
+questions. It registers one base condition and keeps the original answerability
+labels. Its preparation is separate from the 54 matched-generation calls below.
+
 ## What is held constant
 
 | Condition | Weights | Factual passages | Wording examples |
