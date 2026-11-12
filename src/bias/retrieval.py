@@ -121,16 +121,23 @@ class Retriever:
         self.records = tuple(corpus.training_evidence)
         self.original_qa = any(record.question_answer is not None for record in self.records)
         self.source_years = {source.id: {source.published_at.year, *([source.recorded_at.year] if source.recorded_at else [])} for source in corpus.sources.values()}
-        self.topic_terms = {record.id: set(tokenize(" ".join(record.topics), original_qa=self.original_qa)) for record in self.records}
+        self.topic_terms = {record.id: set(self.tokenize(" ".join(record.topics))) for record in self.records}
         # Match incoming questions against original questions as well as answers.
         # Both B and C use exactly this topical index; only C reranks its eligible
         # candidates. An annotation summary is never substituted for source text.
-        self.term_counts = [Counter(tokenize(record.text + " " + (record.question_answer.question + " " + record.question_answer.question if record.question_answer else "") + " " + " ".join(record.topics + record.topics), original_qa=self.original_qa)) for record in self.records]
+        self.term_counts = [Counter(self.tokenize(record.text + " " + (record.question_answer.question + " " + record.question_answer.question if record.question_answer else "") + " " + " ".join(record.topics + record.topics))) for record in self.records]
         self.lengths = [sum(count.values()) for count in self.term_counts]
         self.average_length = sum(self.lengths) / max(1, len(self.lengths))
         self.df: Counter[str] = Counter()
         for count in self.term_counts:
             self.df.update(count.keys())
+
+    def tokenize(self, text: str) -> list[str]:
+        return tokenize(text, original_qa=self.original_qa)
+
+    def with_corpus(self, corpus: Corpus) -> Retriever:
+        """Keep the selected lexical policy when temporal filtering rebuilds it."""
+        return type(self)(corpus)
 
     def search(self, query: str, *, limit: int = 4, behavior: bool = False, allow_live: bool = False) -> SearchResult:
         if not 1 <= limit <= 10:
@@ -139,7 +146,7 @@ class Retriever:
             return SearchResult((), 0, reason)
         if not allow_live and LIVE_QUERY.search(query):
             return SearchResult((), 0, "The curated corpus is historical and cannot verify current information.")
-        terms = set(tokenize(query, original_qa=self.original_qa))
+        terms = set(self.tokenize(query))
         known = terms.intersection(self.df)
         if not known or not self.records:
             return SearchResult((), 0, "No matching evidence in the reviewed training corpus.")
@@ -164,10 +171,7 @@ class Retriever:
         # A weak, generic match must not be promoted into a factual response.
         hits = [
             hit for hit in hits
-            if hit.score >= 0.65
-            and len(hit.matched_terms) / max(1, len(terms)) >= 0.28
-            and (len(hit.matched_terms) >= 2 or bool(set(hit.matched_terms).intersection(self.topic_terms[hit.evidence.id])))
-            and (hit.evidence.question_answer is None or self._qa_topic_supported(hit))
+            if self._eligible_hit(hit, terms)
         ]
         if not hits:
             return SearchResult((), 0, "Matches are too weak to support an answer.")
@@ -181,6 +185,12 @@ class Retriever:
         coverage = len(best_terms) / max(1, len(terms))
         confidence = min(1.0, 0.35 + min(0.35, hits[0].score / 12) + 0.30 * coverage)
         return SearchResult(tuple(hits[:limit]), round(confidence, 3))
+
+    def _eligible_hit(self, hit: SearchHit, terms: set[str]) -> bool:
+        return (hit.score >= 0.65
+            and len(hit.matched_terms) / max(1, len(terms)) >= 0.28
+            and (len(hit.matched_terms) >= 2 or bool(set(hit.matched_terms).intersection(self.topic_terms[hit.evidence.id])))
+            and (hit.evidence.question_answer is None or self._qa_topic_supported(hit)))
 
     def _qa_topic_supported(self, hit: SearchHit) -> bool:
         matched = set(hit.matched_terms).intersection(self.topic_terms[hit.evidence.id])

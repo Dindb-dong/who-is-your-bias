@@ -88,8 +88,8 @@ class Settings:
             raise ValueError("tts_persona_id must be a persona identifier or generic")
         if not isinstance(self.tts_language_hint, bool):
             raise ValueError("tts_language_hint must be a boolean")
-        if self.retrieval_backend not in {"lexical", "hybrid"} or self.embedding_backend not in {"local", "http"}:
-            raise ValueError("Select lexical/hybrid retrieval and local/http embeddings")
+        if self.retrieval_backend not in {"lexical", "hybrid", "jensen-lexical"} or self.embedding_backend not in {"local", "http"}:
+            raise ValueError("Select lexical/hybrid/jensen-lexical retrieval and local/http embeddings")
         if not isinstance(self.retrieval_prewarm, bool):
             raise ValueError("retrieval_prewarm must be a boolean")
         if self.retrieval_backend == "hybrid" and not self.embedding_model:

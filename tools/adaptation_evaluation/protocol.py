@@ -38,7 +38,7 @@ def implementation_hashes() -> dict:
              "services/language/app.py", "services/language/schemas.py",
              "services/language/requirements.txt", "services/language/requirements-adapter.txt",
              "src/bias/context_budget.py", "src/bias/snapshots.py", "src/bias/config.py",
-             "src/bias/corpus.py", "src/bias/models.py", "src/bias/retrieval.py", "src/bias/hybrid_retrieval.py",
+             "src/bias/corpus.py", "src/bias/models.py", "src/bias/retrieval.py", "src/bias/jensen_retrieval.py", "src/bias/hybrid_retrieval.py",
              "tools/reference_evaluation/run.py", "tools/reference_evaluation/protocol.py",
              "tools/evaluation/observe.py", "tools/evaluation/run.py"]
     return {name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in names}
@@ -83,7 +83,7 @@ def _facts_and_styles(engine: Engine, case: dict, selection: dict | None):
         # Do not accidentally apply the archived retriever's exact-year filter
         # a second time to a future plan target or historical upper bound.
         lexical_query = re.sub(r"(?<!\d)(?:19|20)\d{2}(?!\d)", "", query) if temporal and temporal.intent.mode != "comparison" else query
-        result = Retriever(filtered).search(lexical_query, limit=engine.settings.retrieval_limit, allow_live=bool(temporal))
+        result = engine.retriever.with_corpus(filtered).search(lexical_query, limit=engine.settings.retrieval_limit, allow_live=bool(temporal))
         facts = result.hits
         # A declared development fallback, not a semantic relevance claim.
         terms = set(tokenize(query, original_qa=True))
@@ -91,7 +91,7 @@ def _facts_and_styles(engine: Engine, case: dict, selection: dict | None):
                   for e in corpus.style_evidence if e.id in style_ids and e.id not in {h.evidence.id for h in facts}]
         scored.sort(key=lambda pair: (-pair[0], pair[1].id))
         styles = tuple(SearchHit(e, float(score), ()) for score, e in scored[:2] if score)
-        policy = "frozen_lexical_with_question_overlap_style_candidates"
+        policy = "frozen_" + engine.settings.retrieval_backend + "_with_question_overlap_style_candidates"
     for hit in (*facts, *styles):
         source = corpus.sources[hit.evidence.source_id]
         if case.get("exposure") == "heldout" and source_event_id(source) == case.get("event_family_id"):

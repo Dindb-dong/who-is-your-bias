@@ -113,6 +113,9 @@ class Engine:
             reranker = CrossEncoderReranker(settings.reranker_model, revision=settings.reranker_revision) if settings.reranker_model else None
             self.retriever = HybridRetriever(corpus, embedder, policy=HybridPolicy(dense_min_similarity=settings.dense_min_similarity,
                                                reranker_min_score=settings.reranker_min_score), reranker=reranker)
+        elif settings.retrieval_backend == "jensen-lexical":
+            from .jensen_retrieval import JensenConceptRetriever
+            self.retriever = JensenConceptRetriever(corpus)
         else:
             self.retriever = Retriever(corpus)
         self.sessions = SessionStore(ttl=settings.session_ttl, max_sessions=settings.max_sessions, max_turns=settings.max_turns)
@@ -218,7 +221,7 @@ class Engine:
                         if temporal and len(temporal.eligible_ids) != len(self.corpus.training_evidence):
                             filtered = Corpus(self.corpus.persona, self.corpus.sources,
                                               {key: value for key, value in self.corpus.evidence.items() if key in temporal.eligible_ids})
-                            retriever = Retriever(filtered)
+                            retriever = self.retriever.with_corpus(filtered)
                         # The snapshot already applies exact/before/through/
                         # forecast policy to the eligible corpus. The archived
                         # lexical retriever's independent exact-year gate must
