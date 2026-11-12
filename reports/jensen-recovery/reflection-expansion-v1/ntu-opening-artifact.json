@@ -1,0 +1,122 @@
+{
+  "schema_version": "reflection-boundary-review-artifact.v1",
+  "file": "ntu-opening-review-and-official-text-v1.tar.gz",
+  "bytes": 265060,
+  "sha256": "ff2b96a5edb803a0793b7fc2b95c4c239f4dbc026b641a33d515af0773a3c82a",
+  "members": [
+    {
+      "file": "discovery/ntu-official-commencement-overview.html",
+      "bytes": 113925,
+      "sha256": "f98ae289fc15c847593dab20591e2a612667fbcd508327ff9b13cff9228f300b"
+    },
+    {
+      "file": "discovery/nvidia-official-ntu-commencement-summary.html",
+      "bytes": 106889,
+      "sha256": "3c28264269ad952794d0d8eac33dfecd319d5a26bb625dd43039f608b0be5bd0"
+    },
+    {
+      "file": "discovery/commencement-official-text-review.json",
+      "bytes": 1665,
+      "sha256": "c9c17586f50cfa517edeca314ee2a7bc50db6865a1eb8585839c740a2436ab9b"
+    },
+    {
+      "file": "discovery/ntu-continuity-review/observations.json",
+      "bytes": 1654,
+      "sha256": "0ec4390772e7fd9caf0bda98b4376d60cd5669fe8c88fb0b17d8077b32f33d5e"
+    },
+    {
+      "file": "discovery/ntu-continuity-review/opening-first2s.probe.json",
+      "bytes": 13217,
+      "sha256": "aa2e1a4f87f23c1147dcbf4c9cf2a373d153dec73e0e38d90eee2cc51ae11a40"
+    },
+    {
+      "file": "discovery/ntu-continuity-review/opening-first2s.probe.stderr",
+      "bytes": 60,
+      "sha256": "9b779a1134b234f7f953b49ea8ecd38ec9a99f085b52a313ab1e9d9fe8cd1d82"
+    },
+    {
+      "file": "discovery/ntu-continuity-review/opening-first120s-5s-sampling.jpg",
+      "bytes": 210074,
+      "sha256": "76716b5d0e8359cd517127da6bba3a0c645793fe86d072ec87633f906522b07b"
+    }
+  ],
+  "complete_address_claim": false,
+  "full_commencement_transcripts_acquired": 0,
+  "acquired_official_event_summaries": 2,
+  "role": "opening_boundary_review_and_official_event_summaries",
+  "event_family_id": "ntu-commencement-2023-05-27",
+  "created_at": "2026-11-12T19:53:03.512577+00:00",
+  "file_id": "file_000000003c8c81fdbdf1a9b506d56323",
+  "library_file_id": "libfile_fde3_f-6e6bfd62109481918a6dcbf2ddc12d4d_a18ece08681081918d81df44f69c4b1f",
+  "file_name": "ntu-opening-review-and-official-text-v1.tar.gz",
+  "current_version_number": 0,
+  "upload_status": "succeeded",
+  "fresh_readback_status": "archive_and_all_members_verified",
+  "verified_at": "2026-11-12T19:53:56.085696+00:00",
+  "excluded_from_frozen_v4_text_v1_M6": true,
+  "boundary_review": {
+    "schema_version": "source-range-boundary-review.v1",
+    "reviewer": "reflective_sources agent",
+    "human_review": "ungraded",
+    "status": "opening_review_complete; closing_and_whole_range_pending",
+    "opening_review": {
+      "source_pts_origin_seconds": 1211.431956,
+      "first_decoded_video_frame_pts_seconds": 1211.974456,
+      "initial_partial_gop_seconds": 0.5425,
+      "source_prefix_bytes": 67108864,
+      "source_prefix_sha256": "ffcb6e336220e5790d207d4b50a7e72a941a289e5eeae863f2277158c200d2b6",
+      "decoded_contiguous_interval_local_seconds": [
+        0,
+        120
+      ],
+      "visual_sampling_interval_seconds": 5,
+      "contact_sheet": {
+        "file": "opening-first120s-5s-sampling.jpg",
+        "sha256": "76716b5d0e8359cd517127da6bba3a0c645793fe86d072ec87633f906522b07b",
+        "rows": 6,
+        "columns": 4,
+        "order": "left_to_right_then_top_to_bottom"
+      },
+      "observation": "The first three sampled frames show Executive Vice President Wanjiun Liao speaking/turning toward the stage. A stage handover and audience follow; Jensen appears at the lectern by the second row and speaks through the rest of the reviewed prefix. This range begins before his address.",
+      "identity_source_url": "https://www.ntu.edu.tw/english/spotlight/2023/2164_20230529.html",
+      "decoder_warning": "MPEG range begins inside a GOP; dimensions unavailable before first sequence header. First decoded video frame is approximately0.5425s after format start, while prior speaker is still at the lectern.",
+      "audio_wording_reviewed": false
+    },
+    "closing_review": null,
+    "semantic_complete_address_claim": false,
+    "all_frozen_inputs_unchanged": true
+  },
+  "official_text_review": {
+    "sources": [
+      {
+        "file": "ntu-official-commencement-overview.html",
+        "bytes": 113925,
+        "sha256": "f98ae289fc15c847593dab20591e2a612667fbcd508327ff9b13cff9228f300b",
+        "source_url": "https://www.ntu.edu.tw/english/spotlight/2023/2164_20230529.html",
+        "retrieved_url": "https://www.ntu.edu.tw/english/spotlight/2023/2164_20230529.html",
+        "http_status": 200,
+        "content_type": "text/html",
+        "acquired_at": "2026-11-12T19:52:01.006673+00:00",
+        "role": "official_publisher_event_summary; not_full_transcript",
+        "event_family_id": "ntu-commencement-2023-05-27",
+        "source_clock": "untimed_document"
+      },
+      {
+        "file": "nvidia-official-ntu-commencement-summary.html",
+        "bytes": 106889,
+        "sha256": "3c28264269ad952794d0d8eac33dfecd319d5a26bb625dd43039f608b0be5bd0",
+        "source_url": "https://blogs.nvidia.com/blog/huang-ntu-commencement/",
+        "retrieved_url": "https://blogs.nvidia.com/blog/huang-ntu-commencement/",
+        "http_status": 200,
+        "content_type": "text/html; charset=UTF-8",
+        "acquired_at": "2026-11-12T19:52:07.476900+00:00",
+        "role": "official_publisher_event_summary; not_full_transcript",
+        "event_family_id": "ntu-commencement-2023-05-27",
+        "source_clock": "untimed_document"
+      }
+    ],
+    "full_commencement_transcripts_acquired": 0,
+    "interpretation": "Both fetched official sources are summaries with selected quotations. A bounded official-domain search also found no full transcript on the examined Caltech and CMU event-report pages. This is not proof that no official full transcript exists.",
+    "excluded_from_frozen_v4_text_v1_M6": true
+  }
+}
