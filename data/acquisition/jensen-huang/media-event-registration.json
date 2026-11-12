@@ -1,0 +1,77 @@
+{
+  "schema_version": "jensen-media-event-registration.v1",
+  "registered_at": "2026-11-12T17:39:39.239118+00:00",
+  "purpose": "source_video_acquisition_train_only",
+  "source_split_registry_sha256": "c5f6831dfd5212153749d7b683e3c0e80d0ee5340a60dbb1023cac1fb39b2aa9",
+  "heldout_excluded_event_families": [
+    "wef-davos-2026",
+    "no-priors-2023"
+  ],
+  "notes": [
+    "GTC2025 reuses preexposed NVIDIA editorial event family. Newly added keynote families assigned train before media acquisition.",
+    "Resolved player URLs remain private artifacts; public entries retain reproducible publisher URL and player identifiers.",
+    "Metadata duration is an acquisition expectation, not a completion claim."
+  ],
+  "events": [
+    {
+      "source_id": "gtc-2025-video",
+      "event_family_id": "nvidia-gtc-2025",
+      "split": "train",
+      "discovery_url": "https://www.nvidia.com/en-us/on-demand/session/gtc25-s72484/",
+      "publisher": "NVIDIA",
+      "player_entry": "1_i4n8e58g",
+      "player_partner_id": "2935771",
+      "rendition_format_id": "mp4-589",
+      "role": "full_source_video",
+      "source_title": "GTC25_Keynote_S72484",
+      "expected_duration_seconds": 7908,
+      "landing_sha256": "b10b9807e25b0b315fc3dd43cbd9f957bbbe8a08ec31245e8757e64bef5b7e19",
+      "acquisition_status": "registered_before_media_download"
+    },
+    {
+      "source_id": "gtc-dc-2025-video",
+      "event_family_id": "nvidia-gtc-dc-2025",
+      "split": "train",
+      "discovery_url": "https://www.nvidia.com/en-us/on-demand/session/gtcdc25-dc1204/",
+      "publisher": "NVIDIA",
+      "player_entry": "1_6app54ep",
+      "player_partner_id": "2935771",
+      "rendition_format_id": "mp4-454",
+      "role": "full_source_video",
+      "source_title": "keynote-gtcdc",
+      "expected_duration_seconds": 6188,
+      "landing_sha256": "feb4a68c7b04a9847d5d4133867523b72183c55516384624ce52db0c21cc586e",
+      "acquisition_status": "registered_before_media_download"
+    },
+    {
+      "source_id": "gtc-taipei-2026-video",
+      "event_family_id": "nvidia-gtc-taipei-2026",
+      "split": "train",
+      "discovery_url": "https://www.nvidia.com/en-us/on-demand/session/gtctaipei26-stw61044/",
+      "publisher": "NVIDIA",
+      "player_entry": "1_qjkgxtey",
+      "player_partner_id": "2935771",
+      "rendition_format_id": "mp4-539",
+      "role": "full_source_video",
+      "source_title": "NVIDIA GTC Taipei 2026 Keynote \uff5c Full Replay [wSp6AiNIrsY]",
+      "expected_duration_seconds": 7073,
+      "landing_sha256": "2cfae4e2af13870772f9645a5b1b0b705c9cf3395e32a962e8028ec27ea62f0e",
+      "acquisition_status": "registered_before_media_download"
+    },
+    {
+      "source_id": "gtc-berlin-2026-video",
+      "event_family_id": "nvidia-gtc-berlin-2026",
+      "split": "train",
+      "discovery_url": "https://www.nvidia.com/en-us/on-demand/session/gtcberlin26-sb61112/",
+      "publisher": "NVIDIA",
+      "player_entry": "1_g29qkalc",
+      "player_partner_id": "2935771",
+      "rendition_format_id": "mp4-563",
+      "role": "full_source_video",
+      "source_title": "NVIDIA GTC Berlin 2026 Keynote With CEO Jensen Huang [4K 60fps, Oct 23 replay]",
+      "expected_duration_seconds": 5519,
+      "landing_sha256": "eb5523719ef96878a7d2770fa3b945cbabd3214276918e15fbc1aa1ca20c7c59",
+      "acquisition_status": "registered_before_media_download"
+    }
+  ]
+}
