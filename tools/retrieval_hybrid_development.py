@@ -27,7 +27,13 @@ def run(corpus_path: Path, settings_path: Path, output: Path):
     for name, expected in protocol["files_sha256"].items():
         if Path(name).name != name or sha(corpus_path / name) != expected:
             raise ValueError("Frozen corpus changed")
-    corpus = Corpus.load(corpus_path)
+    loaded = Corpus.load(corpus_path)
+    # The comparison's factual universe is exactly the lexical baseline's.
+    # Exclude style-only records even from optional dense view construction.
+    factual_ids = {record.id for record in loaded.training_evidence}
+    corpus = Corpus(loaded.persona, loaded.sources,
+        {key: value for key, value in loaded.evidence.items() if key in factual_ids},
+        loaded.manifest, loaded.source_assignments)
     torch.set_num_threads(settings["threads"])
     embedder = SentenceTransformerEmbedder(settings["model"], revision=settings["revision"],
         query_prefix=settings["query_prefix"], passage_prefix=settings["passage_prefix"],
