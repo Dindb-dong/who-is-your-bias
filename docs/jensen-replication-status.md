@@ -97,15 +97,18 @@ separately. The prior unverified eight-video claim is not inherited by this run.
   History Museum oral-history video and its publisher transcript PDF. Combined,
   **nine distinct complete publisher videos** are saved: **5,066,419,711 bytes /
   42,473.925525 seconds (11h47m54s)**. The CHM event remains outside frozen v4,
-  text training and M6. The bounded NTU commencement extraction is still in
-  progress; a saved prefix is not another completed video. Transcript counts,
+  text training and M6. The NTU commencement expansion is also saved and freshly reconstructed:
+  **one additional derived address with context**, 752,097,280 bytes /
+  1,518.692466 seconds (25m19s). Opening and closing review supports full address
+  containment; the source-cut decode warnings remain recorded. The full ceremony
+  ISO was not acquired, so this is separate from the nine complete original videos. Transcript counts,
   recording duration and target-speaker duration are distinct.
 
 ## Workstream checkpoints
 
 | Workstream | Saved implementation | Current gate |
 | --- | --- | --- |
-| Corpus | Authentic v4, held-out references, nine full original video restorations | Original batch and CHM complete; NTU extraction in progress; frozen event isolation preserved |
+| Corpus | Authentic v4, held-out references, nine full original video restorations | Nine original videos and one additional derived NTU address verified; frozen event isolation preserved |
 | Voice | Source clocks, four-event dataset, 16 completed updates, eight public waveforms, ASR/WavLM diagnostics and verified gateway | Candidate remains optional; human likeness is ungraded |
 | Avatar | Actual fitted model, editable master, finger controls, observed clips and actual desktop/mobile browser rendering | Human likeness remains ungraded; candidate stays optional |
 | Text | Frozen dataset, 10 saved updates and successful remote optimizer continuation | Finish bounded run and serve exact adapter |

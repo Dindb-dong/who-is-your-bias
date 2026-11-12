@@ -43,9 +43,12 @@ and the original publisher transcript PDF. Its fresh remote reconstruction and
 whole-video hash passed. The combined total is **nine distinct complete original
 event videos, 5,066,419,711 bytes / 42,473.925525 seconds (11h47m54s)**. Expansion
 receipts are in [its own artifact ledger](reflection-expansion-v1/media-artifacts.json);
-the original eight-event ledgers above retain their original scope. Neither the
-CHM expansion nor the pending bounded NTU commencement extraction enters the
-frozen v4 corpus, current text training or M6 comparison.
+the original eight-event ledgers above retain their original scope. The [NTU address with context](reflection-expansion-v1/ntu-media-artifacts.json)
+adds one separately acquired and freshly reconstructed 25m19s derived recording
+from a tenth distinct event. All 30 chunks restore its exact 752,097,280 bytes.
+Bookend review supports complete address containment; the full ceremony ISO was
+not acquired, and boundary decode warnings remain explicit. Neither expansion
+enters the frozen v4 corpus, current text training or M6 comparison.
 
 | Published event | Complete duration | Bytes | Recovery status |
 | --- | ---: | ---: | --- |
