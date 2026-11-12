@@ -5,14 +5,40 @@ and GTC 2026 public replays. Both event families were assigned to `train` before
 media acquisition. The frozen text/voice datasets and evaluation inputs are not
 modified by this acquisition.
 
-## Durable media-prefix checkpoints
+## Complete GTC replay saved and restored
+
+[gtc-complete.json](gtc-complete.json) records one complete additional publisher
+video package: **8,335.646444 seconds (2 h 18 m 55.65 s), 855,451,136 bytes**.
+All 834 registered fragments were acquired in order. The retained MPEG-TS file
+contains H.264 video at 854×480 and 30 fps plus stereo AAC at 44.1 kHz.
+
+The full decode-timestamp walk inspected 250,068 video packets and 358,987 audio
+packets. Neither stream had a backward step; maximum gaps were 33.334 ms and
+23.234 ms. First and last four-second decode checks passed. All 34 byte-chunk
+objects, the final reconstruction manifest and the acquisition metadata archive
+were saved and freshly materialized. Container hashes and decoded chunk hashes
+matched; ordered reconstruction matched the retained original's full SHA-256:
+`4070e63179f44e5de14d70bc615322a2821b2ed417610ffa0e92ccd371cd7b28`.
+
+This is an exact concatenation of the public HLS fragment bytes, with no
+transcoding or remux. The complete package includes the publisher's whole
+timeline; it is not a claim of 2.3 hours of isolated Jensen speech. Audio
+language, dubbing and burned-in subtitles remain unreviewed, and these new
+recordings have not been admitted to frozen training/evaluation datasets.
+
+[artifact-manifest.json](artifact-manifest.json) tracks the current aggregate
+state and links the exact object-level receipts. CES remains pending full
+acquisition. Its remaining byte budget after GTC is 1,292,032,512 bytes, with
+the 6 GiB free-space reserve still enforced.
+
+## Earlier durable media-prefix checkpoints
 
 [gtc-prefix007.json](gtc-prefix007.json) records 168 MiB (176,160,768 bytes)
 from the beginning of the GTC replay, stored as seven lossless chunks plus a
 reconstruction manifest. All eight objects were freshly materialized; container
 hashes, decoded chunk hashes and the reconstructed ordered prefix hash matched.
-This is an incomplete prefix, not a complete video. Whole-replay duration and
-continuity validation are still pending. Later chunks continue downloading.
+This was an incomplete prefix, not a complete video. Whole-replay duration and
+continuity validation had not yet run at this checkpoint.
 
 [gtc-prefix019.json](gtc-prefix019.json) extends the saved, freshly reconstructed
 prefix to 19 chunks: 456 MiB (478,150,656 bytes). Its full-prefix SHA-256 is
@@ -65,7 +91,7 @@ timestamp walk without backward steps or gaps over 250 ms, and first/last
 four-second decode checks. This validates container/timeline continuity; it is
 not a full audiovisual content review or a human language/identity assessment.
 
-Proposed invocation, before an actual acquisition receipt exists:
+GTC invocation used for the complete receipt (replace local path placeholders):
 
 ```sh
 PYTHONPATH=src:. /absolute/path/to/existing/.venv/bin/python -m tools.persona_data.regional_hls \
