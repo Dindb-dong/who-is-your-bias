@@ -1,0 +1,39 @@
+{
+  "schema_version": "voice-cpu-linear-probe.v1",
+  "torch": "2.11.0+cpu",
+  "threads": 4,
+  "shape": [
+    256,
+    1024,
+    3072
+  ],
+  "objective": "frozen weight linear forward + input gradient; squared mean loss",
+  "warmup": 2,
+  "repeats": 5,
+  "results": [
+    {
+      "dtype": "torch.float32",
+      "seconds": [
+        0.022184497000125702,
+        0.017129627000031178,
+        0.013987360000101035,
+        0.015954749999764317,
+        0.01375815400024294
+      ],
+      "median_seconds": 0.015954749999764317
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "seconds": [
+        0.021116677000463824,
+        0.021740196999417094,
+        0.02265615499982232,
+        0.025711160999890126,
+        0.020974635999664315
+      ],
+      "median_seconds": 0.021740196999417094
+    }
+  ],
+  "bf16_to_fp32_time_ratio": 1.3626159607476294,
+  "scope": "small diagnostic; not an end-to-end speech training benchmark"
+}

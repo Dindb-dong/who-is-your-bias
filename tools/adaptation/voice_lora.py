@@ -18,6 +18,7 @@ import random
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 import time
 from pathlib import Path
@@ -40,6 +41,15 @@ def atomic_json(path: Path, content: dict) -> None:
     finally:
         if os.path.exists(name):
             os.unlink(name)
+
+
+def peak_rss_bytes() -> int | None:
+    try:
+        import resource
+    except ImportError:
+        return None
+    value = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    return int(value if sys.platform == "darwin" else value * 1024)
 
 
 def upstream_dataset(upstream: Path, revision: str):
@@ -258,9 +268,11 @@ def train(dataset: Path, codes: Path, output: Path, *, base_model: Path, base_re
         for name, module in model.named_modules():
             if "lora_dropout" in name:
                 module.train()
-        report.update(status="running", optimizer_steps=step, trainable_parameters=sum(p.numel() for p in parameters))
+        report.update(status="running", optimizer_steps=step, block_started_from_step=step,
+            trainable_parameters=sum(p.numel() for p in parameters), peak_process_rss_bytes=peak_rss_bytes())
         atomic_json(output / "run.json", report)
         while step < target:
+            update_started = time.monotonic()
             optimizer.zero_grad(set_to_none=True)
             loss_sum = 0.0
             for _ in range(gradient_accumulation):
@@ -278,7 +290,9 @@ def train(dataset: Path, codes: Path, output: Path, *, base_model: Path, base_re
             torch.nn.utils.clip_grad_norm_(parameters, 1.0)
             optimizer.step(); step += 1; losses.append(loss_sum)
             checkpoint = save_checkpoint(output, model=model, optimizer=optimizer, contract=contract, step=step, cursor=cursor, losses=losses)
-            report.update(optimizer_steps=step, last_checkpoint=checkpoint.name, losses=losses, elapsed_seconds=time.monotonic()-started)
+            report.update(optimizer_steps=step, last_checkpoint=checkpoint.name, losses=losses,
+                elapsed_seconds=time.monotonic()-started, last_update_seconds=time.monotonic()-update_started,
+                peak_process_rss_bytes=peak_rss_bytes())
             atomic_json(output / "run.json", report)
             print(json.dumps({"optimizer_steps": step, "loss": loss_sum, "checkpoint": checkpoint.name}), flush=True)
         report["status"] = "completed" if step == max_updates else "paused_for_persistence"
@@ -287,7 +301,8 @@ def train(dataset: Path, codes: Path, output: Path, *, base_model: Path, base_re
         atomic_json(output / "run.json", report)
         return report
     except BaseException as exc:
-        report.update(status="failed", error_type=type(exc).__name__, elapsed_seconds=time.monotonic()-started)
+        report.update(status="failed", error_type=type(exc).__name__, elapsed_seconds=time.monotonic()-started,
+            peak_process_rss_bytes=peak_rss_bytes())
         atomic_json(output / "run.json", report)
         raise
 

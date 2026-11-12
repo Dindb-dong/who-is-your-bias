@@ -258,10 +258,25 @@
       "dataset_manifest_sha256": "843d4798449eee4b8d52cb170d05face601642666ec9674832721acc94c60b12",
       "split_registration_sha256": "c5f6831dfd5212153749d7b683e3c0e80d0ee5340a60dbb1023cac1fb39b2aa9",
       "listening_reviewed": 0,
-      "optimizer_updates": 0
+      "optimizer_updates": 0,
+      "durable_receipt": {
+        "artifact_id": "voice-dataset-pilot-v2",
+        "role": "frozen-candidate-speech-dataset",
+        "samples": 8,
+        "duration_seconds": 91.84,
+        "event_families": 4,
+        "listening_reviewed": 0,
+        "file_name": "voice-dataset-pilot-v2.tar.gz",
+        "file_id": "file_000000001d1c81fdaeba39ae6ae25f49",
+        "library_file_id": "libfile_fde3_f-cb59fb286ba081919698efd25e5c5373_a18ece08681081918d81df44f69c4b1f",
+        "size_bytes": 9881794,
+        "sha256": "30a907a9493f0c1a0c87091fad4c49da9d4300c0990c1ca0f2744a8f1f473510",
+        "upload_status": "uploaded",
+        "verification_status": "fresh-materialization-byte-verified"
+      }
     }
   ],
-  "persistence_status": "dataset_upload_and_readback_pending_coordinator_confirmation",
+  "persistence_status": "fresh-materialization-byte-verified",
   "model": {
     "repo": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
     "revision": "5d83992436eae1d760afd27aff78a71d676296fc"

@@ -3,8 +3,11 @@
 This is the M4 execution record for the [Jensen recovery handoff](jensen-replication-handoff.md).
 The reproducible preparation is measured in
 [preparation.json](../reports/voice/jensen-2026-11-13/preparation.json).
-The current checkpoint has a frozen **candidate** dataset. Optimization, generated
-speech, independent output ASR, and human listening remain separate completion gates.
+The current checkpoint has a persisted **candidate** dataset and completed acoustic
+tokenization. Optimization, generated speech, independent output ASR, and human
+listening remain separate completion gates. The [codec receipt](../reports/voice/jensen-2026-11-13/codecs.json)
+records all eight encodings (1,151 frames, 16 codebooks per frame). The encoding
+loop took 6.13 seconds, excluding model loading; actual optimizer updates remain zero.
 
 ## Source and subject binding
 
@@ -90,8 +93,8 @@ a checkpoint implementation test, not evidence of Qwen speech adaptation.
 
 ## Execution and resume
 
-The following commands are proposed until the run report records their actual
-outcome. Set `ART` to the private artifact root and run from the repository with
+The preparation command below completed successfully. The optimization and resume
+commands remain proposed until their actual run receipt exists. Set `ART` to the private artifact root and run from the repository with
 the pinned inference environment. The selected dataset archive must first be
 uploaded, retrieved in a fresh operation, and verified by SHA-256.
 
@@ -149,7 +152,7 @@ The dataset manifest hash is
 The coordinator records durable object identifiers and readback receipts in the
 run artifact manifest. The archive's creation alone is not a persistence claim.
 
-Next gates: verified dataset persistence; acoustic tokenization; actual optimizer
-save/load/resume; English/Korean synthesis for both conditions; independent output
-ASR; and a measured report. The candidate pilot remains separate from application
+Completed gates: dataset upload and fresh readback, acoustic tokenization. Next
+gates: codec persistence; actual optimizer save/load/resume; English/Korean
+synthesis for both conditions; independent output ASR; and a measured report. The candidate pilot remains separate from application
 promotion and from a qualified speech likeness.
