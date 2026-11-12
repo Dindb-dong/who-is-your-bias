@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import gzip
 import hashlib
 import json
 from pathlib import Path
@@ -28,7 +29,7 @@ def split(source: Path, output: Path, *, chunk_bytes: int = 200 * 1024 * 1024) -
     return manifest
 
 
-def verify(directory: Path, *, output: Path | None = None) -> dict:
+def verify(directory: Path, *, output: Path | None = None, gzip_archives: bool = False) -> dict:
     manifest = json.loads((directory / "reconstruction.json").read_text())
     if manifest.get("schema_version") != "persona-media-byte-chunks.v1" or not manifest.get("parts"):
         raise ValueError("Expected a nonempty byte-chunk manifest")
@@ -40,12 +41,12 @@ def verify(directory: Path, *, output: Path | None = None) -> dict:
     try:
         for index, item in enumerate(manifest["parts"]):
             name = item["file"]
-            path = directory / name
+            path = directory / (name + ".gz" if gzip_archives else name)
             if (Path(name).name != name or path.is_symlink() or item["index"] != index
                     or item["offset"] != offset):
                 raise ValueError("Chunk path, order or offset changed")
             digest, size = hashlib.sha256(), 0
-            with path.open("rb") as chunk:
+            with (gzip.open(path, "rb") if gzip_archives else path.open("rb")) as chunk:
                 while block := chunk.read(4 * 1024 * 1024):
                     digest.update(block)
                     whole.update(block)
@@ -79,12 +80,13 @@ def main():
     check = commands.add_parser("verify")
     check.add_argument("directory", type=Path)
     check.add_argument("--output", type=Path)
+    check.add_argument("--gzip", action="store_true", help="Read verified .bin.gz containers without intermediate raw chunks")
     args = parser.parse_args()
     if args.command == "split":
         result = split(args.source, args.directory, chunk_bytes=args.chunk_bytes)
         print(json.dumps({key: result[key] for key in ("original_file", "bytes", "sha256")}))
     else:
-        print(json.dumps(verify(args.directory, output=args.output)))
+        print(json.dumps(verify(args.directory, output=args.output, gzip_archives=args.gzip)))
 
 
 if __name__ == "__main__":

@@ -1,3 +1,4 @@
+import gzip
 import json
 
 import pytest
@@ -30,3 +31,18 @@ def test_changed_order_is_not_a_complete_video(tmp_path):
     (chunks / "reconstruction.json").write_text(json.dumps(manifest))
     with pytest.raises(ValueError, match="order or offset"):
         verify(chunks)
+
+
+def test_gzip_containers_recover_exact_original_bytes_without_raw_parts(tmp_path):
+    source = tmp_path / "source.mp4"
+    source.write_bytes(bytes(range(256)) * 10)
+    chunks = tmp_path / "chunks"
+    manifest = split(source, chunks, chunk_bytes=701)
+    for item in manifest["parts"]:
+        part = chunks / item["file"]
+        with gzip.open(str(part) + ".gz", "wb", compresslevel=0) as stream:
+            stream.write(part.read_bytes())
+        part.unlink()
+    restored = tmp_path / "restored.mp4"
+    assert verify(chunks, output=restored, gzip_archives=True)["verified"]
+    assert restored.read_bytes() == source.read_bytes()

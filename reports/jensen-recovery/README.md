@@ -37,14 +37,14 @@ listed in `source-progress.json`; inspect each receipt before retrying.
 
 For a fully saved video, materialize every listed gzip chunk into a new local
 directory. Verify each **stored gzip** SHA-256 against its durable receipt,
-decompress it to the raw `.bin` filename in the reconstruction manifest, and
-place that manifest at `reconstruction.json`. Then run:
+retain the `.bin.gz` names corresponding to the raw names in the reconstruction
+manifest, and place that manifest at `reconstruction.json`. Then run:
 
 ```sh
-PYTHONPATH=src:. python -m tools.persona_data.media_chunks verify RECOVERED_CHUNK_DIRECTORY --output RECOVERED_VIDEO.mp4
+PYTHONPATH=src:. python -m tools.persona_data.media_chunks verify RECOVERED_CHUNK_DIRECTORY --gzip --output RECOVERED_VIDEO.mp4
 ```
 
-The command checks part ordering, contiguous offsets, every raw chunk hash and
+The command streams gzip decoding and checks part ordering, contiguous offsets, every raw chunk hash and
 the reconstructed full-file hash before atomically naming the output. A failed
 check leaves no completed output. Compare the result with the original video
 SHA-256 in the source progress record. This is lossless recovery, not video

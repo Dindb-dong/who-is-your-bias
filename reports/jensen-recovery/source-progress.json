@@ -241,18 +241,22 @@
   ],
   "pending_jobs": [
     {
-      "name": "media-upload-batch-02",
-      "scope": "remaining10gzip-wrapped200MiBrawchunks_Goldman_Stripe_GTC2025",
+      "name": "gzip-media-readback",
+      "scope": "uploaded Goldman/Stripe/GTC2025 chunks",
+      "status": "some503_remote_readbacks_retry_sequentially_using_exact_savedIDs",
+      "report": "reports/jensen-recovery/media-artifacts.json"
+    },
+    {
+      "name": "missing_gtc_chunks",
+      "scope": "GTC2025 rawchunks2and3",
+      "status": "chunk2definitive_transfer_failed_retry_or_subdivide;chunk3notyetretried",
       "plan": "media-upload-batch-02.json",
-      "result": "media-upload-batch-02-result.json",
-      "status": "submitted_inspect_per_item_outcomes_before_retry"
+      "result": "media-upload-sequential-01/progress.json"
     },
     {
       "name": "wired-full",
-      "scope": "full494775046-bytepublisherMP4",
-      "entry": "video-discovery/wired-2024.entry.json",
-      "output": "media/wired-2024-full.mp4",
-      "status": "running_inspect_receipt_before_retry"
+      "status": "completed_locally_validated_chunk_save_pending",
+      "output": "media/wired-2024-full.mp4"
     }
   ],
   "persistence": {

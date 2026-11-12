@@ -65,6 +65,102 @@
       "storage_encoding": "gzip",
       "decoded_bytes": 209715200,
       "decoded_sha256": "e77f8b9aca039755f05c0c00e5951caeee65eca8fc462fb3f85c919a6c923337"
+    },
+    {
+      "artifact": "media-chunks/stripe-sessions-2024-full/stripe-sessions-2024-full.mp4.part004.bin.gz",
+      "bytes": 209731515,
+      "sha256": "9962d7e05c9e0a48c7aa978d1ec507a8ddd2135f0f03769dd761cb326fde4a20",
+      "file_id": "file_000000001b7881f4a89d40eefddbb011",
+      "library_file_id": "libfile_fde3_f-1712749bd2ec819183bd857934eb11db_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "stripe-sessions-2024-full.mp4.part004.bin.gz",
+      "storage_encoding": "gzip",
+      "decoded_bytes": 209715200,
+      "decoded_sha256": "c209ac8c5d73a31f96ff13318511e3dc865d8cc1bdb376560ddb5ee0d6f393fb",
+      "status": "uploaded_pending_fresh_readback"
+    },
+    {
+      "artifact": "media-chunks/gtc-2025-full-480p/gtc-2025-full-480p.mp4.part001.bin.gz",
+      "bytes": 209731508,
+      "sha256": "ae04cee7b6ff58093d0e91cb19d16fab2af2663409db4b89f16b4835d2b1dab4",
+      "file_id": "file_0000000013e081f6a83b39572e9b5653",
+      "library_file_id": "libfile_fde3_f-7a8ee96f70848191ad55a519a944b3c1_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "gtc-2025-full-480p.mp4.part001.bin.gz",
+      "storage_encoding": "gzip",
+      "decoded_bytes": 209715200,
+      "decoded_sha256": "4ebb3a13d0442c61e38062180cb38a0276e876400c96cbf0af00892931ab09bf",
+      "status": "uploaded_pending_fresh_readback"
+    },
+    {
+      "artifact": "media-chunks/goldman-sachs-2024-full/goldman-sachs-2024-full.mp4.part002.bin.gz",
+      "bytes": 209731513,
+      "sha256": "ad61de59e23cb7f3e4c23318cbb8336ad4ece32b3f5e014c44aa4da1878110a1",
+      "file_id": "file_0000000056ac81fd9356e3a75ea761cd",
+      "library_file_id": "libfile_fde3_f-d0fcc9c26bf48191a1167b49b785968c_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "goldman-sachs-2024-full.mp4.part002.bin.gz",
+      "storage_encoding": "gzip",
+      "decoded_bytes": 209715200,
+      "decoded_sha256": "bcf4f14ebbfdea8ac5ebcbb96315bc0288d2a59eea3bac5a8697addf96f6af58",
+      "status": "uploaded_pending_fresh_readback"
+    },
+    {
+      "artifact": "media-chunks/goldman-sachs-2024-full/goldman-sachs-2024-full.mp4.part003.bin.gz",
+      "bytes": 167342303,
+      "sha256": "5d27c609e0b4bcfaac670b84ab9e56e5693ab23b742e280ac563ec459379ff49",
+      "file_id": "file_00000000508081fd84023f5c07381241",
+      "library_file_id": "libfile_fde3_f-52dbf02230848191ba2cc98fbd0c2953_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "goldman-sachs-2024-full.mp4.part003.bin.gz",
+      "storage_encoding": "gzip",
+      "decoded_bytes": 167329275,
+      "decoded_sha256": "f94cc7f9b5aee5ebf748ac9068538ded0c534f3a7b093e51aa38fa29cb90355a",
+      "status": "uploaded_pending_fresh_readback"
+    },
+    {
+      "artifact": "media-chunks/stripe-sessions-2024-full/stripe-sessions-2024-full.mp4.part001.bin.gz",
+      "bytes": 209731515,
+      "sha256": "951124b84b65ffb74abecec9f00489b7ab9515acf15e6e6ddf7ee8c5cef0aa4a",
+      "file_id": "file_000000009f3081fdaaf5179475053d96",
+      "library_file_id": "libfile_fde3_f-62dcd6f4ea308191810c644c4fbc09f2_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "stripe-sessions-2024-full.mp4.part001.bin.gz",
+      "storage_encoding": "gzip",
+      "decoded_bytes": 209715200,
+      "decoded_sha256": "bcb54dbd86115f6450befa4d60b64680a96081818960b4d0930f9fa64e68a4e3",
+      "status": "uploaded_pending_fresh_readback"
+    },
+    {
+      "artifact": "media-chunks/stripe-sessions-2024-full/stripe-sessions-2024-full.mp4.part002.bin.gz",
+      "bytes": 209731515,
+      "sha256": "b3c0c8fba12eb1b8b598c6361ed0036dbc6b7f1e248b09322d248550ecd9af6f",
+      "file_id": "file_00000000597881f88cf675471511e8e1",
+      "library_file_id": "libfile_fde3_f-222522352dc88191bba5a7429ae89432_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "stripe-sessions-2024-full.mp4.part002.bin.gz",
+      "storage_encoding": "gzip",
+      "decoded_bytes": 209715200,
+      "decoded_sha256": "89aed92111c38f92fd109a8f217ff469d8fa1e41f2721fe7d3cab8f03bab2b64",
+      "status": "uploaded_pending_fresh_readback"
+    },
+    {
+      "artifact": "media-chunks/stripe-sessions-2024-full/stripe-sessions-2024-full.mp4.part003.bin.gz",
+      "bytes": 209731515,
+      "sha256": "894bbbfef2bc2bd26c91b790247e92a52914ee1525ab35585e99a054e23be949",
+      "file_id": "file_0000000097688212933b4248b6786a10",
+      "library_file_id": "libfile_fde3_f-26423d499d8481918779384f9f245af7_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "stripe-sessions-2024-full.mp4.part003.bin.gz",
+      "storage_encoding": "gzip",
+      "decoded_bytes": 209715200,
+      "decoded_sha256": "7898ed94e796b7210078d3460ba0a908572ffeecefe8c5413581b5d5c7a98405",
+      "status": "uploaded_pending_fresh_readback"
+    },
+    {
+      "artifact": "media-chunks/stripe-sessions-2024-full/stripe-sessions-2024-full.mp4.part005.bin.gz",
+      "bytes": 113232749,
+      "sha256": "b78a4d21ca748c9b6efa12284a41407d1a8959ce9cd8a6a192526ac47ff64f81",
+      "file_id": "file_0000000052fc81fdaf63eeae6f1fd503",
+      "library_file_id": "libfile_fde3_f-0564be7f8cb481918017d929b4c72557_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "stripe-sessions-2024-full.mp4.part005.bin.gz",
+      "storage_encoding": "gzip",
+      "decoded_bytes": 113223914,
+      "decoded_sha256": "646e6ca3dcc2535d159728889d8eda3ba36ca0b09f0f39fb01ab5e82f824d966",
+      "status": "uploaded_pending_fresh_readback"
     }
   ],
   "failed_transfers": {
@@ -78,5 +174,6 @@
     "Only metadata, reconstruction manifests and actual heldout archive are verified at this checkpoint. Full video chunks remain pending retry; the original videos are locally acquired.",
     "Heldout archive contains50complete NoPriors2023 exchanges, frozen manifest SHA256 0c5df9f3a41371570a0fb57426bd1bd78d445ce6eddd6f00b8de941fe403682b."
   ],
-  "large_artifact_gate": "207929911-byte gzip upload and fresh readback plus decoded209715200-byte chunk hash verified"
+  "large_artifact_gate": "207929911-byte gzip upload and fresh readback plus decoded209715200-byte chunk hash verified",
+  "readback_progress_note": "Four parallel chunk materializations returned503; other requests pending. Retry fresh read preparation sequentially. Preserve uploadedIDs; do not reupload already successful creates."
 }
