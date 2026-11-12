@@ -136,6 +136,30 @@ def test_missing_evidence_streams_only_reviewed_inference(monkeypatch, tmp_path,
     assert turn["grounding"]["citation_status"] == "not_required"
 
 
+@pytest.mark.parametrize("draft", [
+    '그는 "제가 생산량을 결정했습니다"라고 말했다.',
+    "생산량을決定합니다.",
+    "Hương은 납기를 지켰다고 설명했습니다.",
+    "저는 주문 조정과 납기를 지키는 능력을 높이 평가합니다.",
+])
+def test_korean_jensen_summary_never_streams_fabricated_quotes_or_mixed_script(monkeypatch, tmp_path, draft):
+    config = replace(default_settings(monkeypatch, tmp_path), llm=ProviderSettings("http://model.invalid/v1", "test"))
+
+    async def stream(_self, messages):
+        assert "자료는 편집 요약입니다" in messages[0]["content"]
+        yield draft[:9]
+        yield draft[9:]
+
+    monkeypatch.setattr(OpenAICompatibleLLM, "stream", stream)
+    with TestClient(create_app(config)) as client:
+        response = client.post("/api/chat/stream", json={"message": "TSMC 반도체 패키징 납기", "language": "ko"})
+    assert draft not in response.text
+    events = [block.split("\ndata: ", 1) for block in response.text.strip().split("\n\n")]
+    tokens = [json.loads(data)["text"] for event, data in events if event == "event: token"]
+    assert len(tokens) == 1 and tokens[0].startswith("한국어 답변을 확인할 수 없습니다.")
+    assert "[source:jensen-lex-494-03]" in tokens[0]
+
+
 def test_future_quotation_is_unavailable_without_generation(monkeypatch, tmp_path):
     config = replace(default_settings(monkeypatch, tmp_path), llm=ProviderSettings("http://model.invalid/v1", "test"))
 

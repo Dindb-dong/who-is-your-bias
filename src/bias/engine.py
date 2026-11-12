@@ -34,9 +34,13 @@ KOREAN_INFERENCE = re.compile(
 )
 UNSUPPORTED_ATTRIBUTION = re.compile(
     r"말했|발언했|밝혔|주장했|언급했|설명했|강조했|회고했|증언했|했다는|됐다는|"
-    r"실제로|당시|이미|특허|발표한"
+    r"실제로|당시|이미|특허|발표한|젠슨 황|Huang|한 이유를 밝히"
 )
 KOREAN_EXACT_SPEECH = re.compile(r"무슨 말을 했|어떤 말을 했|뭐라고 (?:말)?했|한 말은|그대로 (?:적|말|알려)|따옴표")
+KOREAN_EVIDENCE_VIOLATION = re.compile(
+    r'["“”「」『』\u00c0-\u024f\u1e00-\u1eff぀-ヿ㐀-鿿豈-﫿𠀀-𲎯]'
+    r"|(?<![가-힣])(?:저는|제가|나는|내가|우리는|우리가)(?![가-힣])"
+)
 KOREAN_INFERENCE_FALLBACK = "어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다."
 
 
@@ -239,9 +243,11 @@ class Engine:
                         messages = self.prompt_builder(self.corpus.persona, request, result, list(session.history), self.corpus.sources)
                     committer = SegmentCommitter(turn_id=turn_id, language=request.language, allowed_ids=allowed_ids)
                     review_inference = speculative and request.language == "ko"
+                    review_evidence = (self.corpus.persona.id == "jensen-huang" and request.language == "ko"
+                                       and request.mode != "profile" and bool(result.hits))
                     async with aclosing(self.llm.stream(messages)) as tokens:
                         async for token in tokens:
-                            if review_inference:
+                            if review_inference or review_evidence:
                                 fragments.append(token)
                                 continue
                             if speculative and not fragments:
@@ -253,8 +259,13 @@ class Engine:
                             if committed_segments:
                                 for segment in committer.push(token):
                                     yield "segment", segment
-                    if review_inference:
-                        text = korean_inference("".join(fragments))
+                    if review_inference or review_evidence:
+                        text = "".join(fragments).strip()
+                        if review_inference:
+                            text = korean_inference(text)
+                        elif KOREAN_EVIDENCE_VIOLATION.search(text) or not re.search(r"[가-힣]", text):
+                            source = next(hit.evidence.id for hit in result.hits if hit.evidence.id in allowed_ids)
+                            text = f"한국어 답변을 확인할 수 없습니다. 관련 공개 자료를 참고해 주세요. [source:{source}]"
                         fragments = [text]
                         yield "token", {"text": text}
                         if committed_segments:
