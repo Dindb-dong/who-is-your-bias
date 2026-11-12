@@ -328,3 +328,26 @@ independent evaluation of animation and voice similarity.
 [gltf-docs]: https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html
 [quaternion-docs]: https://threejs.org/docs/pages/Quaternion.html
 [rhubarb-docs]: https://github.com/DanielSWolf/rhubarb-lip-sync
+
+## Optional articulated hand observations
+
+`python -m tools.media observe` accepts `--hand-model` alongside the existing
+face and pose model paths. It records 21 image/world landmarks and the model's
+handedness labels, with a separate model SHA-256. A detection index is local to
+one frame; handedness does not associate it with a person or a voice.
+
+A hash-bound `motion-review.v1` selection may add `left_hand_index` and
+`right_hand_index`. They must explicitly refer to the subject's anatomical
+hands; the same detection cannot serve both sides. Existing reviews that omit
+these fields continue exporting face/body-only clips. Review changes remain
+bound to the original observation hash.
+
+The converter exports 15 local-delta finger rotations per selected hand,
+retaining the existing `avatar-clip.v1` schema. Hand landmarks outside the image
+or degenerate segment geometry stay unavailable. Each finger's swing is
+estimated from the measured segment direction; axial twist is unobserved.
+No implicit interpolation crosses missing detections or camera cuts. Source
+neutral calibration and the usual reviewed/geometry-preview gates still apply.
+
+Upstream API reference: [MediaPipe Hand Landmarker](https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker?tab=Python).
+This extension does not itself establish a Jensen-specific motion dataset.

@@ -32,10 +32,11 @@ def main(argv: list[str] | None = None) -> int:
     transcribe.add_argument("--compute-type", default="int8")
     transcribe.add_argument("--language")
     transcribe.add_argument("--overwrite", action="store_true")
-    observe = commands.add_parser("observe", help="Optional MediaPipe face/pose measurements; no emotion or identity inference")
+    observe = commands.add_parser("observe", help="Optional MediaPipe face/pose/hand measurements; no emotion or identity inference")
     observe.add_argument("manifest")
     observe.add_argument("--face-model", required=True)
     observe.add_argument("--pose-model")
+    observe.add_argument("--hand-model")
     observe.add_argument("--sample-fps", type=float, default=10)
     observe.add_argument("--overwrite", action="store_true")
     args = parser.parse_args(argv)
@@ -50,7 +51,7 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps({"segments": len(output["segments"]), "review_status": "draft"}))
         else:
             from .observe import observe_clip
-            output = observe_clip(args.manifest, face_model=args.face_model, pose_model=args.pose_model, sample_fps=args.sample_fps, overwrite=args.overwrite)
+            output = observe_clip(args.manifest, face_model=args.face_model, pose_model=args.pose_model, hand_model=args.hand_model, sample_fps=args.sample_fps, overwrite=args.overwrite)
             print(json.dumps({"observed_frames": output["observed_frames"], "review_status": "unreviewed"}))
         return 0
     except (MediaError, OSError) as exc:
