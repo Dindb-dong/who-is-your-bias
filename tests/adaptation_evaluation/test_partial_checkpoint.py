@@ -152,6 +152,52 @@ def test_explicit_prefix_stays_bounded(tmp_path):
         capture(run, tmp_path / "too-many", attempts=3)
 
 
+def test_identity_failure_keeps_original_provider_response(tmp_path):
+    run = make_run(tmp_path)
+    row = run.report["runs"][1]
+    row["provider_generation"].update(completed=True, error=None, finish_reason="stop")
+    row["generation"] = {**row["provider_generation"], "completed": False, "error": "post_generation_identity_unverified"}
+    row["identity_check"].update(after="unverified", failure_type="ReadTimeout")
+    row["validation_errors"] = ["post_generation_identity_unverified"]
+    run.report["runs"] = run.report["runs"][:2]
+    run.report["status"] = "failed"
+    refresh(run)
+    result = capture(run, tmp_path / "snapshot")
+    assert result["captured_completed"] == result["captured_failed"] == 1
+    prefix = json.loads((tmp_path / "snapshot/partial-run.json").read_text())
+    saved = prefix["runs"][1]
+    assert saved["provider_generation"]["completed"] is True
+    assert saved["generation"]["completed"] is False
+    assert saved["provider_generation"]["text"] == row["provider_generation"]["text"]
+
+
+def test_empty_or_entirely_pending_run_has_no_finished_snapshot(tmp_path):
+    run = make_run(tmp_path)
+    run.report["runs"] = []
+    refresh(run)
+    with pytest.raises(ValueError, match="finalized"):
+        capture(run, tmp_path / "snapshot")
+    assert not (tmp_path / "snapshot").exists()
+
+
+def test_optional_log_captures_only_the_size_observed_at_open(tmp_path, monkeypatch):
+    run = make_run(tmp_path)
+    log = run.source / "server.log"
+    original_bytes = log.read_bytes()
+    original_fstat = partial.os.fstat
+
+    def append_after_size(fd):
+        observed = original_fstat(fd)
+        with log.open("ab") as stream:
+            stream.write(b"later log bytes")
+        return observed
+
+    monkeypatch.setattr(partial.os, "fstat", append_after_size)
+    capture(run, tmp_path / "snapshot", include_server_log=True)
+    assert (tmp_path / "snapshot/server.log.snapshot").read_bytes() == original_bytes
+    assert log.read_bytes().endswith(b"later log bytes")
+
+
 @pytest.mark.parametrize("change", ["seal", "case_order", "condition", "attempt", "raw", "short_line", "warmup", "supervisor", "false_success"])
 def test_inconsistent_observations_never_publish_a_snapshot(tmp_path, change):
     run = make_run(tmp_path)
