@@ -11,6 +11,7 @@ from dataclasses import dataclass
 from .corpus import Corpus
 from .models import Evidence
 from .situations import classify_situation
+from .query_policy import public_evidence_limitation
 
 RETRIEVER_VERSION = "qa-bm25-situation.v3"
 SITUATION_MULTIPLIER = 1.35
@@ -134,6 +135,8 @@ class Retriever:
     def search(self, query: str, *, limit: int = 4, behavior: bool = False, allow_live: bool = False) -> SearchResult:
         if not 1 <= limit <= 10:
             raise ValueError("limit must be between 1 and 10")
+        if reason := public_evidence_limitation(query):
+            return SearchResult((), 0, reason)
         if not allow_live and LIVE_QUERY.search(query):
             return SearchResult((), 0, "The curated corpus is historical and cannot verify current information.")
         terms = set(tokenize(query, original_qa=self.original_qa))

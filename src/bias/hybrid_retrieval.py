@@ -26,6 +26,7 @@ from .corpus import Corpus, source_event_id
 from .models import Evidence
 from .retrieval import LIVE_QUERY, Retriever, SearchHit, SearchResult
 from .situations import classify_situation
+from .query_policy import public_evidence_limitation
 
 HYBRID_VERSION = "hybrid-rrf.v1"
 _CURRENT_QUERY = re.compile(r"\b(now|current|these days|this year|at present)\b|지금|현재|요즘|올해|최근", re.I)
@@ -395,6 +396,9 @@ class HybridRetriever:
                  "policy": asdict(self.policy), "training_records": len(self.records), "style_records": len(self.style_records),
                  "candidates": [], "style_candidates": [],
                  "factual_ids": [], "style_ids": [], "semantic_status": "unreviewed_candidates"}
+        if reason := (public_evidence_limitation(original_query or "") or public_evidence_limitation(query)):
+            trace["abstention_reason"] = "unsupported_private_or_user_endorsement"
+            return HybridSearchResult((), 0, reason, trace=trace)
         if not allow_live and (LIVE_QUERY.search(query) or _CURRENT_QUERY.search(query)):
             trace["abstention_reason"] = "current_information_requires_snapshot_policy"
             return HybridSearchResult((), 0, "The curated corpus cannot verify current information without a temporal policy.", trace=trace)
