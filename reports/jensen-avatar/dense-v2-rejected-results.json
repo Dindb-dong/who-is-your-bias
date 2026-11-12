@@ -1,0 +1,82 @@
+{
+  "schema_version": "avatar-surface-fit.v1",
+  "persona_id": "jensen-huang",
+  "inputs": {
+    "coarse_master": {
+      "path": "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/avatar/coarse-fit-v1/jensen-landmark-candidate-v1.blend",
+      "sha256": "4563d8878b34b17d4c4d933f5c8306ecd2e89e9370c859c2c430fe8dc67e0074"
+    },
+    "template_binding": {
+      "path": "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/avatar/template-binding/template-binding.json",
+      "sha256": "cd6d6b0d431b87ab7e4fbf4a417600b9a9f304809656a90977f18c5973e24fba"
+    },
+    "template_landmarks": {
+      "path": "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/avatar/template-binding/template-landmarks.json",
+      "sha256": "7879e563d9a974088540b7f6e405d9e3a434c61a29357b3f715afd5bbf753f43"
+    },
+    "measurements": {
+      "path": "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/avatar/multimodal-measurements.json",
+      "sha256": "7f63c078dee417e2154aad9e5307f811b7c933591503f8beb14563de8d32649e"
+    }
+  },
+  "method": "event-balanced dense landmark Gaussian surface interpolation",
+  "landmarks": 468,
+  "unique_mesh_anchors": 440,
+  "event_families": [
+    "goldman-sachs-2024",
+    "nvidia-executive-portraits-2026",
+    "stanford-cs153-2026-04-30"
+  ],
+  "inferred_depth_weight": 0.35,
+  "sigma_face_height": 0.12,
+  "displacement_cap_face_height": 0.12,
+  "maximum_displacement": 0.019486859273362134,
+  "moved_vertices_by_mesh": {
+    "AuthoredGlassesBridge": 30,
+    "AuthoredGlassesLeft": 650,
+    "AuthoredGlassesRight": 650,
+    "AuthoredTempleLeft": 20,
+    "AuthoredTempleRight": 20,
+    "Icosphere": 0,
+    "JensenCandidateSkin": 4564,
+    "ResearchHumanSkin.eyebrow001": 124,
+    "ResearchHumanSkin.high-poly": 1076,
+    "ResearchHumanSkin.male_casualsuit01": 337,
+    "ResearchHumanSkin.short01": 2061,
+    "ResearchHumanSkin.teeth_base": 4494,
+    "ResearchHumanSkin.tongue01": 253
+  },
+  "landmark_rmse_before": 0.012578372521821788,
+  "landmark_rmse_after": 0.006328167581628314,
+  "glb": {
+    "filename": "jensen-landmark-candidate-v2.glb",
+    "sha256": "50dfd424b1b8ba21c968738f6b051e6930ddeac66ada5d50109c4869ab4c633b",
+    "bytes": 16983952
+  },
+  "editable_master": {
+    "filename": "jensen-landmark-candidate-v2.blend",
+    "sha256": "039bd4fe26e8aa87fb7e0647dd769668617caecd9d844aece5464aae673789e1",
+    "bytes": 27509292
+  },
+  "likeness_review": "ungraded",
+  "promotion": "candidate_only",
+  "limitations": [
+    "Inferred source depth is not calibrated scan geometry.",
+    "Source expressions, glasses occlusion and detector priors affect the fitted surface.",
+    "Texture, hair and clothing remain generic or authored; no source pixels are baked.",
+    "Residual reduction is an engineering fit metric, not human likeness acceptance."
+  ],
+  "visual_review": {
+    "status": "rejected_for_promotion",
+    "findings": [
+      "Young generic-looking face and pale blue eyes do not adequately reproduce Jensen.",
+      "Bone-parented glasses disappeared during dense rest-shape fitting.",
+      "Residual reduction alone does not establish likeness."
+    ],
+    "next_steps": [
+      "Apply rigid-accessory preservation fix in commit570ad5b.",
+      "Refine face appearance using only explicitly attributed CC-BY-SA Stanford texture references.",
+      "Re-render face/front/three-quarter/profile and articulated hands before integration."
+    ]
+  }
+}

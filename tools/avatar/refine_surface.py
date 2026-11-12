@@ -62,9 +62,15 @@ def main():
     spread = np.array([np.mean(uncertainty[indices]) for indices in grouped])
     fitter = SmoothSurfaceFit(centers, goals, sigma=height * .12, maximum=height * .12, uncertainty=spread)
     meshes = [obj for obj in bpy.data.objects if obj.type == 'MESH']
+    rigid_world = {obj: obj.matrix_world.copy() for obj in meshes if obj.parent_type == 'BONE'}
     moved = {}
     maximum = 0.
     for obj in meshes:
+        if obj in rigid_world:
+            # Bone-attached glasses are rigid accessories, not skin. Deforming
+            # their vertices and their parent rest bone would move them twice.
+            moved[obj.name] = 0
+            continue
         collections = [key.data for key in obj.data.shape_keys.key_blocks] if obj.data.shape_keys else [obj.data.vertices]
         world = np.array([obj.matrix_world @ vertex.co for vertex in collections[0]])
         offsets = fitter.displacement(world)
@@ -87,6 +93,19 @@ def main():
         bone.head = inverse @ Vector(transformed[0]); bone.tail = inverse @ Vector(transformed[1])
     bpy.ops.object.mode_set(mode='OBJECT')
     bpy.context.view_layer.update()
+    fitted = points + fitter.displacement(points)
+    frames = [obj for obj in rigid_world if obj.name.startswith('AuthoredGlasses') and 'Bridge' not in obj.name]
+    if frames:
+        frame_y = float(np.mean([matrix @ vertex.co for obj, matrix in rigid_world.items() if obj in frames for vertex in obj.data.vertices], axis=0)[1])
+        desired_y = max(float(fitted[6, 1]), float(fitted[168, 1])) + height * .02
+        correction = Vector((0, max(0., desired_y - frame_y), 0))
+    else:
+        correction = Vector((0, 0, 0))
+    for obj, matrix in rigid_world.items():
+        obj.matrix_world = matrix
+        if obj.name.startswith('Authored'):
+            obj.matrix_world.translation += correction
+    bpy.context.view_layer.update()
     bpy.ops.object.select_all(action='DESELECT'); rig.select_set(True)
     for obj in meshes:
         obj.select_set(True)
@@ -97,13 +116,13 @@ def main():
     bpy.ops.wm.save_as_mainfile(filepath=str(master.resolve()))
     bpy.context.scene.render.filepath = str((args.output / 'candidate-neutral.png').resolve())
     bpy.ops.render.render(write_still=True)
-    fitted = points + fitter.displacement(points)
     report = {'schema_version': 'avatar-surface-fit.v1', 'persona_id': 'jensen-huang',
               'inputs': {name: {'path': str(getattr(args, name)), 'sha256': digest(getattr(args, name))} for name in ['coarse_master', 'template_binding', 'template_landmarks', 'measurements']},
               'method': 'event-balanced dense landmark Gaussian surface interpolation',
               'landmarks': 468, 'unique_mesh_anchors': len(unique), 'event_families': measurements['event_families'],
               'inferred_depth_weight': .35, 'sigma_face_height': .12, 'displacement_cap_face_height': .12,
               'maximum_displacement': maximum, 'moved_vertices_by_mesh': moved,
+              'rigid_accessory_preservation': True, 'glasses_clearance_translation': list(correction),
               'landmark_rmse_before': float(np.sqrt(np.mean(np.sum((points - targets) ** 2, axis=1)))),
               'landmark_rmse_after': float(np.sqrt(np.mean(np.sum((fitted - targets) ** 2, axis=1)))),
               'glb': {'filename': glb.name, 'sha256': digest(glb), 'bytes': glb.stat().st_size},

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "goldman-0128-8s",
+    "frames": 80,
+    "reference_ms": 100.1,
+    "finger_channels": 30,
+    "frames_with_fingers": 68,
+    "selected_two_hands": 53
+  },
+  {
+    "id": "goldman-0146-8s",
+    "frames": 80,
+    "reference_ms": 1501.5,
+    "finger_channels": 30,
+    "frames_with_fingers": 59,
+    "selected_two_hands": 45
+  },
+  {
+    "id": "goldman-0164-8s",
+    "frames": 80,
+    "reference_ms": 0.0,
+    "finger_channels": 30,
+    "frames_with_fingers": 71,
+    "selected_two_hands": 57
+  }
+]

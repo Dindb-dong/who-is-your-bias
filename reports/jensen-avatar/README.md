@@ -6,6 +6,17 @@ too strongly. It must not replace the designed default under a claim that Jensen
 appearance has been reproduced. Dense landmark refinement and visual comparison
 are the next gate.
 
+The completed dense-v2 attempt is **rejected for promotion**: it reduced landmark
+RMSE from 0.0125784 to 0.00632817, but remained too generic and moved the rigid
+glasses inside the head. The exact failed model and editable master are retained
+in the `jensen-dense-fit-v2-rejected` artifact package. Its
+[measured result and visual findings](dense-v2-rejected-results.json),
+[coarse render](renders/coarse-v1-neutral.png), and
+[rejected dense render](renders/dense-v2-neutral-rejected.png) are in the repository.
+Commit `570ad5b` implements rigid-accessory preservation; rerender verification
+is still pending. Source-derived texture from the licensed Stanford photographs
+is proposed, not yet implemented or baked.
+
 ## Actual inputs and outputs
 
 The initial identity measurement used seven accepted images across three event
@@ -66,6 +77,15 @@ Finger segment swing is measured, while axial twist and hidden joints remain
 unavailable. This initial event is a pilot; broader full-video acquisition and
 additional event windows are still being prepared.
 
+Three actual exported clips are now versioned under
+`apps/web/public/motion/jensen/`, with hash-bound selections under
+`data/motion/reviews/jensen/`. Each clip carries 30 finger channels; fingers are
+available on 68, 59 and 71 frames respectively. The standalone
+`data/motion/jensen-goldman-v1.json` library binds explicitly to `jensen-huang`.
+It contains no text-context assertions and does not enable automatic conversation
+selection. Import a clip in Motion & rig calibration and explicitly enable
+geometry preview to inspect its measured motion.
+
 ## Reproduction and remaining gates
 
 The code is in `tools/avatar/{identity,prepare_fit,fit_mesh,surface_fit,refine_surface}.py`,
@@ -80,3 +100,22 @@ deformation checks on the exact final asset, desktop/mobile rendered evidence,
 more than one measured video event, source-bound clip qualification, and human
 likeness/performance assessment. The observed optimizer residual cannot pass any
 of those gates by itself.
+
+### Next commands after restoring artifact packages
+
+The following are proposed next execution commands. Set `AVATAR_ARTIFACT_ROOT`
+to the directory containing the restored packages. Use a fresh output directory;
+completed candidates are immutable.
+
+```bash
+OPENBLAS_NUM_THREADS=3 OMP_NUM_THREADS=3 blender --background --threads 3 \
+  --python tools/avatar/refine_surface.py -- \
+  "$AVATAR_ARTIFACT_ROOT/coarse-fit-v1/jensen-landmark-candidate-v1.blend" \
+  "$AVATAR_ARTIFACT_ROOT/template-binding/template-binding.json" \
+  "$AVATAR_ARTIFACT_ROOT/template-binding/template-landmarks.json" \
+  "$AVATAR_ARTIFACT_ROOT/multimodal-measurements.json" \
+  "$AVATAR_ARTIFACT_ROOT/dense-fit-v2b"
+
+PYTHONPATH=src:. python -m tools.motion check \
+  data/motion/jensen-goldman-v1.json apps/web/public
+```
