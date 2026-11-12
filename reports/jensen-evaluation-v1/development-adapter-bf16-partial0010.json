@@ -1,0 +1,90 @@
+{
+  "schema_version": "jensen-matched-condition-partial-result.v1",
+  "recorded_at": "2026-11-12T22:20:40.174557+00:00",
+  "recorded_at_basis": "immutable_snapshot_creation",
+  "exposure": "development",
+  "condition": "adapter",
+  "status": "partial_saved_and_fresh_readback_verified",
+  "collectible": false,
+  "final_full_condition_save_required": true,
+  "planned_case_count": 12,
+  "captured_attempts": 10,
+  "captured_completed": 2,
+  "captured_failed": 8,
+  "case_ids": [
+    "dev-ko-cuda",
+    "dev-ko-sega",
+    "dev-ko-tsmc",
+    "dev-ko-values",
+    "dev-en-accelerated",
+    "dev-ko-followup",
+    "dev-ko-correction",
+    "dev-ko-topic-switch",
+    "dev-ko-unsupported",
+    "dev-ko-current"
+  ],
+  "plan_sha256": "cd2bd7340c3eb7d9c1ddc248b78e25d69b8e00c9d246454cf5925e082a1dd030",
+  "plan_file_sha256": "8e2c7d269ff12d29d260ffdd4212de5ae4afe1c5862a0c1ea57cf8b023916bbe",
+  "contract_sha256": "9c79398b54118f284ffdc6e4592d501e1cc214e77f6a895152ae91019286b6c0",
+  "contract_file_sha256": "5dbe9a114d081e10ac689160e59988c255a9d15a901f2e90e44dd9ff53482d15",
+  "completed_case_ids": [
+    "dev-ko-tsmc",
+    "dev-ko-followup"
+  ],
+  "failed_case_ids": [
+    "dev-ko-cuda",
+    "dev-ko-sega",
+    "dev-ko-values",
+    "dev-en-accelerated",
+    "dev-ko-correction",
+    "dev-ko-topic-switch",
+    "dev-ko-unsupported",
+    "dev-ko-current"
+  ],
+  "uncaptured_case_ids": [
+    "dev-en-private",
+    "dev-ko-future"
+  ],
+  "model_identity_hashes": {
+    "identity_sha256": "300560a54349d92f85d9bebd2f16a9d1afe2edc430ec39bef4ccb4d981c0ca97",
+    "adapter_sha256": "11a1cc22a4b3edc931273a2b430e4c201c815d65334d62f0e152d322947da797",
+    "runtime_sha256": "f09c338c9e491f5bd94d33a9a6cd8040303fb2670080e6a43013257406072a23"
+  },
+  "snapshot_manifest_sha256": "49a15329e6f29fb219a32368a97d5f377a9aa82f88439882042b919977310d02",
+  "snapshot_manifest_file_sha256": "efab89a0cf29a2a1202b029fc2eb6eedd691e438a708328d344bfdfecfbd363d",
+  "partial_sha256": "23ee92416183687fc33bf33d2fdf1cf05a7d7e485c1b963b8f5b3840f1cb19c9",
+  "helper_source_sha256": "33b244c32af6fd1ed89b794f5d295ea20f2a7ab97a160972fa81b09df93ac7fe",
+  "snapshot_tool_sha256": "5f18454919f7387a6bf1add4c18b66faaeb5329ff34f1ecae23c6a1afb276a56",
+  "payload_files_sha256": {
+    "attempts.prefix.jsonl": "ba3f5bf512401837c9e1d62bb0a3e134c72b14137f9521d31d1aac5db0f81ba9",
+    "manifest.json": "efab89a0cf29a2a1202b029fc2eb6eedd691e438a708328d344bfdfecfbd363d",
+    "metadata/launcher.json": "c73f9b004d7f8428c3a66694c2f60bdeacbd6620098cee067a8ffecef59428f4",
+    "metadata/observed-before.json": "21f155b9399f3f365dde34d48036dccbb1a57ed29b48fb6e6f2b0102917cce12",
+    "metadata/supervisor-observed.json": "46f86ce96a2da45489bfc2992448409727f5641f8665049da6c7e2e8d14557f5",
+    "metadata/warmup.json": "f2ccac5c9675ed1d2387e4b3e52b5cc23d47b89a36f916be93253e9e45793cf5",
+    "partial-run.json": "7bb47e92b876d23e5199fe341739e019d5732d83dfdf740d242a7b6589703bbc",
+    "raw-generations.prefix.jsonl": "7c9acec8ce878d5c093f2318353ebfada62799931d054c1a5e898fb529b1f6d9"
+  },
+  "artifact": {
+    "artifact_id": "jensen-m6-development-adapter-bf16-v2-partial0010",
+    "file_name": "jensen-m6-development-adapter-bf16-v2-partial0010.tar.gz",
+    "file_id": "file_000000008e6481f8868ef59f4b7460b6",
+    "library_file_id": "libfile_fde3_f-41942837e0c88191936062c46a468782_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 22547,
+    "sha256": "979c8c3c45115d1dab08ea7a4a688dc5055820df64f4effbe16677fe68f6c784",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "verification": {
+    "fresh_archive_bytes_and_sha256": true,
+    "exact_regular_member_inventory": true,
+    "all_archive_member_hashes": true,
+    "snapshot_manifest_and_prefix_seals": true,
+    "captured_rows_and_metadata_revalidated": true,
+    "original_full_report_revalidated": false
+  },
+  "scope": "Immutable finalized attempt prefix only. The active condition may have advanced. This is not a final condition, collector input or generation resume cursor.",
+  "full_raw_outputs": "Preserved only inside the private verified partial artifact.",
+  "human_review": "ungraded",
+  "efficacy_claim": false
+}
