@@ -1,0 +1,13 @@
+{
+  "schema_version": "regional-replays-storage-probe.v1",
+  "checked_at": "2026-11-12T21:07:51.061297+00:00",
+  "artifact_role": "bounded-acquisition-preflight",
+  "library_file_id": "libfile_fde3_f-82708c02bb9c8191b21212b330939d03_a18ece08681081918d81df44f69c4b1f",
+  "file_id": "file_000000009be481f5978b13caeccc5e31",
+  "file_name": "preflight.json",
+  "bytes": 3430,
+  "sha256": "ff8f2870d04825523a7fb34fe9ccc1c0dd601b73245dc16edd6f81b0e905f23a",
+  "fresh_materialized_sha256": "ff8f2870d04825523a7fb34fe9ccc1c0dd601b73245dc16edd6f81b0e905f23a",
+  "local_metadata_applied": true,
+  "status": "fresh_materialized_exact_bytes_verified"
+}
