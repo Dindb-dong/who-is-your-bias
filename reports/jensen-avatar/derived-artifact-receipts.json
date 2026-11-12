@@ -60,6 +60,23 @@
       "verification_status": "verified",
       "fresh_readback_sha256": "16a55e229ebf7f11275d7667219553286acfcf02abef7d9788cc0b6667fae451",
       "verified_at": "2026-11-12T18:00:33.582053+00:00"
+    },
+    {
+      "local_path": "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/avatar/jensen-textured-v3b.tar.gz",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_000000006e6481f59a1400c0bcfc1b47",
+      "library_file_id": "libfile_fde3_f-3e727c525bbc819184dfb9e0591ed8bd_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "jensen-textured-v3b.tar.gz",
+      "local_metadata_applied": true,
+      "path": "/jensen-textured-v3b.tar.gz",
+      "current_version_number": 0,
+      "bytes": 38123876,
+      "sha256": "c53b82b03d023d73fe73ac0b07aaef34534c65ba1eecf21022d314d551034c3d",
+      "upload_status": "succeeded",
+      "verification_status": "verified",
+      "fresh_readback_sha256": "c53b82b03d023d73fe73ac0b07aaef34534c65ba1eecf21022d314d551034c3d",
+      "verified_at": "2026-11-12T18:11:34.373434+00:00"
     }
   ]
 }
