@@ -38,6 +38,16 @@ apps/web/public/models/*
 # Bounded generated evaluation speech; source/reference recordings stay ignored.
 !tools/voice_evaluation/results/qwen06-cpu-2026-11-11-listening/listener/sample*.wav
 
+# Eight generated Jensen comparison outputs; original source/reference audio stays ignored.
+!reports/voice/jensen-2026-11-13/listening/base-en_short.wav
+!reports/voice/jensen-2026-11-13/listening/base-en_multisentence.wav
+!reports/voice/jensen-2026-11-13/listening/base-ko_multisentence.wav
+!reports/voice/jensen-2026-11-13/listening/base-en_numbers.wav
+!reports/voice/jensen-2026-11-13/listening/adapted-en_short.wav
+!reports/voice/jensen-2026-11-13/listening/adapted-en_multisentence.wav
+!reports/voice/jensen-2026-11-13/listening/adapted-ko_multisentence.wav
+!reports/voice/jensen-2026-11-13/listening/adapted-en_numbers.wav
+
 # Bounded generated presentation assets; source recordings and weights stay ignored.
 !apps/web/public/presentation/presentation.mp4
 !apps/web/public/presentation/narration.wav

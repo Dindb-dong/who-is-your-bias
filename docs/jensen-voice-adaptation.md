@@ -13,6 +13,11 @@ The [measured evaluation](../reports/voice/jensen-2026-11-13/evaluation.json) re
 the outputs and limitations. The adapter remains a candidate; no quality promotion
 has been made.
 
+The [generated listening page](../reports/voice/jensen-2026-11-13/listening/README.md)
+includes all eight exact output WAVs in the repository. Download that directory
+and open `index.html` locally for the labeled comparison. Original source/reference
+audio is not included in that public directory.
+
 The [codec receipt](../reports/voice/jensen-2026-11-13/codecs.json) records all eight
 encodings (1,151 frames, 16 codebooks per frame). The encoding loop took 6.13
 seconds, excluding model loading. All source clips still have **candidate**
