@@ -1,0 +1,120 @@
+{
+  "schema_version": "persona-split-registration.v1",
+  "id": "jensen-event-splits.2026-11-13.v1",
+  "registered_at": "2026-11-12T17:24:38.717038+00:00",
+  "policy": "Entire event families including reuploads, transcripts and edited clips stay in one split. All nine PR #17 sources remain exposed training/development. Test families are excluded from acquisition/build, adaptation, style and retrieval.",
+  "events": [
+    {
+      "source_event_id": "nvidia-computex-2024",
+      "event_family_id": "nvidia-computex-2024",
+      "source_ids": [
+        "nvidia-computex-2024"
+      ],
+      "split": "train"
+    },
+    {
+      "source_event_id": "nvidia-gtc-2025",
+      "event_family_id": "nvidia-gtc-2025",
+      "source_ids": [
+        "nvidia-blackwell-ultra-2025"
+      ],
+      "split": "train"
+    },
+    {
+      "source_event_id": "nvidia-computex-2025",
+      "event_family_id": "nvidia-computex-2025",
+      "source_ids": [
+        "nvidia-computex-2025"
+      ],
+      "split": "train"
+    },
+    {
+      "source_event_id": "lex-494",
+      "event_family_id": "lex-494",
+      "source_ids": [
+        "lex-494"
+      ],
+      "split": "train"
+    },
+    {
+      "source_event_id": "dwarkesh-2026",
+      "event_family_id": "dwarkesh-2026",
+      "source_ids": [
+        "dwarkesh-2026"
+      ],
+      "split": "train"
+    },
+    {
+      "source_event_id": "acquired-2023",
+      "event_family_id": "acquired-2023",
+      "source_ids": [
+        "acquired-2023"
+      ],
+      "split": "train"
+    },
+    {
+      "source_event_id": "stripe-sessions-2024",
+      "event_family_id": "stripe-sessions-2024",
+      "source_ids": [
+        "stripe-sessions-2024"
+      ],
+      "split": "train"
+    },
+    {
+      "source_event_id": "strange-loop-2025",
+      "event_family_id": "strange-loop-2025",
+      "source_ids": [
+        "strange-loop-2025"
+      ],
+      "split": "train"
+    },
+    {
+      "source_event_id": "csis-2025",
+      "event_family_id": "csis-2025",
+      "source_ids": [
+        "csis-2025"
+      ],
+      "split": "train"
+    },
+    {
+      "source_event_id": "stanford-vftt-2024",
+      "event_family_id": "stanford-vftt-2024",
+      "source_ids": [
+        "stanford-vftt-2024"
+      ],
+      "split": "train"
+    },
+    {
+      "source_event_id": "goldman-sachs-2024",
+      "event_family_id": "goldman-sachs-2024",
+      "source_ids": [
+        "goldman-sachs-2024"
+      ],
+      "split": "train"
+    },
+    {
+      "source_event_id": "yc-startup-school-2026",
+      "event_family_id": "yc-startup-school-2026",
+      "source_ids": [
+        "yc-startup-school-2026"
+      ],
+      "split": "train"
+    },
+    {
+      "source_event_id": "wef-davos-2026",
+      "event_family_id": "wef-davos-2026",
+      "source_ids": [
+        "wef-davos-2026"
+      ],
+      "split": "test"
+    },
+    {
+      "source_event_id": "no-priors-2023",
+      "event_family_id": "no-priors-2023",
+      "source_ids": [
+        "no-priors-2023"
+      ],
+      "split": "test"
+    }
+  ]
+}
