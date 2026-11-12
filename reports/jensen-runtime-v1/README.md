@@ -51,5 +51,17 @@ cleanup. Timings in this configuration measure evidence delivery and API work,
 not language-model inference. The optional short speech probe is an integration
 check excluded from the frozen voice quality comparison.
 
-Status: configuration and protocol prepared; the real HTTP runner and measured
-report are the next checkpoint. No functional pass is claimed by this document.
+```bash
+PYTHONPATH=src:. .venv/bin/python -m tools.runtime_checks smoke \
+  --artifacts /absolute/path/to/jensen-2026-11-13 --allow-candidates \
+  --output /absolute/path/outside-the-repository/runtime-preview-check
+```
+
+The runner starts the real API on an ephemeral loopback TCP port, executes the
+protocol, writes raw HTTP evidence and a source-text-free report, and stops its
+servers. The output directory must be new and outside the repository because
+the raw trace contains original interview answers. Its report does not claim
+that a quickly completed preview was interrupted neural inference.
+
+Status: configuration preflight and Python compilation passed; the frozen
+real HTTP runner is ready. Functional execution results are pending.
