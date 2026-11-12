@@ -1,0 +1,76 @@
+{
+  "schema_version": "jensen-regional-post-acquisition-stream-coverage.v1",
+  "checked_at": "2026-11-12T21:34:06.110916+00:00",
+  "validation_phase": "post_acquisition_derived_from_saved_actual_timestamp_statistics",
+  "validator_module": "tools.persona_data.regional_hls.stream_coverage",
+  "validator_source_sha256": "10bee703b0418cb10b4013f96c767c1704eee6e22daceabfba8b8ff1fadeed4f",
+  "validator_public_checkpoint": "9c77df40925f2db7904f29b115d0b7b4f16cebe9",
+  "original_acquisition_collector_public_checkpoint": "9a6bada20771e1e563c76ac4abeb2d208ec9e359",
+  "original_acquisition_collector_source_sha256": "1ec3f127ae5d592762133dc61c0d2fe76a9bb1213811ae0f598bfb8ffa1fd2a9",
+  "checks": [
+    {
+      "source_id": "gtc-2026-cn-video",
+      "acquisition_report": "gtc-complete.json",
+      "source_receipt_bytes": 2637,
+      "source_receipt_sha256": "cf01fc95f2d3cc71007273548428d0cca95aa2c8481487f0dd4bb2c9ae952cdb",
+      "source_media_sha256": "4070e63179f44e5de14d70bc615322a2821b2ed417610ffa0e92ccd371cd7b28",
+      "source_metadata_bundle_library_file_id": "libfile_fde3_f-0be233b01fe08191ae53099c1e42fb25_a18ece08681081918d81df44f69c4b1f",
+      "original_timeline_backward_step_threshold_seconds": 0.001,
+      "original_packet_scan_stderr_bytes": 0,
+      "post_acquisition_stream_coverage": {
+        "status": "passed",
+        "anchor_dts": 1.4,
+        "expected_duration_seconds": 8335.6,
+        "endpoint_tolerance_seconds": 0.25,
+        "streams": {
+          "0": {
+            "first_dts_offset_seconds": 0.0,
+            "last_dts_elapsed_seconds": 8335.566667000001,
+            "last_dts_minus_expected_end_seconds": -0.03333299999940209,
+            "dts_span_seconds": 8335.566667000001
+          },
+          "1": {
+            "first_dts_offset_seconds": 0.05355600000000016,
+            "last_dts_elapsed_seconds": 8335.692211,
+            "last_dts_minus_expected_end_seconds": 0.09221099999922444,
+            "dts_span_seconds": 8335.638654999999
+          }
+        },
+        "method": "each_track_first_and_last_decode_timestamp_against_registered_VOD"
+      }
+    },
+    {
+      "source_id": "ces-2026-cn-video",
+      "acquisition_report": "ces-complete.json",
+      "source_receipt_bytes": 2608,
+      "source_receipt_sha256": "8c7b75789f101781a3cd70989937ea04922fb05ba847c0948597d42e7b6e0a79",
+      "source_media_sha256": "e1ac9122cb2468d7759eeef5b2b2f67655eda6e6f72c3fe7b88389ccb5a05d45",
+      "source_metadata_bundle_library_file_id": "libfile_fde3_f-0e3451ad33808191bc34ec384d628976_a18ece08681081918d81df44f69c4b1f",
+      "original_timeline_backward_step_threshold_seconds": 0.001,
+      "original_packet_scan_stderr_bytes": 0,
+      "post_acquisition_stream_coverage": {
+        "status": "passed",
+        "anchor_dts": 1.4,
+        "expected_duration_seconds": 5499.766667,
+        "endpoint_tolerance_seconds": 0.25,
+        "streams": {
+          "0": {
+            "first_dts_offset_seconds": 0.0,
+            "last_dts_elapsed_seconds": 5499.733333,
+            "last_dts_minus_expected_end_seconds": -0.03333399999974063,
+            "dts_span_seconds": 5499.733333
+          },
+          "1": {
+            "first_dts_offset_seconds": 0.05355600000000016,
+            "last_dts_elapsed_seconds": 5499.862367000001,
+            "last_dts_minus_expected_end_seconds": 0.09570000000076107,
+            "dts_span_seconds": 5499.808811
+          }
+        },
+        "method": "each_track_first_and_last_decode_timestamp_against_registered_VOD"
+      }
+    }
+  ],
+  "status": "both_complete_audio_and_video_track_extents_passed",
+  "method_limit": "Endpoint/timeline validation is not human language review or full content-quality evaluation."
+}
