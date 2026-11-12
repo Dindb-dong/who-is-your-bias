@@ -1,0 +1,44 @@
+[
+  {
+    "id": "nvidia-computex-2024",
+    "title": "Accelerate Everything: NVIDIA CEO Says Ahead of COMPUTEX",
+    "url": "https://blogs.nvidia.com/blog/computex-2024-jensen-huang/",
+    "publisher": "NVIDIA Blog",
+    "published_at": "2024-06-02",
+    "recorded_at": null,
+    "source_type": "publisher_keynote_report",
+    "split": "train",
+    "source_event_id": "nvidia-computex-2024",
+    "attribution": "Brian Caulfield reports Jensen Huang keynote remarks. Evidence is an original editorial paraphrase, not a transcript or independent verification of company claims.",
+    "timeline": "article_sections",
+    "persona_id": "jensen-huang"
+  },
+  {
+    "id": "nvidia-blackwell-ultra-2025",
+    "title": "NVIDIA Blackwell Ultra AI Factory Platform Paves Way for Age of AI Reasoning",
+    "url": "https://nvidianews.nvidia.com/news/nvidia-blackwell-ultra-ai-factory-platform-paves-way-for-age-of-ai-reasoning",
+    "publisher": "NVIDIA Newsroom",
+    "published_at": "2025-03-18",
+    "recorded_at": null,
+    "source_type": "company_press_release",
+    "split": "train",
+    "source_event_id": "nvidia-gtc-2025",
+    "attribution": "NVIDIA press release with an attributed Jensen Huang statement. Product descriptions and forecasts remain company claims dated March 2025.",
+    "timeline": "article_sections",
+    "persona_id": "jensen-huang"
+  },
+  {
+    "id": "nvidia-computex-2025",
+    "title": "NVIDIA CEO Envisions AI Infrastructure Industry Worth Trillions of Dollars",
+    "url": "https://blogs.nvidia.com/blog/computex-2025-jensen-huang/",
+    "publisher": "NVIDIA Blog",
+    "published_at": "2025-05-18",
+    "recorded_at": null,
+    "source_type": "publisher_keynote_report",
+    "split": "train",
+    "source_event_id": "nvidia-computex-2025",
+    "attribution": "Brian Caulfield reports Jensen Huang keynote remarks. The page displays May 18, 2025; the recording date is not asserted by this seed.",
+    "timeline": "article_sections",
+    "persona_id": "jensen-huang"
+  }
+]

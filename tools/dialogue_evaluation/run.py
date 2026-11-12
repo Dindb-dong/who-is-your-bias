@@ -56,7 +56,8 @@ def load_registry(path: Path = REGISTRY) -> dict:
 def preview_settings() -> Settings:
     # Explicit settings make a deterministic preview independent of secrets or
     # provider variables in the caller's environment.
-    return Settings(persona_snapshot=repository_root() / "data/snapshots/elon-musk-2026-11-11.json")
+    return Settings(corpus_dir=repository_root() / "data/qna/elon-musk-v1",
+                    persona_snapshot=repository_root() / "data/snapshots/elon-musk-2026-11-11.json")
 
 
 async def interrupt_stream(app, request: dict) -> dict:

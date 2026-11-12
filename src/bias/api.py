@@ -18,13 +18,14 @@ from fastapi.staticfiles import StaticFiles
 from starlette.requests import ClientDisconnect
 
 from . import __version__
+from .bindings import SubjectSpeechProvider, motion_binding_status
 from .config import Settings
 from .corpus import Corpus
 from .engine import Engine
 from .lipsync import LipsyncEngine
 from .models import ChatRequest, ChatTurn, SpeechPackageRequest, SpeechRequest
 from .motion import MotionError, MotionLibrary
-from .providers import OpenAICompatibleLLM, ProviderError, SpeechProvider, TranscriptionProvider
+from .providers import OpenAICompatibleLLM, ProviderError, TranscriptionProvider
 from .request_work import run_until_disconnect
 from .sessions import SessionCapacityError, SessionNotFound
 from .speech import SpeechPackages
@@ -119,6 +120,7 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
 
     @asynccontextmanager
     async def lifespan(application: FastAPI) -> AsyncIterator[None]:
+        loaded_corpus = corpus or Corpus.load(config.corpus_dir)
         loaded_motion = motion_library
         motion_status = "not_configured"
         if loaded_motion is None and config.motion_catalog is not None:
@@ -127,9 +129,14 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
             except (ValueError, OSError) as exc:
                 logger.warning("Optional motion library unavailable (%s)", type(exc).__name__)
                 motion_status = "invalid_catalog"
+        if loaded_motion is not None:
+            binding_status = motion_binding_status(loaded_motion, loaded_corpus)
+            if binding_status not in {"matched", "source_bound"}:
+                loaded_motion = None
+                motion_status = binding_status
         application.state.motion_library = loaded_motion
         application.state.motion_status = "available" if loaded_motion else motion_status
-        application.state.engine = Engine(config, corpus or Corpus.load(config.corpus_dir), llm=llm, motion_library=loaded_motion)
+        application.state.engine = Engine(config, loaded_corpus, llm=llm, motion_library=loaded_motion)
         application.state.retrieval_warmup_ms = None
         if config.retrieval_backend == "hybrid" and config.retrieval_prewarm:
             # Cold local indexing can take longer than a conversation deadline.
@@ -138,7 +145,7 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
             logger.info("Warming the configured hybrid retrieval index before API readiness")
             await asyncio.to_thread(application.state.engine.retriever.warm_up)
             application.state.retrieval_warmup_ms = round((time.perf_counter() - started) * 1000, 3)
-        application.state.speech = SpeechProvider(config.tts, voice=config.tts_voice, timeout=config.request_timeout, language_hint=config.tts_language_hint)
+        application.state.speech = SubjectSpeechProvider(config, loaded_corpus.persona.id)
         application.state.transcription = TranscriptionProvider(config.asr, timeout=config.request_timeout)
         application.state.lipsync = LipsyncEngine.from_env()
         application.state.speech_packages = SpeechPackages()
@@ -172,8 +179,8 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
         engine: Engine = request.app.state.engine
         return {
             "status": "ok", "version": __version__, "provider": "openai" if config.llm.configured else "evidence",
-            "capabilities": {"llm": config.llm.configured, "speech": config.tts.configured, "transcription": config.asr.configured},
-            "providers": {"llm": {"configured": config.llm.configured, "model": config.llm.model}, "speech": {"configured": config.tts.configured, "model": config.tts.model}, "transcription": {"configured": config.asr.configured, "model": config.asr.model}},
+            "capabilities": {"llm": config.llm.configured, "speech": request.app.state.speech.settings.configured, "transcription": config.asr.configured},
+            "providers": {"llm": {"configured": config.llm.configured, "model": config.llm.model}, "speech": {"configured": config.tts.configured, "available": request.app.state.speech.settings.configured, "model": config.tts.model, "binding": request.app.state.speech.binding}, "transcription": {"configured": config.asr.configured, "model": config.asr.model}},
             "corpus": engine.corpus.stats(),
             "qa_corpus": engine.corpus.qa_report(),
             "persona_snapshot": engine.snapshot.summary() if engine.snapshot else None,
@@ -190,7 +197,17 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
         loaded: Corpus = request.app.state.engine.corpus
         item = loaded.persona
         snapshot = request.app.state.engine.snapshot
-        return {"id": item.id, "name": item.name, "tagline": item.tagline, "description": item.description, "example_questions": item.example_questions, "stats": loaded.stats(), "qa_corpus": loaded.qa_report(), "snapshot": snapshot.summary() if snapshot else None, "capabilities": {"llm": config.llm.configured, "speech": config.tts.configured, "transcription": config.asr.configured, "live_speech": config.tts.configured}, "notice": item.notice}
+        speech = request.app.state.speech
+        motion = request.app.state.motion_library
+        return {"id": item.id, "name": item.name, "tagline": item.tagline, "description": item.description,
+                "example_questions": item.example_questions, "stats": loaded.stats(), "qa_corpus": loaded.qa_report(),
+                "snapshot": snapshot.summary() if snapshot else None,
+                "capabilities": {"llm": config.llm.configured, "speech": speech.settings.configured,
+                                 "transcription": config.asr.configured, "live_speech": speech.settings.configured},
+                "notice": item.notice, "presentation": (item.model_extra or {}).get("presentation"),
+                "bindings": {"persona_id": item.id, "voice": speech.binding,
+                             "motion": {"status": motion_binding_status(motion, loaded) if motion else request.app.state.motion_status,
+                                        "persona_id": item.id if motion else None}}}
 
     @application.get("/api/sources")
     async def sources(request: Request):
@@ -334,3 +351,4 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
 
 
 app = create_app()
+

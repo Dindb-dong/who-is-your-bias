@@ -226,6 +226,7 @@ def parser() -> argparse.ArgumentParser:
     for name in ("app-repo", "app-python", "voice-python", "llama-server", "llm-metadata", "voice-cache", "reference-wav", "reference-text", "output"):
         result.add_argument("--" + name, type=Path, required=True)
     result.add_argument("--corpus-dir", type=Path)
+    result.add_argument("--voice-persona-id", default="elon-musk", help="Declared reference subject, or generic. The historical benchmark defaults to Elon Musk.")
     result.add_argument("--question", default="How does tunnel diameter affect cost? In 12 words.")
     result.add_argument("--repeats", type=int, default=2)
     result.add_argument("--mode", choices=("profile", "rag", "behavior"), default="behavior")
@@ -325,11 +326,11 @@ def main() -> int:
         app_env = {**root_env, "BIAS_LLM_BASE_URL": llm_url + "/v1", "BIAS_LLM_MODEL": "qwen3-4b-instruct-q4",
             "BIAS_LLM_MAX_TOKENS": str(args.max_output_tokens), "BIAS_REQUEST_TIMEOUT": str(args.timeout),
             "BIAS_TTS_BASE_URL": voice_url + "/v1", "BIAS_TTS_MODEL": "qwen3-tts", "BIAS_TTS_VOICE": "reference",
-            "BIAS_TTS_LANGUAGE_HINT": "true", "BIAS_CORPUS_DIR": str(corpus)}
+            "BIAS_TTS_LANGUAGE_HINT": "true", "BIAS_TTS_PERSONA_ID": args.voice_persona_id, "BIAS_CORPUS_DIR": str(corpus)}
         voice_command = [str(args.voice_python), "-m", "uvicorn", "services.voice.app:app", "--host", "127.0.0.1", "--port", str(args.port_base + 1)]
         app_command = [str(args.app_python), "-m", "uvicorn", "bias.api:app", "--host", "127.0.0.1", "--port", str(args.port_base + 2)]
         report["runtime"] = {"llama_binary": file_identity(args.llama_server), "commands": {"llm": llm_command, "voice": voice_command, "app": app_command},
-            "voice_settings": voice_settings, "request_timeout_seconds": args.timeout, "lipsync": "not_configured",
+            "voice_settings": voice_settings, "voice_persona_id": args.voice_persona_id, "request_timeout_seconds": args.timeout, "lipsync": "not_configured",
             "max_output_tokens": args.max_output_tokens, "startup_warmup": "llama.cpp default enabled", "speech_streaming": False}
         save(report_path, report)
         processes = Processes(args.output)

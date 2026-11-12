@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from urllib.parse import urlparse
@@ -45,12 +46,14 @@ class ProviderSettings:
 
 @dataclass(frozen=True)
 class Settings:
-    corpus_dir: Path = field(default_factory=lambda: repository_root() / "data/qna/elon-musk-v1")
+    corpus_dir: Path = field(default_factory=lambda: repository_root() / "data/personas/jensen-huang")
     web_dir: Path = field(default_factory=lambda: repository_root() / "apps/web/dist")
     llm: ProviderSettings = field(default_factory=ProviderSettings)
     tts: ProviderSettings = field(default_factory=ProviderSettings)
     asr: ProviderSettings = field(default_factory=ProviderSettings)
     tts_voice: str = "default"
+    # Explicitly bind a server voice to this persona, or declare a generic voice.
+    tts_persona_id: str | None = None
     tts_language_hint: bool = False
     motion_catalog: Path | None = None
     motion_asset_root: Path = field(default_factory=lambda: repository_root() / "apps/web/public")
@@ -81,6 +84,8 @@ class Settings:
     cors_origins: tuple[str, ...] = ("http://localhost:5173", "http://127.0.0.1:5173")
 
     def __post_init__(self) -> None:
+        if self.tts_persona_id is not None and (not isinstance(self.tts_persona_id, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,119}", self.tts_persona_id)):
+            raise ValueError("tts_persona_id must be a persona identifier or generic")
         if not isinstance(self.tts_language_hint, bool):
             raise ValueError("tts_language_hint must be a boolean")
         if self.retrieval_backend not in {"lexical", "hybrid"} or self.embedding_backend not in {"local", "http"}:
@@ -127,12 +132,13 @@ class Settings:
             raise ValueError("BIAS_RETRIEVAL_PREWARM must be true, false, 1, or 0")
 
         return cls(
-            corpus_dir=Path(os.getenv("BIAS_CORPUS_DIR", str(repository_root() / "data/qna/elon-musk-v1"))),
+            corpus_dir=Path(os.getenv("BIAS_CORPUS_DIR", str(repository_root() / "data/personas/jensen-huang"))),
             web_dir=Path(os.getenv("BIAS_WEB_DIR", str(repository_root() / "apps/web/dist"))),
             llm=provider("LLM"),
             tts=provider("TTS"),
             asr=provider("ASR"),
             tts_voice=os.getenv("BIAS_TTS_VOICE", "default"),
+            tts_persona_id=os.getenv("BIAS_TTS_PERSONA_ID") or None,
             tts_language_hint=language_hint in {"true", "1"},
             motion_catalog=Path(os.environ["BIAS_MOTION_CATALOG"]).expanduser() if os.getenv("BIAS_MOTION_CATALOG") else None,
             motion_asset_root=Path(os.getenv("BIAS_MOTION_ASSET_ROOT", str(repository_root() / "apps/web/public"))).expanduser(),
@@ -144,7 +150,7 @@ class Settings:
             llm_max_tokens=int(llm_max_tokens),
             persona_snapshot=(Path(os.environ["BIAS_PERSONA_SNAPSHOT"]).expanduser() if os.getenv("BIAS_PERSONA_SNAPSHOT") else
                               None if os.getenv("BIAS_CORPUS_DIR") or os.environ.get("BIAS_PERSONA_SNAPSHOT") == "" else
-                              repository_root() / "data/snapshots/elon-musk-2026-11-11.json"),
+                              repository_root() / "data/snapshots/jensen-huang-2026-11-12.json"),
             llm_context_window=int(number("BIAS_LLM_CONTEXT_WINDOW", 8192, 1024, 262144)),
             llm_tokenizer_path=Path(os.environ["BIAS_LLM_TOKENIZER_PATH"]).expanduser() if os.getenv("BIAS_LLM_TOKENIZER_PATH") else None,
             retrieval_backend=os.getenv("BIAS_RETRIEVAL_BACKEND", "lexical"),
@@ -163,3 +169,4 @@ class Settings:
             style_examples=os.getenv("BIAS_STYLE_EXAMPLES", "false").lower() == "true",
             cors_origins=tuple(x.strip() for x in os.getenv("BIAS_CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",") if x.strip()),
         )
+
