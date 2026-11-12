@@ -1,0 +1,621 @@
+{
+  "schema_version": "m6-condition-runtime-error-note.v1",
+  "recorded_at": "2026-11-12T22:07:39.191485+00:00",
+  "condition": "style",
+  "exposure": "development",
+  "execution_name": "m6-development-style-bf16-v2",
+  "scope": "Metadata-only interpretation of the original completed invocation; questions, answers, source passages and private review judgments were not exposed to the reviewer or copied here.",
+  "record_state": "public_interpretation_of_saved_and_freshly_verified_condition",
+  "source_report": {
+    "path_relative_to_artifacts": "text-evaluation-v1/execution-development-bf16-v2/style/condition/run.json",
+    "bytes": 51870,
+    "sha256": "feaa2fc2fc5b2ed3aba5f23aae67f8200204099042d85ce7de7ecb96060484cd",
+    "run_sha256": "06ad4ee8693c1dc2a7cdb3b193c7f00709f4f1c043d7f50d0c7ff1ce0189ba8d",
+    "seal_verified": true,
+    "status": "completed",
+    "plan_sha256": "cd2bd7340c3eb7d9c1ddc248b78e25d69b8e00c9d246454cf5925e082a1dd030"
+  },
+  "source_supervisor": {
+    "path_relative_to_artifacts": "text-evaluation-v1/execution-development-bf16-v2/style/supervisor.json",
+    "bytes": 3409,
+    "sha256": "7cf5ffeb5e95bada6947ef61b0e88b491b96ec1b64bd951e495792d987390d84",
+    "supervisor_sha256": "2be9ffe9bd8c3f43affb10d622e9678b14944df58faa5203fdb9aec283e04e3a",
+    "seal_verified": true,
+    "status": "completed",
+    "server_stopped": true,
+    "report_file_and_seal_bindings_verified": true,
+    "finished_at": "2026-11-12T22:05:30.964481+00:00"
+  },
+  "outer_process": {
+    "path_relative_to_artifacts": "text-process/m6-development-style-bf16-v2.json",
+    "sha256": "20e054a9918cc54837d6a897a9ff59aa7f40cdf830439aa9162753170a51ca28",
+    "name": "m6-development-style-bf16-v2",
+    "invocation_state": "exited",
+    "child_returncode": 0,
+    "child_stopped": true,
+    "finished_at": "2026-11-12T22:05:31.406038+00:00"
+  },
+  "counts": {
+    "planned": 12,
+    "attempted": 12,
+    "completed": 5,
+    "failed": 7,
+    "unattempted": 0,
+    "raw_provider_errors": {
+      "none": 5,
+      "provider_finish_length": 1,
+      "provider_timeout": 1,
+      "provider_http_429": 5
+    },
+    "normalized_generation_errors": {
+      "none": 5,
+      "provider_finish_length": 1,
+      "provider_timeout": 1,
+      "provider_model_identity_changed": 5
+    }
+  },
+  "observed_sequence": {
+    "timeout_attempt": {
+      "case_id": "dev-en-accelerated",
+      "provider_generation": {
+        "completed": false,
+        "error": "provider_timeout",
+        "finish_reason": null,
+        "response_model": "comparison-local",
+        "http_statuses": [
+          200
+        ],
+        "wall_ms": 182193.513,
+        "first_text_ms": 28510.554,
+        "request_sha256": "2cdbd48c1913664ef341bcceb9c0663c4986f00b6dcefd710d2739a5b07b138b"
+      },
+      "generation": {
+        "completed": false,
+        "error": "provider_timeout",
+        "finish_reason": null,
+        "response_model": "comparison-local",
+        "http_statuses": [
+          200
+        ],
+        "wall_ms": 182193.513,
+        "first_text_ms": 28510.554,
+        "request_sha256": "2cdbd48c1913664ef341bcceb9c0663c4986f00b6dcefd710d2739a5b07b138b"
+      },
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "validation_errors": []
+    },
+    "subsequent_busy_rejections": [
+      {
+        "case_id": "dev-ko-followup",
+        "provider_generation": {
+          "completed": false,
+          "error": "provider_http_429",
+          "finish_reason": null,
+          "response_model": null,
+          "http_statuses": [
+            429
+          ],
+          "wall_ms": 2541.508,
+          "first_text_ms": null,
+          "request_sha256": "8d68e9ff7cee789d3d904c51ec8e716b7c19a0241d0aaca7b271769bb91fb0eb"
+        },
+        "generation": {
+          "completed": false,
+          "error": "provider_model_identity_changed",
+          "finish_reason": null,
+          "response_model": null,
+          "http_statuses": [
+            429
+          ],
+          "wall_ms": 2541.508,
+          "first_text_ms": null,
+          "request_sha256": "8d68e9ff7cee789d3d904c51ec8e716b7c19a0241d0aaca7b271769bb91fb0eb"
+        },
+        "identity_check": {
+          "before": "verified",
+          "after": "verified"
+        },
+        "validation_errors": [
+          "provider_model_identity_changed"
+        ]
+      },
+      {
+        "case_id": "dev-ko-correction",
+        "provider_generation": {
+          "completed": false,
+          "error": "provider_http_429",
+          "finish_reason": null,
+          "response_model": null,
+          "http_statuses": [
+            429
+          ],
+          "wall_ms": 1389.204,
+          "first_text_ms": null,
+          "request_sha256": "b8af61af0a0a7c6b72fa96fb9a64ac435713dc5e3c3f1d9823a91a48cebd85e4"
+        },
+        "generation": {
+          "completed": false,
+          "error": "provider_model_identity_changed",
+          "finish_reason": null,
+          "response_model": null,
+          "http_statuses": [
+            429
+          ],
+          "wall_ms": 1389.204,
+          "first_text_ms": null,
+          "request_sha256": "b8af61af0a0a7c6b72fa96fb9a64ac435713dc5e3c3f1d9823a91a48cebd85e4"
+        },
+        "identity_check": {
+          "before": "verified",
+          "after": "verified"
+        },
+        "validation_errors": [
+          "provider_model_identity_changed"
+        ]
+      },
+      {
+        "case_id": "dev-ko-topic-switch",
+        "provider_generation": {
+          "completed": false,
+          "error": "provider_http_429",
+          "finish_reason": null,
+          "response_model": null,
+          "http_statuses": [
+            429
+          ],
+          "wall_ms": 12.422,
+          "first_text_ms": null,
+          "request_sha256": "207feca8320c758b8a52d71ae67c491532cb44e52a5e9325798c53a505edea4c"
+        },
+        "generation": {
+          "completed": false,
+          "error": "provider_model_identity_changed",
+          "finish_reason": null,
+          "response_model": null,
+          "http_statuses": [
+            429
+          ],
+          "wall_ms": 12.422,
+          "first_text_ms": null,
+          "request_sha256": "207feca8320c758b8a52d71ae67c491532cb44e52a5e9325798c53a505edea4c"
+        },
+        "identity_check": {
+          "before": "verified",
+          "after": "verified"
+        },
+        "validation_errors": [
+          "provider_model_identity_changed"
+        ]
+      },
+      {
+        "case_id": "dev-ko-unsupported",
+        "provider_generation": {
+          "completed": false,
+          "error": "provider_http_429",
+          "finish_reason": null,
+          "response_model": null,
+          "http_statuses": [
+            429
+          ],
+          "wall_ms": 8.803,
+          "first_text_ms": null,
+          "request_sha256": "56ddfb00f97b726c8bb4d124d8636a80c19511f7310b378b4234b3019600e966"
+        },
+        "generation": {
+          "completed": false,
+          "error": "provider_model_identity_changed",
+          "finish_reason": null,
+          "response_model": null,
+          "http_statuses": [
+            429
+          ],
+          "wall_ms": 8.803,
+          "first_text_ms": null,
+          "request_sha256": "56ddfb00f97b726c8bb4d124d8636a80c19511f7310b378b4234b3019600e966"
+        },
+        "identity_check": {
+          "before": "verified",
+          "after": "verified"
+        },
+        "validation_errors": [
+          "provider_model_identity_changed"
+        ]
+      },
+      {
+        "case_id": "dev-ko-current",
+        "provider_generation": {
+          "completed": false,
+          "error": "provider_http_429",
+          "finish_reason": null,
+          "response_model": null,
+          "http_statuses": [
+            429
+          ],
+          "wall_ms": 14.924,
+          "first_text_ms": null,
+          "request_sha256": "ace2cb6bcbe7fed54d519743732866f735d370aa5ecfb214817abbf7fd62ba3b"
+        },
+        "generation": {
+          "completed": false,
+          "error": "provider_model_identity_changed",
+          "finish_reason": null,
+          "response_model": null,
+          "http_statuses": [
+            429
+          ],
+          "wall_ms": 14.924,
+          "first_text_ms": null,
+          "request_sha256": "ace2cb6bcbe7fed54d519743732866f735d370aa5ecfb214817abbf7fd62ba3b"
+        },
+        "identity_check": {
+          "before": "verified",
+          "after": "verified"
+        },
+        "validation_errors": [
+          "provider_model_identity_changed"
+        ]
+      }
+    ],
+    "after_busy_sequence": [
+      {
+        "case_id": "dev-en-private",
+        "provider_generation": {
+          "completed": true,
+          "error": null,
+          "finish_reason": "stop",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 83529.617,
+          "first_text_ms": 65040.165,
+          "request_sha256": "b813e715c885d8c5cbac8d1cada2c58b4f0f6d8b179de04b926e9cde1d9f8d2a"
+        },
+        "generation": {
+          "completed": true,
+          "error": null,
+          "finish_reason": "stop",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 83529.617,
+          "first_text_ms": 65040.165,
+          "request_sha256": "b813e715c885d8c5cbac8d1cada2c58b4f0f6d8b179de04b926e9cde1d9f8d2a"
+        },
+        "identity_check": {
+          "before": "verified",
+          "after": "verified"
+        },
+        "validation_errors": []
+      },
+      {
+        "case_id": "dev-ko-future",
+        "provider_generation": {
+          "completed": true,
+          "error": null,
+          "finish_reason": "stop",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 93783.946,
+          "first_text_ms": 11615.145,
+          "request_sha256": "72666bfaa9994d4e55ee940c7eff3f2d435d7738c123d0033fc54d31232935a3"
+        },
+        "generation": {
+          "completed": true,
+          "error": null,
+          "finish_reason": "stop",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 93783.946,
+          "first_text_ms": 11615.145,
+          "request_sha256": "72666bfaa9994d4e55ee940c7eff3f2d435d7738c123d0033fc54d31232935a3"
+        },
+        "identity_check": {
+          "before": "verified",
+          "after": "verified"
+        },
+        "validation_errors": []
+      }
+    ],
+    "separate_length_limit_attempt": {
+      "case_id": "dev-ko-tsmc",
+      "provider_generation": {
+        "completed": false,
+        "error": "provider_finish_length",
+        "finish_reason": "length",
+        "response_model": "comparison-local",
+        "http_statuses": [
+          200
+        ],
+        "wall_ms": 76725.537,
+        "first_text_ms": 23223.865,
+        "request_sha256": "c027e4a1e200aa1ae1fccc6b36d6530dc17e29a02bbd51ac5d0b3dc81f341a48"
+      },
+      "generation": {
+        "completed": false,
+        "error": "provider_finish_length",
+        "finish_reason": "length",
+        "response_model": "comparison-local",
+        "http_statuses": [
+          200
+        ],
+        "wall_ms": 76725.537,
+        "first_text_ms": 23223.865,
+        "request_sha256": "c027e4a1e200aa1ae1fccc6b36d6530dc17e29a02bbd51ac5d0b3dc81f341a48"
+      },
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "validation_errors": []
+    },
+    "case_order": [
+      "dev-ko-cuda",
+      "dev-ko-sega",
+      "dev-ko-tsmc",
+      "dev-ko-values",
+      "dev-en-accelerated",
+      "dev-ko-followup",
+      "dev-ko-correction",
+      "dev-ko-topic-switch",
+      "dev-ko-unsupported",
+      "dev-ko-current",
+      "dev-en-private",
+      "dev-ko-future"
+    ]
+  },
+  "identity_evidence": {
+    "per_attempt_before_after_statuses": {
+      "dev-ko-cuda": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "dev-ko-sega": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "dev-ko-tsmc": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "dev-ko-values": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "dev-en-accelerated": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "dev-ko-followup": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "dev-ko-correction": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "dev-ko-topic-switch": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "dev-ko-unsupported": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "dev-ko-current": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "dev-en-private": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "dev-ko-future": {
+        "before": "verified",
+        "after": "verified"
+      }
+    },
+    "all_attempts_report_before_and_after_verified": true,
+    "condition_before_equals_after_equals_report_model": true,
+    "before_file_sha256": "e73bf1d5894dcadbfe770dfd51ea273fd7ef05356bd227a5a7a5a3e190609991",
+    "after_file_sha256": "e73bf1d5894dcadbfe770dfd51ea273fd7ef05356bd227a5a7a5a3e190609991",
+    "supervisor_observed_before_hashes": {
+      "identity_sha256": "300560a54349d92f85d9bebd2f16a9d1afe2edc430ec39bef4ccb4d981c0ca97",
+      "adapter_sha256": "1229fcd3639560d466635395f34e8707c8c7954131ea460be99228198f66ca2a",
+      "runtime_sha256": "f09c338c9e491f5bd94d33a9a6cd8040303fb2670080e6a43013257406072a23"
+    },
+    "supervisor_observed_after_hashes": {
+      "identity_sha256": "300560a54349d92f85d9bebd2f16a9d1afe2edc430ec39bef4ccb4d981c0ca97",
+      "adapter_sha256": "1229fcd3639560d466635395f34e8707c8c7954131ea460be99228198f66ca2a",
+      "runtime_sha256": "f09c338c9e491f5bd94d33a9a6cd8040303fb2670080e6a43013257406072a23"
+    },
+    "transient_busy_stage_fields_are_excluded_from_read_identity": true
+  },
+  "server_log_evidence": {
+    "path_relative_to_artifacts": "text-evaluation-v1/execution-development-bf16-v2/style/server.log",
+    "bytes": 3288,
+    "sha256": "85e001dfb9d6403c5d82ddc0786cc02aa263f4832e03fd72f48657ecce79e07f",
+    "matches_sealed_supervisor_inventory": true,
+    "post_status_events": [
+      {
+        "line_number": 10,
+        "method": "POST",
+        "path": "/v1/chat/completions",
+        "status": 200
+      },
+      {
+        "line_number": 14,
+        "method": "POST",
+        "path": "/v1/chat/completions",
+        "status": 200
+      },
+      {
+        "line_number": 17,
+        "method": "POST",
+        "path": "/v1/chat/completions",
+        "status": 200
+      },
+      {
+        "line_number": 20,
+        "method": "POST",
+        "path": "/v1/chat/completions",
+        "status": 200
+      },
+      {
+        "line_number": 23,
+        "method": "POST",
+        "path": "/v1/chat/completions",
+        "status": 200
+      },
+      {
+        "line_number": 26,
+        "method": "POST",
+        "path": "/v1/chat/completions",
+        "status": 200
+      },
+      {
+        "line_number": 29,
+        "method": "POST",
+        "path": "/v1/chat/completions",
+        "status": 429
+      },
+      {
+        "line_number": 32,
+        "method": "POST",
+        "path": "/v1/chat/completions",
+        "status": 429
+      },
+      {
+        "line_number": 35,
+        "method": "POST",
+        "path": "/v1/chat/completions",
+        "status": 429
+      },
+      {
+        "line_number": 38,
+        "method": "POST",
+        "path": "/v1/chat/completions",
+        "status": 429
+      },
+      {
+        "line_number": 41,
+        "method": "POST",
+        "path": "/v1/chat/completions",
+        "status": 429
+      },
+      {
+        "line_number": 44,
+        "method": "POST",
+        "path": "/v1/chat/completions",
+        "status": 200
+      },
+      {
+        "line_number": 47,
+        "method": "POST",
+        "path": "/v1/chat/completions",
+        "status": 200
+      }
+    ],
+    "post_status_counts": {
+      "200": 8,
+      "429": 5
+    },
+    "health_event_count": 28,
+    "health_status_counts": {
+      "200": 28
+    },
+    "first_successful_post_is_excluded_warmup": true,
+    "interpretation_limit": "Access-log ordering and status codes do not themselves supply a per-request correlation ID or model-worker timing trace. Row-to-case mapping comes from the sealed run metadata."
+  },
+  "explanation": {
+    "observed_transport_failure": "dev-en-accelerated received HTTP 200 and a matching response model name but timed out after 182193.513 ms. The next five case records preserve raw provider_http_429, HTTP status [429], no finish reason and no response_model. Two later cases completed with HTTP 200 and finish_reason stop.",
+    "validation_error_precedence": "The runner preserves raw provider_generation, then compares the response model name with the configured served-model name. None fails that comparison and adds provider_model_identity_changed. A validation error takes precedence in normalized generation.error over the raw provider error. Thus five missing model fields on rejected HTTP 429 responses produce five such labels.",
+    "code_supported_mechanism": "The language service admits one generation at a time. Timeout/disconnect cancellation is cooperative; the admission lock remains held until the generation worker exits its finally block. A following request while that lock is held receives model_busy/HTTP 429. The error envelope has no model field and the client rejects non-200 before SSE parsing.",
+    "inference_from_sequence": "The timeout followed by five busy rejections and later accepted requests is consistent with the timed-out generation still stopping while the following requests arrived. The available access-log/metadata evidence does not establish the exact worker cancellation timing.",
+    "weight_identity_interpretation": "The normalized label is a response-envelope validation outcome, not five observed weight changes. Separate saved health identity checks are verified before and after every attempt; the condition-level before and after identity objects and hashes also match.",
+    "memory_interpretation": "No OOM diagnosis follows from provider_timeout, HTTP 429 or the missing-response-model validation label. This metadata review does not establish a memory-exhaustion cause.",
+    "reporting_rule": "Retain all twelve registered attempts and all seven failures, with raw provider errors, normalized validation errors and identity evidence distinguished. Completed loop and clean process exit do not mean all answers completed or were correct."
+  },
+  "code_provenance": [
+    {
+      "path": "tools/reference_evaluation/run.py",
+      "sha256": "9e713a05d9e403d91278242d0a110193f3ec6f50764c79efb7ddf1aa873be17b",
+      "functions": [
+        "generate"
+      ]
+    },
+    {
+      "path": "tools/adaptation_evaluation/run.py",
+      "sha256": "ead4af96d3ee25305611e776d8871bcba538a6d80715ed8cef0a4561c3803f57",
+      "functions": [
+        "run_condition",
+        "read_identity"
+      ]
+    },
+    {
+      "path": "tools/evaluation/observe.py",
+      "sha256": "857361e39a940958eef70e6f052e9453ae98676c8f931fcdd5af3ce78284f541",
+      "functions": [
+        "StreamObservation"
+      ]
+    },
+    {
+      "path": "services/language/app.py",
+      "sha256": "8e9ae8d0b2e3be25d6fdbbac830f38c827f567d8bb2e26fb86cb7402ae8ff799",
+      "functions": [
+        "output_events",
+        "create_app streaming generator",
+        "language_error",
+        "error_payload"
+      ]
+    },
+    {
+      "path": "services/language/engine.py",
+      "sha256": "4de8fb45c173620e502539273a76ce9e708e8e12fee51060ae61fca8845a633c",
+      "functions": [
+        "GenerationJob.should_stop",
+        "GenerationJob.check",
+        "TransformersBackend.generate",
+        "LanguageEngine.start"
+      ]
+    }
+  ],
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "weight_change_established_by_error_labels": false,
+  "oom_established_by_error_labels": false,
+  "persistence_boundary": "The underlying whole-condition artifact is saved and freshly verified. The coordinator rechecked this note against its recovered run, supervisor, owner and full server log; no model run or retry was performed for this interpretation.",
+  "source_artifact": {
+    "artifact_id": "jensen-m6-development-style-bf16-v2",
+    "role": "complete-frozen-matched-response-condition",
+    "exposure": "development",
+    "condition": "style",
+    "file_name": "jensen-m6-development-style-bf16-v2.tar.gz",
+    "file_id": "file_00000000a5b88230b50803055c97c12b",
+    "library_file_id": "libfile_fde3_f-0e31055fc6808191b1607ebe1946744c_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 24731,
+    "sha256": "81d7df0660c6211c73a96cd203bd1d9219745afc2f658042efcf57031b3f5323",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "original_analyst_note_sha256": "c2f66f85cbf59c0447894e201391c4bd17d57c2fcbc17dca01d3244a62dd6d34",
+  "fresh_condition_evidence_rechecked": true,
+  "analyst_actions_before_publication": {
+    "frozen_implementation_changed": false,
+    "original_outputs_changed": false,
+    "cases_retried": false,
+    "models_started": 0,
+    "tests_run": 0,
+    "answer_text_reviewed": false,
+    "public_repository_files_changed": false,
+    "central_artifact_manifest_changed": false
+  }
+}

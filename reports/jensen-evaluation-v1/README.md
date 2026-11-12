@@ -28,6 +28,13 @@ now freezes actual runtime retrieval and prompt packing for the same six
 questions. It registers one base condition and keeps the original answerability
 labels. Its preparation is separate from the 54 matched-generation calls below.
 
+The [development-style runtime note](development-style-runtime-errors.json)
+separates one length limit, one timeout and five HTTP 429 rejections from their
+normalized runner labels. Missing model fields in those error responses caused
+`provider_model_identity_changed`; the separately recorded health identities
+remained equal. These labels do not establish five weight changes. All failures
+remain in the denominator, and the raw responses and access log are preserved.
+
 ## What is held constant
 
 | Condition | Weights | Factual passages | Wording examples |

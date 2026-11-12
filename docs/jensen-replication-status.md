@@ -210,10 +210,10 @@ actual text checkpoint survived fresh remote retrieval and completed the next
 optimizer update in a fresh process; step 2 was again saved and freshly verified. The retrieval comparison and the voice candidate
 training/sample/diagnostic/gateway delivery have executed. Both retrieval
 candidates remain opt-in after missing their declared gate. Text training and
-the serving export are complete. The first 12 of 54 matched M6 calls have
-executed and been saved (six normal
-completions, six length-limited failures). The remaining 42 matched calls, six
-separate RAG responses and actual M7 neural-text session checks remain pending.
+the serving export are complete. The matched M6 calls are executing and being
+preserved one condition at a time; the execution-status record below gives
+current complete-condition counts and artifact links. The separate six-case RAG
+diagnostic and actual M7 neural-text session checks remain pending.
 See the [current response execution status](../reports/jensen-evaluation-v1/execution-status.json). Avatar/browser
 functionality is measured, while likeness and contextual gesture quality remain
 ungraded. No accepted persona fidelity, human likeness or latency-target
