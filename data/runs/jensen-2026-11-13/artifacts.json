@@ -106,6 +106,65 @@
       "sha256": "e6cc51da71a2f9ed09deafa5fc0c53f9e497afadd2ba44281010e0876997ed5e",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "avatar-fit-step0020",
+      "role": "resumable-identity-fit-state",
+      "file_name": "fit-step-0020.json",
+      "file_id": "file_00000000766c8243aea09e41fe0d89cc",
+      "library_file_id": "libfile_fde3_f-314e906ddccc8191b659ff48c8ae6e90_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 3010,
+      "sha256": "72150797765e609346aaa14935626688e9b2dbf4642b59ef5ea0873aca3846fc",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "acquired-2023-podcast",
+      "role": "source-audio",
+      "event_family_id": "acquired-2023",
+      "duration_seconds": 5458.295375,
+      "file_name": "acquired-2023-podcast.mp3",
+      "file_id": "file_00000000a178821288404fd82e771935",
+      "library_file_id": "libfile_fde3_f-4bf95c066dd08191b18b98faa57ef5d1_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 87332864,
+      "sha256": "57f6a7a0d28c29705eeabc788f25aafa7a836b8ad73561d376706b0d321af6ce",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "acquired-2023-podcast-receipt",
+      "role": "source-audio-provenance",
+      "file_name": "acquired-2023-podcast.receipt.json",
+      "file_id": "file_000000000b74822f8397e6b8c6580c6f",
+      "library_file_id": "libfile_fde3_f-ff2105aacd548191980e6f204369d82e_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 706,
+      "sha256": "569a45554a81563b8a3693232fd862db1f9b32737e166311e6050cfa17a1ee32",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "lex-494-podcast",
+      "role": "source-audio",
+      "event_family_id": "lex-494",
+      "duration_seconds": 9133.066667,
+      "file_name": "lex-494-podcast.mp3",
+      "file_id": "file_0000000092d081fb8e761a6a5ab8096a",
+      "library_file_id": "libfile_fde3_f-5493cabf11888191b926e6cad9afabad_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 116997396,
+      "sha256": "018c6101e4f94c62a3105e52f6beeee88832b526f36d263ac6221fd561c49f7c",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "lex-494-podcast-receipt",
+      "role": "source-audio-provenance",
+      "file_name": "lex-494-podcast.receipt.json",
+      "file_id": "file_00000000697c81f582679615664bb88f",
+      "library_file_id": "libfile_fde3_f-5531e39205a88191b41208bc24484343_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 722,
+      "sha256": "afef0565c3caa378e83626c67c0d57599285b39d6549aa796f724e02e752df5d",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ]
 }
