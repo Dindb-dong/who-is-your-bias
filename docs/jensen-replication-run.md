@@ -1,5 +1,9 @@
 # Jensen persona, speech, and avatar execution
 
+> Status as of 2026-11-13: the execution session was interrupted. This file
+> preserves the original plan. Read the [recovery and remaining-work handoff](jensen-replication-handoff.md)
+> for verified baseline evidence, reported intermediate progress, and resumption gates.
+
 ## Scope and baseline
 
 This work continues merged PR #17 at `3038629f3c4aeefff568684a6a7ba10df2b61db8`.
@@ -48,12 +52,23 @@ promoted only if its measured behavior supports using it.
 
 ## Environment
 
-The execution host is Linux with nine logical CPUs and approximately 10 GB RAM.
-CUDA and Apple MPS are unavailable. Heavy training, speech, and rendering tasks
-are coordinated to fit the memory budget; independent acquisition and code work
-proceed in parallel.
+The interrupted session's plan recorded a Linux host with nine logical CPUs
+and approximately 10 GB RAM, without CUDA or Apple MPS. These are historical
+execution assumptions, not a guarantee about the next host. Recheck hardware,
+disk, process lifetime, and persistent checkpoint storage before resuming.
+Coordinate heavy training, speech, and rendering within the actual memory budget.
 
 ## Results
 
-Execution is in progress. Results and reproducible commands are added after the
-corresponding runs finish.
+The audit found PR #18 still at its original plan-only commit, with no later
+implementation connected to any audited remote branch. The interrupted dialogue
+reported acquisition, preparation, training, and avatar work, but its supporting
+artifacts were not recovered in the audit. Those claims remain pending recovery
+and verification or a new reproducible run; they are not completed deliverables.
+
+PR #18 now preserves [repository operating rules](../AGENTS.md) and the
+[detailed handoff](jensen-replication-handoff.md). Its documentation-only merge
+does not establish completion of text adaptation, speech adaptation, new avatar
+generation, or response-quality experiments. Follow the handoff's M0-M7 gates
+and save verified remote checkpoints throughout any later implementation.
+

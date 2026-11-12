@@ -151,6 +151,9 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 
 ## Documentation
 
+- [Agent operating rules](AGENTS.md): explicit instruction loading, durable checkpoints, remote verification, and resumable handoffs.
+- [Jensen interrupted-run handoff](docs/jensen-replication-handoff.md): verified PR #17 baseline, unverified post-PR #17 progress, known failures, and remaining persona, voice, avatar, and evaluation milestones.
+- [Jensen original execution plan](docs/jensen-replication-run.md): the historical PR #18 brief, now marked interrupted and linked to the recovery plan.
 - [Jensen attention guide](docs/jensen-attention.md): explicit participant selection, local capture, eyes-first timing, reduced motion, setup and known limits.
 - [PR #16 implementation plan](docs/jensen-attention-plan.md): committed before implementation, with implementation and validation evidence.
 - [New avatar generation pipeline](docs/avatar-generation-pipeline.md): the active plan for creating a new Jensen Huang avatar from multiple photographs and video, including complete arms/hands, facial and finger rigs, new performances, runtime work and acceptance gates.
@@ -198,4 +201,5 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 - [Integration validation](docs/integration-validation.md): actual ASR, local HTTP inference, speech packages, and video observations.
 
 Run locally by default. Internet-facing deployment needs application authentication, inference quotas, and a considered persistence policy. The current session store is process-local and intentionally ephemeral; run a single API worker.
+
 
