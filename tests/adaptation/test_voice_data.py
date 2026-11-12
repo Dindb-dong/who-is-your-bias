@@ -64,3 +64,30 @@ def test_subject_and_reference_manifest_integrity_are_checked(tmp_path):
     path.write_text(path.read_text() + " ")
     with pytest.raises(ValueError, match="manifest changed"):
         export_references(plan, tmp_path / "dataset", persona_id="jensen-huang", speaker="Jensen Huang", allow_candidates=True)
+
+
+def test_authoritative_registration_prevents_split_or_source_relabeling(tmp_path):
+    plan = selection(tmp_path)
+    document = json.loads(plan.read_text())
+    reference = json.loads((tmp_path / "reference/reference.json").read_text())
+    registration = tmp_path / "registered.json"
+    registration.write_text(json.dumps({"schema_version": "persona-split-registration.v1", "events": [
+        {"event_family_id": "event-one", "source_ids": [reference["source_id"]], "split": "train"},
+        {"event_family_id": "unseen-event", "source_ids": ["heldout-source"], "split": "test"}]}))
+    document["split_registration"] = {"path": registration.name, "sha256": file_hash(registration)}
+    document["event_splits"]["unseen-event"] = "train"
+    plan.write_text(json.dumps(document))
+    with pytest.raises(ValueError, match="registered event families"):
+        export_references(plan, tmp_path / "bad", persona_id="jensen-huang", speaker="Jensen Huang", allow_candidates=True)
+    document["event_splits"]["unseen-event"] = "test"
+    plan.write_text(json.dumps(document))
+    output = tmp_path / "dataset"
+    export_references(plan, output, persona_id="jensen-huang", speaker="Jensen Huang", allow_candidates=True)
+    registration.unlink()
+    load_dataset(output, persona_id="jensen-huang", allow_candidates=True)
+    metadata = output / "manifest.json"
+    manifest = json.loads(metadata.read_text())
+    manifest["lineage"][0]["source_id"] = "heldout-source"
+    metadata.write_text(json.dumps(manifest))
+    with pytest.raises(ValueError, match="another registered event family"):
+        load_dataset(output, persona_id="jensen-huang", allow_candidates=True)

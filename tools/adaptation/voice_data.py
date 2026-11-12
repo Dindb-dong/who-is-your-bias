@@ -25,6 +25,24 @@ def _write(path: Path, value: dict) -> None:
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def _registered_splits(registration: dict) -> tuple[dict, dict]:
+    if registration.get("schema_version") != "persona-split-registration.v1":
+        raise ValueError("Unknown voice event split registration")
+    events, sources = {}, {}
+    for row in registration.get("events", []):
+        event, split = row.get("event_family_id"), row.get("split")
+        if not event or event in events or split not in {"train", "validation", "test"}:
+            raise ValueError("Ambiguous voice event split registration")
+        events[event] = split
+        for source in row.get("source_ids", []):
+            if source in sources:
+                raise ValueError("Duplicate source in voice event split registration")
+            sources[source] = event
+    if not events:
+        raise ValueError("Empty voice event split registration")
+    return events, sources
+
+
 def export_references(selection: Path, output: Path, *, persona_id: str, speaker: str,
                       allow_candidates: bool = False) -> dict:
     """Selection rows bind a verified reference to a predeclared train event."""
@@ -39,6 +57,15 @@ def export_references(selection: Path, output: Path, *, persona_id: str, speaker
         raise ValueError("Voice selection needs references and frozen event splits")
     if not all(isinstance(v, str) and v in {"train", "validation", "test"} for v in events.values()):
         raise ValueError("Unknown event split in voice selection")
+    registration_path, registered_sources = None, None
+    if "split_registration" in plan:
+        entry = plan["split_registration"]
+        registration_path = artifact_path(selection, entry["path"])
+        if sha256(registration_path) != entry.get("sha256"):
+            raise ValueError("Voice split registration changed")
+        registered_events, registered_sources = _registered_splits(json.loads(registration_path.read_text()))
+        if events != registered_events:
+            raise ValueError("Voice event splits differ from the registered event families")
     checked, seen, source_families = [], set(), {}
     for row in selected:
         event = row.get("event_family_id")
@@ -51,6 +78,8 @@ def export_references(selection: Path, output: Path, *, persona_id: str, speaker
         if manifest["publisher_attribution"]["speaker_label"] != speaker:
             raise ValueError("Selected reference belongs to another publisher speaker")
         source = manifest["source_id"]
+        if registered_sources is not None and registered_sources.get(source) != event:
+            raise ValueError("Voice source belongs to another registered event family")
         if source_families.setdefault(source, event) != event:
             raise ValueError("One source cannot belong to multiple event families")
         if manifest.get("persona_id") not in {None, persona_id}:
@@ -106,6 +135,9 @@ def export_references(selection: Path, output: Path, *, persona_id: str, speaker
             "speaker_similarity_evaluated": False, "heldout_samples": 0,
             "limitations": ["ASR agreement is not human listening or a speaker-similarity score.",
                             "Candidate source intervals remain candidate after adaptation."]}
+        if registration_path is not None:
+            shutil.copyfile(registration_path, staging / "split-registration.json")
+            manifest["split_registration"] = {"path": "split-registration.json", "sha256": sha256(registration_path)}
         _write(staging / "manifest.json", manifest)
         staging.rename(output)
         return manifest
@@ -127,10 +159,21 @@ def load_dataset(directory: Path, *, persona_id: str, allow_candidates: bool = F
     lineage = manifest.get("lineage", [])
     if not rows or len(rows) != manifest.get("samples") or len(lineage) != len(rows) or manifest.get("heldout_samples") != 0:
         raise ValueError("Voice dataset counts are inconsistent")
+    registered_sources = None
+    if "split_registration" in manifest:
+        entry = manifest["split_registration"]
+        path = artifact_path(directory / "manifest.json", entry["path"])
+        if sha256(path) != entry.get("sha256"):
+            raise ValueError("Voice split registration changed")
+        registered_events, registered_sources = _registered_splits(json.loads(path.read_text()))
+        if manifest["event_splits"] != registered_events:
+            raise ValueError("Voice event splits differ from the registered event families")
     families = Counter()
     for row, provenance in zip(rows, lineage):
         if provenance.get("audio") != row["audio"] or provenance.get("split") != "train" or manifest["event_splits"].get(provenance["event_family_id"]) != "train":
             raise ValueError("Voice lineage or held-out split differs")
+        if registered_sources is not None and registered_sources.get(provenance["source_id"]) != provenance["event_family_id"]:
+            raise ValueError("Voice source belongs to another registered event family")
         families[provenance["event_family_id"]] += 1
         for key in ("audio", "ref_audio"):
             path = artifact_path(directory / "manifest.json", row[key])
