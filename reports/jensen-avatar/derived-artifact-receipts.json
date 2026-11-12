@@ -145,6 +145,23 @@
       "verification_status": "verified",
       "fresh_readback_sha256": "573b4f2c4ca5e1f28abb5c79447e854cc0114e686fa6611e45f65f83d29376ca",
       "verified_at": "2026-11-12T18:31:58.160741+00:00"
+    },
+    {
+      "local_path": "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/avatar/jensen-avatar-visual-qa-v3c-tight.tar.gz",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000accc81fdbf6c1ab512b7dc7e",
+      "library_file_id": "libfile_fde3_f-497bf9bd8afc8191800f7b07836d01ec_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "jensen-avatar-visual-qa-v3c-tight.tar.gz",
+      "local_metadata_applied": true,
+      "path": "/jensen-avatar-visual-qa-v3c-tight.tar.gz",
+      "current_version_number": 0,
+      "bytes": 4819591,
+      "sha256": "9e39ecc4bc421e25daae605662f1fbbb17687411d4f0da5cec6042b5e865fc95",
+      "upload_status": "succeeded",
+      "verification_status": "verified",
+      "fresh_readback_sha256": "9e39ecc4bc421e25daae605662f1fbbb17687411d4f0da5cec6042b5e865fc95",
+      "verified_at": "2026-11-12T18:38:04.365866+00:00"
     }
   ]
 }

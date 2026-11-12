@@ -10,25 +10,33 @@
   "tests": {
     "actual_decoded_geometry_and_attention": {
       "status": "passed",
-      "files": 2,
-      "tests": 26
+      "files": 5,
+      "tests": 45,
+      "camera_checks": "4 source poses x 3 viewport aspects x 3 orbit directions on actual deformed hand vertices"
     },
     "typescript": "passed",
     "production_build": "passed",
     "browser_desktop_and_mobile": {
       "status": "blocked_before_page_launch",
       "reason": "Chromium process_singleton_posix.cc AF_UNIX socket() failed: Operation not permitted",
-      "application_assertions_executed": false
+      "application_assertions_executed": false,
+      "candidate_case": "Implemented and discovered for both projects; integration CI result must be read separately."
     }
   },
   "offline_visual": {
-    "status": "six_renders_inspected",
+    "status": "six_final_renders_inspected",
     "hand_vertices_inside_frame": 3586,
-    "known_issue": "Conservative mobile upper_body camera has excessive margin; tighter framing pending."
+    "report": "offline-visual-qa.json",
+    "framing": "Mapped head/arm/hand pose envelope plus skin margins; mobile excess margin corrected.",
+    "visual_findings": [
+      "Independent glasses remain in front of face across views.",
+      "Dark irises, gray hair and brows visibly improved over rejected candidates.",
+      "Authored finger curl stress deforms both hands without clipping.",
+      "Face geometry, hair silhouette, generic garment and baked lighting remain imperfect likeness."
+    ]
   },
   "remaining": [
     "Browser/WebGL material and playback acceptance",
-    "Tighter mobile framing",
     "Continuous speaker/track association review",
     "Independent human likeness and motion-quality review"
   ]

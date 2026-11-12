@@ -1,0 +1,161 @@
+{
+  "schema_version": "avatar-offline-visual-qa.v1",
+  "master_sha256": "a67ecf8d7b12055939ec64d4d6df627bbe054942282b694292d46f058457e02d",
+  "engine": "Blender Cycles CPU",
+  "samples": 12,
+  "threads": 3,
+  "renders": [
+    {
+      "image": "portrait-front.png",
+      "width": 768,
+      "height": 896,
+      "pose_kind": "neutral",
+      "sha256": "ed0f2602003d160a0542436340c0ceeb7f8884a99bfb52179d61beaede54c29d",
+      "hand_bounds_normalized": null
+    },
+    {
+      "image": "portrait-three-quarter.png",
+      "width": 768,
+      "height": 896,
+      "pose_kind": "neutral",
+      "sha256": "9f0c6facbfd4b53225a94fab4d790596c302d2ea11c288f92351b479c3bb58a8",
+      "hand_bounds_normalized": null
+    },
+    {
+      "image": "portrait-profile.png",
+      "width": 768,
+      "height": 896,
+      "pose_kind": "neutral",
+      "sha256": "6b69267bffb54a37a08cb72d8b48818d3250282f4568e027c4ef18784f95cbd0",
+      "hand_bounds_normalized": null
+    },
+    {
+      "image": "desktop-observed-frame.png",
+      "width": 1200,
+      "height": 900,
+      "pose_kind": "measured_geometry_preview",
+      "sha256": "a044fd6390422fb977cb6e9f814c2e261438714f1f64f6cce62e14f84d40ded0",
+      "hand_bounds_normalized": {
+        "x": [
+          0.23312729597091675,
+          0.6523440480232239
+        ],
+        "y": [
+          0.1525222361087799,
+          0.341819167137146
+        ],
+        "minimum_depth": 2.1021790504455566,
+        "inside_frame": true
+      }
+    },
+    {
+      "image": "desktop-hand-stress.png",
+      "width": 1200,
+      "height": 900,
+      "pose_kind": "authored_articulation_stress",
+      "sha256": "e85889c36bf4a423a309c525db8cc0348bfc7111641ed20b756c898d2b9aae98",
+      "hand_bounds_normalized": {
+        "x": [
+          0.28739508986473083,
+          0.712604820728302
+        ],
+        "y": [
+          0.6327130794525146,
+          0.7155213356018066
+        ],
+        "minimum_depth": 1.9217236042022705,
+        "inside_frame": true
+      }
+    },
+    {
+      "image": "mobile-hand-stress.png",
+      "width": 720,
+      "height": 1000,
+      "pose_kind": "authored_articulation_stress",
+      "sha256": "cfd3abcddcaae6671af5707144ae25753d253069fb738266eabb65029098e641",
+      "hand_bounds_normalized": {
+        "x": [
+          0.12030752748250961,
+          0.8796924948692322
+        ],
+        "y": [
+          0.6280764937400818,
+          0.7077530026435852
+        ],
+        "minimum_depth": 1.9956707954406738,
+        "inside_frame": true
+      }
+    }
+  ],
+  "hand_skin_vertices_checked": 3586,
+  "measured_frame": {
+    "sha256": "e6dfb2a06a54dba724b88682e63dc9ffb649fd162fdcf9e4bd6158ff4c65ca95",
+    "source": {
+      "source_id": "goldman-sachs-2024",
+      "source_timeline": "publisher_video_elapsed",
+      "source_start_seconds": 164.0,
+      "observation_offset_ms": 0.0,
+      "video_sha256": "5a03a87ab422080d705bd51127f942173aa141a2a9ca145d7c0c00e8c2ed2554",
+      "observations_sha256": "a4ed6c143238bd6afdddf01837478af64cc627a37cf053f7c4b300177b143784",
+      "review_sha256": "3a88cace7ec10975234d4a12101ac2e77ec5468e14510887b37dfd8e1a0c4575",
+      "input_sha256": "4557437ba42c8cf3b90f55210f08e4d1be399ab5fa689139b3b49735ae91da2d",
+      "preparation_manifest_sha256": "5188be53c1765312034a0c16635b3c855d1bc6e29297c2a4170907f203ca75fc"
+    },
+    "review": {
+      "status": "geometry_preview",
+      "reviewer": "Operator-selected pilot; automatic wrist association remains unreviewed",
+      "track_id": "goldman-0164-8s-explicit-zero",
+      "track_continuity_reviewed": false,
+      "source_clock_reviewed": false,
+      "speaker_association_reviewed": false,
+      "attribution_basis": "Operator-selected window and detection indexes; frame-local hands associated by pose-wrist proximity. Multi-person or ambiguous detections are omitted. This is unreviewed geometry and does not verify speaker identity or continuous tracking."
+    },
+    "rendered_frame_ms": 1801.8
+  },
+  "browser_rendering": "not_tested_by_this_command",
+  "human_likeness": "requires_visual_review",
+  "framing_method": "current mapped head/arm/hand joint envelope with explicit skin margins; fixed front camera per render",
+  "notes": [
+    "Portrait views use the same asset and lighting.",
+    "Stress poses are authored mechanical checks, not observed personal gestures.",
+    "Mobile framing uses the actual pose envelope; full extensions can still require a wider view."
+  ],
+  "repository_review_images": [
+    {
+      "path": "renders/v3c-portrait-front.jpg",
+      "sha256": "1df805fbcac0296c50fa0406b70fe8ce31542bef2e9023ba76d929a47e93b2c2",
+      "source_png_sha256": "ed0f2602003d160a0542436340c0ceeb7f8884a99bfb52179d61beaede54c29d",
+      "purpose": "Compressed repository review copy; original full-resolution PNG retained in verified artifact package."
+    },
+    {
+      "path": "renders/v3c-portrait-three-quarter.jpg",
+      "sha256": "f2547ba7bec8d0a2aaed578a104b90ff98027d75ecc1e4ab43ea8bafed2a83ac",
+      "source_png_sha256": "9f0c6facbfd4b53225a94fab4d790596c302d2ea11c288f92351b479c3bb58a8",
+      "purpose": "Compressed repository review copy; original full-resolution PNG retained in verified artifact package."
+    },
+    {
+      "path": "renders/v3c-portrait-profile.jpg",
+      "sha256": "69cc9992f9f237b143a21a58aa4f02a39733f550352f2830a99cc8591b562a36",
+      "source_png_sha256": "6b69267bffb54a37a08cb72d8b48818d3250282f4568e027c4ef18784f95cbd0",
+      "purpose": "Compressed repository review copy; original full-resolution PNG retained in verified artifact package."
+    },
+    {
+      "path": "renders/v3c-desktop-observed-frame.jpg",
+      "sha256": "b7b92be7c4316d217fc859799b49daeb1174c217b30d805cca8cf81657643d6d",
+      "source_png_sha256": "a044fd6390422fb977cb6e9f814c2e261438714f1f64f6cce62e14f84d40ded0",
+      "purpose": "Compressed repository review copy; original full-resolution PNG retained in verified artifact package."
+    },
+    {
+      "path": "renders/v3c-desktop-hand-stress.jpg",
+      "sha256": "97bb936a59b6fd545a151e44b1a6dbe1cf4d16989a76af1347e54298dbeb2ce6",
+      "source_png_sha256": "e85889c36bf4a423a309c525db8cc0348bfc7111641ed20b756c898d2b9aae98",
+      "purpose": "Compressed repository review copy; original full-resolution PNG retained in verified artifact package."
+    },
+    {
+      "path": "renders/v3c-mobile-hand-stress.jpg",
+      "sha256": "5f89025e140c39615c7f4ef0cb3ea11090c8fe0ddf53f8660de58af394c9abc4",
+      "source_png_sha256": "cfd3abcddcaae6671af5707144ae25753d253069fb738266eabb65029098e641",
+      "purpose": "Compressed repository review copy; original full-resolution PNG retained in verified artifact package."
+    }
+  ]
+}

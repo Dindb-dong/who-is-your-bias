@@ -109,7 +109,11 @@ unavailable. The second completed event adds two twelve-second Stripe Sessions
 2024 windows: 240 more actual observation frames. Their source video and raw
 observations have both passed fresh durable readback. Fingers are retained on
 98/120 and 108/120 frames; arm observations are less complete because of source
-cropping and confidence gates. A third WIRED event measurement is in progress.
+cropping and confidence gates. The completed third event adds a ten-second WIRED
+Big Interview 2024 window: 100 actual frames with some finger channels in every
+frame and both hands selected in 91 frames. Left/right arm chains are retained in
+80/67 frames. [Per-clip results](multievent-motion-results.json) preserve those
+coverage limits and the exact source/event identities.
 
 Three actual exported clips are now versioned under
 `apps/web/public/motion/jensen/`, with hash-bound selections under
@@ -117,8 +121,8 @@ Three actual exported clips are now versioned under
 available on 68, 59 and 71 frames respectively. The standalone
 `data/motion/jensen-goldman-v1.json` library binds explicitly to `jensen-huang`.
 It contains no text-context assertions and does not enable automatic conversation
-selection. The new `data/motion/jensen-multievent.v1.json` catalog contains five
-clips, two events, 480 observed frames and 28 preview primitives. It also has no
+selection. The new `data/motion/jensen-multievent.v1.json` catalog contains six
+clips, three events, 580 observed frames, 58.0574 seconds and 36 preview primitives. It also has no
 context assertions, reviewed runtime primitives or held-out quality result.
 The Jensen Motion Lab offers **Load Jensen face & hands**, a source-event
 selector, and an explicit geometry-preview checkbox. Imported clips and audio reset when the
@@ -132,9 +136,25 @@ passing UI tests. Web type checking and the production build passed; actual
 browser rendering/replay acceptance remains open. Six actual Blender CPU renders
 of v3c cover front, three-quarter, profile, an observed frame and desktop/mobile
 hand articulation stress. All 3,586 selected hand skin vertices remain in frame.
-Visual review found excessive mobile framing margin; a tighter camera check is
-the next bounded correction. These renders are offline evidence, not browser
-screenshots or proof of WebGL material parity.
+The initial conservative mobile camera had excessive margin. A subsequent
+completed render uses the actual mapped head/arm/hand envelope with skin margins;
+the camera expands for extended hands and eases inward. The full-resolution
+renders were preserved separately; compressed repository review copies are
+linked from [the exact visual QA record](offline-visual-qa.json).
+These renders are offline evidence, not browser screenshots or proof of WebGL
+material parity. The candidate-specific browser test now verifies the real GLB
+hash, live WebGL2 context, framing, preview consent and cancellation, and captures
+desktop/mobile screenshots; its actual CI result is recorded by the integration
+execution record rather than inferred from this local environment.
+
+| View | Actual rendered evidence |
+| --- | --- |
+| Front | [Face and glasses](renders/v3c-portrait-front.jpg) |
+| Three-quarter | [Geometry and texture profile](renders/v3c-portrait-three-quarter.jpg) |
+| Profile | [Side silhouette](renders/v3c-portrait-profile.jpg) |
+| Measured frame | [Goldman source-relative movement](renders/v3c-desktop-observed-frame.jpg) |
+| Desktop articulation | [Both hands and curled fingers](renders/v3c-desktop-hand-stress.jpg) |
+| Mobile articulation | [Both hands in the tighter viewport](renders/v3c-mobile-hand-stress.jpg) |
 
 ## Reproduction and remaining gates
 
@@ -147,8 +167,10 @@ The code checkpoints and artifact receipts are separate preservation claims.
 
 The exact optimized asset's native geometry checks passed (including every
 finger, three face controls, measured clip consent and reset). The native and
-attention test files passed 26 tests together. Remaining acceptance gates are
-browser rendering, the tighter mobile camera, continuous source/speaker review,
+attention test files initially passed 26 tests together. The final focused run
+passed **45 tests across five files**, including actual posed hand skin on four
+observed poses, three viewport aspects and three orbit directions. Remaining
+acceptance gates are browser rendering, continuous source/speaker review,
 and independent human likeness/performance assessment. The observed optimizer
 residual cannot pass those gates by itself.
 
@@ -186,6 +208,13 @@ node tools/avatar/optimize.mjs \
   "$AVATAR_ARTIFACT_ROOT/textured-fit-v3c/jensen-source-fitted-candidate-v3.glb" \
   apps/web/public/models/jensen-source-fitted-v3.glb \
   reports/jensen-avatar/runtime-asset-report.json jensen-source-fitted-v3
+
+OPENBLAS_NUM_THREADS=3 OMP_NUM_THREADS=3 blender --background --threads 3 \
+  --python tools/avatar/render_quality.py -- \
+  "$AVATAR_ARTIFACT_ROOT/textured-fit-v3c/jensen-source-fitted-candidate-v3.blend" \
+  "$AVATAR_ARTIFACT_ROOT/visual-qa-v3c-tight" \
+  --clip apps/web/public/motion/jensen/goldman-0164-8s.json \
+  --at-ms 1800 --allow-geometry-preview
 
 PYTHONPATH=src:. python -m tools.motion check \
   data/motion/jensen-multievent.v1.json apps/web/public
