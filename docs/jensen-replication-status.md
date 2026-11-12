@@ -7,7 +7,7 @@ Repository: `Dindb-dong/who-is-your-bias`. Integration branch:
 `8515b5f30f3cd412e18db3d54ee28bf2a4c28694`.
 Implementation review: [PR #19](https://github.com/Dindb-dong/who-is-your-bias/pull/19).
 Last verified code checkpoint before this status update:
-`cd54c28f61a08c9356e77d44398b5b55891405b6`.
+`c1741e952edeec1dde154c25efe2115454225506`.
 
 The [historical handoff](jensen-replication-handoff.md) defines M0–M7.
 This is a new reproducible run; unverified earlier acquisition/training counts
@@ -50,11 +50,13 @@ separately. The prior unverified eight-video claim is not inherited by this run.
 - Text computation: **8 actual saved optimizer updates**, 8,716,288 trainable LoRA
   parameters, BF16 CPU. The actual fresh-process continuation from remote step 1
   to step 2 passed (282.0 seconds for that invocation). Step 2 was then uploaded,
-  freshly retrieved and extracted for continuation. Step 4 has now also been saved,
-  freshly retrieved and loaded with its optimizer/RNG/cursor intact. Further
-  computation uses eight CPU threads with unchanged optimization settings. Its
-  29-update plan is still
-  in progress; model quality has not yet been evaluated.
+  freshly retrieved and extracted for continuation. Steps 4, 6 and 8 were also saved,
+  freshly retrieved and loaded with their optimizer/RNG/cursor intact. After an
+  execution-connection interruption, the supervised recovery trial restored step 8
+  with four intra-op CPU threads and one inter-op thread; an earlier invocation
+  used eight intra-op threads. The frozen optimization, data order and 29-update
+  budget are unchanged. See the [recovery record](../reports/jensen-recovery/text-v1/session-recovery-step0008.json).
+  Model quality has not yet been evaluated.
 - Voice: **19 publisher-matched candidates**, independently screened down to
   **8 clips / 91.84 seconds / four events**. Human listening review is zero.
   Actual acoustic encoding produced **1,151 frames × 16 codebooks**, saved and
@@ -86,17 +88,24 @@ separately. The prior unverified eight-video claim is not inherited by this run.
   and [media artifact receipts](../reports/jensen-recovery/media-artifacts.json)
   distinguish all located events, complete local files, failed addresses,
   partial uploads and fully reconstructed remote videos. All
-  **eight complete recordings are now reconstructed from fresh remote chunks**:
+  **eight complete recordings in the original batch were reconstructed from fresh remote chunks**:
   4,412,488,053 original bytes / 10h35m29s, including four complete keynotes
   totaling 7h34m46s. All full SHA-256 values match. Three full original interview
   audio files (Stanford, Acquired and Lex) are separately saved and verified.
-  Transcript counts, recording duration and target-speaker duration are distinct.
+  The separate [reflection expansion](../reports/jensen-recovery/reflection-expansion-v1/README.md)
+  adds a freshly reconstructed 653,931,658-byte, 4,344.825034-second Computer
+  History Museum oral-history video and its publisher transcript PDF. Combined,
+  **nine distinct complete publisher videos** are saved: **5,066,419,711 bytes /
+  42,473.925525 seconds (11h47m54s)**. The CHM event remains outside frozen v4,
+  text training and M6. The bounded NTU commencement extraction is still in
+  progress; a saved prefix is not another completed video. Transcript counts,
+  recording duration and target-speaker duration are distinct.
 
 ## Workstream checkpoints
 
 | Workstream | Saved implementation | Current gate |
 | --- | --- | --- |
-| Corpus | Authentic v4, held-out references, all eight full video restorations | Source/media acquisition batch complete; preserve event isolation |
+| Corpus | Authentic v4, held-out references, nine full original video restorations | Original batch and CHM complete; NTU extraction in progress; frozen event isolation preserved |
 | Voice | Source clocks, four-event dataset, 16 completed updates, eight public waveforms, ASR/WavLM diagnostics and verified gateway | Candidate remains optional; human likeness is ungraded |
 | Avatar | Actual fitted model, editable master, finger controls, observed clips and actual desktop/mobile browser rendering | Human likeness remains ungraded; candidate stays optional |
 | Text | Frozen dataset, 8 saved updates and successful remote optimizer continuation | Finish bounded run and serve exact adapter |
@@ -108,8 +117,8 @@ passed 45 tests in the model environment. Web: TypeScript passed and 236 tests
 passed at the then-verified head. Later changes still need final focused checks.
 Actual GitHub Actions run [43278388296](https://github.com/Dindb-dong/who-is-your-bias/actions/runs/43278388296)
 passed web checks/build, 96 focused Python tests and **50 desktop/mobile browser
-cases** at head `05d4062`. That head predates the fitted model; its explicit browser
-case and final camera checks are queued separately. Synthetic PCM/detection
+cases** at head `05d4062`. That historical head predates the fitted model; its later browser and camera
+checks are recorded below. Synthetic PCM/detection
 fixtures test transport behavior, not neural inference speed or human likeness.
 
 The later run [43283696054](https://github.com/Dindb-dong/who-is-your-bias/actions/runs/43283696054)
@@ -126,8 +135,18 @@ Its delivery timings describe evidence preview, not neural text generation.
 The first failed harness attempt is retained alongside the corrected run.
 The actual main-API learned-voice gateway also passed 95 assertions and produced
 a 1.52-second WAV in 34.835 seconds on CPU. Its exact loaded step-16 weights and
-reference provenance matched. This is not real-time performance. Recorded
-generated-audio avatar playback is now queued in browser CI.
+reference provenance matched. This is not real-time performance.
+
+The later [recorded generated-audio browser run](https://github.com/Dindb-dong/who-is-your-bias/actions/runs/43289898996)
+at `a5cdcdffc1c5b4bf088baccae8f9469a9ad6f501` passed **242 web tests, 96 focused
+Python tests and 52 browser cases (30 historical + 22 Jensen)**, plus typecheck
+and build. Desktop and mobile emulation replayed the exact 9.92-second generated
+WAV through the v3c fitted avatar. Measured playback-clock gaps were at most
+618.667 ms and 580.950 ms against the unchanged 750 ms functional gate; Stop
+returned clocks and face/body/hand channels to neutral. This tests recorded
+playback, not live model inference, physical-phone performance or perceptual
+lip-sync. Screenshots were captured after Stop; the saved frame traces contain
+the actual animation. See the [measured result](../reports/jensen-runtime-v1/recorded-browser-result.json).
 
 On 16 supported + eight unsupported frozen development questions, relevant
 top-four hits were 3/16 archived lexical, 11/16 concept lexical and 12/16 pinned
@@ -163,9 +182,14 @@ will be recorded only after their exact pinned inputs and checkpoint paths exist
 
 M0 storage readback and real optimizer/RNG equivalence tests are verified. The
 actual text checkpoint survived fresh remote retrieval and completed the next
-optimizer update in a fresh process; step 2 was again saved and freshly verified. M1–M7 remain in progress. No Jensen
-text/voice model quality, accepted likeness, human ratings, or latency target is
-claimed by these implementation checkpoints.
+optimizer update in a fresh process; step 2 was again saved and freshly verified. The retrieval comparison and the voice candidate
+training/sample/diagnostic/gateway delivery have executed. Both retrieval
+candidates remain opt-in after missing their declared gate. Text training is
+still 8/29 saved updates; the 54 matched M6 responses, six separate RAG responses
+and actual M7 neural-text session checks have not yet executed. Avatar/browser
+functionality is measured, while likeness and contextual gesture quality remain
+ungraded. No accepted persona fidelity, human likeness or latency-target
+acceptance is claimed.
 New follow-up pull requests are published for review; no new merge is authorized.
 
 

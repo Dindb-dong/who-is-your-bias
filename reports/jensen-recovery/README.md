@@ -29,13 +29,23 @@ Use the current Library skill to materialize the **exact** `file_id`,
 returned identity and transfer metadata. The heldout archive was freshly
 materialized and hash checked, so it can already be restored.
 
-Eight complete published videos have been acquired and validated: four keynote
+The original eight-video batch has been acquired and validated: four keynote
 replays and four interviews, totaling 10 h 35 min 29 s. All eight passed complete
 recovery from fresh remote copies: every stored-container hash, decoded chunk
 hash, contiguous offset and complete original-video SHA-256 matched. The four
 keynotes total 7 h 34 min 46 s. These are complete publisher packages; their
 durations include slides, hosts and other speakers, and do not measure usable
 Jensen training time.
+
+The separate [reflection expansion](reflection-expansion-v1/README.md) adds the
+complete Computer History Museum oral history (72 min 25 s, 653,931,658 bytes)
+and the original publisher transcript PDF. Its fresh remote reconstruction and
+whole-video hash passed. The combined total is **nine distinct complete original
+event videos, 5,066,419,711 bytes / 42,473.925525 seconds (11h47m54s)**. Expansion
+receipts are in [its own artifact ledger](reflection-expansion-v1/media-artifacts.json);
+the original eight-event ledgers above retain their original scope. Neither the
+CHM expansion nor the pending bounded NTU commencement extraction enters the
+frozen v4 corpus, current text training or M6 comparison.
 
 | Published event | Complete duration | Bytes | Recovery status |
 | --- | ---: | ---: | --- |

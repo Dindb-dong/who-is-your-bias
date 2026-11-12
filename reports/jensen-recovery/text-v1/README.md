@@ -10,7 +10,9 @@ dataset and pinned tokenizer hashes are in `dataset-selection.json` and
 ## Verified checkpoint
 
 The current saved counter and resume path are in [latest.json](latest.json).
-Six optimizer updates have been preserved and freshly retrieved. The actual
+Eight optimizer updates have been preserved and freshly retrieved. The latest
+actual state is in `checkpoint-step0008.json`; connection recovery is recorded
+in `session-recovery-step0008.json`. The actual
 second update ran in a new process restored from the remotely retrieved first
 checkpoint, including adapter weights, AdamW state, random state and data cursor.
 See `resume-step0002.json` for that real continuation gate and
@@ -22,8 +24,9 @@ step count. Training loss is not an answer-quality or likeness score.
 
 The bounded invocation restored step 2, completed four additional updates and
 paused at step 6. Its fresh archive and real optimizer/RNG/cursor load passed.
-The actual runtime reports eight
-Torch CPU threads. Earlier updates used four. The data order, seed, BF16
+That historical invocation reports eight
+Torch CPU threads. Earlier updates used four, and the supervised step-8 recovery
+trial uses four intra-op threads and one inter-op thread. The data order, seed, BF16
 precision, gradient accumulation, optimizer and frozen 29-update budget are
 unchanged. Small kernel measurements support trying eight threads but do not
 establish an end-to-end speedup. The alternative cast-to-FP32 linear experiment
