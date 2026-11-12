@@ -139,3 +139,19 @@ slow cold request, not real-time speech or a simultaneous neural text/voice
 demonstration. Both child services exited before the text-training slot resumed.
 Human similarity and end-of-sentence completion remain the separate voice
 evaluation's responsibility; the backend does not expose an EOS reason.
+
+## Recorded generated-audio browser check
+
+The next bounded check replays the already generated 9.92-second adapted English
+sample on the actual fitted GLB. `recorded-browser-protocol.json` freezes its
+exact WAV/case hashes, replaced HTTP boundaries and exclusions. The browser will
+decode actual saved audio with its normal media clock and analyser; no new
+synthesis or invented phoneme labels are involved. The authored gesture cues
+are declared fixtures, separate from measured source motion.
+
+The added output reader observes actual mapped morph weights and joint angles
+after the rig applies its pose. Node references are cached and observations do
+not change animation. Its focused actual-GLB composition/reset check passed,
+web type checking passed, and Playwright discovered the new case for desktop
+and mobile. Actual browser execution remains pending; the earlier candidate
+render/replay CI result does not establish this additional audio check.

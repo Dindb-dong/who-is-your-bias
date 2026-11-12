@@ -6,6 +6,7 @@ import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { describe, expect, it } from 'vitest';
 import { avatarView, createResearchHumanMapping, mergeRigMappings } from './builtin';
 import { createUpperBodyFramer } from './framing';
+import { createRigOutputReader } from './observe-rig';
 import { FACE_CHANNELS, FINGER_CHANNELS, VISEMES } from './channels';
 import { sampleMotion } from './motion';
 import { createRetargetedRig } from './retarget';
@@ -164,6 +165,19 @@ describe('shipped Meshopt research human', () => {
 
 describe('shipped Jensen source-fitted candidate', () => {
   const candidate = new URL('../../public/models/jensen-source-fitted-v3.glb', import.meta.url);
+
+  it('reads actual composed mouth blink and limb outputs, then observes their reset', async () => {
+    const { rig, update } = await loadHuman(candidate);
+    const read = createRigOutputReader(rig);
+    expect(Object.values(read()).every((value) => value < 1e-6)).toBe(true);
+    rig.apply({ ...neutralPose(), jawOpen: .4, blink: .7, mouthSmile: .3, openPalm: .6, emphasis: .5 }); update();
+    expect(read()).toMatchObject({ jawOpen: .4, eyeBlinkLeft: .7, eyeBlinkRight: .7, mouthSmileLeft: .3 });
+    expect(read().leftUpperArm).toBeGreaterThan(.1); expect(read().leftHand).toBeGreaterThan(.1);
+    expect(read().leftIndexProximal).toBeGreaterThan(.01);
+    rig.apply(neutralPose()); update();
+    expect(Object.values(read()).every((value) => value < 1e-6)).toBe(true);
+    rig.dispose();
+  });
 
   it('matches the saved asset receipt and decodes the complete fitted facial and hand rig', async () => {
     const bytes = await readFile(candidate);

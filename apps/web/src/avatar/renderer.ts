@@ -6,6 +6,7 @@ import {
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { avatarView, type AvatarFraming } from './builtin';
 import { createUpperBodyFramer } from './framing';
+import { createRigOutputReader } from './observe-rig';
 import { disposeObject } from './dispose';
 import { createProceduralRig, type AvatarRig, type PortraitStyle } from './procedural';
 import { loadGlbRig } from './retarget';
@@ -46,6 +47,7 @@ export class AvatarRenderer {
   private camera = new PerspectiveCamera(34, 1, 0.1, 30);
   private controls: OrbitControls;
   private rig: AvatarRig;
+  private readRigOutput: ReturnType<typeof createRigOutputReader>;
   private resizeObserver: ResizeObserver;
   private raf = 0;
   private disposed = false;
@@ -102,6 +104,7 @@ export class AvatarRenderer {
     const leftRim = new DirectionalLight('#819e91', 1.4); leftRim.position.set(-2, 1.9, -1.2); this.scene.add(leftRim);
     this.createStudio();
     this.rig = createProceduralRig(this.portraitStyle); this.scene.add(this.rig.root);
+    this.readRigOutput = createRigOutputReader(this.rig);
     this.host.appendChild(this.canvas);
     this.resizeObserver = new ResizeObserver(this.resize); this.resizeObserver.observe(host);
     document.addEventListener('visibilitychange', this.onVisibility);
@@ -239,6 +242,7 @@ export class AvatarRenderer {
   private replaceRig(rig: AvatarRig): void {
     this.scene.remove(this.rig.root); this.rig.dispose(); this.rig = rig;
     this.pose = neutralPose(); this.attention.reset(); rig.apply(this.pose); this.scene.add(rig.root);
+    this.readRigOutput = createRigOutputReader(rig);
     this.upperBodyFramer = createUpperBodyFramer(rig.root, rig.diagnostics);
     this.canvas.dataset.avatar = rig.diagnostics.kind;
     this.canvas.dataset.portraitStyle = this.portraitStyle;
@@ -303,6 +307,19 @@ export class AvatarRenderer {
     this.canvas.dataset.attentionEyePitch = attended.telemetry.eyePitch.toFixed(4);
     this.canvas.dataset.attentionHeadYaw = attended.telemetry.headYaw.toFixed(4);
     this.canvas.dataset.attentionHeadPitch = attended.telemetry.headPitch.toFixed(4);
+    // These are actual mapped morph weights and joint angles, not inferred
+    // phonemes or personal gesture measurements. Node references are cached.
+    const output = this.readRigOutput();
+    this.canvas.dataset.audioClockMs = (this.playback.audioElapsedMs ?? 0).toFixed(3);
+    this.canvas.dataset.audioSha256 = this.playback.audioSha256 ?? '';
+    this.canvas.dataset.speaking = String(this.playback.speaking);
+    this.canvas.dataset.speechSource = telemetry.speechSource;
+    this.canvas.dataset.rigJaw = output.jawOpen.toFixed(4);
+    this.canvas.dataset.rigBlink = Math.max(output.eyeBlinkLeft, output.eyeBlinkRight).toFixed(4);
+    this.canvas.dataset.rigSmile = output.mouthSmileLeft.toFixed(4);
+    this.canvas.dataset.rigArm = Math.max(output.leftUpperArm, output.rightUpperArm).toFixed(4);
+    this.canvas.dataset.rigHand = output.leftHand.toFixed(4);
+    this.canvas.dataset.rigFinger = output.leftIndexProximal.toFixed(4);
     if (now - this.lastTelemetry > (attentionFrame.phase === 'idle' ? 250 : 80)) {
       this.lastTelemetry = now;
       this.callbacks.onTelemetry?.(telemetry);

@@ -1,5 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 
 const pageErrors = new WeakMap<Page, string[]>();
 test.beforeEach(async ({ page }) => {
@@ -385,4 +386,135 @@ test('Jensen fitted candidate renders its actual asset and resets preview motion
   await expect(page.getByText('goldman-sachs-2024', { exact: true })).toHaveCount(0);
   expect(graphicsErrors).toEqual([]);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+});
+
+type RecordedSample = { at: number; audioMs: number; mediaMs: number; speaking: boolean;
+  jaw: number; blink: number; smile: number; arm: number; hand: number; finger: number };
+type RecordedWindow = Window & { __recordedMedia: HTMLAudioElement[]; __recordedContexts: AudioContext[];
+  __recordedTrace: RecordedSample[]; __recordedTraceFrame: number };
+
+test('replays actual generated Jensen audio through the fitted avatar and cancels its clock and composed channels', async ({ page }, info) => {
+  // The WAV is a saved neural output. The response envelope and gestures are
+  // declared replay fixtures; no inference server or synthetic audio is used.
+  const label = 'Recorded generated-audio replay — no live inference.';
+  const audioPath = 'reports/voice/jensen-2026-11-13/listening/adapted-en_multisentence.wav';
+  const audio = readFileSync(audioPath);
+  const audioHash = createHash('sha256').update(audio).digest('hex');
+  expect(audioHash).toBe('ca5664747699df7826d4c380c0d26f6b36ff34157df742276945ffbab62086f2');
+  expect(audio.length).toBe(476204);
+  const cases = readFileSync('tools/voice_evaluation/cases.json');
+  expect(createHash('sha256').update(cases).digest('hex')).toBe('dc00ae852aeac5028914c68fbcbb019c00d85b46575912379976345752efe649');
+  const spokenText = JSON.parse(cases.toString()).cases.find((item: { id: string }) => item.id === 'en_multisentence').text;
+  const assetHash = 'dea0c921fb7d5668527bd8ee9082f382b14e8d300c43936842e15356dc7d90cd';
+  const clipUrl = `/api/speech/clips/${'c'.repeat(32)}`;
+  let preparedRequests = 0; let clipRequests = 0; let liveRequests = 0;
+  const graphicsErrors: string[] = [];
+  page.on('console', (message) => { if (message.type() === 'error' && /WebGL|shader|THREE|texture/i.test(message.text())) graphicsErrors.push(message.text()); });
+  await page.addInitScript(() => {
+    const state = window as RecordedWindow;
+    state.__recordedMedia = []; state.__recordedContexts = []; state.__recordedTrace = []; state.__recordedTraceFrame = 0;
+    // Observe real browser objects; do not replace decoding, clocks or analysis.
+    Object.defineProperty(window, 'Audio', { configurable: true, value: new Proxy(window.Audio, {
+      construct(target, args) { const media = Reflect.construct(target, args) as HTMLAudioElement; state.__recordedMedia.push(media); return media; },
+    }) });
+    Object.defineProperty(window, 'AudioContext', { configurable: true, value: new Proxy(window.AudioContext, {
+      construct(target, args) { const context = Reflect.construct(target, args) as AudioContext; state.__recordedContexts.push(context); return context; },
+    }) });
+  });
+  await page.route('**/api/persona', async (route) => {
+    const response = await route.fetch(); const profile = await response.json();
+    await route.fulfill({ response, json: { ...profile, capabilities: { ...profile.capabilities, speech: true, live_speech: false },
+      bindings: { ...profile.bindings, voice: { status: 'matched', persona_id: 'jensen-huang', voice: 'reference' } } } });
+  });
+  const turn = { id: 'recorded-audio-replay', session_id: 'a'.repeat(32), text: spokenText, language: 'en', mode: 'behavior', provider: 'evidence',
+    citations: [], grounding: { status: 'unverified', retrieved_ids: [], invalid_citation_ids: [], reason: label },
+    metrics: { retrieval_ms: 0, generation_ms: 0, total_ms: 0 }, context: { condition: 'recorded_generated_audio_replay', live_inference: false },
+    behavior: { duration_ms: 9920, timing_basis: 'estimated_text', motion: null, speech: { rate: 1, pitch: 1, pause_ms: 0 }, cues: [
+      { channel: 'face', name: 'smile', start_ms: 0, duration_ms: 9600, intensity: .55, provenance: 'designed' },
+      { channel: 'head', name: 'nod', start_ms: 500, duration_ms: 8500, intensity: .5, provenance: 'designed' },
+      { channel: 'gesture', name: 'open_palm', start_ms: 400, duration_ms: 9000, intensity: .65, provenance: 'designed' },
+      { channel: 'gesture', name: 'emphasis', start_ms: 400, duration_ms: 9000, intensity: .6, provenance: 'designed' },
+    ] } };
+  await page.route('**/api/chat/stream', (route) => route.fulfill({ contentType: 'text/event-stream', body: [
+    ['meta', { session_id: turn.session_id, turn_id: turn.id }], ['token', { text: turn.text }], ['result', { turn }], ['done', {}],
+  ].map(([event, data]) => `event: ${event}\ndata: ${JSON.stringify(data)}\n\n`).join('') }));
+  await page.route('**/api/speech/prepare', (route) => {
+    preparedRequests++;
+    expect(route.request().postDataJSON()).toEqual({ text: spokenText, language: 'en' });
+    return route.fulfill({ json: { audio_url: clipUrl, audio_sha256: audioHash, timing_status: 'not_configured',
+      speech_timing: null, timing_message: label+' Mouth motion uses actual waveform amplitude; no phoneme alignment.' } });
+  });
+  await page.route(`**${clipUrl}`, (route) => { clipRequests++; return route.fulfill({ body: audio, contentType: 'audio/wav' }); });
+  for (const path of ['/api/speech', '/api/chat/live']) await page.route(`**${path}`, (route) => {
+    liveRequests++; return route.fulfill({ status: 503, json: { detail: 'Live inference is excluded from this recorded playback check.' } });
+  });
+
+  await openStudio(page);
+  await page.getByRole('button', { name: 'Studio settings', exact: true }).filter({ visible: true }).click();
+  await page.getByRole('button', { name: /^Jensen source-fitted candidate/ }).click();
+  await page.getByRole('button', { name: /Connected voice/ }).click();
+  await page.getByRole('button', { name: 'Close settings' }).click();
+  const stage = page.getByTestId('avatar-stage'); const surface = canvas(page);
+  await expect(stage).toHaveAttribute('data-model-state', 'ready', { timeout: 20000 });
+  await expect(stage).toHaveAttribute('data-asset-sha256', assetHash);
+  await page.getByRole('textbox', { name: 'Your message' }).fill(label);
+  await page.getByRole('button', { name: 'Send message', exact: true }).click();
+  await expect(page.getByText(label, { exact: true })).toBeVisible();
+  await surface.evaluate((element) => {
+    const state = window as RecordedWindow;
+    const frame = () => {
+      const value = (name: string) => Number(element.getAttribute(`data-${name}`) ?? 0);
+      const media = state.__recordedMedia.at(-1);
+      state.__recordedTrace.push({ at: performance.now(), audioMs: value('audio-clock-ms'), mediaMs: (media?.currentTime ?? 0)*1000,
+        speaking: element.getAttribute('data-speaking') === 'true', jaw: value('rig-jaw'), blink: value('rig-blink'),
+        smile: value('rig-smile'), arm: value('rig-arm'), hand: value('rig-hand'), finger: value('rig-finger') });
+      if (state.__recordedTrace.length > 1500) state.__recordedTrace.shift();
+      state.__recordedTraceFrame = requestAnimationFrame(frame);
+    };
+    frame();
+  });
+  await page.getByRole('button', { name: 'Play response' }).click();
+  await expect(surface).toHaveAttribute('data-speaking', 'true');
+  await expect(surface).toHaveAttribute('data-audio-sha256', audioHash);
+  await expect(surface).toHaveAttribute('data-speech-source', 'amplitude');
+  await expect(page.getByText('Provider voice · approximate mouth movement', { exact: true })).toHaveAttribute('title', /Recorded generated-audio replay/);
+  await expect.poll(async () => Number(await surface.getAttribute('data-audio-clock-ms')), { timeout: 12000 }).toBeGreaterThan(1800);
+  expect(await page.evaluate(() => (window as RecordedWindow).__recordedMedia.at(-1)!.duration)).toBeCloseTo(9.92, 3);
+  const screenshot = info.outputPath(`recorded-generated-audio-${info.project.name}.png`);
+  await page.locator('.studio-grid').screenshot({ path: screenshot });
+  await info.attach('recorded generated audio replay; no live inference', { path: screenshot, contentType: 'image/png' });
+  await expect.poll(async () => Number(await surface.getAttribute('data-audio-clock-ms')), { timeout: 12000 }).toBeGreaterThan(6500);
+  const trace = await page.evaluate(() => (window as RecordedWindow).__recordedTrace);
+  const playing = trace.filter((sample) => sample.speaking && sample.audioMs > 100 && sample.audioMs < 9000);
+  const maximum = (key: 'jaw' | 'blink' | 'smile' | 'arm' | 'hand' | 'finger') => Math.max(...playing.map((sample) => sample[key]));
+  expect(playing.length).toBeGreaterThan(10);
+  expect(maximum('jaw')).toBeGreaterThan(.02); expect(maximum('blink')).toBeGreaterThan(.03);
+  expect(maximum('smile')).toBeGreaterThan(.1); expect(maximum('arm')).toBeGreaterThan(.1);
+  expect(maximum('hand')).toBeGreaterThan(.1); expect(maximum('finger')).toBeGreaterThan(.005);
+  const composed = playing.filter((sample) => sample.jaw > .02 && sample.smile > .1 && sample.arm > .1 && sample.hand > .1);
+  expect(composed.length).toBeGreaterThan(0);
+  const maximumClockDifference = Math.max(...playing.map((sample) => Math.abs(sample.audioMs-sample.mediaMs)));
+  expect(maximumClockDifference).toBeLessThan(750); // Bounded rendered-frame lag on software WebGL, not acoustic latency.
+  await page.getByRole('button', { name: 'Stop audio', exact: true }).click();
+  await expect(surface).toHaveAttribute('data-speaking', 'false');
+  await expect(surface).toHaveAttribute('data-audio-clock-ms', '0.000');
+  await expect(surface).toHaveAttribute('data-audio-sha256', '');
+  await expect(surface).toHaveAttribute('data-speech-source', 'silent');
+  for (const name of ['jaw', 'smile', 'arm', 'hand', 'finger']) await expect.poll(async () => Number(await surface.getAttribute(`data-rig-${name}`))).toBeLessThan(.001);
+  await expect.poll(() => page.evaluate(() => (window as RecordedWindow).__recordedContexts.every((context) => context.state === 'closed'))).toBe(true);
+  expect(await page.evaluate(() => (window as RecordedWindow).__recordedMedia.every((media) => media.paused && media.getAttribute('src') === null))).toBe(true);
+  await page.waitForTimeout(250);
+  await expect(surface).toHaveAttribute('data-audio-clock-ms', '0.000');
+  await page.evaluate(() => cancelAnimationFrame((window as RecordedWindow).__recordedTraceFrame));
+  expect(preparedRequests).toBe(1); expect(clipRequests).toBe(1); expect(liveRequests).toBe(0);
+  expect(graphicsErrors).toEqual([]); await expect(page.getByRole('alert')).toHaveCount(0);
+  await info.attach('actual generated audio playback measurements', { body: Buffer.from(JSON.stringify({
+    schema_version: 'recorded-generated-audio-browser.v1', project: info.project.name,
+    condition: label, audio_file: audioPath, audio_sha256: audioHash, audio_duration_seconds: 9.92, avatar_sha256: assetHash,
+    articulation: 'actual waveform amplitude; no phoneme alignment', gestures: 'authored fixture cues; not a learned personal policy',
+    live_inference: false, simultaneous_neural_providers: false, acoustic_latency_measured: false,
+    playing_frames: playing.length, composed_frames: composed.length, maximum_clock_difference_ms: maximumClockDifference,
+    channel_maxima: Object.fromEntries((['jaw', 'blink', 'smile', 'arm', 'hand', 'finger'] as const).map((key) => [key, maximum(key)])),
+    cancelled_to_zero_clock_and_neutral_channels: true, trace,
+  }, null, 2)), contentType: 'application/json' });
 });
