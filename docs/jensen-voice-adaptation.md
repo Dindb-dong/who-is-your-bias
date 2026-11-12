@@ -7,8 +7,11 @@ The bounded speech-weight experiment completed **16 actual optimizer updates**.
 The final adapter, optimizer/random state and progress counters were uploaded,
 retrieved in a fresh operation, and verified by SHA-256. See
 [training-completed.json](../reports/voice/jensen-2026-11-13/training-completed.json)
-for the exact contract and durable receipts. Generated speech and independent
-quality measurements are the next stage; no quality promotion has been made.
+for the exact contract and durable receipts. Both conditions now have four actual
+English/Korean waveforms, with independent ASR and WavLM diagnostics for all eight.
+The [measured evaluation](../reports/voice/jensen-2026-11-13/evaluation.json) records
+the outputs and limitations. The adapter remains a candidate; no quality promotion
+has been made.
 
 The [codec receipt](../reports/voice/jensen-2026-11-13/codecs.json) records all eight
 encodings (1,151 frames, 16 codebooks per frame). The encoding loop took 6.13
@@ -200,17 +203,76 @@ Repeat with `--condition adapted` and a new output path after saving the first
 condition. This runner validates the frozen case bytes, checkpoints each waveform,
 keeps server logs and a process receipt, and stops its server before returning.
 
-Generate the frozen English and Korean cases, stop the TTS service to release
-memory, and transcribe the generated waveforms with the independent ASR model.
-Report English WER, Korean CER, cold/warm wall time, failures, and raw outputs.
+The frozen English and Korean cases were generated, then each TTS process was
+stopped to release memory before independent ASR and speaker diagnostics ran.
+English WER, Korean CER, cold/warm wall time, failures, and raw outputs are saved.
 The separately pinned `microsoft/wavlm-base-plus-sv` diagnostic also compares
 complete generated clips with all eight source clips, reporting raw cosines and
 event-balanced averages. The verification model is independent of both Qwen and
 the ASR model; the references themselves are training-exposed. No calibrated
 identity threshold, unseen-event result, or Korean language invariance is claimed.
-These measures do not replace perceived Jensen similarity. Human
-listening and speaker similarity remain unmeasured until their actual reviews
-are supplied; the adapter must not be promoted based on training loss alone.
+These measures do not replace perceived Jensen similarity. Human listening and
+perceived speaker likeness remain unmeasured until actual reviews are supplied;
+the adapter must not be promoted based on training loss or uncalibrated cosines.
+
+## Actual matched speech results
+
+All eight requests produced verified mono WAV files, totaling **57.76 seconds**.
+The [reference-condition receipt](../reports/voice/jensen-2026-11-13/synthesis-reference.json)
+and [adapted-condition receipt](../reports/voice/jensen-2026-11-13/synthesis-adapted.json)
+retain HTTP timing, signal checks, source binding, and actual loaded adapter
+identity. The adapted service reported the verified step 16 checkpoint and
+`weight_adaptation: true` after each real waveform response.
+
+The independent recognizer received only the generated audio and declared language,
+with no transcript prompt, prefix, or hotwords. The scores below keep the frozen
+normalization; no numeric rewriting was introduced after observing the results.
+
+| Case | Reference ASR error | Adapted ASR error | Reference WavLM cosine | Adapted WavLM cosine |
+| --- | ---: | ---: | ---: | ---: |
+| Short English | WER 0/5, 0% | WER 0/5, 0% | 0.936892 | 0.944122 |
+| Multiple English sentences | WER 0/33, 0% | WER 0/33, 0% | 0.956202 | 0.948573 |
+| Multiple Korean sentences | CER 1/58, 1.724% | CER 0/58, 0% | 0.793490 | 0.800503 |
+| English numbers | WER 5/21, 23.810% | WER 5/21, 23.810% | 0.944494 | 0.956157 |
+
+For the number case, both recognized transcripts used `9.30`, `12`, and `24`
+where the input used words. Those formatting differences account for the literal
+word-error score. The reference-condition Korean transcript omitted the initial
+`이`; the adapted transcript contained all 58 normalized characters. None of the
+eight ASR suffix, repetition, or substantial-deletion screens fired. ASR remains
+an imperfect recognizer; these observations do not prove backend EOS, natural
+prosody, or a general intelligibility improvement.
+
+The WavLM value is an event-balanced mean of raw cosines against eight source
+clips: average within each source event, then weight all four events equally.
+It increased in three cases and decreased in the longer English case. There is
+one output per condition and case, no impostor calibration, no held-out event,
+and no human rating. These are descriptive scores, not resemblance percentages
+or an overall improvement result. The source-reference pair cosines ranged from
+0.935389 to 0.984556 across 28 pairs; they do not independently establish identity.
+
+| Case | Reference audio / HTTP wall time | Adapted audio / HTTP wall time |
+| --- | ---: | ---: |
+| Short English, cold | 2.16 s / 56.15 s | 1.92 s / 35.25 s |
+| Multiple English sentences | 10.56 s / 81.61 s | 9.92 s / 71.09 s |
+| Multiple Korean sentences | 10.16 s / 85.14 s | 8.40 s / 57.04 s |
+| English numbers | 7.36 s / 76.26 s | 7.28 s / 56.52 s |
+
+The condition runs took 305.45 and 230.02 seconds including startup; there was no
+warm-up request. These timings describe an ordered base-then-adapted run with
+different waveform lengths and cache state, so they do not establish a speedup.
+The service returned complete WAVs and did not stream audio. TTS peak process RSS
+was 6,341,668,864 and 6,113,681,408 bytes. In the adapted invocation, available
+memory fell from 9,249,016 KiB before model loading to 4,695,104 KiB before shutdown.
+Full text and voice models were serialized on the approximately 10 GB host;
+simultaneous full-model operation was not verified.
+
+The two ASR runs took 12.16 and 11.58 seconds. The independent WavLM run took
+21.74 seconds and completed all eight output comparisons and 28 source pairs.
+An eight-sample condition-blind listening bundle was created at
+`voice/listening-v1/listener/index.html`, with a source comparison recording.
+Its manifest hash is `1f3e3ffe0076b5334ba67b2ad423374a318496f843d6f8fbfe8ad72ad9b996ec`.
+All listening fields remain **unrated**; bundle creation is not a human review.
 
 ## Saved evidence and remaining work
 
@@ -229,6 +291,10 @@ fresh-process remote-checkpoint resume, and recovery after a real tool-runtime
 interruption. The final archive is `voice-lora-v2-step16.tar.gz`, 6,475,745 bytes,
 SHA-256 `d87c8ac3a6c00d7f35023bb2cc048ebb76984f2288d62ec27c19f7d22951cf7e`.
 
-Next gates: English/Korean synthesis for both conditions; independent output ASR
-and speaker-embedding diagnostics; and a measured report. The candidate pilot
-remains separate from application promotion and from a qualified speech likeness.
+Completed output gates: eight matched English/Korean waveforms, successful
+independent ASR on all eight, independent WavLM diagnostics on all eight, and an
+unrated blind listening bundle. Each synthesis condition was uploaded and freshly
+retrieved with a matching SHA-256 before continuing. Remaining quality gates are
+human listening, calibrated speaker comparisons, and unseen-event generalization.
+The candidate pilot remains separate from application promotion and from a
+qualified speech likeness.
