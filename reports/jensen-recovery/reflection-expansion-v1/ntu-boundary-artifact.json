@@ -1,0 +1,312 @@
+{
+  "schema_version": "reflection-source-boundary-artifact.v1",
+  "run_id": "jensen-2026-11-13",
+  "event_family_id": "ntu-commencement-2023-05-27",
+  "source_url": "https://ftp.ntu.edu.tw/NTU/ceremony/2023/GC2023.iso",
+  "excluded_from_frozen_v4_text_v1_M6": true,
+  "full_source_video_acquired": false,
+  "role": "bounded_source_boundary_samples_and_DVD_metadata",
+  "file": "ntu-range-boundary-review-v1.tar.gz",
+  "bytes": 37233283,
+  "sha256": "b5eb77033955e62a96935a209d1241416d72c0393bbfe40f6343f934f6dc16b8",
+  "file_id": "file_00000000ffd48209a56d865b2b9cbb97",
+  "library_file_id": "libfile_fde3_f-15ad74b6e1cc8191822804794245234c_a18ece08681081918d81df44f69c4b1f",
+  "file_name": "ntu-range-boundary-review-v1.tar.gz",
+  "version": 0,
+  "upload_status": "succeeded",
+  "fresh_readback_status": "all_bytes_and_members_verified",
+  "fresh_readback_verified_at": "2026-11-12T19:48:00.177367+00:00",
+  "member_count": 54,
+  "members": [
+    {
+      "file": "discovery/ntu-boundary-review/coarse-samples.json",
+      "bytes": 2949,
+      "sha256": "c0b42d822f39462cbe71934520504a76a4042afa8b22caa589de7ba060e636f1"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/fine-samples.json",
+      "bytes": 2964,
+      "sha256": "b5a8abdd956b582f4ce00ebb264f08e45a14b75d27ad4bb5ee651e4da5430ae0"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0000000000.jpg",
+      "bytes": 7180,
+      "sha256": "34efaae1fe6e8eb61b00ec753f4b138bcc0da7a41c8cb4578dc7575fc5a52b78"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0000000000.probe.json",
+      "bytes": 4145,
+      "sha256": "66f5bb3eaf7265dcb6932c5a390e40c14438b036691987f532fce5700fc249bc"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0000000000.vob",
+      "bytes": 4194304,
+      "sha256": "39269013a34171d271bbafa58131e5c9c5fe9e835dbde612b125269ed098c08b"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0499998720.jpg",
+      "bytes": 94033,
+      "sha256": "3decb2f512b063bce2d4ae8a46891db97991747edb028c2874446e38b4ffa00e"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0499998720.probe.json",
+      "bytes": 4166,
+      "sha256": "48019464e0f4117b63dea12174e767f2ee4e2a8b7cb2ba3158137e83a617f240"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0499998720.vob",
+      "bytes": 4194304,
+      "sha256": "c3281042352fdb356cf3af0dc7373384ba4ca7e7f20c37c46e3ae8f69f8ea974"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0549998592.jpg",
+      "bytes": 59068,
+      "sha256": "265cae6ec36c761381ddc93c1ed95886b271175382670781f225219ca0cd381d"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0549998592.probe.json",
+      "bytes": 4166,
+      "sha256": "cd065b334910d4cc8655422290a4657b7bb248053acfcd00fb7818007f393961"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0549998592.vob",
+      "bytes": 2097152,
+      "sha256": "96b9e25d72256eac7160bbe28617e7802f39cbf4a6efe6471af8b1db00f604a5"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0599998464.jpg",
+      "bytes": 54060,
+      "sha256": "4eb43cd6ef0fd2725cfd01bd5425caba4b432bcd4f8e85571b204b8e69351aad"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0599998464.probe.json",
+      "bytes": 4169,
+      "sha256": "02b90470ace0fe2903f74ddc595ebc93b4e88acbf00f3ec1c3d564acf1d0fdf0"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0599998464.vob",
+      "bytes": 2097152,
+      "sha256": "07e7ccc65a498dc7c63aecadbff4b859d0a7d6965d3140690f220c2d0628d951"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0649998336.jpg",
+      "bytes": 99036,
+      "sha256": "6ca05f4c3538b0ac214a7573bbcd70a5f3f2554a20ec7c340b1ed54001c508c2"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0649998336.probe.json",
+      "bytes": 4169,
+      "sha256": "2c5a59f84aa904ed407826d286564b6612d247c91713143fc9a8a1cdffbf63a5"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0649998336.vob",
+      "bytes": 2097152,
+      "sha256": "60d5ed7291e189fb58d104f2671507aa2fea28beb7449c52319729d2f2818c3a"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0749998080.jpg",
+      "bytes": 110086,
+      "sha256": "4c4329166736eacc39c18cf211979c919685ef416a5a9ae8b23b15cabd641c59"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0749998080.probe.json",
+      "bytes": 4169,
+      "sha256": "5705d3ee671cab1e25650fb8dc495f69697215effe7e6825e986aecbe1bd20f0"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0749998080.vob",
+      "bytes": 4194304,
+      "sha256": "03857af4bb3759e4c2bb7fc76889207febee28a171308510718d9843b2e8c1e7"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0999999488.jpg",
+      "bytes": 93144,
+      "sha256": "d3a82140b45d1a5348ab8cd133023c2a7ecb4baf100174e542cf70ed5ecd6d6c"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0999999488.probe.json",
+      "bytes": 4169,
+      "sha256": "3843194d86c102276825b0866983f28af469eda4f2bf1d24c73d3335d691825f"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-0999999488.vob",
+      "bytes": 4194304,
+      "sha256": "7f45d4d9d15276fe1c0586b7c1ad287592ed5d115bf130b70fb96c4e71f2feaf"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-1249998848.jpg",
+      "bytes": 82988,
+      "sha256": "4c319205d99c21778f62c64729cd6eb54fdf64271b8182e78c9d3eccae8c371d"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-1249998848.probe.json",
+      "bytes": 4169,
+      "sha256": "d8b33a9feeb0484d23e82164668bce9d51582bf3f63108ff6ccac27e1a9e591d"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-1249998848.vob",
+      "bytes": 4194304,
+      "sha256": "8bc9b6be1fa29861696f6703a4cac62d5978bcf073566ffaca65492f7eb10a95"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-1349998592.jpg",
+      "bytes": 40322,
+      "sha256": "bc0d9ff04c93e94bcbabb18e3362bd5bc1c9c6ef73a2b5324680aed2576b2c56"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-1349998592.probe.json",
+      "bytes": 4169,
+      "sha256": "5c419d39a41aa13fb962f63bfa8e8f8b6253ad1e3d80ba427e1018c3103aad7b"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-1349998592.vob",
+      "bytes": 2097152,
+      "sha256": "3b5fa82c463ce7a8dc299c48edc59dc9e11dc1ec1ed195a43a87d23a278ce72d"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-1399998464.jpg",
+      "bytes": 63667,
+      "sha256": "94ce4acde24d8d14298c238d76e3de3bb2909c3e9a97b029ea8c9ec42d1cc2bc"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-1399998464.probe.json",
+      "bytes": 4169,
+      "sha256": "1e18a282bb3f8df380a2f7eebe909bf4cd04566907df528da7de84f781978077"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-1399998464.vob",
+      "bytes": 2097152,
+      "sha256": "efc6c844a81ddf0d8e9980e47ee6c12ff21b239294f77d07f56c6c34112e80cc"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-1449998336.jpg",
+      "bytes": 106113,
+      "sha256": "7c779f39aad3f4dada7b940683e0664463f9fdbb089bc9ad12d9a7dd4745951d"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-1449998336.probe.json",
+      "bytes": 4169,
+      "sha256": "2463f54596bfc29aa33a5a40fdc9f2705ecda747e50ab306c67b3e9321432cff"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-1449998336.vob",
+      "bytes": 2097152,
+      "sha256": "fa696d558c44fa1e20c5ea0eada51f236e5ffca3486d02d53d7618e1ed657662"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-1499998208.jpg",
+      "bytes": 104475,
+      "sha256": "cfcb38cbbfa956753c62a80edfe0782e167d9289923b885ae8b95150b7170835"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-1499998208.probe.json",
+      "bytes": 4169,
+      "sha256": "67fc173bd374b1baf0d35d919461b087c42a2b2ec58a20ea182e411b129ea973"
+    },
+    {
+      "file": "discovery/ntu-boundary-review/vob-offset-1499998208.vob",
+      "bytes": 4194304,
+      "sha256": "ab988c399342fd66301a9fde4fda24ec204fad34dc487a2f9fd7117a2c017e1c"
+    },
+    {
+      "file": "discovery/ntu-iso-primary-volume.bin",
+      "bytes": 2048,
+      "sha256": "3cf51383521823b5dd2effdd8c4429e81fad9756ab3f41d3fc62002c0bf9177e"
+    },
+    {
+      "file": "discovery/ntu-iso-root-directory.bin",
+      "bytes": 2048,
+      "sha256": "7551294880e3a29165cb8271973da2f15b2986ed91323182f953edd23b78c15f"
+    },
+    {
+      "file": "discovery/ntu-iso-video-directory.bin",
+      "bytes": 2048,
+      "sha256": "2f2ab74e594ceeecbe9fe33fdc838786aafce260d44ee6f219e750169c8e3e43"
+    },
+    {
+      "file": "discovery/ntu-iso-directory.json",
+      "bytes": 2486,
+      "sha256": "bb7047652c5d215a263ee77834d76c2ac8be5434c572008d0c48b43e3972a144"
+    },
+    {
+      "file": "discovery/ntu-VIDEO_TS.IFO",
+      "bytes": 8192,
+      "sha256": "74ec8ad966b0e356cf3bfc01639d6e9cc61ec6197fa5823b644c0f3c945df122"
+    },
+    {
+      "file": "discovery/ntu-VTS_01_0.IFO",
+      "bytes": 92160,
+      "sha256": "a517331f9fb202d5030879c25baf69cf92a592f356783667dbb1c4364fd48a12"
+    },
+    {
+      "file": "discovery/ntu-source-identity.json",
+      "bytes": 256,
+      "sha256": "90670af616b80133595ea3a80a5c85e4815651de81f4ed324d86b7305e015575"
+    },
+    {
+      "file": "discovery/ntu-address-range-entry.json",
+      "bytes": 3366,
+      "sha256": "8680a401fa9bd42bc2431b73eabe73cb61d7ec2e66c48f2414b20458bd2badc4"
+    },
+    {
+      "file": "discovery/ntu-ceremony-index.html",
+      "bytes": 507,
+      "sha256": "4a071d6e0d8c3f57b115caa88765112b09ef2da4b394c34369c04717d2b458ec"
+    },
+    {
+      "file": "discovery/ntu-2023-index.html",
+      "bytes": 419,
+      "sha256": "81cf971d4590f15ae03cb79ae5bff4399b8975acfb972b5120de6866da576e04"
+    },
+    {
+      "file": "discovery/ntu-public-address-youtube.json",
+      "bytes": 2721629,
+      "sha256": "709a7d741a684dfce3a554c9685541bdcb9a4e18ac5604dcc6c530b9129f71f9"
+    },
+    {
+      "file": "discovery/ntu-public-address-youtube.stderr",
+      "bytes": 848,
+      "sha256": "cc7e70f2c2e5e098ba8eefc259147c4ff6e3ae6ebba7f631e7477fec8485293b"
+    },
+    {
+      "file": "discovery/ntu-youtube.stderr",
+      "bytes": 426,
+      "sha256": "bd121588e7772573a017bab0caa24396d07aefb20036a427c035fa5cd88981f9"
+    },
+    {
+      "file": "discovery/cmu-kaltura-public-probe.json",
+      "bytes": 2161,
+      "sha256": "9c3fe13509ee9e116cfc4e7ca37117bd99de6b4e419277e7393b06561c97c611"
+    },
+    {
+      "file": "discovery/address-delivery-probes.json",
+      "bytes": 703,
+      "sha256": "f98b1c6cf9757d59735c26cbff452dac6c25b4f3a9cf4a39653d1d3ae0ea6986"
+    },
+    {
+      "file": "discovery/address-watch-header-probes.json",
+      "bytes": 765,
+      "sha256": "4de3505f53b6d56df50f1afab0c9cf8ed5b5018021229634d8bd8365a39b3b94"
+    }
+  ],
+  "acquisition_code_checkpoint_verified_remote": "f59f2389833031f149403d2d41b308fca774d1d0",
+  "review_erratum": {
+    "field": "ntu-extraction-plan.json boundary_review.before.visual_observation",
+    "recorded_introducer_name": "Liao Wan-Chun",
+    "correct_publisher_name": "Executive Vice President Wanjiun Liao (廖婉君)",
+    "identity_source_url": "https://www.ntu.edu.tw/english/spotlight/2023/2164_20230529.html",
+    "reason": "Official English publisher report names the introducer. Exact acquisition input is retained unchanged for resume binding; this erratum supersedes the romanized name only."
+  },
+  "semantic_review": {
+    "reviewer": "reflective_sources agent",
+    "human_review": "ungraded",
+    "direct_visual_sample_checks": [
+      1211.431956,
+      1312.359956,
+      2523.687956,
+      2725.703956
+    ],
+    "observation": "Prior speaker at start boundary; Jensen at the two middle samples; ceremony announcer at after boundary.",
+    "completeness_claim": "These isolated samples do not establish a complete address. Continuous range acquisition and opening/closing review remain pending."
+  }
+}
