@@ -7,7 +7,7 @@ Repository: `Dindb-dong/who-is-your-bias`. Integration branch:
 `8515b5f30f3cd412e18db3d54ee28bf2a4c28694`.
 Implementation review: [PR #19](https://github.com/Dindb-dong/who-is-your-bias/pull/19).
 Last verified code checkpoint before this status update:
-`31cb01051114cd03c1cfbac3d40a484c2d9df95a`.
+`c3a3e084f276511536da987908b6387a014fcb3c`.
 
 The [historical handoff](jensen-replication-handoff.md) defines M0–M7.
 This is a new reproducible run; unverified earlier acquisition/training counts
@@ -59,6 +59,10 @@ separately. The prior unverified eight-video claim is not inherited by this run.
   A fresh process restored remote step 1 and completed step 2; subsequent 6/10/14
   checkpoints and final step 16 were also freshly retrieved. The interrupted final
   block recovered from verified step 14 without inventing an uncompleted update.
+  **Eight actual matched waveforms** (four reference-conditioned and four with
+  learned weights, including Korean) are now saved and freshly retrieved. The
+  loaded adapter/checkpoint hashes were checked at synthesis time. Independent
+  ASR and speaker-embedding diagnostics are a separate quality assessment.
 - Avatar: a **2,530,256-byte fitted Jensen GLB** is committed with an explicit
   optional Settings selection and source license. Its measured geometry, licensed
   face texture, dark iris and authored salt-and-pepper material are preserved in
@@ -87,8 +91,8 @@ separately. The prior unverified eight-video claim is not inherited by this run.
 | Workstream | Saved implementation | Current gate |
 | --- | --- | --- |
 | Corpus | Authentic v4, held-out references, all eight full video restorations | Source/media acquisition batch complete; preserve event isolation |
-| Voice | Source clocks, screened four-event dataset, actual codes and 16 completed saved updates | Generate matched EN/KO samples and diagnostics |
-| Avatar | Actual fitted model, editable master, finger controls and observed clips | Final camera and candidate-specific desktop/mobile playback |
+| Voice | Source clocks, screened four-event dataset, actual codes, 16 completed updates and eight saved waveforms | Preserve diagnostics and check main API speech proxy |
+| Avatar | Actual fitted model, editable master, finger controls, observed clips and actual desktop/mobile browser rendering | Human likeness remains ungraded; candidate stays optional |
 | Text | Frozen dataset, two updates and successful remote optimizer continuation | Finish bounded run and serve exact adapter |
 | Retrieval/evaluation | Frozen lexical/concept/hybrid comparison; both candidates remain opt-in | Matched base/style/adapter and heldout response experiments |
 
@@ -101,6 +105,19 @@ passed web checks/build, 96 focused Python tests and **50 desktop/mobile browser
 cases** at head `05d4062`. That head predates the fitted model; its explicit browser
 case and final camera checks are queued separately. Synthetic PCM/detection
 fixtures test transport behavior, not neural inference speed or human likeness.
+
+The later run [43283696054](https://github.com/Dindb-dong/who-is-your-bias/actions/runs/43283696054)
+at `ff64ea3e49335fcfceea35b5ba2c0f29af4b4784` passed **241 web tests, 96 focused
+Python tests, 30 historical browser cases and 20 Jensen browser cases**, including
+the exact fitted candidate on desktop and mobile. TypeScript and production build
+also passed. The downloaded diagnostic ZIP matches GitHub's SHA-256 and was
+separately saved and freshly retrieved; both candidate screenshots were inspected.
+
+The separate [actual TCP preview check](../reports/jensen-runtime-v1/README.md)
+passed **91 assertions** against the original v4 corpus, exact avatar bytes,
+six explicit motion choices, real streaming and four-turn session provenance.
+Its delivery timings describe evidence preview, not neural text generation.
+The first failed harness attempt is retained alongside the corrected run.
 
 On 16 supported + eight unsupported frozen development questions, relevant
 top-four hits were 3/16 archived lexical, 11/16 concept lexical and 12/16 pinned

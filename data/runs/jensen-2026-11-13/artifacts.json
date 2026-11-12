@@ -390,12 +390,54 @@
       "sha256": "8c5854cdbf37494e61b7508da4b5a5ec43af57c7656b0e59cef3b370401d186c",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-browser-ci-ff64ea3",
+      "role": "actual_browser_tests_and_candidate_screenshots",
+      "workflow_run_id": 43283696054,
+      "head_sha": "ff64ea3e49335fcfceea35b5ba2c0f29af4b4784",
+      "file_name": "studio-browser-ff64ea3.zip",
+      "file_id": "file_00000000e56481fd89769a22d4a44bec",
+      "library_file_id": "libfile_fde3_f-4b05799db3f48191a4dc393709f0911f_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 2887277,
+      "sha256": "1b925984770feae939219ba1a32a816ccc9d1886a536f6482aad79c3166293c2",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-voice-synthesis-reference-v2",
+      "role": "actual_matched_voice_evaluation_waveforms",
+      "condition": "jensen-reference",
+      "completed_samples": 4,
+      "file_name": "voice-synthesis-reference-v2.tar.gz",
+      "file_id": "file_00000000469c81fd9ceb3cb6373fa1b1",
+      "library_file_id": "libfile_fde3_f-49a00bc861548191ae790205b90f1f10_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 1281696,
+      "sha256": "f3659e7ca951c38627f716ef44eebacbb2a900dae07ba0e4199ece765ab8ff62",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified",
+      "workstream_receipt_sha256": "340dd4030da00376023c89f9aabfaeaa18b43f93c2a631825dd8aac249a66acb"
+    },
+    {
+      "artifact_id": "jensen-voice-synthesis-adapted-v2",
+      "role": "actual_matched_voice_evaluation_waveforms",
+      "condition": "jensen-lora-candidate",
+      "completed_samples": 4,
+      "file_name": "voice-synthesis-adapted-v2.tar.gz",
+      "file_id": "file_00000000cd3081fd9b2d787cad80fb7d",
+      "library_file_id": "libfile_fde3_f-6acb4c5db4dc8191ad4991b38afef1d2_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 1159503,
+      "sha256": "d8fb95faba69aaaec5a535805352879d6a82813646918243cbba70fbb79ed5c8",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified",
+      "workstream_receipt_sha256": "c00ad4492b53a8da42db771bdac3d2df5a9ffa432dfbc964d1affe7a2b6d8c90"
     }
   ],
   "artifact_indexes": {
     "media": "reports/jensen-recovery/media-artifacts.json",
     "avatar": "reports/jensen-avatar/derived-artifact-receipts.json",
     "source_progress": "reports/jensen-recovery/source-progress.json",
-    "response_protocols": "reports/jensen-evaluation-v1/artifacts.json"
+    "response_protocols": "reports/jensen-evaluation-v1/artifacts.json",
+    "runtime": "reports/jensen-runtime-v1/artifact-receipts.json"
   }
 }
