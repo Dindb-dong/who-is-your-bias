@@ -30,10 +30,28 @@ returned identity and transfer metadata. The heldout archive was freshly
 materialized and hash checked, so it can already be restored.
 
 Eight complete published videos have been acquired and validated: four keynote
-replays and four interviews, totaling 10 h 35 min 29 s. Five have already passed
-complete recovery from fresh remote copies. Every chunk for the remaining three
-has uploaded successfully; their fresh readback and full reconstruction are the
-remaining durability checks. Use the machine-readable count for newer updates.
+replays and four interviews, totaling 10 h 35 min 29 s. All eight passed complete
+recovery from fresh remote copies: every stored-container hash, decoded chunk
+hash, contiguous offset and complete original-video SHA-256 matched. The four
+keynotes total 7 h 34 min 46 s. These are complete publisher packages; their
+durations include slides, hosts and other speakers, and do not measure usable
+Jensen training time.
+
+| Published event | Complete duration | Bytes | Recovery status |
+| --- | ---: | ---: | --- |
+| Goldman Sachs 2024 | 29 min 43 s | 586,759,675 | Full original hash verified |
+| Stripe Sessions 2024 | 64 min 49 s | 952,084,714 | Full original hash verified |
+| WIRED Big Interview 2024 | 26 min 45 s | 494,775,046 | Full original hash verified |
+| SIGGRAPH / WIRED 2024 | 59 min 25 s | 448,609,245 | Full original hash verified |
+| NVIDIA GTC 2024 | 123 min 08 s | 479,397,116 | Full original hash verified |
+| NVIDIA GTC 2025 | 131 min 48 s | 583,069,430 | Full original hash verified |
+| NVIDIA COMPUTEX 2025 | 102 min 51 s | 452,685,850 | Full original hash verified |
+| NVIDIA CES 2025 | 96 min 59 s | 415,106,977 | Full original hash verified |
+
+The saved `jensen-media-batch-02-publisher-metadata.tar.gz` contains 65 original
+landing-page, player, playlist, receipt and internal checksum-manifest files.
+It passed an independent fresh readback. Some cataloged players have metadata
+only; those events do not increase the acquired-video count.
 
 Large media uses lossless contiguous raw byte chunks, wrapped in ordinary gzip
 or single-member tar.gz containers. Initial unwrapped `.bin` transfers failed;

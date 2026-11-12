@@ -1,7 +1,7 @@
 {
   "schema_version": "jensen-media-artifacts.v1",
   "run_id": "jensen-2026-11-13",
-  "complete_videos_durably_verified": 5,
+  "complete_videos_durably_verified": 8,
   "artifacts": [
     {
       "artifact": "media-chunks/goldman-sachs-2024-full/reconstruction.json",
@@ -306,7 +306,8 @@
       "file_id": "file_0000000059dc81fd89054cf63f69d50a",
       "library_file_id": "libfile_fde3_f-bc0f5d36be008191951da653d2bad1c4_a18ece08681081918d81df44f69c4b1f",
       "file_name": "ces-2025-full-480p-reconstruction.json",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "910e15734d3384318c12a77ee76b5ddc1fd29edd05a675f9bd54dc92d1fe6666"
     },
     {
       "artifact": "media/ces-2025-full-480p.receipt.json",
@@ -315,7 +316,8 @@
       "file_id": "file_00000000fe7081fdb706982ef2f748dc",
       "library_file_id": "libfile_fde3_f-8104b6b721dc81918bcab6c9fa188f07_a18ece08681081918d81df44f69c4b1f",
       "file_name": "ces-2025-full-480p.receipt.json",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "58e584ec3339300911d4038f2e9af27bf908f87c84cb771e54378174606cc92c"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p/siggraph-wired-2024-full-720p.mp4.part006.bin.tar.gz",
@@ -324,11 +326,12 @@
       "file_id": "file_000000007ec881fd8666775b10f10193",
       "library_file_id": "libfile_fde3_f-c0ce9dec16108191953b515147878b45_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.part006.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 29178845,
       "decoded_sha256": "2195aab5462e78299e1f4311c68a3bd990c689c5ff27ec66d19bf085129de221",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.part006.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.part006.bin",
+      "readback_sha256": "dd9d367d00114e8a52177553cddfaaa730ded1a905355bc5460f081272f3e9e1"
     },
     {
       "artifact": "siggraph-wired-2024-full-720p-reconstruction.json",
@@ -337,7 +340,8 @@
       "file_id": "file_000000004c7481fd8e07d777273ab27a",
       "library_file_id": "libfile_fde3_f-bc74ae8233f88191a784d8a72c4fd5a0_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p-reconstruction.json",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "d6977c9a08ee920211493a2bfd47d0e3ce6b347340e9afa901b2099d65bc47e7"
     },
     {
       "artifact": "media/siggraph-wired-2024-full-720p.receipt.json",
@@ -346,7 +350,8 @@
       "file_id": "file_00000000797481fda8a4bf932179b27f",
       "library_file_id": "libfile_fde3_f-b6680a2c0950819181650d4fb575270a_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.receipt.json",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "75fa8b9779d45da2b153d316e1e152e12c070410e6809781273a7c5fab751a40"
     },
     {
       "artifact": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part001.bin.tar.gz",
@@ -603,11 +608,12 @@
       "file_id": "file_00000000cd8481fdb490ce0d18ee9d32",
       "library_file_id": "libfile_fde3_f-cc6da8e5a1e481918a12ec8a37154f52_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part001.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "1881dd6ecc0b42d637a096764987786bf04098ee7a277f8f82c85322a2b45e7c",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part001.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part001.bin",
+      "readback_sha256": "bf1e3b5214f643e0b6338f3d3687dbac16ab04e5f3edd5cc0e994e29a8b69e8a"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part002.bin.tar.gz",
@@ -616,11 +622,12 @@
       "file_id": "file_0000000017e881fd92cb3c2e9b0d5f46",
       "library_file_id": "libfile_fde3_f-5352c53218c881918f7324b4c36174b7_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part002.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "0041ae6636176416351ba32175936b9b5a3f8f24ff562a31226b6c534f752b9d",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part002.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part002.bin",
+      "readback_sha256": "78fd5dd0eb4f4089a5520005d3db6404d0339ebc59f54a9c7e768417d91eb268"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part003.bin.tar.gz",
@@ -629,11 +636,12 @@
       "file_id": "file_00000000abf481fd8bd3cf51193d5436",
       "library_file_id": "libfile_fde3_f-294bad3be80c81918a3cae48ee544ec7_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part003.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "81e6940189fd6ac2c4f396ef53b392903604a043fde2854f78cbadac2358ad38",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part003.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part003.bin",
+      "readback_sha256": "aa96c4cf869148b1e129d6b36a179169553eb69c1e574ad2ca34940be7ca7e40"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part004.bin.tar.gz",
@@ -642,11 +650,12 @@
       "file_id": "file_000000003cac81fdb3e3462172d11b70",
       "library_file_id": "libfile_fde3_f-debd2cef6cd48191af80f6e48dab9aa1_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part004.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "4cd907cb2c7d6994193d0f50ad9ab9f48db35c5c2424705a36d363899ee06828",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part004.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part004.bin",
+      "readback_sha256": "9b843448ce59fda389a513fa4b73aa9441000aa0c94020f58a7ed9f481c8b314"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part005.bin.tar.gz",
@@ -655,11 +664,12 @@
       "file_id": "file_00000000a22881fd9d2cd6d338608c39",
       "library_file_id": "libfile_fde3_f-6f9185cfcc1c8191bb7a72bc73dfb7f4_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part005.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "5c607ead7c3f4cafd170099986229382a7a07a26c1131ea58cd35c289f5e5d1d",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part005.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part005.bin",
+      "readback_sha256": "b5fba02e7593a487cf8622e3320e0160d6a448d1568056aac8141d16163ce651"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part006.bin.tar.gz",
@@ -668,11 +678,12 @@
       "file_id": "file_000000001ee881fd95db45b8c79ddc71",
       "library_file_id": "libfile_fde3_f-d484f8e2b62481918061a795629b489d_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part006.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "c60f0344cfba8a5cd5e78a353f8ec5eb558b4b29d4211c7e040dd70f45640648",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part006.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part006.bin",
+      "readback_sha256": "e3dd44fa2eeb928ffde8bf6cad38fa33749057687f865ba44931c807267cbf5a"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part007.bin.tar.gz",
@@ -681,11 +692,12 @@
       "file_id": "file_000000001e2481fd9bed0bf94e743aa6",
       "library_file_id": "libfile_fde3_f-cfbf71669c208191b506a9127df504ec_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part007.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "e723899854cb6021adf1731ec8e81199c4b1ed7adf8c532a88f9b476539f0bfb",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part007.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part007.bin",
+      "readback_sha256": "955625559340498d66391e48f20629f02812365c8ca68522b979b5826b0546f0"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part008.bin.tar.gz",
@@ -694,11 +706,12 @@
       "file_id": "file_00000000211481fd8b11146d2f637c0a",
       "library_file_id": "libfile_fde3_f-eb313793a2a8819193dd8d2d5819c6f8_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part008.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "0723ec7c7e5a6026b1c305d57f342b04792f6d8dc4b1acdefa4894edfbec0324",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part008.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part008.bin",
+      "readback_sha256": "4944d593ad1ff742fbc8cceb727cfda72cd110f58785c88f69137fc4b97bcdce"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part009.bin.tar.gz",
@@ -707,11 +720,12 @@
       "file_id": "file_00000000610481fd9125ed53d70854f1",
       "library_file_id": "libfile_fde3_f-c5f020db52d08191b7e886d72cbc7b07_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part009.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "810f3a364434c5df0865c6ddb01b77928c7b98e29c9a5a4236e175d1ec02fe1c",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part009.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part009.bin",
+      "readback_sha256": "99e5a66f8ec1927d1f088999f2b1fd071556f8a2f07415195367d70b169fe9ce"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part010.bin.tar.gz",
@@ -720,11 +734,12 @@
       "file_id": "file_00000000cffc81fd9714eceaf3ba016b",
       "library_file_id": "libfile_fde3_f-80ec316e41688191b245e46a34ee712d_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part010.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "ba8df52c2c6dc1cede6602dff12d01970ec75853203a657206c24fb77c51d76e",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part010.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part010.bin",
+      "readback_sha256": "2b56945729d55996091ba16f1fae4f8c1727f1203bd21fec7f27d765ad41ed30"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part011.bin.tar.gz",
@@ -733,11 +748,12 @@
       "file_id": "file_00000000b60c81fd98c51179a79288a5",
       "library_file_id": "libfile_fde3_f-c51bf35fccd88191a96756a887261c87_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part011.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "4037bb731f5ce6b2ad635ce2240f27bddac905372ced9194fedb7797258f8d78",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part011.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part011.bin",
+      "readback_sha256": "409aa2f9e6f840e52e9dd8dc6fbafae2bb0195b9aa503656bf30231e3664ecb4"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part012.bin.tar.gz",
@@ -746,11 +762,12 @@
       "file_id": "file_000000001dd081fd859dd1cc5628606b",
       "library_file_id": "libfile_fde3_f-14c6612892388191b2835751ba961c03_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part012.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "6a1c3386e7bd7886f0f44579f2e177c5af340b38a201b3ad4c13031c51bb4327",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part012.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part012.bin",
+      "readback_sha256": "7721fba23367455ac06304879462b32e08766e02e21289c59dc17d46945e4ed2"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part013.bin.tar.gz",
@@ -759,11 +776,12 @@
       "file_id": "file_000000000e2881fdb08c5132032dd10f",
       "library_file_id": "libfile_fde3_f-cfd541ef4a408191acb9f4ecf1b28e01_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part013.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "04a445e2f5d2dd1d8f5fcb7280e9bf5678c82c6148b1864b8374759df1e176ad",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part013.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part013.bin",
+      "readback_sha256": "4bd59df0a82063bd5707605e5fa8b2a868f089545eb2eb7b8c1ea29dbbc88a39"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part014.bin.tar.gz",
@@ -772,11 +790,12 @@
       "file_id": "file_0000000046fc81fd8eb7f1f36905c725",
       "library_file_id": "libfile_fde3_f-04e9e4832eb08191a01e77c633b3642b_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part014.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "68dd023825af0bbf9d58d296bc7347381bdd501d8d01a898d19855c1a35c8a70",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part014.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part014.bin",
+      "readback_sha256": "9925ef1396f59a42f6158a404f9656e2293e87ab662aefcd40cdae67b3df3eb6"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part015.bin.tar.gz",
@@ -785,11 +804,12 @@
       "file_id": "file_0000000070e881fdbc7c46749d9c91b4",
       "library_file_id": "libfile_fde3_f-1b67a200ae7481918858969033c23638_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part015.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "3bdfef0a712308dfb5aae7b2b3c62c49ba1654aadccff3770643f2b07103a39b",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part015.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part015.bin",
+      "readback_sha256": "95685247e0aab82017b948ad930c2ea2e43a46d18b668e891cb67980593afce0"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part016.bin.tar.gz",
@@ -798,11 +818,12 @@
       "file_id": "file_00000000607c81fd8dd399fdf96d3569",
       "library_file_id": "libfile_fde3_f-8452e0aa2e088191b879eb637ffee0b0_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part016.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "596b65fe11a421b37a7543b14c30fac372c2dcb57066f2c83b504bb15108d5c7",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part016.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part016.bin",
+      "readback_sha256": "b80e92501282238522212da35414180f90995f63d242a1074425dc960929d702"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part017.bin.tar.gz",
@@ -811,11 +832,12 @@
       "file_id": "file_00000000f3ec81fdba55cc6e68825fbc",
       "library_file_id": "libfile_fde3_f-cc8a78f33de08191b324fedef98f89d6_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part017.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "c80eef40e4d36ca8936ef6be138c46fdf86e2e06291bc2ede2a47b3e6f88fd36",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part017.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part017.bin",
+      "readback_sha256": "b671195d1a65463528a0931422126bdef66cb05909181d10d3f1a3f557729abd"
     },
     {
       "artifact": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part018.bin.tar.gz",
@@ -824,11 +846,12 @@
       "file_id": "file_000000006dec81fdb892f9f9d2b9e261",
       "library_file_id": "libfile_fde3_f-a845a7c0ea048191af09362724743620_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p.mp4.24mib.part018.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 20790237,
       "decoded_sha256": "082155d3c7608b1b140aa5c2d5c865bd35871aaae3da009679374ab146148b03",
-      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part018.bin"
+      "member_name": "siggraph-wired-2024-full-720p.mp4.24mib.part018.bin",
+      "readback_sha256": "517ab1c465d5dfc619d7849a9d2a0fefbfa7de1caae3e6855415536ae57da62f"
     },
     {
       "artifact": "siggraph-wired-2024-full-720p-24mib-reconstruction.json",
@@ -837,7 +860,8 @@
       "file_id": "file_00000000727c81fd85ee9156819b78ce",
       "library_file_id": "libfile_fde3_f-4f8f35fe01e081919b0e65132b2c4fd2_a18ece08681081918d81df44f69c4b1f",
       "file_name": "siggraph-wired-2024-full-720p-24mib-reconstruction.json",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "9c913d754d967d8790cdfd8f90b13a9be25c6818aa3cc409dcd42eab247d26e6"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part001.bin.tar.gz",
@@ -846,11 +870,12 @@
       "file_id": "file_00000000772881fdac1c7149fb790d6e",
       "library_file_id": "libfile_fde3_f-4ed7a55e0e488191b39df7105d68a240_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part001.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "6d210c82c928654facc66a38f9c7d67b419910606211547bc49b53223f3a3e42",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part001.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part001.bin",
+      "readback_sha256": "061efe95ac023af19ba1e9927d6a9ac08683401b0a27cd3d83292715a65fcf87"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part002.bin.tar.gz",
@@ -859,11 +884,12 @@
       "file_id": "file_00000000848c8230a1c0fc2de39001bb",
       "library_file_id": "libfile_fde3_f-b63db09904148191a7eb8e3aa362c9fb_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part002.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "f54b8a0af0b97f4c15cf6a4ae535660c3d0e41a12162f5c6d01874958d303141",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part002.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part002.bin",
+      "readback_sha256": "41196e4e111aa4fea57eeebfd77596a99d70568510e006be4c1114d81d08769f"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part003.bin.tar.gz",
@@ -872,11 +898,12 @@
       "file_id": "file_00000000c4108230a944abfff994b7ca",
       "library_file_id": "libfile_fde3_f-a9357b06590c819195cded4b7b62d8e1_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part003.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "546f0b87a0493367b738d9a3462e8979a13f310c43a0955e8628894224eb8b7d",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part003.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part003.bin",
+      "readback_sha256": "f94cb434527c2e26f5d3d986d8c5deedcc617e0c06258ccc303cf1b88d2ea61a"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part004.bin.tar.gz",
@@ -885,11 +912,12 @@
       "file_id": "file_00000000c58c8230b2729af3835354fe",
       "library_file_id": "libfile_fde3_f-1103ddc0e4e881918344566b7ca79537_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part004.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "921bd3312314ecacbb0543a5cf62f952fd77eaac8d46b5de4e12a3cece64ca8f",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part004.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part004.bin",
+      "readback_sha256": "ead62dcc651a5767ae841eeddc85cab4be46f788e489d2004f26568039475829"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part005.bin.tar.gz",
@@ -898,11 +926,12 @@
       "file_id": "file_0000000063a48230be7f1679ed28d078",
       "library_file_id": "libfile_fde3_f-7fb6454ab7208191824bcaf635906804_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part005.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "93746d85b9670f6ee2720829e86536384d6f24a8008aeff38f4325dab15f8376",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part005.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part005.bin",
+      "readback_sha256": "e21f223fd3a7f717a562a18446a2daba7bea8691670711f9409b827ff68e991d"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part006.bin.tar.gz",
@@ -911,11 +940,12 @@
       "file_id": "file_00000000ac1882309296793ca385d67f",
       "library_file_id": "libfile_fde3_f-e26810ebcaa4819198662707e1ea0a0c_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part006.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "915a1299ab0e4ce22ad5da5193d4bfd5ac593f822d64f6c92b9eb885af7caebc",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part006.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part006.bin",
+      "readback_sha256": "70f7c689986df7010a34157e373d8f6aa1c38748c66c14c3416ff49f1048c5cd"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part007.bin.tar.gz",
@@ -924,11 +954,12 @@
       "file_id": "file_00000000c4188230832e46b5af0c147e",
       "library_file_id": "libfile_fde3_f-2a1cdf6259f08191a021aa05f3c13030_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part007.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "12f176f76720bf8d91f7e0b27d0921ca05ca9922e4063d46bdf8244877104398",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part007.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part007.bin",
+      "readback_sha256": "72f64c1dc98cdf346aef75afaf2a8a9cd6819edbb23d0a94022cbb09adc4c669"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part008.bin.tar.gz",
@@ -937,11 +968,12 @@
       "file_id": "file_000000004fc0823086917ce6df4028dd",
       "library_file_id": "libfile_fde3_f-58cb187dbdd48191ab1a52e7c772e41b_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part008.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "b8482bfee0cd742672fdbad3e80cfb36bc2f9b7219d1b19112e6802f65815095",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part008.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part008.bin",
+      "readback_sha256": "74f4ad0bc6f6a5b6b7bb49fc14d7bc6556f4b749f31567919783452a1c987674"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part009.bin.tar.gz",
@@ -950,11 +982,12 @@
       "file_id": "file_00000000f174823092dbf28d1a3baec6",
       "library_file_id": "libfile_fde3_f-8b7e7ff2ca6c8191ac2823f16a2f5c3e_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part009.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "64d09894252734b3ce3496c80c9c851e36908f893ce15348a7d3f3c90dc6f54d",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part009.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part009.bin",
+      "readback_sha256": "5317c96383be2a05e1eec4346923bd91668802a8ce47fd0389c0313250db0ed9"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part010.bin.tar.gz",
@@ -963,11 +996,12 @@
       "file_id": "file_00000000c54c823082942e4d0b35653a",
       "library_file_id": "libfile_fde3_f-da7feaf1a09c8191ad1a460d85411d5b_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part010.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "105ab4a7ee3bfb7f2231c0ecbdbaaeea88b71444016c74760a8ba463dda06c81",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part010.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part010.bin",
+      "readback_sha256": "ff5e876ba516e07d4f33dfaf97fcb550f8e727f5fc538a4622aee2b0b00e7e1a"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part011.bin.tar.gz",
@@ -976,11 +1010,12 @@
       "file_id": "file_00000000b5bc8230826c42a6a75d9435",
       "library_file_id": "libfile_fde3_f-1fd5759e62c08191a281740ad6160fd7_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part011.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "4e20e3db8dabae55da8df91a6468ff1a3e470bab82b3f62d10afddb5b912df68",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part011.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part011.bin",
+      "readback_sha256": "9275a8d72535b90714b156f4fd10a3b142c97049fb5c6f1f83ad9d63515458bb"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part012.bin.tar.gz",
@@ -989,11 +1024,12 @@
       "file_id": "file_00000000d6088230902035efd0036fd0",
       "library_file_id": "libfile_fde3_f-258ab1ca93608191a2b7429ef35f01ed_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part012.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "7da1a568f0df49d0f0e52a10e421ed94f85c757bf9886d3980ad6337135b6375",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part012.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part012.bin",
+      "readback_sha256": "38b34af4e2a6c840a8d3b534871c67b692f184ed186b23fc65cb014d39a45ef4"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part013.bin.tar.gz",
@@ -1002,11 +1038,12 @@
       "file_id": "file_000000000458823098b66dee7007bffd",
       "library_file_id": "libfile_fde3_f-2fc79ea855088191a99db280fe243b88_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part013.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "90624ccaaca845d048cc5db0a8d9548ea711ce4ba98739b2c6d3c6334544414e",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part013.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part013.bin",
+      "readback_sha256": "35fb5b3c882b92919dc355edbaee07f1797bb401c1b272670045485ddf095919"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part014.bin.tar.gz",
@@ -1015,11 +1052,12 @@
       "file_id": "file_00000000e33482308727e403319be690",
       "library_file_id": "libfile_fde3_f-98ac406dbd548191809022498611b75c_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part014.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "6f73be8d0be6887a87a5099296793a90e85afd8866a5eb33dca89fe2e32c9ba2",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part014.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part014.bin",
+      "readback_sha256": "09a4c548a8b503bf9270f7e90cdde109e4cab0d07f907aa30ace9035c4081d3b"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part015.bin.tar.gz",
@@ -1028,11 +1066,12 @@
       "file_id": "file_0000000034948230bb509478efe3ca99",
       "library_file_id": "libfile_fde3_f-2e701f7d1a988191a850a20430d2f1b0_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part015.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "bcc93d9ef76fa1e700b50148104afd3a68cbdacd88eaf2a38f59eb4c355fced8",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part015.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part015.bin",
+      "readback_sha256": "3839e306912e132d3f02bdb829929627fc7bef75d5747e81d1f91f2c205431bb"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part016.bin.tar.gz",
@@ -1041,11 +1080,12 @@
       "file_id": "file_0000000036548230addb2d4ea071f47a",
       "library_file_id": "libfile_fde3_f-7933db9313e88191af00fb4a12ef043b_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part016.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "f92b3a36e7325acabe1b1638c6d1ea422d12119c26df5164d74798ef1e099ba5",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part016.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part016.bin",
+      "readback_sha256": "1c1ed85532baea887c5b8157047d7487530f0bc2761da86499ba93f42fb866bb"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part017.bin.tar.gz",
@@ -1054,11 +1094,12 @@
       "file_id": "file_00000000dab88230a38900c268247a4d",
       "library_file_id": "libfile_fde3_f-73143f36f69881918ee1844c05857dcf_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part017.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "3eac3c1eed87e2fd755d3a57e7d20e261cefcafb9331370bd3851c543562f501",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part017.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part017.bin",
+      "readback_sha256": "4677a7f22e8b60a054747b6b0499eb0aa80a5320279a49300f3fc2d34f604056"
     },
     {
       "artifact": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part018.bin.tar.gz",
@@ -1067,11 +1108,12 @@
       "file_id": "file_00000000f0cc8230803c81d26b9b8ddb",
       "library_file_id": "libfile_fde3_f-1e32956540888191b207bdf8e67df8bf_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.mp4.24mib.part018.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 24866842,
       "decoded_sha256": "4e76dff94d1bd6314651420924ebb1232f13cc20ae9ce0e0d7660b04c52261fd",
-      "member_name": "computex-2025-full-480p.mp4.24mib.part018.bin"
+      "member_name": "computex-2025-full-480p.mp4.24mib.part018.bin",
+      "readback_sha256": "ab07fb0b41e907487fdaedb21302b54074a069b9d9560e38c9f77486fe7996d0"
     },
     {
       "artifact": "computex-2025-full-480p-24mib-reconstruction.json",
@@ -1080,7 +1122,8 @@
       "file_id": "file_0000000039608230979d7901fa3c398b",
       "library_file_id": "libfile_fde3_f-3625619160b48191a693df9d330cf73f_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p-24mib-reconstruction.json",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "bb37848e5d1aaf02c53d3d70221287da29b893cb2e854a74a5cc02fe95121fe4"
     },
     {
       "artifact": "media/computex-2025-full-480p.receipt.json",
@@ -1089,7 +1132,8 @@
       "file_id": "file_000000001b248230ae8c73431447cde3",
       "library_file_id": "libfile_fde3_f-7350afd990908191b32ae1e3eed28339_a18ece08681081918d81df44f69c4b1f",
       "file_name": "computex-2025-full-480p.receipt.json",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "12f75b89d6aacb84eb979b5cd7d1447d28da597ffd55901ad58e0d018802571b"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part001.bin.tar.gz",
@@ -1098,11 +1142,12 @@
       "file_id": "file_00000000c4208230a46ad6683923802d",
       "library_file_id": "libfile_fde3_f-9b9c136f3a808191a9386412854f868e_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part001.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "ac9d47748d1bf451940b88bdc5080cb523a7d9570743b6b22f9e75e0de9cbb36",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part001.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part001.bin",
+      "readback_sha256": "8a8a40ffc24bb34f15bcd78be151453bc038f9c708c89d8366caadd4c4f5cbeb"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part002.bin.tar.gz",
@@ -1111,11 +1156,12 @@
       "file_id": "file_00000000e0e881fd877d837ca67f1480",
       "library_file_id": "libfile_fde3_f-286e20e36c788191b429bddc8ed05111_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part002.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "e28efb108d6f892b49000108aa7e0cf88973bc1460aee483a1d9bd99a6d8a7fa",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part002.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part002.bin",
+      "readback_sha256": "33b8853995c03a12b7437571d62188c22fca2969b11a3f6bb30270d989fa61b4"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part003.bin.tar.gz",
@@ -1124,11 +1170,12 @@
       "file_id": "file_00000000e36881fdbd422d8cea4c0886",
       "library_file_id": "libfile_fde3_f-062dacfbfe248191ae68ef87432d1e6e_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part003.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "ac89d6d36f2f6e4e31b4494c05ee8694107142c682a3895b579bcd4f4e30911e",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part003.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part003.bin",
+      "readback_sha256": "d5576a40bd56531ea61d0dc6e5164c298171fde7bd569ff7da3c3457e6243615"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part004.bin.tar.gz",
@@ -1137,11 +1184,12 @@
       "file_id": "file_00000000081481fd956158892bb8a40c",
       "library_file_id": "libfile_fde3_f-ab0e7527c10081919573d9d59218c89b_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part004.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "85fd0635cfec0e777a3896e954a8714cded615ee9fe006772759b971ce019b7e",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part004.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part004.bin",
+      "readback_sha256": "1d059ee314d0c8ef831bd01543e0c3fc88539aeb781df0e219e29cd3326e5f6e"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part005.bin.tar.gz",
@@ -1150,11 +1198,12 @@
       "file_id": "file_000000001b7481fda36202c52660fa55",
       "library_file_id": "libfile_fde3_f-803c0663161c8191baed301708038ae2_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part005.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "9f9b56c989e512acf51ac1dec5d5c02755bf176d3d39f0cbcf4309cd51c200e4",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part005.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part005.bin",
+      "readback_sha256": "fb5f3b8b5ff0975221f0787324931c890c1efcc6d564014a632820ade34ebeac"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part006.bin.tar.gz",
@@ -1163,11 +1212,12 @@
       "file_id": "file_00000000ef0081fdaa6d5175386ee693",
       "library_file_id": "libfile_fde3_f-b18c0f3329cc81919d68a889600b0b6c_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part006.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "a7eb34168fbd25e6a0b40f2c4fe8634b9b0a59ce516df32507f1a835b9feb4e9",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part006.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part006.bin",
+      "readback_sha256": "829464078b88711bd7d7b77fb73c9e29185ad67cad4bb5f92e98d63581ac8e03"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part007.bin.tar.gz",
@@ -1176,11 +1226,12 @@
       "file_id": "file_0000000074e081fdb8f14685d38c7d3d",
       "library_file_id": "libfile_fde3_f-7a7942a15ea4819183608a80267f1875_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part007.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "404bf8834ce383344ed92bf972f5014632935177b4acbdaa95fdeafad64ac8b4",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part007.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part007.bin",
+      "readback_sha256": "748fdbfc6a689c2937754de1b8ceeb9a3e906f1c1aa46727060c0418e1c51f73"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part008.bin.tar.gz",
@@ -1189,11 +1240,12 @@
       "file_id": "file_00000000564881fda74695e77f615a65",
       "library_file_id": "libfile_fde3_f-2c495a18482881919e36974356dbee6a_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part008.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "8e54c29aba52fc1e81bd97261ff4b359fd0e5b24bb5a3441792dd078edb76e62",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part008.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part008.bin",
+      "readback_sha256": "16a744d1d8a8f85540cdba8d6b9c7c998c7e1120ad272136bdf00c319c0b9b44"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part009.bin.tar.gz",
@@ -1202,11 +1254,12 @@
       "file_id": "file_00000000dc5881fdbcd5ec241c2d6efa",
       "library_file_id": "libfile_fde3_f-b19f2adf4e388191a48dc3f2421af013_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part009.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "488c5edeb31a21651e7481dc42a692f5e896a76936ec8dafdc3fcdc62c309dc6",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part009.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part009.bin",
+      "readback_sha256": "2eb9f4403b1cd8621a675494d885bc5a8191fd3eba0f332ff98ba858f36aadb2"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part010.bin.tar.gz",
@@ -1215,11 +1268,12 @@
       "file_id": "file_0000000086fc81fd8c59ed4a414a7700",
       "library_file_id": "libfile_fde3_f-a43ae915a0a4819192da2dedcc249350_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part010.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "89d382a1f5d99f94d51a88ec786c1918a6c74467a13f526cb7918cc1645c5c6d",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part010.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part010.bin",
+      "readback_sha256": "21b32a3767407b9f9a99d886ba5d6abba209f569d4094509c3144e253dc20ab7"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part011.bin.tar.gz",
@@ -1228,11 +1282,12 @@
       "file_id": "file_00000000cc6481fd8834d0fddc8d1eea",
       "library_file_id": "libfile_fde3_f-9c7510fc6f908191a0e5c698b4112627_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part011.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "67d35c792c3c196e30a91edbbd33d17f7816c0aaebecd59a0f70117f79577b47",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part011.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part011.bin",
+      "readback_sha256": "e01bc17d849c47023dad8263ddc5afea0cd6d121016883b8372fcd39f1775cac"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part012.bin.tar.gz",
@@ -1241,11 +1296,12 @@
       "file_id": "file_000000000ec481fdb22263a65d684db6",
       "library_file_id": "libfile_fde3_f-aceefc0add9881918f959c187fbf54a4_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part012.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "77929cf930a37b22a93dff287326525cd8aef314e451523d2f3223a7a2f84fc9",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part012.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part012.bin",
+      "readback_sha256": "a82276e969be29e42fb4f87437d1bacb58986fea37355fba9e95222d06be5711"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part013.bin.tar.gz",
@@ -1254,11 +1310,12 @@
       "file_id": "file_0000000075d081fd9a16b352bb266982",
       "library_file_id": "libfile_fde3_f-87b047af2b348191bc61d5fd1b5632b9_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part013.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "c11c9945ee926237740acbc23e494f62054ce4132e16a44497f81d4f4f328287",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part013.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part013.bin",
+      "readback_sha256": "c61bf5ecb7b925a675db8daf0fc2d18f5a515bdbfbaa4894f7c13935fe5419f0"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part014.bin.tar.gz",
@@ -1267,11 +1324,12 @@
       "file_id": "file_00000000a8f881fdb5a122345e4b59de",
       "library_file_id": "libfile_fde3_f-05d0e8950e608191ae43befbec62065f_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part014.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "b431b8db7f4b6417e3961bb250ea7cd8001a0de698afdf6e35e42e3715f60672",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part014.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part014.bin",
+      "readback_sha256": "410946d5ed35387af0be6ed6277498fb945d53bb6380bacf2ce62e00e11c82ea"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part015.bin.tar.gz",
@@ -1280,11 +1338,12 @@
       "file_id": "file_000000007d0081fd954e51c2a7036bc4",
       "library_file_id": "libfile_fde3_f-6b6b25450acc819199cabab07aec21c0_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part015.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "0ca887b5c6aea9afa7bd350493f20aac7873a8e273ca5c22f5ff5dd5f4a5360f",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part015.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part015.bin",
+      "readback_sha256": "68fdbb78b308c3d7b967c01e6c3508cf02d3ae6fe0176ca485aa4b31b8749401"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part016.bin.tar.gz",
@@ -1293,11 +1352,12 @@
       "file_id": "file_00000000525481fda057942c6a8400dc",
       "library_file_id": "libfile_fde3_f-afff2968164881918279c17b6d4358a0_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part016.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "c5861458a4eef27d99694544fd34d06bfe9cee4668f99af7557815317f8d3933",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part016.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part016.bin",
+      "readback_sha256": "1b40058919355b79aab8c3d20dbe9784ac86bbd7cc878777703533ba8710a3f5"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part017.bin.tar.gz",
@@ -1306,11 +1366,12 @@
       "file_id": "file_00000000e75481fd946e22bada2665e4",
       "library_file_id": "libfile_fde3_f-0353fa7f6138819184a75163a51170fc_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part017.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "b0c29650116221a43425d9e7420adaf09503c09ba3bbf9ef0859d2dfd93d53ec",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part017.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part017.bin",
+      "readback_sha256": "3a88160032d712888a82d977d76692f724b98f6f5cfbb97884d1c80263fa6225"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part018.bin.tar.gz",
@@ -1319,11 +1380,12 @@
       "file_id": "file_00000000af3c81fd861d1ef0b09640b9",
       "library_file_id": "libfile_fde3_f-a95b7ae75ef4819190b7f2be30d8563e_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part018.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "ea9d34b17f7ef51edc759aed11301e0f9e075276b5a13d4d004a3fab9e9701a3",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part018.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part018.bin",
+      "readback_sha256": "70f76ecc6bd739ec84db2bb4b050ce6c8d708f66475f27f9a652694f1f1169b5"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part019.bin.tar.gz",
@@ -1332,11 +1394,12 @@
       "file_id": "file_000000007b2081fd9fe97c5e712e4b18",
       "library_file_id": "libfile_fde3_f-f57a49a018408191a9db6567edb76f88_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part019.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 25165824,
       "decoded_sha256": "88c0bdba69c8f9bd478168c7fc055c888df82abd0e8352346c8909d0316c5e38",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part019.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part019.bin",
+      "readback_sha256": "926f13145c931e06a588fa87ebee4b7c1a5a85418a60603dfe0a7eee3cdf2a75"
     },
     {
       "artifact": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part020.bin.tar.gz",
@@ -1345,11 +1408,12 @@
       "file_id": "file_00000000749c81fd9ad22888efd2faa3",
       "library_file_id": "libfile_fde3_f-569a299e5ad88191a4b47718420dcfa7_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.mp4.24mib.part020.bin.tar.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "single_member_tar_gzip",
       "decoded_bytes": 1246460,
       "decoded_sha256": "d24e4f9c486f915b9067ec2569768d36472c7c5eae7e2e1312fda9b7ca78d1d6",
-      "member_name": "gtc-2024-full-480p.mp4.24mib.part020.bin"
+      "member_name": "gtc-2024-full-480p.mp4.24mib.part020.bin",
+      "readback_sha256": "3d282dfb565eb48964de2ac09d36ea8e27f2f725734634cfaecd97ac082b5237"
     },
     {
       "artifact": "gtc-2024-full-480p-24mib-reconstruction.json",
@@ -1358,7 +1422,8 @@
       "file_id": "file_0000000038c081fdbf3cecaefeb8af63",
       "library_file_id": "libfile_fde3_f-cd3ba529982481919a99a3ac3d11fd41_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p-24mib-reconstruction.json",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "b0a80b96410657057f8390d466b7ceb325d0494abd90a9e2e26cd8040d61e6f2"
     },
     {
       "artifact": "media/gtc-2024-full-480p.receipt.json",
@@ -1367,7 +1432,18 @@
       "file_id": "file_00000000bfec821288c64276d78fac88",
       "library_file_id": "libfile_fde3_f-edac8edf090c819183a665b56ae0ecb0_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2024-full-480p.receipt.json",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "73511eb603928be32fb0888c768e26f107ec63ab9f76da714f92062ade5d87c6"
+    },
+    {
+      "artifact": "jensen-media-batch-02-publisher-metadata.tar.gz",
+      "bytes": 1858701,
+      "sha256": "02fbda356b7fa97213ec74b5481237f4ddc7c3d6a484b3ad18ed8fdc7c96628d",
+      "file_id": "file_00000000a59c81fd9eb6e4db34622ef5",
+      "library_file_id": "libfile_fde3_f-dbd3ef25535081918e633c4e4ebfe092_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "jensen-media-batch-02-publisher-metadata.tar.gz",
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "02fbda356b7fa97213ec74b5481237f4ddc7c3d6a484b3ad18ed8fdc7c96628d"
     }
   ],
   "failed_transfers": {
@@ -1383,7 +1459,7 @@
     "Earlier 80/200 MiB transfer failures are retained as history. Successful new 24 MiB tar containers are distinct canonical recovery profiles, not additional videos."
   ],
   "large_artifact_gate": "207929911-byte gzip upload and fresh readback plus decoded209715200-byte chunk hash verified",
-  "readback_progress_note": "5 of 8 complete recordings freshly reconstructed. All 79 objects for the final four 24 MiB profiles uploaded successfully; pending fresh checks remain explicitly per artifact.",
+  "readback_progress_note": "All eight complete recordings reconstructed from fresh remote copies and matched their original full-file SHA-256. All 79 objects for the final four 24 MiB profiles passed upload and fresh readback.",
   "complete_videos": [
     {
       "source_id": "goldman-sachs-2024",
@@ -1498,6 +1574,110 @@
         "libfile_fde3_f-6758fcba034881918f15262f68e257e8_a18ece08681081918d81df44f69c4b1f"
       ],
       "reconstruction_manifest_library_file_id": "libfile_fde3_f-e58de48c42e48191a048d4e35d893153_a18ece08681081918d81df44f69c4b1f"
+    },
+    {
+      "source_id": "siggraph-wired-2024-video",
+      "event_family_id": "nvidia-siggraph-wired-2024",
+      "split": "train",
+      "full_file": "siggraph-wired-2024-full-720p.mp4",
+      "bytes": 448609245,
+      "sha256": "855e56f7597e124d520b800f899082a42532be41898ceeab749fdc57af564406",
+      "duration_seconds": 3565.493696,
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "status": "all_chunks_fresh_readback_and_full_reconstruction_verified",
+      "chunk_library_file_ids": [
+        "libfile_fde3_f-cc6da8e5a1e481918a12ec8a37154f52_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-5352c53218c881918f7324b4c36174b7_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-294bad3be80c81918a3cae48ee544ec7_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-debd2cef6cd48191af80f6e48dab9aa1_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-6f9185cfcc1c8191bb7a72bc73dfb7f4_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-d484f8e2b62481918061a795629b489d_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-cfbf71669c208191b506a9127df504ec_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-eb313793a2a8819193dd8d2d5819c6f8_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-c5f020db52d08191b7e886d72cbc7b07_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-80ec316e41688191b245e46a34ee712d_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-c51bf35fccd88191a96756a887261c87_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-14c6612892388191b2835751ba961c03_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-cfd541ef4a408191acb9f4ecf1b28e01_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-04e9e4832eb08191a01e77c633b3642b_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-1b67a200ae7481918858969033c23638_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-8452e0aa2e088191b879eb637ffee0b0_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-cc8a78f33de08191b324fedef98f89d6_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-a845a7c0ea048191af09362724743620_a18ece08681081918d81df44f69c4b1f"
+      ],
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-4f8f35fe01e081919b0e65132b2c4fd2_a18ece08681081918d81df44f69c4b1f"
+    },
+    {
+      "source_id": "computex-2025-video",
+      "event_family_id": "nvidia-computex-2025",
+      "split": "train",
+      "full_file": "computex-2025-full-480p.mp4",
+      "bytes": 452685850,
+      "sha256": "9669d9333f97c80b7ffe41e799d75245e9a2e067fa52df999a0b09db0254c047",
+      "duration_seconds": 6171.376327,
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "status": "all_chunks_fresh_readback_and_full_reconstruction_verified",
+      "chunk_library_file_ids": [
+        "libfile_fde3_f-4ed7a55e0e488191b39df7105d68a240_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-b63db09904148191a7eb8e3aa362c9fb_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-a9357b06590c819195cded4b7b62d8e1_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-1103ddc0e4e881918344566b7ca79537_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-7fb6454ab7208191824bcaf635906804_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-e26810ebcaa4819198662707e1ea0a0c_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-2a1cdf6259f08191a021aa05f3c13030_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-58cb187dbdd48191ab1a52e7c772e41b_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-8b7e7ff2ca6c8191ac2823f16a2f5c3e_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-da7feaf1a09c8191ad1a460d85411d5b_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-1fd5759e62c08191a281740ad6160fd7_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-258ab1ca93608191a2b7429ef35f01ed_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-2fc79ea855088191a99db280fe243b88_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-98ac406dbd548191809022498611b75c_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-2e701f7d1a988191a850a20430d2f1b0_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-7933db9313e88191af00fb4a12ef043b_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-73143f36f69881918ee1844c05857dcf_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-1e32956540888191b207bdf8e67df8bf_a18ece08681081918d81df44f69c4b1f"
+      ],
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-3625619160b48191a693df9d330cf73f_a18ece08681081918d81df44f69c4b1f"
+    },
+    {
+      "source_id": "gtc-2024-video",
+      "event_family_id": "nvidia-gtc-2024",
+      "split": "train",
+      "full_file": "gtc-2024-full-480p.mp4",
+      "bytes": 479397116,
+      "sha256": "16ffcdfee02d8b9bf4a9be7fab6413066b8b65f1388c3e8ccae88cfdea7b9184",
+      "duration_seconds": 7387.567891,
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "status": "all_chunks_fresh_readback_and_full_reconstruction_verified",
+      "chunk_library_file_ids": [
+        "libfile_fde3_f-9b9c136f3a808191a9386412854f868e_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-286e20e36c788191b429bddc8ed05111_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-062dacfbfe248191ae68ef87432d1e6e_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-ab0e7527c10081919573d9d59218c89b_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-803c0663161c8191baed301708038ae2_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-b18c0f3329cc81919d68a889600b0b6c_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-7a7942a15ea4819183608a80267f1875_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-2c495a18482881919e36974356dbee6a_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-b19f2adf4e388191a48dc3f2421af013_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-a43ae915a0a4819192da2dedcc249350_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-9c7510fc6f908191a0e5c698b4112627_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-aceefc0add9881918f959c187fbf54a4_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-87b047af2b348191bc61d5fd1b5632b9_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-05d0e8950e608191ae43befbec62065f_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-6b6b25450acc819199cabab07aec21c0_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-afff2968164881918279c17b6d4358a0_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-0353fa7f6138819184a75163a51170fc_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-a95b7ae75ef4819190b7f2be30d8563e_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-f57a49a018408191a9db6567edb76f88_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-569a299e5ad88191a4b47718420dcfa7_a18ece08681081918d81df44f69c4b1f"
+      ],
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-cd3ba529982481919a99a3ac3d11fd41_a18ece08681081918d81df44f69c4b1f"
     }
   ],
   "container_verification": {
