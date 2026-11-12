@@ -1,0 +1,122 @@
+{
+  "schema_version": "verified-full-video-duplicate-cleanup.v1",
+  "started_at": "2026-11-12T21:05:35.189591+00:00",
+  "status": "completed",
+  "scope": "Nine previously reconstructed verification copies only; each retained original is rehashed and matched to its already durable published whole-file digest.",
+  "preserved": "All original media, compressed chunks, remote objects, source metadata, reconstruction recipes and training artifacts.",
+  "free_bytes_before": 11189542912,
+  "files": [
+    {
+      "source_id": "goldman-sachs-2024",
+      "retained_original": "media/goldman-sachs-2024-full.mp4",
+      "removed_duplicate": "media-reconstructed/goldman-sachs-2024/goldman-sachs-2024-recovered.mp4",
+      "bytes": 586759675,
+      "sha256": "586dff89def8ff4a0cea0848a094cca41e573aec0492db9b51325d71aca1bf8b",
+      "evidence_report": "reports/jensen-recovery/media-artifacts.json",
+      "evidence_report_sha256": "b850ea6e5681f5b9904422caa6c6f3916d8bcdc9a1e2245473865d8250599f08",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-9438e7da117081919eeda856adb58846_a18ece08681081918d81df44f69c4b1f",
+      "original_and_duplicate_hashes_match": true,
+      "status": "verified_temporary_duplicate_removed"
+    },
+    {
+      "source_id": "stripe-sessions-2024",
+      "retained_original": "media/stripe-sessions-2024-full.mp4",
+      "removed_duplicate": "media-reconstructed/stripe-sessions-2024/stripe-sessions-2024-recovered.mp4",
+      "bytes": 952084714,
+      "sha256": "0882539adca1bca58a8e64c4341a6fdca4ebca69a88c77799c882fb1dd0bfa32",
+      "evidence_report": "reports/jensen-recovery/media-artifacts.json",
+      "evidence_report_sha256": "b850ea6e5681f5b9904422caa6c6f3916d8bcdc9a1e2245473865d8250599f08",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-a6ee1a8cd3b881919ae9c3224e4254f1_a18ece08681081918d81df44f69c4b1f",
+      "original_and_duplicate_hashes_match": true,
+      "status": "verified_temporary_duplicate_removed"
+    },
+    {
+      "source_id": "gtc-2025-video",
+      "retained_original": "media/gtc-2025-full-480p.mp4",
+      "removed_duplicate": "media-reconstructed/gtc-2025/gtc-2025-recovered.mp4",
+      "bytes": 583069430,
+      "sha256": "2996962463654e679a2a8c0cf48689e961ad05ef6cc28c6ea0bdc225f68dd459",
+      "evidence_report": "reports/jensen-recovery/media-artifacts.json",
+      "evidence_report_sha256": "b850ea6e5681f5b9904422caa6c6f3916d8bcdc9a1e2245473865d8250599f08",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-c9753d92b94c819194215f9902bbe9b6_a18ece08681081918d81df44f69c4b1f",
+      "original_and_duplicate_hashes_match": true,
+      "status": "verified_temporary_duplicate_removed"
+    },
+    {
+      "source_id": "wired-2024-video",
+      "retained_original": "media/wired-2024-full.mp4",
+      "removed_duplicate": "media-reconstructed/wired-2024/wired-2024-recovered.mp4",
+      "bytes": 494775046,
+      "sha256": "1ab8c1cdabf2aa4690cb4561242c604a1206b4c52f9d5a5a6107ca7e537d72e7",
+      "evidence_report": "reports/jensen-recovery/media-artifacts.json",
+      "evidence_report_sha256": "b850ea6e5681f5b9904422caa6c6f3916d8bcdc9a1e2245473865d8250599f08",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-e47ab43b99388191839b76be5f112744_a18ece08681081918d81df44f69c4b1f",
+      "original_and_duplicate_hashes_match": true,
+      "status": "verified_temporary_duplicate_removed"
+    },
+    {
+      "source_id": "ces-2025-video",
+      "retained_original": "media/ces-2025-full-480p.mp4",
+      "removed_duplicate": "media-reconstructed/ces-2025/ces-2025-recovered.mp4",
+      "bytes": 415106977,
+      "sha256": "88a98c8eea77df6e32bb5d2b085c9fe8403c033df0029f1f26ade32320ad177d",
+      "evidence_report": "reports/jensen-recovery/media-artifacts.json",
+      "evidence_report_sha256": "b850ea6e5681f5b9904422caa6c6f3916d8bcdc9a1e2245473865d8250599f08",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-e58de48c42e48191a048d4e35d893153_a18ece08681081918d81df44f69c4b1f",
+      "original_and_duplicate_hashes_match": true,
+      "status": "verified_temporary_duplicate_removed"
+    },
+    {
+      "source_id": "siggraph-wired-2024-video",
+      "retained_original": "media/siggraph-wired-2024-full-720p.mp4",
+      "removed_duplicate": "media-reconstructed/siggraph-wired-2024/siggraph-wired-2024-recovered.mp4",
+      "bytes": 448609245,
+      "sha256": "855e56f7597e124d520b800f899082a42532be41898ceeab749fdc57af564406",
+      "evidence_report": "reports/jensen-recovery/media-artifacts.json",
+      "evidence_report_sha256": "b850ea6e5681f5b9904422caa6c6f3916d8bcdc9a1e2245473865d8250599f08",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-4f8f35fe01e081919b0e65132b2c4fd2_a18ece08681081918d81df44f69c4b1f",
+      "original_and_duplicate_hashes_match": true,
+      "status": "verified_temporary_duplicate_removed"
+    },
+    {
+      "source_id": "computex-2025-video",
+      "retained_original": "media/computex-2025-full-480p.mp4",
+      "removed_duplicate": "media-reconstructed/computex-2025/computex-2025-recovered.mp4",
+      "bytes": 452685850,
+      "sha256": "9669d9333f97c80b7ffe41e799d75245e9a2e067fa52df999a0b09db0254c047",
+      "evidence_report": "reports/jensen-recovery/media-artifacts.json",
+      "evidence_report_sha256": "b850ea6e5681f5b9904422caa6c6f3916d8bcdc9a1e2245473865d8250599f08",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-3625619160b48191a693df9d330cf73f_a18ece08681081918d81df44f69c4b1f",
+      "original_and_duplicate_hashes_match": true,
+      "status": "verified_temporary_duplicate_removed"
+    },
+    {
+      "source_id": "gtc-2024-video",
+      "retained_original": "media/gtc-2024-full-480p.mp4",
+      "removed_duplicate": "media-reconstructed/gtc-2024/gtc-2024-recovered.mp4",
+      "bytes": 479397116,
+      "sha256": "16ffcdfee02d8b9bf4a9be7fab6413066b8b65f1388c3e8ccae88cfdea7b9184",
+      "evidence_report": "reports/jensen-recovery/media-artifacts.json",
+      "evidence_report_sha256": "b850ea6e5681f5b9904422caa6c6f3916d8bcdc9a1e2245473865d8250599f08",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-cd3ba529982481919a99a3ac3d11fd41_a18ece08681081918d81df44f69c4b1f",
+      "original_and_duplicate_hashes_match": true,
+      "status": "verified_temporary_duplicate_removed"
+    },
+    {
+      "source_id": "chm-jensen-oral-history-102809035",
+      "retained_original": "reflection-expansion-v1/media/chm-oral-history-2024-08-09-full.mp4",
+      "removed_duplicate": "reflection-expansion-v1/reconstructed/chm-oral-history-2024-08-09-full.mp4",
+      "bytes": 653931658,
+      "sha256": "1840202f25adc219a166cfdc3b4968fa34ad43fe5ff33a2b27e56b22c16d85a8",
+      "evidence_report": "reports/jensen-recovery/reflection-expansion-v1/media-artifacts.json",
+      "evidence_report_sha256": "3629fba27ebf38cd80e4f826e7e354790e62be03d26253842e5d137e3a8bfb04",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-e9949243c2088191bb0db793cce9a533_a18ece08681081918d81df44f69c4b1f",
+      "original_and_duplicate_hashes_match": true,
+      "status": "verified_temporary_duplicate_removed"
+    }
+  ],
+  "unlinked_file_bytes": 5066419711,
+  "completed_at": "2026-11-12T21:05:54.181113+00:00",
+  "free_bytes_after": 16086519808,
+  "removed_file_count": 9
+}
