@@ -1,0 +1,35 @@
+{
+  "schema_version": "avatar-candidate-qualification.v1",
+  "persona_id": "jensen-huang",
+  "asset_id": "jensen-source-fitted-v3",
+  "sha256": "dea0c921fb7d5668527bd8ee9082f382b14e8d300c43936842e15356dc7d90cd",
+  "bytes": 2530256,
+  "promotion": "explicit_optional_candidate",
+  "default_changed": false,
+  "human_likeness": "not_accepted",
+  "tests": {
+    "actual_decoded_geometry_and_attention": {
+      "status": "passed",
+      "files": 2,
+      "tests": 26
+    },
+    "typescript": "passed",
+    "production_build": "passed",
+    "browser_desktop_and_mobile": {
+      "status": "blocked_before_page_launch",
+      "reason": "Chromium process_singleton_posix.cc AF_UNIX socket() failed: Operation not permitted",
+      "application_assertions_executed": false
+    }
+  },
+  "offline_visual": {
+    "status": "six_renders_inspected",
+    "hand_vertices_inside_frame": 3586,
+    "known_issue": "Conservative mobile upper_body camera has excessive margin; tighter framing pending."
+  },
+  "remaining": [
+    "Browser/WebGL material and playback acceptance",
+    "Tighter mobile framing",
+    "Continuous speaker/track association review",
+    "Independent human likeness and motion-quality review"
+  ]
+}

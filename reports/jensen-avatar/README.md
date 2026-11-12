@@ -1,10 +1,21 @@
 # Jensen source-fitted avatar and hand performance pilot
 
-This is a new, editable Jensen **candidate**, not accepted likeness. The first
-coarse render is anatomically coherent but still resembles the generic foundation
-too strongly. It must not replace the designed default under a claim that Jensen
-appearance has been reproduced. Dense landmark refinement and visual comparison
-are the next gate.
+The new, editable Jensen **candidate v3c** now has a concrete
+[2.53 MB runtime GLB](../../apps/web/public/models/jensen-source-fitted-v3.glb),
+[attribution and license](../../apps/web/public/models/jensen-source-fitted-v3.LICENSE.md),
+and [actual neutral render](renders/textured-v3c-neutral.png). Choose **Jensen
+source-fitted candidate** in Studio settings to use it, then open Motion Lab for
+the measured hand clips. It is an explicit optional choice; the designed Jensen
+default remains unchanged. Human likeness acceptance has not passed.
+
+The candidate combines new source-measured facial proportions and dense surface
+deformation with a two-photo licensed skin bake, a complete articulated body,
+independent glasses, and authored dark irises, gray hair and subtle eyebrows.
+The [packaging report](runtime-asset-report.json) binds the exact shipped bytes to
+the uncompressed source: all 67 native face/speech target names, 66 nonzero
+targets, and 163 skeletal joints survive compression. The actual decoded asset
+passes finger deformation/reset, facial deformation, and Jensen clip consent and
+cancellation checks. This is a fitted animated mesh, not a static portrait.
 
 The completed dense-v2 attempt is **rejected for promotion**: it reduced landmark
 RMSE from 0.0125784 to 0.00632817, but remained too generic and moved the rigid
@@ -23,8 +34,15 @@ source appearance, producing a 17.5 MB GLB and 28 MB editable master. The
 [textured-v3 render](renders/textured-v3-neutral-rejected.png) is rejected because
 authored hair compression exposed the scalp and source eye pixels overlapped the
 rig's eyes. The [bake result and failure findings](textured-v3-rejected-results.json)
-preserve actual output hashes, attribution, and limitations. Commit `1b1cf5c`
-fixes those specific defects; the corrected bake has not yet been executed.
+preserve actual output hashes, attribution, and limitations. The corrected v3b
+bake **ran**, and the subsequent v3c appearance pass **ran**. Their
+[texture result](texture-bake-results.json) and
+[appearance result](appearance-results.json) distinguish 214,578 skin UV pixels
+with source contribution from authored iris/hair/brow changes. Complete v3b and
+v3c editable masters were uploaded and freshly retrieved with matching SHA-256.
+The v3c master is 28,495,448 bytes; its durable receipt is in the artifact manifest
+linked above. Pale irises and white hair were corrected, but the hair silhouette,
+face geometry and baked lighting still limit likeness.
 
 ## Actual inputs and outputs
 
@@ -87,8 +105,11 @@ and an inspected bounded window. It skips multi-person frames and associates
 hands only when wrists are unambiguously close to the selected pose. It always
 emits `geometry_preview`; a model's handedness label cannot promote identity.
 Finger segment swing is measured, while axial twist and hidden joints remain
-unavailable. This initial event is a pilot; broader full-video acquisition and
-additional event windows are still being prepared.
+unavailable. The second completed event adds two twelve-second Stripe Sessions
+2024 windows: 240 more actual observation frames. Their source video and raw
+observations have both passed fresh durable readback. Fingers are retained on
+98/120 and 108/120 frames; arm observations are less complete because of source
+cropping and confidence gates. A third WIRED event measurement is in progress.
 
 Three actual exported clips are now versioned under
 `apps/web/public/motion/jensen/`, with hash-bound selections under
@@ -96,8 +117,11 @@ Three actual exported clips are now versioned under
 available on 68, 59 and 71 frames respectively. The standalone
 `data/motion/jensen-goldman-v1.json` library binds explicitly to `jensen-huang`.
 It contains no text-context assertions and does not enable automatic conversation
-selection. The Jensen Motion Lab now offers **Load Jensen face & hands** with an
-explicit geometry-preview checkbox. Imported clips and audio reset when the
+selection. The new `data/motion/jensen-multievent.v1.json` catalog contains five
+clips, two events, 480 observed frames and 28 preview primitives. It also has no
+context assertions, reviewed runtime primitives or held-out quality result.
+The Jensen Motion Lab offers **Load Jensen face & hands**, a source-event
+selector, and an explicit geometry-preview checkbox. Imported clips and audio reset when the
 persona changes. Historical Musk clip/narration buttons are not offered in the
 Jensen lab.
 
@@ -105,7 +129,12 @@ The focused browser test was attempted on desktop and mobile, but Chromium exite
 before creating a page: `socket() failed: Operation not permitted` in
 `process_singleton_posix.cc`. Those two attempts are environment-blocked, not
 passing UI tests. Web type checking and the production build passed; actual
-browser rendering/replay acceptance remains open.
+browser rendering/replay acceptance remains open. Six actual Blender CPU renders
+of v3c cover front, three-quarter, profile, an observed frame and desktop/mobile
+hand articulation stress. All 3,586 selected hand skin vertices remain in frame.
+Visual review found excessive mobile framing margin; a tighter camera check is
+the next bounded correction. These renders are offline evidence, not browser
+screenshots or proof of WebGL material parity.
 
 ## Reproduction and remaining gates
 
@@ -116,15 +145,16 @@ Raw images, videos, model task files, masters and reusable intermediate packages
 are retained through the parent execution record's artifact receipts, not in Git.
 The code checkpoints and artifact receipts are separate preservation claims.
 
-Remaining acceptance gates are dense-fit visual review, expression/skin/finger
-deformation checks on the exact final asset, desktop/mobile rendered evidence,
-more than one measured video event, source-bound clip qualification, and human
-likeness/performance assessment. The observed optimizer residual cannot pass any
-of those gates by itself.
+The exact optimized asset's native geometry checks passed (including every
+finger, three face controls, measured clip consent and reset). The native and
+attention test files passed 26 tests together. Remaining acceptance gates are
+browser rendering, the tighter mobile camera, continuous source/speaker review,
+and independent human likeness/performance assessment. The observed optimizer
+residual cannot pass those gates by itself.
 
 ### Next commands after restoring artifact packages
 
-The following are proposed next execution commands. Set `AVATAR_ARTIFACT_ROOT`
+The following reproduce completed stages. Set `AVATAR_ARTIFACT_ROOT`
 to the directory containing the restored packages. Use a fresh output directory;
 completed candidates are immutable.
 
@@ -147,6 +177,16 @@ OPENBLAS_NUM_THREADS=3 OMP_NUM_THREADS=3 blender --background --threads 3 \
   reports/jensen-avatar/texture-reference-plan.json \
   "$AVATAR_ARTIFACT_ROOT/textured-fit-v3b"
 
+OPENBLAS_NUM_THREADS=3 OMP_NUM_THREADS=3 blender --background --threads 3 \
+  --python tools/avatar/refine_appearance.py -- \
+  "$AVATAR_ARTIFACT_ROOT/textured-fit-v3b/jensen-source-fitted-candidate-v3.blend" \
+  "$AVATAR_ARTIFACT_ROOT/textured-fit-v3c"
+
+node tools/avatar/optimize.mjs \
+  "$AVATAR_ARTIFACT_ROOT/textured-fit-v3c/jensen-source-fitted-candidate-v3.glb" \
+  apps/web/public/models/jensen-source-fitted-v3.glb \
+  reports/jensen-avatar/runtime-asset-report.json jensen-source-fitted-v3
+
 PYTHONPATH=src:. python -m tools.motion check \
-  data/motion/jensen-goldman-v1.json apps/web/public
+  data/motion/jensen-multievent.v1.json apps/web/public
 ```

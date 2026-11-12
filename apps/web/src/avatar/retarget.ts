@@ -1,7 +1,7 @@
 import { Box3, Euler, Group, LoadingManager, Mesh, Object3D, Quaternion, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
-import { createResearchHumanMapping, mergeRigMappings, RESEARCH_HUMAN_AVATAR } from './builtin';
+import { createResearchHumanMapping, JENSEN_SOURCE_FITTED_AVATAR, mergeRigMappings, RESEARCH_HUMAN_AVATAR } from './builtin';
 import { BONE_CHANNELS, FACE_CHANNELS, FINGER_CHANNELS, FINGER_JOINTS, VISEMES } from './channels';
 import { disposeObject } from './dispose';
 import type { AvatarRig } from './procedural';
@@ -266,7 +266,7 @@ export async function loadGlbRig(url: string, mapping: RigMapping, signal?: Abor
   const gltf = await loader.parseAsync(bytes, '');
   if (signal?.aborted) { disposeObject(gltf.scene); signal.throwIfAborted(); }
   try {
-    const calibrated = target.pathname === RESEARCH_HUMAN_AVATAR.modelUrl
+    const calibrated = [RESEARCH_HUMAN_AVATAR.modelUrl, JENSEN_SOURCE_FITTED_AVATAR.modelUrl].some((path) => target.pathname === path)
       ? mergeRigMappings(createResearchHumanMapping(gltf.scene), mapping) : mapping;
     const rig = createRetargetedRig(gltf.scene, calibrated);
     const inspection = rig.diagnostics.assetInspection!;

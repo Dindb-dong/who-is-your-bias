@@ -2,14 +2,14 @@ import { useEffect, useRef } from 'react';
 import { Activity, AudioLines, Check, Upload, X } from 'lucide-react';
 import type { MotionLibraryStatus, Persona } from '../api';
 import type { MotionMode } from '../avatar/types';
-import type { AvatarFraming } from '../avatar/builtin';
+import type { AvatarFraming, BuiltinAvatar } from '../avatar/builtin';
 import type { VoiceMode } from '../hooks/usePlayback';
 
 interface Props {
   open: boolean; close: () => void; persona: Persona | null; voice: VoiceMode; setVoice: (voice: VoiceMode) => void;
   autoPlay: boolean; setAutoPlay: (value: boolean) => void; reducedMotion: boolean; setReducedMotion: (value: boolean) => void;
   modelName?: string; loadModel: (file: File) => void; resetModel: () => void;
-  builtinAvatar: 'human' | 'portrait'; setBuiltinAvatar: (avatar: 'human' | 'portrait') => void;
+  builtinAvatar: BuiltinAvatar; setBuiltinAvatar: (avatar: BuiltinAvatar) => void;
   framing: AvatarFraming; setFraming: (framing: AvatarFraming) => void;
   motionMode: MotionMode; setMotionMode: (mode: MotionMode) => void;
   motionLibrary: MotionLibraryStatus | null; motionLibraryError?: string;
@@ -23,9 +23,11 @@ export function SettingsDialog(props: Props) {
       <section><h3>Voice playback</h3><p>Choose how responses are spoken. Built-in voices are generic and do not reproduce the subject's voice.</p><div className="voice-options">{([{ id: 'off', title: 'Text only', note: 'Keep the conversation quiet.' }, { id: 'browser', title: 'Built-in voice', note: 'Generic browser voice · approximate mouth motion.' }, { id: 'provider', title: 'Connected voice', note: props.persona?.capabilities.speech ? 'Use the configured speech provider.' : 'Connect a speech server to enable.' }] as const).map((option) => <button key={option.id} aria-pressed={props.voice === option.id} className={`voice-option ${props.voice === option.id ? 'selected' : ''}`} disabled={option.id === 'provider' && !props.persona?.capabilities.speech} onClick={() => props.setVoice(option.id)}><AudioLines size={18}/><span><strong>{option.title}</strong><small>{option.note}</small></span>{props.voice === option.id && <Check size={17}/>}</button>)}</div><label className="switch-row"><span>Read new responses aloud</span><input type="checkbox" checked={props.autoPlay} onChange={(event) => props.setAutoPlay(event.target.checked)} disabled={props.voice === 'off'}/></label></section>
       <section><h3>Avatar asset</h3><p>Choose a research avatar or load your own rig. The included models are artistic prototypes.</p>
         <div className="voice-options">{([
+          ...(props.persona?.id === 'jensen-huang' ? [{ id: 'jensen' as const, title: 'Jensen source-fitted candidate', note: 'Face geometry and texture from source references, with articulated hands. Likeness remains under review.' }] : []),
           { id: 'human', title: 'Research human', note: 'Human mesh with facial expressions and articulated limbs.' },
           { id: 'portrait', title: 'Stylized portrait', note: props.persona?.id === 'jensen-huang' ? 'Jensen-inspired preview with glasses, gray hair and a dark jacket.' : 'Lightweight portrait with designed expressions.' },
         ] as const).map((option) => <button key={option.id} type="button" aria-pressed={!props.modelName && props.builtinAvatar === option.id} className={`voice-option ${!props.modelName && props.builtinAvatar === option.id ? 'selected' : ''}`} onClick={() => props.setBuiltinAvatar(option.id)}><span><strong>{option.title}</strong><small>{option.note}</small></span>{!props.modelName && props.builtinAvatar === option.id && <Check size={17}/>}</button>)}</div>
+        {props.persona?.id === 'jensen-huang' && props.builtinAvatar === 'jensen' && <p>Face texture adapted from photographs by Anders Eidesvik, CC BY-SA 4.0. <a href="/models/jensen-source-fitted-v3.LICENSE.md" target="_blank" rel="noreferrer">Sources, license and changes</a>.</p>}
         <label className="switch-row"><span>Camera framing</span><select aria-label="Avatar camera framing" value={props.framing} onChange={(event) => props.setFraming(event.target.value as AvatarFraming)}><option value="portrait">Portrait</option><option value="upper_body">Upper body & hands</option><option value="full_body">Full body</option></select></label><label className="upload-model"><Upload size={19}/><span>{props.modelName || 'Choose a local GLB model'}<small>Stays in your browser · up to 50 MB</small></span><input type="file" accept=".glb" onChange={(event) => { const file = event.target.files?.[0]; if (file) props.loadModel(file); event.target.value = ''; }}/></label>{props.modelName && <button className="text-button" onClick={props.resetModel}>Restore default portrait</button>}<label className="switch-row"><span>Reduce automatic motion</span><input type="checkbox" checked={props.reducedMotion} onChange={(event) => props.setReducedMotion(event.target.checked)}/></label></section>
       <section><h3>Conversation movement</h3><p>Designed motion is the default. Source clips replay a recorded movement once at its original speed, independently of voice. Context matching does not predict a person's emotion or gesture choice.</p>
         <div className="voice-options">{([

@@ -14,12 +14,12 @@ import { parseAvatarClip } from './validation';
 
 const asset = new URL('../../public/models/research-human-v2.glb', import.meta.url);
 
-async function loadHuman() {
-  const bytes = await readFile(asset);
+async function loadHuman(assetUrl = asset) {
+  const bytes = await readFile(assetUrl);
   const loader = new GLTFLoader().setMeshoptDecoder(MeshoptDecoder);
   // This Node test decodes the real compressed geometry, morphs, and skin.
-  // Only material/image creation is replaced: actual WebP/GPU rendering is
-  // covered by the browser test with the unmodified same-origin GLB.
+  // Only material/image creation is replaced. Separate browser checks exercise
+  // WebP/GPU rendering when the execution environment can launch Chromium.
   loader.register((parser) => ({ name: 'CPU_GEOMETRY_INSPECTION', loadMaterial: async (index) =>
     new MeshStandardMaterial({ name: parser.json.materials[index].name }) }));
   const imported = await loader.parseAsync(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), '');
@@ -158,5 +158,65 @@ describe('shipped Meshopt research human', () => {
     expect(merged.bones!.head).toEqual(override.bones!.head);
     expect(merged.bones!.leftForearm).toEqual(mapping.bones!.leftForearm);
     expect(merged.yaw).toBe(0); rig.dispose();
+  });
+});
+
+describe('shipped Jensen source-fitted candidate', () => {
+  const candidate = new URL('../../public/models/jensen-source-fitted-v3.glb', import.meta.url);
+
+  it('matches the saved asset receipt and decodes the complete fitted facial and hand rig', async () => {
+    const bytes = await readFile(candidate);
+    const receipt = JSON.parse(await readFile(new URL('../../../../reports/jensen-avatar/runtime-asset-report.json', import.meta.url), 'utf8'));
+    expect(createHash('sha256').update(bytes).digest('hex')).toBe(receipt.output_sha256);
+    expect(receipt.asset_id).toBe('jensen-source-fitted-v3');
+    expect(bytes.length).toBeLessThan(5_000_000);
+    expect(receipt.before.nonzero_target_names).toEqual(receipt.after.nonzero_target_names);
+    expect(receipt.after.nonzero_target_names).toHaveLength(66);
+    expect(receipt.after.joint_names).toHaveLength(163);
+    const { rig, meshes } = await loadHuman(candidate);
+    expect(rig.diagnostics.morphs.sort()).toEqual([...FACE_CHANNELS].sort());
+    expect(rig.diagnostics.visemes!.sort()).toEqual([...VISEMES].sort());
+    expect(rig.diagnostics.bones).toHaveLength(46);
+    expect(rig.diagnostics.missing).toEqual([]);
+    expect(meshes).toHaveLength(7);
+    rig.dispose();
+  });
+
+  it('deforms each of its thirty skinned fingers and facial shapes, then resets without drift', async () => {
+    const { rig, meshes, node, update } = await loadHuman(candidate);
+    const skin = meshes.reduce((a, b) => a.geometry.attributes.position.count > b.geometry.attributes.position.count ? a : b);
+    const baseline = positions(skin);
+    for (const channel of FINGER_CHANNELS) {
+      const rest = node(channel).quaternion.clone();
+      const rotation = new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), .5).toArray() as [number, number, number, number];
+      rig.apply({ ...neutralPose(), bones: { [channel]: rotation } }); update();
+      expect(node(channel).quaternion.angleTo(rest), channel).toBeGreaterThan(.1);
+      expect(largestChange(skin, baseline), channel).toBeGreaterThan(.0001);
+      rig.apply(neutralPose()); update();
+      expect(largestChange(skin, baseline), `${channel} reset`).toBeLessThan(1e-6);
+    }
+    for (const channel of ['jawOpen', 'eyeBlinkLeft', 'mouthSmileLeft'] as const) {
+      rig.apply({ ...neutralPose(), face: { [channel]: .8 } }); update();
+      expect(largestChange(skin, baseline), channel).toBeGreaterThan(.002);
+    }
+    rig.apply(neutralPose()); update();
+    expect(largestChange(skin, baseline)).toBeLessThan(1e-6);
+    rig.dispose();
+  });
+
+  it('plays actual Jensen observation deltas only with preview consent and returns to neutral on cancel', async () => {
+    const { rig, meshes, update } = await loadHuman(candidate);
+    const skin = meshes.reduce((a, b) => a.geometry.attributes.position.count > b.geometry.attributes.position.count ? a : b);
+    const baseline = positions(skin);
+    const clip = parseAvatarClip(JSON.parse(await readFile(new URL('../../public/motion/jensen/goldman-0164-8s.json', import.meta.url), 'utf8')), true);
+    expect(clip.source.source_id).toBe('goldman-sachs-2024');
+    expect(sampleMotion(clip, 1800, false)).toBeNull();
+    const pose = sampleMotion(clip, 1800, true)!;
+    expect(Object.keys(pose.bones ?? {}).some((channel) => channel.includes('Index'))).toBe(true);
+    rig.apply({ ...neutralPose(), ...pose }); update();
+    expect(largestChange(skin, baseline)).toBeGreaterThan(.01);
+    rig.apply(neutralPose()); update();
+    expect(largestChange(skin, baseline)).toBeLessThan(1e-6);
+    rig.dispose();
   });
 });

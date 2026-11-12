@@ -8,6 +8,14 @@ export const RESEARCH_HUMAN_AVATAR = {
   modelUrl: '/models/research-human-v2.glb',
 } as const;
 
+export const JENSEN_SOURCE_FITTED_AVATAR = {
+  id: 'jensen-source-fitted-v3',
+  label: 'Jensen source-fitted candidate',
+  modelUrl: '/models/jensen-source-fitted-v3.glb',
+} as const;
+
+export type BuiltinAvatar = 'human' | 'portrait' | 'jensen';
+
 export type AvatarFraming = 'portrait' | 'upper_body' | 'full_body';
 
 const JOINTS = {
@@ -21,7 +29,7 @@ const JOINTS = {
 const canonicalName = (name: string): string => name.toLowerCase().replace(/[^a-z0-9]/g, '');
 const tuple = (rotation: Quaternion): QuaternionTuple => rotation.normalize().toArray() as QuaternionTuple;
 
-/** Explicit calibration for the bundled MPFB asset, never guessed for an upload. */
+/** Explicit calibration for bundled MPFB-derived assets, never guessed for an upload. */
 export function createResearchHumanMapping(model: Object3D): RigMapping {
   const nodes = new Map<string, Object3D>();
   model.traverse((node) => { nodes.set(canonicalName(node.name), node); });
