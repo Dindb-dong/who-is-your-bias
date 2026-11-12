@@ -488,6 +488,17 @@
       "sha256": "e88b866ccd5429dbe6041af3039379817d683c4c4f610ecb0c9fa2302e62e383",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-text-checkpoint-step0010",
+      "role": "Text LoRA optimizer step 10 with exact optimizer, RNG and data cursor; supervised recovery from freshly restored step 8",
+      "file_name": "jensen-text-checkpoint-step0010.tar.gz",
+      "file_id": "file_00000000de2881fb8b64b9df7368ee60",
+      "library_file_id": "libfile_fde3_f-51ecbfbd0f108191991ecdc149961fc2_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 97101783,
+      "sha256": "12f99e96a4c8c8e1d58570650aaf8f6b617e1c43e199b2505d5488db55435561",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {
