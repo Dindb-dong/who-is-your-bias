@@ -54,10 +54,10 @@ separately. The prior unverified eight-video claim is not inherited by this run.
 - Voice: **19 publisher-matched candidates**, independently screened down to
   **8 clips / 91.84 seconds / four events**. Human listening review is zero.
   Actual acoustic encoding produced **1,151 frames × 16 codebooks**, saved and
-  freshly retrieved. **14 actual LoRA updates** are durably saved, with 16 planned.
+  freshly retrieved. **16 actual LoRA updates are complete and durably saved**.
   A fresh process restored remote step 1 and completed step 2; subsequent 6/10/14
-  checkpoints were also freshly retrieved. The interrupted final block resumes
-  from verified step 14 rather than inheriting an uncompleted step.
+  checkpoints and final step 16 were also freshly retrieved. The interrupted final
+  block recovered from verified step 14 without inventing an uncompleted update.
 - Avatar: a **2,530,256-byte fitted Jensen GLB** is committed with an explicit
   optional Settings selection and source license. Its measured geometry, licensed
   face texture, dark iris and authored salt-and-pepper material are preserved in
@@ -73,7 +73,7 @@ separately. The prior unverified eight-video claim is not inherited by this run.
 - Source videos: the [live source ledger](../reports/jensen-recovery/source-progress.json)
   and [media artifact receipts](../reports/jensen-recovery/media-artifacts.json)
   distinguish all located events, complete local files, failed addresses,
-  partial uploads and fully reconstructed remote videos. The first complete
+  partial uploads and fully reconstructed remote videos. All
   **eight complete recordings are now reconstructed from fresh remote chunks**:
   4,412,488,053 original bytes / 10h35m29s, including four complete keynotes
   totaling 7h34m46s. All full SHA-256 values match. Three full original interview
@@ -85,7 +85,7 @@ separately. The prior unverified eight-video claim is not inherited by this run.
 | Workstream | Saved implementation | Current gate |
 | --- | --- | --- |
 | Corpus | Authentic v4, held-out references, all eight full video restorations | Source/media acquisition batch complete; preserve event isolation |
-| Voice | Source clocks, screened four-event dataset, actual codes and 14 saved updates | Finish bounded 16-step run, EN/KO samples and diagnostics |
+| Voice | Source clocks, screened four-event dataset, actual codes and 16 completed saved updates | Generate matched EN/KO samples and diagnostics |
 | Avatar | Actual fitted model, editable master, finger controls and observed clips | Final camera and candidate-specific desktop/mobile playback |
 | Text | Frozen dataset, actual first update and verified remote optimizer checkpoint | Resume from retrieved bytes; finish bounded run and serve exact adapter |
 | Retrieval/evaluation | Frozen lexical/concept/hybrid comparison; both candidates remain opt-in | Matched base/style/adapter and heldout response experiments |

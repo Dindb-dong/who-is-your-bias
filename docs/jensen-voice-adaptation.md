@@ -3,14 +3,17 @@
 This is the M4 execution record for the [Jensen recovery handoff](jensen-replication-handoff.md).
 The reproducible preparation is measured in
 [preparation.json](../reports/voice/jensen-2026-11-13/preparation.json).
-The current checkpoint has a persisted **candidate** dataset, completed acoustic
-tokenization, and **two durably verified speech optimizer updates**. A new process
-restored the freshly retrieved first checkpoint and completed step 2; see
-[the resume receipt](../reports/voice/jensen-2026-11-13/resume-step2.json).
-A bounded block toward step 6 is now running, out of 16 planned updates. Generated
-speech, independent output ASR, and human listening remain separate completion gates. The [codec receipt](../reports/voice/jensen-2026-11-13/codecs.json)
-records all eight encodings (1,151 frames, 16 codebooks per frame). The encoding
-loop took 6.13 seconds, excluding model loading.
+The bounded speech-weight experiment completed **16 actual optimizer updates**.
+The final adapter, optimizer/random state and progress counters were uploaded,
+retrieved in a fresh operation, and verified by SHA-256. See
+[training-completed.json](../reports/voice/jensen-2026-11-13/training-completed.json)
+for the exact contract and durable receipts. Generated speech and independent
+quality measurements are the next stage; no quality promotion has been made.
+
+The [codec receipt](../reports/voice/jensen-2026-11-13/codecs.json) records all eight
+encodings (1,151 frames, 16 codebooks per frame). The encoding loop took 6.13
+seconds, excluding model loading. All source clips still have **candidate**
+status and zero human listening reviews.
 
 ## Source and subject binding
 
@@ -81,21 +84,24 @@ text and speech embeddings, consistent with its inference path.
 
 The planned pilot uses CPU float32, SDPA attention, rank 4 / alpha 8, LoRA dropout
 0.05, learning rate 0.00002, AdamW, seed 42, batch size one, four threads, and
-16 planned optimizer updates. **Two updates have been durably verified**, with
-codec-objective losses 12.889015 and 13.412356 on different examples. These values
-are not an efficacy comparison. The first step is measured in
-[pilot-step1.json](../reports/voice/jensen-2026-11-13/pilot-step1.json). The first update took
-21.22 seconds, including its input preparation and checkpoint save; the complete
-process block including model load took 54.21 seconds. Peak process RSS was
-6,675,206,144 bytes. All 344,064 learned LoRA-B elements are nonzero after that
-step (their PEFT initialization is zero); their L2 norm is 0.0117255. This proves
-actual changed weights, not improved perceptual quality.
+16 planned optimizer updates; all **16 completed**, covering two shuffled passes
+through eight source clips. The 573,440 trainable parameters include 344,064 LoRA-B
+elements, all nonzero in the final checkpoint. Their L2 norm is 0.103470; the
+maximum absolute weight is 0.000322710. PEFT initializes those matrices to zero.
+These are actual changed model weights, separate from reference conditioning.
+
+The mean training objective was 12.004980 in the first pass and 11.860619 in the
+second pass. These are training-exposed objective values with dropout, not
+independent intelligibility or voice-likeness results. All quality and promotion
+gates remain separate from the optimizer completion.
+
 A representative frozen-linear forward/backward probe measured float32 at
-15.95 ms versus bfloat16 at 21.74 ms (four CPU threads). The first actual speech
-update measured the full model time and memory above; this microbenchmark alone
-does not do so. A speech LoRA checkpoint counts as weight adaptation only after an actual
-optimizer update and a valid saved adapter. Reference prompting remains a
-separate conditioning mechanism in both the base and adapted conditions.
+15.95 ms versus bfloat16 at 21.74 ms with four CPU threads. The actual six completed
+training blocks, including model loads, totaled 223.20 seconds. That total excludes
+artifact transfers, tool scheduling and an interrupted unfinished block. The first
+actual update took 21.22 seconds; later update times varied by speech example and
+warm-up. The maximum measured process RSS was 6,869,979,136 bytes. The measured
+full-model run establishes these resource values; the microbenchmark alone does not.
 
 Every successful update atomically saves learned adapter tensors, optimizer
 state, Python and Torch random state, cursor, actual losses, constant learning
@@ -107,10 +113,12 @@ a checkpoint implementation test, not evidence of Qwen speech adaptation.
 
 ## Execution and resume
 
-The preparation and one-update optimization commands below completed successfully.
-The actual fresh-process resume loaded the remotely retrieved archive in a new
-restore directory and completed step 2. Its source-archive and resulting
-checkpoint hashes are recorded in the resume receipt. Set `ART` to the private artifact root and run from the repository with
+The preparation and initial one-update optimization commands below completed
+successfully. A fresh process loaded the remotely retrieved checkpoint and
+completed step 2. Further bounded blocks completed at steps 6, 10, 14 and 16; every
+block was uploaded and read back before the next began. A tool-runtime reset left
+no valid checkpoint after step 14. The run recovered from the verified step 14
+state and completed the remaining two updates. Set `ART` to the private artifact root and run from the repository with
 the pinned inference environment. The selected dataset archive must first be
 uploaded, retrieved in a fresh operation, and verified by SHA-256.
 
@@ -143,7 +151,9 @@ The step 1 archive was retrieved and extracted under
 `--stop-after 1`. It restored optimizer/RNG state and produced step 2. For the
 remaining run, use the identical contract, the last verified checkpoint path, and
 `--stop-after 4` (a count of additional updates, capped at 16 total). The driver rejects changed input, model, code, or optimizer
-settings. Do not edit the driver halfway through a run and bypass that check.
+settings. Do not edit the driver halfway through a run and bypass that check. This pilot is
+now complete at its declared 16-update ceiling; the resume examples document the
+verified interrupted-run procedure, not a request to duplicate completed updates.
 
 ## Output evaluation gates
 
@@ -178,9 +188,12 @@ The dataset manifest hash is
 The coordinator records durable object identifiers and readback receipts in the
 run artifact manifest. The archive's creation alone is not a persistence claim.
 
-Completed gates: dataset upload and fresh readback, acoustic tokenization, codec
-upload and fresh readback, two actual optimizer updates, both persisted and
-read back, and actual fresh-process remote-checkpoint resume.
-Next gates: remaining bounded updates; English/Korean
-synthesis for both conditions; independent output ASR; and a measured report. The candidate pilot remains separate from application
-promotion and from a qualified speech likeness.
+Completed gates: dataset upload and fresh readback, acoustic tokenization and
+codec persistence, 16 actual optimizer updates, bounded checkpoint persistence,
+fresh-process remote-checkpoint resume, and recovery after a real tool-runtime
+interruption. The final archive is `voice-lora-v2-step16.tar.gz`, 6,475,745 bytes,
+SHA-256 `d87c8ac3a6c00d7f35023bb2cc048ebb76984f2288d62ec27c19f7d22951cf7e`.
+
+Next gates: English/Korean synthesis for both conditions; independent output ASR
+and speaker-embedding diagnostics; and a measured report. The candidate pilot
+remains separate from application promotion and from a qualified speech likeness.

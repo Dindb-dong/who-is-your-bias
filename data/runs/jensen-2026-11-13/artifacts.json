@@ -360,6 +360,22 @@
       "checkpoint_metadata_sha256": "9c75851434b21db10f8d53d8777370622aaecd5ccdf0f516240ca63696c5189c",
       "contract_sha256": "9c673a2048c24b5527719bddbb2e5bcb38b8e1e0b52fe3150c893ba87c1e55b1",
       "workstream_verification_receipt_sha256": "5c9f2e47e59d95c9b62bbb37456f2682221b99e545080b63f6bc27d65733c8cb"
+    },
+    {
+      "artifact_id": "jensen-voice-lora-v2-step0016",
+      "role": "completed_voice_optimizer_checkpoint",
+      "file_name": "voice-lora-v2-step16.tar.gz",
+      "file_id": "file_0000000097f081fdbfb779b178eb90c3",
+      "library_file_id": "libfile_fde3_f-dc5ca51c542c81918c1d917b2895de60_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 6475745,
+      "sha256": "d87c8ac3a6c00d7f35023bb2cc048ebb76984f2288d62ec27c19f7d22951cf7e",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified",
+      "completed_optimizer_steps": 16,
+      "target_optimizer_steps": 16,
+      "checkpoint_metadata_sha256": "9286167534283c576c329203f010b44bbdd31ef20f679f4693875b79a91dbf5b",
+      "contract_sha256": "9c673a2048c24b5527719bddbb2e5bcb38b8e1e0b52fe3150c893ba87c1e55b1",
+      "workstream_verification_receipt_sha256": "204cee99a43569f954a39cb0d1f13100cf69d08ce466903f99aafd5729f861c9"
     }
   ],
   "artifact_indexes": {
