@@ -38,6 +38,12 @@ def main(argv=None):
     text_train.add_argument("--device", default="cpu")
     text_train.add_argument("--precision", choices=("float32", "bfloat16"), default="float32")
     text_train.add_argument("--gradient-checkpointing", action="store_true")
+    text_train.add_argument("--checkpoint-every", type=int, default=10)
+    text_train.add_argument("--stop-after-steps", type=int,
+                            help="Pause after this many additional updates so the saved block can be persisted")
+    text_train.add_argument("--resume-from", type=Path)
+    text_train.add_argument("--checkpoint-publisher", type=json.loads,
+                            help="Optional JSON argv; synchronous publisher must verify the exact checkpoint")
     voice_train = commands.add_parser("train-voice")
     for key in ("dataset", "output", "upstream", "base-model", "tokenizer-model"):
         voice_train.add_argument("--"+key, type=Path, required=True)
