@@ -1,0 +1,71 @@
+name: Temporary PR 16 verification
+
+# This PR-only runner is removed after its evidence is recorded. The project
+# keeps its existing local-validation default; no persistent CI is introduced.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr16-verification
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    if: github.event.pull_request.number == 16 && github.head_ref == 'feat/jensen-attention' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install reproducible dependencies
+        run: |
+          python -m pip install uv==0.13.6
+          uv sync --locked --extra dev
+          npm ci
+          npm ci --prefix tools/avatar --ignore-scripts
+      - name: Validate code and production build
+        run: |
+          uv run pytest -q
+          uv run bias validate
+          npm run check
+          node --test tools/avatar_audition.test.mjs
+      - name: Install Chromium and media dependencies
+        run: |
+          npx playwright install --with-deps chromium
+          sudo apt-get install -y ffmpeg
+      - name: Jensen browser and actual detector smoke
+        env:
+          PLAYWRIGHT_HTML_OUTPUT_DIR: reports/local/playwright-jensen
+        run: npm run test:attention -- --workers=2 --output=reports/local/results-jensen
+      - name: Historical studio browser regressions
+        env:
+          PLAYWRIGHT_HTML_OUTPUT_DIR: reports/local/playwright-legacy
+        run: npm run test:e2e -- --workers=2 --output=reports/local/results-legacy
+      - name: Verify container build
+        run: docker build --tag bias-pr16-verification .
+      - name: Save browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pr16-browser-evidence
+          retention-days: 7
+          path: |
+            reports/local/playwright-jensen/
+            reports/local/playwright-legacy/
+            reports/local/results-jensen/
+            reports/local/results-legacy/

@@ -1,0 +1,37 @@
+.attention-panel { margin-top: 14px; padding: 20px; border: 1px solid #dce1d4; border-radius: 18px; background: #f8faf4; color: #25331e; }
+.attention-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.attention-heading .eyebrow { font-size: 9px; letter-spacing: .13em; color: #75856a; }
+.attention-heading h3 { display: flex; align-items: center; gap: 8px; margin: 6px 0 0; font-size: 16px; font-weight: 650; }
+.attention-state { color: #6e7b66; background: #e8edde; border-radius: 999px; font-size: 10px; font-weight: 650; padding: 5px 9px; white-space: nowrap; }
+.attention-state.active { background: #dcecc3; color: #3b5a25; }
+.attention-intro { font-size: 12px; line-height: 1.65; color: #627157; margin: 12px 0; }
+.attention-controls { display: flex; flex-wrap: wrap; gap: 7px; }
+.attention-controls button, .attention-participants button { display: inline-flex; gap: 6px; align-items: center; justify-content: center; border: 1px solid #d3dcc9; border-radius: 9px; padding: 8px 10px; background: white; font-family: inherit; font-size: 11px; color: #33492a; cursor: pointer; min-height: 36px; }
+.attention-controls button:hover:not(:disabled), .attention-participants button:hover { background: #e9f1df; border-color: #a4b88f; }
+.attention-controls button:disabled { opacity: .5; cursor: default; }
+.attention-controls button.attention-stop { background: #273720; color: #f0f7e8; border-color: #273720; }
+.attention-panel button:focus-visible, .attention-demo-pad:focus-visible, .attention-panel input:focus-visible { outline: 3px solid #6e934e; outline-offset: 3px; }
+.attention-preview { position: relative; aspect-ratio: 16 / 9; width: 100%; margin-top: 14px; background: #162012; border-radius: 11px; overflow: hidden; }
+.attention-preview[hidden] { display: none; }
+.attention-video-content { position: absolute; }
+.attention-video-content video { position: absolute; width: 100%; height: 100%; object-fit: contain; }
+.attention-face { position: absolute; display: block; background: transparent; border: 2px solid #a5c77d; border-radius: 6px; padding: 0; cursor: pointer; }
+.attention-face.selected { border-color: #d1ff7f; box-shadow: 0 0 0 2px #1b341080; background: #c7fb6520; }
+.attention-face span { position: absolute; top: 0; left: 0; display: inline-block; min-width: 21px; padding: 2px 4px; background: #c8e79b; color: #1c2b13; font-size: 11px; font-weight: 700; border-radius: 0 0 4px 0; }
+.attention-preview-message { position: absolute; left: 20px; right: 20px; top: 50%; transform: translateY(-50%); color: #d8e2d0; text-align: center; font-size: 12px; pointer-events: none; }
+.attention-participants { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+.attention-participants button[aria-pressed=true] { background: #dcebc5; border-color: #9bb780; }
+.attention-demo-pad { position: relative; height: 150px; margin-top: 14px; border: 1px solid #cad8bc; border-radius: 11px; background: radial-gradient(ellipse at center, #f3f7eb 0%, #e5eddc 100%); cursor: crosshair; overflow: hidden; touch-action: none; }
+.attention-demo-cross { position: absolute; background: #d4dec9; pointer-events: none; }
+.attention-demo-cross.horizontal { height: 1px; left: 12px; right: 12px; top: 50%; }
+.attention-demo-cross.vertical { width: 1px; top: 12px; bottom: 12px; left: 50%; }
+.attention-demo-target { position: absolute; display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; transform: translate(-50%, -50%); border-radius: 50%; color: #e9f8d9; background: #45652e; box-shadow: 0 0 0 6px #809c6023; pointer-events: none; }
+.attention-demo-label { position: absolute; bottom: 9px; left: 12px; font-size: 9px; color: #738565; pointer-events: none; }
+.attention-demo-ranges { display: flex; gap: 14px; margin-top: 10px; }
+.attention-demo-ranges label { flex: 1; min-width: 0; display: grid; gap: 4px; font-size: 10px; color: #6b7c5e; }
+.attention-demo-ranges input { accent-color: #4c6c36; width: 100%; min-width: 0; }
+.attention-notice { font-size: 11px; line-height: 1.65; margin: 12px 0 0; color: #526947; }
+.attention-notice.error { color: #9a452a; }
+.attention-reduced { color: #738063; font-size: 10px; margin: 6px 0 0; }
+.attention-privacy { font-size: 9px; line-height: 1.6; color: #7b8971; margin: 8px 0 0; }
+@media (max-width: 600px) { .attention-panel { padding: 16px; } .attention-controls button { min-height: 40px; } .attention-demo-ranges { gap: 10px; } }

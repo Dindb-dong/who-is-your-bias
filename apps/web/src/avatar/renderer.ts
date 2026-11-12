@@ -6,10 +6,11 @@ import {
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { avatarView, type AvatarFraming } from './builtin';
 import { disposeObject } from './dispose';
-import { createProceduralRig, type AvatarRig } from './procedural';
+import { createProceduralRig, type AvatarRig, type PortraitStyle } from './procedural';
 import { loadGlbRig } from './retarget';
 import { dampPose, neutralPose } from './timeline';
 import { samplePerformance } from './performance';
+import { AttentionController, attentionCapabilities, composeAttentionPose, type AttentionTarget } from './attention';
 import { parseAvatarClip, parseSpeechTiming } from './validation';
 import { AUDITION_PROTOCOL, AuditionRecorder, canonicalJson, sealAudition, sha256Bytes } from './audition';
 import type { AnimationTelemetry, AvatarClip, BehaviorPlan, RigDiagnostics, RigMapping, RigPose, SpeechTiming } from './types';
@@ -26,6 +27,7 @@ export interface PlaybackState {
   performanceClip?: AvatarClip;
   observationElapsedMs?: number;
   allowGeometryPreview?: boolean;
+  attentionTarget?: AttentionTarget | null;
 }
 
 interface RendererCallbacks {
@@ -63,6 +65,8 @@ export class AvatarRenderer {
   private lastTelemetry = 0;
   private framing: AvatarFraming = 'portrait';
   private audition?: AuditionRecorder;
+  private attention = new AttentionController();
+  private portraitStyle: PortraitStyle = 'reference';
 
   constructor(private host: HTMLElement, private callbacks: RendererCallbacks = {}) {
     this.renderer = new WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
@@ -95,7 +99,7 @@ export class AvatarRenderer {
     const rim = new DirectionalLight('#d8f8a0', 2.3); rim.position.set(1.5, 2.8, -2); this.scene.add(rim);
     const leftRim = new DirectionalLight('#819e91', 1.4); leftRim.position.set(-2, 1.9, -1.2); this.scene.add(leftRim);
     this.createStudio();
-    this.rig = createProceduralRig(); this.scene.add(this.rig.root);
+    this.rig = createProceduralRig(this.portraitStyle); this.scene.add(this.rig.root);
     this.host.appendChild(this.canvas);
     this.resizeObserver = new ResizeObserver(this.resize); this.resizeObserver.observe(host);
     document.addEventListener('visibilitychange', this.onVisibility);
@@ -122,6 +126,7 @@ export class AvatarRenderer {
       else if (state.speechTiming !== this.timingInput) this.stopAudition('speech_timing_changed');
       else if (state.performanceClip !== this.clipInput || state.allowGeometryPreview !== this.playback.allowGeometryPreview
         || state.reducedMotion !== this.playback.reducedMotion) this.stopAudition('motion_settings_changed');
+      else if (state.attentionTarget || this.playback.attentionTarget) this.stopAudition('attention_changed');
     }
     if (state.speechTiming !== this.timingInput) {
       this.timingInput = state.speechTiming; this.validatedTiming = undefined;
@@ -138,12 +143,14 @@ export class AvatarRenderer {
 
   setCalibrationPose(pose?: RigPose): void {
     if (pose) this.stopAudition('manual_calibration');
+    if (pose) this.attention.reset();
     this.calibrationPose = pose; this.pose = neutralPose();
   }
 
   async startAudition(): Promise<void> {
     if (this.disposed || this.contextLost || !this.visible) throw new Error('The avatar must be visible before recording.');
     if (this.calibrationPose) throw new Error('Turn off manual pose preview before recording.');
+    if (this.playback.attentionTarget || this.attention.active) throw new Error('Stop attention tracking and wait for the avatar to settle before recording a fixed comparison audition.');
     const asset = this.rig.diagnostics.assetInspection;
     if (!asset?.sha256) throw new Error('Load a GLB before recording an audition.');
     if (!this.playback.speaking || !this.playback.audioSha256) throw new Error('Start a recorded audio sample, then record the audition.');
@@ -156,7 +163,7 @@ export class AvatarRenderer {
     ]);
     if (serial !== this.modelSerial || this.disposed || this.playback.audioSha256 !== state.audioSha256
       || !this.playback.speaking || this.playback.speechTiming !== state.speechTiming
-      || this.playback.performanceClip !== state.performanceClip) throw new Error('Playback changed; start the audition again.');
+      || this.playback.performanceClip !== state.performanceClip || this.playback.attentionTarget || this.attention.active) throw new Error('Playback changed; start the audition again.');
     // Consume pre-existing drag inertia, then reset the camera. Disabling input
     // alone does not stop OrbitControls' damping from moving a comparison view.
     const damping = this.controls.enableDamping; this.controls.enableDamping = false;
@@ -194,13 +201,20 @@ export class AvatarRenderer {
     this.framing = framing; this.canvas.dataset.framing = framing; this.resetView();
   }
 
+  setPortraitStyle(style: PortraitStyle): void {
+    if (this.disposed || style === this.portraitStyle) return;
+    this.portraitStyle = style;
+    this.canvas.dataset.portraitStyle = style;
+    if (this.rig.diagnostics.kind === 'procedural') this.replaceRig(createProceduralRig(style));
+  }
+
   async setModel(url?: string, mapping: RigMapping = {}): Promise<void> {
     if (this.disposed) return;
     this.stopAudition('model_or_mapping_changed');
     const serial = ++this.modelSerial;
     this.modelAbort?.abort();
     if (!url) {
-      if (this.rig.diagnostics.kind === 'glb') this.replaceRig(createProceduralRig());
+      if (this.rig.diagnostics.kind === 'glb') this.replaceRig(createProceduralRig(this.portraitStyle));
       else this.callbacks.onReady?.(this.rig.diagnostics);
       this.callbacks.onModelState?.('ready');
       return;
@@ -214,7 +228,7 @@ export class AvatarRenderer {
       this.callbacks.onModelState?.('ready');
     } catch (error) {
       if (this.disposed || serial !== this.modelSerial || abort.signal.aborted) return;
-      if (this.rig.diagnostics.kind !== 'procedural') this.replaceRig(createProceduralRig());
+      if (this.rig.diagnostics.kind !== 'procedural') this.replaceRig(createProceduralRig(this.portraitStyle));
       this.callbacks.onModelState?.('fallback');
       this.callbacks.onError?.(error instanceof Error ? error : new Error('The model could not be loaded.'));
     }
@@ -222,8 +236,9 @@ export class AvatarRenderer {
 
   private replaceRig(rig: AvatarRig): void {
     this.scene.remove(this.rig.root); this.rig.dispose(); this.rig = rig;
-    this.pose = neutralPose(); rig.apply(this.pose); this.scene.add(rig.root);
+    this.pose = neutralPose(); this.attention.reset(); rig.apply(this.pose); this.scene.add(rig.root);
     this.canvas.dataset.avatar = rig.diagnostics.kind;
+    this.canvas.dataset.portraitStyle = this.portraitStyle;
     this.canvas.setAttribute('aria-label', rig.diagnostics.kind === 'glb'
       ? 'Interactive rigged 3D human avatar. Drag to change the viewing angle.'
       : 'Interactive stylized 3D avatar. Drag to change the viewing angle.');
@@ -244,12 +259,13 @@ export class AvatarRenderer {
 
   private onVisibility = (): void => {
     this.visible = !document.hidden;
-    if (!this.visible) this.stopAudition('document_hidden');
+    if (!this.visible) { this.stopAudition('document_hidden'); this.attention.reset(); }
     if (this.visible) { this.previousFrame = 0; if (!this.raf && !this.contextLost) this.raf = requestAnimationFrame(this.frame); }
   };
 
   private onContextLost = (event: Event): void => {
     this.stopAudition('graphics_context_lost');
+    this.attention.reset();
     event.preventDefault(); this.contextLost = true;
     cancelAnimationFrame(this.raf); this.raf = 0;
     this.callbacks.onError?.(new Error('The graphics context was interrupted. Reload the avatar to continue.'));
@@ -265,15 +281,32 @@ export class AvatarRenderer {
     const clock = this.playback.performanceClip ? this.playback.observationElapsedMs ?? this.playback.elapsedMs : this.playback.audioElapsedMs ?? this.playback.elapsedMs;
     const seek = clock < this.lastClock || clock - this.lastClock > 250;
     this.lastClock = clock;
-    this.pose = seek || this.calibrationPose ? target : dampPose(this.pose, target, delta); this.rig.apply(this.pose);
-    if (now - this.lastTelemetry > 250) {
+    this.pose = seek || this.calibrationPose ? target : dampPose(this.pose, target, delta);
+    // RAF's timestamp can precede a pointer/capture event in the same frame.
+    // Sample the input clock now so a freshly observed target is not discarded
+    // as a future timestamp and the eyes-first delay is not restarted.
+    const attentionFrame = this.attention.sample(this.calibrationPose ? null : this.playback.attentionTarget,
+      performance.now(), this.playback.reducedMotion, attentionCapabilities(this.rig.diagnostics).head);
+    const attended = composeAttentionPose(this.pose, attentionFrame, this.rig.diagnostics);
+    this.rig.apply(this.calibrationPose ? this.pose : attended.pose);
+    const telemetry = this.calibrationPose
+      ? { ...sample.telemetry, faceSource: 'calibration' as const, boneSource: 'calibration' as const, speechSource: 'silent' as const, attention: attended.telemetry }
+      : { ...sample.telemetry, attention: attended.telemetry };
+    // Observable animation output, without retaining capture images or landmarks.
+    this.canvas.dataset.attentionPhase = attended.telemetry.phase;
+    this.canvas.dataset.attentionTarget = attended.telemetry.targetId ?? '';
+    this.canvas.dataset.attentionEyeYaw = attended.telemetry.eyeYaw.toFixed(4);
+    this.canvas.dataset.attentionEyePitch = attended.telemetry.eyePitch.toFixed(4);
+    this.canvas.dataset.attentionHeadYaw = attended.telemetry.headYaw.toFixed(4);
+    this.canvas.dataset.attentionHeadPitch = attended.telemetry.headPitch.toFixed(4);
+    if (now - this.lastTelemetry > (attentionFrame.phase === 'idle' ? 250 : 80)) {
       this.lastTelemetry = now;
-      this.callbacks.onTelemetry?.(this.calibrationPose ? { ...sample.telemetry, faceSource: 'calibration', boneSource: 'calibration', speechSource: 'silent' } : sample.telemetry);
+      this.callbacks.onTelemetry?.(telemetry);
     }
     this.controls.update(); this.renderer.render(this.scene, this.camera);
     if (this.audition?.recording) {
       this.audition.add({ monotonicMs: now, audioMs: this.playback.audioElapsedMs ?? null, speaking: this.playback.speaking,
-        telemetry: sample.telemetry, drawCalls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles,
+        telemetry, drawCalls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles,
         geometryCount: this.renderer.info.memory.geometries, textureCount: this.renderer.info.memory.textures }, this.playback.audioSha256);
       if (!this.audition.recording) { this.controls.enabled = true; this.callbacks.onAuditionState?.(false); }
     }
@@ -290,6 +323,7 @@ export class AvatarRenderer {
   dispose(): void {
     if (this.disposed) return;
     this.stopAudition('renderer_disposed');
+    this.attention.reset();
     this.disposed = true; ++this.modelSerial; this.modelAbort?.abort();
     cancelAnimationFrame(this.raf); this.raf = 0;
     this.resizeObserver.disconnect(); this.controls.dispose();
@@ -301,3 +335,4 @@ export class AvatarRenderer {
     this.canvas.remove();
   }
 }
+

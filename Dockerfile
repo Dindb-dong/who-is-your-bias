@@ -4,6 +4,7 @@ COPY package.json package-lock.json ./
 COPY apps/web/package.json ./apps/web/package.json
 RUN npm ci
 COPY apps/web ./apps/web
+COPY scripts/prepare-vision.mjs ./scripts/prepare-vision.mjs
 RUN npm run build
 
 FROM python:3.12-slim-bookworm AS runtime
@@ -14,8 +15,10 @@ COPY pyproject.toml uv.lock README.md ./
 COPY src ./src
 RUN uv sync --locked --no-dev
 COPY data/personas ./data/personas
+COPY data/snapshots/jensen-huang-2026-11-12.json ./data/snapshots/jensen-huang-2026-11-12.json
 COPY --from=web /build/apps/web/dist ./apps/web/dist
-ENV BIAS_CORPUS_DIR=/app/data/personas/elon-musk \
+ENV BIAS_CORPUS_DIR=/app/data/personas/jensen-huang \
+    BIAS_PERSONA_SNAPSHOT=/app/data/snapshots/jensen-huang-2026-11-12.json \
     BIAS_WEB_DIR=/app/apps/web/dist \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1

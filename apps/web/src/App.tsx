@@ -5,6 +5,8 @@ import type { Citation, ExperimentMode, Language, MotionLibraryStatus, Persona, 
 import type { MotionMode } from './avatar/types';
 import { RESEARCH_HUMAN_AVATAR, type AvatarFraming } from './avatar/builtin';
 import { AvatarStage } from './components/AvatarStage';
+import { AttentionPanel } from './components/AttentionPanel';
+import type { AttentionTarget } from './avatar/attention';
 import { SourcesView } from './components/SourcesView';
 import { experiments, ResearchLab } from './components/ResearchLab';
 import { SettingsDialog } from './components/SettingsDialog';
@@ -24,7 +26,7 @@ import type { PcmState } from './hooks/pcmPlayback';
 
 interface Message { id: string; role: 'user' | 'assistant'; text: string; turn?: Turn; pending?: boolean; error?: string }
 type Page = 'studio' | 'sources' | 'lab' | 'presentation';
-const defaultQuestions = ['Why are you boring?', 'How do tunnels reduce traffic congestion?', 'How can we reduce tunneling costs?'];
+const defaultQuestions = ['What is accelerated computing?', 'What are AI factories?', 'How does simulation help robotics?'];
 const stages: Record<string, string> = { retrieving: 'Finding relevant sources', generating: 'Composing a response', planning: 'Planning expression', complete: 'Response ready' };
 
 function Mark({ small = false }: { small?: boolean }) {
@@ -63,6 +65,9 @@ export default function App() {
   const [model, setModel] = useState<{ name: string; url: string } | undefined>();
   const [builtinAvatar, setBuiltinAvatar] = useState<'human' | 'portrait'>('human');
   const [framing, setFraming] = useState<AvatarFraming>('portrait');
+  const [attentionTarget, setAttentionTarget] = useState<AttentionTarget | null>(null);
+  const avatarChoiceMade = useRef(false);
+  const lastPersona = useRef<string | null>(null);
   const [avatarError, setAvatarError] = useState<string | null>(null);
   const [avatarReady, setAvatarReady] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
@@ -117,7 +122,7 @@ export default function App() {
     liveClock.current = null; setLiveMeasurement(null);
     composer.current?.focus();
   }
-  function navigate(next: Page) { cancel(); setPage(next); setEvidence(null); }
+  function navigate(next: Page) { cancel(); setAttentionTarget(null); setPage(next); setEvidence(null); }
   async function send(text = draft) {
     const question = text.trim();
     if (!question || busy || connection !== 'ready') return;
@@ -194,13 +199,29 @@ export default function App() {
   }
   function loadModel(file: File) {
     if (!file.name.toLowerCase().endsWith('.glb') || file.size > 50 * 1024 * 1024) { setAvatarError('Choose a GLB file smaller than 50 MB.'); return; }
+    avatarChoiceMade.current = true;
     measuredMotion.stop(); setAvatarError(null); setAvatarReady(false); setModel({ name: file.name, url: URL.createObjectURL(file) });
   }
   function selectBuiltinAvatar(next: 'human' | 'portrait') {
+    avatarChoiceMade.current = true;
     if (!model && builtinAvatar === next && !avatarError) return;
     measuredMotion.stop(); setModel(undefined); setBuiltinAvatar(next); setAvatarError(null); setAvatarReady(false);
   }
   function listen(turn: Turn) { if (busy) return; pcmPlayer.current?.stop(); setPcmState(initialPcmState); setActiveTurn(turn); void measuredMotion.play(turn.behavior.motion); void playback.play(turn, voice === 'off' ? 'browser' : voice); }
+  useEffect(() => {
+    if (!persona) return;
+    if (lastPersona.current && lastPersona.current !== persona.id) {
+      cancel(); setMessages([]); setSessionId(undefined); setActiveTurn(undefined); setEvidence(null);
+      setVoice('off'); setMotionMode('disabled'); setAttentionTarget(null);
+      avatarChoiceMade.current = false; setModel(undefined);
+    }
+    if (!avatarChoiceMade.current) setBuiltinAvatar(persona.id === 'jensen-huang' ? 'portrait' : 'human');
+    lastPersona.current = persona.id;
+  }, [persona?.id]);
+  const isJensen = persona?.id === 'jensen-huang';
+  const subjectName = persona?.name ?? 'Studio persona';
+  const initials = persona?.presentation?.initials ?? (persona?.name.split(/\s+/).map((part) => part[0]).slice(0, 2).join('') || '—');
+  const topics = persona?.presentation?.topics ?? [];
   const questions = persona?.example_questions[language] ?? defaultQuestions;
   const speaking = pcmState.status === 'playing' || playback.status === 'playing';
   const visualPlayback = streamingVoice ? { ...playback, ...pcmState, speechTiming: undefined, audioSha256: undefined } : playback;
@@ -211,30 +232,30 @@ export default function App() {
     <aside className="sidebar">
       <a className="brand" href="#" onClick={(event) => { event.preventDefault(); navigate('studio'); }} aria-label="Who is your bias home"><Mark/><span>who is<br/>your <b>bias?</b></span></a>
       <div className="workspace-label">PERSONA WORKSPACE<span>01</span></div>
-      <nav aria-label="Main navigation"><button className={page === 'studio' ? 'nav-item active' : 'nav-item'} onClick={() => navigate('studio')}><MessageCircle size={19}/><span>Conversation</span>{page === 'studio' && <i/>}</button><button className={page === 'sources' ? 'nav-item active' : 'nav-item'} onClick={() => navigate('sources')}><BookOpen size={19}/><span>Source library</span><span className="nav-count">{sources.length || '—'}</span></button><button className={page === 'lab' ? 'nav-item active' : 'nav-item'} onClick={() => navigate('lab')}><FlaskConical size={19}/><span>Research lab</span></button><button className={page === 'presentation' ? 'nav-item active' : 'nav-item'} onClick={() => navigate('presentation')}><Clapperboard size={19}/><span>Presentation</span></button></nav>
-      <div className="sidebar-subject"><span className="eyebrow">IN THE STUDIO</span><div className="subject-mini"><div className="monogram">EM</div><div><strong>Elon Musk</strong><span>Public-source persona</span></div></div><div className="subject-lines"><span>Engineering</span><span>Space</span><span>Ideas</span></div></div>
+      <nav aria-label="Main navigation"><button className={page === 'studio' ? 'nav-item active' : 'nav-item'} onClick={() => navigate('studio')}><MessageCircle size={19}/><span>Conversation</span>{page === 'studio' && <i/>}</button><button className={page === 'sources' ? 'nav-item active' : 'nav-item'} onClick={() => navigate('sources')}><BookOpen size={19}/><span>Source library</span><span className="nav-count">{sources.length || '—'}</span></button><button className={page === 'lab' ? 'nav-item active' : 'nav-item'} onClick={() => navigate('lab')}><FlaskConical size={19}/><span>Research lab</span></button><button className={page === 'presentation' ? 'nav-item active' : 'nav-item'} onClick={() => navigate('presentation')}><Clapperboard size={19}/><span>{isJensen ? 'Archived presentation' : 'Presentation'}</span></button></nav>
+      <div className="sidebar-subject"><span className="eyebrow">IN THE STUDIO</span><div className="subject-mini"><div className="monogram">{initials}</div><div><strong>{subjectName}</strong><span>Public-source persona</span></div></div><div className="subject-lines">{topics.map((topic) => <span key={topic}>{topic}</span>)}</div></div>
       <div className="sidebar-bottom"><button className="nav-item" onClick={() => setSettings(true)}><Settings2 size={18}/><span>Studio settings</span></button><button className="nav-item" onClick={() => setInfoOpen(!infoOpen)}><CircleHelp size={18}/><span>About this project</span></button><div className="simulation-note"><span className="tiny-dot"/> An AI simulation, openly labeled.</div></div>
     </aside>
     <div className="workspace">
       <header className="topbar"><div className="breadcrumb"><span>Workspace</span><ChevronRight size={14}/><strong>{page === 'studio' ? 'Conversation' : page === 'sources' ? 'Source library' : page === 'presentation' ? 'Presentation' : 'Research lab'}</strong></div><div className="topbar-actions"><span className={`connection ${connection}`}><i/>{connection === 'ready' ? 'Studio connected' : connection === 'connecting' ? 'Connecting' : 'Service offline'}</span><label className="language-select"><Globe2 size={15}/><select aria-label="Response language" value={language} onChange={(event) => setLanguage(event.target.value as Language)}><option value="en">English</option><option value="ko">한국어</option></select><ChevronDown size={12}/></label><button className="icon-button mobile-settings" onClick={() => setSettings(true)} aria-label="Studio settings"><Settings2 size={18}/></button><div className="user-avatar">Y</div></div></header>
       <main>
-        {infoOpen && <div className="about-banner"><Sparkles size={19}/><p><strong>Who Is Your Bias?</strong> A research workspace for source-grounded dialogue, voice, and embodied behavior. This is an AI simulation, not Elon Musk or an official representative. The reference avatar and its movement rules are designed prototypes.</p><button className="icon-button" onClick={() => setInfoOpen(false)} aria-label="Close project information"><X size={17}/></button></div>}
+        {infoOpen && <div className="about-banner"><Sparkles size={19}/><p><strong>Who Is Your Bias?</strong> A research workspace for source-grounded dialogue, voice, and embodied behavior. This is an AI simulation, not {subjectName} or an official representative. The portrait and attention interaction are designed previews; they do not reproduce learned personal habits.</p><button className="icon-button" onClick={() => setInfoOpen(false)} aria-label="Close project information"><X size={17}/></button></div>}
         {connection === 'error' && <div className="connection-error" role="alert"><span><strong>The conversation service is offline.</strong> {connectionError}</span><button onClick={() => setReload((value) => value + 1)}><RotateCcw size={14}/> Reconnect</button></div>}
-        {page === 'presentation' ? <PresentationView onAsk={() => { reset(); navigate('studio'); setTimeout(() => composer.current?.focus(), 0); }}/> : page === 'sources' ? <SourcesView sources={sources} corpusInfo={persona?.qa_corpus}/> : page === 'lab' ? <><ResearchLab language={language}/><MotionLab modelUrl={modelUrl} reducedMotion={reducedMotion}/></> : <>
-          <div className="studio-heading"><div><div className="eyebrow">CURIOSITY, IN CONVERSATION</div><h1>Meet the mind. <span>Explore the ideas.</span></h1><p>A conversation with an evidence-grounded Elon Musk persona.</p></div><button className="secondary-button" onClick={reset}><Plus size={16}/> New conversation</button></div>
+        {page === 'presentation' ? <><div className="about-banner"><p><strong>Historical Musk presentation.</strong> This archived evaluation video predates the Jensen studio and is not a Jensen avatar or voice.</p></div><PresentationView onAsk={() => { reset(); navigate('studio'); setTimeout(() => composer.current?.focus(), 0); }}/></> : page === 'sources' ? <SourcesView sources={sources} corpusInfo={persona?.qa_corpus}/> : page === 'lab' ? <><ResearchLab language={language}/><MotionLab modelUrl={modelUrl} reducedMotion={reducedMotion}/></> : <>
+          <div className="studio-heading"><div><div className="eyebrow">CURIOSITY, IN CONVERSATION</div><h1>Meet the mind. <span>Explore the ideas.</span></h1><p>A conversation with a source-grounded {subjectName} persona.</p></div><button className="secondary-button" onClick={reset}><Plus size={16}/> New conversation</button></div>
           <div className="studio-grid">
             <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}><section className="stage-card" aria-label="Avatar studio" style={{ flex: 1 }}>
-              <div className="stage-top"><div><span className="tag dark"><span className="tiny-dot"/> AI SIMULATION</span><div className="stage-title">Elon Musk<span>01 / RESEARCH PERSONA</span></div></div><button className="stage-options" onClick={() => setSettings(true)} aria-label="Avatar settings"><Settings2 size={18}/></button></div>
-              <div className="avatar-viewport"><AvatarStage speaking={speaking} timeline={streamingVoice ? undefined : activeTurn?.behavior} elapsedMs={visualPlayback.elapsedMs} amplitude={speaking ? visualPlayback.amplitude : 0} modelUrl={modelUrl} framing={framing} reducedMotion={reducedMotion} speechTiming={visualPlayback.speechTiming} audioSha256={visualPlayback.audioSha256} audioElapsedMs={visualPlayback.audioElapsedMs} performanceClip={motionMode !== 'disabled' && mode === 'behavior' && !reducedMotion ? measuredMotion.clip : undefined} observationElapsedMs={measuredMotion.elapsedMs} allowGeometryPreview={motionMode === 'geometry_preview'} onReady={onAvatarReady} onError={onAvatarError}/></div>
-              <div className="stage-caption"><span className="caption-rule"/><span>{model ? 'YOUR CUSTOM RIG' : builtinAvatar === 'human' ? 'RESEARCH HUMAN RIG' : 'STYLIZED PORTRAIT RIG'}</span><span className="caption-rule"/></div>
+              <div className="stage-top"><div><span className="tag dark"><span className="tiny-dot"/> AI SIMULATION</span><div className="stage-title">{subjectName}<span>01 / RESEARCH PERSONA</span></div></div><button className="stage-options" onClick={() => setSettings(true)} aria-label="Avatar settings"><Settings2 size={18}/></button></div>
+              <div className="avatar-viewport"><AvatarStage attentionTarget={attentionTarget} portraitStyle={isJensen ? 'jensen' : 'reference'} speaking={speaking} timeline={streamingVoice ? undefined : activeTurn?.behavior} elapsedMs={visualPlayback.elapsedMs} amplitude={speaking ? visualPlayback.amplitude : 0} modelUrl={modelUrl} framing={framing} reducedMotion={reducedMotion} speechTiming={visualPlayback.speechTiming} audioSha256={visualPlayback.audioSha256} audioElapsedMs={visualPlayback.audioElapsedMs} performanceClip={motionMode !== 'disabled' && mode === 'behavior' && !reducedMotion ? measuredMotion.clip : undefined} observationElapsedMs={measuredMotion.elapsedMs} allowGeometryPreview={motionMode === 'geometry_preview'} onReady={onAvatarReady} onError={onAvatarError}/></div>
+              <div className="stage-caption"><span className="caption-rule"/><span>{model ? 'YOUR CUSTOM RIG' : builtinAvatar === 'human' ? (isJensen ? 'GENERIC RESEARCH RIG' : 'RESEARCH HUMAN RIG') : isJensen ? 'JENSEN · STYLIZED PREVIEW' : 'STYLIZED PORTRAIT RIG'}</span><span className="caption-rule"/></div>
               <div className="stage-bottom"><div className="live-status"><span className={`status-orb ${speaking || busy ? 'animated' : ''}`}/><div><strong>{stageState}</strong><span title={playback.timingMessage}>{streamingVoice ? 'Streaming voice · PCM-clock mouth movement' : voice === 'provider' ? playback.timingStatus === 'available' ? 'Provider voice · audio-timed mouth cues' : 'Provider voice · approximate mouth movement' : voice === 'browser' || speaking ? 'Generic browser voice · approximate lip sync' : 'Text mode · voice available'}</span></div></div><button className="round-control" aria-label={streamingVoice || speaking || playback.status === 'loading' ? 'Stop audio' : 'Enable voice settings'} onClick={() => streamingVoice ? cancel() : speaking || playback.status === 'loading' ? playback.stop() : setSettings(true)}>{streamingVoice || speaking || playback.status === 'loading' ? <Square size={16}/> : voice === 'off' ? <VolumeX size={18}/> : <Volume2 size={18}/>}</button></div>
               {!avatarReady && !avatarError && <div className="avatar-loading"><LoaderCircle size={18} className="spin"/> Preparing the rig</div>}
               {avatarError && <div className="avatar-error" role="alert">{avatarError}<button onClick={() => selectBuiltinAvatar('portrait')}>Use stylized portrait</button></div>}
-            </section><MotionNotice state={measuredMotion} mode={motionMode} reducedMotion={reducedMotion} noMatch={Boolean(activeTurn && !busy && !activeTurn.behavior.motion)}/></div>
+            </section><AttentionPanel enabled={page === 'studio'} reducedMotion={reducedMotion} onTarget={setAttentionTarget}/><MotionNotice state={measuredMotion} mode={motionMode} reducedMotion={reducedMotion} noMatch={Boolean(activeTurn && !busy && !activeTurn.behavior.motion)}/></div>
             <section className="conversation-card" aria-label="Conversation">
               <div className="conversation-header"><div><MessageCircle size={18}/><h2>Let's talk</h2></div><span className="preview-label">{persona?.capabilities.llm ? 'LLM connected' : 'Source preview'}</span></div>
               <div className="message-list" role="log" aria-label="Conversation messages" aria-live="polite" aria-relevant="additions text">
-                {!messages.length && <div className="welcome-message"><div className="assistant-avatar"><Mark small/></div><span className="eyebrow">A GOOD QUESTION IS A GOOD START</span><h2>{language === 'ko' ? '어떤 이야기가 궁금해?' : 'Where should we begin?'}</h2><p>{language === 'ko' ? '우주, 공학, 창업에 관한 공개 인터뷰와 글을 바탕으로 질문해 봐.' : 'Explore space, engineering, and the thinking behind big ideas — with the original sources close by.'}</p><div className="starter-questions">{questions.slice(0, 3).map((question) => <button key={question} disabled={connection !== 'ready'} onClick={() => void send(question)}><span>{question}</span><ArrowUpRight size={16}/></button>)}</div><div className="preview-explainer"><BookOpen size={14}/><span>{persona?.capabilities.llm ? 'Responses use a connected model and selected evidence.' : 'Source preview uses published evidence. Connect a model for generated dialogue.'}</span></div></div>}
+                {!messages.length && <div className="welcome-message"><div className="assistant-avatar"><Mark small/></div><span className="eyebrow">A GOOD QUESTION IS A GOOD START</span><h2>{language === 'ko' ? '어떤 이야기가 궁금해?' : 'Where should we begin?'}</h2><p>{language === 'ko' ? '공개된 자료를 바탕으로 궁금한 것을 물어봐. 답변의 출처도 함께 확인할 수 있어.' : `Explore ${topics.length ? topics.join(', ') : 'the ideas'} — with the original sources close by.`}</p><div className="starter-questions">{questions.slice(0, 3).map((question) => <button key={question} disabled={connection !== 'ready'} onClick={() => void send(question)}><span>{question}</span><ArrowUpRight size={16}/></button>)}</div><div className="preview-explainer"><BookOpen size={14}/><span>{persona?.capabilities.llm ? 'Responses use a connected model and selected evidence.' : 'Source preview uses published evidence. Connect a model for generated dialogue.'}</span></div></div>}
                 {messages.map((message) => <article key={message.id} className={`message ${message.role}`}><div className="message-avatar">{message.role === 'assistant' ? <Mark small/> : 'Y'}</div><div className="message-content"><div className="message-author">{message.role === 'assistant' ? 'Research persona' : 'You'}{message.turn && <span>{message.turn.provider === 'evidence' ? 'Source notes' : 'Generated'}</span>}</div>{message.text && <p className="message-text">{message.text}</p>}{message.pending && <div className="thinking"><LoaderCircle size={13} className="spin"/>{status || 'Working on your question'}</div>}{message.error && <div className="message-error" role="alert">{message.error}</div>}{message.turn && <div className="message-tools"><button onClick={() => setEvidence(message.turn!.citations)}><BookOpen size={13}/>{message.turn.citations.length ? `${message.turn.citations.length} evidence records` : 'No supporting evidence'}</button><button onClick={() => listen(message.turn!)} disabled={busy} aria-label="Play response"><Volume2 size={14}/><span>Listen</span></button><GroundingBadge grounding={message.turn.grounding} language={message.turn.language}/></div>}</div></article>)}
                 <div ref={chatBottom}/>
               </div>
@@ -251,7 +272,8 @@ export default function App() {
       <nav className="mobile-nav" aria-label="Mobile navigation"><button className={page === 'studio' ? 'active' : ''} onClick={() => navigate('studio')}><MessageCircle size={19}/>Studio</button><button className={page === 'sources' ? 'active' : ''} onClick={() => navigate('sources')}><BookOpen size={19}/>Sources</button><button className={page === 'lab' ? 'active' : ''} onClick={() => navigate('lab')}><FlaskConical size={19}/>Lab</button><button className={page === 'presentation' ? 'active' : ''} onClick={() => navigate('presentation')}><Clapperboard size={19}/>Present</button></nav>
     </div>
     {evidence && <><button className="drawer-scrim" onClick={() => setEvidence(null)} aria-label="Close response evidence"/><EvidencePanel citations={evidence} onClose={() => setEvidence(null)}/></>}
-    <SettingsDialog open={settings} close={() => setSettings(false)} persona={persona} voice={voice} setVoice={(next) => { if (streamingVoice) cancel(); playback.stop(); setVoice(next); }} autoPlay={autoPlay} setAutoPlay={setAutoPlay} reducedMotion={reducedMotion} setReducedMotion={(value) => { measuredMotion.stop(); setReducedMotion(value); }} modelName={model?.name} loadModel={loadModel} resetModel={() => selectBuiltinAvatar('human')} builtinAvatar={builtinAvatar} setBuiltinAvatar={selectBuiltinAvatar} framing={framing} setFraming={setFraming} motionMode={motionMode} setMotionMode={(value) => { measuredMotion.stop(); setMotionMode(value); }} motionLibrary={motionLibrary} motionLibraryError={motionLibraryError}/>
+    <SettingsDialog open={settings} close={() => setSettings(false)} persona={persona} voice={voice} setVoice={(next) => { if (streamingVoice) cancel(); playback.stop(); setVoice(next); }} autoPlay={autoPlay} setAutoPlay={setAutoPlay} reducedMotion={reducedMotion} setReducedMotion={(value) => { measuredMotion.stop(); setReducedMotion(value); }} modelName={model?.name} loadModel={loadModel} resetModel={() => selectBuiltinAvatar(isJensen ? 'portrait' : 'human')} builtinAvatar={builtinAvatar} setBuiltinAvatar={selectBuiltinAvatar} framing={framing} setFraming={setFraming} motionMode={motionMode} setMotionMode={(value) => { measuredMotion.stop(); setMotionMode(value); }} motionLibrary={motionLibrary} motionLibraryError={motionLibraryError}/>
   </div>;
 }
+
 

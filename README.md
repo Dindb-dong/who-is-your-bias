@@ -2,7 +2,7 @@
 
 **A research studio for evidence-grounded conversation, voice, and embodied behavior.**
 
-Initial subject: **Elon Musk**. The project connects documented statements to a conversational model and a synchronized avatar. Generated interactions are explicitly presented as simulations. Historical statements keep their source and date; the system does not claim to reconstruct private thoughts.
+Active subject: **Jensen Huang**. The project connects documented statements to a conversational model and a synchronized avatar. Generated interactions are explicitly presented as simulations. Historical statements keep their source and date; the system does not claim to reconstruct private thoughts. Earlier Elon Musk corpora, presentations, motion clips and evaluation results remain explicitly historical research assets.
 
 ## Run the complete studio
 
@@ -15,9 +15,13 @@ npm run build
 uv run bias serve
 ```
 
-Open `http://127.0.0.1:8000`. The studio includes conversation, source inspection, A/B/C comparison, a prepared presentation player with live Q&A handoff, exportable turn timing, voice playback controls, a bundled human avatar, a lightweight portrait, local GLB loading, and a motion/calibration lab. See [studio guide](docs/studio.md) for development, audio, and retargeting details.
+Open `http://127.0.0.1:8000`. Jensen's stylized portrait is the default. In **Attention**, try the pointer preview, or explicitly start Camera / Share screen and select a numbered participant. The eyes turn first; the head follows after 220 ms. Selection uses face positions and does not infer gender or identity. See the [Jensen attention guide](docs/jensen-attention.md) for controls, privacy, setup and limitations.
 
-The [2026 implementation report](docs/2026-implementation.md) adds a reproducible 977-QA original-data build, optional multilingual hybrid retrieval, explicit temporal snapshots, follow-up resolution, early PCM speech and same-audio avatar audition. The bundled excerpt preview remains the lightweight default. The report separates actual development results from uncompleted adapter training, recent-position coverage and Musk-likeness evaluation.
+Build and development startup provision a pinned local face detector. Initial setup needs network access to download its verified model; camera frames and inference remain in the browser. The studio also includes source inspection, A/B/C comparison, exportable turn timing, optional voice playback, a generic human rig, local GLB loading and historical presentation/motion labs. See [studio guide](docs/studio.md) for audio and retargeting details.
+
+The Jensen seed contains eight original editorial summaries from three dated NVIDIA sources (2024–2025), bound to an explicit snapshot. It supports source-grounded previews and does not claim current 2026 coverage, a trained Jensen voice, learned mannerisms or a photorealistic likeness. Those avatar quality gates remain in [PR #15's generation plan](docs/avatar-generation-pipeline.md).
+
+The historical [2026 implementation report](docs/2026-implementation.md) records a reproducible 977-QA original-data build, optional multilingual hybrid retrieval, explicit temporal snapshots, follow-up resolution, early PCM speech and same-audio avatar audition for the earlier Musk workstream. Its measurements and remaining limitations do not transfer to Jensen.
 
 ## Run the conversation engine
 
@@ -29,7 +33,7 @@ uv run bias validate
 uv run bias serve
 ```
 
-The API runs at `http://127.0.0.1:8000`; API documentation is at `/docs`. With no model configured, responses contain labeled original-interview excerpts from a bounded pilot. This mode exercises retrieval, sessions, evidence links, and behavior planning without claiming language-model inference.
+The API runs at `http://127.0.0.1:8000`; API documentation is at `/docs`. With no model configured, Jensen responses contain labeled evidence summaries from the dated seed. This mode exercises retrieval, sessions, evidence links, and behavior planning without claiming language-model inference. Optional speech must explicitly bind `BIAS_TTS_PERSONA_ID` to `jensen-huang` or `generic`; foreign or unbound voices and historical Musk motion are unavailable in the Jensen studio.
 
 ### Connect an actual model
 
@@ -49,6 +53,8 @@ The optional [local language server](docs/language-runtime.md) runs a server-sel
 
 | Capability | Behavior |
 | --- | --- |
+| Active Jensen studio | Profile, topics, source library and snapshot from Jensen's own dated seed; explicit speech/motion subject binding |
+| Participant attention | Local camera/screen face boxes, explicit selection, eyes-first then head response, pointer/keyboard preview and reduced-motion support |
 | Source corpus | Original question/answer pairs, distinct context/annotations, pinned source events, explicit unknown acoustic boundaries and review provenance |
 | Retrieval | Preserved lexical baseline; optional pinned multilingual embeddings, fusion and cross-encoder with independent factual/style gates and recorded development tradeoffs |
 | Dialogue | OpenAI-compatible streaming adapter; profile, evidence, and behavior modes; explicit corpus-bound historical/current snapshot policy |
@@ -56,12 +62,12 @@ The optional [local language server](docs/language-runtime.md) runs a server-sel
 | Evidence | Per-unit citation coverage, separately labeled semantic review, original source links, frozen prompt comparisons |
 | Behavior plans | Timed face/gaze/head/gesture cues with explicit provenance and estimated timing |
 | Speech and transcription | Optional compatible providers; committed-sentence synthesis and bounded PCM delivery while later text continues; sample-clock playback and interruption |
-| Prepared presentation | Actual 12.24-second Qwen3-TTS → MuseTalk video, captions, generated WAV, verified media hashes and fresh live-session handoff |
+| Historical prepared presentation | Earlier Musk-workstream 12.24-second Qwen3-TTS → MuseTalk video, captions, generated WAV, verified media hashes and fresh live-session handoff |
 | Live timing | Browser text/PCM events and JSON export; separate actual-service HTTP benchmark; acoustic speaker output remains unmeasured |
 | Local reference voice | Optional Qwen3-TTS service with cached prompts, bounded requests, and a fixed server-side reference |
 | Speech timing | Optional Rhubarb mouth-cue recognition, SHA-256-bound audio packages, actual playback clock, explicit amplitude fallback |
 | Avatar calibration | Bundled compressed human mesh with 163 bones and 67 named face/viseme targets; calibrated controls, portrait/full-body cameras, and local GLB support |
-| Measured motion | 13 source-linked clips and 40 primitives from two events; opt-in conversation retrieval, source-clock replay, and explicit review gates |
+| Historical measured motion | Earlier Musk-workstream 13 source-linked clips and 40 primitives from two events; source-clock replay and explicit review gates; not bound to Jensen |
 | Situation observations | Four original Q&As linked to 19 speech-rate windows and ten visual windows; source-clock measurements, explicit unknowns and an empty reviewed runtime index |
 | Reference preparation | Publisher-text/ASR comparison, bounded candidate WAVs, clock metadata, artifact hashes, and a review ledger |
 | Media processing | FFmpeg clips, source-clock manifests, optional ASR/alignment and facial/body observation adapters |
@@ -70,7 +76,7 @@ The optional [local language server](docs/language-runtime.md) runs a server-sel
 
 ## Historical corpus and source acquisition
 
-The following counts describe the preserved `data/personas/elon-musk` summary archive, not the current original-Q&A default or the v2 experiment.
+The following counts describe the preserved `data/personas/elon-musk` summary archive, not the active Jensen seed or the original-Q&A v2 experiment.
 
 The initial 7-source development collection has expanded to **31 distinct source events/documents and 163 reviewed evidence records**, spanning **2003–2026**. Retrieval uses **159 records from 30 sources**; the four reference records from Lex #438 remain held out. Evidence is concise, attributed paraphrase, with original URLs and dates.
 
@@ -80,9 +86,9 @@ The publisher transcript pipeline also extracted **3,451 timestamped caption cue
 
 This is a research corpus and working application, not a validated replica of a person's mind, voice, or appearance. The [initial inference report](docs/inference-validation.md) and [integration results](docs/integration-validation.md) separate real model execution from citation compliance and perceptual quality. The included human avatar is an artistic reference asset with a calibrated face/body rig. A high-quality likeness asset, learned personal mannerisms across many situations, and independent perceptual evaluation remain separate work.
 
-## Original interview corpus
+## Historical original interview corpus
 
-The explicit default is a ten-record bounded excerpt pilot. The source library identifies it. The full original-answer study uses 92 locally materialized exchanges (80 train / four development / eight test); source text is pinned and reconstructed locally:
+The earlier Musk default is a ten-record bounded excerpt pilot, now selected explicitly with `BIAS_CORPUS_DIR=data/qna/elon-musk-v1` and `BIAS_PERSONA_SNAPSHOT=data/snapshots/elon-musk-2026-11-11.json`. The full original-answer study uses 92 locally materialized exchanges (80 train / four development / eight test); source text is pinned and reconstructed locally:
 
 ```bash
 uv run python -m tools.qna hydrate \
@@ -96,8 +102,8 @@ See [original Q&A](docs/original-qa.md) for source review, source-event isolatio
 ## Research workflow
 
 ```bash
-uv run bias search "Why are you boring?"
-uv run bias search "땅굴을 왜 파나요?"
+uv run bias search "What are AI factories?"
+uv run bias search "AI 팩토리를 어떻게 설명했나요?"
 uv run bias --corpus data/personas/elon-musk evaluate --fail-on-regression --output reports/local/retrieval.json
 uv run python -m tools.research inventory --output reports/local/source-inventory.json
 uv run pytest
@@ -145,6 +151,8 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 
 ## Documentation
 
+- [Jensen attention guide](docs/jensen-attention.md): explicit participant selection, local capture, eyes-first timing, reduced motion, setup and known limits.
+- [PR #16 implementation plan](docs/jensen-attention-plan.md): committed before implementation, with implementation and validation evidence.
 - [New avatar generation pipeline](docs/avatar-generation-pipeline.md): the active plan for creating a new Jensen Huang avatar from multiple photographs and video, including complete arms/hands, facial and finger rigs, new performances, runtime work and acceptance gates.
 - [Avatar generation method evidence](docs/research/avatar-generation-methods.md): mesh authoring, expressive video and multi-image reconstruction, output-format boundaries, hardware and separate code/model licenses.
 - [2026 continuation and execution evidence](docs/2026-continuation.md): merged PR #13, verified adapter serving, real training/comparison boundaries, dialogue regressions, and remaining acceptance work.
