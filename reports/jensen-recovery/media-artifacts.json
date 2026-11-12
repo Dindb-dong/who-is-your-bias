@@ -1,0 +1,68 @@
+{
+  "schema_version": "jensen-media-artifacts.v1",
+  "run_id": "jensen-2026-11-13",
+  "complete_videos_durably_verified": 0,
+  "artifacts": [
+    {
+      "artifact": "media-chunks/goldman-sachs-2024-full/reconstruction.json",
+      "bytes": 954,
+      "sha256": "e3f797225fe77da46591e67c5a8d1f93aecbbfdf543c3349852dd66bdbda1d92",
+      "file_id": "file_00000000571481fd9712405415231d04",
+      "library_file_id": "libfile_fde3_f-9438e7da117081919eeda856adb58846_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "reconstruction(2).json",
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "e3f797225fe77da46591e67c5a8d1f93aecbbfdf543c3349852dd66bdbda1d92"
+    },
+    {
+      "artifact": "media-chunks/stripe-sessions-2024-full/reconstruction.json",
+      "bytes": 1414,
+      "sha256": "d679f73169679f02c38498d61b2e90a7d4f66b7763a3381d96c01cbffe41260f",
+      "file_id": "file_00000000ce1c81fd9a0705e3bc2430eb",
+      "library_file_id": "libfile_fde3_f-a6ee1a8cd3b881919ae9c3224e4254f1_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "reconstruction.json",
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "d679f73169679f02c38498d61b2e90a7d4f66b7763a3381d96c01cbffe41260f"
+    },
+    {
+      "artifact": "media-chunks/gtc-2025-full-480p/reconstruction.json",
+      "bytes": 934,
+      "sha256": "cbd0a4cd7e4f2d1c877509cc10014401941f8737e2f04bea636fc2dcb6f6fd8a",
+      "file_id": "file_000000000ff081fd8b73fbbb3d274857",
+      "library_file_id": "libfile_fde3_f-c9753d92b94c819194215f9902bbe9b6_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "reconstruction(1).json",
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "cbd0a4cd7e4f2d1c877509cc10014401941f8737e2f04bea636fc2dcb6f6fd8a"
+    },
+    {
+      "artifact": "jensen-heldout-original-v1.tar.gz",
+      "bytes": 3497075,
+      "sha256": "900ffd00ed417e15df3e24c8c90aac72b529dc2c66139ff63a92383cec3d661a",
+      "file_id": "file_000000000c3481fdad97c2e4389d58dd",
+      "library_file_id": "libfile_fde3_f-189904c92eec8191b0b278873f13edab_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "jensen-heldout-original-v1.tar.gz",
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "900ffd00ed417e15df3e24c8c90aac72b529dc2c66139ff63a92383cec3d661a"
+    },
+    {
+      "artifact": "jensen-media-batch-01-metadata.tar.gz",
+      "bytes": 260530,
+      "sha256": "d9981fed775cc9acc0c713332c5e61e61e7d7bb8ff57c1dbc21d7a9d06bf1bb8",
+      "file_id": "file_000000006f5881fda17b5e5d80cbc086",
+      "library_file_id": "libfile_fde3_f-d1ae6dfb6d548191aeb7908e47fd1f5b_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "jensen-media-batch-01-metadata.tar.gz",
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "d9981fed775cc9acc0c713332c5e61e61e7d7bb8ff57c1dbc21d7a9d06bf1bb8"
+    }
+  ],
+  "failed_transfers": {
+    "batch": "media-upload-batch-01",
+    "role": "raw_byte_chunks_200MiB",
+    "count": 11,
+    "error_code": "transfer_failed",
+    "status": "definitive_failure_no_completion_claim"
+  },
+  "notes": [
+    "Only metadata, reconstruction manifests and actual heldout archive are verified at this checkpoint. Full video chunks remain pending retry; the original videos are locally acquired.",
+    "Heldout archive contains50complete NoPriors2023 exchanges, frozen manifest SHA256 0c5df9f3a41371570a0fb57426bd1bd78d445ce6eddd6f00b8de941fe403682b."
+  ]
+}
