@@ -431,6 +431,21 @@
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified",
       "workstream_receipt_sha256": "c00ad4492b53a8da42db771bdac3d2df5a9ffa432dfbc964d1affe7a2b6d8c90"
+    },
+    {
+      "artifact_id": "jensen-voice-candidate-evaluation-v1",
+      "role": "complete_voice_candidate_inputs_weights_generated_outputs_and_diagnostics",
+      "file_name": "jensen-voice-candidate-evaluation-v1.tar.gz",
+      "file_id": "file_0000000084e081fdb667221e9e067b83",
+      "library_file_id": "libfile_fde3_f-058149a6e0a88191b568f6164cd66812_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 18933760,
+      "sha256": "017656a776a2af2b2d1c3ca83a9eb58a88533e903a2f4a95766fb465f96fe568",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-all-payload-hashes-and-loaders-verified",
+      "completed_optimizer_steps": 16,
+      "generated_samples": 8,
+      "payload_files_verified": 134,
+      "workstream_verification_receipt_sha256": "08510a1efebd0e3c77f5680fcf1125c7cda35dc991780b5b71c5e0dd026c2bb7"
     }
   ],
   "artifact_indexes": {
@@ -438,6 +453,7 @@
     "avatar": "reports/jensen-avatar/derived-artifact-receipts.json",
     "source_progress": "reports/jensen-recovery/source-progress.json",
     "response_protocols": "reports/jensen-evaluation-v1/artifacts.json",
-    "runtime": "reports/jensen-runtime-v1/artifact-receipts.json"
+    "runtime": "reports/jensen-runtime-v1/artifact-receipts.json",
+    "voice": "reports/voice/jensen-2026-11-13/delivery.json"
   }
 }
