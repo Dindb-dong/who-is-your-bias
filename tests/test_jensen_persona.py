@@ -103,26 +103,55 @@ def test_korean_interview_evidence_reaches_normal_chat(monkeypatch, tmp_path):
         assert source["published_at"] == "2026-03-23" and source["recorded_at"] is None
 
 
-def test_missing_evidence_streams_labeled_simulation_without_citations(monkeypatch, tmp_path):
+@pytest.mark.parametrize(("draft", "accepted"), [
+    ("처리량이 어디에서 막히는지 살필 수 있습니다.", True),
+    ("식량 보급을 어떻게提高效率할지 살필 수 있습니다.", False),
+    ("그가 특허를 냈다고 말했는지 살필 수 있습니다.", False),
+    ("“내가 직접 설계했다”라고 말할지 살필 수 있습니다.", False),
+])
+def test_missing_evidence_streams_only_reviewed_inference(monkeypatch, tmp_path, draft, accepted):
     config = replace(default_settings(monkeypatch, tmp_path), llm=ProviderSettings("http://model.invalid/v1", "test"))
 
     async def stream(_self, messages):
-        assert "conditional answer" in messages[0]["content"]
+        assert "질문의 전제를 사실로 받아들이지 말고" in messages[0]["content"]
         assert '"factual_evidence":[]' in messages[1]["content"]
         yield "  "
-        yield "그는 제약 조건부터 살폈을 가능성이 있습니다."
+        yield draft[:14]
+        yield draft[14:]
 
     monkeypatch.setattr(OpenAICompatibleLLM, "stream", stream)
     with TestClient(create_app(config)) as client:
-        stream_body = client.post("/api/chat/stream", json={"message": "2035년 화성 기지에서 황이 실제로 한 말은?", "language": "ko"}).text
+        stream_body = client.post("/api/chat/stream", json={"message": "화성 기지의 식량 배급을 설계한다고 가정하면 무엇을 고려할까?", "language": "ko"}).text
     events = [block.split("\ndata: ", 1) for block in stream_body.strip().split("\n\n")]
     first_token = next(json.loads(data)["text"] for event, data in events if event == "event: token")
     turn = next(json.loads(data)["turn"] for event, data in events if event == "event: result")
     assert first_token.startswith("가상 추론 (실제 발언 확인 불가)")
+    assert (draft in first_token) is accepted
+    if not accepted:
+        assert draft not in stream_body
+        assert "전체 성능이 막히는지" in first_token
     assert turn["text"] == first_token
     assert turn["provider"] == "openai" and turn["citations"] == []
     assert turn["grounding"]["status"] == "insufficient"
     assert turn["grounding"]["citation_status"] == "not_required"
+
+
+def test_future_quotation_is_unavailable_without_generation(monkeypatch, tmp_path):
+    config = replace(default_settings(monkeypatch, tmp_path), llm=ProviderSettings("http://model.invalid/v1", "test"))
+
+    async def stream(_self, _messages):
+        pytest.fail("An actual future quotation must not reach generation.")
+        yield
+
+    monkeypatch.setattr(OpenAICompatibleLLM, "stream", stream)
+    with TestClient(create_app(config)) as client:
+        turn = client.post("/api/chat", json={
+            "message": "2035년에 황이 비공개 회의에서 실제로 무슨 말을 했어?",
+            "language": "ko",
+        }).json()
+    assert "실제 발언을 확인할 수 없습니다" in turn["text"]
+    assert turn["grounding"]["status"] == "insufficient"
+    assert turn["citations"] == []
 
 
 def test_jensen_snapshot_cannot_be_applied_to_another_subject(corpus):
