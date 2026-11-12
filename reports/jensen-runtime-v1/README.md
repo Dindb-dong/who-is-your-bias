@@ -63,5 +63,12 @@ servers. The output directory must be new and outside the repository because
 the raw trace contains original interview answers. Its report does not claim
 that a quickly completed preview was interrupted neural inference.
 
-Status: configuration preflight and Python compilation passed; the frozen
-real HTTP runner is ready. Functional execution results are pending.
+The first actual HTTP attempt completed 90 assertions; seven failed because the
+runner compared serialized URLs with Pydantic URL objects and expected streaming
+citation markers to remain in the final display text. Direct inspection found
+the original citation text, source identity, URL serialization and locator
+unchanged. The runner now compares canonical URL strings, marker identities and
+all display content after explicit citation-marker removal. The initial run is
+retained as `preview-attempt-1.json`; no shared API or corpus change was made.
+
+Status: corrected runner compiled; the repeated functional run is pending.

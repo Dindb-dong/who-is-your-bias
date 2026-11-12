@@ -9,6 +9,7 @@ import io
 import json
 from pathlib import Path
 import platform
+import re
 import socket
 import subprocess
 import threading
@@ -33,7 +34,8 @@ def code_receipt() -> dict:
     root = Path(bias.api.__file__).resolve().parents[2]
     result = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=root, text=True, capture_output=True)
     paths = ['api.py', 'engine.py', 'config.py', 'corpus.py', 'dialogue.py', 'motion.py',
-             'query_policy.py', 'snapshots.py', 'bindings.py', 'providers.py']
+             'query_policy.py', 'snapshots.py', 'bindings.py', 'providers.py', 'grounding.py',
+             'retrieval.py', 'jensen_retrieval.py', 'temporal.py']
     return {'repository': str(root), 'head': result.stdout.strip() if result.returncode == 0 else None,
             'modules_sha256': {name: digest(root/'src/bias'/name) for name in paths if (root/'src/bias'/name).is_file()},
             'python': platform.python_version(), 'platform': platform.platform()}
@@ -151,7 +153,7 @@ def run(args, settings, corpus, config: dict, preflight: dict) -> dict:
             evidence = corpus.evidence.get(citation['evidence_id'])
             source = corpus.sources.get(citation['source_id'])
             verified = verified and bool(evidence and source and evidence.source_id == source.id
-                and citation['text'] == evidence.text and citation['url'] == source.url
+                and citation['text'] == evidence.text and citation['url'] == str(source.url)
                 and source.split == 'train' and citation['locator'] == evidence.locator.model_dump(mode='json'))
         check(case_id+'.original_citation_binding', verified, citation_count=len(citations))
         check(case_id+'.no_uncontextualized_motion', turn.get('behavior', {}).get('motion') is None)
@@ -246,12 +248,20 @@ def run(args, settings, corpus, config: dict, preflight: dict) -> dict:
             check('sse.lifecycle', names[0] == 'meta' and names[-1] == 'done' and 'error' not in names
                 and len(results) == 1 and 'token' in names)
             if results:
-                check('sse.text_matches_result', tokens == results[0]['text'])
+                # Streaming exposes citation markers; the final display text removes them.
+                # Compare all non-whitespace content after that explicit transformation,
+                # and independently require the same evidence identifiers.
+                markers = re.findall(r'\[source:([A-Za-z0-9_.-]+)\]', tokens)
+                clean_tokens = re.sub(r'\[source:[A-Za-z0-9_.-]+\]', '', tokens)
+                check('sse.display_content_matches_result', ' '.join(clean_tokens.split()) == ' '.join(results[0]['text'].split()))
+                check('sse.marker_identity', set(markers) == {item['evidence_id'] for item in results[0]['citations']})
                 check('sse.identity', events[0]['data']['session_id'] == results[0]['session_id'])
                 report['stream_turn'] = inspect_turn('sse', results[0])
             report['sse'] = {'events': names, 'first_event_ms': events[0]['elapsed_ms'],
                 'first_text_ms': next((event['elapsed_ms'] for event in events if event['event'] == 'token'), None),
-                'complete_ms': stream_record['elapsed_ms'], 'timing_scope': report['timing_scope']}
+                'complete_ms': stream_record['elapsed_ms'], 'raw_token_text_sha256': sha(tokens.encode()),
+                'display_transformation': 'remove explicit source markers; normalize whitespace for content comparison',
+                'timing_scope': report['timing_scope']}
 
             events, _ = client.sse(stream_body, disconnect_after_meta=True)
             interrupted_session = events[0]['data']['session_id']
