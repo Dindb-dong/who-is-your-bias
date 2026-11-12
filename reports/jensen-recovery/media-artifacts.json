@@ -1,7 +1,7 @@
 {
   "schema_version": "jensen-media-artifacts.v1",
   "run_id": "jensen-2026-11-13",
-  "complete_videos_durably_verified": 0,
+  "complete_videos_durably_verified": 1,
   "artifacts": [
     {
       "artifact": "media-chunks/goldman-sachs-2024-full/reconstruction.json",
@@ -100,7 +100,8 @@
       "storage_encoding": "gzip",
       "decoded_bytes": 209715200,
       "decoded_sha256": "bcf4f14ebbfdea8ac5ebcbb96315bc0288d2a59eea3bac5a8697addf96f6af58",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "ad61de59e23cb7f3e4c23318cbb8336ad4ece32b3f5e014c44aa4da1878110a1"
     },
     {
       "artifact": "media-chunks/goldman-sachs-2024-full/goldman-sachs-2024-full.mp4.part003.bin.gz",
@@ -112,7 +113,8 @@
       "storage_encoding": "gzip",
       "decoded_bytes": 167329275,
       "decoded_sha256": "f94cc7f9b5aee5ebf748ac9068538ded0c534f3a7b093e51aa38fa29cb90355a",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "5d27c609e0b4bcfaac670b84ab9e56e5693ab23b742e280ac563ec459379ff49"
     },
     {
       "artifact": "media-chunks/stripe-sessions-2024-full/stripe-sessions-2024-full.mp4.part001.bin.gz",
@@ -175,5 +177,26 @@
     "Heldout archive contains50complete NoPriors2023 exchanges, frozen manifest SHA256 0c5df9f3a41371570a0fb57426bd1bd78d445ce6eddd6f00b8de941fe403682b."
   ],
   "large_artifact_gate": "207929911-byte gzip upload and fresh readback plus decoded209715200-byte chunk hash verified",
-  "readback_progress_note": "Four parallel chunk materializations returned503; other requests pending. Retry fresh read preparation sequentially. Preserve uploadedIDs; do not reupload already successful creates."
+  "readback_progress_note": "Four parallel chunk materializations returned503; other requests pending. Retry fresh read preparation sequentially. Preserve uploadedIDs; do not reupload already successful creates.",
+  "complete_videos": [
+    {
+      "source_id": "goldman-sachs-2024",
+      "event_family_id": "goldman-sachs-2024",
+      "split": "train",
+      "full_file": "goldman-sachs-2024-full.mp4",
+      "bytes": 586759675,
+      "sha256": "586dff89def8ff4a0cea0848a094cca41e573aec0492db9b51325d71aca1bf8b",
+      "duration_seconds": 1783.448333,
+      "source_clock": "publisher_video_package_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "status": "all_chunks_fresh_readback_and_full_reconstruction_verified",
+      "chunk_library_file_ids": [
+        "libfile_fde3_f-e1477bc92e0c8191aecf0a2d8fba6ca8_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-d0fcc9c26bf48191a1167b49b785968c_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-52dbf02230848191ba2cc98fbd0c2953_a18ece08681081918d81df44f69c4b1f"
+      ],
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-9438e7da117081919eeda856adb58846_a18ece08681081918d81df44f69c4b1f"
+    }
+  ]
 }

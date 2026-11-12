@@ -6,7 +6,7 @@
     "located_public_player_events": 11,
     "complete_published_renditions_locally_validated": 4,
     "locally_validated_seconds": 15185.927679,
-    "whole_videos_durably_verified": 0
+    "whole_videos_durably_verified": 1
   },
   "original_dialogue": {
     "dataset": "original-dialogue-v4",
