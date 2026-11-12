@@ -83,6 +83,29 @@ def test_same_subject_metadata_cannot_replace_source_identity(context):
         align_transcripts(context["publisher"], context["asr"])
 
 
+def test_untimed_publisher_text_never_invents_subtitle_clock_or_offset(context):
+    context["publisher"].update(timing_kind="untimed_text", source_timeline=None)
+    for cue in context["publisher"]["segments"]:
+        cue["start"] = None
+    context["publisher_file"].write_text(json.dumps(context["publisher"]))
+    report = align_transcripts(context["publisher"], context["asr"])
+    assert report["matched_tokens"] == 12
+    assert report["offset_summary"] is None
+    assert report["anchors"] == []
+    assert report["publisher_timeline"] is None
+    assert all(match["publisher_cue_start_seconds"] is None for match in report["matches"])
+    assert make_reference(context)["automatic_checks"]["exact_normalized_text_agreement"] is True
+
+
+def test_missing_publisher_times_need_explicit_untimed_declaration(context):
+    context["publisher"]["segments"][0]["start"] = None
+    with pytest.raises(MediaError, match="publisher cue onset"):
+        align_transcripts(context["publisher"], context["asr"])
+    context["publisher"]["timing_kind"] = "untimed_text"
+    with pytest.raises(MediaError, match="Untimed publisher text"):
+        align_transcripts(context["publisher"], context["asr"])
+
+
 def test_real_ffmpeg_candidate_keeps_full_provenance_and_never_auto_approves(context):
     manifest = make_reference(context)
     assert manifest["review"]["status"] == "candidate"

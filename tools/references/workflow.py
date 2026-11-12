@@ -64,7 +64,12 @@ def publisher_words(publisher: dict) -> list[dict]:
         if not isinstance(cue, dict) or cue.get("id") in identifiers:
             raise MediaError("Publisher cue IDs must be unique")
         identifiers.add(cue.get("id"))
-        onset = finite_number(cue.get("start"), "publisher cue onset", 0, 86400)
+        if publisher.get("timing_kind") == "untimed_text":
+            if cue.get("start") is not None or publisher.get("source_timeline") is not None:
+                raise MediaError("Untimed publisher text cannot declare numeric cue times or a media clock")
+            onset = None
+        else:
+            onset = finite_number(cue.get("start"), "publisher cue onset", 0, 86400)
         spans = cue.get("speaker_spans")
         if not isinstance(spans, list):
             raise MediaError("Publisher text must retain explicit speaker spans")
@@ -133,7 +138,7 @@ def align_transcripts(publisher: dict, asr: dict) -> dict:
                 "speaker_basis": source["speaker_basis"], "source_start_seconds": word["source_start"],
                 "source_end_seconds": word["source_end"], "publisher_cue_start_seconds": source["publisher_start"]}
             matches.append(match)
-            if source["cue_word_index"] == 0:
+            if source["cue_word_index"] == 0 and source["publisher_start"] is not None:
                 anchors.append({"cue_id": source["cue_id"], "native_word_start_seconds": word["source_start"],
                     "publisher_cue_start_seconds": source["publisher_start"],
                     "native_minus_publisher_seconds": round(word["source_start"] - source["publisher_start"], 4)})
