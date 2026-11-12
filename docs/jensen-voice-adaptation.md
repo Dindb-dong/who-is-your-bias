@@ -290,6 +290,25 @@ The dataset manifest hash is
 The coordinator records durable object identifiers and readback receipts in the
 run artifact manifest. The archive's creation alone is not a persistence claim.
 
+The final [delivery receipt](../reports/voice/jensen-2026-11-13/delivery.json)
+identifies `jensen-voice-candidate-evaluation-v1.tar.gz`: **18,933,760 bytes**, SHA-256
+`017656a776a2af2b2d1c3ca83a9eb58a88533e903a2f4a95766fb465f96fe568`.
+It contains the eight selected source-reference bundles, portable dataset,
+acoustic tokens, final learned adapter and optimizer state, generated waveforms,
+complete ASR/WavLM outputs, and the unrated blind listening bundle. The large
+pretrained dependencies are listed by immutable upstream revision and file hashes.
+Their weights are separate from this archive; the actual learned weights are
+included.
+
+The first materialization was truncated and failed both SHA-256 and gzip integrity.
+A fresh retry of the same exact stored object recovered the full matching bytes.
+After extracting into a new directory, all **134 payload file hashes** passed;
+the eight-row dataset, all eight source-reference manifests, and the final step 16
+checkpoint passed their real loaders. The failed attempt is retained explicitly
+in the receipt. The repository's generated listening WAVs were also verified
+byte-for-byte against the measured outputs; no source/reference recording was
+added to that public directory.
+
 Completed gates: dataset upload and fresh readback, acoustic tokenization and
 codec persistence, 16 actual optimizer updates, bounded checkpoint persistence,
 fresh-process remote-checkpoint resume, and recovery after a real tool-runtime

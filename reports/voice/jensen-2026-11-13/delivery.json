@@ -1,0 +1,34 @@
+{
+  "schema_version": "jensen-voice-delivery-receipt.v1",
+  "archive": "jensen-voice-candidate-evaluation-v1.tar.gz",
+  "bytes": 18933760,
+  "sha256": "017656a776a2af2b2d1c3ca83a9eb58a88533e903a2f4a95766fb465f96fe568",
+  "payload_files_verified": 134,
+  "payload_bytes": 23837055,
+  "restored_dataset_samples": 8,
+  "restored_source_reference_manifests": 8,
+  "restored_optimizer_steps": 16,
+  "generated_waveforms": 8,
+  "asr_cases": 8,
+  "speaker_diagnostic_cases": 8,
+  "listening_status": "unrated",
+  "pretrained_model_files_included": false,
+  "learned_weights_and_optimizer_included": true,
+  "durable_receipt": {
+    "file_id": "file_0000000084e081fdb667221e9e067b83",
+    "library_file_id": "libfile_fde3_f-058149a6e0a88191b568f6164cd66812_a18ece08681081918d81df44f69c4b1f",
+    "file_name": "jensen-voice-candidate-evaluation-v1.tar.gz",
+    "current_version_number": 0
+  },
+  "verification_status": "fresh-materialization-all-payload-hashes-and-loaders-verified",
+  "failed_attempts": [
+    {
+      "kind": "first_materialization_truncated",
+      "expected_bytes": 18933760,
+      "observed_bytes": 18898935,
+      "gzip_integrity": "EOFError",
+      "retry": "fresh_materialization_of_same_exact_object",
+      "observed_sha256": "dd20aacf5f002089fffdbd778d0a42938891b65d7728bd4307bdd625ce4af05a"
+    }
+  ]
+}
