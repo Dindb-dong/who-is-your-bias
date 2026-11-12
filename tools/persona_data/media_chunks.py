@@ -5,7 +5,23 @@ import argparse
 import gzip
 import hashlib
 import json
+import tarfile
+from contextlib import contextmanager
 from pathlib import Path
+
+
+@contextmanager
+def _chunk_stream(path: Path, name: str, *, archive: bool):
+    if archive and path.name.endswith(".tar.gz"):
+        with tarfile.open(path, "r:gz") as container:
+            members = container.getmembers()
+            if len(members) != 1 or members[0].name != name or not members[0].isfile():
+                raise ValueError("Chunk tar must contain exactly its registered regular file")
+            with container.extractfile(members[0]) as stream:
+                yield stream
+    else:
+        with (gzip.open(path, "rb") if archive else path.open("rb")) as stream:
+            yield stream
 
 
 def split(source: Path, output: Path, *, chunk_bytes: int = 200 * 1024 * 1024) -> dict:
@@ -42,11 +58,13 @@ def verify(directory: Path, *, output: Path | None = None, gzip_archives: bool =
         for index, item in enumerate(manifest["parts"]):
             name = item["file"]
             path = directory / (name + ".gz" if gzip_archives else name)
+            if gzip_archives and not path.exists():
+                path = directory / (name + ".tar.gz")
             if (Path(name).name != name or path.is_symlink() or item["index"] != index
                     or item["offset"] != offset):
                 raise ValueError("Chunk path, order or offset changed")
             digest, size = hashlib.sha256(), 0
-            with (gzip.open(path, "rb") if gzip_archives else path.open("rb")) as chunk:
+            with _chunk_stream(path, name, archive=gzip_archives) as chunk:
                 while block := chunk.read(4 * 1024 * 1024):
                     digest.update(block)
                     whole.update(block)
@@ -80,7 +98,7 @@ def main():
     check = commands.add_parser("verify")
     check.add_argument("directory", type=Path)
     check.add_argument("--output", type=Path)
-    check.add_argument("--gzip", action="store_true", help="Read verified .bin.gz containers without intermediate raw chunks")
+    check.add_argument("--gzip", action="store_true", help="Read .bin.gz or single-member .bin.tar.gz without intermediate raw chunks")
     args = parser.parse_args()
     if args.command == "split":
         result = split(args.source, args.directory, chunk_bytes=args.chunk_bytes)

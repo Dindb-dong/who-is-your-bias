@@ -1,7 +1,7 @@
 {
   "schema_version": "jensen-media-artifacts.v1",
   "run_id": "jensen-2026-11-13",
-  "complete_videos_durably_verified": 2,
+  "complete_videos_durably_verified": 3,
   "artifacts": [
     {
       "artifact": "media-chunks/goldman-sachs-2024-full/reconstruction.json",
@@ -89,7 +89,8 @@
       "storage_encoding": "gzip",
       "decoded_bytes": 209715200,
       "decoded_sha256": "4ebb3a13d0442c61e38062180cb38a0276e876400c96cbf0af00892931ab09bf",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "ae04cee7b6ff58093d0e91cb19d16fab2af2663409db4b89f16b4835d2b1dab4"
     },
     {
       "artifact": "media-chunks/goldman-sachs-2024-full/goldman-sachs-2024-full.mp4.part002.bin.gz",
@@ -176,10 +177,11 @@
       "file_id": "file_00000000204c81fdbd12344ffcd7d61d",
       "library_file_id": "libfile_fde3_f-70294e8d505c8191be927505879a2f6b_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2025-full-480p.mp4.part002.bin.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "gzip",
       "decoded_bytes": 209715200,
-      "decoded_sha256": "0ab8e6f4e55e8a7c1a2cfab07b57bd92b98a00ef4dd8d2bb8ff3e6edcaec8fb4"
+      "decoded_sha256": "0ab8e6f4e55e8a7c1a2cfab07b57bd92b98a00ef4dd8d2bb8ff3e6edcaec8fb4",
+      "readback_sha256": "8dc80b777f0408638042f1a9142dc6da15376f25c825c543ea49c09323d62f2b"
     },
     {
       "artifact": "media-chunks/gtc-2025-full-480p/gtc-2025-full-480p.mp4.part003.bin.gz",
@@ -188,10 +190,11 @@
       "file_id": "file_00000000a70081fd9d6e935128aa03b0",
       "library_file_id": "libfile_fde3_f-cb587d8c4f548191af69ffd06462bb1f_a18ece08681081918d81df44f69c4b1f",
       "file_name": "gtc-2025-full-480p.mp4.part003.bin.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "gzip",
       "decoded_bytes": 163639030,
-      "decoded_sha256": "887735d9763d3385654ae117a64a6b407a5eaeac32d6d3630aaabda625b9403d"
+      "decoded_sha256": "887735d9763d3385654ae117a64a6b407a5eaeac32d6d3630aaabda625b9403d",
+      "readback_sha256": "d06dce631f0dd8a273e7da98e4d48b66f33e97e23bdfb45d617a21cdbc2da601"
     },
     {
       "artifact": "media-chunks/wired-2024-full/wired-2024-full.mp4.part003.bin.gz",
@@ -200,10 +203,11 @@
       "file_id": "file_0000000005e881fd902bbe292f598310",
       "library_file_id": "libfile_fde3_f-258a7f989c7c819199b64cc2a6978e5a_a18ece08681081918d81df44f69c4b1f",
       "file_name": "wired-2024-full.mp4.part003.bin.gz",
-      "status": "uploaded_pending_fresh_readback",
+      "status": "uploaded_and_fresh_readback_verified",
       "storage_encoding": "gzip",
       "decoded_bytes": 83886080,
-      "decoded_sha256": "6361feb09c22b4546b2612cb15c4d9d3614c012c02792197e326f4f17d52d6e9"
+      "decoded_sha256": "6361feb09c22b4546b2612cb15c4d9d3614c012c02792197e326f4f17d52d6e9",
+      "readback_sha256": "f28f9215c3c2e38fc66b175c6706b133a1f0fef7521a9b8a6337ec78c99ec987"
     },
     {
       "artifact": "wired-2024-reconstruction.json",
@@ -212,7 +216,8 @@
       "file_id": "file_000000007e5481fdb9cea6bc95d4c910",
       "library_file_id": "libfile_fde3_f-e47ab43b99388191839b76be5f112744_a18ece08681081918d81df44f69c4b1f",
       "file_name": "wired-2024-reconstruction.json",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "581657d4aac2fa757668e0ee471618505b104bcb407dc496624e4d76c9aa60aa"
     },
     {
       "artifact": "media/wired-2024-full.receipt.json",
@@ -221,7 +226,22 @@
       "file_id": "file_00000000c0e481fd805281e92cfc6bb0",
       "library_file_id": "libfile_fde3_f-f35a391821008191bad2ae6db5d4e3f6_a18ece08681081918d81df44f69c4b1f",
       "file_name": "wired-2024-full.receipt.json",
-      "status": "uploaded_pending_fresh_readback"
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "81ca939e023d9f536c5b2fdab001a71366262e9a687ade5d6f01aa52d827e7d4"
+    },
+    {
+      "artifact": "media-chunks/wired-2024-full/wired-2024-full.mp4.part001.bin.tar.gz",
+      "bytes": 83909174,
+      "sha256": "89874d2966236451e49f3804801188ce2062b9ab8438aa7d12c221ee236122fa",
+      "file_id": "file_00000000194c81fd95cb7f4382b8d1a6",
+      "library_file_id": "libfile_fde3_f-26ae4b79c03881919b4d281e8adf4b14_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "wired-2024-full.mp4.part001.bin.tar.gz",
+      "status": "uploaded_and_fresh_readback_verified",
+      "readback_sha256": "89874d2966236451e49f3804801188ce2062b9ab8438aa7d12c221ee236122fa",
+      "storage_encoding": "single_member_tar_gzip",
+      "member_name": "wired-2024-full.mp4.part001.bin",
+      "decoded_bytes": 83886080,
+      "decoded_sha256": "4392622523db581712fc79f15623c2de46498b671207974cd22bffb21e6d6a15"
     }
   ],
   "failed_transfers": {
@@ -236,7 +256,7 @@
     "Heldout archive contains50complete NoPriors2023 exchanges, frozen manifest SHA256 0c5df9f3a41371570a0fb57426bd1bd78d445ce6eddd6f00b8de941fe403682b."
   ],
   "large_artifact_gate": "207929911-byte gzip upload and fresh readback plus decoded209715200-byte chunk hash verified",
-  "readback_progress_note": "Four parallel chunk materializations returned503; other requests pending. Retry fresh read preparation sequentially. Preserve uploadedIDs; do not reupload already successful creates.",
+  "readback_progress_note": "Goldman, Stripe andGTC2025 whole recordings reconstructed from fresh remote copies and matched original fullSHA. WIRED upload/readback pending; four newly acquired full recordings await chunk save.",
   "complete_videos": [
     {
       "source_id": "goldman-sachs-2024",
@@ -277,6 +297,32 @@
         "libfile_fde3_f-0564be7f8cb481918017d929b4c72557_a18ece08681081918d81df44f69c4b1f"
       ],
       "reconstruction_manifest_library_file_id": "libfile_fde3_f-a6ee1a8cd3b881919ae9c3224e4254f1_a18ece08681081918d81df44f69c4b1f"
+    },
+    {
+      "source_id": "gtc-2025-video",
+      "event_family_id": "nvidia-gtc-2025",
+      "split": "train",
+      "full_file": "gtc-2025-full-480p.mp4",
+      "bytes": 583069430,
+      "sha256": "2996962463654e679a2a8c0cf48689e961ad05ef6cc28c6ea0bdc225f68dd459",
+      "duration_seconds": 7907.927075,
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "status": "all_chunks_fresh_readback_and_full_reconstruction_verified",
+      "chunk_library_file_ids": [
+        "libfile_fde3_f-7a8ee96f70848191ad55a519a944b3c1_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-70294e8d505c8191be927505879a2f6b_a18ece08681081918d81df44f69c4b1f",
+        "libfile_fde3_f-cb587d8c4f548191af69ffd06462bb1f_a18ece08681081918d81df44f69c4b1f"
+      ],
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-c9753d92b94c819194215f9902bbe9b6_a18ece08681081918d81df44f69c4b1f"
     }
-  ]
+  ],
+  "container_verification": {
+    "stored_bytes": 83909174,
+    "stored_sha256": "89874d2966236451e49f3804801188ce2062b9ab8438aa7d12c221ee236122fa",
+    "decoded_bytes": 83886080,
+    "decoded_sha256": "4392622523db581712fc79f15623c2de46498b671207974cd22bffb21e6d6a15",
+    "status": "standard_tar_container_fresh_readback_verified"
+  }
 }

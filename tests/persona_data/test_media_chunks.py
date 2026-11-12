@@ -1,5 +1,6 @@
 import gzip
 import json
+import tarfile
 
 import pytest
 
@@ -42,6 +43,21 @@ def test_gzip_containers_recover_exact_original_bytes_without_raw_parts(tmp_path
         part = chunks / item["file"]
         with gzip.open(str(part) + ".gz", "wb", compresslevel=0) as stream:
             stream.write(part.read_bytes())
+        part.unlink()
+    restored = tmp_path / "restored.mp4"
+    assert verify(chunks, output=restored, gzip_archives=True)["verified"]
+    assert restored.read_bytes() == source.read_bytes()
+
+
+def test_single_member_tar_containers_restore_without_extracting_paths(tmp_path):
+    source = tmp_path / "source.mp4"
+    source.write_bytes(bytes(range(256)) * 10)
+    chunks = tmp_path / "chunks"
+    manifest = split(source, chunks, chunk_bytes=701)
+    for item in manifest["parts"]:
+        part = chunks / item["file"]
+        with tarfile.open(str(part) + ".tar.gz", "w:gz", compresslevel=0) as container:
+            container.add(part, arcname=part.name)
         part.unlink()
     restored = tmp_path / "restored.mp4"
     assert verify(chunks, output=restored, gzip_archives=True)["verified"]

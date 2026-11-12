@@ -37,7 +37,7 @@ listed in `source-progress.json`; inspect each receipt before retrying.
 
 For a fully saved video, materialize every listed gzip chunk into a new local
 directory. Verify each **stored gzip** SHA-256 against its durable receipt,
-retain the `.bin.gz` names corresponding to the raw names in the reconstruction
+retain the `.bin.gz` or single-member `.bin.tar.gz` names corresponding to the raw names in the reconstruction
 manifest, and place that manifest at `reconstruction.json`. Then run:
 
 ```sh

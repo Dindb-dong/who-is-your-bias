@@ -1,12 +1,15 @@
 {
   "schema_version": "jensen-source-progress.v1",
   "run_id": "jensen-2026-11-13",
-  "recorded_at": "2026-11-12T17:48:21.752051+00:00",
+  "recorded_at": "2026-11-12T18:02:22.542909+00:00",
   "video_counts": {
-    "located_public_player_events": 11,
-    "complete_published_renditions_locally_validated": 4,
-    "locally_validated_seconds": 15185.927679,
-    "whole_videos_durably_verified": 2
+    "located_public_player_events": 13,
+    "complete_published_renditions_locally_validated": 8,
+    "locally_validated_seconds": 38129.100491,
+    "locally_validated_bytes": 4412488053,
+    "whole_videos_durably_verified": 3,
+    "full_keynote_replays": 4,
+    "keynote_seconds": 27285.606191
   },
   "original_dialogue": {
     "dataset": "original-dialogue-v4",
@@ -41,7 +44,32 @@
       "bytes": 952084714,
       "sha256": "0882539adca1bca58a8e64c4341a6fdca4ebca69a88c77799c882fb1dd0bfa32",
       "duration_seconds": 3889.485604,
-      "publisher_edit_note": null
+      "publisher_edit_note": null,
+      "validation": {
+        "http_content_length": "952084714",
+        "ffprobe": "passed",
+        "last_four_seconds_decode": "passed",
+        "decoder_stderr": ""
+      },
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1920,
+          "height": 1080,
+          "r_frame_rate": "30000/1001",
+          "duration": "3889.485600"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "width": null,
+          "height": null,
+          "r_frame_rate": "0/0",
+          "duration": "3889.485604"
+        }
+      ],
+      "durable_status": "full_reconstruction_verified"
     },
     {
       "source_id": "goldman-sachs-2024",
@@ -57,7 +85,27 @@
       "bytes": 586759675,
       "sha256": "586dff89def8ff4a0cea0848a094cca41e573aec0492db9b51325d71aca1bf8b",
       "duration_seconds": 1783.448333,
-      "publisher_edit_note": "Goldman source filename says HIGHLIGHTS; complete published29m43s package, not an unedited event claim."
+      "publisher_edit_note": "Goldman source filename says HIGHLIGHTS; complete published29m43s package, not an unedited event claim.",
+      "validation": null,
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1278,
+          "height": 720,
+          "r_frame_rate": "60000/1001",
+          "duration": "1783.448333"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "width": null,
+          "height": null,
+          "r_frame_rate": "0/0",
+          "duration": "1783.448333"
+        }
+      ],
+      "durable_status": "full_reconstruction_verified"
     },
     {
       "source_id": "gtc-2025-video",
@@ -85,7 +133,31 @@
       },
       "source_clock": "publisher_rendition_elapsed",
       "local_source_clock_offset_seconds": 0,
-      "transcript_clock_mapping_verified": false
+      "transcript_clock_mapping_verified": false,
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 854,
+          "height": 480,
+          "r_frame_rate": "30/1",
+          "duration": "7907.900000"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "width": null,
+          "height": null,
+          "r_frame_rate": "0/0",
+          "duration": "7907.927075"
+        }
+      ],
+      "durable_status": "full_reconstruction_verified",
+      "public_media_url": "http://cdnapi.kaltura.com/p/2935771/sp/293577100/playManifest/entryId/1_i4n8e58g/format/url/protocol/http/flavorId/1_eu9rxzfp",
+      "required_public_request_headers": {
+        "Referer": "https://www.nvidia.com/en-us/on-demand/session/gtc25-s72484/",
+        "User-Agent": "Mozilla/5.0"
+      }
     },
     {
       "source_id": "gtc-dc-2025-video",
@@ -151,11 +223,47 @@
       "player_partner_id": "2935771",
       "publisher_edit_note": "Player title explicitly says Trimmed; entire published rendition is acquired, not an uncut-event claim.",
       "expected_duration_seconds": 3565,
-      "acquisition_status": "public_flavor_delivery_returned_404",
+      "acquisition_status": "complete_published_rendition_locally_verified",
       "registered_at": "2026-11-12T17:43:42.191469+00:00",
       "landing_sha256": "e8ad5ddfef1d0288a73a1c8f0a98f393a83d5a34d51092509ae73d5807079b57",
-      "failure_scope": "yt-dlp public HTTP format/url flavors; https transport/protocol and public HLS manifest also404; no complete media bytes acquired",
-      "next_step": "inspect original publisher player delivery, alternate listed public rendition or another primary source"
+      "local_file": "media/siggraph-wired-2024-full-720p.mp4",
+      "bytes": 448609245,
+      "sha256": "855e56f7597e124d520b800f899082a42532be41898ceeab749fdc57af564406",
+      "duration_seconds": 3565.493696,
+      "validation": {
+        "http_content_length": "448609245",
+        "ffprobe": "passed",
+        "last_four_seconds_decode": "passed",
+        "decoder_stderr": ""
+      },
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1280,
+          "height": 720,
+          "r_frame_rate": "30/1",
+          "duration": "3565.419987"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "width": null,
+          "height": null,
+          "r_frame_rate": "0/0",
+          "duration": "3565.493696"
+        }
+      ],
+      "durable_status": "save_pending",
+      "earlier_headerless_failure": "yt-dlp public HTTP format/url flavors; https transport/protocol and public HLS manifest also404; no complete media bytes acquired",
+      "public_media_url": "http://cdnapi.kaltura.com/p/2935771/sp/293577100/playManifest/entryId/1_mchywbeo/format/url/protocol/http/flavorId/1_fusm2e3j",
+      "required_public_request_headers": {
+        "Referer": "https://www.nvidia.com/en-us/on-demand/session/siggraph2024-fsc1/",
+        "User-Agent": "Mozilla/5.0"
+      }
     },
     {
       "source_id": "gtc-2024-video",
@@ -169,11 +277,47 @@
       "source_title": "[gtc24-s62542] GTC 2024 Keynote",
       "player_partner_id": "2935771",
       "expected_duration_seconds": 7388,
-      "acquisition_status": "public_flavor_delivery_returned_404",
+      "acquisition_status": "complete_published_rendition_locally_verified",
       "registered_at": "2026-11-12T17:43:42.193058+00:00",
       "landing_sha256": "ba8f61df4e22adc9d3695490fee1f72117845f00b9ee68a7651b75e499aa3dbf",
-      "failure_scope": "yt-dlp public HTTP format/url flavors; https transport/protocol and public HLS manifest also404; no complete media bytes acquired",
-      "next_step": "inspect original publisher player delivery, alternate listed public rendition or another primary source"
+      "local_file": "media/gtc-2024-full-480p.mp4",
+      "bytes": 479397116,
+      "sha256": "16ffcdfee02d8b9bf4a9be7fab6413066b8b65f1388c3e8ccae88cfdea7b9184",
+      "duration_seconds": 7387.567891,
+      "validation": {
+        "http_content_length": "479397116",
+        "ffprobe": "passed",
+        "last_four_seconds_decode": "passed",
+        "decoder_stderr": ""
+      },
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 854,
+          "height": 480,
+          "r_frame_rate": "30/1",
+          "duration": "7387.566667"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "width": null,
+          "height": null,
+          "r_frame_rate": "0/0",
+          "duration": "7387.567891"
+        }
+      ],
+      "durable_status": "save_pending",
+      "earlier_headerless_failure": "yt-dlp public HTTP format/url flavors; https transport/protocol and public HLS manifest also404; no complete media bytes acquired",
+      "public_media_url": "http://cdnapi.kaltura.com/p/2935771/sp/293577100/playManifest/entryId/1_f91o5wo1/format/url/protocol/http/flavorId/1_g9ovnwvu",
+      "required_public_request_headers": {
+        "Referer": "https://www.nvidia.com/en-us/on-demand/session/gtc24-s62542/",
+        "User-Agent": "Mozilla/5.0"
+      }
     },
     {
       "source_id": "computex-2025-video",
@@ -187,11 +331,47 @@
       "source_title": "CPTX25_Keynote_Program_Fixed_v02_YT",
       "player_partner_id": "2935771",
       "expected_duration_seconds": 6171,
-      "acquisition_status": "public_flavor_delivery_returned_404",
+      "acquisition_status": "complete_published_rendition_locally_verified",
       "registered_at": "2026-11-12T17:43:42.194046+00:00",
       "landing_sha256": "576ce40a077d3ea14901871ae26288b7a720179e4522a01d5f3276f46934a2f6",
-      "failure_scope": "yt-dlp public HTTP format/url flavors; https transport/protocol and public HLS manifest also404; no complete media bytes acquired",
-      "next_step": "inspect original publisher player delivery, alternate listed public rendition or another primary source"
+      "local_file": "media/computex-2025-full-480p.mp4",
+      "bytes": 452685850,
+      "sha256": "9669d9333f97c80b7ffe41e799d75245e9a2e067fa52df999a0b09db0254c047",
+      "duration_seconds": 6171.376327,
+      "validation": {
+        "http_content_length": "452685850",
+        "ffprobe": "passed",
+        "last_four_seconds_decode": "passed",
+        "decoder_stderr": ""
+      },
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 854,
+          "height": 480,
+          "r_frame_rate": "2997/100",
+          "duration": "6171.370370"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "width": null,
+          "height": null,
+          "r_frame_rate": "0/0",
+          "duration": "6171.376327"
+        }
+      ],
+      "durable_status": "save_pending",
+      "earlier_headerless_failure": "yt-dlp public HTTP format/url flavors; https transport/protocol and public HLS manifest also404; no complete media bytes acquired",
+      "public_media_url": "http://cdnapi.kaltura.com/p/2935771/sp/293577100/playManifest/entryId/1_p33ptvnj/format/url/protocol/http/flavorId/1_gvdmhkcn",
+      "required_public_request_headers": {
+        "Referer": "https://www.nvidia.com/en-us/on-demand/session/computex25-keynote/",
+        "User-Agent": "Mozilla/5.0"
+      }
     },
     {
       "source_id": "ces-2025-video",
@@ -205,11 +385,47 @@
       "source_title": "CES25_KEYNOTE_VOD",
       "player_partner_id": "2935771",
       "expected_duration_seconds": 5819,
-      "acquisition_status": "public_flavor_delivery_returned_404",
+      "acquisition_status": "complete_published_rendition_locally_verified",
       "registered_at": "2026-11-12T17:43:42.194708+00:00",
       "landing_sha256": "9b497a69795d0ba59cdda69359a6e7c789caf2a957678ddae1b9b771f6f79a6d",
-      "failure_scope": "yt-dlp public HTTP format/url flavors; https transport/protocol and public HLS manifest also404; no complete media bytes acquired",
-      "next_step": "inspect original publisher player delivery, alternate listed public rendition or another primary source"
+      "local_file": "media/ces-2025-full-480p.mp4",
+      "bytes": 415106977,
+      "sha256": "88a98c8eea77df6e32bb5d2b085c9fe8403c033df0029f1f26ade32320ad177d",
+      "duration_seconds": 5818.734898,
+      "validation": {
+        "http_content_length": "415106977",
+        "ffprobe": "passed",
+        "last_four_seconds_decode": "passed",
+        "decoder_stderr": ""
+      },
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 854,
+          "height": 480,
+          "r_frame_rate": "2997/100",
+          "duration": "5818.717718"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "width": null,
+          "height": null,
+          "r_frame_rate": "0/0",
+          "duration": "5818.734898"
+        }
+      ],
+      "durable_status": "save_pending",
+      "earlier_headerless_failure": "yt-dlp public HTTP format/url flavors; https transport/protocol and public HLS manifest also404; no complete media bytes acquired",
+      "public_media_url": "http://cdnapi.kaltura.com/p/2935771/sp/293577100/playManifest/entryId/1_rtiv08b6/format/url/protocol/http/flavorId/1_mfm5x1ox",
+      "required_public_request_headers": {
+        "Referer": "https://www.nvidia.com/en-us/on-demand/session/ces25-keynote/",
+        "User-Agent": "Mozilla/5.0"
+      }
     },
     {
       "source_id": "wired-2024-video",
@@ -236,24 +452,72 @@
       },
       "source_clock": "publisher_rendition_elapsed",
       "local_source_clock_offset_seconds": 0,
-      "transcript_clock_mapping_verified": false
+      "transcript_clock_mapping_verified": false,
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1920,
+          "height": 1080,
+          "r_frame_rate": "60000/1001",
+          "duration": "1605.036767"
+        },
+        {
+          "codec_name": "aac",
+          "codec_type": "audio",
+          "width": null,
+          "height": null,
+          "r_frame_rate": "0/0",
+          "duration": "1605.066667"
+        }
+      ],
+      "durable_status": "save_pending"
+    },
+    {
+      "source_id": "ces-2026-cn-video",
+      "event_family_id": "nvidia-ces-2026",
+      "split": "train",
+      "discovery_url": "https://www.nvidia.cn/events/ces/",
+      "publisher": "NVIDIA China",
+      "role": "full_published_video_package",
+      "expected_duration_seconds": 5499.766667,
+      "publisher_manifest_sha256": "b210d95c9a43f7b748b6b6885ff68c568a6c02a76c78f06121e7c80fcca3169f",
+      "expected_fragments": 550,
+      "language_note": "Official regional replay; verify actual audio language and burned-in subtitles before any speech training.",
+      "player_type": "NVIDIA_NVVP_public_VOD_HLS",
+      "public_player_state_url": "https://live.nvidia.cn/20260106-ces/state-u.json",
+      "registered_at": "2026-11-12T17:56:13.370563+00:00",
+      "acquisition_status": "complete_hls_manifest_acquired_media_pending"
+    },
+    {
+      "source_id": "gtc-2026-cn-video",
+      "event_family_id": "nvidia-gtc-2026",
+      "split": "train",
+      "discovery_url": "https://www.nvidia.cn/gtc/keynote/",
+      "publisher": "NVIDIA China",
+      "role": "full_published_video_package",
+      "expected_duration_seconds": 8335.6,
+      "publisher_manifest_sha256": "23a4101b6f1ebd7a6205f4041f877972ff16509701471a6b807f51c794863f71",
+      "expected_fragments": 834,
+      "language_note": "Official regional replay; verify actual audio language and burned-in subtitles before any speech training.",
+      "player_type": "NVIDIA_NVVP_public_VOD_HLS",
+      "public_player_state_url": "https://live.nvidia.cn/20260317-gtc/state-u.json",
+      "registered_at": "2026-11-12T17:56:13.372370+00:00",
+      "acquisition_status": "complete_hls_manifest_acquired_media_pending"
     }
   ],
   "pending_jobs": [
     {
-      "name": "media-readback-gtc",
-      "scope": "GTC2025 allchunks uploaded; chunks2and3 fresh readback running",
-      "receipt": "media-readback-gtc-progress.json"
+      "name": "remaining_five_videos_durable_save",
+      "scope": "WIRED plusCES2025,SIGGRAPH2024,COMPUTEX2025,GTC2024",
+      "status": "acquired_and_validated;chunk_container/transfers/readback inprogress",
+      "previous_attempts": "media-upload-wired-result.json,media-upload-wired-retry/0.json",
+      "tar_container_probe": "media-upload-tar-probe-result.json"
     },
     {
-      "name": "media-upload-wired-retry",
-      "scope": "80MiB gzip chunks; retry only failed creates individually",
-      "receipts": "media-upload-wired-retry/*.json"
-    },
-    {
-      "name": "next_full_keynote_batch",
-      "scope": "CES2025/GTC2024 now return206 with ordinary publisher headers; inspect other preflight then acquire",
-      "code_checkpoint": "828cf99"
+      "name": "optional_regional_replays",
+      "scope": "CES2026,GTC2026 complete550/834fragment HLS manifests acquired; media notyetacquired",
+      "registration": "data/acquisition/jensen-huang/media-event-registration.json"
     }
   ],
   "persistence": {
