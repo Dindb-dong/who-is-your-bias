@@ -47,7 +47,7 @@ separately. The prior unverified eight-video claim is not inherited by this run.
 - Text selection: **113 complete answers / all 9 events**, 24-word minimum,
   768-token whole-exchange limit, deterministic cap of 16 per event. Dataset,
   selection and immutable Qwen3-1.7B tokenizer/model hashes are saved.
-- Text computation: **four actual saved optimizer updates**, 8,716,288 trainable LoRA
+- Text computation: **6 actual saved optimizer updates**, 8,716,288 trainable LoRA
   parameters, BF16 CPU. The actual fresh-process continuation from remote step 1
   to step 2 passed (282.0 seconds for that invocation). Step 2 was then uploaded,
   freshly retrieved and extracted for continuation. Step 4 has now also been saved,
@@ -99,7 +99,7 @@ separately. The prior unverified eight-video claim is not inherited by this run.
 | Corpus | Authentic v4, held-out references, all eight full video restorations | Source/media acquisition batch complete; preserve event isolation |
 | Voice | Source clocks, four-event dataset, 16 completed updates, eight public waveforms, ASR/WavLM diagnostics and verified gateway | Candidate remains optional; human likeness is ungraded |
 | Avatar | Actual fitted model, editable master, finger controls, observed clips and actual desktop/mobile browser rendering | Human likeness remains ungraded; candidate stays optional |
-| Text | Frozen dataset, four saved updates and successful remote optimizer continuation | Finish bounded run and serve exact adapter |
+| Text | Frozen dataset, 6 saved updates and successful remote optimizer continuation | Finish bounded run and serve exact adapter |
 | Retrieval/evaluation | Frozen lexical/concept/hybrid comparison; both candidates remain opt-in | Matched base/style/adapter and heldout response experiments |
 
 Integrated changed-path Python checks: 186 passed and two optional-Torch modules

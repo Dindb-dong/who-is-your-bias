@@ -460,6 +460,20 @@
       "sha256": "9757298ba866c063aa4fe697a080ad36b5343b9f6d791be8432e821ca35d0190",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-text-checkpoint-step0006",
+      "role": "actual_text_optimizer_checkpoint",
+      "completed_optimizer_steps": 6,
+      "target_optimizer_steps": 29,
+      "checkpoint_metadata_sha256": "8217f5723a57edcc91cadc34d52df36ae13b877f23617091c5e567ba8783e2fd",
+      "file_name": "jensen-text-checkpoint-step0006.tar.gz",
+      "file_id": "file_00000000bf5881fdb8f7f93e5264fd5c",
+      "library_file_id": "libfile_fde3_f-bf2885e654c08191bf7428e918126d9b_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 97267334,
+      "sha256": "b9ff3cbb42cf4db4f2c5f14fbcf6857f33651c94e63205455834b2d4609bdf3c",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {

@@ -9,7 +9,8 @@ dataset and pinned tokenizer hashes are in `dataset-selection.json` and
 
 ## Verified checkpoint
 
-Four optimizer updates have been preserved and freshly retrieved. The actual
+The current saved counter and resume path are in [latest.json](latest.json).
+Six optimizer updates have been preserved and freshly retrieved. The actual
 second update ran in a new process restored from the remotely retrieved first
 checkpoint, including adapter weights, AdamW state, random state and data cursor.
 See `resume-step0002.json` for that real continuation gate and
@@ -19,8 +20,9 @@ restored its AdamW, RNG and data cursor (epoch 0, next example 16).
 The target is 29 updates for the complete one-epoch dataset, not a completed
 step count. Training loss is not an answer-quality or likeness score.
 
-The next bounded invocation has started from the freshly retrieved step 2 and
-will pause after four additional updates. The actual runtime reports eight
+The bounded invocation restored step 2, completed four additional updates and
+paused at step 6. Its fresh archive and real optimizer/RNG/cursor load passed.
+The actual runtime reports eight
 Torch CPU threads. Earlier updates used four. The data order, seed, BF16
 precision, gradient accumulation, optimizer and frozen 29-update budget are
 unchanged. Small kernel measurements support trying eight threads but do not
@@ -48,6 +50,32 @@ OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 OPENBLAS_NUM_THREADS=1 \
   --checkpoint-every 2 --stop-after-steps 4 --gradient-checkpointing \
   --resume-from "$ART/readback/text-resume-step0002/step-00000002"
 ```
+
+That exact bounded command completed. A coordinator-supervised continuation can
+keep the model in memory while waiting at every second update for remote
+verification. Resume from the **latest freshly restored** checkpoint, omit
+`--stop-after-steps`, and add the following publisher argument (substitute the
+actual absolute paths):
+
+```sh
+--checkpoint-publisher '["/absolute/path/to/.venv/bin/python","-m","tools.adaptation.checkpoint_gate","--handoff","/absolute/path/to/jensen-2026-11-13/text-checkpoint-gates","--timeout","1800"]'
+```
+
+The existing trainer calls the publisher synchronously after the checkpoint is
+atomic. The gate creates `step-STEP-METADATA_HASH/request.json` and waits for
+`verified.json` in that directory. It stops with an error after 30 minutes without
+a valid receipt. The coordinator must archive the checkpoint, save it remotely,
+freshly retrieve and hash-check every byte, run the actual checkpoint loader,
+publish the corresponding public receipt and verify that Git checkpoint before
+acknowledging the gate. The waiting process itself does not contact storage.
+
+The acknowledgement is an atomic JSON object containing `status: "verified"`,
+`verification_status: "fresh_materialization_and_checkpoint_load_verified"`,
+the exact `optimizer_steps` and `checkpoint_metadata_sha256`, stable
+`persistent_locator` (the saved artifact ID), `file_id`, `archive_sha256`,
+`archive_bytes`, and the freshly verified `public_checkpoint_sha`. Missing or
+mismatched identity never releases the next optimizer update. The gate also
+applies to the final optimizer checkpoint before serving artifacts are exported.
 
 The trainer writes an atomic local checkpoint every two updates and on pause.
 After a bounded invocation exits, package the latest checkpoint and its paused
