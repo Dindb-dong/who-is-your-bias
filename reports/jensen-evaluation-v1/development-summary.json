@@ -1,0 +1,269 @@
+{
+  "schema_version": "text-adaptation-plan-summary.v1",
+  "plan_sha256": "cd2bd7340c3eb7d9c1ddc248b78e25d69b8e00c9d246454cf5925e082a1dd030",
+  "id": "jensen-generation-development-v2",
+  "created_at": "2026-11-12T18:38:21.022283+00:00",
+  "exposure": "development",
+  "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+  "policy": {
+    "conditions": [
+      "facts",
+      "style",
+      "adapter"
+    ],
+    "max_tokens": 160,
+    "context_window": 4096,
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 42,
+    "factual_policy": "identical_complete_passages_all_conditions",
+    "adapter_style_policy": "identical_prompts",
+    "reference_answer_supplied": false,
+    "history_policy": "same_frozen_context_all_conditions"
+  },
+  "implementation_sha256": {
+    "tools/adaptation_evaluation/protocol.py": "b01305ca54e797626d7a52334e6ba96c21a4efc17f65fb390decb3ee8df632da",
+    "tools/adaptation_evaluation/run.py": "ead4af96d3ee25305611e776d8871bcba538a6d80715ed8cef0a4561c3803f57",
+    "tools/adaptation_evaluation/__main__.py": "98cdf136d3e7352e42c01ccadb7cf51e13f5e36230a915c88064cced9ae2cf13",
+    "tools/adaptation_evaluation/local.py": "e9609da6819c8db350b888dc32408f2d5c49a703f8018c05bec5a21c456bc70e",
+    "services/language/engine.py": "4de8fb45c173620e502539273a76ce9e708e8e12fee51060ae61fca8845a633c",
+    "services/language/adapters.py": "ccd92dace3db5065f9af73d26958fcb045fbb3d650f0ead0b10636fe36a185c1",
+    "services/language/app.py": "8e9ae8d0b2e3be25d6fdbbac830f38c827f567d8bb2e26fb86cb7402ae8ff799",
+    "services/language/schemas.py": "f9bea7bde3338b9b5c2e2c670a9ff7ad26d1857777e9d35c787b7f5ffa75da5e",
+    "services/language/requirements.txt": "925c22fead2bd564f8a0ca268d30e05533bfd2856338e7b800f6465dc4258f3b",
+    "services/language/requirements-adapter.txt": "66a43ff50713f25cc71213529074841f61a637acaa55212236ac7b2bafd183dc",
+    "src/bias/context_budget.py": "678645c4ceb0737575d6b26261ebf0b4d1934bc8b0a6a1f7a1af2000c291f420",
+    "src/bias/snapshots.py": "28659167b62d4de7354ccbe83ab4cc3c924891d8c6df2418a33d8755e7b51fc2",
+    "src/bias/config.py": "dddd8a68115d92db72d390a51e6a188302732b887e00e0efcb59221b26d0ae9d",
+    "src/bias/corpus.py": "16b9eef8a6fef0e20a7dd4099b470724e793dc14c698313d06fb679b87e9aeb0",
+    "src/bias/models.py": "1342ef5660b903e2bed04ed28f52e06ec1b1b39fddfb97f8c4b58f36fe13caca",
+    "src/bias/retrieval.py": "7a1c316aecdcfcd1b3bffc25430080b2a4c57738708efe61de9237e0acd5627c",
+    "src/bias/jensen_retrieval.py": "fddc8ceec417fd3c9fd3440ef09438b849793b57c9c24bf595b1fd478d3b8df4",
+    "src/bias/hybrid_retrieval.py": "6d35a45b60473886ae6bcaf40a7b2098a3bab17b944369f033b357afe58b6697",
+    "tools/reference_evaluation/run.py": "9e713a05d9e403d91278242d0a110193f3ec6f50764c79efb7ddf1aa873be17b",
+    "tools/reference_evaluation/protocol.py": "781463b6c3bbccb9d02fe513b7595bc31bac837158257dcc02ef923eaf77b9fb",
+    "tools/evaluation/observe.py": "857361e39a940958eef70e6f052e9453ae98676c8f931fcdd5af3ce78284f541",
+    "tools/evaluation/run.py": "25fb528cdf08ad9396a994eabd919a6956f991e7a839a7d6bc61afb09418f15d"
+  },
+  "cases": [
+    {
+      "id": "dev-ko-cuda",
+      "language": "ko",
+      "factual_ids": [
+        "qa26-acquired-2023-turn-00055"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "factual_sha256": "af58ee1d6355137c50c1de5f8752ba988c22429914b50847e8e2a86b7c46e930",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "question_sha256": "4191f8da43d60544b556821af0a0a6791331ef89ad2160bd878c573f3ad0eb86",
+      "prompt_sha256": {
+        "facts": "37fd314956e291f067b823ea067a1f999b01ec7ffd3f3b05ca1ff33cc94f56b5",
+        "style": "876e609e0e88a2b0295bb085d4bd39abdc3d4fe798917d0c42fc73b0ce8acaca",
+        "adapter": "876e609e0e88a2b0295bb085d4bd39abdc3d4fe798917d0c42fc73b0ce8acaca"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "dev-ko-sega",
+      "language": "ko",
+      "factual_ids": [
+        "qa26-yc-startup-school-2026-turn-00010"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "factual_sha256": "97faa359b4593b190fad86acc9f2a54c68f302860ddcadfda832d93578d32ad5",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "question_sha256": "9b01616fc89e295998434a047d8fc697811273db8e3222f97c2b9c240805b998",
+      "prompt_sha256": {
+        "facts": "ad99b60c55a511682d4e4f68c861efe785e071b83123a4af94bfe9568727bcbc",
+        "style": "d961cfbac8ddddc3268fce9fb7c99f7a44708b1821a94c96feb91abd7d6de90f",
+        "adapter": "d961cfbac8ddddc3268fce9fb7c99f7a44708b1821a94c96feb91abd7d6de90f"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "dev-ko-tsmc",
+      "language": "ko",
+      "factual_ids": [
+        "qa26-lex-494-cue-00187"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "factual_sha256": "60495b9beef24fd8b5eeacfddfc4ee17f9aba1695f9eb5bfc65629d5b32f0f3a",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "question_sha256": "310e0ebc9d08f138eca216953a319532f634b2a70bceccf937e0f296c62379e2",
+      "prompt_sha256": {
+        "facts": "202a16499707fd0028d051814b524f98deabcc701b47a8f986c0bf75d5f2a178",
+        "style": "d7568148f5746e125ba4c578eff9cc02a502bd2cfd1e39f8b7ea68ecb28d399d",
+        "adapter": "d7568148f5746e125ba4c578eff9cc02a502bd2cfd1e39f8b7ea68ecb28d399d"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "dev-ko-values",
+      "language": "ko",
+      "factual_ids": [
+        "qa26-stripe-sessions-2024-turn-00209"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "factual_sha256": "2f0272e19a5445bc4ccbb453316fb07d844ffa6bd9b11f1eba4adf2a0a5fd2b2",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "question_sha256": "457f54cd53caf6e783d677b0febdc8fd8ae67f083c0501ebb627d8673492b15e",
+      "prompt_sha256": {
+        "facts": "a171455584bd1d01126f4171d234897f6037df93fed51f8e59ea6d8e1bfaee26",
+        "style": "f240cbbcbcc2c41e14ebf847ab62c085c5fbec2f641cfa92ca0464d8defb6d49",
+        "adapter": "f240cbbcbcc2c41e14ebf847ab62c085c5fbec2f641cfa92ca0464d8defb6d49"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "dev-en-accelerated",
+      "language": "en",
+      "factual_ids": [
+        "qa26-goldman-sachs-2024-turn-00007"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "factual_sha256": "52196ab7c2180822adad9db4a850a73f91a3963d1ec15880229a0c71a37c8aac",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "question_sha256": "1b16ed3874a80e9b93af9f32c754def84b84840568078136dcd988ed03d71d98",
+      "prompt_sha256": {
+        "facts": "55dafa8df34da5e50b5f2114dc417669069eb25b9e61a60540fb76586197336a",
+        "style": "8b6aa38ad062b0484096cdc6a2b1acd051d1b836063f717a91c7d1dbcc1fac90",
+        "adapter": "8b6aa38ad062b0484096cdc6a2b1acd051d1b836063f717a91c7d1dbcc1fac90"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "dev-ko-followup",
+      "language": "ko",
+      "factual_ids": [
+        "qa26-acquired-2023-turn-00055"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "factual_sha256": "af58ee1d6355137c50c1de5f8752ba988c22429914b50847e8e2a86b7c46e930",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "question_sha256": "0f12a6e5f1ccafafdba4ceab480798efe5da58a0fd7a6702ad2ae5b4157e7357",
+      "prompt_sha256": {
+        "facts": "a29580287443cd2db24ed9dce93a767450f37e5243b379568857965abfcf641b",
+        "style": "9cd49bb3927e4349c69a023b8591b71985130361e37a6f0c6f6d6a1bf4ced536",
+        "adapter": "9cd49bb3927e4349c69a023b8591b71985130361e37a6f0c6f6d6a1bf4ced536"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "dev-ko-correction",
+      "language": "ko",
+      "factual_ids": [
+        "qa26-lex-494-cue-00187"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "factual_sha256": "60495b9beef24fd8b5eeacfddfc4ee17f9aba1695f9eb5bfc65629d5b32f0f3a",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "question_sha256": "225ed382c593bed3403bcc9d53864f42668c3cef900594d597f30f1d10a301e0",
+      "prompt_sha256": {
+        "facts": "c9986eb2a77e4d313b2ffb1193553220e9ac6ca8f60539ea55117425dd15046b",
+        "style": "dccb58aed9c92115e26b2f3b9c3ccaf17bbffc5569a2e30c58433f319e56ba7d",
+        "adapter": "dccb58aed9c92115e26b2f3b9c3ccaf17bbffc5569a2e30c58433f319e56ba7d"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "dev-ko-topic-switch",
+      "language": "ko",
+      "factual_ids": [
+        "qa26-stripe-sessions-2024-turn-00126"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "factual_sha256": "d1bddb31ca77d68b0b137b28e3f1aa01e5600bb30484585d8a29682df103623f",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "question_sha256": "c82eaa9af1056fd80f9e4b44ac93e9c70951571863a0db8b7cfcd423b89e6165",
+      "prompt_sha256": {
+        "facts": "d48e6a12bb39e0d09c12ce273ba9f1543a4cf232b682d46adb091c168693858c",
+        "style": "c820b000b9c9ba51e12c59700d6610989c572bcc6ba3d58cda79de35d88733c3",
+        "adapter": "c820b000b9c9ba51e12c59700d6610989c572bcc6ba3d58cda79de35d88733c3"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "dev-ko-unsupported",
+      "language": "ko",
+      "factual_ids": [],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "factual_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "question_sha256": "c3e067fda05d1f144f8a9295c11b3edb5d6fb9a2f682c29ae8341120b1b97644",
+      "prompt_sha256": {
+        "facts": "c8b723fdc8a30402560835527b3d1cf749b4acc9c011543f1ed0e1033039661c",
+        "style": "b4b0db286d1791645b333da61260ab5aa0e8a8ab696c7fc0692e38892a2113aa",
+        "adapter": "b4b0db286d1791645b333da61260ab5aa0e8a8ab696c7fc0692e38892a2113aa"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "dev-ko-current",
+      "language": "ko",
+      "factual_ids": [],
+      "style_ids": [],
+      "factual_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "question_sha256": "892e644211e09a0d141334ebc2a99f47765a1dd8294fda96c07eb14fbf6f0f88",
+      "prompt_sha256": {
+        "facts": "cf39a0d4451bdbb49510a4401388d8f232eea52f45caaf3f140dd6f235589344",
+        "style": "cf39a0d4451bdbb49510a4401388d8f232eea52f45caaf3f140dd6f235589344",
+        "adapter": "cf39a0d4451bdbb49510a4401388d8f232eea52f45caaf3f140dd6f235589344"
+      },
+      "style_contrast_present": false
+    },
+    {
+      "id": "dev-en-private",
+      "language": "en",
+      "factual_ids": [],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "factual_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "question_sha256": "ff2a9fe3df18a7841611b60cae1815e8ef67c7e80a3c8078a30f388c1e58f6a6",
+      "prompt_sha256": {
+        "facts": "c5fe131cc67c0b8bf5ec02676eb6b7cf5d9373faa9fb5de23f5be6ee91f8f188",
+        "style": "5fff6ce88e93b06b522ef62bf69530f44d98a3992b74980e19bf5a297cf1b1b9",
+        "adapter": "5fff6ce88e93b06b522ef62bf69530f44d98a3992b74980e19bf5a297cf1b1b9"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "dev-ko-future",
+      "language": "ko",
+      "factual_ids": [],
+      "style_ids": [],
+      "factual_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "question_sha256": "e86cde3d264df86c9ee6f017a690e57580af5b4158e0e525e325ef1ed6ed8837",
+      "prompt_sha256": {
+        "facts": "7644e2b16ef671f4f7ec00338379cbbe3c62c12226f2a4d3306052bd24201b7c",
+        "style": "7644e2b16ef671f4f7ec00338379cbbe3c62c12226f2a4d3306052bd24201b7c",
+        "adapter": "7644e2b16ef671f4f7ec00338379cbbe3c62c12226f2a4d3306052bd24201b7c"
+      },
+      "style_contrast_present": false
+    }
+  ],
+  "source_wording_distributed": false,
+  "human_review": "ungraded",
+  "efficacy_claim": false
+}

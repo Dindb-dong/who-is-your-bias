@@ -1,0 +1,165 @@
+{
+  "schema_version": "text-adaptation-plan-summary.v1",
+  "plan_sha256": "7fd35de01ea1a364aa7b5a2bf8547bf3a4a6cd3ebee4b3764b8ce7c8957e5c7c",
+  "id": "jensen-generation-heldout-v2",
+  "created_at": "2026-11-12T18:38:21.800242+00:00",
+  "exposure": "heldout",
+  "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+  "policy": {
+    "conditions": [
+      "facts",
+      "style",
+      "adapter"
+    ],
+    "max_tokens": 160,
+    "context_window": 4096,
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 42,
+    "factual_policy": "identical_complete_passages_all_conditions",
+    "adapter_style_policy": "identical_prompts",
+    "reference_answer_supplied": false,
+    "history_policy": "same_frozen_context_all_conditions"
+  },
+  "implementation_sha256": {
+    "tools/adaptation_evaluation/protocol.py": "b01305ca54e797626d7a52334e6ba96c21a4efc17f65fb390decb3ee8df632da",
+    "tools/adaptation_evaluation/run.py": "ead4af96d3ee25305611e776d8871bcba538a6d80715ed8cef0a4561c3803f57",
+    "tools/adaptation_evaluation/__main__.py": "98cdf136d3e7352e42c01ccadb7cf51e13f5e36230a915c88064cced9ae2cf13",
+    "tools/adaptation_evaluation/local.py": "e9609da6819c8db350b888dc32408f2d5c49a703f8018c05bec5a21c456bc70e",
+    "services/language/engine.py": "4de8fb45c173620e502539273a76ce9e708e8e12fee51060ae61fca8845a633c",
+    "services/language/adapters.py": "ccd92dace3db5065f9af73d26958fcb045fbb3d650f0ead0b10636fe36a185c1",
+    "services/language/app.py": "8e9ae8d0b2e3be25d6fdbbac830f38c827f567d8bb2e26fb86cb7402ae8ff799",
+    "services/language/schemas.py": "f9bea7bde3338b9b5c2e2c670a9ff7ad26d1857777e9d35c787b7f5ffa75da5e",
+    "services/language/requirements.txt": "925c22fead2bd564f8a0ca268d30e05533bfd2856338e7b800f6465dc4258f3b",
+    "services/language/requirements-adapter.txt": "66a43ff50713f25cc71213529074841f61a637acaa55212236ac7b2bafd183dc",
+    "src/bias/context_budget.py": "678645c4ceb0737575d6b26261ebf0b4d1934bc8b0a6a1f7a1af2000c291f420",
+    "src/bias/snapshots.py": "28659167b62d4de7354ccbe83ab4cc3c924891d8c6df2418a33d8755e7b51fc2",
+    "src/bias/config.py": "dddd8a68115d92db72d390a51e6a188302732b887e00e0efcb59221b26d0ae9d",
+    "src/bias/corpus.py": "16b9eef8a6fef0e20a7dd4099b470724e793dc14c698313d06fb679b87e9aeb0",
+    "src/bias/models.py": "1342ef5660b903e2bed04ed28f52e06ec1b1b39fddfb97f8c4b58f36fe13caca",
+    "src/bias/retrieval.py": "7a1c316aecdcfcd1b3bffc25430080b2a4c57738708efe61de9237e0acd5627c",
+    "src/bias/jensen_retrieval.py": "fddc8ceec417fd3c9fd3440ef09438b849793b57c9c24bf595b1fd478d3b8df4",
+    "src/bias/hybrid_retrieval.py": "6d35a45b60473886ae6bcaf40a7b2098a3bab17b944369f033b357afe58b6697",
+    "tools/reference_evaluation/run.py": "9e713a05d9e403d91278242d0a110193f3ec6f50764c79efb7ddf1aa873be17b",
+    "tools/reference_evaluation/protocol.py": "781463b6c3bbccb9d02fe513b7595bc31bac837158257dcc02ef923eaf77b9fb",
+    "tools/evaluation/observe.py": "857361e39a940958eef70e6f052e9453ae98676c8f931fcdd5af3ce78284f541",
+    "tools/evaluation/run.py": "25fb528cdf08ad9396a994eabd919a6956f991e7a839a7d6bc61afb09418f15d"
+  },
+  "cases": [
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00072",
+      "language": "en",
+      "factual_ids": [
+        "qa26-acquired-2023-turn-00077"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "factual_sha256": "2439425bcb57932ec502b3995157032ab1d48355052c05be3376e1fc06458ff1",
+      "reference_sha256": "ab6a061f7f3738efab4ba94194f937cb7b7b718e8c56d067e31860d73670a509",
+      "question_sha256": "37d87ee3aaffff83d6426de214a9b4c47c3e12514e3f99948a4c4ec71faa7ce6",
+      "prompt_sha256": {
+        "facts": "b54af9d82fb0dcb0b96928a2e1cdafecfbd303ba68c52cd1e933c52fc6531ea6",
+        "style": "b924f3d7ba6171dbe7af8f9108930422f5c607c4f438bb7e21965a5d68dca1c9",
+        "adapter": "b924f3d7ba6171dbe7af8f9108930422f5c607c4f438bb7e21965a5d68dca1c9"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00078",
+      "language": "en",
+      "factual_ids": [
+        "qa26-strange-loop-2025-turn-00009"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "factual_sha256": "e66632d149e3f0c44fdbc076b4de700a61d476a9dc6af33aff289d79c52f00a7",
+      "reference_sha256": "83a59bb6c62a5c86a9dafc5f82486079a7d0d87d48667826af9dc0a69427d47d",
+      "question_sha256": "def664f7607bf97ccb672a0c2c914b6813746c6778104a4b09e119e9ce17c030",
+      "prompt_sha256": {
+        "facts": "e800f810dc3881b710e8d478137db6a7eaa2a24b75f3fd87927627e7416327cd",
+        "style": "00fbd293736ed29323b8a5f9c14990f53bf0b18c86d867e5f6845dd75b6422af",
+        "adapter": "00fbd293736ed29323b8a5f9c14990f53bf0b18c86d867e5f6845dd75b6422af"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00186",
+      "language": "en",
+      "factual_ids": [
+        "qa26-stripe-sessions-2024-turn-00203"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "factual_sha256": "bb5a4f0b275f1127e358d600e260168a2eab12b08fca4844c6fac1e859cf9ade",
+      "reference_sha256": "b8561bbc6d32d51a2569d85b63d7929e827f6cb4c3f04a9103920c8d2276922d",
+      "question_sha256": "332729f8e2db3d61dd6fef927125b0f03334bc8396b4ed0c3c18458d4e0c6f87",
+      "prompt_sha256": {
+        "facts": "29f5dc25b000e1e38226c08323c392840545cff8c2090d38136eab2b0abe6fde",
+        "style": "ac1c5e88a86d698db159715dde3e590651646ed97c69f7f62f407e5e45356f50",
+        "adapter": "ac1c5e88a86d698db159715dde3e590651646ed97c69f7f62f407e5e45356f50"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00190",
+      "language": "en",
+      "factual_ids": [
+        "qa26-stripe-sessions-2024-turn-00126"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "factual_sha256": "d1bddb31ca77d68b0b137b28e3f1aa01e5600bb30484585d8a29682df103623f",
+      "reference_sha256": "7310f93d3772495151ae2dfd09580dfef0519b9445bd73e43fde10bbc4418be0",
+      "question_sha256": "7422ed43593aff17582d720345abe072114e91b756d69049e8437340769fc3a6",
+      "prompt_sha256": {
+        "facts": "8ba855f1864c45d444d37c61198e7a6ec03b3cad746adaa9bd82c935ca09f65d",
+        "style": "587b012c27e66dfa47277f46b927c88a9b74265056f15a40c8c5c85c2af83b70",
+        "adapter": "587b012c27e66dfa47277f46b927c88a9b74265056f15a40c8c5c85c2af83b70"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00253",
+      "language": "en",
+      "factual_ids": [
+        "qa26-acquired-2023-turn-00339"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "factual_sha256": "b48adc1e690b16f6b9bae555ff9b661603ffa6f81a46799aaf88b6a14170d97a",
+      "reference_sha256": "be26af12fdff6f9c276c77ba0456bbbf76cebc5b6335ade903aac2cf738c7fb3",
+      "question_sha256": "d562be13c6962048a619d0a475c1086c972838b4dcdb3e2cff8c7d10a9976dda",
+      "prompt_sha256": {
+        "facts": "d0bded957dc8e636cb3d7fa647c27b0772f4d6b72ad563875a207485078109d3",
+        "style": "71d48d4ffca7d6d48d52076bbd470562e818b8109a77ba89f35b4bba9af798ef",
+        "adapter": "71d48d4ffca7d6d48d52076bbd470562e818b8109a77ba89f35b4bba9af798ef"
+      },
+      "style_contrast_present": true
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00297",
+      "language": "en",
+      "factual_ids": [],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "factual_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "reference_sha256": "95dae56a916e26258c03a3e366fd8239b2d11424e7525faf1e8017fd02b42a6f",
+      "question_sha256": "c17122cfc2d23d342a3179a81950c2bf82f91649aec113a9ee2c3cd5d42bed24",
+      "prompt_sha256": {
+        "facts": "bff560b0a61b8a69c911fc2c0dc12029411b28da3e02e82962369bc736d0285d",
+        "style": "fca0cb29e9791b2eb7d25e063ece1d580f907740118453ea0c62b947f2fc1468",
+        "adapter": "fca0cb29e9791b2eb7d25e063ece1d580f907740118453ea0c62b947f2fc1468"
+      },
+      "style_contrast_present": true
+    }
+  ],
+  "source_wording_distributed": false,
+  "human_review": "ungraded",
+  "efficacy_claim": false
+}

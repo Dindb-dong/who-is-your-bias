@@ -1,0 +1,109 @@
+{
+  "schema_version": "jensen-generation-evaluation-registration.v1",
+  "run_id": "jensen-2026-11-13",
+  "status": "frozen_not_executed",
+  "verified_code_checkpoint_before_freeze": "6ea11b6df8296e008e866b74fe1ed0e5f3aa0b0c",
+  "plans": {
+    "development": {
+      "id": "jensen-generation-development-v2",
+      "plan_sha256": "cd2bd7340c3eb7d9c1ddc248b78e25d69b8e00c9d246454cf5925e082a1dd030",
+      "file_sha256": "8e2c7d269ff12d29d260ffdd4212de5ae4afe1c5862a0c1ea57cf8b023916bbe",
+      "cases": 12
+    },
+    "heldout": {
+      "id": "jensen-generation-heldout-v2",
+      "plan_sha256": "7fd35de01ea1a364aa7b5a2bf8547bf3a4a6cd3ebee4b3764b8ce7c8957e5c7c",
+      "file_sha256": "6392f58bde3a2ac49d41ab76f19d88d15fa9a9f686abaabcc4a1bf90e6f4a6ba",
+      "cases": 6
+    }
+  },
+  "scope": "Generation under explicitly fixed training evidence; not retrieval efficacy, live session behavior, speech or avatar quality.",
+  "base_identity": {
+    "base_model": "Qwen/Qwen3-1.7B",
+    "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e"
+  },
+  "policy": {
+    "conditions": [
+      "facts",
+      "style",
+      "adapter"
+    ],
+    "max_tokens": 160,
+    "context_window": 4096,
+    "temperature": 0,
+    "top_p": 1,
+    "seed": 42,
+    "factual_policy": "identical_complete_passages_all_conditions",
+    "adapter_style_policy": "identical_prompts",
+    "reference_answer_supplied": false,
+    "history_policy": "same_frozen_context_all_conditions"
+  },
+  "planned_generations": 54,
+  "attempted_generations": 0,
+  "planned_repetitions_per_case_condition": 1,
+  "source_context_policy": "Heldout original earlier-speaker turns omitted from inference; exact original questions and private references retained.",
+  "history_policy": "Three development cases use authored fixed earlier-user context and the protocol acknowledgement; they are not actual multi-turn conversation executions.",
+  "snapshot": {
+    "id": "jensen-generation-evaluation-v2",
+    "file_sha256": "942b65fecb5c10e7a39b6538b9bae7b600434abcbe1c7a760d7296b672e55e59",
+    "as_of": "2026-11-12T18:36:58.188093Z",
+    "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+    "style_version": "fixed-original-training-examples.v1-condition-neutral",
+    "voice_version": "not-part-of-text-comparison",
+    "appearance_version": "not-part-of-text-comparison",
+    "current_dated_position_coverage": 0
+  },
+  "corpus_files_sha256": {
+    "corpus-manifest.json": "a6b5b353a0eb664e0c9e16b05910e1c0d6e8e4b1b5c0907b59a17f984a6e09f3",
+    "evidence.jsonl": "c64b78d1979d3700c060205293a22272ac2b77ff290bc1387057ecae84bcf526",
+    "profile.json": "11e7078ab047aafa73460a760df8dc4ba74c4a045d78e2d3e18a6a72b851896a",
+    "sources.json": "6baf3e7d6e55f6edccd8ab8551be7525aa86c5682d9ca3fae5f0a5b859bef347",
+    "split-manifest.json": "c5f6831dfd5212153749d7b683e3c0e80d0ee5340a60dbb1023cac1fb39b2aa9"
+  },
+  "heldout_dataset_manifest_sha256": "0c5df9f3a41371570a0fb57426bd1bd78d445ce6eddd6f00b8de941fe403682b",
+  "heldout_answerability_counts": {
+    "partially_answerable": 2,
+    "answerable": 3,
+    "unanswerable": 1
+  },
+  "answerability_review": "agent classification against eligible training material before model generations; human reference/support review remains ungraded",
+  "input_tokens": {
+    "counter": "actual pinned Qwen3 tokenizer chat template with enable_thinking=False",
+    "minimum": 703,
+    "maximum": 1625,
+    "whole_factual_passages_dropped": 0,
+    "style_contrast_cases": 16
+  },
+  "runtime_plan": {
+    "device": "cpu",
+    "preferred_dtype": "float32",
+    "threads": 4,
+    "conditional_fallback": "Use bfloat16 for every condition only if actual float32 memory smoke does not fit. Record measured runtime; the precision probe is not an end-to-end speed claim.",
+    "model_execution_gate": "wait for shared memory slot and completed compatible adapter receipt"
+  },
+  "style_constraints": [
+    "The existing Korean factual prompt requires one sentence, third person and no direct quotations.",
+    "This constraint limits expressiveness and the interpretation of adapter/style similarity.",
+    "Current-position and unseen-future controls have no eligible style examples under the temporal snapshot; their facts/style prompts coincide."
+  ],
+  "source_wording_notes": [
+    "Whole selected source answers, questions and context are retained without evaluation-time truncation.",
+    "Publisher transcripts retain disfluencies and interruptions; the selected Sega turn ends in a publisher-labeled interruption, and only its supported complete claims are evaluation targets."
+  ],
+  "superseded_unexecuted_plans": {
+    "development": {
+      "id": "jensen-generation-development-v1",
+      "plan_sha256": "69e810a55625ffa5ffa83b04ab9fb1e122d6c0e402bca628ef763d5dffc7c419",
+      "reason": "Initial preflight sealed before condition-neutral modality labels were applied. Same cases, selections, facts, references and cutoff; no output was generated."
+    },
+    "heldout": {
+      "id": "jensen-generation-heldout-v1",
+      "plan_sha256": "f6c300faf754ca618e2d84577fea86539fafb3363038464a2b4154d142467b95",
+      "reason": "Initial preflight sealed before condition-neutral modality labels were applied. Same cases, selections, facts, references and cutoff; no output was generated."
+    }
+  },
+  "source_wording_distributed": false,
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "promotion": "Keep adapter opt-in pending actual matched execution and support/control review; this registration is not an acceptance result."
+}
