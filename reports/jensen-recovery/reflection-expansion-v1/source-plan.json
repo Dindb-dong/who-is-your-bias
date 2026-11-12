@@ -1,7 +1,7 @@
 {
   "schema_version": "jensen-reflection-expansion-sources.v1",
   "registered_at": "2026-11-12T19:20:48.905907+00:00",
-  "status": "oral_history_acquired_persistence_in_progress_commencement_pending",
+  "status": "oral_history_durably_verified_commencement_pending",
   "isolation": {
     "included_in_frozen_v4": false,
     "included_in_text_adapter_v1": false,
@@ -57,7 +57,7 @@
         "Hansen Hsu"
       ],
       "transcript_warning": "Publisher says interviewees may edit transcripts afterward; words and clocks must not be assumed identical to video.",
-      "status": "full_mp4_and_original_pdf_acquired_durable_readback_pending",
+      "status": "full_mp4_and_original_pdf_uploaded_and_fresh_readback_verified",
       "declared_event_partition": "train_expansion_only; no current frozen run membership or automatic training eligibility",
       "delivery_headers": "ordinary browser User-Agent and the linked public CHM catalog Referer; headerless delivery returned403"
     },
@@ -72,10 +72,13 @@
       "status": "official_player_metadata_acquired_delivery_probe_returned_html_not_media",
       "youtube_duration_seconds": 1102,
       "youtube_publication_date": "2026-05-10",
-      "delivery_limitation": "Public player CDN probe returned a195-byte Site Unavailable HTML page; this is not an acquired video."
+      "delivery_limitation": "Public player CDN probe returned a195-byte Site Unavailable HTML page; this is not an acquired video.",
+      "alternate_official_player_url": "https://mediaservices.cmu.edu/media/2026%2BCMU%2BCommencement%2BCeremony%2B(Live)/1_0vcp1jtq",
+      "alternate_player_status": "Official public Kaltura page200; manifest404; ended live entry with empty recordedEntryId, no playable archive established"
     }
   ],
   "actual_media_files_acquired": 1,
   "actual_media_count_unit": "complete original event video files; transcript PDF and metadata are separate artifacts",
-  "last_verified_preparation_commit": "f2cf6bad53493aae7522c5b63612e654b850365d"
+  "last_verified_preparation_commit": "f2cf6bad53493aae7522c5b63612e654b850365d",
+  "actual_distinct_event_videos_durably_verified": 1
 }
