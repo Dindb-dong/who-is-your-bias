@@ -17,6 +17,17 @@
     "typescript": "passed",
     "production_build": "passed",
     "browser_desktop_and_mobile": {
+      "status": "passed_in_actual_github_ci",
+      "report": "browser-qualification.json",
+      "run_id": 43283696054,
+      "head_sha": "ff64ea3e49335fcfceea35b5ba2c0f29af4b4784",
+      "jensen_cases": 20,
+      "candidate_projects": [
+        "desktop",
+        "mobile"
+      ]
+    },
+    "local_browser_attempt": {
       "status": "blocked_before_page_launch",
       "reason": "Chromium process_singleton_posix.cc AF_UNIX socket() failed: Operation not permitted",
       "application_assertions_executed": false,
@@ -36,7 +47,6 @@
     ]
   },
   "remaining": [
-    "Browser/WebGL material and playback acceptance",
     "Continuous speaker/track association review",
     "Independent human likeness and motion-quality review"
   ]

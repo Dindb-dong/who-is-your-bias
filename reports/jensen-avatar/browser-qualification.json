@@ -1,0 +1,77 @@
+{
+  "schema_version": "avatar-browser-qualification.v1",
+  "persona_id": "jensen-huang",
+  "asset_sha256": "dea0c921fb7d5668527bd8ee9082f382b14e8d300c43936842e15356dc7d90cd",
+  "head_sha": "ff64ea3e49335fcfceea35b5ba2c0f29af4b4784",
+  "run_id": 43283696054,
+  "url": "https://github.com/Dindb-dong/who-is-your-bias/actions/runs/43283696054",
+  "conclusion": "success",
+  "browser": "GitHub-hosted Chromium with ANGLE SwiftShader software WebGL",
+  "projects": [
+    "desktop",
+    "mobile (Playwright Pixel 7 emulation)"
+  ],
+  "checks": {
+    "web_typecheck": "passed",
+    "web_unit_tests": 241,
+    "production_build": "passed",
+    "focused_python": 96,
+    "historical_browser": 30,
+    "jensen_browser": 20
+  },
+  "candidate_case": {
+    "explicit_candidate_selection": true,
+    "loaded_geometry": "52 face controls and 46 mapped joints",
+    "webgl_context_not_lost": true,
+    "geometry_preview_consent": true,
+    "advances_and_resets_source_clock": true,
+    "remains_reset_after_delay": true,
+    "historical_narration_absent": true,
+    "no_console_webgl_errors": true,
+    "no_horizontal_page_overflow": true,
+    "screenshots": [
+      {
+        "project": "desktop",
+        "path": "renders/browser-desktop.png",
+        "bytes": 125494,
+        "sha256": "9ca26aa475cb762ea33d76010880251cba721ae03b0ed7e458edfa2b9decf583",
+        "image_width": 597,
+        "image_height": 541,
+        "crop": "Actual .avatar-visual element; not the full viewport"
+      },
+      {
+        "project": "mobile",
+        "path": "renders/browser-mobile.png",
+        "bytes": 414769,
+        "sha256": "cfd78fd1be44116fbfbfab32a50aa184e5a3b42b627d22213e2d2c284244fd57",
+        "image_width": 987,
+        "image_height": 1315,
+        "crop": "Actual .avatar-visual element; not the full viewport"
+      }
+    ]
+  },
+  "visual_review": {
+    "reviewer": "assistant inspection of actual screenshots",
+    "findings": [
+      "Face, glasses, authored clothing and both hands render on both sizes.",
+      "Both hands remain inside each captured avatar viewport.",
+      "Generic face geometry, stylized skin, hair shape and clothing remain candidate likeness limits."
+    ],
+    "human_likeness": "not_accepted"
+  },
+  "artifact": {
+    "github_artifact_id": 13974477427,
+    "file_name": "studio-browser-ff64ea3.zip",
+    "bytes": 2887277,
+    "sha256": "1b925984770feae939219ba1a32a816ccc9d1886a536f6482aad79c3166293c2",
+    "file_id": "file_00000000e56481fd89769a22d4a44bec",
+    "library_file_id": "libfile_fde3_f-4b05799db3f48191a4dc393709f0911f_a18ece08681081918d81df44f69c4b1f",
+    "status": "uploaded_and_fresh_readback_sha256_verified_by_root"
+  },
+  "scope": [
+    "This CI uses the isolated seeded Jensen browser corpus, not the restored v4 corpus used by the separate actual HTTP smoke.",
+    "No speech model is running in this browser test.",
+    "Mobile emulation and software WebGL do not establish physical-device performance.",
+    "Functional rendering/replay passed; continuous speaker association and human likeness remain unaccepted."
+  ]
+}

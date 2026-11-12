@@ -129,11 +129,18 @@ selector, and an explicit geometry-preview checkbox. Imported clips and audio re
 persona changes. Historical Musk clip/narration buttons are not offered in the
 Jensen lab.
 
-The focused browser test was attempted on desktop and mobile, but Chromium exited
+The local browser test was attempted on desktop and mobile, but Chromium exited
 before creating a page: `socket() failed: Operation not permitted` in
 `process_singleton_posix.cc`. Those two attempts are environment-blocked, not
-passing UI tests. Web type checking and the production build passed; actual
-browser rendering/replay acceptance remains open. Six actual Blender CPU renders
+passing UI tests. Actual GitHub-hosted Chromium subsequently passed the Jensen
+suite on desktop and mobile, including explicit selection and playback of this
+new GLB. The [browser qualification record](browser-qualification.json) binds
+run `43283696054`, head `ff64ea3e49335fcfceea35b5ba2c0f29af4b4784`, the
+durably verified artifact ZIP and both original screenshots. Web type checking,
+241 web tests, the production build, 96 focused Python tests, 30 historical
+browser cases and 20 Jensen browser cases passed at that head.
+
+Six actual Blender CPU renders
 of v3c cover front, three-quarter, profile, an observed frame and desktop/mobile
 hand articulation stress. All 3,586 selected hand skin vertices remain in frame.
 The initial conservative mobile camera had excessive margin. A subsequent
@@ -141,11 +148,14 @@ completed render uses the actual mapped head/arm/hand envelope with skin margins
 the camera expands for extended hands and eases inward. The full-resolution
 renders were preserved separately; compressed repository review copies are
 linked from [the exact visual QA record](offline-visual-qa.json).
-These renders are offline evidence, not browser screenshots or proof of WebGL
-material parity. The candidate-specific browser test now verifies the real GLB
+These renders remain offline evidence, separate from the actual browser
+screenshots below. The candidate-specific browser test verifies the real GLB
 hash, live WebGL2 context, framing, preview consent and cancellation, and captures
-desktop/mobile screenshots; its actual CI result is recorded by the integration
-execution record rather than inferred from this local environment.
+desktop/mobile screenshots. Both inspected screenshots show the face, glasses,
+jacket and both hands within the avatar viewport. This CI uses software WebGL
+and Pixel 7 emulation with the seeded Jensen browser corpus. It does not establish
+physical-phone performance or simultaneous neural speech/avatar operation; the
+restored v4 corpus is exercised by the separate actual HTTP runtime check.
 
 | View | Actual rendered evidence |
 | --- | --- |
@@ -155,6 +165,8 @@ execution record rather than inferred from this local environment.
 | Measured frame | [Goldman source-relative movement](renders/v3c-desktop-observed-frame.jpg) |
 | Desktop articulation | [Both hands and curled fingers](renders/v3c-desktop-hand-stress.jpg) |
 | Mobile articulation | [Both hands in the tighter viewport](renders/v3c-mobile-hand-stress.jpg) |
+| Actual desktop browser | [Loaded candidate and source-relative hand replay](renders/browser-desktop.png) |
+| Actual mobile browser | [Candidate with both hands inside the emulated viewport](renders/browser-mobile.png) |
 
 ## Reproduction and remaining gates
 
@@ -170,7 +182,7 @@ finger, three face controls, measured clip consent and reset). The native and
 attention test files initially passed 26 tests together. The final focused run
 passed **45 tests across five files**, including actual posed hand skin on four
 observed poses, three viewport aspects and three orbit directions. Remaining
-acceptance gates are browser rendering, continuous source/speaker review,
+acceptance gates are continuous source/speaker review, physical-device performance,
 and independent human likeness/performance assessment. The observed optimizer
 residual cannot pass those gates by itself.
 
