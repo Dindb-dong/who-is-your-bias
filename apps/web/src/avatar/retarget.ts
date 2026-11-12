@@ -2,7 +2,7 @@ import { Box3, Euler, Group, LoadingManager, Mesh, Object3D, Quaternion, Vector3
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { createResearchHumanMapping, mergeRigMappings, RESEARCH_HUMAN_AVATAR } from './builtin';
-import { BONE_CHANNELS, FACE_CHANNELS, VISEMES } from './channels';
+import { BONE_CHANNELS, FACE_CHANNELS, FINGER_CHANNELS, FINGER_JOINTS, VISEMES } from './channels';
 import { disposeObject } from './dispose';
 import type { AvatarRig } from './procedural';
 import type { BoneBinding, BoneControl, FaceWeights, MorphBinding, MorphControl, RigMapping, RigPose, Viseme } from './types';
@@ -14,7 +14,7 @@ const MORPH_ALIASES: Partial<Record<MorphControl, string[]>> = {
   jawOpen: ['mouthOpen'], mouthSmileLeft: ['mouthSmile_L'], mouthSmileRight: ['mouthSmile_R'],
   browDownLeft: ['browDown_L'], browDownRight: ['browDown_R'],
 };
-const BONES: Record<BoneControl, string[]> = {
+const BONES = {
   hips: ['Hips', 'mixamorigHips', 'J_Bip_C_Hips'],
   spine: ['Spine', 'mixamorigSpine', 'J_Bip_C_Spine'],
   chest: ['Chest', 'Spine2', 'mixamorigSpine2', 'J_Bip_C_Chest'],
@@ -31,7 +31,11 @@ const BONES: Record<BoneControl, string[]> = {
   rightForearm: ['RightForeArm', 'RightLowerArm', 'mixamorigRightForeArm', 'J_Bip_R_LowerArm'],
   leftHand: ['LeftHand', 'mixamorigLeftHand', 'J_Bip_L_Hand'],
   rightHand: ['RightHand', 'mixamorigRightHand', 'J_Bip_R_Hand'],
-};
+  ...Object.fromEntries((['left', 'right'] as const).flatMap((side) => FINGER_JOINTS.map((joint, index) => {
+    const hand = side === 'left' ? 'Left' : 'Right'; const finger = ['Thumb', 'Index', 'Middle', 'Ring', 'Pinky'][Math.floor(index / 3)];
+    return [`${side}${joint}`, [`${side}${joint}`, `${hand}Hand${finger}${index % 3 + 1}`, `mixamorig${hand}Hand${finger}${index % 3 + 1}`]];
+  }))),
+} as Record<BoneControl, string[]>;
 const normalized = (value: string): string => value.toLowerCase().replace(/[^a-z0-9]/g, '');
 const bounded = (value: number, min: number, max: number): number => Number.isFinite(value) ? Math.max(min, Math.min(max, value)) : 0;
 
@@ -204,6 +208,13 @@ export function createRetargetedRig(model: Group, suppliedMapping: RigMapping = 
       rotate(pose, 'rightForearm', -pose.openPalm * 0.7 - pose.wave * 0.7);
       rotate(pose, 'leftHand', 0, pose.openPalm * 0.4, pose.emphasis * 0.1);
       rotate(pose, 'rightHand', 0, -pose.openPalm * 0.4, -pose.wave * 0.2);
+      // Explicit measurements override each joint independently. Unobserved
+      // fingers receive only a bounded authored gesture, never a learned claim.
+      for (const name of FINGER_CHANNELS) {
+        const thumb = name.includes('Thumb');
+        const curl = (thumb ? 0.12 : 0.30) * pose.emphasis * (1 - pose.openPalm);
+        rotate(pose, name, curl, 0, 0);
+      }
     },
     dispose() { disposeObject(root); },
   };

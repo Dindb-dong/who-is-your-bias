@@ -15,11 +15,24 @@ export const FACE_CHANNELS = [
 ] as const;
 
 export type FaceChannel = typeof FACE_CHANNELS[number];
-export const BONE_CHANNELS = [
+export const FINGER_JOINTS = [
+  'ThumbMetacarpal', 'ThumbProximal', 'ThumbDistal',
+  'IndexProximal', 'IndexIntermediate', 'IndexDistal',
+  'MiddleProximal', 'MiddleIntermediate', 'MiddleDistal',
+  'RingProximal', 'RingIntermediate', 'RingDistal',
+  'LittleProximal', 'LittleIntermediate', 'LittleDistal',
+] as const;
+export type FingerControl = `${'left' | 'right'}${typeof FINGER_JOINTS[number]}`;
+export const FINGER_CHANNELS = [
+  ...FINGER_JOINTS.map((joint) => `left${joint}` as FingerControl),
+  ...FINGER_JOINTS.map((joint) => `right${joint}` as FingerControl),
+] as const;
+export const BODY_CHANNELS = [
   'hips', 'spine', 'chest', 'neck', 'head', 'jaw', 'leftEye', 'rightEye',
   'leftShoulder', 'rightShoulder', 'leftUpperArm', 'rightUpperArm',
   'leftForearm', 'rightForearm', 'leftHand', 'rightHand',
 ] as const;
+export const BONE_CHANNELS = [...BODY_CHANNELS, ...FINGER_CHANNELS] as const;
 export type BoneControl = typeof BONE_CHANNELS[number];
 
 /** Common 15-target viseme vocabulary; a loaded asset must actually supply it. */

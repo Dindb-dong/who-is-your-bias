@@ -5,7 +5,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { describe, expect, it } from 'vitest';
 import { createResearchHumanMapping, mergeRigMappings } from './builtin';
-import { FACE_CHANNELS, VISEMES } from './channels';
+import { FACE_CHANNELS, FINGER_CHANNELS, VISEMES } from './channels';
 import { sampleMotion } from './motion';
 import { createRetargetedRig } from './retarget';
 import { neutralPose } from './timeline';
@@ -66,7 +66,7 @@ describe('shipped Meshopt research human', () => {
     const { rig, meshes } = await loadHuman();
     expect(rig.diagnostics.morphs.sort()).toEqual([...FACE_CHANNELS].sort());
     expect(rig.diagnostics.visemes!.sort()).toEqual([...VISEMES].sort());
-    expect(rig.diagnostics.bones).toHaveLength(16);
+    expect(rig.diagnostics.bones).toHaveLength(46);
     expect(rig.diagnostics.missing).toEqual([]);
     expect(meshes).toHaveLength(7);
     expect(meshes[0].skeleton.bones).toHaveLength(163);
@@ -122,6 +122,22 @@ describe('shipped Meshopt research human', () => {
     expect(greatestSkinChange).toBeGreaterThan(0.03);
     rig.apply(neutralPose()); update();
     expect(point('leftHand').distanceTo(wrist)).toBeLessThan(1e-6);
+    rig.dispose();
+  });
+
+  it('moves real skinned fingers independently and returns to authored rest without drift', async () => {
+    const { rig, meshes, node, update } = await loadHuman();
+    const skin = meshes.reduce((largest, mesh) => mesh.geometry.attributes.position.count > largest.geometry.attributes.position.count ? mesh : largest);
+    const baseline = positions(skin);
+    for (const channel of FINGER_CHANNELS) {
+      const rest = node(channel).quaternion.clone();
+      const rotation = new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), 0.5).toArray() as [number, number, number, number];
+      rig.apply({ ...neutralPose(), bones: { [channel]: rotation } }); update();
+      expect(node(channel).quaternion.angleTo(rest), channel).toBeGreaterThan(0.1);
+      expect(largestChange(skin, baseline), `${channel} must deform its bound skin`).toBeGreaterThan(0.0001);
+      rig.apply(neutralPose()); update();
+      expect(largestChange(skin, baseline)).toBeLessThan(1e-6);
+    }
     rig.dispose();
   });
 

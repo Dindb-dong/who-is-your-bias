@@ -252,7 +252,8 @@ export class AvatarRenderer {
     const oldSize = this.renderer.getSize(new Vector2());
     if (oldSize.x !== width || oldSize.y !== height) this.stopAudition('viewport_changed');
     this.camera.aspect = width / height;
-    // Preserve the face/shoulder framing on narrow mobile stages.
+    // Upper-body framing must recompute distance after an aspect change.
+    if (this.framing === 'upper_body' && (oldSize.x !== width || oldSize.y !== height)) this.resetView();
     this.camera.fov = avatarView(this.rig.diagnostics.kind, this.framing, this.camera.aspect).fov;
     this.camera.updateProjectionMatrix(); this.renderer.setSize(width, height, false);
   };
