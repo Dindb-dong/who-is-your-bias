@@ -1,0 +1,22 @@
+{
+  "schema_version": "jensen-text-experiment.v1",
+  "status": "prepared",
+  "model": "Qwen/Qwen3-1.7B",
+  "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+  "dataset_sha256": "f83aea790b09631ae7b96f8f899012c879af92c73acafc81a475a49cdfe460d4",
+  "examples": 113,
+  "event_families": 9,
+  "device": "cpu",
+  "precision": "bfloat16",
+  "rank": 8,
+  "epochs": 1,
+  "max_length": 768,
+  "gradient_accumulation": 4,
+  "max_steps": 29,
+  "learning_rate": 0.0002,
+  "seed": 42,
+  "checkpoint_every": 2,
+  "initial_stop_after_steps": 1,
+  "promotion": "candidate_until_measured",
+  "training_quality_claim": false
+}

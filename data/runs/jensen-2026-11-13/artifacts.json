@@ -202,6 +202,19 @@
       "sha256": "d334c36000c4a995e18ad4bca9e2a03c8b3f1c1626aafe1fb4a09dc7e564f7c9",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "text-dataset-v1",
+      "role": "frozen-text-adaptation-dataset",
+      "examples": 113,
+      "event_families": 9,
+      "file_name": "jensen-text-dataset-v1.tar.gz",
+      "file_id": "file_0000000030b081fd9b6c8cf9497371f4",
+      "library_file_id": "libfile_fde3_f-9207351937988191831e419a6a9df833_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 74188,
+      "sha256": "bace668feff99ef3576dd389cfc2e8424088d263bbf857afa62d4db697d6a6a6",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ]
 }
