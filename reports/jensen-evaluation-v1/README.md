@@ -78,12 +78,15 @@ training evidence supports only a broader or partial answer.
 
 ## Execution and review procedure
 
-Execution waits for the shared model-memory slot and a completed, compatible
-adapter receipt. The preferred serving runtime is CPU float32 with four
-threads. If an actual memory smoke cannot accommodate float32, use bfloat16
-for **all three conditions** and record that runtime. A matrix-kernel precision
-probe does not establish end-to-end generation speed. Do not run different
-precisions or thread counts across the required conditions.
+Execution waits for the shared model-memory slot. Adapter execution additionally
+requires the exact completed, compatible adapter receipt. The additive
+[execution contract](execution-contract.json) now registers **CPU float32 with
+eight threads** for all conditions. This updates the four-thread runtime plan
+in the earlier registration without changing either v2 plan, its questions,
+messages or decoding. If the excluded loading/warmup preflight cannot fit,
+preserve that failure and explicitly register a new common runtime before
+starting cases. A matrix-kernel probe does not establish end-to-end generation
+speed. Do not mix precision or thread counts across the comparison.
 
 Restore the saved private archive, check its file SHA-256, then validate the
 immutable `frozen-v2` plans against the exact bound implementation. The v1
@@ -92,30 +95,20 @@ snapshot used historical modality labels. V2 changes only the snapshot ID and
 condition-neutral modality labels; cases, facts, selections, references and
 cutoff are unchanged. No model output was used for that revision.
 
-With `ART` pointing at the restored artifact root, run from the project root
-using the prepared inference environment. These are **proposed execution
-commands**, not completed runs:
-
-```sh
-PYTHONPATH=src:. .venv-inference/bin/python -m tools.adaptation_evaluation.local \
-  --plan "$ART/text-evaluation-v1/frozen-v2/development/plan.json" \
-  --adapter-run "$ART/text-adapter-v1" \
-  --dtype float32 --threads 4 --timeout 180 \
-  --output "$ART/text-evaluation-v1/execution-development-v2"
-
-PYTHONPATH=src:. .venv-inference/bin/python -m tools.adaptation_evaluation.local \
-  --plan "$ART/text-evaluation-v1/frozen-v2/heldout/plan.json" \
-  --adapter-run "$ART/text-adapter-v1" \
-  --dtype float32 --threads 4 --timeout 180 \
-  --output "$ART/text-evaluation-v1/execution-heldout-v2"
-```
+Use the [single-condition execution and collection guide](condition-execution.md).
+The new supervisor starts one real server, runs exactly `facts`, `style` or
+`adapter` with the unchanged frozen runner, saves its report and private review
+data, then terminates. Save and verify that complete output before another
+condition. The original all-condition `local.py` remains unchanged for protocol
+identity; it is not the execution entrypoint for this checkpointed procedure.
 
 Use new output directories. Retain raw generations and failed/partial attempts,
 finish reasons, identity checks and latency. Save each completed condition
 before proceeding with further expensive work. A transport completion with a
-length finish reason is not proof of a complete or correct answer. The runner
-uses a fixed condition order and excludes warmup; its times describe this CPU,
-not a target device.
+length finish reason is not proof of a complete or correct answer. Each
+condition now has its own excluded model load and short warmup. Sequential
+order remains unbalanced, and its times describe this CPU rather than a target
+device. Interruption between conditions can also change background host load.
 
 Review factual support, temporal fidelity, answer quality, style similarity,
 unsupported first-person assertions, repetitive mannerisms and quotation
