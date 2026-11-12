@@ -1,0 +1,130 @@
+{
+  "schema_version": "jensen-neural-text-live-protocol.v1",
+  "purpose": "Functional main API to actual neural language-provider integration; no semantic, language-quality or persona-fidelity verdict.",
+  "frozen_before_execution": true,
+  "persona_id": "jensen-huang",
+  "conditions": [
+    "base",
+    "adapter"
+  ],
+  "base_identity": {
+    "base_model": "Qwen/Qwen3-1.7B",
+    "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+    "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+    "chat_template_options": {
+      "enable_thinking": false
+    }
+  },
+  "corpus": {
+    "artifact_path": "original-dialogue-v4/corpus",
+    "sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+    "all_sources_split": "train"
+  },
+  "snapshots": {
+    "base": {
+      "path": "base.snapshot.json",
+      "sha256": "bbb709d3bf8cafb794a762808a36ffad0e9a7afffa4aca5e23b38cfd6c3de904"
+    },
+    "adapter": {
+      "path": "adapter.snapshot.json",
+      "sha256": "590d78fa4be5aced318d90de4affaaffb22885b2295a34ef7a3b603d8c7f6843"
+    }
+  },
+  "runtime": {
+    "device": "cpu",
+    "dtype": "bfloat16",
+    "threads": 8,
+    "served_model": "jensen-neural-functional",
+    "retrieval_backend": "jensen-lexical",
+    "style_examples": false,
+    "voice_enabled": false,
+    "motion_enabled": false
+  },
+  "policy": {
+    "context_window": 4096,
+    "max_output_tokens": 160,
+    "max_response_chars": 3000,
+    "request_seconds": 240,
+    "startup_seconds": 30,
+    "recovery_seconds": 60,
+    "total_seconds": 1800,
+    "temperature": 0,
+    "top_p": 1,
+    "top_k": 20,
+    "seed": 42,
+    "warmup_max_tokens": 12
+  },
+  "cases": [
+    {
+      "id": "question",
+      "role": "question",
+      "message": "What is CUDA? Please answer in one short sentence.",
+      "language": "en",
+      "expected_resolution": "original"
+    },
+    {
+      "id": "followup",
+      "role": "follow-up",
+      "message": "Can you explain that more simply in one short sentence?",
+      "language": "en",
+      "expected_resolution": "previous_user_reference"
+    },
+    {
+      "id": "correction",
+      "role": "correction",
+      "message": "I meant CUDA's developer ecosystem. Please use one short sentence.",
+      "language": "en",
+      "expected_resolution": "explicit_correction"
+    },
+    {
+      "id": "topic_switch",
+      "role": "topic switch",
+      "message": "Switching topics: what are AI factories? Please use one short sentence.",
+      "language": "en",
+      "expected_resolution": "topic_switch"
+    }
+  ],
+  "disconnect_case": {
+    "id": "disconnect",
+    "message": "Explain CUDA's developer ecosystem in detail, with several examples.",
+    "language": "en",
+    "close_after": "first nonempty SSE token while the exact neural provider is observed busy",
+    "same_session": true
+  },
+  "recovery_case": {
+    "id": "recovery",
+    "message": "What is CUDA? Please answer in one short sentence.",
+    "language": "en",
+    "same_session": true
+  },
+  "expectations": [
+    "Both actual TCP HTTP hops, main API and local neural provider, run in the same managed invocation.",
+    "The loaded base bytes, tokenizer contract and CPU runtime match the pinned identity; adapter mode additionally requires a hash-verified completed training receipt.",
+    "Four completed responses use the openai-compatible neural path and preserve one session; no evidence-preview response counts as neural success.",
+    "Retrieved evidence and any emitted citation bindings match unchanged training records; marker coverage is reported separately from functional transport checks.",
+    "The fifth stream closes after one nonempty model token while provider health still reports busy; no completed partial turn enters session memory.",
+    "Provider becomes idle after cancellation, a same-session recovery turn completes, and session deletion succeeds.",
+    "Every stage saves raw traces and a report incrementally; every child process and server is stopped on success or failure.",
+    "No voice model, human rating, semantic entailment, persona fidelity or production promotion is part of this probe."
+  ],
+  "persistence_boundary": "Save the complete private output and verify fresh readback before claiming the functional run is preserved.",
+  "related_experiments": "Separate from frozen M6 matched54 and six heldout retrieval diagnostic calls; these functional outputs are never merged into their scores.",
+  "adapter_training": {
+    "dataset_sha256": "f83aea790b09631ae7b96f8f899012c879af92c73acafc81a475a49cdfe460d4",
+    "samples": 113,
+    "event_counts": {
+      "acquired-2023": 16,
+      "csis-2025": 12,
+      "dwarkesh-2026": 16,
+      "goldman-sachs-2024": 10,
+      "lex-494": 16,
+      "stanford-vftt-2024": 6,
+      "strange-loop-2025": 12,
+      "stripe-sessions-2024": 16,
+      "yc-startup-school-2026": 9
+    },
+    "optimizer_steps": 29,
+    "basis": "Frozen Jensen text experiment: 113 complete exchanges across nine events, with 29 planned optimizer updates; candidate must be completed and locally artifact-verified before serving."
+  }
+}

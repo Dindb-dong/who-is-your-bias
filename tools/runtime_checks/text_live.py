@@ -28,16 +28,17 @@ from tools.runtime_checks.smoke import Client, code_receipt, server, sha, write
 
 SCHEMA = "jensen-neural-text-live-protocol.v1"
 SHA256 = re.compile(r"[a-f0-9]{64}")
+SEALED_PROTOCOLS = {
+    "edac6dfc7fb1545fc164fc5070ae3fdbc52a0a6dd82f7c10082fa88a58aa1210": "float32",
+    "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e": "bfloat16",
+}
 
 
-def prepare(args):
-    """Validate local identities without importing or loading neural weights."""
-    if not args.allow_candidates:
-        raise ValueError("This optional functional configuration requires --allow-candidates")
-    repo = args.repository.resolve()
-    path = (args.protocol or repo / "reports/jensen-text-live-v1/protocol.json").resolve()
-    if not args.protocol_sha256 or digest(path) != args.protocol_sha256:
-        raise ValueError("Supply the exact frozen --protocol-sha256")
+def load_protocol(path: Path, expected_sha256: str) -> dict:
+    """Accept only the two sealed runtimes, with every other protocol byte pinned."""
+    actual = digest(path)
+    if expected_sha256 != actual or actual not in SEALED_PROTOCOLS:
+        raise ValueError("Supply the exact frozen --protocol-sha256 of a registered sealed runtime")
     protocol = json.loads(path.read_text())
     identity = protocol.get("base_identity", {})
     if (protocol.get("schema_version") != SCHEMA or protocol.get("persona_id") != "jensen-huang"
@@ -51,7 +52,7 @@ def prepare(args):
         raise ValueError("Expected an explicitly frozen Jensen neural functional protocol")
     runtime = protocol["runtime"]
     policy = protocol["policy"]
-    if (runtime != {"device": "cpu", "dtype": "float32", "threads": 8,
+    if (runtime != {"device": "cpu", "dtype": SEALED_PROTOCOLS[actual], "threads": 8,
                     "served_model": "jensen-neural-functional", "retrieval_backend": "jensen-lexical",
                     "style_examples": False, "voice_enabled": False, "motion_enabled": False}
             or policy != {"context_window": 4096, "max_output_tokens": 160, "max_response_chars": 3000,
@@ -61,6 +62,17 @@ def prepare(args):
             or [case.get("id") for case in protocol["cases"]] !=
                ["question", "followup", "correction", "topic_switch"]):
         raise ValueError("This wrapper requires the predeclared bounded runtime and four-turn protocol")
+    return protocol
+
+
+def prepare(args):
+    """Validate local identities without importing or loading neural weights."""
+    if not args.allow_candidates:
+        raise ValueError("This optional functional configuration requires --allow-candidates")
+    repo = args.repository.resolve()
+    path = (args.protocol or repo / "reports/jensen-text-live-v1/protocol.json").resolve()
+    protocol = load_protocol(path, args.protocol_sha256)
+    identity = protocol["base_identity"]
     corpus_path = local(args.artifacts.resolve(), protocol["corpus"]["artifact_path"])
     corpus = Corpus.load(corpus_path)
     if (corpus.persona.id != "jensen-huang" or corpus_digest(corpus) != protocol["corpus"]["sha256"]
@@ -108,7 +120,8 @@ def prepare(args):
     preflight = {"protocol_sha256": digest(path), "condition": args.condition,
         "corpus_sha256": corpus_digest(corpus), "snapshot_sha256": digest(snapshot_path),
         "snapshot": snapshot.summary(), "base_identity": identity, "adapter": adapter,
-        "interpreter": interpreter, "weights_loaded": False, "voice_enabled": False}
+        "declared_runtime": protocol["runtime"], "interpreter": interpreter,
+        "weights_loaded": False, "voice_enabled": False}
     return protocol, corpus, snapshot_path, tokenizer_path, preflight
 
 

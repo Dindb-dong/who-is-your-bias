@@ -12,10 +12,35 @@ and tokenizer hashes, original-dialogue-v4, and distinct
 snapshots. Its exact file SHA-256 is
 `edac6dfc7fb1545fc164fc5070ae3fdbc52a0a6dd82f7c10082fa88a58aa1210`.
 
-The runtime uses CPU float32, eight threads, a 4,096-token input/output context,
+The original runtime declares CPU float32, eight threads, a 4,096-token input/output context,
 160 output tokens, deterministic decoding, a 240-second per-request budget and
 a 1,800-second whole-run budget. Voice, transcription and measured-motion
 selection are disabled. It does not change the application's default config.
+
+## Pre-output BF16 runtime amendment
+
+The separate M6 language service was SIGKILLed (`-9`) during its excluded FP32
+warmup, before any evaluation question or response. Its supervisor recorded
+91.894 seconds and the process owner observed a maximum waited-child RSS of
+8,191,066,112 bytes. This is consistent with memory pressure; no kernel OOM
+attribution was available. The failed attempt and its fresh-readback receipt are
+preserved in the [M6 runtime amendment](../jensen-evaluation-v1/runtime-amendment-bf16-v2.json).
+It is not an M7 attempt or a semantic response failure.
+
+The additive [BF16 protocol](protocol-bf16-v2.json), sealed before any M7 output,
+has SHA-256
+`6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e`.
+It differs from the retained original protocol only in `runtime.dtype`, from
+`float32` to `bfloat16`. All questions, snapshots, timeouts, decoding settings,
+eight threads and the completed 29-update Jensen adapter gate are unchanged.
+The [M7 amendment](runtime-amendment-bf16-v2.json) records the observed failure,
+exact artifacts and this prospective selection. The wrapper accepts only these
+two exact registered protocol digests and still checks the actual loaded dtype.
+There is no automatic precision fallback.
+
+This registration does not establish BF16 runtime suitability. Await the
+coordinator's actual BF16 preflight observation, the final restored adapter and
+release of shared model memory before M7 execution. No M7 neural case has run.
 
 ## What it checks
 
@@ -42,14 +67,21 @@ direct provider health receipt identifies the actual local Qwen model.
 
 ## Verified preparation and next commands
 
-Python compilation, whitespace checking, thirteen focused harness tests and the base
-preflight passed. The tests cover exact observed model/adapter rejection, actual
+The original preparation passed Python compilation, whitespace checking, thirteen
+focused harness tests and the base preflight. The tests cover exact observed model/adapter rejection, actual
 TCP first-nonempty-token disconnect, generator cancellation, normal SSE, HTTP
 error retention and server teardown after a body exception. Their small HTTP
 fixtures are explicitly not neural integration evidence. The
 preflight validated the exact corpus and snapshot, the local pinned cache,
 and the selected virtualenv's dependency availability. **No weights loaded, no
 model responses generated, and no functional run success is claimed.**
+
+The [BF16 preparation record](preparation-bf16-v2.json) adds 24 passing harness
+tests and a successful base configuration-only `--verify-only` check. Both seals
+are accepted; altered questions, snapshots, budgets or training bindings are
+rejected even when a caller supplies a new matching digest. This check found the
+existing corpus/cache/interpreter dependencies and loaded no weights. It does
+not establish actual BF16 model execution or memory suitability.
 
 From the integrated repository, set the following existing paths. The interpreter
 path must preserve the virtualenv spelling; resolving its symlink can select the
@@ -59,12 +91,13 @@ base Python without the model dependencies.
 ART=/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13
 CACHE=/workspace/scratch/6f64e1b53384/model-cache/hub
 INFERENCE_PYTHON=/workspace/scratch/6f64e1b53384/who-is-your-bias/.venv-inference/bin/python
-PROTOCOL_SHA=edac6dfc7fb1545fc164fc5070ae3fdbc52a0a6dd82f7c10082fa88a58aa1210
+PROTOCOL_FILE=reports/jensen-text-live-v1/protocol-bf16-v2.json
+PROTOCOL_SHA=6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e
 
 PYTHONPATH=src:. "$INFERENCE_PYTHON" -m tools.runtime_checks.text_live \
   --artifacts "$ART" --cache-dir "$CACHE" \
   --inference-python "$INFERENCE_PYTHON" \
-  --protocol-sha256 "$PROTOCOL_SHA" --condition base \
+  --protocol "$PROTOCOL_FILE" --protocol-sha256 "$PROTOCOL_SHA" --condition base \
   --allow-candidates --verify-only
 ```
 
@@ -79,13 +112,15 @@ An intermediate checkpoint or a manually relabeled receipt is rejected.
 PYTHONPATH=src:. "$INFERENCE_PYTHON" -m tools.runtime_checks.text_live \
   --artifacts "$ART" --cache-dir "$CACHE" \
   --inference-python "$INFERENCE_PYTHON" \
-  --protocol-sha256 "$PROTOCOL_SHA" --condition adapter \
+  --protocol "$PROTOCOL_FILE" --protocol-sha256 "$PROTOCOL_SHA" --condition adapter \
   --adapter-run "$ADAPTER_RUN" --adapter-run-sha256 "$ADAPTER_RUN_SHA" \
-  --allow-candidates --output "$ART/runtime-checks/neural-text-adapter-v1"
+  --allow-candidates --output "$ART/runtime-checks/neural-text-adapter-bf16-v2"
 ```
 
 For an explicitly selected base run, use `--condition base`, omit both adapter
 arguments and select a new output directory. There is no silent adapter fallback.
+To reproduce the original preparation, select `protocol.json` and its original
+SHA-256; omitting `--protocol` still selects that original FP32 declaration.
 The protocol also pins the exact Jensen training JSONL hash, 113 examples, each of
 the nine event counts and 29 optimizer updates. A same-base adapter trained on
 another dataset or a shorter completed run cannot satisfy this separate gate.
