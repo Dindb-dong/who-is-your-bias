@@ -1,0 +1,31 @@
+{
+  "run_id": "jensen-2026-11-13",
+  "artifacts": [
+    {
+      "file_id": "file_00000000838881fdad792d0cb2de4158",
+      "library_file_id": "libfile_fde3_f-a197300d8944819187a9c30a7f40e577_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "jensen-dense-fit-v2-rejected.tar.gz",
+      "current_version_number": 0,
+      "bytes": 33425148,
+      "sha256": "0a3b81ef97a500e74caf48f63ab6ca3ecdca2cdc86620336186fb95a84f9db8b",
+      "upload_status": "succeeded",
+      "fresh_readback_sha256": "0a3b81ef97a500e74caf48f63ab6ca3ecdca2cdc86620336186fb95a84f9db8b",
+      "verification_status": "verified",
+      "verified_at": "2026-11-12T17:54:28.531468+00:00",
+      "local_path": "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/avatar/jensen-dense-fit-v2-rejected.tar.gz"
+    },
+    {
+      "file_id": "file_000000004fe881fdb490fc92598473a9",
+      "library_file_id": "libfile_fde3_f-f5127f41f42c8191a978e819c91ccfff_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "jensen-motion-preview-clips.tar.gz",
+      "current_version_number": 0,
+      "bytes": 421285,
+      "sha256": "75c11db522c3d4291ed0fdabdcf62422a2fd49935a2852a4312c2fe9f99f7eca",
+      "upload_status": "succeeded",
+      "fresh_readback_sha256": "75c11db522c3d4291ed0fdabdcf62422a2fd49935a2852a4312c2fe9f99f7eca",
+      "verification_status": "verified",
+      "verified_at": "2026-11-12T17:54:28.532440+00:00",
+      "local_path": "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/avatar/jensen-motion-preview-clips.tar.gz"
+    }
+  ]
+}
