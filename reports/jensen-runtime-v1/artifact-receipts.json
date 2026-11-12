@@ -21,6 +21,27 @@
         "passed": 91,
         "total": 91
       }
+    },
+    {
+      "run_id": "jensen-runtime-voice-gateway-v1",
+      "role": "Raw main API gateway requests, failed interpreter diagnostic, corrected actual generated WAV and service health logs",
+      "file_name": "jensen-runtime-voice-gateway-v1.tar.gz",
+      "file_id": "file_00000000184c81fdbd67de9bef8805d8",
+      "library_file_id": "libfile_fde3_f-b7d32ed98df08191836ce429485df6ff_a18ece08681081918d81df44f69c4b1f",
+      "bytes": 349438,
+      "sha256": "393a22e58b3b82183c74fdc8f3b564f0c779f2c7acd304d665178099a0880340",
+      "status": "uploaded_and_fresh_readback_sha256_verified",
+      "verified_at": "2026-11-12T19:01:18.994506+00:00",
+      "failed_attempt": "Base interpreter selected by resolving virtualenv symlink; no waveform generated",
+      "corrected_assertions": {
+        "passed": 95,
+        "total": 95
+      },
+      "audio_sha256": "fb29a43a125eb26f12b5c9fc2ff3d2abff998f33efe2223f1fd9178ed92b6f1a",
+      "audio_seconds": 1.52,
+      "optimizer_steps": 16,
+      "checkpoint_sha256": "9286167534283c576c329203f010b44bbdd31ef20f679f4693875b79a91dbf5b",
+      "language_model_generated": false
     }
   ]
 }

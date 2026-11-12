@@ -108,6 +108,34 @@ cleanly. `voice-attempt-1.json` preserves this failure; it produced no waveform.
 
 The launcher now preserves the executable path and checks dependency discovery
 in that exact interpreter before starting a server. This changes no shared API,
-voice service, frozen M6 input or model setting. The corrected gateway check
-will record its actual waveform, provider identity and audio clock separately,
-with no neural text model loaded.
+voice service, frozen M6 input or model setting.
+
+The corrected run passed **95 of 95 assertions**, including an actual main-API
+`/api/speech` request to the adapted provider in the same invocation. Its
+`voice-result.json` records the response and post-generation provider identity;
+`voice-signal.json` records a separate PCM signal measurement. The failed and
+successful raw traces, service logs and actual generated waveform are preserved
+in the freshly retrieved, hash-verified gateway artifact package.
+
+| Measurement | Actual result |
+| --- | --- |
+| Requested integration text | “This is a simulation.”, English; excluded from the frozen voice quality comparison |
+| HTTP response | 200, `audio/wav`, configured-provider header; 73,004 bytes |
+| Waveform | Mono PCM16, 24,000 Hz, 36,480 frames, **1.52 seconds** |
+| Waveform SHA-256 | `fb29a43a125eb26f12b5c9fc2ff3d2abff998f33efe2223f1fd9178ed92b6f1a` |
+| Signal | Peak 0.4630, RMS 0.0990, 35,573 nonzero samples |
+| Cold HTTP duration | **34.835 seconds**, including provider model load and synthesis |
+| Provider duration | 34.752 seconds; real-time factor 22.863 |
+| Actual adaptation | 16 optimizer steps, adapter SHA-256 `56d01017b1d464ea384d60661fd44a97de72ebde884b09adbf70a90f4d20477f` |
+| Loaded checkpoint | `9286167534283c576c329203f010b44bbdd31ef20f679f4693875b79a91dbf5b` |
+| Subject binding | Jensen persona, publisher-attributed Goldman reference, candidate review status |
+
+The provider used the pinned local model, CPU float32, four threads and seed 42.
+The actual command also selected `HF_HUB_OFFLINE=1`,
+`TRANSFORMERS_OFFLINE=1`, `OMP_NUM_THREADS=4` and `MKL_NUM_THREADS=4`.
+The request returned a complete buffered WAV; its header explicitly reports
+speech timing as unavailable. This is successful gateway integration with a
+slow cold request, not real-time speech or a simultaneous neural text/voice
+demonstration. Both child services exited before the text-training slot resumed.
+Human similarity and end-of-sentence completion remain the separate voice
+evaluation's responsibility; the backend does not expose an EOS reason.
