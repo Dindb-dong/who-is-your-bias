@@ -38,6 +38,29 @@ TOPICS = {
 }
 
 
+JENSEN_TOPICS = {
+    "cuda platform": ("cuda", "developer", "ecosystem", "platform"),
+    "semiconductors": ("tsmc", "chip", "semiconductor", "supply chain"),
+    "company founding": ("sega", "founding", "started nvidia", "bankrupt"),
+    "leadership": ("leadership", "employees", "direct report", "coach", "team"),
+    "first principles": ("first principle", "reasoning", "fundamental"),
+    "resilience": ("suffering", "setback", "resilien", "persever"),
+    "responsibility": ("responsib", "commitment", "accountab"),
+    "long term judgment": ("long-term", "long term", "decade", "conviction"),
+    "ai factories": ("ai factor", "accelerated computing", "data center"),
+}
+
+
+def target_speaker(source: dict) -> str:
+    """Explicit per-source identity; legacy registries retain their Musk binding."""
+    expected = {"jensen-huang": "Jensen Huang", "elon-musk": "Elon Musk"}
+    persona = source.get("persona_id", "elon-musk")
+    speaker = source.get("target_speaker", expected.get(persona))
+    if not speaker or (persona in expected and speaker != expected[persona]):
+        raise ValueError("Source target speaker does not match its persona")
+    return speaker
+
+
 def read_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
@@ -108,9 +131,10 @@ def _normal(text: str) -> str:
     return " ".join(re.findall(r"\w+", unicodedata.normalize("NFKC", text).casefold()))
 
 
-def _topics(question: str, answer: str) -> list[str]:
+def _topics(question: str, answer: str, *, persona_id: str = "elon-musk") -> list[str]:
     value = " " + (question + " " + answer).lower() + " "
-    return [topic for topic, markers in TOPICS.items() if any(marker in value for marker in markers)] or ["conversation"]
+    topics = TOPICS | (JENSEN_TOPICS if persona_id == "jensen-huang" else {})
+    return [topic for topic, markers in topics.items() if any(marker in value for marker in markers)] or ["conversation"]
 
 
 def runtime_source(source: dict, transcript: dict, *, acquired_at: str) -> dict:
@@ -134,7 +158,7 @@ def runtime_source(source: dict, transcript: dict, *, acquired_at: str) -> dict:
         result["source_type"] = "congressional_hearing_transcript"
         result["transcript_adapter_version"] = transcript["adapter_version"]
         result["transcript_adapter_sha256"] = transcript["adapter_sha256"]
-    if source["id"] == "dwarkesh-2026":
+    if source["id"] == "dwarkesh-2026" and target_speaker(source) == "Elon Musk":
         result["recorded_at"] = None
         result["date_provenance"] = (
             "Inspected publisher HTML has datePublished 2026-02-05T16:45:08+00:00 and a February 5 byline. "
@@ -146,10 +170,11 @@ def runtime_source(source: dict, transcript: dict, *, acquired_at: str) -> dict:
 
 def extract_exchanges(source: dict, transcript: dict, *, acquired_at: str) -> tuple[list[dict], list[dict]]:
     turns = transcript["turns"]
+    respondent = target_speaker(source)
     accepted, rejected = [], []
     for index in range(len(turns) - 1):
         question, answer = turns[index:index+2]
-        if question["speaker"] in {None, "Elon Musk"} or answer["speaker"] != "Elon Musk":
+        if question["speaker"] in {None, respondent} or answer["speaker"] != respondent:
             continue
         identifier = f"qa26-{source['id']}-{question['id']}"
         qtext, atext = question["text"], answer["text"]
@@ -188,7 +213,7 @@ def extract_exchanges(source: dict, transcript: dict, *, acquired_at: str) -> tu
             "Consecutive attributed turns retain original wording; unknown blocks are never reassigned."
         )
         qa = {"question": qtext, "answer": atext, "context_before": context, "context_kind": "original_text" if context else "none",
-              "original_language": "en", "questioner": question["speaker"], "respondent": "Elon Musk",
+              "original_language": "en", "questioner": question["speaker"], "respondent": respondent,
               "source_event_id": source["source_event_id"], "completeness": completeness,
               "excerpt_note": ("The printed response ends at an interruption; the attributed turn is preserved, but later qualifications are not assumed complete."
                                if interrupted else "An adjacent block has unknown attribution; this is only the contiguous attributed part of the published response, not a proven complete response."
@@ -206,7 +231,7 @@ def extract_exchanges(source: dict, transcript: dict, *, acquired_at: str) -> tu
               "annotation_basis": "Generic conversation label only; topical tags are deterministic lexical hints, not reviewed situation or emotional inferences.",
               "taxonomy_version": "situations.v1"}
         evidence = Evidence.model_validate({"id": identifier, "source_id": source["id"], "kind": "question_answer", "question_answer": qa,
-                    "topics": _topics(qtext, atext), "situations": ["conversation"], "review_status": "reviewed", "confidence": "source_grounded",
+                    "topics": _topics(qtext, atext, persona_id=source.get("persona_id", "elon-musk")), "situations": ["conversation"], "review_status": "reviewed", "confidence": "source_grounded",
                     "locator": {"label": f"Original publisher turns {question['id']} / {answer['id']}; {completeness}; unverified acoustic timing.",
                                 "start_seconds": astart if has_time else None, "timeline": timeline if has_time else None},
                     "event_family_id": source["event_family_id"], "event_at": source.get("recorded_at"),
@@ -229,7 +254,7 @@ def _media_eligibility(record: dict, entry: dict | None, modality: str, asset_ro
             or entry.get("source_artifact_sha256") != record["source_artifact_sha256"]
             or not entry.get("recording_id") or entry.get("source_clock_mapping_reviewed") is not True):
         return False, "media_source_mapping_unreviewed"
-    if (entry.get("speaker") != "Elon Musk" or entry.get("review_status") != "accepted" or not entry.get("reviewer")
+    if (entry.get("speaker") != qa["respondent"] or entry.get("review_status") != "accepted" or not entry.get("reviewer")
             or entry.get("reviewer_type") not in {"agent", "human"} or not entry.get("reviewed_at")):
         return False, "target_speaker_or_review_unaccepted"
     start, end = entry.get("start_seconds"), entry.get("end_seconds")
@@ -377,7 +402,7 @@ def build(registry_dir: Path, acquisition_dir: Path, output: Path, *, report_dir
                                "artifact_sha256": record["sha256"], "transcript_sha256": transcript["transcript_sha256"],
                                "attributed_turns": sum(t["speaker"] is not None for t in transcript["turns"]),
                                "candidate_exchanges": len(extracted) + len(failures), "accepted_exchanges": len(included),
-                               "target_speaker_words": sum(len(t["text"].split()) for t in transcript["turns"] if t["speaker"] == "Elon Musk")})
+                               "target_speaker_words": sum(len(t["text"].split()) for t in transcript["turns"] if t["speaker"] == target_speaker(source))})
         if transcript.get("adapter_version"):
             source_reports[-1].update(adapter_version=transcript["adapter_version"], adapter_sha256=transcript["adapter_sha256"],
                                       extraction_audit=transcript["extraction_audit"])
@@ -413,8 +438,14 @@ def build(registry_dir: Path, acquisition_dir: Path, output: Path, *, report_dir
         runtime.mkdir()
         write_json(runtime / "sources.json", [materialized_sources[key] for key in used_ids])
         write_json(runtime / "split-manifest.json", registration)
-        profile = read_json(Path("data/qna/elon-musk-v1/profile.json"))
-        profile["qa_corpus_id"] = "elon-musk-original-2026.v1"
+        persona_id = registry.get("persona_id", "elon-musk")
+        profile_path = registry_dir / "profile.json"
+        if not profile_path.is_file() and persona_id == "elon-musk":
+            profile_path = Path("data/qna/elon-musk-v1/profile.json")
+        profile = read_json(profile_path)
+        if profile["id"] != persona_id or any(target_speaker(sources[key]) != profile["name"] for key in used_ids):
+            raise ValueError("Registry/profile/source persona identity mismatch")
+        profile["qa_corpus_id"] = registry.get("corpus_id", "elon-musk-original-2026.v1")
         write_json(runtime / "profile.json", profile)
         write_jsonl(runtime / "evidence.jsonl", records)
         manifest = {"schema_version": "original-qa-corpus.v1", "id": profile["qa_corpus_id"], "materialization": "full_selected_exchanges_local",
