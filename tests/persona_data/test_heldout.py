@@ -77,6 +77,36 @@ def test_materialization_is_private_evaluation_only_and_preserves_original_conte
         Corpus.load(output)
 
 
+def test_jensen_heldout_uses_registered_speaker_and_original_publisher_document(setup, tmp_path):
+    registry, acquisition, output, payload = setup
+    sources = json.loads((registry / "source-families.json").read_text())
+    source = sources["sources"][0]
+    source.update(id="no-priors-2023", source_event_id="no-priors-2023", event_family_id="no-priors-2023",
+                  persona_id="jensen-huang", target_speaker="Jensen Huang",
+                  url="https://podcasts.apple.com/us/podcast/example?id=original")
+    write_json(registry / "source-families.json", sources)
+    registration = json.loads((registry / "split-registration.json").read_text())
+    registration["events"][0].update(source_event_id=source["id"], event_family_id=source["id"], source_ids=[source["id"]])
+    write_json(registry / "split-registration.json", registration)
+    payload["raw"] = (f'<p>SARAH:</p><p>Welcome.</p><p>JENSEN:</p><p>{CONTEXT}</p>'
+                      f'<p>SARAH:</p><p>How would the independent amber observatory work?</p>'
+                      f'<p>JENSEN:</p><p>{ANSWER}</p><h2>get new essays in your inbox</h2>').encode()
+    documents = {"schema_version": "persona-heldout-documents.v1", "registered_at": "2026-11-11T10:00:00Z",
+                 "source_registry_sha256": digest(sources), "split_registration_sha256": digest(registration),
+                 "documents": [{"source_id": source["id"], "adapter": "jensen_no_priors_html", "basis": "Synthetic fixture.",
+                                "acquisition_url": "https://sarah-guo.herokuapp.com/blog/jensenhuang",
+                                "discovery_url": "https://sarah-guo.herokuapp.com/blog/jensenhuang"}]}
+    path = tmp_path / "documents.json"
+    write_json(path, documents)
+    heldout.acquire_heldout(registry, acquisition, [source["id"]], documents_path=path)
+    heldout.build_heldout(registry, acquisition, output, comparison_corpora=[ROOT / "data/personas/jensen-huang"])
+    _, cases = heldout.load_heldout(output)
+    last = cases[-1]
+    assert last["respondent"] == "Jensen Huang"
+    assert last["context"] == [{"role": "assistant", "content": CONTEXT}]
+    assert last["reference_answer"] == ANSWER
+
+
 def test_existing_training_acquisition_and_build_cannot_accept_heldout(setup, tmp_path):
     registry, acquisition, _ = acquire(setup)
     with pytest.raises(ValueError, match="Reserved test"):

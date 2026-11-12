@@ -200,6 +200,9 @@ def parse_jensen(source: dict, artifact: Path) -> dict:
         rows = yc(raw)
     elif identifier == "goldman-sachs-2024":
         rows = goldman(_pdf_text(artifact))
+    elif identifier == "no-priors-2023":
+        rows = colon_turns(html_blocks(raw), {"SARAH": "Sarah Guo", "ELAD": "Elad Gil", "JENSEN": "Jensen Huang"},
+                           start="SARAH:")
     else:
         raise ValueError("No reviewed Jensen adapter for this publisher/event")
     if not any(row["speaker"] == "Jensen Huang" for row in rows):

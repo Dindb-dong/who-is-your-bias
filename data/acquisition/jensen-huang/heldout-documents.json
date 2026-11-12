@@ -1,0 +1,15 @@
+{
+  "schema_version": "persona-heldout-documents.v1",
+  "registered_at": "2026-11-12T17:41:11.093462+00:00",
+  "source_registry_sha256": "4d3f84d717dc88a77fb300866d564f20f1fd4556172366896ecbb6253d7f420d",
+  "split_registration_sha256": "05c0c737e3257c09a9619279c8017c770b3e5ceb7db20fe6d329f553162379be",
+  "documents": [
+    {
+      "source_id": "no-priors-2023",
+      "adapter": "jensen_no_priors_html",
+      "basis": "Original host Sarah Guo website publishes April20,2023 NoPriors episode113 transcript with explicit SARAH/ELAD/JENSEN speaker labels. Episode title, description, date and Nvidia SantaClara setting match frozen distributor listing. Legacy public publisher URL remains accessible; current sarahguo.com/blog/jensenhuang returns404.",
+      "acquisition_url": "https://sarah-guo.herokuapp.com/blog/jensenhuang",
+      "discovery_url": "https://sarah-guo.herokuapp.com/blog/jensenhuang"
+    }
+  ]
+}

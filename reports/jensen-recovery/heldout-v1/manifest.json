@@ -1,0 +1,63 @@
+{
+  "schema_version": "persona-heldout-dataset.v1",
+  "purpose": "evaluation_only",
+  "created_at": "2026-11-12T17:41:49.829662+00:00",
+  "source_registry_sha256": "4d3f84d717dc88a77fb300866d564f20f1fd4556172366896ecbb6253d7f420d",
+  "split_registration_sha256": "05c0c737e3257c09a9619279c8017c770b3e5ceb7db20fe6d329f553162379be",
+  "files": {
+    "source-families.json": "fb48e5b140868d538a41afdac9a96c2949a5df65afa038c96fb1f04c61409848",
+    "split-registration.json": "c5f6831dfd5212153749d7b683e3c0e80d0ee5340a60dbb1023cac1fb39b2aa9",
+    "cases.jsonl": "08a9574de96218c0b357a75328832e839a33c67ad706f8b1be7bd15863b3d19e",
+    "recipe.json": "12168f29d431deb3827ce55f285eb1628f39c14ef5c64aaa076124b90be60fc5",
+    "exposure-index.json": "c9e83217822f86b4a8906ee6517a91c48d236a3f4e2846cfbc0666e6ac4792df"
+  },
+  "cases": 50,
+  "source_events": 1,
+  "case_split": "test",
+  "event_counts": {
+    "no-priors-2023": 50
+  },
+  "projection_eligibility": {
+    "factual": false,
+    "text_style": false,
+    "aligned_speech": false,
+    "visible_behavior": false
+  },
+  "reference_review_status": "publisher_structure_only",
+  "human_review_completed": false,
+  "original_wording_local_only": true,
+  "leakage_policy": {
+    "span_words": 12,
+    "checked_corpora": [
+      {
+        "files": {
+          "sources.json": "6baf3e7d6e55f6edccd8ab8551be7525aa86c5682d9ca3fae5f0a5b859bef347",
+          "evidence.jsonl": "c64b78d1979d3700c060205293a22272ac2b77ff290bc1387057ecae84bcf526",
+          "profile.json": "11e7078ab047aafa73460a760df8dc4ba74c4a045d78e2d3e18a6a72b851896a",
+          "corpus-manifest.json": "a6b5b353a0eb664e0c9e16b05910e1c0d6e8e4b1b5c0907b59a17f984a6e09f3",
+          "split-manifest.json": "c5f6831dfd5212153749d7b683e3c0e80d0ee5340a60dbb1023cac1fb39b2aa9"
+        },
+        "identity_sha256": "009219f2b66c5e63add59f904f4ab9eaa874115c7a41165f209c30a08d24e193",
+        "source_count": 9,
+        "record_count": 554
+      },
+      {
+        "files": {
+          "sources.json": "826b22d21a516c20c2f09dfd12346e87f8424036e5b0e999e5fe82c3974120fa",
+          "evidence.jsonl": "9e021aba2e7b833bffc42e3ad57318fab4e683a67280ba979158ed661d07b8eb",
+          "profile.json": "666dcb92e2efd79bffd0751f3fe46d673dbb02fa9e766facb15fbc6ccbe674da"
+        },
+        "identity_sha256": "d69bc1213721aac839951151924e478ee4a02d8b5ed4c41239724f45460ad8e5",
+        "source_count": 9,
+        "record_count": 32
+      }
+    ],
+    "semantic_duplicate_review": "not_performed"
+  },
+  "limitations": [
+    "Only explicitly supplied comparison corpora were checked; externally exposed wording is unknown.",
+    "Exact normalized and shared-word-span checks do not establish semantic independence.",
+    "Publisher structure is not independent human reference review, acoustic verification or efficacy.",
+    "Null dates remain unknown; acquiring an old interview does not establish current positions."
+  ]
+}
