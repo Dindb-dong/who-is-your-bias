@@ -1,0 +1,45 @@
+{
+  "schema_version": "jensen-evaluation-operational-tools-package.v1",
+  "archive": "jensen-evaluation-operational-tools-v1.tar.gz",
+  "bytes": 14769,
+  "sha256": "e62e3ae4320b1cca7976b24f04fb63c48aaedd20967d27497961a179d700f497",
+  "files_sha256": {
+    "m6_condition_delivery.py": "ca16d54ae64c937524b39d7309717cf538567b67740c243bb84158ad133975fa",
+    "launch_m6_condition.py": "948a6271858e318317358cead270e343c5ee18cb89e49036fddcc22320057c25",
+    "package_text_serving.py": "68966ddc936064580556f381c0f82f6243bf0c4abd76ed52b8e5d9f58e715e66",
+    "restore_m7_serving_bundle.py": "3ffc83ffbcb4af13524d4ea0c5a09e34abc381978247513949558625834d3a4e",
+    "m6_condition_delivery_synthetic_checks.py": "55e800d33920a6aa3f2a29a4315cd92cfd657e9e1ed1947a95fffdfa69242920",
+    "m6_condition_delivery_archive_synthetic_checks.py": "e0f202872156191d296a21ea994fab3bab490137286d06fb135d5f5b47871f59",
+    "m6_condition_delivery_synthetic_validation.json": "51e7c94c2057023bf103b5f97558ed0e4975821d891a8b62efe226d37d21e4aa"
+  },
+  "scope": "Operational helpers and exact previously executed synthetic checks; no neural outputs or original source text. Existing frozen execution implementation is not changed.",
+  "previous_synthetic_checks": 17,
+  "actual_closed_condition_validation": {
+    "command": "PYTHONPATH=src:. .venv/bin/python /workspace/scratch/6f64e1b53384/m6_condition_delivery.py validate development facts",
+    "observed_stdout": {
+      "validated_condition_files": 10,
+      "status": "completed"
+    },
+    "observed_exit_code": 0,
+    "condition_run_file_sha256": "ba78b8e65f2f268b410851ccf80b42600d41dd6c462ac2fb7981f2b13b3d6765",
+    "source_artifact_id": "jensen-m6-development-facts-bf16-v2"
+  },
+  "serving_package_and_restore_helpers": "Syntax/precondition preparation only; final29 export does not exist yet and those helpers have not been executed on it.",
+  "recorded_at": "2026-11-12T21:22:05.640232+00:00",
+  "artifact": {
+    "artifact_id": "jensen-evaluation-operational-tools-v1",
+    "file_id": "file_00000000727c81fb87d1f04927d843e8",
+    "library_file_id": "libfile_fde3_f-8ba8d2b311388191b7bf9f9a3aa8a134_a18ece08681081918d81df44f69c4b1f",
+    "file_name": "jensen-evaluation-operational-tools-v1.tar.gz",
+    "bytes": 14769,
+    "sha256": "e62e3ae4320b1cca7976b24f04fb63c48aaedd20967d27497961a179d700f497",
+    "upload_status": "uploaded",
+    "verification_status": "fresh_materialization_and_all_payload_hashes_verified"
+  },
+  "fresh_readback": {
+    "archive_bytes_and_sha256": true,
+    "exact_regular_file_inventory": true,
+    "all_seven_payload_hashes": true
+  },
+  "portability": "Run-specific operational scripts contain workspace paths. Portable repository commands remain in condition-execution.md and tools/adaptation_evaluation; no frozen runner is replaced."
+}
