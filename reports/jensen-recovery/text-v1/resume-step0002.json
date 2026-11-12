@@ -1,0 +1,76 @@
+{
+  "schema_version": "jensen-text-remote-resume.v1",
+  "status": "actual_remote_step1_to_step2_completed",
+  "optimizer_steps": 2,
+  "planned_optimizer_steps": 29,
+  "accepted_examples": 113,
+  "trainable_parameters": 8716288,
+  "base_model": "Qwen/Qwen3-1.7B",
+  "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+  "precision": "bfloat16",
+  "runtime": {
+    "cpu_affinity_count": 9,
+    "cuda_runtime": null,
+    "logical_cpu_count": 9,
+    "machine": "x86_64",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "processor": null,
+    "python": "3.12.14",
+    "requested_device": "cpu",
+    "torch_interop_threads": 9,
+    "torch_threads": 4
+  },
+  "optimization": {
+    "batch_size": 1,
+    "checkpoint_use_reentrant": false,
+    "gradient_accumulation": 4,
+    "gradient_checkpointing": true,
+    "learning_rate": 0.0002,
+    "max_steps": 29
+  },
+  "loss_statistics": {
+    "examples": 8,
+    "maximum": 6.463873386383057,
+    "minimum": 3.8529598712921143,
+    "sum": 37.31892657279968
+  },
+  "loss_history": [
+    6.463873386383057,
+    4.181422710418701,
+    4.127119541168213,
+    5.200517654418945,
+    4.269936561584473,
+    3.8529598712921143,
+    5.1923627853393555,
+    4.030734062194824
+  ],
+  "elapsed_active_seconds": 501.171054335,
+  "resumed_block_seconds": 281.9733578099999,
+  "resume_history": [
+    {
+      "checkpoint_metadata_sha256": "4ed7fa2421c2694b29bfbfb97167a0996e4783d2d8ab4a231a235e8361fc5cb4",
+      "optimizer_steps": 1
+    }
+  ],
+  "checkpoint_metadata_sha256": "290c48fa622c641dfa25688d0a87fef3593528452b5c30eae8830e3025a202f4",
+  "archive": "jensen-text-checkpoint-step0002.tar.gz",
+  "archive_bytes": 95796345,
+  "archive_sha256": "8c5854cdbf37494e61b7508da4b5a5ec43af57c7656b0e59cef3b370401d186c",
+  "persistence_status": "uploaded_fresh_readback_byte_verified",
+  "model_quality_evaluated": false,
+  "artifact": {
+    "artifact_id": "jensen-text-checkpoint-step0002",
+    "role": "actual_text_remote_resume_optimizer_checkpoint",
+    "completed_optimizer_steps": 2,
+    "target_optimizer_steps": 29,
+    "remote_restore_executed": true,
+    "file_name": "jensen-text-checkpoint-step0002.tar.gz",
+    "file_id": "file_00000000161c81fdbf6bf30ecb51c2b5",
+    "library_file_id": "libfile_fde3_f-decb48cef8c8819187bb666a0c795b18_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 95796345,
+    "sha256": "8c5854cdbf37494e61b7508da4b5a5ec43af57c7656b0e59cef3b370401d186c",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "next_resume_checkpoint": "step-00000002"
+}

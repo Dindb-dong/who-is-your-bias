@@ -7,7 +7,7 @@ Repository: `Dindb-dong/who-is-your-bias`. Integration branch:
 `8515b5f30f3cd412e18db3d54ee28bf2a4c28694`.
 Implementation review: [PR #19](https://github.com/Dindb-dong/who-is-your-bias/pull/19).
 Last verified code checkpoint before this status update:
-`6ea11b6df8296e008e866b74fe1ed0e5f3aa0b0c`.
+`31cb01051114cd03c1cfbac3d40a484c2d9df95a`.
 
 The [historical handoff](jensen-replication-handoff.md) defines M0–M7.
 This is a new reproducible run; unverified earlier acquisition/training counts
@@ -47,10 +47,11 @@ separately. The prior unverified eight-video claim is not inherited by this run.
 - Text selection: **113 complete answers / all 9 events**, 24-word minimum,
   768-token whole-exchange limit, deterministic cap of 16 per event. Dataset,
   selection and immutable Qwen3-1.7B tokenizer/model hashes are saved.
-- Text computation: **one actual optimizer update**, 8,716,288 trainable LoRA
-  parameters, BF16 CPU, 220.2 seconds for the first invocation. The job is paused
-  at a verified remote checkpoint containing adapter weights, optimizer state,
-  RNG, cursor and bound inputs. Its 29-update plan is not reported as completed.
+- Text computation: **two actual optimizer updates**, 8,716,288 trainable LoRA
+  parameters, BF16 CPU. The actual fresh-process continuation from remote step 1
+  to step 2 passed (282.0 seconds for that invocation). Step 2 was then uploaded,
+  freshly retrieved and extracted for continuation. Its 29-update plan is still
+  in progress; model quality has not yet been evaluated.
 - Voice: **19 publisher-matched candidates**, independently screened down to
   **8 clips / 91.84 seconds / four events**. Human listening review is zero.
   Actual acoustic encoding produced **1,151 frames × 16 codebooks**, saved and
@@ -63,10 +64,11 @@ separately. The prior unverified eight-video claim is not inherited by this run.
   face texture, dark iris and authored salt-and-pepper material are preserved in
   editable masters. The 20→80-step restored fit matches uninterrupted state.
   Likeness remains imperfect and ungraded; the candidate is not the default.
-- Motion: **480 measured face/body/hand frames across five Goldman/Stripe
-  windows**, five source-bound clips and explicit Motion Lab source choices are
+- Motion: **580 measured face/body/hand frames across six Goldman/Stripe/WIRED
+  windows**, six source-bound clips and explicit Motion Lab source choices are
   already in Git. Thirty finger controls preserve confidence/occlusion exclusions.
-  A third WIRED event is being exported. These previews do not establish habits.
+  All three events and their exact source clocks are preserved. These previews do
+  not establish habits.
 - Held-out evaluation: 50 original No Priors exchanges passed isolation against
   both the v4 corpus and PR #17 summaries. WEF's former transcript URL is
   unavailable; no replacement transcript is invented.
@@ -87,7 +89,7 @@ separately. The prior unverified eight-video claim is not inherited by this run.
 | Corpus | Authentic v4, held-out references, all eight full video restorations | Source/media acquisition batch complete; preserve event isolation |
 | Voice | Source clocks, screened four-event dataset, actual codes and 16 completed saved updates | Generate matched EN/KO samples and diagnostics |
 | Avatar | Actual fitted model, editable master, finger controls and observed clips | Final camera and candidate-specific desktop/mobile playback |
-| Text | Frozen dataset, actual first update and verified remote optimizer checkpoint | Resume from retrieved bytes; finish bounded run and serve exact adapter |
+| Text | Frozen dataset, two updates and successful remote optimizer continuation | Finish bounded run and serve exact adapter |
 | Retrieval/evaluation | Frozen lexical/concept/hybrid comparison; both candidates remain opt-in | Matched base/style/adapter and heldout response experiments |
 
 Integrated changed-path Python checks: 186 passed and two optional-Torch modules
@@ -107,7 +109,7 @@ the predeclared 80% recall gate and remain opt-in. Full failures and hashes are
 in the [retrieval report](../reports/jensen-retrieval-v2/README.md).
 
 Read the [recovery index](../reports/jensen-recovery/README.md),
-[text pilot](../reports/jensen-recovery/text-v1/pilot-step0001.json),
+[text remote-resume proof](../reports/jensen-recovery/text-v1/resume-step0002.json),
 [voice run](jensen-voice-adaptation.md), and
 [avatar results](../reports/jensen-avatar/README.md) before repeating work.
 
@@ -133,8 +135,20 @@ will be recorded only after their exact pinned inputs and checkpoint paths exist
 ## Remaining acceptance
 
 M0 storage readback and real optimizer/RNG equivalence tests are verified. The
-actual text checkpoint has also survived fresh remote retrieval; its next
-optimizer update from those bytes is pending. M1–M7 remain in progress. No Jensen
+actual text checkpoint survived fresh remote retrieval and completed the next
+optimizer update in a fresh process; step 2 was again saved and freshly verified. M1–M7 remain in progress. No Jensen
 text/voice model quality, accepted likeness, human ratings, or latency target is
 claimed by these implementation checkpoints.
 New follow-up pull requests are published for review; no new merge is authorized.
+
+
+## Frozen response comparison
+
+Twelve development cases and six untouched No Priors references are frozen in
+[the response protocol](../reports/jensen-evaluation-v1/README.md). All 54 planned
+calls use 160 output tokens and identical whole factual passages, with byte-identical
+style/adapter messages. Actual tokenizer counts are 703–1,625 input tokens.
+Version 1 plans are retained as superseded; version 2 changes only condition-neutral
+snapshot metadata before any model output. The private plans, references and snapshot
+have been saved, freshly retrieved, seal-validated and checked against the exact v4
+corpus. No generated answer is claimed yet at this checkpoint.

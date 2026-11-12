@@ -376,11 +376,26 @@
       "checkpoint_metadata_sha256": "9286167534283c576c329203f010b44bbdd31ef20f679f4693875b79a91dbf5b",
       "contract_sha256": "9c673a2048c24b5527719bddbb2e5bcb38b8e1e0b52fe3150c893ba87c1e55b1",
       "workstream_verification_receipt_sha256": "204cee99a43569f954a39cb0d1f13100cf69d08ce466903f99aafd5729f861c9"
+    },
+    {
+      "artifact_id": "jensen-text-checkpoint-step0002",
+      "role": "actual_text_remote_resume_optimizer_checkpoint",
+      "completed_optimizer_steps": 2,
+      "target_optimizer_steps": 29,
+      "remote_restore_executed": true,
+      "file_name": "jensen-text-checkpoint-step0002.tar.gz",
+      "file_id": "file_00000000161c81fdbf6bf30ecb51c2b5",
+      "library_file_id": "libfile_fde3_f-decb48cef8c8819187bb666a0c795b18_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 95796345,
+      "sha256": "8c5854cdbf37494e61b7508da4b5a5ec43af57c7656b0e59cef3b370401d186c",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {
     "media": "reports/jensen-recovery/media-artifacts.json",
     "avatar": "reports/jensen-avatar/derived-artifact-receipts.json",
-    "source_progress": "reports/jensen-recovery/source-progress.json"
+    "source_progress": "reports/jensen-recovery/source-progress.json",
+    "response_protocols": "reports/jensen-evaluation-v1/artifacts.json"
   }
 }
