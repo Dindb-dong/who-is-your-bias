@@ -28,7 +28,7 @@ def publisher_from_turns(canonical: Path, *, source_url: str) -> dict:
         speaker = turn.get("speaker")
         basis = turn.get("speaker_basis")
         attributed = isinstance(speaker, str) and bool(speaker) and basis in {
-            "explicit_pdf_speaker_label", "explicit_label", "explicit_publisher_label"}
+            "explicit_pdf_speaker_label", "explicit_label", "explicit_publisher_label", "explicit_publisher_speaker_label"}
         for index, match in enumerate(re.finditer(r"\S.*?(?:[.!?](?=\s|$)|$)", text, flags=re.DOTALL)):
             passage = match.group().strip()
             if not passage:
