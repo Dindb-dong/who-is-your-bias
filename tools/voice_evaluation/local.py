@@ -19,6 +19,17 @@ from .run import checkpoint, digest, run_synthesis
 from .serve_candidate import read_pinned
 
 
+def process_memory(pid: int) -> dict:
+    def fields(path: Path, names: set[str]) -> dict:
+        if not path.exists():
+            return {}
+        return {key: value.strip() for line in path.read_text().splitlines()
+            for key, _, value in [line.partition(":")] if key in names}
+    return {"scope": "same invocation as the real speech server",
+        "parent_namespace_meminfo": fields(Path("/proc/meminfo"), {"MemTotal", "MemAvailable", "MemFree"}),
+        "server_status": fields(Path(f"/proc/{pid}/status"), {"VmRSS", "VmHWM", "Threads", "State"})}
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--binding", type=Path, required=True)
@@ -50,6 +61,7 @@ def main() -> int:
         "--binding", str(args.binding.resolve()), "--artifacts", str(args.artifacts.resolve()),
         "--condition", args.condition, "--allow-candidates", "--port", str(port)]
     record = {"schema_version": "voice_local_execution.v1", "status": "starting",
+        "implementation_sha256": digest(Path(__file__)),
         "condition": binding["conditions"][args.condition], "binding_sha256": digest(args.binding),
         "transport": "actual_loopback_http", "server_and_client_same_namespace": True,
         "warmup_performed": False, "service_log": log_path.name}
@@ -71,7 +83,8 @@ def main() -> int:
                     time.sleep(0.1)
                 else:
                     raise TimeoutError("Speech server did not start within 45 seconds")
-            record.update(status="synthesizing", startup_seconds=round(time.monotonic() - started, 6))
+            record.update(status="synthesizing", startup_seconds=round(time.monotonic() - started, 6),
+                memory_before_model_load=process_memory(process.pid))
             checkpoint(launcher_path, record)
             result = asyncio.run(run_synthesis(base_url=base, output=output, cases_path=cases,
                 condition=record["condition"], api_key=os.getenv("BIAS_VOICE_API_KEY"),
@@ -81,6 +94,7 @@ def main() -> int:
             record.update(status="incomplete", error_type=type(exc).__name__)
             raise
         finally:
+            record["memory_before_server_stop"] = process_memory(process.pid)
             process.terminate()
             try:
                 process.wait(timeout=10)
