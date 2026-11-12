@@ -1,10 +1,10 @@
 {
   "schema_version": "jensen-matched-execution-status.v1",
-  "recorded_at": "2026-11-12T20:25:17.475126+00:00",
+  "recorded_at": "2026-11-12T22:05:30.964481+00:00",
   "matched_planned_calls": 54,
-  "matched_attempted": 12,
-  "matched_completed": 6,
-  "matched_failed": 6,
+  "matched_attempted": 24,
+  "matched_completed": 11,
+  "matched_failed": 13,
   "conditions": [
     {
       "exposure": "development",
@@ -23,12 +23,16 @@
     {
       "exposure": "development",
       "condition": "style",
-      "status": "not_executed",
+      "status": "executed_saved_and_fresh_readback_verified",
       "planned": 12,
-      "attempted": 0,
-      "completed": 0,
-      "failed": 0,
-      "unattempted": 12
+      "attempted": 12,
+      "completed": 5,
+      "failed": 7,
+      "unattempted": 0,
+      "plan_sha256": "cd2bd7340c3eb7d9c1ddc248b78e25d69b8e00c9d246454cf5925e082a1dd030",
+      "contract_sha256": "9c79398b54118f284ffdc6e4592d501e1cc214e77f6a895152ae91019286b6c0",
+      "report": "development-style-bf16-result.json",
+      "artifact_id": "jensen-m6-development-style-bf16-v2"
     },
     {
       "exposure": "development",
