@@ -111,6 +111,40 @@
       "verification_status": "verified",
       "fresh_readback_sha256": "4abb40f8e4ebf026aba49066551e9f1c76e21f5f19bbd42cf76c31ea1a176177",
       "verified_at": "2026-11-12T18:16:43.454063+00:00"
+    },
+    {
+      "local_path": "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/avatar/jensen-wired-motion-pilot.tar.gz",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000486081fdada42e62a7c33324",
+      "library_file_id": "libfile_fde3_f-a3293be323dc8191b73c5ae667b33f38_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "jensen-wired-motion-pilot.tar.gz",
+      "local_metadata_applied": true,
+      "path": "/jensen-wired-motion-pilot.tar.gz",
+      "current_version_number": 0,
+      "bytes": 3975529,
+      "sha256": "a8dd93cdb96f00303e6adf09c1656f01928d4e474519dd12b5ac21ef78a75f2f",
+      "upload_status": "succeeded",
+      "verification_status": "verified",
+      "fresh_readback_sha256": "a8dd93cdb96f00303e6adf09c1656f01928d4e474519dd12b5ac21ef78a75f2f",
+      "verified_at": "2026-11-12T18:31:58.110677+00:00"
+    },
+    {
+      "local_path": "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/avatar/jensen-avatar-visual-qa-v3c.tar.gz",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000707081fd83da869f9f3f5123",
+      "library_file_id": "libfile_fde3_f-85cffa5e60b08191a81e4f95728176d6_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "jensen-avatar-visual-qa-v3c.tar.gz",
+      "local_metadata_applied": true,
+      "path": "/jensen-avatar-visual-qa-v3c.tar.gz",
+      "current_version_number": 0,
+      "bytes": 4578704,
+      "sha256": "573b4f2c4ca5e1f28abb5c79447e854cc0114e686fa6611e45f65f83d29376ca",
+      "upload_status": "succeeded",
+      "verification_status": "verified",
+      "fresh_readback_sha256": "573b4f2c4ca5e1f28abb5c79447e854cc0114e686fa6611e45f65f83d29376ca",
+      "verified_at": "2026-11-12T18:31:58.160741+00:00"
     }
   ]
 }

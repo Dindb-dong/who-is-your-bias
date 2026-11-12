@@ -2,7 +2,7 @@
   "schema_version": "motion-input.v1",
   "id": "jensen-multievent-geometry-pilot",
   "persona_id": "jensen-huang",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "sources": [
     {
       "id": "goldman-sachs-2024",
@@ -15,6 +15,13 @@
       "id": "stripe-sessions-2024",
       "source_event_id": "stripe-sessions-2024",
       "url": "https://stripe.com/gb/sessions/2024/a-conversation-with-nvidias-jensen-huang",
+      "corpus_split": "train",
+      "motion_split": "train"
+    },
+    {
+      "id": "wired-2024-video",
+      "source_event_id": "wired-big-interview-2024",
+      "url": "https://www.wired.com/video/watch/nvidias-global-takeover-a-conversation-with-jensen-huang",
       "corpus_split": "train",
       "motion_split": "train"
     }
@@ -49,6 +56,12 @@
       "path": "motion/jensen/stripe-2696-12s.json",
       "sha256": "a1e79e017a024fda8bc1fa0d7fd2fff2ce04bef917ac18df18644f0b025c73a0",
       "source_id": "stripe-sessions-2024"
+    },
+    {
+      "id": "jensen-wired-1350-10s",
+      "path": "motion/jensen/wired-1350-10s.json",
+      "sha256": "cb1bdedd9b46cab640d83c3254160b8a58f0b3a356b6ccb95ca8e971532cf346",
+      "source_id": "wired-2024-video"
     }
   ],
   "window_ms": 2500,

@@ -1,0 +1,143 @@
+{
+  "schema_version": "jensen-multievent-motion-result.v1",
+  "persona_id": "jensen-huang",
+  "input_manifest_sha256": "e82abb8171a5a18c5e3a41c1f85b292f187d4cc4ebb37ab02b7a6cd64056927e",
+  "summary": {
+    "source_events": [
+      "goldman-sachs-2024",
+      "stripe-sessions-2024",
+      "wired-big-interview-2024"
+    ],
+    "primitives": 36,
+    "unique_temporal_windows": 20,
+    "observed_frames": 580,
+    "observed_seconds": 58.057399999999994,
+    "reviewed_runtime_primitives": 0,
+    "preview_runtime_primitives": 36
+  },
+  "clips": [
+    {
+      "id": "jensen-goldman-0128-8s",
+      "source_id": "goldman-sachs-2024",
+      "sha256": "ece3ab917cc229bf43b3f9b3f48d754d1b6d949d19b1409449eccc3c5284857a",
+      "frames": 80,
+      "finger_channels": 30,
+      "frames_with_fingers": 68,
+      "bone_coverage_frames": {
+        "head": 80,
+        "leftUpperArm": 62,
+        "rightUpperArm": 64,
+        "leftForearm": 56,
+        "rightForearm": 60,
+        "leftHand": 56,
+        "rightHand": 60
+      },
+      "reference_ms": 100.1,
+      "review_status": "geometry_preview"
+    },
+    {
+      "id": "jensen-goldman-0146-8s",
+      "source_id": "goldman-sachs-2024",
+      "sha256": "c66c81b77ced4fefa426e61436d912ca685e1cb454df2033e48dd28dd5b11291",
+      "frames": 80,
+      "finger_channels": 30,
+      "frames_with_fingers": 59,
+      "bone_coverage_frames": {
+        "head": 2,
+        "leftUpperArm": 2,
+        "rightUpperArm": 2,
+        "leftForearm": 46,
+        "rightForearm": 48,
+        "leftHand": 46,
+        "rightHand": 48
+      },
+      "reference_ms": 1501.5,
+      "review_status": "geometry_preview"
+    },
+    {
+      "id": "jensen-goldman-0164-8s",
+      "source_id": "goldman-sachs-2024",
+      "sha256": "e6dfb2a06a54dba724b88682e63dc9ffb649fd162fdcf9e4bd6158ff4c65ca95",
+      "frames": 80,
+      "finger_channels": 30,
+      "frames_with_fingers": 71,
+      "bone_coverage_frames": {
+        "head": 80,
+        "leftUpperArm": 71,
+        "rightUpperArm": 70,
+        "leftForearm": 64,
+        "rightForearm": 67,
+        "leftHand": 64,
+        "rightHand": 67
+      },
+      "reference_ms": 0.0,
+      "review_status": "geometry_preview"
+    },
+    {
+      "id": "jensen-stripe-2396-12s",
+      "source_id": "stripe-sessions-2024",
+      "sha256": "c52a28512bff876a8be94e38da81f8c881f5520bf76cd4b89f7a6e8b36760bf6",
+      "frames": 120,
+      "finger_channels": 30,
+      "frames_with_fingers": 98,
+      "bone_coverage_frames": {
+        "head": 120,
+        "leftUpperArm": 4,
+        "rightUpperArm": 0,
+        "leftForearm": 4,
+        "rightForearm": 0,
+        "leftHand": 4,
+        "rightHand": 66
+      },
+      "reference_ms": 3703.7,
+      "review_status": "geometry_preview"
+    },
+    {
+      "id": "jensen-stripe-2696-12s",
+      "source_id": "stripe-sessions-2024",
+      "sha256": "a1e79e017a024fda8bc1fa0d7fd2fff2ce04bef917ac18df18644f0b025c73a0",
+      "frames": 120,
+      "finger_channels": 30,
+      "frames_with_fingers": 108,
+      "bone_coverage_frames": {
+        "head": 120,
+        "leftUpperArm": 1,
+        "rightUpperArm": 0,
+        "leftForearm": 1,
+        "rightForearm": 0,
+        "leftHand": 1,
+        "rightHand": 96
+      },
+      "reference_ms": 3603.6,
+      "review_status": "geometry_preview"
+    },
+    {
+      "id": "jensen-wired-1350-10s",
+      "source_id": "wired-2024-video",
+      "sha256": "cb1bdedd9b46cab640d83c3254160b8a58f0b3a356b6ccb95ca8e971532cf346",
+      "frames": 100,
+      "finger_channels": 30,
+      "frames_with_fingers": 100,
+      "bone_coverage_frames": {
+        "head": 100,
+        "leftUpperArm": 80,
+        "rightUpperArm": 67,
+        "leftForearm": 80,
+        "rightForearm": 67,
+        "leftHand": 80,
+        "rightHand": 67
+      },
+      "reference_ms": 100.1,
+      "review_status": "geometry_preview"
+    }
+  ],
+  "automatic_selection_without_context": null,
+  "claim": "Actual source observations and source-relative geometry previews only. Three training events; no held-out or speaker-association quality acceptance.",
+  "limitations": [
+    "All clips require explicit geometry-preview opt-in.",
+    "Reference-frame rotations replay deltas on avatar neutral; they do not reproduce the absolute photographed pose.",
+    "Axial finger twist, cropped joints and occluded geometry are unobserved.",
+    "Direction-only monocular estimates and frame-local detection associations are not ground-truth motion capture.",
+    "No text context is asserted, so automatic conversation retrieval selects no clip."
+  ]
+}

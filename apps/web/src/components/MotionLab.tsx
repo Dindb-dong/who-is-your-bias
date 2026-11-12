@@ -10,6 +10,7 @@ const JENSEN_SAMPLES = [
   { file: 'goldman-0164-8s.json', label: 'Goldman Sachs 2024 · 2:44 · 8 seconds' },
   { file: 'stripe-2396-12s.json', label: 'Stripe Sessions 2024 · 39:56 · 12 seconds' },
   { file: 'stripe-2696-12s.json', label: 'Stripe Sessions 2024 · 44:56 · 12 seconds' },
+  { file: 'wired-1350-10s.json', label: 'WIRED Big Interview 2024 · 22:30 · 10 seconds' },
 ] as const;
 
 /** Imported measurements have their own source clock, separate from conversation cues. */

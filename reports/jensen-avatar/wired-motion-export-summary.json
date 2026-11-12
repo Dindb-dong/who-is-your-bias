@@ -1,0 +1,9 @@
+{
+  "id": "wired-1350-10s",
+  "frames": 100,
+  "reference_ms": 100.1,
+  "finger_channels": 30,
+  "frames_with_fingers": 100,
+  "selected_two_hands": 91,
+  "public_sha256": "cb1bdedd9b46cab640d83c3254160b8a58f0b3a356b6ccb95ca8e971532cf346"
+}
