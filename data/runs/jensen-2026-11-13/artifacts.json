@@ -880,6 +880,19 @@
       "sha256": "4815d15070a6c8dee07bcd3ac94a006db52a9d9b22686477a759a7093d203be8",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-m6-heldout-style-bf16-v2",
+      "role": "complete-frozen-matched-response-condition",
+      "exposure": "heldout",
+      "condition": "style",
+      "file_name": "jensen-m6-heldout-style-bf16-v2.tar.gz",
+      "file_id": "file_00000000b26881fd8d7c95b8c6687771",
+      "library_file_id": "libfile_fde3_f-6a337eb8af48819184fc9ccb111ebd64_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 18746,
+      "sha256": "fa9fa19fd73b3ef0a448ddf9373f17bb25a38a8fe6bd5e809778b6d116478806",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {
