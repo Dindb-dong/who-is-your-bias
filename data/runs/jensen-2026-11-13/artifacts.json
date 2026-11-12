@@ -737,6 +737,18 @@
       "sha256": "81d7df0660c6211c73a96cd203bd1d9219745afc2f658042efcf57031b3f5323",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-evaluation-operational-tools-v2",
+      "role": "actual-partial-delivery-and-separate-rag-operational-preparation",
+      "generation_executed_by_bundle": false,
+      "file_name": "jensen-evaluation-operational-tools-v2.tar.gz",
+      "file_id": "file_00000000619c81fdbe605b5aa9eb0118",
+      "library_file_id": "libfile_fde3_f-6e195253a5208191bae29bcb3ca7fec3_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 12633,
+      "sha256": "4528926a4f15a4b46fff4d09cb91c7ffeae07f827015ba56ec3945bc0468bf31",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {

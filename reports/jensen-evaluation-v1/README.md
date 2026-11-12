@@ -1,11 +1,13 @@
 # Jensen matched generation: frozen inputs
 
-Current [execution status](execution-status.json): the first development `facts`
-condition has executed all 12 calls, with six normal completions and six
-length-limited failures. Its complete raw outputs and all ten condition files
-were saved and freshly verified; see [the measured report](development-facts-bf16-result.json).
-The other matched conditions and the separate RAG diagnostic are pending.
-This does not establish a semantic or model-improvement result.
+The current [execution status](execution-status.json) links every finished
+condition's measured report, complete raw-output artifact and fresh-readback
+receipt. It retains normal, failed and unattempted calls separately. Partial
+prefix reports preserve work while a condition is running and remain excluded
+from final collection until the whole condition has been saved.
+The final [29-update adapter](../jensen-recovery/text-v1/completed-serving.json)
+is now available for the frozen adapter condition. Matched execution and semantic
+review do not themselves establish human likeness or model promotion.
 
 **Registration history:** inputs were frozen before any model generations.
 The execution-status link above records subsequent actual calls.

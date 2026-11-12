@@ -1,0 +1,36 @@
+{
+  "schema_version": "jensen-operational-tools-preservation.v2",
+  "artifact": {
+    "artifact_id": "jensen-evaluation-operational-tools-v2",
+    "role": "actual-partial-delivery-and-separate-rag-operational-preparation",
+    "generation_executed_by_bundle": false,
+    "file_name": "jensen-evaluation-operational-tools-v2.tar.gz",
+    "file_id": "file_00000000619c81fdbe605b5aa9eb0118",
+    "library_file_id": "libfile_fde3_f-6e195253a5208191bae29bcb3ca7fec3_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 12633,
+    "sha256": "4528926a4f15a4b46fff4d09cb91c7ffeae07f827015ba56ec3945bc0468bf31",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "payload_sha256": {
+    "m6_partial_delivery.py": "33b244c32af6fd1ed89b794f5d295ea20f2a7ab97a160972fa81b09df93ac7fe",
+    "m6-delivery-functions.mjs": "6a083603fbbb99e816fb890a2444afa018aa6908752b57ce4e44cc5a32656912",
+    "launch_m6_rag.py": "5a78a311e46d07b3c3f48468335b2a8307ed440102f76b930b6e17b904c40ced",
+    "m6_rag_launcher_preflight.json": "a4eb4c0f85126bb3e9855a6643a677333b53aa7dd643c0059ad5086471a540ce",
+    "m6_rag_delivery_map.json": "d343c8788405570d2424cd8ab3505cf50fca4a8f8bd967dfb7f3663d3408acd6",
+    "m6_partial_delivery_synthetic_evidence.json": "f5f375c09b7efb98ae602ab6042c6329d2fa5c99b6a5f82a8007f9ffc6367392"
+  },
+  "fresh_payload_count": 6,
+  "frozen_model_implementation_changed": false,
+  "actual_partial_deliveries": [
+    "development-style-bf16-partial0004.json",
+    "development-style-bf16-partial0008.json"
+  ],
+  "rag_execution": {
+    "status": "prepared_not_executed",
+    "model_generations": 0,
+    "preflight": "Saved compile and exact sealed-input/default-print checks; no model execution."
+  },
+  "synthetic_check_evidence_scope": "Eight checks were observed in one inline no-model invocation; the source script and temporary fixtures were not retained. The saved retrospective receipt explicitly preserves that limitation; no rerun is claimed.",
+  "prior_tools_bundle": "operational-tools-checkpoint.json"
+}
