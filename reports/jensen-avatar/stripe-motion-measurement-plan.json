@@ -1,0 +1,53 @@
+{
+  "schema_version": "motion-measurement-plan.v1",
+  "persona_id": "jensen-huang",
+  "runtime_version": "0.10.21",
+  "sample_fps": 10,
+  "sources": [
+    {
+      "id": "stripe-sessions-2024",
+      "source_event_id": "stripe-sessions-2024",
+      "url": "https://stripe.com/gb/sessions/2024/a-conversation-with-nvidias-jensen-huang",
+      "corpus_split": "train",
+      "motion_split": "train"
+    }
+  ],
+  "acquisitions": [
+    {
+      "source_id": "stripe-sessions-2024",
+      "input_basename": "stripe-sessions-2024-full.mp4",
+      "input_sha256": "0882539adca1bca58a8e64c4341a6fdca4ebca69a88c77799c882fb1dd0bfa32",
+      "source_timeline": "publisher_rendition_elapsed",
+      "source_offset_seconds": 0,
+      "clock_mapping": [
+        {
+          "local_start": 0,
+          "local_end": 3889.485604,
+          "source_start": 0,
+          "rate": 1
+        }
+      ],
+      "source_url": "https://videos.stripeassets.com/fzn2n1nzq965/5OJ9Vx62so0tWBvEAEDA9L/62fc5a05cb70e2076ca15cc94166f96a/s24_KEY03_FINAL_WEB3.mp4"
+    }
+  ],
+  "windows": [
+    {
+      "id": "stripe-2396-12s",
+      "source_id": "stripe-sessions-2024",
+      "start_seconds": 2396,
+      "duration_seconds": 12,
+      "selection_basis": "Frames inspected every two source seconds: single seated Jensen close-up with both hands visible; full track association remains unreviewed."
+    },
+    {
+      "id": "stripe-2696-12s",
+      "source_id": "stripe-sessions-2024",
+      "start_seconds": 2696,
+      "duration_seconds": 12,
+      "selection_basis": "Frames inspected every two source seconds: single seated Jensen close-up with both hands visible; full track association remains unreviewed."
+    }
+  ],
+  "claim": "Second-event pilot measurement; event is training-only, not an independent quality evaluation.",
+  "face_model_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+  "pose_model_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a",
+  "hand_model_sha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1"
+}

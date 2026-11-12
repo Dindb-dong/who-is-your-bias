@@ -26,6 +26,40 @@
       "verification_status": "verified",
       "verified_at": "2026-11-12T17:54:28.532440+00:00",
       "local_path": "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/avatar/jensen-motion-preview-clips.tar.gz"
+    },
+    {
+      "local_path": "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/avatar/jensen-dense-fit-v2b.tar.gz",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_00000000b0ac81fdb89816c1f536d7be",
+      "library_file_id": "libfile_fde3_f-4c6788c52e04819183e6e605a8dd3315_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "jensen-dense-fit-v2b.tar.gz",
+      "local_metadata_applied": true,
+      "path": "/jensen-dense-fit-v2b.tar.gz",
+      "current_version_number": 0,
+      "bytes": 33405454,
+      "sha256": "dc4d17bcd57832310ef70a69eff857b508b6c8a88070d53ef10afc87b2c5404a",
+      "upload_status": "succeeded",
+      "verification_status": "verified",
+      "fresh_readback_sha256": "dc4d17bcd57832310ef70a69eff857b508b6c8a88070d53ef10afc87b2c5404a",
+      "verified_at": "2026-11-12T17:56:16.648729+00:00"
+    },
+    {
+      "local_path": "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/avatar/jensen-textured-v3-rejected.tar.gz",
+      "purpose": "create_library_file",
+      "status": "succeeded",
+      "file_id": "file_0000000041b481fd8132b44adfa9ae80",
+      "library_file_id": "libfile_fde3_f-f3dbeec56f308191b4472b226a9eea27_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "jensen-textured-v3-rejected.tar.gz",
+      "local_metadata_applied": true,
+      "path": "/jensen-textured-v3-rejected.tar.gz",
+      "current_version_number": 0,
+      "bytes": 38284494,
+      "sha256": "16a55e229ebf7f11275d7667219553286acfcf02abef7d9788cc0b6667fae451",
+      "upload_status": "succeeded",
+      "verification_status": "verified",
+      "fresh_readback_sha256": "16a55e229ebf7f11275d7667219553286acfcf02abef7d9788cc0b6667fae451",
+      "verified_at": "2026-11-12T18:00:33.582053+00:00"
     }
   ]
 }

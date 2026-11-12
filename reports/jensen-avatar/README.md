@@ -13,9 +13,18 @@ in the `jensen-dense-fit-v2-rejected` artifact package. Its
 [measured result and visual findings](dense-v2-rejected-results.json),
 [coarse render](renders/coarse-v1-neutral.png), and
 [rejected dense render](renders/dense-v2-neutral-rejected.png) are in the repository.
-Commit `570ad5b` implements rigid-accessory preservation; rerender verification
-is still pending. Source-derived texture from the licensed Stanford photographs
-is proposed, not yet implemented or baked.
+Commit `570ad5b` implements rigid-accessory preservation; the corrected dense-v2b
+render now shows the glasses in front of the face. Its complete package was
+uploaded and freshly retrieved with matching SHA-256; see the
+[derived artifact receipts](derived-artifact-receipts.json).
+
+The first licensed photo texture bake also **ran**: 221,259 skin UV pixels received
+source appearance, producing a 17.5 MB GLB and 28 MB editable master. The
+[textured-v3 render](renders/textured-v3-neutral-rejected.png) is rejected because
+authored hair compression exposed the scalp and source eye pixels overlapped the
+rig's eyes. The [bake result and failure findings](textured-v3-rejected-results.json)
+preserve actual output hashes, attribution, and limitations. Commit `1b1cf5c`
+fixes those specific defects; the corrected bake has not yet been executed.
 
 ## Actual inputs and outputs
 
@@ -36,7 +45,11 @@ held-out WEF Davos 2026 and No Priors 2023 sources do not enter fitting.
   recorded 2024-09-11, published 2024-11-11; reference frames at publisher elapsed
   130, 150 and 170 seconds. This pilot used the hash-bound 180-second acquisition.
 
-No source photograph pixels were copied into the runtime texture. The foundation
+The initial coarse/dense candidates copied no source photograph pixels. The
+later texture experiment uses only the two credited Stanford photographs under
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The source texture
+and derived textured candidate are distributed under that license, with warping,
+blending, UV baking and other changes identified in the bake report. The foundation
 is the repository's generic CC0 anatomical rig, hash
 `aee550c9cb5b20c6afccfb038c42c2eb8d7aab2c8fb74ca977aefed56f633519`.
 It is not a ready-made celebrity model. Hair/glasses/garment styling remains
@@ -83,8 +96,16 @@ Three actual exported clips are now versioned under
 available on 68, 59 and 71 frames respectively. The standalone
 `data/motion/jensen-goldman-v1.json` library binds explicitly to `jensen-huang`.
 It contains no text-context assertions and does not enable automatic conversation
-selection. Import a clip in Motion & rig calibration and explicitly enable
-geometry preview to inspect its measured motion.
+selection. The Jensen Motion Lab now offers **Load Jensen face & hands** with an
+explicit geometry-preview checkbox. Imported clips and audio reset when the
+persona changes. Historical Musk clip/narration buttons are not offered in the
+Jensen lab.
+
+The focused browser test was attempted on desktop and mobile, but Chromium exited
+before creating a page: `socket() failed: Operation not permitted` in
+`process_singleton_posix.cc`. Those two attempts are environment-blocked, not
+passing UI tests. Web type checking and the production build passed; actual
+browser rendering/replay acceptance remains open.
 
 ## Reproduction and remaining gates
 
@@ -115,6 +136,16 @@ OPENBLAS_NUM_THREADS=3 OMP_NUM_THREADS=3 blender --background --threads 3 \
   "$AVATAR_ARTIFACT_ROOT/template-binding/template-landmarks.json" \
   "$AVATAR_ARTIFACT_ROOT/multimodal-measurements.json" \
   "$AVATAR_ARTIFACT_ROOT/dense-fit-v2b"
+
+OPENBLAS_NUM_THREADS=3 OMP_NUM_THREADS=3 blender --background --threads 3 \
+  --python tools/avatar/bake_reference_texture.py -- \
+  "$AVATAR_ARTIFACT_ROOT/dense-fit-v2b/jensen-landmark-candidate-v2.blend" \
+  "$AVATAR_ARTIFACT_ROOT/template-binding/template-binding.json" \
+  "$AVATAR_ARTIFACT_ROOT/template-binding/template-landmarks.json" \
+  "$AVATAR_ARTIFACT_ROOT/multimodal-measurements.json" \
+  "$AVATAR_ARTIFACT_ROOT/references" \
+  reports/jensen-avatar/texture-reference-plan.json \
+  "$AVATAR_ARTIFACT_ROOT/textured-fit-v3b"
 
 PYTHONPATH=src:. python -m tools.motion check \
   data/motion/jensen-goldman-v1.json apps/web/public
