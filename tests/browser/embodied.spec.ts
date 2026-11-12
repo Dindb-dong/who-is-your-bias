@@ -21,7 +21,7 @@ test('loads the bundled human and switches camera framing and avatar assets', as
   await expectHumanReady(page);
   await expect(stage).toHaveAttribute('data-face-controls', '52');
   await expect(stage).toHaveAttribute('data-visemes', '15');
-  await expect(stage).toHaveAttribute('data-mapped-joints', '16');
+  await expect(stage).toHaveAttribute('data-mapped-joints', '46');
   await expect(stage).toHaveAttribute('data-framing', 'portrait');
   await expect(page.locator('.stage-caption')).toHaveText('RESEARCH HUMAN RIG');
   await page.getByRole('region', { name: 'Avatar studio', exact: true }).screenshot({ path: info.outputPath('research-human-portrait.png') });

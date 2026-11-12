@@ -339,3 +339,28 @@ test('screen capture starts under user activation and external track end cleans 
   expect(await page.evaluate(() => (window as FixtureWindow).__attentionFixture.terminated)).toBe(1);
   await expect(canvas(page)).toHaveAttribute('data-attention-phase', 'idle', { timeout: 4000 });
 });
+
+test('Jensen hand sample requires preview consent and resets cleanly', async ({ page }, info) => {
+  await openStudio(page);
+  await page.getByRole('button', { name: 'Studio settings', exact: true }).filter({ visible: true }).click();
+  await page.getByRole('button', { name: /^Research human/ }).click();
+  await page.getByRole('button', { name: 'Close settings' }).click();
+  await expect(page.getByTestId('avatar-stage')).toHaveAttribute('data-mapped-joints', '46', { timeout: 15000 });
+  await navigation(page, info.project.name === 'mobile').getByRole('button', { name: info.project.name === 'mobile' ? 'Lab' : 'Research lab', exact: true }).click();
+  await page.getByRole('button', { name: 'Load Jensen face & hands', exact: true }).click();
+  await expect(page.getByText('goldman-sachs-2024', { exact: true })).toBeVisible();
+  const replay = page.getByRole('button', { name: 'Replay source motion', exact: true });
+  await expect(replay).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Load narration sample', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('combobox', { name: 'Motion lab camera framing' })).toHaveValue('upper_body');
+  await page.getByRole('checkbox', { name: 'Preview geometry without speaker attribution', exact: true }).check();
+  await replay.click();
+  await expect.poll(async () => Number(await page.getByRole('slider', { name: 'Source position' }).inputValue())).toBeGreaterThan(150);
+  await page.getByRole('button', { name: 'Reset source replay', exact: true }).click();
+  await expect(page.getByRole('slider', { name: 'Source position' })).toHaveValue('0');
+  await page.getByRole('checkbox', { name: 'Preview geometry without speaker attribution', exact: true }).uncheck();
+  await expect(replay).toBeDisabled();
+  await page.getByRole('button', { name: 'Clear imported files', exact: true }).click();
+  await expect(page.getByText('goldman-sachs-2024', { exact: true })).toHaveCount(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+});

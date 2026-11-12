@@ -124,6 +124,9 @@ def main():
     multiplier = np.clip(target_color / np.maximum(np.median(valid, axis=0), .05), .55, 1.25)
     canvas[:, :, :3] = np.clip(canvas[:, :, :3] * multiplier, 0, 1)
     covered = np.zeros((texture_height, texture_width), dtype=bool)
+    eye_centers = [(coordinates[indices[left]] + coordinates[indices[right]]) / 2 for left, right in [(33, 133), (362, 263)]]
+    mouth_center = (coordinates[indices[13]] + coordinates[indices[14]]) / 2
+    neutral_mouth_source = min(range(len(sources)), key=lambda i: measured[sources[i][0]['id']]['blendshapes'].get('jawOpen', 1))
     for triangle in skin.data.loop_triangles:
         vertex = list(triangle.vertices); local = coordinates[vertex]; center = np.mean(local, axis=0)
         if center[2] < -.60 or center[2] > .65 or abs(center[0]) > .65 or center[1] < -.12:
@@ -146,11 +149,18 @@ def main():
         if not len(samples): continue
         location = weights @ local
         mask = np.minimum.reduce([np.clip((.59-np.abs(location[:, 0]))/.12, 0, 1), np.clip((location[:, 2]+.56)/.08, 0, 1), np.clip((.60-location[:, 2])/.13, 0, 1), np.clip((location[:, 1]+.1)/.16, 0, 1)])
-        colors = np.zeros((len(samples), 3)); total = 0.
-        for mapped, pixels, viewing in projections:
-            contribution = max(.03, float(np.dot(normal, viewing))) ** 4
-            colors += sample(pixels, weights @ mapped[vertex]) * contribution; total += contribution
-        colors /= total
+        # Source eyes/glasses must not become a second pair painted across the
+        # animated eyelids. Keep the rig's eyes and independent glasses there.
+        for center in eye_centers:
+            ellipse = ((location[:, 0]-center[0])/.14)**2 + ((location[:, 2]-center[2])/.070)**2
+            mask *= np.clip((ellipse-.8)/.7, 0, 1)
+        mouth = ((location[:, 0]-mouth_center[0])/.17)**2 + ((location[:, 2]-mouth_center[2])/.08)**2 < 1
+        colors = np.zeros((len(samples), 3)); total = np.zeros(len(samples))
+        for source_index, (mapped, pixels, viewing) in enumerate(projections):
+            contribution = np.full(len(samples), max(.03, float(np.dot(normal, viewing))) ** 4)
+            if source_index != neutral_mouth_source: contribution[mouth] *= .02
+            colors += sample(pixels, weights @ mapped[vertex]) * contribution[:, None]; total += contribution
+        colors /= total[:, None]
         sx, sy = samples[:, 0], samples[:, 1]
         canvas[sy, sx, :3] = canvas[sy, sx, :3] * (1-mask[:, None]) + colors * mask[:, None]
         covered[sy, sx] |= mask > .1
@@ -175,21 +185,13 @@ def main():
         tinted.filepath_raw = str((args.output / 'jensen-authored-brown-iris.png').resolve()); tinted.file_format = 'PNG'; tinted.save(); tinted.pack()
         for node in nodes:
             if node.image == eye_image: node.image = tinted
-    meshes = [obj for obj in bpy.data.objects if obj.type == 'MESH']
-    # Retain gray hair cards but shorten the generic raised hairstyle. This is
-    # authored grooming, not a measured reconstruction of individual hair strands.
-    forehead = float(anchor_points[10, 2])
-    for obj in meshes:
-        if 'short01' not in obj.name: continue
-        inverse = obj.matrix_world.inverted()
-        collections = [key.data for key in obj.data.shape_keys.key_blocks] if obj.data.shape_keys else [obj.data.vertices]
-        offsets = []
-        for vertex in collections[0]:
-            point = obj.matrix_world @ vertex.co
-            if point.z > forehead: point.z = forehead + (point.z - forehead) * .60
-            offsets.append(inverse @ point - vertex.co)
-        for vertices in collections:
-            for vertex, offset in zip(vertices, offsets): vertex.co += offset
+    # The source eyebrows now live on the animated skin. Keep the generic thick
+    # eyebrow object editable but hidden, rather than stacking two brow shapes.
+    hidden = []
+    for obj in bpy.data.objects:
+        if obj.type == 'MESH' and 'eyebrow001' in obj.name:
+            obj.hide_render = True; obj.hide_set(True); hidden.append(obj.name)
+    meshes = [obj for obj in bpy.data.objects if obj.type == 'MESH' and obj.name not in hidden]
     bpy.context.view_layer.update()
     bpy.ops.object.select_all(action='DESELECT'); rig.select_set(True)
     for obj in meshes: obj.select_set(True)
@@ -200,10 +202,11 @@ def main():
     bpy.context.scene.render.filepath = str((args.output / 'candidate-neutral.png').resolve()); bpy.ops.render.render(write_still=True)
     report = {'schema_version': 'avatar-reference-texture-bake.v1', 'persona_id': 'jensen-huang', 'license': 'CC-BY-SA-4.0',
               'license_url': 'https://creativecommons.org/licenses/by-sa/4.0/', 'attribution': plan['attribution'], 'sources': plan['sources'],
-              'changes': 'Two licensed face photographs warped by 468 source-bound landmarks, blended by surface viewing angle, and baked into the fitted animated skin UVs; gray hair shape authored.',
+              'changes': 'Two licensed face photographs warped by 468 source-bound landmarks, blended by surface viewing angle, and baked into the fitted animated skin UVs; eye/glasses region excluded and closed-mouth reference prioritized. Gray hair and brown iris colors authored.',
               'master_input_sha256': digest(args.master), 'measurement_sha256': digest(args.measurements), 'recipe_sha256': digest(args.plan),
               'texture_pixels_with_source_contribution': int(np.sum(covered)), 'texture_size': [texture_width, texture_height], 'skin_color_multiplier': multiplier.tolist(),
-              'authored_iris_texels': iris_texels, 'authored_hair_compression': .60,
+              'authored_iris_texels': iris_texels, 'authored_hair_compression': 1,
+              'excluded_generic_brow_meshes': hidden, 'closed_mouth_source_id': sources[neutral_mouth_source][0]['id'],
               'glb': {'filename': glb.name, 'sha256': digest(glb), 'bytes': glb.stat().st_size},
               'editable_master': {'filename': master.name, 'sha256': digest(master), 'bytes': master.stat().st_size},
               'promotion': 'candidate_only', 'likeness_review': 'pending_visual_review',
