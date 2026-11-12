@@ -543,6 +543,7 @@
     "voice": "reports/voice/jensen-2026-11-13/delivery.json",
     "reflection_expansion": "reports/jensen-recovery/reflection-expansion-v1/media-artifacts.json",
     "heldout_rag": "reports/jensen-evaluation-v1/heldout-rag-v1/artifacts.json",
-    "ntu_derived_address": "reports/jensen-recovery/reflection-expansion-v1/ntu-media-artifacts.json"
+    "ntu_derived_address": "reports/jensen-recovery/reflection-expansion-v1/ntu-media-artifacts.json",
+    "response_results": "reports/jensen-evaluation-v1/execution-status.json"
   }
 }

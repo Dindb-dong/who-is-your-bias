@@ -1,0 +1,86 @@
+{
+  "schema_version": "jensen-matched-execution-status.v1",
+  "recorded_at": "2026-11-12T20:25:17.475126+00:00",
+  "matched_planned_calls": 54,
+  "matched_attempted": 12,
+  "matched_completed": 6,
+  "matched_failed": 6,
+  "conditions": [
+    {
+      "exposure": "development",
+      "condition": "facts",
+      "status": "executed_saved_and_fresh_readback_verified",
+      "planned": 12,
+      "attempted": 12,
+      "completed": 6,
+      "failed": 6,
+      "unattempted": 0,
+      "plan_sha256": "cd2bd7340c3eb7d9c1ddc248b78e25d69b8e00c9d246454cf5925e082a1dd030",
+      "contract_sha256": "9c79398b54118f284ffdc6e4592d501e1cc214e77f6a895152ae91019286b6c0",
+      "report": "development-facts-bf16-result.json",
+      "artifact_id": "jensen-m6-development-facts-bf16-v2"
+    },
+    {
+      "exposure": "development",
+      "condition": "style",
+      "status": "not_executed",
+      "planned": 12,
+      "attempted": 0,
+      "completed": 0,
+      "failed": 0,
+      "unattempted": 12
+    },
+    {
+      "exposure": "development",
+      "condition": "adapter",
+      "status": "not_executed",
+      "planned": 12,
+      "attempted": 0,
+      "completed": 0,
+      "failed": 0,
+      "unattempted": 12
+    },
+    {
+      "exposure": "heldout",
+      "condition": "facts",
+      "status": "not_executed",
+      "planned": 6,
+      "attempted": 0,
+      "completed": 0,
+      "failed": 0,
+      "unattempted": 6
+    },
+    {
+      "exposure": "heldout",
+      "condition": "style",
+      "status": "not_executed",
+      "planned": 6,
+      "attempted": 0,
+      "completed": 0,
+      "failed": 0,
+      "unattempted": 6
+    },
+    {
+      "exposure": "heldout",
+      "condition": "adapter",
+      "status": "not_executed",
+      "planned": 6,
+      "attempted": 0,
+      "completed": 0,
+      "failed": 0,
+      "unattempted": 6
+    }
+  ],
+  "primary_runtime_contract": "execution-contract-bf16-v2.json",
+  "fp32_preflight_failure": "runtime-amendment-bf16-v2.json",
+  "separate_heldout_rag": {
+    "planned": 6,
+    "attempted": 0,
+    "status": "not_executed",
+    "contract": "heldout-rag-v1/execution-contract-bf16-v2.json"
+  },
+  "collection": "pending remaining conditions and fresh-readback receipts",
+  "semantic_support_review": "ungraded",
+  "human_review": "ungraded",
+  "efficacy_claim": false
+}

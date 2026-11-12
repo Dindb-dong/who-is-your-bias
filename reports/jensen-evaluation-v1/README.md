@@ -1,5 +1,12 @@
 # Jensen matched generation: frozen inputs
 
+Current [execution status](execution-status.json): the first development `facts`
+condition has executed all 12 calls, with six normal completions and six
+length-limited failures. Its complete raw outputs and all ten condition files
+were saved and freshly verified; see [the measured report](development-facts-bf16-result.json).
+The other matched conditions and the separate RAG diagnostic are pending.
+This does not establish a semantic or model-improvement result.
+
 **Status: inputs frozen; zero model generations executed at this checkpoint.**
 There are 12 development cases and six cases from the separately acquired No
 Priors 2023 test event. One attempt in each of three conditions is planned: 54

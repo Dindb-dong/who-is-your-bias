@@ -188,8 +188,10 @@ actual text checkpoint survived fresh remote retrieval and completed the next
 optimizer update in a fresh process; step 2 was again saved and freshly verified. The retrieval comparison and the voice candidate
 training/sample/diagnostic/gateway delivery have executed. Both retrieval
 candidates remain opt-in after missing their declared gate. Text training is
-still 10/29 saved updates; the 54 matched M6 responses, six separate RAG responses
-and actual M7 neural-text session checks have not yet executed. Avatar/browser
+still 10/29 saved updates; the first 12 of 54 matched M6 calls have executed and been saved (six normal
+completions, six length-limited failures). The remaining 42 matched calls, six
+separate RAG responses and actual M7 neural-text session checks remain pending.
+See the [current response execution status](../reports/jensen-evaluation-v1/execution-status.json). Avatar/browser
 functionality is measured, while likeness and contextual gesture quality remain
 ungraded. No accepted persona fidelity, human likeness or latency-target
 acceptance is claimed.
@@ -205,4 +207,5 @@ style/adapter messages. Actual tokenizer counts are 703–1,625 input tokens.
 Version 1 plans are retained as superseded; version 2 changes only condition-neutral
 snapshot metadata before any model output. The private plans, references and snapshot
 have been saved, freshly retrieved, seal-validated and checked against the exact v4
-corpus. No generated answer is claimed yet at this checkpoint.
+corpus. The initial freeze itself claimed no generated answers; actual subsequent results
+are tracked in the response execution status above.
