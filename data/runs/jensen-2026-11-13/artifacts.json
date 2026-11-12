@@ -866,6 +866,20 @@
       "sha256": "f1d8e2ddc5bbf4600747e19c24c96c3f379d005a0ebc4dc39c84e4251501a4eb",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-m6-development-agent-review-v1",
+      "role": "condition-blind-agent-semantic-review-before-unblinding",
+      "exposure": "development",
+      "review_samples": 13,
+      "human_review": "ungraded",
+      "file_name": "jensen-m6-development-agent-review-v1.tar.gz",
+      "file_id": "file_00000000d3ac81fd85e296b985bc0111",
+      "library_file_id": "libfile_fde3_f-182964910d848191ad82dacb30eb0b1f_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 41148,
+      "sha256": "4815d15070a6c8dee07bcd3ac94a006db52a9d9b22686477a759a7093d203be8",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {
