@@ -1,15 +1,63 @@
 {
   "schema_version": "persona-snapshot.v1",
-  "id": "jensen-huang-2026-11-12-seed.v1",
+  "id": "jensen-huang-2026-11-12-interviews.v2",
   "persona_id": "jensen-huang",
-  "as_of": "2026-11-12T04:17:28Z",
+  "as_of": "2026-11-12T11:42:20Z",
   "current_evidence_since": "2026-01-01",
-  "corpus_sha256": "09a81cb03831650ca04107b542bcbace07f0f5f089cedb71a94fc49d6e85e9ee",
-  "knowledge_version": "jensen-huang-editorial-seed.v1",
-  "style_version": "editorial-guidance-no-trained-adapter",
+  "corpus_sha256": "3560a462a8ec4a1a53cd010e15fc07e95bfc41eb9498cc9c09b0924dcc133740",
+  "knowledge_version": "jensen-huang-interviews.v2",
+  "style_version": "interview-informed-editorial-guidance.v2-no-trained-adapter",
   "voice_version": "unconfigured-no-jensen-reference",
   "appearance_version": "designed-prototype-not-qualified-likeness",
   "sources": [
+    {
+      "source_id": "acquired-2023",
+      "event_family": "acquired-2023",
+      "event_at": null,
+      "published_at": "2023-10-16",
+      "ingested_at": "2026-11-12T11:42:20Z",
+      "split": "train",
+      "source_content_sha256": null,
+      "assertion_period_start": null,
+      "assertion_period_end": null,
+      "assertion_period_basis": null
+    },
+    {
+      "source_id": "csis-2025",
+      "event_family": "csis-2025",
+      "event_at": "2025-12-03",
+      "published_at": "2025-12-03",
+      "ingested_at": "2026-11-12T11:42:20Z",
+      "split": "train",
+      "source_content_sha256": null,
+      "assertion_period_start": null,
+      "assertion_period_end": null,
+      "assertion_period_basis": null
+    },
+    {
+      "source_id": "dwarkesh-2026",
+      "event_family": "dwarkesh-2026",
+      "event_at": null,
+      "published_at": "2026-04-15",
+      "ingested_at": "2026-11-12T11:42:20Z",
+      "split": "train",
+      "source_content_sha256": null,
+      "assertion_period_start": null,
+      "assertion_period_end": null,
+      "assertion_period_basis": null
+    },
+    {
+      "source_id": "lex-494",
+      "event_family": "lex-494",
+      "event_at": null,
+      "published_at": "2026-03-23",
+      "ingested_at": "2026-11-12T11:42:20Z",
+      "split": "train",
+      "source_content_sha256": null,
+      "assertion_period_start": null,
+      "assertion_period_end": null,
+      "assertion_period_basis": null
+    },
     {
       "source_id": "nvidia-blackwell-ultra-2025",
       "event_family": "nvidia-gtc-2025",
@@ -45,8 +93,32 @@
       "assertion_period_start": null,
       "assertion_period_end": null,
       "assertion_period_basis": null
+    },
+    {
+      "source_id": "strange-loop-2025",
+      "event_family": "strange-loop-2025",
+      "event_at": null,
+      "published_at": "2025-06-26",
+      "ingested_at": "2026-11-12T11:42:20Z",
+      "split": "train",
+      "source_content_sha256": null,
+      "assertion_period_start": null,
+      "assertion_period_end": null,
+      "assertion_period_basis": null
+    },
+    {
+      "source_id": "stripe-sessions-2024",
+      "event_family": "stripe-sessions-2024",
+      "event_at": null,
+      "published_at": "2024-05-21",
+      "ingested_at": "2026-11-12T11:42:20Z",
+      "split": "train",
+      "source_content_sha256": null,
+      "assertion_period_start": null,
+      "assertion_period_end": null,
+      "assertion_period_basis": null
     }
   ],
   "statement_links": [],
-  "coverage_note": "Three NVIDIA publications from 2024-2025, eight editorial summaries. No current 2026 position coverage, original interview Q&A, aligned speech or observed behavior is claimed."
+  "coverage_note": "Nine dated publisher sources and 32 editorial summaries, including 24 paraphrased exchanges from six interviews. No present-day positions, original-text training examples, aligned speech or observed behavior are asserted."
 }

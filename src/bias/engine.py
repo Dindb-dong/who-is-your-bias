@@ -192,24 +192,31 @@ class Engine:
                 retrieval_ms = (time.perf_counter() - retrieval_started) * 1000
                 yield "status", {"stage": "generating"}
                 generation_started = time.perf_counter()
-                use_llm = self.settings.llm.configured and (request.mode == "profile" or bool(result.hits))
+                speculative = (self.settings.llm.configured and self.corpus.persona.id == "jensen-huang"
+                               and request.mode != "profile" and not result.hits)
+                use_llm = self.settings.llm.configured and (request.mode == "profile" or bool(result.hits) or speculative)
                 fragments: list[str] = []
                 allowed_ids = {hit.evidence.id for hit in result.hits}
                 if use_llm:
-                    if self.snapshot or self.settings.retrieval_backend == "hybrid":
+                    if self.snapshot or self.settings.retrieval_backend == "hybrid" or speculative:
                         package = build_snapshot_messages(self.corpus, request, result, list(session.history), self.snapshot, temporal,
                             context_window=self.settings.llm_context_window, output_tokens=self.settings.llm_max_tokens,
-                            counter=self.counter, resolved=resolved)
+                            counter=self.counter, resolved=resolved, speculative=speculative)
                         messages = package.messages
                         allowed_ids = set(package.supplied_ids)
                         context["prompt_budget"] = package.budget
-                        if request.mode != "profile" and not allowed_ids:
+                        if request.mode != "profile" and not speculative and not allowed_ids:
                             raise ProviderError("evidence_budget", "No complete evidence passage fits this model's context budget.", 422)
                     else:
                         messages = self.prompt_builder(self.corpus.persona, request, result, list(session.history), self.corpus.sources)
                     committer = SegmentCommitter(turn_id=turn_id, language=request.language, allowed_ids=allowed_ids)
                     async with aclosing(self.llm.stream(messages)) as tokens:
                         async for token in tokens:
+                            if speculative and not fragments:
+                                if not token.strip():
+                                    continue
+                                label = "가상 추론 (실제 발언 확인 불가)" if request.language == "ko" else "Hypothetical simulation (no verified statement)"
+                                token = f"{label}\n\n{token.lstrip()}"
                             fragments.append(token)
                             yield "token", {"text": token}
                             if committed_segments:
@@ -233,10 +240,10 @@ class Engine:
                 yield "status", {"stage": "planning"}
                 raw = "".join(fragments)
                 text, valid, invalid = validate_citations(raw, allowed_ids)
-                audit = audit_citations(raw, allowed_ids, required=use_llm and request.mode != "profile")
+                audit = audit_citations(raw, allowed_ids, required=use_llm and not speculative and request.mode != "profile")
                 if request.mode != "profile" and not result.hits:
                     status = "insufficient"
-                    reason = result.reason
+                    reason = ("Hypothetical simulation. No supporting evidence was retrieved." if speculative else result.reason)
                 elif use_llm:
                     status = "unverified"
                     reason = (

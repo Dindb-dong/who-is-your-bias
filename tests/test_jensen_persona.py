@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 from types import SimpleNamespace
 
 import httpx
@@ -14,6 +15,7 @@ from bias.config import ProviderSettings, Settings, repository_root
 from bias.cli import main
 from bias.corpus import Corpus, projection_eligible
 from bias.engine import Engine
+from bias.providers import OpenAICompatibleLLM
 from bias.snapshots import PersonaSnapshot
 
 
@@ -38,21 +40,24 @@ def test_default_studio_has_jensen_identity_and_its_exact_snapshot(monkeypatch, 
         assert profile["id"] == profile["bindings"]["persona_id"] == "jensen-huang"
         assert profile["name"] == "Jensen Huang"
         assert profile["presentation"]["initials"] == "JH"
-        assert profile["stats"] == {"sources": 3, "evidence": 8, "held_out_sources": 0, "total_evidence": 8}
-        assert profile["snapshot"]["id"] == "jensen-huang-2026-11-12-seed.v1"
+        assert profile["stats"] == {"sources": 9, "evidence": 32, "held_out_sources": 0, "total_evidence": 32}
+        assert profile["snapshot"]["id"] == "jensen-huang-2026-11-12-interviews.v2"
         assert profile["snapshot"]["current_dated_training_sources"] == 0
         assert profile["bindings"]["voice"]["status"] == "not_configured"
         assert profile["capabilities"]["speech"] is False
         assert client.get("/api/motion/library").json()["available"] is False
 
 
-def test_seed_is_attributed_editorial_text_with_no_style_speech_or_behavior_eligibility(jensen):
-    assert len(jensen.training_evidence) == 8
+def test_corpus_is_attributed_editorial_text_with_no_style_speech_or_behavior_eligibility(jensen):
+    assert len(jensen.training_evidence) == 32
     assert not jensen.style_evidence
+    interview_sources = {source.id for source in jensen.sources.values() if source.source_type == "publisher_interview_transcript"}
+    assert len(interview_sources) == 6
+    interviews = [record for record in jensen.training_evidence if record.source_id in interview_sources]
+    assert len(interviews) == len({record.model_extra["acquisition_id"] for record in interviews}) == 24
     for source in jensen.sources.values():
-        assert source.url.host in {"blogs.nvidia.com", "nvidianews.nvidia.com"}
         assert source.model_extra["persona_id"] == jensen.persona.id
-        assert source.published_at.year in {2024, 2025}
+        assert 2023 <= source.published_at.year <= 2026
     for record in jensen.evidence.values():
         assert record.model_extra["persona_id"] == "jensen-huang"
         assert record.model_extra["text_provenance"] == "editorial_summary"
@@ -86,6 +91,38 @@ def test_historical_seed_does_not_answer_current_position_questions(monkeypatch,
         assert turn["citations"] == []
         assert turn["grounding"]["retrieved_ids"] == []
         assert turn["grounding"]["status"] == "insufficient"
+
+
+def test_korean_interview_evidence_reaches_normal_chat(monkeypatch, tmp_path):
+    with TestClient(create_app(default_settings(monkeypatch, tmp_path))) as client:
+        turn = client.post("/api/chat", json={"message": "TSMC 반도체 패키징 납기", "language": "ko"}).json()
+        citation = next(item for item in turn["citations"] if item["evidence_id"] == "jensen-lex-494-03")
+        assert citation["url"] == "https://lexfridman.com/jensen-huang-transcript/"
+        assert "01:10:19" in citation["locator"]["label"]
+        source = next(item for item in client.get("/api/sources").json()["sources"] if item["id"] == citation["source_id"])
+        assert source["published_at"] == "2026-03-23" and source["recorded_at"] is None
+
+
+def test_missing_evidence_streams_labeled_simulation_without_citations(monkeypatch, tmp_path):
+    config = replace(default_settings(monkeypatch, tmp_path), llm=ProviderSettings("http://model.invalid/v1", "test"))
+
+    async def stream(_self, messages):
+        assert "conditional answer" in messages[0]["content"]
+        assert '"factual_evidence":[]' in messages[1]["content"]
+        yield "  "
+        yield "그는 제약 조건부터 살폈을 가능성이 있습니다."
+
+    monkeypatch.setattr(OpenAICompatibleLLM, "stream", stream)
+    with TestClient(create_app(config)) as client:
+        stream_body = client.post("/api/chat/stream", json={"message": "2035년 화성 기지에서 황이 실제로 한 말은?", "language": "ko"}).text
+    events = [block.split("\ndata: ", 1) for block in stream_body.strip().split("\n\n")]
+    first_token = next(json.loads(data)["text"] for event, data in events if event == "event: token")
+    turn = next(json.loads(data)["turn"] for event, data in events if event == "event: result")
+    assert first_token.startswith("가상 추론 (실제 발언 확인 불가)")
+    assert turn["text"] == first_token
+    assert turn["provider"] == "openai" and turn["citations"] == []
+    assert turn["grounding"]["status"] == "insufficient"
+    assert turn["grounding"]["citation_status"] == "not_required"
 
 
 def test_jensen_snapshot_cannot_be_applied_to_another_subject(corpus):

@@ -45,7 +45,8 @@ class PromptPackage:
 
 
 def build_snapshot_messages(corpus, request: ChatRequest, result, history, snapshot, temporal,
-                            *, context_window: int, output_tokens: int, counter: Counter, resolved=None) -> PromptPackage:
+                            *, context_window: int, output_tokens: int, counter: Counter, resolved=None,
+                            speculative: bool = False) -> PromptPackage:
     system = (
         f"You are a clearly labeled AI simulation of {corpus.persona.name}, not the real person. "
         f"Answer in {'Korean' if request.language == 'ko' else 'English'}. Adapt length to the question. "
@@ -59,6 +60,20 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
     )
     if request.language == "ko" and request.mode != "profile" and result.hits:
         system += KOREAN_CITATION_INSTRUCTION
+    if speculative:
+        system += (
+            " No verified evidence was retrieved. In one or two sentences, give a useful conditional answer "
+            "inspired by the persona's public reasoning style, using third person. Start directly with the answer; "
+            "the application adds a simulation label. For questions about actual events, dates or positions, "
+            "state what cannot be verified and offer a conditional perspective if useful. "
+            "Do not produce quotations, citations, concrete unsupported facts or invented personal details."
+        )
+    elif corpus.persona.id == "jensen-huang" and request.mode != "profile":
+        system += (
+            " For a hypothetical question, you may also extrapolate from the supplied reasoning patterns. "
+            "Start any extrapolation with '가상 추론:' in Korean or 'Hypothetical:' in English, "
+            "use conditional language, and never attach a citation to the extrapolation itself."
+        )
     context = {"profile": {"name": corpus.persona.name, "style_guidance": corpus.persona.style_rules},
                "snapshot": snapshot.summary() if snapshot else None,
                "temporal_request": temporal.intent.mode if temporal else "general",
