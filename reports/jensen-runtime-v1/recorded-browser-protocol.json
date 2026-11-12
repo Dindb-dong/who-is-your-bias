@@ -25,7 +25,7 @@
     "Actual media clock advances past 6.5 seconds and drives rendered playback time.",
     "Actual mapped jaw, blink and smile weights and arm, hand and finger angles become nonzero.",
     "Mouth, smile, arm and hand channels coexist in observed rendered frames.",
-    "Stop clears the audio clock, closes the AudioContext, removes the media source and returns speech/gesture channels to neutral.",
+    "Exactly one real media element and AudioContext are observed; Stop is clicked before natural file completion, then clears the audio clock, closes the context, removes the source and resets speech/gesture channels.",
     "Desktop/mobile screenshots and bounded frame traces are attached to the CI artifact."
   ],
   "exclusions": [

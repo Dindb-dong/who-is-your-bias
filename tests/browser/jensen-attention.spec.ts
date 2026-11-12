@@ -484,7 +484,17 @@ test('replays actual generated Jensen audio through the fitted avatar and cancel
   await page.locator('.studio-grid').screenshot({ path: screenshot });
   await info.attach('recorded generated audio replay; no live inference', { path: screenshot, contentType: 'image/png' });
   await expect.poll(async () => Number(await surface.getAttribute('data-audio-clock-ms')), { timeout: 12000 }).toBeGreaterThan(6500);
-  const trace = await page.evaluate(() => (window as RecordedWindow).__recordedTrace);
+  const beforeStop = await page.evaluate(() => {
+    const state = window as RecordedWindow; const media = state.__recordedMedia.at(-1)!;
+    return { trace: state.__recordedTrace, mediaMs: media.currentTime*1000, ended: media.ended, paused: media.paused,
+      mediaCount: state.__recordedMedia.length, contextCount: state.__recordedContexts.length };
+  });
+  // Cancel before inspecting/exporting the collected trace; the real file lasts 9.92s.
+  await page.getByRole('button', { name: 'Stop audio', exact: true }).click();
+  expect(beforeStop.ended).toBe(false); expect(beforeStop.paused).toBe(false);
+  expect(beforeStop.mediaMs).toBeLessThan(9920);
+  expect(beforeStop.mediaCount).toBe(1); expect(beforeStop.contextCount).toBe(1);
+  const trace = beforeStop.trace;
   const playing = trace.filter((sample) => sample.speaking && sample.audioMs > 100 && sample.audioMs < 9000);
   const maximum = (key: 'jaw' | 'blink' | 'smile' | 'arm' | 'hand' | 'finger') => Math.max(...playing.map((sample) => sample[key]));
   expect(playing.length).toBeGreaterThan(10);
@@ -495,7 +505,6 @@ test('replays actual generated Jensen audio through the fitted avatar and cancel
   expect(composed.length).toBeGreaterThan(0);
   const maximumClockDifference = Math.max(...playing.map((sample) => Math.abs(sample.audioMs-sample.mediaMs)));
   expect(maximumClockDifference).toBeLessThan(750); // Bounded rendered-frame lag on software WebGL, not acoustic latency.
-  await page.getByRole('button', { name: 'Stop audio', exact: true }).click();
   await expect(surface).toHaveAttribute('data-speaking', 'false');
   await expect(surface).toHaveAttribute('data-audio-clock-ms', '0.000');
   await expect(surface).toHaveAttribute('data-audio-sha256', '');
@@ -513,6 +522,8 @@ test('replays actual generated Jensen audio through the fitted avatar and cancel
     condition: label, audio_file: audioPath, audio_sha256: audioHash, audio_duration_seconds: 9.92, avatar_sha256: assetHash,
     articulation: 'actual waveform amplitude; no phoneme alignment', gestures: 'authored fixture cues; not a learned personal policy',
     live_inference: false, simultaneous_neural_providers: false, acoustic_latency_measured: false,
+    cancelled_before_natural_end: !beforeStop.ended, media_ms_before_stop: beforeStop.mediaMs,
+    real_media_instances: beforeStop.mediaCount, real_audio_contexts: beforeStop.contextCount,
     playing_frames: playing.length, composed_frames: composed.length, maximum_clock_difference_ms: maximumClockDifference,
     channel_maxima: Object.fromEntries((['jaw', 'blink', 'smile', 'arm', 'hand', 'finger'] as const).map((key) => [key, maximum(key)])),
     cancelled_to_zero_clock_and_neutral_channels: true, trace,
