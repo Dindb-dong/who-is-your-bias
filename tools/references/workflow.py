@@ -229,7 +229,10 @@ def prepare_reference(
     if all_ids[first:last + 1] != cue_ids:
         raise MediaError("Selected publisher cues must be consecutive")
     words = asr_words(asr)
-    chosen = [word for word in words if word["source_start"] < end and word["source_end"] > start]
+    # Adding a duration can move an exact adjacent-word boundary by a few
+    # floating-point ULPs (601.22 + 9.94 -> 611.1600000000001). Such rounding
+    # must not pull the following complete word into an otherwise valid clip.
+    chosen = [word for word in words if word["source_start"] < end - 1e-7 and word["source_end"] > start + 1e-7]
     if not chosen or any(word["source_start"] < start - 0.001 or word["source_end"] > end + 0.001 for word in chosen):
         raise MediaError("Reference boundaries cut an ASR word; choose boundaries outside observed words")
     text = " ".join(word["word"].strip() for word in chosen)
