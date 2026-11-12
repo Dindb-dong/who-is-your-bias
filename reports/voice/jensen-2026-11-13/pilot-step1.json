@@ -1,0 +1,108 @@
+{
+  "schema_version": "jensen-voice-training-checkpoint-report.v1",
+  "run_id": "jensen-2026-11-13",
+  "stage": "first_actual_speech_optimizer_update",
+  "run": {
+    "schema_version": "voice-lora-run.v1",
+    "status": "paused_for_persistence",
+    "contract": {
+      "persona_id": "jensen-huang",
+      "speaker": "Jensen Huang",
+      "base_repo": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+      "base_revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+      "base_files_sha256": {
+        "config.json": "2e714c787c8edb98b05432685cddb634add2de4d4e645f653d68251ef72ba011",
+        "generation_config.json": "f1b90b4513f3b34c62851049e2492d7b4c5940daf1276f89c82b8ef04127f3aa",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model.safetensors": "180b3b10eb1c9f1b4db7806d5475bae3071c0243c299d49926bab1da3b6946f6",
+        "preprocessor_config.json": "efdde1022ea9d76928bf7a9cd53139138f5ba2e466e837f08f6105ab1af1c119",
+        "speech_tokenizer/config.json": "ee65bb901c876664ab8707c487157aa1a6ee57c65969b28fb5ec9dc211e68167",
+        "speech_tokenizer/configuration.json": "6bc26d64eb5024b4d1dab5a52371958b429256d6c9d59787f1f5294a54e0cebd",
+        "speech_tokenizer/model.safetensors": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258",
+        "speech_tokenizer/preprocessor_config.json": "fcb3805e597e786d4067706e602f6688524640f8d3396790e2e09b5942fcbdfb",
+        "tokenizer_config.json": "dc3c31c3bdaedd5016382bb3cbe07323026775ad51f5a4fb564505992ae4a670",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "dataset_manifest_sha256": "843d4798449eee4b8d52cb170d05face601642666ec9674832721acc94c60b12",
+      "codec_index_sha256": "b185f773549c98fc85c26e358ea083223615ce83f01671f56ed6298d74559129",
+      "upstream_revision": "022e286b98fbec7e1e916cb940cdf532cd9f488e",
+      "upstream_dataset_sha256": "fd15ee9e71822d9fc1cdf8eb6d6f042836d186e95de5920087d80828cf98a1cb",
+      "implementation_sha256": "7f4612fdbe897d999e3007de52df02289f1508f1476e07491752b29af3ba88ed",
+      "lora": {
+        "r": 4,
+        "lora_alpha": 8,
+        "lora_dropout": 0.05,
+        "target_modules": "talker\\.model\\.layers\\.\\d+\\.self_attn\\.(q_proj|v_proj)",
+        "bias": "none"
+      },
+      "learning_rate": 2e-05,
+      "max_updates": 16,
+      "gradient_accumulation": 1,
+      "seed": 42,
+      "threads": 4,
+      "precision": "float32",
+      "device": "cpu",
+      "batch_size": 1,
+      "training_event_families": [
+        "acquired-2023",
+        "goldman-sachs-2024",
+        "lex-494",
+        "stanford-vftt-2024"
+      ],
+      "experimental_candidates": true,
+      "objective": "codec_0_cross_entropy + 0.3 * sub_talker_codebook_cross_entropy",
+      "versions": {
+        "torch": "2.11.0+cpu",
+        "transformers": "4.57.3",
+        "peft": "0.18.1",
+        "qwen-tts": "0.1.1"
+      }
+    },
+    "optimizer_steps": 1,
+    "planned_updates": 16,
+    "efficacy_evaluated": false,
+    "block_started_from_step": 0,
+    "trainable_parameters": 573440,
+    "peak_process_rss_bytes": 6675206144,
+    "last_checkpoint": "step-00000001",
+    "losses": [
+      12.889015197753906
+    ],
+    "elapsed_seconds": 54.205217974000334,
+    "last_update_seconds": 21.21506580100049,
+    "resume": {
+      "checkpoint": "step-00000001",
+      "same_contract_required": true,
+      "remote_readback_required_before_next_block": true
+    }
+  },
+  "artifact": {
+    "archive": "voice-lora-v2-step1.tar.gz",
+    "bytes": 4317440,
+    "sha256": "6d58863b7055981501a19652a8cbc6f6619e3a10cbb638ca3381e1642f1b7d7a",
+    "optimizer_steps": 1,
+    "checkpoint_sha256": "bf9c11c73d4ba51bbd4cb53de5f0a8ecd44352a4b267df160f0a3f854b5078b6",
+    "adapter_sha256": "143ed0635173c9b863f4651ef98a9c8ba33d69d7ce5be9704c990ef878589d23",
+    "state_sha256": "8d9b6e153477c961bdf3be27452ffeef1b99d936c4ecfdee73563a8f4c724952",
+    "status": "paused_for_persistence",
+    "trainable_parameters": 573440,
+    "last_loss": 12.889015197753906,
+    "block_elapsed_seconds": 54.205217974000334,
+    "last_update_seconds": 21.21506580100049,
+    "peak_process_rss_bytes": 6675206144,
+    "precision": "float32",
+    "weight_statistics": {
+      "lora_B_tensors": 56,
+      "lora_B_elements": 344064,
+      "nonzero_lora_B_elements": 344064,
+      "lora_B_l2_norm": 0.011725475124822832,
+      "basis": "PEFT default LoRA B initializes to zero; these learned matrices are nonzero after the actual optimizer step."
+    }
+  },
+  "persistence_status": "upload_and_fresh_readback_pending",
+  "generated_samples": 0,
+  "fresh_process_resume_verified": false,
+  "speaker_similarity_evaluated": false,
+  "human_listening_completed": false,
+  "promotion_status": "candidate"
+}

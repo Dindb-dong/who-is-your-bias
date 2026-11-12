@@ -1,0 +1,87 @@
+{
+  "schema_version": "jensen-voice-evaluation-protocol.v1",
+  "status": "frozen_before_synthesis",
+  "persona_id": "jensen-huang",
+  "conditions": [
+    "jensen-reference",
+    "jensen-lora-candidate"
+  ],
+  "planned_adapter_updates": 16,
+  "cases_path": "tools/voice_evaluation/cases.json",
+  "cases_sha256": "dc00ae852aeac5028914c68fbcbb019c00d85b46575912379976345752efe649",
+  "reference_audio_sha256": "754919e88abf65407c4c3bdb136c23d0e9700a5a71e30233d76506955a4f1877",
+  "reference_manifest_sha256": "a6f491e44fa2a5953ed7712ebc733b95252af0d0bd33f369cb9f6f3a7deea936",
+  "reference_event_family_id": "goldman-sachs-2024",
+  "dataset_manifest_sha256": "843d4798449eee4b8d52cb170d05face601642666ec9674832721acc94c60b12",
+  "base_repo": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+  "base_revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+  "runtime": {
+    "device": "cpu",
+    "dtype": "float32",
+    "attention": "sdpa",
+    "threads": 4,
+    "seed": 42,
+    "do_sample": true,
+    "temperature": 0.9,
+    "top_k": 50,
+    "top_p": 1.0,
+    "repetition_penalty": 1.05,
+    "max_new_tokens": 512,
+    "x_vector_only_mode": false
+  },
+  "asr": {
+    "repo": "Systran/faster-whisper-small",
+    "revision": "536b0662742c02347bc0e980a01041f333bce120",
+    "prompt": null,
+    "english_primary_metric": "WER",
+    "korean_primary_metric": "CER"
+  },
+  "speaker_diagnostic": {
+    "model_receipt": {
+      "repo": "microsoft/wavlm-base-plus-sv",
+      "revision": "feb593a6c23c1cc3d9510425c29b0a14d2b07b1e",
+      "files": [
+        {
+          "path": "README.md",
+          "bytes": 4052,
+          "sha256": "97f5513cde351b3adb4e182b60ec23154dadba7ca83e667ceace237177855b8e"
+        },
+        {
+          "path": "config.json",
+          "bytes": 58639,
+          "sha256": "c6ac8c0ce55b18d4612677931036fe5ce78093e87361c552a173f00a0bb07514"
+        },
+        {
+          "path": "preprocessor_config.json",
+          "bytes": 215,
+          "sha256": "99272fe8ccfab114b68b478681ea47ee3a1ce62bb788cb92dd6e4f69fb1f1da2"
+        },
+        {
+          "path": "pytorch_model.bin",
+          "bytes": 404547053,
+          "sha256": "e906bce2fa42fb497a1d1a9ecf81548adb7e03b12a5644e32d2f42f0d6500fad"
+        }
+      ],
+      "bytes": 404609959
+    },
+    "reference_events": [
+      "acquired-2023",
+      "goldman-sachs-2024",
+      "lex-494",
+      "stanford-vftt-2024"
+    ],
+    "reference_set_training_exposed": true,
+    "human_likeness_score": null,
+    "decision_threshold": null,
+    "max_input_seconds": 30,
+    "aggregation": "mean within event, equal weight across events"
+  },
+  "human_listening_completed": false,
+  "promotion_status": "not_promoted",
+  "limitations": [
+    "One generated sample per case and condition is a descriptive pilot.",
+    "Unseen-event voice generalization is not evaluated.",
+    "A waveform response alone does not prove complete text or naturalness.",
+    "Independent ASR and pretrained speaker embeddings are diagnostic proxies; no human scores are invented."
+  ]
+}

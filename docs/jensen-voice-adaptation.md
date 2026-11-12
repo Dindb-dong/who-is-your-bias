@@ -3,11 +3,13 @@
 This is the M4 execution record for the [Jensen recovery handoff](jensen-replication-handoff.md).
 The reproducible preparation is measured in
 [preparation.json](../reports/voice/jensen-2026-11-13/preparation.json).
-The current checkpoint has a persisted **candidate** dataset and completed acoustic
-tokenization. Optimization, generated speech, independent output ASR, and human
+The current checkpoint has a persisted **candidate** dataset, completed acoustic
+tokenization, and **one actual speech optimizer update**. Its saved tensors and
+state are measured in [pilot-step1.json](../reports/voice/jensen-2026-11-13/pilot-step1.json).
+Fresh-process resume, generated speech, independent output ASR, and human
 listening remain separate completion gates. The [codec receipt](../reports/voice/jensen-2026-11-13/codecs.json)
 records all eight encodings (1,151 frames, 16 codebooks per frame). The encoding
-loop took 6.13 seconds, excluding model loading; actual optimizer updates remain zero.
+loop took 6.13 seconds, excluding model loading.
 
 ## Source and subject binding
 
@@ -76,10 +78,19 @@ modules. The base, acoustic tokenizer, speaker encoder, text projection, and
 other weights remain frozen. The 0.6B text projection is applied before combining
 text and speech embeddings, consistent with its inference path.
 
-The planned pilot uses CPU bfloat16, SDPA attention, rank 4 / alpha 8, LoRA dropout
+The planned pilot uses CPU float32, SDPA attention, rank 4 / alpha 8, LoRA dropout
 0.05, learning rate 0.00002, AdamW, seed 42, batch size one, four threads, and
-16 optimizer updates. These are **planned settings**, not a completed step count.
-A speech LoRA checkpoint counts as weight adaptation only after an actual
+16 planned optimizer updates. **One update has completed** with codec objective
+loss 12.889015; the remaining 15 updates have not run. The first update took
+21.22 seconds, including its input preparation and checkpoint save; the complete
+process block including model load took 54.21 seconds. Peak process RSS was
+6,675,206,144 bytes. All 344,064 learned LoRA-B elements are nonzero after that
+step (their PEFT initialization is zero); their L2 norm is 0.0117255. This proves
+actual changed weights, not improved perceptual quality.
+A representative frozen-linear forward/backward probe measured float32 at
+15.95 ms versus bfloat16 at 21.74 ms (four CPU threads). The first actual speech
+update measured the full model time and memory above; this microbenchmark alone
+does not do so. A speech LoRA checkpoint counts as weight adaptation only after an actual
 optimizer update and a valid saved adapter. Reference prompting remains a
 separate conditioning mechanism in both the base and adapted conditions.
 
@@ -93,8 +104,8 @@ a checkpoint implementation test, not evidence of Qwen speech adaptation.
 
 ## Execution and resume
 
-The preparation command below completed successfully. The optimization and resume
-commands remain proposed until their actual run receipt exists. Set `ART` to the private artifact root and run from the repository with
+The preparation and one-update optimization commands below completed successfully.
+The fresh-process resume command remains proposed until its actual run receipt exists. Set `ART` to the private artifact root and run from the repository with
 the pinned inference environment. The selected dataset archive must first be
 uploaded, retrieved in a fresh operation, and verified by SHA-256.
 
@@ -117,7 +128,7 @@ python -m tools.adaptation.voice_lora train \
   --upstream "$ART/qwen-upstream" \
   --upstream-revision 022e286b98fbec7e1e916cb940cdf532cd9f488e \
   --persona-id jensen-huang --allow-candidates --threads 4 \
-  --precision bfloat16 --rank 4 --learning-rate 0.00002 \
+  --precision float32 --rank 4 --learning-rate 0.00002 \
   --max-updates 16 --stop-after 1
 ```
 
@@ -128,7 +139,9 @@ settings. Do not edit the driver halfway through a run and bypass that check.
 
 ## Output evaluation gates
 
-Use the same source reference, fixed cases, generation settings, and seed for
+The [frozen evaluation protocol](../reports/voice/jensen-2026-11-13/evaluation-protocol.json)
+records model and reference hashes before any synthesis. Use the same source
+reference, fixed cases, generation settings, and seed for
 both the unadapted and adapted model. The existing `tools.voice_evaluation`
 workflow records actual HTTP behavior, output WAV hashes, latency, and health
 metadata. The health snapshot now retains subject, reference identity, actual
@@ -137,7 +150,12 @@ adapter identity, and synthesis kind.
 Generate the frozen English and Korean cases, stop the TTS service to release
 memory, and transcribe the generated waveforms with the independent ASR model.
 Report English WER, Korean CER, cold/warm wall time, failures, and raw outputs.
-This measures recognizability rather than perceived Jensen similarity. Human
+The separately pinned `microsoft/wavlm-base-plus-sv` diagnostic also compares
+complete generated clips with all eight source clips, reporting raw cosines and
+event-balanced averages. The verification model is independent of both Qwen and
+the ASR model; the references themselves are training-exposed. No calibrated
+identity threshold, unseen-event result, or Korean language invariance is claimed.
+These measures do not replace perceived Jensen similarity. Human
 listening and speaker similarity remain unmeasured until their actual reviews
 are supplied; the adapter must not be promoted based on training loss alone.
 
@@ -152,7 +170,8 @@ The dataset manifest hash is
 The coordinator records durable object identifiers and readback receipts in the
 run artifact manifest. The archive's creation alone is not a persistence claim.
 
-Completed gates: dataset upload and fresh readback, acoustic tokenization. Next
-gates: codec persistence; actual optimizer save/load/resume; English/Korean
+Completed gates: dataset upload and fresh readback, acoustic tokenization, codec
+upload and fresh readback, one actual optimizer update and local resumable checkpoint.
+Next gates: checkpoint persistence and fresh-process resume; remaining bounded updates; English/Korean
 synthesis for both conditions; independent output ASR; and a measured report. The candidate pilot remains separate from application
 promotion and from a qualified speech likeness.

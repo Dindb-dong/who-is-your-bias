@@ -24,5 +24,19 @@
   "codebooks_per_frame": 16,
   "model_repo": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
   "model_revision": "5d83992436eae1d760afd27aff78a71d676296fc",
-  "persistence_status": "upload_and_fresh_readback_pending"
+  "persistence_status": "fresh-materialization-byte-verified",
+  "durable_receipt": {
+    "artifact_id": "voice-codecs-v2",
+    "role": "acoustic-code-training-input",
+    "samples": 8,
+    "codec_frames": 1151,
+    "codebooks": 16,
+    "file_name": "voice-codecs-v2.tar.gz",
+    "file_id": "file_0000000024a481fd85774f7bba3762e9",
+    "library_file_id": "libfile_fde3_f-3bfca702fcfc8191aad129e209231e90_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 42686,
+    "sha256": "fb6ee01ce5be5dd365128c98c101ba11253b0895c2c6860a6f9baaebb8e99190",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  }
 }
