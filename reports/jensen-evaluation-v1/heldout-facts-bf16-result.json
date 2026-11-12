@@ -1,0 +1,392 @@
+{
+  "schema_version": "jensen-matched-condition-result.v1",
+  "recorded_at": "2026-11-12T22:27:24.903340+00:00",
+  "recorded_at_basis": "terminal_supervisor_observation",
+  "condition": "facts",
+  "exposure": "heldout",
+  "status": "executed_saved_and_fresh_readback_verified",
+  "loop_status": "completed",
+  "plan_sha256": "7fd35de01ea1a364aa7b5a2bf8547bf3a4a6cd3ebee4b3764b8ce7c8957e5c7c",
+  "contract_sha256": "9c79398b54118f284ffdc6e4592d501e1cc214e77f6a895152ae91019286b6c0",
+  "runtime": {
+    "device": "cpu",
+    "dtype": "bfloat16",
+    "threads": 8,
+    "input_limit": 4096,
+    "output_limit": 160
+  },
+  "planned": 6,
+  "attempted": 6,
+  "completed": 4,
+  "failed": 2,
+  "unattempted": 0,
+  "all_failures_retained": true,
+  "timing": {
+    "first_text_median_ms": 16394.758,
+    "wall_median_ms": 39480.587,
+    "first_text_numeric_count": 4,
+    "wall_numeric_count": 4,
+    "generic_median_population": "completed_only",
+    "numeric_policy": "Finite int/float values per metric; booleans and absent/non-finite values excluded.",
+    "completed_only": {
+      "population_count": 4,
+      "first_text_numeric_count": 4,
+      "first_text_median_ms": 16394.758,
+      "wall_numeric_count": 4,
+      "wall_median_ms": 39480.587
+    },
+    "all_attempts": {
+      "population_count": 6,
+      "first_text_numeric_count": 6,
+      "first_text_median_ms": 16394.758,
+      "wall_numeric_count": 6,
+      "wall_median_ms": 42805.143
+    },
+    "startup_and_excluded_warmup_ms": 15522.803,
+    "whole_process_elapsed_seconds": 279.055,
+    "max_waited_child_rss_bytes": 4520837120
+  },
+  "observed_before": {
+    "identity_sha256": "300560a54349d92f85d9bebd2f16a9d1afe2edc430ec39bef4ccb4d981c0ca97",
+    "adapter_sha256": "1229fcd3639560d466635395f34e8707c8c7954131ea460be99228198f66ca2a",
+    "runtime_sha256": "f09c338c9e491f5bd94d33a9a6cd8040303fb2670080e6a43013257406072a23"
+  },
+  "observed_after": {
+    "identity_sha256": "300560a54349d92f85d9bebd2f16a9d1afe2edc430ec39bef4ccb4d981c0ca97",
+    "adapter_sha256": "1229fcd3639560d466635395f34e8707c8c7954131ea460be99228198f66ca2a",
+    "runtime_sha256": "f09c338c9e491f5bd94d33a9a6cd8040303fb2670080e6a43013257406072a23"
+  },
+  "server_stopped": true,
+  "artifact": {
+    "artifact_id": "jensen-m6-heldout-facts-bf16-v2",
+    "role": "complete-frozen-matched-response-condition",
+    "exposure": "heldout",
+    "condition": "facts",
+    "file_name": "jensen-m6-heldout-facts-bf16-v2.tar.gz",
+    "file_id": "file_0000000013d481fdb8fb0d98a2576aed",
+    "library_file_id": "libfile_fde3_f-1feeab61e7c88191bfd4ee8eba2a3914_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 18722,
+    "sha256": "f1d8e2ddc5bbf4600747e19c24c96c3f379d005a0ebc4dc39c84e4251501a4eb",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "verification": {
+    "archive_sha256": true,
+    "condition_file_count": 10,
+    "all_condition_files": true,
+    "all_archive_members": true,
+    "supervisor_and_condition_seals": true,
+    "fresh_readback_directory": "text-evaluation-v1/condition-readbacks/heldout-facts-bf16-v2/facts"
+  },
+  "per_case": [
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00072",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 18324.966,
+      "wall_ms": 60091.833,
+      "usage": {
+        "prompt_tokens": 1415,
+        "completion_tokens": 160,
+        "total_tokens": 1575
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "missing",
+        "unit_count": 8,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00078",
+      "completed": true,
+      "error": null,
+      "finish_reason": "stop",
+      "first_text_ms": 16803.71,
+      "wall_ms": 43269.194,
+      "usage": {
+        "prompt_tokens": 1311,
+        "completion_tokens": 113,
+        "total_tokens": 1424
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "missing",
+        "unit_count": 5,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00186",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 14475.714,
+      "wall_ms": 50782.653,
+      "usage": {
+        "prompt_tokens": 1065,
+        "completion_tokens": 160,
+        "total_tokens": 1225
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "missing",
+        "unit_count": 7,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00190",
+      "completed": true,
+      "error": null,
+      "finish_reason": "stop",
+      "first_text_ms": 16756.161,
+      "wall_ms": 42341.092,
+      "usage": {
+        "prompt_tokens": 1211,
+        "completion_tokens": 115,
+        "total_tokens": 1326
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "missing",
+        "unit_count": 5,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00253",
+      "completed": true,
+      "error": null,
+      "finish_reason": "stop",
+      "first_text_ms": 16033.356,
+      "wall_ms": 36620.083,
+      "usage": {
+        "prompt_tokens": 1113,
+        "completion_tokens": 94,
+        "total_tokens": 1207
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "missing",
+        "unit_count": 5,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00297",
+      "completed": true,
+      "error": null,
+      "finish_reason": "stop",
+      "first_text_ms": 8603.309,
+      "wall_ms": 28798.013,
+      "usage": {
+        "prompt_tokens": 692,
+        "completion_tokens": 91,
+        "total_tokens": 783
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "not_required",
+        "unit_count": 4,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    }
+  ],
+  "full_raw_outputs": "preserved privately in the verified artifact",
+  "paired_comparison": "pending collection",
+  "semantic_support_review": "ungraded",
+  "human_review": "ungraded",
+  "efficacy_claim": false
+}
