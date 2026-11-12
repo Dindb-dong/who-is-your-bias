@@ -480,9 +480,6 @@ test('replays actual generated Jensen audio through the fitted avatar and cancel
   await expect(page.getByText('Provider voice · approximate mouth movement', { exact: true })).toHaveAttribute('title', /Recorded generated-audio replay/);
   await expect.poll(async () => Number(await surface.getAttribute('data-audio-clock-ms')), { timeout: 12000 }).toBeGreaterThan(1800);
   expect(await page.evaluate(() => (window as RecordedWindow).__recordedMedia.at(-1)!.duration)).toBeCloseTo(9.92, 3);
-  const screenshot = info.outputPath(`recorded-generated-audio-${info.project.name}.png`);
-  await page.locator('.studio-grid').screenshot({ path: screenshot });
-  await info.attach('recorded generated audio replay; no live inference', { path: screenshot, contentType: 'image/png' });
   await expect.poll(async () => Number(await surface.getAttribute('data-audio-clock-ms')), { timeout: 12000 }).toBeGreaterThan(6500);
   const beforeStop = await page.evaluate(() => {
     const state = window as RecordedWindow; const media = state.__recordedMedia.at(-1)!;
@@ -491,6 +488,12 @@ test('replays actual generated Jensen audio through the fitted avatar and cancel
   });
   // Cancel before inspecting/exporting the collected trace; the real file lasts 9.92s.
   await page.getByRole('button', { name: 'Stop audio', exact: true }).click();
+  // Preserve raw observations even if a channel or timing assertion below fails.
+  // A full mobile screenshot took 18.19s in the first CI attempt, so capture it
+  // only after this real-time interval and its cancellation have completed.
+  await info.attach('recorded audio frame observations before cancellation', {
+    body: Buffer.from(JSON.stringify(beforeStop, null, 2)), contentType: 'application/json',
+  });
   expect(beforeStop.ended).toBe(false); expect(beforeStop.paused).toBe(false);
   expect(beforeStop.mediaMs).toBeLessThan(9920);
   expect(beforeStop.mediaCount).toBe(1); expect(beforeStop.contextCount).toBe(1);
@@ -515,6 +518,9 @@ test('replays actual generated Jensen audio through the fitted avatar and cancel
   await page.waitForTimeout(250);
   await expect(surface).toHaveAttribute('data-audio-clock-ms', '0.000');
   await page.evaluate(() => cancelAnimationFrame((window as RecordedWindow).__recordedTraceFrame));
+  const screenshot = info.outputPath(`recorded-generated-audio-${info.project.name}.png`);
+  await page.locator('.studio-grid').screenshot({ path: screenshot });
+  await info.attach('recorded generated audio replay after cancellation; no live inference', { path: screenshot, contentType: 'image/png' });
   expect(preparedRequests).toBe(1); expect(clipRequests).toBe(1); expect(liveRequests).toBe(0);
   expect(graphicsErrors).toEqual([]); await expect(page.getByRole('alert')).toHaveCount(0);
   await info.attach('actual generated audio playback measurements', { body: Buffer.from(JSON.stringify({
@@ -522,6 +528,7 @@ test('replays actual generated Jensen audio through the fitted avatar and cancel
     condition: label, audio_file: audioPath, audio_sha256: audioHash, audio_duration_seconds: 9.92, avatar_sha256: assetHash,
     articulation: 'actual waveform amplitude; no phoneme alignment', gestures: 'authored fixture cues; not a learned personal policy',
     live_inference: false, simultaneous_neural_providers: false, acoustic_latency_measured: false,
+    acquisition_order: 'uninterrupted playback trace, Stop, cleanup checks, screenshot', screenshot_state: 'after cancellation',
     cancelled_before_natural_end: !beforeStop.ended, media_ms_before_stop: beforeStop.mediaMs,
     real_media_instances: beforeStop.mediaCount, real_audio_contexts: beforeStop.contextCount,
     playing_frames: playing.length, composed_frames: composed.length, maximum_clock_difference_ms: maximumClockDifference,

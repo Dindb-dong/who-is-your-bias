@@ -1,6 +1,6 @@
 {
   "schema_version": "recorded-generated-audio-browser-protocol.v1",
-  "status": "frozen_before_browser_execution",
+  "status": "revised_acquisition_order_after_first_CI_failure; acceptance_thresholds_unchanged",
   "persona_id": "jensen-huang",
   "audio": {
     "path": "reports/voice/jensen-2026-11-13/listening/adapted-en_multisentence.wav",
@@ -19,6 +19,8 @@
   "unmodified_runtime": ["Web Audio analyser", "HTMLMediaElement clock", "GLB geometry and materials", "Face and bone retargeting", "Playback cancellation"],
   "articulation": "Actual waveform amplitude; no phoneme alignment",
   "gestures": "Declared authored fixture cues; not a learned personal gesture policy",
+  "acquisition_order": "Trace uninterrupted real playback, click Stop, verify cleanup, then capture screenshot. Screenshots document the post-cancellation state, while frame traces document animation during playback.",
+  "maximum_observed_clock_gap_gate_ms": 750,
   "checks": [
     "Frozen WAV and exact transcript-case hashes match before playback.",
     "Explicit fitted candidate is loaded and audio digest is verified by the production client.",
