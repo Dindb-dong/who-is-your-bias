@@ -9,10 +9,13 @@ dataset and pinned tokenizer hashes are in `dataset-selection.json` and
 
 ## Verified checkpoint
 
-Two optimizer updates have been preserved and freshly retrieved. The actual
+Four optimizer updates have been preserved and freshly retrieved. The actual
 second update ran in a new process restored from the remotely retrieved first
 checkpoint, including adapter weights, AdamW state, random state and data cursor.
-See `resume-step0002.json` for exact progress, hashes and artifact identity.
+See `resume-step0002.json` for that real continuation gate and
+`checkpoint-step0004.json` for the later saved checkpoint. The step-4 archive
+was freshly retrieved, all internal file hashes matched, and the real loader
+restored its AdamW, RNG and data cursor (epoch 0, next example 16).
 The target is 29 updates for the complete one-epoch dataset, not a completed
 step count. Training loss is not an answer-quality or likeness score.
 
