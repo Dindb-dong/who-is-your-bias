@@ -62,7 +62,9 @@ separately. The prior unverified eight-video claim is not inherited by this run.
   with four intra-op CPU threads and one inter-op thread; an earlier invocation
   used eight intra-op threads. The frozen optimization, data order and 29-update
   budget are unchanged. See the [recovery record](../reports/jensen-recovery/text-v1/session-recovery-step0008.json).
-  Model quality has not yet been evaluated.
+  [Development response assessment](../reports/jensen-evaluation-v1/development-comparison.md)
+  has now executed; it does not support default promotion. Heldout and actual
+  neural session checks continue separately, and human likeness is ungraded.
 - Voice: **19 publisher-matched candidates**, independently screened down to
   **8 clips / 91.84 seconds / four events**. Human listening review is zero.
   Actual acoustic encoding produced **1,151 frames × 16 codebooks**, saved and

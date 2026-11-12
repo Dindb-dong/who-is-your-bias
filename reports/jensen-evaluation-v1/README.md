@@ -9,6 +9,11 @@ The final [29-update adapter](../jensen-recovery/text-v1/completed-serving.json)
 is now available for the frozen adapter condition. Matched execution and semantic
 review do not themselves establish human likeness or model promotion.
 
+The [executed development comparison](development-comparison.md) now links all
+36 attempts to the preserved condition-blind review. The adapter is not supported
+for default promotion by those development outcomes; heldout and live-runtime
+results remain separate gates.
+
 **Registration history:** inputs were frozen before any model generations.
 The execution-status link above records subsequent actual calls.
 There are 12 development cases and six cases from the separately acquired No

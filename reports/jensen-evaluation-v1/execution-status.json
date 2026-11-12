@@ -100,6 +100,8 @@
     "report": "development-collection.json",
     "artifact_id": "jensen-m6-development-collection-review-bf16-v2",
     "review_samples": 13,
-    "semantic_review": "pending"
+    "semantic_review": "condition_blind_agent_findings_saved_then_unblinded",
+    "semantic_review_report": "development-comparison.md",
+    "human_review": "ungraded"
   }
 }
