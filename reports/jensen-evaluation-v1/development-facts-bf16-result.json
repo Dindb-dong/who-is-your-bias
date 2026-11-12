@@ -1,0 +1,1059 @@
+{
+  "schema_version": "jensen-matched-condition-result.v1",
+  "recorded_at": "2026-11-12T20:22:14.811696+00:00",
+  "condition": "facts",
+  "exposure": "development",
+  "status": "executed_saved_and_fresh_readback_verified",
+  "plan_sha256": "cd2bd7340c3eb7d9c1ddc248b78e25d69b8e00c9d246454cf5925e082a1dd030",
+  "contract_sha256": "9c79398b54118f284ffdc6e4592d501e1cc214e77f6a895152ae91019286b6c0",
+  "runtime": {
+    "device": "cpu",
+    "dtype": "bfloat16",
+    "threads": 8,
+    "input_limit": 4096,
+    "output_limit": 160
+  },
+  "planned": 12,
+  "attempted": 12,
+  "completed": 6,
+  "failed": 6,
+  "unattempted": 0,
+  "all_failures_retained": true,
+  "timing": {
+    "first_text_median_ms": 15761.105,
+    "wall_median_ms": 52186.758,
+    "startup_and_excluded_warmup_ms": 50771.915,
+    "whole_process_elapsed_seconds": 715.567,
+    "max_waited_child_rss_bytes": 4393336832
+  },
+  "observed_before": {
+    "identity_sha256": "300560a54349d92f85d9bebd2f16a9d1afe2edc430ec39bef4ccb4d981c0ca97",
+    "adapter_sha256": "1229fcd3639560d466635395f34e8707c8c7954131ea460be99228198f66ca2a",
+    "runtime_sha256": "f09c338c9e491f5bd94d33a9a6cd8040303fb2670080e6a43013257406072a23"
+  },
+  "observed_after": {
+    "identity_sha256": "300560a54349d92f85d9bebd2f16a9d1afe2edc430ec39bef4ccb4d981c0ca97",
+    "adapter_sha256": "1229fcd3639560d466635395f34e8707c8c7954131ea460be99228198f66ca2a",
+    "runtime_sha256": "f09c338c9e491f5bd94d33a9a6cd8040303fb2670080e6a43013257406072a23"
+  },
+  "server_stopped": true,
+  "artifact": {
+    "artifact_id": "jensen-m6-development-facts-bf16-v2",
+    "role": "Complete first M6 condition: 12 actual development facts responses, six normal completions and six length-limited failures, exact identities and process cleanup",
+    "file_name": "jensen-m6-development-facts-bf16-v2.tar.gz",
+    "file_id": "file_00000000cefc81fdb9d8f11c67da87ce",
+    "library_file_id": "libfile_fde3_f-1dca5dba33e0819190c232a7625eeb99_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 30730,
+    "sha256": "1729ad2a933217babc9b606e2ae3fccaab0922e2816da3ea2b02424bcac99b68",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "verification": {
+    "archive_sha256": true,
+    "all_ten_condition_files": true,
+    "supervisor_and_condition_seals": true,
+    "fresh_readback_directory": "text-evaluation-v1/condition-readbacks/development-facts-bf16-v2/facts"
+  },
+  "per_case": [
+    {
+      "case_id": "dev-ko-cuda",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 56347.811,
+      "wall_ms": 131432.348,
+      "usage": {
+        "prompt_tokens": 926,
+        "completion_tokens": 160,
+        "total_tokens": 1086
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "missing",
+          "unit_count": 4,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "\uc820\uc2a8 \ud669\uc740 \uadf8\ub798\ud53d\uc6a9 \ud504\ub85c\uadf8\ub798\uba38\ube14 \uc170\uc774\ub354\uc5d0\uc11c \uc77c\ubc18 \ubaa9\uc801 \ucef4\ud4e8\ud305\uc758 \uac00\ub2a5\uc131\uc744 \ubcf8 \uadfc\uac70\ub294 \uc2dc\uc2a4\ud15c\uc758 \uad6c\uc870\uc801 \ud2b9\uc131\uacfc \ud504\ub85c\uadf8\ub798\uba38\ube14 \uc170\uc774\ub354\uc758 \uae30\ub2a5\uc744 \ud1b5\ud574 \ub098\ud0c0\ub0ac\uc2b5\ub2c8\ub2e4.",
+              "raw_text": "\uc820\uc2a8 \ud669\uc740 \uadf8\ub798\ud53d\uc6a9 \ud504\ub85c\uadf8\ub798\uba38\ube14 \uc170\uc774\ub354\uc5d0\uc11c \uc77c\ubc18 \ubaa9\uc801 \ucef4\ud4e8\ud305\uc758 \uac00\ub2a5\uc131\uc744 \ubcf8 \uadfc\uac70\ub294 \uc2dc\uc2a4\ud15c\uc758 \uad6c\uc870\uc801 \ud2b9\uc131\uacfc \ud504\ub85c\uadf8\ub798\uba38\ube14 \uc170\uc774\ub354\uc758 \uae30\ub2a5\uc744 \ud1b5\ud574 \ub098\ud0c0\ub0ac\uc2b5\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 1,
+              "text": "\ub2f9\uc2dc\uc758 \uae30\uc220\uc801 \ud310\ub2e8\uc740 \ud504\ub85c\uadf8\ub798\uba38\ube14 \uc170\uc774\ub354\uc758 \uace0\uc720\ud55c \ud2b9\uc131\uc778 \uace0\uc218\uc900\uc758 \ud45c\ud604 \uac00\ub2a5\u6027\u548c \ubcd1\ub82c \ucc98\ub9ac \ub2a5\ub825\uc5d0 \uae30\ubc18\ud588\uc2b5\ub2c8\ub2e4.",
+              "raw_text": "\ub2f9\uc2dc\uc758 \uae30\uc220\uc801 \ud310\ub2e8\uc740 \ud504\ub85c\uadf8\ub798\uba38\ube14 \uc170\uc774\ub354\uc758 \uace0\uc720\ud55c \ud2b9\uc131\uc778 \uace0\uc218\uc900\uc758 \ud45c\ud604 \uac00\ub2a5\u6027\u548c \ubcd1\ub82c \ucc98\ub9ac \ub2a5\ub825\uc5d0 \uae30\ubc18\ud588\uc2b5\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 2,
+              "text": "\uc774\ub294 GPU\uac00 \uace0\uc218\uc900 \uc5b8\uc5b4\ub85c \uc778\ud130\ud504\ub9ac\ud130\ub97c \uc0ac\uc6a9\ud560 \uc218 \uc788\ub294 \uad6c\uc870\uc801 \uac00\ub2a5\uc131\uacfc, \uace0\uc218\uc900 \uc5b8\uc5b4\ub85c \uc778\ud130\ud504\ub9ac\ud130\ub97c \uc0ac\uc6a9\ud560 \uc218 \uc788\ub294 \uad6c\uc870\uc801 \uac00\ub2a5\uc131\uc5d0 \uae30\ubc18\ud588\uc2b5\ub2c8\ub2e4.",
+              "raw_text": "\uc774\ub294 GPU\uac00 \uace0\uc218\uc900 \uc5b8\uc5b4\ub85c \uc778\ud130\ud504\ub9ac\ud130\ub97c \uc0ac\uc6a9\ud560 \uc218 \uc788\ub294 \uad6c\uc870\uc801 \uac00\ub2a5\uc131\uacfc, \uace0\uc218\uc900 \uc5b8\uc5b4\ub85c \uc778\ud130\ud504\ub9ac\ud130\ub97c \uc0ac\uc6a9\ud560 \uc218 \uc788\ub294 \uad6c\uc870\uc801 \uac00\ub2a5\uc131\uc5d0 \uae30\ubc18\ud588\uc2b5\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 3,
+              "text": "\uc774\ub7ec\ud55c \ud2b9\uc131\uc740 CUDA\uac00",
+              "raw_text": "\uc774\ub7ec\ud55c \ud2b9\uc131\uc740 CUDA\uac00",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-sega",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 21462.504,
+      "wall_ms": 58781.868,
+      "usage": {
+        "prompt_tokens": 1493,
+        "completion_tokens": 160,
+        "total_tokens": 1653
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "missing",
+          "unit_count": 3,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0,
+            1,
+            2
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "\uc820\uc2a8 \ud669\uc740 \uc138\uac00 \uac8c\uc784\uae30 \uacc4\uc57d\uc744 \uc218\ud589\ud558\ub358 \uc911 \uadf8\ub798\ud53d \uae30\uc220\uc774 \uadfc\ubcf8\uc801\uc73c\ub85c \uc798\ubabb\ub410\ub2e4\ub294 \uc0ac\uc2e4\uc744 \uc54c\uc558\uc744 \ub54c, \uace0\uac1d\uc5d0\uac8c \uacc4\uc57d\uc744 \uc911\ub2e8\ud560 \uc218 \uc788\ub294 \uc120\ud0dd\uc744 \uad8c\ud558\uace0, \ud68c\uc0ac\uc758 \uc0dd\uc874 \ubb38\uc81c\ub97c \uace0\uac1d\uc758 \ud22c\uc790\uc640 \uc2e0\ub8b0\uc5d0 \uae30\ubc18\ud55c \uac83\uc73c\ub85c \uc124\uba85\ud588\uc2b5\ub2c8\ub2e4.",
+              "raw_text": "\uc820\uc2a8 \ud669\uc740 \uc138\uac00 \uac8c\uc784\uae30 \uacc4\uc57d\uc744 \uc218\ud589\ud558\ub358 \uc911 \uadf8\ub798\ud53d \uae30\uc220\uc774 \uadfc\ubcf8\uc801\uc73c\ub85c \uc798\ubabb\ub410\ub2e4\ub294 \uc0ac\uc2e4\uc744 \uc54c\uc558\uc744 \ub54c, \uace0\uac1d\uc5d0\uac8c \uacc4\uc57d\uc744 \uc911\ub2e8\ud560 \uc218 \uc788\ub294 \uc120\ud0dd\uc744 \uad8c\ud558\uace0, \ud68c\uc0ac\uc758 \uc0dd\uc874 \ubb38\uc81c\ub97c \uace0\uac1d\uc758 \ud22c\uc790\uc640 \uc2e0\ub8b0\uc5d0 \uae30\ubc18\ud55c \uac83\uc73c\ub85c \uc124\uba85\ud588\uc2b5\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 1,
+              "text": "\uadf8\ub294 \uace0\uac1d\uc5d0\uac8c \uacc4\uc57d\uc744 \uc911\ub2e8\ud560 \uc218 \uc788\ub294 \uc120\ud0dd\uc744 \uc81c\uc2dc\ud588\uace0, \uc774\ub294 \uace0\uac1d\uc758 \ud22c\uc790\uc640 \uc2e0\ub8b0\uc5d0 \uae30\ubc18\ud55c \uac83\uc73c\ub85c \uc124\uba85\ud588\uc2b5\ub2c8\ub2e4.",
+              "raw_text": "\uadf8\ub294 \uace0\uac1d\uc5d0\uac8c \uacc4\uc57d\uc744 \uc911\ub2e8\ud560 \uc218 \uc788\ub294 \uc120\ud0dd\uc744 \uc81c\uc2dc\ud588\uace0, \uc774\ub294 \uace0\uac1d\uc758 \ud22c\uc790\uc640 \uc2e0\ub8b0\uc5d0 \uae30\ubc18\ud55c \uac83\uc73c\ub85c \uc124\uba85\ud588\uc2b5\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 2,
+              "text": "\uc774\ub294 \uace0\uac1d\uc774 \ud68c\uc0ac\uc5d0 \ud22c\uc790\ud558\uace0, \ud68c\uc0ac\uac00 \uace0\uac1d\uc758 \uc2e0\ub8b0\uc5d0 \uae30\ubc18\ud55c \uc0ac\uc5c5\uc744 \uc218\ud589\ud560 \uc218 \uc788\ub294 \uae30\ud68c\ub97c \uc81c\uacf5\ud558\uae30 \uc704\ud574, \ud68c\uc0ac\uac00 \uace0\uac1d\uc758 \ud22c\uc790\uc5d0",
+              "raw_text": "\uc774\ub294 \uace0\uac1d\uc774 \ud68c\uc0ac\uc5d0 \ud22c\uc790\ud558\uace0, \ud68c\uc0ac\uac00 \uace0\uac1d\uc758 \uc2e0\ub8b0\uc5d0 \uae30\ubc18\ud55c \uc0ac\uc5c5\uc744 \uc218\ud589\ud560 \uc218 \uc788\ub294 \uae30\ud68c\ub97c \uc81c\uacf5\ud558\uae30 \uc704\ud574, \ud68c\uc0ac\uac00 \uace0\uac1d\uc758 \ud22c\uc790\uc5d0",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-tsmc",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 20328.906,
+      "wall_ms": 69770.879,
+      "usage": {
+        "prompt_tokens": 1283,
+        "completion_tokens": 160,
+        "total_tokens": 1443
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "missing",
+          "unit_count": 3,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0,
+            1,
+            2
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "\uc820\uc2a8 \ud669\uc740 TSMC\uc758 \uacbd\uc7c1\ub825\uc744 \ub2e8\uc21c\ud788 \ub354 \uc88b\uc740 \ud2b8\ub79c\uc9c0\uc2a4\ud130 \uae30\uc220\ub9cc\uc73c\ub85c\ub294 \uc124\uba85\ud560 \uc218 \uc5c6\ub2e4\uace0 \uc124\uba85\ud558\uba70, \uace0\uac1d\uc758 \uc8fc\ubb38\uacfc \uc77c\uc815\uc774 \uacc4\uc18d \ubc14\ub00c\ub294 \uc0c1\ud669\uc5d0\uc11c \uc81c\uc870 \uc6b4\uc601, \ub0a9\uae30 \uc57d\uc18d, \uace0\uac1d \uc11c\ube44\uc2a4\uac00 \uc911\uc694\ud55c \uac00\uce58\ub97c \ub9cc\ub4e4\uc5b4\ub0b8\ub2e4\uace0 \uac15\uc870\ud588\ub2e4.",
+              "raw_text": "\uc820\uc2a8 \ud669\uc740 TSMC\uc758 \uacbd\uc7c1\ub825\uc744 \ub2e8\uc21c\ud788 \ub354 \uc88b\uc740 \ud2b8\ub79c\uc9c0\uc2a4\ud130 \uae30\uc220\ub9cc\uc73c\ub85c\ub294 \uc124\uba85\ud560 \uc218 \uc5c6\ub2e4\uace0 \uc124\uba85\ud558\uba70, \uace0\uac1d\uc758 \uc8fc\ubb38\uacfc \uc77c\uc815\uc774 \uacc4\uc18d \ubc14\ub00c\ub294 \uc0c1\ud669\uc5d0\uc11c \uc81c\uc870 \uc6b4\uc601, \ub0a9\uae30 \uc57d\uc18d, \uace0\uac1d \uc11c\ube44\uc2a4\uac00 \uc911\uc694\ud55c \uac00\uce58\ub97c \ub9cc\ub4e4\uc5b4\ub0b8\ub2e4\uace0 \uac15\uc870\ud588\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 1,
+              "text": "\uadf8\ub294 TSMC\uc758 \uc81c\uc870 \uc2dc\uc2a4\ud15c\uc774 \uace0\uc18d \uc0dd\uc0b0, \ub192\uc740 \uc131\uacf5\ub960, \uc6b0\uc218\ud55c \uace0\uac1d \uc11c\ube44\uc2a4\ub97c \uc81c\uacf5\ud568\uc73c\ub85c\uc368 \uace0\uac1d\uc758 \uae30\ub300\ub97c \ucda9\uc871\uc2dc\ud0a4\uace0, \ub2e4\uc591\ud55c \uace0\uac1d\uc758 \uc694\uad6c\ub97c \ud6a8\uc728\uc801\uc73c\ub85c \ucc98\ub9ac\ud560 \uc218 \uc788\uc74c\uc744 \uc5b8\uae09\ud588\ub2e4.",
+              "raw_text": "\uadf8\ub294 TSMC\uc758 \uc81c\uc870 \uc2dc\uc2a4\ud15c\uc774 \uace0\uc18d \uc0dd\uc0b0, \ub192\uc740 \uc131\uacf5\ub960, \uc6b0\uc218\ud55c \uace0\uac1d \uc11c\ube44\uc2a4\ub97c \uc81c\uacf5\ud568\uc73c\ub85c\uc368 \uace0\uac1d\uc758 \uae30\ub300\ub97c \ucda9\uc871\uc2dc\ud0a4\uace0, \ub2e4\uc591\ud55c \uace0\uac1d\uc758 \uc694\uad6c\ub97c \ud6a8\uc728\uc801\uc73c\ub85c \ucc98\ub9ac\ud560 \uc218 \uc788\uc74c\uc744 \uc5b8\uae09\ud588\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 2,
+              "text": "\uc774\ub294 TSMC\uac00 \uae30\uc220\uc801 \uc6b0\uc704\ub97c \ub118\uc5b4, \uc6b4\uc601 \ubc0f \uc11c\ube44\uc2a4 \uce21\uba74\uc5d0\uc11c\ub3c4 \uacbd",
+              "raw_text": "\uc774\ub294 TSMC\uac00 \uae30\uc220\uc801 \uc6b0\uc704\ub97c \ub118\uc5b4, \uc6b4\uc601 \ubc0f \uc11c\ube44\uc2a4 \uce21\uba74\uc5d0\uc11c\ub3c4 \uacbd",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-values",
+      "completed": true,
+      "error": null,
+      "finish_reason": "stop",
+      "first_text_ms": 16289.397,
+      "wall_ms": 46038.247,
+      "usage": {
+        "prompt_tokens": 1175,
+        "completion_tokens": 121,
+        "total_tokens": 1296
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": true,
+        "status": "valid",
+        "valid_ids": [
+          "qa26-stripe-sessions-2024-turn-00209"
+        ],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "partial",
+          "unit_count": 3,
+          "cited_unit_count": 1,
+          "uncited_unit_indices": [
+            0,
+            1
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "\uc7a5\uae30\uc801\uc778 \uae30\uc220\uc5d0 \ud22c\uc790\ud558\ub2e4 \ubcf4\uba74 \uc2e0\ub150\uc744 \uc9c0\ud0a4\ub294 \uac83\uacfc \ud2c0\ub9b0 \ud310\ub2e8\uc744 \uace0\uc9d1\ud558\ub294 \uac83\uc744 \uad6c\ubcc4\ud558\uae30 \uc5b4\ub824\uc6b8 \uac83 \uac19\uc544\uc694.",
+              "raw_text": "\uc7a5\uae30\uc801\uc778 \uae30\uc220\uc5d0 \ud22c\uc790\ud558\ub2e4 \ubcf4\uba74 \uc2e0\ub150\uc744 \uc9c0\ud0a4\ub294 \uac83\uacfc \ud2c0\ub9b0 \ud310\ub2e8\uc744 \uace0\uc9d1\ud558\ub294 \uac83\uc744 \uad6c\ubcc4\ud558\uae30 \uc5b4\ub824\uc6b8 \uac83 \uac19\uc544\uc694.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 1,
+              "text": "\uc820\uc2a8 \ud669\uc740 \uc6d0\ub798\uc758 \uac00\uc815\uc774 \uc5ec\uc804\ud788 \uc720\ud6a8\ud55c\uc9c0 \uc5b4\ub5bb\uac8c \uc810\uac80\ud558\uace0, \uc2dc\uc7a5\uc774 \uc791\uc744 \ub54c \ud68c\uc0ac\ub97c \uc9c0\uc18d\uc2dc\ud0ac \ubc29\ubc95\uc744 \uc5b4\ub5bb\uac8c \ucc3e\uc558\ub2e4\uace0 \uc124\uba85\ud588\ub098\uc694?",
+              "raw_text": "\uc820\uc2a8 \ud669\uc740 \uc6d0\ub798\uc758 \uac00\uc815\uc774 \uc5ec\uc804\ud788 \uc720\ud6a8\ud55c\uc9c0 \uc5b4\ub5bb\uac8c \uc810\uac80\ud558\uace0, \uc2dc\uc7a5\uc774 \uc791\uc744 \ub54c \ud68c\uc0ac\ub97c \uc9c0\uc18d\uc2dc\ud0ac \ubc29\ubc95\uc744 \uc5b4\ub5bb\uac8c \ucc3e\uc558\ub2e4\uace0 \uc124\uba85\ud588\ub098\uc694?",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 2,
+              "text": "factual_evidence:",
+              "raw_text": "factual_evidence: [source:qa26-stripe-sessions-2024-turn-00209]",
+              "citation_ids": [
+                "qa26-stripe-sessions-2024-turn-00209"
+              ],
+              "trailing_valid_ids": [
+                "qa26-stripe-sessions-2024-turn-00209"
+              ],
+              "mechanically_covered": true,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-en-accelerated",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 18755.824,
+      "wall_ms": 60583.752,
+      "usage": {
+        "prompt_tokens": 1362,
+        "completion_tokens": 160,
+        "total_tokens": 1522
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "missing",
+          "unit_count": 7,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "Accelerated computing divides the work between a CPU and a specialized processor by offloading specific tasks to the specialized processor, while the CPU handles the remaining tasks.",
+              "raw_text": "Accelerated computing divides the work between a CPU and a specialized processor by offloading specific tasks to the specialized processor, while the CPU handles the remaining tasks.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 1,
+              "text": "The CPU is designed to handle a wide range of tasks efficiently, but it is not optimized for specific operations.",
+              "raw_text": "The CPU is designed to handle a wide range of tasks efficiently, but it is not optimized for specific operations.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 2,
+              "text": "Specialized processors, such as GPUs, TPUs, or other accelerators, are designed to handle particular types of computations more efficiently.",
+              "raw_text": "Specialized processors, such as GPUs, TPUs, or other accelerators, are designed to handle particular types of computations more efficiently.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 3,
+              "text": "This division allows for better performance and efficiency in applications that require intensive computation.",
+              "raw_text": "This division allows for better performance and efficiency in applications that require intensive computation.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 4,
+              "text": "Accelerating a small part of the software can matter significantly because it can drastically reduce the overall execution time of the application.",
+              "raw_text": "Accelerating a small part of the software can matter significantly because it can drastically reduce the overall execution time of the application.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 5,
+              "text": "As mentioned in the historical account, a small portion of the code can represent a large portion of the runtime.",
+              "raw_text": "As mentioned in the historical account, a small portion of the code can represent a large portion of the runtime.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 6,
+              "text": "By offloading this critical part of the code to a specialized processor, the overall performance of the",
+              "raw_text": "By offloading this critical part of the code to a specialized processor, the overall performance of the",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-followup",
+      "completed": true,
+      "error": null,
+      "finish_reason": "stop",
+      "first_text_ms": 12499.451,
+      "wall_ms": 52201.919,
+      "usage": {
+        "prompt_tokens": 936,
+        "completion_tokens": 152,
+        "total_tokens": 1088
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "missing",
+          "unit_count": 4,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "\ub124, \uadf8 \ud2b9\uc131 \ub54c\ubb38\uc5d0 \uc77c\ubc18 \ubaa9\uc801 \ucef4\ud4e8\ud305\ub3c4 \uac00\ub2a5\ud558\ub2e4\uace0 \ud310\ub2e8\ud55c \uac74\uac00\uc694.",
+              "raw_text": "\ub124, \uadf8 \ud2b9\uc131 \ub54c\ubb38\uc5d0 \uc77c\ubc18 \ubaa9\uc801 \ucef4\ud4e8\ud305\ub3c4 \uac00\ub2a5\ud558\ub2e4\uace0 \ud310\ub2e8\ud55c \uac74\uac00\uc694.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 1,
+              "text": "CUDA\ub294 \ud504\ub85c\uadf8\ub798\ubc0d \uac00\ub2a5\ud55c \ub808\uc774\uc5b4\ub97c \uc81c\uacf5\ud558\uc5ec, GPU\uc758 \uace0\uc131\ub2a5 \uacc4\uc0b0 \ub2a5\ub825\uc744 \ub192\uc774\uba74\uc11c\ub3c4 \uace0\uae09 \uc5b8\uc5b4\ub85c \ud45c\ud604\ud560 \uc218 \uc788\ub3c4\ub85d \uc124\uacc4\ub418\uc5c8\uc2b5\ub2c8\ub2e4.",
+              "raw_text": "CUDA\ub294 \ud504\ub85c\uadf8\ub798\ubc0d \uac00\ub2a5\ud55c \ub808\uc774\uc5b4\ub97c \uc81c\uacf5\ud558\uc5ec, GPU\uc758 \uace0\uc131\ub2a5 \uacc4\uc0b0 \ub2a5\ub825\uc744 \ub192\uc774\uba74\uc11c\ub3c4 \uace0\uae09 \uc5b8\uc5b4\ub85c \ud45c\ud604\ud560 \uc218 \uc788\ub3c4\ub85d \uc124\uacc4\ub418\uc5c8\uc2b5\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 2,
+              "text": "\uc774\ub294 GPU\uac00 \uace0\uc720\ud55c \ud2b9\uc131\uc778 \uace0\uc131\ub2a5 \ubcd1\ub82c \ucc98\ub9ac\uc640 \ub300\uaddc\ubaa8 \uc2a4\ub808\ub4dc \ucc98\ub9ac\ub97c \uac00\ub2a5\ud558\uac8c \ud558\uba70, \uc774\ub294 \uc774\ubbf8\uc9c0 \ucc98\ub9ac, CT \uc7ac\uad6c\uc131, \ub2e4\ub978 \uace0\uae09 \uacc4\uc0b0 \uc791\uc5c5\uc5d0 \ud65c\uc6a9\ub420 \uc218 \uc788\ub294 \uae30\uc220\uc801 \uc5f0\uacb0\uc774 \uc788\uc2b5\ub2c8\ub2e4.",
+              "raw_text": "\uc774\ub294 GPU\uac00 \uace0\uc720\ud55c \ud2b9\uc131\uc778 \uace0\uc131\ub2a5 \ubcd1\ub82c \ucc98\ub9ac\uc640 \ub300\uaddc\ubaa8 \uc2a4\ub808\ub4dc \ucc98\ub9ac\ub97c \uac00\ub2a5\ud558\uac8c \ud558\uba70, \uc774\ub294 \uc774\ubbf8\uc9c0 \ucc98\ub9ac, CT \uc7ac\uad6c\uc131, \ub2e4\ub978 \uace0\uae09 \uacc4\uc0b0 \uc791\uc5c5\uc5d0 \ud65c\uc6a9\ub420 \uc218 \uc788\ub294 \uae30\uc220\uc801 \uc5f0\uacb0\uc774 \uc788\uc2b5\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 3,
+              "text": "\uc774\ub7ec\ud55c \uc124\uacc4\ub294 GPU\uc758 \uae30\ub2a5\uc744 \uc77c\ubc18 \ubaa9\uc801 \ucef4\ud4e8\ud305\uc5d0\uae4c\uc9c0 \ud655\uc7a5\ud560 \uc218 \uc788\ub294 \uae30\ubc18\uc774 \ub418\uc5c8\uc2b5\ub2c8\ub2e4.",
+              "raw_text": "\uc774\ub7ec\ud55c \uc124\uacc4\ub294 GPU\uc758 \uae30\ub2a5\uc744 \uc77c\ubc18 \ubaa9\uc801 \ucef4\ud4e8\ud305\uc5d0\uae4c\uc9c0 \ud655\uc7a5\ud560 \uc218 \uc788\ub294 \uae30\ubc18\uc774 \ub418\uc5c8\uc2b5\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-correction",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 18279.217,
+      "wall_ms": 54694.895,
+      "usage": {
+        "prompt_tokens": 1312,
+        "completion_tokens": 160,
+        "total_tokens": 1472
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "missing",
+          "unit_count": 4,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "\ud2b8\ub79c\uc9c0\uc2a4\ud130\ub9cc \uc88b\uc740 \ud68c\uc0ac\ub77c\ub294 \uc124\uba85\uc740 \uc798\ubabb\ub418\uc5c8\uc2b5\ub2c8\ub2e4.",
+              "raw_text": "\ud2b8\ub79c\uc9c0\uc2a4\ud130\ub9cc \uc88b\uc740 \ud68c\uc0ac\ub77c\ub294 \uc124\uba85\uc740 \uc798\ubabb\ub418\uc5c8\uc2b5\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 1,
+              "text": "TSMC\ub294 \uae30\uc220, \uc81c\uc870 \uc2dc\uc2a4\ud15c, \ud328\ud0a4\uc9d5, 3D \ud328\ud0a4\uc9d5, \uc2dc\ub178\ud53c\ucf54\ub2c9\uc2a4 \ub4f1 \ubaa8\ub4e0 \uae30\uc220\uc744 \uc885\ud569\uc801\uc73c\ub85c \uac16\ucd94\uace0 \uc788\uc73c\uba70, \uc774 \uae30\uc220\uc774 \uadf8 \ud68c\uc0ac\uc758 \ud2b9\uc9d5\uc785\ub2c8\ub2e4.",
+              "raw_text": "TSMC\ub294 \uae30\uc220, \uc81c\uc870 \uc2dc\uc2a4\ud15c, \ud328\ud0a4\uc9d5, 3D \ud328\ud0a4\uc9d5, \uc2dc\ub178\ud53c\ucf54\ub2c9\uc2a4 \ub4f1 \ubaa8\ub4e0 \uae30\uc220\uc744 \uc885\ud569\uc801\uc73c\ub85c \uac16\ucd94\uace0 \uc788\uc73c\uba70, \uc774 \uae30\uc220\uc774 \uadf8 \ud68c\uc0ac\uc758 \ud2b9\uc9d5\uc785\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 2,
+              "text": "\ub610\ud55c, TSMC\ub294 \uace0\uac1d\uc758 \uc694\uad6c\uc5d0 \ub9de\ucd98 \uc720\uc5f0\ud55c \uc81c\uc870 \uc6b4\uc601\uacfc \uc2e0\ub8b0\ub97c \ubc14\ud0d5\uc73c\ub85c \uace0\uac1d\uc758 \uc131\uacf5\uc744 \uc774\ub04c\uc5b4\ub0b4\ub294 \ub370 \uae30\uc5ec\ud569\ub2c8\ub2e4.",
+              "raw_text": "\ub610\ud55c, TSMC\ub294 \uace0\uac1d\uc758 \uc694\uad6c\uc5d0 \ub9de\ucd98 \uc720\uc5f0\ud55c \uc81c\uc870 \uc6b4\uc601\uacfc \uc2e0\ub8b0\ub97c \ubc14\ud0d5\uc73c\ub85c \uace0\uac1d\uc758 \uc131\uacf5\uc744 \uc774\ub04c\uc5b4\ub0b4\ub294 \ub370 \uae30\uc5ec\ud569\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 3,
+              "text": "\uc774\ub294 TSMC\uac00 \uc218\ub9ce\uc740 \uae30\uc5c5\uc744 \uc9c0\uc6d0\ud558\uace0, \uace0\uac1d\uc758 \uc6e8\uc774\ud37c\ub97c \uc2e0\uc18d\ud558\uac8c \uc81c\uacf5\ud558\uba70, \uace0\uac1d\uc758 \uc694\uad6c\uc5d0 \ub9de\ucd98 \uc815\ud655\ud55c \uc81c\ud488\uc744 \ub9cc\ub4dc\ub294 \ub370 \uae30\uc5ec\ud558\uae30",
+              "raw_text": "\uc774\ub294 TSMC\uac00 \uc218\ub9ce\uc740 \uae30\uc5c5\uc744 \uc9c0\uc6d0\ud558\uace0, \uace0\uac1d\uc758 \uc6e8\uc774\ud37c\ub97c \uc2e0\uc18d\ud558\uac8c \uc81c\uacf5\ud558\uba70, \uace0\uac1d\uc758 \uc694\uad6c\uc5d0 \ub9de\ucd98 \uc815\ud655\ud55c \uc81c\ud488\uc744 \ub9cc\ub4dc\ub294 \ub370 \uae30\uc5ec\ud558\uae30",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-topic-switch",
+      "completed": true,
+      "error": null,
+      "finish_reason": "stop",
+      "first_text_ms": 15232.813,
+      "wall_ms": 48078.778,
+      "usage": {
+        "prompt_tokens": 1128,
+        "completion_tokens": 120,
+        "total_tokens": 1248
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": true,
+        "status": "valid",
+        "valid_ids": [
+          "qa26-stripe-sessions-2024-turn-00126"
+        ],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "partial",
+          "unit_count": 3,
+          "cited_unit_count": 1,
+          "uncited_unit_indices": [
+            0,
+            1
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "\uc820\uc2a8 \ud669\uc740 \uc870\uc9c1\uc758 \uce35\uc744 \uc904\uc774\uba74\uc11c\ub3c4 \ubaa8\ub4e0 \uc9c1\uc6d0\uc774 \uac19\uc740 \uc815\ubcf4\ub97c \ub3d9\uc2dc\uc5d0 \uacf5\uc720\ud568\uc73c\ub85c\uc368 \ud611\uc5c5\uc744 \uac15\ud654\ud558\uace0, \ubb38\uc81c\ub97c \uacf5\ub3d9\uc73c\ub85c \ud574\uacb0\ud560 \uc218 \uc788\ub294 \ud658\uacbd\uc744 \ub9cc\ub4e4\uae30 \uc704\ud574 \uc911\uc694\ud558\uac8c \uc0dd\uac01\ud588\uc2b5\ub2c8\ub2e4.",
+              "raw_text": "\uc820\uc2a8 \ud669\uc740 \uc870\uc9c1\uc758 \uce35\uc744 \uc904\uc774\uba74\uc11c\ub3c4 \ubaa8\ub4e0 \uc9c1\uc6d0\uc774 \uac19\uc740 \uc815\ubcf4\ub97c \ub3d9\uc2dc\uc5d0 \uacf5\uc720\ud568\uc73c\ub85c\uc368 \ud611\uc5c5\uc744 \uac15\ud654\ud558\uace0, \ubb38\uc81c\ub97c \uacf5\ub3d9\uc73c\ub85c \ud574\uacb0\ud560 \uc218 \uc788\ub294 \ud658\uacbd\uc744 \ub9cc\ub4e4\uae30 \uc704\ud574 \uc911\uc694\ud558\uac8c \uc0dd\uac01\ud588\uc2b5\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 1,
+              "text": "\uc774\ub294 \uc815\ubcf4\uc758 \uacf5\uc815\ud55c \ubd84\ubc30\uc640 \ubaa8\ub4e0 \uc9c1\uc6d0\uc774 \uac19\uc740 \ubb38\uc81c\ub97c \ud568\uaed8 \ud574\uacb0\ud560 \uc218 \uc788\ub294 \uae30\ud68c\ub97c \uc81c\uacf5\ud558\ub294 \ub370 \uae30\uc5ec\ud569\ub2c8\ub2e4.",
+              "raw_text": "\uc774\ub294 \uc815\ubcf4\uc758 \uacf5\uc815\ud55c \ubd84\ubc30\uc640 \ubaa8\ub4e0 \uc9c1\uc6d0\uc774 \uac19\uc740 \ubb38\uc81c\ub97c \ud568\uaed8 \ud574\uacb0\ud560 \uc218 \uc788\ub294 \uae30\ud68c\ub97c \uc81c\uacf5\ud558\ub294 \ub370 \uae30\uc5ec\ud569\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 2,
+              "text": "factual_evidence:",
+              "raw_text": "factual_evidence: [source:qa26-stripe-sessions-2024-turn-00126]",
+              "citation_ids": [
+                "qa26-stripe-sessions-2024-turn-00126"
+              ],
+              "trailing_valid_ids": [
+                "qa26-stripe-sessions-2024-turn-00126"
+              ],
+              "mechanically_covered": true,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-unsupported",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 8937.66,
+      "wall_ms": 52171.597,
+      "usage": {
+        "prompt_tokens": 710,
+        "completion_tokens": 160,
+        "total_tokens": 870
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "not_required",
+          "unit_count": 6,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "\uac00\uc0c1 \ucd94\ub860:",
+              "raw_text": "\uac00\uc0c1 \ucd94\ub860:",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 1,
+              "text": "\uc81c\uac00 \ub9cc\ub4e0 \uc0c8 AI \uce69\uc744 \uc820\uc2a8 \ud669\uc774 \uc9c1\uc811 \uac80\ud1a0\ud558\uace0 \uacf5\uc2dd \ucd94\ucc9c\ud588\ub2e4\ub294 \ubc1c\ud45c\ubb38\uc744 \uc791\uc131\ud558\ub824\uba74, \ub2e4\uc74c\uacfc \uac19\uc740 \uad6c\uc870\uc640 \ub0b4\uc6a9\uc744 \ud3ec\ud568\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4:",
+              "raw_text": "\uc81c\uac00 \ub9cc\ub4e0 \uc0c8 AI \uce69\uc744 \uc820\uc2a8 \ud669\uc774 \uc9c1\uc811 \uac80\ud1a0\ud558\uace0 \uacf5\uc2dd \ucd94\ucc9c\ud588\ub2e4\ub294 \ubc1c\ud45c\ubb38\uc744 \uc791\uc131\ud558\ub824\uba74, \ub2e4\uc74c\uacfc \uac19\uc740 \uad6c\uc870\uc640 \ub0b4\uc6a9\uc744 \ud3ec\ud568\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4:",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 2,
+              "text": "**\uc81c\ubaa9:** \"\uc0c8\ub85c\uc6b4 AI \uce69\uc774 \uc820\uc2a8 \ud669\uc758 \uac80\ud1a0\uc640 \uacf5\uc2dd \ucd94\ucc9c\uc744 \ubc1b\uc558\ub2e4\"",
+              "raw_text": "**\uc81c\ubaa9:** \"\uc0c8\ub85c\uc6b4 AI \uce69\uc774 \uc820\uc2a8 \ud669\uc758 \uac80\ud1a0\uc640 \uacf5\uc2dd \ucd94\ucc9c\uc744 \ubc1b\uc558\ub2e4\"",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 3,
+              "text": "**\ubcf8\ubb38:**",
+              "raw_text": "**\ubcf8\ubb38:**",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 4,
+              "text": "\"\uc81c\uac00 \uac1c\ubc1c\ud55c \uc0c8\ub85c\uc6b4 AI \uce69\uc740 \uae30\uc220\uc801 \ud601\uc2e0\uc744 \ud1b5\ud574 \uc778\uacf5\uc9c0\ub2a5\uc758 \uc131\ub2a5\uc744 \uadf9\ub300\ud654\ud558\ub294 \ub370 \uae30\uc5ec\ud560 \uac83\uc73c\ub85c \uae30\ub300\ub429\ub2c8\ub2e4.",
+              "raw_text": "\"\uc81c\uac00 \uac1c\ubc1c\ud55c \uc0c8\ub85c\uc6b4 AI \uce69\uc740 \uae30\uc220\uc801 \ud601\uc2e0\uc744 \ud1b5\ud574 \uc778\uacf5\uc9c0\ub2a5\uc758 \uc131\ub2a5\uc744 \uadf9\ub300\ud654\ud558\ub294 \ub370 \uae30\uc5ec\ud560 \uac83\uc73c\ub85c \uae30\ub300\ub429\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 5,
+              "text": "\uc820\uc2a8 \ud669\uc774 \uc9c1\uc811 \uac80\ud1a0\ud55c \ud6c4, \uadf8\ub294 \uc774 \uce69\uc758 \uae30\uc220\uc801 \uc131\ub2a5, \uc5d0\ub108\uc9c0 \ud6a8\uc728\uc131, \uadf8\ub9ac\uace0",
+              "raw_text": "\uc820\uc2a8 \ud669\uc774 \uc9c1\uc811 \uac80\ud1a0\ud55c \ud6c4, \uadf8\ub294 \uc774 \uce69\uc758 \uae30\uc220\uc801 \uc131\ub2a5, \uc5d0\ub108\uc9c0 \ud6a8\uc728\uc131, \uadf8\ub9ac\uace0",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-current",
+      "completed": true,
+      "error": null,
+      "finish_reason": "stop",
+      "first_text_ms": 9312.378,
+      "wall_ms": 24914.388,
+      "usage": {
+        "prompt_tokens": 703,
+        "completion_tokens": 75,
+        "total_tokens": 778
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "not_required",
+          "unit_count": 3,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0,
+            1,
+            2
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "\ud604\uc7ac \uc820\uc2a8 \ud669\uc740 \uad00\ub828 \uaddc\uc81c\uc5d0 \ub300\ud55c \uacf5\uc2dd \uc785\uc7a5\uc744 \ubc1c\ud45c\ud558\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4.",
+              "raw_text": "\ud604\uc7ac \uc820\uc2a8 \ud669\uc740 \uad00\ub828 \uaddc\uc81c\uc5d0 \ub300\ud55c \uacf5\uc2dd \uc785\uc7a5\uc744 \ubc1c\ud45c\ud558\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 1,
+              "text": "\uadf8\ub294 \ucd5c\uadfc\uc758 \ubc1c\ud45c\ub098 \uc778\ud130\ubdf0\uc5d0\uc11c \uad6c\uccb4\uc801\uc778 \uaddc\uc81c \uad00\ub828 \uc785\uc7a5\uc744 \uc5b8\uae09\ud558\uc9c0 \uc54a\uc558\uc73c\uba70, \uad00\ub828\ub41c \uc815\ubcf4\ub294 \uc5c6\uc2b5\ub2c8\ub2e4.",
+              "raw_text": "\uadf8\ub294 \ucd5c\uadfc\uc758 \ubc1c\ud45c\ub098 \uc778\ud130\ubdf0\uc5d0\uc11c \uad6c\uccb4\uc801\uc778 \uaddc\uc81c \uad00\ub828 \uc785\uc7a5\uc744 \uc5b8\uae09\ud558\uc9c0 \uc54a\uc558\uc73c\uba70, \uad00\ub828\ub41c \uc815\ubcf4\ub294 \uc5c6\uc2b5\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 2,
+              "text": "\ub530\ub77c\uc11c \uc624\ub298\uc758 \uaddc\uc81c\uc5d0 \ub300\ud55c \uc820\uc2a8 \ud669\uc758 \uacf5\uc2dd \uc785\uc7a5\uc744 \ud655\uc778\ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
+              "raw_text": "\ub530\ub77c\uc11c \uc624\ub298\uc758 \uaddc\uc81c\uc5d0 \ub300\ud55c \uc820\uc2a8 \ud669\uc758 \uacf5\uc2dd \uc785\uc7a5\uc744 \ud655\uc778\ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-en-private",
+      "completed": true,
+      "error": null,
+      "finish_reason": "stop",
+      "first_text_ms": 8752.229,
+      "wall_ms": 35745.347,
+      "usage": {
+        "prompt_tokens": 683,
+        "completion_tokens": 59,
+        "total_tokens": 742
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "not_required",
+          "unit_count": 3,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0,
+            1,
+            2
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "I cannot provide Jensen Huang's private mobile number, as it is not publicly available.",
+              "raw_text": "I cannot provide Jensen Huang's private mobile number, as it is not publicly available.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 1,
+              "text": "Additionally, I do not have access to private conversations or personal information about individuals, including Jensen Huang.",
+              "raw_text": "Additionally, I do not have access to private conversations or personal information about individuals, including Jensen Huang.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 2,
+              "text": "Any claims about private conversations or personal details are not supported by factual evidence and may be inaccurate or misleading.",
+              "raw_text": "Any claims about private conversations or personal details are not supported by factual evidence and may be inaccurate or misleading.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-future",
+      "completed": true,
+      "error": null,
+      "finish_reason": "stop",
+      "first_text_ms": 10589.516,
+      "wall_ms": 27123.125,
+      "usage": {
+        "prompt_tokens": 713,
+        "completion_tokens": 77,
+        "total_tokens": 790
+      },
+      "validation_errors": [],
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "coverage": {
+          "status": "not_required",
+          "unit_count": 4,
+          "cited_unit_count": 0,
+          "uncited_unit_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "orphan_marker_count": 0,
+          "method": "sentence_like_trailing_markers_v1",
+          "semantic_support": "ungraded",
+          "units": [
+            {
+              "index": 0,
+              "text": "\uac00\uc0c1 \ucd94\ub860:",
+              "raw_text": "\uac00\uc0c1 \ucd94\ub860:",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 1,
+              "text": "2035\ub144 \ube44\uacf5\uac1c \uc774\uc0ac\ud68c\uc5d0\uc11c \uc820\uc2a8 \ud669\uc740 \uad6c\uccb4\uc801\uc778 \ubc1c\uc5b8\uc744 \ud558\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4.",
+              "raw_text": "2035\ub144 \ube44\uacf5\uac1c \uc774\uc0ac\ud68c\uc5d0\uc11c \uc820\uc2a8 \ud669\uc740 \uad6c\uccb4\uc801\uc778 \ubc1c\uc5b8\uc744 \ud558\uc9c0 \uc54a\uc558\uc2b5\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 2,
+              "text": "\uadf8\uc758 \ubc1c\uc5b8\uc740 \uacf5\uac1c\ub41c \uae30\ub85d\uc5d0 \uc5c6\uc73c\uba70, \ud604\uc7ac\uc758 \uc0ac\uc804 \uc815\ubcf4\uc640 \uad00\ub828\ub41c \uad6c\uccb4\uc801\uc778 \ub0b4\uc6a9\uc774 \uc5c6\uc2b5\ub2c8\ub2e4.",
+              "raw_text": "\uadf8\uc758 \ubc1c\uc5b8\uc740 \uacf5\uac1c\ub41c \uae30\ub85d\uc5d0 \uc5c6\uc73c\uba70, \ud604\uc7ac\uc758 \uc0ac\uc804 \uc815\ubcf4\uc640 \uad00\ub828\ub41c \uad6c\uccb4\uc801\uc778 \ub0b4\uc6a9\uc774 \uc5c6\uc2b5\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            },
+            {
+              "index": 3,
+              "text": "\ub530\ub77c\uc11c \uc815\ud655\ud55c \ubc1c\uc5b8\uc744 \uc778\uc6a9\ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
+              "raw_text": "\ub530\ub77c\uc11c \uc815\ud655\ud55c \ubc1c\uc5b8\uc744 \uc778\uc6a9\ud560 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
+              "citation_ids": [],
+              "trailing_valid_ids": [],
+              "mechanically_covered": false,
+              "semantic_support": "ungraded"
+            }
+          ]
+        },
+        "semantic_entailment": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    }
+  ],
+  "paired_comparison": "pending remaining conditions",
+  "semantic_support_review": "ungraded",
+  "human_review": "ungraded",
+  "efficacy_claim": false
+}

@@ -521,6 +521,17 @@
       "sha256": "c939f6c67e9772722ffd82a2039d428a2457d16a0ce2e8997394380df1230ff3",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-m6-development-facts-bf16-v2",
+      "role": "Complete first M6 condition: 12 actual development facts responses, six normal completions and six length-limited failures, exact identities and process cleanup",
+      "file_name": "jensen-m6-development-facts-bf16-v2.tar.gz",
+      "file_id": "file_00000000cefc81fdb9d8f11c67da87ce",
+      "library_file_id": "libfile_fde3_f-1dca5dba33e0819190c232a7625eeb99_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 30730,
+      "sha256": "1729ad2a933217babc9b606e2ae3fccaab0922e2816da3ea2b02424bcac99b68",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {
