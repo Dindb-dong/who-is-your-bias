@@ -5,6 +5,9 @@ four independently published English-language events. Each row summarizes an
 actual interviewer prompt and Huang's response from the linked publisher
 transcript. Use the locator to read the original turns in context.
 
+See the [second source collection](source-catalog-v2.md) for the expanded event
+list and additional Q&A.
+
 ## Sources and dates
 
 | Event ID | Publisher and interviewer | Publication date | Event or recording date | Original material |
