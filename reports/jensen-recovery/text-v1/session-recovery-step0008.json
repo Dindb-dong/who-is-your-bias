@@ -1,0 +1,34 @@
+{
+  "schema_version": "jensen-text-session-recovery.v1",
+  "recorded_at": "2026-11-12T19:50:12.605145+00:00",
+  "last_public_checkpoint": "e5704d2ff2cbfdec0d6cc9ce9c78c60d050ef54e",
+  "last_saved_optimizer_steps": 8,
+  "planned_optimizer_steps": 29,
+  "observed_disruption": [
+    "tool session handles and function store became unavailable",
+    "former trainer run.json stayed at7 while its atomic checkpoint and verification request recorded8",
+    "valid remote acknowledgement was not consumed; no new trainer persistence receipt appeared"
+  ],
+  "restoration": {
+    "checkpoint_metadata_sha256": "e2caa13cd05dc50a1484d3fc309d016e2f8f2ff7228d41be6097131e632376f9",
+    "archive_sha256": "e88b866ccd5429dbe6041af3039379817d683c4c4f610ecb0c9fa2302e62e383",
+    "fresh_checkpoint_loader_passed": true,
+    "cursor": {
+      "epoch": 0,
+      "next_index": 32
+    }
+  },
+  "next_invocation": {
+    "cpu_threads": 4,
+    "cpu_interop_threads": 1,
+    "precision": "bfloat16",
+    "reason": "bounded native runtime retry after interruption; prior four-thread updates worked, later eight-thread wall times varied substantially",
+    "whole_model_speedup_claim": false,
+    "additional_updates_before_pause": 2,
+    "checkpoint_every": 2,
+    "remote_receipt_gate": true,
+    "file_heartbeat_and_shared_lock": true
+  },
+  "optimization_data_and_ordering_changed": false,
+  "model_quality_evaluated": false
+}

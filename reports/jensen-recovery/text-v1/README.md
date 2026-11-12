@@ -88,3 +88,38 @@ trainer exports the adapter, tokenizer and completed serving receipt.
 The serving path must load the saved completed adapter with its exact receipt
 hash. The frozen matched generation experiment is a separate gate; no default
 promotion follows merely from completing training.
+
+## Recover an execution connection
+
+At step 8 the external tool handles disappeared. The checkpoint archive was
+already uploaded; fresh archive, payload and real state-loader verification
+subsequently passed. The old process did not consume its valid acknowledgement,
+and its mutable run receipt remained at step 7. The atomic checkpoint and its
+verified remote receipt establish the actual saved step. The observation and
+next bounded runtime choice are preserved in `session-recovery-step0008.json`.
+
+`tools.adaptation.supervise` now keeps a shared nonblocking process lock and an
+atomic file heartbeat independently of the interactive tool handle. It owns the
+child process and records actual exit/cleanup and maximum waited-child RSS.
+It also accepts an atomic `stop-NAME.json` containing the exact invocation
+`name` and a nonempty `reason`, then stops only its owned child process group.
+The supervisor's successful exit is not a completed-training claim: inspect the
+trainer's separate run receipt. Existing state/log names cannot be overwritten.
+
+Invoke it from the repository root with the inference virtualenv's actual path:
+
+```sh
+PYTHONPATH=src:. .venv/bin/python -m tools.adaptation.supervise \
+  --state-dir "$ART/text-process" --name UNIQUE_INVOCATION_NAME \
+  --log "$ART/UNIQUE_INVOCATION_NAME.log" \
+  --inference-python /absolute/path/to/.venv-inference/bin/python \
+  --interop-threads 1 --timeout 14400 -- train-text TRAINING_ARGUMENTS
+```
+
+Keep the frozen dataset/model/optimization arguments shown above, choose the
+latest verified resume directory, and retain the synchronous checkpoint
+publisher. The bounded recovery trial uses four intra-op threads and one
+inter-op thread, with two additional updates before pausing. This is a recorded
+native runtime choice; no new training algorithm or speedup result is claimed.
+Eighteen gate/supervisor checks passed, including real child shutdown after a
+file stop request and rejection of a simultaneous supervised invocation.
