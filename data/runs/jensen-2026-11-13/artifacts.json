@@ -269,6 +269,20 @@
       "sha256": "f0e818a26e3381198af71c85af64069a90c6ba06b7315d94d22d2544db8bc94d",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-voice-lora-v2-step0001",
+      "role": "actual_voice_optimizer_checkpoint",
+      "completed_optimizer_steps": 1,
+      "target_optimizer_steps": 16,
+      "source_events": 4,
+      "file_name": "voice-lora-v2-step1.tar.gz",
+      "file_id": "file_00000000bae481fd824dfc959d5981d3",
+      "library_file_id": "libfile_fde3_f-00bac5eb72888191bfd665e25ea0604e_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 4317440,
+      "sha256": "6d58863b7055981501a19652a8cbc6f6619e3a10cbb638ca3381e1642f1b7d7a",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ]
 }
