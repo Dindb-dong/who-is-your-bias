@@ -28,7 +28,12 @@ recordings have not been admitted to frozen training/evaluation datasets.
 
 [artifact-manifest.json](artifact-manifest.json) tracks the current aggregate
 state and links the exact object-level receipts. CES remains pending full
-acquisition. Its remaining byte budget after GTC is 1,292,032,512 bytes, with
+acquisition. Its first 24 MiB (25,165,824 bytes) are already saved and freshly
+reconstructed in [ces-prefix001.json](ces-prefix001.json), with zero complete
+CES videos counted. The initial full-download attempt received HTTP 503 for
+the registered manifest before any fragment download; one normal retry with
+unchanged URL and headers succeeded and acquisition is continuing.
+Its remaining byte budget after GTC is 1,292,032,512 bytes, with
 the 6 GiB free-space reserve still enforced.
 
 ## Earlier durable media-prefix checkpoints

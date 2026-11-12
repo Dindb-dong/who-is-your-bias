@@ -1,7 +1,7 @@
 {
   "schema_version": "jensen-regional-replay-artifact-manifest.v1",
   "run_id": "regional-replays-v1",
-  "checked_at": "2026-11-12T21:20:02.263132+00:00",
+  "checked_at": "2026-11-12T21:26:02.226126+00:00",
   "integration_base": "2eb40726b8963d136edd0f25656a89b2dd77a67a",
   "complete_source_count": 1,
   "complete_media_bytes": 855451136,
@@ -27,8 +27,14 @@
       "source_id": "ces-2026-cn-video",
       "event_family_id": "nvidia-ces-2026",
       "split": "train",
-      "status": "first_fragment_sample_only_full_acquisition_pending",
-      "complete_video_count": 0
+      "status": "incomplete_contiguous_prefix_saved_and_verified",
+      "complete_video_count": 0,
+      "saved_prefix_bytes": 25165824,
+      "saved_prefix_sha256": "14fb478e434848f7f752b90ba2563fb5bca2d8d2852a25093262fdeb3b681540",
+      "report": "ces-prefix001.json",
+      "manifest_request_attempts": 2,
+      "first_manifest_request_status": 503,
+      "second_manifest_request_status": 200
     }
   ],
   "language_review": "unverified",

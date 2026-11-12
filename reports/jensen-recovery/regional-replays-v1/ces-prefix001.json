@@ -1,0 +1,56 @@
+{
+  "schema_version": "jensen-regional-replay-checkpoint.v1",
+  "run_id": "regional-replays-v1",
+  "source_id": "ces-2026-cn-video",
+  "event_family_id": "nvidia-ces-2026",
+  "split": "train",
+  "discovery_url": "https://www.nvidia.cn/events/ces/",
+  "publisher": "NVIDIA China",
+  "checked_at": "2026-11-12T21:25:34.256109+00:00",
+  "status": "incomplete_contiguous_prefix_saved_and_verified",
+  "complete_video_count": 0,
+  "bytes": 25165824,
+  "sha256": "14fb478e434848f7f752b90ba2563fb5bca2d8d2852a25093262fdeb3b681540",
+  "expected_total_fragments": 550,
+  "registered_publisher_manifest_sha256": "b210d95c9a43f7b748b6b6885ff68c568a6c02a76c78f06121e7c80fcca3169f",
+  "expected_full_duration_seconds": 5499.766667,
+  "media_clock": "publisher_VOD_manifest_elapsed",
+  "local_source_clock_offset_seconds": 0,
+  "transcript_clock_mapping_verified": false,
+  "audio_language": "unverified",
+  "dubbing": "unverified",
+  "burned_in_subtitles": "unverified",
+  "speech_training_eligible": false,
+  "reconstruction": {
+    "bytes": 25165824,
+    "sha256": "14fb478e434848f7f752b90ba2563fb5bca2d8d2852a25093262fdeb3b681540",
+    "parts": 1,
+    "verified": true
+  },
+  "reconstruction_manifest": {
+    "file_name": "ces-2026-cn.full.ts.prefix001.json",
+    "file_id": "file_00000000a7b481fd843af036a7168c8c",
+    "library_file_id": "libfile_fde3_f-c2b005731e188191838091fe5a1fe02d_a18ece08681081918d81df44f69c4b1f",
+    "bytes": 543,
+    "sha256": "e06f0e84d32563aa04df68911616692d97097566b0d489ab9655b592a44d2229",
+    "fresh_materialized_sha256": "e06f0e84d32563aa04df68911616692d97097566b0d489ab9655b592a44d2229",
+    "status": "fresh_materialized_exact_bytes_verified"
+  },
+  "objects": [
+    {
+      "index": 0,
+      "file": "ces-2026-cn.full.ts.part001.bin",
+      "offset": 0,
+      "bytes": 25165824,
+      "sha256": "14fb478e434848f7f752b90ba2563fb5bca2d8d2852a25093262fdeb3b681540",
+      "archive_file": "ces-2026-cn.full.ts.part001.bin.tar.gz",
+      "archive_bytes": 25172503,
+      "archive_sha256": "7b5b62750a868af07020a798082277011c4db1f1f0da10cf9fd59254cc02519f",
+      "file_id": "file_00000000fee081fd98738aa9b1f613aa",
+      "library_file_id": "libfile_fde3_f-09d9ad73cdd4819186e20a83b60f5bda_a18ece08681081918d81df44f69c4b1f",
+      "fresh_materialized_archive_sha256": "7b5b62750a868af07020a798082277011c4db1f1f0da10cf9fd59254cc02519f",
+      "status": "fresh_materialized_exact_bytes_verified"
+    }
+  ],
+  "note": "Incomplete contiguous bytes may end inside a TS packet; this is not a complete independently usable recording."
+}
