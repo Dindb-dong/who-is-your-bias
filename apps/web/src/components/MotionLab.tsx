@@ -73,7 +73,7 @@ export function MotionLab({ modelUrl, reducedMotion }: { modelUrl?: string; redu
   }
 
   return <section className="motion-lab" aria-labelledby="motion-lab-heading">
-    <div className="motion-heading"><div><span className="eyebrow">FROM SOURCE VIDEO TO MOVEMENT</span><h2 id="motion-lab-heading">Motion & rig calibration</h2><p>Replay measured face and pose tracks on the reference rig or your own avatar.</p></div><SlidersHorizontal size={27}/></div>
+    <div className="motion-heading"><div><span className="eyebrow">FROM SOURCE VIDEO TO MOVEMENT</span><h2 id="motion-lab-heading">Motion & rig calibration</h2><p>Replay measured face and pose tracks on the reference rig or your own avatar. Bundled TED clips and narration are historical Musk-era evaluation material; they are not Jensen motion or voice.</p></div><SlidersHorizontal size={27}/></div>
     <div className="motion-layout">
       <div className="motion-stage"><AvatarStage speaking={audio.state.status === 'playing'} modelUrl={modelUrl} rigMapping={mapping} framing={framing}
         audioElapsedMs={audio.state.audioElapsedMs} elapsedMs={audio.state.elapsedMs} amplitude={audio.state.amplitude}

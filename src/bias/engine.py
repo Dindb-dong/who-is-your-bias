@@ -11,6 +11,7 @@ from collections.abc import AsyncIterator
 from contextlib import aclosing
 
 from .behavior import plan_behavior
+from .bindings import motion_binding_status
 from .config import Settings
 from .context_budget import ByteBudgetCounter, TokenizerCounter, build_snapshot_messages
 from .corpus import Corpus
@@ -60,7 +61,7 @@ class Engine:
         self.settings = settings
         self.corpus = corpus
         self.prompt_builder = prompt_builder
-        self.motion_library = motion_library
+        self.motion_library = motion_library if motion_library is not None and motion_binding_status(motion_library, corpus) in {"matched", "source_bound"} else None
         self.snapshot = PersonaSnapshot.load(settings.persona_snapshot, corpus) if settings.persona_snapshot else None
         self.counter = ByteBudgetCounter()
         if settings.llm_tokenizer_path:
@@ -288,3 +289,4 @@ class Engine:
         if turn is None:
             raise RuntimeError("The response ended without a result")
         return turn
+

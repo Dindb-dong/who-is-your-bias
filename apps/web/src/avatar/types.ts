@@ -45,7 +45,9 @@ export interface RigPose {
   mouthRound: number;
   browRaise: number;
   browFurrow: number;
+  /** Aggregate eye yaw, positive to display right in a frontal view. */
   gazeX: number;
+  /** Aggregate eye elevation, positive up (headPitch remains positive down). */
   gazeY: number;
   headPitch: number;
   headYaw: number;
@@ -192,4 +194,21 @@ export interface AnimationTelemetry {
   unsupportedFace: string[];
   unsupportedVisemes: string[];
   warning?: string;
+  /** Authored attention behavior, separate from observed clip provenance. */
+  attention?: AttentionTelemetry;
 }
+
+export interface AttentionTelemetry {
+  phase: 'idle' | 'eyes' | 'following' | 'returning' | 'reduced';
+  targetId: string | null;
+  /** Radians in the canonical avatar basis: yaw right, pitch down. */
+  eyeYaw: number;
+  eyePitch: number;
+  headYaw: number;
+  headPitch: number;
+  eyeWeight: number;
+  headWeight: number;
+  /** Missing mapped controls; mapping names alone do not establish deformation quality. */
+  unsupported: string[];
+}
+

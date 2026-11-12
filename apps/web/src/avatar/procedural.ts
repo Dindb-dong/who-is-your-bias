@@ -15,6 +15,8 @@ export interface AvatarRig {
   dispose: () => void;
 }
 
+export type PortraitStyle = 'reference' | 'jensen';
+
 type Material = MeshStandardMaterial;
 
 const ellipsoid = (material: Material, scale: [number, number, number], at: [number, number, number], segments = 32): Mesh => {
@@ -177,19 +179,21 @@ function shirtGeometry(): BufferGeometry {
 }
 
 /** Procedural portrait rig. This is a stylized stand-in, not a face scan. */
-export function createProceduralRig(): AvatarRig {
-  const root = new Group(); root.name = 'proceduralPortrait';
+export function createProceduralRig(style: PortraitStyle = 'reference'): AvatarRig {
+  const jensen = style === 'jensen';
+  const root = new Group(); root.name = jensen ? 'jensenStylizedPortrait' : 'proceduralPortrait';
+  root.userData.portraitStyle = style;
   const skin = new MeshStandardMaterial({ color: '#d0a58c', roughness: 0.7, metalness: 0 });
   const faceMaterial = new MeshStandardMaterial({ vertexColors: true, roughness: 0.72, metalness: 0 });
   const ears = new MeshStandardMaterial({ color: '#bd8d7a', roughness: 0.75 });
   const lips = new MeshStandardMaterial({ color: '#a86f66', roughness: 0.69 });
   const crease = new MeshStandardMaterial({ color: '#5f3f38', roughness: 0.85 });
-  const hair = new MeshStandardMaterial({ color: '#171511', roughness: 0.69, metalness: 0.03 });
-  const strandMaterial = new MeshStandardMaterial({ color: '#28221e', roughness: 0.78 });
-  const shirt = new MeshStandardMaterial({ color: '#202320', roughness: 0.94 });
+  const hair = new MeshStandardMaterial({ color: jensen ? '#9d9f9a' : '#171511', roughness: 0.69, metalness: 0.03 });
+  const strandMaterial = new MeshStandardMaterial({ color: jensen ? '#c2c1b9' : '#28221e', roughness: 0.78 });
+  const shirt = new MeshStandardMaterial({ color: jensen ? '#111412' : '#202320', roughness: jensen ? 0.42 : 0.94, metalness: jensen ? 0.08 : 0 });
   const shirtSeam = new MeshStandardMaterial({ color: '#30342e', roughness: 0.96 });
   const eyeWhite = new MeshStandardMaterial({ color: '#dedbd0', roughness: 0.38 });
-  const irisMaterial = new MeshStandardMaterial({ color: '#78877c', roughness: 0.36 });
+  const irisMaterial = new MeshStandardMaterial({ color: jensen ? '#3a3028' : '#78877c', roughness: 0.36 });
   const pupilMaterial = new MeshStandardMaterial({ color: '#111715', roughness: 0.26 });
   const highlight = new MeshStandardMaterial({ color: '#ffffff', roughness: 0.2, emissive: '#bfcdbf', emissiveIntensity: 0.15 });
 
@@ -221,12 +225,41 @@ export function createProceduralRig(): AvatarRig {
     head.add(curveMesh(points, 0.0025, strandMaterial, 28));
   }
 
+  if (jensen) {
+    // Authored preview accessories, never a photo reconstruction or identity scan.
+    const frames = new MeshStandardMaterial({ color: '#171a18', roughness: 0.30, metalness: 0.55 });
+    const spectacles = new Group(); spectacles.name = 'jensenGlasses'; head.add(spectacles);
+    for (const side of [-1, 1]) {
+      const cx = side * 0.14;
+      const rim = curveMesh([
+        [cx - 0.108, 0.126, 0.340], [cx - 0.10, 0.015, 0.347],
+        [cx + 0.097, 0.015, 0.347], [cx + 0.108, 0.124, 0.340],
+        [cx + 0.020, 0.141, 0.352], [cx - 0.108, 0.126, 0.340],
+      ], 0.007, frames, 36);
+      rim.name = side < 0 ? 'glassesRight' : 'glassesLeft'; spectacles.add(rim);
+      spectacles.add(curveMesh([[side * 0.247, 0.116, 0.342], [side * 0.337, 0.106, 0.158],
+        [side * 0.371, 0.071, -0.022]], 0.006, frames));
+    }
+    spectacles.add(curveMesh([[-0.032, 0.119, 0.354], [0, 0.127, 0.370], [0.032, 0.119, 0.354]], 0.006, frames));
+    // Jacket lapels, a central zipper and long sleeves keep the prototype coherent.
+    for (const side of [-1, 1]) {
+      torso.add(curveMesh([[side * 0.17, 1.32, 0.135], [side * 0.29, 1.19, 0.209],
+        [side * 0.17, 1.04, 0.235], [side * 0.045, 0.91, 0.230]], 0.024, shirtSeam));
+      torso.add(curveMesh([[side * 0.34, 0.79, 0.232], [side * 0.23, 0.62, 0.223]], 0.006, frames));
+    }
+    const zipper = new MeshStandardMaterial({ color: '#757975', roughness: 0.35, metalness: 0.6 });
+    const zip = curveMesh([[0, 0.12, 0.172], [0, 0.53, 0.220], [0, 0.97, 0.232]], 0.003, zipper);
+    zip.name = 'jacketZipper'; torso.add(zip);
+    torso.add(ellipsoid(zipper, [0.009, 0.020, 0.005], [0, 0.96, 0.239], 12));
+  }
+
   const eyeGroups: Group[] = []; const irises: Group[] = []; const brows: Group[] = [];
   for (const side of [-1, 1]) {
     const eye = new Group(); eye.name = side < 0 ? 'eyeRight' : 'eyeLeft';
     eye.position.set(side * 0.138, 0.083, 0.302); head.add(eye); eyeGroups.push(eye);
     eye.add(ellipsoid(eyeWhite, [0.065, 0.022, 0.025], [0, 0, 0], 32));
-    const iris = new Group(); iris.position.set(0, 0, 0.026); eye.add(iris); irises.push(iris);
+    const iris = new Group(); iris.name = side < 0 ? 'irisRight' : 'irisLeft';
+    iris.position.set(0, 0, 0.026); eye.add(iris); irises.push(iris);
     iris.add(ellipsoid(irisMaterial, [0.019, 0.02, 0.005], [0, 0, 0], 24));
     iris.add(ellipsoid(pupilMaterial, [0.009, 0.010, 0.005], [0, 0, 0.004], 20));
     iris.add(ellipsoid(highlight, [0.004, 0.004, 0.002], [-0.005, 0.006, 0.009], 12));
@@ -267,10 +300,10 @@ export function createProceduralRig(): AvatarRig {
     shoulder.position.set(side * 0.59, 1.12, -0.025); shoulder.rotation.z = side * 0.13;
     torso.add(shoulder); shoulders.push(shoulder);
     shoulder.add(ellipsoid(shirt, [0.19, 0.28, 0.22], [side * 0.035, -0.11, 0], 32));
-    shoulder.add(ellipsoid(skin, [0.12, 0.27, 0.13], [side * 0.04, -0.40, 0.012], 32));
+    shoulder.add(ellipsoid(jensen ? shirt : skin, [0.12, 0.27, 0.13], [side * 0.04, -0.40, 0.012], 32));
     const forearm = new Group(); forearm.name = side > 0 ? 'leftForearm' : 'rightForearm';
     forearm.position.set(side * 0.04, -0.61, 0.01); shoulder.add(forearm); forearms.push(forearm);
-    forearm.add(ellipsoid(skin, [0.10, 0.255, 0.105], [0, -0.19, 0], 32));
+    forearm.add(ellipsoid(jensen ? shirt : skin, [0.10, 0.255, 0.105], [0, -0.19, 0], 32));
     const hand = makeHand(skin, side); hand.position.set(0, -0.41, 0); forearm.add(hand); hands.push(hand);
   }
   root.rotation.y = -0.075;
@@ -358,3 +391,4 @@ export function createProceduralRig(): AvatarRig {
     dispose() { disposeObject(root); },
   };
 }
+

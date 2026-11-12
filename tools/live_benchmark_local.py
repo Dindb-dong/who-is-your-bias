@@ -65,6 +65,7 @@ def main(argv=None) -> int:
         parser.add_argument("--" + name, type=Path, required=True)
     for name in ("app-python", "language-python", "voice-python", "corpus-dir"):
         parser.add_argument("--" + name, type=Path)
+    parser.add_argument("--voice-persona-id", default="elon-musk", help="Declared reference subject, or generic. The historical benchmark defaults to Elon Musk.")
     parser.add_argument("--question", default="How does tunnel diameter affect cost? In 12 words.")
     parser.add_argument("--language", choices=("en", "ko"), default="en")
     parser.add_argument("--mode", choices=("rag", "behavior"), default="behavior")
@@ -162,10 +163,10 @@ def main(argv=None) -> int:
             "BIAS_LLM_MAX_TOKENS": str(args.max_output_tokens), "BIAS_LLM_TOKENIZER_PATH": str(language_directory),
             "BIAS_LLM_CONTEXT_WINDOW": "8192", "BIAS_REQUEST_TIMEOUT": str(args.timeout), "BIAS_RETRIEVAL_LIMIT": "2",
             "BIAS_TTS_BASE_URL": voice_url + "/v1", "BIAS_TTS_MODEL": "qwen3-tts", "BIAS_TTS_VOICE": "reference",
-            "BIAS_TTS_LANGUAGE_HINT": "true", "BIAS_CORPUS_DIR": str(args.corpus_dir), "BIAS_PERSONA_SNAPSHOT": "",
+            "BIAS_TTS_LANGUAGE_HINT": "true", "BIAS_TTS_PERSONA_ID": args.voice_persona_id, "BIAS_CORPUS_DIR": str(args.corpus_dir), "BIAS_PERSONA_SNAPSHOT": "",
             "BIAS_RETRIEVAL_BACKEND": "lexical", "BIAS_STYLE_EXAMPLES": "false", "HF_HUB_CACHE": str(args.language_cache)}
         report["configuration"] = {"language_settings": language_settings, "voice_settings": voice_settings,
-            "max_output_tokens": args.max_output_tokens, "request_timeout_seconds": args.timeout,
+            "voice_persona_id": args.voice_persona_id, "max_output_tokens": args.max_output_tokens, "request_timeout_seconds": args.timeout,
             "retrieval_backend": "lexical", "retrieval_limit": 2, "style_examples": False, "persona_snapshot": None,
             "question": args.question, "language": args.language, "mode": args.mode, "lipsync": "not_configured"}
         report["status"] = "starting_services"

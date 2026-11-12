@@ -50,3 +50,11 @@ apps/web/public/models/*
 artifacts/demo-latency/
 # Bounded generated audio from the actual CPU transport pilot.
 !tools/demo_latency/results/qwen4b-qwen06-cpu-2026-11-11/turn-*.wav
+
+
+# Pinned face-detection runtime copied/downloaded by prepare:vision.
+apps/web/public/vision/wasm/
+apps/web/public/vision/vision_bundle.mjs
+apps/web/public/vision/blaze_face_short_range.tflite
+apps/web/public/vision/*.tmp
+apps/web/public/vision/assets.json

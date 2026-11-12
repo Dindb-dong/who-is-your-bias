@@ -36,6 +36,16 @@ describe('retargeted avatar', () => {
     expect(face.morphTargetInfluences?.[0]).toBe(1); rig.dispose();
   });
 
+  it('keeps head direction independent from eye gaze and matches upward gaze across rigs', () => {
+    const { root, head } = model();
+    const eye = new Group(); eye.name = 'LeftEye'; head.add(eye);
+    const rig = createRetargetedRig(root);
+    rig.apply({ ...neutralPose(), gazeX: 0.25, gazeY: 0.2 });
+    expect(head.rotation.y).toBeCloseTo(0.1); expect(head.rotation.x).toBeCloseTo(0);
+    expect(eye.rotation.y).toBeCloseTo(0.25); expect(eye.rotation.x).toBeCloseTo(-0.2);
+    rig.dispose();
+  });
+
   it('calibrates neutral/range and rotates measured deltas through an explicit local basis without drift', () => {
     const { root, face, head } = model();
     const basis = new Quaternion().setFromAxisAngle(new Vector3(0, 0, 1), Math.PI / 2);
@@ -126,3 +136,4 @@ describe('procedural portrait rig', () => {
     expect(rig.diagnostics.unsupportedFace).toContain('noseSneerLeft'); rig.dispose();
   });
 });
+

@@ -34,6 +34,8 @@ export interface Persona {
   capabilities: { llm: boolean; speech: boolean; transcription?: boolean; live_speech?: boolean };
   snapshot?: { id: string; as_of: string; current_dated_training_sources: number; coverage_note: string } | null;
   notice: string;
+  presentation?: { initials: string; topics: string[]; avatar_status: string; avatar_label: string } | null;
+  bindings?: { persona_id: string; voice: { status: string; persona_id: string | null; voice: string }; motion: { status: string; persona_id: string | null } };
 }
 export interface ChatRequest { message: string; session_id?: string; mode: ExperimentMode; language: Language; motion_mode?: MotionMode }
 export type StreamEvent =
@@ -427,4 +429,5 @@ export async function getPreparedSpeech(text: string, language: Language, signal
     timingStatus: value.timing_status,
     timingMessage: typeof value.timing_message === 'string' ? value.timing_message.slice(0, 500) : undefined };
 }
+
 

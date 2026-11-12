@@ -81,6 +81,8 @@ class MotionPrimitive(MotionRecord):
 class MotionCatalog(MotionRecord):
     schema_version: Literal["motion-library.v1"]
     id: str = Field(pattern=ID_PATTERN)
+    # Optional for frozen historical artifacts; new libraries declare a subject.
+    persona_id: str | None = Field(default=None, pattern=ID_PATTERN)
     version: str = Field(min_length=1, max_length=60)
     created_at: str
     sources: list[MotionSource] = Field(min_length=1, max_length=1000)
@@ -403,3 +405,4 @@ class MotionLibrary:
             "fitting": self.catalog.fitting, "evaluation": self.catalog.evaluation,
             "limitations": self.catalog.limitations,
         }
+

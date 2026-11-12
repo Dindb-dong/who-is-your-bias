@@ -183,14 +183,18 @@ export function createRetargetedRig(model: Group, suppliedMapping: RigMapping = 
         if (binding.mesh.morphTargetInfluences) binding.mesh.morphTargetInfluences[binding.index] = bounded(binding.neutral + (contributions.get(key) ?? 0), 0, 1);
       }
       rotate(pose, 'hips'); rotate(pose, 'spine'); rotate(pose, 'chest');
-      rotate(pose, 'head', pose.headPitch + pose.gazeY * 0.2, pose.headYaw + pose.gazeX * 0.2, pose.headRoll);
+      // Eye direction and head direction are independent. Coupling gaze into
+      // this rotation would make an eyes-first attention turn move the head early.
+      rotate(pose, 'head', pose.headPitch, pose.headYaw, pose.headRoll);
       rotate(pose, 'neck', pose.headPitch * 0.2, pose.headYaw * 0.2, pose.headRoll * 0.2);
       for (const [eye, side] of [['leftEye', 'Left'], ['rightEye', 'Right']] as const) {
         const measuredHorizontal = (['In', 'Out'] as const).some((axis) => pose.face?.[`eyeLook${axis}${side}`] !== undefined && morphs.has(`eyeLook${axis}${side}`));
         const measuredVertical = (['Up', 'Down'] as const).some((axis) => pose.face?.[`eyeLook${axis}${side}`] !== undefined && morphs.has(`eyeLook${axis}${side}`));
         // Eye-direction morphs already move the eyeball. Do not add a second
         // authored or observed eye-bone rotation to the same measured gaze.
-        rotate(pose, eye, measuredVertical ? 0 : pose.gazeY, measuredHorizontal ? 0 : pose.gazeX, 0, !measuredHorizontal && !measuredVertical);
+        // Aggregate gazeY is positive up, like the procedural portrait. A
+        // positive local X rotation of a +Z-facing eye points down.
+        rotate(pose, eye, measuredVertical ? 0 : -pose.gazeY, measuredHorizontal ? 0 : pose.gazeX, 0, !measuredHorizontal && !measuredVertical);
       }
       rotate(pose, 'jaw', morphs.has('jawOpen') || nativeMouth ? 0 : (face.jawOpen ?? pose.jawOpen) * 0.2, 0, 0, !morphs.has('jawOpen') && !nativeMouth);
       rotate(pose, 'leftShoulder', 0, 0, pose.shrug * 0.08); rotate(pose, 'rightShoulder', 0, 0, -pose.shrug * 0.08);
@@ -263,3 +267,4 @@ export async function loadGlbRig(url: string, mapping: RigMapping, signal?: Abor
   }
   catch (error) { disposeObject(gltf.scene); throw error; }
 }
+

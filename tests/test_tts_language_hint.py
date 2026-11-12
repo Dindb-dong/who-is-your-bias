@@ -50,7 +50,7 @@ def test_enabled_korean_hint_reaches_qwen_through_both_application_routes(endpoi
         generate_voice_clone=lambda **kw: (calls.append(kw) or [[0.1] * 2400], 24000))
     voice_app = create_voice_app(VoiceSettings(reference_wav=reference, reference_text="A synthetic reference."), model_loader=lambda _: model)
     app = create_app(Settings(web_dir=tmp_path / "absent", tts=ProviderSettings("http://voice/v1", "qwen3-tts"),
-        tts_voice="reference", tts_language_hint=True), corpus=corpus)
+        tts_voice="reference", tts_persona_id="generic", tts_language_hint=True), corpus=corpus)
     with TestClient(app) as client:
         app.state.speech.transport = httpx.ASGITransport(app=voice_app)
         response = client.post(endpoint, json={"text": "한국어 음성 테스트입니다.", "language": "ko"})
@@ -83,3 +83,4 @@ def test_language_hint_environment_is_opt_in_and_strict(monkeypatch):
         Settings.from_env()
     with pytest.raises(ValueError, match="tts_language_hint"):
         Settings(tts_language_hint="true")
+

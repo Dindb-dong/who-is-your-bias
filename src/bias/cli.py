@@ -82,6 +82,8 @@ def main(argv: list[str] | None = None) -> int:
             result = Retriever(corpus).search(args.query, limit=args.limit, behavior=args.behavior)
             print(json.dumps({"confidence": result.confidence, "reason": result.reason, "hits": [{"score": hit.score, "matched_terms": hit.matched_terms, "citation": corpus.citation(hit.evidence.id).model_dump(mode="json")} for hit in result.hits]}, ensure_ascii=False, indent=2))
         elif args.command == "evaluate":
+            if args.cases is None and corpus.persona.id != "elon-musk":
+                raise ValueError("The bundled default evaluation cases belong to the historical Musk corpus. Supply --cases for the active persona.")
             files = args.cases or sorted((repository_root() / "data/evaluation").glob("*.json"))
             if not files:
                 raise ValueError("No evaluation files found")

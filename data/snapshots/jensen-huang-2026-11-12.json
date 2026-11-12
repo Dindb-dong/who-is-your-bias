@@ -1,0 +1,52 @@
+{
+  "schema_version": "persona-snapshot.v1",
+  "id": "jensen-huang-2026-11-12-seed.v1",
+  "persona_id": "jensen-huang",
+  "as_of": "2026-11-12T04:17:28Z",
+  "current_evidence_since": "2026-01-01",
+  "corpus_sha256": "09a81cb03831650ca04107b542bcbace07f0f5f089cedb71a94fc49d6e85e9ee",
+  "knowledge_version": "jensen-huang-editorial-seed.v1",
+  "style_version": "editorial-guidance-no-trained-adapter",
+  "voice_version": "unconfigured-no-jensen-reference",
+  "appearance_version": "designed-prototype-not-qualified-likeness",
+  "sources": [
+    {
+      "source_id": "nvidia-blackwell-ultra-2025",
+      "event_family": "nvidia-gtc-2025",
+      "event_at": null,
+      "published_at": "2025-03-18",
+      "ingested_at": "2026-11-12T04:17:28Z",
+      "split": "train",
+      "source_content_sha256": null,
+      "assertion_period_start": null,
+      "assertion_period_end": null,
+      "assertion_period_basis": null
+    },
+    {
+      "source_id": "nvidia-computex-2024",
+      "event_family": "nvidia-computex-2024",
+      "event_at": null,
+      "published_at": "2024-06-02",
+      "ingested_at": "2026-11-12T04:17:28Z",
+      "split": "train",
+      "source_content_sha256": null,
+      "assertion_period_start": null,
+      "assertion_period_end": null,
+      "assertion_period_basis": null
+    },
+    {
+      "source_id": "nvidia-computex-2025",
+      "event_family": "nvidia-computex-2025",
+      "event_at": null,
+      "published_at": "2025-05-18",
+      "ingested_at": "2026-11-12T04:17:28Z",
+      "split": "train",
+      "source_content_sha256": null,
+      "assertion_period_start": null,
+      "assertion_period_end": null,
+      "assertion_period_basis": null
+    }
+  ],
+  "statement_links": [],
+  "coverage_note": "Three NVIDIA publications from 2024-2025, eight editorial summaries. No current 2026 position coverage, original interview Q&A, aligned speech or observed behavior is claimed."
+}

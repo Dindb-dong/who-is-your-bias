@@ -3,6 +3,8 @@ import { Quaternion, Vector3 } from 'three';
 import type { AvatarFraming } from '../avatar/builtin';
 import { BONE_CHANNELS, FACE_CHANNELS, VISEMES } from '../avatar/channels';
 import { AvatarRenderer } from '../avatar/renderer';
+import type { PortraitStyle } from '../avatar/procedural';
+import type { AttentionTarget } from '../avatar/attention';
 import { visemesToFace } from '../avatar/speech';
 import { neutralPose } from '../avatar/timeline';
 import { parseRigMapping } from '../avatar/validation';
@@ -20,6 +22,8 @@ export interface AvatarStageProps {
   performanceClip?: AvatarClip;
   observationElapsedMs?: number;
   allowGeometryPreview?: boolean;
+  attentionTarget?: AttentionTarget | null;
+  portraitStyle?: PortraitStyle;
   showCalibration?: boolean;
   framing?: AvatarFraming;
   modelUrl?: string;
@@ -36,7 +40,7 @@ export interface AvatarStageProps {
 /** GPU resources are owned by one mount, including under React StrictMode. */
 export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, modelUrl,
   rigMapping, reducedMotion, onReady, onError, onTelemetry, className = '',
-  audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview = false,
+  audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview = false, attentionTarget, portraitStyle = 'reference',
   showCalibration = false, framing = 'portrait', auditionStartKey = 0 }: AvatarStageProps) {
   const host = useRef<HTMLDivElement>(null);
   const runtime = useRef<AvatarRenderer | null>(null);
@@ -85,7 +89,7 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
         },
         onTelemetry: (value) => {
           if (!alive) return;
-          if (callbacks.current.showCalibration) setTelemetry(value);
+          setTelemetry(value);
           callbacks.current.onTelemetry?.(value);
         },
         onAuditionState: (recording) => { if (alive) {
@@ -103,8 +107,10 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
 
   useEffect(() => {
     runtime.current?.setPlayback({ speaking, timeline, elapsedMs, amplitude, reducedMotion: reducedMotion ?? systemReduced,
-      audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview });
-  }, [speaking, timeline, elapsedMs, amplitude, reducedMotion, systemReduced, epoch, audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview]);
+      audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview, attentionTarget });
+  }, [speaking, timeline, elapsedMs, amplitude, reducedMotion, systemReduced, epoch, audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview, attentionTarget]);
+
+  useEffect(() => { runtime.current?.setPortraitStyle(portraitStyle); }, [portraitStyle, epoch]);
 
   useEffect(() => { void runtime.current?.setModel(modelUrl, localMapping ?? rigMapping); }, [modelUrl, localMapping, rigMapping, epoch]);
 
@@ -173,9 +179,12 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
 
   return (
     <div className={`avatar-stage${showCalibration ? ' avatar-stage--calibration' : ''} ${className}`} data-testid="avatar-stage"
-      data-rig-kind={diagnostics?.kind ?? 'initializing'} data-face-controls={diagnostics?.morphs.length ?? 0}
+      data-portrait-style={portraitStyle} data-rig-kind={diagnostics?.kind ?? 'initializing'} data-face-controls={diagnostics?.morphs.length ?? 0}
       data-visemes={diagnostics?.visemes?.length ?? 0} data-mapped-joints={diagnostics?.bones.length ?? 0}
       data-framing={framing} data-model-state={loadingModel ? 'loading' : modelError ? 'fallback' : diagnostics ? 'ready' : 'initializing'}
+      data-attention-phase={telemetry?.attention?.phase ?? 'idle'} data-attention-target={telemetry?.attention?.targetId ?? ''}
+      data-attention-eye-yaw={telemetry?.attention?.eyeYaw ?? 0} data-attention-eye-pitch={telemetry?.attention?.eyePitch ?? 0}
+      data-attention-head-yaw={telemetry?.attention?.headYaw ?? 0} data-attention-head-pitch={telemetry?.attention?.headPitch ?? 0}
       style={{ position: 'relative', width: '100%', height: showCalibration ? 'auto' : '100%', minHeight: 440, overflow: 'hidden', background: 'radial-gradient(ellipse at 50% 38%, #26301f 0%, #151c13 45%, #10160f 100%)' }}>
       <div className="avatar-visual">
         <div ref={host} style={{ position: 'absolute', inset: 0 }} aria-hidden={fatal ? true : undefined} />
@@ -194,6 +203,9 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
         <p>{diagnostics?.morphs.length ?? 0}/52 named face controls · {diagnostics?.visemes?.length ?? 0}/15 native visemes · {diagnostics?.bones.length ?? 0} mapped joints</p>
         <p style={{ color: '#b8c4ad', lineHeight: 1.55 }}>Face: {telemetry?.faceSource ?? 'designed'} · Speech: {telemetry?.speechSource ?? 'silent'}</p>
         <p style={{ color: '#b8c4ad', lineHeight: 1.55 }}>Body: {telemetry?.boneSource ?? 'designed'}</p>
+        {telemetry?.attention && telemetry.attention.phase !== 'idle' && <p style={{ color: '#b8c4ad', lineHeight: 1.55 }}>
+          Designed attention: {telemetry.attention.phase}{telemetry.attention.unsupported.length > 0 ? ` · Unavailable: ${telemetry.attention.unsupported.join(', ')}` : ''}
+        </p>}
         {telemetry?.warning && <p role="status" style={{ color: '#f0d6a0' }}>{telemetry.warning}</p>}
         <label style={{ display: 'flex', gap: 8, alignItems: 'center', marginBottom: 10 }}><input type="checkbox" checked={debugEnabled} onChange={(event) => setDebugEnabled(event.target.checked)}/> Manual pose preview</label>
         <label style={{ display: 'grid', gap: 6 }}>Control
@@ -239,3 +251,4 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
 }
 
 export default AvatarStage;
+

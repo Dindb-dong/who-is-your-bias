@@ -24,7 +24,9 @@ def main() -> int:
     for name in (signal.SIGINT, signal.SIGTERM):
         signal.signal(name, stop)
     try:
-        for command in ([sys.executable, "-m", "uvicorn", "bias.api:app", "--host", "127.0.0.1", "--port", "8000", "--reload"], [npm, "run", "dev", "--workspace", "@bias/web"]):
+        # Use the root lifecycle hook so a fresh install provisions the pinned
+        # same-origin vision assets before Vite serves capture controls.
+        for command in ([sys.executable, "-m", "uvicorn", "bias.api:app", "--host", "127.0.0.1", "--port", "8000", "--reload"], [npm, "run", "dev"]):
             processes.append(subprocess.Popen(command, cwd=root, start_new_session=os.name != "nt"))
         print("Studio: http://127.0.0.1:5173 | API: http://127.0.0.1:8000", flush=True)
         while not stopping and all(process.poll() is None for process in processes):
