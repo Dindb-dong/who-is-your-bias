@@ -71,4 +71,32 @@ unchanged. The runner now compares canonical URL strings, marker identities and
 all display content after explicit citation-marker removal. The initial run is
 retained as `preview-attempt-1.json`; no shared API or corpus change was made.
 
-Status: corrected runner compiled; the repeated functional run is pending.
+## Measured preview result
+
+The corrected real HTTP run passed **91 of 91 assertions**. The result and exact
+imported API module hashes are recorded in `preview-result.json`. The raw traces
+from both runs were uploaded and freshly retrieved with matching SHA-256;
+`artifact-receipts.json` records the stable artifact identifiers and hashes.
+
+| Check | Observed result |
+| --- | --- |
+| Corpus and source inspection | Nine train sources, 554 original exchanges, 410 factual-eligible records; source records and returned citation text, locators and URLs match the frozen corpus. |
+| Avatar asset | Actual HTTP response is 2,530,256 bytes with SHA-256 `dea0c921fb7d5668527bd8ee9082f382b14e8d300c43936842e15356dc7d90cd`. |
+| Motion | Six clips from three events; 580 frames, 36 preview primitives, zero reviewed runtime primitives. Each representative clip returned 404 without preview permission and 200 with it. No uncontextualized clip was selected by chat. |
+| Same-session conversation | CUDA question, follow-up, explicit correction and AI-factory topic switch retained four inspectable user turns with the expected reference provenance. Deletion returned 200 and the subsequent inspection returned 404. |
+| Current/private/endorsement controls | Each returned `insufficient` with zero citations. No present-day coverage or private information was inferred. |
+| Korean request | Returned an explicitly labeled original-source preview. This is not newly generated Korean persona speech. |
+| SSE | Real TCP `meta → status → status → token → status → result → done`; metadata at 2.172 ms, original-source text at 62.673 ms, complete at 64.336 ms in this one run. |
+| Client disconnect | The client closed after `meta`; zero turns were stored and session deletion succeeded. This tests peer disconnect and session release with a fast preview, not cancellation of neural inference. |
+
+These measurements establish functional wiring and provenance. Citation binding
+does not establish that every retrieved exchange answers the question well.
+The retrieval acceptance gate remains unmet. The reported milliseconds measure
+preview assembly and HTTP delivery, not language-model latency, and are one
+observation rather than a throughput benchmark. Live generated speech/avatar
+synchronization, two simultaneous neural providers on this host, generated text
+quality and human voice/likeness acceptance remain outside this preview result.
+
+The optional main-API speech proxy check is pending the voice evaluation memory
+slot. Its waveform, actual provider identity and audio clock will be recorded
+separately. It will run with no neural text model loaded.

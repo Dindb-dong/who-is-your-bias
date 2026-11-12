@@ -1,0 +1,26 @@
+{
+  "schema_version": "runtime-artifact-receipts.v1",
+  "artifacts": [
+    {
+      "run_id": "jensen-runtime-preview-v1",
+      "role": "Raw actual HTTP responses from initial and corrected preview checks; source excerpts excluded from Git",
+      "file_name": "jensen-runtime-preview-evidence-v1.tar.gz",
+      "file_id": "file_00000000e73881fd8b7a65faf4f94fe9",
+      "library_file_id": "libfile_fde3_f-061938b1b7a08191b4c15cfe89da7e3f_a18ece08681081918d81df44f69c4b1f",
+      "bytes": 280575,
+      "sha256": "b44d33cd1e48943e3a2dd6167f8893e15f9d190a736ed2019cd574ce3bcf72b1",
+      "status": "uploaded_and_fresh_readback_sha256_verified",
+      "verified_at": "2026-11-12T18:54:26.270160+00:00",
+      "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+      "initial_assertions": {
+        "passed": 83,
+        "total": 90,
+        "failure_scope": "URL serialization and SSE display transformation in smoke harness"
+      },
+      "corrected_assertions": {
+        "passed": 91,
+        "total": 91
+      }
+    }
+  ]
+}
