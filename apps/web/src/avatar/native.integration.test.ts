@@ -1,10 +1,11 @@
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
-import { Mesh, MeshStandardMaterial, Object3D, Quaternion, SkinnedMesh, Vector3 } from 'three';
+import { Mesh, MeshStandardMaterial, Object3D, PerspectiveCamera, Quaternion, SkinnedMesh, Vector3 } from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { describe, expect, it } from 'vitest';
-import { createResearchHumanMapping, mergeRigMappings } from './builtin';
+import { avatarView, createResearchHumanMapping, mergeRigMappings } from './builtin';
+import { createUpperBodyFramer } from './framing';
 import { FACE_CHANNELS, FINGER_CHANNELS, VISEMES } from './channels';
 import { sampleMotion } from './motion';
 import { createRetargetedRig } from './retarget';
@@ -217,6 +218,33 @@ describe('shipped Jensen source-fitted candidate', () => {
     expect(largestChange(skin, baseline)).toBeGreaterThan(.01);
     rig.apply(neutralPose()); update();
     expect(largestChange(skin, baseline)).toBeLessThan(1e-6);
+    rig.dispose();
+  });
+
+  it('fits actual posed hand skin on narrow and wide screens without an empty full-body mobile view', async () => {
+    const { rig, meshes, update } = await loadHuman(candidate);
+    const skin = meshes.reduce((a, b) => a.geometry.attributes.position.count > b.geometry.attributes.position.count ? a : b);
+    const joint = skin.geometry.attributes.skinIndex; const weight = skin.geometry.attributes.skinWeight;
+    const handVertices = Array.from({ length: joint.count }, (_, index) => index).filter((index) =>
+      [0, 1, 2, 3].some((slot) => weight.getComponent(index, slot) > .05 && /^(finger|wrist)/.test(skin.skeleton.bones[joint.getComponent(index, slot)].name)));
+    expect(handVertices.length).toBeGreaterThan(100);
+    const fit = createUpperBodyFramer(rig.root, rig.diagnostics)!; expect(fit).not.toBeNull();
+    const mobile = fit(.72);
+    expect(mobile.position[2]).toBeLessThan(avatarView('glb', 'upper_body', .72).position[2] * .85);
+    const clip = parseAvatarClip(JSON.parse(await readFile(new URL('../../public/motion/jensen/goldman-0164-8s.json', import.meta.url), 'utf8')), true);
+    for (const time of [0, 1800, 3500, 6000]) {
+      rig.apply({ ...neutralPose(), ...sampleMotion(clip, time, true)! }); update();
+      for (const aspect of [.48, .72, 1.6]) for (const yaw of [-.35, 0, .35]) {
+        const view = fit(aspect, new Vector3(Math.sin(yaw), .08, Math.cos(yaw)));
+        const camera = new PerspectiveCamera(view.fov, aspect, .1, 30);
+        camera.position.fromArray(view.position); camera.lookAt(new Vector3().fromArray(view.target)); camera.updateMatrixWorld();
+        for (const index of handVertices) {
+          const point = skin.getVertexPosition(index, new Vector3()).applyMatrix4(skin.matrixWorld).project(camera);
+          expect(Math.abs(point.x)).toBeLessThan(.98); expect(Math.abs(point.y)).toBeLessThan(.98);
+          expect(point.z).toBeLessThan(1);
+        }
+      }
+    }
     rig.dispose();
   });
 });

@@ -1,10 +1,11 @@
 import {
   ACESFilmicToneMapping, AmbientLight, CircleGeometry, DirectionalLight,
   FogExp2, HemisphereLight, Mesh, MeshBasicMaterial, MeshStandardMaterial,
-  PerspectiveCamera, PlaneGeometry, Scene, SRGBColorSpace, Vector2, WebGLRenderer,
+  PerspectiveCamera, PlaneGeometry, Scene, SRGBColorSpace, Vector2, Vector3, WebGLRenderer,
 } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { avatarView, type AvatarFraming } from './builtin';
+import { createUpperBodyFramer } from './framing';
 import { disposeObject } from './dispose';
 import { createProceduralRig, type AvatarRig, type PortraitStyle } from './procedural';
 import { loadGlbRig } from './retarget';
@@ -67,6 +68,7 @@ export class AvatarRenderer {
   private audition?: AuditionRecorder;
   private attention = new AttentionController();
   private portraitStyle: PortraitStyle = 'reference';
+  private upperBodyFramer: ReturnType<typeof createUpperBodyFramer> = null;
 
   constructor(private host: HTMLElement, private callbacks: RendererCallbacks = {}) {
     this.renderer = new WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
@@ -167,7 +169,7 @@ export class AvatarRenderer {
     // Consume pre-existing drag inertia, then reset the camera. Disabling input
     // alone does not stop OrbitControls' damping from moving a comparison view.
     const damping = this.controls.enableDamping; this.controls.enableDamping = false;
-    this.controls.update(); this.resetView(); this.controls.enableDamping = damping; this.controls.enabled = false;
+    this.controls.update(); this.resetView(true); this.controls.enableDamping = damping; this.controls.enabled = false;
     this.start = performance.now(); this.previousFrame = 0; this.pose = neutralPose();
     const size = this.renderer.getSize(new Vector2());
     this.audition = new AuditionRecorder({ schema_version: 'avatar-audition-run.v1', protocol: AUDITION_PROTOCOL,
@@ -237,6 +239,7 @@ export class AvatarRenderer {
   private replaceRig(rig: AvatarRig): void {
     this.scene.remove(this.rig.root); this.rig.dispose(); this.rig = rig;
     this.pose = neutralPose(); this.attention.reset(); rig.apply(this.pose); this.scene.add(rig.root);
+    this.upperBodyFramer = createUpperBodyFramer(rig.root, rig.diagnostics);
     this.canvas.dataset.avatar = rig.diagnostics.kind;
     this.canvas.dataset.portraitStyle = this.portraitStyle;
     this.canvas.setAttribute('aria-label', rig.diagnostics.kind === 'glb'
@@ -304,7 +307,17 @@ export class AvatarRenderer {
       this.lastTelemetry = now;
       this.callbacks.onTelemetry?.(telemetry);
     }
-    this.controls.update(); this.renderer.render(this.scene, this.camera);
+    this.controls.update();
+    if (this.framing === 'upper_body' && this.upperBodyFramer && !this.audition?.recording) {
+      const direction = this.camera.position.clone().sub(this.controls.target).normalize();
+      const view = this.upperBodyFramer(this.camera.aspect, direction);
+      const required = new Vector3().fromArray(view.position).distanceTo(this.controls.target);
+      const current = this.camera.position.distanceTo(this.controls.target);
+      // Expand immediately so a new hand pose cannot be cropped; ease inward.
+      const distance = required >= current ? required : current + (required-current)*(1-Math.exp(-Math.min(delta, .1)*.8));
+      this.camera.position.copy(this.controls.target).addScaledVector(direction, distance);
+    }
+    this.renderer.render(this.scene, this.camera);
     if (this.audition?.recording) {
       this.audition.add({ monotonicMs: now, audioMs: this.playback.audioElapsedMs ?? null, speaking: this.playback.speaking,
         telemetry, drawCalls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles,
@@ -314,9 +327,10 @@ export class AvatarRenderer {
     this.raf = requestAnimationFrame(this.frame);
   };
 
-  resetView(): void {
+  resetView(fixedEnvelope = false): void {
     this.stopAudition('view_reset');
-    const view = avatarView(this.rig.diagnostics.kind, this.framing, this.camera.aspect);
+    const view = !fixedEnvelope && this.framing === 'upper_body' && this.upperBodyFramer
+      ? this.upperBodyFramer(this.camera.aspect) : avatarView(this.rig.diagnostics.kind, this.framing, this.camera.aspect);
     this.camera.position.fromArray(view.position); this.controls.target.fromArray(view.target);
     this.camera.fov = view.fov; this.camera.updateProjectionMatrix(); this.controls.update();
   }

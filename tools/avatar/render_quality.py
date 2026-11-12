@@ -84,8 +84,15 @@ def main():
             camera.data.sensor_fit = 'AUTO'; camera.data.lens = 68
         else:
             aspect = width/height; tangent = math.tan(math.radians(18))
-            distance = max(1.05/tangent, 1.30/(tangent*max(.2, aspect)))*unit
-            target = Vector((0, 0, bottom+1.65*unit)); camera.location = (0, distance, target.z)
+            target = Vector((0, 0, bottom+1.65*unit)); distance = 2.3*unit
+            points = [(Vector((x*unit,0,bottom+z*unit)),.06*unit) for x,z in [(-.4,1.05),(.4,1.05),(0,2.4)]]
+            for control in JOINTS:
+                if control not in ['head','chest'] and (not control.startswith(('left','right')) or control.endswith('Eye')): continue
+                radius = .27 if control == 'head' else .22 if control == 'chest' else .12 if any(part in control for part in ['Shoulder','UpperArm','Forearm']) else .08
+                points.append((point(control),radius*unit))
+            for position,radius in points:
+                distance=max(distance,position.y+radius+(abs(position.x)+radius)/(tangent*max(.2,aspect)*.90),position.y+radius+(abs(position.z-target.z)+radius)/(tangent*.90))
+            camera.location = (0, distance, target.z)
             camera.data.sensor_fit = 'VERTICAL'; camera.data.lens = camera.data.sensor_height/(2*tangent)
         camera.rotation_euler = (target-camera.location).to_track_quat('-Z', 'Y').to_euler()
         bpy.context.view_layer.update()
@@ -123,7 +130,8 @@ def main():
     report = {'schema_version': 'avatar-offline-visual-qa.v1', 'master_sha256': hashlib.sha256(args.master.read_bytes()).hexdigest(),
               'engine': 'Blender Cycles CPU', 'samples': 12, 'threads': 3, 'renders': renders, 'hand_skin_vertices_checked': len(hand_vertex_ids),
               'measured_frame': clip_report, 'browser_rendering': 'not_tested_by_this_command',
-              'human_likeness': 'requires_visual_review', 'notes': ['Portrait views use the same asset and lighting.', 'Stress poses are authored mechanical checks, not observed personal gestures.', 'Mobile framing trades apparent size for complete hand visibility.']}
+              'human_likeness': 'requires_visual_review', 'framing_method': 'current mapped head/arm/hand joint envelope with explicit skin margins; fixed front camera per render',
+              'notes': ['Portrait views use the same asset and lighting.', 'Stress poses are authored mechanical checks, not observed personal gestures.', 'Mobile framing uses the actual pose envelope; full extensions can still require a wider view.']}
     (args.output/'visual-qa-report.json').write_text(json.dumps(report, indent=2, allow_nan=False)+'\n')
     print(json.dumps({'output': str(args.output), 'renders': len(renders), 'hand_vertices': len(hand_vertex_ids)}))
 
