@@ -30,6 +30,13 @@ describe('hand performance contract', () => {
     expect(() => parseAvatarClip({ ...clip, frames: [{ time_ms: 0, bones: { leftExtraFinger: [0, 0, 0, 1] } }] }, true)).toThrow();
   });
 
+  it('retains the exact optional hand-model provenance without requiring it in older clips', () => {
+    const measurement = { engine: 'mediapipe', version: '0.10.21', face_model_sha256: 'c'.repeat(64), hand_model_sha256: 'd'.repeat(64) };
+    expect(parseAvatarClip({ ...clip, measurement }, true).measurement).toEqual(measurement);
+    expect(() => parseAvatarClip({ ...clip, measurement: { ...measurement, hand_model_sha256: 'invalid' } }, true)).toThrow();
+    expect(parseAvatarClip(clip, true).measurement).toBeUndefined();
+  });
+
   it.each([0.48, 0.75, 1.0, 1.6])('keeps the declared hand envelope in frame at aspect %s', (aspect) => {
     const view = avatarView('glb', 'upper_body', aspect);
     const camera = new PerspectiveCamera(view.fov, aspect, 0.1, 30);

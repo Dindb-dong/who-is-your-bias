@@ -187,7 +187,8 @@ export function parseAvatarClip(value: unknown, allowGeometryPreview = false): A
       coordinate_basis: 'right_handed_y_up', bone_rotation_space: 'local_delta' },
     ...(measurement ? { measurement: { engine: text(measurement.engine, 'measurement.engine'), version: text(measurement.version, 'measurement.version'),
       face_model_sha256: hash(measurement.face_model_sha256, 'measurement.face_model_sha256'),
-      ...(measurement.pose_model_sha256 === undefined ? {} : { pose_model_sha256: hash(measurement.pose_model_sha256, 'measurement.pose_model_sha256') }) } } : {}),
+      ...(measurement.pose_model_sha256 === undefined ? {} : { pose_model_sha256: hash(measurement.pose_model_sha256, 'measurement.pose_model_sha256') }),
+      ...(measurement.hand_model_sha256 === undefined ? {} : { hand_model_sha256: hash(measurement.hand_model_sha256, 'measurement.hand_model_sha256') }) } } : {}),
     frames, limitations: data.limitations.map((value) => text(value, 'limitation', 1000)),
   };
 }

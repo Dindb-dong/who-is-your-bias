@@ -4,12 +4,26 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import tempfile
 from pathlib import Path
 
 from tools.media.common import artifact_path, sha256, write_json
 from tools.media.prepare import prepare_clip
 from .asr import transcribe_reference_context
 from .workflow import asr_words, tokens, verify_reference
+
+
+def _checkpoint(path: Path, value: dict) -> None:
+    fd, name = tempfile.mkstemp(prefix=".screen-", dir=path.parent)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as stream:
+            json.dump(value, stream, ensure_ascii=False, indent=2)
+            stream.write("\n"); stream.flush(); os.fsync(stream.fileno())
+        os.replace(name, path)
+    finally:
+        if os.path.exists(name):
+            os.unlink(name)
 
 
 def screen(candidates: list[Path], output: Path, *, model_directory: Path, model_repo: str,
@@ -59,7 +73,7 @@ def screen(candidates: list[Path], output: Path, *, model_directory: Path, model
         summary = {"schema_version": "voice-reference-screen-result.v1", "protocol_sha256": sha256(output / "protocol.json"),
             "references": results, "candidate_count": len(candidates), "processed": len(results),
             "selected": sum(item["selected"] for item in results), "listening_reviewed": 0}
-        write_json(output / "results.json", summary)
+        _checkpoint(output / "results.json", summary)
         print(json.dumps({"processed": len(results), "selected": summary["selected"], "source_id": row["source_id"], "reason": row["reason"]}), flush=True)
     return summary
 

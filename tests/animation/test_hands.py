@@ -53,9 +53,13 @@ def test_export_selects_hands_explicitly_and_drops_unselected_or_missing_frames(
             row["hands"] = [hand]
         rows[1]["hands"][0]["detection_index"] = 1
     manifest, review, output = dataset(tmp_path, mutate=mutate)
+    measured = json.loads(manifest.read_text())
+    measured.update(mediapipe_version="0.10.21", models={"face_sha256": "c" * 64, "hand_sha256": "d" * 64})
+    manifest.write_text(json.dumps(measured))
     data = json.loads(review.read_text()); data["selections"][0]["left_hand_index"] = 0
     review.write_text(json.dumps(data))
     result = export_clip(manifest, review, output, allow_geometry_preview=True)
+    assert result["measurement"]["hand_model_sha256"] == "d" * 64
     assert "leftIndexDistal" in result["frames"][0]["bones"]
     assert not any(name.startswith("left") for name in result["frames"][1].get("bones", {}))
     assert "rightHand" not in result["frames"][2]["bones"]

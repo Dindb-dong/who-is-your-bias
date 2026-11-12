@@ -154,6 +154,18 @@ def test_adjacent_word_is_not_included_by_floating_point_roundoff(context):
     assert result["automatic_checks"]["exact_normalized_text_agreement"] is True
 
 
+def test_source_match_keeps_last_word_when_duration_rounds_down(context):
+    words = context["asr"]["segments"][0]["words"]
+    for index, word in enumerate(words):
+        word["start"] = 1.58 + index * 0.7
+        word["end"] = word["start"] + 0.6
+    words[-1]["end"] = 10.24
+    context["asr_file"].write_text(json.dumps(context["asr"]))
+    result = prepare_reference(context["media_manifest"], context["publisher_file"], context["asr_file"], context["original"],
+        context["output"], speaker="Speaker One", cue_ids=["cue-1", "cue-2"], start_seconds=1.579999999999998, duration_seconds=8.66)
+    assert result["automatic_checks"]["exact_normalized_text_agreement"] is True
+
+
 def test_reference_duration_is_bounded(context):
     with pytest.raises(MediaError, match="reference duration"):
         prepare_reference(context["media_manifest"], context["publisher_file"], context["asr_file"], context["original"],

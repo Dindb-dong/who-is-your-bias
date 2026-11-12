@@ -243,7 +243,7 @@ def prepare_reference(
     alignment = align_transcripts(publisher, asr)
     if len(observed_tokens) < 10:
         raise MediaError("Reference needs at least 10 observed words for contextual matching")
-    target_matches = [item for item in alignment["matches"] if item["source_start_seconds"] >= start and item["source_end_seconds"] <= end]
+    target_matches = [item for item in alignment["matches"] if item["source_start_seconds"] >= start - 1e-7 and item["source_end_seconds"] <= end + 1e-7]
     attribution_agrees = bool(target_matches) and all(item["cue_id"] in cue_ids and item["speaker"] == speaker for item in target_matches)
     exact_agreement = observed_tokens == expected_tokens and len(target_matches) == len(observed_tokens)
     if not attribution_agrees:

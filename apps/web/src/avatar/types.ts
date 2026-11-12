@@ -177,7 +177,7 @@ export interface AvatarClip {
       rotation_operation: 'retained_parent_local_delta';
     };
   };
-  measurement?: { engine: string; version: string; face_model_sha256: string; pose_model_sha256?: string };
+  measurement?: { engine: string; version: string; face_model_sha256: string; pose_model_sha256?: string; hand_model_sha256?: string };
   frames: { time_ms: number; face?: FaceWeights; bones?: BoneRotations }[];
   limitations: string[];
 }

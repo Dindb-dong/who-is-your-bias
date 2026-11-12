@@ -405,7 +405,7 @@ def export_clip(manifest_path: str | Path, review_path: str | Path, output_path:
             "Detection selection and speaker attribution are reviewer assertions, not biometric verification.",
             "The reference frame establishes a rotation reference, not an automatically detected anatomical neutral face.",
             f"Pose landmarks outside the image or below visibility/presence {visibility} are omitted.",
-            "Limb rotations use direction-only swing; axial twist and finger articulation are not measured.",
+            "Limb and finger rotations use direction-only swing; axial twist is not recovered.",
             f"Rotations are bounded to {max_rotation_degrees:g} degrees relative to the reference pose.",
             "Unobserved channels, gaps, and channels unavailable in the reference frame stay absent.",
             "Ignored source-only blendshape categories: " + (", ".join(sorted(unknown_shapes)) or "none"),
@@ -416,6 +416,8 @@ def export_clip(manifest_path: str | Path, review_path: str | Path, output_path:
                                  "face_model_sha256": _hash(manifest["models"].get("face_sha256"), "face model hash")}
         if manifest["models"].get("pose_sha256"):
             result["measurement"]["pose_model_sha256"] = _hash(manifest["models"]["pose_sha256"], "pose model hash")
+        if manifest["models"].get("hand_sha256"):
+            result["measurement"]["hand_model_sha256"] = _hash(manifest["models"]["hand_sha256"], "hand model hash")
     for field in ("input_sha256", "preparation_manifest_sha256"):
         if manifest.get(field):
             result["source"][field] = _hash(manifest[field], field)
