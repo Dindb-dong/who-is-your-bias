@@ -1022,6 +1022,19 @@
       "sha256": "91686bb8070fa9a4e18fd131fe74a58f4ad98031d3adc705527d559844128281",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-m6-heldout-rag-review-packet-v1",
+      "role": "separate-rag-supplied-evidence-agent-review-packet",
+      "review_samples": 4,
+      "source_pools": 6,
+      "file_name": "jensen-m6-heldout-rag-review-packet-v1.tar.gz",
+      "file_id": "file_000000002c90821290fb1e53b63465d1",
+      "library_file_id": "libfile_fde3_f-e32d2ce38c4881919996842bacaf28be_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 34360,
+      "sha256": "5ebceab4cf2e7c9f8a426d3fd31c306345ebbc86f69ab1925235c553a4ee9ac4",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {
