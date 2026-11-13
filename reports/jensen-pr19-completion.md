@@ -10,8 +10,10 @@ ungraded.
 
 This closes execution of the registered experiment; it does not claim that all
 quality or deployment acceptance gates passed. [PR #19](https://github.com/Dindb-dong/who-is-your-bias/pull/19)
-remains the review and current CI entry point. No merge was performed as part
-of this completion work.
+is the integration and CI record. The [post-PR #19 quality roadmap](../docs/jensen-post-pr19-roadmap.md)
+records subsequent work and proposed acceptance gates. Publishing that roadmap
+and merging the implementation do not promote the experimental candidates or
+change these completed measurements.
 
 ## Matched response results
 

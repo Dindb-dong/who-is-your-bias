@@ -6,8 +6,8 @@ Repository: `Dindb-dong/who-is-your-bias`. Integration branch:
 `feat/jensen-resumable-replication`. Base: PR #18 merge
 `8515b5f30f3cd412e18db3d54ee28bf2a4c28694`.
 Implementation review: [PR #19](https://github.com/Dindb-dong/who-is-your-bias/pull/19).
-Last verified code checkpoint before this status update:
-`7827c9328da96419a5768a82d5962796660bc871`.
+Last verified branch checkpoint before this documentation update:
+`bb26b6c26fc6b3382cb28b3c8dc93e05bddee272`.
 
 **Registered execution and agent review are complete.** The
 [PR completion report](../reports/jensen-pr19-completion.md) records **54/54
@@ -15,6 +15,12 @@ matched attempts (22 normal, 32 failed)**, the separate **six RAG attempts
 (four normal, two length failures)**, and actual base/adapter API probes with
 **46/46 functional checks each**. The adapter is not promoted. Human likeness
 and production acceptance remain separate from completing the experiments.
+
+The [post-PR #19 quality roadmap](jensen-post-pr19-roadmap.md) records the planned
+follow-up packages, dependencies, proposed acceptance gates and checkpoint/resume
+procedure. Start with a newly frozen evaluation contract and grounded base/RAG
+responses. Existing completed results remain unchanged; no candidate is promoted
+by documenting or merging that plan.
 
 The [historical handoff](jensen-replication-handoff.md) defines M0–M7.
 This is a new reproducible run; unverified earlier acquisition/training counts
@@ -209,8 +215,9 @@ finishes. Raw media/full transcripts/weights stay outside public Git; actual
 objects have stable IDs, sizes and digests in the versioned manifest. Acquired,
 prepared, trained, uploaded and verified states remain separate.
 
-Resume by fetching the integration branch, reading this file and the artifact
-manifest, then the latest workstream report. Do not repeat expensive work until
+Resume by inspecting current `main` and the chosen authorized task branch,
+reading this file, the follow-up roadmap and the artifact manifest, then the
+latest workstream report. Do not repeat expensive work until
 recoverable artifacts and current checks have been inspected. Training commands
 will be recorded only after their exact pinned inputs and checkpoint paths exist.
 
@@ -247,7 +254,10 @@ Avatar/browser
 functionality is measured, while likeness and contextual gesture quality remain
 ungraded. No accepted persona fidelity, human likeness or latency-target
 acceptance is claimed.
-PR #19 contains the completed work for review; no new merge is authorized.
+The user subsequently requested that the follow-up roadmap be pushed and PR #19
+merged. The [PR record](https://github.com/Dindb-dong/who-is-your-bias/pull/19)
+records actual merge state and CI; this status document does not claim a merge
+before it is observed.
 
 
 ## Frozen response comparison

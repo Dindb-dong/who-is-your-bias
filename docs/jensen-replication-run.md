@@ -4,6 +4,10 @@
 > complete as of 2026-11-13. Read the [completion report](../reports/jensen-pr19-completion.md)
 > and [current execution status](jensen-replication-status.md) for actual results,
 > artifact receipts and acceptance limits. The learned candidates remain optional.
+>
+> The [post-PR #19 quality roadmap](jensen-post-pr19-roadmap.md) defines the next
+> work: fresh evaluation, grounded bilingual answers and retrieval, adapter
+> diagnosis, voice/likeness review, and complete conversational integration.
 
 > Historical pre-resumption status: the earlier execution session was interrupted. This file
 > preserves the original plan. Read the [recovery and remaining-work handoff](jensen-replication-handoff.md)
