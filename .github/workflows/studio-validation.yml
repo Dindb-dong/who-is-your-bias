@@ -44,7 +44,7 @@ jobs:
       - name: Check and build web application
         run: npm run check
       - name: Verify Jensen and shared runtime paths
-        run: uv run pytest -q tests/test_jensen_persona.py tests/test_jensen_retrieval.py tests/test_query_evidence_policy.py tests/test_temporal_dialogue.py
+        run: uv run pytest -q tests/test_jensen_persona.py tests/test_jensen_retrieval.py tests/test_query_evidence_policy.py tests/test_temporal_dialogue.py tests/test_runtime_text_live.py tests/test_runtime_text_cancel_recovery.py
       - name: Validate historical desktop and mobile flows
         run: npm run test:e2e
       - name: Validate Jensen selection and hand playback
