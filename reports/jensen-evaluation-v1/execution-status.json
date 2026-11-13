@@ -1,6 +1,6 @@
 {
   "schema_version": "jensen-matched-execution-status.v1",
-  "recorded_at": "2026-11-13T05:20:34.062432+00:00",
+  "recorded_at": "2026-11-13T05:40:24.512593+00:00",
   "matched_planned_calls": 54,
   "matched_attempted": 54,
   "matched_completed": 22,
@@ -103,10 +103,12 @@
     "report": "heldout-rag-v1/result.json",
     "artifact_id": "jensen-m6-heldout-rag-bf16-v2",
     "contract": "heldout-rag-v1/execution-contract-bf16-v2.json",
-    "semantic_review": "pending"
+    "semantic_review": "supplied_evidence_agent_review_preserved",
+    "semantic_review_report": "heldout-rag-v1/review/support-findings.md",
+    "human_review": "ungraded"
   },
   "collection": "all_54_matched_attempts_collected_and_fresh_readback_verified",
-  "semantic_support_review": "development_completed_heldout_in_progress",
+  "semantic_support_review": "development_and_heldout_agent_reviews_preserved_and_compared",
   "human_review": "ungraded",
   "efficacy_claim": false,
   "development_collection": {
@@ -123,7 +125,16 @@
     "report": "heldout-collection.json",
     "artifact_id": "jensen-m6-heldout-collection-review-bf16-v2",
     "review_samples": 9,
-    "semantic_review": "condition_blind_agent_review_in_progress",
+    "semantic_review": "condition_blind_agent_findings_saved_then_unblinded",
+    "human_review": "ungraded",
+    "semantic_review_report": "heldout-review-v1/comparison.md",
+    "blinded_findings": "heldout-review-v1/blinded-findings.json",
+    "blinded_findings_preservation_checkpoint": "e3ed0796e0124a068f84856985c35839040b4e88"
+  },
+  "promotion_decision": {
+    "default_adapter_promoted": false,
+    "default_prompt_policy_changed": false,
+    "reason": "Heldout adapter completed 0/6 under the frozen limit; no completed style/adapter pair supports a quality or fidelity improvement. Source-support defects remain in completed base/style responses.",
     "human_review": "ungraded"
   }
 }

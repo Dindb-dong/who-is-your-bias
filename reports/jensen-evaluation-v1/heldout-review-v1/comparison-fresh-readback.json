@@ -1,0 +1,14 @@
+{
+  "schema_version": "jensen-heldout-unblinded-comparison-fresh-readback.v1",
+  "status": "fresh_archive_and_every_payload_verified",
+  "file_id": "file_0000000093bc81f5beaf6a2041f67342",
+  "library_file_id": "libfile_fde3_f-86a79cbbb9e481918c9e9ade0967e134_a18ece08681081918d81df44f69c4b1f",
+  "file_name": "jensen-m6-heldout-unblinded-comparison-v1.tar.gz",
+  "size_bytes": 61994,
+  "sha256": "00c8ef26aded9ea99d7d63195aa8642cd199b7f507a214337d65d0bb2cbf9253",
+  "verified_payload_files": 18,
+  "access": "private_coordinator_only",
+  "blind_findings_preservation_checkpoint": "e3ed0796e0124a068f84856985c35839040b4e88",
+  "human_review": "ungraded",
+  "efficacy_claim": false
+}

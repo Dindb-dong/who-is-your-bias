@@ -1096,6 +1096,32 @@
       "sha256": "d748fa547007f2f4cafd528dd01439a82976d297042b50bf499bd2b3715eaedb",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-and-every-payload-verified"
+    },
+    {
+      "artifact_id": "jensen-m6-heldout-unblinded-comparison-v1",
+      "role": "heldout-agent-findings-mapping-and-descriptive-reference-comparison",
+      "file_name": "jensen-m6-heldout-unblinded-comparison-v1.tar.gz",
+      "file_id": "file_0000000093bc81f5beaf6a2041f67342",
+      "library_file_id": "libfile_fde3_f-86a79cbbb9e481918c9e9ade0967e134_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 61994,
+      "sha256": "00c8ef26aded9ea99d7d63195aa8642cd199b7f507a214337d65d0bb2cbf9253",
+      "access": "private_coordinator_only",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-and-every-payload-verified"
+    },
+    {
+      "artifact_id": "jensen-m7-adapter-completion-20261113-v2",
+      "role": "actual-neural-completed29-adapter-api-session-cancellation-recovery",
+      "functional_status": "passed",
+      "passed_checks": 46,
+      "total_checks": 46,
+      "file_name": "jensen-m7-adapter-completion-20261113-v2.tar.gz",
+      "file_id": "file_0000000097e48212b303d2cfb65006e1",
+      "library_file_id": "libfile_fde3_f-4b3fa80c63f4819186226e0839a44613_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 25685,
+      "sha256": "b75ab78afbd0c13347e2a00c3b92fe8062a78ee2948a337d6ad5891230e223fa",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-and-every-payload-verified"
     }
   ],
   "artifact_indexes": {
