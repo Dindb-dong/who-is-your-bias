@@ -1,6 +1,8 @@
 # Jensen replication: interrupted-run handoff and remaining work
 
-**Status: recovery and execution pending.** This document preserves the scope and
+**Historical handoff: superseded by the [PR #19 completion report](../reports/jensen-pr19-completion.md)
+and [current execution status](jensen-replication-status.md).** The pending gates
+below describe the original recovery handoff. This document preserves the scope and
 reported progress of the interrupted post-PR #17 session. PR #18 is being resolved
 as an operating-instructions and recovery-documentation change. Merging that PR
 does not deliver a trained Jensen persona, trained voice, or newly fitted avatar.

@@ -1122,6 +1122,17 @@
       "sha256": "b75ab78afbd0c13347e2a00c3b92fe8062a78ee2948a337d6ad5891230e223fa",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-and-every-payload-verified"
+    },
+    {
+      "artifact_id": "jensen-ci-43372847097-diagnostics",
+      "role": "retained-finalization-ci-rendered-clock-failure",
+      "file_name": "jensen-ci-43372847097-diagnostics.zip",
+      "file_id": "file_000000004d5481f5887490553146b1ea",
+      "library_file_id": "libfile_fde3_f-1aa3cda00e4481919851f2edab41cff1_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 22841495,
+      "sha256": "06b83e76b5cfb5ea679e2fe9e296126ad8ab224bb3f0fc2a69e888a5dc87207f",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-and-every-payload-verified"
     }
   ],
   "artifact_indexes": {

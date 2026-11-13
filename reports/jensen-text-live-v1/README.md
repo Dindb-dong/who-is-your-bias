@@ -1,9 +1,31 @@
 # Actual neural-text API functional probe
 
-This separate M7 procedure runs a real local language provider, the actual main
-API and an HTTP client within one invocation. It is prepared but **has not yet
-run a neural model**. The existing evidence-preview smoke, matched M6 response
-experiment and recorded-audio browser replay remain separate measurements.
+**The actual base and completed29-adapter runs each passed 46/46 functional
+checks.** Both used a real local language provider, the actual main API and a
+loopback TCP HTTP client. Each completed the four registered conversation turns,
+closed a connection after an active model token, retained no partial turn,
+completed one recovery response in the same session, deleted the session and
+stopped both servers without a forced kill. See the [base receipt](base-result.json),
+[adapter receipt](adapter-result.json), and [comparison](comparison.md).
+
+Each result archive and all 12 payload files were freshly restored and verified.
+The original preflight failure is preserved in
+[base-first-preflight-failure.json](base-first-preflight-failure.json): the
+harness incorrectly compared the service's versioned identity envelope with
+the frozen payload alone. The correction requires the exact supported schema
+and every unchanged payload field. [Corrected preparation](schema-corrected-preparation.json)
+records the single changed source hash and the other 49 unchanged inputs.
+Models, prompts, budgets, snapshots and decoding settings were unchanged.
+
+The [separate cancellation diagnostic](cancel-recovery/README.md) was registered
+as a fallback, but neither condition is eligible because both original corrected
+probes reached and passed cancellation/recovery. It was not executed.
+
+These results establish the bounded functional route. Matched M6 answer quality,
+human likeness, the existing evidence-preview smoke and recorded-audio browser
+replay remain separate measurements. In particular, the [M6 results](../jensen-evaluation-v1/heldout-review-v1/comparison.md)
+do not support adapter promotion. The CPU observations do not establish a
+real-time or comparative model-speed claim.
 
 The [frozen protocol](protocol.json) binds Qwen3-1.7B revision
 `70d244cc86ccca08cf5af4e1e306ecf908b1ad5e`, the independently recorded base-file
@@ -38,9 +60,8 @@ exact artifacts and this prospective selection. The wrapper accepts only these
 two exact registered protocol digests and still checks the actual loaded dtype.
 There is no automatic precision fallback.
 
-This registration does not establish BF16 runtime suitability. Await the
-coordinator's actual BF16 preflight observation, the final restored adapter and
-release of shared model memory before M7 execution. No M7 neural case has run.
+This pre-output registration itself did not establish BF16 runtime suitability.
+The subsequent actual observations are the separately preserved results above.
 
 ## What it checks
 
@@ -65,14 +86,14 @@ harness; it does not reuse its evidence-preview configuration preparation.
 The `openai` response field names the existing OpenAI-compatible transport. The
 direct provider health receipt identifies the actual local Qwen model.
 
-## Verified preparation and next commands
+## Preparation history and reproduction commands
 
 The [completed-29 preparation](completed29-preparation.json) binds the now-saved
 serving export. Both base and exact-adapter configuration-only preflights pass;
 no weights or neural responses were produced. Its seven preparation payloads
 were saved and freshly restored. The serving run SHA is
 `e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42`;
-actual neural execution still waits for the shared model slot.
+the subsequent relocated and corrected preparation is linked above.
 
 The original preparation passed Python compilation, whitespace checking, thirteen
 focused harness tests and the base preflight. The tests cover exact observed model/adapter rejection, actual
@@ -80,8 +101,9 @@ TCP first-nonempty-token disconnect, generator cancellation, normal SSE, HTTP
 error retention and server teardown after a body exception. Their small HTTP
 fixtures are explicitly not neural integration evidence. The
 preflight validated the exact corpus and snapshot, the local pinned cache,
-and the selected virtualenv's dependency availability. **No weights loaded, no
-model responses generated, and no functional run success is claimed.**
+and the selected virtualenv's dependency availability. Those preparation-only
+checks loaded no weights and generated no responses; the subsequent actual
+functional results are linked above.
 
 The [BF16 preparation record](preparation-bf16-v2.json) adds 24 passing harness
 tests and a successful base configuration-only `--verify-only` check. Both seals
@@ -95,9 +117,11 @@ path must preserve the virtualenv spelling; resolving its symlink can select the
 base Python without the model dependencies.
 
 ```bash
-ART=/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13
-CACHE=/workspace/scratch/6f64e1b53384/model-cache/hub
-INFERENCE_PYTHON=/workspace/scratch/6f64e1b53384/who-is-your-bias/.venv-inference/bin/python
+ART=/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1
+CACHE=/workspace/scratch/31a6dc706f63/model-cache/hub
+INFERENCE_PYTHON=/workspace/scratch/31a6dc706f63/who-is-your-bias/.venv-inference/bin/python
+ADAPTER_RUN=/workspace/scratch/31a6dc706f63/restored/jensen-text-adapter-completed29-v1/text-adapter-v1
+ADAPTER_RUN_SHA=e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42
 PROTOCOL_FILE=reports/jensen-text-live-v1/protocol-bf16-v2.json
 PROTOCOL_SHA=6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e
 
@@ -108,7 +132,7 @@ PYTHONPATH=src:. "$INFERENCE_PYTHON" -m tools.runtime_checks.text_live \
   --allow-candidates --verify-only
 ```
 
-Actual execution waits for the coordinating job to release model memory. The
+The completed runs were serialized against the shared model-memory slot. The
 candidate execution command below additionally requires `ADAPTER_RUN` to name a
 freshly restored, completed text training run and `ADAPTER_RUN_SHA` to contain
 the exact SHA-256 of its `run.json`. The completed-29 preparation above now records both values from the

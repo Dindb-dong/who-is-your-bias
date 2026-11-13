@@ -1,0 +1,440 @@
+{
+  "schema_version": "jensen-neural-text-live-comparison.v1",
+  "recorded_at": "2026-11-13T05:40:10.072460+00:00",
+  "scope": "Two actual sequential main-API/local-neural functional invocations, one base and one exact completed29 adapter; distinct from M6 response-quality evaluation.",
+  "protocol_sha256": "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+  "corrected_harness_sha256": "6421b108f7ec7d390507ba3015b7c55ed824c4c2e76e729fa5bc6f598c8ac014",
+  "runtime_contract": {
+    "device": "cpu",
+    "dtype": "bfloat16",
+    "threads": 8,
+    "served_model": "jensen-neural-functional",
+    "retrieval_backend": "jensen-lexical",
+    "style_examples": false,
+    "voice_enabled": false,
+    "motion_enabled": false
+  },
+  "request_policy": {
+    "context_window": 4096,
+    "max_output_tokens": 160,
+    "max_response_chars": 3000,
+    "request_seconds": 240,
+    "startup_seconds": 30,
+    "recovery_seconds": 60,
+    "total_seconds": 1800,
+    "temperature": 0,
+    "top_p": 1,
+    "top_k": 20,
+    "seed": 42,
+    "warmup_max_tokens": 12
+  },
+  "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+  "conditions": [
+    {
+      "condition": "base",
+      "result_report": "base-result.json",
+      "status": "passed",
+      "passed_checks": 46,
+      "total_checks": 46,
+      "observed_invocations": 1,
+      "started_at": "2026-11-13T05:31:25.659459+00:00",
+      "finished_at": "2026-11-13T05:33:57.721447+00:00",
+      "elapsed_seconds": 152.062,
+      "completed_conversation_turns_before_disconnect": 4,
+      "disconnect_requests": 1,
+      "completed_recovery_turns": 1,
+      "total_completed_responses": 5,
+      "query_resolution_methods": {
+        "question": "original",
+        "followup": "previous_user_reference",
+        "correction": "explicit_correction",
+        "topic_switch": "topic_switch"
+      },
+      "checks": {
+        "session.four_completed_turns": true,
+        "session.correction_and_topic_provenance": true,
+        "disconnect.after_actual_active_model_token": true,
+        "disconnect.provider_became_idle": true,
+        "disconnect.no_partial_turn_committed": true,
+        "recovery.same_session_fifth_completed_turn": true,
+        "session.deleted": true,
+        "loaded_identity_unchanged": true,
+        "provider_idle_after_recovery": true
+      },
+      "disconnect_idle_observation_ms": 309.943,
+      "observed_identity": {
+        "identity": {
+          "schema_version": "language-model-identity.v1",
+          "base_model": "Qwen/Qwen3-1.7B",
+          "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+          "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+          "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+          "chat_template_options": {
+            "enable_thinking": false
+          }
+        },
+        "adapter": {
+          "configured": false,
+          "loaded": false,
+          "verified": false
+        },
+        "runtime": {
+          "backend": "transformers",
+          "requested_device": "cpu",
+          "requested_dtype": "bfloat16",
+          "device": "cpu",
+          "dtype": "bfloat16",
+          "context_window": 40960,
+          "base_parameters": 1720574976,
+          "versions": {
+            "torch": "2.11.0+cpu",
+            "transformers": "4.57.3"
+          },
+          "threads": 8,
+          "attention": "sdpa",
+          "generation_defaults": {
+            "seed": 42,
+            "temperature": 0.0,
+            "top_p": 1.0,
+            "top_k": 20
+          }
+        }
+      },
+      "observed_identity_unchanged_after_recovery": true,
+      "cleanup": {
+        "main_api_started": true,
+        "main_api_stopped": true,
+        "language_stopped": true,
+        "language_forced_kill": false,
+        "language_returncode": -15
+      },
+      "provider_resources": {
+        "load_ms": 10148.150775999966,
+        "peak_rss_bytes_after_warmup": 3914166272,
+        "peak_rss_bytes_after_recovery": 5419683840
+      },
+      "completed_response_measurements": [
+        {
+          "id": "question",
+          "provider": "openai",
+          "response_sha256": "cfaa536df435a824780a80a41fbd54921d9400b67c779dfd8a00816f86d982d1",
+          "response_characters": 160,
+          "first_token_ms": 18407.8,
+          "http_ms": 25129.483,
+          "api_metrics": {
+            "retrieval_ms": 47.875,
+            "generation_ms": 25078.081,
+            "total_ms": 25127.474
+          },
+          "emitted_citations": 0
+        },
+        {
+          "id": "followup",
+          "provider": "openai",
+          "response_sha256": "4b4e08d229d63e838f9e3549a427e2396064ae7a1518e14f01f168b46f4b8b34",
+          "response_characters": 141,
+          "first_token_ms": 15458.781,
+          "http_ms": 22138.175,
+          "api_metrics": {
+            "retrieval_ms": 53.804,
+            "generation_ms": 22079.438,
+            "total_ms": 22135.467
+          },
+          "emitted_citations": 0
+        },
+        {
+          "id": "correction",
+          "provider": "openai",
+          "response_sha256": "256db5758b59fcf5f5c97328ef1dc2357da661b48222a667486044f8b27f4317",
+          "response_characters": 183,
+          "first_token_ms": 16719.82,
+          "http_ms": 24885.179,
+          "api_metrics": {
+            "retrieval_ms": 51.562,
+            "generation_ms": 24830.141,
+            "total_ms": 24882.805
+          },
+          "emitted_citations": 0
+        },
+        {
+          "id": "topic_switch",
+          "provider": "openai",
+          "response_sha256": "481fbb1e9bef007c205973366b5054cd464e90b5a92ccc9dedaa6a10cc64dce7",
+          "response_characters": 198,
+          "first_token_ms": 14248.319,
+          "http_ms": 21325.462,
+          "api_metrics": {
+            "retrieval_ms": 45.584,
+            "generation_ms": 21275.991,
+            "total_ms": 21322.786
+          },
+          "emitted_citations": 0
+        },
+        {
+          "id": "recovery",
+          "provider": "openai",
+          "response_sha256": "5b82f0a25abd8707f961e011fd80f0c42c133faa81266e364f8fab0090be5b86",
+          "response_characters": 174,
+          "first_token_ms": 18444.452,
+          "http_ms": 25784.14,
+          "api_metrics": {
+            "retrieval_ms": 114.442,
+            "generation_ms": 25653.001,
+            "total_ms": 25777.428
+          },
+          "emitted_citations": 0
+        }
+      ],
+      "identical_output_hash_groups": {},
+      "raw_trace_sha256": "4384da5df4332288dbf201b724002b10d76aa481739df9f7e45d8e97989c02eb",
+      "supplemental_cancellation_diagnostic": {
+        "eligible": false,
+        "executed": false,
+        "reason": "Corrected original run passed and exercised cancellation plus same-session recovery."
+      },
+      "artifact_persistence": {
+        "status": "fresh_readback_archive_and_every_payload_verified",
+        "archive_file_name": "jensen-m7-base-completion-20261113-v2.tar.gz",
+        "size_bytes": 26406,
+        "sha256": "fac25894fa9c96df47f730160ffb35f0713721939d1fff9c7695f3145ff582dc",
+        "verified_payload_files": 12
+      }
+    },
+    {
+      "condition": "adapter",
+      "result_report": "adapter-result.json",
+      "status": "passed",
+      "passed_checks": 46,
+      "total_checks": 46,
+      "observed_invocations": 1,
+      "started_at": "2026-11-13T05:34:51.212410+00:00",
+      "finished_at": "2026-11-13T05:37:52.048181+00:00",
+      "elapsed_seconds": 180.836,
+      "completed_conversation_turns_before_disconnect": 4,
+      "disconnect_requests": 1,
+      "completed_recovery_turns": 1,
+      "total_completed_responses": 5,
+      "query_resolution_methods": {
+        "question": "original",
+        "followup": "previous_user_reference",
+        "correction": "explicit_correction",
+        "topic_switch": "topic_switch"
+      },
+      "checks": {
+        "session.four_completed_turns": true,
+        "session.correction_and_topic_provenance": true,
+        "disconnect.after_actual_active_model_token": true,
+        "disconnect.provider_became_idle": true,
+        "disconnect.no_partial_turn_committed": true,
+        "recovery.same_session_fifth_completed_turn": true,
+        "session.deleted": true,
+        "loaded_identity_unchanged": true,
+        "provider_idle_after_recovery": true
+      },
+      "disconnect_idle_observation_ms": 312.444,
+      "observed_identity": {
+        "identity": {
+          "schema_version": "language-model-identity.v1",
+          "base_model": "Qwen/Qwen3-1.7B",
+          "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+          "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+          "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+          "chat_template_options": {
+            "enable_thinking": false
+          }
+        },
+        "adapter": {
+          "configured": true,
+          "loaded": true,
+          "verified": true,
+          "schema_version": "text-adapter-identity.v1",
+          "run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+          "artifact_manifest_sha256": "01726cf712cb6b88fde409cea1ba64a3841ab446e5ade2b0cffe51aa29073166",
+          "base_model": "Qwen/Qwen3-1.7B",
+          "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+          "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+          "dataset_sha256": "f83aea790b09631ae7b96f8f899012c879af92c73acafc81a475a49cdfe460d4",
+          "training_event_families": [
+            "acquired-2023",
+            "csis-2025",
+            "dwarkesh-2026",
+            "goldman-sachs-2024",
+            "lex-494",
+            "stanford-vftt-2024",
+            "strange-loop-2025",
+            "stripe-sessions-2024",
+            "yc-startup-school-2026"
+          ],
+          "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+          "optimizer_steps": 29,
+          "efficacy_evaluated": false
+        },
+        "runtime": {
+          "backend": "transformers",
+          "requested_device": "cpu",
+          "requested_dtype": "bfloat16",
+          "device": "cpu",
+          "dtype": "bfloat16",
+          "context_window": 40960,
+          "base_parameters": 1720574976,
+          "versions": {
+            "torch": "2.11.0+cpu",
+            "transformers": "4.57.3",
+            "peft": "0.18.1"
+          },
+          "threads": 8,
+          "attention": "sdpa",
+          "generation_defaults": {
+            "seed": 42,
+            "temperature": 0.0,
+            "top_p": 1.0,
+            "top_k": 20
+          }
+        }
+      },
+      "observed_identity_unchanged_after_recovery": true,
+      "cleanup": {
+        "main_api_started": true,
+        "main_api_stopped": true,
+        "language_stopped": true,
+        "language_forced_kill": false,
+        "language_returncode": -15
+      },
+      "provider_resources": {
+        "load_ms": 9369.948440999906,
+        "peak_rss_bytes_after_warmup": 4631658496,
+        "peak_rss_bytes_after_recovery": 6280990720
+      },
+      "completed_response_measurements": [
+        {
+          "id": "question",
+          "provider": "openai",
+          "response_sha256": "dbb1eb6295076f31fb5e0b131ae718001a7488274dda0ae3d0f4cd5e17d6e611",
+          "response_characters": 94,
+          "first_token_ms": 24588.012,
+          "http_ms": 28189.837,
+          "api_metrics": {
+            "retrieval_ms": 48.688,
+            "generation_ms": 28137.794,
+            "total_ms": 28187.782
+          },
+          "emitted_citations": 0
+        },
+        {
+          "id": "followup",
+          "provider": "openai",
+          "response_sha256": "dbb1eb6295076f31fb5e0b131ae718001a7488274dda0ae3d0f4cd5e17d6e611",
+          "response_characters": 94,
+          "first_token_ms": 24294.403,
+          "http_ms": 28215.18,
+          "api_metrics": {
+            "retrieval_ms": 46.09,
+            "generation_ms": 28165.444,
+            "total_ms": 28212.909
+          },
+          "emitted_citations": 0
+        },
+        {
+          "id": "correction",
+          "provider": "openai",
+          "response_sha256": "dbb1eb6295076f31fb5e0b131ae718001a7488274dda0ae3d0f4cd5e17d6e611",
+          "response_characters": 94,
+          "first_token_ms": 26874.466,
+          "http_ms": 31351.467,
+          "api_metrics": {
+            "retrieval_ms": 46.986,
+            "generation_ms": 31301.799,
+            "total_ms": 31349.576
+          },
+          "emitted_citations": 0
+        },
+        {
+          "id": "topic_switch",
+          "provider": "openai",
+          "response_sha256": "2a658d86afe33fc826c6bd1d51c80e1c040ae11c359336707176894b05c8186a",
+          "response_characters": 30,
+          "first_token_ms": 23883.03,
+          "http_ms": 25008.913,
+          "api_metrics": {
+            "retrieval_ms": 51.011,
+            "generation_ms": 24954.25,
+            "total_ms": 25006.306
+          },
+          "emitted_citations": 0
+        },
+        {
+          "id": "recovery",
+          "provider": "openai",
+          "response_sha256": "dbb1eb6295076f31fb5e0b131ae718001a7488274dda0ae3d0f4cd5e17d6e611",
+          "response_characters": 94,
+          "first_token_ms": 22563.177,
+          "http_ms": 26242.037,
+          "api_metrics": {
+            "retrieval_ms": 45.477,
+            "generation_ms": 26193.045,
+            "total_ms": 26239.559
+          },
+          "emitted_citations": 0
+        }
+      ],
+      "identical_output_hash_groups": {
+        "dbb1eb6295076f31fb5e0b131ae718001a7488274dda0ae3d0f4cd5e17d6e611": [
+          "question",
+          "followup",
+          "correction",
+          "recovery"
+        ]
+      },
+      "raw_trace_sha256": "52958e7bafce0e4298c998a9b14e6ad9699480ad9110ea2e52a32a785660e7c1",
+      "supplemental_cancellation_diagnostic": {
+        "eligible": false,
+        "executed": false,
+        "reason": "Corrected original run passed and exercised cancellation plus same-session recovery."
+      },
+      "artifact_persistence": {
+        "status": "fresh_readback_archive_and_every_payload_verified",
+        "archive_file_name": "jensen-m7-adapter-completion-20261113-v2.tar.gz",
+        "size_bytes": 25685,
+        "sha256": "b75ab78afbd0c13347e2a00c3b92fe8062a78ee2948a337d6ad5891230e223fa",
+        "verified_payload_files": 12
+      }
+    }
+  ],
+  "original_failed_attempt": {
+    "report": "base-first-preflight-failure.json",
+    "status": "failed",
+    "stage": "actual_provider_identity_preflight",
+    "completed_main_api_cases": 0,
+    "failure": "Original harness compared the versioned actual identity to an unversioned frozen payload.",
+    "retained_separately": true,
+    "original_harness_sha256": "e1874d62e251cc4f29ef2eb84c1cfc795181201b24d611b1a5998795b929cdeb",
+    "fix": "Require exact language-model-identity.v1 schema and every unchanged frozen payload field; preserve all protocol bytes, runtime limits and prompts."
+  },
+  "interpretation": {
+    "timing_scope": "One sequential invocation per condition; request times exclude warmup, elapsed run times include startup/warmup/lifecycle overhead. These observations cannot rank model speed.",
+    "citation_binding_scope": "All five completed responses in each condition emitted zero citations; binding checks establish no unsupported citation record was introduced, not factual support or citation coverage.",
+    "semantic_quality_claim": false,
+    "persona_fidelity_claim": false,
+    "real_time_acceptance_claim": false,
+    "human_review": "ungraded",
+    "voice_enabled": false,
+    "browser_or_physical_device_trial": false,
+    "production_promotion": false,
+    "supplemental_diagnostic_neural_trials": 0,
+    "unit_fixture_note": "The 38 identity/transport regression tests load no neural weights and are not model trials.",
+    "durable_artifact_authority": "The linked per-condition result reports contain the authoritative archive and fresh-readback receipts."
+  },
+  "coordinator_output_observations": {
+    "source": "Verified private http-trace.json result events in the two archived runs.",
+    "adapter_repeated_definition_cases": [
+      "question",
+      "followup",
+      "correction",
+      "recovery"
+    ],
+    "adapter_topic_switch": "Restates the AI-factory term without an explanatory answer.",
+    "interpretation": "Functional session-resolution checks do not establish contextual answer quality.",
+    "human_review": "ungraded",
+    "quantitative_semantic_score": null
+  }
+}

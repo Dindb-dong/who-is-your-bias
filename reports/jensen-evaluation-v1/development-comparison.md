@@ -73,4 +73,6 @@ outputs actually received them.
 The original complete outputs, failures, model identities, timings and private keys
 are in the [verified collection](development-collection.json); exact semantic
 review files are in the [review preservation receipt](development-agent-review-preservation.json).
-The registered heldout evaluation continues without tuning on these outputs.
+The [registered heldout evaluation](heldout-review-v1/comparison.md) is now
+complete, without tuning on these development outputs. Its separately preserved
+blind review also does not support adapter promotion.

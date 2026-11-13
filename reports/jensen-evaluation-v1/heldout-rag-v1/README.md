@@ -1,10 +1,24 @@
 # Heldout default lexical retrieval-to-generation diagnostic
 
-**Status: six runtime prompts frozen and durably restored; zero model responses
-generated.** This is a separate, single-base diagnostic of actual default
+**Status: all six calls executed, saved and freshly restored; four normal
+completions and two length-limit failures.** The [actual result](result.json)
+and [supplied-evidence agent review](review/support-findings.md) retain the
+complete denominator and actual retrieved pools. The review archive and all
+four payloads passed [fresh readback](review/fresh-readback.json). Human ratings
+remain ungraded.
+
+This is a separate, single-base diagnostic of actual default
 retrieval feeding generation. It supplements the [matched fixed-evidence
 experiment](../README.md), whose six heldout prompts deliberately use selected
 training passages and do not measure retrieval efficacy.
+
+The review found a supported 2012/deep-learning core with missing citations and
+unsupported additions, fallback-format violations in both empty-evidence
+answers, and an appropriate limitation response to the jacket-origin question.
+Permitted conditional reasoning is distinguished from unsupported factual or
+persona assertions; an ambiguous forecast is not silently scored as a fact.
+No selected passage from the matched experiment was used to rescue an empty
+retrieval pool, and these results did not change retrieval or prompt defaults.
 
 The [protocol summary](protocol.json), [execution contract](execution-contract.json)
 and [artifact receipt](artifacts.json) contain public hashes and results of
@@ -74,8 +88,9 @@ this artifact as a matched three-condition comparison.
 
 Restore the archive from `artifacts.json`, verify its SHA-256 and every restored
 member, then wait for the shared model-memory slot. Run from the project root
-using the prepared inference environment. This is a **proposed command**, not
-an execution receipt:
+using the prepared inference environment. The following is the registered
+command shape; the actual supervised invocation and fresh artifact receipt are
+in [result.json](result.json). Use a new directory for any future reproduction:
 
 ```sh
 EVAL_RAG="$ART/text-evaluation-v1/heldout-rag-v1"

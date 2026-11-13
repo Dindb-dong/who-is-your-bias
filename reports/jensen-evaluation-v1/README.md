@@ -1,4 +1,17 @@
-# Jensen matched generation: frozen inputs
+# Jensen matched generation: results and frozen inputs
+
+**Execution and agent review are complete.** All **54/54** registered calls
+were attempted, saved and freshly restored: **22 normal completions and 32
+failures**. Development completed 13/36; heldout completed 9/18. The learned
+adapter completed 2/12 development and 0/6 heldout responses under the unchanged
+160-token limit. It is not promoted to the default.
+
+Read the [development comparison](development-comparison.md),
+[heldout comparison after preserved blind review](heldout-review-v1/comparison.md),
+and [PR completion report](../jensen-pr19-completion.md). The separate
+[retrieval-to-generation diagnostic](heldout-rag-v1/README.md) completed 4/6;
+its source-only review remains separate from this matched experiment. Human
+ratings remain ungraded, and normal termination is not a quality score.
 
 The current [execution status](execution-status.json) links every finished
 condition's measured report, complete raw-output artifact and fresh-readback
@@ -29,9 +42,9 @@ complete passages, references, prompts and detailed support rationales remain
 in the saved private artifact identified by [artifact receipts](artifacts.json).
 
 A separate [default lexical heldout RAG diagnostic](heldout-rag-v1/README.md)
-now freezes actual runtime retrieval and prompt packing for the same six
-questions. It registers one base condition and keeps the original answerability
-labels. Its preparation is separate from the 54 matched-generation calls below.
+preserves actual runtime retrieval and prompt packing for the same six
+questions. Its one base condition has executed and keeps the original
+answerability labels. It is separate from the 54 matched-generation calls below.
 
 The [development-style runtime note](development-style-runtime-errors.json)
 separates one length limit, one timeout and five HTTP 429 rejections from their
@@ -149,9 +162,9 @@ the requested unsupported fact or quotation is not fabricated. Lexical overlap
 and citation syntax remain diagnostics rather than semantic or human scores.
 
 All human ratings are **ungraded**. Keep failed and incomplete attempts in the
-denominator. The adapter remains opt-in pending actual matched execution and
-support/control review. Freezing these inputs does not promote a model or
-establish an improvement.
+denominator. The completed execution and support/control review do not support
+promoting the adapter. It remains an optional experimental artifact. No prompt,
+token budget or model was tuned on these heldout results.
 
 ## Preparation checks
 
@@ -161,4 +174,5 @@ full selected-passage retention, identical factual inputs, identical
 style/adapter messages and absence of reference answers from prompts passed.
 The heldout loader and snapshot verification passed. V1-to-v2 checks confirm
 unchanged questions, references, input-case hashes, selections and factual
-hashes. Model execution and human review remain pending.
+hashes. Those were preparation-only checks; the completed model execution and
+agent review are linked above. Human review remains ungraded.

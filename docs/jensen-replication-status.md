@@ -7,7 +7,14 @@ Repository: `Dindb-dong/who-is-your-bias`. Integration branch:
 `8515b5f30f3cd412e18db3d54ee28bf2a4c28694`.
 Implementation review: [PR #19](https://github.com/Dindb-dong/who-is-your-bias/pull/19).
 Last verified code checkpoint before this status update:
-`52b6283f902769024250f0de1591bd84009affc3`.
+`7827c9328da96419a5768a82d5962796660bc871`.
+
+**Registered execution and agent review are complete.** The
+[PR completion report](../reports/jensen-pr19-completion.md) records **54/54
+matched attempts (22 normal, 32 failed)**, the separate **six RAG attempts
+(four normal, two length failures)**, and actual base/adapter API probes with
+**46/46 functional checks each**. The adapter is not promoted. Human likeness
+and production acceptance remain separate from completing the experiments.
 
 The [historical handoff](jensen-replication-handoff.md) defines M0–M7.
 This is a new reproducible run; unverified earlier acquisition/training counts
@@ -39,7 +46,9 @@ search. This access audit does not establish permanent loss.
 are saved and freshly verified. The isolated step-28 recovery exited zero;
 [the completion receipt](../reports/jensen-recovery/text-v1/completed-serving.json)
 binds the exact run, payloads, optimizer checkpoint and actual process evidence.
-Matched response execution and actual neural session checks continue separately.
+Matched response execution, preserved independent agent reviews and actual
+neural session checks are complete; their quality and functional results are
+distinguished in the completion report.
 
 The user reiterated that full original videos and an actual newly authored
 avatar are required, and asked to publish useful intermediate material quickly.
@@ -63,8 +72,10 @@ separately. The prior unverified eight-video claim is not inherited by this run.
   used eight intra-op threads. The frozen optimization, data order and 29-update
   budget are unchanged. See the [recovery record](../reports/jensen-recovery/text-v1/session-recovery-step0008.json).
   [Development response assessment](../reports/jensen-evaluation-v1/development-comparison.md)
-  has now executed; it does not support default promotion. Heldout and actual
-  neural session checks continue separately, and human likeness is ungraded.
+  has now executed; it does not support default promotion. The
+  [heldout comparison](../reports/jensen-evaluation-v1/heldout-review-v1/comparison.md)
+  also rejects promotion; [actual neural session checks](../reports/jensen-text-live-v1/comparison.md)
+  passed their functional gates. Human likeness is ungraded.
 - Voice: **19 publisher-matched candidates**, independently screened down to
   **8 clips / 91.84 seconds / four events**. Human listening review is zero.
   Actual acoustic encoding produced **1,151 frames × 16 codebooks**, saved and
@@ -127,8 +138,14 @@ separately. The prior unverified eight-video claim is not inherited by this run.
 | Corpus | Authentic v4, held-out references, 11 complete publisher-video restorations | Eleven event packages and one separate derived NTU address verified; frozen event isolation preserved |
 | Voice | Source clocks, four-event dataset, 16 completed updates, eight public waveforms, ASR/WavLM diagnostics and verified gateway | Candidate remains optional; human likeness is ungraded |
 | Avatar | Actual fitted model, editable master, finger controls, observed clips and actual desktop/mobile browser rendering | Human likeness remains ungraded; candidate stays optional |
-| Text | All 29 updates, final serving export, successful remote optimizer continuation and clean recovered-process exit | Exact saved adapter enters the frozen matched and live-text evaluations |
-| Retrieval/evaluation | Frozen lexical/concept/hybrid comparison; both candidates remain opt-in | Matched base/style/adapter and heldout response experiments |
+| Text | All 29 updates, final serving export, successful remote optimizer continuation and clean recovered-process exit | Matched execution and actual API checks complete; quality does not support default promotion |
+| Retrieval/evaluation | Frozen lexical/concept/hybrid comparison and all 60 matched/separate-RAG attempts preserved | Independent agent support review complete; retrieval candidates remain opt-in and human likeness ungraded |
+
+The final integrated evaluation/supervisor/neural-harness command passed
+**135 tests**. See the [validation receipt](../reports/jensen-recovery/pr19-resumption-v1/final-validation.json).
+Both neural runtime regression modules are now included in the Studio CI Python
+gate. Inspect CI separately at PR #19's exact current head. The older validation
+records below retain their original scope and commit identities.
 
 Integrated changed-path Python checks: 186 passed and two optional-Torch modules
 skipped in the core environment. Separately, real Torch checkpoint/adapter checks
@@ -178,10 +195,10 @@ Read the [recovery index](../reports/jensen-recovery/README.md),
 [voice run](jensen-voice-adaptation.md), and
 [avatar results](../reports/jensen-avatar/README.md) before repeating work.
 
-## Parallel ownership and resumption
+## Completed ownership and future resumption
 
-- Corpus: completed source ledger/acquisition and source-family splits; now
-  frozen matched generation and heldout answerability preparation.
+- Corpus: completed source ledger/acquisition and source-family splits,
+  frozen matched generation, heldout answerability and response review.
 - Voice: voice export/reference provenance, alignment and voice adaptation.
 - Avatar: web rig/fingers/framing, media observation and authored avatar assets.
 - Coordinator: artifact manifests, text checkpoints/training, completed retrieval
@@ -197,7 +214,7 @@ manifest, then the latest workstream report. Do not repeat expensive work until
 recoverable artifacts and current checks have been inspected. Training commands
 will be recorded only after their exact pinned inputs and checkpoint paths exist.
 
-## Remaining acceptance
+## Execution closure and remaining quality gates
 
 The step-28 checkpoint survived an execution-session interruption. The
 [interruption record](../reports/jensen-recovery/text-v1/interrupted-owner-step0028.json)
@@ -212,15 +229,25 @@ actual text checkpoint survived fresh remote retrieval and completed the next
 optimizer update in a fresh process; step 2 was again saved and freshly verified. The retrieval comparison and the voice candidate
 training/sample/diagnostic/gateway delivery have executed. Both retrieval
 candidates remain opt-in after missing their declared gate. Text training and
-the serving export are complete. The matched M6 calls are executing and being
-preserved one condition at a time; the execution-status record below gives
-current complete-condition counts and artifact links. The separate six-case RAG
-diagnostic and actual M7 neural-text session checks remain pending.
-See the [current response execution status](../reports/jensen-evaluation-v1/execution-status.json). Avatar/browser
+the serving export are complete. All 54 matched M6 calls and six separate RAG
+calls were executed, collected and freshly restored, including every failure.
+Condition-blind heldout findings were preserved before unblinding; the separate
+RAG review used only the actual supplied pools. All human rating fields remain
+ungraded. See the [current response execution status](../reports/jensen-evaluation-v1/execution-status.json).
+
+The actual M7 base and completed29-adapter runs each passed 46/46 functional
+checks, including active-token cancellation, unchanged conversation memory,
+same-session recovery, deletion and clean teardown. The initial harness identity
+failure and its narrow schema-envelope correction remain separately preserved.
+These functional passes do not repair M6 quality defects: heldout adapter normal
+completion was 0/6, and live adapter responses repeated a general definition
+even after a correction. No candidate or prompt policy was promoted.
+
+Avatar/browser
 functionality is measured, while likeness and contextual gesture quality remain
 ungraded. No accepted persona fidelity, human likeness or latency-target
 acceptance is claimed.
-New follow-up pull requests are published for review; no new merge is authorized.
+PR #19 contains the completed work for review; no new merge is authorized.
 
 
 ## Frozen response comparison

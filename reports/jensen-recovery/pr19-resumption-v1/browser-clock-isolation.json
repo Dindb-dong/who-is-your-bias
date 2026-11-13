@@ -1,0 +1,29 @@
+{
+  "schema_version": "jensen-browser-clock-scheduling-diagnostic.v1",
+  "retained_failure": "ci-first-failure.json",
+  "run_id": 43372847097,
+  "raw_attachment_sha256": "876d442a1d0ecc66027e03895ce7253c827658653e82a86741d9f2f93ffcb9e9",
+  "trace_observations": 23,
+  "playing_observations": 17,
+  "median_clock_gap_ms": 354.51800000000003,
+  "maximum_clock_gap_ms": 754.9240000000002,
+  "interval_at_worst_ms": 757.5999999999767,
+  "preceding_media_ms": 1615.6470000000002,
+  "worst_renderer_ms": 1615.693,
+  "worst_media_ms": 2370.617,
+  "following_clock_gap_ms": 66.66899999999987,
+  "observed": "Renderer retains the previous frame sample while real media time advances; the gap then shrinks rather than accumulating. Both software-WebGL projects were running.",
+  "inference": "Overlapping CPU render load plausibly delays frame scheduling; CPU contention was not directly profiled.",
+  "change": {
+    "path": "playwright.jensen.config.ts",
+    "workers": 1,
+    "prior_workers_inherited": 2,
+    "rationale": "Measure each Jensen desktop/mobile playback clock without the unrelated concurrent software-WebGL renderer.",
+    "assertion_less_than_ms": 750,
+    "retries": 0,
+    "all_22_cases_retained": true,
+    "application_code_changed": false,
+    "frozen_model_inputs_changed": false
+  },
+  "validation": "New published-head CI must establish the outcome; this diagnostic is not a passing browser result."
+}

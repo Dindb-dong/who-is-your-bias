@@ -1,10 +1,11 @@
 # Jensen persona, speech, and avatar execution
 
-> A new run is active on 2026-11-13. Read the
-> [current execution status](jensen-replication-status.md) for saved code,
-> artifact receipts, checks and exact continuation state.
+> PR #19's registered implementation, response execution and agent review are
+> complete as of 2026-11-13. Read the [completion report](../reports/jensen-pr19-completion.md)
+> and [current execution status](jensen-replication-status.md) for actual results,
+> artifact receipts and acceptance limits. The learned candidates remain optional.
 
-> Status as of 2026-11-13: the execution session was interrupted. This file
+> Historical pre-resumption status: the earlier execution session was interrupted. This file
 > preserves the original plan. Read the [recovery and remaining-work handoff](jensen-replication-handoff.md)
 > for verified baseline evidence, reported intermediate progress, and resumption gates.
 
@@ -62,7 +63,7 @@ execution assumptions, not a guarantee about the next host. Recheck hardware,
 disk, process lifetime, and persistent checkpoint storage before resuming.
 Coordinate heavy training, speech, and rendering within the actual memory budget.
 
-## Results
+## Historical PR #18 audit
 
 The audit found PR #18 still at its original plan-only commit, with no later
 implementation connected to any audited remote branch. The interrupted dialogue
