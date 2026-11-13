@@ -1,0 +1,175 @@
+{
+  "schema_version": "jensen-pr19-preflight-preservation.v1",
+  "recorded_at": "2026-11-13T05:06:57.820761+00:00",
+  "source_checkpoint": "e2d310fda24e8d0e46728731e7cc7a337acce6f7",
+  "artifacts": [
+    {
+      "artifact_id": "jensen-pr19-m6-resumption-preparation-v1",
+      "role": "verified-relocated-execution-preparation",
+      "file_name": "jensen-pr19-m6-resumption-preparation-v1.tar.gz",
+      "file_id": "file_00000000b30881f5b40424249e8cd54c",
+      "library_file_id": "libfile_fde3_f-0eae2d0a27508191b5ca1a64f07c6306_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 11386,
+      "sha256": "20d91eb7ad00a4155c29aa9fb81c20063889be60ca28665ca3e0a0ed014d3859",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified",
+      "generation_executed": false,
+      "files_sha256": {
+        "m6-adapter-preflight.json": "069d183e80d84fcec77c8d01bb919a26b03ec628c016ec6c2e1be5f129c7b598",
+        "m6-rag-preflight.json": "2ce6225cb07d0dbb57b149e6564dc4eb62b49e29e6cfbff554c58abdc987cd25",
+        "launch_remaining.py": "b75024b49b143a792e6c0d4290112a4334205131b9402f945b60ac220b983106",
+        "restored-inputs.json": "3eaa1761afe7e5dca5b4311a046f7c5b83911c64eff14c502d03d33495d15438"
+      }
+    },
+    {
+      "artifact_id": "jensen-m7-preparation-resumed-20261113-v1",
+      "role": "verified-relocated-execution-preparation",
+      "file_name": "jensen-m7-preparation-resumed-20261113-v1.tar.gz",
+      "file_id": "file_000000005a2c81f5a991ecd71be6c2d7",
+      "library_file_id": "libfile_fde3_f-a17fb02aff00819189383f4261afd8f5_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 10515,
+      "sha256": "9540ece848d2eaa97504f983ac1f02319ae2341d1a039b7179a410f6ccbd22b5",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified",
+      "generation_executed": false,
+      "files_sha256": {
+        "artifact-manifest.json": "fe871c80a1c2981211e6de5e51d117f7132a613d84bdcdab57ea0bcd73281cf1",
+        "preparation/bindings.json": "da4e23213dd4f31ffb849e288eb749bc70a20b21d280dec3fd0a487331ab46dd",
+        "preparation/execution-plan.json": "da7f177cadabb22a5bcad1d5a6ec40da34188899e9d9342a765598ebe1058a8e",
+        "preparation/m7_delivery.py": "1d543d3983fb0e1d2536eec8e041780a95cd6f49c2d5e7efd68ae7edeeceebf7",
+        "preparation/preflight-adapter.json": "ef14bbca22de174cad56d92958f2349461680305b49a9ed8633a4e2657d9e386",
+        "preparation/preflight-base.json": "f0a633431cb2f8fe71b03a9945defea7c1f9618287b617702980866a60a9df87",
+        "preparation/preparation.json": "7feb29d2940cc272518db21199b96c06a08fa6bf5eef62d357e7678e87981ec7",
+        "preparation/relocation.json": "f3d896215e1c95fcb8881e17005e800eda3f96d1672e79e44eebcdcf75186d80"
+      }
+    }
+  ],
+  "matched_adapter_preflight": {
+    "schema_version": "jensen-m6-relocated-launch.v1",
+    "condition": "adapter",
+    "executed": false,
+    "model_weights_loaded": false,
+    "tokenizer_contract_checked": true,
+    "launcher_sha256": "b75024b49b143a792e6c0d4290112a4334205131b9402f945b60ac220b983106",
+    "command": [
+      "/workspace/scratch/31a6dc706f63/who-is-your-bias/.venv-inference/bin/python",
+      "-m",
+      "tools.adaptation_evaluation.local_condition",
+      "run",
+      "--condition",
+      "adapter",
+      "--adapter-run",
+      "/workspace/scratch/31a6dc706f63/restored/jensen-text-adapter-completed29-v1/text-adapter-v1",
+      "--adapter-run-sha256",
+      "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+      "--dtype",
+      "bfloat16",
+      "--threads",
+      "8",
+      "--plan",
+      "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1/text-evaluation-v1/frozen-v2/heldout/plan.json",
+      "--contract",
+      "/workspace/scratch/31a6dc706f63/who-is-your-bias/reports/jensen-evaluation-v1/execution-contract-bf16-v2.json",
+      "--timeout",
+      "180",
+      "--output",
+      "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1/text-evaluation-v1/execution-heldout-bf16-v2/adapter"
+    ],
+    "working_directory": "/workspace/scratch/31a6dc706f63/who-is-your-bias",
+    "environment": {
+      "PYTHONPATH": "/workspace/scratch/31a6dc706f63/who-is-your-bias/src:/workspace/scratch/31a6dc706f63/who-is-your-bias",
+      "HF_HOME": "/workspace/scratch/31a6dc706f63/model-cache",
+      "HF_HUB_CACHE": "/workspace/scratch/31a6dc706f63/model-cache/hub",
+      "HUGGINGFACE_HUB_CACHE": "/workspace/scratch/31a6dc706f63/model-cache/hub",
+      "HF_HUB_OFFLINE": "1",
+      "OMP_NUM_THREADS": "8",
+      "MKL_NUM_THREADS": "8",
+      "OPENBLAS_NUM_THREADS": "8",
+      "TOKENIZERS_PARALLELISM": "false"
+    },
+    "plan_sha256": "7fd35de01ea1a364aa7b5a2bf8547bf3a4a6cd3ebee4b3764b8ce7c8957e5c7c",
+    "plan_file_sha256": "6392f58bde3a2ac49d41ab76f19d88d15fa9a9f686abaabcc4a1bf90e6f4a6ba",
+    "contract_sha256": "9c79398b54118f284ffdc6e4592d501e1cc214e77f6a895152ae91019286b6c0",
+    "contract_file_sha256": "5dbe9a114d081e10ac689160e59988c255a9d15a901f2e90e44dd9ff53482d15",
+    "base_identity": {
+      "base_model": "Qwen/Qwen3-1.7B",
+      "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+      "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+      "chat_template_options": {
+        "enable_thinking": false
+      }
+    },
+    "cached_checkpoint_files": 9,
+    "versions": {
+      "torch": "2.11.0+cpu",
+      "transformers": "4.57.3"
+    },
+    "adapter_run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+    "shared_lock": "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1/text-process/active.lock",
+    "process_receipt": "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1/text-process/m6-heldout-adapter-bf16-v2.json",
+    "log": "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1/text-process/m6-heldout-adapter-bf16-v2.log",
+    "process_timeout_seconds": 3600,
+    "note": "Relocation only; original prompts, cases, decoded-output budgets, and sealed inference code remain unchanged."
+  },
+  "separate_rag_preflight": {
+    "schema_version": "jensen-m6-relocated-launch.v1",
+    "condition": "rag",
+    "executed": false,
+    "model_weights_loaded": false,
+    "tokenizer_contract_checked": true,
+    "launcher_sha256": "b75024b49b143a792e6c0d4290112a4334205131b9402f945b60ac220b983106",
+    "command": [
+      "/workspace/scratch/31a6dc706f63/who-is-your-bias/.venv-inference/bin/python",
+      "-m",
+      "tools.adaptation_evaluation.rag_diagnostic",
+      "run",
+      "--plan",
+      "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1/text-evaluation-v1/heldout-rag-v1/plan.json",
+      "--contract",
+      "/workspace/scratch/31a6dc706f63/who-is-your-bias/reports/jensen-evaluation-v1/heldout-rag-v1/execution-contract-bf16-v2.json",
+      "--timeout",
+      "180",
+      "--output",
+      "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1/text-evaluation-v1/execution-heldout-rag-bf16-v2"
+    ],
+    "working_directory": "/workspace/scratch/31a6dc706f63/who-is-your-bias",
+    "environment": {
+      "PYTHONPATH": "/workspace/scratch/31a6dc706f63/who-is-your-bias/src:/workspace/scratch/31a6dc706f63/who-is-your-bias",
+      "HF_HOME": "/workspace/scratch/31a6dc706f63/model-cache",
+      "HF_HUB_CACHE": "/workspace/scratch/31a6dc706f63/model-cache/hub",
+      "HUGGINGFACE_HUB_CACHE": "/workspace/scratch/31a6dc706f63/model-cache/hub",
+      "HF_HUB_OFFLINE": "1",
+      "OMP_NUM_THREADS": "8",
+      "MKL_NUM_THREADS": "8",
+      "OPENBLAS_NUM_THREADS": "8",
+      "TOKENIZERS_PARALLELISM": "false"
+    },
+    "plan_sha256": "3e2c6409b45a67b11798c17f23c6ce869aa9d71309775bf9af8f69afcc7d02d6",
+    "plan_file_sha256": "58338fe59a75eac2ff86e5e52fece7ea268145987957709d4df72d04ea2b7adb",
+    "contract_sha256": "7c3c0bc535cc2f92efa582a909c01e7f44280f58fd21ae66f184408cd714464d",
+    "contract_file_sha256": "3aa4356d0466a9d3a60daaa007f164091ea42869a67689cf9112adbb77a86d07",
+    "base_identity": {
+      "base_model": "Qwen/Qwen3-1.7B",
+      "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+      "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+      "chat_template_options": {
+        "enable_thinking": false
+      }
+    },
+    "cached_checkpoint_files": 9,
+    "versions": {
+      "torch": "2.11.0+cpu",
+      "transformers": "4.57.3"
+    },
+    "adapter_run_sha256": null,
+    "shared_lock": "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1/text-process/active.lock",
+    "process_receipt": "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1/text-process/m6-heldout-rag-bf16-v2.json",
+    "log": "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1/text-process/m6-heldout-rag-bf16-v2.log",
+    "process_timeout_seconds": 3600,
+    "note": "Relocation only; original prompts, cases, decoded-output budgets, and sealed inference code remain unchanged."
+  },
+  "generation_executed": false,
+  "next": "Execute final six heldout adapter attempts once this code checkpoint is remotely verified."
+}

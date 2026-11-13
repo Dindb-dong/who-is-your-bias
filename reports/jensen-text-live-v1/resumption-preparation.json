@@ -1,0 +1,155 @@
+{
+  "schema_version": "m7-resumption-preparation.v1",
+  "recorded_at": "2026-11-13T05:05:01.724905+00:00",
+  "repository": "Dindb-dong/who-is-your-bias",
+  "integration_branch": "feat/jensen-resumable-replication",
+  "remote_resume_head": "324b9e8e5af9ff16f471badf2e1478c7c5e2bdd1",
+  "observed_local_head": "893606a60c5706dc907b82be45682ea3569e35a4",
+  "status": "model_free_preflights_passed_awaiting_archive_persistence_and_coordinator_release",
+  "source_preparation_artifact": {
+    "artifact_id": "jensen-m7-preparation-completed29-v1",
+    "sha256": "1c6ae0e06d74e06688cc6e447cfa85babba25b9ca8e557f4ef0d4ada39c95621",
+    "source_bindings_sha256": "ec41bbdd94ee21d6ab7cf21781e8b87e5e803f8b72e388a74f6600bc139837a5"
+  },
+  "relocated_bindings_sha256": "da4e23213dd4f31ffb849e288eb749bc70a20b21d280dec3fd0a487331ab46dd",
+  "operational_helper_sha256": "1d543d3983fb0e1d2536eec8e041780a95cd6f49c2d5e7efd68ae7edeeceebf7",
+  "execution_plan_sha256": "da7f177cadabb22a5bcad1d5a6ec40da34188899e9d9342a765598ebe1058a8e",
+  "relocated_path_fields": {
+    "repository": "/workspace/scratch/31a6dc706f63/who-is-your-bias",
+    "artifacts": "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1",
+    "cache_dir": "/workspace/scratch/31a6dc706f63/model-cache/hub",
+    "inference_python": "/workspace/scratch/31a6dc706f63/who-is-your-bias/.venv-inference/bin/python",
+    "adapter_run": "/workspace/scratch/31a6dc706f63/restored/jensen-text-adapter-completed29-v1/text-adapter-v1",
+    "supervisor_directory": "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1/process"
+  },
+  "preparation_directory": "/workspace/scratch/31a6dc706f63/m7-completion-preparation",
+  "repository_input_hashes_verified": 50,
+  "protocol_sha256": "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+  "adapter_run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+  "focused_harness_checks": {
+    "command": [
+      "/workspace/scratch/6dda730ffb24/persona-venv/bin/python",
+      "-m",
+      "pytest",
+      "tests/test_runtime_text_live.py",
+      "tests/adaptation/test_supervise.py",
+      "-q"
+    ],
+    "working_directory": "/workspace/scratch/31a6dc706f63/pr19-m7",
+    "passed": 29,
+    "failed": 0,
+    "warnings": 1,
+    "scope": "existing transport, cancellation, sealed identity and process-supervisor fixtures; no neural model"
+  },
+  "commands": {
+    "base": {
+      "preflight": [
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias/.venv-inference/bin/python",
+        "-m",
+        "tools.runtime_checks.text_live",
+        "--repository",
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias",
+        "--artifacts",
+        "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1",
+        "--cache-dir",
+        "/workspace/scratch/31a6dc706f63/model-cache/hub",
+        "--inference-python",
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias/.venv-inference/bin/python",
+        "--protocol",
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias/reports/jensen-text-live-v1/protocol-bf16-v2.json",
+        "--protocol-sha256",
+        "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+        "--condition",
+        "base",
+        "--allow-candidates",
+        "--verify-only"
+      ],
+      "run": [
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias/.venv/bin/python",
+        "/workspace/scratch/31a6dc706f63/m7-completion-preparation/m7_delivery.py",
+        "run",
+        "--condition",
+        "base",
+        "--name",
+        "m7-base-completion-20261113-v1",
+        "--release-note",
+        "Coordinator released the shared model slot after M6 and RAG evidence was saved and freshly verified."
+      ]
+    },
+    "adapter": {
+      "preflight": [
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias/.venv-inference/bin/python",
+        "-m",
+        "tools.runtime_checks.text_live",
+        "--repository",
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias",
+        "--artifacts",
+        "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1",
+        "--cache-dir",
+        "/workspace/scratch/31a6dc706f63/model-cache/hub",
+        "--inference-python",
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias/.venv-inference/bin/python",
+        "--protocol",
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias/reports/jensen-text-live-v1/protocol-bf16-v2.json",
+        "--protocol-sha256",
+        "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+        "--condition",
+        "adapter",
+        "--allow-candidates",
+        "--adapter-run",
+        "/workspace/scratch/31a6dc706f63/restored/jensen-text-adapter-completed29-v1/text-adapter-v1",
+        "--adapter-run-sha256",
+        "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+        "--verify-only"
+      ],
+      "run": [
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias/.venv/bin/python",
+        "/workspace/scratch/31a6dc706f63/m7-completion-preparation/m7_delivery.py",
+        "run",
+        "--condition",
+        "adapter",
+        "--name",
+        "m7-adapter-completion-20261113-v1",
+        "--release-note",
+        "Coordinator released the shared model slot after M6 and RAG evidence was saved and freshly verified."
+      ]
+    }
+  },
+  "model_loaded": false,
+  "generation_executed": false,
+  "preparation_archive_persistence": "pending",
+  "semantic_quality_claim": false,
+  "preflight": {
+    "schema_version": "m7-completed29-preparation.v1",
+    "checked_at": "2026-11-13T05:05:22.042970+00:00",
+    "status": "no_model_preflights_passed_awaiting_coordinator_release",
+    "bindings_sha256": "da4e23213dd4f31ffb849e288eb749bc70a20b21d280dec3fd0a487331ab46dd",
+    "operational_helper_sha256": "1d543d3983fb0e1d2536eec8e041780a95cd6f49c2d5e7efd68ae7edeeceebf7",
+    "conditions": {
+      "base": {
+        "file": "preflight-base.json",
+        "sha256": "f0a633431cb2f8fe71b03a9945defea7c1f9618287b617702980866a60a9df87",
+        "weights_loaded": false,
+        "returncode": 0
+      },
+      "adapter": {
+        "file": "preflight-adapter.json",
+        "sha256": "ef14bbca22de174cad56d92958f2349461680305b49a9ed8633a4e2657d9e386",
+        "weights_loaded": false,
+        "returncode": 0
+      }
+    },
+    "model_loaded": false,
+    "generation_executed": false,
+    "adapter_run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+    "protocol_sha256": "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e"
+  },
+  "preparation_archive": {
+    "file_name": "jensen-m7-preparation-resumed-20261113-v1.tar.gz",
+    "size_bytes": 10515,
+    "sha256": "9540ece848d2eaa97504f983ac1f02319ae2341d1a039b7179a410f6ccbd22b5",
+    "payload_files": 7,
+    "upload_status": "not_uploaded",
+    "verification_status": "pending_fresh_readback"
+  }
+}

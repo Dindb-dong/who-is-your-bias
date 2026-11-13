@@ -54,8 +54,8 @@ log and process name. Use the same `--state-dir` for all heavy M6/M7 model work.
   --plan "$EVAL_ART/text-evaluation-v1/frozen-v2/heldout/plan.json" \
   --adapter-run "$EVAL_ART/text-adapter-completed29-v1" \
   --hf-home "$EVAL_CACHE" \
-  --output "$EVAL_ART/text-evaluation-v1/execution-heldout-bf16-resumed/adapter" \
-  --state-dir "$EVAL_ART/text-process" --name m6-heldout-adapter-resumed
+  --output "$EVAL_ART/text-evaluation-v1/execution-heldout-bf16-v2/adapter" \
+  --state-dir "$EVAL_ART/text-process" --name m6-heldout-adapter-bf16-v2
 ```
 
 Save the preflight and publish its operational code before adding `--execute`.
@@ -71,8 +71,8 @@ separate base-only RAG diagnostic with another unused output:
 "$EVAL_PYTHON" reports/jensen-evaluation-v1/resumption/launch_remaining.py rag \
   --plan "$EVAL_ART/text-evaluation-v1/heldout-rag-v1/plan.json" \
   --hf-home "$EVAL_CACHE" \
-  --output "$EVAL_ART/text-evaluation-v1/execution-heldout-rag-bf16-resumed" \
-  --state-dir "$EVAL_ART/text-process" --name m6-heldout-rag-resumed
+  --output "$EVAL_ART/text-evaluation-v1/execution-heldout-rag-bf16-v2" \
+  --state-dir "$EVAL_ART/text-process" --name m6-heldout-rag-bf16-v2
 ```
 
 ## Preservation and collection
@@ -98,6 +98,33 @@ seals, identities, frozen requests and stopped servers. The operational
 [collection helper](../operations/collect_package_m6.py) also creates the
 opaque review packet; its old absolute paths must be explicitly relocated in
 a new wrapper, without changing the archived original.
+
+`deliver_remaining.py` provides that relocation for the original condition,
+partial-prefix, collection and RAG helpers. It verifies each imported helper
+against the original source manifest, records its actual new paths and wrapper
+hashes, and leaves the helpers' original source files unchanged. It runs no
+inference or transfer. All finalizers still require genuine independently
+obtained upload/readback receipts. Use a new artifact root with the canonical
+relative paths and process names shown above; do not reuse the old workspace.
+
+```sh
+"$EVAL_PYTHON" reports/jensen-evaluation-v1/resumption/deliver_remaining.py matched-package \
+  --artifact-root "$EVAL_ART"
+# Upload the resulting archive, freshly retrieve it under EVAL_ART/readback,
+# and register the actual verified record in the central artifact index.
+"$EVAL_PYTHON" reports/jensen-evaluation-v1/resumption/deliver_remaining.py matched-finalize \
+  --artifact-root "$EVAL_ART"
+"$EVAL_PYTHON" reports/jensen-evaluation-v1/resumption/deliver_remaining.py collect \
+  --artifact-root "$EVAL_ART"
+```
+
+`partial-package`/`partial-finalize --attempts 3` preserve a finalized matched
+prefix. `rag-package --mode partial3`, `rag-package --mode final`, and
+`rag-verify --mode final --artifact-receipt <actual-record.json>` use the separate
+RAG workflow. For RAG validation, supply `--inference-python` when it differs
+from the checkout's `.venv-inference/bin/python`. The recorded command must
+match the real process owner. The RAG archive also includes both relocation
+wrappers and the explicit binding record.
 
 Share only the resulting `agent-review/reviewer/` directory with a fresh agent.
 Save categorical factual-support/coverage findings before revealing condition

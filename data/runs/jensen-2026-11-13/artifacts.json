@@ -893,6 +893,46 @@
       "sha256": "fa9fa19fd73b3ef0a448ddf9373f17bb25a38a8fe6bd5e809778b6d116478806",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-pr19-m6-resumption-preparation-v1",
+      "role": "verified-relocated-execution-preparation",
+      "file_name": "jensen-pr19-m6-resumption-preparation-v1.tar.gz",
+      "file_id": "file_00000000b30881f5b40424249e8cd54c",
+      "library_file_id": "libfile_fde3_f-0eae2d0a27508191b5ca1a64f07c6306_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 11386,
+      "sha256": "20d91eb7ad00a4155c29aa9fb81c20063889be60ca28665ca3e0a0ed014d3859",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified",
+      "generation_executed": false,
+      "files_sha256": {
+        "m6-adapter-preflight.json": "069d183e80d84fcec77c8d01bb919a26b03ec628c016ec6c2e1be5f129c7b598",
+        "m6-rag-preflight.json": "2ce6225cb07d0dbb57b149e6564dc4eb62b49e29e6cfbff554c58abdc987cd25",
+        "launch_remaining.py": "b75024b49b143a792e6c0d4290112a4334205131b9402f945b60ac220b983106",
+        "restored-inputs.json": "3eaa1761afe7e5dca5b4311a046f7c5b83911c64eff14c502d03d33495d15438"
+      }
+    },
+    {
+      "artifact_id": "jensen-m7-preparation-resumed-20261113-v1",
+      "role": "verified-relocated-execution-preparation",
+      "file_name": "jensen-m7-preparation-resumed-20261113-v1.tar.gz",
+      "file_id": "file_000000005a2c81f5a991ecd71be6c2d7",
+      "library_file_id": "libfile_fde3_f-a17fb02aff00819189383f4261afd8f5_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 10515,
+      "sha256": "9540ece848d2eaa97504f983ac1f02319ae2341d1a039b7179a410f6ccbd22b5",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified",
+      "generation_executed": false,
+      "files_sha256": {
+        "artifact-manifest.json": "fe871c80a1c2981211e6de5e51d117f7132a613d84bdcdab57ea0bcd73281cf1",
+        "preparation/bindings.json": "da4e23213dd4f31ffb849e288eb749bc70a20b21d280dec3fd0a487331ab46dd",
+        "preparation/execution-plan.json": "da7f177cadabb22a5bcad1d5a6ec40da34188899e9d9342a765598ebe1058a8e",
+        "preparation/m7_delivery.py": "1d543d3983fb0e1d2536eec8e041780a95cd6f49c2d5e7efd68ae7edeeceebf7",
+        "preparation/preflight-adapter.json": "ef14bbca22de174cad56d92958f2349461680305b49a9ed8633a4e2657d9e386",
+        "preparation/preflight-base.json": "f0a633431cb2f8fe71b03a9945defea7c1f9618287b617702980866a60a9df87",
+        "preparation/preparation.json": "7feb29d2940cc272518db21199b96c06a08fa6bf5eef62d357e7678e87981ec7",
+        "preparation/relocation.json": "f3d896215e1c95fcb8881e17005e800eda3f96d1672e79e44eebcdcf75186d80"
+      }
     }
   ],
   "artifact_indexes": {
