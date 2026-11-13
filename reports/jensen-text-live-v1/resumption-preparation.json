@@ -5,7 +5,7 @@
   "integration_branch": "feat/jensen-resumable-replication",
   "remote_resume_head": "324b9e8e5af9ff16f471badf2e1478c7c5e2bdd1",
   "observed_local_head": "893606a60c5706dc907b82be45682ea3569e35a4",
-  "status": "model_free_preflights_passed_awaiting_archive_persistence_and_coordinator_release",
+  "status": "model_free_preflights_and_fresh_readback_passed_awaiting_coordinator_release",
   "source_preparation_artifact": {
     "artifact_id": "jensen-m7-preparation-completed29-v1",
     "sha256": "1c6ae0e06d74e06688cc6e447cfa85babba25b9ca8e557f4ef0d4ada39c95621",
@@ -117,7 +117,7 @@
   },
   "model_loaded": false,
   "generation_executed": false,
-  "preparation_archive_persistence": "pending",
+  "preparation_archive_persistence": "uploaded_and_fresh_readback_archive_and_every_payload_verified",
   "semantic_quality_claim": false,
   "preflight": {
     "schema_version": "m7-completed29-preparation.v1",
@@ -149,7 +149,29 @@
     "size_bytes": 10515,
     "sha256": "9540ece848d2eaa97504f983ac1f02319ae2341d1a039b7179a410f6ccbd22b5",
     "payload_files": 7,
-    "upload_status": "not_uploaded",
-    "verification_status": "pending_fresh_readback"
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified",
+    "file_id": "file_000000005a2c81f5a991ecd71be6c2d7",
+    "library_file_id": "libfile_fde3_f-a17fb02aff00819189383f4261afd8f5_a18ece08681081918d81df44f69c4b1f"
+  },
+  "fresh_readback": {
+    "schema_version": "m7-operational-fresh-readback.v1",
+    "verified_at": "2026-11-13T05:06:57.780329+00:00",
+    "file_id": "file_000000005a2c81f5a991ecd71be6c2d7",
+    "library_file_id": "libfile_fde3_f-a17fb02aff00819189383f4261afd8f5_a18ece08681081918d81df44f69c4b1f",
+    "file_name": "jensen-m7-preparation-resumed-20261113-v1.tar.gz",
+    "bytes": 10515,
+    "sha256": "9540ece848d2eaa97504f983ac1f02319ae2341d1a039b7179a410f6ccbd22b5",
+    "verified_payload_files": 7,
+    "metadata": {
+      "role": "m7-relocated-completed29-operational-preparation",
+      "model_loaded": false,
+      "generation_executed": false,
+      "protocol_sha256": "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+      "adapter_run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+      "source_preparation_sha256": "1c6ae0e06d74e06688cc6e447cfa85babba25b9ca8e557f4ef0d4ada39c95621",
+      "relocated_bindings_sha256": "da4e23213dd4f31ffb849e288eb749bc70a20b21d280dec3fd0a487331ab46dd"
+    },
+    "status": "fresh_readback_archive_and_every_payload_verified"
   }
 }

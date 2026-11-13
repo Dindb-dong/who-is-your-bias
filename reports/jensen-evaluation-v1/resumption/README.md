@@ -133,8 +133,33 @@ coordinator's denominator. Human likeness/quality ratings remain null until an
 identified human supplies them. Review the RAG diagnostic separately against
 its actual captured passages, including both empty-retrieval cases.
 
+`package_rag_review.py` implements the previously saved
+[RAG reviewer preparation](../operations/m6_rag_reviewer_plan.json). It invokes
+the original final fresh-readback audit again before packaging the exact actual
+outputs. It is intentionally separate from the three-arm collector. References
+stay in `private/`; all six captured factual pools survive even if no generation
+completed. Preserve the packet and its realized sample mapping before sharing
+only `reviewer/` with an independent reviewer.
+
+```sh
+"$EVAL_PYTHON" reports/jensen-evaluation-v1/resumption/package_rag_review.py \
+  --artifact-root "$EVAL_ART" --artifact-receipt <actual-rag-record.json> \
+  --output "$EVAL_ART/text-evaluation-v1/rag-reviewer-packet-v1"
+```
+
 ## Audit validation
 
 This addition does not change the original M6 plans, contracts, inference,
 prompting, comparison, packaging or review rubric. Preparation checks and actual
 runtime outcomes are recorded separately by the coordinating session.
+
+At preparation, 65 existing local-condition, partial-checkpoint, blind-review
+and RAG tests passed in the core environment. The actual restored heldout and
+RAG plans validated against the original implementation and six-case IDs.
+The operational helper source hashes matched their original manifest. The new
+RAG packet transformation was exercised using synthetic output fixtures with
+the actual frozen source-pool structure: both empty pools stayed empty,
+completed content stayed exact, failed and zero-sample denominators survived,
+human fields stayed null, references stayed separate, and changed counts,
+identity or content were rejected. No actual generated answer was used in
+those fixture checks, and they do not establish model quality.
