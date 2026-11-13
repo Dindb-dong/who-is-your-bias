@@ -1035,6 +1035,20 @@
       "sha256": "5ebceab4cf2e7c9f8a426d3fd31c306345ebbc86f69ab1925235c553a4ee9ac4",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-m7-base-completion-20261113-v1",
+      "role": "actual-neural-api-original-harness-preflight-failure",
+      "functional_status": "failed",
+      "conversation_cases_attempted": 0,
+      "failure_preserved": true,
+      "file_name": "jensen-m7-base-completion-20261113-v1.tar.gz",
+      "file_id": "file_00000000637881f58857b889e3506271",
+      "library_file_id": "libfile_fde3_f-153d8615f584819195e9d5788c4da659_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 14408,
+      "sha256": "eef30c8f3d7e89b49a6e89458cddaa5fe5796fcfb6051014abcc9f12fd086258",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-and-every-payload-verified"
     }
   ],
   "artifact_indexes": {
