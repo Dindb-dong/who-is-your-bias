@@ -1085,6 +1085,17 @@
       "sha256": "fac25894fa9c96df47f730160ffb35f0713721939d1fff9c7695f3145ff582dc",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-and-every-payload-verified"
+    },
+    {
+      "artifact_id": "jensen-m6-rag-agent-review-v1",
+      "role": "separate-rag-supplied-evidence-agent-semantic-findings",
+      "file_name": "jensen-m6-rag-agent-review-v1.tar.gz",
+      "file_id": "file_000000009f0081f5b0cc0e9f0a64016a",
+      "library_file_id": "libfile_fde3_f-c0a1158a93fc8191b85e8d0b672c6f85_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 19373,
+      "sha256": "d748fa547007f2f4cafd528dd01439a82976d297042b50bf499bd2b3715eaedb",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-and-every-payload-verified"
     }
   ],
   "artifact_indexes": {
