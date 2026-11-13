@@ -1,6 +1,6 @@
 {
   "schema_version": "jensen-matched-execution-status.v1",
-  "recorded_at": "2026-11-13T05:14:51.480592+00:00",
+  "recorded_at": "2026-11-13T05:20:34.062432+00:00",
   "matched_planned_calls": 54,
   "matched_attempted": 54,
   "matched_completed": 22,
@@ -94,10 +94,16 @@
   "primary_runtime_contract": "execution-contract-bf16-v2.json",
   "fp32_preflight_failure": "runtime-amendment-bf16-v2.json",
   "separate_heldout_rag": {
+    "status": "executed_saved_and_fresh_readback_verified",
     "planned": 6,
-    "attempted": 0,
-    "status": "not_executed",
-    "contract": "heldout-rag-v1/execution-contract-bf16-v2.json"
+    "attempted": 6,
+    "completed": 4,
+    "failed": 2,
+    "unattempted": 0,
+    "report": "heldout-rag-v1/result.json",
+    "artifact_id": "jensen-m6-heldout-rag-bf16-v2",
+    "contract": "heldout-rag-v1/execution-contract-bf16-v2.json",
+    "semantic_review": "pending"
   },
   "collection": "all_54_matched_attempts_collected_and_fresh_readback_verified",
   "semantic_support_review": "development_completed_heldout_in_progress",

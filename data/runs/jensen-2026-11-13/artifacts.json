@@ -1006,6 +1006,22 @@
       "sha256": "8aec9926460429419e3d7a973f3e7c17861bbb21ae19fd7e08253c71e59823cd",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-m6-heldout-rag-bf16-v2",
+      "role": "separate-heldout-retrieval-to-generation-results",
+      "planned": 6,
+      "attempted": 6,
+      "completed": 4,
+      "failed": 2,
+      "collectible": false,
+      "file_name": "jensen-m6-heldout-rag-bf16-v2.tar.gz",
+      "file_id": "file_00000000c0fc81f582ace48c51a8d9db",
+      "library_file_id": "libfile_fde3_f-a567c24c0eac819198ad0d8e12589f81_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 99958,
+      "sha256": "91686bb8070fa9a4e18fd131fe74a58f4ad98031d3adc705527d559844128281",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {

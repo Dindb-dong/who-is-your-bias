@@ -1,0 +1,362 @@
+{
+  "schema_version": "m6-rag-persistence-result.v1",
+  "mode": "final",
+  "status": "saved_and_fresh_readback_verified",
+  "recorded_at": "2026-11-13T05:19:37.014485+00:00",
+  "exposure": "heldout",
+  "execution_condition": "facts",
+  "scope": "separate_single_base_offline_rag",
+  "plan_sha256": "3e2c6409b45a67b11798c17f23c6ce869aa9d71309775bf9af8f69afcc7d02d6",
+  "contract_sha256": "7c3c0bc535cc2f92efa582a909c01e7f44280f58fd21ae66f184408cd714464d",
+  "observation": {
+    "validation": "closed_invocation_revalidated",
+    "condition_status": "completed",
+    "run_status": "completed",
+    "registered": 6,
+    "planned": 6,
+    "attempted": 6,
+    "completed": 4,
+    "failed": 2,
+    "unattempted": 0,
+    "run_sha256": "33d51533af9ec933eb5e7e8584d0378ecfe149b4ca5efe6c62786186cfaf66e4",
+    "supervisor_sha256": "de7bbe3019699d9d6f732f0ed21d850e37c1617c3e304ab325602ecfdd235337",
+    "model_identity_hashes": {
+      "identity_sha256": "300560a54349d92f85d9bebd2f16a9d1afe2edc430ec39bef4ccb4d981c0ca97",
+      "adapter_sha256": "1229fcd3639560d466635395f34e8707c8c7954131ea460be99228198f66ca2a",
+      "runtime_sha256": "f09c338c9e491f5bd94d33a9a6cd8040303fb2670080e6a43013257406072a23"
+    },
+    "completed_case_ids": [
+      "heldout-qa26-no-priors-2023-turn-00078",
+      "heldout-qa26-no-priors-2023-turn-00186",
+      "heldout-qa26-no-priors-2023-turn-00253",
+      "heldout-qa26-no-priors-2023-turn-00297"
+    ],
+    "case_metadata": [
+      {
+        "case_id": "heldout-qa26-no-priors-2023-turn-00072",
+        "provider_generation": {
+          "completed": false,
+          "error": "provider_finish_length",
+          "finish_reason": "length",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 55490.466,
+          "first_text_ms": 18062.756,
+          "request_sha256": "da5ca34c077fcabdd8ee861318b90187fc023f2c23cc17dbe8462d21240bcd15"
+        },
+        "generation": {
+          "completed": false,
+          "error": "provider_finish_length",
+          "finish_reason": "length",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 55490.466,
+          "first_text_ms": 18062.756,
+          "request_sha256": "da5ca34c077fcabdd8ee861318b90187fc023f2c23cc17dbe8462d21240bcd15"
+        },
+        "identity_check": {
+          "before": "verified",
+          "after": "verified"
+        },
+        "validation_errors": []
+      },
+      {
+        "case_id": "heldout-qa26-no-priors-2023-turn-00078",
+        "provider_generation": {
+          "completed": true,
+          "error": null,
+          "finish_reason": "stop",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 46020.369,
+          "first_text_ms": 18060.817,
+          "request_sha256": "0b9254d0a1dc9c731229fd80e920d235bc868d0b6b2138ab493c0a887d10feca"
+        },
+        "generation": {
+          "completed": true,
+          "error": null,
+          "finish_reason": "stop",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 46020.369,
+          "first_text_ms": 18060.817,
+          "request_sha256": "0b9254d0a1dc9c731229fd80e920d235bc868d0b6b2138ab493c0a887d10feca"
+        },
+        "identity_check": {
+          "before": "verified",
+          "after": "verified"
+        },
+        "validation_errors": []
+      },
+      {
+        "case_id": "heldout-qa26-no-priors-2023-turn-00186",
+        "provider_generation": {
+          "completed": true,
+          "error": null,
+          "finish_reason": "stop",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 12654.491,
+          "first_text_ms": 2619.921,
+          "request_sha256": "410a417604247e07a0f576893d0175d2a2821644757f53dd091f478c49e614a6"
+        },
+        "generation": {
+          "completed": true,
+          "error": null,
+          "finish_reason": "stop",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 12654.491,
+          "first_text_ms": 2619.921,
+          "request_sha256": "410a417604247e07a0f576893d0175d2a2821644757f53dd091f478c49e614a6"
+        },
+        "identity_check": {
+          "before": "verified",
+          "after": "verified"
+        },
+        "validation_errors": []
+      },
+      {
+        "case_id": "heldout-qa26-no-priors-2023-turn-00190",
+        "provider_generation": {
+          "completed": false,
+          "error": "provider_finish_length",
+          "finish_reason": "length",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 53586.532,
+          "first_text_ms": 16815.666,
+          "request_sha256": "7a04a1aa0b646efcd7255591ecc19e3fdcdf59c1c8d7e7d3c3e9bd6643dbbfb5"
+        },
+        "generation": {
+          "completed": false,
+          "error": "provider_finish_length",
+          "finish_reason": "length",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 53586.532,
+          "first_text_ms": 16815.666,
+          "request_sha256": "7a04a1aa0b646efcd7255591ecc19e3fdcdf59c1c8d7e7d3c3e9bd6643dbbfb5"
+        },
+        "identity_check": {
+          "before": "verified",
+          "after": "verified"
+        },
+        "validation_errors": []
+      },
+      {
+        "case_id": "heldout-qa26-no-priors-2023-turn-00253",
+        "provider_generation": {
+          "completed": true,
+          "error": null,
+          "finish_reason": "stop",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 14216.956,
+          "first_text_ms": 2760.996,
+          "request_sha256": "291d4d768c3c1a04f64251d18222f77875dc4e38e99cd531e580418be33faf82"
+        },
+        "generation": {
+          "completed": true,
+          "error": null,
+          "finish_reason": "stop",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 14216.956,
+          "first_text_ms": 2760.996,
+          "request_sha256": "291d4d768c3c1a04f64251d18222f77875dc4e38e99cd531e580418be33faf82"
+        },
+        "identity_check": {
+          "before": "verified",
+          "after": "verified"
+        },
+        "validation_errors": []
+      },
+      {
+        "case_id": "heldout-qa26-no-priors-2023-turn-00297",
+        "provider_generation": {
+          "completed": true,
+          "error": null,
+          "finish_reason": "stop",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 12654.587,
+          "first_text_ms": 10426.003,
+          "request_sha256": "2933b7a54252747c04dc36aa24defd081b9cdc647374a0ce51b45b293fbe119f"
+        },
+        "generation": {
+          "completed": true,
+          "error": null,
+          "finish_reason": "stop",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 12654.587,
+          "first_text_ms": 10426.003,
+          "request_sha256": "2933b7a54252747c04dc36aa24defd081b9cdc647374a0ce51b45b293fbe119f"
+        },
+        "identity_check": {
+          "before": "verified",
+          "after": "verified"
+        },
+        "validation_errors": []
+      }
+    ],
+    "server_stopped": true,
+    "process_owner_exit_verified": true,
+    "eligible_for_completed_output_review": true
+  },
+  "artifact": {
+    "artifact_id": "jensen-m6-heldout-rag-bf16-v2",
+    "file_name": "jensen-m6-heldout-rag-bf16-v2.tar.gz",
+    "file_id": "file_00000000c0fc81f582ace48c51a8d9db",
+    "library_file_id": "libfile_fde3_f-a567c24c0eac819198ad0d8e12589f81_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 99958,
+    "sha256": "91686bb8070fa9a4e18fd131fe74a58f4ad98031d3adc705527d559844128281",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "artifact_record_file_sha256": "618af1bb3b608a0dffac9c7ee1b854c20baf03d8d33264f770041e567ea4823c",
+  "archive_members": {
+    "condition-output/condition-review.json": {
+      "bytes": 65349,
+      "sha256": "6134f1ecf5a19142c8bb377740af1cb71c12bdb324596a9e02ee48aaace2dafe"
+    },
+    "condition-output/condition/attempts.jsonl": {
+      "bytes": 29437,
+      "sha256": "a92100f037827ff604cf0db3bdf1c1fb193cc3f4ab17cc4af3693f909a818185"
+    },
+    "condition-output/condition/raw-generations.jsonl": {
+      "bytes": 6104,
+      "sha256": "637f3799b09dc51ddae4d38191f46f052e211aa7225cbba20dc7eb9247a6f0bb"
+    },
+    "condition-output/condition/run.json": {
+      "bytes": 40500,
+      "sha256": "a24df17cffe53092c2bd120a60c9a7c83c49cb7574c6adfc40126fe504f874e3"
+    },
+    "condition-output/launcher.json": {
+      "bytes": 960,
+      "sha256": "c6020ab8906f99f0aa9bb4a879291bc3cd7ee9e517e7f96bc23ec5898c50ab64"
+    },
+    "condition-output/observed-after.json": {
+      "bytes": 896,
+      "sha256": "e73bf1d5894dcadbfe770dfd51ea273fd7ef05356bd227a5a7a5a3e190609991"
+    },
+    "condition-output/observed-before.json": {
+      "bytes": 896,
+      "sha256": "e73bf1d5894dcadbfe770dfd51ea273fd7ef05356bd227a5a7a5a3e190609991"
+    },
+    "condition-output/server.log": {
+      "bytes": 2087,
+      "sha256": "94c8dfed2d8ba9833cfd17ee3429ce8550980ee7363c5e42309ee8c14f8b6a92"
+    },
+    "condition-output/supervisor.json": {
+      "bytes": 3407,
+      "sha256": "972f0306a318cf4d029b5012cbd58e81b2f0d392e870bf63f8108f8c94b858a6"
+    },
+    "condition-output/warmup.json": {
+      "bytes": 523,
+      "sha256": "7e4c96cca18f91b01e52f967af939ff3cc3c39fadc091a924b5f62702f08b8b4"
+    },
+    "inputs/execution-contract-bf16-v2.json": {
+      "bytes": 1445,
+      "sha256": "3aa4356d0466a9d3a60daaa007f164091ea42869a67689cf9112adbb77a86d07"
+    },
+    "inputs/plan.json": {
+      "bytes": 247457,
+      "sha256": "58338fe59a75eac2ff86e5e52fece7ea268145987957709d4df72d04ea2b7adb"
+    },
+    "inputs/relocation-bindings.json": {
+      "bytes": 1023,
+      "sha256": "55cd9746ea8ce4a3faf401189d6626c29eb68dcf709cec9b07a6bbedde91abf6"
+    },
+    "process-owner.json": {
+      "bytes": 1621,
+      "sha256": "3a2f5a04aa4223b80a6b8e073e72bcd0309135032b6133279556e6caa536c651"
+    },
+    "process-owner.log": {
+      "bytes": 102,
+      "sha256": "4c82586c66b5f4c0f61bd58cdc74ab0eb1fc1f6b9830bd852741e6fb0766e296"
+    },
+    "source/launch_m6_rag.py": {
+      "bytes": 5927,
+      "sha256": "5a78a311e46d07b3c3f48468335b2a8307ed440102f76b930b6e17b904c40ced"
+    },
+    "source/m6_partial_delivery.py": {
+      "bytes": 18064,
+      "sha256": "33b244c32af6fd1ed89b794f5d295ea20f2a7ab97a160972fa81b09df93ac7fe"
+    },
+    "source/m6_rag_delivery.py": {
+      "bytes": 20638,
+      "sha256": "1270079fff1b7636d4d9945cc7b8d07c9d44fe07badaf31eccff881b8de91fdd"
+    },
+    "source/resumption/deliver_remaining.py": {
+      "bytes": 6201,
+      "sha256": "3294be9631f7caf951d67362dd9686c41f2b60e8c9584bc61ef3f10e4bd6e15d"
+    },
+    "source/resumption/launch_remaining.py": {
+      "bytes": 9036,
+      "sha256": "b75024b49b143a792e6c0d4290112a4334205131b9402f945b60ac220b983106"
+    },
+    "source/tools/adaptation/supervise.py": {
+      "bytes": 6750,
+      "sha256": "61341377a4bb9fa0a7edca65111218d6e9d6fdd9107438c00753621da8df51a7"
+    },
+    "source/tools/adaptation_evaluation/local_condition.py": {
+      "bytes": 23163,
+      "sha256": "f1fda11d0f7f4f5d5de6dcee20d51bb0c3230d1b32509267915977808a16b5da"
+    },
+    "source/tools/adaptation_evaluation/partial_checkpoint.py": {
+      "bytes": 15177,
+      "sha256": "5f18454919f7387a6bf1add4c18b66faaeb5329ff34f1ecae23c6a1afb276a56"
+    },
+    "source/tools/adaptation_evaluation/protocol.py": {
+      "bytes": 14310,
+      "sha256": "b01305ca54e797626d7a52334e6ba96c21a4efc17f65fb390decb3ee8df632da"
+    },
+    "source/tools/adaptation_evaluation/rag_diagnostic.py": {
+      "bytes": 18268,
+      "sha256": "5b7a32372e8407ff8b19bfc69737b8e58cb402e1f217c82c125bcbd511c16544"
+    },
+    "source/tools/adaptation_evaluation/run.py": {
+      "bytes": 23098,
+      "sha256": "ead4af96d3ee25305611e776d8871bcba538a6d80715ed8cef0a4561c3803f57"
+    }
+  },
+  "private_restored_root": "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1/text-evaluation-v1/rag-readbacks/final-bf16-v2",
+  "raw_errors_and_normalized_errors_retained_separately": true,
+  "collectible": false,
+  "matched_counters_updated": false,
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "verification": {
+    "fresh_archive_bytes_and_hash": true,
+    "every_regular_member_hash": true,
+    "exact_restored_inventory": true,
+    "mode_specific_evidence_revalidated": true
+  },
+  "publication": "Published metadata; raw source passages and generated outputs remain in the verified private artifact."
+}
