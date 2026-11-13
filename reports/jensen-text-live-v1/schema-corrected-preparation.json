@@ -1,0 +1,203 @@
+{
+  "schema_version": "m7-schema-corrected-resumption-preparation.v1",
+  "recorded_at": "2026-11-13T05:30:01.625318+00:00",
+  "status": "preserved_and_freshly_verified_ready_for_corrected_harness_execution",
+  "preparation_directory": "/workspace/scratch/31a6dc706f63/m7-completion-preparation-v2",
+  "lineage": {
+    "schema_version": "m7-harness-schema-correction-preparation.v1",
+    "recorded_at": "2026-11-13T05:28:39.037052+00:00",
+    "status": "all_50_rebound_input_files_verified_and_model_free_preflights_passed",
+    "old_bindings_sha256": "da4e23213dd4f31ffb849e288eb749bc70a20b21d280dec3fd0a487331ab46dd",
+    "corrected_bindings_sha256": "23cdc43675d67aebd1bcb366bd3b1aafd3922dbee250a87acd0f8e83435de3f1",
+    "helper_sha256": "1d543d3983fb0e1d2536eec8e041780a95cd6f49c2d5e7efd68ae7edeeceebf7",
+    "inventory_count": 50,
+    "intentional_inventory_change": {
+      "path": "tools/runtime_checks/text_live.py",
+      "previous_sha256": "e1874d62e251cc4f29ef2eb84c1cfc795181201b24d611b1a5998795b929cdeb",
+      "corrected_sha256": "6421b108f7ec7d390507ba3015b7c55ed824c4c2e76e729fa5bc6f598c8ac014",
+      "reason": "Require exact language-model-identity.v1 envelope plus unchanged sealed payload."
+    },
+    "unchanged_inventory_entries": 49,
+    "original_protocol_sha256": "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+    "model_or_prompt_amendment": false,
+    "initial_failed_invocation": {
+      "name": "m7-base-completion-20261113-v1",
+      "status": "failed",
+      "failure_type": "ValueError",
+      "completed_main_api_cases": 0,
+      "public_summary_sha256": "ceabac610673e22ef27478928e64b95118c3ab3cafe467a7ad98846507a544ed",
+      "private_report_sha256": "d76e24e45d3568e53920bc77793d2ccf11b3e275d15b1e89b20a6de9484f6cf5",
+      "owner_sha256": "07198e738404c17efd2ee5bf2584660df9697c505e21c1e397b36d9e8bce34e7",
+      "observed_base_identity_matches_versioned_protocol": true,
+      "precision_device_threads_match": true,
+      "retention": "Original failure remains separate; corrected v2 invocation never overwrites or counts it as successful.",
+      "fresh_readback": {
+        "schema_version": "m7-operational-fresh-readback.v1",
+        "verified_at": "2026-11-13T05:28:13.633790+00:00",
+        "file_id": "file_00000000637881f58857b889e3506271",
+        "library_file_id": "libfile_fde3_f-153d8615f584819195e9d5788c4da659_a18ece08681081918d81df44f69c4b1f",
+        "file_name": "jensen-m7-base-completion-20261113-v1.tar.gz",
+        "bytes": 14408,
+        "sha256": "eef30c8f3d7e89b49a6e89458cddaa5fe5796fcfb6051014abcc9f12fd086258",
+        "verified_payload_files": 12,
+        "metadata": {
+          "role": "actual-m7-neural-functional-evidence",
+          "name": "m7-base-completion-20261113-v1",
+          "invocation_state": "exited",
+          "child_returncode": 1,
+          "child_stopped": true,
+          "functional_status": "failed",
+          "passed_checks": 0,
+          "total_checks": 0,
+          "protocol_sha256": "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+          "adapter_run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+          "failure_preserved": true
+        },
+        "status": "fresh_readback_archive_and_every_payload_verified"
+      },
+      "published_failure_receipt": "reports/jensen-text-live-v1/base-first-preflight-failure.json",
+      "verified_remote_checkpoint": "6ca3c53cb83c990e6ee76b48555089b59002bc28"
+    },
+    "prepared_v2_model_loaded": false,
+    "prepared_v2_generation_executed": false,
+    "verified_at": "2026-11-13T05:29:33.213242+00:00",
+    "verified_root_head": "23fb57f075a60862ef31835fb7a9e95df991c481",
+    "verified_root_file_count": 50,
+    "fix_verified_remote_checkpoint": "b935972c3c23c9ed50456c6e02fd96d527dd56f5"
+  },
+  "preflight": {
+    "schema_version": "m7-completed29-preparation.v1",
+    "checked_at": "2026-11-13T05:29:02.910572+00:00",
+    "status": "no_model_preflights_passed_awaiting_coordinator_release",
+    "bindings_sha256": "23cdc43675d67aebd1bcb366bd3b1aafd3922dbee250a87acd0f8e83435de3f1",
+    "operational_helper_sha256": "1d543d3983fb0e1d2536eec8e041780a95cd6f49c2d5e7efd68ae7edeeceebf7",
+    "conditions": {
+      "base": {
+        "file": "preflight-base.json",
+        "sha256": "f0a633431cb2f8fe71b03a9945defea7c1f9618287b617702980866a60a9df87",
+        "weights_loaded": false,
+        "returncode": 0
+      },
+      "adapter": {
+        "file": "preflight-adapter.json",
+        "sha256": "ef14bbca22de174cad56d92958f2349461680305b49a9ed8633a4e2657d9e386",
+        "weights_loaded": false,
+        "returncode": 0
+      }
+    },
+    "model_loaded": false,
+    "generation_executed": false,
+    "adapter_run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+    "protocol_sha256": "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e"
+  },
+  "commands": {
+    "base": {
+      "preflight": [
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias/.venv-inference/bin/python",
+        "-m",
+        "tools.runtime_checks.text_live",
+        "--repository",
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias",
+        "--artifacts",
+        "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1",
+        "--cache-dir",
+        "/workspace/scratch/31a6dc706f63/model-cache/hub",
+        "--inference-python",
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias/.venv-inference/bin/python",
+        "--protocol",
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias/reports/jensen-text-live-v1/protocol-bf16-v2.json",
+        "--protocol-sha256",
+        "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+        "--condition",
+        "base",
+        "--allow-candidates",
+        "--verify-only"
+      ],
+      "run": [
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias/.venv/bin/python",
+        "/workspace/scratch/31a6dc706f63/m7-completion-preparation-v2/m7_delivery.py",
+        "run",
+        "--condition",
+        "base",
+        "--name",
+        "m7-base-completion-20261113-v2",
+        "--release-note",
+        "Coordinator released the shared model slot after preserving the original schema-rejection failure and verifying the corrected-harness preparation."
+      ]
+    },
+    "adapter": {
+      "preflight": [
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias/.venv-inference/bin/python",
+        "-m",
+        "tools.runtime_checks.text_live",
+        "--repository",
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias",
+        "--artifacts",
+        "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1",
+        "--cache-dir",
+        "/workspace/scratch/31a6dc706f63/model-cache/hub",
+        "--inference-python",
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias/.venv-inference/bin/python",
+        "--protocol",
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias/reports/jensen-text-live-v1/protocol-bf16-v2.json",
+        "--protocol-sha256",
+        "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+        "--condition",
+        "adapter",
+        "--allow-candidates",
+        "--adapter-run",
+        "/workspace/scratch/31a6dc706f63/restored/jensen-text-adapter-completed29-v1/text-adapter-v1",
+        "--adapter-run-sha256",
+        "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+        "--verify-only"
+      ],
+      "run": [
+        "/workspace/scratch/31a6dc706f63/who-is-your-bias/.venv/bin/python",
+        "/workspace/scratch/31a6dc706f63/m7-completion-preparation-v2/m7_delivery.py",
+        "run",
+        "--condition",
+        "adapter",
+        "--name",
+        "m7-adapter-completion-20261113-v2",
+        "--release-note",
+        "Coordinator released the shared model slot after preserving the original schema-rejection failure and verifying the corrected-harness preparation."
+      ]
+    }
+  },
+  "archive": {
+    "file_name": "jensen-m7-preparation-identity-fixed-20261113-v2-verified.tar.gz",
+    "size_bytes": 12706,
+    "sha256": "c3ff0a78f5e78bfd0a576fb8316b39b9b82807826132fa5677c276a412099fd0",
+    "payload_files": 9,
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-and-every-payload-verified",
+    "file_id": "file_00000000df7481f5b37eb8572ed5e828",
+    "library_file_id": "libfile_fde3_f-ffbb701dc15c8191bfe0673130d1b6f8_a18ece08681081918d81df44f69c4b1f"
+  },
+  "model_loaded": false,
+  "generation_executed": false,
+  "quality_claim": false,
+  "fresh_readback": {
+    "schema_version": "m7-operational-fresh-readback.v1",
+    "verified_at": "2026-11-13T05:30:49.708358+00:00",
+    "file_id": "file_00000000df7481f5b37eb8572ed5e828",
+    "library_file_id": "libfile_fde3_f-ffbb701dc15c8191bfe0673130d1b6f8_a18ece08681081918d81df44f69c4b1f",
+    "file_name": "jensen-m7-preparation-identity-fixed-20261113-v2-verified.tar.gz",
+    "bytes": 12706,
+    "sha256": "c3ff0a78f5e78bfd0a576fb8316b39b9b82807826132fa5677c276a412099fd0",
+    "verified_payload_files": 9,
+    "metadata": {
+      "role": "m7-identity-schema-corrected-operational-preparation",
+      "model_loaded": false,
+      "generation_executed": false,
+      "protocol_sha256": "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+      "adapter_run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+      "bindings_sha256": "23cdc43675d67aebd1bcb366bd3b1aafd3922dbee250a87acd0f8e83435de3f1",
+      "corrected_harness_sha256": "6421b108f7ec7d390507ba3015b7c55ed824c4c2e76e729fa5bc6f598c8ac014",
+      "initial_failure_preserved": true,
+      "initial_failure_archive_sha256": "eef30c8f3d7e89b49a6e89458cddaa5fe5796fcfb6051014abcc9f12fd086258",
+      "fix_verified_remote_checkpoint": "b935972c3c23c9ed50456c6e02fd96d527dd56f5"
+    },
+    "status": "fresh_readback_archive_and_every_payload_verified"
+  }
+}

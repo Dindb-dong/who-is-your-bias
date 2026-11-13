@@ -1049,6 +1049,28 @@
       "sha256": "eef30c8f3d7e89b49a6e89458cddaa5fe5796fcfb6051014abcc9f12fd086258",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-and-every-payload-verified"
+    },
+    {
+      "artifact_id": "jensen-m6-heldout-agent-review-v1",
+      "role": "condition-blind-heldout-agent-semantic-findings",
+      "file_name": "jensen-m6-heldout-agent-review-v1.tar.gz",
+      "file_id": "file_00000000f12881f58e41d211e5653a72",
+      "library_file_id": "libfile_fde3_f-84b320f4e8ec819181517187e064e55f_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 21367,
+      "sha256": "a01e60bef3fa6025f54c2e79e7941be91bbd77c18b596d011899050b1c4791f9",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-and-every-payload-verified"
+    },
+    {
+      "artifact_id": "jensen-m7-preparation-identity-fixed-20261113-v2-verified",
+      "role": "m7-identity-schema-corrected-preparation",
+      "file_name": "jensen-m7-preparation-identity-fixed-20261113-v2-verified.tar.gz",
+      "file_id": "file_00000000df7481f5b37eb8572ed5e828",
+      "library_file_id": "libfile_fde3_f-ffbb701dc15c8191bfe0673130d1b6f8_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 12706,
+      "sha256": "c3ff0a78f5e78bfd0a576fb8316b39b9b82807826132fa5677c276a412099fd0",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-and-every-payload-verified"
     }
   ],
   "artifact_indexes": {

@@ -1,0 +1,55 @@
+{
+  "archive_scope": "Original findings and hash-only provenance; neither private keys/references nor complete source-pool bytes are copied into this package.",
+  "condition_key_opened_for_preservation": false,
+  "efficacy_claim": false,
+  "findings_modified": false,
+  "findings_original_bytes": {
+    "blinded-findings.json": {
+      "bytes": 124569,
+      "sha256": "bd6ba567b468570525d09477e617d97498906e696ad299d6409baac9c5f28c03"
+    },
+    "blinded-findings.md": {
+      "bytes": 7399,
+      "sha256": "d31c13c89e12a37db37a1066d356ac5919a5375103841dddbef31752a9171637"
+    }
+  },
+  "human_review": "ungraded",
+  "integration_branch": "feat/jensen-resumable-replication",
+  "observed_integration_checkpoint": "650052b5ad34a130d981871cd1a8d2791cd37297",
+  "persistence_scope": "Packaged and locally byte-verified only; coordinator must upload, freshly retrieve and verify before unblinding.",
+  "pr_base": "8515b5f30f3cd412e18db3d54ee28bf2a4c28694",
+  "pr_number": 19,
+  "prior_condition_exposure_as_recorded": false,
+  "reference_answers_opened_for_preservation": false,
+  "repository": "Dindb-dong/who-is-your-bias",
+  "review_input_packet_files": {
+    "README.md": {
+      "bytes": 1446,
+      "sha256": "104f396a124ea47bd8c02bf796f7bac849d9335405e5fb837a2630c8ecdbcbd7"
+    },
+    "rubric.md": {
+      "bytes": 14493,
+      "sha256": "d7e6db218c0fb29110583930797d9e824e802ce10ca9d8447f9acf55e03fcfcd"
+    },
+    "samples.json": {
+      "bytes": 11604,
+      "sha256": "681a0bca581ffb202291d21974a458a8708a42efe0fd376d4c1c791b19e8650d"
+    },
+    "source-pools.json": {
+      "bytes": 29985,
+      "sha256": "9dacfcfab052e2795beca543890edd211aaf117e4134e57a14f1494a8d1d3de0"
+    }
+  },
+  "review_samples": 9,
+  "reviewed_at_utc_as_recorded": "2026-11-13T05:23:37.035348+00:00",
+  "reviewer_packet_wording_included_in_public_git": false,
+  "reviewer_type": "agent_semantic_assessment",
+  "role": "heldout-condition-blind-agent-semantic-review-before-unblinding",
+  "schema_version": "jensen-heldout-blind-review-preservation.v1",
+  "source_collection_archive": {
+    "bytes": 51378,
+    "file_name": "jensen-m6-heldout-collection-review-bf16-v2.tar.gz",
+    "sha256": "627c1e741e726594538fde447b332adf365ad305cd0f6c3a617c35f126f176ee"
+  },
+  "source_collection_local_and_fresh_copies_byte_equal": true
+}

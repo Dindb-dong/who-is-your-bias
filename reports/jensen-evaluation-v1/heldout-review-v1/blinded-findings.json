@@ -1,0 +1,2802 @@
+{
+  "schema_version": "agent-semantic-blinded-findings.v1",
+  "reviewer_type": "agent_semantic_assessment",
+  "reviewer_id": "heldout_blind_review_agent",
+  "reviewed_at_utc": "2026-11-13T05:23:37.035348+00:00",
+  "prior_condition_exposure": false,
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "scope": {
+    "packet": "heldout-bf16-v2/agent-review/reviewer",
+    "partition": "heldout",
+    "stage": "source_only_blinded_semantic_assessment",
+    "factual_support_policy": "Only each sample's supplied factual_evidence supports factual claims. Common style examples are inspected only for copying observations.",
+    "external_browsing": false,
+    "reference_answers_read": false,
+    "private_or_condition_material_read": false,
+    "condition_inference_performed": false,
+    "mutation_scope": "Only these two local findings artifacts; no repository changes, commits, uploads, or unblinding."
+  },
+  "instruction_provenance": {
+    "repository": "Dindb-dong/who-is-your-bias",
+    "target_branch_from_rubric": "feat/jensen-resumable-replication",
+    "draft_pr_from_rubric": 19,
+    "root_agents_read": true,
+    "rubric_commit": null,
+    "rubric_commit_limitation": "The permitted packet states an authoring base but does not identify the rubric file's actual commit. No external repository metadata was accessed.",
+    "authoring_base_recorded_in_rubric": "f59f2389833031f149403d2d41b308fca774d1d0",
+    "live_remote_head_verified_by_reviewer": false,
+    "rubric_sha256": "d7e6db218c0fb29110583930797d9e824e802ce10ca9d8447f9acf55e03fcfcd"
+  },
+  "input_files_sha256": {
+    "README.md": "104f396a124ea47bd8c02bf796f7bac849d9335405e5fb837a2630c8ecdbcbd7",
+    "rubric.md": "d7e6db218c0fb29110583930797d9e824e802ce10ca9d8447f9acf55e03fcfcd",
+    "samples.json": "681a0bca581ffb202291d21974a458a8708a42efe0fd376d4c1c791b19e8650d",
+    "source-pools.json": "9dacfcfab052e2795beca543890edd211aaf117e4134e57a14f1494a8d1d3de0"
+  },
+  "hash_conventions": {
+    "file_sha256": "SHA-256 of the exact file bytes.",
+    "output_sha256": "SHA-256 of the exact answer string encoded UTF-8, without trimming, citation stripping, or newline normalization.",
+    "sample_sha256": "SHA-256 of the complete input sample object serialized with Python json.dumps(sample, ensure_ascii=False, sort_keys=True, separators=(',', ':')), then encoded UTF-8.",
+    "review_pool_sha256": "The same canonical JSON method over the full common review pool; this is not the model request hash and does not establish delivery of style examples.",
+    "question_sha256": "SHA-256 of the exact question string encoded UTF-8.",
+    "source_sha256": "Canonical JSON SHA-256 matching the supplied evidence-pointer fingerprints.",
+    "character_spans": "Zero-based, half-open character offsets; lexical diagnostic uses lowercase Unicode word tokens, not a semantic or persona score."
+  },
+  "packet_integrity": {
+    "sample_ids_unique": true,
+    "all_case_pool_question_mappings_match": true,
+    "all_supplied_source_hashes_match": true,
+    "source_checks": [
+      {
+        "source_pool_id": "pool-0001",
+        "source_id": "qa26-acquired-2023-turn-00077",
+        "pointer": "/pools/pool-0001/factual_evidence/0",
+        "expected_sha256": "988c01432461bfb6e99676a935c4588eee29f2a3e5b3db0e78406be930d135bf",
+        "computed_sha256": "988c01432461bfb6e99676a935c4588eee29f2a3e5b3db0e78406be930d135bf",
+        "status": "matched"
+      },
+      {
+        "source_pool_id": "pool-0001",
+        "source_id": "qa26-stanford-vftt-2024-turn-00130",
+        "pointer": "/pools/pool-0001/style_examples/0",
+        "expected_sha256": "f4500f42cb4b0be8c21d9a1ff5591a7be6fdada7909d09bcba7cd88a4030cc11",
+        "computed_sha256": "f4500f42cb4b0be8c21d9a1ff5591a7be6fdada7909d09bcba7cd88a4030cc11",
+        "status": "matched"
+      },
+      {
+        "source_pool_id": "pool-0002",
+        "source_id": "qa26-strange-loop-2025-turn-00009",
+        "pointer": "/pools/pool-0002/factual_evidence/0",
+        "expected_sha256": "32f3b178d3f9c4f042fd891cae61b492915aa069897a5a6d72d09096cebb433f",
+        "computed_sha256": "32f3b178d3f9c4f042fd891cae61b492915aa069897a5a6d72d09096cebb433f",
+        "status": "matched"
+      },
+      {
+        "source_pool_id": "pool-0002",
+        "source_id": "qa26-stanford-vftt-2024-turn-00130",
+        "pointer": "/pools/pool-0002/style_examples/0",
+        "expected_sha256": "f4500f42cb4b0be8c21d9a1ff5591a7be6fdada7909d09bcba7cd88a4030cc11",
+        "computed_sha256": "f4500f42cb4b0be8c21d9a1ff5591a7be6fdada7909d09bcba7cd88a4030cc11",
+        "status": "matched"
+      },
+      {
+        "source_pool_id": "pool-0003",
+        "source_id": "qa26-stripe-sessions-2024-turn-00203",
+        "pointer": "/pools/pool-0003/factual_evidence/0",
+        "expected_sha256": "5fafc008e9126aaf26632ae0dcd5f413ceefaeb7414b14c09ea0139d3ba7e80f",
+        "computed_sha256": "5fafc008e9126aaf26632ae0dcd5f413ceefaeb7414b14c09ea0139d3ba7e80f",
+        "status": "matched"
+      },
+      {
+        "source_pool_id": "pool-0003",
+        "source_id": "qa26-stanford-vftt-2024-turn-00130",
+        "pointer": "/pools/pool-0003/style_examples/0",
+        "expected_sha256": "f4500f42cb4b0be8c21d9a1ff5591a7be6fdada7909d09bcba7cd88a4030cc11",
+        "computed_sha256": "f4500f42cb4b0be8c21d9a1ff5591a7be6fdada7909d09bcba7cd88a4030cc11",
+        "status": "matched"
+      },
+      {
+        "source_pool_id": "pool-0004",
+        "source_id": "qa26-stripe-sessions-2024-turn-00126",
+        "pointer": "/pools/pool-0004/factual_evidence/0",
+        "expected_sha256": "564ff039d23c41f88359b3ba524bb4934300097c3f26e6d715d2d6a54f331fd3",
+        "computed_sha256": "564ff039d23c41f88359b3ba524bb4934300097c3f26e6d715d2d6a54f331fd3",
+        "status": "matched"
+      },
+      {
+        "source_pool_id": "pool-0004",
+        "source_id": "qa26-stanford-vftt-2024-turn-00130",
+        "pointer": "/pools/pool-0004/style_examples/0",
+        "expected_sha256": "f4500f42cb4b0be8c21d9a1ff5591a7be6fdada7909d09bcba7cd88a4030cc11",
+        "computed_sha256": "f4500f42cb4b0be8c21d9a1ff5591a7be6fdada7909d09bcba7cd88a4030cc11",
+        "status": "matched"
+      },
+      {
+        "source_pool_id": "pool-0005",
+        "source_id": "qa26-acquired-2023-turn-00339",
+        "pointer": "/pools/pool-0005/factual_evidence/0",
+        "expected_sha256": "669db4c7e02b7f21085e02cf57c332721ef04d0432e2d077b3db88fa68d38f5c",
+        "computed_sha256": "669db4c7e02b7f21085e02cf57c332721ef04d0432e2d077b3db88fa68d38f5c",
+        "status": "matched"
+      },
+      {
+        "source_pool_id": "pool-0005",
+        "source_id": "qa26-stanford-vftt-2024-turn-00130",
+        "pointer": "/pools/pool-0005/style_examples/0",
+        "expected_sha256": "f4500f42cb4b0be8c21d9a1ff5591a7be6fdada7909d09bcba7cd88a4030cc11",
+        "computed_sha256": "f4500f42cb4b0be8c21d9a1ff5591a7be6fdada7909d09bcba7cd88a4030cc11",
+        "status": "matched"
+      },
+      {
+        "source_pool_id": "pool-0006",
+        "source_id": "qa26-stanford-vftt-2024-turn-00130",
+        "pointer": "/pools/pool-0006/style_examples/0",
+        "expected_sha256": "f4500f42cb4b0be8c21d9a1ff5591a7be6fdada7909d09bcba7cd88a4030cc11",
+        "computed_sha256": "f4500f42cb4b0be8c21d9a1ff5591a7be6fdada7909d09bcba7cd88a4030cc11",
+        "status": "matched"
+      }
+    ],
+    "all_seven_human_fields_remain_null": true,
+    "execution_metadata_limitation": "The reviewer samples do not expose finish reason, completion/error, request hashes, execution receipt, or a separately recorded expected output hash. Those remain unverified here; hashes computed here identify the exact reviewed bytes."
+  },
+  "denominators": {
+    "samples_reviewed": 9,
+    "source_pools": 6,
+    "cases_with_samples": 5,
+    "case_sample_counts": {
+      "heldout-qa26-no-priors-2023-turn-00072": 0,
+      "heldout-qa26-no-priors-2023-turn-00078": 2,
+      "heldout-qa26-no-priors-2023-turn-00186": 1,
+      "heldout-qa26-no-priors-2023-turn-00190": 2,
+      "heldout-qa26-no-priors-2023-turn-00253": 2,
+      "heldout-qa26-no-priors-2023-turn-00297": 2
+    },
+    "registered_heldout_calls_from_rubric": 18,
+    "attempted_calls_verified": null,
+    "completed_calls_verified": null,
+    "failed_calls_verified": null,
+    "unattempted_calls_verified": null,
+    "status_limitation": "Missing or absent sample records are not classified as failed, unattempted, or completed. The coordinator retains the private execution denominator; it was not accessed."
+  },
+  "categorical_summary": {
+    "claim_labels": {
+      "supported": 8,
+      "partially_supported": 1,
+      "unsupported": 15,
+      "contradicted": 0,
+      "nonfactual": 15,
+      "uncertain": 5
+    },
+    "samples_with_no_citation_markers": 9,
+    "samples_with_factual_citation_presence_violation": [
+      "sample-0001",
+      "sample-0002",
+      "sample-0003",
+      "sample-0004",
+      "sample-0005",
+      "sample-0007",
+      "sample-0009"
+    ],
+    "samples_with_only_nonfactual_advice_and_no_citation_required": [
+      "sample-0006",
+      "sample-0008"
+    ],
+    "english_satisfied": 9,
+    "extended_source_or_style_copying_observed": 0,
+    "no_aggregate_pass_or_persona_score": true,
+    "main_findings": [
+      "Supported claims are uncited where factual accounts are given.",
+      "Several hypothetical headings introduce categorical unsupported facts or inevitable futures rather than properly conditional source-grounded extrapolation.",
+      "The deep-learning answers omit the available 2012 inflection and effectiveness/scalability explanation.",
+      "Both jacket answers add unsupported interpretations to an otherwise appropriate evidence gap.",
+      "Entrepreneurial recommendations are normative hypothetical advice, not automatically factual hallucinations; their clear problem is weak or absent supplied-source coverage."
+    ]
+  },
+  "cross_sample_observations": [
+    {
+      "sample_ids": [
+        "sample-0005",
+        "sample-0007"
+      ],
+      "category": "parallel_wording",
+      "longest_contiguous_lowercase_word_span": 34,
+      "answer_character_spans": [
+        [
+          0,
+          202
+        ],
+        [
+          0,
+          202
+        ]
+      ],
+      "reason": "The same-question outputs share the opening exact-utterance limitation and a similar structure. This does not establish source copying, condition identity, or causal memorization."
+    },
+    {
+      "sample_ids": [
+        "sample-0006",
+        "sample-0008"
+      ],
+      "category": "parallel_wording",
+      "longest_contiguous_lowercase_word_span": 13,
+      "answer_character_spans": [
+        [
+          0,
+          94
+        ],
+        [
+          0,
+          94
+        ]
+      ],
+      "reason": "Both begin with the same hypothetical advice formulation. A common prompt and generic phrasing permit overlap without provenance inference."
+    }
+  ],
+  "independent_check": {
+    "reviewer_type": "agent_semantic_assessment",
+    "sample_ids": [
+      "sample-0003",
+      "sample-0004",
+      "sample-0009"
+    ],
+    "prior_condition_exposure": false,
+    "read_scope": "Same permitted README, rubric, samples, source pools plus root AGENTS.md; no reference/private/external material.",
+    "integration_note": "The coordinating reviewer independently read these outputs and incorporated the second reader's caution about future CPU limits, citation-free normative/conditional text, and response-level labeling uncertainty."
+  },
+  "samples": [
+    {
+      "sample_id": "sample-0001",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00190",
+      "source_pool_id": "pool-0004",
+      "reviewer_type": "agent_semantic_assessment",
+      "prior_condition_exposure": false,
+      "human_review": "ungraded",
+      "human_ratings": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      },
+      "human_reviewer": null,
+      "sample_sha256": "d595ed1a3de4920824a8b0c96b3293170156111769cb9a61bf7ac095cfe7f57d",
+      "output_sha256": "a09d10559eddf76065d5ef57e4629c941afee925e3ac5968bf0248001920a79f",
+      "question_sha256": "4072dd9a9e3c6deee7301eb7e2798a9fce847b695a97676d8863b5f4889a30ed",
+      "review_pool_sha256": "3a4a40289911b880204ff4cb91cc5e46f382a0d5a8874fdcd60bdada711689df",
+      "output_pointer": "samples.json#/samples/0/answer",
+      "input_identity": {
+        "sample_id_unique": true,
+        "case_id_matches_pool": true,
+        "question_matches_pool": true,
+        "model_request_sha256": null,
+        "raw_output_hash_crosscheck": "unavailable_in_permitted_packet"
+      },
+      "completion_integrity": {
+        "provider_finish_reason": null,
+        "completion_flag": null,
+        "error": null,
+        "execution_receipt_validation": "unavailable_in_permitted_packet",
+        "text_integrity": "full_answer_string_reviewed_unchanged",
+        "note": "Presence of an answer in this packet is not independent proof of provider completion; no execution metadata is inferred."
+      },
+      "source_context": {
+        "factual_sources": [
+          {
+            "source_id": "qa26-stripe-sessions-2024-turn-00126",
+            "json_pointer": "/pools/pool-0004/factual_evidence/0",
+            "source_sha256": "564ff039d23c41f88359b3ba524bb4934300097c3f26e6d715d2d6a54f331fd3",
+            "published_at": "2024-05-21",
+            "event_at": null
+          }
+        ],
+        "empty_factual_pool": false,
+        "common_style_sources": [
+          {
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "pointer": "/pools/pool-0004/style_examples/0",
+            "role": "copying_observation_only_not_factual_support"
+          }
+        ]
+      },
+      "assessment_summary": "Mixed supported management content, an unsupported attributed adaptability claim, and a partly appropriate realignment limitation.",
+      "claims": [
+        {
+          "answer_location": "Sentence 1",
+          "claim_paraphrase": "Jensen has not explicitly described an AI-related organizational realignment.",
+          "label": "uncertain",
+          "reason": "The closing sentence scopes this to the supplied context, where such a realignment is absent; the opening alone can read as a claim about all his public statements, which this passage cannot establish.",
+          "claim_id": "sample-0001-claim-01",
+          "output_pointer": "/samples/0/answer",
+          "checked_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00126"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0004/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 2, first clause",
+          "claim_paraphrase": "Jensen emphasized transparency and equal access to information.",
+          "label": "supported",
+          "reason": "The passage explains shared access to company information and collective reasoning.",
+          "claim_id": "sample-0001-claim-02",
+          "output_pointer": "/samples/0/answer",
+          "checked_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00126"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0004/factual_evidence/0"
+          ],
+          "supporting_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00126"
+          ]
+        },
+        {
+          "answer_location": "Sentence 2, second clause",
+          "claim_paraphrase": "The management approach rests on collaboration and shared decision-making.",
+          "label": "partially_supported",
+          "reason": "Collective contribution and reasoning are supported. Formal distribution of decision authority is not established; shared decision-making could instead be a loose paraphrase of joint problem solving.",
+          "claim_id": "sample-0001-claim-03",
+          "output_pointer": "/samples/0/answer",
+          "checked_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00126"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0004/factual_evidence/0"
+          ],
+          "supporting_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00126"
+          ]
+        },
+        {
+          "answer_location": "Sentence 3, first clause",
+          "claim_paraphrase": "Jensen highlighted a need for adaptability in a rapidly changing environment.",
+          "label": "unsupported",
+          "reason": "The supplied passage addresses information access, participation, and hierarchy; it does not attribute this adaptability statement to him.",
+          "claim_id": "sample-0001-claim-04",
+          "output_pointer": "/samples/0/answer",
+          "checked_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00126"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0004/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 3, second clause",
+          "claim_paraphrase": "Management practices may be evolving to handle new challenges.",
+          "label": "nonfactual",
+          "reason": "This is hedged inference, but its stated adaptability premise is unsupported and no AI-driven evolution is established by the pool.",
+          "claim_id": "sample-0001-claim-05",
+          "output_pointer": "/samples/0/answer",
+          "checked_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00126"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0004/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 4",
+          "claim_paraphrase": "The provided context does not specify the exact realignment.",
+          "label": "nonfactual",
+          "reason": "This is an appropriately local evidence-limit statement; the passage describes management practices without an AI-related reorganization history.",
+          "claim_id": "sample-0001-claim-06",
+          "output_pointer": "/samples/0/answer",
+          "checked_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00126"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0004/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        }
+      ],
+      "citations": {
+        "observed_markers": [],
+        "allowlisted_ids": [
+          "qa26-stripe-sessions-2024-turn-00126"
+        ],
+        "presence": {
+          "status": "violated",
+          "reason": "The supported management account and the attributed adaptability statement have no required source markers."
+        },
+        "exact_allowlist_id": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "placement": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "semantic_applicability": {
+          "status": "not_applicable",
+          "reason": "No cited claim/source association is present; claim support is assessed separately."
+        }
+      },
+      "language_and_format": {
+        "english": {
+          "status": "satisfied",
+          "reason": "The response is in English."
+        },
+        "korean_one_sentence": {
+          "status": "not_applicable",
+          "reason": "The actual English system instruction has no Korean one-sentence rule."
+        },
+        "third_person_only": {
+          "status": "not_applicable",
+          "reason": "The English system instruction does not forbid first-person grammar."
+        },
+        "no_direct_quotation": {
+          "status": "not_applicable",
+          "reason": "The Korean-only no-direct-quotation constraint does not apply; quotation authenticity is assessed in the claim and identity notes."
+        },
+        "prescribed_korean_name": {
+          "status": "not_applicable",
+          "reason": "No Korean name-preservation instruction applies."
+        },
+        "standalone_ai_simulation_label": {
+          "status": "uncertain",
+          "reason": "The answer does not include an explicit AI-simulation label; the saved system instruction labels the simulation, and the packet does not establish surrounding UI labeling."
+        }
+      },
+      "attribution_and_boundaries": {
+        "historical_attribution": {
+          "status": "violated",
+          "reason": "The public management account is undated; the supplied independent source was published 2024-05-21, with an unknown event date."
+        },
+        "publication_as_event_date": {
+          "status": "not_applicable",
+          "reason": "No publication date is stated as an event date."
+        },
+        "persona_experience_boundary": {
+          "status": "satisfied",
+          "reason": "Uses third-person attribution and does not claim the AI personally experienced company history."
+        },
+        "evidence_limit_handling": {
+          "status": "partially_covered",
+          "reason": "Correctly recognizes that the supplied passage does not establish a specific AI-related realignment, but its opening can be broader and the unsupported adaptability addition weakens the boundary."
+        },
+        "hypothetical_handling": {
+          "prefix": {
+            "status": "satisfied",
+            "reason": "Begins with the exact English prefix."
+          },
+          "question_scope": {
+            "status": "uncertain",
+            "reason": "The question asks about management history and principles, not an expressly hypothetical scenario."
+          },
+          "conditional_language": {
+            "status": "violated",
+            "reason": "The prefix is followed by factual attributed statements; only one later inference is hedged."
+          },
+          "grounding": {
+            "status": "violated",
+            "reason": "The evolution inference depends on an adaptability statement absent from the factual passage."
+          },
+          "citation_separation": {
+            "status": "satisfied",
+            "reason": "No citation is attached to the extrapolation."
+          }
+        }
+      },
+      "coverage": {
+        "overall": "partially_covered",
+        "requested_supported_content": {
+          "status": "partially_covered",
+          "reason": "Covers equal information access and some collective reasoning; omits the reduction of management layers."
+        },
+        "components": [
+          {
+            "requested_content": "Equal information access and shared reasoning",
+            "status": "covered",
+            "reason": "Both appear in the transparency/collaboration account."
+          },
+          {
+            "requested_content": "Fewer organizational layers",
+            "status": "not_covered",
+            "reason": "No hierarchy or layer mechanism is explained."
+          },
+          {
+            "requested_content": "Whether AI caused a specific organizational realignment",
+            "status": "partially_covered",
+            "reason": "A local evidence limit is present, alongside unsupported adaptation language."
+          }
+        ]
+      },
+      "repetition_and_copying": {
+        "repetition": {
+          "status": "minor_semantic_repetition",
+          "reason": "The first and last sentences repeat the absence of an explicit realignment account."
+        },
+        "source_overlap_category": "no_extended_copying_observed",
+        "source_overlap_reason": "Only short information-access terminology overlaps with the factual passage; no extended wording from the common style example is observed.",
+        "lexical_observations": [
+          {
+            "role": "factual_evidence",
+            "source_id": "qa26-stripe-sessions-2024-turn-00126",
+            "source_pointer": "/pools/pool-0004/factual_evidence/0/text",
+            "longest_contiguous_lowercase_word_span": 4,
+            "answer_character_span": [
+              221,
+              248
+            ],
+            "source_character_span": [
+              1355,
+              1382
+            ]
+          },
+          {
+            "role": "style_examples",
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "source_pointer": "/pools/pool-0004/style_examples/0/answer",
+            "longest_contiguous_lowercase_word_span": 1,
+            "answer_character_span": [
+              33,
+              36
+            ],
+            "source_character_span": [
+              5,
+              8
+            ]
+          }
+        ],
+        "style_observation": "Cautious third-person summary with a generic management inference; this is descriptive, not a fidelity rating.",
+        "limits": "Short overlap is not proof of copying, memorization, condition assignment, style-example receipt, or persona fidelity. No private reference comparison was performed."
+      },
+      "ambiguities": [
+        "The opening nonstatement claim is broad in isolation but locally narrowed at the end.",
+        "Shared decision-making may mean group reasoning or formal authority; only the former is supported."
+      ],
+      "public_summary": "Equal access is supported, but adaptability is newly attributed, fewer layers are omitted, and citations/dating are absent; the realignment gap is only partly precise."
+    },
+    {
+      "sample_id": "sample-0002",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00190",
+      "source_pool_id": "pool-0004",
+      "reviewer_type": "agent_semantic_assessment",
+      "prior_condition_exposure": false,
+      "human_review": "ungraded",
+      "human_ratings": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      },
+      "human_reviewer": null,
+      "sample_sha256": "5464b487331980c41338f2fe781691e52d9b8bd46e95e1349a23ed05400b3e03",
+      "output_sha256": "fb6f5f12f400cccebd45e8fe40c4c66b71f6f1c520d9ee5d3be001a3a5b379c3",
+      "question_sha256": "4072dd9a9e3c6deee7301eb7e2798a9fce847b695a97676d8863b5f4889a30ed",
+      "review_pool_sha256": "3a4a40289911b880204ff4cb91cc5e46f382a0d5a8874fdcd60bdada711689df",
+      "output_pointer": "samples.json#/samples/1/answer",
+      "input_identity": {
+        "sample_id_unique": true,
+        "case_id_matches_pool": true,
+        "question_matches_pool": true,
+        "model_request_sha256": null,
+        "raw_output_hash_crosscheck": "unavailable_in_permitted_packet"
+      },
+      "completion_integrity": {
+        "provider_finish_reason": null,
+        "completion_flag": null,
+        "error": null,
+        "execution_receipt_validation": "unavailable_in_permitted_packet",
+        "text_integrity": "full_answer_string_reviewed_unchanged",
+        "note": "Presence of an answer in this packet is not independent proof of provider completion; no execution metadata is inferred."
+      },
+      "source_context": {
+        "factual_sources": [
+          {
+            "source_id": "qa26-stripe-sessions-2024-turn-00126",
+            "json_pointer": "/pools/pool-0004/factual_evidence/0",
+            "source_sha256": "564ff039d23c41f88359b3ba524bb4934300097c3f26e6d715d2d6a54f331fd3",
+            "published_at": "2024-05-21",
+            "event_at": null
+          }
+        ],
+        "empty_factual_pool": false,
+        "common_style_sources": [
+          {
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "pointer": "/pools/pool-0004/style_examples/0",
+            "role": "copying_observation_only_not_factual_support"
+          }
+        ]
+      },
+      "assessment_summary": "Unsupported first-person company-change narrative replaces the supplied information-access and hierarchy explanation.",
+      "claims": [
+        {
+          "answer_location": "Sentence 1",
+          "claim_paraphrase": "The company significantly changed how it is organized and run as AI became prominent.",
+          "label": "unsupported",
+          "reason": "The passage gives management principles and practices, without a before/after history or AI-driven causal realignment.",
+          "claim_id": "sample-0002-claim-01",
+          "output_pointer": "/samples/1/answer",
+          "checked_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00126"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0004/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 2",
+          "claim_paraphrase": "The company realigned business strategies to meet AI challenges and opportunities.",
+          "label": "unsupported",
+          "reason": "No such strategic realignment is described.",
+          "claim_id": "sample-0002-claim-02",
+          "output_pointer": "/samples/1/answer",
+          "checked_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00126"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0004/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 3",
+          "claim_paraphrase": "The realignment included more research investment, engineering capability, and an innovation culture.",
+          "label": "unsupported",
+          "reason": "These specific actions and their AI-related motivation are absent from the factual source.",
+          "claim_id": "sample-0002-claim-03",
+          "output_pointer": "/samples/1/answer",
+          "checked_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00126"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0004/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 4, collaboration component",
+          "claim_paraphrase": "Management emphasizes collaboration.",
+          "label": "supported",
+          "reason": "The source describes shared reasoning and contributions to problems, which support this broad isolated principle.",
+          "claim_id": "sample-0002-claim-04",
+          "output_pointer": "/samples/1/answer",
+          "checked_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00126"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0004/factual_evidence/0"
+          ],
+          "supporting_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00126"
+          ]
+        },
+        {
+          "answer_location": "Sentence 4, change and additional principles",
+          "claim_paraphrase": "Management adapted to rapid AI change by emphasizing agility and continuous learning.",
+          "label": "unsupported",
+          "reason": "The claimed change, agility principle, and continuous-learning principle are not in the supplied passage.",
+          "claim_id": "sample-0002-claim-05",
+          "output_pointer": "/samples/1/answer",
+          "checked_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00126"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0004/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 5",
+          "claim_paraphrase": "The management changes aim to keep the team competitive and responsive to changing market needs.",
+          "label": "unsupported",
+          "reason": "This particular corporate objective is not stated in the supplied evidence.",
+          "claim_id": "sample-0002-claim-06",
+          "output_pointer": "/samples/1/answer",
+          "checked_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00126"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0004/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        }
+      ],
+      "citations": {
+        "observed_markers": [],
+        "allowlisted_ids": [
+          "qa26-stripe-sessions-2024-turn-00126"
+        ],
+        "presence": {
+          "status": "violated",
+          "reason": "No factual assertion has a citation; attaching the allowed management citation would not support the invented company changes."
+        },
+        "exact_allowlist_id": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "placement": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "semantic_applicability": {
+          "status": "not_applicable",
+          "reason": "No cited claim/source association is present; claim support is assessed separately."
+        }
+      },
+      "language_and_format": {
+        "english": {
+          "status": "satisfied",
+          "reason": "The response is in English."
+        },
+        "korean_one_sentence": {
+          "status": "not_applicable",
+          "reason": "The actual English system instruction has no Korean one-sentence rule."
+        },
+        "third_person_only": {
+          "status": "not_applicable",
+          "reason": "The English system instruction does not forbid first-person grammar."
+        },
+        "no_direct_quotation": {
+          "status": "not_applicable",
+          "reason": "The Korean-only no-direct-quotation constraint does not apply; quotation authenticity is assessed in the claim and identity notes."
+        },
+        "prescribed_korean_name": {
+          "status": "not_applicable",
+          "reason": "No Korean name-preservation instruction applies."
+        },
+        "standalone_ai_simulation_label": {
+          "status": "uncertain",
+          "reason": "The answer does not include an explicit AI-simulation label; the saved system instruction labels the simulation, and the packet does not establish surrounding UI labeling."
+        }
+      },
+      "attribution_and_boundaries": {
+        "historical_attribution": {
+          "status": "violated",
+          "reason": "The answer presents current and retrospective corporate claims without the supplied source date or independent-source attribution."
+        },
+        "publication_as_event_date": {
+          "status": "not_applicable",
+          "reason": "No publication date is stated as an event date."
+        },
+        "persona_experience_boundary": {
+          "status": "violated",
+          "reason": "First-person corporate ownership of unsupported completed changes makes the simulation sound as though it personally enacted them. The prefix does not qualify those past-tense assertions."
+        },
+        "evidence_limit_handling": {
+          "status": "not_covered",
+          "reason": "Does not acknowledge that the pool lacks an AI-driven realignment history."
+        },
+        "hypothetical_handling": {
+          "prefix": {
+            "status": "satisfied",
+            "reason": "Uses the required English prefix."
+          },
+          "question_scope": {
+            "status": "uncertain",
+            "reason": "The question asks about actual management history and principles."
+          },
+          "conditional_language": {
+            "status": "violated",
+            "reason": "The body asserts changes and goals as actual company facts."
+          },
+          "grounding": {
+            "status": "violated",
+            "reason": "Specific AI-related investments and corporate changes are absent from the supplied reasoning."
+          },
+          "citation_separation": {
+            "status": "satisfied",
+            "reason": "No citations are attached to the hypothetical heading or extrapolated content."
+          }
+        }
+      },
+      "coverage": {
+        "overall": "not_covered",
+        "requested_supported_content": {
+          "status": "not_covered",
+          "reason": "A generic collaboration word is present, but the requested supported management mechanisms—equal information access and fewer layers—are absent."
+        },
+        "components": [
+          {
+            "requested_content": "Equal information access and shared reasoning mechanism",
+            "status": "not_covered",
+            "reason": "Collaboration is named without the shared-information mechanism."
+          },
+          {
+            "requested_content": "Fewer organizational layers",
+            "status": "not_covered",
+            "reason": "No hierarchy explanation appears."
+          },
+          {
+            "requested_content": "Limits of the evidence for AI-driven realignment",
+            "status": "not_covered",
+            "reason": "The realignment is asserted instead."
+          }
+        ]
+      },
+      "repetition_and_copying": {
+        "repetition": {
+          "status": "not_observed",
+          "reason": "No materially repeated clause; the answer instead accumulates generic corporate themes."
+        },
+        "source_overlap_category": "no_extended_copying_observed",
+        "source_overlap_reason": "Only trivial short overlap with the factual and common style pools; no extended copied wording observed.",
+        "lexical_observations": [
+          {
+            "role": "factual_evidence",
+            "source_id": "qa26-stripe-sessions-2024-turn-00126",
+            "source_pointer": "/pools/pool-0004/factual_evidence/0/text",
+            "longest_contiguous_lowercase_word_span": 2,
+            "answer_character_span": [
+              44,
+              55
+            ],
+            "source_character_span": [
+              528,
+              539
+            ]
+          },
+          {
+            "role": "style_examples",
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "source_pointer": "/pools/pool-0004/style_examples/0/answer",
+            "longest_contiguous_lowercase_word_span": 1,
+            "answer_character_span": [
+              16,
+              19
+            ],
+            "source_character_span": [
+              211,
+              214
+            ]
+          }
+        ],
+        "style_observation": "Generic corporate-management vocabulary; no human style or persona score assigned.",
+        "limits": "Short overlap is not proof of copying, memorization, condition assignment, style-example receipt, or persona fidelity. No private reference comparison was performed."
+      },
+      "ambiguities": [
+        "The opening hypothetical label signals a possible scenario, but the past/present assertions never state that scenario conditionally."
+      ],
+      "public_summary": "Asserts AI-driven realignment, investments, and present corporate goals without support; misses the supplied information-access/hierarchy mechanisms and gives no citations."
+    },
+    {
+      "sample_id": "sample-0003",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00297",
+      "source_pool_id": "pool-0006",
+      "reviewer_type": "agent_semantic_assessment",
+      "prior_condition_exposure": false,
+      "human_review": "ungraded",
+      "human_ratings": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      },
+      "human_reviewer": null,
+      "sample_sha256": "a1fc0911d3bfd1c527895bb6f45a3e5745cedccf481e28929caf0443cdddd98e",
+      "output_sha256": "2a94e7399f4cfb3f5cc7d236bddcacda695abb220d5dcee58dade3b5e4791da8",
+      "question_sha256": "2cb0801e60db04bc69198ad09a7f6e1fb5828c75c3b5bb8ba29ac39aa81067f7",
+      "review_pool_sha256": "6509138c51449a730f72d5bb434e5d22ef740d951fd9f3eb179c2648e3e20495",
+      "output_pointer": "samples.json#/samples/2/answer",
+      "input_identity": {
+        "sample_id_unique": true,
+        "case_id_matches_pool": true,
+        "question_matches_pool": true,
+        "model_request_sha256": null,
+        "raw_output_hash_crosscheck": "unavailable_in_permitted_packet"
+      },
+      "completion_integrity": {
+        "provider_finish_reason": null,
+        "completion_flag": null,
+        "error": null,
+        "execution_receipt_validation": "unavailable_in_permitted_packet",
+        "text_integrity": "full_answer_string_reviewed_unchanged",
+        "note": "Presence of an answer in this packet is not independent proof of provider completion; no execution metadata is inferred."
+      },
+      "source_context": {
+        "factual_sources": [],
+        "empty_factual_pool": true,
+        "common_style_sources": [
+          {
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "pointer": "/pools/pool-0006/style_examples/0",
+            "role": "copying_observation_only_not_factual_support"
+          }
+        ]
+      },
+      "assessment_summary": "Partial abstention is weakened by unsupported industry interpretation and a global public-nondisclosure claim.",
+      "claims": [
+        {
+          "answer_location": "Sentence 1, first clause",
+          "claim_paraphrase": "The assistant cannot provide the specific acquisition details.",
+          "label": "nonfactual",
+          "reason": "An assistant limitation is not a claim about Jensen's personal experience.",
+          "claim_id": "sample-0003-claim-01",
+          "output_pointer": "/samples/2/answer",
+          "checked_source_ids": [],
+          "evidence_pointers": [
+            "/pools/pool-0006/factual_evidence"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 1, reason",
+          "claim_paraphrase": "The question is personal and subjective.",
+          "label": "nonfactual",
+          "reason": "This evaluative framing mischaracterizes a factual provenance question and does not identify the empty factual pool.",
+          "claim_id": "sample-0003-claim-02",
+          "output_pointer": "/samples/2/answer",
+          "checked_source_ids": [],
+          "evidence_pointers": [
+            "/pools/pool-0006/factual_evidence"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 2",
+          "claim_paraphrase": "The jackets probably refer to iconic clothing associated with technology workers and NVIDIA.",
+          "label": "unsupported",
+          "reason": "The factual pool is empty; no source establishes this industry-wide interpretation.",
+          "claim_id": "sample-0003-claim-03",
+          "output_pointer": "/samples/2/answer",
+          "checked_source_ids": [],
+          "evidence_pointers": [
+            "/pools/pool-0006/factual_evidence"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 3, first clause",
+          "claim_paraphrase": "The exact jacket source has not been publicly disclosed.",
+          "label": "unsupported",
+          "reason": "Absence from this packet does not establish absence of public disclosure.",
+          "claim_id": "sample-0003-claim-04",
+          "output_pointer": "/samples/2/answer",
+          "checked_source_ids": [],
+          "evidence_pointers": [
+            "/pools/pool-0006/factual_evidence"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 3, remainder, and sentence 4",
+          "claim_paraphrase": "Providing that information is not the assistant's responsibility, and further questions are invited.",
+          "label": "nonfactual",
+          "reason": "These service statements supply no answer; the responsibility disclaimer is unnecessary and dismissive.",
+          "claim_id": "sample-0003-claim-05",
+          "output_pointer": "/samples/2/answer",
+          "checked_source_ids": [],
+          "evidence_pointers": [
+            "/pools/pool-0006/factual_evidence"
+          ],
+          "supporting_source_ids": []
+        }
+      ],
+      "citations": {
+        "observed_markers": [],
+        "allowlisted_ids": [],
+        "presence": {
+          "status": "violated",
+          "reason": "Substantive industry/nondisclosure assertions have neither factual support nor citations. The empty allowlist means those assertions cannot be repaired by adding a marker."
+        },
+        "exact_allowlist_id": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "placement": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "semantic_applicability": {
+          "status": "not_applicable",
+          "reason": "No cited claim/source association is present; claim support is assessed separately."
+        }
+      },
+      "language_and_format": {
+        "english": {
+          "status": "satisfied",
+          "reason": "The response is in English."
+        },
+        "korean_one_sentence": {
+          "status": "not_applicable",
+          "reason": "The actual English system instruction has no Korean one-sentence rule."
+        },
+        "third_person_only": {
+          "status": "not_applicable",
+          "reason": "The English system instruction does not forbid first-person grammar."
+        },
+        "no_direct_quotation": {
+          "status": "not_applicable",
+          "reason": "The Korean-only no-direct-quotation constraint does not apply; quotation authenticity is assessed in the claim and identity notes."
+        },
+        "prescribed_korean_name": {
+          "status": "not_applicable",
+          "reason": "No Korean name-preservation instruction applies."
+        },
+        "standalone_ai_simulation_label": {
+          "status": "uncertain",
+          "reason": "The answer does not include an explicit AI-simulation label; the saved system instruction labels the simulation, and the packet does not establish surrounding UI labeling."
+        }
+      },
+      "attribution_and_boundaries": {
+        "historical_attribution": {
+          "status": "not_applicable",
+          "reason": "No dated factual passage or dated event is reported."
+        },
+        "publication_as_event_date": {
+          "status": "not_applicable",
+          "reason": "No publication date is stated as an event date."
+        },
+        "persona_experience_boundary": {
+          "status": "satisfied",
+          "reason": "The first-person inability statement concerns the assistant, not a biographical experience."
+        },
+        "evidence_limit_handling": {
+          "status": "partially_covered",
+          "reason": "Avoids inventing a supplier, but replaces a precise packet-based gap with subjectivity and unsupported public nondisclosure."
+        },
+        "hypothetical_handling": {
+          "prefix": {
+            "status": "violated",
+            "reason": "The speculative industry interpretation has no required prefix."
+          },
+          "question_scope": {
+            "status": "violated",
+            "reason": "The question asks factual acquisition provenance, not a hypothetical interpretation."
+          },
+          "conditional_language": {
+            "status": "violated",
+            "reason": "One sentence is hedged, but public nondisclosure is asserted as fact."
+          },
+          "grounding": {
+            "status": "violated",
+            "reason": "There are no supplied factual reasoning patterns for the added interpretation."
+          },
+          "citation_separation": {
+            "status": "not_applicable",
+            "reason": "No explicit hypothetical block or citations appears."
+          }
+        }
+      },
+      "coverage": {
+        "overall": "partially_covered",
+        "requested_supported_content": {
+          "status": "not_applicable",
+          "reason": "No acquisition fact is supplied. A precise evidence-limit acknowledgement could fully answer this case."
+        },
+        "components": [
+          {
+            "requested_content": "Specific acknowledgement that supplied evidence does not identify jacket provenance",
+            "status": "partially_covered",
+            "reason": "Inability is expressed, but the explanation makes unsupported broader claims."
+          },
+          {
+            "requested_content": "Supplier or acquisition location",
+            "status": "not_applicable",
+            "reason": "The factual pool is empty; no supplier should be invented."
+          }
+        ]
+      },
+      "repetition_and_copying": {
+        "repetition": {
+          "status": "not_observed",
+          "reason": "Jacket references are topical repetition, not a materially repeated clause."
+        },
+        "source_overlap_category": "no_extended_copying_observed",
+        "source_overlap_reason": "No extended wording overlap with the common style example; no factual text exists in this pool.",
+        "lexical_observations": [
+          {
+            "role": "style_examples",
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "source_pointer": "/pools/pool-0006/style_examples/0/answer",
+            "longest_contiguous_lowercase_word_span": 1,
+            "answer_character_span": [
+              44,
+              47
+            ],
+            "source_character_span": [
+              211,
+              214
+            ]
+          }
+        ],
+        "style_observation": "The responsibility disclaimer creates avoidable topic drift and an unhelpful tone, without a claim about human preference.",
+        "limits": "Short overlap is not proof of copying, memorization, condition assignment, style-example receipt, or persona fidelity. No private reference comparison was performed."
+      },
+      "ambiguities": [
+        "Missing supplied evidence is distinct from unavailable public information. No conclusion about public disclosure can be drawn."
+      ],
+      "public_summary": "Avoids naming a supplier but invents a tech-industry interpretation and claims public nondisclosure; the empty pool supports only a specific evidence-gap response."
+    },
+    {
+      "sample_id": "sample-0004",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00186",
+      "source_pool_id": "pool-0003",
+      "reviewer_type": "agent_semantic_assessment",
+      "prior_condition_exposure": false,
+      "human_review": "ungraded",
+      "human_ratings": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      },
+      "human_reviewer": null,
+      "sample_sha256": "3031184c5f9428c4a3537ddaa080edc892d0d4bd12b5d798d21bfe7ede07005f",
+      "output_sha256": "8693336609db327e39a8c5d0a8edf374e4dc93f0d77b5c139cb5302eeda1189f",
+      "question_sha256": "62aba72b338104dfc3a6b3fe6c94540a92d126845ff2c554c239bf347488d600",
+      "review_pool_sha256": "a08fe2c5cdcb75a3bb2760904540cba6bb6a9e251548b419e281520dab2134a9",
+      "output_pointer": "samples.json#/samples/3/answer",
+      "input_identity": {
+        "sample_id_unique": true,
+        "case_id_matches_pool": true,
+        "question_matches_pool": true,
+        "model_request_sha256": null,
+        "raw_output_hash_crosscheck": "unavailable_in_permitted_packet"
+      },
+      "completion_integrity": {
+        "provider_finish_reason": null,
+        "completion_flag": null,
+        "error": null,
+        "execution_receipt_validation": "unavailable_in_permitted_packet",
+        "text_integrity": "full_answer_string_reviewed_unchanged",
+        "note": "Presence of an answer in this packet is not independent proof of provider completion; no execution metadata is inferred."
+      },
+      "source_context": {
+        "factual_sources": [
+          {
+            "source_id": "qa26-stripe-sessions-2024-turn-00203",
+            "json_pointer": "/pools/pool-0003/factual_evidence/0",
+            "source_sha256": "5fafc008e9126aaf26632ae0dcd5f413ceefaeb7414b14c09ea0139d3ba7e80f",
+            "published_at": "2024-05-21",
+            "event_at": null
+          }
+        ],
+        "empty_factual_pool": false,
+        "common_style_sources": [
+          {
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "pointer": "/pools/pool-0003/style_examples/0",
+            "role": "copying_observation_only_not_factual_support"
+          }
+        ]
+      },
+      "assessment_summary": "Acknowledges no precise deadline while replacing the supported CPU-scaling/kernel account with an unsupported inevitable future sequence.",
+      "claims": [
+        {
+          "answer_location": "Sentence 1, opening, and sentence 3",
+          "claim_paraphrase": "The speaker cannot confidently predict timing and supplies no fixed timeframe.",
+          "label": "nonfactual",
+          "reason": "Appropriately avoids inventing a five- or ten-year deadline, although it does not clearly identify the source-based limit.",
+          "claim_id": "sample-0004-claim-01",
+          "output_pointer": "/samples/3/answer",
+          "checked_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00203"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0003/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 1, remainder",
+          "claim_paraphrase": "CPU limits will occur when thermal, power, and manufacturing-yield constraints become insurmountable.",
+          "label": "unsupported",
+          "reason": "These particular constraints and the necessary future sequence are not established by the supplied passage.",
+          "claim_id": "sample-0004-claim-02",
+          "output_pointer": "/samples/3/answer",
+          "checked_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00203"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0003/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 2",
+          "claim_paraphrase": "Attention will then shift to other computing paradigms.",
+          "label": "unsupported",
+          "reason": "This is a definite future shift; the source instead explains accelerating runtime-dominant kernels and already-stalled CPU scaling.",
+          "claim_id": "sample-0004-claim-03",
+          "output_pointer": "/samples/3/answer",
+          "checked_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00203"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0003/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 4",
+          "claim_paraphrase": "Alternative approaches are inevitable; only the timing is uncertain.",
+          "label": "unsupported",
+          "reason": "The statement broadens the prediction into inevitability without the supplied mechanism or its qualifications.",
+          "claim_id": "sample-0004-claim-04",
+          "output_pointer": "/samples/3/answer",
+          "checked_source_ids": [
+            "qa26-stripe-sessions-2024-turn-00203"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0003/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        }
+      ],
+      "citations": {
+        "observed_markers": [],
+        "allowlisted_ids": [
+          "qa26-stripe-sessions-2024-turn-00203"
+        ],
+        "presence": {
+          "status": "violated",
+          "reason": "The categorical technical/future assertions lack support and citations. A properly conditional extrapolation would not need a citation, and adding the allowed citation here would not repair those assertions."
+        },
+        "exact_allowlist_id": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "placement": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "semantic_applicability": {
+          "status": "not_applicable",
+          "reason": "No cited claim/source association is present; claim support is assessed separately."
+        }
+      },
+      "language_and_format": {
+        "english": {
+          "status": "satisfied",
+          "reason": "The response is in English."
+        },
+        "korean_one_sentence": {
+          "status": "not_applicable",
+          "reason": "The actual English system instruction has no Korean one-sentence rule."
+        },
+        "third_person_only": {
+          "status": "not_applicable",
+          "reason": "The English system instruction does not forbid first-person grammar."
+        },
+        "no_direct_quotation": {
+          "status": "not_applicable",
+          "reason": "The Korean-only no-direct-quotation constraint does not apply; quotation authenticity is assessed in the claim and identity notes."
+        },
+        "prescribed_korean_name": {
+          "status": "not_applicable",
+          "reason": "No Korean name-preservation instruction applies."
+        },
+        "standalone_ai_simulation_label": {
+          "status": "uncertain",
+          "reason": "The answer does not include an explicit AI-simulation label; the saved system instruction labels the simulation, and the packet does not establish surrounding UI labeling."
+        }
+      },
+      "attribution_and_boundaries": {
+        "historical_attribution": {
+          "status": "not_applicable",
+          "reason": "The answer does not actually report the historical source account; its omission is recorded under coverage. No publication date is transformed into an event date."
+        },
+        "publication_as_event_date": {
+          "status": "not_applicable",
+          "reason": "No publication date is stated as an event date."
+        },
+        "persona_experience_boundary": {
+          "status": "uncertain",
+          "reason": "The first-person belief may be hypothetical simulation reasoning, but the definite prediction does not clearly separate that from Jensen's real position."
+        },
+        "evidence_limit_handling": {
+          "status": "partially_covered",
+          "reason": "Gives no year count and admits uncertainty, but leaves out what the supplied passage does establish."
+        },
+        "hypothetical_handling": {
+          "prefix": {
+            "status": "satisfied",
+            "reason": "Starts with the exact English prefix."
+          },
+          "question_scope": {
+            "status": "satisfied",
+            "reason": "The question asks for a prospective estimate."
+          },
+          "conditional_language": {
+            "status": "violated",
+            "reason": "A temporal when-clause plus repeated definite future/inevitability claims is not consistently conditional."
+          },
+          "grounding": {
+            "status": "violated",
+            "reason": "Specific physical constraints and the sequence to alternative paradigms are not supplied reasoning."
+          },
+          "citation_separation": {
+            "status": "satisfied",
+            "reason": "No citation is attached to extrapolation."
+          }
+        }
+      },
+      "coverage": {
+        "overall": "partially_covered",
+        "requested_supported_content": {
+          "status": "not_covered",
+          "reason": "Omits the historical claim that CPU scaling had effectively stopped and the runtime-dominant-kernel acceleration mechanism."
+        },
+        "components": [
+          {
+            "requested_content": "CPU scaling limits as described in the supplied historical account",
+            "status": "not_covered",
+            "reason": "Replaces them with a different prospective physical-ceiling story."
+          },
+          {
+            "requested_content": "Accelerating the small code portions dominating runtime",
+            "status": "not_covered",
+            "reason": "No kernel/runtime explanation appears."
+          },
+          {
+            "requested_content": "No supported universal five- or ten-year deadline",
+            "status": "covered",
+            "reason": "Does not invent a date or year count."
+          }
+        ]
+      },
+      "repetition_and_copying": {
+        "repetition": {
+          "status": "minor_semantic_repetition",
+          "reason": "Sentences 1 and 3 both decline a precise forecast; the final sentence repeats inevitability."
+        },
+        "source_overlap_category": "no_extended_copying_observed",
+        "source_overlap_reason": "Only trivial short overlap with factual/style pools; no extended copied wording observed.",
+        "lexical_observations": [
+          {
+            "role": "factual_evidence",
+            "source_id": "qa26-stripe-sessions-2024-turn-00203",
+            "source_pointer": "/pools/pool-0003/factual_evidence/0/text",
+            "longest_contiguous_lowercase_word_span": 2,
+            "answer_character_span": [
+              448,
+              453
+            ],
+            "source_character_span": [
+              16,
+              21
+            ]
+          },
+          {
+            "role": "style_examples",
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "source_pointer": "/pools/pool-0003/style_examples/0/answer",
+            "longest_contiguous_lowercase_word_span": 2,
+            "answer_character_span": [
+              384,
+              390
+            ],
+            "source_character_span": [
+              21,
+              27
+            ]
+          }
+        ],
+        "style_observation": "Generic futurist explanation with repeated uncertainty and inevitability language.",
+        "limits": "Short overlap is not proof of copying, memorization, condition assignment, style-example receipt, or persona fidelity. No private reference comparison was performed."
+      },
+      "ambiguities": [
+        "Do not force a contradiction: an absolute physical CPU ceiling may differ from the source's already-stalled performance scaling. The clear defects are missing source coverage and unsupported extrapolation."
+      ],
+      "public_summary": "No fixed deadline is invented, but the supplied stalled-scaling/kernel explanation is absent; thermal/yield constraints and an inevitable paradigm shift are unsupported."
+    },
+    {
+      "sample_id": "sample-0005",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00078",
+      "source_pool_id": "pool-0002",
+      "reviewer_type": "agent_semantic_assessment",
+      "prior_condition_exposure": false,
+      "human_review": "ungraded",
+      "human_ratings": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      },
+      "human_reviewer": null,
+      "sample_sha256": "e51859b9ed71c9be555adc4b3daa9f852384ee588eb541fc617c954522e1d3b5",
+      "output_sha256": "0e1d539e4dc9bb6e4d343603cd71598fb0f7f88a870c0fdfadeddea400acf8e7",
+      "question_sha256": "faf1cfcc9cc951a07bac80b27e983afb3677cd5f1a0732132c83a8ff82e1cdf8",
+      "review_pool_sha256": "73801e43a5841075af216d59c427e88d7d2a13c1283e9e88840cce5b0ed43169",
+      "output_pointer": "samples.json#/samples/4/answer",
+      "input_identity": {
+        "sample_id_unique": true,
+        "case_id_matches_pool": true,
+        "question_matches_pool": true,
+        "model_request_sha256": null,
+        "raw_output_hash_crosscheck": "unavailable_in_permitted_packet"
+      },
+      "completion_integrity": {
+        "provider_finish_reason": null,
+        "completion_flag": null,
+        "error": null,
+        "execution_receipt_validation": "unavailable_in_permitted_packet",
+        "text_integrity": "full_answer_string_reviewed_unchanged",
+        "note": "Presence of an answer in this packet is not independent proof of provider completion; no execution metadata is inferred."
+      },
+      "source_context": {
+        "factual_sources": [
+          {
+            "source_id": "qa26-strange-loop-2025-turn-00009",
+            "json_pointer": "/pools/pool-0002/factual_evidence/0",
+            "source_sha256": "32f3b178d3f9c4f042fd891cae61b492915aa069897a5a6d72d09096cebb433f",
+            "published_at": "2025-06-26",
+            "event_at": null
+          }
+        ],
+        "empty_factual_pool": false,
+        "common_style_sources": [
+          {
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "pointer": "/pools/pool-0002/style_examples/0",
+            "role": "copying_observation_only_not_factual_support"
+          }
+        ]
+      },
+      "assessment_summary": "Some deep-learning significance is supported, but literal treatment of the user's quoted phrasing obscures the supplied 2012 inflection and scalability reasoning.",
+      "claims": [
+        {
+          "answer_location": "Sentence 1",
+          "claim_paraphrase": "The exact moment of the user-phrased utterance is not specified in the evidence.",
+          "label": "uncertain",
+          "reason": "The exact quoted words are absent, but the passage does locate the substantive conviction around the 2012 research contest and observed effectiveness. The literal-versus-substantive reading must remain explicit.",
+          "claim_id": "sample-0005-claim-01",
+          "output_pointer": "/samples/4/answer",
+          "checked_source_ids": [
+            "qa26-strange-loop-2025-turn-00009"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0002/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 2",
+          "claim_paraphrase": "The passage describes deep learning as significant and potentially transformative for software development.",
+          "label": "supported",
+          "reason": "The source treats it as a new software-development method with broad computing implications.",
+          "claim_id": "sample-0005-claim-02",
+          "output_pointer": "/samples/4/answer",
+          "checked_source_ids": [
+            "qa26-strange-loop-2025-turn-00009"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0002/factual_evidence/0"
+          ],
+          "supporting_source_ids": [
+            "qa26-strange-loop-2025-turn-00009"
+          ]
+        },
+        {
+          "answer_location": "Sentence 3",
+          "claim_paraphrase": "Deep learning is described as a new software method for difficult problems.",
+          "label": "supported",
+          "reason": "The supplied passage discusses a new software method and solving problems that are hard to specify.",
+          "claim_id": "sample-0005-claim-03",
+          "output_pointer": "/samples/4/answer",
+          "checked_source_ids": [
+            "qa26-strange-loop-2025-turn-00009"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0002/factual_evidence/0"
+          ],
+          "supporting_source_ids": [
+            "qa26-strange-loop-2025-turn-00009"
+          ]
+        },
+        {
+          "answer_location": "Sentence 4, first clause",
+          "claim_paraphrase": "AI's importance was recognized at that time.",
+          "label": "supported",
+          "reason": "The passage explicitly recounts growing conviction, but the answer leaves the time and speaker vague.",
+          "claim_id": "sample-0005-claim-04",
+          "output_pointer": "/samples/4/answer",
+          "checked_source_ids": [
+            "qa26-strange-loop-2025-turn-00009"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0002/factual_evidence/0"
+          ],
+          "supporting_source_ids": [
+            "qa26-strange-loop-2025-turn-00009"
+          ]
+        },
+        {
+          "answer_location": "Sentence 4, final clause",
+          "claim_paraphrase": "The exact moment of making that statement is unavailable.",
+          "label": "uncertain",
+          "reason": "Literal wording is not established; using its absence to omit the available 2012 milestone underanswers the question.",
+          "claim_id": "sample-0005-claim-05",
+          "output_pointer": "/samples/4/answer",
+          "checked_source_ids": [
+            "qa26-strange-loop-2025-turn-00009"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0002/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        }
+      ],
+      "citations": {
+        "observed_markers": [],
+        "allowlisted_ids": [
+          "qa26-strange-loop-2025-turn-00009"
+        ],
+        "presence": {
+          "status": "violated",
+          "reason": "The supported software/deep-learning claims have no copied source citations."
+        },
+        "exact_allowlist_id": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "placement": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "semantic_applicability": {
+          "status": "not_applicable",
+          "reason": "No cited claim/source association is present; claim support is assessed separately."
+        }
+      },
+      "language_and_format": {
+        "english": {
+          "status": "satisfied",
+          "reason": "The response is in English."
+        },
+        "korean_one_sentence": {
+          "status": "not_applicable",
+          "reason": "The actual English system instruction has no Korean one-sentence rule."
+        },
+        "third_person_only": {
+          "status": "not_applicable",
+          "reason": "The English system instruction does not forbid first-person grammar."
+        },
+        "no_direct_quotation": {
+          "status": "not_applicable",
+          "reason": "The Korean-only no-direct-quotation constraint does not apply; quotation authenticity is assessed in the claim and identity notes."
+        },
+        "prescribed_korean_name": {
+          "status": "not_applicable",
+          "reason": "No Korean name-preservation instruction applies."
+        },
+        "standalone_ai_simulation_label": {
+          "status": "uncertain",
+          "reason": "The answer does not include an explicit AI-simulation label; the saved system instruction labels the simulation, and the packet does not establish surrounding UI labeling."
+        }
+      },
+      "attribution_and_boundaries": {
+        "historical_attribution": {
+          "status": "violated",
+          "reason": "Omits both the 2012 historical context and attribution to the independent passage published 2025-06-26; the event date is unknown, and the publication date should not be treated as the event."
+        },
+        "publication_as_event_date": {
+          "status": "not_applicable",
+          "reason": "No publication date is stated as an event date."
+        },
+        "persona_experience_boundary": {
+          "status": "uncertain",
+          "reason": "The first-person quoted formulation echoes the unverified user prompt. It is not a newly invented quotation, but can imply personal utterance; no additional lived experience is asserted."
+        },
+        "evidence_limit_handling": {
+          "status": "partially_covered",
+          "reason": "Caution about exact quotation is legitimate, but the answer overemphasizes it and fails to use the available substantive milestone."
+        },
+        "hypothetical_handling": {
+          "prefix": {
+            "status": "not_applicable",
+            "reason": "No explicit extrapolated scenario is attempted."
+          },
+          "question_scope": {
+            "status": "not_applicable",
+            "reason": "The question requests a historical account."
+          },
+          "conditional_language": {
+            "status": "not_applicable",
+            "reason": "No hypothetical scenario is presented."
+          },
+          "grounding": {
+            "status": "not_applicable",
+            "reason": "Substantive historical claims are assessed directly against the factual source."
+          },
+          "citation_separation": {
+            "status": "not_applicable",
+            "reason": "No hypothetical block is present."
+          }
+        }
+      },
+      "coverage": {
+        "overall": "partially_covered",
+        "requested_supported_content": {
+          "status": "partially_covered",
+          "reason": "Covers deep learning as a new software method, but omits the 2012 inflection, effectiveness, and scalability rationale."
+        },
+        "components": [
+          {
+            "requested_content": "2012 deep-learning inflection",
+            "status": "not_covered",
+            "reason": "The source names the 2012 contest context; the answer provides no year or corresponding moment."
+          },
+          {
+            "requested_content": "Observed effectiveness and scalability as reasons for conviction",
+            "status": "not_covered",
+            "reason": "The mechanism is replaced with broad statements about significance."
+          },
+          {
+            "requested_content": "Deep learning as a new way to develop software",
+            "status": "covered",
+            "reason": "This source-supported idea is stated."
+          }
+        ]
+      },
+      "repetition_and_copying": {
+        "repetition": {
+          "status": "minor_semantic_repetition",
+          "reason": "Opening and closing sentences repeat the absence of the exact utterance moment."
+        },
+        "source_overlap_category": "no_extended_copying_observed",
+        "source_overlap_reason": "A six-token technical description is shared with the factual source; it is a short necessary concept, not evidence of extended copying. The common style example has only trivial overlap.",
+        "lexical_observations": [
+          {
+            "role": "factual_evidence",
+            "source_id": "qa26-strange-loop-2025-turn-00009",
+            "source_pointer": "/pools/pool-0002/factual_evidence/0/text",
+            "longest_contiguous_lowercase_word_span": 6,
+            "answer_character_span": [
+              335,
+              370
+            ],
+            "source_character_span": [
+              1418,
+              1453
+            ]
+          },
+          {
+            "role": "style_examples",
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "source_pointer": "/pools/pool-0002/style_examples/0/answer",
+            "longest_contiguous_lowercase_word_span": 1,
+            "answer_character_span": [
+              0,
+              3
+            ],
+            "source_character_span": [
+              211,
+              214
+            ]
+          }
+        ],
+        "style_observation": "Cautious metatextual explanation that answers the literal phrasing more than the requested historical inflection.",
+        "limits": "Short overlap is not proof of copying, memorization, condition assignment, style-example receipt, or persona fidelity. No private reference comparison was performed."
+      },
+      "ambiguities": [
+        "The source supports a year/context for conviction, not the user's exact quotation. Do not mark an exact-wording limitation as flatly contradicted, but do mark the omitted historical answer.",
+        "The first-person formulation may be question echo rather than a genuine autobiographical claim."
+      ],
+      "public_summary": "Supported software-development significance appears, but the available 2012 moment and effectiveness/scalability reasons are omitted; exact-quote caution is overextended and citations/dates are missing."
+    },
+    {
+      "sample_id": "sample-0006",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00253",
+      "source_pool_id": "pool-0005",
+      "reviewer_type": "agent_semantic_assessment",
+      "prior_condition_exposure": false,
+      "human_review": "ungraded",
+      "human_ratings": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      },
+      "human_reviewer": null,
+      "sample_sha256": "5d939955cfa7388239fa5ae358da20c5728e876001c839a8d22d3f73c60429f5",
+      "output_sha256": "4a0f23787ec40355b7a63c4478966e2f05e1fd5c10dab3478e568008ca753fda",
+      "question_sha256": "e5d10932b65515f7a40aaf28b1eeac5f6f06c526d3e1928a92b228858bde74cf",
+      "review_pool_sha256": "19fd06f5b57dd0600fcfd513cd010a96ba5339acf5e094ef16acd6f9957d63f8",
+      "output_pointer": "samples.json#/samples/5/answer",
+      "input_identity": {
+        "sample_id_unique": true,
+        "case_id_matches_pool": true,
+        "question_matches_pool": true,
+        "model_request_sha256": null,
+        "raw_output_hash_crosscheck": "unavailable_in_permitted_packet"
+      },
+      "completion_integrity": {
+        "provider_finish_reason": null,
+        "completion_flag": null,
+        "error": null,
+        "execution_receipt_validation": "unavailable_in_permitted_packet",
+        "text_integrity": "full_answer_string_reviewed_unchanged",
+        "note": "Presence of an answer in this packet is not independent proof of provider completion; no execution metadata is inferred."
+      },
+      "source_context": {
+        "factual_sources": [
+          {
+            "source_id": "qa26-acquired-2023-turn-00339",
+            "json_pointer": "/pools/pool-0005/factual_evidence/0",
+            "source_sha256": "669db4c7e02b7f21085e02cf57c332721ef04d0432e2d077b3db88fa68d38f5c",
+            "published_at": "2023-10-16",
+            "event_at": null
+          }
+        ],
+        "empty_factual_pool": false,
+        "common_style_sources": [
+          {
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "pointer": "/pools/pool-0005/style_examples/0",
+            "role": "copying_observation_only_not_factual_support"
+          }
+        ]
+      },
+      "assessment_summary": "Conditional generic entrepreneurial advice contains no claimed biography, but barely engages the supplied hardship/uncertainty account.",
+      "claims": [
+        {
+          "answer_location": "Sentence 1",
+          "claim_paraphrase": "Entrepreneurs should favor a sustainable model and prepare for scaling challenges.",
+          "label": "nonfactual",
+          "reason": "Normative advice under a conditional opening, not an assertion of Jensen's actual recommendation. Specific business-model/scaling advice is not drawn from the factual passage.",
+          "claim_id": "sample-0006-claim-01",
+          "output_pointer": "/samples/5/answer",
+          "checked_source_ids": [
+            "qa26-acquired-2023-turn-00339"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0005/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 2",
+          "claim_paraphrase": "Entrepreneurs should maintain a clear vision and commitment through difficulty.",
+          "label": "nonfactual",
+          "reason": "Advice, not a factual biographical claim. Difficulty loosely overlaps the source, but the source's distinctive point is the motivating value of not knowing how hard founding will be.",
+          "claim_id": "sample-0006-claim-02",
+          "output_pointer": "/samples/5/answer",
+          "checked_source_ids": [
+            "qa26-acquired-2023-turn-00339"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0005/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 3",
+          "claim_paraphrase": "Entrepreneurs should build a strong team and seek mentors.",
+          "label": "nonfactual",
+          "reason": "A normative recommendation; these specific points are not factual-source content, and the common style example cannot support them as actual advice.",
+          "claim_id": "sample-0006-claim-03",
+          "output_pointer": "/samples/5/answer",
+          "checked_source_ids": [
+            "qa26-acquired-2023-turn-00339"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0005/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 4",
+          "claim_paraphrase": "Entrepreneurs should stay adaptable and keep learning.",
+          "label": "nonfactual",
+          "reason": "Normative hypothetical guidance, not evidence of a current personal belief or historical recommendation.",
+          "claim_id": "sample-0006-claim-04",
+          "output_pointer": "/samples/5/answer",
+          "checked_source_ids": [
+            "qa26-acquired-2023-turn-00339"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0005/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        }
+      ],
+      "citations": {
+        "observed_markers": [],
+        "allowlisted_ids": [
+          "qa26-acquired-2023-turn-00339"
+        ],
+        "presence": {
+          "status": "not_applicable",
+          "reason": "The answer is conditional normative advice, with no discrete historical factual claim requiring a citation. Its missing source-based answer is a coverage defect, not repaired by citing the generic advice."
+        },
+        "exact_allowlist_id": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "placement": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "semantic_applicability": {
+          "status": "not_applicable",
+          "reason": "No cited claim/source association is present; claim support is assessed separately."
+        }
+      },
+      "language_and_format": {
+        "english": {
+          "status": "satisfied",
+          "reason": "The response is in English."
+        },
+        "korean_one_sentence": {
+          "status": "not_applicable",
+          "reason": "The actual English system instruction has no Korean one-sentence rule."
+        },
+        "third_person_only": {
+          "status": "not_applicable",
+          "reason": "The English system instruction does not forbid first-person grammar."
+        },
+        "no_direct_quotation": {
+          "status": "not_applicable",
+          "reason": "The Korean-only no-direct-quotation constraint does not apply; quotation authenticity is assessed in the claim and identity notes."
+        },
+        "prescribed_korean_name": {
+          "status": "not_applicable",
+          "reason": "No Korean name-preservation instruction applies."
+        },
+        "standalone_ai_simulation_label": {
+          "status": "uncertain",
+          "reason": "The answer does not include an explicit AI-simulation label; the saved system instruction labels the simulation, and the packet does not establish surrounding UI labeling."
+        }
+      },
+      "attribution_and_boundaries": {
+        "historical_attribution": {
+          "status": "not_applicable",
+          "reason": "No historical account is actually given; the omitted historical content is recorded under coverage."
+        },
+        "publication_as_event_date": {
+          "status": "not_applicable",
+          "reason": "No publication date is stated as an event date."
+        },
+        "persona_experience_boundary": {
+          "status": "satisfied",
+          "reason": "The first-person would-advise wording is hypothetical advice rather than a claim of lived experience."
+        },
+        "evidence_limit_handling": {
+          "status": "not_applicable",
+          "reason": "The question is answerable from the supplied account; no unavailable detail needs invention."
+        },
+        "hypothetical_handling": {
+          "prefix": {
+            "status": "satisfied",
+            "reason": "Uses the exact English prefix."
+          },
+          "question_scope": {
+            "status": "uncertain",
+            "reason": "An open advice request can invite recommendations, but is not explicitly phrased as a hypothetical question."
+          },
+          "conditional_language": {
+            "status": "satisfied",
+            "reason": "The opening would-advise construction frames the following recommendations as normative hypothetical advice, not completed events."
+          },
+          "grounding": {
+            "status": "violated",
+            "reason": "Most specific advice is not an extrapolation of the source's uncertainty/underestimated-hardship reasoning."
+          },
+          "citation_separation": {
+            "status": "satisfied",
+            "reason": "No factual citation is attached to hypothetical advice."
+          }
+        }
+      },
+      "coverage": {
+        "overall": "partially_covered",
+        "requested_supported_content": {
+          "status": "partially_covered",
+          "reason": "Acknowledges difficulty in a broad sense, but omits the magnitude of founding hardship, uncertainty, and the value of initially underestimating it."
+        },
+        "components": [
+          {
+            "requested_content": "Founding difficulty and uncertainty",
+            "status": "partially_covered",
+            "reason": "Mentions a difficult road and challenges without the source's specific founding account."
+          },
+          {
+            "requested_content": "Why not knowing the full hardship can enable entrepreneurial action",
+            "status": "not_covered",
+            "reason": "The central source reasoning is absent."
+          },
+          {
+            "requested_content": "Advice based on the supplied public experience",
+            "status": "not_covered",
+            "reason": "Generic business-model, mentoring, and adaptability advice is not traced to that experience."
+          }
+        ]
+      },
+      "repetition_and_copying": {
+        "repetition": {
+          "status": "not_observed",
+          "reason": "Repeated importance markers are formulaic parallelism, not materially repeated factual clauses."
+        },
+        "source_overlap_category": "no_extended_copying_observed",
+        "source_overlap_reason": "The strongest style overlap is a three-token generic directive about surrounding oneself with others. No extended copied span; thematic similarity cannot establish that the output received the style example.",
+        "lexical_observations": [
+          {
+            "role": "factual_evidence",
+            "source_id": "qa26-acquired-2023-turn-00339",
+            "source_pointer": "/pools/pool-0005/factual_evidence/0/text",
+            "longest_contiguous_lowercase_word_span": 3,
+            "answer_character_span": [
+              118,
+              137
+            ],
+            "source_character_span": [
+              462,
+              481
+            ]
+          },
+          {
+            "role": "style_examples",
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "source_pointer": "/pools/pool-0005/style_examples/0/answer",
+            "longest_contiguous_lowercase_word_span": 3,
+            "answer_character_span": [
+              279,
+              301
+            ],
+            "source_character_span": [
+              128,
+              150
+            ]
+          }
+        ],
+        "style_observation": "Conventional advice-list prose. Normative additions are not automatically factual hallucinations and do not establish actual Jensen views.",
+        "limits": "Short overlap is not proof of copying, memorization, condition assignment, style-example receipt, or persona fidelity. No private reference comparison was performed."
+      },
+      "ambiguities": [
+        "Advice requested in persona is not automatically an assertion of the person's actual present-day belief. The clear issue is weak supplied-reasoning coverage."
+      ],
+      "public_summary": "Generic hypothetical advice is nonfactual rather than fabricated biography; it only loosely covers difficulty and omits the source's uncertainty/underestimation mechanism."
+    },
+    {
+      "sample_id": "sample-0007",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00078",
+      "source_pool_id": "pool-0002",
+      "reviewer_type": "agent_semantic_assessment",
+      "prior_condition_exposure": false,
+      "human_review": "ungraded",
+      "human_ratings": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      },
+      "human_reviewer": null,
+      "sample_sha256": "ab66d728e865f4077e7fdfbf23060c8263144151200978a22258ca5c60232b4a",
+      "output_sha256": "77d6ea918b6a966b9164873560cb4c0eb3f4d6729b2cec5fb62002f13b272229",
+      "question_sha256": "faf1cfcc9cc951a07bac80b27e983afb3677cd5f1a0732132c83a8ff82e1cdf8",
+      "review_pool_sha256": "73801e43a5841075af216d59c427e88d7d2a13c1283e9e88840cce5b0ed43169",
+      "output_pointer": "samples.json#/samples/6/answer",
+      "input_identity": {
+        "sample_id_unique": true,
+        "case_id_matches_pool": true,
+        "question_matches_pool": true,
+        "model_request_sha256": null,
+        "raw_output_hash_crosscheck": "unavailable_in_permitted_packet"
+      },
+      "completion_integrity": {
+        "provider_finish_reason": null,
+        "completion_flag": null,
+        "error": null,
+        "execution_receipt_validation": "unavailable_in_permitted_packet",
+        "text_integrity": "full_answer_string_reviewed_unchanged",
+        "note": "Presence of an answer in this packet is not independent proof of provider completion; no execution metadata is inferred."
+      },
+      "source_context": {
+        "factual_sources": [
+          {
+            "source_id": "qa26-strange-loop-2025-turn-00009",
+            "json_pointer": "/pools/pool-0002/factual_evidence/0",
+            "source_sha256": "32f3b178d3f9c4f042fd891cae61b492915aa069897a5a6d72d09096cebb433f",
+            "published_at": "2025-06-26",
+            "event_at": null
+          }
+        ],
+        "empty_factual_pool": false,
+        "common_style_sources": [
+          {
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "pointer": "/pools/pool-0002/style_examples/0",
+            "role": "copying_observation_only_not_factual_support"
+          }
+        ]
+      },
+      "assessment_summary": "A near-parallel metatextual answer to sample-0005 retains a supported software point but omits the historical inflection and scalability explanation.",
+      "claims": [
+        {
+          "answer_location": "Sentence 1",
+          "claim_paraphrase": "The precise moment of the user-phrased utterance is not explicitly given.",
+          "label": "uncertain",
+          "reason": "The exact user wording is absent, but the source identifies the 2012 contest context for the substantive realization.",
+          "claim_id": "sample-0007-claim-01",
+          "output_pointer": "/samples/6/answer",
+          "checked_source_ids": [
+            "qa26-strange-loop-2025-turn-00009"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0002/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 2",
+          "claim_paraphrase": "The source discusses deep learning's impact on software development.",
+          "label": "supported",
+          "reason": "The passage presents deep learning as a new way to develop software and change computing.",
+          "claim_id": "sample-0007-claim-02",
+          "output_pointer": "/samples/6/answer",
+          "checked_source_ids": [
+            "qa26-strange-loop-2025-turn-00009"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0002/factual_evidence/0"
+          ],
+          "supporting_source_ids": [
+            "qa26-strange-loop-2025-turn-00009"
+          ]
+        },
+        {
+          "answer_location": "Sentence 3",
+          "claim_paraphrase": "Deep learning was a new software-development method recognized as a significant advance.",
+          "label": "supported",
+          "reason": "This is a reasonable broad paraphrase of the supplied conviction and software-method account.",
+          "claim_id": "sample-0007-claim-03",
+          "output_pointer": "/samples/6/answer",
+          "checked_source_ids": [
+            "qa26-strange-loop-2025-turn-00009"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0002/factual_evidence/0"
+          ],
+          "supporting_source_ids": [
+            "qa26-strange-loop-2025-turn-00009"
+          ]
+        },
+        {
+          "answer_location": "Sentence 4, first clause",
+          "claim_paraphrase": "Recognizing its importance was a pivotal moment.",
+          "label": "supported",
+          "reason": "The source describes the effectiveness observation and the resulting conviction; the wording is a qualitative paraphrase, not an extra external event.",
+          "claim_id": "sample-0007-claim-04",
+          "output_pointer": "/samples/6/answer",
+          "checked_source_ids": [
+            "qa26-strange-loop-2025-turn-00009"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0002/factual_evidence/0"
+          ],
+          "supporting_source_ids": [
+            "qa26-strange-loop-2025-turn-00009"
+          ]
+        },
+        {
+          "answer_location": "Sentence 4, final clause",
+          "claim_paraphrase": "The exact words or specific moment of personal conviction are not clearly stated.",
+          "label": "uncertain",
+          "reason": "The exact quotation is not supplied, whereas the year/context of conviction is. The answer merges these distinct evidentiary limits.",
+          "claim_id": "sample-0007-claim-05",
+          "output_pointer": "/samples/6/answer",
+          "checked_source_ids": [
+            "qa26-strange-loop-2025-turn-00009"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0002/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        }
+      ],
+      "citations": {
+        "observed_markers": [],
+        "allowlisted_ids": [
+          "qa26-strange-loop-2025-turn-00009"
+        ],
+        "presence": {
+          "status": "violated",
+          "reason": "No citation follows the supported factual paraphrases."
+        },
+        "exact_allowlist_id": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "placement": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "semantic_applicability": {
+          "status": "not_applicable",
+          "reason": "No cited claim/source association is present; claim support is assessed separately."
+        }
+      },
+      "language_and_format": {
+        "english": {
+          "status": "satisfied",
+          "reason": "The response is in English."
+        },
+        "korean_one_sentence": {
+          "status": "not_applicable",
+          "reason": "The actual English system instruction has no Korean one-sentence rule."
+        },
+        "third_person_only": {
+          "status": "not_applicable",
+          "reason": "The English system instruction does not forbid first-person grammar."
+        },
+        "no_direct_quotation": {
+          "status": "not_applicable",
+          "reason": "The Korean-only no-direct-quotation constraint does not apply; quotation authenticity is assessed in the claim and identity notes."
+        },
+        "prescribed_korean_name": {
+          "status": "not_applicable",
+          "reason": "No Korean name-preservation instruction applies."
+        },
+        "standalone_ai_simulation_label": {
+          "status": "uncertain",
+          "reason": "The answer does not include an explicit AI-simulation label; the saved system instruction labels the simulation, and the packet does not establish surrounding UI labeling."
+        }
+      },
+      "attribution_and_boundaries": {
+        "historical_attribution": {
+          "status": "violated",
+          "reason": "Omits 2012 and the independent source's 2025-06-26 publication attribution; its event date is unknown."
+        },
+        "publication_as_event_date": {
+          "status": "not_applicable",
+          "reason": "No publication date is stated as an event date."
+        },
+        "persona_experience_boundary": {
+          "status": "uncertain",
+          "reason": "The first-person quote and conviction wording may be a question echo, but can appropriate an unverified utterance. No additional private experience is invented."
+        },
+        "evidence_limit_handling": {
+          "status": "partially_covered",
+          "reason": "Appropriately avoids authenticating the exact quotation, while treating the available substantive inflection as unavailable."
+        },
+        "hypothetical_handling": {
+          "prefix": {
+            "status": "not_applicable",
+            "reason": "No hypothetical scenario is presented."
+          },
+          "question_scope": {
+            "status": "not_applicable",
+            "reason": "The question is historical."
+          },
+          "conditional_language": {
+            "status": "not_applicable",
+            "reason": "There is no hypothetical scenario to qualify."
+          },
+          "grounding": {
+            "status": "not_applicable",
+            "reason": "The pivotal-moment statement is assessed as a broad source paraphrase."
+          },
+          "citation_separation": {
+            "status": "not_applicable",
+            "reason": "No hypothetical block appears."
+          }
+        }
+      },
+      "coverage": {
+        "overall": "partially_covered",
+        "requested_supported_content": {
+          "status": "partially_covered",
+          "reason": "States the software-method idea but omits the 2012 milestone and effectiveness/scalability mechanism."
+        },
+        "components": [
+          {
+            "requested_content": "2012 deep-learning inflection",
+            "status": "not_covered",
+            "reason": "No year or equivalent event context is given."
+          },
+          {
+            "requested_content": "Effectiveness and scalability as reasons for conviction",
+            "status": "not_covered",
+            "reason": "A significant-advance label does not explain those reasons."
+          },
+          {
+            "requested_content": "Deep learning as a new software-development method",
+            "status": "covered",
+            "reason": "This idea is retained."
+          }
+        ]
+      },
+      "repetition_and_copying": {
+        "repetition": {
+          "status": "minor_semantic_repetition",
+          "reason": "The first and last sentences repeat the missing exact-moment/wording point."
+        },
+        "source_overlap_category": "no_extended_copying_observed",
+        "source_overlap_reason": "A six-token factual technical description overlaps the source; no extended factual/style copying is observed. Cross-output similarity is separately documented without causal inference.",
+        "lexical_observations": [
+          {
+            "role": "factual_evidence",
+            "source_id": "qa26-strange-loop-2025-turn-00009",
+            "source_pointer": "/pools/pool-0002/factual_evidence/0/text",
+            "longest_contiguous_lowercase_word_span": 6,
+            "answer_character_span": [
+              308,
+              343
+            ],
+            "source_character_span": [
+              1418,
+              1453
+            ]
+          },
+          {
+            "role": "style_examples",
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "source_pointer": "/pools/pool-0002/style_examples/0/answer",
+            "longest_contiguous_lowercase_word_span": 1,
+            "answer_character_span": [
+              0,
+              3
+            ],
+            "source_character_span": [
+              211,
+              214
+            ]
+          }
+        ],
+        "style_observation": "Metatextual caution focuses on the exact phrasing rather than the supported historical answer.",
+        "limits": "Short overlap is not proof of copying, memorization, condition assignment, style-example receipt, or persona fidelity. No private reference comparison was performed."
+      },
+      "ambiguities": [
+        "The absence of verbatim wording is not the absence of a substantive moment.",
+        "The first-person user-quote echo is ambiguous and should not alone be treated as proof of invented lived experience."
+      ],
+      "public_summary": "Like sample-0005, it retains a supported software point but misses 2012 and the effectiveness/scalability explanation; the exact-wording limitation is too broad and citations/dates are absent."
+    },
+    {
+      "sample_id": "sample-0008",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00253",
+      "source_pool_id": "pool-0005",
+      "reviewer_type": "agent_semantic_assessment",
+      "prior_condition_exposure": false,
+      "human_review": "ungraded",
+      "human_ratings": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      },
+      "human_reviewer": null,
+      "sample_sha256": "29f08970f8aff6bd7f679f6c785f53d6c9d70b9c8e2152bfdb7464b4f3c452ba",
+      "output_sha256": "c5860a917bf1edb7fd906647045288f9c54517d17d312d8236606d57b5bb344f",
+      "question_sha256": "e5d10932b65515f7a40aaf28b1eeac5f6f06c526d3e1928a92b228858bde74cf",
+      "review_pool_sha256": "19fd06f5b57dd0600fcfd513cd010a96ba5339acf5e094ef16acd6f9957d63f8",
+      "output_pointer": "samples.json#/samples/7/answer",
+      "input_identity": {
+        "sample_id_unique": true,
+        "case_id_matches_pool": true,
+        "question_matches_pool": true,
+        "model_request_sha256": null,
+        "raw_output_hash_crosscheck": "unavailable_in_permitted_packet"
+      },
+      "completion_integrity": {
+        "provider_finish_reason": null,
+        "completion_flag": null,
+        "error": null,
+        "execution_receipt_validation": "unavailable_in_permitted_packet",
+        "text_integrity": "full_answer_string_reviewed_unchanged",
+        "note": "Presence of an answer in this packet is not independent proof of provider completion; no execution metadata is inferred."
+      },
+      "source_context": {
+        "factual_sources": [
+          {
+            "source_id": "qa26-acquired-2023-turn-00339",
+            "json_pointer": "/pools/pool-0005/factual_evidence/0",
+            "source_sha256": "669db4c7e02b7f21085e02cf57c332721ef04d0432e2d077b3db88fa68d38f5c",
+            "published_at": "2023-10-16",
+            "event_at": null
+          }
+        ],
+        "empty_factual_pool": false,
+        "common_style_sources": [
+          {
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "pointer": "/pools/pool-0005/style_examples/0",
+            "role": "copying_observation_only_not_factual_support"
+          }
+        ]
+      },
+      "assessment_summary": "Conditional generic entrepreneurial recommendations do not provide the supplied founding-hardship and motivating-uncertainty account.",
+      "claims": [
+        {
+          "answer_location": "Sentence 1",
+          "claim_paraphrase": "Entrepreneurs should pursue sustainability, adaptability, and a strong vision.",
+          "label": "nonfactual",
+          "reason": "These are hypothetical normative recommendations, not factual claims of Jensen's actual advice.",
+          "claim_id": "sample-0008-claim-01",
+          "output_pointer": "/samples/7/answer",
+          "checked_source_ids": [
+            "qa26-acquired-2023-turn-00339"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0005/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 2",
+          "claim_paraphrase": "Entrepreneurs should listen to team members and customers and pivot when needed.",
+          "label": "nonfactual",
+          "reason": "Normative guidance; the supplied public account does not provide these specific recommendations.",
+          "claim_id": "sample-0008-claim-02",
+          "output_pointer": "/samples/7/answer",
+          "checked_source_ids": [
+            "qa26-acquired-2023-turn-00339"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0005/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 3",
+          "claim_paraphrase": "Entrepreneurs should manage time and prioritize health.",
+          "label": "nonfactual",
+          "reason": "Advice rather than a biographical or medical factual assertion; it is not derived from the supplied founding account.",
+          "claim_id": "sample-0008-claim-03",
+          "output_pointer": "/samples/7/answer",
+          "checked_source_ids": [
+            "qa26-acquired-2023-turn-00339"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0005/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 4",
+          "claim_paraphrase": "Success should be judged partly by impact on people and the world, not only company size.",
+          "label": "nonfactual",
+          "reason": "A value judgment, not a measurable source-backed fact or an authenticated Jensen belief.",
+          "claim_id": "sample-0008-claim-04",
+          "output_pointer": "/samples/7/answer",
+          "checked_source_ids": [
+            "qa26-acquired-2023-turn-00339"
+          ],
+          "evidence_pointers": [
+            "/pools/pool-0005/factual_evidence/0"
+          ],
+          "supporting_source_ids": []
+        }
+      ],
+      "citations": {
+        "observed_markers": [],
+        "allowlisted_ids": [
+          "qa26-acquired-2023-turn-00339"
+        ],
+        "presence": {
+          "status": "not_applicable",
+          "reason": "Conditional normative advice requires no factual citation; a missing source-based answer remains a coverage problem."
+        },
+        "exact_allowlist_id": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "placement": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "semantic_applicability": {
+          "status": "not_applicable",
+          "reason": "No cited claim/source association is present; claim support is assessed separately."
+        }
+      },
+      "language_and_format": {
+        "english": {
+          "status": "satisfied",
+          "reason": "The response is in English."
+        },
+        "korean_one_sentence": {
+          "status": "not_applicable",
+          "reason": "The actual English system instruction has no Korean one-sentence rule."
+        },
+        "third_person_only": {
+          "status": "not_applicable",
+          "reason": "The English system instruction does not forbid first-person grammar."
+        },
+        "no_direct_quotation": {
+          "status": "not_applicable",
+          "reason": "The Korean-only no-direct-quotation constraint does not apply; quotation authenticity is assessed in the claim and identity notes."
+        },
+        "prescribed_korean_name": {
+          "status": "not_applicable",
+          "reason": "No Korean name-preservation instruction applies."
+        },
+        "standalone_ai_simulation_label": {
+          "status": "uncertain",
+          "reason": "The answer does not include an explicit AI-simulation label; the saved system instruction labels the simulation, and the packet does not establish surrounding UI labeling."
+        }
+      },
+      "attribution_and_boundaries": {
+        "historical_attribution": {
+          "status": "not_applicable",
+          "reason": "No historical source statement or dated event is described."
+        },
+        "publication_as_event_date": {
+          "status": "not_applicable",
+          "reason": "No publication date is stated as an event date."
+        },
+        "persona_experience_boundary": {
+          "status": "satisfied",
+          "reason": "Would-advise wording does not assert a lived personal experience."
+        },
+        "evidence_limit_handling": {
+          "status": "not_applicable",
+          "reason": "The supplied factual account can support an answer; the case is not unanswerable."
+        },
+        "hypothetical_handling": {
+          "prefix": {
+            "status": "satisfied",
+            "reason": "Uses the exact English prefix."
+          },
+          "question_scope": {
+            "status": "uncertain",
+            "reason": "An open advice question can invite recommendations but is not expressly hypothetical."
+          },
+          "conditional_language": {
+            "status": "satisfied",
+            "reason": "The initial would-advise framing makes the ensuing recommendations normative hypothetical advice."
+          },
+          "grounding": {
+            "status": "violated",
+            "reason": "The advice does not extrapolate the source's hardship/uncertainty reasoning."
+          },
+          "citation_separation": {
+            "status": "satisfied",
+            "reason": "No source marker is attached to hypothetical advice."
+          }
+        }
+      },
+      "coverage": {
+        "overall": "not_covered",
+        "requested_supported_content": {
+          "status": "not_covered",
+          "reason": "Does not cover severe founding difficulty, uncertainty, or the value of initially not knowing the full hardship."
+        },
+        "components": [
+          {
+            "requested_content": "Founding difficulty and uncertainty",
+            "status": "not_covered",
+            "reason": "Generic advice does not relate the public founding account."
+          },
+          {
+            "requested_content": "Why initially underestimating hardship can enable entrepreneurship",
+            "status": "not_covered",
+            "reason": "The source's central causal insight is absent."
+          },
+          {
+            "requested_content": "Advice grounded in the supplied experience",
+            "status": "not_covered",
+            "reason": "The recommendations are generic and unconnected to that account."
+          }
+        ]
+      },
+      "repetition_and_copying": {
+        "repetition": {
+          "status": "not_observed",
+          "reason": "Parallel importance markers are formulaic but do not create material repeated clauses."
+        },
+        "source_overlap_category": "no_extended_copying_observed",
+        "source_overlap_reason": "Only trivial short overlaps with factual/style text; no extended copied wording observed.",
+        "lexical_observations": [
+          {
+            "role": "factual_evidence",
+            "source_id": "qa26-acquired-2023-turn-00339",
+            "source_pointer": "/pools/pool-0005/factual_evidence/0/text",
+            "longest_contiguous_lowercase_word_span": 2,
+            "answer_character_span": [
+              57,
+              67
+            ],
+            "source_character_span": [
+              222,
+              232
+            ]
+          },
+          {
+            "role": "style_examples",
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "source_pointer": "/pools/pool-0005/style_examples/0/answer",
+            "longest_contiguous_lowercase_word_span": 2,
+            "answer_character_span": [
+              148,
+              152
+            ],
+            "source_character_span": [
+              0,
+              4
+            ]
+          }
+        ],
+        "style_observation": "Conventional broad advice. It should not be counted as a set of hallucinated biographical facts, but supplies little evidence-based coverage.",
+        "limits": "Short overlap is not proof of copying, memorization, condition assignment, style-example receipt, or persona fidelity. No private reference comparison was performed."
+      },
+      "ambiguities": [
+        "The recommendations are hypothetical value judgments, not evidence of current Jensen beliefs."
+      ],
+      "public_summary": "Hypothetical normative advice contains no fabricated biography, but the supplied founding difficulty, uncertainty, and motivating underestimation are all absent."
+    },
+    {
+      "sample_id": "sample-0009",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00297",
+      "source_pool_id": "pool-0006",
+      "reviewer_type": "agent_semantic_assessment",
+      "prior_condition_exposure": false,
+      "human_review": "ungraded",
+      "human_ratings": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      },
+      "human_reviewer": null,
+      "sample_sha256": "5f37e0a4fdd073fc384dee2673cc63bc6071c6b0a9a407127a9fc44da254b3b5",
+      "output_sha256": "0910a2924eaa2b87a1b8d5606de82719b3429e77f6b4b018fa0156614cafe17f",
+      "question_sha256": "2cb0801e60db04bc69198ad09a7f6e1fb5828c75c3b5bb8ba29ac39aa81067f7",
+      "review_pool_sha256": "6509138c51449a730f72d5bb434e5d22ef740d951fd9f3eb179c2648e3e20495",
+      "output_pointer": "samples.json#/samples/8/answer",
+      "input_identity": {
+        "sample_id_unique": true,
+        "case_id_matches_pool": true,
+        "question_matches_pool": true,
+        "model_request_sha256": null,
+        "raw_output_hash_crosscheck": "unavailable_in_permitted_packet"
+      },
+      "completion_integrity": {
+        "provider_finish_reason": null,
+        "completion_flag": null,
+        "error": null,
+        "execution_receipt_validation": "unavailable_in_permitted_packet",
+        "text_integrity": "full_answer_string_reviewed_unchanged",
+        "note": "Presence of an answer in this packet is not independent proof of provider completion; no execution metadata is inferred."
+      },
+      "source_context": {
+        "factual_sources": [],
+        "empty_factual_pool": true,
+        "common_style_sources": [
+          {
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "pointer": "/pools/pool-0006/style_examples/0",
+            "role": "copying_observation_only_not_factual_support"
+          }
+        ]
+      },
+      "assessment_summary": "An explicit local verification limit is surrounded by an unsupported symbolic reinterpretation of a factual acquisition question.",
+      "claims": [
+        {
+          "answer_location": "Sentence 1, first clause",
+          "claim_paraphrase": "The jackets are a metaphorical or symbolic reference.",
+          "label": "unsupported",
+          "reason": "The factual pool is empty; no supplied evidence warrants recasting the acquisition question this way.",
+          "claim_id": "sample-0009-claim-01",
+          "output_pointer": "/samples/8/answer",
+          "checked_source_ids": [],
+          "evidence_pointers": [
+            "/pools/pool-0006/factual_evidence"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 1, second clause",
+          "claim_paraphrase": "Such symbolism is commonly used in technology and innovation discussions.",
+          "label": "unsupported",
+          "reason": "A customary-usage claim requires evidence that is not provided.",
+          "claim_id": "sample-0009-claim-02",
+          "output_pointer": "/samples/8/answer",
+          "checked_source_ids": [],
+          "evidence_pointers": [
+            "/pools/pool-0006/factual_evidence"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 2",
+          "claim_paraphrase": "The jackets symbolize durability and the essential nature of technical work.",
+          "label": "unsupported",
+          "reason": "This definite interpretation is neither supplied reasoning nor an explicit conditional scenario.",
+          "claim_id": "sample-0009-claim-03",
+          "output_pointer": "/samples/8/answer",
+          "checked_source_ids": [],
+          "evidence_pointers": [
+            "/pools/pool-0006/factual_evidence"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 3",
+          "claim_paraphrase": "The supplied context cannot verify the jackets' source.",
+          "label": "nonfactual",
+          "reason": "Recognizes the local evidence gap, although describing provenance as not a factual claim is misleading: provenance is factual but unsupported here.",
+          "claim_id": "sample-0009-claim-04",
+          "output_pointer": "/samples/8/answer",
+          "checked_source_ids": [],
+          "evidence_pointers": [
+            "/pools/pool-0006/factual_evidence"
+          ],
+          "supporting_source_ids": []
+        },
+        {
+          "answer_location": "Sentence 4",
+          "claim_paraphrase": "The jacket reference is probably creative symbolism instead of literal provenance.",
+          "label": "unsupported",
+          "reason": "Repeats the unsupported reinterpretation; a hedge and global prefix do not supply its missing factual basis.",
+          "claim_id": "sample-0009-claim-05",
+          "output_pointer": "/samples/8/answer",
+          "checked_source_ids": [],
+          "evidence_pointers": [
+            "/pools/pool-0006/factual_evidence"
+          ],
+          "supporting_source_ids": []
+        }
+      ],
+      "citations": {
+        "observed_markers": [],
+        "allowlisted_ids": [],
+        "presence": {
+          "status": "violated",
+          "reason": "Categorical symbolism and customary-usage assertions have no evidence or citations. The empty pool means no allowed citation could repair them."
+        },
+        "exact_allowlist_id": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "placement": {
+          "status": "not_applicable",
+          "reason": "No citation markers appear."
+        },
+        "semantic_applicability": {
+          "status": "not_applicable",
+          "reason": "No cited claim/source association is present; claim support is assessed separately."
+        }
+      },
+      "language_and_format": {
+        "english": {
+          "status": "satisfied",
+          "reason": "The response is in English."
+        },
+        "korean_one_sentence": {
+          "status": "not_applicable",
+          "reason": "The actual English system instruction has no Korean one-sentence rule."
+        },
+        "third_person_only": {
+          "status": "not_applicable",
+          "reason": "The English system instruction does not forbid first-person grammar."
+        },
+        "no_direct_quotation": {
+          "status": "not_applicable",
+          "reason": "The Korean-only no-direct-quotation constraint does not apply; quotation authenticity is assessed in the claim and identity notes."
+        },
+        "prescribed_korean_name": {
+          "status": "not_applicable",
+          "reason": "No Korean name-preservation instruction applies."
+        },
+        "standalone_ai_simulation_label": {
+          "status": "uncertain",
+          "reason": "The answer does not include an explicit AI-simulation label; the saved system instruction labels the simulation, and the packet does not establish surrounding UI labeling."
+        }
+      },
+      "attribution_and_boundaries": {
+        "historical_attribution": {
+          "status": "not_applicable",
+          "reason": "No historical date or source event is reported."
+        },
+        "publication_as_event_date": {
+          "status": "not_applicable",
+          "reason": "No publication date is stated as an event date."
+        },
+        "persona_experience_boundary": {
+          "status": "satisfied",
+          "reason": "No autobiographical experience is asserted."
+        },
+        "evidence_limit_handling": {
+          "status": "partially_covered",
+          "reason": "Identifies inability to verify provenance locally, but diverts the factual question into an invented symbolism account."
+        },
+        "hypothetical_handling": {
+          "prefix": {
+            "status": "satisfied",
+            "reason": "Uses the exact English prefix."
+          },
+          "question_scope": {
+            "status": "violated",
+            "reason": "The question seeks factual provenance rather than a symbolic scenario."
+          },
+          "conditional_language": {
+            "status": "violated",
+            "reason": "The main symbolism claims are categorical; only the final restatement is hedged."
+          },
+          "grounding": {
+            "status": "violated",
+            "reason": "No factual reasoning patterns are supplied for the symbolic construction."
+          },
+          "citation_separation": {
+            "status": "satisfied",
+            "reason": "No citation is attached to extrapolation."
+          }
+        }
+      },
+      "coverage": {
+        "overall": "partially_covered",
+        "requested_supported_content": {
+          "status": "not_applicable",
+          "reason": "No acquisition fact is supplied; a precise evidence-limit response could fully satisfy this unanswerable case."
+        },
+        "components": [
+          {
+            "requested_content": "Specific acknowledgement that the supplied record cannot identify provenance",
+            "status": "partially_covered",
+            "reason": "The local limitation appears but is embedded in unsupported reinterpretation."
+          },
+          {
+            "requested_content": "Actual supplier or acquisition location",
+            "status": "not_applicable",
+            "reason": "No factual source supports that answer."
+          }
+        ]
+      },
+      "repetition_and_copying": {
+        "repetition": {
+          "status": "observed",
+          "reason": "Sentences 1 and 4 repeat the symbolic/metaphorical interpretation with little added content."
+        },
+        "source_overlap_category": "no_extended_copying_observed",
+        "source_overlap_reason": "No extended wording overlap with the common style example; the factual pool has no text.",
+        "lexical_observations": [
+          {
+            "role": "style_examples",
+            "source_id": "qa26-stanford-vftt-2024-turn-00130",
+            "source_pointer": "/pools/pool-0006/style_examples/0/answer",
+            "longest_contiguous_lowercase_word_span": 2,
+            "answer_character_span": [
+              338,
+              343
+            ],
+            "source_character_span": [
+              5,
+              10
+            ]
+          }
+        ],
+        "style_observation": "Topic drift converts an acquisition question into commentary about technology symbolism.",
+        "limits": "Short overlap is not proof of copying, memorization, condition assignment, style-example receipt, or persona fidelity. No private reference comparison was performed."
+      },
+      "ambiguities": [
+        "Provenance is a factual question even when the supplied record does not establish the answer."
+      ],
+      "public_summary": "Acknowledges that provenance cannot be verified here, then asserts unsupported symbolism and customary usage; the first and last sentences repeat that reinterpretation."
+    }
+  ],
+  "remaining_gates": [
+    "Coordinator independently cross-checks reviewed output hashes against the preserved collection and execution receipt.",
+    "Coordinator preserves and reads back these findings remotely before any unblinding or optional reference comparison.",
+    "Any later reference comparison is a separate stage and cannot add factual support to this assessment.",
+    "Human ratings remain null unless supplied by an identified human under a stated procedure."
+  ]
+}
