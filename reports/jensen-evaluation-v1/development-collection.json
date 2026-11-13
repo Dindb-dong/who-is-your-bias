@@ -1,0 +1,344 @@
+{
+  "schema_version": "jensen-matched-collection-delivery.v1",
+  "exposure": "development",
+  "status": "collected_saved_and_fresh_readback_verified",
+  "artifact": {
+    "artifact_id": "jensen-m6-development-collection-review-bf16-v2",
+    "role": "complete-matched-collection-and-condition-blind-review-packet",
+    "exposure": "development",
+    "planned": 36,
+    "attempted": 36,
+    "completed": 13,
+    "failed": 23,
+    "file_name": "jensen-m6-development-collection-review-bf16-v2.tar.gz",
+    "file_id": "file_000000009c1081fd813606272ffa0440",
+    "library_file_id": "libfile_fde3_f-c367fcdeba248191989b5eaa9028391b_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 65497,
+    "sha256": "d45f6194444c65d1434f2ba3e6ef9849751526970cddf146e45ee5fa5bfd1b5b",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "conditions": {
+    "facts": {
+      "planned": 12,
+      "attempted": 12,
+      "completed": 6,
+      "failed": 6,
+      "unattempted": 0
+    },
+    "style": {
+      "planned": 12,
+      "attempted": 12,
+      "completed": 5,
+      "failed": 7,
+      "unattempted": 0
+    },
+    "adapter": {
+      "planned": 12,
+      "attempted": 12,
+      "completed": 2,
+      "failed": 10,
+      "unattempted": 0
+    }
+  },
+  "denominators": {
+    "planned": 36,
+    "attempted": 36,
+    "completed": 13,
+    "failed": 23,
+    "unattempted": 0
+  },
+  "review_samples": 13,
+  "plan_sha256": "cd2bd7340c3eb7d9c1ddc248b78e25d69b8e00c9d246454cf5925e082a1dd030",
+  "contract_sha256": "9c79398b54118f284ffdc6e4592d501e1cc214e77f6a895152ae91019286b6c0",
+  "rubric_sha256": "d7e6db218c0fb29110583930797d9e824e802ce10ca9d8447f9acf55e03fcfcd",
+  "review_manifest_file_sha256": "4e2d785b41493fb1e20b85b83b3593c24163a861c818fb201395a0a831bdade2",
+  "archive_members_sha256": {
+    "development-bf16-v2/agent-review/manifest.json": "4e2d785b41493fb1e20b85b83b3593c24163a861c818fb201395a0a831bdade2",
+    "development-bf16-v2/agent-review/private/answer-key.json": "54ebbc260587161903cee65693a8b63099966cd3e704afda075eeb1ce4132191",
+    "development-bf16-v2/agent-review/private/execution-diagnostics.json": "17c401f759b5a26acd54f8463414e8805fe6bddebbed26df27723e215941a007",
+    "development-bf16-v2/agent-review/private/input-manifest.json": "c82ccd590f3469e5cacdd8996716906a5a52899e2df5f6e7b6b30b30ddd0f179",
+    "development-bf16-v2/agent-review/reviewer/README.md": "104f396a124ea47bd8c02bf796f7bac849d9335405e5fb837a2630c8ecdbcbd7",
+    "development-bf16-v2/agent-review/reviewer/reference-answers.json": "8e43a4bbec66ab7d58cc22464fee1ba1d83f7b16cf36e31d31587171d59639e0",
+    "development-bf16-v2/agent-review/reviewer/rubric.md": "d7e6db218c0fb29110583930797d9e824e802ce10ca9d8447f9acf55e03fcfcd",
+    "development-bf16-v2/agent-review/reviewer/samples.json": "82ef42a144e99b6d5657a209116ff93dddbaf4f54a44a9cb7fdff523bceea939",
+    "development-bf16-v2/agent-review/reviewer/source-pools.json": "4f145f2477bf04d0895c3cf49e4c9a4d6306a502d16eb9c54406d529e69ac1be",
+    "development-bf16-v2/collection/blind-review/private/answer-key.json": "fa9118837d9690a4a24e5a4245b434a25351e5f5c8a61949eef00b37ec5d4e3e",
+    "development-bf16-v2/collection/blind-review/private/comparison.json": "26c775cdd2d08323b728f538b8ba96ad8cacb02c94e2c26e8a3a08a59de98e17",
+    "development-bf16-v2/collection/blind-review/private/failed-attempts.json": "7a4006fb6914f88f7be009179835eed985dce1ed32f6e6ab4d685c9d23d8ff89",
+    "development-bf16-v2/collection/blind-review/reviewer/samples.json": "77b5ef57502add613c83f4b0fc88312a4d5ca8b4fdb571ed8b98c30910dc59bd",
+    "development-bf16-v2/collection/comparison.json": "f0a42fd8703c9f8ed4b3c6675963f33221d07a48576e2840defb86a81d8453a1",
+    "development-bf16-v2/collection/review-summary.json": "88bca709317499b64a48dc6168cf63fd25d51d59913f342af524d7c43871d018",
+    "inputs/plan.json": "8e2c7d269ff12d29d260ffdd4212de5ae4afe1c5862a0c1ea57cf8b023916bbe",
+    "inputs/execution-contract-bf16-v2.json": "5dbe9a114d081e10ac689160e59988c255a9d15a901f2e90e44dd9ff53482d15",
+    "inputs/durability-receipts.json": "ae9ed3bfd302094e9abdbc97165dc84056b5ab3d971aab7ab4349c267be0aae8",
+    "collect_package_m6.py": "56713ac6e78f6289f92bc28a382f1cd447460209668da451955f1037826e52ae"
+  },
+  "comparison": {
+    "schema_version": "text-adaptation-comparison-summary.v1",
+    "plan_sha256": "cd2bd7340c3eb7d9c1ddc248b78e25d69b8e00c9d246454cf5925e082a1dd030",
+    "exposure": "development",
+    "conditions": {
+      "facts": {
+        "attempted": 12,
+        "completed": 6,
+        "run_status": "completed",
+        "run_sha256": "60345ac028ccbb14a7f280128dfc54291e5ae783c96d403e04eb553b7260d690",
+        "model": {
+          "identity": {
+            "base_model": "Qwen/Qwen3-1.7B",
+            "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+            "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+            "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+            "chat_template_options": {
+              "enable_thinking": false
+            }
+          },
+          "adapter": {
+            "configured": false,
+            "loaded": false,
+            "verified": false
+          },
+          "runtime": {
+            "device": "cpu",
+            "dtype": "bfloat16",
+            "backend": "transformers",
+            "context_window": 40960,
+            "threads": 8,
+            "attention": "sdpa",
+            "base_parameters": 1720574976,
+            "versions": {
+              "torch": "2.11.0+cpu",
+              "transformers": "4.57.3"
+            },
+            "generation_defaults": {
+              "seed": 42,
+              "temperature": 0.7,
+              "top_p": 0.8,
+              "top_k": 20
+            }
+          }
+        },
+        "errors": {
+          "provider_finish_length": 6
+        },
+        "generation_ms_median": 40891.797000000006,
+        "output_sha256": {
+          "dev-ko-cuda": "b4f06fbabeeab0933f2648618982e184e290a6892ff14e3eac82f3491759e388",
+          "dev-ko-sega": "db77179de3e40f23af23d9dd077dacd9ed6e47ead76f25f5f156315c7613ee7f",
+          "dev-ko-tsmc": "cb256972ae8ee372420a89c6d24c0fa21ae0fd41b43ac45c4bc4af8b772fe036",
+          "dev-ko-values": "f5070ca9d382d198b12e2406208d078d805c8b9f3df810a89838e1b33a4e2cf1",
+          "dev-en-accelerated": "31f6087380e2989964f04c10d3ada4e90cbe23b4ee8474db17f7ccbedd8da685",
+          "dev-ko-followup": "856c310a08c0c3be3278ea7b8dfba779406752aa04e8397fa5d7928e499e3f65",
+          "dev-ko-correction": "5ce18f2688199b0b6b023afe29677e548eb94ec7c3a3aafd09bc2d80ae884c87",
+          "dev-ko-topic-switch": "6ab127512ed3c63fcb0e3174f9dfe810afa0655efeb7829b00b40c0d1071e01d",
+          "dev-ko-unsupported": "7e37dd09d95bb8f6910b99c267a70026458d18104354fe692fcaf1836f61ae63",
+          "dev-ko-current": "0eca71c13bdcf2f189bd0d13127df31683b581343e3178e06850ad31110a4417",
+          "dev-en-private": "6746b805d46dd5e4c01542876384158d0ff9e87aac131492c3d2bf98c52b76c6",
+          "dev-ko-future": "c504f578f837945f3d338c6e0a55da40914cfc04328b21e5abcfd43b6b34172f"
+        }
+      },
+      "style": {
+        "attempted": 12,
+        "completed": 5,
+        "run_status": "completed",
+        "run_sha256": "06ad4ee8693c1dc2a7cdb3b193c7f00709f4f1c043d7f50d0c7ff1ce0189ba8d",
+        "model": {
+          "identity": {
+            "base_model": "Qwen/Qwen3-1.7B",
+            "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+            "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+            "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+            "chat_template_options": {
+              "enable_thinking": false
+            }
+          },
+          "adapter": {
+            "configured": false,
+            "loaded": false,
+            "verified": false
+          },
+          "runtime": {
+            "device": "cpu",
+            "dtype": "bfloat16",
+            "backend": "transformers",
+            "context_window": 40960,
+            "threads": 8,
+            "attention": "sdpa",
+            "base_parameters": 1720574976,
+            "versions": {
+              "torch": "2.11.0+cpu",
+              "transformers": "4.57.3"
+            },
+            "generation_defaults": {
+              "seed": 42,
+              "temperature": 0.7,
+              "top_p": 0.8,
+              "top_k": 20
+            }
+          }
+        },
+        "errors": {
+          "provider_finish_length": 1,
+          "provider_timeout": 1,
+          "provider_model_identity_changed": 5
+        },
+        "generation_ms_median": 78994.257,
+        "output_sha256": {
+          "dev-ko-cuda": "67e216d619947fdbf43aef1286518f7ef8c5a6e57c4852b48c6d765af8c5023a",
+          "dev-ko-sega": "14074a697009740c00080ee34c80c69e544303ddc3959729f5512eaea292691e",
+          "dev-ko-tsmc": "9a4c196f443b898001b2a2369a4bcc1ec0a2dbd2fe926a1c8b79d939ffd2713b",
+          "dev-ko-values": "f5070ca9d382d198b12e2406208d078d805c8b9f3df810a89838e1b33a4e2cf1",
+          "dev-en-accelerated": "c433c53dc462ba9061497d8e59b1e14457cd2b74c74ef2577769a66a3b7be09a",
+          "dev-ko-followup": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "dev-ko-correction": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "dev-ko-topic-switch": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "dev-ko-unsupported": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "dev-ko-current": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "dev-en-private": "432ac8fa8fd1cc6cf320b064cf4f707e831b794810c5c7f340bd480787062504",
+          "dev-ko-future": "c504f578f837945f3d338c6e0a55da40914cfc04328b21e5abcfd43b6b34172f"
+        }
+      },
+      "adapter": {
+        "attempted": 12,
+        "completed": 2,
+        "run_status": "completed",
+        "run_sha256": "54fe4d9d6b4062a8f71fc054e7e64a43adcd142f5562b5f170658b9f74fc5638",
+        "model": {
+          "identity": {
+            "base_model": "Qwen/Qwen3-1.7B",
+            "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+            "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+            "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+            "chat_template_options": {
+              "enable_thinking": false
+            }
+          },
+          "adapter": {
+            "configured": true,
+            "loaded": true,
+            "verified": true,
+            "schema_version": "text-adapter-identity.v1",
+            "run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+            "artifact_manifest_sha256": "01726cf712cb6b88fde409cea1ba64a3841ab446e5ade2b0cffe51aa29073166",
+            "base_model": "Qwen/Qwen3-1.7B",
+            "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+            "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+            "dataset_sha256": "f83aea790b09631ae7b96f8f899012c879af92c73acafc81a475a49cdfe460d4",
+            "training_event_families": [
+              "acquired-2023",
+              "csis-2025",
+              "dwarkesh-2026",
+              "goldman-sachs-2024",
+              "lex-494",
+              "stanford-vftt-2024",
+              "strange-loop-2025",
+              "stripe-sessions-2024",
+              "yc-startup-school-2026"
+            ],
+            "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+            "optimizer_steps": 29,
+            "efficacy_evaluated": false
+          },
+          "runtime": {
+            "device": "cpu",
+            "dtype": "bfloat16",
+            "backend": "transformers",
+            "context_window": 40960,
+            "threads": 8,
+            "attention": "sdpa",
+            "base_parameters": 1720574976,
+            "versions": {
+              "torch": "2.11.0+cpu",
+              "transformers": "4.57.3"
+            },
+            "generation_defaults": {
+              "seed": 42,
+              "temperature": 0.7,
+              "top_p": 0.8,
+              "top_k": 20
+            }
+          }
+        },
+        "errors": {
+          "provider_finish_length": 10
+        },
+        "generation_ms_median": 37173.3995,
+        "output_sha256": {
+          "dev-ko-cuda": "f82e0e202bee85ae246292a80c423c454320afc90c94ca2094679d6a8316320f",
+          "dev-ko-sega": "a0771eee33a8b613b4f0a1a64a1e58ad8cdb2d1f425dffbe1d7c1e33b3de4974",
+          "dev-ko-tsmc": "5982b703ae2dd47515701c8fea182e9154f4889c1122e2ece43ea84975676c6e",
+          "dev-ko-values": "f60452eb34bbebd3eee3b61ec21da6be3a2493a518907ee3559a347f7a491b26",
+          "dev-en-accelerated": "1c609c4c7a8d5e5d1638961e1c739aa6773eaecf75c0e48a916caae305edb5f3",
+          "dev-ko-followup": "658dc72020fbc7de9d5a7869c83fc39c1ac2868f9c20ac7d8e9df96cff7857a9",
+          "dev-ko-correction": "c2c3c072deb49b841e56bd4041f59b6a08963a838aac8f4f544a3e6641b6561d",
+          "dev-ko-topic-switch": "62c6b482c6dbe82c538ba66267e50353067215119c2eeec6d087a21be06a3fd2",
+          "dev-ko-unsupported": "bc6fcddd0adb89fe9071e3cd8f35084b1d60f8ce5e0283b922c31e03cf23a689",
+          "dev-ko-current": "6acbbe0fec42701a6df25e63b9863345e9fcf5210a37c81ac4f77ab969e3c8c5",
+          "dev-en-private": "aeeffcde88674c33852ded4a4b7b1bd9e11c23212e23a72f43df011496d90c23",
+          "dev-ko-future": "4fddfbceca3f2371ffc9337ec7ced13947a242b221676615d111585df5ed85ee"
+        }
+      }
+    },
+    "cases_with_style_contrast": 10,
+    "cases_without_factual_candidates": 4,
+    "larger_model_compared": false,
+    "human_review": "ungraded",
+    "efficacy_claim": false,
+    "limitations": [
+      "Completion and citation syntax are not semantic entailment or persona similarity.",
+      "Surface overlap can indicate memorization as well as matching wording; judge it separately.",
+      "Development cases and a bounded training smoke do not establish held-out improvement.",
+      "These are sequential model runs, not simultaneous audiovisual latency measurements."
+    ],
+    "local_execution": {
+      "supervision": "one real server per condition invocation",
+      "conditions_by_start_time": [
+        "facts",
+        "style",
+        "adapter"
+      ],
+      "warmup_excluded_per_condition": true,
+      "order_counterbalanced": false,
+      "contract_sha256": "9c79398b54118f284ffdc6e4592d501e1cc214e77f6a895152ae91019286b6c0",
+      "durability_receipts_file_sha256": "ae9ed3bfd302094e9abdbc97165dc84056b5ab3d971aab7ab4349c267be0aae8",
+      "supervisors": [
+        {
+          "condition": "facts",
+          "status": "completed",
+          "failure_type": null,
+          "supervisor_sha256": "ee84e1acad1e78b14af5e52b73b83a003e5d4f771b549e8b17e1f3db7f6b83d7",
+          "startup_ready_ms": 5570.332,
+          "warmup_request_ms": 45144.999
+        },
+        {
+          "condition": "style",
+          "status": "completed",
+          "failure_type": null,
+          "supervisor_sha256": "2be9ffe9bd8c3f43affb10d622e9678b14944df58faa5203fdb9aec283e04e3a",
+          "startup_ready_ms": 726.646,
+          "warmup_request_ms": 17581.314
+        },
+        {
+          "condition": "adapter",
+          "status": "completed",
+          "failure_type": null,
+          "supervisor_sha256": "25c1755ebd2999105726d78206fe215e264c54a7956222c2b23f32b6dac1d6a5",
+          "startup_ready_ms": 706.313,
+          "warmup_request_ms": 18028.655
+        }
+      ],
+      "persistence_validation": "Matches supplied verified receipts to every local file; this collector does not itself contact remote storage."
+    }
+  },
+  "verification": {
+    "fresh_archive": true,
+    "exact_payload_count": 19,
+    "all_payload_sha256": true,
+    "review_packet_manifest": true
+  },
+  "semantic_support_review": "pending condition-blind agent assessment",
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "reviewer_share_only": "development-bf16-v2/agent-review/reviewer/"
+}

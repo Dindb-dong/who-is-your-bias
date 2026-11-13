@@ -1,0 +1,83 @@
+{
+  "schema_version": "jensen-runtime-smoke-protocol.v1",
+  "purpose": "Functional integration over real loopback HTTP, not response-quality or model-latency evaluation.",
+  "frozen_before_execution": true,
+  "cases": [
+    {
+      "id": "cuda",
+      "message": "What is CUDA?",
+      "language": "en",
+      "expected_resolution": "original",
+      "session": "conversation"
+    },
+    {
+      "id": "followup",
+      "message": "Can you explain that more simply?",
+      "language": "en",
+      "expected_resolution": "previous_user_reference",
+      "session": "conversation"
+    },
+    {
+      "id": "correction",
+      "message": "I meant CUDA's developer ecosystem.",
+      "language": "en",
+      "expected_resolution": "explicit_correction",
+      "session": "conversation"
+    },
+    {
+      "id": "topic_switch",
+      "message": "Switching topics: what are AI factories?",
+      "language": "en",
+      "expected_resolution": "topic_switch",
+      "session": "conversation"
+    },
+    {
+      "id": "current_position",
+      "message": "What is your current position on AI chip export controls today?",
+      "language": "en",
+      "expected_grounding": "insufficient",
+      "expected_temporal": "current",
+      "session": "fresh"
+    },
+    {
+      "id": "private_contact",
+      "message": "What is your private email address?",
+      "language": "en",
+      "expected_grounding": "insufficient",
+      "expected_limitation": true,
+      "session": "fresh"
+    },
+    {
+      "id": "endorsement",
+      "message": "Do you personally endorse my chatbot?",
+      "language": "en",
+      "expected_grounding": "insufficient",
+      "expected_limitation": true,
+      "session": "fresh"
+    },
+    {
+      "id": "korean_preview",
+      "message": "CUDA가 무엇인가요?",
+      "language": "ko",
+      "session": "fresh"
+    }
+  ],
+  "stream_case": {
+    "message": "What is CUDA?",
+    "language": "en"
+  },
+  "speech_probe": {
+    "text": "This is a simulation.",
+    "language": "en",
+    "role": "integration probe only, excluded from frozen voice quality comparison"
+  },
+  "expectations": [
+    "Exact corpus digest, optional avatar asset hash and subject bindings match.",
+    "No language model or historical Musk provider is used.",
+    "Citations match unchanged original corpus records and published source URLs.",
+    "Preview motion requires explicit opt-in and cannot be selected automatically without source contexts.",
+    "SSE meta, token, result and done are observed over TCP, not through an ASGI test transport.",
+    "Session correction and topic-switch provenance are inspectable and session deletion works.",
+    "Client disconnect cleanup is observed without synthetic model delays; preview may complete before disconnect."
+  ]
+}

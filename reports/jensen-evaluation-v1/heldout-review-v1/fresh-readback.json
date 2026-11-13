@@ -1,0 +1,13 @@
+{
+  "schema_version": "jensen-agent-review-fresh-readback.v1",
+  "status": "fresh_archive_and_every_payload_verified",
+  "file_id": "file_00000000f12881f58e41d211e5653a72",
+  "library_file_id": "libfile_fde3_f-84b320f4e8ec819181517187e064e55f_a18ece08681081918d81df44f69c4b1f",
+  "file_name": "jensen-m6-heldout-agent-review-v1.tar.gz",
+  "size_bytes": 21367,
+  "sha256": "a01e60bef3fa6025f54c2e79e7941be91bbd77c18b596d011899050b1c4791f9",
+  "verified_payload_files": 4,
+  "review_samples": 9,
+  "human_review": "ungraded",
+  "condition_key_or_references_opened": false
+}

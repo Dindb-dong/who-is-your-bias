@@ -1,0 +1,20 @@
+{
+  "artifact_id": "jensen-m6-heldout-agent-review-v1",
+  "efficacy_claim": false,
+  "files": {
+    "blinded-findings.json": {
+      "bytes": 124569,
+      "sha256": "bd6ba567b468570525d09477e617d97498906e696ad299d6409baac9c5f28c03"
+    },
+    "blinded-findings.md": {
+      "bytes": 7399,
+      "sha256": "d31c13c89e12a37db37a1066d356ac5919a5375103841dddbef31752a9171637"
+    },
+    "provenance.json": {
+      "bytes": 2312,
+      "sha256": "bca1dbe4b5442c9cba0e6a3da5634aad2a0a15057ef406de4310a7862122e82c"
+    }
+  },
+  "human_review": "ungraded",
+  "schema_version": "jensen-heldout-blind-review-payload.v1"
+}

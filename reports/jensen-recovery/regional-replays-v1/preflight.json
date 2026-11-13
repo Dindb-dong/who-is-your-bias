@@ -1,0 +1,113 @@
+{
+  "schema_version": "jensen-regional-replays-preflight.v1",
+  "checked_at": "2026-11-12T21:04:57.627921+00:00",
+  "sources": [
+    {
+      "source_id": "ces-2026-cn-video",
+      "event_family_id": "nvidia-ces-2026",
+      "split": "train",
+      "discovery_url": "https://www.nvidia.cn/events/ces/",
+      "expected_duration_seconds": 5499.766667,
+      "expected_fragments": 550,
+      "manifest_sha256": "b210d95c9a43f7b748b6b6885ff68c568a6c02a76c78f06121e7c80fcca3169f",
+      "selected_rendition": "m3u8_sd",
+      "published_renditions": [
+        "m3u8_4k",
+        "m3u8_ud",
+        "m3u8_hd",
+        "m3u8_sd"
+      ],
+      "head_samples": [
+        {
+          "index": 0,
+          "error": "HTTP Error 503: Service Unavailable"
+        },
+        {
+          "index": 137,
+          "status": 200,
+          "bytes": 831336,
+          "content_type": "video/mp2t"
+        },
+        {
+          "index": 275,
+          "status": 200,
+          "bytes": 1300020,
+          "content_type": "video/mp2t"
+        },
+        {
+          "index": 412,
+          "status": 200,
+          "bytes": 1081376,
+          "content_type": "video/mp2t"
+        },
+        {
+          "index": 549,
+          "status": 200,
+          "bytes": 231052,
+          "content_type": "video/mp2t"
+        }
+      ],
+      "rough_sample_mean_bytes_estimate": 473520300,
+      "estimate_is_not_full_size_guarantee": true,
+      "sample_successes": 4,
+      "sample_upper_observed_fragment_projection_bytes": 715011000,
+      "estimate_note": "Mean of successful HEAD samples only; sampled final fragment is shorter. Neither mean nor maximum-sample projection is a full download bound."
+    },
+    {
+      "source_id": "gtc-2026-cn-video",
+      "event_family_id": "nvidia-gtc-2026",
+      "split": "train",
+      "discovery_url": "https://www.nvidia.cn/gtc/keynote/",
+      "expected_duration_seconds": 8335.6,
+      "expected_fragments": 834,
+      "manifest_sha256": "23a4101b6f1ebd7a6205f4041f877972ff16509701471a6b807f51c794863f71",
+      "selected_rendition": "m3u8_sd",
+      "published_renditions": [
+        "m3u8_4k",
+        "m3u8_ud",
+        "m3u8_hd",
+        "m3u8_sd"
+      ],
+      "head_samples": [
+        {
+          "index": 0,
+          "error": "HTTP Error 503: Service Unavailable"
+        },
+        {
+          "index": 208,
+          "status": 200,
+          "bytes": 824756,
+          "content_type": "video/mp2t"
+        },
+        {
+          "index": 417,
+          "status": 200,
+          "bytes": 234812,
+          "content_type": "video/mp2t"
+        },
+        {
+          "index": 625,
+          "status": 200,
+          "bytes": 1699332,
+          "content_type": "video/mp2t"
+        },
+        {
+          "index": 833,
+          "status": 200,
+          "bytes": 409840,
+          "content_type": "video/mp2t"
+        }
+      ],
+      "rough_sample_mean_bytes_estimate": 660682290,
+      "estimate_is_not_full_size_guarantee": true,
+      "sample_successes": 4,
+      "sample_upper_observed_fragment_projection_bytes": 1417242888,
+      "estimate_note": "Mean of successful HEAD samples only; sampled final fragment is shorter. Neither mean nor maximum-sample projection is a full download bound."
+    }
+  ],
+  "free_disk_bytes": 11426275328,
+  "final_media_cap_bytes": 2147483648,
+  "working_floor_bytes": 4294967296,
+  "training_reserve_bytes": 2147483648,
+  "status": "estimated_not_acquired"
+}

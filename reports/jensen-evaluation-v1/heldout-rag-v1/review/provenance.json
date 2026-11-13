@@ -1,0 +1,70 @@
+{
+  "archive_scope": "Two immutable findings files, provenance.json and payload-manifest.json. The package receipt is a separate file because it hashes the completed archive.",
+  "central_manifest_modified": false,
+  "complete_factual_source_passages_copied_into_archive_or_git": false,
+  "condition_key_opened_for_preservation": false,
+  "deliberately_empty_pools": [
+    "pool-0003",
+    "pool-0005"
+  ],
+  "efficacy_claim": false,
+  "findings_modified": false,
+  "findings_original_bytes": {
+    "support-findings.json": {
+      "bytes": 85749,
+      "sha256": "248251ea760f75a8530df71fb191fc7b8b7e96a6193ce9877908e65511bb37de"
+    },
+    "support-findings.md": {
+      "bytes": 6986,
+      "sha256": "e1a893576d32d284966e233cf907a0b038a4293d3941754b6a0e083aa41ace55"
+    }
+  },
+  "fresh_remote_head_observed_before_packaging": "e3ed0796e0124a068f84856985c35839040b4e88",
+  "frozen_status_fields": "Original findings are a snapshot of the review before preservation; their historical handoff fields are intentionally unchanged. Current packaging/commit/upload state belongs in separate receipts.",
+  "human_rating_fields_null": true,
+  "human_review": "ungraded",
+  "integration_branch": "feat/jensen-resumable-replication",
+  "observed_integration_checkpoint": "e3ed0796e0124a068f84856985c35839040b4e88",
+  "persistence_scope": "Packaged and locally byte-verified only; coordinator must upload, freshly retrieve and verify before private-reference comparison.",
+  "pr_base": "8515b5f30f3cd412e18db3d54ee28bf2a4c28694",
+  "pr_number": 19,
+  "prior_condition_exposure_as_recorded": "The README identifies one base-model RAG diagnostic; this is not a condition-blind matched comparison.",
+  "private_reference_answers_copied_into_archive_or_git": false,
+  "public_payload_scope": "Exact original findings (including generated answers, captured system instructions and paraphrased source rationales), plus hash-only preservation provenance and a payload manifest; no complete source transcripts, private references or condition keys.",
+  "reference_answers_opened_for_preservation": false,
+  "repository": "Dindb-dong/who-is-your-bias",
+  "review_date_utc_as_recorded": "2026-11-13",
+  "review_input_packet_files": {
+    "README.md": {
+      "bytes": 967,
+      "sha256": "82b516cda48b117f11b6ef956021b1ff040f3e2d93742667464c6eb1ac7c5271"
+    },
+    "rubric.md": {
+      "bytes": 14493,
+      "sha256": "d7e6db218c0fb29110583930797d9e824e802ce10ca9d8447f9acf55e03fcfcd"
+    },
+    "samples.json": {
+      "bytes": 4785,
+      "sha256": "2026e1e98cfdb994dda8f3b977838cad5cc2d23b581885e7d0d7557600b91449"
+    },
+    "source-pools.json": {
+      "bytes": 67144,
+      "sha256": "ae22a956d7a8cc4b729cc057073bee805863a5df01ba131be36258dc0ecff380"
+    }
+  },
+  "review_samples": 4,
+  "review_time_observed_utc_as_recorded": "2026-11-13T05:25:02Z",
+  "reviewer_packet_copied_wholesale_into_archive_or_git": false,
+  "reviewer_type": "agent_semantic_assessment",
+  "role": "heldout-rag-agent-semantic-review-before-private-reference-comparison",
+  "schema_version": "jensen-rag-agent-review-preservation.v1",
+  "source_pools": 6,
+  "source_review_packet_archive": {
+    "archive_bytes_independently_rehashed_by_this_packager": false,
+    "archive_opened_for_preservation": false,
+    "hash_provenance": "Coordinator-supplied identity of the actual freshly restored RAG review packet.",
+    "reviewer_directory_bytes_independently_rehashed": true,
+    "sha256": "5ebceab4cf2e7c9f8a426d3fd31c306345ebbc86f69ab1925235c553a4ee9ac4"
+  },
+  "task_branch": "task/jensen-rag-review-preservation-v1"
+}

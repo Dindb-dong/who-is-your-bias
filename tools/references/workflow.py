@@ -64,7 +64,12 @@ def publisher_words(publisher: dict) -> list[dict]:
         if not isinstance(cue, dict) or cue.get("id") in identifiers:
             raise MediaError("Publisher cue IDs must be unique")
         identifiers.add(cue.get("id"))
-        onset = finite_number(cue.get("start"), "publisher cue onset", 0, 86400)
+        if publisher.get("timing_kind") == "untimed_text":
+            if cue.get("start") is not None or publisher.get("source_timeline") is not None:
+                raise MediaError("Untimed publisher text cannot declare numeric cue times or a media clock")
+            onset = None
+        else:
+            onset = finite_number(cue.get("start"), "publisher cue onset", 0, 86400)
         spans = cue.get("speaker_spans")
         if not isinstance(spans, list):
             raise MediaError("Publisher text must retain explicit speaker spans")
@@ -133,7 +138,7 @@ def align_transcripts(publisher: dict, asr: dict) -> dict:
                 "speaker_basis": source["speaker_basis"], "source_start_seconds": word["source_start"],
                 "source_end_seconds": word["source_end"], "publisher_cue_start_seconds": source["publisher_start"]}
             matches.append(match)
-            if source["cue_word_index"] == 0:
+            if source["cue_word_index"] == 0 and source["publisher_start"] is not None:
                 anchors.append({"cue_id": source["cue_id"], "native_word_start_seconds": word["source_start"],
                     "publisher_cue_start_seconds": source["publisher_start"],
                     "native_minus_publisher_seconds": round(word["source_start"] - source["publisher_start"], 4)})
@@ -224,7 +229,10 @@ def prepare_reference(
     if all_ids[first:last + 1] != cue_ids:
         raise MediaError("Selected publisher cues must be consecutive")
     words = asr_words(asr)
-    chosen = [word for word in words if word["source_start"] < end and word["source_end"] > start]
+    # Adding a duration can move an exact adjacent-word boundary by a few
+    # floating-point ULPs (601.22 + 9.94 -> 611.1600000000001). Such rounding
+    # must not pull the following complete word into an otherwise valid clip.
+    chosen = [word for word in words if word["source_start"] < end - 1e-7 and word["source_end"] > start + 1e-7]
     if not chosen or any(word["source_start"] < start - 0.001 or word["source_end"] > end + 0.001 for word in chosen):
         raise MediaError("Reference boundaries cut an ASR word; choose boundaries outside observed words")
     text = " ".join(word["word"].strip() for word in chosen)
@@ -235,7 +243,7 @@ def prepare_reference(
     alignment = align_transcripts(publisher, asr)
     if len(observed_tokens) < 10:
         raise MediaError("Reference needs at least 10 observed words for contextual matching")
-    target_matches = [item for item in alignment["matches"] if item["source_start_seconds"] >= start and item["source_end_seconds"] <= end]
+    target_matches = [item for item in alignment["matches"] if item["source_start_seconds"] >= start - 1e-7 and item["source_end_seconds"] <= end + 1e-7]
     attribution_agrees = bool(target_matches) and all(item["cue_id"] in cue_ids and item["speaker"] == speaker for item in target_matches)
     exact_agreement = observed_tokens == expected_tokens and len(target_matches) == len(observed_tokens)
     if not attribution_agrees:

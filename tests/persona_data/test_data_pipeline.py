@@ -228,3 +228,31 @@ def test_mismatched_chat_template_prefix_is_rejected():
             return [9, 9] if add_generation_prompt else [1, 2, 3]
     with pytest.raises(ValueError, match="loss masking"):
         encode_example(Wrong(), [], 10)
+
+
+def test_jensen_identity_does_not_extract_musk_or_reuse_musk_date():
+    jensen_source = dict(source(), persona_id="jensen-huang", target_speaker="Jensen Huang")
+    turns = transcript()
+    assert extract_exchanges(jensen_source, turns, acquired_at="2026-11-13T00:00:00Z")[0] == []
+    turns["turns"][1]["speaker"] = "Jensen Huang"
+    rows, failures = extract_exchanges(jensen_source, turns, acquired_at="2026-11-13T00:00:00Z")
+    assert not failures and rows[0]["question_answer"]["respondent"] == "Jensen Huang"
+    projected = runtime_source(dict(jensen_source, id="dwarkesh-2026"), turns, acquired_at="2026-11-13T00:00:00Z")
+    assert "date_provenance" not in projected
+    with pytest.raises(ValueError, match="target speaker"):
+        extract_exchanges(dict(jensen_source, target_speaker="Elon Musk"), turns, acquired_at="2026-11-13T00:00:00Z")
+
+
+def test_media_speaker_review_must_match_record_respondent(tmp_path):
+    from tools.persona_data.pipeline import _media_eligibility
+    item = record()
+    item["question_answer"]["respondent"] = "Jensen Huang"
+    qa = item["question_answer"]
+    entry = {"record_id": item["id"], "answer_sha256": sha_text(qa["answer"]),
+             "source_id": item["source_id"], "source_timeline": "source_video",
+             "transcript_sha256": qa["transcript_locator"]["transcript_sha256"],
+             "source_artifact_sha256": item["source_artifact_sha256"],
+             "recording_id": "recording-one", "source_clock_mapping_reviewed": True,
+             "speaker": "Elon Musk", "review_status": "accepted", "reviewer": "fixture",
+             "reviewer_type": "agent", "reviewed_at": "2026-11-13"}
+    assert _media_eligibility(item, entry, "speech", tmp_path) == (False, "target_speaker_or_review_unaccepted")

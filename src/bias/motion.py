@@ -21,7 +21,10 @@ from pydantic import BaseModel, ConfigDict, Field
 ID_PATTERN = r"^[a-z0-9][a-z0-9_.-]{0,119}$"
 HASH_PATTERN = r"^[a-f0-9]{64}$"
 REVIEW_FLAGS = ("track_continuity_reviewed", "source_clock_reviewed", "speaker_association_reviewed")
-BODY_CHANNELS = {"chest", "leftUpperArm", "rightUpperArm", "leftForearm", "rightForearm", "leftHand", "rightHand"}
+FINGER_CHANNELS = {side + finger + joint for side in ("left", "right")
+                   for finger in ("Thumb", "Index", "Middle", "Ring", "Little")
+                   for joint in (("Metacarpal", "Proximal", "Distal") if finger == "Thumb" else ("Proximal", "Intermediate", "Distal"))}
+BODY_CHANNELS = FINGER_CHANNELS | {"chest", "leftUpperArm", "rightUpperArm", "leftForearm", "rightForearm", "leftHand", "rightHand"}
 MAX_CATALOG_BYTES = 8 * 1024**2
 MAX_CLIP_BYTES = 8 * 1024**2
 

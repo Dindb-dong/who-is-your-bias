@@ -1,0 +1,2347 @@
+{
+  "schema_version": "jensen-completed-text-delivery.v1",
+  "recorded_at": "2026-11-12T21:53:55.073703+00:00",
+  "status": "completed_saved_and_fresh_readback_verified",
+  "training_completed": true,
+  "optimizer_steps": 29,
+  "accepted_examples": 113,
+  "trainable_parameters": 8716288,
+  "precision": "bfloat16",
+  "dataset_manifest": {
+    "dataset_sha256": "f83aea790b09631ae7b96f8f899012c879af92c73acafc81a475a49cdfe460d4",
+    "event_counts": {
+      "acquired-2023": 16,
+      "csis-2025": 12,
+      "dwarkesh-2026": 16,
+      "goldman-sachs-2024": 10,
+      "lex-494": 16,
+      "stanford-vftt-2024": 6,
+      "strange-loop-2025": 12,
+      "stripe-sessions-2024": 16,
+      "yc-startup-school-2026": 9
+    },
+    "full_source_wording_local_only": true,
+    "generated_augmentation": false,
+    "limitations": [
+      "Historical factual content can still be memorized; retrieval-only facts are a design intention, not a guarantee.",
+      "Training loss does not measure likeness or held-out answer quality."
+    ],
+    "max_per_event": 16,
+    "projection_sha256": "8ec31030e58f6c03de7623399f9bff1a3beadf4f2a28155ac91e61baebf9fcea",
+    "samples": 113,
+    "schema_version": "text-adaptation-dataset.v1",
+    "seed": 42,
+    "selection_sha256": "bf20c06a6afd5ba65427faf02ae45a818ca076a7c6d163daed1f4bfa6f8272b2",
+    "source_selection": {
+      "accepted_ids": [
+        "qa26-acquired-2023-turn-00077",
+        "qa26-acquired-2023-turn-00106",
+        "qa26-acquired-2023-turn-00141",
+        "qa26-acquired-2023-turn-00155",
+        "qa26-acquired-2023-turn-00160",
+        "qa26-acquired-2023-turn-00174",
+        "qa26-acquired-2023-turn-00206",
+        "qa26-acquired-2023-turn-00216",
+        "qa26-acquired-2023-turn-00226",
+        "qa26-acquired-2023-turn-00239",
+        "qa26-acquired-2023-turn-00293",
+        "qa26-acquired-2023-turn-00306",
+        "qa26-acquired-2023-turn-00337",
+        "qa26-acquired-2023-turn-00339",
+        "qa26-acquired-2023-turn-00353",
+        "qa26-acquired-2023-turn-00359",
+        "qa26-csis-2025-turn-00047",
+        "qa26-csis-2025-turn-00050",
+        "qa26-csis-2025-turn-00062",
+        "qa26-csis-2025-turn-00073",
+        "qa26-csis-2025-turn-00075",
+        "qa26-csis-2025-turn-00083",
+        "qa26-csis-2025-turn-00096",
+        "qa26-csis-2025-turn-00106",
+        "qa26-csis-2025-turn-00127",
+        "qa26-csis-2025-turn-00132",
+        "qa26-csis-2025-turn-00135",
+        "qa26-csis-2025-turn-00137",
+        "qa26-dwarkesh-2026-turn-00037",
+        "qa26-dwarkesh-2026-turn-00041",
+        "qa26-dwarkesh-2026-turn-00057",
+        "qa26-dwarkesh-2026-turn-00061",
+        "qa26-dwarkesh-2026-turn-00136",
+        "qa26-dwarkesh-2026-turn-00148",
+        "qa26-dwarkesh-2026-turn-00202",
+        "qa26-dwarkesh-2026-turn-00206",
+        "qa26-dwarkesh-2026-turn-00238",
+        "qa26-dwarkesh-2026-turn-00324",
+        "qa26-dwarkesh-2026-turn-00329",
+        "qa26-dwarkesh-2026-turn-00360",
+        "qa26-dwarkesh-2026-turn-00402",
+        "qa26-dwarkesh-2026-turn-00418",
+        "qa26-dwarkesh-2026-turn-00462",
+        "qa26-dwarkesh-2026-turn-00473",
+        "qa26-goldman-sachs-2024-turn-00003",
+        "qa26-goldman-sachs-2024-turn-00005",
+        "qa26-goldman-sachs-2024-turn-00007",
+        "qa26-goldman-sachs-2024-turn-00009",
+        "qa26-goldman-sachs-2024-turn-00013",
+        "qa26-goldman-sachs-2024-turn-00017",
+        "qa26-goldman-sachs-2024-turn-00019",
+        "qa26-goldman-sachs-2024-turn-00021",
+        "qa26-goldman-sachs-2024-turn-00027",
+        "qa26-goldman-sachs-2024-turn-00029",
+        "qa26-lex-494-cue-00009",
+        "qa26-lex-494-cue-00020",
+        "qa26-lex-494-cue-00048",
+        "qa26-lex-494-cue-00098",
+        "qa26-lex-494-cue-00100",
+        "qa26-lex-494-cue-00118",
+        "qa26-lex-494-cue-00130",
+        "qa26-lex-494-cue-00138",
+        "qa26-lex-494-cue-00152",
+        "qa26-lex-494-cue-00180",
+        "qa26-lex-494-cue-00254",
+        "qa26-lex-494-cue-00283",
+        "qa26-lex-494-cue-00311",
+        "qa26-lex-494-cue-00359",
+        "qa26-lex-494-cue-00387",
+        "qa26-lex-494-cue-00394",
+        "qa26-stanford-vftt-2024-turn-00014",
+        "qa26-stanford-vftt-2024-turn-00041",
+        "qa26-stanford-vftt-2024-turn-00066",
+        "qa26-stanford-vftt-2024-turn-00070",
+        "qa26-stanford-vftt-2024-turn-00121",
+        "qa26-stanford-vftt-2024-turn-00130",
+        "qa26-strange-loop-2025-turn-00009",
+        "qa26-strange-loop-2025-turn-00027",
+        "qa26-strange-loop-2025-turn-00085",
+        "qa26-strange-loop-2025-turn-00139",
+        "qa26-strange-loop-2025-turn-00143",
+        "qa26-strange-loop-2025-turn-00197",
+        "qa26-strange-loop-2025-turn-00205",
+        "qa26-strange-loop-2025-turn-00215",
+        "qa26-strange-loop-2025-turn-00221",
+        "qa26-strange-loop-2025-turn-00231",
+        "qa26-strange-loop-2025-turn-00235",
+        "qa26-strange-loop-2025-turn-00239",
+        "qa26-stripe-sessions-2024-turn-00105",
+        "qa26-stripe-sessions-2024-turn-00107",
+        "qa26-stripe-sessions-2024-turn-00111",
+        "qa26-stripe-sessions-2024-turn-00113",
+        "qa26-stripe-sessions-2024-turn-00126",
+        "qa26-stripe-sessions-2024-turn-00133",
+        "qa26-stripe-sessions-2024-turn-00140",
+        "qa26-stripe-sessions-2024-turn-00147",
+        "qa26-stripe-sessions-2024-turn-00149",
+        "qa26-stripe-sessions-2024-turn-00175",
+        "qa26-stripe-sessions-2024-turn-00181",
+        "qa26-stripe-sessions-2024-turn-00191",
+        "qa26-stripe-sessions-2024-turn-00288",
+        "qa26-stripe-sessions-2024-turn-00290",
+        "qa26-stripe-sessions-2024-turn-00294",
+        "qa26-stripe-sessions-2024-turn-00300",
+        "qa26-yc-startup-school-2026-turn-00008",
+        "qa26-yc-startup-school-2026-turn-00012",
+        "qa26-yc-startup-school-2026-turn-00030",
+        "qa26-yc-startup-school-2026-turn-00046",
+        "qa26-yc-startup-school-2026-turn-00057",
+        "qa26-yc-startup-school-2026-turn-00059",
+        "qa26-yc-startup-school-2026-turn-00061",
+        "qa26-yc-startup-school-2026-turn-00063",
+        "qa26-yc-startup-school-2026-turn-00065"
+      ],
+      "accepted_samples": 113,
+      "accepted_token_counts": {
+        "qa26-acquired-2023-turn-00077": 652,
+        "qa26-acquired-2023-turn-00106": 617,
+        "qa26-acquired-2023-turn-00141": 329,
+        "qa26-acquired-2023-turn-00155": 349,
+        "qa26-acquired-2023-turn-00160": 218,
+        "qa26-acquired-2023-turn-00174": 280,
+        "qa26-acquired-2023-turn-00206": 138,
+        "qa26-acquired-2023-turn-00216": 178,
+        "qa26-acquired-2023-turn-00226": 637,
+        "qa26-acquired-2023-turn-00239": 369,
+        "qa26-acquired-2023-turn-00293": 222,
+        "qa26-acquired-2023-turn-00306": 287,
+        "qa26-acquired-2023-turn-00337": 184,
+        "qa26-acquired-2023-turn-00339": 418,
+        "qa26-acquired-2023-turn-00353": 604,
+        "qa26-acquired-2023-turn-00359": 568,
+        "qa26-csis-2025-turn-00047": 252,
+        "qa26-csis-2025-turn-00050": 757,
+        "qa26-csis-2025-turn-00062": 668,
+        "qa26-csis-2025-turn-00073": 497,
+        "qa26-csis-2025-turn-00075": 400,
+        "qa26-csis-2025-turn-00083": 341,
+        "qa26-csis-2025-turn-00096": 676,
+        "qa26-csis-2025-turn-00106": 692,
+        "qa26-csis-2025-turn-00127": 432,
+        "qa26-csis-2025-turn-00132": 617,
+        "qa26-csis-2025-turn-00135": 481,
+        "qa26-csis-2025-turn-00137": 298,
+        "qa26-dwarkesh-2026-turn-00037": 269,
+        "qa26-dwarkesh-2026-turn-00041": 644,
+        "qa26-dwarkesh-2026-turn-00057": 335,
+        "qa26-dwarkesh-2026-turn-00061": 493,
+        "qa26-dwarkesh-2026-turn-00136": 349,
+        "qa26-dwarkesh-2026-turn-00148": 334,
+        "qa26-dwarkesh-2026-turn-00202": 208,
+        "qa26-dwarkesh-2026-turn-00206": 688,
+        "qa26-dwarkesh-2026-turn-00238": 532,
+        "qa26-dwarkesh-2026-turn-00324": 389,
+        "qa26-dwarkesh-2026-turn-00329": 293,
+        "qa26-dwarkesh-2026-turn-00360": 476,
+        "qa26-dwarkesh-2026-turn-00402": 197,
+        "qa26-dwarkesh-2026-turn-00418": 325,
+        "qa26-dwarkesh-2026-turn-00462": 700,
+        "qa26-dwarkesh-2026-turn-00473": 629,
+        "qa26-goldman-sachs-2024-turn-00003": 626,
+        "qa26-goldman-sachs-2024-turn-00005": 716,
+        "qa26-goldman-sachs-2024-turn-00007": 655,
+        "qa26-goldman-sachs-2024-turn-00009": 532,
+        "qa26-goldman-sachs-2024-turn-00013": 625,
+        "qa26-goldman-sachs-2024-turn-00017": 750,
+        "qa26-goldman-sachs-2024-turn-00019": 411,
+        "qa26-goldman-sachs-2024-turn-00021": 747,
+        "qa26-goldman-sachs-2024-turn-00027": 547,
+        "qa26-goldman-sachs-2024-turn-00029": 662,
+        "qa26-lex-494-cue-00009": 592,
+        "qa26-lex-494-cue-00020": 184,
+        "qa26-lex-494-cue-00048": 445,
+        "qa26-lex-494-cue-00098": 219,
+        "qa26-lex-494-cue-00100": 481,
+        "qa26-lex-494-cue-00118": 401,
+        "qa26-lex-494-cue-00130": 553,
+        "qa26-lex-494-cue-00138": 564,
+        "qa26-lex-494-cue-00152": 708,
+        "qa26-lex-494-cue-00180": 706,
+        "qa26-lex-494-cue-00254": 506,
+        "qa26-lex-494-cue-00283": 545,
+        "qa26-lex-494-cue-00311": 233,
+        "qa26-lex-494-cue-00359": 329,
+        "qa26-lex-494-cue-00387": 326,
+        "qa26-lex-494-cue-00394": 307,
+        "qa26-stanford-vftt-2024-turn-00014": 628,
+        "qa26-stanford-vftt-2024-turn-00041": 569,
+        "qa26-stanford-vftt-2024-turn-00066": 420,
+        "qa26-stanford-vftt-2024-turn-00070": 521,
+        "qa26-stanford-vftt-2024-turn-00121": 177,
+        "qa26-stanford-vftt-2024-turn-00130": 191,
+        "qa26-strange-loop-2025-turn-00009": 629,
+        "qa26-strange-loop-2025-turn-00027": 607,
+        "qa26-strange-loop-2025-turn-00085": 430,
+        "qa26-strange-loop-2025-turn-00139": 455,
+        "qa26-strange-loop-2025-turn-00143": 378,
+        "qa26-strange-loop-2025-turn-00197": 143,
+        "qa26-strange-loop-2025-turn-00205": 425,
+        "qa26-strange-loop-2025-turn-00215": 553,
+        "qa26-strange-loop-2025-turn-00221": 440,
+        "qa26-strange-loop-2025-turn-00231": 398,
+        "qa26-strange-loop-2025-turn-00235": 220,
+        "qa26-strange-loop-2025-turn-00239": 482,
+        "qa26-stripe-sessions-2024-turn-00105": 309,
+        "qa26-stripe-sessions-2024-turn-00107": 495,
+        "qa26-stripe-sessions-2024-turn-00111": 481,
+        "qa26-stripe-sessions-2024-turn-00113": 519,
+        "qa26-stripe-sessions-2024-turn-00126": 491,
+        "qa26-stripe-sessions-2024-turn-00133": 152,
+        "qa26-stripe-sessions-2024-turn-00140": 435,
+        "qa26-stripe-sessions-2024-turn-00147": 295,
+        "qa26-stripe-sessions-2024-turn-00149": 346,
+        "qa26-stripe-sessions-2024-turn-00175": 170,
+        "qa26-stripe-sessions-2024-turn-00181": 628,
+        "qa26-stripe-sessions-2024-turn-00191": 343,
+        "qa26-stripe-sessions-2024-turn-00288": 168,
+        "qa26-stripe-sessions-2024-turn-00290": 171,
+        "qa26-stripe-sessions-2024-turn-00294": 375,
+        "qa26-stripe-sessions-2024-turn-00300": 413,
+        "qa26-yc-startup-school-2026-turn-00008": 399,
+        "qa26-yc-startup-school-2026-turn-00012": 540,
+        "qa26-yc-startup-school-2026-turn-00030": 177,
+        "qa26-yc-startup-school-2026-turn-00046": 576,
+        "qa26-yc-startup-school-2026-turn-00057": 714,
+        "qa26-yc-startup-school-2026-turn-00059": 738,
+        "qa26-yc-startup-school-2026-turn-00061": 549,
+        "qa26-yc-startup-school-2026-turn-00063": 336,
+        "qa26-yc-startup-school-2026-turn-00065": 695
+      },
+      "exclusions": [
+        {
+          "id": "qa26-acquired-2023-turn-00029",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00034",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00043",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00045",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00049",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00087",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00093",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00099",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00112",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00133",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00143",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00145",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00158",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00172",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00177",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00191",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00208",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00210",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00213",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00231",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00233",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00244",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00259",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00267",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00269",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00272",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00275",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00277",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00279",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00283",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00285",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00287",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00295",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00302",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00304",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00316",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00318",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00324",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00331",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00333",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00343",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00021",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00023",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00025",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00027",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00037",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00039",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00041",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00043",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00045",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00054",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00056",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00058",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00060",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00066",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00070",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00079",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00081",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00087",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00100",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00104",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00112",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00114",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00116",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-csis-2025-turn-00125",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00016",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00025",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00033",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00049",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00067",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00080",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00089",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00099",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00110",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00114",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00122",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00158",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00162",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00172",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00184",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00194",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00198",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00214",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00234",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00246",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00250",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00254",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00258",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00272",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00284",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00288",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00292",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00296",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00300",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00304",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00312",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00320",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00338",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00342",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00346",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00366",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00374",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00378",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00382",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00386",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00390",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00394",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00398",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00414",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00428",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00432",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00436",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00469",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00482",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-goldman-sachs-2024-turn-00001",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-goldman-sachs-2024-turn-00011",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-goldman-sachs-2024-turn-00015",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-goldman-sachs-2024-turn-00023",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-goldman-sachs-2024-turn-00025",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-goldman-sachs-2024-turn-00031",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00007",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00014",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00016",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00018",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00022",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00024",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00028",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-lex-494-cue-00033",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00038",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-lex-494-cue-00043",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00050",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-lex-494-cue-00058",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00060",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-lex-494-cue-00069",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00071",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00073",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00082",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00084",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-lex-494-cue-00090",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00092",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00096",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00103",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00110",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00112",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00116",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00124",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00126",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00134",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-lex-494-cue-00145",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00147",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00150",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00157",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00159",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00161",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00165",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00167",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00174",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00178",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00196",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00198",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00200",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-lex-494-cue-00205",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-lex-494-cue-00208",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00210",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00219",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-lex-494-cue-00230",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00232",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00234",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00236",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00238",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00240",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00244",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-lex-494-cue-00250",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00252",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00258",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00260",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00268",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-lex-494-cue-00273",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00275",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00279",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00281",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00287",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00291",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00295",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00297",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00299",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00301",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00303",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00305",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00307",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00309",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00315",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00317",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-lex-494-cue-00327",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00329",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00334",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-lex-494-cue-00339",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00341",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00343",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00345",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00347",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00349",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00351",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00353",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00355",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00357",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00362",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-lex-494-cue-00368",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00373",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00375",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00382",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-lex-494-cue-00385",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00390",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00392",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-lex-494-cue-00396",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stanford-vftt-2024-turn-00012",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stanford-vftt-2024-turn-00020",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-stanford-vftt-2024-turn-00030",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-stanford-vftt-2024-turn-00048",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-stanford-vftt-2024-turn-00056",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-stanford-vftt-2024-turn-00061",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-stanford-vftt-2024-turn-00064",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stanford-vftt-2024-turn-00074",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-stanford-vftt-2024-turn-00085",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-stanford-vftt-2024-turn-00117",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stanford-vftt-2024-turn-00124",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stanford-vftt-2024-turn-00127",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stanford-vftt-2024-turn-00132",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-strange-loop-2025-turn-00023",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-strange-loop-2025-turn-00041",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-strange-loop-2025-turn-00057",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-strange-loop-2025-turn-00065",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-strange-loop-2025-turn-00097",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-strange-loop-2025-turn-00109",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-strange-loop-2025-turn-00127",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-strange-loop-2025-turn-00151",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-strange-loop-2025-turn-00171",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-strange-loop-2025-turn-00201",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-strange-loop-2025-turn-00247",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-strange-loop-2025-turn-00263",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00075",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00081",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00083",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00087",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00089",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00091",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00093",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00095",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00097",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00101",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00103",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00117",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00119",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00121",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00131",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00135",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00151",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00155",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00157",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00161",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00165",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00171",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00173",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00185",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00187",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00193",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00199",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00201",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00207",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00225",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00227",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00229",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00231",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00233",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00262",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00264",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00266",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00268",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00274",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00278",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00280",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00282",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00284",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00286",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00292",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00303",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00307",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00309",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00000",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00002",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00004",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00006",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00010",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00014",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00016",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00018",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00032",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00034",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00036",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00044",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00049",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00051",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00053",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00055",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00067",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00070",
+          "reason": "complete_exchange_exceeds_context"
+        },
+        {
+          "id": "qa26-yc-startup-school-2026-turn-00072",
+          "reason": "answer_below_minimum_words"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00047",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00163",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00312",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00051",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00201",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00101",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00297",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00169",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00281",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00179",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00018",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00184",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00326",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00152",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00218",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00241",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00193",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00114",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00289",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00221",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00335",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00116",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00310",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00349",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00040",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00197",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00261",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00055",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00235",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00299",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00058",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00347",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00072",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00127",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00135",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00147",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00320",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00036",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00065",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-acquired-2023-turn-00291",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00350",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00131",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00153",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00188",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00410",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00126",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00370",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00072",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00333",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00262",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00053",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00268",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00276",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00446",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00406",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00456",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00178",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00280",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00423",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00140",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00308",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00356",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00226",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00316",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-dwarkesh-2026-turn-00118",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00331",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00377",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00324",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00105",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00293",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00187",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00289",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00140",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00370",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00262",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00128",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00194",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00313",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00379",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00142",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00001",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00121",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00242",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00192",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00270",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00169",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00035",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00185",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00094",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00078",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00056",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00026",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00045",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00212",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00216",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00075",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00114",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00163",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00176",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-lex-494-cue-00277",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00270",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00177",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00085",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00250",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00197",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00311",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00260",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00214",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00159",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00163",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00079",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00305",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00099",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00243",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00247",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00123",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00276",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00298",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00209",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00189",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00195",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00167",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00142",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00255",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00145",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00203",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00272",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00252",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00153",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00137",
+          "reason": "event_balance_cap"
+        },
+        {
+          "id": "qa26-stripe-sessions-2024-turn-00257",
+          "reason": "event_balance_cap"
+        }
+      ],
+      "human_fidelity_review": "ungraded",
+      "input_dataset_sha256": "794f281483716403bc7d389f98f0139b48e040f15cc1615028b200ce318c0861",
+      "input_samples": 551,
+      "max_length": 768,
+      "max_per_event": 16,
+      "min_answer_words": 24,
+      "model": "Qwen/Qwen3-1.7B",
+      "schema_version": "bounded-text-selection.v1",
+      "seed": 42,
+      "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+      "tokenizer_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "truncated_examples": 0
+    },
+    "test_or_validation_samples": 0
+  },
+  "identity": {
+    "schema_version": "text-adapter-identity.v1",
+    "run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+    "artifact_manifest_sha256": "01726cf712cb6b88fde409cea1ba64a3841ab446e5ade2b0cffe51aa29073166",
+    "base_model": "Qwen/Qwen3-1.7B",
+    "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+    "dataset_sha256": "f83aea790b09631ae7b96f8f899012c879af92c73acafc81a475a49cdfe460d4",
+    "training_event_families": [
+      "acquired-2023",
+      "csis-2025",
+      "dwarkesh-2026",
+      "goldman-sachs-2024",
+      "lex-494",
+      "stanford-vftt-2024",
+      "strange-loop-2025",
+      "stripe-sessions-2024",
+      "yc-startup-school-2026"
+    ],
+    "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+    "optimizer_steps": 29,
+    "efficacy_evaluated": false
+  },
+  "loss_statistics": {
+    "examples": 113,
+    "maximum": 6.463873386383057,
+    "minimum": 1.9348223209381104,
+    "sum": 348.12155520915985
+  },
+  "loss_history": [
+    6.463873386383057,
+    4.181422710418701,
+    4.127119541168213,
+    5.200517654418945,
+    4.269936561584473,
+    3.8529598712921143,
+    5.1923627853393555,
+    4.030734062194824,
+    4.363778591156006,
+    3.659290313720703,
+    3.627488851547241,
+    3.5015923976898193,
+    3.0293197631835938,
+    5.494486331939697,
+    3.013246536254883,
+    3.9919369220733643,
+    2.8295376300811768,
+    2.944530725479126,
+    3.073505401611328,
+    3.4929776191711426,
+    2.707797050476074,
+    3.332435131072998,
+    3.17933988571167,
+    2.8285696506500244,
+    3.3278567790985107,
+    3.433595657348633,
+    3.1193487644195557,
+    3.188209295272827,
+    2.524850606918335,
+    2.9400060176849365,
+    2.9023444652557373,
+    1.9348223209381104,
+    2.9243621826171875,
+    2.9208133220672607,
+    2.6706058979034424,
+    2.3277230262756348,
+    3.394670248031616,
+    2.945894479751587,
+    2.7643184661865234,
+    2.691481590270996,
+    2.9807565212249756,
+    3.2398500442504883,
+    2.6376631259918213,
+    3.1245126724243164,
+    2.7671520709991455,
+    3.0629630088806152,
+    2.936429500579834,
+    3.2493388652801514,
+    2.450216770172119,
+    3.1744508743286133,
+    2.7916150093078613,
+    3.0659313201904297,
+    3.027970790863037,
+    2.8363239765167236,
+    2.801826000213623,
+    3.055598497390747,
+    2.8917529582977295,
+    2.9399468898773193,
+    2.6664175987243652,
+    3.048734188079834,
+    2.7905189990997314,
+    3.407766342163086,
+    2.659686326980591,
+    2.6111092567443848,
+    2.535078525543213,
+    1.9843841791152954,
+    3.0212910175323486,
+    2.960536003112793,
+    2.6258597373962402,
+    2.8680062294006348,
+    3.1241495609283447,
+    2.725050449371338,
+    3.257775068283081,
+    3.4270951747894287,
+    2.8699119091033936,
+    3.5389606952667236,
+    2.7945351600646973,
+    2.655808448791504,
+    3.1244688034057617,
+    2.846863031387329,
+    3.0959038734436035,
+    2.998014211654663,
+    3.2419562339782715,
+    2.6314408779144287,
+    2.7448437213897705,
+    2.425922393798828,
+    3.6557412147521973,
+    2.6817686557769775,
+    2.829225540161133,
+    2.171673059463501,
+    2.7865734100341797,
+    2.7951390743255615,
+    3.0323233604431152,
+    2.3812448978424072,
+    2.7132363319396973,
+    2.928145170211792,
+    3.1242480278015137,
+    2.6452038288116455,
+    3.0402603149414062,
+    2.1859066486358643,
+    2.649610996246338,
+    2.9479217529296875,
+    2.79929256439209,
+    2.3912899494171143,
+    3.2137887477874756,
+    2.553229808807373,
+    3.586235761642456,
+    2.730822801589966,
+    2.452218532562256,
+    3.103546380996704,
+    2.890967607498169,
+    2.8325247764587402,
+    2.883366584777832
+  ],
+  "elapsed_reported_seconds": 7342.672293887001,
+  "elapsed_scope": "Accumulated trainer receipt includes loading and synchronous persistence waits, not pure compute or full wall-clock campaign time.",
+  "resume_history": [
+    {
+      "checkpoint_metadata_sha256": "4ed7fa2421c2694b29bfbfb97167a0996e4783d2d8ab4a231a235e8361fc5cb4",
+      "optimizer_steps": 1
+    },
+    {
+      "checkpoint_metadata_sha256": "290c48fa622c641dfa25688d0a87fef3593528452b5c30eae8830e3025a202f4",
+      "optimizer_steps": 2
+    },
+    {
+      "checkpoint_metadata_sha256": "8217f5723a57edcc91cadc34d52df36ae13b877f23617091c5e567ba8783e2fd",
+      "optimizer_steps": 6
+    },
+    {
+      "checkpoint_metadata_sha256": "e2caa13cd05dc50a1484d3fc309d016e2f8f2ff7228d41be6097131e632376f9",
+      "optimizer_steps": 8
+    },
+    {
+      "checkpoint_metadata_sha256": "726a96933f30c55618deb7133fa50ce573cba1dfa25b781dc57fe83c3eba6f3a",
+      "optimizer_steps": 10
+    },
+    {
+      "checkpoint_metadata_sha256": "396dfb93081b7b9d10853662766d06af64a7b1ddb7b7e70d8e0f4f4856587d67",
+      "optimizer_steps": 28
+    }
+  ],
+  "serving_artifact": {
+    "artifact_id": "jensen-text-adapter-completed29-v1",
+    "role": "completed-text-adapter-serving-export",
+    "optimizer_steps": 29,
+    "subject_id": "jensen-huang",
+    "run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+    "file_name": "jensen-text-adapter-completed29-v1.tar.gz",
+    "file_id": "file_00000000f3c881fb8f1d8083d337234e",
+    "library_file_id": "libfile_fde3_f-be585ebb2ad481918213cbeda58624ab_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 36145069,
+    "sha256": "f40b3e8dd6b2964bc87c916d414db652ee724485aa32b445f71449eaaa65177e",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "checkpoint_artifact": {
+    "artifact_id": "jensen-text-checkpoint-step0029",
+    "role": "text-adapter-optimizer-rng-cursor-checkpoint",
+    "optimizer_steps": 29,
+    "subject_id": "jensen-huang",
+    "file_name": "jensen-text-checkpoint-step0029.tar.gz",
+    "file_id": "file_0000000015a481fda5efea477dd769f7",
+    "library_file_id": "libfile_fde3_f-9910f7486cac81919a61c756b94d0901_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 97101556,
+    "sha256": "66356fc42e1a99c26d54fcfb99ff3b23869e3c49fde30e854ab7c757ccb92bb1",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "execution_evidence_artifact": {
+    "artifact_id": "jensen-text-completion-evidence-v1",
+    "role": "actual-recovered-final-training-process-and-delivery-evidence",
+    "optimizer_steps": 29,
+    "subject_id": "jensen-huang",
+    "file_name": "jensen-text-completion-evidence-v1.tar.gz",
+    "file_id": "file_000000004c0881fda9e067550854fe94",
+    "library_file_id": "libfile_fde3_f-220a476b5dd48191a44c4fc3ae9f6a3b_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 17987,
+    "sha256": "1068a1559bfd264296173cc343f54de4b817e73bc45b5c1e0dc45bd1ca047d12",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "process_owner": {
+    "child_pid": 6,
+    "child_returncode": 0,
+    "child_stopped": true,
+    "command": [
+      "/workspace/scratch/6f64e1b53384/who-is-your-bias/.venv-inference/bin/python",
+      "-c",
+      "import runpy,torch; torch.set_num_interop_threads(1); runpy.run_module('tools.adaptation',run_name='__main__')",
+      "train-text",
+      "--dataset",
+      "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/text-dataset-v1",
+      "--output",
+      "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/text-adapter-v1-resumed28",
+      "--model",
+      "Qwen/Qwen3-1.7B",
+      "--revision",
+      "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "--device",
+      "cpu",
+      "--precision",
+      "bfloat16",
+      "--rank",
+      "8",
+      "--epochs",
+      "1",
+      "--max-length",
+      "768",
+      "--gradient-accumulation",
+      "4",
+      "--max-steps",
+      "29",
+      "--checkpoint-every",
+      "2",
+      "--gradient-checkpointing",
+      "--resume-from",
+      "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/readback/text-resume-step0028/step-00000028",
+      "--checkpoint-publisher",
+      "[\"/workspace/scratch/6f64e1b53384/who-is-your-bias/.venv/bin/python\",\"-m\",\"tools.adaptation.checkpoint_gate\",\"--handoff\",\"/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/text-checkpoint-gates\",\"--timeout\",\"1800\"]"
+    ],
+    "elapsed_seconds": 120.589,
+    "environment": {
+      "MKL_NUM_THREADS": "4",
+      "OMP_NUM_THREADS": "4",
+      "OPENBLAS_NUM_THREADS": "1",
+      "TOKENIZERS_PARALLELISM": "false"
+    },
+    "finished_at": "2026-11-12T21:52:14.483940+00:00",
+    "heartbeat_at": "2026-11-12T21:52:14.483912+00:00",
+    "heartbeat_interval_seconds": 1.0,
+    "invocation_state": "exited",
+    "log": "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/native4-step0028-to0029-recovered-v1.log",
+    "max_waited_child_rss_bytes": 4453605376,
+    "model_training_completion": "read the trainer run receipt separately",
+    "name": "native4-step0028-to0029-recovered-v1",
+    "schema_version": "adaptation-process-supervision.v1",
+    "started_at": "2026-11-12T21:50:13.895038+00:00",
+    "stop_request": "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/text-process/stop-native4-step0028-to0029-recovered-v1.json",
+    "supervisor_pid": 5,
+    "timeout_seconds": 3600
+  },
+  "consumed_final_persistence": {
+    "archive_bytes": 97101556,
+    "archive_sha256": "66356fc42e1a99c26d54fcfb99ff3b23869e3c49fde30e854ab7c757ccb92bb1",
+    "checkpoint_metadata_sha256": "4ce4b30e6b8933752313b723d8f4fd6da70914f54ac5c34eae48df7203a046cd",
+    "file_id": "file_0000000015a481fda5efea477dd769f7",
+    "optimizer_steps": 29,
+    "persistent_locator": "libfile_fde3_f-9910f7486cac81919a61c756b94d0901_a18ece08681081918d81df44f69c4b1f",
+    "public_checkpoint_sha": "71ad7610bf2c672f250d31cf87cb880bd142b507",
+    "source_report": "reports/jensen-recovery/text-v1/checkpoint-step0029.json",
+    "status": "verified",
+    "verification_status": "fresh_materialization_and_checkpoint_load_verified"
+  },
+  "verification": {
+    "fresh_serving_archive": true,
+    "serving_payload_files": 11,
+    "exact_adapter_manifest_and_run": true,
+    "actual_saved_tokenizer": {
+      "schema_version": "jensen-completed-text-lightweight-verification.v1",
+      "tokenizer_instantiated_from_fresh_saved_export": true,
+      "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+      "lora_b_tensors": 196,
+      "lora_b_elements": 4587520,
+      "lora_b_nonzero_elements": 4587520,
+      "lora_b_l2_norm": 3.4623932696433233,
+      "full_base_model_loaded": false,
+      "quality_evaluated": false
+    },
+    "fresh_execution_evidence_payloads": 12
+  },
+  "serving_restore": {
+    "artifact_relative_path": "readback/text-serving-completed29-v1/text-adapter-v1",
+    "run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+    "helper_artifact_id": "jensen-text-completion-evidence-v1"
+  },
+  "interruption_record": "interrupted-owner-step0028.json",
+  "old_invocation_exit_observed": false,
+  "model_quality_evaluated": false,
+  "default_promoted": false,
+  "next_gate": "Remaining frozen M6 matched generation and M7 actual neural runtime."
+}

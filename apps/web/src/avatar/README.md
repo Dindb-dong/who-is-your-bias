@@ -16,7 +16,7 @@ same-audio recording/export, see [Avatar audition](../../../../docs/avatar-audit
 For the planned new identity, face/body/finger authoring, multi-photo/video
 reconstruction and required runtime extensions, see
 [New avatar generation](../../../../docs/avatar-generation-pipeline.md).
-That plan does not add finger controls, new framing or a new persona to this runtime.
+The runtime now supports 30 articulated finger controls and hand-inclusive upper-body framing. New source-fitted identity production remains a separate asset qualification.
 
 ## Runtime contract
 
@@ -30,7 +30,7 @@ available on the current rig; `onError` receives an `Error`. New measurement pro
 | `performanceClip`, `observationElapsedMs` | An `avatar-clip.v1` and its independent source-motion clock. |
 | `allowGeometryPreview` | Explicit permission to display unreviewed geometry. Default false. |
 | `showCalibration` | Show supported controls, actual asset targets, mapping import/export, and manual pose preview. |
-| `framing` | `portrait` or `full_body`; changes the camera without reloading geometry. |
+| `framing` | `portrait`, `upper_body` (complete hand envelope), or `full_body`; changes the camera without reloading geometry. |
 | `onTelemetry` | Face, body/joint, and speech provenance plus unsupported channels and warnings. |
 
 `elapsedMs` is the behavior-plan clock. The transport can map audio playback time
@@ -88,7 +88,7 @@ or same-origin resources; external asset and decoder URLs are not fetched. The
 runtime rejects files above 64 MiB; the upload UI may impose a smaller limit.
 
 `channels.ts` enumerates 52 ARKit-style face channels, 15 native visemes, and
-16 joint controls. `retarget.ts` resolves actual morph targets and node names,
+46 joint controls, including three joints per finger on each hand. Existing `avatar-clip.v1` files remain supported; the optional bone dictionary admits the new names. `retarget.ts` resolves actual morph targets and node names,
 preserves authored rest transforms, and reports unsupported channels explicitly.
 Loading an asset does not create missing shapes or joints.
 
@@ -148,3 +148,19 @@ References:
 - [MediaPipe Pose Landmarker](https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker)
 - [Rhubarb mouth cues](https://github.com/DanielSWolf/rhubarb-lip-sync)
 
+
+## Hands and upper-body framing
+
+Finger names are subject-relative: `left`/`right` + `ThumbMetacarpal`,
+`ThumbProximal`, `ThumbDistal`, and `Index`/`Middle`/`Ring`/`Little` +
+`Proximal`/`Intermediate`/`Distal`. Each rotation is a normalized local-delta
+XYZW quaternion, with the same neutral and basis calibration as other joints.
+Unobserved channels remain authored; missing frames are not held across gaps.
+The generic MPFB calibration maps all 30 real deform bones and restores the
+authored rest transform every frame. Named channels alone do not establish
+Jensen-specific movement or likeness.
+
+`upper_body` fits a declared 2.6-unit-wide envelope around the normalized
+2.4-unit human. Distance adapts to the viewport aspect, including mobile
+resize. Geometry beyond this envelope requires a wider view. The stylized
+bust continues using its existing framing because it is not a complete body.

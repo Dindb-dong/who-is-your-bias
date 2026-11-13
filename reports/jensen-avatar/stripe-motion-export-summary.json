@@ -1,0 +1,20 @@
+[
+  {
+    "id": "stripe-2396-12s",
+    "frames": 120,
+    "reference_ms": 3703.7,
+    "finger_channels": 30,
+    "frames_with_fingers": 98,
+    "selected_two_hands": 93,
+    "public_sha256": "c52a28512bff876a8be94e38da81f8c881f5520bf76cd4b89f7a6e8b36760bf6"
+  },
+  {
+    "id": "stripe-2696-12s",
+    "frames": 120,
+    "reference_ms": 3603.6000000000004,
+    "finger_channels": 30,
+    "frames_with_fingers": 108,
+    "selected_two_hands": 100,
+    "public_sha256": "a1e79e017a024fda8bc1fa0d7fd2fff2ce04bef917ac18df18644f0b025c73a0"
+  }
+]

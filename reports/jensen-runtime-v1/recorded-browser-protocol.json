@@ -1,0 +1,38 @@
+{
+  "schema_version": "recorded-generated-audio-browser-protocol.v1",
+  "status": "revised_acquisition_order_after_first_CI_failure; acceptance_thresholds_unchanged",
+  "persona_id": "jensen-huang",
+  "audio": {
+    "path": "reports/voice/jensen-2026-11-13/listening/adapted-en_multisentence.wav",
+    "sha256": "ca5664747699df7826d4c380c0d26f6b36ff34157df742276945ffbab62086f2",
+    "bytes": 476204,
+    "seconds": 9.92,
+    "sample_rate": 24000,
+    "channels": 1,
+    "origin": "Previously executed step-16 adapted voice evaluation; no new synthesis"
+  },
+  "avatar_sha256": "dea0c921fb7d5668527bd8ee9082f382b14e8d300c43936842e15356dc7d90cd",
+  "cases_sha256": "dc00ae852aeac5028914c68fbcbb019c00d85b46575912379976345752efe649",
+  "projects": ["desktop", "mobile"],
+  "transport": "Recorded speech package response and actual saved WAV decoded by browser HTMLMediaElement/Web Audio",
+  "replaced_boundaries": ["Chat response envelope", "Speech package metadata", "Saved waveform HTTP response"],
+  "unmodified_runtime": ["Web Audio analyser", "HTMLMediaElement clock", "GLB geometry and materials", "Face and bone retargeting", "Playback cancellation"],
+  "articulation": "Actual waveform amplitude; no phoneme alignment",
+  "gestures": "Declared authored fixture cues; not a learned personal gesture policy",
+  "acquisition_order": "Trace uninterrupted real playback, click Stop, verify cleanup, then capture screenshot. Screenshots document the post-cancellation state, while frame traces document animation during playback.",
+  "maximum_observed_clock_gap_gate_ms": 750,
+  "checks": [
+    "Frozen WAV and exact transcript-case hashes match before playback.",
+    "Explicit fitted candidate is loaded and audio digest is verified by the production client.",
+    "Actual media clock advances past 6.5 seconds and drives rendered playback time.",
+    "Actual mapped jaw, blink and smile weights and arm, hand and finger angles become nonzero.",
+    "Mouth, smile, arm and hand channels coexist in observed rendered frames.",
+    "Exactly one real media element and AudioContext are observed; Stop is clicked before natural file completion, then clears the audio clock, closes the context, removes the source and resets speech/gesture channels.",
+    "Desktop/mobile screenshots and bounded frame traces are attached to the CI artifact."
+  ],
+  "exclusions": [
+    "No inference service, artificial phoneme timing or synthetic waveform is used in this playback case.",
+    "No live generation latency, acoustic output latency, human fidelity score or simultaneous neural-provider claim.",
+    "The response-envelope timing fields are fixture metadata, not measured generation times."
+  ]
+}

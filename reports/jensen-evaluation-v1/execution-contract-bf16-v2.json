@@ -1,0 +1,37 @@
+{
+  "schema_version": "text-single-condition-execution-contract.v1",
+  "wrapper_file": "tools/adaptation_evaluation/local_condition.py",
+  "wrapper_sha256": "f1fda11d0f7f4f5d5de6dcee20d51bb0c3230d1b32509267915977808a16b5da",
+  "plan_sha256": [
+    "7fd35de01ea1a364aa7b5a2bf8547bf3a4a6cd3ebee4b3764b8ce7c8957e5c7c",
+    "cd2bd7340c3eb7d9c1ddc248b78e25d69b8e00c9d246454cf5925e082a1dd030"
+  ],
+  "conditions": [
+    "facts",
+    "style",
+    "adapter"
+  ],
+  "base_identity": {
+    "base_model": "Qwen/Qwen3-1.7B",
+    "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+    "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+    "chat_template_options": {
+      "enable_thinking": false
+    }
+  },
+  "runtime": {
+    "device": "cpu",
+    "dtype": "bfloat16",
+    "threads": 8
+  },
+  "decoding": "unchanged frozen plan policy",
+  "warmup": {
+    "max_tokens": 12,
+    "excluded_per_condition": true
+  },
+  "persistence_boundary": "one condition per process invocation; save and freshly verify its complete directory before another condition",
+  "collection": "requires three sealed condition reports and matching fresh-readback file receipts",
+  "timing_scope": "separate model launch and excluded warmup for each condition; sequential order is not counterbalanced",
+  "contract_sha256": "9c79398b54118f284ffdc6e4592d501e1cc214e77f6a895152ae91019286b6c0"
+}

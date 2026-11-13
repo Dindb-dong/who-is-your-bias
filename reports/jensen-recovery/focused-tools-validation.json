@@ -1,0 +1,13 @@
+{
+  "schema_version": "jensen-focused-check-result.v1",
+  "recorded_at": "2026-11-12T20:27:07.688104+00:00",
+  "verified_commit_under_test": "f722be38ce084d2674b8a83a7b441f389fb8881e",
+  "command": "PYTHONPATH=src:. .venv/bin/python -m pytest tests/adaptation/test_checkpoint_gate.py tests/adaptation/test_supervise.py tests/adaptation/test_checkpoint_delivery.py tests/adaptation/test_checkpoint_delivery_state.py tests/adaptation_evaluation/test_blind_review.py tests/adaptation_evaluation/test_partial_checkpoint.py tests/persona_data/test_archive_range.py tests/test_runtime_text_live.py -q",
+  "passed": 122,
+  "skipped": 1,
+  "elapsed_seconds": 2.59,
+  "skip_reason": "Core virtualenv has no torch; tests/adaptation/test_checkpoint_delivery_state.py was skipped.",
+  "scope": "New recovery, packaging, bounded acquisition and live-text protocol checks. No pretrained model or broad browser suite was run by this command.",
+  "model_quality_evidence": false,
+  "browser_evidence": "reports/jensen-runtime-v1/recorded-browser-result.json"
+}

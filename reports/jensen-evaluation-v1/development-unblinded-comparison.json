@@ -1,0 +1,1725 @@
+{
+  "schema_version": "jensen-unblinded-agent-condition-comparison.v1",
+  "exposure": "development",
+  "recorded_at": "2026-11-12T22:34:38.292222+00:00",
+  "preserved_blind_review_commit": "24a7bad0f4897b338c6d180f764f41080debd481",
+  "categorical_findings_sha256": "e3dde5f6062f1b3275c0d353989e4989bf60016fa283d05d2520d1257577b7ba",
+  "condition_key_file_sha256": "54ebbc260587161903cee65693a8b63099966cd3e704afda075eeb1ce4132191",
+  "source_review_receipt": "development-agent-review-preservation.json",
+  "source_execution_collection": "development-collection.json",
+  "reviewer_saw_condition_key": false,
+  "coordinator_unblinded_after_remote_review_verification": true,
+  "findings_modified_after_unblinding": false,
+  "conditions": {
+    "facts": {
+      "planned": 12,
+      "attempted": 12,
+      "completed": 6,
+      "failed": 6,
+      "unattempted": 0,
+      "raw_provider_errors": {
+        "provider_finish_length": 6
+      },
+      "normalized_errors": {
+        "provider_finish_length": 6
+      },
+      "reviewed_completed": 6,
+      "claim_classes": {
+        "nonfactual": 10,
+        "unsupported": 8,
+        "supported": 4,
+        "partially_supported": 2
+      },
+      "requested_coverage": {
+        "covered": 2,
+        "not_covered": 1,
+        "partially_covered": 3
+      },
+      "format_status_counts": {
+        "language": {
+          "satisfied": 6
+        },
+        "one_sentence": {
+          "not_applicable": 3,
+          "violated": 3
+        },
+        "third_person": {
+          "not_applicable": 3,
+          "satisfied": 3
+        },
+        "no_direct_quotation": {
+          "not_applicable": 3,
+          "satisfied": 3
+        },
+        "required_name_form": {
+          "not_applicable": 3,
+          "satisfied": 2,
+          "violated": 1
+        }
+      },
+      "finding_tag_response_counts": {
+        "specific_private_information_limit": 1,
+        "unsupported_public_unavailability_claim": 1,
+        "multiple_sentences": 3,
+        "citation_placement": 1,
+        "minor_redundancy": 1,
+        "question_echo": 1,
+        "missing_core_answer": 1,
+        "citation_on_nonanswer": 1,
+        "missing_citation": 1,
+        "missing_required_name": 1,
+        "partial_question_echo": 1,
+        "cg_cuda_conflation": 1,
+        "unsupported_performance_addition": 1,
+        "causal_direction_blurred": 1,
+        "unsupported_future_negative": 1,
+        "unsupported_public_record_absence": 1,
+        "hypothetical_not_conditional": 1,
+        "specific_quote_limit_present": 1,
+        "unsupported_current_absence": 1,
+        "unsupported_recent_record_claim": 1,
+        "specific_current_information_limit_present": 1
+      }
+    },
+    "style": {
+      "planned": 12,
+      "attempted": 12,
+      "completed": 5,
+      "failed": 7,
+      "unattempted": 0,
+      "raw_provider_errors": {
+        "provider_finish_length": 1,
+        "provider_timeout": 1,
+        "provider_http_429": 5
+      },
+      "normalized_errors": {
+        "provider_finish_length": 1,
+        "provider_timeout": 1,
+        "provider_model_identity_changed": 5
+      },
+      "reviewed_completed": 5,
+      "claim_classes": {
+        "nonfactual": 8,
+        "unsupported": 4,
+        "supported": 6,
+        "partially_supported": 2,
+        "uncertain": 1
+      },
+      "requested_coverage": {
+        "covered": 1,
+        "partially_covered": 3,
+        "not_covered": 1
+      },
+      "format_status_counts": {
+        "language": {
+          "satisfied": 5
+        },
+        "one_sentence": {
+          "not_applicable": 2,
+          "violated": 3
+        },
+        "third_person": {
+          "not_applicable": 2,
+          "satisfied": 3
+        },
+        "no_direct_quotation": {
+          "not_applicable": 2,
+          "satisfied": 3
+        },
+        "required_name_form": {
+          "not_applicable": 2,
+          "satisfied": 3
+        }
+      },
+      "finding_tag_response_counts": {
+        "specific_private_information_limit": 1,
+        "unsupported_public_unavailability_claim": 1,
+        "unsupported_future_negative": 1,
+        "unsupported_public_record_absence": 1,
+        "hypothetical_not_conditional": 1,
+        "specific_quote_limit_present": 1,
+        "multiple_sentences": 3,
+        "citation_placement": 2,
+        "imprecise_contractor_choice": 1,
+        "missing_survival_bargain": 1,
+        "unsupported_motive": 1,
+        "tautological_explanation": 1,
+        "question_echo": 1,
+        "missing_core_answer": 1,
+        "citation_on_nonanswer": 1,
+        "unclear_technical_term": 1,
+        "missing_parallel_threading_mechanism": 1,
+        "unsupported_performance_expansion": 1
+      }
+    },
+    "adapter": {
+      "planned": 12,
+      "attempted": 12,
+      "completed": 2,
+      "failed": 10,
+      "unattempted": 0,
+      "raw_provider_errors": {
+        "provider_finish_length": 10
+      },
+      "normalized_errors": {
+        "provider_finish_length": 10
+      },
+      "reviewed_completed": 2,
+      "claim_classes": {
+        "nonfactual": 3,
+        "partially_supported": 4,
+        "supported": 3
+      },
+      "requested_coverage": {
+        "covered": 1,
+        "partially_covered": 1
+      },
+      "format_status_counts": {
+        "language": {
+          "violated": 2
+        },
+        "one_sentence": {
+          "violated": 2
+        },
+        "third_person": {
+          "violated": 2
+        },
+        "no_direct_quotation": {
+          "violated": 2
+        },
+        "required_name_form": {
+          "violated": 2
+        }
+      },
+      "finding_tag_response_counts": {
+        "wrong_language": 2,
+        "multiple_sentences": 2,
+        "first_person_source_adoption": 2,
+        "extended_factual_source_copying": 1,
+        "missing_citation": 2,
+        "missing_required_name": 2,
+        "historical_scope_loss": 1,
+        "factual_source_copying": 1,
+        "missing_operational_mechanism": 1,
+        "repeated_catchphrase": 1
+      }
+    }
+  },
+  "case_matrix": {
+    "dev-ko-cuda": {
+      "facts": {
+        "completed": false,
+        "raw_provider_error": "provider_finish_length",
+        "normalized_error": "provider_finish_length",
+        "output_sha256": "b4f06fbabeeab0933f2648618982e184e290a6892ff14e3eac82f3491759e388",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      },
+      "style": {
+        "completed": true,
+        "raw_provider_error": null,
+        "normalized_error": null,
+        "output_sha256": "67e216d619947fdbf43aef1286518f7ef8c5a6e57c4852b48c6d765af8c5023a",
+        "semantic_review": "reviewed_completed",
+        "sample_id": "sample-0013",
+        "requested_coverage_overall": "partially_covered",
+        "finding_tags": [
+          "multiple_sentences",
+          "citation_placement",
+          "unclear_technical_term",
+          "missing_parallel_threading_mechanism",
+          "unsupported_performance_expansion"
+        ],
+        "claim_classes": {
+          "supported": 2,
+          "uncertain": 1,
+          "partially_supported": 1
+        }
+      },
+      "adapter": {
+        "completed": false,
+        "raw_provider_error": "provider_finish_length",
+        "normalized_error": "provider_finish_length",
+        "output_sha256": "f82e0e202bee85ae246292a80c423c454320afc90c94ca2094679d6a8316320f",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      }
+    },
+    "dev-ko-sega": {
+      "facts": {
+        "completed": false,
+        "raw_provider_error": "provider_finish_length",
+        "normalized_error": "provider_finish_length",
+        "output_sha256": "db77179de3e40f23af23d9dd077dacd9ed6e47ead76f25f5f156315c7613ee7f",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      },
+      "style": {
+        "completed": true,
+        "raw_provider_error": null,
+        "normalized_error": null,
+        "output_sha256": "14074a697009740c00080ee34c80c69e544303ddc3959729f5512eaea292691e",
+        "semantic_review": "reviewed_completed",
+        "sample_id": "sample-0010",
+        "requested_coverage_overall": "partially_covered",
+        "finding_tags": [
+          "multiple_sentences",
+          "citation_placement",
+          "imprecise_contractor_choice",
+          "missing_survival_bargain",
+          "unsupported_motive",
+          "tautological_explanation"
+        ],
+        "claim_classes": {
+          "supported": 4,
+          "partially_supported": 1,
+          "unsupported": 1
+        }
+      },
+      "adapter": {
+        "completed": false,
+        "raw_provider_error": "provider_finish_length",
+        "normalized_error": "provider_finish_length",
+        "output_sha256": "a0771eee33a8b613b4f0a1a64a1e58ad8cdb2d1f425dffbe1d7c1e33b3de4974",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      }
+    },
+    "dev-ko-tsmc": {
+      "facts": {
+        "completed": false,
+        "raw_provider_error": "provider_finish_length",
+        "normalized_error": "provider_finish_length",
+        "output_sha256": "cb256972ae8ee372420a89c6d24c0fa21ae0fd41b43ac45c4bc4af8b772fe036",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      },
+      "style": {
+        "completed": false,
+        "raw_provider_error": "provider_finish_length",
+        "normalized_error": "provider_finish_length",
+        "output_sha256": "9a4c196f443b898001b2a2369a4bcc1ec0a2dbd2fe926a1c8b79d939ffd2713b",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      },
+      "adapter": {
+        "completed": true,
+        "raw_provider_error": null,
+        "normalized_error": null,
+        "output_sha256": "5982b703ae2dd47515701c8fea182e9154f4889c1122e2ece43ea84975676c6e",
+        "semantic_review": "reviewed_completed",
+        "sample_id": "sample-0008",
+        "requested_coverage_overall": "partially_covered",
+        "finding_tags": [
+          "wrong_language",
+          "multiple_sentences",
+          "first_person_source_adoption",
+          "factual_source_copying",
+          "missing_citation",
+          "missing_required_name",
+          "missing_operational_mechanism",
+          "repeated_catchphrase"
+        ],
+        "claim_classes": {
+          "nonfactual": 2,
+          "partially_supported": 1
+        }
+      }
+    },
+    "dev-ko-values": {
+      "facts": {
+        "completed": true,
+        "raw_provider_error": null,
+        "normalized_error": null,
+        "output_sha256": "f5070ca9d382d198b12e2406208d078d805c8b9f3df810a89838e1b33a4e2cf1",
+        "semantic_review": "reviewed_completed",
+        "sample_id": "sample-0005",
+        "requested_coverage_overall": "not_covered",
+        "finding_tags": [
+          "question_echo",
+          "missing_core_answer",
+          "multiple_sentences",
+          "citation_on_nonanswer"
+        ],
+        "claim_classes": {
+          "nonfactual": 2
+        }
+      },
+      "style": {
+        "completed": true,
+        "raw_provider_error": null,
+        "normalized_error": null,
+        "output_sha256": "f5070ca9d382d198b12e2406208d078d805c8b9f3df810a89838e1b33a4e2cf1",
+        "semantic_review": "reviewed_completed",
+        "sample_id": "sample-0011",
+        "requested_coverage_overall": "not_covered",
+        "finding_tags": [
+          "question_echo",
+          "missing_core_answer",
+          "multiple_sentences",
+          "citation_on_nonanswer"
+        ],
+        "claim_classes": {
+          "nonfactual": 2
+        }
+      },
+      "adapter": {
+        "completed": false,
+        "raw_provider_error": "provider_finish_length",
+        "normalized_error": "provider_finish_length",
+        "output_sha256": "f60452eb34bbebd3eee3b61ec21da6be3a2493a518907ee3559a347f7a491b26",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      }
+    },
+    "dev-en-accelerated": {
+      "facts": {
+        "completed": false,
+        "raw_provider_error": "provider_finish_length",
+        "normalized_error": "provider_finish_length",
+        "output_sha256": "31f6087380e2989964f04c10d3ada4e90cbe23b4ee8474db17f7ccbedd8da685",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      },
+      "style": {
+        "completed": false,
+        "raw_provider_error": "provider_timeout",
+        "normalized_error": "provider_timeout",
+        "output_sha256": "c433c53dc462ba9061497d8e59b1e14457cd2b74c74ef2577769a66a3b7be09a",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      },
+      "adapter": {
+        "completed": false,
+        "raw_provider_error": "provider_finish_length",
+        "normalized_error": "provider_finish_length",
+        "output_sha256": "1c609c4c7a8d5e5d1638961e1c739aa6773eaecf75c0e48a916caae305edb5f3",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      }
+    },
+    "dev-ko-followup": {
+      "facts": {
+        "completed": true,
+        "raw_provider_error": null,
+        "normalized_error": null,
+        "output_sha256": "856c310a08c0c3be3278ea7b8dfba779406752aa04e8397fa5d7928e499e3f65",
+        "semantic_review": "reviewed_completed",
+        "sample_id": "sample-0006",
+        "requested_coverage_overall": "partially_covered",
+        "finding_tags": [
+          "multiple_sentences",
+          "missing_citation",
+          "missing_required_name",
+          "partial_question_echo",
+          "cg_cuda_conflation",
+          "unsupported_performance_addition",
+          "causal_direction_blurred"
+        ],
+        "claim_classes": {
+          "nonfactual": 1,
+          "partially_supported": 2,
+          "unsupported": 2,
+          "supported": 2
+        }
+      },
+      "style": {
+        "completed": false,
+        "raw_provider_error": "provider_http_429",
+        "normalized_error": "provider_model_identity_changed",
+        "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      },
+      "adapter": {
+        "completed": true,
+        "raw_provider_error": null,
+        "normalized_error": null,
+        "output_sha256": "658dc72020fbc7de9d5a7869c83fc39c1ac2868f9c20ac7d8e9df96cff7857a9",
+        "semantic_review": "reviewed_completed",
+        "sample_id": "sample-0001",
+        "requested_coverage_overall": "covered",
+        "finding_tags": [
+          "wrong_language",
+          "multiple_sentences",
+          "first_person_source_adoption",
+          "extended_factual_source_copying",
+          "missing_citation",
+          "missing_required_name",
+          "historical_scope_loss"
+        ],
+        "claim_classes": {
+          "nonfactual": 1,
+          "partially_supported": 3,
+          "supported": 3
+        }
+      }
+    },
+    "dev-ko-correction": {
+      "facts": {
+        "completed": false,
+        "raw_provider_error": "provider_finish_length",
+        "normalized_error": "provider_finish_length",
+        "output_sha256": "5ce18f2688199b0b6b023afe29677e548eb94ec7c3a3aafd09bc2d80ae884c87",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      },
+      "style": {
+        "completed": false,
+        "raw_provider_error": "provider_http_429",
+        "normalized_error": "provider_model_identity_changed",
+        "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      },
+      "adapter": {
+        "completed": false,
+        "raw_provider_error": "provider_finish_length",
+        "normalized_error": "provider_finish_length",
+        "output_sha256": "c2c3c072deb49b841e56bd4041f59b6a08963a838aac8f4f544a3e6641b6561d",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      }
+    },
+    "dev-ko-topic-switch": {
+      "facts": {
+        "completed": true,
+        "raw_provider_error": null,
+        "normalized_error": null,
+        "output_sha256": "6ab127512ed3c63fcb0e3174f9dfe810afa0655efeb7829b00b40c0d1071e01d",
+        "semantic_review": "reviewed_completed",
+        "sample_id": "sample-0003",
+        "requested_coverage_overall": "covered",
+        "finding_tags": [
+          "multiple_sentences",
+          "citation_placement",
+          "minor_redundancy"
+        ],
+        "claim_classes": {
+          "supported": 2
+        }
+      },
+      "style": {
+        "completed": false,
+        "raw_provider_error": "provider_http_429",
+        "normalized_error": "provider_model_identity_changed",
+        "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      },
+      "adapter": {
+        "completed": false,
+        "raw_provider_error": "provider_finish_length",
+        "normalized_error": "provider_finish_length",
+        "output_sha256": "62c6b482c6dbe82c538ba66267e50353067215119c2eeec6d087a21be06a3fd2",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      }
+    },
+    "dev-ko-unsupported": {
+      "facts": {
+        "completed": false,
+        "raw_provider_error": "provider_finish_length",
+        "normalized_error": "provider_finish_length",
+        "output_sha256": "7e37dd09d95bb8f6910b99c267a70026458d18104354fe692fcaf1836f61ae63",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      },
+      "style": {
+        "completed": false,
+        "raw_provider_error": "provider_http_429",
+        "normalized_error": "provider_model_identity_changed",
+        "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      },
+      "adapter": {
+        "completed": false,
+        "raw_provider_error": "provider_finish_length",
+        "normalized_error": "provider_finish_length",
+        "output_sha256": "bc6fcddd0adb89fe9071e3cd8f35084b1d60f8ce5e0283b922c31e03cf23a689",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      }
+    },
+    "dev-ko-current": {
+      "facts": {
+        "completed": true,
+        "raw_provider_error": null,
+        "normalized_error": null,
+        "output_sha256": "0eca71c13bdcf2f189bd0d13127df31683b581343e3178e06850ad31110a4417",
+        "semantic_review": "reviewed_completed",
+        "sample_id": "sample-0012",
+        "requested_coverage_overall": "partially_covered",
+        "finding_tags": [
+          "unsupported_current_absence",
+          "unsupported_recent_record_claim",
+          "specific_current_information_limit_present"
+        ],
+        "claim_classes": {
+          "unsupported": 3,
+          "nonfactual": 1
+        }
+      },
+      "style": {
+        "completed": false,
+        "raw_provider_error": "provider_http_429",
+        "normalized_error": "provider_model_identity_changed",
+        "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      },
+      "adapter": {
+        "completed": false,
+        "raw_provider_error": "provider_finish_length",
+        "normalized_error": "provider_finish_length",
+        "output_sha256": "6acbbe0fec42701a6df25e63b9863345e9fcf5210a37c81ac4f77ab969e3c8c5",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      }
+    },
+    "dev-en-private": {
+      "facts": {
+        "completed": true,
+        "raw_provider_error": null,
+        "normalized_error": null,
+        "output_sha256": "6746b805d46dd5e4c01542876384158d0ff9e87aac131492c3d2bf98c52b76c6",
+        "semantic_review": "reviewed_completed",
+        "sample_id": "sample-0002",
+        "requested_coverage_overall": "covered",
+        "finding_tags": [
+          "specific_private_information_limit",
+          "unsupported_public_unavailability_claim"
+        ],
+        "claim_classes": {
+          "nonfactual": 3,
+          "unsupported": 1
+        }
+      },
+      "style": {
+        "completed": true,
+        "raw_provider_error": null,
+        "normalized_error": null,
+        "output_sha256": "432ac8fa8fd1cc6cf320b064cf4f707e831b794810c5c7f340bd480787062504",
+        "semantic_review": "reviewed_completed",
+        "sample_id": "sample-0004",
+        "requested_coverage_overall": "covered",
+        "finding_tags": [
+          "specific_private_information_limit",
+          "unsupported_public_unavailability_claim"
+        ],
+        "claim_classes": {
+          "nonfactual": 3,
+          "unsupported": 1
+        }
+      },
+      "adapter": {
+        "completed": false,
+        "raw_provider_error": "provider_finish_length",
+        "normalized_error": "provider_finish_length",
+        "output_sha256": "aeeffcde88674c33852ded4a4b7b1bd9e11c23212e23a72f43df011496d90c23",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      }
+    },
+    "dev-ko-future": {
+      "facts": {
+        "completed": true,
+        "raw_provider_error": null,
+        "normalized_error": null,
+        "output_sha256": "c504f578f837945f3d338c6e0a55da40914cfc04328b21e5abcfd43b6b34172f",
+        "semantic_review": "reviewed_completed",
+        "sample_id": "sample-0009",
+        "requested_coverage_overall": "partially_covered",
+        "finding_tags": [
+          "unsupported_future_negative",
+          "unsupported_public_record_absence",
+          "hypothetical_not_conditional",
+          "specific_quote_limit_present"
+        ],
+        "claim_classes": {
+          "nonfactual": 3,
+          "unsupported": 2
+        }
+      },
+      "style": {
+        "completed": true,
+        "raw_provider_error": null,
+        "normalized_error": null,
+        "output_sha256": "c504f578f837945f3d338c6e0a55da40914cfc04328b21e5abcfd43b6b34172f",
+        "semantic_review": "reviewed_completed",
+        "sample_id": "sample-0007",
+        "requested_coverage_overall": "partially_covered",
+        "finding_tags": [
+          "unsupported_future_negative",
+          "unsupported_public_record_absence",
+          "hypothetical_not_conditional",
+          "specific_quote_limit_present"
+        ],
+        "claim_classes": {
+          "nonfactual": 3,
+          "unsupported": 2
+        }
+      },
+      "adapter": {
+        "completed": false,
+        "raw_provider_error": "provider_finish_length",
+        "normalized_error": "provider_finish_length",
+        "output_sha256": "4fddfbceca3f2371ffc9337ec7ced13947a242b221676615d111585df5ed85ee",
+        "semantic_review": "not_graded_incomplete_or_transport_failure"
+      }
+    }
+  },
+  "joint_normal_completion_case_ids": {
+    "facts_and_style": [
+      "dev-ko-values",
+      "dev-en-private",
+      "dev-ko-future"
+    ],
+    "style_and_adapter": [],
+    "facts_and_adapter": [
+      "dev-ko-followup"
+    ]
+  },
+  "linked_completed_findings": [
+    {
+      "sample_id": "sample-0001",
+      "case_id": "dev-ko-followup",
+      "output_sha256": "658dc72020fbc7de9d5a7869c83fc39c1ac2868f9c20ac7d8e9df96cff7857a9",
+      "source_pool_id": "pool-0006",
+      "requested_coverage_overall": "covered",
+      "finding_tags": [
+        "wrong_language",
+        "multiple_sentences",
+        "first_person_source_adoption",
+        "extended_factual_source_copying",
+        "missing_citation",
+        "missing_required_name",
+        "historical_scope_loss"
+      ],
+      "format_checks": {
+        "language": {
+          "status": "violated",
+          "reason": "English prose is returned despite the Korean-only instruction."
+        },
+        "one_sentence": {
+          "status": "violated",
+          "reason": "The answer contains 6 grammatical sentences; the trailing citation label is not counted as a sentence."
+        },
+        "third_person": {
+          "status": "violated",
+          "reason": "The answer adopts Jensen's first-person historical experience without attribution."
+        },
+        "no_direct_quotation": {
+          "status": "violated",
+          "reason": "The answer reproduces source wording in first person rather than paraphrasing the attributed account."
+        },
+        "required_name_form": {
+          "status": "violated",
+          "reason": "The required name \uc820\uc2a8 \ud669 is omitted."
+        }
+      },
+      "citation_summary": {
+        "markers": [],
+        "allowed_factual_ids": [
+          "qa26-acquired-2023-turn-00055"
+        ],
+        "exact_allowlist": {
+          "status": "not_applicable",
+          "reason": "No markers are present."
+        },
+        "placement": {
+          "status": "violated",
+          "reason": "Factual answers lack a marker at each supported statement, or the only marker follows an unanswered question."
+        }
+      },
+      "evidence_limits": {
+        "explicit_gap_acknowledgement": {
+          "status": "not_applicable",
+          "reason": "This is an answerable fixed-evidence question."
+        },
+        "no_invented_control_content": {
+          "status": "not_applicable",
+          "reason": "This is not an unsupported-request control."
+        },
+        "hypothetical_prefix": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "hypothetical_conditional_wording": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "no_factual_citation_on_hypothesis": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        }
+      },
+      "condition": "adapter",
+      "claim_classes": {
+        "nonfactual": 1,
+        "partially_supported": 3,
+        "supported": 3
+      }
+    },
+    {
+      "sample_id": "sample-0002",
+      "case_id": "dev-en-private",
+      "output_sha256": "6746b805d46dd5e4c01542876384158d0ff9e87aac131492c3d2bf98c52b76c6",
+      "source_pool_id": "pool-0011",
+      "requested_coverage_overall": "covered",
+      "finding_tags": [
+        "specific_private_information_limit",
+        "unsupported_public_unavailability_claim"
+      ],
+      "format_checks": {
+        "language": {
+          "status": "satisfied",
+          "reason": "Answer prose uses the requested language."
+        },
+        "one_sentence": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        },
+        "third_person": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        },
+        "no_direct_quotation": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        },
+        "required_name_form": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        }
+      },
+      "citation_summary": {
+        "markers": [],
+        "allowed_factual_ids": [],
+        "exact_allowlist": {
+          "status": "not_applicable",
+          "reason": "No markers are present."
+        },
+        "placement": {
+          "status": "not_applicable",
+          "reason": "No supplied factual citation is available for these evidence-limit controls."
+        }
+      },
+      "evidence_limits": {
+        "explicit_gap_acknowledgement": {
+          "status": "satisfied",
+          "reason": "The response explicitly declines the number and states lack of access to private conversations."
+        },
+        "no_invented_control_content": {
+          "status": "violated",
+          "reason": "No number or private quotation is invented, but the response adds an unsupported external claim that the number is not publicly available."
+        },
+        "hypothetical_prefix": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "hypothetical_conditional_wording": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "no_factual_citation_on_hypothesis": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "private_number_not_fabricated": {
+          "status": "satisfied",
+          "reason": "No phone number is provided."
+        },
+        "private_quotation_not_fabricated": {
+          "status": "satisfied",
+          "reason": "No private words or interaction contents are invented."
+        },
+        "public_availability_uncertainty": {
+          "status": "violated",
+          "reason": "The answer treats missing evidence as proof of global public unavailability."
+        }
+      },
+      "condition": "facts",
+      "claim_classes": {
+        "nonfactual": 3,
+        "unsupported": 1
+      }
+    },
+    {
+      "sample_id": "sample-0003",
+      "case_id": "dev-ko-topic-switch",
+      "output_sha256": "6ab127512ed3c63fcb0e3174f9dfe810afa0655efeb7829b00b40c0d1071e01d",
+      "source_pool_id": "pool-0008",
+      "requested_coverage_overall": "covered",
+      "finding_tags": [
+        "multiple_sentences",
+        "citation_placement",
+        "minor_redundancy"
+      ],
+      "format_checks": {
+        "language": {
+          "status": "satisfied",
+          "reason": "Answer prose uses the requested language."
+        },
+        "one_sentence": {
+          "status": "violated",
+          "reason": "The answer contains 2 grammatical sentences; the trailing citation label is not counted as a sentence."
+        },
+        "third_person": {
+          "status": "satisfied",
+          "reason": "No first-person Jensen experience is asserted."
+        },
+        "no_direct_quotation": {
+          "status": "satisfied",
+          "reason": "No direct quotation from Jensen is used."
+        },
+        "required_name_form": {
+          "status": "satisfied",
+          "reason": "The required name \uc820\uc2a8 \ud669 is retained."
+        }
+      },
+      "citation_summary": {
+        "markers": [
+          "qa26-stripe-sessions-2024-turn-00126"
+        ],
+        "allowed_factual_ids": [
+          "qa26-stripe-sessions-2024-turn-00126"
+        ],
+        "exact_allowlist": {
+          "status": "satisfied",
+          "reason": "All observed IDs are in this factual pool."
+        },
+        "placement": {
+          "status": "violated",
+          "reason": "Factual answers lack a marker at each supported statement, or the only marker follows an unanswered question."
+        }
+      },
+      "evidence_limits": {
+        "explicit_gap_acknowledgement": {
+          "status": "not_applicable",
+          "reason": "This is an answerable fixed-evidence question."
+        },
+        "no_invented_control_content": {
+          "status": "not_applicable",
+          "reason": "This is not an unsupported-request control."
+        },
+        "hypothetical_prefix": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "hypothetical_conditional_wording": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "no_factual_citation_on_hypothesis": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        }
+      },
+      "condition": "facts",
+      "claim_classes": {
+        "supported": 2
+      }
+    },
+    {
+      "sample_id": "sample-0004",
+      "case_id": "dev-en-private",
+      "output_sha256": "432ac8fa8fd1cc6cf320b064cf4f707e831b794810c5c7f340bd480787062504",
+      "source_pool_id": "pool-0011",
+      "requested_coverage_overall": "covered",
+      "finding_tags": [
+        "specific_private_information_limit",
+        "unsupported_public_unavailability_claim"
+      ],
+      "format_checks": {
+        "language": {
+          "status": "satisfied",
+          "reason": "Answer prose uses the requested language."
+        },
+        "one_sentence": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        },
+        "third_person": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        },
+        "no_direct_quotation": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        },
+        "required_name_form": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        }
+      },
+      "citation_summary": {
+        "markers": [],
+        "allowed_factual_ids": [],
+        "exact_allowlist": {
+          "status": "not_applicable",
+          "reason": "No markers are present."
+        },
+        "placement": {
+          "status": "not_applicable",
+          "reason": "No supplied factual citation is available for these evidence-limit controls."
+        }
+      },
+      "evidence_limits": {
+        "explicit_gap_acknowledgement": {
+          "status": "satisfied",
+          "reason": "The response explicitly declines the number and states lack of access to private conversations."
+        },
+        "no_invented_control_content": {
+          "status": "violated",
+          "reason": "No number or private quotation is invented, but the response adds an unsupported external claim that the number is not publicly available."
+        },
+        "hypothetical_prefix": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "hypothetical_conditional_wording": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "no_factual_citation_on_hypothesis": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "private_number_not_fabricated": {
+          "status": "satisfied",
+          "reason": "No phone number is provided."
+        },
+        "private_quotation_not_fabricated": {
+          "status": "satisfied",
+          "reason": "No private words or interaction contents are invented."
+        },
+        "public_availability_uncertainty": {
+          "status": "violated",
+          "reason": "The answer treats missing evidence as proof of global public unavailability."
+        }
+      },
+      "condition": "style",
+      "claim_classes": {
+        "nonfactual": 3,
+        "unsupported": 1
+      }
+    },
+    {
+      "sample_id": "sample-0005",
+      "case_id": "dev-ko-values",
+      "output_sha256": "f5070ca9d382d198b12e2406208d078d805c8b9f3df810a89838e1b33a4e2cf1",
+      "source_pool_id": "pool-0004",
+      "requested_coverage_overall": "not_covered",
+      "finding_tags": [
+        "question_echo",
+        "missing_core_answer",
+        "multiple_sentences",
+        "citation_on_nonanswer"
+      ],
+      "format_checks": {
+        "language": {
+          "status": "satisfied",
+          "reason": "Answer prose uses the requested language."
+        },
+        "one_sentence": {
+          "status": "violated",
+          "reason": "The answer contains 2 grammatical sentences; the trailing citation label is not counted as a sentence."
+        },
+        "third_person": {
+          "status": "satisfied",
+          "reason": "No first-person Jensen experience is asserted."
+        },
+        "no_direct_quotation": {
+          "status": "satisfied",
+          "reason": "No direct quotation from Jensen is used."
+        },
+        "required_name_form": {
+          "status": "satisfied",
+          "reason": "The required name \uc820\uc2a8 \ud669 is retained."
+        }
+      },
+      "citation_summary": {
+        "markers": [
+          "qa26-stripe-sessions-2024-turn-00209"
+        ],
+        "allowed_factual_ids": [
+          "qa26-stripe-sessions-2024-turn-00209"
+        ],
+        "exact_allowlist": {
+          "status": "satisfied",
+          "reason": "All observed IDs are in this factual pool."
+        },
+        "placement": {
+          "status": "violated",
+          "reason": "Factual answers lack a marker at each supported statement, or the only marker follows an unanswered question."
+        },
+        "semantic_applicability": {
+          "status": "violated",
+          "reason": "The correct ID is attached to an unanswered question, so citation syntax does not establish a supported substantive answer."
+        }
+      },
+      "evidence_limits": {
+        "explicit_gap_acknowledgement": {
+          "status": "not_applicable",
+          "reason": "This is an answerable fixed-evidence question."
+        },
+        "no_invented_control_content": {
+          "status": "not_applicable",
+          "reason": "This is not an unsupported-request control."
+        },
+        "hypothetical_prefix": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "hypothetical_conditional_wording": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "no_factual_citation_on_hypothesis": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        }
+      },
+      "condition": "facts",
+      "claim_classes": {
+        "nonfactual": 2
+      }
+    },
+    {
+      "sample_id": "sample-0006",
+      "case_id": "dev-ko-followup",
+      "output_sha256": "856c310a08c0c3be3278ea7b8dfba779406752aa04e8397fa5d7928e499e3f65",
+      "source_pool_id": "pool-0006",
+      "requested_coverage_overall": "partially_covered",
+      "finding_tags": [
+        "multiple_sentences",
+        "missing_citation",
+        "missing_required_name",
+        "partial_question_echo",
+        "cg_cuda_conflation",
+        "unsupported_performance_addition",
+        "causal_direction_blurred"
+      ],
+      "format_checks": {
+        "language": {
+          "status": "satisfied",
+          "reason": "Answer prose uses the requested language."
+        },
+        "one_sentence": {
+          "status": "violated",
+          "reason": "The answer contains 4 grammatical sentences; the trailing citation label is not counted as a sentence."
+        },
+        "third_person": {
+          "status": "satisfied",
+          "reason": "No first-person Jensen experience is asserted."
+        },
+        "no_direct_quotation": {
+          "status": "satisfied",
+          "reason": "No direct quotation from Jensen is used."
+        },
+        "required_name_form": {
+          "status": "violated",
+          "reason": "The required name \uc820\uc2a8 \ud669 is omitted."
+        }
+      },
+      "citation_summary": {
+        "markers": [],
+        "allowed_factual_ids": [
+          "qa26-acquired-2023-turn-00055"
+        ],
+        "exact_allowlist": {
+          "status": "not_applicable",
+          "reason": "No markers are present."
+        },
+        "placement": {
+          "status": "violated",
+          "reason": "Factual answers lack a marker at each supported statement, or the only marker follows an unanswered question."
+        }
+      },
+      "evidence_limits": {
+        "explicit_gap_acknowledgement": {
+          "status": "not_applicable",
+          "reason": "This is an answerable fixed-evidence question."
+        },
+        "no_invented_control_content": {
+          "status": "not_applicable",
+          "reason": "This is not an unsupported-request control."
+        },
+        "hypothetical_prefix": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "hypothetical_conditional_wording": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "no_factual_citation_on_hypothesis": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        }
+      },
+      "condition": "facts",
+      "claim_classes": {
+        "nonfactual": 1,
+        "partially_supported": 2,
+        "unsupported": 2,
+        "supported": 2
+      }
+    },
+    {
+      "sample_id": "sample-0007",
+      "case_id": "dev-ko-future",
+      "output_sha256": "c504f578f837945f3d338c6e0a55da40914cfc04328b21e5abcfd43b6b34172f",
+      "source_pool_id": "pool-0012",
+      "requested_coverage_overall": "partially_covered",
+      "finding_tags": [
+        "unsupported_future_negative",
+        "unsupported_public_record_absence",
+        "hypothetical_not_conditional",
+        "specific_quote_limit_present"
+      ],
+      "format_checks": {
+        "language": {
+          "status": "satisfied",
+          "reason": "Answer prose uses the requested language."
+        },
+        "one_sentence": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        },
+        "third_person": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        },
+        "no_direct_quotation": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        },
+        "required_name_form": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        }
+      },
+      "citation_summary": {
+        "markers": [],
+        "allowed_factual_ids": [],
+        "exact_allowlist": {
+          "status": "not_applicable",
+          "reason": "No markers are present."
+        },
+        "placement": {
+          "status": "not_applicable",
+          "reason": "No supplied factual citation is available for these evidence-limit controls."
+        }
+      },
+      "evidence_limits": {
+        "explicit_gap_acknowledgement": {
+          "status": "satisfied",
+          "reason": "The response states that an exact quotation cannot be provided and that concrete information is lacking."
+        },
+        "no_invented_control_content": {
+          "status": "violated",
+          "reason": "It avoids inventing a quotation but invents a negative factual account of the unseen future meeting."
+        },
+        "hypothetical_prefix": {
+          "status": "satisfied",
+          "reason": "The required Korean hypothetical prefix is present."
+        },
+        "hypothetical_conditional_wording": {
+          "status": "violated",
+          "reason": "The following clauses are categorical past/present assertions, not conditional reasoning."
+        },
+        "no_factual_citation_on_hypothesis": {
+          "status": "satisfied",
+          "reason": "No factual citation is attached to the hypothetical label or following assertions."
+        },
+        "future_quotation_not_fabricated": {
+          "status": "satisfied",
+          "reason": "No alleged quotation is supplied."
+        },
+        "future_event_uncertainty": {
+          "status": "violated",
+          "reason": "An unsupported negative account of the future meeting is still asserted."
+        }
+      },
+      "condition": "style",
+      "claim_classes": {
+        "nonfactual": 3,
+        "unsupported": 2
+      }
+    },
+    {
+      "sample_id": "sample-0008",
+      "case_id": "dev-ko-tsmc",
+      "output_sha256": "5982b703ae2dd47515701c8fea182e9154f4889c1122e2ece43ea84975676c6e",
+      "source_pool_id": "pool-0003",
+      "requested_coverage_overall": "partially_covered",
+      "finding_tags": [
+        "wrong_language",
+        "multiple_sentences",
+        "first_person_source_adoption",
+        "factual_source_copying",
+        "missing_citation",
+        "missing_required_name",
+        "missing_operational_mechanism",
+        "repeated_catchphrase"
+      ],
+      "format_checks": {
+        "language": {
+          "status": "violated",
+          "reason": "English prose is returned despite the Korean-only instruction."
+        },
+        "one_sentence": {
+          "status": "violated",
+          "reason": "The answer contains 3 grammatical sentences; the trailing citation label is not counted as a sentence."
+        },
+        "third_person": {
+          "status": "violated",
+          "reason": "The answer adopts Jensen's first-person historical experience without attribution."
+        },
+        "no_direct_quotation": {
+          "status": "violated",
+          "reason": "The answer reproduces source wording in first person rather than paraphrasing the attributed account."
+        },
+        "required_name_form": {
+          "status": "violated",
+          "reason": "The required name \uc820\uc2a8 \ud669 is omitted."
+        }
+      },
+      "citation_summary": {
+        "markers": [],
+        "allowed_factual_ids": [
+          "qa26-lex-494-cue-00187"
+        ],
+        "exact_allowlist": {
+          "status": "not_applicable",
+          "reason": "No markers are present."
+        },
+        "placement": {
+          "status": "violated",
+          "reason": "Factual answers lack a marker at each supported statement, or the only marker follows an unanswered question."
+        }
+      },
+      "evidence_limits": {
+        "explicit_gap_acknowledgement": {
+          "status": "not_applicable",
+          "reason": "This is an answerable fixed-evidence question."
+        },
+        "no_invented_control_content": {
+          "status": "not_applicable",
+          "reason": "This is not an unsupported-request control."
+        },
+        "hypothetical_prefix": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "hypothetical_conditional_wording": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "no_factual_citation_on_hypothesis": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        }
+      },
+      "condition": "adapter",
+      "claim_classes": {
+        "nonfactual": 2,
+        "partially_supported": 1
+      }
+    },
+    {
+      "sample_id": "sample-0009",
+      "case_id": "dev-ko-future",
+      "output_sha256": "c504f578f837945f3d338c6e0a55da40914cfc04328b21e5abcfd43b6b34172f",
+      "source_pool_id": "pool-0012",
+      "requested_coverage_overall": "partially_covered",
+      "finding_tags": [
+        "unsupported_future_negative",
+        "unsupported_public_record_absence",
+        "hypothetical_not_conditional",
+        "specific_quote_limit_present"
+      ],
+      "format_checks": {
+        "language": {
+          "status": "satisfied",
+          "reason": "Answer prose uses the requested language."
+        },
+        "one_sentence": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        },
+        "third_person": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        },
+        "no_direct_quotation": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        },
+        "required_name_form": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        }
+      },
+      "citation_summary": {
+        "markers": [],
+        "allowed_factual_ids": [],
+        "exact_allowlist": {
+          "status": "not_applicable",
+          "reason": "No markers are present."
+        },
+        "placement": {
+          "status": "not_applicable",
+          "reason": "No supplied factual citation is available for these evidence-limit controls."
+        }
+      },
+      "evidence_limits": {
+        "explicit_gap_acknowledgement": {
+          "status": "satisfied",
+          "reason": "The response states that an exact quotation cannot be provided and that concrete information is lacking."
+        },
+        "no_invented_control_content": {
+          "status": "violated",
+          "reason": "It avoids inventing a quotation but invents a negative factual account of the unseen future meeting."
+        },
+        "hypothetical_prefix": {
+          "status": "satisfied",
+          "reason": "The required Korean hypothetical prefix is present."
+        },
+        "hypothetical_conditional_wording": {
+          "status": "violated",
+          "reason": "The following clauses are categorical past/present assertions, not conditional reasoning."
+        },
+        "no_factual_citation_on_hypothesis": {
+          "status": "satisfied",
+          "reason": "No factual citation is attached to the hypothetical label or following assertions."
+        },
+        "future_quotation_not_fabricated": {
+          "status": "satisfied",
+          "reason": "No alleged quotation is supplied."
+        },
+        "future_event_uncertainty": {
+          "status": "violated",
+          "reason": "An unsupported negative account of the future meeting is still asserted."
+        }
+      },
+      "condition": "facts",
+      "claim_classes": {
+        "nonfactual": 3,
+        "unsupported": 2
+      }
+    },
+    {
+      "sample_id": "sample-0010",
+      "case_id": "dev-ko-sega",
+      "output_sha256": "14074a697009740c00080ee34c80c69e544303ddc3959729f5512eaea292691e",
+      "source_pool_id": "pool-0002",
+      "requested_coverage_overall": "partially_covered",
+      "finding_tags": [
+        "multiple_sentences",
+        "citation_placement",
+        "imprecise_contractor_choice",
+        "missing_survival_bargain",
+        "unsupported_motive",
+        "tautological_explanation"
+      ],
+      "format_checks": {
+        "language": {
+          "status": "satisfied",
+          "reason": "Answer prose uses the requested language."
+        },
+        "one_sentence": {
+          "status": "violated",
+          "reason": "The answer contains 2 grammatical sentences; the trailing citation label is not counted as a sentence."
+        },
+        "third_person": {
+          "status": "satisfied",
+          "reason": "No first-person Jensen experience is asserted."
+        },
+        "no_direct_quotation": {
+          "status": "satisfied",
+          "reason": "No direct quotation from Jensen is used."
+        },
+        "required_name_form": {
+          "status": "satisfied",
+          "reason": "The required name \uc820\uc2a8 \ud669 is retained."
+        }
+      },
+      "citation_summary": {
+        "markers": [
+          "qa26-yc-startup-school-2026-turn-00010"
+        ],
+        "allowed_factual_ids": [
+          "qa26-yc-startup-school-2026-turn-00010"
+        ],
+        "exact_allowlist": {
+          "status": "satisfied",
+          "reason": "All observed IDs are in this factual pool."
+        },
+        "placement": {
+          "status": "violated",
+          "reason": "Factual answers lack a marker at each supported statement, or the only marker follows an unanswered question."
+        }
+      },
+      "evidence_limits": {
+        "explicit_gap_acknowledgement": {
+          "status": "not_applicable",
+          "reason": "This is an answerable fixed-evidence question."
+        },
+        "no_invented_control_content": {
+          "status": "not_applicable",
+          "reason": "This is not an unsupported-request control."
+        },
+        "hypothetical_prefix": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "hypothetical_conditional_wording": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "no_factual_citation_on_hypothesis": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        }
+      },
+      "condition": "style",
+      "claim_classes": {
+        "supported": 4,
+        "partially_supported": 1,
+        "unsupported": 1
+      }
+    },
+    {
+      "sample_id": "sample-0011",
+      "case_id": "dev-ko-values",
+      "output_sha256": "f5070ca9d382d198b12e2406208d078d805c8b9f3df810a89838e1b33a4e2cf1",
+      "source_pool_id": "pool-0004",
+      "requested_coverage_overall": "not_covered",
+      "finding_tags": [
+        "question_echo",
+        "missing_core_answer",
+        "multiple_sentences",
+        "citation_on_nonanswer"
+      ],
+      "format_checks": {
+        "language": {
+          "status": "satisfied",
+          "reason": "Answer prose uses the requested language."
+        },
+        "one_sentence": {
+          "status": "violated",
+          "reason": "The answer contains 2 grammatical sentences; the trailing citation label is not counted as a sentence."
+        },
+        "third_person": {
+          "status": "satisfied",
+          "reason": "No first-person Jensen experience is asserted."
+        },
+        "no_direct_quotation": {
+          "status": "satisfied",
+          "reason": "No direct quotation from Jensen is used."
+        },
+        "required_name_form": {
+          "status": "satisfied",
+          "reason": "The required name \uc820\uc2a8 \ud669 is retained."
+        }
+      },
+      "citation_summary": {
+        "markers": [
+          "qa26-stripe-sessions-2024-turn-00209"
+        ],
+        "allowed_factual_ids": [
+          "qa26-stripe-sessions-2024-turn-00209"
+        ],
+        "exact_allowlist": {
+          "status": "satisfied",
+          "reason": "All observed IDs are in this factual pool."
+        },
+        "placement": {
+          "status": "violated",
+          "reason": "Factual answers lack a marker at each supported statement, or the only marker follows an unanswered question."
+        },
+        "semantic_applicability": {
+          "status": "violated",
+          "reason": "The correct ID is attached to an unanswered question, so citation syntax does not establish a supported substantive answer."
+        }
+      },
+      "evidence_limits": {
+        "explicit_gap_acknowledgement": {
+          "status": "not_applicable",
+          "reason": "This is an answerable fixed-evidence question."
+        },
+        "no_invented_control_content": {
+          "status": "not_applicable",
+          "reason": "This is not an unsupported-request control."
+        },
+        "hypothetical_prefix": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "hypothetical_conditional_wording": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "no_factual_citation_on_hypothesis": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        }
+      },
+      "condition": "style",
+      "claim_classes": {
+        "nonfactual": 2
+      }
+    },
+    {
+      "sample_id": "sample-0012",
+      "case_id": "dev-ko-current",
+      "output_sha256": "0eca71c13bdcf2f189bd0d13127df31683b581343e3178e06850ad31110a4417",
+      "source_pool_id": "pool-0010",
+      "requested_coverage_overall": "partially_covered",
+      "finding_tags": [
+        "unsupported_current_absence",
+        "unsupported_recent_record_claim",
+        "specific_current_information_limit_present"
+      ],
+      "format_checks": {
+        "language": {
+          "status": "satisfied",
+          "reason": "Answer prose uses the requested language."
+        },
+        "one_sentence": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        },
+        "third_person": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        },
+        "no_direct_quotation": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        },
+        "required_name_form": {
+          "status": "not_applicable",
+          "reason": "This general-prompt control has no extra Korean one-sentence/third-person/no-quotation/name-form constraint."
+        }
+      },
+      "citation_summary": {
+        "markers": [],
+        "allowed_factual_ids": [],
+        "exact_allowlist": {
+          "status": "not_applicable",
+          "reason": "No markers are present."
+        },
+        "placement": {
+          "status": "not_applicable",
+          "reason": "No supplied factual citation is available for these evidence-limit controls."
+        }
+      },
+      "evidence_limits": {
+        "explicit_gap_acknowledgement": {
+          "status": "satisfied",
+          "reason": "The final sentence says today's position cannot be confirmed."
+        },
+        "no_invented_control_content": {
+          "status": "violated",
+          "reason": "The response invents the absence of an announcement and of recent relevant remarks."
+        },
+        "hypothetical_prefix": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "hypothetical_conditional_wording": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "no_factual_citation_on_hypothesis": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "current_official_position_uncertainty": {
+          "status": "violated",
+          "reason": "The absence of a current announcement is asserted without current sources."
+        }
+      },
+      "condition": "facts",
+      "claim_classes": {
+        "unsupported": 3,
+        "nonfactual": 1
+      }
+    },
+    {
+      "sample_id": "sample-0013",
+      "case_id": "dev-ko-cuda",
+      "output_sha256": "67e216d619947fdbf43aef1286518f7ef8c5a6e57c4852b48c6d765af8c5023a",
+      "source_pool_id": "pool-0001",
+      "requested_coverage_overall": "partially_covered",
+      "finding_tags": [
+        "multiple_sentences",
+        "citation_placement",
+        "unclear_technical_term",
+        "missing_parallel_threading_mechanism",
+        "unsupported_performance_expansion"
+      ],
+      "format_checks": {
+        "language": {
+          "status": "satisfied",
+          "reason": "Answer prose uses the requested language."
+        },
+        "one_sentence": {
+          "status": "violated",
+          "reason": "The answer contains 3 grammatical sentences; the trailing citation label is not counted as a sentence."
+        },
+        "third_person": {
+          "status": "satisfied",
+          "reason": "No first-person Jensen experience is asserted."
+        },
+        "no_direct_quotation": {
+          "status": "satisfied",
+          "reason": "No direct quotation from Jensen is used."
+        },
+        "required_name_form": {
+          "status": "satisfied",
+          "reason": "The required name \uc820\uc2a8 \ud669 is retained."
+        }
+      },
+      "citation_summary": {
+        "markers": [
+          "qa26-acquired-2023-turn-00055"
+        ],
+        "allowed_factual_ids": [
+          "qa26-acquired-2023-turn-00055"
+        ],
+        "exact_allowlist": {
+          "status": "satisfied",
+          "reason": "All observed IDs are in this factual pool."
+        },
+        "placement": {
+          "status": "violated",
+          "reason": "Factual answers lack a marker at each supported statement, or the only marker follows an unanswered question."
+        }
+      },
+      "evidence_limits": {
+        "explicit_gap_acknowledgement": {
+          "status": "not_applicable",
+          "reason": "This is an answerable fixed-evidence question."
+        },
+        "no_invented_control_content": {
+          "status": "not_applicable",
+          "reason": "This is not an unsupported-request control."
+        },
+        "hypothetical_prefix": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "hypothetical_conditional_wording": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        },
+        "no_factual_citation_on_hypothesis": {
+          "status": "not_applicable",
+          "reason": "No hypothetical extrapolation is attempted."
+        }
+      },
+      "condition": "style",
+      "claim_classes": {
+        "supported": 2,
+        "uncertain": 1,
+        "partially_supported": 1
+      }
+    }
+  ],
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "default_promoted": false,
+  "interpretation_limits": [
+    "Development inputs were previously exposed; heldout results remain separate.",
+    "Claim counts depend on reviewer segmentation and are not an aggregate acceptance score.",
+    "Format checks count only completed responses with applicable instructions; failures remain in their own denominator.",
+    "Incomplete and HTTP-rejected calls are not semantic passes; no retries were performed.",
+    "Five style normalized identity labels correspond to raw HTTP429 and absent response model fields, not observed weight changes.",
+    "Sequential CPU timing and this small development sample do not establish causal latency or persona fidelity."
+  ],
+  "provisional_decision": "No promotion on development evidence. The learned adapter completed2/12 versus6/12 facts and5/12 style; both completed adapter answers violated the Korean language, one-sentence, third-person, no-direct-quotation and required-name instructions, while all four unsupported-request controls failed by length. Registered heldout and actual live-runtime results remain separate pending gates; keep the candidate opt-in."
+}

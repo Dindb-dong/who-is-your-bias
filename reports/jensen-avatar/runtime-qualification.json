@@ -1,0 +1,53 @@
+{
+  "schema_version": "avatar-candidate-qualification.v1",
+  "persona_id": "jensen-huang",
+  "asset_id": "jensen-source-fitted-v3",
+  "sha256": "dea0c921fb7d5668527bd8ee9082f382b14e8d300c43936842e15356dc7d90cd",
+  "bytes": 2530256,
+  "promotion": "explicit_optional_candidate",
+  "default_changed": false,
+  "human_likeness": "not_accepted",
+  "tests": {
+    "actual_decoded_geometry_and_attention": {
+      "status": "passed",
+      "files": 5,
+      "tests": 45,
+      "camera_checks": "4 source poses x 3 viewport aspects x 3 orbit directions on actual deformed hand vertices"
+    },
+    "typescript": "passed",
+    "production_build": "passed",
+    "browser_desktop_and_mobile": {
+      "status": "passed_in_actual_github_ci",
+      "report": "browser-qualification.json",
+      "run_id": 43283696054,
+      "head_sha": "ff64ea3e49335fcfceea35b5ba2c0f29af4b4784",
+      "jensen_cases": 20,
+      "candidate_projects": [
+        "desktop",
+        "mobile"
+      ]
+    },
+    "local_browser_attempt": {
+      "status": "blocked_before_page_launch",
+      "reason": "Chromium process_singleton_posix.cc AF_UNIX socket() failed: Operation not permitted",
+      "application_assertions_executed": false,
+      "candidate_case": "Implemented and discovered for both projects; integration CI result must be read separately."
+    }
+  },
+  "offline_visual": {
+    "status": "six_final_renders_inspected",
+    "hand_vertices_inside_frame": 3586,
+    "report": "offline-visual-qa.json",
+    "framing": "Mapped head/arm/hand pose envelope plus skin margins; mobile excess margin corrected.",
+    "visual_findings": [
+      "Independent glasses remain in front of face across views.",
+      "Dark irises, gray hair and brows visibly improved over rejected candidates.",
+      "Authored finger curl stress deforms both hands without clipping.",
+      "Face geometry, hair silhouette, generic garment and baked lighting remain imperfect likeness."
+    ]
+  },
+  "remaining": [
+    "Continuous speaker/track association review",
+    "Independent human likeness and motion-quality review"
+  ]
+}

@@ -1,0 +1,812 @@
+{
+  "schema_version": "verified-temporary-duplicate-cleanup.v1",
+  "recorded_at": "2026-11-12T19:56:29.202764+00:00",
+  "reason": "Recover working capacity for remaining text checkpoints and bounded reflection video extraction.",
+  "scope": "Only raw temporary chunk duplicates, each matched to its retained full-source byte range; original source files, archives, manifests, fresh-restoration reports and remote objects are retained.",
+  "deleted_duplicate_bytes": 6208287241,
+  "free_bytes_before": 10639138816,
+  "free_bytes_after": 16805531648,
+  "retained_sources_sha256": {
+    "media/ces-2025-full-480p.mp4": "88a98c8eea77df6e32bb5d2b085c9fe8403c033df0029f1f26ade32320ad177d",
+    "media/computex-2025-full-480p.mp4": "9669d9333f97c80b7ffe41e799d75245e9a2e067fa52df999a0b09db0254c047",
+    "media/goldman-sachs-2024-full.mp4": "586dff89def8ff4a0cea0848a094cca41e573aec0492db9b51325d71aca1bf8b",
+    "media/gtc-2024-full-480p.mp4": "16ffcdfee02d8b9bf4a9be7fab6413066b8b65f1388c3e8ccae88cfdea7b9184",
+    "media/gtc-2025-full-480p.mp4": "2996962463654e679a2a8c0cf48689e961ad05ef6cc28c6ea0bdc225f68dd459",
+    "media/siggraph-wired-2024-full-720p.mp4": "855e56f7597e124d520b800f899082a42532be41898ceeab749fdc57af564406",
+    "media/stripe-sessions-2024-full.mp4": "0882539adca1bca58a8e64c4341a6fdca4ebca69a88c77799c882fb1dd0bfa32",
+    "media/wired-2024-full.mp4": "1ab8c1cdabf2aa4690cb4561242c604a1206b4c52f9d5a5a6107ca7e537d72e7"
+  },
+  "deleted_duplicates": [
+    {
+      "local_path": "media-chunks/ces-2025-full-480p/ces-2025-full-480p.mp4.part001.bin",
+      "bytes": 83886080,
+      "sha256": "fcce89313a9e5b0d4f3312a96f5176993d6a8681c335e0345af41eb0e09d3d5c",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 0
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p/ces-2025-full-480p.mp4.part002.bin",
+      "bytes": 83886080,
+      "sha256": "da56aacfa6ad34a302d415fe647b8f8e6bcfb3df676038c891f6eae5f1b88c07",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 83886080
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p/ces-2025-full-480p.mp4.part003.bin",
+      "bytes": 83886080,
+      "sha256": "09f5f5ed73bf259ac7c8c326be8f01a8012ca555cc7a3298e362eeb00ad0bc69",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 167772160
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p/ces-2025-full-480p.mp4.part004.bin",
+      "bytes": 83886080,
+      "sha256": "e39db31959765e628fa84823a66a848f961849da6ab0d6a62037d0e265ebc2a4",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 251658240
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p/ces-2025-full-480p.mp4.part005.bin",
+      "bytes": 79562657,
+      "sha256": "716c8a2bce05b510432f0e69175955fea0bbfed9178f254673531ad1cb4cee7d",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 335544320
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part001.bin",
+      "bytes": 25165824,
+      "sha256": "340c086761f47da7015be55d8223e6122c46557c1c7618c0e2a24008d0dba36b",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 0
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part002.bin",
+      "bytes": 25165824,
+      "sha256": "23d5d097f55b88a8e3417daaf380ef64396d2feeef46efc4f2741f1a11231f73",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 25165824
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part003.bin",
+      "bytes": 25165824,
+      "sha256": "6f800e97601b522ef49da36722ce12d5aad1731e1472a31093881666587b1b2d",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 50331648
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part004.bin",
+      "bytes": 25165824,
+      "sha256": "1a9305fe9b2cbb31e9e426dd880cbf105e3ff7b027a070e4e3732934f8a35d4b",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 75497472
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part005.bin",
+      "bytes": 25165824,
+      "sha256": "e37dd4b5757d30b5bb20e219d6cf9d97063e1e68b2bbb57b9184d13e0687aa25",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 100663296
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part006.bin",
+      "bytes": 25165824,
+      "sha256": "7069fc4d62ce07266fccadfde1a4bd0eb8691be8e74e84fbed2796517cef2bac",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 125829120
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part007.bin",
+      "bytes": 25165824,
+      "sha256": "d076876779ebf2f6b7cb9813430bb9388ec974396b6ce9c7b67ff9bfefc038f7",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 150994944
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part008.bin",
+      "bytes": 25165824,
+      "sha256": "415fa9502a369474389b74221a65b59dcfe2cc14b981ff4eba940c428941cb0a",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 176160768
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part009.bin",
+      "bytes": 25165824,
+      "sha256": "fa4fb33e502a1f310388a0117e8cb98b1439c9978d2d84fd2c072dd3908f89b8",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 201326592
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part010.bin",
+      "bytes": 25165824,
+      "sha256": "a67a8bbf45353ad6ff97a301048657e3741005b36be7a1286266f91d00e2752e",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 226492416
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part011.bin",
+      "bytes": 25165824,
+      "sha256": "ba7521cd527ae6573805d09e7fc920c6fe81a81228e2af8d39371671e4fa8831",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 251658240
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part012.bin",
+      "bytes": 25165824,
+      "sha256": "f8468001f07cf4e7a7e9cad5995bcf8c040be6ee89dbf99fcdc77ecba6913bb0",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 276824064
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part013.bin",
+      "bytes": 25165824,
+      "sha256": "5af26b6196313c1a6a18b74587afaa3ca9afd1b33af80570d97296f644c18e1c",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 301989888
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part014.bin",
+      "bytes": 25165824,
+      "sha256": "ee4128914e88fbe1acbd871ec46cabf66bbd3e5f751895253bfbde6eacb07aa4",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 327155712
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part015.bin",
+      "bytes": 25165824,
+      "sha256": "0dd413b0b0ea99829bc240c326cd64a711c8939563fb7968b2a14dd251a9eea8",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 352321536
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part016.bin",
+      "bytes": 25165824,
+      "sha256": "aba852f6eb104799b988d46473c225f89873a418e4a186dbfa7f59370417e854",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 377487360
+    },
+    {
+      "local_path": "media-chunks/ces-2025-full-480p-24mib/ces-2025-full-480p.mp4.24mib.part017.bin",
+      "bytes": 12453793,
+      "sha256": "818ee6d35e8321ac03cdd6f8e8cb2a2543799aa6d07a852e613c66510fd83686",
+      "retained_source": "media/ces-2025-full-480p.mp4",
+      "offset": 402653184
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p/computex-2025-full-480p.mp4.part001.bin",
+      "bytes": 83886080,
+      "sha256": "e59e0ecb1ae56813c2fde442d6a0322e5e94710fcde6b68611d215400a07c4ca",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 0
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p/computex-2025-full-480p.mp4.part002.bin",
+      "bytes": 83886080,
+      "sha256": "e61b96a83890e7c51a6c41ba2859b99eac47089d73db8638e10bdc5b6f024ff5",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 83886080
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p/computex-2025-full-480p.mp4.part003.bin",
+      "bytes": 83886080,
+      "sha256": "57e0139fc76d7977b1d3e4568eb8338ec0454baffeef1f8670b424aa10ae0ef5",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 167772160
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p/computex-2025-full-480p.mp4.part004.bin",
+      "bytes": 83886080,
+      "sha256": "32b4d06066ba9778ff06a69cf3fd11c7d0ee005d301852e1658a7246f46fe783",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 251658240
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p/computex-2025-full-480p.mp4.part005.bin",
+      "bytes": 83886080,
+      "sha256": "e923a52692e9cd6d68a3d83e0bd0c565f4401bc7d1da5d3a415f153f03843d17",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 335544320
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p/computex-2025-full-480p.mp4.part006.bin",
+      "bytes": 33255450,
+      "sha256": "c03f3ad0813d67ad42178aa890c9d3200841230ad001d5817f3bd1d42cb0b4c0",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 419430400
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part001.bin",
+      "bytes": 25165824,
+      "sha256": "6d210c82c928654facc66a38f9c7d67b419910606211547bc49b53223f3a3e42",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 0
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part002.bin",
+      "bytes": 25165824,
+      "sha256": "f54b8a0af0b97f4c15cf6a4ae535660c3d0e41a12162f5c6d01874958d303141",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 25165824
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part003.bin",
+      "bytes": 25165824,
+      "sha256": "546f0b87a0493367b738d9a3462e8979a13f310c43a0955e8628894224eb8b7d",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 50331648
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part004.bin",
+      "bytes": 25165824,
+      "sha256": "921bd3312314ecacbb0543a5cf62f952fd77eaac8d46b5de4e12a3cece64ca8f",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 75497472
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part005.bin",
+      "bytes": 25165824,
+      "sha256": "93746d85b9670f6ee2720829e86536384d6f24a8008aeff38f4325dab15f8376",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 100663296
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part006.bin",
+      "bytes": 25165824,
+      "sha256": "915a1299ab0e4ce22ad5da5193d4bfd5ac593f822d64f6c92b9eb885af7caebc",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 125829120
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part007.bin",
+      "bytes": 25165824,
+      "sha256": "12f176f76720bf8d91f7e0b27d0921ca05ca9922e4063d46bdf8244877104398",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 150994944
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part008.bin",
+      "bytes": 25165824,
+      "sha256": "b8482bfee0cd742672fdbad3e80cfb36bc2f9b7219d1b19112e6802f65815095",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 176160768
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part009.bin",
+      "bytes": 25165824,
+      "sha256": "64d09894252734b3ce3496c80c9c851e36908f893ce15348a7d3f3c90dc6f54d",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 201326592
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part010.bin",
+      "bytes": 25165824,
+      "sha256": "105ab4a7ee3bfb7f2231c0ecbdbaaeea88b71444016c74760a8ba463dda06c81",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 226492416
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part011.bin",
+      "bytes": 25165824,
+      "sha256": "4e20e3db8dabae55da8df91a6468ff1a3e470bab82b3f62d10afddb5b912df68",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 251658240
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part012.bin",
+      "bytes": 25165824,
+      "sha256": "7da1a568f0df49d0f0e52a10e421ed94f85c757bf9886d3980ad6337135b6375",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 276824064
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part013.bin",
+      "bytes": 25165824,
+      "sha256": "90624ccaaca845d048cc5db0a8d9548ea711ce4ba98739b2c6d3c6334544414e",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 301989888
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part014.bin",
+      "bytes": 25165824,
+      "sha256": "6f73be8d0be6887a87a5099296793a90e85afd8866a5eb33dca89fe2e32c9ba2",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 327155712
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part015.bin",
+      "bytes": 25165824,
+      "sha256": "bcc93d9ef76fa1e700b50148104afd3a68cbdacd88eaf2a38f59eb4c355fced8",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 352321536
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part016.bin",
+      "bytes": 25165824,
+      "sha256": "f92b3a36e7325acabe1b1638c6d1ea422d12119c26df5164d74798ef1e099ba5",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 377487360
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part017.bin",
+      "bytes": 25165824,
+      "sha256": "3eac3c1eed87e2fd755d3a57e7d20e261cefcafb9331370bd3851c543562f501",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 402653184
+    },
+    {
+      "local_path": "media-chunks/computex-2025-full-480p-24mib/computex-2025-full-480p.mp4.24mib.part018.bin",
+      "bytes": 24866842,
+      "sha256": "4e76dff94d1bd6314651420924ebb1232f13cc20ae9ce0e0d7660b04c52261fd",
+      "retained_source": "media/computex-2025-full-480p.mp4",
+      "offset": 427819008
+    },
+    {
+      "local_path": "media-chunks/goldman-sachs-2024-full/goldman-sachs-2024-full.mp4.part001.bin",
+      "bytes": 209715200,
+      "sha256": "e77f8b9aca039755f05c0c00e5951caeee65eca8fc462fb3f85c919a6c923337",
+      "retained_source": "media/goldman-sachs-2024-full.mp4",
+      "offset": 0
+    },
+    {
+      "local_path": "media-chunks/goldman-sachs-2024-full/goldman-sachs-2024-full.mp4.part002.bin",
+      "bytes": 209715200,
+      "sha256": "bcf4f14ebbfdea8ac5ebcbb96315bc0288d2a59eea3bac5a8697addf96f6af58",
+      "retained_source": "media/goldman-sachs-2024-full.mp4",
+      "offset": 209715200
+    },
+    {
+      "local_path": "media-chunks/goldman-sachs-2024-full/goldman-sachs-2024-full.mp4.part003.bin",
+      "bytes": 167329275,
+      "sha256": "f94cc7f9b5aee5ebf748ac9068538ded0c534f3a7b093e51aa38fa29cb90355a",
+      "retained_source": "media/goldman-sachs-2024-full.mp4",
+      "offset": 419430400
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p/gtc-2024-full-480p.mp4.part001.bin",
+      "bytes": 83886080,
+      "sha256": "8ab2fe4e6d8fc732dc35ec169449911e87b27db874d057ee1800899af968207e",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 0
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p/gtc-2024-full-480p.mp4.part002.bin",
+      "bytes": 83886080,
+      "sha256": "acec16f783e21731757073f32c4b5a4e6491a1bd4e657320256c458c8057dbf0",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 83886080
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p/gtc-2024-full-480p.mp4.part003.bin",
+      "bytes": 83886080,
+      "sha256": "101a1ca03fbe396cef7601e55fb007cff0e4d59426aed6ed2ad2c97371eb8590",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 167772160
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p/gtc-2024-full-480p.mp4.part004.bin",
+      "bytes": 83886080,
+      "sha256": "8c49b878dc38a62cd2707855d4f6a8639a7d0adf2c19028eba2df7f07940869f",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 251658240
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p/gtc-2024-full-480p.mp4.part005.bin",
+      "bytes": 83886080,
+      "sha256": "f5203712c2ae957b0a76f4b99ac3878f2a24af8ef27c9e483f863fb37bd612aa",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 335544320
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p/gtc-2024-full-480p.mp4.part006.bin",
+      "bytes": 59966716,
+      "sha256": "9667a102d5400ae075d9879073e27d9aea7302fe35f893e391fac74e91f7e3d6",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 419430400
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part001.bin",
+      "bytes": 25165824,
+      "sha256": "ac9d47748d1bf451940b88bdc5080cb523a7d9570743b6b22f9e75e0de9cbb36",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 0
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part002.bin",
+      "bytes": 25165824,
+      "sha256": "e28efb108d6f892b49000108aa7e0cf88973bc1460aee483a1d9bd99a6d8a7fa",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 25165824
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part003.bin",
+      "bytes": 25165824,
+      "sha256": "ac89d6d36f2f6e4e31b4494c05ee8694107142c682a3895b579bcd4f4e30911e",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 50331648
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part004.bin",
+      "bytes": 25165824,
+      "sha256": "85fd0635cfec0e777a3896e954a8714cded615ee9fe006772759b971ce019b7e",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 75497472
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part005.bin",
+      "bytes": 25165824,
+      "sha256": "9f9b56c989e512acf51ac1dec5d5c02755bf176d3d39f0cbcf4309cd51c200e4",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 100663296
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part006.bin",
+      "bytes": 25165824,
+      "sha256": "a7eb34168fbd25e6a0b40f2c4fe8634b9b0a59ce516df32507f1a835b9feb4e9",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 125829120
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part007.bin",
+      "bytes": 25165824,
+      "sha256": "404bf8834ce383344ed92bf972f5014632935177b4acbdaa95fdeafad64ac8b4",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 150994944
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part008.bin",
+      "bytes": 25165824,
+      "sha256": "8e54c29aba52fc1e81bd97261ff4b359fd0e5b24bb5a3441792dd078edb76e62",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 176160768
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part009.bin",
+      "bytes": 25165824,
+      "sha256": "488c5edeb31a21651e7481dc42a692f5e896a76936ec8dafdc3fcdc62c309dc6",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 201326592
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part010.bin",
+      "bytes": 25165824,
+      "sha256": "89d382a1f5d99f94d51a88ec786c1918a6c74467a13f526cb7918cc1645c5c6d",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 226492416
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part011.bin",
+      "bytes": 25165824,
+      "sha256": "67d35c792c3c196e30a91edbbd33d17f7816c0aaebecd59a0f70117f79577b47",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 251658240
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part012.bin",
+      "bytes": 25165824,
+      "sha256": "77929cf930a37b22a93dff287326525cd8aef314e451523d2f3223a7a2f84fc9",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 276824064
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part013.bin",
+      "bytes": 25165824,
+      "sha256": "c11c9945ee926237740acbc23e494f62054ce4132e16a44497f81d4f4f328287",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 301989888
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part014.bin",
+      "bytes": 25165824,
+      "sha256": "b431b8db7f4b6417e3961bb250ea7cd8001a0de698afdf6e35e42e3715f60672",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 327155712
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part015.bin",
+      "bytes": 25165824,
+      "sha256": "0ca887b5c6aea9afa7bd350493f20aac7873a8e273ca5c22f5ff5dd5f4a5360f",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 352321536
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part016.bin",
+      "bytes": 25165824,
+      "sha256": "c5861458a4eef27d99694544fd34d06bfe9cee4668f99af7557815317f8d3933",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 377487360
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part017.bin",
+      "bytes": 25165824,
+      "sha256": "b0c29650116221a43425d9e7420adaf09503c09ba3bbf9ef0859d2dfd93d53ec",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 402653184
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part018.bin",
+      "bytes": 25165824,
+      "sha256": "ea9d34b17f7ef51edc759aed11301e0f9e075276b5a13d4d004a3fab9e9701a3",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 427819008
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part019.bin",
+      "bytes": 25165824,
+      "sha256": "88c0bdba69c8f9bd478168c7fc055c888df82abd0e8352346c8909d0316c5e38",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 452984832
+    },
+    {
+      "local_path": "media-chunks/gtc-2024-full-480p-24mib/gtc-2024-full-480p.mp4.24mib.part020.bin",
+      "bytes": 1246460,
+      "sha256": "d24e4f9c486f915b9067ec2569768d36472c7c5eae7e2e1312fda9b7ca78d1d6",
+      "retained_source": "media/gtc-2024-full-480p.mp4",
+      "offset": 478150656
+    },
+    {
+      "local_path": "media-chunks/gtc-2025-full-480p/gtc-2025-full-480p.mp4.part001.bin",
+      "bytes": 209715200,
+      "sha256": "4ebb3a13d0442c61e38062180cb38a0276e876400c96cbf0af00892931ab09bf",
+      "retained_source": "media/gtc-2025-full-480p.mp4",
+      "offset": 0
+    },
+    {
+      "local_path": "media-chunks/gtc-2025-full-480p/gtc-2025-full-480p.mp4.part002.bin",
+      "bytes": 209715200,
+      "sha256": "0ab8e6f4e55e8a7c1a2cfab07b57bd92b98a00ef4dd8d2bb8ff3e6edcaec8fb4",
+      "retained_source": "media/gtc-2025-full-480p.mp4",
+      "offset": 209715200
+    },
+    {
+      "local_path": "media-chunks/gtc-2025-full-480p/gtc-2025-full-480p.mp4.part003.bin",
+      "bytes": 163639030,
+      "sha256": "887735d9763d3385654ae117a64a6b407a5eaeac32d6d3630aaabda625b9403d",
+      "retained_source": "media/gtc-2025-full-480p.mp4",
+      "offset": 419430400
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p/siggraph-wired-2024-full-720p.mp4.part001.bin",
+      "bytes": 83886080,
+      "sha256": "605b50acba4049a27948b29163f15cccda0ad38c69572f6940d7a4aa880d00e0",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 0
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p/siggraph-wired-2024-full-720p.mp4.part002.bin",
+      "bytes": 83886080,
+      "sha256": "d94810f8bd06c14c320da2d0fee68705f4d20188f8c83d905c70f06784eda706",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 83886080
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p/siggraph-wired-2024-full-720p.mp4.part003.bin",
+      "bytes": 83886080,
+      "sha256": "2e23b0fa85c3c5d6f4f83bea49a33116b8599720919449b590eacb57fceb9f3a",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 167772160
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p/siggraph-wired-2024-full-720p.mp4.part004.bin",
+      "bytes": 83886080,
+      "sha256": "858f593383effb9f7799f5e85ec0d99cc0c190c477c8b5da44e71361578e739c",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 251658240
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p/siggraph-wired-2024-full-720p.mp4.part005.bin",
+      "bytes": 83886080,
+      "sha256": "9e01d81eb36554cdb30e4612a9079f841dd24fa329adb534189961dbc57e20ce",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 335544320
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p/siggraph-wired-2024-full-720p.mp4.part006.bin",
+      "bytes": 29178845,
+      "sha256": "2195aab5462e78299e1f4311c68a3bd990c689c5ff27ec66d19bf085129de221",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 419430400
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part001.bin",
+      "bytes": 25165824,
+      "sha256": "1881dd6ecc0b42d637a096764987786bf04098ee7a277f8f82c85322a2b45e7c",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 0
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part002.bin",
+      "bytes": 25165824,
+      "sha256": "0041ae6636176416351ba32175936b9b5a3f8f24ff562a31226b6c534f752b9d",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 25165824
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part003.bin",
+      "bytes": 25165824,
+      "sha256": "81e6940189fd6ac2c4f396ef53b392903604a043fde2854f78cbadac2358ad38",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 50331648
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part004.bin",
+      "bytes": 25165824,
+      "sha256": "4cd907cb2c7d6994193d0f50ad9ab9f48db35c5c2424705a36d363899ee06828",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 75497472
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part005.bin",
+      "bytes": 25165824,
+      "sha256": "5c607ead7c3f4cafd170099986229382a7a07a26c1131ea58cd35c289f5e5d1d",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 100663296
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part006.bin",
+      "bytes": 25165824,
+      "sha256": "c60f0344cfba8a5cd5e78a353f8ec5eb558b4b29d4211c7e040dd70f45640648",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 125829120
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part007.bin",
+      "bytes": 25165824,
+      "sha256": "e723899854cb6021adf1731ec8e81199c4b1ed7adf8c532a88f9b476539f0bfb",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 150994944
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part008.bin",
+      "bytes": 25165824,
+      "sha256": "0723ec7c7e5a6026b1c305d57f342b04792f6d8dc4b1acdefa4894edfbec0324",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 176160768
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part009.bin",
+      "bytes": 25165824,
+      "sha256": "810f3a364434c5df0865c6ddb01b77928c7b98e29c9a5a4236e175d1ec02fe1c",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 201326592
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part010.bin",
+      "bytes": 25165824,
+      "sha256": "ba8df52c2c6dc1cede6602dff12d01970ec75853203a657206c24fb77c51d76e",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 226492416
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part011.bin",
+      "bytes": 25165824,
+      "sha256": "4037bb731f5ce6b2ad635ce2240f27bddac905372ced9194fedb7797258f8d78",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 251658240
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part012.bin",
+      "bytes": 25165824,
+      "sha256": "6a1c3386e7bd7886f0f44579f2e177c5af340b38a201b3ad4c13031c51bb4327",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 276824064
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part013.bin",
+      "bytes": 25165824,
+      "sha256": "04a445e2f5d2dd1d8f5fcb7280e9bf5678c82c6148b1864b8374759df1e176ad",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 301989888
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part014.bin",
+      "bytes": 25165824,
+      "sha256": "68dd023825af0bbf9d58d296bc7347381bdd501d8d01a898d19855c1a35c8a70",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 327155712
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part015.bin",
+      "bytes": 25165824,
+      "sha256": "3bdfef0a712308dfb5aae7b2b3c62c49ba1654aadccff3770643f2b07103a39b",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 352321536
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part016.bin",
+      "bytes": 25165824,
+      "sha256": "596b65fe11a421b37a7543b14c30fac372c2dcb57066f2c83b504bb15108d5c7",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 377487360
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part017.bin",
+      "bytes": 25165824,
+      "sha256": "c80eef40e4d36ca8936ef6be138c46fdf86e2e06291bc2ede2a47b3e6f88fd36",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 402653184
+    },
+    {
+      "local_path": "media-chunks/siggraph-wired-2024-full-720p-24mib/siggraph-wired-2024-full-720p.mp4.24mib.part018.bin",
+      "bytes": 20790237,
+      "sha256": "082155d3c7608b1b140aa5c2d5c865bd35871aaae3da009679374ab146148b03",
+      "retained_source": "media/siggraph-wired-2024-full-720p.mp4",
+      "offset": 427819008
+    },
+    {
+      "local_path": "media-chunks/stripe-sessions-2024-full/stripe-sessions-2024-full.mp4.part001.bin",
+      "bytes": 209715200,
+      "sha256": "bcb54dbd86115f6450befa4d60b64680a96081818960b4d0930f9fa64e68a4e3",
+      "retained_source": "media/stripe-sessions-2024-full.mp4",
+      "offset": 0
+    },
+    {
+      "local_path": "media-chunks/stripe-sessions-2024-full/stripe-sessions-2024-full.mp4.part002.bin",
+      "bytes": 209715200,
+      "sha256": "89aed92111c38f92fd109a8f217ff469d8fa1e41f2721fe7d3cab8f03bab2b64",
+      "retained_source": "media/stripe-sessions-2024-full.mp4",
+      "offset": 209715200
+    },
+    {
+      "local_path": "media-chunks/stripe-sessions-2024-full/stripe-sessions-2024-full.mp4.part003.bin",
+      "bytes": 209715200,
+      "sha256": "7898ed94e796b7210078d3460ba0a908572ffeecefe8c5413581b5d5c7a98405",
+      "retained_source": "media/stripe-sessions-2024-full.mp4",
+      "offset": 419430400
+    },
+    {
+      "local_path": "media-chunks/stripe-sessions-2024-full/stripe-sessions-2024-full.mp4.part004.bin",
+      "bytes": 209715200,
+      "sha256": "c209ac8c5d73a31f96ff13318511e3dc865d8cc1bdb376560ddb5ee0d6f393fb",
+      "retained_source": "media/stripe-sessions-2024-full.mp4",
+      "offset": 629145600
+    },
+    {
+      "local_path": "media-chunks/stripe-sessions-2024-full/stripe-sessions-2024-full.mp4.part005.bin",
+      "bytes": 113223914,
+      "sha256": "646e6ca3dcc2535d159728889d8eda3ba36ca0b09f0f39fb01ab5e82f824d966",
+      "retained_source": "media/stripe-sessions-2024-full.mp4",
+      "offset": 838860800
+    },
+    {
+      "local_path": "media-chunks/wired-2024-full/wired-2024-full.mp4.part001.bin",
+      "bytes": 83886080,
+      "sha256": "4392622523db581712fc79f15623c2de46498b671207974cd22bffb21e6d6a15",
+      "retained_source": "media/wired-2024-full.mp4",
+      "offset": 0
+    },
+    {
+      "local_path": "media-chunks/wired-2024-full/wired-2024-full.mp4.part002.bin",
+      "bytes": 83886080,
+      "sha256": "bddb3e1adbed695e05eaefbf960930ff5b30eaa7c8140ae4f013b2ed33615c10",
+      "retained_source": "media/wired-2024-full.mp4",
+      "offset": 83886080
+    },
+    {
+      "local_path": "media-chunks/wired-2024-full/wired-2024-full.mp4.part003.bin",
+      "bytes": 83886080,
+      "sha256": "6361feb09c22b4546b2612cb15c4d9d3614c012c02792197e326f4f17d52d6e9",
+      "retained_source": "media/wired-2024-full.mp4",
+      "offset": 167772160
+    },
+    {
+      "local_path": "media-chunks/wired-2024-full/wired-2024-full.mp4.part004.bin",
+      "bytes": 83886080,
+      "sha256": "1289c753491569dfab363e4672142563d32eaa884e1cb9cb7d047ff3cd33f5fd",
+      "retained_source": "media/wired-2024-full.mp4",
+      "offset": 251658240
+    },
+    {
+      "local_path": "media-chunks/wired-2024-full/wired-2024-full.mp4.part005.bin",
+      "bytes": 83886080,
+      "sha256": "36be90c477e8e83a472e6ff8d2366090f9aca45a3928fca31049c1081fb9563e",
+      "retained_source": "media/wired-2024-full.mp4",
+      "offset": 335544320
+    },
+    {
+      "local_path": "media-chunks/wired-2024-full/wired-2024-full.mp4.part006.bin",
+      "bytes": 75344646,
+      "sha256": "b472fbc2ea229ebf8f3a91cda4d55e1b93814c3cf125d1714048224077955d37",
+      "retained_source": "media/wired-2024-full.mp4",
+      "offset": 419430400
+    }
+  ]
+}

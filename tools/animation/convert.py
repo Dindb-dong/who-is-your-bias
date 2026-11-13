@@ -172,7 +172,52 @@ def pose_rotations(pose: dict, threshold: float) -> dict[str, Quat]:
     return result
 
 
+FINGER_JOINTS = ("ThumbMetacarpal", "ThumbProximal", "ThumbDistal",
+                 "IndexProximal", "IndexIntermediate", "IndexDistal",
+                 "MiddleProximal", "MiddleIntermediate", "MiddleDistal",
+                 "RingProximal", "RingIntermediate", "RingDistal",
+                 "LittleProximal", "LittleIntermediate", "LittleDistal")
+
+
+def hand_rotations(hand: dict, side: str) -> dict[str, Quat]:
+    """Selected hand geometry, never automatic handedness/identity assignment.
+
+    Segment directions constrain swing only. Axial finger twist is unobserved.
+    Out-of-frame landmarks suppress the hand rather than inventing hidden joints.
+    """
+    if side not in {"left", "right"}:
+        raise MediaError("Select the hand's subject-relative side explicitly")
+    image, world = hand.get("landmarks", []), hand.get("world_landmarks", [])
+    if not isinstance(image, list) or not isinstance(world, list) or len(image) != 21 or len(world) != 21:
+        return {}
+    points = []
+    for normalized, metric in zip(image, world):
+        normalized = _object(normalized, "hand image landmark")
+        metric = _object(metric, "hand world landmark")
+        if any(not 0 <= _number(normalized.get(axis), "hand image " + axis, -100, 100) <= 1 for axis in ("x", "y")):
+            return {}
+        points.append((_number(metric.get("x"), "hand world x", -100, 100),
+                       -_number(metric.get("y"), "hand world y", -100, 100),
+                       -_number(metric.get("z"), "hand world z", -100, 100)))
+    directions = [_sub(points[start + 1], points[start]) for start in (1, 2, 3, 5, 6, 7, 9, 10, 11, 13, 14, 15, 17, 18, 19)]
+    if any(_dot(direction, direction) < 1e-10 for direction in directions):
+        return {}
+    palm_y = _sub(points[0], points[9])
+    palm_x = _sub(points[5], points[17])
+    if side == "right":
+        palm_x = tuple(-value for value in palm_x)
+    if _dot(_cross(palm_x, palm_y), _cross(palm_x, palm_y)) < 1e-10:
+        return {}
+    rotations = {side + "Hand": _qmatrix((palm_x, palm_y, _cross(palm_x, palm_y)))}
+    rotations.update({side + joint: _direction_rotation(direction) for joint, direction in zip(FINGER_JOINTS, directions)})
+    return rotations
+
+
 PARENTS = {"head": "chest", "leftUpperArm": "chest", "rightUpperArm": "chest", "leftForearm": "leftUpperArm", "rightForearm": "rightUpperArm", "leftHand": "leftForearm", "rightHand": "rightForearm"}
+
+for _side in ("left", "right"):
+    for _index, _joint in enumerate(FINGER_JOINTS):
+        PARENTS[_side + _joint] = _side + ("Hand" if _index % 3 == 0 else FINGER_JOINTS[_index - 1])
 
 
 def local_rotations(world: dict[str, Quat], reference_names: set[str] | None = None) -> dict[str, Quat]:
@@ -224,10 +269,12 @@ def load_review(path: Path, observations_sha256: str, allow_preview: bool) -> di
         if start < previous_end or end <= start:
             raise MediaError("Selections must be positive, ordered, and nonoverlapping")
         previous_end = end
-        for field in ("face_index", "pose_index"):
+        for field in ("face_index", "pose_index", "left_hand_index", "right_hand_index"):
             value = selected.get(field)
             if value is not None and (isinstance(value, bool) or not isinstance(value, int) or not 0 <= value <= 3):
                 raise MediaError(f"{field} must be null or a frame-local detection index 0–3")
+        if selected.get("left_hand_index") is not None and selected.get("left_hand_index") == selected.get("right_hand_index"):
+            raise MediaError("One hand detection cannot be assigned to both subject-relative hands")
     return review
 
 
@@ -312,6 +359,17 @@ def export_clip(manifest_path: str | Path, review_path: str | Path, output_path:
                         world["head"] = rotation
                 else:
                     world.update(pose_rotations(chosen, visibility))
+            hands = row.get("hands", [])
+            if not isinstance(hands, list) or len(hands) > 4:
+                raise MediaError("A frame contains invalid or excessive hand detections")
+            indexes = [hand.get("detection_index") for hand in hands if isinstance(hand, dict)]
+            if len(indexes) != len(hands) or len(set(indexes)) != len(indexes) or any(isinstance(index, bool) or not isinstance(index, int) or not 0 <= index <= 3 for index in indexes):
+                raise MediaError("Hand detection indexes must be unique integers 0–3")
+            for side in ("left", "right"):
+                selected = selection.get(side + "_hand_index")
+                chosen = next((hand for hand in hands if hand["detection_index"] == selected), None) if selected is not None else None
+                if chosen is not None:
+                    world.update(hand_rotations(chosen, side))
         frames.append(frame)
         world_frames.append(world)
     if not frames or not any(frame.get("face") or world for frame, world in zip(frames, world_frames)):
@@ -343,10 +401,11 @@ def export_clip(manifest_path: str | Path, review_path: str | Path, output_path:
         "frames": frames,
         "limitations": [
             "Geometry estimates do not identify a person or establish emotional state.",
+            "Finger segment swing is estimated from selected hand landmarks; axial twist and occluded joints are not recovered.",
             "Detection selection and speaker attribution are reviewer assertions, not biometric verification.",
             "The reference frame establishes a rotation reference, not an automatically detected anatomical neutral face.",
             f"Pose landmarks outside the image or below visibility/presence {visibility} are omitted.",
-            "Limb rotations use direction-only swing; axial twist and finger articulation are not measured.",
+            "Limb and finger rotations use direction-only swing; axial twist is not recovered.",
             f"Rotations are bounded to {max_rotation_degrees:g} degrees relative to the reference pose.",
             "Unobserved channels, gaps, and channels unavailable in the reference frame stay absent.",
             "Ignored source-only blendshape categories: " + (", ".join(sorted(unknown_shapes)) or "none"),
@@ -357,6 +416,8 @@ def export_clip(manifest_path: str | Path, review_path: str | Path, output_path:
                                  "face_model_sha256": _hash(manifest["models"].get("face_sha256"), "face model hash")}
         if manifest["models"].get("pose_sha256"):
             result["measurement"]["pose_model_sha256"] = _hash(manifest["models"]["pose_sha256"], "pose model hash")
+        if manifest["models"].get("hand_sha256"):
+            result["measurement"]["hand_model_sha256"] = _hash(manifest["models"]["hand_sha256"], "hand model hash")
     for field in ("input_sha256", "preparation_manifest_sha256"):
         if manifest.get(field):
             result["source"][field] = _hash(manifest[field], field)

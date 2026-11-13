@@ -1,0 +1,62 @@
+{
+  "schema_version": "recorded-generated-audio-browser-attempt.v1",
+  "attempt": 1,
+  "passed": false,
+  "github_run_id": 43287361386,
+  "github_job_id": 131424738006,
+  "github_url": "https://github.com/Dindb-dong/who-is-your-bias/actions/runs/43287361386",
+  "head": "e4b05f88757bc9e9a07a1dfe065d2e9c8e9d7a05",
+  "archive": {
+    "run_id": "jensen-recorded-audio-browser-attempt-1",
+    "role": "Actual failing desktop/mobile browser traces and screenshots, retaining acquisition overhead and unmet clock gate",
+    "file_name": "studio-browser-e4b05f8-failed.zip",
+    "file_id": "file_00000000c69481fb9e69dd088ab9103b",
+    "library_file_id": "libfile_fde3_f-7227a3fd38908191abd8bd42e165c57b_a18ece08681081918d81df44f69c4b1f",
+    "bytes": 39745230,
+    "sha256": "c5dd46407be59a083191b94ef6064ca192bc319eb0464ad2ad63752b07b40acc",
+    "status": "uploaded_and_fresh_readback_sha256_verified",
+    "verified_at": "2026-11-12T19:23:33.256139+00:00",
+    "github_run_id": 43287361386,
+    "github_artifact_id": 13975183687,
+    "github_head": "e4b05f88757bc9e9a07a1dfe065d2e9c8e9d7a05"
+  },
+  "checks": {
+    "web_build_typecheck_tests": "passed",
+    "focused_python": "passed",
+    "historical_browser_passed": 30,
+    "existing_jensen_browser_passed": 20,
+    "new_recorded_audio_cases_passed": 0,
+    "new_recorded_audio_cases_failed": 2
+  },
+  "cases": [
+    {
+      "project": "desktop",
+      "failed_check": "maximum absolute difference between mapped renderer audio clock and actual media clock below750ms",
+      "maximum_clock_difference_ms": 898.537,
+      "next_largest_clock_difference_ms": 475.983,
+      "playing_frames_returned": 29,
+      "screenshot_duration_ms": 1913.06,
+      "finding": "Largest observed clock difference occurs during screenshot acquisition; all animation channel checks before this assertion passed. Cancellation was not reached in this attempt.",
+      "cancellation_established": false
+    },
+    {
+      "project": "mobile",
+      "failed_check": "audio clock exceeds6500ms after screenshot",
+      "screenshot_duration_ms": 18189.34,
+      "file_duration_ms": 9920,
+      "clock_after_screenshot_ms": 0,
+      "finding": "Full studio screenshot ran past natural file completion. The subsequent clock poll timed out at0. This does not establish failed application cancellation.",
+      "cancellation_established": false
+    }
+  ],
+  "revision": {
+    "code_checkpoint": "4059e1f",
+    "change": "Collect uninterrupted trace, Stop, verify cleanup, then screenshot. Preserve raw trace before timing/channel assertions.",
+    "threshold_ms": 750,
+    "threshold_changed": false,
+    "application_audio_renderer_changed": false,
+    "screenshot_state": "after cancellation",
+    "subsequent_browser_result": "pending"
+  },
+  "scope": "Previously generated actual WAV and real browser playback; HTTP response envelopes and gestures are declared fixtures. No live inference or simultaneous neural providers."
+}

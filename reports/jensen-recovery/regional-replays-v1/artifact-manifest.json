@@ -1,0 +1,45 @@
+{
+  "schema_version": "jensen-regional-replay-artifact-manifest.v1",
+  "run_id": "regional-replays-v1",
+  "checked_at": "2026-11-12T21:34:06.111671+00:00",
+  "integration_base": "2eb40726b8963d136edd0f25656a89b2dd77a67a",
+  "complete_source_count": 2,
+  "complete_media_bytes": 1402645064,
+  "complete_media_duration_seconds": 13835.459555,
+  "final_media_budget_bytes": 2147483648,
+  "remaining_media_budget_bytes": 744838584,
+  "minimum_free_bytes_including_training_reserve": 6442450944,
+  "free_disk_bytes_observed": 10659983360,
+  "sources": [
+    {
+      "source_id": "gtc-2026-cn-video",
+      "event_family_id": "nvidia-gtc-2026",
+      "split": "train",
+      "status": "complete_video_saved_and_fresh_reconstruction_verified",
+      "bytes": 855451136,
+      "sha256": "4070e63179f44e5de14d70bc615322a2821b2ed417610ffa0e92ccd371cd7b28",
+      "duration_seconds": 8335.646444,
+      "chunk_objects": 34,
+      "metadata_objects": 2,
+      "report": "gtc-complete.json"
+    },
+    {
+      "source_id": "ces-2026-cn-video",
+      "event_family_id": "nvidia-ces-2026",
+      "split": "train",
+      "status": "complete_video_saved_and_fresh_reconstruction_verified",
+      "bytes": 547193928,
+      "sha256": "e1ac9122cb2468d7759eeef5b2b2f67655eda6e6f72c3fe7b88389ccb5a05d45",
+      "duration_seconds": 5499.813111,
+      "chunk_objects": 22,
+      "metadata_objects": 2,
+      "report": "ces-complete.json"
+    }
+  ],
+  "language_review": "unverified",
+  "speech_training_eligible": false,
+  "frozen_training_or_evaluation_inputs_changed": false,
+  "post_acquisition_track_coverage_report": "stream-coverage-checks.json",
+  "complete_media_chunk_objects": 56,
+  "complete_media_metadata_objects": 4
+}

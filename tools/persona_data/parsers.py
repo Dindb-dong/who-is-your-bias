@@ -277,6 +277,9 @@ def _ford_pdf(text: str) -> list[dict]:
 
 
 def parse(source: dict, artifact: Path) -> dict:
+    if source.get("persona_id") == "jensen-huang":
+        from .jensen import parse_jensen
+        return parse_jensen(source, artifact)
     raw = artifact.read_bytes()
     if len(raw) > 16 * 1024 * 1024:
         raise ValueError("Source artifact exceeds 16 MiB")

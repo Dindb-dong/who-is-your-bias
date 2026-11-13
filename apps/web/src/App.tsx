@@ -3,7 +3,7 @@ import { ArrowDown, ArrowRight, ArrowUp, ArrowUpRight, BookOpen, ChevronDown, Ch
 import { getJson, getMotionLibrary, streamChat } from './api';
 import type { Citation, ExperimentMode, Language, MotionLibraryStatus, Persona, Source, Turn } from './api';
 import type { MotionMode } from './avatar/types';
-import { RESEARCH_HUMAN_AVATAR, type AvatarFraming } from './avatar/builtin';
+import { JENSEN_SOURCE_FITTED_AVATAR, RESEARCH_HUMAN_AVATAR, type AvatarFraming, type BuiltinAvatar } from './avatar/builtin';
 import { AvatarStage } from './components/AvatarStage';
 import { AttentionPanel } from './components/AttentionPanel';
 import type { AttentionTarget } from './avatar/attention';
@@ -63,7 +63,7 @@ export default function App() {
   const liveClock = useRef<LiveTurnClock | null>(null);
   const [reducedMotion, setReducedMotion] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches);
   const [model, setModel] = useState<{ name: string; url: string } | undefined>();
-  const [builtinAvatar, setBuiltinAvatar] = useState<'human' | 'portrait'>('human');
+  const [builtinAvatar, setBuiltinAvatar] = useState<BuiltinAvatar>('human');
   const [framing, setFraming] = useState<AvatarFraming>('portrait');
   const [attentionTarget, setAttentionTarget] = useState<AttentionTarget | null>(null);
   const avatarChoiceMade = useRef(false);
@@ -202,10 +202,12 @@ export default function App() {
     avatarChoiceMade.current = true;
     measuredMotion.stop(); setAvatarError(null); setAvatarReady(false); setModel({ name: file.name, url: URL.createObjectURL(file) });
   }
-  function selectBuiltinAvatar(next: 'human' | 'portrait') {
+  function selectBuiltinAvatar(next: BuiltinAvatar) {
+    if (next === 'jensen' && persona?.id !== 'jensen-huang') return;
     avatarChoiceMade.current = true;
     if (!model && builtinAvatar === next && !avatarError) return;
     measuredMotion.stop(); setModel(undefined); setBuiltinAvatar(next); setAvatarError(null); setAvatarReady(false);
+    if (next === 'jensen') setFraming('upper_body');
   }
   function listen(turn: Turn) { if (busy) return; pcmPlayer.current?.stop(); setPcmState(initialPcmState); setActiveTurn(turn); void measuredMotion.play(turn.behavior.motion); void playback.play(turn, voice === 'off' ? 'browser' : voice); }
   useEffect(() => {
@@ -225,7 +227,7 @@ export default function App() {
   const questions = persona?.example_questions[language] ?? defaultQuestions;
   const speaking = pcmState.status === 'playing' || playback.status === 'playing';
   const visualPlayback = streamingVoice ? { ...playback, ...pcmState, speechTiming: undefined, audioSha256: undefined } : playback;
-  const modelUrl = model?.url ?? (builtinAvatar === 'human' ? RESEARCH_HUMAN_AVATAR.modelUrl : undefined);
+  const modelUrl = model?.url ?? (builtinAvatar === 'human' ? RESEARCH_HUMAN_AVATAR.modelUrl : builtinAvatar === 'jensen' && isJensen ? JENSEN_SOURCE_FITTED_AVATAR.modelUrl : undefined);
   const stageState = speaking ? 'Speaking' : (playback.status === 'loading' || pcmState.status === 'loading') ? 'Preparing voice' : microphone.listening ? 'Listening' : busy ? 'Thinking' : 'Ready when you are';
 
   return <div className="app-shell">
@@ -241,13 +243,13 @@ export default function App() {
       <main>
         {infoOpen && <div className="about-banner"><Sparkles size={19}/><p><strong>Who Is Your Bias?</strong> A research workspace for source-grounded dialogue, voice, and embodied behavior. This is an AI simulation, not {subjectName} or an official representative. The portrait and attention interaction are designed previews; they do not reproduce learned personal habits.</p><button className="icon-button" onClick={() => setInfoOpen(false)} aria-label="Close project information"><X size={17}/></button></div>}
         {connection === 'error' && <div className="connection-error" role="alert"><span><strong>The conversation service is offline.</strong> {connectionError}</span><button onClick={() => setReload((value) => value + 1)}><RotateCcw size={14}/> Reconnect</button></div>}
-        {page === 'presentation' ? <><div className="about-banner"><p><strong>Historical Musk presentation.</strong> This archived evaluation video predates the Jensen studio and is not a Jensen avatar or voice.</p></div><PresentationView onAsk={() => { reset(); navigate('studio'); setTimeout(() => composer.current?.focus(), 0); }}/></> : page === 'sources' ? <SourcesView sources={sources} corpusInfo={persona?.qa_corpus}/> : page === 'lab' ? <><ResearchLab language={language}/><MotionLab modelUrl={modelUrl} reducedMotion={reducedMotion}/></> : <>
+        {page === 'presentation' ? <><div className="about-banner"><p><strong>Historical Musk presentation.</strong> This archived evaluation video predates the Jensen studio and is not a Jensen avatar or voice.</p></div><PresentationView onAsk={() => { reset(); navigate('studio'); setTimeout(() => composer.current?.focus(), 0); }}/></> : page === 'sources' ? <SourcesView sources={sources} corpusInfo={persona?.qa_corpus}/> : page === 'lab' ? <><ResearchLab language={language}/><MotionLab key={persona?.id ?? "unbound"} personaId={persona?.id} modelUrl={modelUrl} reducedMotion={reducedMotion}/></> : <>
           <div className="studio-heading"><div><div className="eyebrow">CURIOSITY, IN CONVERSATION</div><h1>Meet the mind. <span>Explore the ideas.</span></h1><p>A conversation with a source-grounded {subjectName} persona.</p></div><button className="secondary-button" onClick={reset}><Plus size={16}/> New conversation</button></div>
           <div className="studio-grid">
             <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}><section className="stage-card" aria-label="Avatar studio" style={{ flex: 1 }}>
               <div className="stage-top"><div><span className="tag dark"><span className="tiny-dot"/> AI SIMULATION</span><div className="stage-title">{subjectName}<span>01 / RESEARCH PERSONA</span></div></div><button className="stage-options" onClick={() => setSettings(true)} aria-label="Avatar settings"><Settings2 size={18}/></button></div>
               <div className="avatar-viewport"><AvatarStage attentionTarget={attentionTarget} portraitStyle={isJensen ? 'jensen' : 'reference'} speaking={speaking} timeline={streamingVoice ? undefined : activeTurn?.behavior} elapsedMs={visualPlayback.elapsedMs} amplitude={speaking ? visualPlayback.amplitude : 0} modelUrl={modelUrl} framing={framing} reducedMotion={reducedMotion} speechTiming={visualPlayback.speechTiming} audioSha256={visualPlayback.audioSha256} audioElapsedMs={visualPlayback.audioElapsedMs} performanceClip={motionMode !== 'disabled' && mode === 'behavior' && !reducedMotion ? measuredMotion.clip : undefined} observationElapsedMs={measuredMotion.elapsedMs} allowGeometryPreview={motionMode === 'geometry_preview'} onReady={onAvatarReady} onError={onAvatarError}/></div>
-              <div className="stage-caption"><span className="caption-rule"/><span>{model ? 'YOUR CUSTOM RIG' : builtinAvatar === 'human' ? (isJensen ? 'GENERIC RESEARCH RIG' : 'RESEARCH HUMAN RIG') : isJensen ? 'JENSEN · STYLIZED PREVIEW' : 'STYLIZED PORTRAIT RIG'}</span><span className="caption-rule"/></div>
+              <div className="stage-caption"><span className="caption-rule"/><span>{model ? 'YOUR CUSTOM RIG' : builtinAvatar === 'jensen' && isJensen ? 'JENSEN · SOURCE-FITTED CANDIDATE' : builtinAvatar === 'human' ? (isJensen ? 'GENERIC RESEARCH RIG' : 'RESEARCH HUMAN RIG') : isJensen ? 'JENSEN · STYLIZED PREVIEW' : 'STYLIZED PORTRAIT RIG'}</span><span className="caption-rule"/></div>
               <div className="stage-bottom"><div className="live-status"><span className={`status-orb ${speaking || busy ? 'animated' : ''}`}/><div><strong>{stageState}</strong><span title={playback.timingMessage}>{streamingVoice ? 'Streaming voice · PCM-clock mouth movement' : voice === 'provider' ? playback.timingStatus === 'available' ? 'Provider voice · audio-timed mouth cues' : 'Provider voice · approximate mouth movement' : voice === 'browser' || speaking ? 'Generic browser voice · approximate lip sync' : 'Text mode · voice available'}</span></div></div><button className="round-control" aria-label={streamingVoice || speaking || playback.status === 'loading' ? 'Stop audio' : 'Enable voice settings'} onClick={() => streamingVoice ? cancel() : speaking || playback.status === 'loading' ? playback.stop() : setSettings(true)}>{streamingVoice || speaking || playback.status === 'loading' ? <Square size={16}/> : voice === 'off' ? <VolumeX size={18}/> : <Volume2 size={18}/>}</button></div>
               {!avatarReady && !avatarError && <div className="avatar-loading"><LoaderCircle size={18} className="spin"/> Preparing the rig</div>}
               {avatarError && <div className="avatar-error" role="alert">{avatarError}<button onClick={() => selectBuiltinAvatar('portrait')}>Use stylized portrait</button></div>}

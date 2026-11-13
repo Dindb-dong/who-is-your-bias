@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "windows": [
+    {
+      "id": "stripe-2396-12s",
+      "source_event_id": "stripe-sessions-2024",
+      "frames": 120,
+      "face_counts": {
+        "1": 120
+      },
+      "pose_counts": {
+        "1": 120
+      },
+      "hand_counts": {
+        "2": 97,
+        "3": 6,
+        "4": 1,
+        "1": 1,
+        "0": 15
+      },
+      "observation_sha256": "f6cfbdf01dc13d5970ec681b16f3a71097ee0c19846752933d5e4b836f023730",
+      "source_start_seconds": 2396.0,
+      "review_status": "unreviewed"
+    },
+    {
+      "id": "stripe-2696-12s",
+      "source_event_id": "stripe-sessions-2024",
+      "frames": 120,
+      "face_counts": {
+        "1": 120
+      },
+      "pose_counts": {
+        "1": 120
+      },
+      "hand_counts": {
+        "2": 100,
+        "3": 3,
+        "1": 7,
+        "0": 10
+      },
+      "observation_sha256": "267f9b76e2089ccf65675231694f1a97fa3f98388fdb8773df43fcb08e681074",
+      "source_start_seconds": 2696.0,
+      "review_status": "unreviewed"
+    }
+  ]
+}

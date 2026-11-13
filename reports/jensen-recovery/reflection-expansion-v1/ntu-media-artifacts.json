@@ -1,0 +1,841 @@
+{
+  "schema_version": "jensen-reflection-derived-media-artifacts.v1",
+  "run_id": "jensen-2026-11-13",
+  "updated_at": "2026-11-12T20:12:29.644090+00:00",
+  "event_family_id": "ntu-commencement-2023-05-27",
+  "excluded_from_frozen_v4_text_v1_M6": true,
+  "status": "all_artifacts_saved_fresh_readback_and_full_reconstruction_verified",
+  "artifact_count": 32,
+  "saved_artifact_count": 32,
+  "fresh_readback_verified_artifact_count": 32,
+  "derived_address_videos_durably_verified": 1,
+  "complete_original_event_video_count_increment": 0,
+  "source_file": {
+    "file": "ntu-commencement-2023-address-with-context.vob",
+    "bytes": 752097280,
+    "sha256": "0559b903a1a4ebc312866c28485b12fefc3611b0b057ced17c6bca2f56eb9f3a",
+    "duration_seconds": 1518.692466,
+    "source_byte_start": 600688640,
+    "source_byte_count": 752097280,
+    "source_total_bytes": 4472338432,
+    "source_url": "https://ftp.ntu.edu.tw/NTU/ceremony/2023/GC2023.iso",
+    "first_source_pts_seconds": 1211.431956,
+    "source_clock": "original_DVD_MPEG_program_stream_PTS",
+    "full_iso_acquired": false,
+    "acquisition_and_review_report": "ntu-acquisition.json"
+  },
+  "artifacts": [
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part001.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "2596175002cf258549f41671cb863a2383085149c7042d015f1fcfe7fb770000",
+      "raw_chunk": {
+        "index": 0,
+        "file": "ntu-commencement-2023-address-with-context.vob.part001.bin",
+        "offset": 0,
+        "bytes": 25165824,
+        "sha256": "9cdbe918c804a89ed2dba69f3b3c85816c43ab91b9bfb5ae1ded0580b7f954f5"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part001.bin.tar.gz",
+      "file_id": "file_000000005a8c81fdb09372c69715ec93",
+      "library_file_id": "libfile_fde3_f-dbf914358ff0819190082f94602d07e0_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part001.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:09:53.074315+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part002.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "9ce9ec59651ffceb2121a7d53782d8ae435023a096a93a0ab7bbfd5263b0061c",
+      "raw_chunk": {
+        "index": 1,
+        "file": "ntu-commencement-2023-address-with-context.vob.part002.bin",
+        "offset": 25165824,
+        "bytes": 25165824,
+        "sha256": "612d34417962fd8464728d55999cb550a378a70edf071f28121c869c96bfff51"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part002.bin.tar.gz",
+      "file_id": "file_00000000822881fd9ed823f1a5490dbe",
+      "library_file_id": "libfile_fde3_f-c305b5b490a88191b4da4dec723922c3_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part002.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:09:53.219091+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part003.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "831d19ac961d33a874a2b1a5f5c83c5bad2e1d110371caaa3dcf4984d97faf98",
+      "raw_chunk": {
+        "index": 2,
+        "file": "ntu-commencement-2023-address-with-context.vob.part003.bin",
+        "offset": 50331648,
+        "bytes": 25165824,
+        "sha256": "1be09b3e880631a26649fcbbf47a9d0359975d48122f633bd64899971ecd9b0a"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part003.bin.tar.gz",
+      "file_id": "file_00000000562c81fdb18c78205e23d547",
+      "library_file_id": "libfile_fde3_f-d22477867bc88191a791fff00a623c21_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part003.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:09:52.824268+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part004.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "15c070a451c6cc5da096c5cbfedcfa72b6b1eb7dd5b0e1ca554404c404abde8d",
+      "raw_chunk": {
+        "index": 3,
+        "file": "ntu-commencement-2023-address-with-context.vob.part004.bin",
+        "offset": 75497472,
+        "bytes": 25165824,
+        "sha256": "fbfae27dd4fda7937c5dd9ff180987c9378ba38db994ee825deb4a9a76657596"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part004.bin.tar.gz",
+      "file_id": "file_00000000180881fd90aec4d06f4a364d",
+      "library_file_id": "libfile_fde3_f-728c18ab0b5c8191a955cfc39a9ceb89_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part004.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:09:54.521778+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part005.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "c089bbd346e839aeefabde023387243d7e27c05710427145dacca62bc1a5db16",
+      "raw_chunk": {
+        "index": 4,
+        "file": "ntu-commencement-2023-address-with-context.vob.part005.bin",
+        "offset": 100663296,
+        "bytes": 25165824,
+        "sha256": "cf851bff6580044196d1533d14b7b87bacf8bd58bec958edacb10f2313314be4"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part005.bin.tar.gz",
+      "file_id": "file_00000000f74081fd9bc6c25550f69c46",
+      "library_file_id": "libfile_fde3_f-d1fb571c8378819187f5d7ff2d2a0d75_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part005.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:09:54.660103+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part006.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "6ccff5328c853fb691484afa92174e8d055919b06d7be7dc6b6ceb4d3ec86636",
+      "raw_chunk": {
+        "index": 5,
+        "file": "ntu-commencement-2023-address-with-context.vob.part006.bin",
+        "offset": 125829120,
+        "bytes": 25165824,
+        "sha256": "afcd02699bde5d485112a55579c21a68b627113d2c780ec9bdb9d68c2c577119"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part006.bin.tar.gz",
+      "file_id": "file_00000000ee5c81fd9991f747a4980c36",
+      "library_file_id": "libfile_fde3_f-346d4bc900d881919968afe5d0d95519_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part006.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:09:54.809404+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part007.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "46b28350f033c7165b5cb10de525090720f33e50e8fe4c44c531847d0e157af5",
+      "raw_chunk": {
+        "index": 6,
+        "file": "ntu-commencement-2023-address-with-context.vob.part007.bin",
+        "offset": 150994944,
+        "bytes": 25165824,
+        "sha256": "bdcc411c873d510061c57ace89cc9d9ea8c395075002687963472a21d6c6fc0a"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part007.bin.tar.gz",
+      "file_id": "file_00000000c73081fd8733efbff2de08cb",
+      "library_file_id": "libfile_fde3_f-0ce84382332081918ce5fe14e6582ed4_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part007.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:09:55.998705+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part008.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "0aefefc53f9bdffcdf86ef4b991302a1b0a31474cb8b99c74041722e3318ba03",
+      "raw_chunk": {
+        "index": 7,
+        "file": "ntu-commencement-2023-address-with-context.vob.part008.bin",
+        "offset": 176160768,
+        "bytes": 25165824,
+        "sha256": "79ac4bf84e46a4f1e16743fd7ffe825c25b7f4a13b425325dfe6e25a7d994fb9"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part008.bin.tar.gz",
+      "file_id": "file_00000000eba481fd88b18f593777974b",
+      "library_file_id": "libfile_fde3_f-fc9a0345a5b481919e956afe6ccf4064_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part008.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:09:56.240507+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part009.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "44c7b94e56a94a0d4ec53d81a16b5960ef7d1af75e3eb297535b1274aa28cadf",
+      "raw_chunk": {
+        "index": 8,
+        "file": "ntu-commencement-2023-address-with-context.vob.part009.bin",
+        "offset": 201326592,
+        "bytes": 25165824,
+        "sha256": "200edfb87c9fb2c29cc550ae4f883c183be9d8656c65b7d18a4db8c5611901d8"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part009.bin.tar.gz",
+      "file_id": "file_00000000f86881fd8bfdd02caeaa0126",
+      "library_file_id": "libfile_fde3_f-320862a3585c8191b51db2a6349702bd_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part009.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:09:56.321139+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part010.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "e8a7015c19d040ceecb55c7efc01ed17fd35588bbac03634c43ba9ba6f2b2632",
+      "raw_chunk": {
+        "index": 9,
+        "file": "ntu-commencement-2023-address-with-context.vob.part010.bin",
+        "offset": 226492416,
+        "bytes": 25165824,
+        "sha256": "26be5e964e69269bebb71e20952dacc483482d5aab7291ed3d4b471d55e87ce9"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part010.bin.tar.gz",
+      "file_id": "file_000000002f7881fda6f19d0c360210f3",
+      "library_file_id": "libfile_fde3_f-b02f410d09dc8191ade64dfc3ae82604_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part010.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:09:57.541780+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part011.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "cc93c4e7527053c291352bf3e9cb8a31908fc2e2d69e474776d35d39f14589c8",
+      "raw_chunk": {
+        "index": 10,
+        "file": "ntu-commencement-2023-address-with-context.vob.part011.bin",
+        "offset": 251658240,
+        "bytes": 25165824,
+        "sha256": "7c9553bb222a2f53f0227e49fff19eb8c18508f92fe162472a78a25e532405e1"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part011.bin.tar.gz",
+      "file_id": "file_0000000022b881fd8b7755c63b7f36b2",
+      "library_file_id": "libfile_fde3_f-d6864f85dc608191b70e4ea512cd2093_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part011.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:09:57.758669+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part012.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "8eee20808fb4b4435f019f4933476cb78e90d2b84418fe40776f7f60cd131ef3",
+      "raw_chunk": {
+        "index": 11,
+        "file": "ntu-commencement-2023-address-with-context.vob.part012.bin",
+        "offset": 276824064,
+        "bytes": 25165824,
+        "sha256": "d1ea3181a87e4360199d0248b391ba50944a0d22c63f394eca9d476ac7c3e18d"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part012.bin.tar.gz",
+      "file_id": "file_00000000a0ac81fd9678dc7cf2b7be9c",
+      "library_file_id": "libfile_fde3_f-defeb1a82fe88191873295509196fba7_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part012.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:09:58.010464+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part013.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "1ca85d6f32a22bcbf1bee903bc258ebea8fef8694896bb4593041086fdf4c53d",
+      "raw_chunk": {
+        "index": 12,
+        "file": "ntu-commencement-2023-address-with-context.vob.part013.bin",
+        "offset": 301989888,
+        "bytes": 25165824,
+        "sha256": "e8c690f99264de946e3d37b2b2c87905772098148e9122bf3e5a158d10dd6fc9"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part013.bin.tar.gz",
+      "file_id": "file_00000000673881fd8378a1cd1c274fc7",
+      "library_file_id": "libfile_fde3_f-1278873a49988191a545ae50a75dd975_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part013.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:09:59.115184+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part014.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "d9178961315913d2e138165f613e3170eab3a68abaa45b2898bd9a03e5c1ea8b",
+      "raw_chunk": {
+        "index": 13,
+        "file": "ntu-commencement-2023-address-with-context.vob.part014.bin",
+        "offset": 327155712,
+        "bytes": 25165824,
+        "sha256": "f1bb68b57723c73f0d1dc4ffbd995e9e509bf0d18fafdd32c09ed8e6b53e8d6c"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part014.bin.tar.gz",
+      "file_id": "file_000000007ef081fdbc3a9fcbe5aa1c7b",
+      "library_file_id": "libfile_fde3_f-9ce5c02cc9c88191becb6a200920fc76_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part014.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:09:59.400225+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part015.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "161d59c6790bf76d9f370b8cd6ab67d5ed96a7564fed71907edb36db49aaeba6",
+      "raw_chunk": {
+        "index": 14,
+        "file": "ntu-commencement-2023-address-with-context.vob.part015.bin",
+        "offset": 352321536,
+        "bytes": 25165824,
+        "sha256": "b223b10d4e5a96c084222a77bf4ecd90ffebdb8eceec861b497b23d23c7a84d0"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part015.bin.tar.gz",
+      "file_id": "file_000000003b9081fdba095b8659062f49",
+      "library_file_id": "libfile_fde3_f-d7bd4206ea8081918b8f08d1afaa58e8_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part015.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:09:59.508107+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part016.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "8441b57d73631189d3609c18360e18979c36f3b2010e4ad7909231bf4a659d5d",
+      "raw_chunk": {
+        "index": 15,
+        "file": "ntu-commencement-2023-address-with-context.vob.part016.bin",
+        "offset": 377487360,
+        "bytes": 25165824,
+        "sha256": "3c0cc6f6b7093991361d10830566d060e04db9fc596139363d65543572709d97"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part016.bin.tar.gz",
+      "file_id": "file_00000000aa8481fd95d1612e3cc1ccb9",
+      "library_file_id": "libfile_fde3_f-1df80b8b808c819194655492427a647c_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part016.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:10:00.222703+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part017.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "adbd3e33a913ad9c12651d9f2d7dc03d8b2702c905676bb9fa66b170f444835c",
+      "raw_chunk": {
+        "index": 16,
+        "file": "ntu-commencement-2023-address-with-context.vob.part017.bin",
+        "offset": 402653184,
+        "bytes": 25165824,
+        "sha256": "0d249b9bfb3546077280a5da1d73cc9d668499483a02e688d4f95275b17cd4d6"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part017.bin.tar.gz",
+      "file_id": "file_00000000f64481fdaedfc20172664726",
+      "library_file_id": "libfile_fde3_f-9abb60da28488191886aaf5ca45277b1_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part017.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:10:00.837562+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part018.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "ff65fcb708893fd769c5ff0cb3990ddf0d28691181f5a141f5a7ced4ae4960aa",
+      "raw_chunk": {
+        "index": 17,
+        "file": "ntu-commencement-2023-address-with-context.vob.part018.bin",
+        "offset": 427819008,
+        "bytes": 25165824,
+        "sha256": "6a2f8eedad111bd940ce7b4bbd2202654e6245948d2070c3e45a783ae6496088"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part018.bin.tar.gz",
+      "file_id": "file_00000000022081fdbb50f186b0ee5ed8",
+      "library_file_id": "libfile_fde3_f-3422b317b0e88191b7351c4ee7f8714c_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part018.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:10:01.163675+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part019.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "9d0772a274d20201ed826b368be0d6960bbb8b5f90b107805da7620a6cf779e4",
+      "raw_chunk": {
+        "index": 18,
+        "file": "ntu-commencement-2023-address-with-context.vob.part019.bin",
+        "offset": 452984832,
+        "bytes": 25165824,
+        "sha256": "b7f5a3d115e525978e7419fb7f2ab591b34677d145e2a9b2bebcec23383bb35a"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part019.bin.tar.gz",
+      "file_id": "file_000000004e9c81fdb4ffaee998b40042",
+      "library_file_id": "libfile_fde3_f-75d491f814e08191ad7a40e0cd8e20e1_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part019.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:10:01.333851+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part020.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "28152188f65ae83e35d245bfc559f67c6eea35dcf283587a39f141cfeb6d3245",
+      "raw_chunk": {
+        "index": 19,
+        "file": "ntu-commencement-2023-address-with-context.vob.part020.bin",
+        "offset": 478150656,
+        "bytes": 25165824,
+        "sha256": "a0d6e352bc9143fc7314044828356c03e7a0ba0b9b65329de8e4aab9a2f71110"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part020.bin.tar.gz",
+      "file_id": "file_000000000e2481fdae5ec242b43cdb58",
+      "library_file_id": "libfile_fde3_f-f31913a12b04819186f1f19e0fafbf99_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part020.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:10:01.766393+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part021.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "4754990e38715fb3ae3188e856274a0afd277db2984283105ddc10417e5fba2b",
+      "raw_chunk": {
+        "index": 20,
+        "file": "ntu-commencement-2023-address-with-context.vob.part021.bin",
+        "offset": 503316480,
+        "bytes": 25165824,
+        "sha256": "3a133684928d757ada204d39abfd445479f5ba6748d0d09d49a4a24b1e6ba681"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part021.bin.tar.gz",
+      "file_id": "file_00000000c4208230b2a006dcc03c24e8",
+      "library_file_id": "libfile_fde3_f-da78a5bfd63481919f82d4728f9b7101_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part021.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:10:02.489808+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part022.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "beba9e37bfa9997fafd3606a9dbdbf17daffe14d1ac2cac121c9b51160195a1e",
+      "raw_chunk": {
+        "index": 21,
+        "file": "ntu-commencement-2023-address-with-context.vob.part022.bin",
+        "offset": 528482304,
+        "bytes": 25165824,
+        "sha256": "f3472f6bcc912d93bddcf46fdcc135b0c81d0a9ff17a0183654ec76f4151d1ac"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part022.bin.tar.gz",
+      "file_id": "file_000000008e0c81f5b9463dbb67d65be9",
+      "library_file_id": "libfile_fde3_f-9f69aaa726508191ad688e720fbe8a69_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part022.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:10:03.522887+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part023.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "c43d3d93f623fdc35ffca2376767a99484874e89cbeb085a3fb402c4511f97e7",
+      "raw_chunk": {
+        "index": 22,
+        "file": "ntu-commencement-2023-address-with-context.vob.part023.bin",
+        "offset": 553648128,
+        "bytes": 25165824,
+        "sha256": "503ad195572650aea0c64db7e96d1c0e1ff0e9d77da32a0b6722907876c21f7a"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part023.bin.tar.gz",
+      "file_id": "file_00000000910881fb979d9b17f85a55e6",
+      "library_file_id": "libfile_fde3_f-e9b40da3f3748191a4d348f86561d2a1_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part023.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:10:03.505393+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part024.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "4cca9f1fe53fd61a718206e7540b57c60691a21edc7b91c032d8091ca660ab3b",
+      "raw_chunk": {
+        "index": 23,
+        "file": "ntu-commencement-2023-address-with-context.vob.part024.bin",
+        "offset": 578813952,
+        "bytes": 25165824,
+        "sha256": "d711628941a20307a462aac91bac1edbfa6f35a7389d5f75194d76f3dbcb2825"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part024.bin.tar.gz",
+      "file_id": "file_00000000f43481f8bd5b9b240a51b1f9",
+      "library_file_id": "libfile_fde3_f-5a2af0a2ff2c81919bd2db6cc0626b9a_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part024.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:10:03.812263+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part025.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "e5c8c4e2f774e21ce2ea577d481ccabd1b7584e7666fb20d609294e2940ff4a1",
+      "raw_chunk": {
+        "index": 24,
+        "file": "ntu-commencement-2023-address-with-context.vob.part025.bin",
+        "offset": 603979776,
+        "bytes": 25165824,
+        "sha256": "15a996d3c2e3c39d693556dc5732caa6fee62e5b593d64e6a1a72646ca9df1be"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part025.bin.tar.gz",
+      "file_id": "file_0000000001b481fb9b58371f88415116",
+      "library_file_id": "libfile_fde3_f-8ab6ebd9acd0819185409bbfb7634f5e_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part025.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:10:05.006529+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part026.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "1d5b162e0b7418834021395a995d14db96532d6a2c631cee3b8765a444c86d0d",
+      "raw_chunk": {
+        "index": 25,
+        "file": "ntu-commencement-2023-address-with-context.vob.part026.bin",
+        "offset": 629145600,
+        "bytes": 25165824,
+        "sha256": "5070240029e037aba276e1fbfef924c8944cda8f68281273a14bc936e3f3d29d"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part026.bin.tar.gz",
+      "file_id": "file_00000000e1bc81f8b35193a323d31b4a",
+      "library_file_id": "libfile_fde3_f-bb90884db2008191810e094f4784f33d_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part026.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:10:04.849206+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part027.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "2f3de0752e5f096b89061df4da4a2ac309ba8d7d03ab3354518549e54db3d231",
+      "raw_chunk": {
+        "index": 26,
+        "file": "ntu-commencement-2023-address-with-context.vob.part027.bin",
+        "offset": 654311424,
+        "bytes": 25165824,
+        "sha256": "635873bb060ab098cb1681ed71316f26718265770152d36e836641df5c3dc85b"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part027.bin.tar.gz",
+      "file_id": "file_00000000904081f5a56b56705d24229d",
+      "library_file_id": "libfile_fde3_f-1196cfc8403c8191901527dc6a8a9a92_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part027.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:10:05.839475+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part028.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "dd375b5c78e0da456bb006dc4bcb151d8730eb94191e6d989e416c6eb465ce18",
+      "raw_chunk": {
+        "index": 27,
+        "file": "ntu-commencement-2023-address-with-context.vob.part028.bin",
+        "offset": 679477248,
+        "bytes": 25165824,
+        "sha256": "85f38a8417a2b4b644f3e69d1b187b50ae736219b95c1ba0d39b440000c87d47"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part028.bin.tar.gz",
+      "file_id": "file_00000000cc4881f5969268fbbb2b59ad",
+      "library_file_id": "libfile_fde3_f-ec16b4148990819185057b2db25abdd2_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part028.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:10:06.683760+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part029.bin.tar.gz",
+      "bytes": 25173778,
+      "sha256": "1b98ab6ed72c0ff550e040eabdef3073535c00935de9b4d7ca6610cf47964c18",
+      "raw_chunk": {
+        "index": 28,
+        "file": "ntu-commencement-2023-address-with-context.vob.part029.bin",
+        "offset": 704643072,
+        "bytes": 25165824,
+        "sha256": "52002b11d917f8f1362a730c486454a05fc70faccb3c18947798a141144e221e"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part029.bin.tar.gz",
+      "file_id": "file_00000000272881f58460d67e3a1360cd",
+      "library_file_id": "libfile_fde3_f-64112a0fad848191b9ec214404f03cdf_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part029.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:10:06.671419+00:00"
+    },
+    {
+      "role": "lossless_derived_video_byte_chunk",
+      "file": "ntu-commencement-2023-address-with-context.vob.part030.bin.tar.gz",
+      "bytes": 22295898,
+      "sha256": "0bb837ff408f55d7ac78429fc36873ad07f97e397d4d7bb915c337b34d64e984",
+      "raw_chunk": {
+        "index": 29,
+        "file": "ntu-commencement-2023-address-with-context.vob.part030.bin",
+        "offset": 729808896,
+        "bytes": 22288384,
+        "sha256": "bf361401bb00abf65fbc66b1eaca143d2390d40916fb43c6cb17b55b86dba5fd"
+      },
+      "canonical_readback_name": "ntu-commencement-2023-address-with-context.vob.part030.bin.tar.gz",
+      "file_id": "file_000000008b9081f8a67642ea45a54968",
+      "library_file_id": "libfile_fde3_f-ea63e91f665c81918d71105e822c65d6_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.vob.part030.bin.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:10:07.154876+00:00"
+    },
+    {
+      "role": "derived_video_reconstruction_manifest",
+      "file": "ntu-commencement-2023-address-with-context.reconstruction.json",
+      "bytes": 7577,
+      "sha256": "f6b2a1ba4364754cbb020b1028640c9e24396874f28627145d00b6f3105a7297",
+      "canonical_readback_name": "reconstruction.json",
+      "file_id": "file_00000000b5d481f8b3f6ed274235386d",
+      "library_file_id": "libfile_fde3_f-db041d00711481918baa55e26d52b18a_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-commencement-2023-address-with-context.reconstruction.json",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:10:07.162639+00:00"
+    },
+    {
+      "role": "derived_video_source_and_review_metadata",
+      "file": "ntu-complete-address-source-review-v1.tar.gz",
+      "bytes": 1682576,
+      "sha256": "678794be5c5577b543e8b677d959975fe862d5122028b175d2e34b641362c9aa",
+      "canonical_readback_name": "ntu-complete-address-source-review-v1.tar.gz",
+      "members": [
+        {
+          "file": "media/ntu-commencement-2023-address-with-context.vob.receipt.json",
+          "bytes": 5284,
+          "sha256": "907ba44e2302577f5ca77a31759ac4f8131f29a112a01ddd953e11663ed6161c"
+        },
+        {
+          "file": "media/ntu-commencement-2023-address-with-context.vob.state.json",
+          "bytes": 279,
+          "sha256": "30bd663c86d8de8ecda12a0307154b31d2cd8877578d62f26e32e74fd49aa00e"
+        },
+        {
+          "file": "discovery/ntu-continuity-review/closing-contact-decode.json",
+          "bytes": 849,
+          "sha256": "2443207fa59cbc3ed239b1f725bfa95a4c1184396b2e5761f2e88125701c5bd7"
+        },
+        {
+          "file": "discovery/ntu-continuity-review/closing-last180s-5s-sampling.jpg",
+          "bytes": 213834,
+          "sha256": "f1af56d8803d521b5073dcf2999fb773dfbbba7a6d900a608e83d3fd908b7d70"
+        },
+        {
+          "file": "discovery/ntu-continuity-review/observations.json",
+          "bytes": 5156,
+          "sha256": "0d10f6c1daf6bd684cca6c66cb2cb641ffadbc8136de769b89b54880a6e7f363"
+        },
+        {
+          "file": "discovery/ntu-continuity-review/opening-first120s-5s-sampling.jpg",
+          "bytes": 210074,
+          "sha256": "76716b5d0e8359cd517127da6bba3a0c645793fe86d072ec87633f906522b07b"
+        },
+        {
+          "file": "discovery/ntu-continuity-review/opening-first2s.probe.json",
+          "bytes": 13217,
+          "sha256": "aa2e1a4f87f23c1147dcbf4c9cf2a373d153dec73e0e38d90eee2cc51ae11a40"
+        },
+        {
+          "file": "discovery/ntu-continuity-review/opening-first2s.probe.stderr",
+          "bytes": 60,
+          "sha256": "9b779a1134b234f7f953b49ea8ecd38ec9a99f085b52a313ab1e9d9fe8cd1d82"
+        },
+        {
+          "file": "discovery/ntu-continuity-review/whole-range-audio-continuity.json",
+          "bytes": 437,
+          "sha256": "8f21c6ca532010318b68b86fdbe293716b9f9a7ea228e9538090c5110d2d8fab"
+        },
+        {
+          "file": "discovery/ntu-continuity-review/whole-range-audio-frame-continuity.json",
+          "bytes": 654,
+          "sha256": "47de1496e54a0bd8912f518049cc6ad9b6ddb34a21c17ec615639bd49ecfd9b1"
+        },
+        {
+          "file": "discovery/ntu-continuity-review/whole-range-audio-frames.json",
+          "bytes": 20229109,
+          "sha256": "4745204187c13e1727689afdbef4e9017f6ea3bc6ca914b4e2cf277cdab2219f"
+        },
+        {
+          "file": "discovery/ntu-continuity-review/whole-range-audio-frames.stderr",
+          "bytes": 134,
+          "sha256": "cab72c42ba43d362b2e9a0b26b28a5721303215e57f254802a73cc8c4504f508"
+        },
+        {
+          "file": "discovery/ntu-continuity-review/whole-range-audio-packets.json",
+          "bytes": 6073880,
+          "sha256": "43423f6d6e4521c03bc24b2d5920d3411b16ff402d2631adad23e75e6f33c9e2"
+        },
+        {
+          "file": "discovery/ntu-continuity-review/whole-range-decode.json",
+          "bytes": 1231,
+          "sha256": "fc20333683a61493bdf793c0e224c4ebde60431a3a83e4f912e461613fa73b04"
+        },
+        {
+          "file": "discovery/ntu-continuity-review/whole-range-decode.progress",
+          "bytes": 31812,
+          "sha256": "0b6c80a7e06d4da36c49ded0390ab033f6d11aad92efb95cfa0730ff3c69caa1"
+        },
+        {
+          "file": "discovery/ntu-continuity-review/whole-range-packet-continuity.json",
+          "bytes": 554,
+          "sha256": "886e03c55f91ad261bfbae7924919716b40b299aa74db5b7155ec4702e76ee26"
+        },
+        {
+          "file": "discovery/ntu-continuity-review/whole-range-video-packets.json",
+          "bytes": 7159634,
+          "sha256": "eb02d5d4821806520af73c4037c862299da1a2bbb576cb8bee022e5feb8cd00d"
+        },
+        {
+          "file": "discovery/ntu-continuity-review/whole-range-video-packets.stderr",
+          "bytes": 60,
+          "sha256": "c2d2a63ad6e88cb7d27c9a5d6360aa465bbc8ae985b6702a45bd6b506bb1352d"
+        },
+        {
+          "file": "discovery/ntu-official-commencement-overview.html",
+          "bytes": 113925,
+          "sha256": "f98ae289fc15c847593dab20591e2a612667fbcd508327ff9b13cff9228f300b"
+        },
+        {
+          "file": "discovery/nvidia-official-ntu-commencement-summary.html",
+          "bytes": 106889,
+          "sha256": "3c28264269ad952794d0d8eac33dfecd319d5a26bb625dd43039f608b0be5bd0"
+        },
+        {
+          "file": "discovery/commencement-official-text-review.json",
+          "bytes": 1665,
+          "sha256": "c9c17586f50cfa517edeca314ee2a7bc50db6865a1eb8585839c740a2436ab9b"
+        },
+        {
+          "file": "discovery/ntu-iso-directory.json",
+          "bytes": 2486,
+          "sha256": "bb7047652c5d215a263ee77834d76c2ac8be5434c572008d0c48b43e3972a144"
+        },
+        {
+          "file": "discovery/ntu-VTS_01_0.IFO",
+          "bytes": 92160,
+          "sha256": "a517331f9fb202d5030879c25baf69cf92a592f356783667dbb1c4364fd48a12"
+        },
+        {
+          "file": "discovery/ntu-VIDEO_TS.IFO",
+          "bytes": 8192,
+          "sha256": "74ec8ad966b0e356cf3bfc01639d6e9cc61ec6197fa5823b644c0f3c945df122"
+        },
+        {
+          "file": "discovery/ntu-source-identity.json",
+          "bytes": 256,
+          "sha256": "90670af616b80133595ea3a80a5c85e4815651de81f4ed324d86b7305e015575"
+        },
+        {
+          "file": "source/ntu-extraction-plan.json",
+          "bytes": 3366,
+          "sha256": "8680a401fa9bd42bc2431b73eabe73cb61d7ec2e66c48f2414b20458bd2badc4"
+        }
+      ],
+      "file_id": "file_0000000035c4823087035ca19fc9613b",
+      "library_file_id": "libfile_fde3_f-d57368423e7c8191834abcd3ebbb4eab_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "ntu-complete-address-source-review-v1.tar.gz",
+      "current_version_number": 0,
+      "upload_status": "succeeded",
+      "fresh_readback_status": "verified",
+      "fresh_readback_verified_at": "2026-11-12T20:10:07.339286+00:00"
+    }
+  ],
+  "full_reconstruction": {
+    "bytes": 752097280,
+    "sha256": "0559b903a1a4ebc312866c28485b12fefc3611b0b057ced17c6bca2f56eb9f3a",
+    "parts": 30,
+    "verified": true,
+    "verified_at": "2026-11-12T20:12:29.644090+00:00"
+  },
+  "failed_attempts": [],
+  "prior_verified_bounded_checkpoints": [
+    "ntu-boundary-artifact.json",
+    "ntu-prefix-artifact.json",
+    "ntu-opening-artifact.json"
+  ],
+  "reconstruction_recipe": {
+    "materialization": "Use both exact file_id and library_file_id for each object, retaining returned file_name; verify outer bytes and SHA-256. Stage each artifact at canonical_readback_name in one directory.",
+    "chunk_container": "One registered raw contiguous .bin member per .bin.tar.gz; gzip level0. No media re-encoding or timestamp rewriting.",
+    "command_template": "PYTHONPATH=src:. python -m tools.persona_data.media_chunks verify /restored/ntu --gzip --output /restored/ntu-commencement-2023-address-with-context.vob",
+    "expected_full_bytes": 752097280,
+    "expected_full_sha256": "0559b903a1a4ebc312866c28485b12fefc3611b0b057ced17c6bca2f56eb9f3a",
+    "media_clock": "Local elapsed time adds1211.431956 seconds to the original DVD PTS clock; YouTube mapping is not verified."
+  },
+  "previous_verified_implementation_checkpoint": "59f13dfabb413837b4b0194561df998334a71c57"
+}

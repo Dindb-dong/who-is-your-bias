@@ -1,0 +1,64 @@
+{
+  "schema_version": "cpu-frozen-linear-thread-probe.v1",
+  "at": "2026-11-12T18:42:22.493908+00:00",
+  "torch": "2.11.0+cpu",
+  "shape": [
+    768,
+    2048,
+    6144
+  ],
+  "weight_gradient": false,
+  "input_gradient": true,
+  "excluded_warmups_per_condition": 1,
+  "rows": [
+    {
+      "dtype": "torch.bfloat16",
+      "threads": 4,
+      "times_seconds": [
+        1.0873209869996572,
+        1.4791344720006236,
+        1.2854298230004133,
+        1.7647929760005354,
+        1.0738531850001891
+      ],
+      "median_seconds": 1.2854298230004133
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "threads": 8,
+      "times_seconds": [
+        0.927521521000017,
+        0.9204327030001878,
+        0.8422646210001403,
+        0.7004464199999347,
+        0.8603721019999284
+      ],
+      "median_seconds": 0.8603721019999284
+    },
+    {
+      "dtype": "torch.float32",
+      "threads": 4,
+      "times_seconds": [
+        1.1420043739999528,
+        0.9529441610002323,
+        1.0478756470001827,
+        0.7981753560006837,
+        1.0579882740003086
+      ],
+      "median_seconds": 1.0478756470001827
+    },
+    {
+      "dtype": "torch.float32",
+      "threads": 8,
+      "times_seconds": [
+        0.8382644280000022,
+        0.6743579520007188,
+        1.09117040000001,
+        0.655335071999616,
+        0.6388401509993855
+      ],
+      "median_seconds": 0.6743579520007188
+    }
+  ],
+  "scope": "Small frozen-linear kernel only; no end-to-end model speed claim. Other task work may be concurrent."
+}

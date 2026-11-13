@@ -5,6 +5,8 @@ import legacy from './playwright.config';
 export default defineConfig(legacy, {
   testIgnore: [],
   testMatch: '**/jensen-attention.spec.ts',
+  // Isolate desktop/mobile playback clocks from concurrent software-WebGL load.
+  workers: 1,
   retries: 0,
   use: { ...legacy.use, baseURL: 'http://127.0.0.1:8001' },
   webServer: {

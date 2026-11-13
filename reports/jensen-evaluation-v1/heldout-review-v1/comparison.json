@@ -1,0 +1,811 @@
+{
+  "all_registered_attempts": [
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00072",
+      "completed": false,
+      "condition": "facts",
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "output_sha256": "9b26d1195b01667e3781783f7e0eab74fdcfbd243c6e1e9dac7527e5d838d9bf",
+      "sample_id": null,
+      "semantic_review": "not_reviewed_as_completed_output"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00078",
+      "completed": true,
+      "condition": "facts",
+      "error": null,
+      "finish_reason": "stop",
+      "output_sha256": "0e1d539e4dc9bb6e4d343603cd71598fb0f7f88a870c0fdfadeddea400acf8e7",
+      "sample_id": "sample-0005",
+      "semantic_review": "preserved_blind_completed_output"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00186",
+      "completed": false,
+      "condition": "facts",
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "output_sha256": "eb00967348cf4525e61d81b65979877a5f7586290855c042663dbcebb67fc147",
+      "sample_id": null,
+      "semantic_review": "not_reviewed_as_completed_output"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00190",
+      "completed": true,
+      "condition": "facts",
+      "error": null,
+      "finish_reason": "stop",
+      "output_sha256": "a09d10559eddf76065d5ef57e4629c941afee925e3ac5968bf0248001920a79f",
+      "sample_id": "sample-0001",
+      "semantic_review": "preserved_blind_completed_output"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00253",
+      "completed": true,
+      "condition": "facts",
+      "error": null,
+      "finish_reason": "stop",
+      "output_sha256": "c5860a917bf1edb7fd906647045288f9c54517d17d312d8236606d57b5bb344f",
+      "sample_id": "sample-0008",
+      "semantic_review": "preserved_blind_completed_output"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00297",
+      "completed": true,
+      "condition": "facts",
+      "error": null,
+      "finish_reason": "stop",
+      "output_sha256": "2a94e7399f4cfb3f5cc7d236bddcacda695abb220d5dcee58dade3b5e4791da8",
+      "sample_id": "sample-0003",
+      "semantic_review": "preserved_blind_completed_output"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00072",
+      "completed": false,
+      "condition": "style",
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "output_sha256": "2ca4f515e5f3009eca8dad4c84736e0e2d79895ead2a957b0fcd899c5690ec74",
+      "sample_id": null,
+      "semantic_review": "not_reviewed_as_completed_output"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00078",
+      "completed": true,
+      "condition": "style",
+      "error": null,
+      "finish_reason": "stop",
+      "output_sha256": "77d6ea918b6a966b9164873560cb4c0eb3f4d6729b2cec5fb62002f13b272229",
+      "sample_id": "sample-0007",
+      "semantic_review": "preserved_blind_completed_output"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00186",
+      "completed": true,
+      "condition": "style",
+      "error": null,
+      "finish_reason": "stop",
+      "output_sha256": "8693336609db327e39a8c5d0a8edf374e4dc93f0d77b5c139cb5302eeda1189f",
+      "sample_id": "sample-0004",
+      "semantic_review": "preserved_blind_completed_output"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00190",
+      "completed": true,
+      "condition": "style",
+      "error": null,
+      "finish_reason": "stop",
+      "output_sha256": "fb6f5f12f400cccebd45e8fe40c4c66b71f6f1c520d9ee5d3be001a3a5b379c3",
+      "sample_id": "sample-0002",
+      "semantic_review": "preserved_blind_completed_output"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00253",
+      "completed": true,
+      "condition": "style",
+      "error": null,
+      "finish_reason": "stop",
+      "output_sha256": "4a0f23787ec40355b7a63c4478966e2f05e1fd5c10dab3478e568008ca753fda",
+      "sample_id": "sample-0006",
+      "semantic_review": "preserved_blind_completed_output"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00297",
+      "completed": true,
+      "condition": "style",
+      "error": null,
+      "finish_reason": "stop",
+      "output_sha256": "0910a2924eaa2b87a1b8d5606de82719b3429e77f6b4b018fa0156614cafe17f",
+      "sample_id": "sample-0009",
+      "semantic_review": "preserved_blind_completed_output"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00072",
+      "completed": false,
+      "condition": "adapter",
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "output_sha256": "2887b35e32974205253333fc4af4c96cb9121afc0e243767ce387f31ee623137",
+      "sample_id": null,
+      "semantic_review": "not_reviewed_as_completed_output"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00078",
+      "completed": false,
+      "condition": "adapter",
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "output_sha256": "140ce80213ae95318ae3f8307a5f1c3809c30d6d42a4e967df515b539cf83ed8",
+      "sample_id": null,
+      "semantic_review": "not_reviewed_as_completed_output"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00186",
+      "completed": false,
+      "condition": "adapter",
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "output_sha256": "50999de6c4b62129a1ed2db137ee678d82bac54f074b6e96fb6a46fb988cfee1",
+      "sample_id": null,
+      "semantic_review": "not_reviewed_as_completed_output"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00190",
+      "completed": false,
+      "condition": "adapter",
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "output_sha256": "2f881da72b5d2f73cf44fa87b45bdb56de70486e57a5872eb8cc583bceeaee32",
+      "sample_id": null,
+      "semantic_review": "not_reviewed_as_completed_output"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00253",
+      "completed": false,
+      "condition": "adapter",
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "output_sha256": "f3b02d0b5770b8987cc305f496d7a46d7556be8ef0d1a3e7a565b7c709108083",
+      "sample_id": null,
+      "semantic_review": "not_reviewed_as_completed_output"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00297",
+      "completed": false,
+      "condition": "adapter",
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "output_sha256": "12a5badacee2a6403d67187fc8ef66da443b2d17ef3b0dcf8d67b13e021ee5ec",
+      "sample_id": null,
+      "semantic_review": "not_reviewed_as_completed_output"
+    }
+  ],
+  "conditions": {
+    "adapter": {
+      "claim_label_counts_descriptive_only": null,
+      "execution": {
+        "attempted": 6,
+        "completed": 0,
+        "failed": 6,
+        "planned": 6,
+        "unattempted": 0
+      },
+      "factual_citation_presence_violations": null,
+      "length_failures": 6,
+      "no_citation_markers": null,
+      "no_semantic_score_imputed_to_failed_responses": true,
+      "normal_completion_samples": [],
+      "outputs_with_partially_supported_claims": null,
+      "outputs_with_unsupported_claims": null,
+      "semantic_population": "normal_completions_only",
+      "semantic_reviewed": 0
+    },
+    "facts": {
+      "claim_label_counts_descriptive_only": {
+        "nonfactual": 9,
+        "partially_supported": 1,
+        "supported": 4,
+        "uncertain": 3,
+        "unsupported": 3
+      },
+      "execution": {
+        "attempted": 6,
+        "completed": 4,
+        "failed": 2,
+        "planned": 6,
+        "unattempted": 0
+      },
+      "factual_citation_presence_violations": [
+        "sample-0001",
+        "sample-0003",
+        "sample-0005"
+      ],
+      "length_failures": 2,
+      "no_citation_markers": [
+        "sample-0001",
+        "sample-0003",
+        "sample-0005",
+        "sample-0008"
+      ],
+      "no_semantic_score_imputed_to_failed_responses": true,
+      "normal_completion_samples": [
+        "sample-0001",
+        "sample-0003",
+        "sample-0005",
+        "sample-0008"
+      ],
+      "outputs_with_partially_supported_claims": [
+        "sample-0001"
+      ],
+      "outputs_with_unsupported_claims": [
+        "sample-0001",
+        "sample-0003"
+      ],
+      "semantic_population": "normal_completions_only",
+      "semantic_reviewed": 4
+    },
+    "style": {
+      "claim_label_counts_descriptive_only": {
+        "nonfactual": 6,
+        "supported": 4,
+        "uncertain": 2,
+        "unsupported": 12
+      },
+      "execution": {
+        "attempted": 6,
+        "completed": 5,
+        "failed": 1,
+        "planned": 6,
+        "unattempted": 0
+      },
+      "factual_citation_presence_violations": [
+        "sample-0002",
+        "sample-0004",
+        "sample-0007",
+        "sample-0009"
+      ],
+      "length_failures": 1,
+      "no_citation_markers": [
+        "sample-0002",
+        "sample-0004",
+        "sample-0006",
+        "sample-0007",
+        "sample-0009"
+      ],
+      "no_semantic_score_imputed_to_failed_responses": true,
+      "normal_completion_samples": [
+        "sample-0002",
+        "sample-0004",
+        "sample-0006",
+        "sample-0007",
+        "sample-0009"
+      ],
+      "outputs_with_partially_supported_claims": [],
+      "outputs_with_unsupported_claims": [
+        "sample-0002",
+        "sample-0004",
+        "sample-0009"
+      ],
+      "semantic_population": "normal_completions_only",
+      "semantic_reviewed": 5
+    }
+  },
+  "decision": {
+    "default_adapter_promotion": false,
+    "reason": "The adapter completed none of six heldout answers under the unchanged 160-token output cap; there are no completed style/adapter pairs and no evidence here of a supported-response or fidelity improvement.",
+    "saved_adapter_retained_as_experimental_candidate": true,
+    "style_context_default_change_supported": false,
+    "style_context_reason": "One additional normal completion coexists with unsupported claims, missing citations and requested-source coverage defects; four facts/style pairs show no consistent source-grounded improvement."
+  },
+  "denominators": {
+    "attempted": 18,
+    "completed": 9,
+    "failed": 9,
+    "planned": 18,
+    "unattempted": 0
+  },
+  "efficacy_claim": false,
+  "human_review": "ungraded",
+  "input_files": {
+    "agent-review/private/answer-key.json": {
+      "bytes": 3491,
+      "sha256": "70f412e920d46957cc538be856eade6b96b8d9557910a970bcd52a495bb4ac13"
+    },
+    "agent-review/private/execution-diagnostics.json": {
+      "bytes": 13481,
+      "sha256": "0a4fe04396b5635d8ff6c0218aae63e82f4328028256dc9362d84eb057e8fb23"
+    },
+    "agent-review/private/input-manifest.json": {
+      "bytes": 1318,
+      "sha256": "be849b96bd9400c9d1c510613b3c65cd222be59eb39302ba19e577e978cab6eb"
+    },
+    "agent-review/reviewer/README.md": {
+      "bytes": 1446,
+      "sha256": "104f396a124ea47bd8c02bf796f7bac849d9335405e5fb837a2630c8ecdbcbd7"
+    },
+    "agent-review/reviewer/reference-answers.json": {
+      "bytes": 4439,
+      "sha256": "9b4afebbf2df4979b60e7c0c170857b4061397f4e9b0b160d638bb9e25e846b8"
+    },
+    "agent-review/reviewer/rubric.md": {
+      "bytes": 14493,
+      "sha256": "d7e6db218c0fb29110583930797d9e824e802ce10ca9d8447f9acf55e03fcfcd"
+    },
+    "agent-review/reviewer/samples.json": {
+      "bytes": 11604,
+      "sha256": "681a0bca581ffb202291d21974a458a8708a42efe0fd376d4c1c791b19e8650d"
+    },
+    "agent-review/reviewer/source-pools.json": {
+      "bytes": 29985,
+      "sha256": "9dacfcfab052e2795beca543890edd211aaf117e4134e57a14f1494a8d1d3de0"
+    },
+    "reports/jensen-evaluation-v1/heldout-adapter-bf16-result.json": {
+      "bytes": 12024,
+      "sha256": "0fb2ebccfdb044d686abb67223c5bd12824d69735b1e00baf915665ca31cb3c8"
+    },
+    "reports/jensen-evaluation-v1/heldout-facts-bf16-result.json": {
+      "bytes": 11357,
+      "sha256": "425fa9e537b1ba85f35bd149afe915acfe4eab21912f7fccdce7a9bee5161e98"
+    },
+    "reports/jensen-evaluation-v1/heldout-style-bf16-result.json": {
+      "bytes": 11312,
+      "sha256": "f5ba9d59dd90c1e02257b637ba187f80cc9e61a014a85d03c597f1aa54c16b77"
+    }
+  },
+  "integration_branch": "feat/jensen-resumable-replication",
+  "jointly_completed_pairs": {
+    "all_three": {
+      "case_ids": [],
+      "count": 0
+    },
+    "facts_and_adapter": {
+      "case_ids": [],
+      "count": 0
+    },
+    "facts_and_style": {
+      "case_ids": [
+        "heldout-qa26-no-priors-2023-turn-00078",
+        "heldout-qa26-no-priors-2023-turn-00190",
+        "heldout-qa26-no-priors-2023-turn-00253",
+        "heldout-qa26-no-priors-2023-turn-00297"
+      ],
+      "count": 4
+    },
+    "style_and_adapter": {
+      "case_ids": [],
+      "count": 0
+    }
+  },
+  "limitations": [
+    "Claim-label counts describe the preserved agent segmentation and are not calibrated quality scores.",
+    "Semantic findings cover only nine normal completions; failed answers receive no invented semantic score.",
+    "The six heldout questions use manually selected fixed training passages, not end-to-end retrieval.",
+    "Private references never become supplied factual support and are not used for retuning this frozen evaluation.",
+    "Small sequential CPU runs do not establish causal language/style effects, human likeness or real-time performance."
+  ],
+  "original_blind_findings_changed": false,
+  "paired_case_notes": [
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00072",
+      "note": "All three attempts hit the original output cap. There is no completed output to compare semantically.",
+      "topic": "Selecting early accelerated-computing applications"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00078",
+      "note": "Facts and style both retain the new-software-method point while omitting the supplied 2012 inflection and effectiveness/scalability explanation. Both overfocus on verifying the user's exact phrasing and omit citations. The saved reviewer observed a shared 34-token opening; no claim of copying origin or fidelity follows.",
+      "topic": "Recognizing deep learning as important"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00186",
+      "note": "Only style completes. Its lack of a fixed deadline does not repair omission of the supplied stalled-scaling/kernel account or the unsupported inevitable future sequence. There is no completed facts/style pair for this case.",
+      "topic": "CPU-scaling transition timing"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00190",
+      "note": "Facts retains some shared-information content with an unsupported adaptability attribution and missing hierarchy detail. Style instead asserts unsupported AI-driven corporate changes and omits the supplied management mechanisms. The paired blind findings do not show a benefit from adding the wording example on this case.",
+      "topic": "Management and organizational architecture"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00253",
+      "note": "Both completed outputs are conditional generic advice, not invented biography. Style loosely acknowledges difficulty; facts does not. Neither covers the source's hardship/uncertainty mechanism. This limited coverage difference does not establish persona fidelity.",
+      "topic": "Founding hardship and entrepreneurial advice"
+    },
+    {
+      "case_id": "heldout-qa26-no-priors-2023-turn-00297",
+      "note": "Both acknowledge an evidence gap but add unsupported reinterpretations. Facts adds an industry/nondisclosure claim; style replaces the literal acquisition question with symbolic meaning. The supplied factual pool was empty in both conditions.",
+      "topic": "Jacket provenance"
+    }
+  ],
+  "plan_sha256": "7fd35de01ea1a364aa7b5a2bf8547bf3a4a6cd3ebee4b3764b8ce7c8957e5c7c",
+  "pr_number": 19,
+  "recorded_at_utc": "2026-11-13T05:36:46.181717+00:00",
+  "reference_comparison": [
+    {
+      "boundary": "Neither truncated text nor absence of a reviewer sample is scored as semantic reference coverage.",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00072",
+      "comparison": "No completed output exists; no reference-coverage judgment is assigned.",
+      "completed_samples": [],
+      "descriptive_only": true,
+      "private_reference_sha256": "ab6a061f7f3738efab4ba94194f937cb7b7b718e8c56d067e31860d73670a509",
+      "reference_theme": "The reference describes selecting applications and consulting scientific-computing users about problems beyond their reach.",
+      "source_pool_id": "pool-0001",
+      "source_support_regraded": false,
+      "topic": "Selecting early accelerated-computing applications"
+    },
+    {
+      "boundary": "The heldout research-contact details were not supplied. Their absence is descriptive only, not a new grounding defect or required quotation match.",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00078",
+      "comparison": "Both completed answers miss the historical timing and the reference's concrete research-contact narrative. The historical-year omission was already identified against the independently supplied training evidence.",
+      "completed_samples": [
+        "sample-0005",
+        "sample-0007"
+      ],
+      "descriptive_only": true,
+      "private_reference_sha256": "83a59bb6c62a5c86a9dafc5f82486079a7d0d87d48667826af9dc0a69427d47d",
+      "reference_theme": "The reference places recognition around a historical inflection and describes simultaneous interest from several research groups.",
+      "source_pool_id": "pool-0002",
+      "source_support_regraded": false,
+      "topic": "Recognizing deep learning as important"
+    },
+    {
+      "boundary": "The private reference's historical interval and named examples were not supplied and do not become new required details.",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00186",
+      "comparison": "The sole completed style answer gives a prospective physical-ceiling explanation instead. Its saved blind unsupported-future and missing-kernel findings remain unchanged.",
+      "completed_samples": [
+        "sample-0004"
+      ],
+      "descriptive_only": true,
+      "private_reference_sha256": "b8561bbc6d32d51a2569d85b63d7929e827f6cb4c3f04a9103920c8d2276922d",
+      "reference_theme": "The reference treats the transition as already historical for particular workloads, rather than a single future date for all computing.",
+      "source_pool_id": "pool-0003",
+      "source_support_regraded": false,
+      "topic": "CPU-scaling transition timing"
+    },
+    {
+      "boundary": "Reference mechanisms are comparison-only. The supplied-source coverage and support categories retain their original factual-pool basis.",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00190",
+      "comparison": "Facts overlaps at the broad management topic through information sharing, but neither completed output gives the reference's organizational-design reasoning. Style substitutes an asserted AI-driven realignment narrative.",
+      "completed_samples": [
+        "sample-0001",
+        "sample-0002"
+      ],
+      "descriptive_only": true,
+      "private_reference_sha256": "7310f93d3772495151ae2dfd09580dfef0519b9445bd73e43fde10bbc4418be0",
+      "reference_theme": "The reference discusses intentional organizational architecture, spans of control and autonomy of experienced senior leaders.",
+      "source_pool_id": "pool-0004",
+      "source_support_regraded": false,
+      "topic": "Management and organizational architecture"
+    },
+    {
+      "boundary": "The motivating-uncertainty omission came from the supplied training passage, not this shorter heldout reference. Normative advice is not relabeled as fabricated biography.",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00253",
+      "comparison": "Style has a broad difficulty overlap; facts offers generic advice without that central hardship focus. Both remain advice-oriented rather than an account of founding hardship.",
+      "completed_samples": [
+        "sample-0006",
+        "sample-0008"
+      ],
+      "descriptive_only": true,
+      "private_reference_sha256": "be26af12fdff6f9c276c77ba0456bbbf76cebc5b6335ade903aac2cf738c7fb3",
+      "reference_theme": "The reference emphasizes how difficult and onerous starting a company is.",
+      "source_pool_id": "pool-0005",
+      "source_support_regraded": false,
+      "topic": "Founding hardship and entrepreneurial advice"
+    },
+    {
+      "boundary": "The empty supplied pool made the private detail unavailable. Not reproducing it is not a failure; the already-blinded unsupported additions are the relevant defect.",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00297",
+      "comparison": "Neither generated answer reproduces that unavailable personal-source detail; both instead add unsupported reinterpretations to their evidence-gap response.",
+      "completed_samples": [
+        "sample-0003",
+        "sample-0009"
+      ],
+      "descriptive_only": true,
+      "private_reference_sha256": "95dae56a916e26258c03a3e366fd8239b2d11424e7525faf1e8017fd02b42a6f",
+      "reference_theme": "The reference supplies a short, concrete personal source for the jackets.",
+      "source_pool_id": "pool-0006",
+      "source_support_regraded": false,
+      "topic": "Jacket provenance"
+    }
+  ],
+  "repository": "Dindb-dong/who-is-your-bias",
+  "sample_to_condition_mapping": [
+    {
+      "assessment_summary_unchanged": "Mixed supported management content, an unsupported attributed adaptability claim, and a partly appropriate realignment limitation.",
+      "blind_finding_pointer": "/samples/0",
+      "canonical_sample_sha256": "d595ed1a3de4920824a8b0c96b3293170156111769cb9a61bf7ac095cfe7f57d",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00190",
+      "citation_presence": "violated",
+      "claim_label_counts": {
+        "nonfactual": 2,
+        "partially_supported": 1,
+        "supported": 1,
+        "uncertain": 1,
+        "unsupported": 1
+      },
+      "condition": "facts",
+      "coverage_overall": "partially_covered",
+      "human_ratings_unchanged": {
+        "answer_quality": null,
+        "factual_support": null,
+        "quotation_memorization": null,
+        "repetitive_mannerisms": null,
+        "style_similarity": null,
+        "temporal_fidelity": null,
+        "unsupported_first_person": null
+      },
+      "observed_citation_markers": [],
+      "output_sha256": "a09d10559eddf76065d5ef57e4629c941afee925e3ac5968bf0248001920a79f",
+      "question_sha256": "4072dd9a9e3c6deee7301eb7e2798a9fce847b695a97676d8863b5f4889a30ed",
+      "review_pool_sha256": "3a4a40289911b880204ff4cb91cc5e46f382a0d5a8874fdcd60bdada711689df",
+      "sample_id": "sample-0001",
+      "source_pool_id": "pool-0004",
+      "supplied_supported_content_coverage": "partially_covered",
+      "unchanged_blind_finding_sha256": "2ff0fa254f4068a0bfd39f8371fd98cb22afcaadfd23c83870964f297837cc94"
+    },
+    {
+      "assessment_summary_unchanged": "Unsupported first-person company-change narrative replaces the supplied information-access and hierarchy explanation.",
+      "blind_finding_pointer": "/samples/1",
+      "canonical_sample_sha256": "5464b487331980c41338f2fe781691e52d9b8bd46e95e1349a23ed05400b3e03",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00190",
+      "citation_presence": "violated",
+      "claim_label_counts": {
+        "supported": 1,
+        "unsupported": 5
+      },
+      "condition": "style",
+      "coverage_overall": "not_covered",
+      "human_ratings_unchanged": {
+        "answer_quality": null,
+        "factual_support": null,
+        "quotation_memorization": null,
+        "repetitive_mannerisms": null,
+        "style_similarity": null,
+        "temporal_fidelity": null,
+        "unsupported_first_person": null
+      },
+      "observed_citation_markers": [],
+      "output_sha256": "fb6f5f12f400cccebd45e8fe40c4c66b71f6f1c520d9ee5d3be001a3a5b379c3",
+      "question_sha256": "4072dd9a9e3c6deee7301eb7e2798a9fce847b695a97676d8863b5f4889a30ed",
+      "review_pool_sha256": "3a4a40289911b880204ff4cb91cc5e46f382a0d5a8874fdcd60bdada711689df",
+      "sample_id": "sample-0002",
+      "source_pool_id": "pool-0004",
+      "supplied_supported_content_coverage": "not_covered",
+      "unchanged_blind_finding_sha256": "3d220ca65e402e2ac4c51b3623ba3c9eb466ef686c23537bc9660b70204795b8"
+    },
+    {
+      "assessment_summary_unchanged": "Partial abstention is weakened by unsupported industry interpretation and a global public-nondisclosure claim.",
+      "blind_finding_pointer": "/samples/2",
+      "canonical_sample_sha256": "a1fc0911d3bfd1c527895bb6f45a3e5745cedccf481e28929caf0443cdddd98e",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00297",
+      "citation_presence": "violated",
+      "claim_label_counts": {
+        "nonfactual": 3,
+        "unsupported": 2
+      },
+      "condition": "facts",
+      "coverage_overall": "partially_covered",
+      "human_ratings_unchanged": {
+        "answer_quality": null,
+        "factual_support": null,
+        "quotation_memorization": null,
+        "repetitive_mannerisms": null,
+        "style_similarity": null,
+        "temporal_fidelity": null,
+        "unsupported_first_person": null
+      },
+      "observed_citation_markers": [],
+      "output_sha256": "2a94e7399f4cfb3f5cc7d236bddcacda695abb220d5dcee58dade3b5e4791da8",
+      "question_sha256": "2cb0801e60db04bc69198ad09a7f6e1fb5828c75c3b5bb8ba29ac39aa81067f7",
+      "review_pool_sha256": "6509138c51449a730f72d5bb434e5d22ef740d951fd9f3eb179c2648e3e20495",
+      "sample_id": "sample-0003",
+      "source_pool_id": "pool-0006",
+      "supplied_supported_content_coverage": "not_applicable",
+      "unchanged_blind_finding_sha256": "3d563ce9e53427c3e3939d957947de10c598017da0266f2614ae432ef9d16c3a"
+    },
+    {
+      "assessment_summary_unchanged": "Acknowledges no precise deadline while replacing the supported CPU-scaling/kernel account with an unsupported inevitable future sequence.",
+      "blind_finding_pointer": "/samples/3",
+      "canonical_sample_sha256": "3031184c5f9428c4a3537ddaa080edc892d0d4bd12b5d798d21bfe7ede07005f",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00186",
+      "citation_presence": "violated",
+      "claim_label_counts": {
+        "nonfactual": 1,
+        "unsupported": 3
+      },
+      "condition": "style",
+      "coverage_overall": "partially_covered",
+      "human_ratings_unchanged": {
+        "answer_quality": null,
+        "factual_support": null,
+        "quotation_memorization": null,
+        "repetitive_mannerisms": null,
+        "style_similarity": null,
+        "temporal_fidelity": null,
+        "unsupported_first_person": null
+      },
+      "observed_citation_markers": [],
+      "output_sha256": "8693336609db327e39a8c5d0a8edf374e4dc93f0d77b5c139cb5302eeda1189f",
+      "question_sha256": "62aba72b338104dfc3a6b3fe6c94540a92d126845ff2c554c239bf347488d600",
+      "review_pool_sha256": "a08fe2c5cdcb75a3bb2760904540cba6bb6a9e251548b419e281520dab2134a9",
+      "sample_id": "sample-0004",
+      "source_pool_id": "pool-0003",
+      "supplied_supported_content_coverage": "not_covered",
+      "unchanged_blind_finding_sha256": "7684c8c78498328aa036dd38934134584ec28454a4033fdd3841688ed7d09d92"
+    },
+    {
+      "assessment_summary_unchanged": "Some deep-learning significance is supported, but literal treatment of the user's quoted phrasing obscures the supplied 2012 inflection and scalability reasoning.",
+      "blind_finding_pointer": "/samples/4",
+      "canonical_sample_sha256": "e51859b9ed71c9be555adc4b3daa9f852384ee588eb541fc617c954522e1d3b5",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00078",
+      "citation_presence": "violated",
+      "claim_label_counts": {
+        "supported": 3,
+        "uncertain": 2
+      },
+      "condition": "facts",
+      "coverage_overall": "partially_covered",
+      "human_ratings_unchanged": {
+        "answer_quality": null,
+        "factual_support": null,
+        "quotation_memorization": null,
+        "repetitive_mannerisms": null,
+        "style_similarity": null,
+        "temporal_fidelity": null,
+        "unsupported_first_person": null
+      },
+      "observed_citation_markers": [],
+      "output_sha256": "0e1d539e4dc9bb6e4d343603cd71598fb0f7f88a870c0fdfadeddea400acf8e7",
+      "question_sha256": "faf1cfcc9cc951a07bac80b27e983afb3677cd5f1a0732132c83a8ff82e1cdf8",
+      "review_pool_sha256": "73801e43a5841075af216d59c427e88d7d2a13c1283e9e88840cce5b0ed43169",
+      "sample_id": "sample-0005",
+      "source_pool_id": "pool-0002",
+      "supplied_supported_content_coverage": "partially_covered",
+      "unchanged_blind_finding_sha256": "f2ce53fbb0a1fd6f76d0b661e304f077ce1e9580db8d0c4c0a8bd02aff60145a"
+    },
+    {
+      "assessment_summary_unchanged": "Conditional generic entrepreneurial advice contains no claimed biography, but barely engages the supplied hardship/uncertainty account.",
+      "blind_finding_pointer": "/samples/5",
+      "canonical_sample_sha256": "5d939955cfa7388239fa5ae358da20c5728e876001c839a8d22d3f73c60429f5",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00253",
+      "citation_presence": "not_applicable",
+      "claim_label_counts": {
+        "nonfactual": 4
+      },
+      "condition": "style",
+      "coverage_overall": "partially_covered",
+      "human_ratings_unchanged": {
+        "answer_quality": null,
+        "factual_support": null,
+        "quotation_memorization": null,
+        "repetitive_mannerisms": null,
+        "style_similarity": null,
+        "temporal_fidelity": null,
+        "unsupported_first_person": null
+      },
+      "observed_citation_markers": [],
+      "output_sha256": "4a0f23787ec40355b7a63c4478966e2f05e1fd5c10dab3478e568008ca753fda",
+      "question_sha256": "e5d10932b65515f7a40aaf28b1eeac5f6f06c526d3e1928a92b228858bde74cf",
+      "review_pool_sha256": "19fd06f5b57dd0600fcfd513cd010a96ba5339acf5e094ef16acd6f9957d63f8",
+      "sample_id": "sample-0006",
+      "source_pool_id": "pool-0005",
+      "supplied_supported_content_coverage": "partially_covered",
+      "unchanged_blind_finding_sha256": "5ac52e3a61c0cedd9b61ba7c071ca3bbf72c2175dfbff077cc4ed2b2e32d7bce"
+    },
+    {
+      "assessment_summary_unchanged": "A near-parallel metatextual answer to sample-0005 retains a supported software point but omits the historical inflection and scalability explanation.",
+      "blind_finding_pointer": "/samples/6",
+      "canonical_sample_sha256": "ab66d728e865f4077e7fdfbf23060c8263144151200978a22258ca5c60232b4a",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00078",
+      "citation_presence": "violated",
+      "claim_label_counts": {
+        "supported": 3,
+        "uncertain": 2
+      },
+      "condition": "style",
+      "coverage_overall": "partially_covered",
+      "human_ratings_unchanged": {
+        "answer_quality": null,
+        "factual_support": null,
+        "quotation_memorization": null,
+        "repetitive_mannerisms": null,
+        "style_similarity": null,
+        "temporal_fidelity": null,
+        "unsupported_first_person": null
+      },
+      "observed_citation_markers": [],
+      "output_sha256": "77d6ea918b6a966b9164873560cb4c0eb3f4d6729b2cec5fb62002f13b272229",
+      "question_sha256": "faf1cfcc9cc951a07bac80b27e983afb3677cd5f1a0732132c83a8ff82e1cdf8",
+      "review_pool_sha256": "73801e43a5841075af216d59c427e88d7d2a13c1283e9e88840cce5b0ed43169",
+      "sample_id": "sample-0007",
+      "source_pool_id": "pool-0002",
+      "supplied_supported_content_coverage": "partially_covered",
+      "unchanged_blind_finding_sha256": "f0478e1f6de96390e6ae16063364388942d08d27f9a0f5bfff15f1964c0bb832"
+    },
+    {
+      "assessment_summary_unchanged": "Conditional generic entrepreneurial recommendations do not provide the supplied founding-hardship and motivating-uncertainty account.",
+      "blind_finding_pointer": "/samples/7",
+      "canonical_sample_sha256": "29f08970f8aff6bd7f679f6c785f53d6c9d70b9c8e2152bfdb7464b4f3c452ba",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00253",
+      "citation_presence": "not_applicable",
+      "claim_label_counts": {
+        "nonfactual": 4
+      },
+      "condition": "facts",
+      "coverage_overall": "not_covered",
+      "human_ratings_unchanged": {
+        "answer_quality": null,
+        "factual_support": null,
+        "quotation_memorization": null,
+        "repetitive_mannerisms": null,
+        "style_similarity": null,
+        "temporal_fidelity": null,
+        "unsupported_first_person": null
+      },
+      "observed_citation_markers": [],
+      "output_sha256": "c5860a917bf1edb7fd906647045288f9c54517d17d312d8236606d57b5bb344f",
+      "question_sha256": "e5d10932b65515f7a40aaf28b1eeac5f6f06c526d3e1928a92b228858bde74cf",
+      "review_pool_sha256": "19fd06f5b57dd0600fcfd513cd010a96ba5339acf5e094ef16acd6f9957d63f8",
+      "sample_id": "sample-0008",
+      "source_pool_id": "pool-0005",
+      "supplied_supported_content_coverage": "not_covered",
+      "unchanged_blind_finding_sha256": "8c4838c44739c09e53cc5688a82f0afd0ff17aa46e9d2c5c410c6f1fb6de8e9a"
+    },
+    {
+      "assessment_summary_unchanged": "An explicit local verification limit is surrounded by an unsupported symbolic reinterpretation of a factual acquisition question.",
+      "blind_finding_pointer": "/samples/8",
+      "canonical_sample_sha256": "5f37e0a4fdd073fc384dee2673cc63bc6071c6b0a9a407127a9fc44da254b3b5",
+      "case_id": "heldout-qa26-no-priors-2023-turn-00297",
+      "citation_presence": "violated",
+      "claim_label_counts": {
+        "nonfactual": 1,
+        "unsupported": 4
+      },
+      "condition": "style",
+      "coverage_overall": "partially_covered",
+      "human_ratings_unchanged": {
+        "answer_quality": null,
+        "factual_support": null,
+        "quotation_memorization": null,
+        "repetitive_mannerisms": null,
+        "style_similarity": null,
+        "temporal_fidelity": null,
+        "unsupported_first_person": null
+      },
+      "observed_citation_markers": [],
+      "output_sha256": "0910a2924eaa2b87a1b8d5606de82719b3429e77f6b4b018fa0156614cafe17f",
+      "question_sha256": "2cb0801e60db04bc69198ad09a7f6e1fb5828c75c3b5bb8ba29ac39aa81067f7",
+      "review_pool_sha256": "6509138c51449a730f72d5bb434e5d22ef740d951fd9f3eb179c2648e3e20495",
+      "sample_id": "sample-0009",
+      "source_pool_id": "pool-0006",
+      "supplied_supported_content_coverage": "not_applicable",
+      "unchanged_blind_finding_sha256": "b4eca252813cf040c1019c33eca7211d9591499ca9a208a9c9e7a23f4673a859"
+    }
+  ],
+  "schema_version": "jensen-heldout-postblind-comparison.v1",
+  "scope": "Post-unblinding mapping of immutable agent findings plus separate descriptive reference comparison; no model runs or new source-support grading.",
+  "sequencing": {
+    "blinded_findings_original_sha256": {
+      "blinded-findings.json": "bd6ba567b468570525d09477e617d97498906e696ad299d6409baac9c5f28c03",
+      "blinded-findings.md": "d31c13c89e12a37db37a1066d356ac5919a5375103841dddbef31752a9171637"
+    },
+    "blinded_findings_preserved_before_unblinding_at_commit": "e3ed0796e0124a068f84856985c35839040b4e88",
+    "fresh_readback_receipt": {
+      "condition_key_or_references_opened": false,
+      "file_id": "file_00000000f12881f58e41d211e5653a72",
+      "file_name": "jensen-m6-heldout-agent-review-v1.tar.gz",
+      "human_review": "ungraded",
+      "library_file_id": "libfile_fde3_f-84b320f4e8ec819181517187e064e55f_a18ece08681081918d81df44f69c4b1f",
+      "review_samples": 9,
+      "schema_version": "jensen-agent-review-fresh-readback.v1",
+      "sha256": "a01e60bef3fa6025f54c2e79e7941be91bbd77c18b596d011899050b1c4791f9",
+      "size_bytes": 21367,
+      "status": "fresh_archive_and_every_payload_verified",
+      "verified_payload_files": 4
+    },
+    "fresh_readback_receipt_file_sha256": "c35991c77b71f57c5efd58b4288e7797c2cffec91084fb967252261c3a9f8458",
+    "private_key_and_references_opened_only_after_preservation": true,
+    "source_collection_archive_sha256": "627c1e741e726594538fde447b332adf365ad305cd0f6c3a617c35f126f176ee",
+    "source_packet_members_match_verified_archive": true
+  }
+}

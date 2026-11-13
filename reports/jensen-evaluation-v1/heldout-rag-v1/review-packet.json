@@ -1,0 +1,31 @@
+{
+  "schema_version": "jensen-rag-review-packet-preservation.v1",
+  "status": "saved_and_fresh_readback_verified",
+  "artifact": {
+    "artifact_id": "jensen-m6-heldout-rag-review-packet-v1",
+    "role": "separate-rag-supplied-evidence-agent-review-packet",
+    "review_samples": 4,
+    "source_pools": 6,
+    "file_name": "jensen-m6-heldout-rag-review-packet-v1.tar.gz",
+    "file_id": "file_000000002c90821290fb1e53b63465d1",
+    "library_file_id": "libfile_fde3_f-e32d2ce38c4881919996842bacaf28be_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 34360,
+    "sha256": "5ebceab4cf2e7c9f8a426d3fd31c306345ebbc86f69ab1925235c553a4ee9ac4",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "archive_members_sha256": {
+    "rag-reviewer-packet-v1/manifest.json": "f567c3179139440e6402792fa3d20fea3b2287470585ec8bbcae23e3eaf127e3",
+    "rag-reviewer-packet-v1/private/reference-answers.json": "a282739f63da5866ac92b3c65789780a9900f7414bdb865fe7c21e52af845ddd",
+    "rag-reviewer-packet-v1/private/execution-diagnostics.json": "8db4a800349fba366fcc254b789589a039868d78874d74886f7511e90cb4d633",
+    "rag-reviewer-packet-v1/private/input-manifest.json": "79f62e0d33f11b4da833c2fbb8662a4f294c30d8dda34765f5ac4b4ef4733783",
+    "rag-reviewer-packet-v1/reviewer/rubric.md": "d7e6db218c0fb29110583930797d9e824e802ce10ca9d8447f9acf55e03fcfcd",
+    "rag-reviewer-packet-v1/reviewer/README.md": "82b516cda48b117f11b6ef956021b1ff040f3e2d93742667464c6eb1ac7c5271",
+    "rag-reviewer-packet-v1/reviewer/source-pools.json": "ae22a956d7a8cc4b729cc057073bee805863a5df01ba131be36258dc0ecff380",
+    "rag-reviewer-packet-v1/reviewer/samples.json": "2026e1e98cfdb994dda8f3b977838cad5cc2d23b581885e7d0d7557600b91449"
+  },
+  "semantic_support_review": "pending",
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "share_only": "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1/text-evaluation-v1/rag-review-readback-v1/rag-reviewer-packet-v1/reviewer"
+}

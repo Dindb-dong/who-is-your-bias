@@ -1,0 +1,267 @@
+{
+  "schema_version": "persona-coverage.v1",
+  "generated_at": "2026-11-12T17:32:46.123525+00:00",
+  "corpus": {
+    "schema_version": "qa-corpus-report.v1",
+    "corpus_id": "jensen-huang-original-2026-11-13.v1",
+    "materialization": "full_selected_exchanges_local",
+    "question_answer_records": 554,
+    "training_question_answers": 410,
+    "complete_exchanges": 551,
+    "excerpts": 3,
+    "taxonomy_version": "situations.v1",
+    "covered_training_situations": [
+      "conversation"
+    ],
+    "uncovered_situations": [
+      "advice",
+      "challenge",
+      "disclosure_request",
+      "explanation",
+      "humor",
+      "praise",
+      "reflection"
+    ],
+    "reviewer_types": [
+      "agent"
+    ]
+  },
+  "source_events": 9,
+  "registered_events": 14,
+  "fresh_test_events_reserved": 2,
+  "fresh_test_exchanges_acquired": 0,
+  "projections": {
+    "factual": 410,
+    "text_style": 551,
+    "aligned_speech": 0,
+    "visible_behavior": 0
+  },
+  "accepted_speech_hours": 0,
+  "raw_recording_hours": null,
+  "target_speaker_audio_hours": null,
+  "source_reports": [
+    {
+      "source_id": "lex-494",
+      "event_family_id": "lex-494",
+      "status": "extracted",
+      "source_url": "https://lexfridman.com/jensen-huang-transcript/",
+      "published_at": "2026-03-23",
+      "acquired_at": "2026-11-12T17:25:07.291498+00:00",
+      "artifact_sha256": "3e2976d8af8b3a196eea3614761d107997d9c8f536240121a331d56cf8327ece",
+      "transcript_sha256": "dc40f3ba83bb3734f76147f62b565d195cd4bc0376dc68725548f8faf42173a0",
+      "attributed_turns": 293,
+      "candidate_exchanges": 146,
+      "accepted_exchanges": 146,
+      "target_speaker_words": 16928,
+      "adapter_version": "jensen-publisher-dialogue.v2",
+      "adapter_sha256": "9fda523b7a404de115a7cddda6b0354486a78cc72b83bd878c5dc4707e5b2f67",
+      "extraction_audit": {
+        "speaker_basis": "explicit_publisher_labels_only",
+        "corrections": [],
+        "numeric_speech_clock_verified": false
+      }
+    },
+    {
+      "source_id": "dwarkesh-2026",
+      "event_family_id": "dwarkesh-2026",
+      "status": "extracted",
+      "source_url": "https://www.dwarkesh.com/p/jensen-huang",
+      "published_at": "2026-04-15",
+      "acquired_at": "2026-11-12T17:25:12.726526+00:00",
+      "artifact_sha256": "0026262f7e086a6e4c1b09054f1fe9ae36b07838877db086cf9849abca600353",
+      "transcript_sha256": "d9cdd622f80c72c8584a32f5206500b99f67672bbf345d7791ccd5c910bf2d4c",
+      "attributed_turns": 181,
+      "candidate_exchanges": 90,
+      "accepted_exchanges": 90,
+      "target_speaker_words": 10942,
+      "adapter_version": "jensen-publisher-dialogue.v2",
+      "adapter_sha256": "9fda523b7a404de115a7cddda6b0354486a78cc72b83bd878c5dc4707e5b2f67",
+      "extraction_audit": {
+        "speaker_basis": "explicit_publisher_labels_only",
+        "corrections": [],
+        "numeric_speech_clock_verified": false
+      }
+    },
+    {
+      "source_id": "acquired-2023",
+      "event_family_id": "acquired-2023",
+      "status": "extracted",
+      "source_url": "https://www.acquired.fm/episodes/jensen-huang#transcript",
+      "published_at": "2023-10-16",
+      "acquired_at": "2026-11-12T17:25:18.251359+00:00",
+      "artifact_sha256": "d1625a4cb9195b6b1fbbacaf53aa2ae7364a28f0a60436f0ac666db69bc75b82",
+      "transcript_sha256": "54126a9d73a535b4e814453fb415ffce4541d015af4e93fe3a24e6cb8caac18d",
+      "attributed_turns": 232,
+      "candidate_exchanges": 97,
+      "accepted_exchanges": 97,
+      "target_speaker_words": 9633,
+      "adapter_version": "jensen-publisher-dialogue.v2",
+      "adapter_sha256": "9fda523b7a404de115a7cddda6b0354486a78cc72b83bd878c5dc4707e5b2f67",
+      "extraction_audit": {
+        "speaker_basis": "explicit_publisher_labels_only",
+        "corrections": [],
+        "numeric_speech_clock_verified": false
+      }
+    },
+    {
+      "source_id": "stripe-sessions-2024",
+      "event_family_id": "stripe-sessions-2024",
+      "status": "extracted",
+      "source_url": "https://stripe.com/gb/sessions/2024/a-conversation-with-nvidias-jensen-huang",
+      "published_at": "2024-05-21",
+      "acquired_at": "2026-11-12T17:25:23.805151+00:00",
+      "artifact_sha256": "bbbadbeed233f4213555264fa97502b9f4a7661678590076b8bb00349b1e1307",
+      "transcript_sha256": "06719253ec026cd6b23bd373c4f9c942c15e5023749ab262c48e34b3f894932e",
+      "attributed_turns": 195,
+      "candidate_exchanges": 97,
+      "accepted_exchanges": 97,
+      "target_speaker_words": 6840,
+      "adapter_version": "jensen-publisher-dialogue.v2",
+      "adapter_sha256": "9fda523b7a404de115a7cddda6b0354486a78cc72b83bd878c5dc4707e5b2f67",
+      "extraction_audit": {
+        "speaker_basis": "explicit_publisher_labels_only",
+        "corrections": [],
+        "numeric_speech_clock_verified": false
+      }
+    },
+    {
+      "source_id": "strange-loop-2025",
+      "event_family_id": "strange-loop-2025",
+      "status": "extracted",
+      "source_url": "https://sanalabs.com/strange-loop/jensen-huang",
+      "published_at": "2025-06-26",
+      "acquired_at": "2026-11-12T17:25:29.473675+00:00",
+      "artifact_sha256": "c99b701b2dc6e1dd05a3d06a1f791266e5c195829822b4ccf5160ea9d2391123",
+      "transcript_sha256": "0a20f6a3125d76db3442dca28140d8cb76656582ce928deb74fd8c5965890fa1",
+      "attributed_turns": 48,
+      "candidate_exchanges": 24,
+      "accepted_exchanges": 24,
+      "target_speaker_words": 6305,
+      "adapter_version": "jensen-publisher-dialogue.v2",
+      "adapter_sha256": "9fda523b7a404de115a7cddda6b0354486a78cc72b83bd878c5dc4707e5b2f67",
+      "extraction_audit": {
+        "speaker_basis": "explicit_publisher_labels_only",
+        "corrections": [
+          {
+            "block": 277,
+            "reason": "publisher_trailing_topic_tags",
+            "before_sha256": "b674bd0a1a3557f9a33662060e6c3ac7d45393303c1544b2e7cd118ca218113f",
+            "after_sha256": "543f873b76c4a257e492834ba21a84827543d35336819c0ee05bbf72330728e8"
+          }
+        ],
+        "numeric_speech_clock_verified": false
+      }
+    },
+    {
+      "source_id": "csis-2025",
+      "event_family_id": "csis-2025",
+      "status": "extracted",
+      "source_url": "https://www.csis.org/analysis/nvidias-jensen-huang-securing-american-leadership-ai",
+      "published_at": "2025-12-03",
+      "acquired_at": "2026-11-12T17:25:34.919728+00:00",
+      "artifact_sha256": "cfb6ea2f6671a99dacd10744321ecc23b52605448801f37164acb47301ce7c2a",
+      "transcript_sha256": "5fec313d030f1119f3477cf546bc085f459711806d9b75ade32451f0a7dac4ba",
+      "attributed_turns": 73,
+      "candidate_exchanges": 36,
+      "accepted_exchanges": 36,
+      "target_speaker_words": 5884,
+      "adapter_version": "jensen-publisher-dialogue.v2",
+      "adapter_sha256": "9fda523b7a404de115a7cddda6b0354486a78cc72b83bd878c5dc4707e5b2f67",
+      "extraction_audit": {
+        "speaker_basis": "explicit_publisher_labels_only",
+        "corrections": [],
+        "numeric_speech_clock_verified": false
+      }
+    },
+    {
+      "source_id": "stanford-vftt-2024",
+      "event_family_id": "stanford-vftt-2024",
+      "status": "extracted",
+      "source_url": "https://www.gsb.stanford.edu/insights/jensen-huang-how-use-first-principles-thinking-drive-decisions",
+      "published_at": "2024-04-25",
+      "acquired_at": "2026-11-12T17:25:40.366062+00:00",
+      "artifact_sha256": "aa9676a4766469e4e99bb36b104e46b88186f0b739229921446bc695bf3065c3",
+      "transcript_sha256": "bcbf6f51dc10e81473c60997d26419c2b8e9aebe0ceae5e56b23c9e538c7d2d9",
+      "attributed_turns": 42,
+      "candidate_exchanges": 20,
+      "accepted_exchanges": 20,
+      "target_speaker_words": 7596,
+      "adapter_version": "jensen-publisher-dialogue.v2",
+      "adapter_sha256": "9fda523b7a404de115a7cddda6b0354486a78cc72b83bd878c5dc4707e5b2f67",
+      "extraction_audit": {
+        "speaker_basis": "explicit_publisher_labels_only",
+        "corrections": [],
+        "numeric_speech_clock_verified": false
+      }
+    },
+    {
+      "source_id": "yc-startup-school-2026",
+      "event_family_id": "yc-startup-school-2026",
+      "status": "extracted",
+      "source_url": "https://www.ycombinator.com/library/Tq-jensen-huang-the-mindset-that-built-nvidia",
+      "published_at": "2026-07-27",
+      "acquired_at": "2026-11-12T17:25:51.898546+00:00",
+      "artifact_sha256": "8f946df22e0994a1ed6a48f9ef860e4d5e0ab43a49809aa8a67079e49f5f4632",
+      "transcript_sha256": "90812c0459b161b8263b68b9959669e4fd1b9918b07039cf3e6f2f7986d95be1",
+      "attributed_turns": 56,
+      "candidate_exchanges": 28,
+      "accepted_exchanges": 28,
+      "target_speaker_words": 6980,
+      "adapter_version": "jensen-publisher-dialogue.v2",
+      "adapter_sha256": "9fda523b7a404de115a7cddda6b0354486a78cc72b83bd878c5dc4707e5b2f67",
+      "extraction_audit": {
+        "speaker_basis": "explicit_publisher_labels_only",
+        "corrections": [],
+        "numeric_speech_clock_verified": false
+      }
+    },
+    {
+      "source_id": "goldman-sachs-2024",
+      "event_family_id": "goldman-sachs-2024",
+      "status": "extracted",
+      "source_url": "https://www.goldmansachs.com/insights/talks-at-gs/jensen-huang",
+      "published_at": "2024-11-11",
+      "acquired_at": "2026-11-12T17:27:08.029164+00:00",
+      "artifact_sha256": "333472564ded6c150d77d64cad84036e180b88567c9afda2afd8368ee0a4ff0b",
+      "transcript_sha256": "2596639d2b737453d22185cbbfcf66e1288810d8a77a87720837da57aea69b40",
+      "attributed_turns": 33,
+      "candidate_exchanges": 16,
+      "accepted_exchanges": 16,
+      "target_speaker_words": 4117,
+      "adapter_version": "jensen-publisher-dialogue.v2",
+      "adapter_sha256": "9fda523b7a404de115a7cddda6b0354486a78cc72b83bd878c5dc4707e5b2f67",
+      "extraction_audit": {
+        "speaker_basis": "explicit_publisher_labels_only",
+        "corrections": [],
+        "numeric_speech_clock_verified": false
+      }
+    }
+  ],
+  "rejection_counts": {},
+  "rejected": [],
+  "temporal_coverage": {
+    "2023": 1,
+    "2025": 2,
+    "2026": 3,
+    "2024": 3
+  },
+  "event_dominance": {
+    "acquired-2023": 97,
+    "csis-2025": 36,
+    "dwarkesh-2026": 90,
+    "goldman-sachs-2024": 16,
+    "lex-494": 146,
+    "stanford-vftt-2024": 20,
+    "strange-loop-2025": 24,
+    "stripe-sessions-2024": 97,
+    "yc-startup-school-2026": 28
+  },
+  "recipe_sha256": "0b5849ad18c0e89ba5a8a2de3dd5284c66da254ede5a2db22a67f474c37428d6",
+  "source_registry_sha256": "4d3f84d717dc88a77fb300866d564f20f1fd4556172366896ecbb6253d7f420d",
+  "limitations": [
+    "Structural agent review is not human review or factual-entailment evaluation.",
+    "Repeated/quoted semantic duplicates beyond exact normalized wording remain to be reviewed.",
+    "Source text does not establish clean speech duration, 2026 appearance, trained identity or efficacy.",
+    "New holdouts remain reserved and unacquired; this is a development data expansion."
+  ]
+}

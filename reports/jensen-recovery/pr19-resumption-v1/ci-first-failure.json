@@ -1,0 +1,169 @@
+{
+  "schema_version": "jensen-ci-failure-artifact-receipt.v1",
+  "run_id": 43372847097,
+  "head_sha": "2a5ad37d5abb51ed9ef9273d5df0a56b5259eaf4",
+  "github_artifact_id": 14014140364,
+  "github_sha256": "06b83e76b5cfb5ea679e2fe9e296126ad8ab224bb3f0fc2a69e888a5dc87207f",
+  "file_name": "jensen-ci-43372847097-diagnostics.zip",
+  "file_id": "file_000000004d5481f5887490553146b1ea",
+  "library_file_id": "libfile_fde3_f-1aa3cda00e4481919851f2edab41cff1_a18ece08681081918d81df44f69c4b1f",
+  "size_bytes": 22841495,
+  "sha256": "06b83e76b5cfb5ea679e2fe9e296126ad8ab224bb3f0fc2a69e888a5dc87207f",
+  "verification_status": "fresh-archive-and-every-payload-byte-verified",
+  "verified_payload_files": 37,
+  "payloads": {
+    "playwright-report/data/0e0429846b80233f7499a6a8b603012660a81a84.png": {
+      "bytes": 234961,
+      "sha256": "acd74436dc33e1bc328bb9e9db3b72f12508ebad42dc7ee5eb9e859894d494f0"
+    },
+    "playwright-report/data/141b6cf953423280ca96a635a6eea942520c3507.png": {
+      "bytes": 422016,
+      "sha256": "0ffc35d7a84f927eb893abd840425d8ab35eb050eb9d9a2f251b19f7b88b68fd"
+    },
+    "playwright-report/data/90f356713bc57fae4d72ca0c78334b53e4a605b1.zip": {
+      "bytes": 8786009,
+      "sha256": "bbc358868fd3854a56d207d90b5742f60e43c3c766ca45317318ee85f865f22b"
+    },
+    "playwright-report/data/934697c9bcfcdb1412d4828e5c1395c231bb8e31.png": {
+      "bytes": 494059,
+      "sha256": "f9b3fa20c3cec01796cd2fa7829f0befe77d1a48bbb2f79cb4aaf46b28d2d46b"
+    },
+    "playwright-report/data/b43c9640b3c6e91eab099669a1b87d3b0668fda4.png": {
+      "bytes": 122886,
+      "sha256": "d17e2d3b2e0ff8259b9cc134de03a46664b44a50f36ff09864a754101d7f279c"
+    },
+    "playwright-report/data/dbaa8cddcc46184fcfdccf19598ee8ecec984de1.md": {
+      "bytes": 20089,
+      "sha256": "5bc97faffb53e9bcf3717943b594187fedd042e4fbcbbf762b68a0e7fd3340c9"
+    },
+    "playwright-report/index.html": {
+      "bytes": 657830,
+      "sha256": "6bc8b396bb9ac70af1aa1da0a560dc178a69062ea8a10161410b6b86fcc88a22"
+    },
+    "playwright-report/trace/assets/codeMirrorModule-DNqxPF-E.js": {
+      "bytes": 307383,
+      "sha256": "53102e1a7795f44c51b4f4172f9493d94922892a1f5cefe31edf50278e0b89cd"
+    },
+    "playwright-report/trace/assets/defaultSettingsView-BQT9Z6FV.js": {
+      "bytes": 669380,
+      "sha256": "807a114bcf1e58a0f46a931b42ae3b94b1ba049d3d6a308f869dea12e9d15034"
+    },
+    "playwright-report/trace/assets/rolldown-runtime-QTnfLwEv.js": {
+      "bytes": 694,
+      "sha256": "5db5ba82eef00d1dee7e86e663098c9427d01183a88d357437daff295aec3e75"
+    },
+    "playwright-report/trace/assets/urlMatch-Cgl6axSs.js": {
+      "bytes": 806,
+      "sha256": "2d35d162cc21790c6adc218fbd1c3ef77865646b50f60157e04715f48974d182"
+    },
+    "playwright-report/trace/codeMirrorModule.-QdMvsKi.css": {
+      "bytes": 6251,
+      "sha256": "20be824a82832b62cc04642d31da3c609fd280b23f1cdcb1e622c4f40aac5ab8"
+    },
+    "playwright-report/trace/codicon.DCmgc-ay.ttf": {
+      "bytes": 80340,
+      "sha256": "0f1d5219934e96e83b8db162d60b4d8c09b5de1e7d38031cbafe4a3c0f2889c9"
+    },
+    "playwright-report/trace/defaultSettingsView.C8BeHuxd.css": {
+      "bytes": 107270,
+      "sha256": "278101b68ab48ee6323a6afbf4e0e629324e10e96902a62a0875643a1bba3d94"
+    },
+    "playwright-report/trace/index.B5WWZ7O0.js": {
+      "bytes": 6642,
+      "sha256": "9789a9a4d7ed850d2bd20d420f404c1eda41a99d2547f556a182b7f8e18216d5"
+    },
+    "playwright-report/trace/index.B_TqY17P.css": {
+      "bytes": 2055,
+      "sha256": "08a212fcacae1866f44f065654afcc4c7d03409c68c74b3315c5bda17a0ca003"
+    },
+    "playwright-report/trace/index.html": {
+      "bytes": 2451,
+      "sha256": "91ca3298b7beaf6fb7ed8448de516870fe7b625e57af10eba574fe009cc12157"
+    },
+    "playwright-report/trace/manifest.webmanifest": {
+      "bytes": 429,
+      "sha256": "d8540500603a32a39fe7e5a0375dc0f9ebafd11118e06a846db7efc608223ab9"
+    },
+    "playwright-report/trace/playwright-logo.svg": {
+      "bytes": 5033,
+      "sha256": "6b0a4367bdeab10995bc239278f04c68c10e48adbec15e799e01909a0d66dcb9"
+    },
+    "playwright-report/trace/snapshot.-ChLTbql.js": {
+      "bytes": 650,
+      "sha256": "339b2b5c67ef769f60fe959f78a3cfa42b2b8833e30f19cd32bf5194efe833b6"
+    },
+    "playwright-report/trace/snapshot.html": {
+      "bytes": 389,
+      "sha256": "7b889f89c715eadd359d10462e3d8b6292cc632a7a86de75b07e8fc9934d1972"
+    },
+    "playwright-report/trace/sw.bundle.js": {
+      "bytes": 96720,
+      "sha256": "f2a3172345fbf372075d51204139002fe80dc573714a5c7508b581c049f94aca"
+    },
+    "playwright-report/trace/uiMode.CyMfwkXJ.css": {
+      "bytes": 54590,
+      "sha256": "fb403cf0b07007bc1d771e29737f7408924da300e2fab8b289a3ef2e8fc08d7b"
+    },
+    "playwright-report/trace/uiMode.DuLwZHRf.js": {
+      "bytes": 37909,
+      "sha256": "185efd95559d290f77cb5bb7c4efd58aeb8f0f74a5ae0b31d40d7a5413f0314c"
+    },
+    "playwright-report/trace/uiMode.html": {
+      "bytes": 815,
+      "sha256": "777b88825dacada77675168a4b44e17406992b85c7245cdde8588012cc42ba8b"
+    },
+    "playwright-report/trace/xtermModule.kHJ-D0s7.css": {
+      "bytes": 2853,
+      "sha256": "0dd60056134e6a2994a86b59a1e9789b9f04e92924da109aef8c923acaf08ce5"
+    },
+    "test-results/jensen-attention-Jensen-fi-d4d14-sets-preview-motion-cleanly-desktop/attachments/actual-fitted-avatar-and-hands-7c5959123e85b7d3419621cad4c9c842760ed1ab.png": {
+      "bytes": 122886,
+      "sha256": "d17e2d3b2e0ff8259b9cc134de03a46664b44a50f36ff09864a754101d7f279c"
+    },
+    "test-results/jensen-attention-Jensen-fi-d4d14-sets-preview-motion-cleanly-desktop/jensen-fitted-hands-desktop.png": {
+      "bytes": 122886,
+      "sha256": "d17e2d3b2e0ff8259b9cc134de03a46664b44a50f36ff09864a754101d7f279c"
+    },
+    "test-results/jensen-attention-Jensen-fi-d4d14-sets-preview-motion-cleanly-mobile/attachments/actual-fitted-avatar-and-hands-14d15c20e2f7f318bae8c394e9cea9826d9f1a23.png": {
+      "bytes": 422016,
+      "sha256": "0ffc35d7a84f927eb893abd840425d8ab35eb050eb9d9a2f251b19f7b88b68fd"
+    },
+    "test-results/jensen-attention-Jensen-fi-d4d14-sets-preview-motion-cleanly-mobile/jensen-fitted-hands-mobile.png": {
+      "bytes": 422016,
+      "sha256": "0ffc35d7a84f927eb893abd840425d8ab35eb050eb9d9a2f251b19f7b88b68fd"
+    },
+    "test-results/jensen-attention-replays-a-df972-clock-and-composed-channels-desktop/error-context.md": {
+      "bytes": 20089,
+      "sha256": "5bc97faffb53e9bcf3717943b594187fedd042e4fbcbbf762b68a0e7fd3340c9"
+    },
+    "test-results/jensen-attention-replays-a-df972-clock-and-composed-channels-desktop/test-failed-1.png": {
+      "bytes": 234961,
+      "sha256": "acd74436dc33e1bc328bb9e9db3b72f12508ebad42dc7ee5eb9e859894d494f0"
+    },
+    "test-results/jensen-attention-replays-a-df972-clock-and-composed-channels-desktop/trace.zip": {
+      "bytes": 8786009,
+      "sha256": "bbc358868fd3854a56d207d90b5742f60e43c3c766ca45317318ee85f865f22b"
+    },
+    "test-results/jensen-attention-replays-a-df972-clock-and-composed-channels-mobile/attachments/recorded-generated-audio-replay-after-cancellation-no-live-inference-8b139895d84540506ec15a6129f1188592ab08f3.png": {
+      "bytes": 494059,
+      "sha256": "f9b3fa20c3cec01796cd2fa7829f0befe77d1a48bbb2f79cb4aaf46b28d2d46b"
+    },
+    "test-results/jensen-attention-replays-a-df972-clock-and-composed-channels-mobile/recorded-generated-audio-mobile.png": {
+      "bytes": 494059,
+      "sha256": "f9b3fa20c3cec01796cd2fa7829f0befe77d1a48bbb2f79cb4aaf46b28d2d46b"
+    },
+    "test-results/jensen-attention-runs-actu-8034b-ions-and-returns-after-Stop-desktop/jensen-attention-live-preview.png": {
+      "bytes": 296608,
+      "sha256": "60810a32ef83dd28a1fc5bcdb926706c0860f7935957d90a17dbe35eefed9c1a"
+    },
+    "test-results/jensen-attention-runs-actu-8034b-ions-and-returns-after-Stop-mobile/jensen-attention-live-preview.png": {
+      "bytes": 743587,
+      "sha256": "cd0b08231a22de09ccd572e68b85a871255b919e41a4729e743ed1bcb7453dd8"
+    }
+  },
+  "failed_test": "desktop recorded generated-audio clock gap",
+  "maximum_clock_difference_ms": 754.9240000000002,
+  "required_less_than_ms": 750,
+  "failure_retained": true,
+  "gate_relaxed": false
+}

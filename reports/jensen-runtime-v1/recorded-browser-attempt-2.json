@@ -1,0 +1,73 @@
+{
+  "schema_version": "recorded-generated-audio-browser-attempt.v1",
+  "attempt": 2,
+  "passed": false,
+  "github_run_id": 43288581728,
+  "github_job_id": 131429381797,
+  "github_url": "https://github.com/Dindb-dong/who-is-your-bias/actions/runs/43288581728",
+  "head": "9fe8532149830c8f304eea15c88b284386a528f6",
+  "archive": {
+    "run_id": "jensen-recorded-audio-browser-attempt-2",
+    "role": "Actual intermediate desktop pass and mobile screenshot-expiry failure, before screenshot-order correction",
+    "file_name": "studio-browser-9fe8532-intermediate.zip",
+    "file_id": "file_00000000998c81fd8ed8085140948bfa",
+    "library_file_id": "libfile_fde3_f-47624eb96eac8191bed4ada80de7c96e_a18ece08681081918d81df44f69c4b1f",
+    "bytes": 21133105,
+    "sha256": "bc9d4b8ad8eab2c795b181edc05609a1f468b0b199c5f9515fafd1db78124cf3",
+    "status": "uploaded_and_fresh_readback_sha256_verified",
+    "verified_at": "2026-11-12T19:27:21.704925+00:00",
+    "github_run_id": 43288581728,
+    "github_artifact_id": 13976028257,
+    "github_head": "9fe8532149830c8f304eea15c88b284386a528f6"
+  },
+  "existing_checks_passed": {
+    "web_build_typecheck_tests": true,
+    "focused_python": true,
+    "historical_browser": 30,
+    "existing_jensen_browser": 20
+  },
+  "new_recorded_audio_cases_passed": 1,
+  "new_recorded_audio_cases_failed": 1,
+  "cases": [
+    {
+      "project": "desktop",
+      "passed": true,
+      "measurements": {
+        "schema_version": "recorded-generated-audio-browser.v1",
+        "project": "desktop",
+        "condition": "Recorded generated-audio replay \u2014 no live inference.",
+        "audio_file": "reports/voice/jensen-2026-11-13/listening/adapted-en_multisentence.wav",
+        "audio_sha256": "ca5664747699df7826d4c380c0d26f6b36ff34157df742276945ffbab62086f2",
+        "audio_duration_seconds": 9.92,
+        "avatar_sha256": "dea0c921fb7d5668527bd8ee9082f382b14e8d300c43936842e15356dc7d90cd",
+        "articulation": "actual waveform amplitude; no phoneme alignment",
+        "gestures": "authored fixture cues; not a learned personal policy",
+        "live_inference": false,
+        "simultaneous_neural_providers": false,
+        "acoustic_latency_measured": false,
+        "cancelled_before_natural_end": true,
+        "media_ms_before_stop": 7055.341,
+        "real_media_instances": 1,
+        "real_audio_contexts": 1,
+        "playing_frames": 34,
+        "composed_frames": 32,
+        "maximum_clock_difference_ms": 490.6669999999999,
+        "channel_maxima": {
+          "jaw": 0.7103,
+          "blink": 0.0779,
+          "smile": 0.3575,
+          "arm": 0.3867,
+          "hand": 0.2668,
+          "finger": 0.063
+        },
+        "cancelled_to_zero_clock_and_neutral_channels": true
+      }
+    },
+    {
+      "project": "mobile",
+      "passed": false,
+      "failure": "Screenshot preceded6500ms clock poll; media had naturally ended and observed clock reset0. Same acquisition-order issue as attempt1."
+    }
+  ],
+  "code_scope": "This head contains the earlier Stop-before-assertions fix, but predates4059e1f screenshot-after-cancellation correction. No acceptance threshold was changed."
+}

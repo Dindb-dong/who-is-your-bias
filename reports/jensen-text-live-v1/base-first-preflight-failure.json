@@ -1,0 +1,111 @@
+{
+  "schema_version": "jensen-neural-text-live-result.v1",
+  "status": "failed",
+  "condition": "base",
+  "started_at": "2026-11-13T05:22:13.924362+00:00",
+  "finished_at": "2026-11-13T05:22:23.928190+00:00",
+  "protocol_sha256": "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+  "transport": "actual loopback TCP: HTTP client -> main API -> local neural provider",
+  "voice_enabled": false,
+  "human_review": "ungraded",
+  "quality_claim": false,
+  "checks": [],
+  "cases": [],
+  "cleanup": {
+    "main_api_stopped": false,
+    "language_stopped": true,
+    "language_forced_kill": false,
+    "language_pid": 24,
+    "language_returncode": -15
+  },
+  "failure_type": "ValueError",
+  "elapsed_seconds": 10.004,
+  "timing_scope": "one sequential functional run; warmup excluded; no benchmark or condition speed comparison",
+  "preflight": {
+    "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+    "snapshot_sha256": "bbb709d3bf8cafb794a762808a36ffad0e9a7afffa4aca5e23b38cfd6c3de904",
+    "snapshot": {
+      "id": "jensen-neural-text-live-base-v1",
+      "as_of": "2026-11-12T18:36:58.188093+00:00",
+      "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+      "current_evidence_since": "2026-01-01",
+      "current_dated_training_sources": 0,
+      "coverage_note": "Snapshot date limits availability; it does not imply contemporary coverage. Unknown event dates remain unknown. Runtime candidate appearance and optional voice are separate from text evidence; this snapshot does not promote likeness or current-position coverage. This separate functional snapshot enables an explicitly selected neural text provider; it establishes no semantic quality or persona fidelity.",
+      "knowledge_version": "jensen-huang-original-2026-11-13.v1",
+      "style_version": "base-model-no-style-adaptation",
+      "voice_version": "disabled-in-neural-text-functional-probe",
+      "appearance_version": "jensen-stylized-default-source-fitted-v3-optional"
+    },
+    "base_identity": {
+      "base_model": "Qwen/Qwen3-1.7B",
+      "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+      "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+      "chat_template_options": {
+        "enable_thinking": false
+      }
+    },
+    "adapter": null
+  },
+  "code_sha256": "e1874d62e251cc4f29ef2eb84c1cfc795181201b24d611b1a5998795b929cdeb",
+  "api_module_sha256": {
+    "api.py": "f6c3761d29ced31abd1b3ce7f30c4b98bb931e357e594aaea823b01ecaa7627b",
+    "engine.py": "7aa48868dedb41aa44926987347aa6fbe8b6e377af13572ef5e1a77fd3f0fac9",
+    "config.py": "dddd8a68115d92db72d390a51e6a188302732b887e00e0efcb59221b26d0ae9d",
+    "corpus.py": "16b9eef8a6fef0e20a7dd4099b470724e793dc14c698313d06fb679b87e9aeb0",
+    "dialogue.py": "3c5aa9b2e959ce501a807711760683c89b069ebff3f0706b3e3bfd1d88c7455e",
+    "motion.py": "719546905f854572cf53cf920754a9d39c5299f7a97108e49254862adaf7861b",
+    "query_policy.py": "95d25a25696cb868d97f7366b033c3e2c425d876181da374c6ec62e48366f30b",
+    "snapshots.py": "28659167b62d4de7354ccbe83ab4cc3c924891d8c6df2418a33d8755e7b51fc2",
+    "bindings.py": "c4adffbb7d911f3b421e087fb229fc7fde2f95ba064b3d10bde5b23643d0fc34",
+    "providers.py": "e92f428eeefff17a35d0992a0951d9a1fb31620aed9d5516d8402712aef1b083",
+    "grounding.py": "046eb67495f730e5fc29c3dd97181948f9fa59e0e1b07619be320bdfc6597007",
+    "retrieval.py": "7a1c316aecdcfcd1b3bffc25430080b2a4c57738708efe61de9237e0acd5627c",
+    "jensen_retrieval.py": "fddc8ceec417fd3c9fd3440ef09438b849793b57c9c24bf595b1fd478d3b8df4"
+  },
+  "supporting_code_sha256": {
+    "tools/runtime_checks/smoke.py": "e2fb8d3ef929c3794417fb5bedda771bd31e3dee9e716e1b1cb8ba600e6aca40",
+    "tools/runtime_checks/runtime.py": "a0b38effd577258342bff5a80ce709648869923313df6e71e441d003020940b2",
+    "services/language/app.py": "8e9ae8d0b2e3be25d6fdbbac830f38c827f567d8bb2e26fb86cb7402ae8ff799",
+    "services/language/engine.py": "4de8fb45c173620e502539273a76ce9e708e8e12fee51060ae61fca8845a633c",
+    "services/language/adapters.py": "ccd92dace3db5065f9af73d26958fcb045fbb3d650f0ead0b10636fe36a185c1",
+    "services/language/schemas.py": "f9bea7bde3338b9b5c2e2c670a9ff7ad26d1857777e9d35c787b7f5ffa75da5e"
+  },
+  "provider_resources": null,
+  "raw_trace_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "passed_checks": 0,
+  "total_checks": 0,
+  "archive": {
+    "schema_version": "m7-operational-fresh-readback.v1",
+    "verified_at": "2026-11-13T05:28:13.633790+00:00",
+    "file_id": "file_00000000637881f58857b889e3506271",
+    "library_file_id": "libfile_fde3_f-153d8615f584819195e9d5788c4da659_a18ece08681081918d81df44f69c4b1f",
+    "file_name": "jensen-m7-base-completion-20261113-v1.tar.gz",
+    "bytes": 14408,
+    "sha256": "eef30c8f3d7e89b49a6e89458cddaa5fe5796fcfb6051014abcc9f12fd086258",
+    "verified_payload_files": 12,
+    "metadata": {
+      "role": "actual-m7-neural-functional-evidence",
+      "name": "m7-base-completion-20261113-v1",
+      "invocation_state": "exited",
+      "child_returncode": 1,
+      "child_stopped": true,
+      "functional_status": "failed",
+      "passed_checks": 0,
+      "total_checks": 0,
+      "protocol_sha256": "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+      "adapter_run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+      "failure_preserved": true
+    },
+    "status": "fresh_readback_archive_and_every_payload_verified"
+  },
+  "failure_classification": {
+    "stage": "actual_provider_identity_preflight",
+    "cause": "Actual health identity includes schema_version=language-model-identity.v1; harness compared the versioned identity to the unversioned frozen payload. All five pinned payload fields matched.",
+    "main_api_started": false,
+    "conversation_cases_attempted": 0,
+    "cancellation_attempted": false,
+    "model_quality_inference": false,
+    "next": "Preserve this failure, require the exact supported schema envelope plus frozen payload, and execute new attempts without changing protocol, prompts, models, token limits or timing limits."
+  }
+}

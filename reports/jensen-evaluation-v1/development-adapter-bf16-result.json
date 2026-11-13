@@ -1,0 +1,763 @@
+{
+  "schema_version": "jensen-matched-condition-result.v1",
+  "recorded_at": "2026-11-12T22:22:15.061219+00:00",
+  "recorded_at_basis": "terminal_supervisor_observation",
+  "condition": "adapter",
+  "exposure": "development",
+  "status": "executed_saved_and_fresh_readback_verified",
+  "loop_status": "completed",
+  "plan_sha256": "cd2bd7340c3eb7d9c1ddc248b78e25d69b8e00c9d246454cf5925e082a1dd030",
+  "contract_sha256": "9c79398b54118f284ffdc6e4592d501e1cc214e77f6a895152ae91019286b6c0",
+  "runtime": {
+    "device": "cpu",
+    "dtype": "bfloat16",
+    "threads": 8,
+    "input_limit": 4096,
+    "output_limit": 160
+  },
+  "planned": 12,
+  "attempted": 12,
+  "completed": 2,
+  "failed": 10,
+  "unattempted": 0,
+  "all_failures_retained": true,
+  "timing": {
+    "first_text_median_ms": 20850.466,
+    "wall_median_ms": 37173.399,
+    "first_text_numeric_count": 2,
+    "wall_numeric_count": 2,
+    "generic_median_population": "completed_only",
+    "numeric_policy": "Finite int/float values per metric; booleans and absent/non-finite values excluded.",
+    "completed_only": {
+      "population_count": 2,
+      "first_text_numeric_count": 2,
+      "first_text_median_ms": 20850.466,
+      "wall_numeric_count": 2,
+      "wall_median_ms": 37173.399
+    },
+    "all_attempts": {
+      "population_count": 12,
+      "first_text_numeric_count": 12,
+      "first_text_median_ms": 24036.338,
+      "wall_numeric_count": 12,
+      "wall_median_ms": 77492.829
+    },
+    "startup_and_excluded_warmup_ms": 18735.559,
+    "whole_process_elapsed_seconds": 949.291,
+    "max_waited_child_rss_bytes": 5062967296
+  },
+  "observed_before": {
+    "identity_sha256": "300560a54349d92f85d9bebd2f16a9d1afe2edc430ec39bef4ccb4d981c0ca97",
+    "adapter_sha256": "11a1cc22a4b3edc931273a2b430e4c201c815d65334d62f0e152d322947da797",
+    "runtime_sha256": "f09c338c9e491f5bd94d33a9a6cd8040303fb2670080e6a43013257406072a23"
+  },
+  "observed_after": {
+    "identity_sha256": "300560a54349d92f85d9bebd2f16a9d1afe2edc430ec39bef4ccb4d981c0ca97",
+    "adapter_sha256": "11a1cc22a4b3edc931273a2b430e4c201c815d65334d62f0e152d322947da797",
+    "runtime_sha256": "f09c338c9e491f5bd94d33a9a6cd8040303fb2670080e6a43013257406072a23"
+  },
+  "server_stopped": true,
+  "artifact": {
+    "artifact_id": "jensen-m6-development-adapter-bf16-v2",
+    "role": "complete-frozen-matched-response-condition",
+    "exposure": "development",
+    "condition": "adapter",
+    "file_name": "jensen-m6-development-adapter-bf16-v2.tar.gz",
+    "file_id": "file_00000000b44081fda2796158d378e4fe",
+    "library_file_id": "libfile_fde3_f-984a5eae272c8191835556c72cd4ea13_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 29193,
+    "sha256": "404c784123e7f61ef4f603cac856e1a663b4dde88df48a241143bdc499b6c1f8",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "verification": {
+    "archive_sha256": true,
+    "condition_file_count": 10,
+    "all_condition_files": true,
+    "all_archive_members": true,
+    "supervisor_and_condition_seals": true,
+    "fresh_readback_directory": "text-evaluation-v1/condition-readbacks/development-adapter-bf16-v2/adapter"
+  },
+  "per_case": [
+    {
+      "case_id": "dev-ko-cuda",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 56220.525,
+      "wall_ms": 130545.159,
+      "usage": {
+        "prompt_tokens": 1058,
+        "completion_tokens": 160,
+        "total_tokens": 1218
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "missing",
+        "unit_count": 13,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-sega",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 29578.203,
+      "wall_ms": 97302.976,
+      "usage": {
+        "prompt_tokens": 1625,
+        "completion_tokens": 160,
+        "total_tokens": 1785
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "missing",
+        "unit_count": 9,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-tsmc",
+      "completed": true,
+      "error": null,
+      "finish_reason": "stop",
+      "first_text_ms": 23907.196,
+      "wall_ms": 31323.281,
+      "usage": {
+        "prompt_tokens": 1415,
+        "completion_tokens": 27,
+        "total_tokens": 1442
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "missing",
+        "unit_count": 3,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-values",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 27120.733,
+      "wall_ms": 92220.614,
+      "usage": {
+        "prompt_tokens": 1307,
+        "completion_tokens": 160,
+        "total_tokens": 1467
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "missing",
+        "unit_count": 14,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-en-accelerated",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 44406.97,
+      "wall_ms": 113274.428,
+      "usage": {
+        "prompt_tokens": 1494,
+        "completion_tokens": 160,
+        "total_tokens": 1654
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "missing",
+        "unit_count": 9,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-followup",
+      "completed": true,
+      "error": null,
+      "finish_reason": "stop",
+      "first_text_ms": 17793.736,
+      "wall_ms": 43023.518,
+      "usage": {
+        "prompt_tokens": 1068,
+        "completion_tokens": 94,
+        "total_tokens": 1162
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "missing",
+        "unit_count": 6,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-correction",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 28594.52,
+      "wall_ms": 90672.367,
+      "usage": {
+        "prompt_tokens": 1444,
+        "completion_tokens": 160,
+        "total_tokens": 1604
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "missing",
+        "unit_count": 7,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-topic-switch",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 24165.48,
+      "wall_ms": 90907.427,
+      "usage": {
+        "prompt_tokens": 1260,
+        "completion_tokens": 160,
+        "total_tokens": 1420
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": true,
+        "status": "missing",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "missing",
+        "unit_count": 12,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-unsupported",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 15269.472,
+      "wall_ms": 61475.584,
+      "usage": {
+        "prompt_tokens": 842,
+        "completion_tokens": 160,
+        "total_tokens": 1002
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "not_required",
+        "unit_count": 20,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-current",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 12579.623,
+      "wall_ms": 54933.385,
+      "usage": {
+        "prompt_tokens": 703,
+        "completion_tokens": 160,
+        "total_tokens": 863
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "not_required",
+        "unit_count": 11,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-en-private",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 13279.788,
+      "wall_ms": 58202.129,
+      "usage": {
+        "prompt_tokens": 815,
+        "completion_tokens": 160,
+        "total_tokens": 975
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "not_required",
+        "unit_count": 20,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    },
+    {
+      "case_id": "dev-ko-future",
+      "completed": false,
+      "error": "provider_finish_length",
+      "finish_reason": "length",
+      "first_text_ms": 14575.034,
+      "wall_ms": 64313.291,
+      "usage": {
+        "prompt_tokens": 713,
+        "completion_tokens": 160,
+        "total_tokens": 873
+      },
+      "validation_errors": [],
+      "identity_check": {
+        "before": "verified",
+        "after": "verified"
+      },
+      "citation_format": {
+        "required": false,
+        "status": "not_required",
+        "valid_ids": [],
+        "invalid_ids": [],
+        "malformed_markers": [],
+        "semantic_entailment": "ungraded"
+      },
+      "citation_coverage": {
+        "status": "not_required",
+        "unit_count": 11,
+        "cited_unit_count": 0,
+        "uncited_unit_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "orphan_marker_count": 0,
+        "method": "sentence_like_trailing_markers_v1",
+        "semantic_support": "ungraded"
+      },
+      "judgments": {
+        "factual_support": null,
+        "temporal_fidelity": null,
+        "style_similarity": null,
+        "answer_quality": null,
+        "unsupported_first_person": null,
+        "repetitive_mannerisms": null,
+        "quotation_memorization": null
+      }
+    }
+  ],
+  "full_raw_outputs": "preserved privately in the verified artifact",
+  "paired_comparison": "pending collection",
+  "semantic_support_review": "ungraded",
+  "human_review": "ungraded",
+  "efficacy_claim": false
+}

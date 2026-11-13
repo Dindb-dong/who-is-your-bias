@@ -20,7 +20,7 @@ from urllib.parse import urlsplit
 from bias.corpus import Corpus, canonical_source_url, source_event_id
 
 from .parsers import PARSER_VERSION, _canonical_turns, _lex_pdf, _pdf_text, canonical_lex, digest, parse, sha_text
-from .pipeline import _normal, collect_source, extract_exchanges, load_registry, read_json, write_json, write_jsonl
+from .pipeline import _normal, collect_source, extract_exchanges, load_registry, read_json, target_speaker, write_json, write_jsonl
 
 
 DATASET_SCHEMA = "persona-heldout-dataset.v1"
@@ -94,15 +94,22 @@ def _documents(path: Path | None, registry: dict, registration: dict) -> dict:
         source = sources.get(identifier)
         if not source or source["split"] != "test" or identifier in result:
             raise ValueError("Document registration requires unique reserved test sources")
-        if item.get("adapter") not in {"lex_publisher_html", "lex_publisher_pdf"}:
+        if item.get("adapter") not in {"lex_publisher_html", "lex_publisher_pdf", "jensen_no_priors_html"}:
             raise ValueError("No reviewed adapter for this held-out document format")
         url = urlsplit(item.get("acquisition_url", ""))
         evidence = urlsplit(item.get("discovery_url", ""))
-        if (url.scheme != "https" or evidence.scheme != "https"
-                or url.hostname != "lexfridman.com" or evidence.hostname != "lexfridman.com"
-                or urlsplit(source["url"]).hostname != "lexfridman.com"
-                or url.username or url.password or url.port not in {None, 443}):
-            raise ValueError("Held-out Lex documents require their original publisher URLs")
+        if item["adapter"] == "jensen_no_priors_html":
+            allowed = (source["id"] == "no-priors-2023" and source.get("persona_id") == "jensen-huang"
+                       and url.hostname == evidence.hostname == "sarah-guo.herokuapp.com"
+                       and url.path == evidence.path == "/blog/jensenhuang"
+                       and urlsplit(source["url"]).hostname == "podcasts.apple.com")
+        else:
+            allowed = (url.hostname == evidence.hostname == "lexfridman.com"
+                       and urlsplit(source["url"]).hostname == "lexfridman.com")
+        if (not allowed or url.scheme != "https" or evidence.scheme != "https"
+                or url.username or url.password or url.port not in {None, 443}
+                or evidence.username or evidence.password or evidence.port not in {None, 443}):
+            raise ValueError("Held-out documents require their reviewed original publisher URLs")
         if not isinstance(item.get("basis"), str) or not item["basis"].strip():
             raise ValueError("Document registration needs a source-identity verification basis")
         result[identifier] = item
@@ -225,7 +232,7 @@ def _case(source: dict, item: dict, transcript: dict) -> dict:
         previous = transcript["turns"][position - 1] if position else None
         if previous is None or previous["text"] != qa["context_before"]:
             raise ValueError("Original held-out context cannot be traced to its publisher turn")
-        context.append({"role": "assistant" if previous["speaker"] == "Elon Musk" else "user", "content": qa["context_before"]})
+        context.append({"role": "assistant" if previous["speaker"] == target_speaker(source) else "user", "content": qa["context_before"]})
     return {"schema_version": CASE_SCHEMA, "purpose": PURPOSE, "id": "heldout-" + item["id"],
             "source_id": source["id"], "source_event_id": source["source_event_id"], "event_family_id": source["event_family_id"],
             "split": "test", "source_url": source["url"], "published_at": source.get("published_at"),
@@ -408,7 +415,7 @@ def load_heldout(directory: Path) -> tuple[dict, list[dict]]:
         report = source_reports.get(item["source_id"], {})
         if (item.get("source_artifact_sha256") != report.get("artifact_sha256")
                 or item.get("transcript_locator", {}).get("transcript_sha256") != report.get("transcript_sha256")
-                or item.get("ingested_at") != report.get("acquired_at") or item.get("respondent") != "Elon Musk"
+                or item.get("ingested_at") != report.get("acquired_at") or item.get("respondent") != target_speaker(source)
                 or item.get("original_language") not in {"en", "ko"}
                 or item.get("review", {}).get("reviewer_type") != "agent"
                 or item.get("review", {}).get("speaker_status") != "publisher_labels_checked"

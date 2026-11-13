@@ -1,0 +1,115 @@
+{
+  "schema_version": "jensen-text-interrupted-owner-recovery.v1",
+  "recorded_at": "2026-11-12T21:45:12.749666+00:00",
+  "status": "checkpoint28_preserved_new_invocation_prepared",
+  "old_owner": {
+    "name": "native4-step0010-to0029",
+    "last_heartbeat_at": "2026-11-12T21:36:15.850863+00:00",
+    "last_reported_state": "running",
+    "observed_exit_code": null,
+    "original_exec_session_probe": "Unknown process id74455",
+    "child_liveness": "not_observable_from_lost_execution_session",
+    "stop_request_written": true,
+    "stop_request_consumed": false
+  },
+  "advisory_lock_probe": {
+    "observed_at": "2026-11-12T21:42:33Z",
+    "mode": "one nonblocking exclusive probe of existing active.lock",
+    "result": "acquired_immediately_and_released_immediately",
+    "scope": "No lock holder at that instant; not a child-exit receipt."
+  },
+  "memory_before_new_launch": {
+    "total_bytes": 10451423232,
+    "available_bytes": 9540055040,
+    "swap_bytes": 0
+  },
+  "checkpoint28": {
+    "optimizer_steps": 28,
+    "cursor": {
+      "epoch": 0,
+      "next_index": 112
+    },
+    "optimizer_state_entries": 392,
+    "archive_bytes": 97097705,
+    "archive_sha256": "73d5cc8ab38d9187974e53e0efd9acd4c3be6005cc0c0852ffb0686cd6b83baa",
+    "checkpoint_metadata_sha256": "396dfb93081b7b9d10853662766d06af64a7b1ddb7b7e70d8e0f4f4856587d67",
+    "actual_loader_verified_before_interruption": true,
+    "both_archives_and_four_payload_hashes_rechecked_after_interruption": true,
+    "old_gate_ack_issued": false,
+    "old_gate_ack_consumed": false
+  },
+  "interpretation": "Lost execution supervision; no OOM attribution and no clean-exit claim. The atomic checkpoint is ahead of the mutable trainer counter because publisher ACK precedes the mutable progress update.",
+  "proposed_continuation": {
+    "name": "native4-step0028-to0029-recovered-v1",
+    "command": [
+      "/workspace/scratch/6f64e1b53384/who-is-your-bias/.venv-inference/bin/python",
+      "-c",
+      "import runpy,torch; torch.set_num_interop_threads(1); runpy.run_module('tools.adaptation',run_name='__main__')",
+      "train-text",
+      "--dataset",
+      "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/text-dataset-v1",
+      "--output",
+      "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/text-adapter-v1-resumed28",
+      "--model",
+      "Qwen/Qwen3-1.7B",
+      "--revision",
+      "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "--device",
+      "cpu",
+      "--precision",
+      "bfloat16",
+      "--rank",
+      "8",
+      "--epochs",
+      "1",
+      "--max-length",
+      "768",
+      "--gradient-accumulation",
+      "4",
+      "--max-steps",
+      "29",
+      "--checkpoint-every",
+      "2",
+      "--gradient-checkpointing",
+      "--resume-from",
+      "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/readback/text-resume-step0028/step-00000028",
+      "--checkpoint-publisher",
+      "[\"/workspace/scratch/6f64e1b53384/who-is-your-bias/.venv/bin/python\",\"-m\",\"tools.adaptation.checkpoint_gate\",\"--handoff\",\"/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/text-checkpoint-gates\",\"--timeout\",\"1800\"]"
+    ],
+    "environment": {
+      "MKL_NUM_THREADS": "4",
+      "OMP_NUM_THREADS": "4",
+      "OPENBLAS_NUM_THREADS": "1",
+      "TOKENIZERS_PARALLELISM": "false"
+    },
+    "output": "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/text-adapter-v1-resumed28",
+    "from_step": 28,
+    "target_step": 29,
+    "executed": false,
+    "isolated_output_preserves_old_run": true
+  },
+  "training_completed": false,
+  "artifact": {
+    "artifact_id": "jensen-text-interrupted-owner-step28-v1",
+    "role": "Preserved lost execution evidence and exact proposed 28-to-29 recovery; no clean exit or OOM inference",
+    "file_name": "jensen-text-interrupted-owner-step28-v1.tar.gz",
+    "file_id": "file_00000000401881fd8bcb0b003d8c0f78",
+    "library_file_id": "libfile_fde3_f-c90780f418a88191b3e87669a99d9236_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 10403,
+    "sha256": "14079b1d84b32b96ccdc18497c4240c17fced4f8b14ce0b763ad1484e4a359c5",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "verification": {
+    "fresh_archive_bytes_and_sha256": true,
+    "all_six_payload_hashes": true
+  },
+  "recovery_payloads_sha256": {
+    "supervisor-last-observed.json": "f02817bacac22ce0c757f6304926843fd4c6f5302bb68bbeeda1599e16c3558c",
+    "old-owner-stop-request.json": "b855a7753a0208d38b05924f12f4c53b78479e0c4d2d2e248a1aeaddd564a865",
+    "recovery-audit.json": "09163b39d0d92ee233ab7c3ec7b3eb78d241d0a7f42dbc97bf051b6e10fcf526",
+    "trainer.log": "dd9c6bd85d35c50daacd05494bb600b4ba6f057e4ba14c29d16d44bec2488215",
+    "checkpoint28-request.json": "3af49880936a224d8dd0d70af855db74c462efe54121b1b92bb6d824343682fa",
+    "trainer-last-mutable-run.json": "c2cc81f288fe5698495889abc2f0d91f33a6980fa1b8e01ab5042ce86e5a50ed"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "schema_version": "avatar-reference-texture-bake.v1",
+  "persona_id": "jensen-huang",
+  "license": "CC-BY-SA-4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "attribution": "Face texture adapted from Jensen Huang Stanford 2026-04-30 photographs 008 and 010 by Anders Eidesvik (Anderseidesvik), CC BY-SA 4.0. Warping, multi-view blending and animated-mesh UV baking by the Who Is Your Bias project. No endorsement is implied.",
+  "sources": [
+    {
+      "id": "stanford-2026-008",
+      "filename": "stanford-2026-008.jpg",
+      "sha256": "3d4f737f1936504c646e46c398972f90dfc60cdff69b8bdd1241bb3b2c873c45",
+      "creator": "Anders Eidesvik",
+      "url": "https://commons.wikimedia.org/wiki/File:Jensen_huang_stanford_2026-04-30_008.jpg",
+      "page_revision": "1298252096",
+      "event_family": "stanford-cs153-2026-04-30",
+      "split": "train",
+      "usage": "Derived facial texture under CC BY-SA 4.0; this explicitly expands the earlier reference-only acquisition plan."
+    },
+    {
+      "id": "stanford-2026-010",
+      "filename": "stanford-2026-010.jpg",
+      "sha256": "f08aa7f24227eaa6e3a964dcf676cdfe0ab85f917822ba3f668ef2641caf7838",
+      "creator": "Anders Eidesvik",
+      "url": "https://commons.wikimedia.org/wiki/File:Jensen_huang_stanford_2026-04-30_010.jpg",
+      "page_revision": "1300280320",
+      "event_family": "stanford-cs153-2026-04-30",
+      "split": "train",
+      "usage": "Derived facial texture under CC BY-SA 4.0; this explicitly expands the earlier reference-only acquisition plan."
+    }
+  ],
+  "changes": "Two licensed face photographs warped by 468 source-bound landmarks, blended by surface viewing angle, and baked into the fitted animated skin UVs; gray hair shape authored.",
+  "master_input_sha256": "8c5bac606997323d71fad42de7f3e2cd4e20296c05887be000647541c53833b4",
+  "measurement_sha256": "7f63c078dee417e2154aad9e5307f811b7c933591503f8beb14563de8d32649e",
+  "recipe_sha256": "d6fd8fa7bf8a4024cd4030f0d57a6ae25fd5d00234d82326ff8c26c6e6ed7301",
+  "texture_pixels_with_source_contribution": 221259,
+  "texture_size": [
+    2048,
+    2048
+  ],
+  "skin_color_multiplier": [
+    0.8599722081769929,
+    0.7808076787480941,
+    0.8275918071768119
+  ],
+  "authored_iris_texels": 44245,
+  "authored_hair_compression": 0.6,
+  "glb": {
+    "filename": "jensen-source-fitted-candidate-v3.glb",
+    "sha256": "89d860c39849528117ceeb1e25b16b173331546be740195c2066fdcc5f45435f",
+    "bytes": 17498540
+  },
+  "editable_master": {
+    "filename": "jensen-source-fitted-candidate-v3.blend",
+    "sha256": "36d02777ae0d54cae0cacafb81c2925aab37f80b09605cac3be5aee46f0f4c82",
+    "bytes": 28050812
+  },
+  "promotion": "candidate_only",
+  "likeness_review": "pending_visual_review",
+  "limitations": [
+    "Photographic illumination, glasses and occlusions can remain baked into the surface.",
+    "The photograph bake is not intrinsic albedo or photogrammetric reconstruction.",
+    "The two texture views share one event family; other event families contribute geometry only.",
+    "Likeness and animation quality require explicit visual review."
+  ],
+  "visual_review": {
+    "status": "rejected_for_promotion",
+    "findings": [
+      "Hair compression exposed the underlying bald scalp.",
+      "Source eye/glasses pixels created double imagery around the animated eyes.",
+      "Open-mouth reference pixels contaminated neutral lips."
+    ],
+    "next_fix": "Remove hair compression, exclude eye lens regions from reference texture, hide generic brow mesh and prioritize low-jawOpen source for lips."
+  }
+}

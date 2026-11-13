@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "windows": [
+    {
+      "id": "wired-1350-10s",
+      "source_event_id": "wired-big-interview-2024",
+      "frames": 100,
+      "face_counts": {
+        "1": 100
+      },
+      "pose_counts": {
+        "1": 100
+      },
+      "hand_counts": {
+        "2": 85,
+        "3": 15
+      },
+      "observation_sha256": "4bcf2717b9fbfce89172d2a0516a416b95825835ee12cea8d16a1cb6dfc53663",
+      "source_start_seconds": 1350.0,
+      "review_status": "unreviewed"
+    }
+  ]
+}

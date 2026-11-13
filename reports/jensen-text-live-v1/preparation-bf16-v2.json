@@ -1,0 +1,31 @@
+{
+  "schema_version": "jensen-neural-text-preparation.v1",
+  "recorded_at": "2026-11-12T20:10:49.942278+00:00",
+  "protocol": "protocol-bf16-v2.json",
+  "protocol_sha256": "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+  "implementation_sha256": "e1874d62e251cc4f29ef2eb84c1cfc795181201b24d611b1a5998795b929cdeb",
+  "focused_tests": {
+    "path": "tests/test_runtime_text_live.py",
+    "passed": 24,
+    "elapsed_seconds": 1.17,
+    "scope": "Sealed protocol/identity and bounded fixture HTTP behavior; no neural inference"
+  },
+  "configuration_only_preflight": {
+    "condition": "base",
+    "passed": true,
+    "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+    "snapshot_sha256": "bbb709d3bf8cafb794a762808a36ffad0e9a7afffa4aca5e23b38cfd6c3de904",
+    "declared_runtime": {
+      "device": "cpu",
+      "dtype": "bfloat16",
+      "threads": 8
+    },
+    "pinned_local_cache_and_interpreter_dependencies_found": true,
+    "weights_loaded": false
+  },
+  "original_protocol_sha256": "edac6dfc7fb1545fc164fc5070ae3fdbc52a0a6dd82f7c10082fa88a58aa1210",
+  "original_protocol_and_both_snapshots_unchanged": true,
+  "m7_neural_cases_executed": 0,
+  "bf16_neural_suitability_established_by_these_checks": false,
+  "remaining": "Actual BF16 preflight observation, verified completed 29-update adapter and coordinator model-slot release before M7 neural execution."
+}

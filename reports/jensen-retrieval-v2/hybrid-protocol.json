@@ -1,0 +1,30 @@
+{
+  "schema_version": "jensen-hybrid-development.v1",
+  "exposure": "development",
+  "status": "frozen_before_model_inference",
+  "parent_protocol_sha256": "95ace25c667b76ac6e69e73b1ae47a42ef13ed0120213f7bf29426346a05a953",
+  "cases_path": "reports/jensen-retrieval-v2/development-cases.json",
+  "model": "intfloat/multilingual-e5-small",
+  "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+  "source": "https://huggingface.co/intfloat/multilingual-e5-small/tree/614241f622f53c4eeff9890bdc4f31cfecc418b3",
+  "query_prefix": "query: ",
+  "passage_prefix": "passage: ",
+  "device": "cpu",
+  "threads": 2,
+  "max_tokens": 512,
+  "batch_size": 8,
+  "dense_min_similarity": 0.84,
+  "reranker": null,
+  "style_index_enabled": false,
+  "timing_policy": {
+    "index_warmup_excluded": true,
+    "cold_query_passes": 1,
+    "warm_query_passes": 6
+  },
+  "decision": "retain_opt_in_unless_same_frozen_development_gates_pass_then_review",
+  "limitations": [
+    "Model and policy fixed after lexical development results but before this model inference.",
+    "No claim of calibrated 0.84 probability; this is the existing configured cosine gate.",
+    "No heldout source text enters index or tuning."
+  ]
+}

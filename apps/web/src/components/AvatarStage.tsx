@@ -181,6 +181,7 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
     <div className={`avatar-stage${showCalibration ? ' avatar-stage--calibration' : ''} ${className}`} data-testid="avatar-stage"
       data-portrait-style={portraitStyle} data-rig-kind={diagnostics?.kind ?? 'initializing'} data-face-controls={diagnostics?.morphs.length ?? 0}
       data-visemes={diagnostics?.visemes?.length ?? 0} data-mapped-joints={diagnostics?.bones.length ?? 0}
+      data-asset-sha256={diagnostics?.assetInspection?.sha256 ?? ''}
       data-framing={framing} data-model-state={loadingModel ? 'loading' : modelError ? 'fallback' : diagnostics ? 'ready' : 'initializing'}
       data-attention-phase={telemetry?.attention?.phase ?? 'idle'} data-attention-target={telemetry?.attention?.targetId ?? ''}
       data-attention-eye-yaw={telemetry?.attention?.eyeYaw ?? 0} data-attention-eye-pitch={telemetry?.attention?.eyePitch ?? 0}

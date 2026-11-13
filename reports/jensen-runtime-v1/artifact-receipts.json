@@ -1,0 +1,89 @@
+{
+  "schema_version": "runtime-artifact-receipts.v1",
+  "artifacts": [
+    {
+      "run_id": "jensen-runtime-preview-v1",
+      "role": "Raw actual HTTP responses from initial and corrected preview checks; source excerpts excluded from Git",
+      "file_name": "jensen-runtime-preview-evidence-v1.tar.gz",
+      "file_id": "file_00000000e73881fd8b7a65faf4f94fe9",
+      "library_file_id": "libfile_fde3_f-061938b1b7a08191b4c15cfe89da7e3f_a18ece08681081918d81df44f69c4b1f",
+      "bytes": 280575,
+      "sha256": "b44d33cd1e48943e3a2dd6167f8893e15f9d190a736ed2019cd574ce3bcf72b1",
+      "status": "uploaded_and_fresh_readback_sha256_verified",
+      "verified_at": "2026-11-12T18:54:26.270160+00:00",
+      "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+      "initial_assertions": {
+        "passed": 83,
+        "total": 90,
+        "failure_scope": "URL serialization and SSE display transformation in smoke harness"
+      },
+      "corrected_assertions": {
+        "passed": 91,
+        "total": 91
+      }
+    },
+    {
+      "run_id": "jensen-runtime-voice-gateway-v1",
+      "role": "Raw main API gateway requests, failed interpreter diagnostic, corrected actual generated WAV and service health logs",
+      "file_name": "jensen-runtime-voice-gateway-v1.tar.gz",
+      "file_id": "file_00000000184c81fdbd67de9bef8805d8",
+      "library_file_id": "libfile_fde3_f-b7d32ed98df08191836ce429485df6ff_a18ece08681081918d81df44f69c4b1f",
+      "bytes": 349438,
+      "sha256": "393a22e58b3b82183c74fdc8f3b564f0c779f2c7acd304d665178099a0880340",
+      "status": "uploaded_and_fresh_readback_sha256_verified",
+      "verified_at": "2026-11-12T19:01:18.994506+00:00",
+      "failed_attempt": "Base interpreter selected by resolving virtualenv symlink; no waveform generated",
+      "corrected_assertions": {
+        "passed": 95,
+        "total": 95
+      },
+      "audio_sha256": "fb29a43a125eb26f12b5c9fc2ff3d2abff998f33efe2223f1fd9178ed92b6f1a",
+      "audio_seconds": 1.52,
+      "optimizer_steps": 16,
+      "checkpoint_sha256": "9286167534283c576c329203f010b44bbdd31ef20f679f4693875b79a91dbf5b",
+      "language_model_generated": false
+    },
+    {
+      "run_id": "jensen-recorded-audio-browser-attempt-1",
+      "role": "Actual failing desktop/mobile browser traces and screenshots, retaining acquisition overhead and unmet clock gate",
+      "file_name": "studio-browser-e4b05f8-failed.zip",
+      "file_id": "file_00000000c69481fb9e69dd088ab9103b",
+      "library_file_id": "libfile_fde3_f-7227a3fd38908191abd8bd42e165c57b_a18ece08681081918d81df44f69c4b1f",
+      "bytes": 39745230,
+      "sha256": "c5dd46407be59a083191b94ef6064ca192bc319eb0464ad2ad63752b07b40acc",
+      "status": "uploaded_and_fresh_readback_sha256_verified",
+      "verified_at": "2026-11-12T19:23:33.256139+00:00",
+      "github_run_id": 43287361386,
+      "github_artifact_id": 13975183687,
+      "github_head": "e4b05f88757bc9e9a07a1dfe065d2e9c8e9d7a05"
+    },
+    {
+      "run_id": "jensen-recorded-audio-browser-attempt-2",
+      "role": "Actual intermediate desktop pass and mobile screenshot-expiry failure, before screenshot-order correction",
+      "file_name": "studio-browser-9fe8532-intermediate.zip",
+      "file_id": "file_00000000998c81fd8ed8085140948bfa",
+      "library_file_id": "libfile_fde3_f-47624eb96eac8191bed4ada80de7c96e_a18ece08681081918d81df44f69c4b1f",
+      "bytes": 21133105,
+      "sha256": "bc9d4b8ad8eab2c795b181edc05609a1f468b0b199c5f9515fafd1db78124cf3",
+      "status": "uploaded_and_fresh_readback_sha256_verified",
+      "verified_at": "2026-11-12T19:27:21.704925+00:00",
+      "github_run_id": 43288581728,
+      "github_artifact_id": 13976028257,
+      "github_head": "9fe8532149830c8f304eea15c88b284386a528f6"
+    },
+    {
+      "run_id": "jensen-recorded-audio-browser-passed",
+      "role": "Successful actual desktop/mobile generated-audio playback, frame measurements and post-cancellation screenshots",
+      "file_name": "studio-browser-a5cdcdf-recorded-audio.zip",
+      "file_id": "file_00000000eba081fd8d7265857f7bc5d6",
+      "library_file_id": "libfile_fde3_f-a4cb6353fab48191a163b23c29cced6f_a18ece08681081918d81df44f69c4b1f",
+      "bytes": 4921492,
+      "sha256": "ccc572d43693539c9b099dc5b8e3b1073d211258161361da6a9aa6a17d3fad27",
+      "status": "uploaded_and_fresh_readback_sha256_verified",
+      "verified_at": "2026-11-12T19:36:10.123289+00:00",
+      "github_run_id": 43289898996,
+      "github_artifact_id": 13975294947,
+      "github_head": "a5cdcdffc1c5b4bf088baccae8f9469a9ad6f501"
+    }
+  ]
+}

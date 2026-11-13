@@ -21,6 +21,8 @@ def main(argv=None):
     voice_export.add_argument("--output", type=Path, required=True)
     voice_export.add_argument("--asset-root", type=Path, default=Path("."))
     voice_export.add_argument("--reference-id")
+    voice_export.add_argument("--speaker", help="Exact publisher label from accepted speech review")
+    voice_export.add_argument("--persona-id", help="Subject binding, for example jensen-huang")
     text_train = commands.add_parser("train-text")
     text_train.add_argument("--dataset", type=Path, required=True)
     text_train.add_argument("--output", type=Path, required=True)
@@ -36,6 +38,12 @@ def main(argv=None):
     text_train.add_argument("--device", default="cpu")
     text_train.add_argument("--precision", choices=("float32", "bfloat16"), default="float32")
     text_train.add_argument("--gradient-checkpointing", action="store_true")
+    text_train.add_argument("--checkpoint-every", type=int, default=10)
+    text_train.add_argument("--stop-after-steps", type=int,
+                            help="Pause after this many additional updates so the saved block can be persisted")
+    text_train.add_argument("--resume-from", type=Path)
+    text_train.add_argument("--checkpoint-publisher", type=json.loads,
+                            help="Optional JSON argv; synchronous publisher must verify the exact checkpoint")
     voice_train = commands.add_parser("train-voice")
     for key in ("dataset", "output", "upstream", "base-model", "tokenizer-model"):
         voice_train.add_argument("--"+key, type=Path, required=True)

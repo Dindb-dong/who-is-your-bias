@@ -131,7 +131,8 @@ async def _health(client: httpx.AsyncClient, base: str, headers: dict, deadline:
                 data = json.loads(raw)
                 if not isinstance(data, dict):
                     raise EvaluationError("Health response is not an object")
-                return {key: data[key] for key in ("status", "reference_configured", "reference_mode", "model_loaded", "busy", "streaming", "runtime", "last_generation") if key in data}
+                return {key: data[key] for key in ("status", "reference_configured", "reference_mode", "model_loaded", "busy", "streaming", "runtime", "last_generation",
+                    "persona_id", "reference_identity", "adaptation", "synthesis") if key in data}
     except (ValueError, TimeoutError, httpx.HTTPError) as exc:
         return {"unavailable": type(exc).__name__}
 

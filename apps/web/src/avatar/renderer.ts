@@ -1,10 +1,12 @@
 import {
   ACESFilmicToneMapping, AmbientLight, CircleGeometry, DirectionalLight,
   FogExp2, HemisphereLight, Mesh, MeshBasicMaterial, MeshStandardMaterial,
-  PerspectiveCamera, PlaneGeometry, Scene, SRGBColorSpace, Vector2, WebGLRenderer,
+  PerspectiveCamera, PlaneGeometry, Scene, SRGBColorSpace, Vector2, Vector3, WebGLRenderer,
 } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { avatarView, type AvatarFraming } from './builtin';
+import { createUpperBodyFramer } from './framing';
+import { createRigOutputReader } from './observe-rig';
 import { disposeObject } from './dispose';
 import { createProceduralRig, type AvatarRig, type PortraitStyle } from './procedural';
 import { loadGlbRig } from './retarget';
@@ -45,6 +47,7 @@ export class AvatarRenderer {
   private camera = new PerspectiveCamera(34, 1, 0.1, 30);
   private controls: OrbitControls;
   private rig: AvatarRig;
+  private readRigOutput: ReturnType<typeof createRigOutputReader>;
   private resizeObserver: ResizeObserver;
   private raf = 0;
   private disposed = false;
@@ -67,6 +70,7 @@ export class AvatarRenderer {
   private audition?: AuditionRecorder;
   private attention = new AttentionController();
   private portraitStyle: PortraitStyle = 'reference';
+  private upperBodyFramer: ReturnType<typeof createUpperBodyFramer> = null;
 
   constructor(private host: HTMLElement, private callbacks: RendererCallbacks = {}) {
     this.renderer = new WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
@@ -100,6 +104,7 @@ export class AvatarRenderer {
     const leftRim = new DirectionalLight('#819e91', 1.4); leftRim.position.set(-2, 1.9, -1.2); this.scene.add(leftRim);
     this.createStudio();
     this.rig = createProceduralRig(this.portraitStyle); this.scene.add(this.rig.root);
+    this.readRigOutput = createRigOutputReader(this.rig);
     this.host.appendChild(this.canvas);
     this.resizeObserver = new ResizeObserver(this.resize); this.resizeObserver.observe(host);
     document.addEventListener('visibilitychange', this.onVisibility);
@@ -167,7 +172,7 @@ export class AvatarRenderer {
     // Consume pre-existing drag inertia, then reset the camera. Disabling input
     // alone does not stop OrbitControls' damping from moving a comparison view.
     const damping = this.controls.enableDamping; this.controls.enableDamping = false;
-    this.controls.update(); this.resetView(); this.controls.enableDamping = damping; this.controls.enabled = false;
+    this.controls.update(); this.resetView(true); this.controls.enableDamping = damping; this.controls.enabled = false;
     this.start = performance.now(); this.previousFrame = 0; this.pose = neutralPose();
     const size = this.renderer.getSize(new Vector2());
     this.audition = new AuditionRecorder({ schema_version: 'avatar-audition-run.v1', protocol: AUDITION_PROTOCOL,
@@ -237,6 +242,8 @@ export class AvatarRenderer {
   private replaceRig(rig: AvatarRig): void {
     this.scene.remove(this.rig.root); this.rig.dispose(); this.rig = rig;
     this.pose = neutralPose(); this.attention.reset(); rig.apply(this.pose); this.scene.add(rig.root);
+    this.readRigOutput = createRigOutputReader(rig);
+    this.upperBodyFramer = createUpperBodyFramer(rig.root, rig.diagnostics);
     this.canvas.dataset.avatar = rig.diagnostics.kind;
     this.canvas.dataset.portraitStyle = this.portraitStyle;
     this.canvas.setAttribute('aria-label', rig.diagnostics.kind === 'glb'
@@ -252,7 +259,8 @@ export class AvatarRenderer {
     const oldSize = this.renderer.getSize(new Vector2());
     if (oldSize.x !== width || oldSize.y !== height) this.stopAudition('viewport_changed');
     this.camera.aspect = width / height;
-    // Preserve the face/shoulder framing on narrow mobile stages.
+    // Upper-body framing must recompute distance after an aspect change.
+    if (this.framing === 'upper_body' && (oldSize.x !== width || oldSize.y !== height)) this.resetView();
     this.camera.fov = avatarView(this.rig.diagnostics.kind, this.framing, this.camera.aspect).fov;
     this.camera.updateProjectionMatrix(); this.renderer.setSize(width, height, false);
   };
@@ -299,11 +307,34 @@ export class AvatarRenderer {
     this.canvas.dataset.attentionEyePitch = attended.telemetry.eyePitch.toFixed(4);
     this.canvas.dataset.attentionHeadYaw = attended.telemetry.headYaw.toFixed(4);
     this.canvas.dataset.attentionHeadPitch = attended.telemetry.headPitch.toFixed(4);
+    // These are actual mapped morph weights and joint angles, not inferred
+    // phonemes or personal gesture measurements. Node references are cached.
+    const output = this.readRigOutput();
+    this.canvas.dataset.audioClockMs = (this.playback.audioElapsedMs ?? 0).toFixed(3);
+    this.canvas.dataset.audioSha256 = this.playback.audioSha256 ?? '';
+    this.canvas.dataset.speaking = String(this.playback.speaking);
+    this.canvas.dataset.speechSource = telemetry.speechSource;
+    this.canvas.dataset.rigJaw = output.jawOpen.toFixed(4);
+    this.canvas.dataset.rigBlink = Math.max(output.eyeBlinkLeft, output.eyeBlinkRight).toFixed(4);
+    this.canvas.dataset.rigSmile = output.mouthSmileLeft.toFixed(4);
+    this.canvas.dataset.rigArm = Math.max(output.leftUpperArm, output.rightUpperArm).toFixed(4);
+    this.canvas.dataset.rigHand = output.leftHand.toFixed(4);
+    this.canvas.dataset.rigFinger = output.leftIndexProximal.toFixed(4);
     if (now - this.lastTelemetry > (attentionFrame.phase === 'idle' ? 250 : 80)) {
       this.lastTelemetry = now;
       this.callbacks.onTelemetry?.(telemetry);
     }
-    this.controls.update(); this.renderer.render(this.scene, this.camera);
+    this.controls.update();
+    if (this.framing === 'upper_body' && this.upperBodyFramer && !this.audition?.recording) {
+      const direction = this.camera.position.clone().sub(this.controls.target).normalize();
+      const view = this.upperBodyFramer(this.camera.aspect, direction);
+      const required = new Vector3().fromArray(view.position).distanceTo(this.controls.target);
+      const current = this.camera.position.distanceTo(this.controls.target);
+      // Expand immediately so a new hand pose cannot be cropped; ease inward.
+      const distance = required >= current ? required : current + (required-current)*(1-Math.exp(-Math.min(delta, .1)*.8));
+      this.camera.position.copy(this.controls.target).addScaledVector(direction, distance);
+    }
+    this.renderer.render(this.scene, this.camera);
     if (this.audition?.recording) {
       this.audition.add({ monotonicMs: now, audioMs: this.playback.audioElapsedMs ?? null, speaking: this.playback.speaking,
         telemetry, drawCalls: this.renderer.info.render.calls, triangles: this.renderer.info.render.triangles,
@@ -313,9 +344,10 @@ export class AvatarRenderer {
     this.raf = requestAnimationFrame(this.frame);
   };
 
-  resetView(): void {
+  resetView(fixedEnvelope = false): void {
     this.stopAudition('view_reset');
-    const view = avatarView(this.rig.diagnostics.kind, this.framing, this.camera.aspect);
+    const view = !fixedEnvelope && this.framing === 'upper_body' && this.upperBodyFramer
+      ? this.upperBodyFramer(this.camera.aspect) : avatarView(this.rig.diagnostics.kind, this.framing, this.camera.aspect);
     this.camera.position.fromArray(view.position); this.controls.target.fromArray(view.target);
     this.camera.fov = view.fov; this.camera.updateProjectionMatrix(); this.controls.update();
   }

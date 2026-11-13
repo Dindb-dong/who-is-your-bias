@@ -6,8 +6,16 @@ import type { AvatarClip, RigMapping } from '../avatar/types';
 import type { AvatarFraming } from '../avatar/builtin';
 import { useAuditionAudio } from '../avatar/useAuditionAudio';
 
+const JENSEN_SAMPLES = [
+  { file: 'goldman-0164-8s.json', label: 'Goldman Sachs 2024 · 2:44 · 8 seconds' },
+  { file: 'stripe-2396-12s.json', label: 'Stripe Sessions 2024 · 39:56 · 12 seconds' },
+  { file: 'stripe-2696-12s.json', label: 'Stripe Sessions 2024 · 44:56 · 12 seconds' },
+  { file: 'wired-1350-10s.json', label: 'WIRED Big Interview 2024 · 22:30 · 10 seconds' },
+] as const;
+
 /** Imported measurements have their own source clock, separate from conversation cues. */
-export function MotionLab({ modelUrl, reducedMotion }: { modelUrl?: string; reducedMotion: boolean }) {
+export function MotionLab({ modelUrl, reducedMotion, personaId }: { modelUrl?: string; reducedMotion: boolean; personaId?: string }) {
+  const isJensen = personaId === 'jensen-huang';
   const scrubberId = useId();
   const [clip, setClip] = useState<AvatarClip>();
   const [mapping, setMapping] = useState<RigMapping>();
@@ -18,8 +26,9 @@ export function MotionLab({ modelUrl, reducedMotion }: { modelUrl?: string; redu
   const [elapsed, setElapsed] = useState(0);
   const [allowPreview, setAllowPreview] = useState(false);
   const [showCalibration, setShowCalibration] = useState(true);
-  const [framing, setFraming] = useState<AvatarFraming>('full_body');
-  const [loadingSample, setLoadingSample] = useState<'face' | 'body' | null>(null);
+  const [framing, setFraming] = useState<AvatarFraming>(isJensen ? 'upper_body' : 'full_body');
+  const [loadingSample, setLoadingSample] = useState<'face' | 'body' | 'jensen' | null>(null);
+  const [jensenSample, setJensenSample] = useState<string>(JENSEN_SAMPLES[0].file);
   const audio = useAuditionAudio(); const [auditionStartKey, setAuditionStartKey] = useState(0);
   const clock = useRef(0); clock.current = elapsed;
   const sampleRequest = useRef<AbortController | null>(null);
@@ -54,13 +63,14 @@ export function MotionLab({ modelUrl, reducedMotion }: { modelUrl?: string; redu
     }
   }
 
-  async function loadSample(kind: 'face' | 'body' = 'face') {
+  async function loadSample(kind: 'face' | 'body' | 'jensen' = 'face') {
     sampleRequest.current?.abort();
     const controller = new AbortController(); sampleRequest.current = controller;
     setLoadingSample(kind); setError(null);
-    const filename = kind === 'body' ? 'ted-2013-body-geometry-preview.json' : 'ted-2013-geometry-preview.json';
+    const filename = kind === 'jensen' ? jensenSample : kind === 'body' ? 'ted-2013-body-geometry-preview.json' : 'ted-2013-geometry-preview.json';
+    if (kind === 'jensen') setFraming('upper_body');
     try {
-      const response = await fetch(`/samples/${filename}`, { signal: controller.signal });
+      const response = await fetch(`${kind === 'jensen' ? '/motion/jensen' : '/samples'}/${filename}`, { signal: controller.signal });
       if (!response.ok) throw new Error('The measured sample is unavailable in this build. You can import a local clip.');
       const blob = await response.blob();
       if (!alive.current || controller.signal.aborted) return;
@@ -73,17 +83,22 @@ export function MotionLab({ modelUrl, reducedMotion }: { modelUrl?: string; redu
   }
 
   return <section className="motion-lab" aria-labelledby="motion-lab-heading">
-    <div className="motion-heading"><div><span className="eyebrow">FROM SOURCE VIDEO TO MOVEMENT</span><h2 id="motion-lab-heading">Motion & rig calibration</h2><p>Replay measured face and pose tracks on the reference rig or your own avatar. Bundled TED clips and narration are historical Musk-era evaluation material; they are not Jensen motion or voice.</p></div><SlidersHorizontal size={27}/></div>
+    <div className="motion-heading"><div><span className="eyebrow">FROM SOURCE VIDEO TO MOVEMENT</span><h2 id="motion-lab-heading">Motion & rig calibration</h2><p>{isJensen ? 'Inspect measured face, arm, hand and finger tracks from separate interview events. The source geometry remains an unreviewed preview. Choose a research avatar or your own rig in Studio settings.' : 'Replay measured face and pose tracks on the reference rig or your own avatar. Bundled TED clips and narration are historical Musk-era evaluation material; they are not Jensen motion or voice.'}</p></div><SlidersHorizontal size={27}/></div>
     <div className="motion-layout">
-      <div className="motion-stage"><AvatarStage speaking={audio.state.status === 'playing'} modelUrl={modelUrl} rigMapping={mapping} framing={framing}
+      <div className="motion-stage"><AvatarStage speaking={audio.state.status === 'playing'} modelUrl={modelUrl} rigMapping={mapping} framing={framing} portraitStyle={isJensen ? 'jensen' : 'reference'}
         audioElapsedMs={audio.state.audioElapsedMs} elapsedMs={audio.state.elapsedMs} amplitude={audio.state.amplitude}
         audioSha256={audio.state.audioSha256} speechTiming={audio.state.speechTiming} auditionStartKey={auditionStartKey}
         reducedMotion={reducedMotion} performanceClip={permitted ? clip : undefined}
         observationElapsedMs={elapsed} allowGeometryPreview={allowPreview} showCalibration={showCalibration}/></div>
       <div className="motion-controls">
-        <label className="switch-row"><span>Camera framing</span><select aria-label="Motion lab camera framing" value={framing} onChange={(event) => setFraming(event.target.value as AvatarFraming)}><option value="portrait">Portrait</option><option value="full_body">Full body</option></select></label>
-        <button className="secondary-button" disabled={loadingSample !== null} onClick={() => void loadSample()}><Play size={15}/>{loadingSample === 'face' ? 'Loading measured sample…' : 'Load measured sample'}</button>
-        <button className="secondary-button" disabled={loadingSample !== null} onClick={() => void loadSample('body')}><Play size={15}/>{loadingSample === 'body' ? 'Loading arm-motion sample…' : 'Load arm-motion sample'}</button>
+        <label className="switch-row"><span>Camera framing</span><select aria-label="Motion lab camera framing" value={framing} onChange={(event) => setFraming(event.target.value as AvatarFraming)}><option value="portrait">Portrait</option><option value="upper_body">Upper body & hands</option><option value="full_body">Full body</option></select></label>
+        {isJensen ? <>
+          <label className="switch-row"><span>Source event</span><select aria-label="Jensen motion sample" value={jensenSample} disabled={loadingSample !== null} onChange={(event) => setJensenSample(event.target.value)}>{JENSEN_SAMPLES.map((sample) => <option key={sample.file} value={sample.file}>{sample.label}</option>)}</select></label>
+          <button className="secondary-button" disabled={loadingSample !== null} onClick={() => void loadSample('jensen')}><Play size={15}/>{loadingSample === 'jensen' ? 'Loading Jensen hand sample…' : 'Load Jensen face & hands'}</button>
+        </> : <>
+          <button className="secondary-button" disabled={loadingSample !== null} onClick={() => void loadSample()}><Play size={15}/>{loadingSample === 'face' ? 'Loading measured sample…' : 'Load measured sample'}</button>
+          <button className="secondary-button" disabled={loadingSample !== null} onClick={() => void loadSample('body')}><Play size={15}/>{loadingSample === 'body' ? 'Loading arm-motion sample…' : 'Load arm-motion sample'}</button>
+        </>}
         <label className="motion-upload"><Upload size={17}/><span>Import motion clip<small>{clipName || 'Source-linked animation JSON · up to 8 MB'}</small></span><input type="file" accept=".json,application/json" aria-label="Import motion clip" onChange={(event) => { const file = event.target.files?.[0]; if (file) void importFile(file, 'clip'); event.target.value = ''; }}/></label>
         <label className="motion-upload"><Upload size={17}/><span>Import rig mapping<small>{mappingName || 'Morphs, neutral values and bone axes · JSON'}</small></span><input type="file" accept=".json,application/json" aria-label="Import rig mapping" onChange={(event) => { const file = event.target.files?.[0]; if (file) void importFile(file, 'mapping'); event.target.value = ''; }}/></label>
         <label className="motion-check"><input type="checkbox" checked={showCalibration} onChange={(event) => setShowCalibration(event.target.checked)}/> Show calibration controls</label>
@@ -91,7 +106,7 @@ export function MotionLab({ modelUrl, reducedMotion }: { modelUrl?: string; redu
           <span className="eyebrow">SAME-AUDIO AVATAR AUDITION</span>
           <strong>{audio.sample?.name ?? 'Choose a speech sample'}</strong>
           <p>Replay the same WAV on each candidate. Import matching speech timing for phoneme-based articulation, or compare measured audio-energy motion.</p>
-          <button className="secondary-button" disabled={audio.loading} onClick={() => void audio.loadBundled()}>Load narration sample</button>
+          {!isJensen && <button className="secondary-button" disabled={audio.loading} onClick={() => void audio.loadBundled()}>Load narration sample</button>}
           <label className="motion-upload"><Upload size={17}/><span>Import audition audio<small>Local WAV · up to 16 MiB</small></span><input type="file" accept=".wav,audio/wav" aria-label="Import audition audio" onChange={(event) => { const file = event.target.files?.[0]; if (file) void audio.importAudio(file, file.name); event.target.value = ''; }}/></label>
           <label className="motion-upload"><Upload size={17}/><span>Import matching speech timing<small>Optional speech-timing.v1 JSON</small></span><input type="file" accept=".json,application/json" disabled={!audio.sample} aria-label="Import audition speech timing" onChange={(event) => { const file = event.target.files?.[0]; if (file) void audio.importTiming(file); event.target.value = ''; }}/></label>
           {audio.sample && <p>{audio.sample.timingStatus === 'amplitude' ? 'Articulation: measured audio energy' : `Articulation: ${audio.sample.timingStatus}`} · {(audio.state.audioElapsedMs / 1000).toFixed(2)} s</p>}

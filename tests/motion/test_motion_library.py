@@ -243,3 +243,13 @@ def test_word_binding_requires_reproducible_hash_bound_matches(tmp_path, forged_
     (assets / "context-evidence.json").write_text("{}")
     with pytest.raises(MotionError, match="evidence SHA-256"):
         MotionLibrary.load(output, assets)
+
+
+def test_build_preserves_explicit_subject_binding(tmp_path):
+    manifest_path, assets, output = library_files(tmp_path)
+    manifest = json.loads(manifest_path.read_text())
+    manifest["persona_id"] = "jensen-huang"
+    manifest_path.write_text(json.dumps(manifest))
+    result = build_library(manifest_path, assets, output)
+    assert result["persona_id"] == "jensen-huang"
+    assert MotionLibrary.load(output, assets).catalog.persona_id == "jensen-huang"

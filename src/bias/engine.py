@@ -25,6 +25,7 @@ from .sessions import Session, SessionStore
 from .snapshots import PersonaSnapshot, TemporalIntent, select_temporal, temporal_intent
 from .segments import SegmentCommitter
 from .dialogue import DEICTIC_PAST
+from .query_policy import public_evidence_limitation
 
 logger = logging.getLogger(__name__)
 
@@ -112,6 +113,9 @@ class Engine:
             reranker = CrossEncoderReranker(settings.reranker_model, revision=settings.reranker_revision) if settings.reranker_model else None
             self.retriever = HybridRetriever(corpus, embedder, policy=HybridPolicy(dense_min_similarity=settings.dense_min_similarity,
                                                reranker_min_score=settings.reranker_min_score), reranker=reranker)
+        elif settings.retrieval_backend == "jensen-lexical":
+            from .jensen_retrieval import JensenConceptRetriever
+            self.retriever = JensenConceptRetriever(corpus)
         else:
             self.retriever = Retriever(corpus)
         self.sessions = SessionStore(ttl=settings.session_ttl, max_sessions=settings.max_sessions, max_turns=settings.max_turns)
@@ -190,7 +194,11 @@ class Engine:
                            "temporal": {"mode": temporal.intent.mode, "years": list(temporal.intent.years), "period": temporal.intent.period,
                                         "excluded": temporal.exclusion_reasons} if temporal else None,
                            "retrieval_backend": self.settings.retrieval_backend}
-                if request.mode == "profile":
+                evidence_limitation = public_evidence_limitation(request.message) or public_evidence_limitation(resolved.query)
+                if evidence_limitation:
+                    result = SearchResult((), 0, evidence_limitation)
+                    context["evidence_limitation"] = evidence_limitation
+                elif request.mode == "profile":
                     result = SearchResult((), 0, "Profile-only ablation has no retrieved evidence.")
                 elif temporal and not temporal.eligible_ids:
                     result = SearchResult((), 0, temporal.reason)
@@ -213,7 +221,7 @@ class Engine:
                         if temporal and len(temporal.eligible_ids) != len(self.corpus.training_evidence):
                             filtered = Corpus(self.corpus.persona, self.corpus.sources,
                                               {key: value for key, value in self.corpus.evidence.items() if key in temporal.eligible_ids})
-                            retriever = Retriever(filtered)
+                            retriever = self.retriever.with_corpus(filtered)
                         # The snapshot already applies exact/before/through/
                         # forecast policy to the eligible corpus. The archived
                         # lexical retriever's independent exact-year gate must
@@ -227,12 +235,12 @@ class Engine:
                 yield "status", {"stage": "generating"}
                 generation_started = time.perf_counter()
                 speculative = (self.settings.llm.configured and self.corpus.persona.id == "jensen-huang"
-                               and request.mode != "profile" and not result.hits)
+                               and request.mode != "profile" and not result.hits and not evidence_limitation)
                 unverified_quote = (
                     speculative and request.language == "ko" and KOREAN_EXACT_SPEECH.search(request.message) is not None
                     and temporal is not None and temporal.intent.mode == "future"
                 )
-                use_llm = not unverified_quote and self.settings.llm.configured and (
+                use_llm = not evidence_limitation and not unverified_quote and self.settings.llm.configured and (
                     request.mode == "profile" or bool(result.hits) or speculative
                 )
                 fragments: list[str] = []

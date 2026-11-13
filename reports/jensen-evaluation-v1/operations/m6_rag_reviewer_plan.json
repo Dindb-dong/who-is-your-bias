@@ -1,0 +1,72 @@
+{
+  "schema_version": "m6-rag-reviewer-packet-preparation.v1",
+  "status": "proposed_not_executed",
+  "created_at": "2026-11-12T22:34:18.496870+00:00",
+  "scope": "Separate single-base offline RAG semantic review after full genuine fresh-readback validation; no matched comparison, live latency or human-quality claim.",
+  "input_gate": {
+    "source": "Verified m6_rag_delivery final result and its private restored condition-output/ plus exact inputs/plan.json and execution-contract-bf16-v2.json",
+    "full_validation_required": "closed_invocation_revalidated",
+    "reference_plan_sha256": "3e2c6409b45a67b11798c17f23c6ce869aa9d71309775bf9af8f69afcc7d02d6",
+    "reject": [
+      "matched fixed-evidence plans",
+      "new retrieval runs",
+      "partial snapshots as final condition inputs",
+      "unverified/missing model identity"
+    ]
+  },
+  "proposed_output_root": "/workspace/scratch/6f64e1b53384/artifacts/jensen-2026-11-13/text-evaluation-v1/rag-reviewer-packet-v1",
+  "files": {
+    "reviewer/samples.json": "Only normalized completed outputs, unchanged: opaque sample ID, case ID, source-pool ID, question, exact answer, answer SHA-256, null human ratings/reviewer fields.",
+    "reviewer/source-pools.json": "All six generation-case pools derived only from _context(case.messages.facts).factual_evidence; exact system instruction and fixed history, question, factual/prompt/message hashes and evidence pointers. No candidate style sources.",
+    "reviewer/README.md": "Explain single-base offline scope, supplied-evidence support checks, genuine empty pools and ungraded human fields.",
+    "private/reference-answers.json": "Original private reference answers and frozen hashes, kept outside source pools. Release separately only for an explicitly staged second review.",
+    "private/execution-diagnostics.json": "Separate registered/planned/attempted/completed/failed/unattempted counts, failures/skipped IDs, raw provider versus normalized errors and identity outcomes.",
+    "private/input-manifest.json": "Exact input/report/supervisor/condition inventory and genuine durable artifact identities and byte hashes.",
+    "manifest.json": "Written last; payload hashes, counts, input hashes, share_only reviewer/, human_review ungraded and efficacy_claim false."
+  },
+  "evidence_rules": [
+    "messages = rag_case['messages']['facts']; facts = protocol._context(messages)['factual_evidence']; copy facts unchanged.",
+    "Preserve captured system and history constraints; no private reference answer is supplied evidence.",
+    "Do not use the earlier manually selected matched evidence, all-corpus passages, dropped retrieval hits, new retrieval or other-condition evidence.",
+    "Zero-evidence cases heldout-qa26-no-priors-2023-turn-00186 and ...-00253 must retain factual_evidence=[] and evidence_pointers=[].",
+    "Whole-corpus answerability is separate from the evidence actually supplied to a generated answer."
+  ],
+  "sample_gates": [
+    "Normalize completion exactly as frozen generation.completed is True; exclude length/error/identity-unverified outputs from completed samples.",
+    "Underlying provider completed with no raw error; no normalized error or validation errors; expected response model and request digest; before/after identity verified.",
+    "Provider and normalized content match except explicitly allowed completion/error fields. Preserve whole unchanged answer and hash its exact UTF-8 bytes.",
+    "Retain every failed/unattempted case in private denominators; keep its source pool without inventing a reviewer sample.",
+    "Zero complete answers is an honest zero-sample packet, not grounds to retry or discard failures."
+  ],
+  "reuse_validators": [
+    "rag_diagnostic.validate_rag_plan",
+    "local_condition.validate_execution_contract",
+    "partial_checkpoint._check_seal",
+    "partial_checkpoint._validate_report",
+    "partial_checkpoint._validate_metadata",
+    "partial_checkpoint._match_logs",
+    "m6_rag_delivery.condition_audit finality/owner/inventory/observed-after gates"
+  ],
+  "counts": {
+    "planned": "len(plan.cases)",
+    "registered": "len(plan.rag_diagnostic.registered_case_ids)",
+    "attempted": "len(report.runs)",
+    "completed": "count(normalized completed)",
+    "failed": "attempted-completed",
+    "unattempted": "planned-attempted",
+    "review_samples": "completed",
+    "source_pools": "planned"
+  },
+  "sharing": {
+    "full_archive": "private coordinator only",
+    "reviewer_share": "reviewer/ only",
+    "reference_access": "private/reference-answers.json is separate and not shared in first support review",
+    "implementation_note": "Existing blind_review.package_reviews requires three matched conditions and is not used unchanged for RAG."
+  },
+  "preparation_only": true,
+  "actual_answers_read": false,
+  "models_started": 0,
+  "reviews_performed": 0,
+  "human_review": "ungraded",
+  "efficacy_claim": false
+}

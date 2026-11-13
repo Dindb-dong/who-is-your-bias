@@ -1,0 +1,119 @@
+{
+  "schema_version": "jensen-agent-review-preservation.v1",
+  "exposure": "development",
+  "status": "saved_and_freshly_verified_before_coordinator_unblinding",
+  "artifact": {
+    "artifact_id": "jensen-m6-development-agent-review-v1",
+    "role": "condition-blind-agent-semantic-review-before-unblinding",
+    "exposure": "development",
+    "review_samples": 13,
+    "human_review": "ungraded",
+    "file_name": "jensen-m6-development-agent-review-v1.tar.gz",
+    "file_id": "file_00000000d3ac81fd85e296b985bc0111",
+    "library_file_id": "libfile_fde3_f-182964910d848191ad82dacb30eb0b1f_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 41148,
+    "sha256": "4815d15070a6c8dee07bcd3ac94a006db52a9d9b22686477a759a7093d203be8",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "review_samples": 13,
+  "members_sha256": {
+    "development-v1/categorical-findings.json": "e3dde5f6062f1b3275c0d353989e4989bf60016fa283d05d2520d1257577b7ba",
+    "development-v1/reference-comparisons.json": "9038c5f252eee077e925135fca856908de931c1f952043a214439763bbdec8ac",
+    "development-v1/public-summary.md": "46ce608379343b88eb3b04515f45fd5d831d14d71835bad2dea005f31cf20007",
+    "development-v1/categorical-findings.initial-before-range-corrections.json": "8cb19282cbe101e6bff90815adcda2f786899ec77dd901c9da2445c8c7df2a5b",
+    "development-v1/categorical-save-receipt.json": "08c0763c88078368345f1cd8e9dd6601a35be928671ebd1c11477727ef865d2d",
+    "development-v1/mechanical-corrections.json": "1bba422b3e303b60e3e7bc72e38890bfe8a957fb0aa30482c99c1244f58b88ca"
+  },
+  "verification": {
+    "all_six_payloads": true,
+    "all_answer_sha256_and_pool_digests": true,
+    "human_rating_fields_unchanged_and_null": true,
+    "mechanical_corrections_preserved": true,
+    "support_and_coverage_classifications_unchanged": true
+  },
+  "rubric_sha256": "d7e6db218c0fb29110583930797d9e824e802ce10ca9d8447f9acf55e03fcfcd",
+  "rubric_commit": "08d5b002ee83333980bb5b9736c08a8728fd78b3",
+  "source_packet_manifest_sha256": "4e2d785b41493fb1e20b85b83b3593c24163a861c818fb201395a0a831bdade2",
+  "categorical_frozen_before_reference": true,
+  "reference_phase": "All development references are null; no reference similarity or missing-reference penalty is invented.",
+  "reviewer_condition_key_exposure": false,
+  "coordinator_condition_key_opened_at_this_checkpoint": false,
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "aggregate_descriptive_counts": {
+    "reviewed_completed_samples": 13,
+    "represented_cases": 9,
+    "reviewed_common_pools": 9,
+    "claim_units": 55,
+    "claim_support_class_counts": {
+      "contradicted": 0,
+      "nonfactual": 21,
+      "partially_supported": 8,
+      "supported": 13,
+      "uncertain": 1,
+      "unsupported": 12
+    },
+    "coverage_counts": {
+      "covered": 4,
+      "partially_covered": 7,
+      "not_covered": 2,
+      "not_applicable": 0
+    },
+    "format_counts": {
+      "language": {
+        "applicable_samples": 13,
+        "satisfied": 11,
+        "violated": 2,
+        "uncertain": 0
+      },
+      "one_sentence": {
+        "applicable_samples": 8,
+        "satisfied": 0,
+        "violated": 8,
+        "uncertain": 0
+      },
+      "third_person": {
+        "applicable_samples": 8,
+        "satisfied": 6,
+        "violated": 2,
+        "uncertain": 0
+      },
+      "no_direct_quotation": {
+        "applicable_samples": 8,
+        "satisfied": 6,
+        "violated": 2,
+        "uncertain": 0
+      },
+      "required_name_form": {
+        "applicable_samples": 8,
+        "satisfied": 5,
+        "violated": 3,
+        "uncertain": 0
+      }
+    },
+    "source_citation_marker_present_samples": 5,
+    "source_citation_marker_present_applicable_korean_samples": 5,
+    "exact_question_echo_samples": [
+      "sample-0005",
+      "sample-0011"
+    ],
+    "extended_or_substantive_factual_copying_samples": [
+      "sample-0001",
+      "sample-0008"
+    ],
+    "identical_answer_groups": [
+      [
+        "sample-0005",
+        "sample-0011"
+      ],
+      [
+        "sample-0007",
+        "sample-0009"
+      ]
+    ],
+    "denominator_limit": "These categorical counts describe only the 13 coordinator-supplied completed samples. Planned/attempted/failed/unattempted counts and condition assignments remain with the coordinator. Claim counts depend on explicit semantic segmentation and are not a scalar quality or promotion score."
+  },
+  "public_summary": "development-agent-review-blinded.md",
+  "next_step": "Coordinator may now bind the already frozen findings to the private condition key; do not alter them after unblinding."
+}

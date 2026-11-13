@@ -1,0 +1,488 @@
+{
+  "schema_version": "jensen-source-inventory-summary.v1",
+  "subject_id": "jensen-huang",
+  "run_id": "jensen-2026-11-13",
+  "recorded_at": "2026-11-12T21:54:04.062499+00:00",
+  "status": "reconciled_from_published_preservation_evidence",
+  "repository": "Dindb-dong/who-is-your-bias",
+  "target_branch": "feat/jensen-resumable-replication",
+  "evidence_revision": "3c8049c36df5411d413fd8848034fab151715c39",
+  "regional_local_source_commit": "697236708ef01e5cca0c52184a72caccabc4de95",
+  "regional_report_tree_matches_published_revision": true,
+  "verification_scope": "Read-only arithmetic, identity, provenance and report consistency reconciliation. Existing published fresh-readback and reconstruction receipts are the media evidence; this bookkeeping task performed no new download, decode or remote materialization.",
+  "counting_policy": {
+    "complete_video_unit": "One complete selected publisher video-and-audio rendition per distinct event family; publisher edits are retained. This is not an unedited full-event or full-ceremony claim.",
+    "duration_unit": "Entire stored publisher package, including hosts, slides and other speakers; not usable Jensen-only training duration.",
+    "separate_populations": [
+      "complete publisher video packages",
+      "derived bounded address with context",
+      "audio-only publisher files"
+    ],
+    "not_additional_event_packages": [
+      "transcripts and PDFs",
+      "HLS fragments or lossless storage chunks",
+      "earlier incomplete-prefix checkpoints",
+      "alternate renditions of the same event",
+      "short derived clips and generated samples"
+    ],
+    "eligibility": "Acquisition and byte preservation do not authorize a whole package for speech training. Unreviewed language or speaker intervals remain excluded until their own preparation/review gates are satisfied. Existing bounded prepared datasets retain their separately versioned scope.",
+    "frozen_training_or_evaluation_inputs_changed": false,
+    "new_source_exclusions": [
+      "CHM and NTU remain outside frozen v4, current text training and M6.",
+      "GTC 2026 and CES 2026 language, dubbing and burned-in subtitles remain unreviewed; neither entered frozen training or evaluation inputs."
+    ],
+    "clock_rule": "A zero local offset describes the selected rendition only. It does not establish alignment to a separate transcript, video, podcast or YouTube clock. Lex podcast timing uses independently decoded elapsed time; no fixed advertisement offset is assumed.",
+    "historical_status_rule": "source-progress.json describes the original eight-video batch. Regional pending-media entries there and in the pre-download registration are superseded by the final regional reports, without rewriting those historical snapshots.",
+    "heldout_event_families_remain_excluded_from_training": [
+      "wef-davos-2026",
+      "no-priors-2023"
+    ],
+    "audio_source_url_scope": "Audio source_page_url values identify stable publisher pages from existing voice provenance. Original MP3 delivery URLs remain in the linked saved provenance-receipt artifacts; none is invented here."
+  },
+  "totals": {
+    "complete_publisher_event_packages": {
+      "count": 11,
+      "distinct_event_families": 11,
+      "bytes": 6469064775,
+      "duration_seconds": 56309.38508,
+      "duration_seconds_decimal": "56309.385080",
+      "duration_hms": "15:38:29.385080"
+    },
+    "derived_address_with_context": {
+      "count": 1,
+      "distinct_event_families": 1,
+      "bytes": 752097280,
+      "duration_seconds": 1518.692466,
+      "duration_seconds_decimal": "1518.692466",
+      "duration_hms": "00:25:18.692466"
+    },
+    "audio_only_publisher_files": {
+      "count": 3,
+      "distinct_event_families": 3,
+      "bytes": 259625424,
+      "duration_seconds": 18047.309792,
+      "duration_seconds_decimal": "18047.309792",
+      "duration_hms": "05:00:47.309792"
+    },
+    "video_event_families_including_separate_derived_address": 12
+  },
+  "subtotals": {
+    "original_eight_publisher_packages": {
+      "count": 8,
+      "distinct_event_families": 8,
+      "bytes": 4412488053,
+      "duration_seconds": 38129.100491,
+      "duration_seconds_decimal": "38129.100491",
+      "duration_hms": "10:35:29.100491"
+    },
+    "original_eight_plus_CHM": {
+      "count": 9,
+      "distinct_event_families": 9,
+      "bytes": 5066419711,
+      "duration_seconds": 42473.925525,
+      "duration_seconds_decimal": "42473.925525",
+      "duration_hms": "11:47:53.925525"
+    },
+    "regional_GTC_and_CES_2026": {
+      "count": 2,
+      "distinct_event_families": 2,
+      "bytes": 1402645064,
+      "duration_seconds": 13835.459555,
+      "duration_seconds_decimal": "13835.459555",
+      "duration_hms": "03:50:35.459555"
+    }
+  },
+  "complete_publisher_packages": [
+    {
+      "source_id": "goldman-sachs-2024",
+      "event_family_id": "goldman-sachs-2024",
+      "bytes": 586759675,
+      "sha256": "586dff89def8ff4a0cea0848a094cca41e573aec0492db9b51325d71aca1bf8b",
+      "duration_seconds": 1783.448333,
+      "source_clock": "publisher_video_package_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "label": "Goldman Sachs Talks at GS 2024",
+      "source_page_url": "https://www.goldmansachs.com/insights/talks-at-gs/jensen-huang",
+      "file_name": "goldman-sachs-2024-full.mp4",
+      "evidence_report": "media-artifacts.json",
+      "evidence_collection": "complete_videos",
+      "verification_status": "all_chunks_fresh_readback_and_full_reconstruction_verified",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-9438e7da117081919eeda856adb58846_a18ece08681081918d81df44f69c4b1f",
+      "package_scope": "complete_selected_publisher_rendition",
+      "publisher_edit_note": "Goldman source filename says HIGHLIGHTS; complete published29m43s package, not an unedited event claim."
+    },
+    {
+      "source_id": "stripe-sessions-2024",
+      "event_family_id": "stripe-sessions-2024",
+      "bytes": 952084714,
+      "sha256": "0882539adca1bca58a8e64c4341a6fdca4ebca69a88c77799c882fb1dd0bfa32",
+      "duration_seconds": 3889.485604,
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "label": "Stripe Sessions 2024",
+      "source_page_url": "https://stripe.com/gb/sessions/2024/a-conversation-with-nvidias-jensen-huang",
+      "file_name": "stripe-sessions-2024-full.mp4",
+      "evidence_report": "media-artifacts.json",
+      "evidence_collection": "complete_videos",
+      "verification_status": "all_chunks_fresh_readback_and_full_reconstruction_verified",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-a6ee1a8cd3b881919ae9c3224e4254f1_a18ece08681081918d81df44f69c4b1f",
+      "package_scope": "complete_selected_publisher_rendition"
+    },
+    {
+      "source_id": "gtc-2025-video",
+      "event_family_id": "nvidia-gtc-2025",
+      "bytes": 583069430,
+      "sha256": "2996962463654e679a2a8c0cf48689e961ad05ef6cc28c6ea0bdc225f68dd459",
+      "duration_seconds": 7907.927075,
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "label": "NVIDIA GTC 2025 keynote",
+      "source_page_url": "https://www.nvidia.com/en-us/on-demand/session/gtc25-s72484/",
+      "file_name": "gtc-2025-full-480p.mp4",
+      "evidence_report": "media-artifacts.json",
+      "evidence_collection": "complete_videos",
+      "verification_status": "all_chunks_fresh_readback_and_full_reconstruction_verified",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-c9753d92b94c819194215f9902bbe9b6_a18ece08681081918d81df44f69c4b1f",
+      "package_scope": "complete_selected_publisher_rendition"
+    },
+    {
+      "source_id": "wired-2024-video",
+      "event_family_id": "wired-big-interview-2024",
+      "bytes": 494775046,
+      "sha256": "1ab8c1cdabf2aa4690cb4561242c604a1206b4c52f9d5a5a6107ca7e537d72e7",
+      "duration_seconds": 1605.066667,
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "label": "WIRED Big Interview 2024",
+      "source_page_url": "https://www.wired.com/video/watch/nvidias-global-takeover-a-conversation-with-jensen-huang",
+      "file_name": "wired-2024-full.mp4",
+      "evidence_report": "media-artifacts.json",
+      "evidence_collection": "complete_videos",
+      "verification_status": "all_chunks_fresh_readback_and_full_reconstruction_verified",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-e47ab43b99388191839b76be5f112744_a18ece08681081918d81df44f69c4b1f",
+      "package_scope": "complete_selected_publisher_rendition"
+    },
+    {
+      "source_id": "ces-2025-video",
+      "event_family_id": "nvidia-ces-2025",
+      "bytes": 415106977,
+      "sha256": "88a98c8eea77df6e32bb5d2b085c9fe8403c033df0029f1f26ade32320ad177d",
+      "duration_seconds": 5818.734898,
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "label": "NVIDIA CES 2025 keynote",
+      "source_page_url": "https://www.nvidia.com/en-us/on-demand/session/ces25-keynote/",
+      "file_name": "ces-2025-full-480p.mp4",
+      "evidence_report": "media-artifacts.json",
+      "evidence_collection": "complete_videos",
+      "verification_status": "all_chunks_fresh_readback_and_full_reconstruction_verified",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-e58de48c42e48191a048d4e35d893153_a18ece08681081918d81df44f69c4b1f",
+      "package_scope": "complete_selected_publisher_rendition"
+    },
+    {
+      "source_id": "siggraph-wired-2024-video",
+      "event_family_id": "nvidia-siggraph-wired-2024",
+      "bytes": 448609245,
+      "sha256": "855e56f7597e124d520b800f899082a42532be41898ceeab749fdc57af564406",
+      "duration_seconds": 3565.493696,
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "label": "NVIDIA SIGGRAPH / WIRED 2024",
+      "source_page_url": "https://www.nvidia.com/en-us/on-demand/session/siggraph2024-fsc1/",
+      "file_name": "siggraph-wired-2024-full-720p.mp4",
+      "evidence_report": "media-artifacts.json",
+      "evidence_collection": "complete_videos",
+      "verification_status": "all_chunks_fresh_readback_and_full_reconstruction_verified",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-4f8f35fe01e081919b0e65132b2c4fd2_a18ece08681081918d81df44f69c4b1f",
+      "package_scope": "complete_selected_publisher_rendition",
+      "publisher_edit_note": "Player title explicitly says Trimmed; entire published rendition is acquired, not an uncut-event claim."
+    },
+    {
+      "source_id": "computex-2025-video",
+      "event_family_id": "nvidia-computex-2025",
+      "bytes": 452685850,
+      "sha256": "9669d9333f97c80b7ffe41e799d75245e9a2e067fa52df999a0b09db0254c047",
+      "duration_seconds": 6171.376327,
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "label": "NVIDIA COMPUTEX 2025 keynote",
+      "source_page_url": "https://www.nvidia.com/en-us/on-demand/session/computex25-keynote/",
+      "file_name": "computex-2025-full-480p.mp4",
+      "evidence_report": "media-artifacts.json",
+      "evidence_collection": "complete_videos",
+      "verification_status": "all_chunks_fresh_readback_and_full_reconstruction_verified",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-3625619160b48191a693df9d330cf73f_a18ece08681081918d81df44f69c4b1f",
+      "package_scope": "complete_selected_publisher_rendition"
+    },
+    {
+      "source_id": "gtc-2024-video",
+      "event_family_id": "nvidia-gtc-2024",
+      "bytes": 479397116,
+      "sha256": "16ffcdfee02d8b9bf4a9be7fab6413066b8b65f1388c3e8ccae88cfdea7b9184",
+      "duration_seconds": 7387.567891,
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "label": "NVIDIA GTC 2024 keynote",
+      "source_page_url": "https://www.nvidia.com/en-us/on-demand/session/gtc24-s62542/",
+      "file_name": "gtc-2024-full-480p.mp4",
+      "evidence_report": "media-artifacts.json",
+      "evidence_collection": "complete_videos",
+      "verification_status": "all_chunks_fresh_readback_and_full_reconstruction_verified",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-cd3ba529982481919a99a3ac3d11fd41_a18ece08681081918d81df44f69c4b1f",
+      "package_scope": "complete_selected_publisher_rendition"
+    },
+    {
+      "source_id": "chm-jensen-oral-history-102809035",
+      "event_family_id": "chm-oral-history-2024-08-09",
+      "bytes": 653931658,
+      "sha256": "1840202f25adc219a166cfdc3b4968fa34ad43fe5ff33a2b27e56b22c16d85a8",
+      "duration_seconds": 4344.825034,
+      "source_clock": "publisher_rendition_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "label": "Computer History Museum oral history, 2024-08-09",
+      "source_page_url": "https://www.computerhistory.org/collections/catalog/102809035/",
+      "file_name": "chm-oral-history-2024-08-09-full.mp4",
+      "evidence_report": "reflection-expansion-v1/media-artifacts.json",
+      "evidence_collection": "full_video_verification",
+      "verification_status": "all_saved_chunks_fresh_readback_and_full_reconstruction_verified",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-e9949243c2088191bb0db793cce9a533_a18ece08681081918d81df44f69c4b1f",
+      "package_scope": "complete_selected_publisher_rendition",
+      "excluded_from_frozen_v4_text_v1_M6": true,
+      "publisher_transcript_note": "Publisher transcript may contain later edits; its wording and clocks are not assumed identical to the video."
+    },
+    {
+      "source_id": "gtc-2026-cn-video",
+      "event_family_id": "nvidia-gtc-2026",
+      "bytes": 855451136,
+      "sha256": "4070e63179f44e5de14d70bc615322a2821b2ed417610ffa0e92ccd371cd7b28",
+      "label": "NVIDIA GTC 2026 official China replay",
+      "source_page_url": "https://www.nvidia.cn/gtc/keynote/",
+      "file_name": "gtc-2026-cn.full.ts",
+      "duration_seconds": 8335.646444,
+      "source_clock": "publisher_VOD_manifest_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "evidence_report": "regional-replays-v1/gtc-complete.json",
+      "verification_status": "complete_video_saved_and_fresh_reconstruction_verified",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-f04e90009be881918ec7f25d3a1672de_a18ece08681081918d81df44f69c4b1f",
+      "package_scope": "complete_selected_publisher_HLS_rendition",
+      "storage_transform": "byte_exact_playlist_order_MPEG_TS_fragment_concatenation",
+      "audio_language_review": "unverified",
+      "dubbing_review": "unverified",
+      "burned_in_subtitles_review": "unverified",
+      "speech_training_eligible": false,
+      "excluded_from_current_frozen_training_and_evaluation": true,
+      "post_acquisition_track_coverage_report": "regional-replays-v1/stream-coverage-checks.json"
+    },
+    {
+      "source_id": "ces-2026-cn-video",
+      "event_family_id": "nvidia-ces-2026",
+      "bytes": 547193928,
+      "sha256": "e1ac9122cb2468d7759eeef5b2b2f67655eda6e6f72c3fe7b88389ccb5a05d45",
+      "label": "NVIDIA CES 2026 official China replay",
+      "source_page_url": "https://www.nvidia.cn/events/ces/",
+      "file_name": "ces-2026-cn.full.ts",
+      "duration_seconds": 5499.813111,
+      "source_clock": "publisher_VOD_manifest_elapsed",
+      "local_source_clock_offset_seconds": 0,
+      "transcript_clock_mapping_verified": false,
+      "evidence_report": "regional-replays-v1/ces-complete.json",
+      "verification_status": "complete_video_saved_and_fresh_reconstruction_verified",
+      "reconstruction_manifest_library_file_id": "libfile_fde3_f-78c9bd6710b081918b9ac8f7ede0cb24_a18ece08681081918d81df44f69c4b1f",
+      "package_scope": "complete_selected_publisher_HLS_rendition",
+      "storage_transform": "byte_exact_playlist_order_MPEG_TS_fragment_concatenation",
+      "audio_language_review": "unverified",
+      "dubbing_review": "unverified",
+      "burned_in_subtitles_review": "unverified",
+      "speech_training_eligible": false,
+      "excluded_from_current_frozen_training_and_evaluation": true,
+      "post_acquisition_track_coverage_report": "regional-replays-v1/stream-coverage-checks.json"
+    }
+  ],
+  "derived_address_recordings": [
+    {
+      "source_id": "ntu-commencement-2023-dvd-address-range",
+      "event_family_id": "ntu-commencement-2023-05-27",
+      "bytes": 752097280,
+      "sha256": "0559b903a1a4ebc312866c28485b12fefc3611b0b057ced17c6bca2f56eb9f3a",
+      "duration_seconds": 1518.692466,
+      "source_clock": "original_DVD_MPEG_program_stream_PTS",
+      "first_source_pts_seconds": 1211.431956,
+      "local_elapsed_to_source_pts_offset_seconds": 1211.431956,
+      "source_byte_start": 600688640,
+      "source_byte_count": 752097280,
+      "source_total_bytes": 4472338432,
+      "full_iso_acquired": false,
+      "label": "NTU 2023 commencement address with preceding and following context",
+      "source_page_url": "https://www.ntu.edu.tw/english/spotlight/2023/2164_20230529.html",
+      "source_media_url": "https://ftp.ntu.edu.tw/NTU/ceremony/2023/GC2023.iso",
+      "file_name": "ntu-commencement-2023-address-with-context.vob",
+      "evidence_report": "reflection-expansion-v1/ntu-media-artifacts.json",
+      "acquisition_and_review_report": "reflection-expansion-v1/ntu-acquisition.json",
+      "verification_status": "all_artifacts_saved_fresh_readback_and_full_reconstruction_verified",
+      "complete_publisher_package_count_increment": 0,
+      "derived_address_count_increment": 1,
+      "claim_scope": "Agent visual opening/closing review plus continuous source clocks supports containment of the complete address, with preceding introduction and following ceremony. It is not a complete ceremony ISO, a publisher-defined speaker chapter, or a word-aligned speech-only clip.",
+      "exact_speech_only_start_end_or_duration_verified": false,
+      "human_semantic_or_perceptual_quality_review": "ungraded",
+      "excluded_from_frozen_v4_text_v1_M6": true,
+      "decoder_limitations": "The bounded MPEG program stream begins within compressed streams. Initial partial GOP/audio packet, duplicate early audio timestamp and whole-decode incomplete/damaged-frame warnings are retained in the acquisition report; no perceptual grade is claimed."
+    }
+  ],
+  "audio_only_recordings": [
+    {
+      "artifact_id": "stanford-vftt-podcast",
+      "file_name": "stanford-vftt-2024-podcast.mp3",
+      "file_id": "file_00000000d49881fd90d274efc5af9cb6",
+      "library_file_id": "libfile_fde3_f-023420bde25481918c2cbc716e8e6572_a18ece08681081918d81df44f69c4b1f",
+      "sha256": "f505539cf41227178743a030038792db354cb358ec7560774f26492c0b5a3063",
+      "duration_seconds": 3455.94775,
+      "verification_status": "fresh-materialization-byte-verified",
+      "source_id": "stanford-vftt-2024",
+      "event_family_id": "stanford-vftt-2024",
+      "receipt_event_family_id": "jensen-stanford-vftt-2024",
+      "bytes": 55295164,
+      "source_page_url": "https://www.gsb.stanford.edu/insights/jensen-huang-how-use-first-principles-thinking-drive-decisions",
+      "source_clock": "stanford_podcast_edited",
+      "evidence_report": "../../data/runs/jensen-2026-11-13/artifacts.json",
+      "evidence_collection": "artifacts",
+      "provenance_receipt_artifact_id": "stanford-vftt-podcast-receipt",
+      "source_binding_report": "../voice/jensen-2026-11-13/preparation.json",
+      "whole_file_transcript_clock_mapping_verified": false,
+      "included_in_video_totals": false,
+      "whole_file_speaker_review": "not_established; bounded prepared intervals retain their own separate evidence",
+      "event_identifier_reconciliation": {
+        "recorded_receipt_identifier": "jensen-stanford-vftt-2024",
+        "canonical_event_family_id": "stanford-vftt-2024",
+        "note": "Explicit alias reconciliation for this inventory; the original central receipt is unchanged.",
+        "evidence_paths": [
+          "../../data/acquisition/jensen-huang/source-families.json",
+          "../../data/acquisition/jensen-huang/split-registration.json",
+          "../voice/jensen-2026-11-13/preparation.json"
+        ]
+      }
+    },
+    {
+      "artifact_id": "acquired-2023-podcast",
+      "file_name": "acquired-2023-podcast.mp3",
+      "file_id": "file_00000000a178821288404fd82e771935",
+      "library_file_id": "libfile_fde3_f-4bf95c066dd08191b18b98faa57ef5d1_a18ece08681081918d81df44f69c4b1f",
+      "sha256": "57f6a7a0d28c29705eeabc788f25aafa7a836b8ad73561d376706b0d321af6ce",
+      "duration_seconds": 5458.295375,
+      "verification_status": "fresh-materialization-byte-verified",
+      "source_id": "acquired-2023",
+      "event_family_id": "acquired-2023",
+      "receipt_event_family_id": "acquired-2023",
+      "bytes": 87332864,
+      "source_page_url": "https://www.acquired.fm/episodes/jensen-huang",
+      "source_clock": "acquired_podcast_elapsed",
+      "evidence_report": "../../data/runs/jensen-2026-11-13/artifacts.json",
+      "evidence_collection": "artifacts",
+      "provenance_receipt_artifact_id": "acquired-2023-podcast-receipt",
+      "source_binding_report": "../voice/jensen-2026-11-13/preparation.json",
+      "whole_file_transcript_clock_mapping_verified": false,
+      "included_in_video_totals": false,
+      "whole_file_speaker_review": "not_established; bounded prepared intervals retain their own separate evidence"
+    },
+    {
+      "artifact_id": "lex-494-podcast",
+      "file_name": "lex-494-podcast.mp3",
+      "file_id": "file_0000000092d081fb8e761a6a5ab8096a",
+      "library_file_id": "libfile_fde3_f-5493cabf11888191b926e6cad9afabad_a18ece08681081918d81df44f69c4b1f",
+      "sha256": "018c6101e4f94c62a3105e52f6beeee88832b526f36d263ac6221fd561c49f7c",
+      "duration_seconds": 9133.066667,
+      "verification_status": "fresh-materialization-byte-verified",
+      "source_id": "lex-494",
+      "event_family_id": "lex-494",
+      "receipt_event_family_id": "lex-494",
+      "bytes": 116997396,
+      "source_page_url": "https://lexfridman.com/jensen-huang/",
+      "source_clock": "lex_podcast_elapsed",
+      "evidence_report": "../../data/runs/jensen-2026-11-13/artifacts.json",
+      "evidence_collection": "artifacts",
+      "provenance_receipt_artifact_id": "lex-494-podcast-receipt",
+      "source_binding_report": "../voice/jensen-2026-11-13/preparation.json",
+      "whole_file_transcript_clock_mapping_verified": false,
+      "included_in_video_totals": false,
+      "whole_file_speaker_review": "not_established; bounded prepared intervals retain their own separate evidence"
+    }
+  ],
+  "metadata_only_events_excluded_from_acquired_counts": [
+    "nvidia-gtc-dc-2025",
+    "nvidia-gtc-taipei-2026",
+    "nvidia-gtc-berlin-2026",
+    "caltech-commencement-2024-06-14",
+    "cmu-commencement-2026-05-10"
+  ],
+  "evidence_reports": [
+    {
+      "path": "source-progress.json",
+      "sha256_at_evidence_revision": "f112048e98266ab20cc78d476b58854bc8caded262fc5f415a5b0195e2d5625b"
+    },
+    {
+      "path": "media-artifacts.json",
+      "sha256_at_evidence_revision": "b850ea6e5681f5b9904422caa6c6f3916d8bcdc9a1e2245473865d8250599f08"
+    },
+    {
+      "path": "reflection-expansion-v1/source-plan.json",
+      "sha256_at_evidence_revision": "bde1591d93e2d642caefc347d49227170d29b346337f953d1f89f3ca70e8f81e"
+    },
+    {
+      "path": "reflection-expansion-v1/media-artifacts.json",
+      "sha256_at_evidence_revision": "3629fba27ebf38cd80e4f826e7e354790e62be03d26253842e5d137e3a8bfb04"
+    },
+    {
+      "path": "reflection-expansion-v1/ntu-acquisition.json",
+      "sha256_at_evidence_revision": "cfc3b995dd779f727325bb6164e7dcdc4345b6c091bf7577891b7c1ca19449e3"
+    },
+    {
+      "path": "reflection-expansion-v1/ntu-media-artifacts.json",
+      "sha256_at_evidence_revision": "ccdefb8939391f209f1fc8e791ea5e0b2b5ba979eea4332e7968d6e0fc60f305"
+    },
+    {
+      "path": "regional-replays-v1/artifact-manifest.json",
+      "sha256_at_evidence_revision": "ddf7a158e33a1b7536531a2cb059bea757617244050f0b1a8bf0b17bf80c9fcf"
+    },
+    {
+      "path": "regional-replays-v1/gtc-complete.json",
+      "sha256_at_evidence_revision": "85e2788fc39eb496b35ca2dbcbb90ed7bc58419c538c646d4b452ab2febefe0e"
+    },
+    {
+      "path": "regional-replays-v1/ces-complete.json",
+      "sha256_at_evidence_revision": "5bab01ca63aee55fc0094339278897e6e95a3754014019cbb49405cdaaaf192b"
+    },
+    {
+      "path": "regional-replays-v1/stream-coverage-checks.json",
+      "sha256_at_evidence_revision": "ac14ea405e3937e009e25c361ac57be768b75caeb8e7f1f196291c321dc45cef"
+    },
+    {
+      "path": "../../data/runs/jensen-2026-11-13/artifacts.json",
+      "sha256_at_evidence_revision": "54f6b45e36e0852b2a63d7e7a0dc39e46ef68d0f0d0b4be1d0292fcc0e8d9ccb"
+    },
+    {
+      "path": "../../data/acquisition/jensen-huang/source-families.json",
+      "sha256_at_evidence_revision": "fb48e5b140868d538a41afdac9a96c2949a5df65afa038c96fb1f04c61409848"
+    },
+    {
+      "path": "../../data/acquisition/jensen-huang/split-registration.json",
+      "sha256_at_evidence_revision": "c5f6831dfd5212153749d7b683e3c0e80d0ee5340a60dbb1023cac1fb39b2aa9"
+    },
+    {
+      "path": "../voice/jensen-2026-11-13/preparation.json",
+      "sha256_at_evidence_revision": "e265e6e37300679133862d8bccb9aea315948bde8435342a426460eeed84af20"
+    },
+    {
+      "path": "../../docs/jensen-voice-adaptation.md",
+      "sha256_at_evidence_revision": "5a0a2a831fc0aa616e95a00073539b7308e348777f89c86009faedd114708240"
+    }
+  ]
+}

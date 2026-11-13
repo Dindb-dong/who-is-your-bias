@@ -1,0 +1,105 @@
+{
+  "schema_version": "jensen-text-progress.v1",
+  "recorded_at": "2026-11-12T19:21:35.561382+00:00",
+  "status": "paused_and_fresh_remote_state_restored",
+  "completed_and_persisted_optimizer_steps": 6,
+  "planned_optimizer_steps": 29,
+  "accepted_examples": 113,
+  "trainable_parameters": 8716288,
+  "base_model": "Qwen/Qwen3-1.7B",
+  "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+  "precision": "bfloat16",
+  "runtime": {
+    "cpu_affinity_count": 9,
+    "cuda_runtime": null,
+    "logical_cpu_count": 9,
+    "machine": "x86_64",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "processor": null,
+    "python": "3.12.14",
+    "requested_device": "cpu",
+    "torch_interop_threads": 9,
+    "torch_threads": 8
+  },
+  "optimization": {
+    "batch_size": 1,
+    "checkpoint_use_reentrant": false,
+    "gradient_accumulation": 4,
+    "gradient_checkpointing": true,
+    "learning_rate": 0.0002,
+    "max_steps": 29
+  },
+  "loss_statistics": {
+    "examples": 24,
+    "maximum": 6.463873386383057,
+    "minimum": 2.707797050476074,
+    "sum": 92.38875937461853
+  },
+  "loss_history": [
+    6.463873386383057,
+    4.181422710418701,
+    4.127119541168213,
+    5.200517654418945,
+    4.269936561584473,
+    3.8529598712921143,
+    5.1923627853393555,
+    4.030734062194824,
+    4.363778591156006,
+    3.659290313720703,
+    3.627488851547241,
+    3.5015923976898193,
+    3.0293197631835938,
+    5.494486331939697,
+    3.013246536254883,
+    3.9919369220733643,
+    2.8295376300811768,
+    2.944530725479126,
+    3.073505401611328,
+    3.4929776191711426,
+    2.707797050476074,
+    3.332435131072998,
+    3.17933988571167,
+    2.8285696506500244
+  ],
+  "elapsed_active_seconds": 1568.3001344700006,
+  "resume_history": [
+    {
+      "checkpoint_metadata_sha256": "4ed7fa2421c2694b29bfbfb97167a0996e4783d2d8ab4a231a235e8361fc5cb4",
+      "optimizer_steps": 1
+    },
+    {
+      "checkpoint_metadata_sha256": "290c48fa622c641dfa25688d0a87fef3593528452b5c30eae8830e3025a202f4",
+      "optimizer_steps": 2
+    }
+  ],
+  "checkpoint_metadata_sha256": "8217f5723a57edcc91cadc34d52df36ae13b877f23617091c5e567ba8783e2fd",
+  "binding_sha256": "b0e4a560be3649504105d1ec093ce427ab28ae27b09927e504299de7e670f041",
+  "artifact": {
+    "artifact_id": "jensen-text-checkpoint-step0006",
+    "role": "actual_text_optimizer_checkpoint",
+    "completed_optimizer_steps": 6,
+    "target_optimizer_steps": 29,
+    "checkpoint_metadata_sha256": "8217f5723a57edcc91cadc34d52df36ae13b877f23617091c5e567ba8783e2fd",
+    "file_name": "jensen-text-checkpoint-step0006.tar.gz",
+    "file_id": "file_00000000bf5881fdb8f7f93e5264fd5c",
+    "library_file_id": "libfile_fde3_f-bf2885e654c08191bf7428e918126d9b_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 97267334,
+    "sha256": "b9ff3cbb42cf4db4f2c5f14fbcf6857f33651c94e63205455834b2d4609bdf3c",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "verification": {
+    "fresh_archive_sha256": true,
+    "all_checkpoint_payload_hashes": true,
+    "fresh_optimizer_rng_cursor_loader": true,
+    "fresh_loaded_cursor": {
+      "epoch": 0,
+      "next_index": 24
+    },
+    "optimizer_state_entries": 392
+  },
+  "training_completed": false,
+  "model_quality_evaluated": false,
+  "next_bounded_stop": 10,
+  "next_resume_checkpoint": "readback/text-resume-step0006/step-00000006"
+}

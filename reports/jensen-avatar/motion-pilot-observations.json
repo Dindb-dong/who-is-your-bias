@@ -1,0 +1,62 @@
+{
+  "schema_version": "jensen-motion-observation-summary.v1",
+  "status": "measured_unreviewed",
+  "sample_fps": 10,
+  "windows": [
+    {
+      "id": "goldman-0128-8s",
+      "source_event_id": "goldman-sachs-2024",
+      "source_start_seconds": 128.0,
+      "frames": 80,
+      "observations_sha256": "6df4e1d9ec8b0ff5604224f14e48d0a36ee7caca9a34674fdbb23e687f589b9a",
+      "exactly_one_face_frames": 80,
+      "exactly_one_pose_frames": 80,
+      "hand_detection_counts": {
+        "0": 0,
+        "1": 11,
+        "2": 67,
+        "3": 2,
+        "4": 0
+      },
+      "speaker_identity": "unverified",
+      "clip_export_status": "pending_explicit_preview_selection"
+    },
+    {
+      "id": "goldman-0146-8s",
+      "source_event_id": "goldman-sachs-2024",
+      "source_start_seconds": 146.0,
+      "frames": 80,
+      "observations_sha256": "444551afd42a115c4c4ab16854fe6bb59e362e8640947a82aa99049c07943727",
+      "exactly_one_face_frames": 69,
+      "exactly_one_pose_frames": 69,
+      "hand_detection_counts": {
+        "0": 2,
+        "1": 12,
+        "2": 63,
+        "3": 3,
+        "4": 0
+      },
+      "speaker_identity": "unverified",
+      "clip_export_status": "pending_explicit_preview_selection"
+    },
+    {
+      "id": "goldman-0164-8s",
+      "source_event_id": "goldman-sachs-2024",
+      "source_start_seconds": 164.0,
+      "frames": 80,
+      "observations_sha256": "a4ed6c143238bd6afdddf01837478af64cc627a37cf053f7c4b300177b143784",
+      "exactly_one_face_frames": 80,
+      "exactly_one_pose_frames": 80,
+      "hand_detection_counts": {
+        "0": 0,
+        "1": 1,
+        "2": 78,
+        "3": 1,
+        "4": 0
+      },
+      "speaker_identity": "unverified",
+      "clip_export_status": "pending_explicit_preview_selection"
+    }
+  ],
+  "total_observed_frames": 240
+}

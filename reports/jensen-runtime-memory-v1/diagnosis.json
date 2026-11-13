@@ -1,0 +1,216 @@
+{
+  "schema_version": "jensen-runtime-memory-diagnosis.v1",
+  "recorded_at": "2026-11-12T20:21:02.444058+00:00",
+  "status": "read-only source/header diagnosis; proposed optimization unexecuted",
+  "scope": "Original pinned Qwen3-1.7B FP32 loading peak; current frozen BF16 experiments remain unchanged.",
+  "installed_versions": {
+    "transformers": "4.57.3",
+    "torch": "2.11.0+cpu",
+    "accelerate": "1.12.0",
+    "safetensors": "0.8.0"
+  },
+  "installed_source_evidence": [
+    {
+      "installed_path_relative_to_site_packages": "transformers/modeling_utils.py",
+      "sha256": "bf1c6b2a43cf7c36fb79f37c981424dd6ae78eb863fcaa5d2a37e76c9828611d"
+    },
+    {
+      "installed_path_relative_to_site_packages": "transformers/models/qwen3/modeling_qwen3.py",
+      "sha256": "d96eeea4c000abaa70a7c0277437d0843b5b2d005ab233e0ffcaf860a357f1aa"
+    },
+    {
+      "installed_path_relative_to_site_packages": "transformers/modeling_rope_utils.py",
+      "sha256": "55cc0c8cb76f592ab178b4662adcbdf4ad5012bb0b4249c0a96603141f18e9ac"
+    },
+    {
+      "installed_path_relative_to_site_packages": "transformers/configuration_utils.py",
+      "sha256": "08a3889c1b8a73d340a37c93f72346ee0e385e339b7a72a03b5c026d4943baf7"
+    },
+    {
+      "installed_path_relative_to_site_packages": "transformers/cache_utils.py",
+      "sha256": "f4e11caf14c75bdefa5e3003b93ef0e8b97fb6103375705ad944b0b344d7da8a"
+    },
+    {
+      "installed_path_relative_to_site_packages": "torch/nn/modules/module.py",
+      "sha256": "0758af0e6a4214bc36707739c3e730d69c82fdec790eee6fb63e7eeb7518c492"
+    },
+    {
+      "installed_path_relative_to_site_packages": "torch/__future__.py",
+      "sha256": "ca4f65fca5ac7d5233501c7d706afe39db5699bfa923c6617113809b76bf150c"
+    }
+  ],
+  "repository_source_evidence": {
+    "path": "services/language/engine.py",
+    "sha256": "4de8fb45c173620e502539273a76ce9e708e8e12fee51060ae61fca8845a633c",
+    "inspected_commit": "57cb59e9974e44d669ec828554a30db1d97fd9a8"
+  },
+  "snapshot": {
+    "model": "Qwen/Qwen3-1.7B",
+    "revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+    "previously_recorded_base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+    "config_sha256": "1ddb5b89ebc90dcb417a45c213d818577e65976454d29385c8f6140771d95197",
+    "index_sha256": "0d660e94b165eb912669a5249dff44b83188c4777a07ddb9611fb78d91b0578d",
+    "index_declared_tensor_bytes": 4063479808,
+    "tie_word_embeddings": true,
+    "stored_dtype": "bfloat16",
+    "layers": 28,
+    "kv_heads": 8,
+    "head_dim": 128,
+    "shards": [
+      {
+        "file": "model-00001-of-00002.safetensors",
+        "file_bytes": 3441185608,
+        "header_json_bytes": 35648,
+        "header_prefix_and_json_sha256": "1ee0e4e7bf2b79af3ee159ee7894dc37663ca8118eeb88ddd9a3ff2c1c4d91e7",
+        "tensor_count": 310,
+        "elements": 1720574976,
+        "tensor_dtypes": [
+          "BF16"
+        ],
+        "embedding_or_head_headers": {
+          "model.embed_tokens.weight": {
+            "dtype": "BF16",
+            "shape": [
+              151936,
+              2048
+            ],
+            "data_offsets": [
+              0,
+              622329856
+            ]
+          }
+        }
+      },
+      {
+        "file": "model-00002-of-00002.safetensors",
+        "file_bytes": 622329984,
+        "header_json_bytes": 120,
+        "header_prefix_and_json_sha256": "de3c1e531e8d90b962f43c40af894e503d94d171899631d258620241fff6c898",
+        "tensor_count": 1,
+        "elements": 311164928,
+        "tensor_dtypes": [
+          "BF16"
+        ],
+        "embedding_or_head_headers": {
+          "lm_head.weight": {
+            "dtype": "BF16",
+            "shape": [
+              151936,
+              2048
+            ],
+            "data_offsets": [
+              0,
+              622329856
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "header_derived_accounting": {
+    "stored_tensor_elements": 2031739904,
+    "declared_tied_output_head_elements": 311164928,
+    "expected_unique_parameter_elements_after_tying": 1720574976,
+    "expected_unique_parameter_fp32_bytes": 6882299904,
+    "all_serialized_parameters_fp32_bytes": 8126959616,
+    "redundant_output_head_fp32_bytes": 1244659712,
+    "output_head_stored_bf16_bytes": 622329856,
+    "fp32_kv_cache_bytes_per_token": 229376,
+    "fp32_kv_cache_bytes_at_4096_tokens": 939524096,
+    "basis": "Unquantized batch-one KV cache; excludes activations, attention workspace, allocator, tokenizer and mapped-file residency."
+  },
+  "observed_failure": {
+    "source_report": "../jensen-evaluation-v1/runtime-amendment-bf16-v2.json",
+    "source_report_sha256": "4efc4fee67163c8d163885010dbfbd07e4ad67d4bdf01e179b7ebcdcfec03011",
+    "requested_runtime": {
+      "device": "cpu",
+      "dtype": "float32",
+      "threads": 8,
+      "input_limit": 4096,
+      "output_limit": 160
+    },
+    "stage": "Separate M6 excluded warmup; before evaluation questions/responses",
+    "failure_type": "RemoteProtocolError",
+    "server_returncode": -9,
+    "elapsed_seconds": 91.894,
+    "process_owner_max_waited_child_rss_bytes": 8191066112,
+    "supervisor_sha256": "837b6135c7c4c6640c792c91d8ef70c7208775246beda60eb58b5815eae842f6",
+    "failed_archive": {
+      "artifact_id": "jensen-text-eval-fp32-preflight-failed",
+      "role": "Failed pre-output FP32 M6 warmup, actual server SIGKILL and process ownership diagnostics; zero evaluation cases",
+      "file_name": "jensen-text-eval-fp32-preflight-failed.tar.gz",
+      "file_id": "file_00000000e92c81fda45c471d47a75a84",
+      "library_file_id": "libfile_fde3_f-38f95d8a47d881919d1cbf3a89eebf38_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 2619,
+      "sha256": "a2cb10262fff00ea4e039148af329d2862a073c94ec070d0178ed2864f88a949",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
+    },
+    "fresh_archive_and_all_attempt_files_verified": true,
+    "kernel_oom_attribution_available": false
+  },
+  "source_findings": [
+    {
+      "reference": "transformers/modeling_utils.py:4661-4666",
+      "finding": "low_cpu_mem_usage and offload_state_dict are removed as unused kwargs in this installed version."
+    },
+    {
+      "reference": "transformers/modeling_utils.py:4366-4380,4974,5065",
+      "finding": "Empty/meta construction and initial tying precede shard loading; tying is repeated after all shards finish."
+    },
+    {
+      "reference": "transformers/modeling_utils.py:663-668,671-800",
+      "finding": "The loader casts each serialized parameter and assigns it to its named module. The serialized output head can be allocated separately before final tying."
+    },
+    {
+      "reference": "torch/nn/modules/module.py:932-1040,1181-1190; torch/__future__.py:1-2",
+      "finding": "float() delegates to _apply. Ordinary compatible dense CPU parameters retain their Parameter object through param.data assignment under default conversion flags. Both flags default false; no override was found in inspected repo services/tools or installed Transformers/PEFT/Accelerate."
+    },
+    {
+      "reference": "transformers/modeling_utils.py:1219-1297; transformers/configuration_utils.py:429-436",
+      "finding": "from_pretrained sets in-memory config.dtype; Module.float does not correct it. torch_dtype is a deprecated alias."
+    },
+    {
+      "reference": "transformers/models/qwen3/modeling_qwen3.py:299-332; transformers/modeling_rope_utils.py:123-132",
+      "finding": "Default Qwen3 RoPE inv_freq is a nonpersistent buffer explicitly computed in FP32, independent of the load dtype."
+    }
+  ],
+  "candidate": {
+    "name": "native-BF16 load, tie, then base-only FP32 conversion",
+    "status": "UNEXECUTED",
+    "sequence": [
+      "Load the unchanged, verified original snapshot explicitly in its stored BF16 dtype with the same SDPA/tokenizer/runtime settings.",
+      "Finish and verify normal input/output embedding tying.",
+      "Convert the already tied base to FP32 with model.float or the equivalent dtype conversion.",
+      "Correct only the in-memory model.config.dtype to torch.float32; do not save or rewrite cache config/index/tensors.",
+      "Verify final dtype, non-meta state, shared embedding/head Parameter and expected unique parameter count.",
+      "Load the exact PEFT adapter after base conversion so it sees the same FP32 base as the original serving path."
+    ],
+    "preservation_inference": "Every serialized tensor is BF16, so casting those original values to FP32 is exact. Original source file/tokenizer/revision identities can remain unchanged. Whole-model numerical equivalence and actual peak memory have not been executed or measured.",
+    "required_record": "A changed loader needs its own implementation identity and separately recorded bounded preflight; current frozen BF16 execution code and reports remain unchanged.",
+    "limitations": [
+      "Only this all-BF16, ordinary unquantized Qwen3 snapshot was inspected. Loading mixed/FP32-source tensors in BF16 first could lose information.",
+      "Parameter alias preservation is inferred from installed code under default conversion flags; verify actual sharing before and after conversion.",
+      "Unique FP32 parameters still require 6,882,299,904 bytes; source mappings, conversion temporaries, runtime allocations and generation need additional headroom.",
+      "A full 4096-token batch-one FP32 KV cache adds 939,524,096 bytes before other generation memory. A short warmup alone does not prove longest-prompt capacity.",
+      "FP32 throughput relative to BF16 is unmeasured. No speedup, successful FP32 load or semantic-quality claim follows from this diagnosis."
+    ]
+  },
+  "non_solutions_for_this_path": [
+    "Toggling low_cpu_mem_usage or offload_state_dict: ignored by the installed loader.",
+    "device_map=cpu: retains the same per-name cast/assignment path.",
+    "Changing swap semantics alone: still needs a new converted tensor before swapping.",
+    "Quantization, offload or rewriting checkpoint index/cache are different runtime or source choices and are not proposed for current frozen experiments."
+  ],
+  "evidence_boundary": {
+    "model_initialized": false,
+    "torch_imported_for_diagnosis": false,
+    "tensor_payloads_read_or_compared": false,
+    "safetensors_headers_read": true,
+    "repository_implementation_modified": false,
+    "frozen_contracts_modified": false,
+    "new_runtime_experiment_executed": false,
+    "official_web_lookup": "Two attempts returned HTTP503; findings rely on exact locally installed primary source and pinned headers."
+  },
+  "next_action": "Finish current frozen BF16 experiments unchanged. No optimization execution is authorized by this report. M7 continues to wait for the verified completed 29-update adapter and coordinator model-slot release."
+}

@@ -1,0 +1,71 @@
+{
+  "schema_version": "motion-input.v1",
+  "id": "jensen-multievent-geometry-pilot",
+  "persona_id": "jensen-huang",
+  "version": "0.3.0",
+  "sources": [
+    {
+      "id": "goldman-sachs-2024",
+      "source_event_id": "goldman-sachs-2024",
+      "url": "https://www.goldmansachs.com/insights/talks-at-gs/jensen-huang",
+      "corpus_split": "train",
+      "motion_split": "train"
+    },
+    {
+      "id": "stripe-sessions-2024",
+      "source_event_id": "stripe-sessions-2024",
+      "url": "https://stripe.com/gb/sessions/2024/a-conversation-with-nvidias-jensen-huang",
+      "corpus_split": "train",
+      "motion_split": "train"
+    },
+    {
+      "id": "wired-2024-video",
+      "source_event_id": "wired-big-interview-2024",
+      "url": "https://www.wired.com/video/watch/nvidias-global-takeover-a-conversation-with-jensen-huang",
+      "corpus_split": "train",
+      "motion_split": "train"
+    }
+  ],
+  "clips": [
+    {
+      "id": "jensen-goldman-0128-8s",
+      "path": "motion/jensen/goldman-0128-8s.json",
+      "sha256": "ece3ab917cc229bf43b3f9b3f48d754d1b6d949d19b1409449eccc3c5284857a",
+      "source_id": "goldman-sachs-2024"
+    },
+    {
+      "id": "jensen-goldman-0146-8s",
+      "path": "motion/jensen/goldman-0146-8s.json",
+      "sha256": "c66c81b77ced4fefa426e61436d912ca685e1cb454df2033e48dd28dd5b11291",
+      "source_id": "goldman-sachs-2024"
+    },
+    {
+      "id": "jensen-goldman-0164-8s",
+      "path": "motion/jensen/goldman-0164-8s.json",
+      "sha256": "e6dfb2a06a54dba724b88682e63dc9ffb649fd162fdcf9e4bd6158ff4c65ca95",
+      "source_id": "goldman-sachs-2024"
+    },
+    {
+      "id": "jensen-stripe-2396-12s",
+      "path": "motion/jensen/stripe-2396-12s.json",
+      "sha256": "c52a28512bff876a8be94e38da81f8c881f5520bf76cd4b89f7a6e8b36760bf6",
+      "source_id": "stripe-sessions-2024"
+    },
+    {
+      "id": "jensen-stripe-2696-12s",
+      "path": "motion/jensen/stripe-2696-12s.json",
+      "sha256": "a1e79e017a024fda8bc1fa0d7fd2fff2ce04bef917ac18df18644f0b025c73a0",
+      "source_id": "stripe-sessions-2024"
+    },
+    {
+      "id": "jensen-wired-1350-10s",
+      "path": "motion/jensen/wired-1350-10s.json",
+      "sha256": "cb1bdedd9b46cab640d83c3254160b8a58f0b3a356b6ccb95ca8e971532cf346",
+      "source_id": "wired-2024-video"
+    }
+  ],
+  "window_ms": 2500,
+  "stride_ms": 2500,
+  "minimum_feature_coverage": 0.8,
+  "clusters_per_family": 3
+}

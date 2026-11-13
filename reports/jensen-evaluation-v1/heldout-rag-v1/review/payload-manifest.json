@@ -1,0 +1,20 @@
+{
+  "artifact_id": "jensen-m6-rag-agent-review-v1",
+  "efficacy_claim": false,
+  "files": {
+    "provenance.json": {
+      "bytes": 3585,
+      "sha256": "25065991ddb02cace899b5fb359287ca51ac6a10147f51a3b8ef2ec3891d4d55"
+    },
+    "support-findings.json": {
+      "bytes": 85749,
+      "sha256": "248251ea760f75a8530df71fb191fc7b8b7e96a6193ce9877908e65511bb37de"
+    },
+    "support-findings.md": {
+      "bytes": 6986,
+      "sha256": "e1a893576d32d284966e233cf907a0b038a4293d3941754b6a0e083aa41ace55"
+    }
+  },
+  "human_review": "ungraded",
+  "schema_version": "jensen-rag-agent-review-payload.v1"
+}

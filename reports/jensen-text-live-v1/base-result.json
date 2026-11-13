@@ -1,0 +1,540 @@
+{
+  "schema_version": "jensen-neural-text-live-result.v1",
+  "status": "passed",
+  "condition": "base",
+  "started_at": "2026-11-13T05:31:25.659459+00:00",
+  "finished_at": "2026-11-13T05:33:57.721447+00:00",
+  "protocol_sha256": "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+  "transport": "actual loopback TCP: HTTP client -> main API -> local neural provider",
+  "voice_enabled": false,
+  "human_review": "ungraded",
+  "quality_claim": false,
+  "checks": [
+    {
+      "check": "loaded_model_identity",
+      "passed": true
+    },
+    {
+      "check": "main_api.neural_configuration",
+      "passed": true
+    },
+    {
+      "check": "main_api.voice_disabled",
+      "passed": true
+    },
+    {
+      "check": "main_api.frozen_snapshot",
+      "passed": true
+    },
+    {
+      "check": "main_api.source_inspection",
+      "passed": true,
+      "source_count": 9
+    },
+    {
+      "check": "question.completed_stream",
+      "passed": true,
+      "event_count": 30
+    },
+    {
+      "check": "question.neural_provider",
+      "passed": true
+    },
+    {
+      "check": "question.first_token_observed",
+      "passed": true
+    },
+    {
+      "check": "question.same_session",
+      "passed": true
+    },
+    {
+      "check": "question.resolution",
+      "passed": true,
+      "observed": "original"
+    },
+    {
+      "check": "question.citation_source_binding",
+      "passed": true,
+      "citation_count": 0
+    },
+    {
+      "check": "followup.completed_stream",
+      "passed": true,
+      "event_count": 33
+    },
+    {
+      "check": "followup.neural_provider",
+      "passed": true
+    },
+    {
+      "check": "followup.first_token_observed",
+      "passed": true
+    },
+    {
+      "check": "followup.same_session",
+      "passed": true
+    },
+    {
+      "check": "followup.resolution",
+      "passed": true,
+      "observed": "previous_user_reference"
+    },
+    {
+      "check": "followup.citation_source_binding",
+      "passed": true,
+      "citation_count": 0
+    },
+    {
+      "check": "correction.completed_stream",
+      "passed": true,
+      "event_count": 33
+    },
+    {
+      "check": "correction.neural_provider",
+      "passed": true
+    },
+    {
+      "check": "correction.first_token_observed",
+      "passed": true
+    },
+    {
+      "check": "correction.same_session",
+      "passed": true
+    },
+    {
+      "check": "correction.resolution",
+      "passed": true,
+      "observed": "explicit_correction"
+    },
+    {
+      "check": "correction.citation_source_binding",
+      "passed": true,
+      "citation_count": 0
+    },
+    {
+      "check": "topic_switch.completed_stream",
+      "passed": true,
+      "event_count": 32
+    },
+    {
+      "check": "topic_switch.neural_provider",
+      "passed": true
+    },
+    {
+      "check": "topic_switch.first_token_observed",
+      "passed": true
+    },
+    {
+      "check": "topic_switch.same_session",
+      "passed": true
+    },
+    {
+      "check": "topic_switch.resolution",
+      "passed": true,
+      "observed": "topic_switch"
+    },
+    {
+      "check": "topic_switch.citation_source_binding",
+      "passed": true,
+      "citation_count": 0
+    },
+    {
+      "check": "session.four_completed_turns",
+      "passed": true
+    },
+    {
+      "check": "session.correction_and_topic_provenance",
+      "passed": true
+    },
+    {
+      "check": "disconnect.after_actual_active_model_token",
+      "passed": true
+    },
+    {
+      "check": "disconnect.provider_became_idle",
+      "passed": true,
+      "observed_ms": 309.943
+    },
+    {
+      "check": "disconnect.no_partial_turn_committed",
+      "passed": true
+    },
+    {
+      "check": "recovery.completed_stream",
+      "passed": true,
+      "event_count": 31
+    },
+    {
+      "check": "recovery.neural_provider",
+      "passed": true
+    },
+    {
+      "check": "recovery.first_token_observed",
+      "passed": true
+    },
+    {
+      "check": "recovery.same_session",
+      "passed": true
+    },
+    {
+      "check": "recovery.citation_source_binding",
+      "passed": true,
+      "citation_count": 0
+    },
+    {
+      "check": "recovery.same_session_fifth_completed_turn",
+      "passed": true
+    },
+    {
+      "check": "session.deleted",
+      "passed": true
+    },
+    {
+      "check": "loaded_identity_unchanged",
+      "passed": true
+    },
+    {
+      "check": "provider_idle_after_recovery",
+      "passed": true
+    },
+    {
+      "check": "cleanup.main_api_stopped",
+      "passed": true
+    },
+    {
+      "check": "cleanup.language_stopped",
+      "passed": true
+    },
+    {
+      "check": "cleanup.no_forced_kill",
+      "passed": true
+    }
+  ],
+  "cases": [
+    {
+      "id": "question",
+      "provider": "openai",
+      "response_sha256": "cfaa536df435a824780a80a41fbd54921d9400b67c779dfd8a00816f86d982d1",
+      "response_characters": 160,
+      "first_token_ms": 18407.8,
+      "http_ms": 25129.483,
+      "api_metrics": {
+        "retrieval_ms": 47.875,
+        "generation_ms": 25078.081,
+        "total_ms": 25127.474
+      },
+      "grounding": {
+        "status": "unverified",
+        "retrieved_ids": [
+          "qa26-acquired-2023-turn-00353",
+          "qa26-dwarkesh-2026-turn-00462",
+          "qa26-dwarkesh-2026-turn-00178",
+          "qa26-dwarkesh-2026-turn-00162"
+        ],
+        "invalid_citation_ids": [],
+        "reason": "Citation coverage is incomplete or invalid; factual entailment still requires review.",
+        "citation_status": "missing",
+        "citation_unit_count": 1,
+        "cited_unit_count": 0,
+        "malformed_citations": [],
+        "semantic_status": "unreviewed"
+      },
+      "citations": []
+    },
+    {
+      "id": "followup",
+      "provider": "openai",
+      "response_sha256": "4b4e08d229d63e838f9e3549a427e2396064ae7a1518e14f01f168b46f4b8b34",
+      "response_characters": 141,
+      "first_token_ms": 15458.781,
+      "http_ms": 22138.175,
+      "api_metrics": {
+        "retrieval_ms": 53.804,
+        "generation_ms": 22079.438,
+        "total_ms": 22135.467
+      },
+      "grounding": {
+        "status": "unverified",
+        "retrieved_ids": [
+          "qa26-acquired-2023-turn-00353",
+          "qa26-dwarkesh-2026-turn-00462",
+          "qa26-dwarkesh-2026-turn-00360",
+          "qa26-dwarkesh-2026-turn-00178"
+        ],
+        "invalid_citation_ids": [],
+        "reason": "Citation coverage is incomplete or invalid; factual entailment still requires review.",
+        "citation_status": "missing",
+        "citation_unit_count": 1,
+        "cited_unit_count": 0,
+        "malformed_citations": [],
+        "semantic_status": "unreviewed"
+      },
+      "citations": []
+    },
+    {
+      "id": "correction",
+      "provider": "openai",
+      "response_sha256": "256db5758b59fcf5f5c97328ef1dc2357da661b48222a667486044f8b27f4317",
+      "response_characters": 183,
+      "first_token_ms": 16719.82,
+      "http_ms": 24885.179,
+      "api_metrics": {
+        "retrieval_ms": 51.562,
+        "generation_ms": 24830.141,
+        "total_ms": 24882.805
+      },
+      "grounding": {
+        "status": "unverified",
+        "retrieved_ids": [
+          "qa26-dwarkesh-2026-turn-00360",
+          "qa26-lex-494-cue-00200",
+          "qa26-dwarkesh-2026-turn-00089",
+          "qa26-lex-494-cue-00289"
+        ],
+        "invalid_citation_ids": [],
+        "reason": "Citation coverage is incomplete or invalid; factual entailment still requires review.",
+        "citation_status": "missing",
+        "citation_unit_count": 1,
+        "cited_unit_count": 0,
+        "malformed_citations": [],
+        "semantic_status": "unreviewed"
+      },
+      "citations": []
+    },
+    {
+      "id": "topic_switch",
+      "provider": "openai",
+      "response_sha256": "481fbb1e9bef007c205973366b5054cd464e90b5a92ccc9dedaa6a10cc64dce7",
+      "response_characters": 198,
+      "first_token_ms": 14248.319,
+      "http_ms": 21325.462,
+      "api_metrics": {
+        "retrieval_ms": 45.584,
+        "generation_ms": 21275.991,
+        "total_ms": 21322.786
+      },
+      "grounding": {
+        "status": "unverified",
+        "retrieved_ids": [
+          "qa26-acquired-2023-turn-00160",
+          "qa26-lex-494-cue-00142",
+          "qa26-yc-startup-school-2026-turn-00036",
+          "qa26-lex-494-cue-00001"
+        ],
+        "invalid_citation_ids": [],
+        "reason": "Citation coverage is incomplete or invalid; factual entailment still requires review.",
+        "citation_status": "missing",
+        "citation_unit_count": 1,
+        "cited_unit_count": 0,
+        "malformed_citations": [],
+        "semantic_status": "unreviewed"
+      },
+      "citations": []
+    },
+    {
+      "id": "recovery",
+      "provider": "openai",
+      "response_sha256": "5b82f0a25abd8707f961e011fd80f0c42c133faa81266e364f8fab0090be5b86",
+      "response_characters": 174,
+      "first_token_ms": 18444.452,
+      "http_ms": 25784.14,
+      "api_metrics": {
+        "retrieval_ms": 114.442,
+        "generation_ms": 25653.001,
+        "total_ms": 25777.428
+      },
+      "grounding": {
+        "status": "unverified",
+        "retrieved_ids": [
+          "qa26-acquired-2023-turn-00353",
+          "qa26-dwarkesh-2026-turn-00462",
+          "qa26-dwarkesh-2026-turn-00178",
+          "qa26-dwarkesh-2026-turn-00162"
+        ],
+        "invalid_citation_ids": [],
+        "reason": "Citation coverage is incomplete or invalid; factual entailment still requires review.",
+        "citation_status": "missing",
+        "citation_unit_count": 1,
+        "cited_unit_count": 0,
+        "malformed_citations": [],
+        "semantic_status": "unreviewed"
+      },
+      "citations": []
+    }
+  ],
+  "cleanup": {
+    "main_api_stopped": true,
+    "language_stopped": true,
+    "language_forced_kill": false,
+    "language_pid": 11,
+    "main_api_started": true,
+    "language_returncode": -15
+  },
+  "observed_before": {
+    "identity": {
+      "schema_version": "language-model-identity.v1",
+      "base_model": "Qwen/Qwen3-1.7B",
+      "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+      "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+      "chat_template_options": {
+        "enable_thinking": false
+      }
+    },
+    "adapter": {
+      "configured": false,
+      "loaded": false,
+      "verified": false
+    },
+    "runtime": {
+      "backend": "transformers",
+      "requested_device": "cpu",
+      "requested_dtype": "bfloat16",
+      "device": "cpu",
+      "dtype": "bfloat16",
+      "context_window": 40960,
+      "base_parameters": 1720574976,
+      "versions": {
+        "torch": "2.11.0+cpu",
+        "transformers": "4.57.3"
+      },
+      "threads": 8,
+      "attention": "sdpa",
+      "generation_defaults": {
+        "seed": 42,
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "top_k": 20
+      }
+    }
+  },
+  "observed_after": {
+    "identity": {
+      "schema_version": "language-model-identity.v1",
+      "base_model": "Qwen/Qwen3-1.7B",
+      "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+      "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+      "chat_template_options": {
+        "enable_thinking": false
+      }
+    },
+    "adapter": {
+      "configured": false,
+      "loaded": false,
+      "verified": false
+    },
+    "runtime": {
+      "backend": "transformers",
+      "requested_device": "cpu",
+      "requested_dtype": "bfloat16",
+      "device": "cpu",
+      "dtype": "bfloat16",
+      "context_window": 40960,
+      "base_parameters": 1720574976,
+      "versions": {
+        "torch": "2.11.0+cpu",
+        "transformers": "4.57.3"
+      },
+      "threads": 8,
+      "attention": "sdpa",
+      "generation_defaults": {
+        "seed": 42,
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "top_k": 20
+      }
+    }
+  },
+  "elapsed_seconds": 152.062,
+  "timing_scope": "one sequential functional run; warmup excluded; no benchmark or condition speed comparison",
+  "preflight": {
+    "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+    "snapshot_sha256": "bbb709d3bf8cafb794a762808a36ffad0e9a7afffa4aca5e23b38cfd6c3de904",
+    "snapshot": {
+      "id": "jensen-neural-text-live-base-v1",
+      "as_of": "2026-11-12T18:36:58.188093+00:00",
+      "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+      "current_evidence_since": "2026-01-01",
+      "current_dated_training_sources": 0,
+      "coverage_note": "Snapshot date limits availability; it does not imply contemporary coverage. Unknown event dates remain unknown. Runtime candidate appearance and optional voice are separate from text evidence; this snapshot does not promote likeness or current-position coverage. This separate functional snapshot enables an explicitly selected neural text provider; it establishes no semantic quality or persona fidelity.",
+      "knowledge_version": "jensen-huang-original-2026-11-13.v1",
+      "style_version": "base-model-no-style-adaptation",
+      "voice_version": "disabled-in-neural-text-functional-probe",
+      "appearance_version": "jensen-stylized-default-source-fitted-v3-optional"
+    },
+    "base_identity": {
+      "base_model": "Qwen/Qwen3-1.7B",
+      "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+      "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+      "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+      "chat_template_options": {
+        "enable_thinking": false
+      }
+    },
+    "adapter": null
+  },
+  "code_sha256": "6421b108f7ec7d390507ba3015b7c55ed824c4c2e76e729fa5bc6f598c8ac014",
+  "api_module_sha256": {
+    "api.py": "f6c3761d29ced31abd1b3ce7f30c4b98bb931e357e594aaea823b01ecaa7627b",
+    "engine.py": "7aa48868dedb41aa44926987347aa6fbe8b6e377af13572ef5e1a77fd3f0fac9",
+    "config.py": "dddd8a68115d92db72d390a51e6a188302732b887e00e0efcb59221b26d0ae9d",
+    "corpus.py": "16b9eef8a6fef0e20a7dd4099b470724e793dc14c698313d06fb679b87e9aeb0",
+    "dialogue.py": "3c5aa9b2e959ce501a807711760683c89b069ebff3f0706b3e3bfd1d88c7455e",
+    "motion.py": "719546905f854572cf53cf920754a9d39c5299f7a97108e49254862adaf7861b",
+    "query_policy.py": "95d25a25696cb868d97f7366b033c3e2c425d876181da374c6ec62e48366f30b",
+    "snapshots.py": "28659167b62d4de7354ccbe83ab4cc3c924891d8c6df2418a33d8755e7b51fc2",
+    "bindings.py": "c4adffbb7d911f3b421e087fb229fc7fde2f95ba064b3d10bde5b23643d0fc34",
+    "providers.py": "e92f428eeefff17a35d0992a0951d9a1fb31620aed9d5516d8402712aef1b083",
+    "grounding.py": "046eb67495f730e5fc29c3dd97181948f9fa59e0e1b07619be320bdfc6597007",
+    "retrieval.py": "7a1c316aecdcfcd1b3bffc25430080b2a4c57738708efe61de9237e0acd5627c",
+    "jensen_retrieval.py": "fddc8ceec417fd3c9fd3440ef09438b849793b57c9c24bf595b1fd478d3b8df4"
+  },
+  "supporting_code_sha256": {
+    "tools/runtime_checks/smoke.py": "e2fb8d3ef929c3794417fb5bedda771bd31e3dee9e716e1b1cb8ba600e6aca40",
+    "tools/runtime_checks/runtime.py": "a0b38effd577258342bff5a80ce709648869923313df6e71e441d003020940b2",
+    "services/language/app.py": "8e9ae8d0b2e3be25d6fdbbac830f38c827f567d8bb2e26fb86cb7402ae8ff799",
+    "services/language/engine.py": "4de8fb45c173620e502539273a76ce9e708e8e12fee51060ae61fca8845a633c",
+    "services/language/adapters.py": "ccd92dace3db5065f9af73d26958fcb045fbb3d650f0ead0b10636fe36a185c1",
+    "services/language/schemas.py": "f9bea7bde3338b9b5c2e2c670a9ff7ad26d1857777e9d35c787b7f5ffa75da5e"
+  },
+  "provider_resources": {
+    "load_ms": 10148.150775999966,
+    "peak_rss_bytes_after_warmup": 3914166272,
+    "peak_rss_bytes_after_recovery": 5419683840
+  },
+  "raw_trace_sha256": "4384da5df4332288dbf201b724002b10d76aa481739df9f7e45d8e97989c02eb",
+  "passed_checks": 46,
+  "total_checks": 46,
+  "archive": {
+    "schema_version": "m7-operational-fresh-readback.v1",
+    "verified_at": "2026-11-13T05:34:24.223852+00:00",
+    "file_id": "file_00000000f14081f58475bed8733b3480",
+    "library_file_id": "libfile_fde3_f-189ed1b1afb48191b0ab039d234cef63_a18ece08681081918d81df44f69c4b1f",
+    "file_name": "jensen-m7-base-completion-20261113-v2.tar.gz",
+    "bytes": 26406,
+    "sha256": "fac25894fa9c96df47f730160ffb35f0713721939d1fff9c7695f3145ff582dc",
+    "verified_payload_files": 12,
+    "metadata": {
+      "role": "actual-m7-neural-functional-evidence",
+      "name": "m7-base-completion-20261113-v2",
+      "invocation_state": "exited",
+      "child_returncode": 0,
+      "child_stopped": true,
+      "functional_status": "passed",
+      "passed_checks": 46,
+      "total_checks": 46,
+      "protocol_sha256": "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+      "adapter_run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+      "failure_preserved": false
+    },
+    "status": "fresh_readback_archive_and_every_payload_verified"
+  },
+  "initial_harness_failure": "base-first-preflight-failure.json",
+  "corrected_preparation": "schema-corrected-preparation.json",
+  "separate_cancel_recovery_diagnostic": {
+    "eligible": false,
+    "reason": "Original corrected probe completed all cancellation and recovery checks."
+  }
+}

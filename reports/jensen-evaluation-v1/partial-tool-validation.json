@@ -1,0 +1,16 @@
+{
+  "schema_version": "partial-checkpoint-real-artifact-validation.v1",
+  "source_condition_result": "development-facts-bf16-result.json",
+  "source_artifact_sha256": "1729ad2a933217babc9b606e2ae3fccaab0922e2816da3ea2b02424bcac99b68",
+  "command_module": "tools.adaptation_evaluation.partial_checkpoint",
+  "module_sha256": "5f18454919f7387a6bf1add4c18b66faaeb5329ff34f1ecae23c6a1afb276a56",
+  "observed_result": {
+    "status": "partial_local_snapshot",
+    "captured_attempts": 5,
+    "captured_completed": 1,
+    "captured_failed": 4,
+    "collectible": false,
+    "manifest_sha256": "efdfa154a8262a83b2f3ca3462cfaff3db5089afc543390a7b425f62c4f32a39"
+  },
+  "scope": "Offline actual-format compatibility check using already durably saved responses; no new model execution, no semantic grading, no remote persistence claim for this disposable validation copy."
+}

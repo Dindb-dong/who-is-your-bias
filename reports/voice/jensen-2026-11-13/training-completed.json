@@ -1,0 +1,392 @@
+{
+  "schema_version": "jensen-voice-training-completion.v1",
+  "run_id": "jensen-2026-11-13",
+  "status": "completed_and_fresh_readback_verified",
+  "optimizer_steps": 16,
+  "planned_updates": 16,
+  "samples": 8,
+  "seconds": 91.84,
+  "event_counts": {
+    "goldman-sachs-2024": 1,
+    "acquired-2023": 1,
+    "lex-494": 3,
+    "stanford-vftt-2024": 3
+  },
+  "trainable_parameters": 573440,
+  "contract": {
+    "persona_id": "jensen-huang",
+    "speaker": "Jensen Huang",
+    "base_repo": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+    "base_revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+    "base_files_sha256": {
+      "config.json": "2e714c787c8edb98b05432685cddb634add2de4d4e645f653d68251ef72ba011",
+      "generation_config.json": "f1b90b4513f3b34c62851049e2492d7b4c5940daf1276f89c82b8ef04127f3aa",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "model.safetensors": "180b3b10eb1c9f1b4db7806d5475bae3071c0243c299d49926bab1da3b6946f6",
+      "preprocessor_config.json": "efdde1022ea9d76928bf7a9cd53139138f5ba2e466e837f08f6105ab1af1c119",
+      "speech_tokenizer/config.json": "ee65bb901c876664ab8707c487157aa1a6ee57c65969b28fb5ec9dc211e68167",
+      "speech_tokenizer/configuration.json": "6bc26d64eb5024b4d1dab5a52371958b429256d6c9d59787f1f5294a54e0cebd",
+      "speech_tokenizer/model.safetensors": "836b7b357f5ea43e889936a3709af68dfe3751881acefe4ecf0dbd30ba571258",
+      "speech_tokenizer/preprocessor_config.json": "fcb3805e597e786d4067706e602f6688524640f8d3396790e2e09b5942fcbdfb",
+      "tokenizer_config.json": "dc3c31c3bdaedd5016382bb3cbe07323026775ad51f5a4fb564505992ae4a670",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "dataset_manifest_sha256": "843d4798449eee4b8d52cb170d05face601642666ec9674832721acc94c60b12",
+    "codec_index_sha256": "b185f773549c98fc85c26e358ea083223615ce83f01671f56ed6298d74559129",
+    "upstream_revision": "022e286b98fbec7e1e916cb940cdf532cd9f488e",
+    "upstream_dataset_sha256": "fd15ee9e71822d9fc1cdf8eb6d6f042836d186e95de5920087d80828cf98a1cb",
+    "implementation_sha256": "7f4612fdbe897d999e3007de52df02289f1508f1476e07491752b29af3ba88ed",
+    "lora": {
+      "r": 4,
+      "lora_alpha": 8,
+      "lora_dropout": 0.05,
+      "target_modules": "talker\\.model\\.layers\\.\\d+\\.self_attn\\.(q_proj|v_proj)",
+      "bias": "none"
+    },
+    "learning_rate": 2e-05,
+    "max_updates": 16,
+    "gradient_accumulation": 1,
+    "seed": 42,
+    "threads": 4,
+    "precision": "float32",
+    "device": "cpu",
+    "batch_size": 1,
+    "training_event_families": [
+      "acquired-2023",
+      "goldman-sachs-2024",
+      "lex-494",
+      "stanford-vftt-2024"
+    ],
+    "experimental_candidates": true,
+    "objective": "codec_0_cross_entropy + 0.3 * sub_talker_codebook_cross_entropy",
+    "versions": {
+      "torch": "2.11.0+cpu",
+      "transformers": "4.57.3",
+      "peft": "0.18.1",
+      "qwen-tts": "0.1.1"
+    }
+  },
+  "final_artifact": {
+    "archive": "voice-lora-v2-step16.tar.gz",
+    "bytes": 6475745,
+    "sha256": "d87c8ac3a6c00d7f35023bb2cc048ebb76984f2288d62ec27c19f7d22951cf7e",
+    "optimizer_steps": 16,
+    "planned_optimizer_steps": 16,
+    "block_started_from_step": 14,
+    "checkpoint_sha256": "9286167534283c576c329203f010b44bbdd31ef20f679f4693875b79a91dbf5b",
+    "adapter_sha256": "56d01017b1d464ea384d60661fd44a97de72ebde884b09adbf70a90f4d20477f",
+    "state_sha256": "2717e4038dc893e9c3553cec0f12cda45b30d1fdc0f55ef41b5e36e45010cf78",
+    "contract_sha256": "9c673a2048c24b5527719bddbb2e5bcb38b8e1e0b52fe3150c893ba87c1e55b1",
+    "status": "completed",
+    "block_elapsed_seconds": 37.47227285400004,
+    "last_update_seconds": 9.45964474000084,
+    "peak_process_rss_bytes": 6869979136,
+    "losses": [
+      12.889015197753906,
+      13.41235637664795,
+      11.56758975982666,
+      11.376175880432129,
+      12.642705917358398,
+      10.557021141052246,
+      12.226840019226074,
+      11.36813735961914,
+      11.448494911193848,
+      11.275613784790039,
+      13.225091934204102,
+      12.696602821350098,
+      11.274617195129395,
+      10.424528121948242,
+      12.476452827453613,
+      12.063551902770996
+    ],
+    "weight_statistics": {
+      "lora_B_tensors": 56,
+      "lora_B_elements": 344064,
+      "nonzero_lora_B_elements": 344064,
+      "lora_B_l2_norm": 0.10346969794463898,
+      "lora_B_max_absolute_weight": 0.0003227104898542166,
+      "basis": "PEFT default LoRA B initializes to zero; these learned matrices are nonzero after actual optimizer updates."
+    },
+    "fresh_process_remote_resume_verified": true,
+    "runtime_interruption_recovered_from_step14": true,
+    "quality_evaluated": false,
+    "promotion_status": "candidate",
+    "durable_receipt": {
+      "file_id": "file_0000000097f081fdbfb779b178eb90c3",
+      "library_file_id": "libfile_fde3_f-dc5ca51c542c81918c1d917b2895de60_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "voice-lora-v2-step16.tar.gz",
+      "current_version_number": 0,
+      "verification_status": "fresh-materialization-byte-verified",
+      "size_bytes": 6475745,
+      "sha256": "d87c8ac3a6c00d7f35023bb2cc048ebb76984f2288d62ec27c19f7d22951cf7e"
+    }
+  },
+  "saved_blocks": [
+    {
+      "archive": "voice-lora-v2-step2.tar.gz",
+      "bytes": 6466898,
+      "sha256": "13555a15e97381dd9eb2f18cef6db94e19ca41335e24b130902a4e6713bdec34",
+      "optimizer_steps": 2,
+      "restored_from_step": 1,
+      "restored_archive_sha256": "6d58863b7055981501a19652a8cbc6f6619e3a10cbb638ca3381e1642f1b7d7a",
+      "fresh_process_remote_resume_verified": true,
+      "checkpoint_sha256": "c87f686106acda35c5fa73454d7c1f3dfa3bc40734d0be3c0e8b830271785ee5",
+      "adapter_sha256": "c32f35e928dee85af7f535b9133c48e9f8231c99c8af3e4591aa6b52a5d87215",
+      "state_sha256": "dd8b2e6a2061c96fbac41122a383756e556acf6804e64d6dcb209d93b89e680a",
+      "contract_sha256": "9c673a2048c24b5527719bddbb2e5bcb38b8e1e0b52fe3150c893ba87c1e55b1",
+      "status": "paused_for_persistence",
+      "block_elapsed_seconds": 21.087915256999622,
+      "last_update_seconds": 11.070050439000624,
+      "peak_process_rss_bytes": 5978234880,
+      "losses": [
+        12.889015197753906,
+        13.41235637664795
+      ],
+      "durable_receipt": {
+        "file_id": "file_0000000019b081fdb9f5730d2a4fa9ad",
+        "library_file_id": "libfile_fde3_f-a6be952283c0819195d29236c51dcaaa_a18ece08681081918d81df44f69c4b1f",
+        "file_name": "voice-lora-v2-step2.tar.gz",
+        "current_version_number": 0,
+        "verification_status": "fresh-materialization-byte-verified",
+        "size_bytes": 6466898,
+        "sha256": "13555a15e97381dd9eb2f18cef6db94e19ca41335e24b130902a4e6713bdec34"
+      }
+    },
+    {
+      "archive": "voice-lora-v2-step6.tar.gz",
+      "bytes": 6460827,
+      "sha256": "5f9538dbcaf50d2841948d2be4a88e2a39d5176ce9e0c297fea52b29f1e71b98",
+      "optimizer_steps": 6,
+      "block_started_from_step": 2,
+      "checkpoint_sha256": "2a63b320c07b75ae28e256c656eff202cab4b24c2ecdbc0ef25b0a019a280d2f",
+      "adapter_sha256": "98b4137e8ce7f42e158f15b8dbcb38619ebf45e2f1d5b8fa8f74220c787e5f66",
+      "state_sha256": "0c34c6911f470f086b4124daf7aad5a4f3d2a844bfb8f13e17df652b01aabd78",
+      "contract_sha256": "9c673a2048c24b5527719bddbb2e5bcb38b8e1e0b52fe3150c893ba87c1e55b1",
+      "status": "paused_for_persistence",
+      "block_elapsed_seconds": 40.013227419999566,
+      "last_update_seconds": 4.947351200999947,
+      "peak_process_rss_bytes": 6705647616,
+      "losses": [
+        12.889015197753906,
+        13.41235637664795,
+        11.56758975982666,
+        11.376175880432129,
+        12.642705917358398,
+        10.557021141052246
+      ],
+      "durable_receipt": {
+        "file_id": "file_00000000020c81f6945ec4ac36688153",
+        "library_file_id": "libfile_fde3_f-53edc26b18b481919fd3a08f17263e36_a18ece08681081918d81df44f69c4b1f",
+        "file_name": "voice-lora-v2-step6.tar.gz",
+        "current_version_number": 0,
+        "verification_status": "fresh-materialization-byte-verified",
+        "size_bytes": 6460827,
+        "sha256": "5f9538dbcaf50d2841948d2be4a88e2a39d5176ce9e0c297fea52b29f1e71b98"
+      }
+    },
+    {
+      "archive": "voice-lora-v2-step10.tar.gz",
+      "bytes": 6478626,
+      "sha256": "f9ac4cc5ec6092286b692f0bc09c757d85a59231097fb4e2e877ffc93d04e859",
+      "optimizer_steps": 10,
+      "block_started_from_step": 6,
+      "checkpoint_sha256": "d8470d334a6fe9be4bb7ddddef0f2dbb3bed306f472cdf04ef8b6de642c86749",
+      "adapter_sha256": "51aaaf28883ad38bc18b8cbd4bc7751bb29cd3effa3f3a533831f8bc3c481b4d",
+      "state_sha256": "42b67ae5c9201ab9a361df0de1a0b3aba56ed164c319bcf004dc8d108246fb7d",
+      "contract_sha256": "9c673a2048c24b5527719bddbb2e5bcb38b8e1e0b52fe3150c893ba87c1e55b1",
+      "status": "paused_for_persistence",
+      "block_elapsed_seconds": 35.19299179400059,
+      "last_update_seconds": 5.381571089999852,
+      "peak_process_rss_bytes": 6289547264,
+      "losses": [
+        12.889015197753906,
+        13.41235637664795,
+        11.56758975982666,
+        11.376175880432129,
+        12.642705917358398,
+        10.557021141052246,
+        12.226840019226074,
+        11.36813735961914,
+        11.448494911193848,
+        11.275613784790039
+      ],
+      "durable_receipt": {
+        "file_id": "file_00000000f15c81fda1c3c952d25bb12b",
+        "library_file_id": "libfile_fde3_f-f12310f9cc5c8191849de350c690f9f1_a18ece08681081918d81df44f69c4b1f",
+        "file_name": "voice-lora-v2-step10.tar.gz",
+        "current_version_number": 0,
+        "verification_status": "fresh-materialization-byte-verified",
+        "size_bytes": 6478626,
+        "sha256": "f9ac4cc5ec6092286b692f0bc09c757d85a59231097fb4e2e877ffc93d04e859"
+      }
+    },
+    {
+      "archive": "voice-lora-v2-step14.tar.gz",
+      "bytes": 6475774,
+      "sha256": "176b7282a6ab22060e4bf9633fca142f97fdf763e775f2c0c010c8fe14d12347",
+      "optimizer_steps": 14,
+      "block_started_from_step": 10,
+      "checkpoint_sha256": "9c75851434b21db10f8d53d8777370622aaecd5ccdf0f516240ca63696c5189c",
+      "adapter_sha256": "6c06416d9676936ccc194f17a7e60cebba07c57be01f7c3aa872175b2b609dd9",
+      "state_sha256": "919b08a1a94c0e3bc9d631485ae13fe6463971cd2d8f24ab2235a166c0a155d3",
+      "contract_sha256": "9c673a2048c24b5527719bddbb2e5bcb38b8e1e0b52fe3150c893ba87c1e55b1",
+      "status": "paused_for_persistence",
+      "block_elapsed_seconds": 35.22375711699988,
+      "last_update_seconds": 7.509278529999392,
+      "peak_process_rss_bytes": 6566887424,
+      "losses": [
+        12.889015197753906,
+        13.41235637664795,
+        11.56758975982666,
+        11.376175880432129,
+        12.642705917358398,
+        10.557021141052246,
+        12.226840019226074,
+        11.36813735961914,
+        11.448494911193848,
+        11.275613784790039,
+        13.225091934204102,
+        12.696602821350098,
+        11.274617195129395,
+        10.424528121948242
+      ],
+      "durable_receipt": {
+        "file_id": "file_0000000044d48212be2a4c7f067e48f1",
+        "library_file_id": "libfile_fde3_f-a8aa2076937481919ffc878fa9e5cb45_a18ece08681081918d81df44f69c4b1f",
+        "file_name": "voice-lora-v2-step14.tar.gz",
+        "current_version_number": 0,
+        "verification_status": "fresh-materialization-byte-verified",
+        "size_bytes": 6475774,
+        "sha256": "176b7282a6ab22060e4bf9633fca142f97fdf763e775f2c0c010c8fe14d12347"
+      }
+    },
+    {
+      "archive": "voice-lora-v2-step16.tar.gz",
+      "bytes": 6475745,
+      "sha256": "d87c8ac3a6c00d7f35023bb2cc048ebb76984f2288d62ec27c19f7d22951cf7e",
+      "optimizer_steps": 16,
+      "planned_optimizer_steps": 16,
+      "block_started_from_step": 14,
+      "checkpoint_sha256": "9286167534283c576c329203f010b44bbdd31ef20f679f4693875b79a91dbf5b",
+      "adapter_sha256": "56d01017b1d464ea384d60661fd44a97de72ebde884b09adbf70a90f4d20477f",
+      "state_sha256": "2717e4038dc893e9c3553cec0f12cda45b30d1fdc0f55ef41b5e36e45010cf78",
+      "contract_sha256": "9c673a2048c24b5527719bddbb2e5bcb38b8e1e0b52fe3150c893ba87c1e55b1",
+      "status": "completed",
+      "block_elapsed_seconds": 37.47227285400004,
+      "last_update_seconds": 9.45964474000084,
+      "peak_process_rss_bytes": 6869979136,
+      "losses": [
+        12.889015197753906,
+        13.41235637664795,
+        11.56758975982666,
+        11.376175880432129,
+        12.642705917358398,
+        10.557021141052246,
+        12.226840019226074,
+        11.36813735961914,
+        11.448494911193848,
+        11.275613784790039,
+        13.225091934204102,
+        12.696602821350098,
+        11.274617195129395,
+        10.424528121948242,
+        12.476452827453613,
+        12.063551902770996
+      ],
+      "weight_statistics": {
+        "lora_B_tensors": 56,
+        "lora_B_elements": 344064,
+        "nonzero_lora_B_elements": 344064,
+        "lora_B_l2_norm": 0.10346969794463898,
+        "lora_B_max_absolute_weight": 0.0003227104898542166,
+        "basis": "PEFT default LoRA B initializes to zero; these learned matrices are nonzero after actual optimizer updates."
+      },
+      "fresh_process_remote_resume_verified": true,
+      "runtime_interruption_recovered_from_step14": true,
+      "quality_evaluated": false,
+      "promotion_status": "candidate",
+      "durable_receipt": {
+        "file_id": "file_0000000097f081fdbfb779b178eb90c3",
+        "library_file_id": "libfile_fde3_f-dc5ca51c542c81918c1d917b2895de60_a18ece08681081918d81df44f69c4b1f",
+        "file_name": "voice-lora-v2-step16.tar.gz",
+        "current_version_number": 0,
+        "verification_status": "fresh-materialization-byte-verified",
+        "size_bytes": 6475745,
+        "sha256": "d87c8ac3a6c00d7f35023bb2cc048ebb76984f2288d62ec27c19f7d22951cf7e"
+      }
+    }
+  ],
+  "completed_block_seconds": 223.19538241600003,
+  "timing_scope": "sum of six successful block runs, including their model loads; excludes artifact transfer, tool scheduling and the interrupted unfinished block",
+  "peak_process_rss_bytes": 6869979136,
+  "training_objective": {
+    "first_pass_mean": 12.004980206489563,
+    "second_pass_mean": 11.860619187355042,
+    "paired_examples": [
+      {
+        "audio_sha256": "c2307a975dfa871ce2cb4dba9b974aacc71a5f798b10dff79e2943c874d6168c",
+        "first_pass_loss": 12.889015197753906,
+        "second_pass_loss": 12.696602821350098,
+        "change": -0.1924123764038086
+      },
+      {
+        "audio_sha256": "fbfdf69aa63dad65bd421f3210082a35b2026b66fc2ca32dbdb9035fe6ffe886",
+        "first_pass_loss": 13.41235637664795,
+        "second_pass_loss": 13.225091934204102,
+        "change": -0.18726444244384766
+      },
+      {
+        "audio_sha256": "179120f08feb4eb71f0e6586dd57d2ab46910f3032e1920ccc6e1ad0900f6a34",
+        "first_pass_loss": 11.56758975982666,
+        "second_pass_loss": 11.448494911193848,
+        "change": -0.1190948486328125
+      },
+      {
+        "audio_sha256": "19e38279ab22665b01ceb2522ca45bb2217fa3efef1e45414705c817eeedf34e",
+        "first_pass_loss": 11.376175880432129,
+        "second_pass_loss": 11.275613784790039,
+        "change": -0.10056209564208984
+      },
+      {
+        "audio_sha256": "68ad3c461235a8fc684684500e32e0155c87025b3acda2c39dc2207ae368c790",
+        "first_pass_loss": 12.642705917358398,
+        "second_pass_loss": 12.476452827453613,
+        "change": -0.16625308990478516
+      },
+      {
+        "audio_sha256": "7d795927f4c0ab5fc63d975e538631b3a17d9bd3af6c98cb00517b1ece2eb501",
+        "first_pass_loss": 10.557021141052246,
+        "second_pass_loss": 10.424528121948242,
+        "change": -0.1324930191040039
+      },
+      {
+        "audio_sha256": "754919e88abf65407c4c3bdb136c23d0e9700a5a71e30233d76506955a4f1877",
+        "first_pass_loss": 12.226840019226074,
+        "second_pass_loss": 12.063551902770996,
+        "change": -0.16328811645507812
+      },
+      {
+        "audio_sha256": "44bab48b4a4ad25c01bd0353bb60c788bd4ca5654c77595b08b65d965ce9b674",
+        "first_pass_loss": 11.36813735961914,
+        "second_pass_loss": 11.274617195129395,
+        "change": -0.0935201644897461
+      }
+    ],
+    "limitation": "Training-exposed objective values with stochastic dropout; not held-out likelihood, speech intelligibility or voice likeness."
+  },
+  "remote_save_load_resume_verified": true,
+  "interruption_recovery": {
+    "last_verified_step_at_reset": 14,
+    "later_valid_checkpoints_found": false,
+    "restored_from_step": 14,
+    "completed_after_restore": [
+      15,
+      16
+    ],
+    "record_sha256": "85301fe344fe0657482f8519c3094e1a5159e1d752a7540fe5470961342f33f3"
+  },
+  "generated_samples": 0,
+  "independent_quality_evaluated": false,
+  "human_listening_completed": false,
+  "promotion_status": "candidate"
+}

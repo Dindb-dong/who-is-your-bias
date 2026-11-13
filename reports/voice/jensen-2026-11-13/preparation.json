@@ -1,0 +1,298 @@
+{
+  "schema_version": "jensen-voice-preparation-report.v1",
+  "run_id": "jensen-2026-11-13",
+  "persona_id": "jensen-huang",
+  "status": "candidate_dataset_prepared",
+  "contexts": [
+    {
+      "context": "acquired-context",
+      "source_id": "acquired-2023",
+      "source_timeline": "acquired_podcast_elapsed",
+      "start_seconds": 600.0,
+      "seconds": 115.0,
+      "manifest_sha256": "e15c3a8e7591058379f42cadc280f572cf32786263236464519a76263de94ed9",
+      "asr_sha256": "2e4d4f682c74521d9a09a274810d24a5862368c3979ad7914315d8fa6370b437",
+      "asr_elapsed_seconds": 37.323
+    },
+    {
+      "context": "goldman-context",
+      "source_id": "goldman-sachs-2024",
+      "source_timeline": "goldman_native_edited_package",
+      "start_seconds": 95.0,
+      "seconds": 84.0,
+      "manifest_sha256": "2ead74715d607a24a970dd93b5e04cad213569007834040ea41b1656752eb9de",
+      "asr_sha256": "ca9d6669cb3de347426c9408e296a1cd334b042b52cdfe779e97819fbc8ce2ed",
+      "asr_elapsed_seconds": 15.407
+    },
+    {
+      "context": "lex-context",
+      "source_id": "lex-494",
+      "source_timeline": "lex_podcast_elapsed",
+      "start_seconds": 900.0,
+      "seconds": 115.0,
+      "manifest_sha256": "d2bfc7578e17fb236abbeb9e86fcade6bfd86d2fdd5a46a7f2f80a799776a67c",
+      "asr_sha256": "9d23ce66b1f6297034b7660ec8d822631fe859a83134f01e6988f7f0c7f3ac66",
+      "asr_elapsed_seconds": 24.181
+    },
+    {
+      "context": "lex-context-1800",
+      "source_id": "lex-494",
+      "source_timeline": "lex_podcast_elapsed",
+      "start_seconds": 1800.0,
+      "seconds": 115.0,
+      "manifest_sha256": "77a40d88783a732b3e32b3e38e17b97402650f49f09ada3b0cbdf228a27c131a",
+      "asr_sha256": "48757f1bbe6a89f69082142818295ef97420f114097deac3c7e2c5918ee43ff1",
+      "asr_elapsed_seconds": 18.024
+    },
+    {
+      "context": "lex-context-3000",
+      "source_id": "lex-494",
+      "source_timeline": "lex_podcast_elapsed",
+      "start_seconds": 3000.0,
+      "seconds": 115.0,
+      "manifest_sha256": "1794f419c3895fdc53aa47025ff0e139e770f88717a0c06efd2fabb8863d1aab",
+      "asr_sha256": "180d8d0d17cab8c2f50401647b9c23b81c08a3c49e6c1a9df7a9c360595ecb6c",
+      "asr_elapsed_seconds": 18.173
+    },
+    {
+      "context": "stanford-context",
+      "source_id": "stanford-vftt-2024",
+      "source_timeline": "stanford_podcast_edited",
+      "start_seconds": 180.0,
+      "seconds": 110.0,
+      "manifest_sha256": "5a57d11ca0c7fcfc9f9f31575676f56b1028a63425d15cce6e54d6a007356f19",
+      "asr_sha256": "d57d990f041f605a406c02a64cf7dec22b79a5c8e5ef1f7604232c053ff4182f",
+      "asr_elapsed_seconds": 29.016
+    },
+    {
+      "context": "stanford-context-1100",
+      "source_id": "stanford-vftt-2024",
+      "source_timeline": "stanford_podcast_edited",
+      "start_seconds": 1100.0,
+      "seconds": 115.0,
+      "manifest_sha256": "28ceab1c88d0ff7457e132a93048fe6f4dc3938e14ae1adb0f31b8018130866a",
+      "asr_sha256": "ae1ef35d7a19492b1850a374af503999d21f002dead371c457c7013481cba18f",
+      "asr_elapsed_seconds": 21.568
+    },
+    {
+      "context": "stanford-context-2100",
+      "source_id": "stanford-vftt-2024",
+      "source_timeline": "stanford_podcast_edited",
+      "start_seconds": 2100.0,
+      "seconds": 115.0,
+      "manifest_sha256": "3d9b6238623369e7f4a44b706bdf9acd90fade24fd639dcc8dc3acbc1406d444",
+      "asr_sha256": "4184e55d15ac2db82a99ed8694d965dd8b388f5b1551b976ee6073c8c09ce96e",
+      "asr_elapsed_seconds": 15.549
+    },
+    {
+      "context": "stanford-context-500",
+      "source_id": "stanford-vftt-2024",
+      "source_timeline": "stanford_podcast_edited",
+      "start_seconds": 500.0,
+      "seconds": 115.0,
+      "manifest_sha256": "3ab7852aac85f768e783d207ba289190d50e6bdf8c9c56bf7aeff3ac53b0323f",
+      "asr_sha256": "4b543397f2be27f040c17731e3062c275057d154a6f10a1313f04159945cfc21",
+      "asr_elapsed_seconds": 19.505
+    }
+  ],
+  "context_seconds": 999.0,
+  "candidate_clips": 19,
+  "processed_clips": 19,
+  "selected_clips": 8,
+  "screen_decisions": {
+    "exact_second_decoding": 8,
+    "low_or_missing_word_confidence": 7,
+    "second_decoding_disagreement": 2,
+    "context_edge_without_acoustic_padding": 2
+  },
+  "dataset_seconds": 91.84,
+  "event_counts": {
+    "goldman-sachs-2024": 1,
+    "acquired-2023": 1,
+    "lex-494": 3,
+    "stanford-vftt-2024": 3
+  },
+  "lineage": [
+    {
+      "audio": "audio-0000.wav",
+      "audio_sha256": "754919e88abf65407c4c3bdb136c23d0e9700a5a71e30233d76506955a4f1877",
+      "source_id": "goldman-sachs-2024",
+      "source_url": "https://www.goldmansachs.com/insights/talks-at-gs/jensen-huang",
+      "event_family_id": "goldman-sachs-2024",
+      "split": "train",
+      "source_timeline": "goldman_native_edited_package",
+      "source_start_seconds": 157.57999999999998,
+      "source_end_seconds": 169.23999999999998,
+      "seconds": 11.66,
+      "reference_manifest_sha256": "a6f491e44fa2a5953ed7712ebc733b95252af0d0bd33f369cb9f6f3a7deea936",
+      "review_status": "candidate",
+      "listening_review_completed": false
+    },
+    {
+      "audio": "audio-0001.wav",
+      "audio_sha256": "44bab48b4a4ad25c01bd0353bb60c788bd4ca5654c77595b08b65d965ce9b674",
+      "source_id": "acquired-2023",
+      "source_url": "https://www.acquired.fm/episodes/jensen-huang",
+      "event_family_id": "acquired-2023",
+      "split": "train",
+      "source_timeline": "acquired_podcast_elapsed",
+      "source_start_seconds": 679.48,
+      "source_end_seconds": 690.04,
+      "seconds": 10.56,
+      "reference_manifest_sha256": "868bf33e3f8620021a55310e70730003de6ed5e50820c509596b38292691953f",
+      "review_status": "candidate",
+      "listening_review_completed": false
+    },
+    {
+      "audio": "audio-0002.wav",
+      "audio_sha256": "68ad3c461235a8fc684684500e32e0155c87025b3acda2c39dc2207ae368c790",
+      "source_id": "lex-494",
+      "source_url": "https://lexfridman.com/jensen-huang/",
+      "event_family_id": "lex-494",
+      "split": "train",
+      "source_timeline": "lex_podcast_elapsed",
+      "source_start_seconds": 1819.72,
+      "source_end_seconds": 1833.98,
+      "seconds": 14.26,
+      "reference_manifest_sha256": "0480617221a5e4b39a3d0d0440a7a0cd2e826dcaf4335f1bffdb1ae67838e3dd",
+      "review_status": "candidate",
+      "listening_review_completed": false
+    },
+    {
+      "audio": "audio-0003.wav",
+      "audio_sha256": "c2307a975dfa871ce2cb4dba9b974aacc71a5f798b10dff79e2943c874d6168c",
+      "source_id": "lex-494",
+      "source_url": "https://lexfridman.com/jensen-huang/",
+      "event_family_id": "lex-494",
+      "split": "train",
+      "source_timeline": "lex_podcast_elapsed",
+      "source_start_seconds": 1834.64,
+      "source_end_seconds": 1848.5600000000002,
+      "seconds": 13.92,
+      "reference_manifest_sha256": "257d990059a9f7faa47685f92e38d07732704eb1af2806ed4cb1e740f45591dd",
+      "review_status": "candidate",
+      "listening_review_completed": false
+    },
+    {
+      "audio": "audio-0004.wav",
+      "audio_sha256": "fbfdf69aa63dad65bd421f3210082a35b2026b66fc2ca32dbdb9035fe6ffe886",
+      "source_id": "lex-494",
+      "source_url": "https://lexfridman.com/jensen-huang/",
+      "event_family_id": "lex-494",
+      "split": "train",
+      "source_timeline": "lex_podcast_elapsed",
+      "source_start_seconds": 3020.56,
+      "source_end_seconds": 3028.9,
+      "seconds": 8.34,
+      "reference_manifest_sha256": "d7a7fa5fde00fb8dc8203148f4e6e3b73ae9fb84370aed3f29908068d831ae27",
+      "review_status": "candidate",
+      "listening_review_completed": false
+    },
+    {
+      "audio": "audio-0005.wav",
+      "audio_sha256": "7d795927f4c0ab5fc63d975e538631b3a17d9bd3af6c98cb00517b1ece2eb501",
+      "source_id": "stanford-vftt-2024",
+      "source_url": "https://www.gsb.stanford.edu/insights/jensen-huang-how-use-first-principles-thinking-drive-decisions",
+      "event_family_id": "stanford-vftt-2024",
+      "split": "train",
+      "source_timeline": "stanford_podcast_edited",
+      "source_start_seconds": 1196.26,
+      "source_end_seconds": 1208.24,
+      "seconds": 11.98,
+      "reference_manifest_sha256": "76d0b687736886f39ac6d756b4433a828a51001fe6778d223ae634a36fd50b73",
+      "review_status": "candidate",
+      "listening_review_completed": false
+    },
+    {
+      "audio": "audio-0006.wav",
+      "audio_sha256": "179120f08feb4eb71f0e6586dd57d2ab46910f3032e1920ccc6e1ad0900f6a34",
+      "source_id": "stanford-vftt-2024",
+      "source_url": "https://www.gsb.stanford.edu/insights/jensen-huang-how-use-first-principles-thinking-drive-decisions",
+      "event_family_id": "stanford-vftt-2024",
+      "split": "train",
+      "source_timeline": "stanford_podcast_edited",
+      "source_start_seconds": 2162.18,
+      "source_end_seconds": 2173.0,
+      "seconds": 10.82,
+      "reference_manifest_sha256": "a72e9803330fbe29229c16251e0cd2e7514e5ae4fa1f0a2331d405e53603fa29",
+      "review_status": "candidate",
+      "listening_review_completed": false
+    },
+    {
+      "audio": "audio-0007.wav",
+      "audio_sha256": "19e38279ab22665b01ceb2522ca45bb2217fa3efef1e45414705c817eeedf34e",
+      "source_id": "stanford-vftt-2024",
+      "source_url": "https://www.gsb.stanford.edu/insights/jensen-huang-how-use-first-principles-thinking-drive-decisions",
+      "event_family_id": "stanford-vftt-2024",
+      "split": "train",
+      "source_timeline": "stanford_podcast_edited",
+      "source_start_seconds": 2174.6,
+      "source_end_seconds": 2184.9,
+      "seconds": 10.3,
+      "reference_manifest_sha256": "04975472d32145930355e3180b4c3d1e85619dcaafb356f93968d4c63a65dc79",
+      "review_status": "candidate",
+      "listening_review_completed": false
+    }
+  ],
+  "human_listening_completed": false,
+  "listening_reviewed_clips": 0,
+  "speaker_similarity_evaluated": false,
+  "optimizer_updates": 0,
+  "generated_samples": 0,
+  "dataset_manifest_sha256": "843d4798449eee4b8d52cb170d05face601642666ec9674832721acc94c60b12",
+  "screening_sha256": "ace4477e2fd8bad164777c7fc845bde6355391d9f6cea3f53cc6763c01a2bf85",
+  "split_registration_sha256": "c5f6831dfd5212153749d7b683e3c0e80d0ee5340a60dbb1023cac1fb39b2aa9",
+  "artifacts": [
+    {
+      "archive": "voice-dataset-pilot-v2.tar.gz",
+      "bytes": 9881794,
+      "sha256": "30a907a9493f0c1a0c87091fad4c49da9d4300c0990c1ca0f2744a8f1f473510",
+      "samples": 8,
+      "seconds": 91.84,
+      "event_counts": {
+        "goldman-sachs-2024": 1,
+        "acquired-2023": 1,
+        "lex-494": 3,
+        "stanford-vftt-2024": 3
+      },
+      "dataset_manifest_sha256": "843d4798449eee4b8d52cb170d05face601642666ec9674832721acc94c60b12",
+      "split_registration_sha256": "c5f6831dfd5212153749d7b683e3c0e80d0ee5340a60dbb1023cac1fb39b2aa9",
+      "listening_reviewed": 0,
+      "optimizer_updates": 0,
+      "durable_receipt": {
+        "artifact_id": "voice-dataset-pilot-v2",
+        "role": "frozen-candidate-speech-dataset",
+        "samples": 8,
+        "duration_seconds": 91.84,
+        "event_families": 4,
+        "listening_reviewed": 0,
+        "file_name": "voice-dataset-pilot-v2.tar.gz",
+        "file_id": "file_000000001d1c81fdaeba39ae6ae25f49",
+        "library_file_id": "libfile_fde3_f-cb59fb286ba081919698efd25e5c5373_a18ece08681081918d81df44f69c4b1f",
+        "size_bytes": 9881794,
+        "sha256": "30a907a9493f0c1a0c87091fad4c49da9d4300c0990c1ca0f2744a8f1f473510",
+        "upload_status": "uploaded",
+        "verification_status": "fresh-materialization-byte-verified"
+      }
+    }
+  ],
+  "persistence_status": "fresh-materialization-byte-verified",
+  "model": {
+    "repo": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+    "revision": "5d83992436eae1d760afd27aff78a71d676296fc"
+  },
+  "asr": {
+    "repo": "Systran/faster-whisper-small",
+    "revision": "536b0662742c02347bc0e980a01041f333bce120",
+    "compute_type": "int8",
+    "device": "cpu",
+    "threads": 4
+  },
+  "limits": [
+    "Selected clips remain candidate references; both export and adaptation require explicit opt-in.",
+    "The cropped second decoding uses the same ASR model; it is not human review or an independent speaker identity test.",
+    "No claim of restoration of the interrupted 60-clip / 6.4-minute dataset.",
+    "Draft dataset-v1 had obsolete unused held-out labels and is superseded by registered dataset-v2 before any training.",
+    "Original publisher text and source audio remain private artifacts, not public Git data."
+  ]
+}

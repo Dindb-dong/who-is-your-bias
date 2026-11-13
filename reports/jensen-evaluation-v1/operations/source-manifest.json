@@ -1,0 +1,34 @@
+{
+  "schema_version": "jensen-operational-source-copies.v1",
+  "files": {
+    "launch_m6_condition.py": {
+      "bytes": 2654,
+      "sha256": "948a6271858e318317358cead270e343c5ee18cb89e49036fddcc22320057c25"
+    },
+    "m6_condition_delivery.py": {
+      "bytes": 23274,
+      "sha256": "ca16d54ae64c937524b39d7309717cf538567b67740c243bb84158ad133975fa"
+    },
+    "m6_partial_delivery.py": {
+      "bytes": 18064,
+      "sha256": "33b244c32af6fd1ed89b794f5d295ea20f2a7ab97a160972fa81b09df93ac7fe"
+    },
+    "collect_package_m6.py": {
+      "bytes": 11164,
+      "sha256": "56713ac6e78f6289f92bc28a382f1cd447460209668da451955f1037826e52ae"
+    },
+    "launch_m6_rag.py": {
+      "bytes": 5927,
+      "sha256": "5a78a311e46d07b3c3f48468335b2a8307ed440102f76b930b6e17b904c40ced"
+    },
+    "m6_rag_delivery.py": {
+      "bytes": 20638,
+      "sha256": "1270079fff1b7636d4d9945cc7b8d07c9d44fe07badaf31eccff881b8de91fdd"
+    },
+    "m6_rag_reviewer_plan.json": {
+      "bytes": 4919,
+      "sha256": "5bf36dddb1bed1f0bd0b4d5dc61a3d068d01c999ccb7737425644ee3a8460885"
+    }
+  },
+  "scope": "Exact source copies of archived run-specific operational scripts; frozen repository runners remain unchanged."
+}

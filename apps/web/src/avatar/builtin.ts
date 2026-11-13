@@ -1,4 +1,5 @@
 import { Object3D, Quaternion, Vector3 } from 'three';
+import { FINGER_JOINTS } from './channels';
 import type { BoneControl, QuaternionTuple, RigMapping } from './types';
 
 export const RESEARCH_HUMAN_AVATAR = {
@@ -7,18 +8,28 @@ export const RESEARCH_HUMAN_AVATAR = {
   modelUrl: '/models/research-human-v2.glb',
 } as const;
 
-export type AvatarFraming = 'portrait' | 'full_body';
+export const JENSEN_SOURCE_FITTED_AVATAR = {
+  id: 'jensen-source-fitted-v3',
+  label: 'Jensen source-fitted candidate',
+  modelUrl: '/models/jensen-source-fitted-v3.glb',
+} as const;
 
-const JOINTS: Record<BoneControl, string> = {
+export type BuiltinAvatar = 'human' | 'portrait' | 'jensen';
+
+export type AvatarFraming = 'portrait' | 'upper_body' | 'full_body';
+
+const JOINTS = {
   hips: 'root', spine: 'spine03', chest: 'spine01', neck: 'neck01', head: 'head', jaw: 'jaw',
   leftEye: 'eye.L', rightEye: 'eye.R', leftShoulder: 'clavicle.L', rightShoulder: 'clavicle.R',
   leftUpperArm: 'upperarm01.L', rightUpperArm: 'upperarm01.R',
   leftForearm: 'lowerarm01.L', rightForearm: 'lowerarm01.R', leftHand: 'wrist.L', rightHand: 'wrist.R',
-};
+  ...Object.fromEntries((['left', 'right'] as const).flatMap((side) => FINGER_JOINTS.map((joint, index) =>
+    [`${side}${joint}`, `finger${Math.floor(index / 3) + 1}-${index % 3 + 1}.${side === 'left' ? 'L' : 'R'}`]))),
+} as Record<BoneControl, string>;
 const canonicalName = (name: string): string => name.toLowerCase().replace(/[^a-z0-9]/g, '');
 const tuple = (rotation: Quaternion): QuaternionTuple => rotation.normalize().toArray() as QuaternionTuple;
 
-/** Explicit calibration for the bundled MPFB asset, never guessed for an upload. */
+/** Explicit calibration for bundled MPFB-derived assets, never guessed for an upload. */
 export function createResearchHumanMapping(model: Object3D): RigMapping {
   const nodes = new Map<string, Object3D>();
   model.traverse((node) => { nodes.set(canonicalName(node.name), node); });
@@ -73,6 +84,13 @@ export function mergeRigMappings(base: RigMapping, override: RigMapping): RigMap
 /** Both rig kinds are normalized near 2.4 stage units; the procedural rig is a bust. */
 export function avatarView(kind: 'procedural' | 'glb', framing: AvatarFraming, aspect: number) {
   if (kind === 'procedural') return { position: [0.07, 1.58, 4.45] as const, target: [0, 1.40, 0] as const, fov: aspect < 0.8 ? 41 : 34 };
+  if (framing === 'upper_body') {
+    // Fit a conservative complete arm/hand envelope using the horizontal FOV
+    // as well as the vertical FOV. Narrow displays move back instead of clipping.
+    const fov = 36; const halfVertical = Math.tan(fov * Math.PI / 360);
+    const distance = Math.max(1.05 / halfVertical, 1.30 / (halfVertical * Math.max(0.2, aspect)));
+    return { position: [0, 1.65, distance] as const, target: [0, 1.65, 0] as const, fov };
+  }
   if (framing === 'full_body') return { position: [0.04, 1.32, 4.55] as const, target: [0, 1.20, 0] as const, fov: aspect < 0.65 ? 40 : 34 };
   return { position: [0.035, 2.06, 2.20] as const, target: [0, 1.99, 0] as const, fov: aspect < 0.7 ? 39 : 34 };
 }

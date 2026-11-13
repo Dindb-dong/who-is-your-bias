@@ -21,6 +21,7 @@ def main() -> int:
     measure.add_argument("output_root")
     measure.add_argument("--face-model", required=True)
     measure.add_argument("--pose-model", required=True)
+    measure.add_argument("--hand-model")
     context = commands.add_parser("bind-contexts")
     context.add_argument("manifest")
     context.add_argument("asset_root")
@@ -43,7 +44,7 @@ def main() -> int:
             print(json.dumps({"contexts": len(report["entries"]), "with_word_support": sum(row["status"] == "asr_word_matches" for row in report["entries"]), "report": args.report}))
         elif args.command == "measure":
             from .measure import measure_plan
-            result = measure_plan(args.plan, args.media_root, args.output_root, face_model=args.face_model, pose_model=args.pose_model)
+            result = measure_plan(args.plan, args.media_root, args.output_root, face_model=args.face_model, pose_model=args.pose_model, hand_model=args.hand_model)
             print(json.dumps({"windows": result, "frames": sum(window["observed_frames"] for window in result)}))
         elif args.command == "build":
             result = build_library(args.manifest, args.asset_root, args.output)

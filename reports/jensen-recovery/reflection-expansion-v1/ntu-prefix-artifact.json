@@ -1,0 +1,43 @@
+{
+  "schema_version": "source-range-resume-artifact.v1",
+  "event_family_id": "ntu-commencement-2023-05-27",
+  "file": "ntu-address-range-prefix-000064mib-v1.tar.gz",
+  "bytes": 67133500,
+  "sha256": "edb4102b4fdbf9245b0a3477066c42bcbccf6d246a81d349c2cf8f0e6a6085a1",
+  "role": "verified_partial_range_resume_archive",
+  "source_bytes_checkpointed": 67108864,
+  "source_prefix_sha256": "ffcb6e336220e5790d207d4b50a7e72a941a289e5eeae863f2277158c200d2b6",
+  "entry_sha256": "e8bd4c7b145c4bb50624e3008583fa6d7524030afcb04ebe88a961f25fa96935",
+  "complete_source_range": false,
+  "complete_address_claim": false,
+  "created_at": "2026-11-12T19:49:14.842325+00:00",
+  "resume_state": {
+    "entry_sha256": "e8bd4c7b145c4bb50624e3008583fa6d7524030afcb04ebe88a961f25fa96935",
+    "bytes": 67108864,
+    "sha256": "ffcb6e336220e5790d207d4b50a7e72a941a289e5eeae863f2277158c200d2b6",
+    "etag": "\"64c9b4d9-10a927800\"",
+    "last_modified": "Wed, 02 Aug 2023 01:43:53 GMT"
+  },
+  "file_id": "file_00000000b30081fdbb7f9f15398c5e41",
+  "library_file_id": "libfile_fde3_f-bfc3036f6378819192eaa773ec8725cd_a18ece08681081918d81df44f69c4b1f",
+  "file_name": "ntu-address-range-prefix-000064mib-v1.tar.gz",
+  "current_version_number": 0,
+  "upload_status": "succeeded",
+  "fresh_readback_status": "whole_archive_and_exact_resume_members_verified",
+  "fresh_readback_verified_at": "2026-11-12T19:50:07.107646+00:00",
+  "members": [
+    "ntu-commencement-2023-address-with-context.vob.state.json",
+    "ntu-extraction-plan.json",
+    "ntu-commencement-2023-address-with-context.vob.part"
+  ],
+  "excluded_from_frozen_v4_text_v1_M6": true,
+  "recovery_instructions": [
+    "Materialize the exact persistent object using both file_id and library_file_id.",
+    "Verify archive byte count and SHA-256 before extraction.",
+    "Extract into an empty private directory; verify .part prefix hash, state bytes and canonical JSON entry binding.",
+    "Use the published archive_range module with the unchanged extracted ntu-extraction-plan.json, the target path without .part, and --resume."
+  ],
+  "resume_command_template": "PYTHONPATH=src:. python -m tools.persona_data.archive_range /restored/ntu-extraction-plan.json /restored/ntu-commencement-2023-address-with-context.vob --resume",
+  "source_range_goal_bytes": 752097280,
+  "final_full_range_verification": "pending"
+}

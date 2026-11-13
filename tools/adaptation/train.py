@@ -22,6 +22,7 @@ from services.language.adapters import (
 )
 
 from .datasets import file_hash, validate_dataset
+from .checkpoints import atomic_json, capture_state, load_checkpoint, restore_state, save_checkpoint
 
 
 def encode_example(tokenizer, messages: list[dict], max_length: int) -> dict | None:
@@ -46,18 +47,27 @@ def _package_versions(names):
 
 def train_text(dataset: Path, output: Path, *, model: str, revision: str, epochs=1, seed=42, max_length=1024,
                rank=8, learning_rate=0.0002, gradient_accumulation=8, max_steps: int | None = None, device="cpu",
-               precision="float32", gradient_checkpointing=False) -> dict:
+               precision="float32", gradient_checkpointing=False, checkpoint_every=10,
+               stop_after_steps: int | None = None, resume_from: Path | None = None,
+               checkpoint_publisher: list[str] | None = None) -> dict:
     manifest, rows = validate_dataset(dataset, "text")
-    if output.exists() or Path(model).is_dir() or not repository_id(model) or not immutable_revision(revision):
+    if ((output.exists() and resume_from is None) or Path(model).is_dir()
+            or not repository_id(model) or not immutable_revision(revision)):
         raise ValueError("Choose a new output, Hugging Face repository ID and immutable 40-character base model revision; a local directory cannot verify that repository revision")
     if (any(type(value) is not int or value < low for value, low in ((epochs, 1), (rank, 1), (max_length, 32), (gradient_accumulation, 1), (seed, 0)))
             or seed > 2**32 - 1 or isinstance(learning_rate, bool) or not isinstance(learning_rate, (float, int))
             or not math.isfinite(learning_rate) or learning_rate <= 0
             or (max_steps is not None and (type(max_steps) is not int or max_steps < 1))
+            or type(checkpoint_every) is not int or checkpoint_every < 1
+            or (stop_after_steps is not None and (type(stop_after_steps) is not int or stop_after_steps < 1))
             or not re.fullmatch(r"cpu|mps|cuda(?::[0-9]+)?", device)
             or precision not in {"float32", "bfloat16"} or type(gradient_checkpointing) is not bool):
         raise ValueError("Invalid bounded training settings")
-    output.mkdir(parents=True)
+    if resume_from is not None and (output / "run.json").is_file():
+        if json.loads((output / "run.json").read_text()).get("status") == "completed":
+            raise ValueError("Refuse to resume into a completed serving artifact")
+    resume_metadata, resume_state = load_checkpoint(resume_from) if resume_from is not None else (None, None)
+    output.mkdir(parents=True, exist_ok=resume_from is not None)
     started = time.monotonic()
     report = {"schema_version": RUN_SCHEMA, "status": "running", "started_at": datetime.now(timezone.utc).isoformat(),
               "base_model": model, "base_revision": revision, "tokenizer_revision": revision,
@@ -73,7 +83,18 @@ def train_text(dataset: Path, output: Path, *, model: str, revision: str, epochs
                     "tools/adaptation/datasets.py": file_hash(Path(__file__).with_name("datasets.py")),
                     "services/language/adapters.py": file_hash(Path(__file__).resolve().parents[2] / "services/language/adapters.py")},
               "efficacy_evaluated": False}
-    write_json(output / "run.json", report)
+    if resume_metadata:
+        report = dict(resume_metadata["report"])
+        report["status"] = "running"
+        report.pop("failure", None)
+        report.setdefault("resume_history", []).append({"optimizer_steps": resume_metadata["optimizer_steps"],
+                "checkpoint_metadata_sha256": file_hash(resume_from / "checkpoint.json")})
+    previous_elapsed = report.get("elapsed_seconds", 0.)
+    report["checkpoint_policy"] = {"every_optimizer_steps": checkpoint_every,
+            "stop_after_steps_this_invocation": stop_after_steps,
+            "remote_publisher_configured": bool(checkpoint_publisher),
+            "local_checkpoint_is_not_remote_persistence": True}
+    atomic_json(output / "run.json", report)
     try:
         import torch
         from peft import LoraConfig, get_peft_model
@@ -118,8 +139,20 @@ def train_text(dataset: Path, output: Path, *, model: str, revision: str, epochs
         encoded = [(row["id"], encode_example(tokenizer, row["messages"], max_length)) for row in rows]
         report["excluded_whole_examples"] = [key for key, value in encoded if value is None]
         examples = [value for _, value in encoded if value is not None]
+        report["accepted_example_ids"] = [key for key, value in encoded if value is not None]
         if not examples:
             raise ValueError("No whole examples fit the model context budget")
+        binding = {"dataset_manifest": manifest, "base_model": model, "base_revision": revision,
+                   "base_checkpoint_sha256": report["base_checkpoint_sha256"],
+                   "tokenizer_contract_sha256": report["tokenizer_contract_sha256"],
+                   "accepted_example_ids": report["accepted_example_ids"],
+                   "seed": seed, "epochs": epochs, "max_length": max_length, "rank": rank,
+                   "learning_rate": learning_rate, "gradient_accumulation": gradient_accumulation,
+                   "max_steps": max_steps, "device": device, "precision": precision,
+                   "gradient_checkpointing": gradient_checkpointing,
+                   "ordering": "canonical-examples-independent-seeded-epoch.v1"}
+        if resume_metadata and resume_metadata["binding"] != binding:
+            raise ValueError("Dataset, model, tokenizer, or optimization settings changed since checkpoint")
         base = AutoModelForCausalLM.from_pretrained(str(checkpoint), local_files_only=True, trust_remote_code=False,
                                                   use_safetensors=True, dtype=dtype, low_cpu_mem_usage=True, attn_implementation="sdpa")
         adapted = get_peft_model(base, LoraConfig(task_type="CAUSAL_LM", r=rank, lora_alpha=2*rank, lora_dropout=0.05,
@@ -128,6 +161,10 @@ def train_text(dataset: Path, output: Path, *, model: str, revision: str, epochs
         # The receipt binds the repository, revision and actual file hashes.
         adapted.peft_config["default"].base_model_name_or_path = model
         adapted.peft_config["default"].revision = revision
+        if resume_from is not None:
+            from safetensors.torch import load_file
+            from peft import set_peft_model_state_dict
+            set_peft_model_state_dict(adapted, load_file(str(resume_from / "adapter/adapter_model.safetensors")))
         adapted.to(device)
         adapted.train()
         adapted.config.use_cache = False
@@ -142,10 +179,19 @@ def train_text(dataset: Path, output: Path, *, model: str, revision: str, epochs
         report["hardware"] = torch.cuda.get_device_name(torch.device(device)) if device.startswith("cuda") else device
         report["accepted_examples"] = len(examples)
         report["trainable_parameters"] = sum(p.numel() for p in adapted.parameters() if p.requires_grad)
-        steps = 0
-        for epoch in range(epochs):
-            random.Random(seed+epoch).shuffle(examples)
-            for index, example in enumerate(examples):
+        steps = resume_state["optimizer_steps"] if resume_state else 0
+        start_steps = steps
+        cursor = resume_state["cursor"] if resume_state else {"epoch": 0, "next_index": 0}
+        if resume_state:
+            restore_state(optimizer, resume_state)
+        paused = False
+        last_checkpoint = None
+        for epoch in range(cursor["epoch"], epochs):
+            ordered = list(examples)
+            random.Random(seed+epoch).shuffle(ordered)
+            first = cursor["next_index"] if epoch == cursor["epoch"] else 0
+            for index in range(first, len(ordered)):
+                example = ordered[index]
                 inputs = torch.tensor([example["input_ids"]], device=device)
                 labels = torch.tensor([example["labels"]], device=device)
                 loss = adapted(input_ids=inputs, attention_mask=torch.ones_like(inputs), labels=labels).loss
@@ -170,11 +216,29 @@ def train_text(dataset: Path, output: Path, *, model: str, revision: str, epochs
                     optimizer.zero_grad()
                     steps += 1
                     report["optimizer_steps"] = steps
-                    write_json(output / "run.json", report)
+                    report["elapsed_seconds"] = previous_elapsed + time.monotonic() - started
+                    next_cursor = {"epoch": epoch, "next_index": index+1}
+                    if index+1 == len(ordered):
+                        next_cursor = {"epoch": epoch+1, "next_index": 0}
+                    finished = (max_steps is not None and steps >= max_steps) or next_cursor["epoch"] >= epochs
+                    paused = bool(stop_after_steps is not None and steps-start_steps >= stop_after_steps and not finished)
+                    if steps % checkpoint_every == 0 or paused or finished:
+                        last_checkpoint = save_checkpoint(output / "checkpoints", model=adapted,
+                                state=capture_state(optimizer, cursor=next_cursor, optimizer_steps=steps),
+                                binding=binding, report=report, publisher=checkpoint_publisher)
+                        report["last_local_checkpoint"] = last_checkpoint.relative_to(output).as_posix()
+                        report["last_checkpoint_optimizer_steps"] = steps
+                    atomic_json(output / "run.json", report)
+                    if paused:
+                        break
                     if max_steps is not None and steps >= max_steps:
                         break
-            if max_steps is not None and steps >= max_steps:
+            if paused or (max_steps is not None and steps >= max_steps):
                 break
+        if paused:
+            report["status"] = "paused"
+            report["pause_reason"] = "bounded block complete; persist and verify checkpoint before resuming"
+            return report
         adapted.save_pretrained(output / "adapter", safe_serialization=True)
         tokenizer.save_pretrained(output / "tokenizer")
         # Verify that the serialization used by the serving path preserves the
@@ -190,8 +254,8 @@ def train_text(dataset: Path, output: Path, *, model: str, revision: str, epochs
         report["failure"] = {"type": type(exc).__name__, "message": str(exc)}
         raise
     finally:
-        report["elapsed_seconds"] = time.monotonic() - started
-        write_json(output / "run.json", report)
+        report["elapsed_seconds"] = previous_elapsed + time.monotonic() - started
+        atomic_json(output / "run.json", report)
     return report
 
 

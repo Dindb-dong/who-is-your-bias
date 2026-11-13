@@ -1,0 +1,316 @@
+{
+  "schema_version": "jensen-generation-cases-summary.v1",
+  "cases": [
+    {
+      "id": "dev-ko-cuda",
+      "exposure": "development",
+      "kind": "technical_cuda",
+      "language": "ko",
+      "answerability": "answerable",
+      "supporting_training_ids": [
+        "qa26-acquired-2023-turn-00055"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "actual_input_tokens": 1058,
+      "history_turns": 0,
+      "question_sha256": "4191f8da43d60544b556821af0a0a6791331ef89ad2160bd878c573f3ad0eb86",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "private_answerability_review_sha256": "01de3156623434593f188a51016a7cf6a64bbc63a1a3c2e67ffce979bfa8d02c"
+    },
+    {
+      "id": "dev-ko-sega",
+      "exposure": "development",
+      "kind": "technical_failure_and_candor",
+      "language": "ko",
+      "answerability": "answerable",
+      "supporting_training_ids": [
+        "qa26-yc-startup-school-2026-turn-00010"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "actual_input_tokens": 1625,
+      "history_turns": 0,
+      "question_sha256": "9b01616fc89e295998434a047d8fc697811273db8e3222f97c2b9c240805b998",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "private_answerability_review_sha256": "3569e05236de57005dc0b4c289d4b8bf6cbccd090a40ce288380ca95a1b8731e"
+    },
+    {
+      "id": "dev-ko-tsmc",
+      "exposure": "development",
+      "kind": "technical_manufacturing",
+      "language": "ko",
+      "answerability": "answerable",
+      "supporting_training_ids": [
+        "qa26-lex-494-cue-00187"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "actual_input_tokens": 1415,
+      "history_turns": 0,
+      "question_sha256": "310e0ebc9d08f138eca216953a319532f634b2a70bceccf937e0f296c62379e2",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "private_answerability_review_sha256": "b005b447bdf8dd059ef0c73db3306859109893d53d3f3a4b02929fe9c2ca39d3"
+    },
+    {
+      "id": "dev-ko-values",
+      "exposure": "development",
+      "kind": "values_conviction",
+      "language": "ko",
+      "answerability": "answerable",
+      "supporting_training_ids": [
+        "qa26-stripe-sessions-2024-turn-00209"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "actual_input_tokens": 1307,
+      "history_turns": 0,
+      "question_sha256": "457f54cd53caf6e783d677b0febdc8fd8ae67f083c0501ebb627d8673492b15e",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "private_answerability_review_sha256": "1f4971c33be03667671fb672ff0d1991fe25ffdf6695c61b37e79c852b73b134"
+    },
+    {
+      "id": "dev-en-accelerated",
+      "exposure": "development",
+      "kind": "technical_acceleration",
+      "language": "en",
+      "answerability": "answerable",
+      "supporting_training_ids": [
+        "qa26-goldman-sachs-2024-turn-00007"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "actual_input_tokens": 1494,
+      "history_turns": 0,
+      "question_sha256": "1b16ed3874a80e9b93af9f32c754def84b84840568078136dcd988ed03d71d98",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "private_answerability_review_sha256": "1d3f96617c31f9f7f800a17b1432c705a4d7cb13f3023c72810b4b808f69bac9"
+    },
+    {
+      "id": "dev-ko-followup",
+      "exposure": "development",
+      "kind": "followup_fixed_context",
+      "language": "ko",
+      "answerability": "answerable",
+      "supporting_training_ids": [
+        "qa26-acquired-2023-turn-00055"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "actual_input_tokens": 1068,
+      "history_turns": 1,
+      "question_sha256": "0f12a6e5f1ccafafdba4ceab480798efe5da58a0fd7a6702ad2ae5b4157e7357",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "private_answerability_review_sha256": "82c02589dfc038bfa99b7e3483d08ece2a2ed29cc0fbcde1b132857cc45ddeb6"
+    },
+    {
+      "id": "dev-ko-correction",
+      "exposure": "development",
+      "kind": "correction_fixed_context",
+      "language": "ko",
+      "answerability": "answerable",
+      "supporting_training_ids": [
+        "qa26-lex-494-cue-00187"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "actual_input_tokens": 1444,
+      "history_turns": 1,
+      "question_sha256": "225ed382c593bed3403bcc9d53864f42668c3cef900594d597f30f1d10a301e0",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "private_answerability_review_sha256": "19466889d4239b9cd2cca003bf7cac402a3d0c764b765d26ceb2b580f023aab8"
+    },
+    {
+      "id": "dev-ko-topic-switch",
+      "exposure": "development",
+      "kind": "topic_switch_fixed_context",
+      "language": "ko",
+      "answerability": "answerable",
+      "supporting_training_ids": [
+        "qa26-stripe-sessions-2024-turn-00126"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "actual_input_tokens": 1260,
+      "history_turns": 1,
+      "question_sha256": "c82eaa9af1056fd80f9e4b44ac93e9c70951571863a0db8b7cfcd423b89e6165",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "private_answerability_review_sha256": "da7aaca8bd51ddbf162a0402d3af304e9bc6f817c01cdadea7d60d7ab239bb77"
+    },
+    {
+      "id": "dev-ko-unsupported",
+      "exposure": "development",
+      "kind": "unsupported_endorsement",
+      "language": "ko",
+      "answerability": "unanswerable",
+      "supporting_training_ids": [],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "actual_input_tokens": 842,
+      "history_turns": 0,
+      "question_sha256": "c3e067fda05d1f144f8a9295c11b3edb5d6fb9a2f682c29ae8341120b1b97644",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "private_answerability_review_sha256": "f4deefb6c4ab73cc7c1fa6d841fa67380ebfa24426db7a35bb97befc0fba78aa"
+    },
+    {
+      "id": "dev-ko-current",
+      "exposure": "development",
+      "kind": "unknown_current_position",
+      "language": "ko",
+      "answerability": "unanswerable",
+      "supporting_training_ids": [],
+      "style_ids": [],
+      "actual_input_tokens": 703,
+      "history_turns": 0,
+      "question_sha256": "892e644211e09a0d141334ebc2a99f47765a1dd8294fda96c07eb14fbf6f0f88",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "private_answerability_review_sha256": "aac465f56601595261322d28d460cda2d31243ceb15ad64fe3052520aaaa4c13"
+    },
+    {
+      "id": "dev-en-private",
+      "exposure": "development",
+      "kind": "private_information",
+      "language": "en",
+      "answerability": "unanswerable",
+      "supporting_training_ids": [],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "actual_input_tokens": 815,
+      "history_turns": 0,
+      "question_sha256": "ff2a9fe3df18a7841611b60cae1815e8ef67c7e80a3c8078a30f388c1e58f6a6",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "private_answerability_review_sha256": "938a481a1c3fd56cfe592aac3b728655873ae2f666a50b629b93be62920c0748"
+    },
+    {
+      "id": "dev-ko-future",
+      "exposure": "development",
+      "kind": "unseen_future_event",
+      "language": "ko",
+      "answerability": "unanswerable",
+      "supporting_training_ids": [],
+      "style_ids": [],
+      "actual_input_tokens": 713,
+      "history_turns": 0,
+      "question_sha256": "e86cde3d264df86c9ee6f017a690e57580af5b4158e0e525e325ef1ed6ed8837",
+      "reference_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+      "private_answerability_review_sha256": "109c9b8cd86d82128a2430a0688b212bde973f068d13502edb4a6557f8c5b07f"
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00072",
+      "exposure": "heldout",
+      "kind": "unseen_event_question",
+      "language": "en",
+      "answerability": "partially_answerable",
+      "supporting_training_ids": [
+        "qa26-acquired-2023-turn-00077"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "actual_input_tokens": 1547,
+      "history_turns": 0,
+      "question_sha256": "37d87ee3aaffff83d6426de214a9b4c47c3e12514e3f99948a4c4ec71faa7ce6",
+      "reference_sha256": "ab6a061f7f3738efab4ba94194f937cb7b7b718e8c56d067e31860d73670a509",
+      "private_answerability_review_sha256": "6b5ff0d66787e7e469138831df9e4a69efaefef8629a56247fcec483bc558c54"
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00078",
+      "exposure": "heldout",
+      "kind": "unseen_event_question",
+      "language": "en",
+      "answerability": "answerable",
+      "supporting_training_ids": [
+        "qa26-strange-loop-2025-turn-00009"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "actual_input_tokens": 1443,
+      "history_turns": 0,
+      "question_sha256": "def664f7607bf97ccb672a0c2c914b6813746c6778104a4b09e119e9ce17c030",
+      "reference_sha256": "83a59bb6c62a5c86a9dafc5f82486079a7d0d87d48667826af9dc0a69427d47d",
+      "private_answerability_review_sha256": "1cc3b18e477baf540d13a3f52578042073848c5976485d4934e7632222bf391a"
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00186",
+      "exposure": "heldout",
+      "kind": "unseen_event_question",
+      "language": "en",
+      "answerability": "partially_answerable",
+      "supporting_training_ids": [
+        "qa26-stripe-sessions-2024-turn-00203"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "actual_input_tokens": 1197,
+      "history_turns": 0,
+      "question_sha256": "332729f8e2db3d61dd6fef927125b0f03334bc8396b4ed0c3c18458d4e0c6f87",
+      "reference_sha256": "b8561bbc6d32d51a2569d85b63d7929e827f6cb4c3f04a9103920c8d2276922d",
+      "private_answerability_review_sha256": "b17650ba305a8d6a64f7b75a7bac728061a4efa3f2cc9e0d4367ec43c3a5aa85"
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00190",
+      "exposure": "heldout",
+      "kind": "unseen_event_question",
+      "language": "en",
+      "answerability": "answerable",
+      "supporting_training_ids": [
+        "qa26-stripe-sessions-2024-turn-00126"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "actual_input_tokens": 1343,
+      "history_turns": 0,
+      "question_sha256": "7422ed43593aff17582d720345abe072114e91b756d69049e8437340769fc3a6",
+      "reference_sha256": "7310f93d3772495151ae2dfd09580dfef0519b9445bd73e43fde10bbc4418be0",
+      "private_answerability_review_sha256": "8937a8b0cb3e68d431be766ffec80369a832247c23b1d2ee1d6dfe85f9f67885"
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00253",
+      "exposure": "heldout",
+      "kind": "unseen_event_question",
+      "language": "en",
+      "answerability": "answerable",
+      "supporting_training_ids": [
+        "qa26-acquired-2023-turn-00339"
+      ],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "actual_input_tokens": 1245,
+      "history_turns": 0,
+      "question_sha256": "d562be13c6962048a619d0a475c1086c972838b4dcdb3e2cff8c7d10a9976dda",
+      "reference_sha256": "be26af12fdff6f9c276c77ba0456bbbf76cebc5b6335ade903aac2cf738c7fb3",
+      "private_answerability_review_sha256": "fc34c2656b72a713385b1b09e4da8e13cb0156ba4e4b74a92e95ddf92b381168"
+    },
+    {
+      "id": "heldout-qa26-no-priors-2023-turn-00297",
+      "exposure": "heldout",
+      "kind": "unseen_event_question",
+      "language": "en",
+      "answerability": "unanswerable",
+      "supporting_training_ids": [],
+      "style_ids": [
+        "qa26-stanford-vftt-2024-turn-00130"
+      ],
+      "actual_input_tokens": 824,
+      "history_turns": 0,
+      "question_sha256": "c17122cfc2d23d342a3179a81950c2bf82f91649aec113a9ee2c3cd5d42bed24",
+      "reference_sha256": "95dae56a916e26258c03a3e366fd8239b2d11424e7525faf1e8017fd02b42a6f",
+      "private_answerability_review_sha256": "55381e22147b18fba4f3616d18223d5b84a167302c0eb66430ef724aed1a365d"
+    }
+  ],
+  "original_questions_references_and_support_rationales": "private frozen artifact"
+}

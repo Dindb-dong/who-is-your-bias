@@ -1,0 +1,34 @@
+{
+  "schema_version": "jensen-generation-artifacts.v1",
+  "run_id": "jensen-2026-11-13",
+  "artifacts": [
+    {
+      "role": "frozen_private_evaluation_plans_references_and_recipe",
+      "artifact": "jensen-text-evaluation-v1-frozen-plans.tar.gz",
+      "bytes": 98793,
+      "sha256": "347b7c1f9bc896f04958089bc551cefdc18dd4af422da08ebc2860b74643b024",
+      "file_id": "file_00000000c79481fd9ea1d41f0d0e1cc2",
+      "library_file_id": "libfile_fde3_f-4369a032218c819198c27ae68f67f9d0_a18ece08681081918d81df44f69c4b1f",
+      "file_name": "jensen-text-evaluation-v1-frozen-plans.tar.gz",
+      "status": "uploaded_and_fresh_readback_verified",
+      "restored_plans": [
+        {
+          "plan": "development",
+          "cases": 12,
+          "status": "fresh_restoration_validated",
+          "plan_sha256": "cd2bd7340c3eb7d9c1ddc248b78e25d69b8e00c9d246454cf5925e082a1dd030"
+        },
+        {
+          "plan": "heldout",
+          "cases": 6,
+          "status": "fresh_restoration_validated",
+          "plan_sha256": "7fd35de01ea1a364aa7b5a2bf8547bf3a4a6cd3ebee4b3764b8ce7c8957e5c7c"
+        }
+      ],
+      "snapshot_file_sha256": "942b65fecb5c10e7a39b6538b9bae7b600434abcbe1c7a760d7296b672e55e59"
+    }
+  ],
+  "public_source_wording": false,
+  "model_generations_executed": 0,
+  "next_step": "Execute exactly frozen-v2 plans after compatible adapter and shared memory slot are ready."
+}

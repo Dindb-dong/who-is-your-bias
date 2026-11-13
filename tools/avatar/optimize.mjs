@@ -8,7 +8,7 @@ import { dedup, meshopt, textureCompress } from '@gltf-transform/functions';
 import { MeshoptEncoder, MeshoptDecoder } from 'meshoptimizer';
 import sharp from 'sharp';
 
-const [input, output, reportPath] = process.argv.slice(2);
+const [input, output, reportPath, assetId = 'research-human-v2'] = process.argv.slice(2);
 if (!input || !output || !reportPath) throw new Error('Usage: node optimize.mjs INPUT.glb OUTPUT.glb REPORT.json');
 await Promise.all([MeshoptEncoder.ready, MeshoptDecoder.ready]);
 sharp.concurrency(2);
@@ -65,7 +65,7 @@ for (const key of ['target_names', 'nonzero_target_names', 'joint_names']) {
 const bytes = await readFile(output);
 const inputBytes = await readFile(input);
 const report = {
-  schema_version: 1, asset_id: 'research-human-v2', output_bytes: bytes.length,
+  schema_version: 1, asset_id: assetId, output_bytes: bytes.length,
   output_sha256: createHash('sha256').update(bytes).digest('hex'),
   input_bytes: inputBytes.length,
   input_sha256: createHash('sha256').update(inputBytes).digest('hex'),

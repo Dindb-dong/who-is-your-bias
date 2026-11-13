@@ -1,0 +1,14 @@
+{
+  "schema_version": "jensen-text-progress-latest.v1",
+  "recorded_at": "2026-11-12T21:53:55.073703+00:00",
+  "completed_and_persisted_optimizer_steps": 29,
+  "planned_optimizer_steps": 29,
+  "status": "completed_saved_and_fresh_readback_verified",
+  "report": "checkpoint-step0029.json",
+  "artifact_id": "jensen-text-checkpoint-step0029",
+  "next_resume_checkpoint": "readback/text-resume-step0029/step-00000029",
+  "training_completed": true,
+  "serving_report": "completed-serving.json",
+  "serving_artifact_id": "jensen-text-adapter-completed29-v1",
+  "serving_run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42"
+}

@@ -83,6 +83,29 @@ def test_same_subject_metadata_cannot_replace_source_identity(context):
         align_transcripts(context["publisher"], context["asr"])
 
 
+def test_untimed_publisher_text_never_invents_subtitle_clock_or_offset(context):
+    context["publisher"].update(timing_kind="untimed_text", source_timeline=None)
+    for cue in context["publisher"]["segments"]:
+        cue["start"] = None
+    context["publisher_file"].write_text(json.dumps(context["publisher"]))
+    report = align_transcripts(context["publisher"], context["asr"])
+    assert report["matched_tokens"] == 12
+    assert report["offset_summary"] is None
+    assert report["anchors"] == []
+    assert report["publisher_timeline"] is None
+    assert all(match["publisher_cue_start_seconds"] is None for match in report["matches"])
+    assert make_reference(context)["automatic_checks"]["exact_normalized_text_agreement"] is True
+
+
+def test_missing_publisher_times_need_explicit_untimed_declaration(context):
+    context["publisher"]["segments"][0]["start"] = None
+    with pytest.raises(MediaError, match="publisher cue onset"):
+        align_transcripts(context["publisher"], context["asr"])
+    context["publisher"]["timing_kind"] = "untimed_text"
+    with pytest.raises(MediaError, match="Untimed publisher text"):
+        align_transcripts(context["publisher"], context["asr"])
+
+
 def test_real_ffmpeg_candidate_keeps_full_provenance_and_never_auto_approves(context):
     manifest = make_reference(context)
     assert manifest["review"]["status"] == "candidate"
@@ -116,6 +139,31 @@ def test_cutting_through_a_word_is_rejected(context):
     with pytest.raises(MediaError, match="cut an ASR word"):
         prepare_reference(context["media_manifest"], context["publisher_file"], context["asr_file"], context["original"],
             context["output"], speaker="Speaker One", cue_ids=["cue-1", "cue-2"], start_seconds=1.1, duration_seconds=8)
+
+
+def test_adjacent_word_is_not_included_by_floating_point_roundoff(context):
+    words = context["asr"]["segments"][0]["words"]
+    for index, word in enumerate(words):
+        word["start"] = 1.22 + index * 0.7
+        word["end"] = word["start"] + 0.6
+    words[-1]["end"] = 10.16
+    words.append({"word": "unrelated", "start": 10.16, "end": 10.88, "confidence": 0.9})
+    context["asr_file"].write_text(json.dumps(context["asr"]))
+    result = prepare_reference(context["media_manifest"], context["publisher_file"], context["asr_file"], context["original"],
+        context["output"], speaker="Speaker One", cue_ids=["cue-1", "cue-2"], start_seconds=1.22, duration_seconds=8.94)
+    assert result["automatic_checks"]["exact_normalized_text_agreement"] is True
+
+
+def test_source_match_keeps_last_word_when_duration_rounds_down(context):
+    words = context["asr"]["segments"][0]["words"]
+    for index, word in enumerate(words):
+        word["start"] = 1.58 + index * 0.7
+        word["end"] = word["start"] + 0.6
+    words[-1]["end"] = 10.24
+    context["asr_file"].write_text(json.dumps(context["asr"]))
+    result = prepare_reference(context["media_manifest"], context["publisher_file"], context["asr_file"], context["original"],
+        context["output"], speaker="Speaker One", cue_ids=["cue-1", "cue-2"], start_seconds=1.579999999999998, duration_seconds=8.66)
+    assert result["automatic_checks"]["exact_normalized_text_agreement"] is True
 
 
 def test_reference_duration_is_bounded(context):

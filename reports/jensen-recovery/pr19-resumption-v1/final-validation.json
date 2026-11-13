@@ -1,0 +1,45 @@
+{
+  "schema_version": "jensen-pr19-final-targeted-validation.v1",
+  "recorded_at": "2026-11-13T05:43:59.292963+00:00",
+  "command": ".venv/bin/python -m pytest -q tests/adaptation_evaluation tests/adaptation/test_supervise.py tests/test_runtime_text_live.py tests/test_runtime_text_cancel_recovery.py",
+  "exit_code": 0,
+  "passed": 135,
+  "failed": 0,
+  "elapsed_seconds": 3.66,
+  "log_file": "final-targeted-pytest.txt",
+  "log_sha256": "8b684c05bdbf560caefda10856717f3c5a3026e9dacf8d8be46f9e926e7672c4",
+  "source_sha256": {
+    ".github/workflows/studio-validation.yml": "85ff3ed35a948e5f8fc8a13a49ebcb25bee2014e0b29d69aaa550b235759c1b4",
+    "tools/runtime_checks/text_live.py": "6421b108f7ec7d390507ba3015b7c55ed824c4c2e76e729fa5bc6f598c8ac014",
+    "tools/runtime_checks/text_cancel_recovery.py": "4f2aac38bdc16788256175c0a2cd40fa878fe8068801fca018284201f9f69ba2",
+    "tests/test_runtime_text_live.py": "0dde60ea613aa99e08a2f9f42253a3ab0bae5f05546617ca99926879afefa7c3",
+    "tests/test_runtime_text_cancel_recovery.py": "703b9147c80b608474b1ccafc2e62535d93598077c9dae8150b0f3f88d9f64d1",
+    "playwright.jensen.config.ts": "26cb7e0f01e8785c1f7aee49611db6e17ecfe108611cbd44e9bcc58b1388230c"
+  },
+  "latest_results_checkpoint": "163cd565b1fc119dd53d819aa20c47bff89ce4ea",
+  "model_test_scope": "These tests use fixtures; the separate actual neural API receipts report 46/46 for each condition.",
+  "ci_result_location": "Inspect PR #19 native checks for the exact current head; its completion description cites the checked head.",
+  "retained_ci_failure": {
+    "run_id": 43372847097,
+    "head_sha": "2a5ad37d5abb51ed9ef9273d5df0a56b5259eaf4",
+    "url": "https://github.com/Dindb-dong/who-is-your-bias/actions/runs/43372847097",
+    "web_tests_passed": 242,
+    "focused_python_passed": 134,
+    "historical_browser_passed": 30,
+    "jensen_browser_passed": 21,
+    "jensen_browser_failed": 1,
+    "failed_check": "desktop recorded generated-audio maximum rendered/media clock difference",
+    "observed_ms": 754.9240000000002,
+    "required_less_than_ms": 750,
+    "typecheck_and_build_passed": true,
+    "gate_relaxed": false,
+    "retries": 0,
+    "artifact_receipt": "ci-first-failure.json"
+  },
+  "browser_scheduling_diagnostic": "browser-clock-isolation.json",
+  "additional_configuration_checks": {
+    "node --check playwright.jensen.config.ts": "passed",
+    "git diff --check": "passed",
+    "browser_execution": "Latest CI head must verify the one-worker configuration separately."
+  }
+}

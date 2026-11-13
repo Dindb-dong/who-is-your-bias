@@ -1,0 +1,1679 @@
+{
+  "schema_version": "jensen-runtime-smoke.v1",
+  "started_at": "2026-11-12T18:51:27.977548+00:00",
+  "transport": "actual loopback TCP HTTP with Uvicorn; no ASGI test transport or simulated model",
+  "protocol_sha256": "02f4fb2b647e0364b718075a514319eabdc3a259b5066c4bb8401129643edff4",
+  "preflight": {
+    "configuration_sha256": "003d9fd201e8fa0e69c7d8e9c2be5c09e5e4c1d46a8eec4c58f209b4ba159aee",
+    "persona_id": "jensen-huang",
+    "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+    "snapshot_sha256": "f6e13e7f543a4dfd05239c61301771a93c13f339fc855482a84d528d2dde2067",
+    "snapshot": {
+      "id": "jensen-runtime-evidence-preview-v1",
+      "as_of": "2026-11-12T18:36:58.188093+00:00",
+      "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+      "current_evidence_since": "2026-01-01",
+      "current_dated_training_sources": 0,
+      "coverage_note": "Snapshot date limits availability; it does not imply contemporary coverage. Unknown event dates remain unknown. Runtime candidate appearance and optional voice are separate from text evidence; this snapshot does not promote likeness or current-position coverage.",
+      "knowledge_version": "jensen-huang-original-2026-11-13.v1",
+      "style_version": "evidence-preview-no-generated-persona-style",
+      "voice_version": "disabled-in-preview-configuration",
+      "appearance_version": "jensen-stylized-default-source-fitted-v3-optional"
+    },
+    "text_mode": "evidence-preview",
+    "retrieval_backend": "jensen-lexical",
+    "language_model_configured": false,
+    "voice_enabled": false,
+    "avatar_sha256": "dea0c921fb7d5668527bd8ee9082f382b14e8d300c43936842e15356dc7d90cd",
+    "motion_catalog_sha256": "d11c99f649bdc22788f8cd0bc14808db3ce131b913b741e742d77b283a6cd3f8",
+    "motion": {
+      "source_events": [
+        "goldman-sachs-2024",
+        "stripe-sessions-2024",
+        "wired-big-interview-2024"
+      ],
+      "observed_frames": 580,
+      "observed_seconds": 58.057399999999994,
+      "preview_runtime_primitives": 36,
+      "reviewed_runtime_primitives": 0
+    }
+  },
+  "api_code": {
+    "repository": "/workspace/scratch/6f64e1b53384/who-is-your-bias",
+    "head": "655bb62d85fe58dce5b986fb6db4697582ca0115",
+    "modules_sha256": {
+      "api.py": "f6c3761d29ced31abd1b3ce7f30c4b98bb931e357e594aaea823b01ecaa7627b",
+      "engine.py": "7aa48868dedb41aa44926987347aa6fbe8b6e377af13572ef5e1a77fd3f0fac9",
+      "config.py": "dddd8a68115d92db72d390a51e6a188302732b887e00e0efcb59221b26d0ae9d",
+      "corpus.py": "16b9eef8a6fef0e20a7dd4099b470724e793dc14c698313d06fb679b87e9aeb0",
+      "dialogue.py": "3c5aa9b2e959ce501a807711760683c89b069ebff3f0706b3e3bfd1d88c7455e",
+      "motion.py": "719546905f854572cf53cf920754a9d39c5299f7a97108e49254862adaf7861b",
+      "query_policy.py": "95d25a25696cb868d97f7366b033c3e2c425d876181da374c6ec62e48366f30b",
+      "snapshots.py": "28659167b62d4de7354ccbe83ab4cc3c924891d8c6df2418a33d8755e7b51fc2",
+      "bindings.py": "c4adffbb7d911f3b421e087fb229fc7fde2f95ba064b3d10bde5b23643d0fc34",
+      "providers.py": "e92f428eeefff17a35d0992a0951d9a1fb31620aed9d5516d8402712aef1b083"
+    },
+    "python": "3.12.14",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41"
+  },
+  "condition": "evidence-preview",
+  "language_model_generated": false,
+  "model_latency_measured": false,
+  "checks": [
+    {
+      "check": "health.evidence_configuration",
+      "passed": true
+    },
+    {
+      "check": "health.frozen_snapshot",
+      "passed": true
+    },
+    {
+      "check": "health.retrieval",
+      "passed": true
+    },
+    {
+      "check": "persona.identity",
+      "passed": true
+    },
+    {
+      "check": "persona.motion_binding",
+      "passed": true
+    },
+    {
+      "check": "persona.voice_binding",
+      "passed": true
+    },
+    {
+      "check": "sources.unchanged_records",
+      "passed": true
+    },
+    {
+      "check": "sources.train_only",
+      "passed": true
+    },
+    {
+      "check": "avatar.actual_http_bytes",
+      "passed": true
+    },
+    {
+      "check": "motion.available",
+      "passed": true
+    },
+    {
+      "check": "motion.measured_catalog",
+      "passed": true
+    },
+    {
+      "check": "motion.preview_gate.jensen-goldman-0128-8s",
+      "passed": true
+    },
+    {
+      "check": "motion.preview_gate.jensen-goldman-0146-8s",
+      "passed": true
+    },
+    {
+      "check": "motion.preview_gate.jensen-goldman-0164-8s",
+      "passed": true
+    },
+    {
+      "check": "motion.preview_gate.jensen-stripe-2396-12s",
+      "passed": true
+    },
+    {
+      "check": "motion.preview_gate.jensen-stripe-2696-12s",
+      "passed": true
+    },
+    {
+      "check": "motion.preview_gate.jensen-wired-1350-10s",
+      "passed": true
+    },
+    {
+      "check": "cuda.http",
+      "passed": true
+    },
+    {
+      "check": "cuda.same_session",
+      "passed": true
+    },
+    {
+      "check": "cuda.evidence_provider",
+      "passed": true
+    },
+    {
+      "check": "cuda.no_invalid_citations",
+      "passed": true
+    },
+    {
+      "check": "cuda.original_citation_binding",
+      "passed": false,
+      "citation_count": 2
+    },
+    {
+      "check": "cuda.no_uncontextualized_motion",
+      "passed": true
+    },
+    {
+      "check": "cuda.explicit_preview_label",
+      "passed": true
+    },
+    {
+      "check": "cuda.resolution",
+      "passed": true
+    },
+    {
+      "check": "followup.http",
+      "passed": true
+    },
+    {
+      "check": "followup.same_session",
+      "passed": true
+    },
+    {
+      "check": "followup.evidence_provider",
+      "passed": true
+    },
+    {
+      "check": "followup.no_invalid_citations",
+      "passed": true
+    },
+    {
+      "check": "followup.original_citation_binding",
+      "passed": false,
+      "citation_count": 2
+    },
+    {
+      "check": "followup.no_uncontextualized_motion",
+      "passed": true
+    },
+    {
+      "check": "followup.explicit_preview_label",
+      "passed": true
+    },
+    {
+      "check": "followup.resolution",
+      "passed": true
+    },
+    {
+      "check": "correction.http",
+      "passed": true
+    },
+    {
+      "check": "correction.same_session",
+      "passed": true
+    },
+    {
+      "check": "correction.evidence_provider",
+      "passed": true
+    },
+    {
+      "check": "correction.no_invalid_citations",
+      "passed": true
+    },
+    {
+      "check": "correction.original_citation_binding",
+      "passed": false,
+      "citation_count": 2
+    },
+    {
+      "check": "correction.no_uncontextualized_motion",
+      "passed": true
+    },
+    {
+      "check": "correction.explicit_preview_label",
+      "passed": true
+    },
+    {
+      "check": "correction.resolution",
+      "passed": true
+    },
+    {
+      "check": "topic_switch.http",
+      "passed": true
+    },
+    {
+      "check": "topic_switch.same_session",
+      "passed": true
+    },
+    {
+      "check": "topic_switch.evidence_provider",
+      "passed": true
+    },
+    {
+      "check": "topic_switch.no_invalid_citations",
+      "passed": true
+    },
+    {
+      "check": "topic_switch.original_citation_binding",
+      "passed": false,
+      "citation_count": 2
+    },
+    {
+      "check": "topic_switch.no_uncontextualized_motion",
+      "passed": true
+    },
+    {
+      "check": "topic_switch.explicit_preview_label",
+      "passed": true
+    },
+    {
+      "check": "topic_switch.resolution",
+      "passed": true
+    },
+    {
+      "check": "current_position.http",
+      "passed": true
+    },
+    {
+      "check": "current_position.evidence_provider",
+      "passed": true
+    },
+    {
+      "check": "current_position.no_invalid_citations",
+      "passed": true
+    },
+    {
+      "check": "current_position.original_citation_binding",
+      "passed": true,
+      "citation_count": 0
+    },
+    {
+      "check": "current_position.no_uncontextualized_motion",
+      "passed": true
+    },
+    {
+      "check": "current_position.grounding",
+      "passed": true
+    },
+    {
+      "check": "current_position.temporal",
+      "passed": true
+    },
+    {
+      "check": "private_contact.http",
+      "passed": true
+    },
+    {
+      "check": "private_contact.evidence_provider",
+      "passed": true
+    },
+    {
+      "check": "private_contact.no_invalid_citations",
+      "passed": true
+    },
+    {
+      "check": "private_contact.original_citation_binding",
+      "passed": true,
+      "citation_count": 0
+    },
+    {
+      "check": "private_contact.no_uncontextualized_motion",
+      "passed": true
+    },
+    {
+      "check": "private_contact.grounding",
+      "passed": true
+    },
+    {
+      "check": "private_contact.limitation",
+      "passed": true
+    },
+    {
+      "check": "endorsement.http",
+      "passed": true
+    },
+    {
+      "check": "endorsement.evidence_provider",
+      "passed": true
+    },
+    {
+      "check": "endorsement.no_invalid_citations",
+      "passed": true
+    },
+    {
+      "check": "endorsement.original_citation_binding",
+      "passed": true,
+      "citation_count": 0
+    },
+    {
+      "check": "endorsement.no_uncontextualized_motion",
+      "passed": true
+    },
+    {
+      "check": "endorsement.grounding",
+      "passed": true
+    },
+    {
+      "check": "endorsement.limitation",
+      "passed": true
+    },
+    {
+      "check": "korean_preview.http",
+      "passed": true
+    },
+    {
+      "check": "korean_preview.evidence_provider",
+      "passed": true
+    },
+    {
+      "check": "korean_preview.no_invalid_citations",
+      "passed": true
+    },
+    {
+      "check": "korean_preview.original_citation_binding",
+      "passed": false,
+      "citation_count": 2
+    },
+    {
+      "check": "korean_preview.no_uncontextualized_motion",
+      "passed": true
+    },
+    {
+      "check": "korean_preview.explicit_preview_label",
+      "passed": true
+    },
+    {
+      "check": "citations.actual_source_inspection",
+      "passed": true
+    },
+    {
+      "check": "session.four_turns",
+      "passed": true
+    },
+    {
+      "check": "session.provenance",
+      "passed": true
+    },
+    {
+      "check": "session.delete",
+      "passed": true
+    },
+    {
+      "check": "sse.lifecycle",
+      "passed": true
+    },
+    {
+      "check": "sse.text_matches_result",
+      "passed": false
+    },
+    {
+      "check": "sse.identity",
+      "passed": true
+    },
+    {
+      "check": "sse.evidence_provider",
+      "passed": true
+    },
+    {
+      "check": "sse.no_invalid_citations",
+      "passed": true
+    },
+    {
+      "check": "sse.original_citation_binding",
+      "passed": false,
+      "citation_count": 2
+    },
+    {
+      "check": "sse.no_uncontextualized_motion",
+      "passed": true
+    },
+    {
+      "check": "sse.explicit_preview_label",
+      "passed": true
+    },
+    {
+      "check": "disconnect.session_unlocked",
+      "passed": true
+    },
+    {
+      "check": "health.after_requests",
+      "passed": true
+    }
+  ],
+  "cases": [
+    {
+      "id": "cuda",
+      "response_sha256": "176f346a400ddc9063c4b5a89b698c7964cf96cc4729d337eee4a7682a1950e9",
+      "response_characters": 541,
+      "provider": "evidence",
+      "language": "en",
+      "grounding": {
+        "status": "grounded",
+        "retrieved_ids": [
+          "qa26-acquired-2023-turn-00216",
+          "qa26-dwarkesh-2026-turn-00428",
+          "qa26-lex-494-cue-00033",
+          "qa26-stripe-sessions-2024-turn-00191"
+        ],
+        "invalid_citation_ids": [],
+        "reason": "Curated evidence preview; no language-model inference was performed.",
+        "citation_status": "not_required",
+        "citation_unit_count": 8,
+        "cited_unit_count": 2,
+        "malformed_citations": [],
+        "semantic_status": "curated_source"
+      },
+      "context": {
+        "snapshot": {
+          "id": "jensen-runtime-evidence-preview-v1",
+          "as_of": "2026-11-12T18:36:58.188093+00:00",
+          "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+          "current_evidence_since": "2026-01-01",
+          "current_dated_training_sources": 0,
+          "coverage_note": "Snapshot date limits availability; it does not imply contemporary coverage. Unknown event dates remain unknown. Runtime candidate appearance and optional voice are separate from text evidence; this snapshot does not promote likeness or current-position coverage.",
+          "knowledge_version": "jensen-huang-original-2026-11-13.v1",
+          "style_version": "evidence-preview-no-generated-persona-style",
+          "voice_version": "disabled-in-preview-configuration",
+          "appearance_version": "jensen-stylized-default-source-fitted-v3-optional"
+        },
+        "query_resolution": {
+          "original": "What is CUDA?",
+          "query": "What is CUDA?",
+          "method": "original",
+          "supporting_turn_ids": []
+        },
+        "temporal": {
+          "mode": "general",
+          "years": [],
+          "period": "exact",
+          "excluded": {}
+        },
+        "retrieval_backend": "jensen-lexical",
+        "lexical_search": {
+          "query": "What is CUDA?",
+          "temporal_scope_applied_before_search": true
+        }
+      },
+      "metrics": {
+        "retrieval_ms": 55.798,
+        "generation_ms": 0.023,
+        "total_ms": 56.815
+      },
+      "citations": [
+        {
+          "evidence_id": "qa26-acquired-2023-turn-00216",
+          "source_id": "acquired-2023",
+          "url": "https://www.acquired.fm/episodes/jensen-huang#transcript",
+          "original_text_sha256": "23c4dc666a36ac497cf33687a23ae26e4a76bb32172cb2d74d63fe97cd1e9e6c"
+        },
+        {
+          "evidence_id": "qa26-dwarkesh-2026-turn-00428",
+          "source_id": "dwarkesh-2026",
+          "url": "https://www.dwarkesh.com/p/jensen-huang",
+          "original_text_sha256": "3ace54be01a71832317052715d5cd3c1b600856137d98f9c4114340761136612"
+        }
+      ],
+      "http_ms": 59.249
+    },
+    {
+      "id": "followup",
+      "response_sha256": "ae5c7656c864583ceea438c28fc5e25d906647e543d88b8902aba1009dbfe9a8",
+      "response_characters": 3631,
+      "provider": "evidence",
+      "language": "en",
+      "grounding": {
+        "status": "grounded",
+        "retrieved_ids": [
+          "qa26-dwarkesh-2026-turn-00360",
+          "qa26-dwarkesh-2026-turn-00473",
+          "qa26-acquired-2023-turn-00216",
+          "qa26-dwarkesh-2026-turn-00428"
+        ],
+        "invalid_citation_ids": [],
+        "reason": "Curated evidence preview; no language-model inference was performed.",
+        "citation_status": "not_required",
+        "citation_unit_count": 44,
+        "cited_unit_count": 2,
+        "malformed_citations": [],
+        "semantic_status": "curated_source"
+      },
+      "context": {
+        "snapshot": {
+          "id": "jensen-runtime-evidence-preview-v1",
+          "as_of": "2026-11-12T18:36:58.188093+00:00",
+          "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+          "current_evidence_since": "2026-01-01",
+          "current_dated_training_sources": 0,
+          "coverage_note": "Snapshot date limits availability; it does not imply contemporary coverage. Unknown event dates remain unknown. Runtime candidate appearance and optional voice are separate from text evidence; this snapshot does not promote likeness or current-position coverage.",
+          "knowledge_version": "jensen-huang-original-2026-11-13.v1",
+          "style_version": "evidence-preview-no-generated-persona-style",
+          "voice_version": "disabled-in-preview-configuration",
+          "appearance_version": "jensen-stylized-default-source-fitted-v3-optional"
+        },
+        "query_resolution": {
+          "original": "Can you explain that more simply?",
+          "query": "What is CUDA?\nCan you explain that more simply?",
+          "method": "previous_user_reference",
+          "supporting_turn_ids": [
+            "935339369e354eb3ab950fa54fff3171"
+          ]
+        },
+        "temporal": {
+          "mode": "general",
+          "years": [],
+          "period": "exact",
+          "excluded": {}
+        },
+        "retrieval_backend": "jensen-lexical",
+        "lexical_search": {
+          "query": "What is CUDA?\nCan you explain that more simply?",
+          "temporal_scope_applied_before_search": true
+        }
+      },
+      "metrics": {
+        "retrieval_ms": 78.05,
+        "generation_ms": 0.033,
+        "total_ms": 80.189
+      },
+      "citations": [
+        {
+          "evidence_id": "qa26-dwarkesh-2026-turn-00360",
+          "source_id": "dwarkesh-2026",
+          "url": "https://www.dwarkesh.com/p/jensen-huang",
+          "original_text_sha256": "2e68fbf3435345b32098aac088ca5a4c0d1a010172d6ef6be737d0febc0c61c2"
+        },
+        {
+          "evidence_id": "qa26-dwarkesh-2026-turn-00473",
+          "source_id": "dwarkesh-2026",
+          "url": "https://www.dwarkesh.com/p/jensen-huang",
+          "original_text_sha256": "354a2e01ecec809bd731a6f6c70500c96d6b12137d97f07734296aebafddacd0"
+        }
+      ],
+      "http_ms": 82.63
+    },
+    {
+      "id": "correction",
+      "response_sha256": "45fdc06ac8cc3d2463e344ece18658d0167e63f10f65e4fd14ad262b87de1f2d",
+      "response_characters": 3682,
+      "provider": "evidence",
+      "language": "en",
+      "grounding": {
+        "status": "grounded",
+        "retrieved_ids": [
+          "qa26-lex-494-cue-00200",
+          "qa26-acquired-2023-turn-00201",
+          "qa26-dwarkesh-2026-turn-00089",
+          "qa26-dwarkesh-2026-turn-00356"
+        ],
+        "invalid_citation_ids": [],
+        "reason": "Curated evidence preview; no language-model inference was performed.",
+        "citation_status": "not_required",
+        "citation_unit_count": 44,
+        "cited_unit_count": 2,
+        "malformed_citations": [],
+        "semantic_status": "curated_source"
+      },
+      "context": {
+        "snapshot": {
+          "id": "jensen-runtime-evidence-preview-v1",
+          "as_of": "2026-11-12T18:36:58.188093+00:00",
+          "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+          "current_evidence_since": "2026-01-01",
+          "current_dated_training_sources": 0,
+          "coverage_note": "Snapshot date limits availability; it does not imply contemporary coverage. Unknown event dates remain unknown. Runtime candidate appearance and optional voice are separate from text evidence; this snapshot does not promote likeness or current-position coverage.",
+          "knowledge_version": "jensen-huang-original-2026-11-13.v1",
+          "style_version": "evidence-preview-no-generated-persona-style",
+          "voice_version": "disabled-in-preview-configuration",
+          "appearance_version": "jensen-stylized-default-source-fitted-v3-optional"
+        },
+        "query_resolution": {
+          "original": "I meant CUDA's developer ecosystem.",
+          "query": "I meant CUDA's developer ecosystem.",
+          "method": "explicit_correction",
+          "supporting_turn_ids": []
+        },
+        "temporal": {
+          "mode": "general",
+          "years": [],
+          "period": "exact",
+          "excluded": {}
+        },
+        "retrieval_backend": "jensen-lexical",
+        "lexical_search": {
+          "query": "I meant CUDA's developer ecosystem.",
+          "temporal_scope_applied_before_search": true
+        }
+      },
+      "metrics": {
+        "retrieval_ms": 97.591,
+        "generation_ms": 0.027,
+        "total_ms": 99.794
+      },
+      "citations": [
+        {
+          "evidence_id": "qa26-lex-494-cue-00200",
+          "source_id": "lex-494",
+          "url": "https://lexfridman.com/jensen-huang-transcript/",
+          "original_text_sha256": "f60388e03d12c1cc6666562f7dcc5ba494932f488df929cc43a2f2d0a12be2d5"
+        },
+        {
+          "evidence_id": "qa26-acquired-2023-turn-00201",
+          "source_id": "acquired-2023",
+          "url": "https://www.acquired.fm/episodes/jensen-huang#transcript",
+          "original_text_sha256": "eb7e8d422107daf3320edb16567fa77113422162d07324bff2a572712c254f25"
+        }
+      ],
+      "http_ms": 102.901
+    },
+    {
+      "id": "topic_switch",
+      "response_sha256": "3079aa3c34e30cc07c215b2fc323ec6901c49b397f5b7ec6af702ca54d4ae685",
+      "response_characters": 8173,
+      "provider": "evidence",
+      "language": "en",
+      "grounding": {
+        "status": "grounded",
+        "retrieved_ids": [
+          "qa26-lex-494-cue-00142",
+          "qa26-stanford-vftt-2024-turn-00085",
+          "qa26-lex-494-cue-00205",
+          "qa26-lex-494-cue-00001"
+        ],
+        "invalid_citation_ids": [],
+        "reason": "Curated evidence preview; no language-model inference was performed.",
+        "citation_status": "not_required",
+        "citation_unit_count": 120,
+        "cited_unit_count": 2,
+        "malformed_citations": [],
+        "semantic_status": "curated_source"
+      },
+      "context": {
+        "snapshot": {
+          "id": "jensen-runtime-evidence-preview-v1",
+          "as_of": "2026-11-12T18:36:58.188093+00:00",
+          "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+          "current_evidence_since": "2026-01-01",
+          "current_dated_training_sources": 0,
+          "coverage_note": "Snapshot date limits availability; it does not imply contemporary coverage. Unknown event dates remain unknown. Runtime candidate appearance and optional voice are separate from text evidence; this snapshot does not promote likeness or current-position coverage.",
+          "knowledge_version": "jensen-huang-original-2026-11-13.v1",
+          "style_version": "evidence-preview-no-generated-persona-style",
+          "voice_version": "disabled-in-preview-configuration",
+          "appearance_version": "jensen-stylized-default-source-fitted-v3-optional"
+        },
+        "query_resolution": {
+          "original": "Switching topics: what are AI factories?",
+          "query": "Switching topics: what are AI factories?",
+          "method": "topic_switch",
+          "supporting_turn_ids": []
+        },
+        "temporal": {
+          "mode": "general",
+          "years": [],
+          "period": "exact",
+          "excluded": {}
+        },
+        "retrieval_backend": "jensen-lexical",
+        "lexical_search": {
+          "query": "Switching topics: what are AI factories?",
+          "temporal_scope_applied_before_search": true
+        }
+      },
+      "metrics": {
+        "retrieval_ms": 82.562,
+        "generation_ms": 0.026,
+        "total_ms": 86.898
+      },
+      "citations": [
+        {
+          "evidence_id": "qa26-lex-494-cue-00142",
+          "source_id": "lex-494",
+          "url": "https://lexfridman.com/jensen-huang-transcript/",
+          "original_text_sha256": "1414f0fad3e11aba99b7574e9ab7dc53a4a2237689db11875cad82223ab40a7d"
+        },
+        {
+          "evidence_id": "qa26-stanford-vftt-2024-turn-00085",
+          "source_id": "stanford-vftt-2024",
+          "url": "https://www.gsb.stanford.edu/insights/jensen-huang-how-use-first-principles-thinking-drive-decisions",
+          "original_text_sha256": "207eed3bd0980ddb3385cec704b27936ac3e908226e5617797ae431206c206c6"
+        }
+      ],
+      "http_ms": 89.515
+    },
+    {
+      "id": "current_position",
+      "response_sha256": "d31f6719539a1a00c28f17b974da05397789cf27b499370f234fbe3cf1981771",
+      "response_characters": 76,
+      "provider": "evidence",
+      "language": "en",
+      "grounding": {
+        "status": "insufficient",
+        "retrieved_ids": [],
+        "invalid_citation_ids": [],
+        "reason": "No reviewed, dated evidence establishes a current position in this snapshot.",
+        "citation_status": "not_required",
+        "citation_unit_count": 1,
+        "cited_unit_count": 0,
+        "malformed_citations": [],
+        "semantic_status": "unreviewed"
+      },
+      "context": {
+        "snapshot": {
+          "id": "jensen-runtime-evidence-preview-v1",
+          "as_of": "2026-11-12T18:36:58.188093+00:00",
+          "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+          "current_evidence_since": "2026-01-01",
+          "current_dated_training_sources": 0,
+          "coverage_note": "Snapshot date limits availability; it does not imply contemporary coverage. Unknown event dates remain unknown. Runtime candidate appearance and optional voice are separate from text evidence; this snapshot does not promote likeness or current-position coverage.",
+          "knowledge_version": "jensen-huang-original-2026-11-13.v1",
+          "style_version": "evidence-preview-no-generated-persona-style",
+          "voice_version": "disabled-in-preview-configuration",
+          "appearance_version": "jensen-stylized-default-source-fitted-v3-optional"
+        },
+        "query_resolution": {
+          "original": "What is your current position on AI chip export controls today?",
+          "query": "What is your current position on AI chip export controls today?",
+          "method": "original",
+          "supporting_turn_ids": []
+        },
+        "temporal": {
+          "mode": "current",
+          "years": [],
+          "period": "exact",
+          "excluded": {
+            "qa26-lex-494-cue-00001": "no_dated_current_position",
+            "qa26-lex-494-cue-00007": "no_dated_current_position",
+            "qa26-lex-494-cue-00009": "no_dated_current_position",
+            "qa26-lex-494-cue-00016": "no_dated_current_position",
+            "qa26-lex-494-cue-00020": "no_dated_current_position",
+            "qa26-lex-494-cue-00026": "no_dated_current_position",
+            "qa26-lex-494-cue-00028": "no_dated_current_position",
+            "qa26-lex-494-cue-00033": "no_dated_current_position",
+            "qa26-lex-494-cue-00035": "no_dated_current_position",
+            "qa26-lex-494-cue-00038": "no_dated_current_position",
+            "qa26-lex-494-cue-00043": "no_dated_current_position",
+            "qa26-lex-494-cue-00045": "no_dated_current_position",
+            "qa26-lex-494-cue-00048": "no_dated_current_position",
+            "qa26-lex-494-cue-00050": "no_dated_current_position",
+            "qa26-lex-494-cue-00056": "no_dated_current_position",
+            "qa26-lex-494-cue-00058": "no_dated_current_position",
+            "qa26-lex-494-cue-00060": "no_dated_current_position",
+            "qa26-lex-494-cue-00075": "no_dated_current_position",
+            "qa26-lex-494-cue-00078": "no_dated_current_position",
+            "qa26-lex-494-cue-00084": "no_dated_current_position",
+            "qa26-lex-494-cue-00094": "no_dated_current_position",
+            "qa26-lex-494-cue-00098": "no_dated_current_position",
+            "qa26-lex-494-cue-00100": "no_dated_current_position",
+            "qa26-lex-494-cue-00105": "no_dated_current_position",
+            "qa26-lex-494-cue-00112": "no_dated_current_position",
+            "qa26-lex-494-cue-00114": "no_dated_current_position",
+            "qa26-lex-494-cue-00116": "no_dated_current_position",
+            "qa26-lex-494-cue-00118": "no_dated_current_position",
+            "qa26-lex-494-cue-00121": "no_dated_current_position",
+            "qa26-lex-494-cue-00128": "no_dated_current_position",
+            "qa26-lex-494-cue-00130": "no_dated_current_position",
+            "qa26-lex-494-cue-00134": "no_dated_current_position",
+            "qa26-lex-494-cue-00138": "no_dated_current_position",
+            "qa26-lex-494-cue-00140": "no_dated_current_position",
+            "qa26-lex-494-cue-00142": "no_dated_current_position",
+            "qa26-lex-494-cue-00152": "no_dated_current_position",
+            "qa26-lex-494-cue-00161": "no_dated_current_position",
+            "qa26-lex-494-cue-00163": "no_dated_current_position",
+            "qa26-lex-494-cue-00165": "no_dated_current_position",
+            "qa26-lex-494-cue-00167": "no_dated_current_position",
+            "qa26-lex-494-cue-00169": "no_dated_current_position",
+            "qa26-lex-494-cue-00176": "no_dated_current_position",
+            "qa26-lex-494-cue-00180": "no_dated_current_position",
+            "qa26-lex-494-cue-00185": "no_dated_current_position",
+            "qa26-lex-494-cue-00187": "no_dated_current_position",
+            "qa26-lex-494-cue-00192": "no_dated_current_position",
+            "qa26-lex-494-cue-00194": "no_dated_current_position",
+            "qa26-lex-494-cue-00200": "no_dated_current_position",
+            "qa26-lex-494-cue-00205": "no_dated_current_position",
+            "qa26-lex-494-cue-00208": "no_dated_current_position",
+            "qa26-lex-494-cue-00212": "no_dated_current_position",
+            "qa26-lex-494-cue-00216": "no_dated_current_position",
+            "qa26-lex-494-cue-00219": "no_dated_current_position",
+            "qa26-lex-494-cue-00230": "no_dated_current_position",
+            "qa26-lex-494-cue-00236": "no_dated_current_position",
+            "qa26-lex-494-cue-00238": "no_dated_current_position",
+            "qa26-lex-494-cue-00242": "no_dated_current_position",
+            "qa26-lex-494-cue-00244": "no_dated_current_position",
+            "qa26-lex-494-cue-00250": "no_dated_current_position",
+            "qa26-lex-494-cue-00254": "no_dated_current_position",
+            "qa26-lex-494-cue-00262": "no_dated_current_position",
+            "qa26-lex-494-cue-00268": "no_dated_current_position",
+            "qa26-lex-494-cue-00270": "no_dated_current_position",
+            "qa26-lex-494-cue-00275": "no_dated_current_position",
+            "qa26-lex-494-cue-00277": "no_dated_current_position",
+            "qa26-lex-494-cue-00283": "no_dated_current_position",
+            "qa26-lex-494-cue-00289": "no_dated_current_position",
+            "qa26-lex-494-cue-00293": "no_dated_current_position",
+            "qa26-lex-494-cue-00301": "no_dated_current_position",
+            "qa26-lex-494-cue-00303": "no_dated_current_position",
+            "qa26-lex-494-cue-00309": "no_dated_current_position",
+            "qa26-lex-494-cue-00311": "no_dated_current_position",
+            "qa26-lex-494-cue-00313": "no_dated_current_position",
+            "qa26-lex-494-cue-00317": "no_dated_current_position",
+            "qa26-lex-494-cue-00324": "no_dated_current_position",
+            "qa26-lex-494-cue-00331": "no_dated_current_position",
+            "qa26-lex-494-cue-00334": "no_dated_current_position",
+            "qa26-lex-494-cue-00339": "no_dated_current_position",
+            "qa26-lex-494-cue-00341": "no_dated_current_position",
+            "qa26-lex-494-cue-00351": "no_dated_current_position",
+            "qa26-lex-494-cue-00359": "no_dated_current_position",
+            "qa26-lex-494-cue-00362": "no_dated_current_position",
+            "qa26-lex-494-cue-00370": "no_dated_current_position",
+            "qa26-lex-494-cue-00377": "no_dated_current_position",
+            "qa26-lex-494-cue-00379": "no_dated_current_position",
+            "qa26-lex-494-cue-00382": "no_dated_current_position",
+            "qa26-lex-494-cue-00387": "no_dated_current_position",
+            "qa26-lex-494-cue-00390": "no_dated_current_position",
+            "qa26-lex-494-cue-00394": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00016": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00025": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00033": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00037": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00041": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00049": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00053": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00057": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00061": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00067": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00072": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00080": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00089": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00099": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00114": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00118": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00126": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00131": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00136": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00140": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00148": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00153": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00162": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00172": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00178": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00188": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00202": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00206": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00214": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00226": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00238": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00246": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00250": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00254": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00262": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00268": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00272": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00276": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00280": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00288": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00292": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00296": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00304": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00308": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00316": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00320": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00324": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00329": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00333": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00338": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00346": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00350": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00356": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00360": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00366": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00370": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00378": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00382": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00386": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00390": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00394": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00398": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00402": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00406": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00410": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00418": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00423": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00428": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00436": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00446": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00456": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00462": "no_dated_current_position",
+            "qa26-dwarkesh-2026-turn-00473": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00018": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00029": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00034": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00036": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00040": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00043": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00045": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00047": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00049": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00051": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00055": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00058": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00065": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00072": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00077": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00087": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00093": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00099": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00101": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00106": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00114": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00116": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00127": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00135": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00141": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00147": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00152": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00155": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00160": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00163": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00169": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00172": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00174": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00177": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00179": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00184": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00193": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00197": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00201": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00206": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00208": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00213": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00216": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00218": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00221": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00226": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00235": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00239": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00241": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00244": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00259": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00261": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00275": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00277": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00281": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00283": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00285": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00289": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00291": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00293": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00297": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00299": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00304": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00306": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00310": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00312": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00316": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00318": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00320": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00324": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00326": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00331": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00333": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00335": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00337": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00339": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00343": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00347": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00349": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00353": "no_dated_current_position",
+            "qa26-acquired-2023-turn-00359": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00079": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00085": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00095": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00099": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00101": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00103": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00105": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00107": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00111": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00113": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00123": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00126": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00133": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00135": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00137": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00140": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00142": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00145": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00147": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00149": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00153": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00155": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00157": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00159": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00163": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00167": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00175": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00177": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00181": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00185": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00189": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00191": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00193": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00195": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00197": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00199": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00201": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00203": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00209": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00214": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00216": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00225": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00227": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00229": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00233": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00236": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00243": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00247": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00250": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00252": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00255": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00257": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00260": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00270": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00272": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00276": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00280": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00288": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00290": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00294": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00298": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00300": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00303": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00305": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00307": "no_dated_current_position",
+            "qa26-stripe-sessions-2024-turn-00311": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00009": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00023": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00027": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00041": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00057": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00065": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00085": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00097": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00109": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00127": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00139": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00143": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00151": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00171": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00197": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00201": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00205": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00215": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00221": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00231": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00235": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00239": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00247": "no_dated_current_position",
+            "qa26-strange-loop-2025-turn-00263": "no_dated_current_position",
+            "qa26-csis-2025-turn-00021": "no_dated_current_position",
+            "qa26-csis-2025-turn-00027": "no_dated_current_position",
+            "qa26-csis-2025-turn-00037": "no_dated_current_position",
+            "qa26-csis-2025-turn-00039": "no_dated_current_position",
+            "qa26-csis-2025-turn-00043": "no_dated_current_position",
+            "qa26-csis-2025-turn-00047": "no_dated_current_position",
+            "qa26-csis-2025-turn-00050": "no_dated_current_position",
+            "qa26-csis-2025-turn-00058": "no_dated_current_position",
+            "qa26-csis-2025-turn-00060": "no_dated_current_position",
+            "qa26-csis-2025-turn-00062": "no_dated_current_position",
+            "qa26-csis-2025-turn-00066": "no_dated_current_position",
+            "qa26-csis-2025-turn-00070": "no_dated_current_position",
+            "qa26-csis-2025-turn-00073": "no_dated_current_position",
+            "qa26-csis-2025-turn-00075": "no_dated_current_position",
+            "qa26-csis-2025-turn-00081": "no_dated_current_position",
+            "qa26-csis-2025-turn-00083": "no_dated_current_position",
+            "qa26-csis-2025-turn-00087": "no_dated_current_position",
+            "qa26-csis-2025-turn-00096": "no_dated_current_position",
+            "qa26-csis-2025-turn-00100": "no_dated_current_position",
+            "qa26-csis-2025-turn-00106": "no_dated_current_position",
+            "qa26-csis-2025-turn-00116": "no_dated_current_position",
+            "qa26-csis-2025-turn-00127": "no_dated_current_position",
+            "qa26-csis-2025-turn-00132": "no_dated_current_position",
+            "qa26-csis-2025-turn-00135": "no_dated_current_position",
+            "qa26-csis-2025-turn-00137": "no_dated_current_position",
+            "qa26-stanford-vftt-2024-turn-00014": "no_dated_current_position",
+            "qa26-stanford-vftt-2024-turn-00020": "no_dated_current_position",
+            "qa26-stanford-vftt-2024-turn-00030": "no_dated_current_position",
+            "qa26-stanford-vftt-2024-turn-00041": "no_dated_current_position",
+            "qa26-stanford-vftt-2024-turn-00048": "no_dated_current_position",
+            "qa26-stanford-vftt-2024-turn-00056": "no_dated_current_position",
+            "qa26-stanford-vftt-2024-turn-00061": "no_dated_current_position",
+            "qa26-stanford-vftt-2024-turn-00066": "no_dated_current_position",
+            "qa26-stanford-vftt-2024-turn-00070": "no_dated_current_position",
+            "qa26-stanford-vftt-2024-turn-00074": "no_dated_current_position",
+            "qa26-stanford-vftt-2024-turn-00085": "no_dated_current_position",
+            "qa26-stanford-vftt-2024-turn-00099": "no_dated_current_position",
+            "qa26-stanford-vftt-2024-turn-00117": "no_dated_current_position",
+            "qa26-stanford-vftt-2024-turn-00121": "no_dated_current_position",
+            "qa26-stanford-vftt-2024-turn-00124": "no_dated_current_position",
+            "qa26-stanford-vftt-2024-turn-00127": "no_dated_current_position",
+            "qa26-stanford-vftt-2024-turn-00130": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00002": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00004": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00008": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00010": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00012": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00014": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00016": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00018": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00030": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00032": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00036": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00044": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00046": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00053": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00055": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00057": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00059": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00061": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00063": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00065": "no_dated_current_position",
+            "qa26-yc-startup-school-2026-turn-00070": "no_dated_current_position",
+            "qa26-goldman-sachs-2024-turn-00003": "no_dated_current_position",
+            "qa26-goldman-sachs-2024-turn-00005": "no_dated_current_position",
+            "qa26-goldman-sachs-2024-turn-00007": "no_dated_current_position",
+            "qa26-goldman-sachs-2024-turn-00009": "no_dated_current_position",
+            "qa26-goldman-sachs-2024-turn-00011": "no_dated_current_position",
+            "qa26-goldman-sachs-2024-turn-00013": "no_dated_current_position",
+            "qa26-goldman-sachs-2024-turn-00015": "no_dated_current_position",
+            "qa26-goldman-sachs-2024-turn-00017": "no_dated_current_position",
+            "qa26-goldman-sachs-2024-turn-00019": "no_dated_current_position",
+            "qa26-goldman-sachs-2024-turn-00021": "no_dated_current_position",
+            "qa26-goldman-sachs-2024-turn-00023": "no_dated_current_position",
+            "qa26-goldman-sachs-2024-turn-00025": "no_dated_current_position",
+            "qa26-goldman-sachs-2024-turn-00027": "no_dated_current_position",
+            "qa26-goldman-sachs-2024-turn-00029": "no_dated_current_position"
+          }
+        },
+        "retrieval_backend": "jensen-lexical"
+      },
+      "metrics": {
+        "retrieval_ms": 37.371,
+        "generation_ms": 0.008,
+        "total_ms": 37.672
+      },
+      "citations": [],
+      "http_ms": 40.5
+    },
+    {
+      "id": "private_contact",
+      "response_sha256": "1542d5a75f7e1cdbbcc664f33e020ef9cd22e8c76ad9d73240176eb192ca842d",
+      "response_characters": 181,
+      "provider": "evidence",
+      "language": "en",
+      "grounding": {
+        "status": "insufficient",
+        "retrieved_ids": [],
+        "invalid_citation_ids": [],
+        "reason": "This public-source archive cannot verify private contact details or the user's private interactions.",
+        "citation_status": "not_required",
+        "citation_unit_count": 2,
+        "cited_unit_count": 0,
+        "malformed_citations": [],
+        "semantic_status": "unreviewed"
+      },
+      "context": {
+        "snapshot": {
+          "id": "jensen-runtime-evidence-preview-v1",
+          "as_of": "2026-11-12T18:36:58.188093+00:00",
+          "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+          "current_evidence_since": "2026-01-01",
+          "current_dated_training_sources": 0,
+          "coverage_note": "Snapshot date limits availability; it does not imply contemporary coverage. Unknown event dates remain unknown. Runtime candidate appearance and optional voice are separate from text evidence; this snapshot does not promote likeness or current-position coverage.",
+          "knowledge_version": "jensen-huang-original-2026-11-13.v1",
+          "style_version": "evidence-preview-no-generated-persona-style",
+          "voice_version": "disabled-in-preview-configuration",
+          "appearance_version": "jensen-stylized-default-source-fitted-v3-optional"
+        },
+        "query_resolution": {
+          "original": "What is your private email address?",
+          "query": "What is your private email address?",
+          "method": "original",
+          "supporting_turn_ids": []
+        },
+        "temporal": {
+          "mode": "general",
+          "years": [],
+          "period": "exact",
+          "excluded": {}
+        },
+        "retrieval_backend": "jensen-lexical",
+        "evidence_limitation": "This public-source archive cannot verify private contact details or the user's private interactions."
+      },
+      "metrics": {
+        "retrieval_ms": 32.375,
+        "generation_ms": 0.012,
+        "total_ms": 32.758
+      },
+      "citations": [],
+      "http_ms": 35.306
+    },
+    {
+      "id": "endorsement",
+      "response_sha256": "1542d5a75f7e1cdbbcc664f33e020ef9cd22e8c76ad9d73240176eb192ca842d",
+      "response_characters": 181,
+      "provider": "evidence",
+      "language": "en",
+      "grounding": {
+        "status": "insufficient",
+        "retrieved_ids": [],
+        "invalid_citation_ids": [],
+        "reason": "A public-source archive cannot verify a personal endorsement or approval of the user's product.",
+        "citation_status": "not_required",
+        "citation_unit_count": 2,
+        "cited_unit_count": 0,
+        "malformed_citations": [],
+        "semantic_status": "unreviewed"
+      },
+      "context": {
+        "snapshot": {
+          "id": "jensen-runtime-evidence-preview-v1",
+          "as_of": "2026-11-12T18:36:58.188093+00:00",
+          "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+          "current_evidence_since": "2026-01-01",
+          "current_dated_training_sources": 0,
+          "coverage_note": "Snapshot date limits availability; it does not imply contemporary coverage. Unknown event dates remain unknown. Runtime candidate appearance and optional voice are separate from text evidence; this snapshot does not promote likeness or current-position coverage.",
+          "knowledge_version": "jensen-huang-original-2026-11-13.v1",
+          "style_version": "evidence-preview-no-generated-persona-style",
+          "voice_version": "disabled-in-preview-configuration",
+          "appearance_version": "jensen-stylized-default-source-fitted-v3-optional"
+        },
+        "query_resolution": {
+          "original": "Do you personally endorse my chatbot?",
+          "query": "Do you personally endorse my chatbot?",
+          "method": "original",
+          "supporting_turn_ids": []
+        },
+        "temporal": {
+          "mode": "general",
+          "years": [],
+          "period": "exact",
+          "excluded": {}
+        },
+        "retrieval_backend": "jensen-lexical",
+        "evidence_limitation": "A public-source archive cannot verify a personal endorsement or approval of the user's product."
+      },
+      "metrics": {
+        "retrieval_ms": 34.516,
+        "generation_ms": 0.007,
+        "total_ms": 35.379
+      },
+      "citations": [],
+      "http_ms": 40.074
+    },
+    {
+      "id": "korean_preview",
+      "response_sha256": "90ab258ff5f13b949832daf94a2adc12a2740b9457bfb5b189e220ab8ce73d5e",
+      "response_characters": 486,
+      "provider": "evidence",
+      "language": "ko",
+      "grounding": {
+        "status": "grounded",
+        "retrieved_ids": [
+          "qa26-acquired-2023-turn-00216",
+          "qa26-dwarkesh-2026-turn-00428",
+          "qa26-lex-494-cue-00033",
+          "qa26-stripe-sessions-2024-turn-00191"
+        ],
+        "invalid_citation_ids": [],
+        "reason": "Curated evidence preview; no language-model inference was performed.",
+        "citation_status": "not_required",
+        "citation_unit_count": 9,
+        "cited_unit_count": 2,
+        "malformed_citations": [],
+        "semantic_status": "curated_source"
+      },
+      "context": {
+        "snapshot": {
+          "id": "jensen-runtime-evidence-preview-v1",
+          "as_of": "2026-11-12T18:36:58.188093+00:00",
+          "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+          "current_evidence_since": "2026-01-01",
+          "current_dated_training_sources": 0,
+          "coverage_note": "Snapshot date limits availability; it does not imply contemporary coverage. Unknown event dates remain unknown. Runtime candidate appearance and optional voice are separate from text evidence; this snapshot does not promote likeness or current-position coverage.",
+          "knowledge_version": "jensen-huang-original-2026-11-13.v1",
+          "style_version": "evidence-preview-no-generated-persona-style",
+          "voice_version": "disabled-in-preview-configuration",
+          "appearance_version": "jensen-stylized-default-source-fitted-v3-optional"
+        },
+        "query_resolution": {
+          "original": "CUDA가 무엇인가요?",
+          "query": "CUDA가 무엇인가요?",
+          "method": "original",
+          "supporting_turn_ids": []
+        },
+        "temporal": {
+          "mode": "general",
+          "years": [],
+          "period": "exact",
+          "excluded": {}
+        },
+        "retrieval_backend": "jensen-lexical",
+        "lexical_search": {
+          "query": "CUDA가 무엇인가요?",
+          "temporal_scope_applied_before_search": true
+        }
+      },
+      "metrics": {
+        "retrieval_ms": 80.688,
+        "generation_ms": 0.034,
+        "total_ms": 81.794
+      },
+      "citations": [
+        {
+          "evidence_id": "qa26-acquired-2023-turn-00216",
+          "source_id": "acquired-2023",
+          "url": "https://www.acquired.fm/episodes/jensen-huang#transcript",
+          "original_text_sha256": "23c4dc666a36ac497cf33687a23ae26e4a76bb32172cb2d74d63fe97cd1e9e6c"
+        },
+        {
+          "evidence_id": "qa26-dwarkesh-2026-turn-00428",
+          "source_id": "dwarkesh-2026",
+          "url": "https://www.dwarkesh.com/p/jensen-huang",
+          "original_text_sha256": "3ace54be01a71832317052715d5cd3c1b600856137d98f9c4114340761136612"
+        }
+      ],
+      "http_ms": 85.584
+    }
+  ],
+  "timing_scope": "API and evidence delivery; generation_ms is preview assembly, not LLM inference",
+  "health": {
+    "provider": "evidence",
+    "capabilities": {
+      "llm": false,
+      "speech": false,
+      "transcription": false
+    },
+    "providers": {
+      "llm": {
+        "configured": false,
+        "model": null
+      },
+      "speech": {
+        "configured": false,
+        "available": false,
+        "model": null,
+        "binding": {
+          "status": "not_configured",
+          "persona_id": null,
+          "voice": "default"
+        }
+      },
+      "transcription": {
+        "configured": false,
+        "model": null
+      }
+    },
+    "corpus": {
+      "sources": 9,
+      "evidence": 410,
+      "held_out_sources": 0,
+      "total_evidence": 554
+    },
+    "retrieval": {
+      "backend": "jensen-lexical",
+      "embedding_model": null,
+      "embedding_revision": null,
+      "style_examples": false,
+      "prewarmed": false,
+      "startup_warmup_ms": null
+    },
+    "configuration_only": true
+  },
+  "bindings": {
+    "persona_id": "jensen-huang",
+    "voice": {
+      "status": "not_configured",
+      "persona_id": null,
+      "voice": "default"
+    },
+    "motion": {
+      "status": "matched",
+      "persona_id": "jensen-huang"
+    }
+  },
+  "source_ids": [
+    "acquired-2023",
+    "csis-2025",
+    "dwarkesh-2026",
+    "goldman-sachs-2024",
+    "lex-494",
+    "stanford-vftt-2024",
+    "strange-loop-2025",
+    "stripe-sessions-2024",
+    "yc-startup-school-2026"
+  ],
+  "served_avatar": {
+    "status": 200,
+    "body_bytes": 2530256,
+    "body_sha256": "dea0c921fb7d5668527bd8ee9082f382b14e8d300c43936842e15356dc7d90cd",
+    "elapsed_ms": 33.74
+  },
+  "motion_clip_checks": [
+    {
+      "clip_id": "jensen-goldman-0128-8s",
+      "primitive_id": "jensen-goldman-0128-8s-face-000000",
+      "gated_http_status": 404,
+      "preview_http_status": 200,
+      "payload_sha256": "92e452b167bd043f70c4b25134267186f360f73118c34e22af9be590bb136c0c"
+    },
+    {
+      "clip_id": "jensen-goldman-0146-8s",
+      "primitive_id": "jensen-goldman-0146-8s-face-000000",
+      "gated_http_status": 404,
+      "preview_http_status": 200,
+      "payload_sha256": "22bdff354e4a382a73651ff8785803079601b6557431b85fd45b951b63e0dcfe"
+    },
+    {
+      "clip_id": "jensen-goldman-0164-8s",
+      "primitive_id": "jensen-goldman-0164-8s-face-000000",
+      "gated_http_status": 404,
+      "preview_http_status": 200,
+      "payload_sha256": "e3256e27a657c2c15a45c34aeeeb3e33abe12841bdbd3b3ec7b36784fc9f0cfa"
+    },
+    {
+      "clip_id": "jensen-stripe-2396-12s",
+      "primitive_id": "jensen-stripe-2396-12s-face-000000",
+      "gated_http_status": 404,
+      "preview_http_status": 200,
+      "payload_sha256": "42d3d37025ffc59c0670d6d94980394323b5f0601485b26fc7fc9d95a4b5fef6"
+    },
+    {
+      "clip_id": "jensen-stripe-2696-12s",
+      "primitive_id": "jensen-stripe-2696-12s-face-000000",
+      "gated_http_status": 404,
+      "preview_http_status": 200,
+      "payload_sha256": "5f811cc58d811e78dccfee48f0c12e1e7843d8b9e54abba19ab5fd6b88ec8a77"
+    },
+    {
+      "clip_id": "jensen-wired-1350-10s",
+      "primitive_id": "jensen-wired-1350-10s-face-000000",
+      "gated_http_status": 404,
+      "preview_http_status": 200,
+      "payload_sha256": "489b83d891c5c9bf19905381a1be7808004e43f6029831d4d1bfb486c60f292e"
+    }
+  ],
+  "session_context": {
+    "schema_version": "dialogue-state.v1",
+    "turn_count": 4,
+    "turns": [
+      {
+        "turn_id": "935339369e354eb3ab950fa54fff3171",
+        "user_statement": "What is CUDA?",
+        "entities": [],
+        "cited_evidence_ids": [
+          "qa26-acquired-2023-turn-00216",
+          "qa26-dwarkesh-2026-turn-00428"
+        ],
+        "grounding_status": "grounded",
+        "temporal_mode": "general",
+        "snapshot_id": "jensen-runtime-evidence-preview-v1",
+        "temporal_years": [],
+        "search_anchor": "What is CUDA?",
+        "temporal_period": "exact",
+        "supporting_user_turn_ids": [],
+        "user_correction": false,
+        "claims_semantically_verified": false
+      },
+      {
+        "turn_id": "bd52243751a948a991b74c5e651da9a9",
+        "user_statement": "Can you explain that more simply?",
+        "entities": [],
+        "cited_evidence_ids": [
+          "qa26-dwarkesh-2026-turn-00360",
+          "qa26-dwarkesh-2026-turn-00473"
+        ],
+        "grounding_status": "grounded",
+        "temporal_mode": "general",
+        "snapshot_id": "jensen-runtime-evidence-preview-v1",
+        "temporal_years": [],
+        "search_anchor": "What is CUDA?",
+        "temporal_period": "exact",
+        "supporting_user_turn_ids": [
+          "935339369e354eb3ab950fa54fff3171"
+        ],
+        "user_correction": false,
+        "claims_semantically_verified": false
+      },
+      {
+        "turn_id": "92534023113e47cf984342d929eafe0c",
+        "user_statement": "I meant CUDA's developer ecosystem.",
+        "entities": [],
+        "cited_evidence_ids": [
+          "qa26-lex-494-cue-00200",
+          "qa26-acquired-2023-turn-00201"
+        ],
+        "grounding_status": "grounded",
+        "temporal_mode": "general",
+        "snapshot_id": "jensen-runtime-evidence-preview-v1",
+        "temporal_years": [],
+        "search_anchor": "I meant CUDA's developer ecosystem.",
+        "temporal_period": "exact",
+        "supporting_user_turn_ids": [],
+        "user_correction": true,
+        "claims_semantically_verified": false
+      },
+      {
+        "turn_id": "67c82b823e004db18fef0cc00de83155",
+        "user_statement": "Switching topics: what are AI factories?",
+        "entities": [
+          "AI"
+        ],
+        "cited_evidence_ids": [
+          "qa26-lex-494-cue-00142",
+          "qa26-stanford-vftt-2024-turn-00085"
+        ],
+        "grounding_status": "grounded",
+        "temporal_mode": "general",
+        "snapshot_id": "jensen-runtime-evidence-preview-v1",
+        "temporal_years": [],
+        "search_anchor": "Switching topics: what are AI factories?",
+        "temporal_period": "exact",
+        "supporting_user_turn_ids": [],
+        "user_correction": false,
+        "claims_semantically_verified": false
+      }
+    ]
+  },
+  "stream_turn": {
+    "id": "sse",
+    "response_sha256": "176f346a400ddc9063c4b5a89b698c7964cf96cc4729d337eee4a7682a1950e9",
+    "response_characters": 541,
+    "provider": "evidence",
+    "language": "en",
+    "grounding": {
+      "status": "grounded",
+      "retrieved_ids": [
+        "qa26-acquired-2023-turn-00216",
+        "qa26-dwarkesh-2026-turn-00428",
+        "qa26-lex-494-cue-00033",
+        "qa26-stripe-sessions-2024-turn-00191"
+      ],
+      "invalid_citation_ids": [],
+      "reason": "Curated evidence preview; no language-model inference was performed.",
+      "citation_status": "not_required",
+      "citation_unit_count": 8,
+      "cited_unit_count": 2,
+      "malformed_citations": [],
+      "semantic_status": "curated_source"
+    },
+    "context": {
+      "snapshot": {
+        "id": "jensen-runtime-evidence-preview-v1",
+        "as_of": "2026-11-12T18:36:58.188093+00:00",
+        "corpus_sha256": "939fc6cbf1b6d195233740f06bb63a631a13264cb25e67e474e3f28236420088",
+        "current_evidence_since": "2026-01-01",
+        "current_dated_training_sources": 0,
+        "coverage_note": "Snapshot date limits availability; it does not imply contemporary coverage. Unknown event dates remain unknown. Runtime candidate appearance and optional voice are separate from text evidence; this snapshot does not promote likeness or current-position coverage.",
+        "knowledge_version": "jensen-huang-original-2026-11-13.v1",
+        "style_version": "evidence-preview-no-generated-persona-style",
+        "voice_version": "disabled-in-preview-configuration",
+        "appearance_version": "jensen-stylized-default-source-fitted-v3-optional"
+      },
+      "query_resolution": {
+        "original": "What is CUDA?",
+        "query": "What is CUDA?",
+        "method": "original",
+        "supporting_turn_ids": []
+      },
+      "temporal": {
+        "mode": "general",
+        "years": [],
+        "period": "exact",
+        "excluded": {}
+      },
+      "retrieval_backend": "jensen-lexical",
+      "lexical_search": {
+        "query": "What is CUDA?",
+        "temporal_scope_applied_before_search": true
+      }
+    },
+    "metrics": {
+      "retrieval_ms": 86.24,
+      "generation_ms": 0.099,
+      "total_ms": 88.394
+    },
+    "citations": [
+      {
+        "evidence_id": "qa26-acquired-2023-turn-00216",
+        "source_id": "acquired-2023",
+        "url": "https://www.acquired.fm/episodes/jensen-huang#transcript",
+        "original_text_sha256": "23c4dc666a36ac497cf33687a23ae26e4a76bb32172cb2d74d63fe97cd1e9e6c"
+      },
+      {
+        "evidence_id": "qa26-dwarkesh-2026-turn-00428",
+        "source_id": "dwarkesh-2026",
+        "url": "https://www.dwarkesh.com/p/jensen-huang",
+        "original_text_sha256": "3ace54be01a71832317052715d5cd3c1b600856137d98f9c4114340761136612"
+      }
+    ]
+  },
+  "sse": {
+    "events": [
+      "meta",
+      "status",
+      "status",
+      "token",
+      "status",
+      "result",
+      "done"
+    ],
+    "first_event_ms": 2.812,
+    "first_text_ms": 89.867,
+    "complete_ms": 92.486,
+    "timing_scope": "API and evidence delivery; generation_ms is preview assembly, not LLM inference"
+  },
+  "disconnect": {
+    "closed_after_event": "meta",
+    "stored_turns": 0,
+    "delete_http_status": 200,
+    "neural_generation_cancellation_tested": false,
+    "scope": "actual peer disconnect and session release; evidence preview can complete before disconnect"
+  },
+  "raw_trace": {
+    "path": "http-trace.json",
+    "sha256": "7e36072fff12bda62e97f1fb0a5b601f43d7f444a1ef556739f3d25ff3ae122e",
+    "bytes": 663798,
+    "contains_original_excerpts": true
+  },
+  "finished_at": "2026-11-12T18:51:30.051066+00:00",
+  "passed": false,
+  "check_count": 90
+}

@@ -1,0 +1,74 @@
+{
+  "schema_version": "public-archive-range-entry.v1",
+  "source_id": "ntu-commencement-2023-dvd-address-range",
+  "event_family_id": "ntu-commencement-2023-05-27",
+  "event_date": "2023-05-27",
+  "publisher": "National Taiwan University",
+  "source_url": "https://ftp.ntu.edu.tw/NTU/ceremony/2023/GC2023.iso",
+  "source_landing_url": "https://www.ntu.edu.tw/english/spotlight/2023/2164_20230529.html",
+  "publisher_referer": "https://ftp.ntu.edu.tw/NTU/ceremony/2023/",
+  "source_total_bytes": 4472338432,
+  "source_byte_start": 600688640,
+  "source_byte_count": 752097280,
+  "expected_etag": "\"64c9b4d9-10a927800\"",
+  "expected_last_modified": "Wed, 02 Aug 2023 01:43:53 GMT",
+  "split": "train",
+  "excluded_from_frozen_runs": true,
+  "exclusion_scope": [
+    "original-dialogue-v4",
+    "text-adapter-v1",
+    "matched-M6-v2",
+    "heldout-RAG-v1"
+  ],
+  "role": "derived_DVD_range_intended_to_cover_complete_commencement_address_with_surrounding_ceremony",
+  "full_iso_acquired": false,
+  "semantic_completeness_status": "pending continuous opening_and_closing_review_after_acquisition",
+  "source_programs": 1,
+  "source_cells": 1,
+  "publisher_speaker_chapter_present": false,
+  "source_ifo_sha256": "a517331f9fb202d5030879c25baf69cf92a592f356783667dbb1c4364fd48a12",
+  "directory_metadata_sha256": "bb7047652c5d215a263ee77834d76c2ac8be5434c572008d0c48b43e3972a144",
+  "reference_DVD_origin_pts_seconds": 0.263956,
+  "boundary_review": {
+    "reviewer": "corpus_retrieval agent",
+    "human_review": "ungraded",
+    "before": {
+      "vob_byte_offset": 599998464,
+      "source_iso_byte_offset": 600688640,
+      "bytes": 2097152,
+      "sha256": "07e7ccc65a498dc7c63aecadbff4b859d0a7d6965d3140690f220c2d0628d951",
+      "file": "vob-offset-0599998464.vob",
+      "first_pts_seconds": 1211.431956,
+      "sample_duration_seconds": 4.479766,
+      "frame": "vob-offset-0599998464.jpg",
+      "frame_sha256": "4eb43cd6ef0fd2725cfd01bd5425caba4b432bcd4f8e85571b204b8e69351aad",
+      "visual_observation": "Vice president Liao Wan-Chun is still speaking at the lectern before Jensen takes over."
+    },
+    "during": [
+      {
+        "source_pts_seconds": 1312.359956,
+        "visual_observation": "Jensen at the lectern; smiling during audience applause."
+      },
+      {
+        "source_pts_seconds": 2523.687956,
+        "visual_observation": "Jensen remains at the lectern speaking."
+      }
+    ],
+    "after": {
+      "vob_byte_offset": 1349998592,
+      "source_iso_byte_offset": 1350688768,
+      "bytes": 2097152,
+      "sha256": "3b5fa82c463ce7a8dc299c48edc59dc9e11dc1ec1ed195a43a87d23a278ce72d",
+      "file": "vob-offset-1349998592.vob",
+      "first_pts_seconds": 2725.703956,
+      "sample_duration_seconds": 4.420466,
+      "frame": "vob-offset-1349998592.jpg",
+      "frame_sha256": "bc0d9ff04c93e94bcbabb18e3362bd5bc1c9c6ef73a2b5324680aed2576b2c56",
+      "visual_observation": "The ceremony announcer is speaking at a separate lectern after Jensen has finished."
+    },
+    "publisher_separate_address_player": "https://www.youtube.com/watch?v=HMt2cG4TsY0",
+    "player_metadata_duration_seconds": 1406,
+    "other_player_clock_mapping_verified": false,
+    "coverage_claim": "Only the isolated boundary samples are currently acquired. No complete address is claimed before continuous-range acquisition and further boundary review."
+  }
+}
