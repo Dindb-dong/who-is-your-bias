@@ -933,6 +933,21 @@
         "preparation/preparation.json": "7feb29d2940cc272518db21199b96c06a08fa6bf5eef62d357e7678e87981ec7",
         "preparation/relocation.json": "f3d896215e1c95fcb8881e17005e800eda3f96d1672e79e44eebcdcf75186d80"
       }
+    },
+    {
+      "artifact_id": "jensen-m6-heldout-adapter-bf16-v2-partial0002",
+      "role": "partial-frozen-matched-response-attempts",
+      "exposure": "heldout",
+      "condition": "adapter",
+      "captured_attempts": 2,
+      "collectible": false,
+      "file_name": "jensen-m6-heldout-adapter-bf16-v2-partial0002.tar.gz",
+      "file_id": "file_000000003d1c81f69b53594b3f2c4853",
+      "library_file_id": "libfile_fde3_f-072fc70a82a0819187be2f0592a4d8e5_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 11883,
+      "sha256": "d73fcd4bb2a6e7bb0d3cc11ea3ef0bde5c4df5fbb8ee52c98c694ba901eafcef",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {
