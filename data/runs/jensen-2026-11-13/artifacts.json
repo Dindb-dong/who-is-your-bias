@@ -1071,6 +1071,20 @@
       "sha256": "c3ff0a78f5e78bfd0a576fb8316b39b9b82807826132fa5677c276a412099fd0",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-and-every-payload-verified"
+    },
+    {
+      "artifact_id": "jensen-m7-base-completion-20261113-v2",
+      "role": "actual-neural-base-api-session-cancellation-recovery",
+      "functional_status": "passed",
+      "passed_checks": 46,
+      "total_checks": 46,
+      "file_name": "jensen-m7-base-completion-20261113-v2.tar.gz",
+      "file_id": "file_00000000f14081f58475bed8733b3480",
+      "library_file_id": "libfile_fde3_f-189ed1b1afb48191b0ab039d234cef63_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 26406,
+      "sha256": "fac25894fa9c96df47f730160ffb35f0713721939d1fff9c7695f3145ff582dc",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-and-every-payload-verified"
     }
   ],
   "artifact_indexes": {
