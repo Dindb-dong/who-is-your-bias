@@ -69,9 +69,26 @@ def identity_fixture():
                 "adapter_training": {"dataset_sha256": "1" * 64,
                     "event_counts": {"fixture-event": 113}, "optimizer_steps": 29}}
     health = {"status": "ready", "model_loaded": True, "model": runtime["served_model"],
-              "identity": deepcopy(identity), "runtime": {**runtime, "generation_defaults": defaults},
+              "identity": {"schema_version": "language-model-identity.v1", **deepcopy(identity)},
+              "runtime": {**runtime, "generation_defaults": defaults},
               "adapter": {"configured": False, "loaded": False, "verified": False}}
     return protocol, health
+
+
+@pytest.mark.parametrize("mutation", ["missing_schema", "unknown_schema", "missing_payload", "extra_payload"])
+def test_actual_identity_envelope_remains_exact_and_versioned(mutation):
+    protocol, health = identity_fixture()
+    observed_identity(health, protocol, "base", None)
+    if mutation == "missing_schema":
+        del health["identity"]["schema_version"]
+    elif mutation == "unknown_schema":
+        health["identity"]["schema_version"] = "language-model-identity.v2"
+    elif mutation == "missing_payload":
+        del health["identity"]["tokenizer_contract_sha256"]
+    else:
+        health["identity"]["unexpected"] = True
+    with pytest.raises(ValueError, match="differs from the frozen protocol"):
+        observed_identity(health, protocol, "base", None)
 
 
 @pytest.mark.parametrize("mutation", ["unloaded", "revision", "bytes", "dtype", "decoding", "adapter"])

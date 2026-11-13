@@ -127,9 +127,12 @@ def prepare(args):
 
 def observed_identity(health: dict, protocol: dict, condition: str, adapter: dict | None) -> dict:
     runtime = protocol["runtime"]
+    # The protocol pins the identity payload; the actual service adds its
+    # versioned envelope. Require both, including the exact supported schema.
+    expected_identity = {"schema_version": "language-model-identity.v1", **protocol["base_identity"]}
     if (health.get("model_loaded") is not True or health.get("status") != "ready"
             or health.get("model") != runtime["served_model"]
-            or health.get("identity") != protocol["base_identity"]
+            or health.get("identity") != expected_identity
             or any(health.get("runtime", {}).get(key) != runtime[key] for key in ("device", "dtype", "threads"))
             or health.get("runtime", {}).get("generation_defaults") !=
                {key: protocol["policy"][key] for key in ("seed", "temperature", "top_p", "top_k")}):
