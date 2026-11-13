@@ -1,0 +1,64 @@
+{
+  "schema_version": "jensen-neural-cancel-recovery-protocol.v1",
+  "purpose": "Separate two-request cancellation and recovery diagnostic; does not replace, resume, or change the frozen four-turn M7 result.",
+  "frozen_before_diagnostic_execution": true,
+  "original_m7_results_observed_before_registration": false,
+  "parent_protocol_sha256": "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+  "conditions": [
+    "base",
+    "adapter"
+  ],
+  "eligibility": "Run a condition once only if its preserved original M7 summary is failed and contains no disconnect-stage check. Passed runs and runs that reached disconnect are ineligible.",
+  "session_history": "Start a fresh empty main-API session; never seed or copy prior model answers.",
+  "runtime": {
+    "device": "cpu",
+    "dtype": "bfloat16",
+    "threads": 8,
+    "served_model": "jensen-neural-functional",
+    "retrieval_backend": "jensen-lexical",
+    "style_examples": false,
+    "voice_enabled": false,
+    "motion_enabled": false
+  },
+  "policy": {
+    "context_window": 4096,
+    "max_output_tokens": 160,
+    "max_response_chars": 3000,
+    "request_seconds": 240,
+    "startup_seconds": 30,
+    "recovery_seconds": 60,
+    "total_seconds": 1800,
+    "temperature": 0,
+    "top_p": 1,
+    "top_k": 20,
+    "seed": 42,
+    "warmup_max_tokens": 12
+  },
+  "requests": {
+    "disconnect": {
+      "id": "disconnect",
+      "message": "Explain CUDA's developer ecosystem in detail, with several examples.",
+      "language": "en"
+    },
+    "recovery": {
+      "id": "recovery",
+      "message": "What is CUDA? Please answer in one short sentence.",
+      "language": "en"
+    }
+  },
+  "identity_scope": "Use unchanged parent model/corpus/snapshot/adapter preparation and actual observed_identity checks.",
+  "stages": [
+    "Observe one nonempty disconnect token with the exact provider busy and an empty session context; then close TCP.",
+    "Observe provider idle within 60 seconds and unchanged empty session context.",
+    "Issue the unchanged recovery prompt once in that session; independently record busy admission, first token, complete result/done, and any raw error or truncation.",
+    "Inspect post-recovery session integrity even when recovery truncates or errors; then delete the session and stop both servers."
+  ],
+  "outcomes": [
+    "Cancellation transport and memory integrity are separate from recovery admission, token production, and complete response.",
+    "A truncated recovery remains incomplete and makes the full diagnostic fail, even if cancellation and cleanup checks pass.",
+    "All raw token/error traces and warmup bytes remain private; publish hashes, timings, identities, stage outcomes and actual persistence receipts.",
+    "No automatic retry, altered budget, semantic quality score, persona likeness score, or promotion."
+  ],
+  "supervisor_timeout_seconds": 1860,
+  "persistence": "Save success and failure archives with the supervisor owner/log, exact protocol and public summary; freshly retrieve and verify every payload before the next expensive stage."
+}

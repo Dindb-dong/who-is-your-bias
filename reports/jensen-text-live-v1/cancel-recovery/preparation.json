@@ -1,0 +1,35 @@
+{
+  "schema_version": "jensen-neural-cancel-recovery-preparation.v1",
+  "recorded_at": "2026-11-13T05:25:48.461348+00:00",
+  "diagnostic_protocol_sha256": "bd0fd90916bfc07e52600aef0479960a1e0e2b562a46c7ff8e74403e82c03c7a",
+  "parent_protocol_sha256": "6c699aaa81a5f90919be7c78579f400c58590db5924abd045e6c76bcf9cd331e",
+  "original_repository_input_files": 50,
+  "unchanged_original_repository_input_files": 49,
+  "explicit_harness_schema_correction": {
+    "commit": "810ae50",
+    "changed_files": [
+      {
+        "path": "tools/runtime_checks/text_live.py",
+        "previous_sha256": "e1874d62e251cc4f29ef2eb84c1cfc795181201b24d611b1a5998795b929cdeb",
+        "current_sha256": "6421b108f7ec7d390507ba3015b7c55ed824c4c2e76e729fa5bc6f598c8ac014"
+      }
+    ],
+    "reason": "Real service identity has the required language-model-identity.v1 envelope. The corrected checker requires that exact version and all frozen payload fields."
+  },
+  "diagnostic_registration_scope": "The separate protocol was authored before the original M7 identity-envelope failure was disclosed to the diagnostic author. The later source correction only fixes that verified shape mismatch. No diagnostic output was observed.",
+  "runtime_or_prompt_amendment": false,
+  "model_loaded": false,
+  "diagnostic_generation_executed": false,
+  "focused_test_result": {
+    "command": "python -m pytest tests/test_runtime_text_cancel_recovery.py -q",
+    "passed": 10,
+    "failed": 0,
+    "scope": "actual TCP fixtures for active-token cancellation, truncated/HTTP-error/complete recovery, memory/delete/server cleanup, eligibility and immutable protocol checks; no neural model"
+  },
+  "identity_fix_test_result": {
+    "command": "python -m pytest tests/test_runtime_text_live.py -q",
+    "passed": 28,
+    "failed": 0
+  },
+  "remote_persistence": "coordinator_checkpoint_pending"
+}
