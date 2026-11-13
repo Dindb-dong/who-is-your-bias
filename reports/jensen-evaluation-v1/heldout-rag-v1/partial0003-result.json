@@ -1,0 +1,246 @@
+{
+  "schema_version": "m6-rag-persistence-result.v1",
+  "mode": "partial3",
+  "status": "saved_and_fresh_readback_verified",
+  "recorded_at": "2026-11-13T05:18:02.949929+00:00",
+  "exposure": "heldout",
+  "execution_condition": "facts",
+  "scope": "separate_single_base_offline_rag",
+  "plan_sha256": "3e2c6409b45a67b11798c17f23c6ce869aa9d71309775bf9af8f69afcc7d02d6",
+  "contract_sha256": "7c3c0bc535cc2f92efa582a909c01e7f44280f58fd21ae66f184408cd714464d",
+  "observation": {
+    "validation": "finalized_prefix_revalidated",
+    "captured_attempts": 3,
+    "captured_completed": 2,
+    "captured_failed": 1,
+    "registered": 6,
+    "planned": 6,
+    "uncaptured_case_ids": [
+      "heldout-qa26-no-priors-2023-turn-00190",
+      "heldout-qa26-no-priors-2023-turn-00253",
+      "heldout-qa26-no-priors-2023-turn-00297"
+    ],
+    "manifest_sha256": "238f9f656593c44d25c8392fe14e31214ad2a4385940a15a46a5c8fcd956807d",
+    "partial_sha256": "1b129cf4678ce1b708780e16d77242b1ec5730ec836a2814e8c6ec7030f5e1b9",
+    "snapshot_created_at": "2026-11-13T05:18:02.892060+00:00",
+    "model_identity_hashes": {
+      "identity_sha256": "300560a54349d92f85d9bebd2f16a9d1afe2edc430ec39bef4ccb4d981c0ca97",
+      "adapter_sha256": "1229fcd3639560d466635395f34e8707c8c7954131ea460be99228198f66ca2a",
+      "runtime_sha256": "f09c338c9e491f5bd94d33a9a6cd8040303fb2670080e6a43013257406072a23"
+    },
+    "case_metadata": [
+      {
+        "case_id": "heldout-qa26-no-priors-2023-turn-00072",
+        "provider_generation": {
+          "completed": false,
+          "error": "provider_finish_length",
+          "finish_reason": "length",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 55490.466,
+          "first_text_ms": 18062.756,
+          "request_sha256": "da5ca34c077fcabdd8ee861318b90187fc023f2c23cc17dbe8462d21240bcd15"
+        },
+        "generation": {
+          "completed": false,
+          "error": "provider_finish_length",
+          "finish_reason": "length",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 55490.466,
+          "first_text_ms": 18062.756,
+          "request_sha256": "da5ca34c077fcabdd8ee861318b90187fc023f2c23cc17dbe8462d21240bcd15"
+        },
+        "identity_check": {
+          "before": "verified",
+          "after": "verified"
+        },
+        "validation_errors": []
+      },
+      {
+        "case_id": "heldout-qa26-no-priors-2023-turn-00078",
+        "provider_generation": {
+          "completed": true,
+          "error": null,
+          "finish_reason": "stop",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 46020.369,
+          "first_text_ms": 18060.817,
+          "request_sha256": "0b9254d0a1dc9c731229fd80e920d235bc868d0b6b2138ab493c0a887d10feca"
+        },
+        "generation": {
+          "completed": true,
+          "error": null,
+          "finish_reason": "stop",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 46020.369,
+          "first_text_ms": 18060.817,
+          "request_sha256": "0b9254d0a1dc9c731229fd80e920d235bc868d0b6b2138ab493c0a887d10feca"
+        },
+        "identity_check": {
+          "before": "verified",
+          "after": "verified"
+        },
+        "validation_errors": []
+      },
+      {
+        "case_id": "heldout-qa26-no-priors-2023-turn-00186",
+        "provider_generation": {
+          "completed": true,
+          "error": null,
+          "finish_reason": "stop",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 12654.491,
+          "first_text_ms": 2619.921,
+          "request_sha256": "410a417604247e07a0f576893d0175d2a2821644757f53dd091f478c49e614a6"
+        },
+        "generation": {
+          "completed": true,
+          "error": null,
+          "finish_reason": "stop",
+          "response_model": "comparison-local",
+          "http_statuses": [
+            200
+          ],
+          "wall_ms": 12654.491,
+          "first_text_ms": 2619.921,
+          "request_sha256": "410a417604247e07a0f576893d0175d2a2821644757f53dd091f478c49e614a6"
+        },
+        "identity_check": {
+          "before": "verified",
+          "after": "verified"
+        },
+        "validation_errors": []
+      }
+    ],
+    "eligible_for_completed_output_review": false,
+    "final_full_condition_save_required": true
+  },
+  "artifact": {
+    "artifact_id": "jensen-m6-heldout-rag-bf16-v2-partial0003",
+    "file_name": "jensen-m6-heldout-rag-bf16-v2-partial0003.tar.gz",
+    "file_id": "file_00000000e6c081f5a2b58b3b232affbf",
+    "library_file_id": "libfile_fde3_f-7e1f5c6c4c1c819186c5b4b694866030_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 78842,
+    "sha256": "8aec9926460429419e3d7a973f3e7c17861bbb21ae19fd7e08253c71e59823cd",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "artifact_record_file_sha256": "733f75d9d3be9b51cc9656cac659bf8751887d3dc8b22295fcf866bdc826d90f",
+  "archive_members": {
+    "inputs/execution-contract-bf16-v2.json": {
+      "bytes": 1445,
+      "sha256": "3aa4356d0466a9d3a60daaa007f164091ea42869a67689cf9112adbb77a86d07"
+    },
+    "inputs/plan.json": {
+      "bytes": 247457,
+      "sha256": "58338fe59a75eac2ff86e5e52fece7ea268145987957709d4df72d04ea2b7adb"
+    },
+    "inputs/relocation-bindings.json": {
+      "bytes": 1023,
+      "sha256": "55cd9746ea8ce4a3faf401189d6626c29eb68dcf709cec9b07a6bbedde91abf6"
+    },
+    "partial0003/attempts.prefix.jsonl": {
+      "bytes": 16027,
+      "sha256": "6efb30a414d786d01abe07f6f2526f7756f8284d71cd37477163eae2e1c32e12"
+    },
+    "partial0003/manifest.json": {
+      "bytes": 2677,
+      "sha256": "d73967d2bfdd2de4c240877e41473f6cae8110a90cabac8fb1ba0c4734268542"
+    },
+    "partial0003/metadata/launcher.json": {
+      "bytes": 960,
+      "sha256": "c6020ab8906f99f0aa9bb4a879291bc3cd7ee9e517e7f96bc23ec5898c50ab64"
+    },
+    "partial0003/metadata/observed-before.json": {
+      "bytes": 896,
+      "sha256": "e73bf1d5894dcadbfe770dfd51ea273fd7ef05356bd227a5a7a5a3e190609991"
+    },
+    "partial0003/metadata/supervisor-observed.json": {
+      "bytes": 1896,
+      "sha256": "fd1457dbb284df15717ec6fb8050e7d766ec3510b479c807ee0f400cd2f099a3"
+    },
+    "partial0003/metadata/warmup.json": {
+      "bytes": 523,
+      "sha256": "7e4c96cca18f91b01e52f967af939ff3cc3c39fadc091a924b5f62702f08b8b4"
+    },
+    "partial0003/partial-run.json": {
+      "bytes": 24507,
+      "sha256": "572b69fa7699bfeb6f2814ac3899bcaab3351227f2d5822e0377c994edf49c1c"
+    },
+    "partial0003/raw-generations.prefix.jsonl": {
+      "bytes": 3240,
+      "sha256": "c049e98f7a5588f2f2c9688614f10e8d3ac6da5cc22936b92e2cee6463513fcc"
+    },
+    "source/launch_m6_rag.py": {
+      "bytes": 5927,
+      "sha256": "5a78a311e46d07b3c3f48468335b2a8307ed440102f76b930b6e17b904c40ced"
+    },
+    "source/m6_partial_delivery.py": {
+      "bytes": 18064,
+      "sha256": "33b244c32af6fd1ed89b794f5d295ea20f2a7ab97a160972fa81b09df93ac7fe"
+    },
+    "source/m6_rag_delivery.py": {
+      "bytes": 20638,
+      "sha256": "1270079fff1b7636d4d9945cc7b8d07c9d44fe07badaf31eccff881b8de91fdd"
+    },
+    "source/resumption/deliver_remaining.py": {
+      "bytes": 6201,
+      "sha256": "3294be9631f7caf951d67362dd9686c41f2b60e8c9584bc61ef3f10e4bd6e15d"
+    },
+    "source/resumption/launch_remaining.py": {
+      "bytes": 9036,
+      "sha256": "b75024b49b143a792e6c0d4290112a4334205131b9402f945b60ac220b983106"
+    },
+    "source/tools/adaptation/supervise.py": {
+      "bytes": 6750,
+      "sha256": "61341377a4bb9fa0a7edca65111218d6e9d6fdd9107438c00753621da8df51a7"
+    },
+    "source/tools/adaptation_evaluation/local_condition.py": {
+      "bytes": 23163,
+      "sha256": "f1fda11d0f7f4f5d5de6dcee20d51bb0c3230d1b32509267915977808a16b5da"
+    },
+    "source/tools/adaptation_evaluation/partial_checkpoint.py": {
+      "bytes": 15177,
+      "sha256": "5f18454919f7387a6bf1add4c18b66faaeb5329ff34f1ecae23c6a1afb276a56"
+    },
+    "source/tools/adaptation_evaluation/protocol.py": {
+      "bytes": 14310,
+      "sha256": "b01305ca54e797626d7a52334e6ba96c21a4efc17f65fb390decb3ee8df632da"
+    },
+    "source/tools/adaptation_evaluation/rag_diagnostic.py": {
+      "bytes": 18268,
+      "sha256": "5b7a32372e8407ff8b19bfc69737b8e58cb402e1f217c82c125bcbd511c16544"
+    },
+    "source/tools/adaptation_evaluation/run.py": {
+      "bytes": 23098,
+      "sha256": "ead4af96d3ee25305611e776d8871bcba538a6d80715ed8cef0a4561c3803f57"
+    }
+  },
+  "private_restored_root": "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1/text-evaluation-v1/rag-readbacks/partial3-bf16-v2",
+  "raw_errors_and_normalized_errors_retained_separately": true,
+  "collectible": false,
+  "matched_counters_updated": false,
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "verification": {
+    "fresh_archive_bytes_and_hash": true,
+    "every_regular_member_hash": true,
+    "exact_restored_inventory": true,
+    "mode_specific_evidence_revalidated": true
+  },
+  "publication": "Scratch candidate only; coordinator owns central indexing and Git publication."
+}
