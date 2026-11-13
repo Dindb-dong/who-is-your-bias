@@ -976,6 +976,23 @@
       "sha256": "0f25ea29e32b2673131074244bb650e71763a9502fe1e4b76d2dc3e0f50fc5ad",
       "upload_status": "uploaded",
       "verification_status": "fresh-materialization-byte-verified"
+    },
+    {
+      "artifact_id": "jensen-m6-heldout-collection-review-bf16-v2",
+      "role": "complete-matched-collection-and-condition-blind-review-packet",
+      "exposure": "heldout",
+      "planned": 18,
+      "attempted": 18,
+      "completed": 9,
+      "failed": 9,
+      "unattempted": 0,
+      "file_name": "jensen-m6-heldout-collection-review-bf16-v2.tar.gz",
+      "file_id": "file_000000001acc81f5b534489141813c82",
+      "library_file_id": "libfile_fde3_f-3067c589b82c8191a7e77facf5ff2518_a18ece08681081918d81df44f69c4b1f",
+      "size_bytes": 51378,
+      "sha256": "627c1e741e726594538fde447b332adf365ad305cd0f6c3a617c35f126f176ee",
+      "upload_status": "uploaded",
+      "verification_status": "fresh-materialization-byte-verified"
     }
   ],
   "artifact_indexes": {

@@ -1,0 +1,324 @@
+{
+  "schema_version": "jensen-matched-collection-result.v1",
+  "exposure": "heldout",
+  "status": "collected_saved_and_fresh_readback_verified",
+  "artifact": {
+    "artifact_id": "jensen-m6-heldout-collection-review-bf16-v2",
+    "role": "complete-matched-collection-and-condition-blind-review-packet",
+    "exposure": "heldout",
+    "planned": 18,
+    "attempted": 18,
+    "completed": 9,
+    "failed": 9,
+    "unattempted": 0,
+    "file_name": "jensen-m6-heldout-collection-review-bf16-v2.tar.gz",
+    "file_id": "file_000000001acc81f5b534489141813c82",
+    "library_file_id": "libfile_fde3_f-3067c589b82c8191a7e77facf5ff2518_a18ece08681081918d81df44f69c4b1f",
+    "size_bytes": 51378,
+    "sha256": "627c1e741e726594538fde447b332adf365ad305cd0f6c3a617c35f126f176ee",
+    "upload_status": "uploaded",
+    "verification_status": "fresh-materialization-byte-verified"
+  },
+  "conditions": {
+    "facts": {
+      "planned": 6,
+      "attempted": 6,
+      "completed": 4,
+      "failed": 2,
+      "unattempted": 0
+    },
+    "style": {
+      "planned": 6,
+      "attempted": 6,
+      "completed": 5,
+      "failed": 1,
+      "unattempted": 0
+    },
+    "adapter": {
+      "planned": 6,
+      "attempted": 6,
+      "completed": 0,
+      "failed": 6,
+      "unattempted": 0
+    }
+  },
+  "denominators": {
+    "planned": 18,
+    "attempted": 18,
+    "completed": 9,
+    "failed": 9,
+    "unattempted": 0
+  },
+  "review_samples": 9,
+  "plan_sha256": "7fd35de01ea1a364aa7b5a2bf8547bf3a4a6cd3ebee4b3764b8ce7c8957e5c7c",
+  "contract_sha256": "9c79398b54118f284ffdc6e4592d501e1cc214e77f6a895152ae91019286b6c0",
+  "rubric_sha256": "d7e6db218c0fb29110583930797d9e824e802ce10ca9d8447f9acf55e03fcfcd",
+  "review_manifest_file_sha256": "fd236f912f2f8b39b1bc099ffb9b24f4bfc7e5cd3f22d9a4945b6e61e87a7e4b",
+  "archive_members_sha256": {
+    "heldout-bf16-v2/agent-review/manifest.json": "fd236f912f2f8b39b1bc099ffb9b24f4bfc7e5cd3f22d9a4945b6e61e87a7e4b",
+    "heldout-bf16-v2/agent-review/private/answer-key.json": "70f412e920d46957cc538be856eade6b96b8d9557910a970bcd52a495bb4ac13",
+    "heldout-bf16-v2/agent-review/private/execution-diagnostics.json": "0a4fe04396b5635d8ff6c0218aae63e82f4328028256dc9362d84eb057e8fb23",
+    "heldout-bf16-v2/agent-review/private/input-manifest.json": "be849b96bd9400c9d1c510613b3c65cd222be59eb39302ba19e577e978cab6eb",
+    "heldout-bf16-v2/agent-review/reviewer/README.md": "104f396a124ea47bd8c02bf796f7bac849d9335405e5fb837a2630c8ecdbcbd7",
+    "heldout-bf16-v2/agent-review/reviewer/reference-answers.json": "9b4afebbf2df4979b60e7c0c170857b4061397f4e9b0b160d638bb9e25e846b8",
+    "heldout-bf16-v2/agent-review/reviewer/rubric.md": "d7e6db218c0fb29110583930797d9e824e802ce10ca9d8447f9acf55e03fcfcd",
+    "heldout-bf16-v2/agent-review/reviewer/samples.json": "681a0bca581ffb202291d21974a458a8708a42efe0fd376d4c1c791b19e8650d",
+    "heldout-bf16-v2/agent-review/reviewer/source-pools.json": "9dacfcfab052e2795beca543890edd211aaf117e4134e57a14f1494a8d1d3de0",
+    "heldout-bf16-v2/collection/blind-review/private/answer-key.json": "7062a28f3c466fec74004b61459d469a4e72668b889bcf72c1e0f62d3ae1bde8",
+    "heldout-bf16-v2/collection/blind-review/private/comparison.json": "dab64814192ce1d2d0a24ac74a3bfea129a2400110efb07622689ae6284293ee",
+    "heldout-bf16-v2/collection/blind-review/private/failed-attempts.json": "d2fcb31ad0b8ebcb27863af3d0743d5f17e118bbbed7b4e81c7644268c4908b5",
+    "heldout-bf16-v2/collection/blind-review/reviewer/samples.json": "95f7c1b1e5db5071ca1d625f34be0ef4212101a33eb84067d97e4f83b1432cba",
+    "heldout-bf16-v2/collection/comparison.json": "00fac99a3f07510e380a0a0e401691de388a3219abd4fbd99355830b6450884e",
+    "heldout-bf16-v2/collection/review-summary.json": "c5b6d0c47c82cede0dbeacdda8f5934e37259dcdc68fef1372a3b84d4d5e4b23",
+    "inputs/plan.json": "6392f58bde3a2ac49d41ab76f19d88d15fa9a9f686abaabcc4a1bf90e6f4a6ba",
+    "inputs/execution-contract-bf16-v2.json": "5dbe9a114d081e10ac689160e59988c255a9d15a901f2e90e44dd9ff53482d15",
+    "inputs/durability-receipts.json": "aeac31a8aa7bdb71cd9db6d4c9a884e3b3dd305415aadddd09761c588c4c6656",
+    "collect_package_m6.py": "56713ac6e78f6289f92bc28a382f1cd447460209668da451955f1037826e52ae"
+  },
+  "comparison": {
+    "schema_version": "text-adaptation-comparison-summary.v1",
+    "plan_sha256": "7fd35de01ea1a364aa7b5a2bf8547bf3a4a6cd3ebee4b3764b8ce7c8957e5c7c",
+    "exposure": "heldout",
+    "conditions": {
+      "facts": {
+        "attempted": 6,
+        "completed": 4,
+        "run_status": "completed",
+        "run_sha256": "3498a1cd502409eff825a716aa3f99e5ba5f871c8349e816690042bad3b66a2f",
+        "model": {
+          "identity": {
+            "base_model": "Qwen/Qwen3-1.7B",
+            "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+            "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+            "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+            "chat_template_options": {
+              "enable_thinking": false
+            }
+          },
+          "adapter": {
+            "configured": false,
+            "loaded": false,
+            "verified": false
+          },
+          "runtime": {
+            "device": "cpu",
+            "dtype": "bfloat16",
+            "backend": "transformers",
+            "context_window": 40960,
+            "threads": 8,
+            "attention": "sdpa",
+            "base_parameters": 1720574976,
+            "versions": {
+              "torch": "2.11.0+cpu",
+              "transformers": "4.57.3"
+            },
+            "generation_defaults": {
+              "seed": 42,
+              "temperature": 0.7,
+              "top_p": 0.8,
+              "top_k": 20
+            }
+          }
+        },
+        "errors": {
+          "provider_finish_length": 2
+        },
+        "generation_ms_median": 39480.587499999994,
+        "output_sha256": {
+          "heldout-qa26-no-priors-2023-turn-00072": "9b26d1195b01667e3781783f7e0eab74fdcfbd243c6e1e9dac7527e5d838d9bf",
+          "heldout-qa26-no-priors-2023-turn-00078": "0e1d539e4dc9bb6e4d343603cd71598fb0f7f88a870c0fdfadeddea400acf8e7",
+          "heldout-qa26-no-priors-2023-turn-00186": "eb00967348cf4525e61d81b65979877a5f7586290855c042663dbcebb67fc147",
+          "heldout-qa26-no-priors-2023-turn-00190": "a09d10559eddf76065d5ef57e4629c941afee925e3ac5968bf0248001920a79f",
+          "heldout-qa26-no-priors-2023-turn-00253": "c5860a917bf1edb7fd906647045288f9c54517d17d312d8236606d57b5bb344f",
+          "heldout-qa26-no-priors-2023-turn-00297": "2a94e7399f4cfb3f5cc7d236bddcacda695abb220d5dcee58dade3b5e4791da8"
+        }
+      },
+      "style": {
+        "attempted": 6,
+        "completed": 5,
+        "run_status": "completed",
+        "run_sha256": "754ddd5cfb866e707953b212987396caab0686c8a49c2a0943b8f1abc4c5149d",
+        "model": {
+          "identity": {
+            "base_model": "Qwen/Qwen3-1.7B",
+            "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+            "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+            "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+            "chat_template_options": {
+              "enable_thinking": false
+            }
+          },
+          "adapter": {
+            "configured": false,
+            "loaded": false,
+            "verified": false
+          },
+          "runtime": {
+            "device": "cpu",
+            "dtype": "bfloat16",
+            "backend": "transformers",
+            "context_window": 40960,
+            "threads": 8,
+            "attention": "sdpa",
+            "base_parameters": 1720574976,
+            "versions": {
+              "torch": "2.11.0+cpu",
+              "transformers": "4.57.3"
+            },
+            "generation_defaults": {
+              "seed": 42,
+              "temperature": 0.7,
+              "top_p": 0.8,
+              "top_k": 20
+            }
+          }
+        },
+        "errors": {
+          "provider_finish_length": 1
+        },
+        "generation_ms_median": 44558.452,
+        "output_sha256": {
+          "heldout-qa26-no-priors-2023-turn-00072": "2ca4f515e5f3009eca8dad4c84736e0e2d79895ead2a957b0fcd899c5690ec74",
+          "heldout-qa26-no-priors-2023-turn-00078": "77d6ea918b6a966b9164873560cb4c0eb3f4d6729b2cec5fb62002f13b272229",
+          "heldout-qa26-no-priors-2023-turn-00186": "8693336609db327e39a8c5d0a8edf374e4dc93f0d77b5c139cb5302eeda1189f",
+          "heldout-qa26-no-priors-2023-turn-00190": "fb6f5f12f400cccebd45e8fe40c4c66b71f6f1c520d9ee5d3be001a3a5b379c3",
+          "heldout-qa26-no-priors-2023-turn-00253": "4a0f23787ec40355b7a63c4478966e2f05e1fd5c10dab3478e568008ca753fda",
+          "heldout-qa26-no-priors-2023-turn-00297": "0910a2924eaa2b87a1b8d5606de82719b3429e77f6b4b018fa0156614cafe17f"
+        }
+      },
+      "adapter": {
+        "attempted": 6,
+        "completed": 0,
+        "run_status": "completed",
+        "run_sha256": "fc703fe1fea1c6548435da1a4c9006ad6cd38462c250862f324060309d8637c3",
+        "model": {
+          "identity": {
+            "base_model": "Qwen/Qwen3-1.7B",
+            "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+            "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+            "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+            "chat_template_options": {
+              "enable_thinking": false
+            }
+          },
+          "adapter": {
+            "configured": true,
+            "loaded": true,
+            "verified": true,
+            "schema_version": "text-adapter-identity.v1",
+            "run_sha256": "e1102328f6cc85e9c096dc554e6255465d67870706df5d3a4f03bf091c6e3f42",
+            "artifact_manifest_sha256": "01726cf712cb6b88fde409cea1ba64a3841ab446e5ade2b0cffe51aa29073166",
+            "base_model": "Qwen/Qwen3-1.7B",
+            "base_revision": "70d244cc86ccca08cf5af4e1e306ecf908b1ad5e",
+            "base_checkpoint_manifest_sha256": "8922df67227a992c8624e60442f0b455a7a7e5804de384861f931e0d77025b85",
+            "dataset_sha256": "f83aea790b09631ae7b96f8f899012c879af92c73acafc81a475a49cdfe460d4",
+            "training_event_families": [
+              "acquired-2023",
+              "csis-2025",
+              "dwarkesh-2026",
+              "goldman-sachs-2024",
+              "lex-494",
+              "stanford-vftt-2024",
+              "strange-loop-2025",
+              "stripe-sessions-2024",
+              "yc-startup-school-2026"
+            ],
+            "tokenizer_contract_sha256": "483ee203c64a06c6b7e569aaaaae7aebc3db459b029892ce79e537d578904ee6",
+            "optimizer_steps": 29,
+            "efficacy_evaluated": false
+          },
+          "runtime": {
+            "device": "cpu",
+            "dtype": "bfloat16",
+            "backend": "transformers",
+            "context_window": 40960,
+            "threads": 8,
+            "attention": "sdpa",
+            "base_parameters": 1720574976,
+            "versions": {
+              "torch": "2.11.0+cpu",
+              "transformers": "4.57.3"
+            },
+            "generation_defaults": {
+              "seed": 42,
+              "temperature": 0.7,
+              "top_p": 0.8,
+              "top_k": 20
+            }
+          }
+        },
+        "errors": {
+          "provider_finish_length": 6
+        },
+        "generation_ms_median": null,
+        "output_sha256": {
+          "heldout-qa26-no-priors-2023-turn-00072": "2887b35e32974205253333fc4af4c96cb9121afc0e243767ce387f31ee623137",
+          "heldout-qa26-no-priors-2023-turn-00078": "140ce80213ae95318ae3f8307a5f1c3809c30d6d42a4e967df515b539cf83ed8",
+          "heldout-qa26-no-priors-2023-turn-00186": "50999de6c4b62129a1ed2db137ee678d82bac54f074b6e96fb6a46fb988cfee1",
+          "heldout-qa26-no-priors-2023-turn-00190": "2f881da72b5d2f73cf44fa87b45bdb56de70486e57a5872eb8cc583bceeaee32",
+          "heldout-qa26-no-priors-2023-turn-00253": "f3b02d0b5770b8987cc305f496d7a46d7556be8ef0d1a3e7a565b7c709108083",
+          "heldout-qa26-no-priors-2023-turn-00297": "12a5badacee2a6403d67187fc8ef66da443b2d17ef3b0dcf8d67b13e021ee5ec"
+        }
+      }
+    },
+    "cases_with_style_contrast": 6,
+    "cases_without_factual_candidates": 1,
+    "larger_model_compared": false,
+    "human_review": "ungraded",
+    "efficacy_claim": false,
+    "limitations": [
+      "Completion and citation syntax are not semantic entailment or persona similarity.",
+      "Surface overlap can indicate memorization as well as matching wording; judge it separately.",
+      "Development cases and a bounded training smoke do not establish held-out improvement.",
+      "These are sequential model runs, not simultaneous audiovisual latency measurements."
+    ],
+    "local_execution": {
+      "supervision": "one real server per condition invocation",
+      "conditions_by_start_time": [
+        "facts",
+        "style",
+        "adapter"
+      ],
+      "warmup_excluded_per_condition": true,
+      "order_counterbalanced": false,
+      "contract_sha256": "9c79398b54118f284ffdc6e4592d501e1cc214e77f6a895152ae91019286b6c0",
+      "durability_receipts_file_sha256": "aeac31a8aa7bdb71cd9db6d4c9a884e3b3dd305415aadddd09761c588c4c6656",
+      "supervisors": [
+        {
+          "condition": "facts",
+          "status": "completed",
+          "failure_type": null,
+          "supervisor_sha256": "2d40774dca65ef54b93b99da79e2cecaf5dfb823fcd54baff0caa0630f1c5d97",
+          "startup_ready_ms": 599.062,
+          "warmup_request_ms": 14923.12
+        },
+        {
+          "condition": "style",
+          "status": "completed",
+          "failure_type": null,
+          "supervisor_sha256": "e0227414c82a63a53ee58d6dc90d7983c8fc2190ab7d0cb8a56d119b07c6b1c5",
+          "startup_ready_ms": 603.121,
+          "warmup_request_ms": 21087.728
+        },
+        {
+          "condition": "adapter",
+          "status": "completed",
+          "failure_type": null,
+          "supervisor_sha256": "a65726e58a14947d293e8bb7fc12efec2b310f2e076fbe0a8390d1924b46d415",
+          "startup_ready_ms": 527.907,
+          "warmup_request_ms": 9334.25
+        }
+      ],
+      "persistence_validation": "Matches supplied verified receipts to every local file; this collector does not itself contact remote storage."
+    }
+  },
+  "verification": {
+    "archive_bytes_sha256": true,
+    "all_archive_members": true,
+    "fresh_restored_file_inventory": true
+  },
+  "semantic_support_review": "pending_condition_blind_agent_review",
+  "human_review": "ungraded",
+  "efficacy_claim": false,
+  "reviewer_share_only": "/workspace/scratch/31a6dc706f63/artifacts/jensen-pr19-completion-v1/text-evaluation-v1/collection-readback/heldout-bf16-v2/heldout-bf16-v2/agent-review/reviewer"
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "jensen-matched-execution-status.v1",
-  "recorded_at": "2026-11-13T05:11:43.543200+00:00",
+  "recorded_at": "2026-11-13T05:14:51.480592+00:00",
   "matched_planned_calls": 54,
   "matched_attempted": 54,
   "matched_completed": 22,
@@ -99,8 +99,8 @@
     "status": "not_executed",
     "contract": "heldout-rag-v1/execution-contract-bf16-v2.json"
   },
-  "collection": "pending remaining conditions and fresh-readback receipts",
-  "semantic_support_review": "ungraded",
+  "collection": "all_54_matched_attempts_collected_and_fresh_readback_verified",
+  "semantic_support_review": "development_completed_heldout_in_progress",
   "human_review": "ungraded",
   "efficacy_claim": false,
   "development_collection": {
@@ -110,6 +110,14 @@
     "review_samples": 13,
     "semantic_review": "condition_blind_agent_findings_saved_then_unblinded",
     "semantic_review_report": "development-comparison.md",
+    "human_review": "ungraded"
+  },
+  "heldout_collection": {
+    "status": "collected_saved_and_fresh_readback_verified",
+    "report": "heldout-collection.json",
+    "artifact_id": "jensen-m6-heldout-collection-review-bf16-v2",
+    "review_samples": 9,
+    "semantic_review": "condition_blind_agent_review_in_progress",
     "human_review": "ungraded"
   }
 }
