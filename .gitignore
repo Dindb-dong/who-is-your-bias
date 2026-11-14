@@ -70,3 +70,6 @@ apps/web/public/vision/vision_bundle.mjs
 apps/web/public/vision/blaze_face_short_range.tflite
 apps/web/public/vision/*.tmp
 apps/web/public/vision/assets.json
+
+# Copyrighted NVIDIA reference images: team-internal only, never commit
+data/acquisition/jensen-huang/reference-images/internal_reference/
