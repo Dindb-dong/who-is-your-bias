@@ -9,6 +9,9 @@
 > work: fresh evaluation, grounded bilingual answers and retrieval, adapter
 > diagnosis, voice/likeness review, and complete conversational integration.
 
+> The optional photoreal Gaussian head track (VHAP + GaussianAvatars, browser preview, SMPL-X transplant)
+> is recorded in [jensen-gaussian-head.md](jensen-gaussian-head.md).
+
 > Historical pre-resumption status: the earlier execution session was interrupted. This file
 > preserves the original plan. Read the [recovery and remaining-work handoff](jensen-replication-handoff.md)
 > for verified baseline evidence, reported intermediate progress, and resumption gates.

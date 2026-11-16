@@ -1,0 +1,234 @@
+<title>가우시안 헤드 아바타 진단</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a single reading column of numbered findings, each backed by a table or a to-scale chart; lab-notebook tone. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --fg: #1b2230; --muted: #5b6577; --line: #dde2ea;
+  --accent: #2f5bd3; --accent-soft: #e6ecfb;
+  --s1: #8a93a3; --s2: #d0782a; --s3: #2f5bd3;
+  --good: #1f8a5b; --warn: #b7791f; --bad: #c2413a;
+  --font-text: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #12161d; --surface: #1a2029; --fg: #e4e8ef; --muted: #9aa4b5; --line: #2c3442;
+  --accent: #7d9cf0; --accent-soft: #1f2a44; --s1: #8f98a8; --s2: #e39552; --s3: #7d9cf0;
+  --good: #4cc08a; --warn: #e0a84a; --bad: #ef7a72; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #12161d; --surface: #1a2029; --fg: #e4e8ef; --muted: #9aa4b5; --line: #2c3442;
+  --accent: #7d9cf0; --accent-soft: #1f2a44; --s1: #8f98a8; --s2: #e39552; --s3: #7d9cf0;
+  --good: #4cc08a; --warn: #e0a84a; --bad: #ef7a72; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-text); font-size: 15px; line-height: 1.7;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 40px 72px; }
+main { max-width: 860px; margin: 0 auto; display: grid; gap: 44px; }
+header { display: grid; gap: 10px; }
+.eyebrow { font-family: var(--font-data); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font-size: clamp(26px, 4.4vw, 34px); line-height: 1.25; margin: 0; text-wrap: balance; font-weight: 700; }
+h2 { font-size: 21px; margin: 0; text-wrap: balance; display: flex; gap: 10px; align-items: baseline; }
+h2 .n { font-family: var(--font-data); font-size: 14px; color: var(--accent); font-weight: 500; }
+h3 { font-size: 16px; margin: 6px 0 0; }
+p, li { max-width: 68ch; }
+p { margin: 0; }
+section { display: grid; gap: 14px; min-width: 0; }
+.lede { color: var(--muted); }
+.summary { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: grid; gap: 12px; }
+.summary ol { margin: 0; padding-left: 20px; display: grid; gap: 8px; }
+.tag { display: inline-block; font-family: var(--font-data); font-size: 11px; padding: 1px 7px; border-radius: 99px; margin-right: 6px; vertical-align: 1px; border: 1px solid currentColor; }
+.fact { color: var(--good); } .guess { color: var(--warn); } .issue { color: var(--bad); }
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--line); white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+th { font-weight: 600; color: var(--muted); font-size: 12.5px; }
+td.num, th.num { text-align: right; font-family: var(--font-data); font-variant-numeric: tabular-nums; }
+tr.hl td { background: var(--accent-soft); }
+code { font-family: var(--font-data); font-size: .88em; background: var(--accent-soft); padding: 1px 5px; border-radius: 4px; }
+ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 14px 10px; min-width: 0; }
+figcaption { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+svg text { fill: var(--muted); font-family: var(--font-data); font-size: 11px; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12.5px; color: var(--muted); }
+.legend span::before { content: ""; display: inline-block; width: 14px; height: 3px; border-radius: 2px; margin-right: 6px; vertical-align: 3px; background: var(--c); }
+.callout { border-left: 3px solid var(--accent); padding: 4px 0 4px 14px; }
+footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); padding-top: 16px; }
+</style>
+
+<main>
+<header>
+  <div class="eyebrow">GaussianAvatars · 단안 영상 1편 · 2026-11-16</div>
+  <h1>가우시안 헤드 아바타 진단 보고서</h1>
+  <p class="lede">학습한 모델이 브라우저에서 흐리게 보이는 이유와, test 점수가 학습 중반 이후 떨어지는 이유를 조사했습니다. 학습 중인 작업에는 손대지 않고, 저장된 체크포인트를 읽기만 해서 분석했습니다. 각 결론에는 근거의 종류를 붙였습니다.</p>
+  <div class="legend" style="gap:18px"><span style="--c:var(--good)">코드나 측정으로 확인한 사실</span><span style="--c:var(--warn)">측정에 근거한 추정</span></div>
+</header>
+
+<div class="summary">
+  <strong>요약</strong>
+  <ol>
+    <li><span class="tag fact">사실</span>브라우저 화질 손실의 대부분은 SH 1~3차 항을 버린 데서 옵니다. WebGL 렌더러는 서버의 DC 전용 렌더와 35 dB로 거의 같지만, DC 전용 렌더는 원래 렌더와 18 dB밖에 안 됩니다.</li>
+    <li><span class="tag fact">사실</span>불투명도가 낮은 가우시안이 77% 쌓인 원인은 <code>cameras_extent = 0</code>입니다. 이 값이 0이면 60k 이후 prune이 전혀 일어나지 않습니다. extent를 1로 바꾼 실험에서는 이 비율이 10~13%로 내려갔습니다.</li>
+    <li><span class="tag guess">추정</span>test 점수가 정점 이후 떨어지는 것은 주로 과적합입니다. test 점수의 전체 수준은 자세 차이(분포 이동)가 정합니다.</li>
+    <li><span class="tag fact">사실</span>FLAME 표정 학습률을 1/10로 낮춘 실험 c1c3이 가장 좋았습니다. test PSNR 최고 23.30 dB, 600k 기준으로 기준 모델보다 +0.5 dB입니다.</li>
+  </ol>
+</div>
+
+<section>
+  <h2><span class="n">1</span>실험 구성</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>이름</th><th>바꾼 것</th><th class="num">test PSNR 최고</th><th class="num">600k PSNR</th><th class="num">600k LPIPS</th><th class="num">가우시안 수</th></tr></thead>
+    <tbody>
+      <tr><td>기준</td><td>공식 기본값. 단안 카메라라 <code>cameras_extent</code>가 0</td><td class="num">23.06 (300k)</td><td class="num">22.33</td><td class="num">0.0786</td><td class="num">552,553</td></tr>
+      <tr><td>c1_ext1</td><td>extent 하한 1.0 (위치 학습률과 prune 정상화)</td><td class="num">23.06 (120k)</td><td class="num">22.69</td><td class="num">0.0623</td><td class="num">76,923</td></tr>
+      <tr class="hl"><td>c1c3</td><td>c1_ext1 + <code>--flame_expr_lr 1e-4</code></td><td class="num">23.30 (240k)</td><td class="num">22.83</td><td class="num">0.0638</td><td class="num">92,267</td></tr>
+    </tbody></table></div>
+  <p class="lede">학습 데이터는 512×512, 15fps, 3,319프레임입니다. 앞 70%(2,324프레임)로 학습하고 뒤 30%(995프레임)로 평가했습니다. 실험당 학습 시간은 RTX 4090 한 장에서 약 11.6시간입니다.</p>
+  <div class="charts">
+    <figure><figcaption>test PSNR (dB), 학습 로그 기준</figcaption><svg id="ch-test" viewBox="0 0 400 220" role="img" aria-label="반복 횟수에 따른 test PSNR"></svg></figure>
+    <figure><figcaption>train PSNR (dB), 학습 프레임 300장 기준</figcaption><svg id="ch-train" viewBox="0 0 400 220" role="img" aria-label="반복 횟수에 따른 train PSNR"></svg></figure>
+  </div>
+  <div class="legend"><span style="--c:var(--s1)">기준</span><span style="--c:var(--s2)">c1_ext1</span><span style="--c:var(--s3)">c1c3</span></div>
+</section>
+
+<section>
+  <h2><span class="n">2</span>서버 렌더와 브라우저 렌더 비교</h2>
+  <p>기준 모델의 600k 체크포인트를 같은 카메라와 같은 프레임으로 렌더해서 비교했습니다. train 8장과 test 7장을 썼고, PSNR은 흰 배경을 뺀 인물 영역에서만 계산했습니다.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>비교</th><th class="num">train</th><th class="num">test</th><th>의미</th></tr></thead>
+    <tbody>
+      <tr><td>WebGL vs 서버 DC 전용</td><td class="num">35.3 dB</td><td class="num">35.5 dB</td><td>렌더러 자체는 정확함 (평균 오차 2.7/255)</td></tr>
+      <tr class="hl"><td>서버 DC 전용 vs 서버 전체 SH</td><td class="num">18.2 dB</td><td class="num">18.7 dB</td><td>SH 1~3을 버린 손실 (평균 오차 20/255)</td></tr>
+      <tr><td>서버 전체 SH vs 원본</td><td class="num">22.1 dB</td><td class="num">17.4 dB</td><td>모델이 낼 수 있는 화질</td></tr>
+      <tr><td>WebGL vs 원본</td><td class="num">16.9 dB</td><td class="num">15.3 dB</td><td>서버보다 5.2 dB / 2.1 dB 낮음</td></tr>
+      <tr><td>WebGL 13만 개 vs 55만 개</td><td class="num">56.4 dB</td><td class="num">50.8 dB</td><td>불투명도 필터는 화질에 영향 없음</td></tr>
+    </tbody></table></div>
+  <p><span class="tag fact">사실</span>보이는 가우시안에서 SH 1~3 계수의 크기는 DC의 4~5배입니다. <span class="tag guess">추정</span>카메라가 한 대뿐이라 시점에 따른 변화를 배울 데이터가 없습니다. 그래서 SH 고차 항이 시점 효과가 아니라 색 자체를 담게 됐습니다. DC만 쓰면 피부가 얼룩지고 어둡게 보이는 이유입니다.</p>
+</section>
+
+<section>
+  <h2><span class="n">3</span>가우시안 분포</h2>
+  <h3>불투명도 0.005 미만 77%는 지워도 되는가</h3>
+  <ul class="plain">
+    <li><span class="tag fact">사실</span>기준 모델에서 552,553개 중 425,337개(77.0%)가 0.005 미만입니다. 삼각형마다 최소 1개를 남기는 <code>prune_points</code> 보호 규칙을 적용해도 406,103개를 지울 수 있습니다.</li>
+    <li><span class="tag fact">사실</span>이 가우시안을 지우고 서버에서 렌더해도 원래 렌더와 94~100 dB입니다. 눈으로는 같은 그림입니다.</li>
+    <li><span class="tag fact">사실</span>쌓인 원인은 코드에 있습니다. 60k 이후 <code>train.py</code>는 <code>size_threshold=20</code>을 넘기고, <code>densify_and_prune</code>의 <code>big_points_ws = scaling.max &gt; 0.1·extent</code>는 extent가 0이라 모든 점에서 참이 됩니다. 그러면 모든 삼각형의 점이 전부 prune 대상이 되고, 보호 규칙이 그 삼각형을 통째로 남깁니다. 그 결과 opacity prune이 한 번도 실행되지 않습니다. clone 조건(<code>scale ≤ 0.01·extent</code>)도 만족할 수 없어서 split으로만 개수가 늘었습니다.</li>
+  </ul>
+  <h3>부위별 밀도</h3>
+  <p class="lede">FLAME 부위 마스크를 썼습니다. 'face'는 눈, 코, 입술 영역과 겹칩니다. 보이는 가우시안은 불투명도 0.005 이상인 것만 셌습니다.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>부위</th><th class="num">면적 cm²</th><th class="num">보이는 개수 c1c3</th><th class="num">cm²당 c1c3</th><th class="num">cm²당 기준</th><th class="num">불투명도 중앙값 c1c3</th></tr></thead>
+    <tbody>
+      <tr><td>얼굴 전체</td><td class="num">405.7</td><td class="num">11,497</td><td class="num">28.3</td><td class="num">50.5</td><td class="num">0.094</td></tr>
+      <tr><td>눈 주변</td><td class="num">51.4</td><td class="num">3,201</td><td class="num">62.3</td><td class="num">125.5</td><td class="num">0.058</td></tr>
+      <tr><td>입술</td><td class="num">22.7</td><td class="num">818</td><td class="num">36.0</td><td class="num">46.8</td><td class="num">0.095</td></tr>
+      <tr><td>치아</td><td class="num">43.2</td><td class="num">328</td><td class="num">7.6</td><td class="num">4.8</td><td class="num">0.128</td></tr>
+      <tr><td>두피·머리</td><td class="num">897.9</td><td class="num">19,108</td><td class="num">21.3</td><td class="num">25.7</td><td class="num">0.419</td></tr>
+      <tr><td>목</td><td class="num">301.1</td><td class="num">14,290</td><td class="num">47.5</td><td class="num">44.0</td><td class="num">0.937</td></tr>
+      <tr class="hl"><td>메시 아래 경계</td><td class="num">187.1</td><td class="num">35,005</td><td class="num">187.1</td><td class="num">353.3</td><td class="num">0.973</td></tr>
+    </tbody></table></div>
+  <p><span class="tag fact">사실</span>목과 아래 경계에 가우시안의 54%가 몰려 있고, 거의 불투명합니다. 어깨와 옷을 그리는 판 역할을 하고 있습니다. 치아와 입술이 가장 성깁니다.</p>
+  <h3>얇은 원판 모양이 생기는 이유</h3>
+  <ul class="plain">
+    <li><span class="tag fact">사실</span>가장 짧은 축은 사실상 0입니다. 로그 스케일 중앙값이 c1c3에서 −15, 기준 모델에서 −32입니다. 중간 축은 약 0.8 mm, 긴 축은 약 3 mm입니다.</li>
+    <li><span class="tag fact">사실</span>짧은 축은 카메라 방향과 나란하지 않습니다. |cos| 중앙값이 0.26~0.45로, 무작위 방향(0.5)보다도 낮습니다. 두피, 목, 경계에서는 표면 법선과 나란해서(0.73~0.85) 표면에 붙은 판 모양입니다.</li>
+    <li><span class="tag guess">추정</span>작은 스케일을 막는 장치가 없습니다. <code>lambda_scale</code>은 0.6을 넘는 스케일에만 벌점을 줍니다. 래스터라이저는 화면 공분산에 0.3 px²를 더하는데, 이 데이터에서 1 px는 약 1 mm입니다. 그래서 0.3 px보다 얇은 축은 렌더에 영향이 없고 기울기도 거의 0입니다. Adam은 기울기가 작아도 로그 스케일을 같은 보폭으로 계속 내리고, 되돌리는 힘은 없습니다. split할 때 스케일을 1.6으로 나누는 것도 더해집니다.</li>
+    <li><span class="tag guess">추정</span>학습 카메라에서는 문제가 보이지 않습니다. 하지만 고개를 돌리거나 해상도를 올리면 판을 옆에서 보게 되어 선처럼 갈라질 수 있습니다.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="n">4</span>test PSNR이 떨어지는 원인</h2>
+  <p>test 프레임마다 학습 프레임 중 자세(전역, 목, 턱 회전)와 표정이 가장 가까운 것까지의 거리를 재고, 가까운 순으로 세 묶음으로 나눴습니다. 컷 전환으로 다른 장면이 찍힌 마지막 프레임(3318)은 뺐습니다.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>모델</th><th>묶음 (자세 거리 중앙값)</th><th class="num">60k</th><th class="num">정점</th><th class="num">540k</th><th class="num">정점→540k</th></tr></thead>
+    <tbody>
+      <tr><td>기준 (정점 300k)</td><td>가까움 (4.9°)</td><td class="num">23.12</td><td class="num">23.83</td><td class="num">23.35</td><td class="num">−0.49</td></tr>
+      <tr><td></td><td>중간 (5.9°)</td><td class="num">22.40</td><td class="num">23.06</td><td class="num">22.54</td><td class="num">−0.53</td></tr>
+      <tr><td></td><td>멂 (7.7°)</td><td class="num">21.62</td><td class="num">22.28</td><td class="num">21.67</td><td class="num">−0.62</td></tr>
+      <tr class="hl"><td>c1c3 (정점 240k)</td><td>가까움 (4.9°)</td><td class="num">23.89</td><td class="num">24.22</td><td class="num">23.82</td><td class="num">−0.40</td></tr>
+      <tr class="hl"><td></td><td>중간 (5.9°)</td><td class="num">22.97</td><td class="num">23.21</td><td class="num">22.91</td><td class="num">−0.30</td></tr>
+      <tr class="hl"><td></td><td>멂 (7.7°)</td><td class="num">22.21</td><td class="num">22.46</td><td class="num">22.24</td><td class="num">−0.21</td></tr>
+    </tbody></table></div>
+  <ul class="plain">
+    <li><span class="tag fact">사실</span>먼 묶음은 가까운 묶음보다 1.6~1.9 dB 낮고, 이 차이는 60k부터 있습니다. 자세 거리와 PSNR의 상관계수는 −0.46~−0.52입니다. 분포 이동은 실제로 있습니다.</li>
+    <li><span class="tag fact">사실</span>정점 이후 하락폭은 세 묶음과 시간 구간 모두에서 비슷합니다(0.2~0.6 dB). 하락폭과 자세 거리의 상관계수는 −0.19~0.10입니다. 같은 기간 train PSNR은 1.2~2.9 dB 더 올라갑니다.</li>
+    <li><span class="tag guess">추정</span>정점 이후 하락은 과적합으로 봅니다. 위치 학습을 켠 c1_ext1은 train−test 차이가 7.7 dB로 가장 큽니다. 표정 학습률을 낮추면 차이가 다시 줄어듭니다.</li>
+    <li><span class="tag fact">사실</span>표정 파라미터 차이도 있습니다. 학습 프레임의 표정 L2는 FLAME 미세조정 후 9.3에서 25.5로 커졌지만, test 프레임은 원래 값(9.86)을 그대로 씁니다. c1c3이 좋아진 이유와 맞는 결과입니다.</li>
+  </ul>
+  <h3>조건을 맞춘 평가 제안</h3>
+  <ul class="plain">
+    <li>컷 전환 프레임을 빼고, 가까운 묶음의 PSNR을 따로 보고합니다.</li>
+    <li>학습 프레임을 미세조정 전 FLAME 값으로도 렌더해서(<code>select_mesh_by_timestep(t, original=True)</code>) 파라미터 차이만 따로 잽니다.</li>
+    <li>다음 데이터부터는 앞뒤로 자르지 말고 1초 단위로 번갈아 나눠서 자세 분포를 맞춥니다.</li>
+    <li>학습을 약 240k에서 멈춥니다. 정점과 맞고, 학습 시간도 절반 이하로 줄어듭니다.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="n">5</span>개선 우선순위</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>순위</th><th>항목</th><th>기대 효과</th><th>비용</th><th>근거</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td class="num">1</td><td>E1 SH 처리</td><td>큼</td><td>재학습 없음 (내보내기에서 처리)</td><td>브라우저 손실 2~5 dB의 직접 원인</td></tr>
+      <tr><td class="num">2</td><td>D1 머리만 학습</td><td>중~큼</td><td>마스크 재생성 + 학습 1회 (~5시간)</td><td>가우시안 54%가 어깨 판. 브라우저 속도와 얼굴 할당량 개선</td></tr>
+      <tr><td class="num">3</td><td>B2 배경 무작위화</td><td>중</td><td>학습 코드 수정 + 학습 1회</td><td>흰 배경과 흰 가우시안을 구분하지 못함. 직접 측정은 아직 없음</td></tr>
+      <tr><td class="num">4</td><td>A1 1024 해상도</td><td>불확실</td><td>재추적 + 학습 2~4배 + 브라우저 부담</td><td>지금 병목은 SH, 과적합, 자세 차이. 얇은 판 문제가 더 드러날 수 있음</td></tr>
+    </tbody></table></div>
+</section>
+
+<section>
+  <h2><span class="n">6</span>E1 적용 결과: SH를 색에 미리 합치기</h2>
+  <p>내보내기 단계에서 학습 카메라 64개 시점의 SH 색을 계산해 평균을 내고, 그 값을 DC 색으로 저장했습니다. 재학습은 하지 않았고 렌더러와 번들 형식도 그대로입니다. 2절과 같은 카메라와 프레임으로 다시 비교했습니다.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>비교 (인물 영역 PSNR)</th><th class="num">train 이전</th><th class="num">train 이후</th><th class="num">test 이전</th><th class="num">test 이후</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td>WebGL vs 서버 전체 SH</td><td class="num">18.5</td><td class="num">27.5</td><td class="num">19.0</td><td class="num">26.4</td></tr>
+      <tr><td>WebGL vs 원본</td><td class="num">16.9</td><td class="num">20.4</td><td class="num">15.3</td><td class="num">17.0</td></tr>
+      <tr><td>서버 전체 SH vs 원본 (상한)</td><td class="num">22.1</td><td class="num">22.1</td><td class="num">17.4</td><td class="num">17.4</td></tr>
+    </tbody></table></div>
+  <ul class="plain">
+    <li><span class="tag fact">사실</span>브라우저와 서버의 차이가 train 5.2 dB에서 1.6 dB로, test 2.1 dB에서 0.4 dB로 줄었습니다. 남은 차이는 프레임마다 달라지는 시점 효과를 상수 색으로 근사한 오차입니다.</li>
+    <li><span class="tag fact">사실</span>스튜디오에는 c1c3 240k 체크포인트를 같은 방식으로 내보내 넣었습니다. 가우시안은 80,014개(이전 132,438개)이고, 같은 노트북에서 34 fps(이전 29 fps)가 나왔습니다. 피부 얼룩은 사라졌습니다.</li>
+    <li><span class="tag issue">새로 드러난 문제</span>어두운 스튜디오 배경에서 머리 가장자리의 흰 테두리와 메시 아래의 흰 판이 눈에 띕니다. 흰 배경에서만 학습해서 생긴 흰 가우시안으로 보이며(<span class="tag guess">추정</span>), B2(배경 무작위화)와 D1(머리만 학습)이 해결 대상으로 삼는 문제와 같습니다.</li>
+  </ul>
+</section>
+
+<footer>분석 대상은 내부 연구용 영상으로 학습한 합성 아바타입니다. 원본 영상과 렌더 이미지는 이 페이지에 포함하지 않았습니다. 수치는 모두 저장된 체크포인트를 읽기 전용으로 렌더해서 얻었고, 실험마다 한 번씩만 돌렸으므로 0.1~0.2 dB 차이는 오차 범위로 봐야 합니다.</footer>
+</main>
+
+<script>
+(function () {
+  var its = [60, 120, 180, 240, 300, 360, 420, 480, 540, 600];
+  var test = {
+    s1: [22.38, 22.80, 22.80, 23.04, 23.06, 22.78, 22.72, 22.68, 22.54, 22.33],
+    s2: [22.94, 23.06, 22.91, 23.04, 22.81, 22.83, 22.82, 22.78, 22.76, 22.69],
+    s3: [23.02, 23.12, 23.15, 23.30, 23.18, 23.14, 23.08, 22.98, 23.01, 22.83]
+  };
+  var train = {
+    s1: [24.77, 25.58, 26.03, 26.47, 26.96, 27.23, 27.57, 27.91, 28.17],
+    s2: [26.06, 27.51, 28.47, 29.11, 29.53, 29.86, 30.08, 30.26, 30.41],
+    s3: [25.30, 26.16, 26.67, 27.20, 27.58, 27.94, 28.25, 28.50, 28.81]
+  };
+  var NS = 'http://www.w3.org/2000/svg';
+  function el(tag, attrs, parent) { var e = document.createElementNS(NS, tag); for (var k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; }
+  function draw(id, data, xs, y0, y1, step) {
+    var svg = document.getElementById(id), L = 40, R = 390, T = 12, B = 192;
+    var x = function (v) { return L + (v - 60) / (600 - 60) * (R - L); };
+    var y = function (v) { return B - (v - y0) / (y1 - y0) * (B - T); };
+    for (var g = y0; g <= y1 + 1e-9; g += step) {
+      el('line', { x1: L, x2: R, y1: y(g), y2: y(g), stroke: 'var(--line)', 'stroke-width': 1 }, svg);
+      el('text', { x: L - 6, y: y(g) + 4, 'text-anchor': 'end' }, svg).textContent = g.toFixed(step < 1 ? 1 : 0);
+    }
+    [60, 180, 300, 420, 540].forEach(function (v) { el('text', { x: x(v), y: B + 18, 'text-anchor': 'middle' }, svg).textContent = v + 'k'; });
+    ['s1', 's2', 's3'].forEach(function (s) {
+      var pts = data[s].map(function (v, i) { return x(xs[i]) + ',' + y(v); }).join(' ');
+      el('polyline', { points: pts, fill: 'none', stroke: 'var(--' + s + ')', 'stroke-width': s === 's3' ? 2.4 : 1.8, 'stroke-linejoin': 'round' }, svg);
+      var m = data[s].indexOf(Math.max.apply(null, data[s]));
+      el('circle', { cx: x(xs[m]), cy: y(data[s][m]), r: 3.5, fill: 'var(--' + s + ')' }, svg);
+    });
+  }
+  draw('ch-test', test, its, 22.2, 23.4, 0.4);
+  draw('ch-train', train, its.slice(0, 9), 24, 31, 1);
+})();
+</script>

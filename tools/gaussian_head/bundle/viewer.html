@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gaussian Head Viewer</title>
+<style>
+  :root { --bg: #1d1f24; --fg: #e8e8e8; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); font: 13px system-ui, sans-serif; }
+  canvas { width: 100%; height: 100%; display: block; }
+  #hud { position: fixed; left: 12px; top: 10px; background: #0008; padding: 6px 10px; border-radius: 6px; white-space: pre; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="hud">loading…</div>
+<script type="module">
+import { loadBundle, frameParams } from './gaussian-head-core.js';
+import { GaussianHeadRenderer, lookAt } from './gaussian-head-renderer.js';
+const q = new URLSearchParams(location.search);
+const stem = q.get('bundle') || 'test_head';
+const canvas = document.getElementById('c'), hud = document.getElementById('hud');
+const { header, B } = await loadBundle(stem);
+const r = new GaussianHeadRenderer(canvas, header, B);
+const cam0 = header.camera; let yaw = +(q.get('yaw') || 0), frame = +(q.get('frame') || 0), last = performance.now(), fpsAvg = 0, cpuAvg = 0, n = 0;
+canvas.addEventListener('pointermove', e => { if (e.buttons) yaw += e.movementX * 0.01; });
+window.__gh = { frames: 0, fps: 0, cpuMs: 0, ready: true, n_gauss: header.n_gauss };
+function tick(now) {
+  const dpr = Math.min(2, window.devicePixelRatio || 1);
+  const w = Math.round(canvas.clientWidth * dpr), h = Math.round(canvas.clientHeight * dpr);
+  if (canvas.width !== w || canvas.height !== h) { canvas.width = w; canvas.height = h; }
+  const [px, py, pz] = cam0.position, t = cam0.target, R = Math.hypot(px - t[0], pz - t[2]);
+  const eye = [t[0] + R * Math.sin(yaw), py, t[2] + R * Math.cos(yaw)];
+  const view = lookAt(eye, t);
+  r.render(frameParams(B, header, frame), { view, fovY: cam0.fov_y_deg * Math.PI / 180 });
+  if (!q.get('frame')) frame = Math.floor(now / 1000 * header.fps);
+  const dt = now - last; last = now; n++;
+  fpsAvg = fpsAvg * 0.95 + (1000 / dt) * 0.05; cpuAvg = cpuAvg * 0.95 + r.stats.cpuMs * 0.05;
+  window.__gh.frames = n; window.__gh.fps = fpsAvg; window.__gh.cpuMs = cpuAvg;
+  hud.textContent = `${header.n_gauss.toLocaleString()} gaussians  ${w}x${h}\n${fpsAvg.toFixed(1)} fps  cpu ${cpuAvg.toFixed(1)} ms\n${header.source || ''}`;
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+</script>
+</body>
+</html>
