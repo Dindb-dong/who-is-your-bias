@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SMPL-X Head Preview</title>
+<style>
+  :root { --bg: #1b1e24; --panel: #23272f; --fg: #e6e8ec; --muted: #9aa3b2; --accent: #8fb3ff; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); font: 13px system-ui, "Malgun Gothic", sans-serif; }
+  #wrap { display: grid; grid-template-columns: 1fr 280px; height: 100%; }
+  canvas { width: 100%; height: 100%; display: block; background: radial-gradient(ellipse at 50% 35%, #2c323c, #16191e 70%); }
+  #panel { background: var(--panel); padding: 14px 16px; overflow-y: auto; display: grid; gap: 10px; align-content: start; }
+  label { display: grid; gap: 3px; color: var(--muted); }
+  label span { display: flex; justify-content: space-between; } label b { color: var(--fg); font-weight: 500; font-variant-numeric: tabular-nums; }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; } .row label { display: flex; gap: 6px; align-items: center; color: var(--fg); }
+  #hud { color: var(--muted); white-space: pre; font: 12px ui-monospace, Consolas, monospace; }
+  h1 { font-size: 14px; margin: 0; }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="c"></canvas>
+  <div id="panel">
+    <h1>SMPL-X 몸 + 가우시안 머리</h1>
+    <div id="hud">loading…</div>
+    <label>목 아래 자르는 높이 <select id="cut"><option value="0.03">3 cm</option><option value="0.05" selected>5 cm</option><option value="0.07">7 cm</option></select></label>
+    <div class="row"><label><input type="checkbox" id="play"> 추적 동작 재생</label><label><input type="checkbox" id="body" checked> 몸 메시</label></div>
+    <label><span>목 좌우 (neck) <b id="v_neck"></b></span><input type="range" id="neck" min="-60" max="60" value="0"></label>
+    <label><span>고개 끄덕 (head) <b id="v_nod"></b></span><input type="range" id="nod" min="-40" max="40" value="0"></label>
+    <label><span>상체 숙이기 (spine3) <b id="v_spine"></b></span><input type="range" id="spine" min="-30" max="30" value="0"></label>
+    <label><span>어깨 들썩 (collars) <b id="v_shrug"></b></span><input type="range" id="shrug" min="-20" max="25" value="0"></label>
+    <label><span>턱 벌리기 (jaw) <b id="v_jaw"></b></span><input type="range" id="jaw" min="0" max="25" value="0"></label>
+    <label><span>카메라 회전 <b id="v_cam"></b></span><input type="range" id="cam" min="-90" max="90" value="0"></label>
+    <label><span>카메라 거리 <b id="v_dist"></b></span><input type="range" id="dist" min="40" max="250" value="110"></label>
+  </div>
+</div>
+<script type="module">
+import { lookAt } from '../bundle/gaussian-head-renderer.js';
+import { loadPreview, SmplxHead, applyFlamePose } from './smplx-head-core.js';
+import { SmplxPreviewRenderer } from './smplx-preview-renderer.js';
+const q = new URLSearchParams(location.search), $ = id => document.getElementById(id);
+for (const k of ['neck', 'nod', 'spine', 'shrug', 'jaw', 'cam', 'dist']) if (q.has(k)) $(k).value = q.get(k);
+if (q.has('cut')) $('cut').value = q.get('cut');
+if (q.get('play') === '1') $('play').checked = true;
+if (q.get('body') === '0') $('body').checked = false;
+const canvas = $('c'), hud = $('hud'), D = Math.PI / 180;
+let r = null, head = null, header = null, B = null, center = null, frame = +(q.get('frame') || 0), last = performance.now(), fps = 0, n = 0;
+window.__pv = { frames: 0, ready: false };
+async function load() {
+  window.__pv.ready = false;
+  ({ header, B } = await loadPreview('./preview_cut' + $('cut').value));
+  head = new SmplxHead(header, B);
+  const v = head.forward(new Float32Array(165), new Float32Array(header.n_expr), [0, 0, 0]);
+  let cx = 0, cy = 0, cz = 0; for (const i of B.vmap) { cx += v[3 * i]; cy += v[3 * i + 1]; cz += v[3 * i + 2]; }
+  const k = B.vmap.length; center = [cx / k, cy / k - 0.12, cz / k];
+  const fresh = document.createElement('canvas'); fresh.id = 'c'; canvas.replaceWith?.call(document.getElementById('c'), fresh);
+  r = new SmplxPreviewRenderer(document.getElementById('c'), header, B, head);
+  window.__pv = { frames: 0, ready: true, n_gauss: header.n_gauss };
+}
+$('cut').addEventListener('change', load);
+await load();
+const pose = new Float32Array(165), expr = new Float32Array(100);
+function tick(now) {
+  const cv = document.getElementById('c');
+  const dpr = Math.min(2, window.devicePixelRatio || 1), w = Math.round(cv.clientWidth * dpr), h = Math.round(cv.clientHeight * dpr);
+  if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
+  pose.fill(0); expr.fill(0);
+  pose[3 * 16 + 2] = -1.15; pose[3 * 17 + 2] = 1.15;                       // arms down from the T-pose
+  pose[3 * 18 + 1] = -0.25; pose[3 * 19 + 1] = 0.25;
+  const val = id => +$(id).value; for (const k of ['neck', 'nod', 'spine', 'shrug', 'jaw', 'cam', 'dist']) $('v_' + k).textContent = $(k).value + (k === 'dist' ? ' cm' : '°');
+  pose[3 * 12 + 1] += val('neck') * D; pose[3 * 15] += val('nod') * D; pose[3 * 9] += val('spine') * D;
+  pose[3 * 13 + 2] -= val('shrug') * D; pose[3 * 14 + 2] += val('shrug') * D; pose[3 * 22] += val('jaw') * D;
+  if ($('play').checked) {
+    const f = Math.floor(frame) % header.n_frames;
+    applyFlamePose(pose, B.m_pose.subarray(15 * f, 15 * f + 15));
+    expr.set(B.m_expr.subarray(header.n_expr * f, header.n_expr * f + header.n_expr));
+    if (!q.has('frame')) frame += Math.min(0.1, (now - last) / 1000) * header.fps;
+  }
+  const yaw = val('cam') * D, dist = val('dist') / 100;
+  const eye = [center[0] + dist * Math.sin(yaw), center[1] + 0.05, center[2] + dist * Math.cos(yaw)];
+  r.render(pose, expr, [0, 0, 0], { view: lookAt(eye, center), fovY: 30 * D }, { showBody: $('body').checked });
+  const dt = now - last; last = now; fps = fps * 0.9 + 100 / Math.max(dt, 1); n++;
+  window.__pv.frames = n; window.__pv.fps = fps; window.__pv.cpuMs = r.stats.cpuMs;
+  hud.textContent = `가우시안 ${header.n_gauss.toLocaleString()}개\n${fps.toFixed(0)} fps · CPU ${r.stats.cpuMs.toFixed(0)} ms`;
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+</script>
+</body>
+</html>
