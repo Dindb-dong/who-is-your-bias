@@ -105,12 +105,22 @@ See [the method and exact commands](jensen-gesture-training.md) and
 | `apps/web/public/models/gesture/jensen-gesture-basis.json` | First fitted runtime candidate; four arm/finger groups | 141,273 | `f5ac3321fdf34525f1eaff21286e4aca34dfe252e9505a0eb2c0549d74a0f324` |
 | `data/local/jensen-performance-2026-11-17/gesture/dataset.json` | Prepared masked training/validation windows | 923,695 | `3252be1e9f83a8931a92a3c25d5ce90316858ad9c5ecbcd01921adf85354327d` |
 | `jensen-performance-training-2026-11-17.zip` | Prepared data, current/previous checkpoints, model and results | 578,286 | `d410f300051b4940adce298ad66e7f231b170933d00abf78175e24e90f7a847d` |
+| `apps/web/public/models/gesture/jensen-gesture-basis-expanded.json` | Expanded candidate; original runtime file preserved | 144,793 | `ede0a38935d22aa980c622214a6d8a77a2c80b5241856f6d0fcbf46b757ec0b4` |
+| `data/local/jensen-performance-2026-11-17/gesture-expanded/dataset.json` | Ten clips / 960 frames, with the same WIRED validation | 1,409,298 | `773a06bd87710a61a96b20d6232eef63397d5318c8ffb56cf81b205d767c5005` |
+| `jensen-gesture-candidates-2026-11-17.zip` | Both models, datasets, checkpoints, private clips, comparisons and installation README | 2,871,526 | `bfbdf4fbfe4b468af1c5f163a5f691344914069cf78d4b658514d91f182aaf2f` |
 
 The archive was privately saved and independently read back with identical bytes.
 Its stable file IDs and member hashes are in the receipt. A copied model belongs
 at the runtime path above; the studio enables it only through the experimental
 gesture setting or `?head=gaussian&gesture=learned`. Missing artifacts leave the
 designed body-motion path available.
+
+The final two-candidate archive was also independently read back byte-for-byte;
+both contained model hashes and all ZIP CRCs passed. See
+[the expanded result and private receipt](../reports/gesture/jensen-expanded-2026-11-17.json).
+Select the expanded file with
+`?head=gaussian&gesture=learned&gestureBundle=jensen-gesture-basis-expanded`.
+This selects an experimental candidate and does not change the default policy.
 
 Additional recovered source clips, MediaPipe observations and exported geometry
 live under `data/local/jensen-performance-2026-11-17/gesture-expansion/`. Their
