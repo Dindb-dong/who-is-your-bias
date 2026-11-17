@@ -3,10 +3,13 @@
 Status record for the photoreal real-time head avatar track. Last updated 2026-11-17.
 Diagnosis report with charts: [reports/gaussian-head/avatar-diagnosis-2026-11-16.html](../reports/gaussian-head/avatar-diagnosis-2026-11-16.html).
 
+Current follow-up: [expression and upper-body performance execution](jensen-performance-2026-11-17.md).
+
 ## Scope and boundaries
 
 - **Goal.** A FLAME-bound 3D Gaussian head that renders in the browser studio in real time, trained from one
-  monocular clip. It is an optional preview path (`?head=gaussian`); the default studio avatar is unchanged.
+  monocular clip. The optional `?head=gaussian` path now attaches that head to the existing articulated,
+  clothed body through the shared studio renderer. The default studio avatar is unchanged.
 - **Not in Git.** Trained weights, exported bundles (`apps/web/public/models/gaussian-head/*`, ignored), source
   video, rendered comparison images, and the FLAME / SMPL-X model files (research licences, no redistribution).
   Reports in Git contain numbers only, no face images.
@@ -23,13 +26,23 @@ Diagnosis report with charts: [reports/gaussian-head/avatar-diagnosis-2026-11-16
 | Patch | GaussianAvatars | [`slurm/patch_min_extent.sh`](../tools/gaussian_head/slurm/patch_min_extent.sh) adds the `GA_MIN_EXTENT` lower bound on `cameras_extent` |
 | Training | GaussianAvatars | [`slurm/train_exp.sbatch`](../tools/gaussian_head/slurm/train_exp.sbatch) (300-iteration smoke run, then full run) |
 | Bundle export | this repo | [`bundle/export_bundle.py`](../tools/gaussian_head/bundle/export_bundle.py), run inside the GaussianAvatars checkout. Env: `GA_ITER=<iteration>`, `GA_BAKE_SH=1` |
-| Browser | this repo | [`GaussianHeadStage.tsx`](../apps/web/src/components/GaussianHeadStage.tsx) + [`avatar/gaussian/`](../apps/web/src/avatar/gaussian/) |
+| Browser | this repo | [`AvatarStage.tsx`](../apps/web/src/components/AvatarStage.tsx), [`renderer.ts`](../apps/web/src/avatar/renderer.ts), and [`avatar/gaussian/`](../apps/web/src/avatar/gaussian/) |
 
 Data: 512×512, 15 fps, 3,319 frames. The first 70% (2,324 frames) is the train split and the last 30% (995 frames)
 the test split.
 
 Studio preview: put `<name>.json/.bin` in `apps/web/public/models/gaussian-head/` and open
-`/?head=gaussian&headBundle=<name>` (default bundle name `jensen_a`).
+`/?head=gaussian&headBundle=<name>` (default bundle name `jensen_a_c1c3_240k_sh`).
+Install local assets before running `npm run build`; the API serves that built copy.
+The head and body share the camera, depth buffer, speech/performance clocks and attention controls.
+Without a qualified expression driver, the UI labels recorded/static expression fallback explicitly.
+
+For optional learned arm/finger geometry, install the private `jensen-gesture-basis.json` in
+`apps/web/public/models/gesture/` before building, then enable **Learned gesture preview** in settings
+or use `/?head=gaussian&gesture=learned`. This is an experimental preview, not an accepted behavioral
+model. See [training and measured limits](jensen-gesture-training.md).
+Semantic brow/mouth calibration requires the paired observations described in
+[the expression workflow](../tools/gaussian_head/expression/README.md).
 
 ## Code map (`tools/gaussian_head/`)
 
@@ -121,10 +134,13 @@ Preview issues still open:
 - Expectation (not yet measured): more frames of the same frontal clip mainly help overfitting and part of the
   pose shift. Sharper detail needs a higher-resolution source, and side views need multi-angle footage.
 
-## Proposed next steps (not started)
+## Follow-up status and remaining steps
 
-- Studio playback: loop only the train frames (0–2323) and remove the idle expression damping (`k = 0.25`). No
-  retraining needed.
+- Implemented on the current follow-up branch: exact-hash-bound train-frame expression replay
+  (0–2323), removal of global idle damping, shared articulated-body playback, and a calibrated semantic
+  expression-driver route. Real-bundle visual acceptance is still pending the private assets.
+- The body composite uses the existing clothed GLB, with bounded collar-to-neck transform blending.
+  It does not assert completion of the separate SMPL-X identity/texture training track.
 - D1 + B2 retrain to remove the white rim and the shoulder sheet.
 - SMPL-X preview: filter the neck remnants, switch to the male body, and integrate it with the clothed body GLB in
   the three.js studio.

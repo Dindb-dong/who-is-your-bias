@@ -1,0 +1,97 @@
+{
+  "schema_version": "motion-measurement-plan.v1",
+  "id": "jensen-goldman-gesture-expansion-2026-11-17",
+  "persona_id": "jensen-huang",
+  "runtime_version": "0.10.21",
+  "sample_fps": 10,
+  "sources": [
+    {
+      "id": "goldman-sachs-2024",
+      "source_event_id": "goldman-sachs-2024",
+      "url": "https://www.goldmansachs.com/insights/talks-at-gs/jensen-huang",
+      "corpus_split": "train",
+      "motion_split": "train"
+    }
+  ],
+  "acquisitions": [
+    {
+      "source_id": "goldman-sachs-2024",
+      "input_basename": "goldman-sachs-2024-0-180.mp4",
+      "input_sha256": "4557437ba42c8cf3b90f55210f08e4d1be399ab5fa689139b3b49735ae91da2d",
+      "source_timeline": "publisher_video_elapsed",
+      "source_offset_seconds": 0,
+      "clock_mapping": [
+        { "local_start": 0, "local_end": 180, "source_start": 0, "rate": 1 }
+      ]
+    }
+  ],
+  "windows": [
+    {
+      "id": "goldman-0100-14s",
+      "source_id": "goldman-sachs-2024",
+      "start_seconds": 100,
+      "duration_seconds": 14,
+      "selection_basis": "Recovered video inspected before new extraction: continuous single-subject seated shot with visible gesturing hands, ending before the 115.6155 second cut."
+    },
+    {
+      "id": "goldman-0116-8s-crop",
+      "source_id": "goldman-sachs-2024",
+      "start_seconds": 116,
+      "duration_seconds": 8,
+      "crop": [760, 20, 510, 560],
+      "selection_basis": "Recovered wide shot inspected before extraction: fixed right-side input-pixel crop excludes the other participant and foreground audience while retaining shoulders, elbows, wrists and hips. No mirroring; interval lies between observed cuts."
+    },
+    {
+      "id": "goldman-0136-10s",
+      "source_id": "goldman-sachs-2024",
+      "start_seconds": 136,
+      "duration_seconds": 10,
+      "selection_basis": "Continuous single-subject shot with visible hand gestures; adjacent to but nonoverlapping the original 128-136 and 146-154 second clips."
+    },
+    {
+      "id": "goldman-0172-6s",
+      "source_id": "goldman-sachs-2024",
+      "start_seconds": 172,
+      "duration_seconds": 6,
+      "selection_basis": "Continuous single-subject shot with visible hand gestures; starts after the original 164-172 second clip and ends before the 179.8797 second cut."
+    }
+  ],
+  "face_model_sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff",
+  "pose_model_sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a",
+  "hand_model_sha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1",
+  "frozen_export": {
+    "selection_tool": "tools.motion.preview_selection",
+    "face_index": 0,
+    "pose_index": 0,
+    "single_face_and_pose_only": true,
+    "hand_association": "Existing unambiguous selected-pose wrist proximity; detector handedness labels do not establish identity.",
+    "review_status": "geometry_preview",
+    "track_continuity_reviewed": false,
+    "source_clock_reviewed": false,
+    "speaker_association_reviewed": false,
+    "visibility_threshold": 0.65,
+    "max_gap_ms": 250,
+    "max_rotation_degrees": 70,
+    "neutral_reference_rule": "Among selected observations, maximize the count of observable left/right UpperArm, Forearm and Hand controls; break ties by observable finger-control count, then by earliest timestamp. This selects a rotation reference, not anatomical neutral."
+  },
+  "frozen_training": {
+    "baseline_plan": "data/motion/jensen-gesture-training.v1.json",
+    "baseline_source_manifest_sha256": "e82abb8171a5a18c5e3a41c1f85b292f187d4cc4ebb37ab02b7a6cd64056927e",
+    "event_partitions": {
+      "goldman-sachs-2024": "train",
+      "stripe-sessions-2024": "train",
+      "wired-big-interview-2024": "validation"
+    },
+    "window_ms": 2000,
+    "sample_count": 20,
+    "minimum_coverage": 0.6,
+    "rank": 2,
+    "iterations": 60,
+    "ridge": 0.01,
+    "seed": 1729,
+    "checkpoint_every": 10,
+    "promotion": "Explicit geometry-preview opt-in only regardless of this reused validation result. No after-result hyperparameter or window tuning.",
+    "validation_scope": "The same historically exposed WIRED clip is retained for a within-fit reconstruction comparison. Its first-fit results were already observed; it is not fresh independent evaluation."
+  },
+  "claim": "A frozen 38-second training-only source expansion. Existing geometry remains unreviewed. Additional observable arm coverage, successful fitting and held-out quality are separate measurements. No semantic, emotional or audio-conditioned labels are introduced."
+}

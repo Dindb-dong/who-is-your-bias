@@ -1,11 +1,12 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowDown, ArrowRight, ArrowUp, ArrowUpRight, BookOpen, ChevronDown, ChevronRight, CircleHelp, Clapperboard, FlaskConical, Globe2, Layers3, LoaderCircle, MessageCircle, Mic, Plus, Radio, RotateCcw, Settings2, Sparkles, Square, Volume2, VolumeX, X } from 'lucide-react';
 import { getJson, getMotionLibrary, streamChat } from './api';
 import type { Citation, ExperimentMode, Language, MotionLibraryStatus, Persona, Source, Turn } from './api';
 import type { MotionMode } from './avatar/types';
 import { JENSEN_SOURCE_FITTED_AVATAR, RESEARCH_HUMAN_AVATAR, type AvatarFraming, type BuiltinAvatar } from './avatar/builtin';
 import { AvatarStage } from './components/AvatarStage';
-import { GaussianHeadStage } from './components/GaussianHeadStage';
+import type { GaussianHeadConfig } from './avatar/gaussian/gaussianBody';
+import { useLearnedGesture } from './hooks/useLearnedGesture';
 import { AttentionPanel } from './components/AttentionPanel';
 import type { AttentionTarget } from './avatar/attention';
 import { SourcesView } from './components/SourcesView';
@@ -39,6 +40,9 @@ function EvidencePanel({ citations, onClose }: { citations: Citation[]; onClose:
 }
 
 export default function App() {
+  const [avatarQuery] = useState(() => new URLSearchParams(window.location.search));
+  const gaussianRequested = avatarQuery.get('head') === 'gaussian';
+  const [learnedGestureEnabled, setLearnedGestureEnabled] = useState(() => avatarQuery.get('gesture') === 'learned');
   const [page, setPage] = useState<Page>('studio');
   const [persona, setPersona] = useState<Persona | null>(null);
   const [sources, setSources] = useState<Source[]>([]);
@@ -47,7 +51,7 @@ export default function App() {
   const [reload, setReload] = useState(0);
   const [language, setLanguage] = useState<Language>('en');
   const [mode, setMode] = useState<ExperimentMode>('behavior');
-  const [motionMode, setMotionMode] = useState<MotionMode>('disabled');
+  const [motionMode, setMotionMode] = useState<MotionMode>(() => avatarQuery.get('gesture') === 'learned' ? 'geometry_preview' : 'disabled');
   const [motionLibrary, setMotionLibrary] = useState<MotionLibraryStatus | null>(null);
   const [motionLibraryError, setMotionLibraryError] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
@@ -65,7 +69,7 @@ export default function App() {
   const [reducedMotion, setReducedMotion] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches);
   const [model, setModel] = useState<{ name: string; url: string } | undefined>();
   const [builtinAvatar, setBuiltinAvatar] = useState<BuiltinAvatar>('human');
-  const [framing, setFraming] = useState<AvatarFraming>('portrait');
+  const [framing, setFraming] = useState<AvatarFraming>(() => gaussianRequested ? 'upper_body' : 'portrait');
   const [attentionTarget, setAttentionTarget] = useState<AttentionTarget | null>(null);
   const avatarChoiceMade = useRef(false);
   const lastPersona = useRef<string | null>(null);
@@ -81,6 +85,8 @@ export default function App() {
   const pcmPlayer = useRef<ReturnType<typeof createPcmPlayback> | null>(null);
   const streamingVoice = pcmState.status === 'playing' || pcmState.status === 'loading';
   const measuredMotion = useMeasuredMotion({ mode: motionMode, enabled: page === 'studio' && mode === 'behavior', reducedMotion });
+  const learnedGesture = useLearnedGesture(learnedGestureEnabled && motionMode === 'geometry_preview', persona?.id,
+    avatarQuery.get('gestureBundle') ?? 'jensen-gesture-basis');
   const playbackPreferences = useRef({ autoPlay, voice });
   playbackPreferences.current = { autoPlay, voice };
   const microphone = useMicrophone(language, setDraft);
@@ -215,14 +221,19 @@ export default function App() {
     if (!persona) return;
     if (lastPersona.current && lastPersona.current !== persona.id) {
       cancel(); setMessages([]); setSessionId(undefined); setActiveTurn(undefined); setEvidence(null);
-      setVoice('off'); setMotionMode('disabled'); setAttentionTarget(null);
+      setVoice('off'); setMotionMode('disabled'); setLearnedGestureEnabled(false); setAttentionTarget(null);
       avatarChoiceMade.current = false; setModel(undefined);
     }
-    if (!avatarChoiceMade.current) setBuiltinAvatar(persona.id === 'jensen-huang' ? 'portrait' : 'human');
+    if (!avatarChoiceMade.current) setBuiltinAvatar(persona.id === 'jensen-huang' ? gaussianRequested ? 'jensen' : 'portrait' : 'human');
     lastPersona.current = persona.id;
   }, [persona?.id]);
   const isJensen = persona?.id === 'jensen-huang';
-  const gaussianHead = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('head') === 'gaussian';
+  const gaussianEnabled = gaussianRequested && isJensen && builtinAvatar === 'jensen' && !model;
+  const gaussianHead = useMemo<GaussianHeadConfig | undefined>(() => {
+    if (!gaussianEnabled) return undefined;
+    const override = avatarQuery.get('headBundle');
+    return { bundle: override && /^[A-Za-z0-9_-]+$/.test(override) ? override : 'jensen_a_c1c3_240k_sh' };
+  }, [gaussianEnabled, avatarQuery]);
   const subjectName = persona?.name ?? 'Studio persona';
   const initials = persona?.presentation?.initials ?? (persona?.name.split(/\s+/).map((part) => part[0]).slice(0, 2).join('') || '—');
   const topics = persona?.presentation?.topics ?? [];
@@ -250,8 +261,8 @@ export default function App() {
           <div className="studio-grid">
             <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}><section className="stage-card" aria-label="Avatar studio" style={{ flex: 1 }}>
               <div className="stage-top"><div><span className="tag dark"><span className="tiny-dot"/> AI SIMULATION</span><div className="stage-title">{subjectName}<span>01 / RESEARCH PERSONA</span></div></div><button className="stage-options" onClick={() => setSettings(true)} aria-label="Avatar settings"><Settings2 size={18}/></button></div>
-              <div className="avatar-viewport">{gaussianHead ? <GaussianHeadStage speaking={speaking} amplitude={speaking ? visualPlayback.amplitude : 0} onReady={onAvatarReady} onError={onAvatarError}/> : <AvatarStage attentionTarget={attentionTarget} portraitStyle={isJensen ? 'jensen' : 'reference'} speaking={speaking} timeline={streamingVoice ? undefined : activeTurn?.behavior} elapsedMs={visualPlayback.elapsedMs} amplitude={speaking ? visualPlayback.amplitude : 0} modelUrl={modelUrl} framing={framing} reducedMotion={reducedMotion} speechTiming={visualPlayback.speechTiming} audioSha256={visualPlayback.audioSha256} audioElapsedMs={visualPlayback.audioElapsedMs} performanceClip={motionMode !== 'disabled' && mode === 'behavior' && !reducedMotion ? measuredMotion.clip : undefined} observationElapsedMs={measuredMotion.elapsedMs} allowGeometryPreview={motionMode === 'geometry_preview'} onReady={onAvatarReady} onError={onAvatarError}/>}</div>
-              <div className="stage-caption"><span className="caption-rule"/><span>{model ? 'YOUR CUSTOM RIG' : builtinAvatar === 'jensen' && isJensen ? 'JENSEN · SOURCE-FITTED CANDIDATE' : builtinAvatar === 'human' ? (isJensen ? 'GENERIC RESEARCH RIG' : 'RESEARCH HUMAN RIG') : isJensen ? 'JENSEN · STYLIZED PREVIEW' : 'STYLIZED PORTRAIT RIG'}</span><span className="caption-rule"/></div>
+              <div className="avatar-viewport"><AvatarStage gaussianHead={gaussianHead} learnedGesture={learnedGestureEnabled && mode === 'behavior' ? learnedGesture.model : undefined} attentionTarget={attentionTarget} portraitStyle={isJensen ? 'jensen' : 'reference'} speaking={speaking} timeline={streamingVoice ? undefined : activeTurn?.behavior} elapsedMs={visualPlayback.elapsedMs} amplitude={speaking ? visualPlayback.amplitude : 0} modelUrl={modelUrl} framing={framing} reducedMotion={reducedMotion} speechTiming={visualPlayback.speechTiming} audioSha256={visualPlayback.audioSha256} audioElapsedMs={visualPlayback.audioElapsedMs} performanceClip={motionMode !== 'disabled' && mode === 'behavior' && !reducedMotion ? measuredMotion.clip : undefined} observationElapsedMs={measuredMotion.elapsedMs} allowGeometryPreview={motionMode === 'geometry_preview'} onReady={onAvatarReady} onError={onAvatarError}/></div>
+              <div className="stage-caption"><span className="caption-rule"/><span>{gaussianEnabled ? 'JENSEN · PHOTOREAL FACE & BODY' : model ? 'YOUR CUSTOM RIG' : builtinAvatar === 'jensen' && isJensen ? 'JENSEN · SOURCE-FITTED CANDIDATE' : builtinAvatar === 'human' ? (isJensen ? 'GENERIC RESEARCH RIG' : 'RESEARCH HUMAN RIG') : isJensen ? 'JENSEN · STYLIZED PREVIEW' : 'STYLIZED PORTRAIT RIG'}</span><span className="caption-rule"/></div>
               <div className="stage-bottom"><div className="live-status"><span className={`status-orb ${speaking || busy ? 'animated' : ''}`}/><div><strong>{stageState}</strong><span title={playback.timingMessage}>{streamingVoice ? 'Streaming voice · PCM-clock mouth movement' : voice === 'provider' ? playback.timingStatus === 'available' ? 'Provider voice · audio-timed mouth cues' : 'Provider voice · approximate mouth movement' : voice === 'browser' || speaking ? 'Generic browser voice · approximate lip sync' : 'Text mode · voice available'}</span></div></div><button className="round-control" aria-label={streamingVoice || speaking || playback.status === 'loading' ? 'Stop audio' : 'Enable voice settings'} onClick={() => streamingVoice ? cancel() : speaking || playback.status === 'loading' ? playback.stop() : setSettings(true)}>{streamingVoice || speaking || playback.status === 'loading' ? <Square size={16}/> : voice === 'off' ? <VolumeX size={18}/> : <Volume2 size={18}/>}</button></div>
               {!avatarReady && !avatarError && <div className="avatar-loading"><LoaderCircle size={18} className="spin"/> Preparing the rig</div>}
               {avatarError && <div className="avatar-error" role="alert">{avatarError}<button onClick={() => selectBuiltinAvatar('portrait')}>Use stylized portrait</button></div>}
@@ -276,7 +287,7 @@ export default function App() {
       <nav className="mobile-nav" aria-label="Mobile navigation"><button className={page === 'studio' ? 'active' : ''} onClick={() => navigate('studio')}><MessageCircle size={19}/>Studio</button><button className={page === 'sources' ? 'active' : ''} onClick={() => navigate('sources')}><BookOpen size={19}/>Sources</button><button className={page === 'lab' ? 'active' : ''} onClick={() => navigate('lab')}><FlaskConical size={19}/>Lab</button><button className={page === 'presentation' ? 'active' : ''} onClick={() => navigate('presentation')}><Clapperboard size={19}/>Present</button></nav>
     </div>
     {evidence && <><button className="drawer-scrim" onClick={() => setEvidence(null)} aria-label="Close response evidence"/><EvidencePanel citations={evidence} onClose={() => setEvidence(null)}/></>}
-    <SettingsDialog open={settings} close={() => setSettings(false)} persona={persona} voice={voice} setVoice={(next) => { if (streamingVoice) cancel(); playback.stop(); setVoice(next); }} autoPlay={autoPlay} setAutoPlay={setAutoPlay} reducedMotion={reducedMotion} setReducedMotion={(value) => { measuredMotion.stop(); setReducedMotion(value); }} modelName={model?.name} loadModel={loadModel} resetModel={() => selectBuiltinAvatar(isJensen ? 'portrait' : 'human')} builtinAvatar={builtinAvatar} setBuiltinAvatar={selectBuiltinAvatar} framing={framing} setFraming={setFraming} motionMode={motionMode} setMotionMode={(value) => { measuredMotion.stop(); setMotionMode(value); }} motionLibrary={motionLibrary} motionLibraryError={motionLibraryError}/>
+    <SettingsDialog open={settings} close={() => setSettings(false)} persona={persona} voice={voice} setVoice={(next) => { if (streamingVoice) cancel(); playback.stop(); setVoice(next); }} autoPlay={autoPlay} setAutoPlay={setAutoPlay} reducedMotion={reducedMotion} setReducedMotion={(value) => { measuredMotion.stop(); setReducedMotion(value); }} modelName={model?.name} loadModel={loadModel} resetModel={() => selectBuiltinAvatar(isJensen ? 'portrait' : 'human')} builtinAvatar={builtinAvatar} setBuiltinAvatar={selectBuiltinAvatar} framing={framing} setFraming={setFraming} motionMode={motionMode} setMotionMode={(value) => { measuredMotion.stop(); setMotionMode(value); }} motionLibrary={motionLibrary} motionLibraryError={motionLibraryError} learnedGestureEnabled={learnedGestureEnabled} setLearnedGestureEnabled={(enabled) => { measuredMotion.stop(); setLearnedGestureEnabled(enabled); if (enabled) setMotionMode('geometry_preview'); }} learnedGestureLoading={learnedGesture.loading} learnedGestureError={learnedGesture.error}/>
   </div>;
 }
 

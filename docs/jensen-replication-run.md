@@ -12,6 +12,9 @@
 > The optional photoreal Gaussian head track (VHAP + GaussianAvatars, browser preview, SMPL-X transplant)
 > is recorded in [jensen-gaussian-head.md](jensen-gaussian-head.md).
 
+> The current face/body integration, gesture fitting and expression calibration follow-up is
+> recorded in [the 2026-11-17 performance execution record](jensen-performance-2026-11-17.md).
+
 > Historical pre-resumption status: the earlier execution session was interrupted. This file
 > preserves the original plan. Read the [recovery and remaining-work handoff](jensen-replication-handoff.md)
 > for verified baseline evidence, reported intermediate progress, and resumption gates.
