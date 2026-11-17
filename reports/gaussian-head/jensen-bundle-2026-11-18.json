@@ -1,0 +1,303 @@
+{
+  "schema": "gaussian-head-motion-inspection.v1",
+  "inspected_at_utc": "2026-11-17T17:33:06.063822+00:00",
+  "bundle": {
+    "stem": "jensen_a_c1c3_240k_sh",
+    "binary_sha256": "32d5bc15901a8673901c6234ae7af946d2bfcf2c0aa5e7ed9c816d1c3aff599c",
+    "manifest_sha256": "3891190a06c81e1968a625b868f6e41f5651cb86a41ef3749991a81155c1f753",
+    "binary_bytes": 10856460,
+    "manifest_bytes": 2455,
+    "input_bytes_unchanged": true
+  },
+  "implementation": {
+    "production_core": "apps/web/src/avatar/gaussian/gaussianHeadCore.ts",
+    "production_core_sha256": "722b55fd55e9ece327fa91959e07556b268a3b48d77e47afabfa39363cbbfd1b",
+    "numpy_reference": "tools/gaussian_head/bundle/head_bundle.py",
+    "numpy_reference_sha256": "f89849c3f4f7a1199168ab40491132edee3bff02cdbeca06cac76cc4e44099e8"
+  },
+  "dimensions": {
+    "n_verts": 5143,
+    "n_faces": 10144,
+    "n_expr": 100,
+    "n_gauss": 80014,
+    "n_frames": 3319,
+    "fps": 15,
+    "parents": [
+      -1,
+      0,
+      1,
+      1,
+      1
+    ],
+    "iteration": 240000,
+    "sh_baked": true
+  },
+  "scope": {
+    "training_frame_range_half_open": [
+      0,
+      2324
+    ],
+    "analyzed_motion_frames": 2324,
+    "excluded_motion_frames": 995,
+    "full_bundle_layout_checked": true,
+    "finite_value_validation": "all static arrays and declared training motion only",
+    "held_out_motion_values_inspected": false,
+    "fitting_performed": false,
+    "raw_coefficients_vertices_and_images_exported": false
+  },
+  "training_expression": {
+    "coefficient_std_population": {
+      "min": 0.4393976707513854,
+      "median": 0.6816921822807882,
+      "p95": 1.2270680752729632,
+      "max": 1.4163635895339846,
+      "rms": 0.7649551408169658
+    },
+    "coefficients_with_std_above_1e_minus_6": 100,
+    "consecutive_coefficient_vector_delta_l2": {
+      "min": 0.5006224970157753,
+      "median": 1.3910196397621173,
+      "p95": 2.2326478739747393,
+      "max": 4.067583371137519,
+      "rms": 1.5151112862124645
+    },
+    "fraction_consecutive_deltas_above_1e_minus_8": 1.0,
+    "whole_mesh_expression_deviation_rms_m": 0.001208316623565203,
+    "old_idle_scalar_0_25_expression_deviation_rms_m": 0.00030207915589130076,
+    "displacement_measure": "RMS Euclidean expression-only vertex displacement from training mean before pose correctives/skinning; all vertices; covariance evaluated exactly",
+    "interpretation": "Nonconstant latent expression data establishes available motion, not eyebrow amplitude, semantic correspondence, identity fidelity or naturalness."
+  },
+  "training_joint_poses": {
+    "global": {
+      "axis_angle_norm_degrees": {
+        "min": 1.1642265767197573,
+        "median": 13.142467002232289,
+        "p95": 19.9197426185427,
+        "max": 23.51884655410651,
+        "rms": 13.956222482876743
+      },
+      "component_std_degrees": [
+        4.1136035227879,
+        7.991632953456397,
+        3.52529273397812
+      ],
+      "component_range_degrees": [
+        21.0097464105502,
+        37.84249746436827,
+        22.10808992107291
+      ],
+      "consecutive_axis_angle_vector_delta_degrees": {
+        "min": 0.016157617803302382,
+        "median": 0.6652780802128706,
+        "p95": 2.745521388354522,
+        "max": 11.289445338854948,
+        "rms": 1.3218086025199556
+      },
+      "exact_zero_vector_fraction": 0.0
+    },
+    "neck": {
+      "axis_angle_norm_degrees": {
+        "min": 3.6715689764136705,
+        "median": 15.671996654016217,
+        "p95": 28.68349987659866,
+        "max": 33.017760778659095,
+        "rms": 17.411272276258476
+      },
+      "component_std_degrees": [
+        4.504163166095491,
+        9.678351230133085,
+        6.636728944552358
+      ],
+      "component_range_degrees": [
+        19.81473133736204,
+        43.36511863476837,
+        30.41488957690108
+      ],
+      "consecutive_axis_angle_vector_delta_degrees": {
+        "min": 0.056158795606341086,
+        "median": 0.8129387594584258,
+        "p95": 3.558053428465341,
+        "max": 12.536884038459371,
+        "rms": 1.6784564190850033
+      },
+      "exact_zero_vector_fraction": 0.0
+    },
+    "jaw": {
+      "axis_angle_norm_degrees": {
+        "min": 0.6427333336861075,
+        "median": 5.445850178430073,
+        "p95": 10.348904252176652,
+        "max": 17.15660788271928,
+        "rms": 6.303389883053279
+      },
+      "component_std_degrees": [
+        2.4015403432963653,
+        2.1682765562210053,
+        2.4249953732008978
+      ],
+      "component_range_degrees": [
+        18.738155372919895,
+        23.491491376606103,
+        13.930371875934698
+      ],
+      "consecutive_axis_angle_vector_delta_degrees": {
+        "min": 0.0464868096478772,
+        "median": 1.238706302793263,
+        "p95": 3.792658934945487,
+        "max": 13.35640577138488,
+        "rms": 1.9756955181782188
+      },
+      "exact_zero_vector_fraction": 0.0
+    },
+    "left_eye": {
+      "axis_angle_norm_degrees": {
+        "min": 1.2226178907238674,
+        "median": 8.493197878668868,
+        "p95": 17.015209077988015,
+        "max": 26.934333629116132,
+        "rms": 9.91787835198097
+      },
+      "component_std_degrees": [
+        5.174166464391641,
+        6.594384413287873,
+        2.51140870503279
+      ],
+      "component_range_degrees": [
+        41.782953124859105,
+        36.81302232435998,
+        17.11908795175064
+      ],
+      "consecutive_axis_angle_vector_delta_degrees": {
+        "min": 0.061861082854514235,
+        "median": 1.5880456100047278,
+        "p95": 10.31954372691964,
+        "max": 26.5697901717642,
+        "rms": 4.537164422653991
+      },
+      "exact_zero_vector_fraction": 0.0
+    },
+    "right_eye": {
+      "axis_angle_norm_degrees": {
+        "min": 0.23367845085145583,
+        "median": 7.998636962701963,
+        "p95": 15.200443023912202,
+        "max": 25.056991482234988,
+        "rms": 9.275860920687489
+      },
+      "component_std_degrees": [
+        4.555991713901233,
+        6.072215089158923,
+        2.195477231231368
+      ],
+      "component_range_degrees": [
+        44.2614546048329,
+        34.36357646911542,
+        15.916354391274394
+      ],
+      "consecutive_axis_angle_vector_delta_degrees": {
+        "min": 0.039677685576649906,
+        "median": 1.5524966193371192,
+        "p95": 9.704208029277693,
+        "max": 24.41620541976323,
+        "rms": 4.2763838868432815
+      },
+      "exact_zero_vector_fraction": 0.0
+    }
+  },
+  "training_translation": {
+    "component_std_m": [
+      0.01097345095688079,
+      0.003424889843235138,
+      0.012791482304176944
+    ],
+    "consecutive_vector_delta_m": {
+      "min": 8.760544600624586e-05,
+      "median": 0.0018697754292006522,
+      "p95": 0.006441819190620065,
+      "max": 0.022271234390410663,
+      "rms": 0.003364713895983938
+    }
+  },
+  "production_numpy_forward_comparison": {
+    "node_version": "v24.22.1",
+    "layout_valid": true,
+    "static_and_training_arrays_valid": true,
+    "frames": [
+      {
+        "frame": 0,
+        "vertices": {
+          "max_component_error_m": 1.26340263001401e-07,
+          "rms_component_error_m": 1.4748705475160338e-08
+        },
+        "gaussian_centers": {
+          "max_component_error_m": 3.164656229709406e-07,
+          "rms_component_error_m": 5.1383592368051507e-08
+        },
+        "all_vertices_face_frames_and_gaussian_centers_finite": true
+      },
+      {
+        "frame": 580,
+        "vertices": {
+          "max_component_error_m": 1.1157249643622968e-07,
+          "rms_component_error_m": 1.42293289660552e-08
+        },
+        "gaussian_centers": {
+          "max_component_error_m": 8.060828257661079e-07,
+          "rms_component_error_m": 8.505650531705618e-08
+        },
+        "all_vertices_face_frames_and_gaussian_centers_finite": true
+      },
+      {
+        "frame": 1161,
+        "vertices": {
+          "max_component_error_m": 1.1594781279544719e-07,
+          "rms_component_error_m": 1.4397959310532378e-08
+        },
+        "gaussian_centers": {
+          "max_component_error_m": 3.4748709726306615e-07,
+          "rms_component_error_m": 5.6659411306029126e-08
+        },
+        "all_vertices_face_frames_and_gaussian_centers_finite": true
+      },
+      {
+        "frame": 1742,
+        "vertices": {
+          "max_component_error_m": 1.367553359721274e-07,
+          "rms_component_error_m": 1.49383654055005e-08
+        },
+        "gaussian_centers": {
+          "max_component_error_m": 5.463289727558607e-07,
+          "rms_component_error_m": 7.05784880039702e-08
+        },
+        "all_vertices_face_frames_and_gaussian_centers_finite": true
+      },
+      {
+        "frame": 2323,
+        "vertices": {
+          "max_component_error_m": 1.3602934498258001e-07,
+          "rms_component_error_m": 1.3935183204991061e-08
+        },
+        "gaussian_centers": {
+          "max_component_error_m": 4.974770427823572e-07,
+          "rms_component_error_m": 5.0677605133707375e-08
+        },
+        "all_vertices_face_frames_and_gaussian_centers_finite": true
+      }
+    ],
+    "selection": "up to five uniformly spaced training frames; no motion-dependent selection",
+    "vertices_compared_per_frame": 5143,
+    "gaussian_centers_compared_per_frame": 128,
+    "gaussian_centers_checked_finite_per_frame": 80014,
+    "tolerance_m": 0.0001,
+    "pass": true
+  },
+  "limits": [
+    "A head bundle has no articulated torso, arms or fingers; its joint hierarchy is root, neck, jaw and two eyes.",
+    "FLAME expression basis indices are latent coordinates, not named brow, blink or mouth labels.",
+    "The provided JSON/bin bundle contains no paired semantic face observations or source video.",
+    "The exporter's constant fps=15 is not proof of original source frame-0 time, frame sampling, edits or dropped frames.",
+    "Semantic calibration still requires the matching jensen_a source sequence or reviewed observations and its verified source-clock mapping; unrelated interview footage cannot supply paired targets.",
+    "Numerical agreement checks the production geometry math only; it does not assess rendered face/body seams, likeness, naturalness, or unseen motion.",
+    "The old 0.25 scalar comparison is algebraic expression-basis displacement, not a measured fourfold eyebrow or rendered-motion improvement."
+  ]
+}
