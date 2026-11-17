@@ -2,7 +2,7 @@
   "schema_version": "jensen-gesture-expansion-recovery.v1",
   "run_id": "jensen-goldman-gesture-expansion-2026-11-17",
   "date": "2026-11-17",
-  "status": "all_frozen_windows_extracted_expanded_dataset_prepared_fit_not_started",
+  "status": "source_recovery_extraction_preparation_and_fit_artifacts_persisted_verified",
   "archives": [
     {
       "name": "jensen-goldman-media-batch-01.tar.gz",
@@ -76,12 +76,12 @@
     "identity_review": "Source metadata supplies the subject attribution. Visual selection does not promote speaker association or continuity review."
   },
   "recipe": "data/motion/jensen-gesture-expansion.v1.json",
-  "next_step": "Verify the fourth raw batch and prepared dataset archive, checkpoint the exact expanded source manifest and fit recipe, then fit a separate candidate with the frozen settings.",
+  "next_step": "Use the separate explicit initial/expanded preview routes for visual acceptance. A stronger generalization claim requires additional event diversity and a new reserved evaluation set; no further tuning was performed in this run.",
   "private_output_root": "data/local/jensen-performance-2026-11-17/gesture-expansion",
   "limitations": [
     "All added intervals are from the existing Goldman training event; this does not add event diversity.",
     "The original WIRED validation result has already been observed and is not a fresh test.",
-    "All four frozen windows produced 380 new measured frames. Expanded preparation has 14 training windows for each arm and 24 for each finger group; fitting and quality comparison have not run.",
+    "All four frozen windows produced 380 new measured frames. The expanded fit completed 60 updates for each of four groups; its narrow reused-validation comparison is recorded in the expanded fit report.",
     "Raw source media, observations and derived weights are retained privately, not committed to Git.",
     "The wide crop has chest geometry in 78 of 80 frames. The frozen model still trains only arms and fingers because there is no corresponding torso validation series."
   ],
@@ -117,6 +117,41 @@
       "library_file_id": "libfile_fde3_f-ff69ab80b4c48191b5dc8fa18b42426d_a18ece08681081918d81df44f69c4b1f",
       "status": "uploaded_and_independent_full_readback_verified",
       "readback_sha256": "43232ee4e148d53d4541215b34435a462133b1404a2105fb4809150bae442051"
+    },
+    {
+      "name": "jensen-gesture-goldman-0172-6s.tar.gz",
+      "role": "fourth raw observation batch and private geometry export",
+      "bytes": 2862121,
+      "sha256": "e6ddfd5fe058aed59f56c9119b023b55b00cefc2705c5dab1b5afa0d88b62530",
+      "file_id": "file_00000000c55081f7be78310c43325466",
+      "library_file_id": "libfile_fde3_f-215dce3128b08191abaf150c813c9332_a18ece08681081918d81df44f69c4b1f",
+      "status": "uploaded_and_independent_full_readback_verified",
+      "readback_sha256": "e6ddfd5fe058aed59f56c9119b023b55b00cefc2705c5dab1b5afa0d88b62530"
+    },
+    {
+      "name": "jensen-gesture-expanded-preparation.tar.gz",
+      "role": "exact expanded dataset, clips, review receipts and frozen plans before fitting",
+      "bytes": 2108890,
+      "sha256": "69ca6602c2fa4f363180b5a889fadd726e3f3206b24f2d634782dd94ed24f350",
+      "file_id": "file_00000000956481f591e9f57939fda6b9",
+      "library_file_id": "libfile_fde3_f-3f7fe3362e08819180041a776f42d868_a18ece08681081918d81df44f69c4b1f",
+      "status": "uploaded_and_independent_full_readback_verified",
+      "readback_sha256": "69ca6602c2fa4f363180b5a889fadd726e3f3206b24f2d634782dd94ed24f350"
+    },
+    {
+      "name": "jensen-gesture-candidates-2026-11-17.zip",
+      "role": "both fitted gesture candidates, exact datasets, current/previous checkpoints, private input clips, recipes, reports and install README",
+      "path": "data/local/jensen-performance-2026-11-17/jensen-gesture-candidates-2026-11-17.zip",
+      "bytes": 2871526,
+      "sha256": "bfbdf4fbfe4b468af1c5f163a5f691344914069cf78d4b658514d91f182aaf2f",
+      "file_id": "file_00000000a02c81f5b915e6d915a8d618",
+      "library_file_id": "libfile_fde3_f-d611b0f3e1048191a17ad39cda6b7fd1_a18ece08681081918d81df44f69c4b1f",
+      "version": 0,
+      "status": "uploaded_and_independent_full_readback_verified",
+      "readback_sha256": "bfbdf4fbfe4b468af1c5f163a5f691344914069cf78d4b658514d91f182aaf2f",
+      "zip_members": 57,
+      "zip_crc_verified": true,
+      "both_model_hashes_independently_verified": true
     }
   ],
   "extraction_windows": [
@@ -245,5 +280,6 @@
     "dataset_file_sha256": "773a06bd87710a61a96b20d6232eef63397d5318c8ffb56cf81b205d767c5005",
     "input_manifest": "data/motion/jensen-gesture-expanded-input.v1.json",
     "training_plan": "data/motion/jensen-gesture-training-expanded.v1.json"
-  }
+  },
+  "expanded_fit_report": "reports/gesture/jensen-expanded-2026-11-17.json"
 }

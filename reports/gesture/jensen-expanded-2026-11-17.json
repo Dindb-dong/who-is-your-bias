@@ -1,0 +1,473 @@
+{
+  "schema_version": "jensen-gesture-fit-report.v1",
+  "run_id": "jensen-gesture-basis-expanded-2026-11-17",
+  "persona_id": "jensen-huang",
+  "source_revision": "56113261ce98a262b8f6216218534afa215070c6",
+  "algorithm": "masked_alternating_ridge_low_rank_temporal_basis",
+  "source_manifest_sha256": "5f3c54715033de99d6bceebe5e82f81217bf5bbf107787c5c8512799cca3649d",
+  "dataset_sha256": "e61b32907ac28e1031da456c469df437c5320f7f353ef898b3ce3af92c23ffd1",
+  "runtime": {
+    "device": "cpu",
+    "numpy": "2.5.4",
+    "platform": "linux",
+    "python": "3.12.14"
+  },
+  "preparation": {
+    "dataset_sha256": "e61b32907ac28e1031da456c469df437c5320f7f353ef898b3ce3af92c23ffd1",
+    "groups": {
+      "left_arm": {
+        "accepted_train_windows": 14,
+        "accepted_validation_windows": 1,
+        "excluded_windows": 33
+      },
+      "left_fingers": {
+        "accepted_train_windows": 24,
+        "accepted_validation_windows": 5,
+        "excluded_windows": 19
+      },
+      "right_arm": {
+        "accepted_train_windows": 14,
+        "accepted_validation_windows": 1,
+        "excluded_windows": 33
+      },
+      "right_fingers": {
+        "accepted_train_windows": 24,
+        "accepted_validation_windows": 5,
+        "excluded_windows": 19
+      }
+    },
+    "observed_source_frames": 960,
+    "source_clips": 10,
+    "source_events": {
+      "goldman-sachs-2024": "train",
+      "stripe-sessions-2024": "train",
+      "wired-big-interview-2024": "validation"
+    }
+  },
+  "groups": {
+    "left_arm": {
+      "status": "fitted_geometry_preview",
+      "rank": 2,
+      "iterations_completed": 60,
+      "training": {
+        "mean_rmse_rad": 0.188524419892982,
+        "neutral_rmse_rad": 0.195577267577236,
+        "observed_coordinates": 2169,
+        "reconstruction_rmse_rad": 0.12219397425949227,
+        "scope": "Latent codes are inferred from each evaluation window. This measures representation reconstruction, not causal gesture prediction or perceptual quality.",
+        "source_events": [
+          "goldman-sachs-2024"
+        ],
+        "status": "masked_reconstruction_only",
+        "windows": 14
+      },
+      "validation": {
+        "mean_rmse_rad": 0.12686825974725066,
+        "neutral_rmse_rad": 0.09186754293616231,
+        "observed_coordinates": 180,
+        "reconstruction_rmse_rad": 0.06855576753214625,
+        "scope": "Latent codes are inferred from each evaluation window. This measures representation reconstruction, not causal gesture prediction or perceptual quality.",
+        "source_events": [
+          "wired-big-interview-2024"
+        ],
+        "status": "masked_reconstruction_only",
+        "windows": 1
+      },
+      "max_angle_rad": 0.65,
+      "checkpoint_sha256": "7c09067f172e40ddc9910bdf930e2b6d65f2fee84939caaaddf91eb91d9e2ca2",
+      "checkpoint_bytes": 15173,
+      "excluded_windows": 33,
+      "loss_first": {
+        "iteration": 1,
+        "observed_mse": 0.01500821117012355
+      },
+      "loss_last": {
+        "iteration": 60,
+        "observed_mse": 0.014930908389598522
+      },
+      "beats_neutral_on_validation": true
+    },
+    "left_fingers": {
+      "status": "fitted_geometry_preview",
+      "rank": 2,
+      "iterations_completed": 60,
+      "training": {
+        "mean_rmse_rad": 0.233911953966041,
+        "neutral_rmse_rad": 0.24007697803340186,
+        "observed_coordinates": 18810,
+        "reconstruction_rmse_rad": 0.1820388356687099,
+        "scope": "Latent codes are inferred from each evaluation window. This measures representation reconstruction, not causal gesture prediction or perceptual quality.",
+        "source_events": [
+          "goldman-sachs-2024",
+          "stripe-sessions-2024"
+        ],
+        "status": "masked_reconstruction_only",
+        "windows": 24
+      },
+      "validation": {
+        "mean_rmse_rad": 0.35784385892381804,
+        "neutral_rmse_rad": 0.36417688693861455,
+        "observed_coordinates": 4230,
+        "reconstruction_rmse_rad": 0.3498744433979576,
+        "scope": "Latent codes are inferred from each evaluation window. This measures representation reconstruction, not causal gesture prediction or perceptual quality.",
+        "source_events": [
+          "wired-big-interview-2024"
+        ],
+        "status": "masked_reconstruction_only",
+        "windows": 5
+      },
+      "max_angle_rad": 0.8,
+      "checkpoint_sha256": "7cb234abff6a9b16e00edd3b3acadeb901b7c2eddf098036aefb6eaae06d80d2",
+      "checkpoint_bytes": 59000,
+      "excluded_windows": 19,
+      "loss_first": {
+        "iteration": 1,
+        "observed_mse": 0.03363927582360118
+      },
+      "loss_last": {
+        "iteration": 60,
+        "observed_mse": 0.03313765925199136
+      },
+      "beats_neutral_on_validation": true
+    },
+    "right_arm": {
+      "status": "fitted_geometry_preview",
+      "rank": 2,
+      "iterations_completed": 60,
+      "training": {
+        "mean_rmse_rad": 0.15255024699409012,
+        "neutral_rmse_rad": 0.1551737532683128,
+        "observed_coordinates": 2346,
+        "reconstruction_rmse_rad": 0.09125192069848947,
+        "scope": "Latent codes are inferred from each evaluation window. This measures representation reconstruction, not causal gesture prediction or perceptual quality.",
+        "source_events": [
+          "goldman-sachs-2024"
+        ],
+        "status": "masked_reconstruction_only",
+        "windows": 14
+      },
+      "validation": {
+        "mean_rmse_rad": 0.28653322436963485,
+        "neutral_rmse_rad": 0.28367898870075553,
+        "observed_coordinates": 180,
+        "reconstruction_rmse_rad": 0.2764355632062729,
+        "scope": "Latent codes are inferred from each evaluation window. This measures representation reconstruction, not causal gesture prediction or perceptual quality.",
+        "source_events": [
+          "wired-big-interview-2024"
+        ],
+        "status": "masked_reconstruction_only",
+        "windows": 1
+      },
+      "max_angle_rad": 0.5282014692967151,
+      "checkpoint_sha256": "19d54cb0c7ed3a2235c0b0ff4a7b19f0ab04ccdafe911e4786b2830f8442329d",
+      "checkpoint_bytes": 15108,
+      "excluded_windows": 33,
+      "loss_first": {
+        "iteration": 1,
+        "observed_mse": 0.00864755608477272
+      },
+      "loss_last": {
+        "iteration": 60,
+        "observed_mse": 0.008326516637937893
+      },
+      "beats_neutral_on_validation": true
+    },
+    "right_fingers": {
+      "status": "fitted_geometry_preview",
+      "rank": 2,
+      "iterations_completed": 60,
+      "training": {
+        "mean_rmse_rad": 0.2563254884125528,
+        "neutral_rmse_rad": 0.26267019483066334,
+        "observed_coordinates": 19665,
+        "reconstruction_rmse_rad": 0.19278034088692514,
+        "scope": "Latent codes are inferred from each evaluation window. This measures representation reconstruction, not causal gesture prediction or perceptual quality.",
+        "source_events": [
+          "goldman-sachs-2024",
+          "stripe-sessions-2024"
+        ],
+        "status": "masked_reconstruction_only",
+        "windows": 24
+      },
+      "validation": {
+        "mean_rmse_rad": 0.3141577097077502,
+        "neutral_rmse_rad": 0.3078246744878993,
+        "observed_coordinates": 4140,
+        "reconstruction_rmse_rad": 0.30378502080099806,
+        "scope": "Latent codes are inferred from each evaluation window. This measures representation reconstruction, not causal gesture prediction or perceptual quality.",
+        "source_events": [
+          "wired-big-interview-2024"
+        ],
+        "status": "masked_reconstruction_only",
+        "windows": 5
+      },
+      "max_angle_rad": 0.8,
+      "checkpoint_sha256": "8a09cf287dee2fd2865164e1bd509d25ad22deeb57cea7cf43eddf2919f9eba0",
+      "checkpoint_bytes": 59101,
+      "excluded_windows": 19,
+      "loss_first": {
+        "iteration": 1,
+        "observed_mse": 0.037301500571740386
+      },
+      "loss_last": {
+        "iteration": 60,
+        "observed_mse": 0.03716366005398372
+      },
+      "beats_neutral_on_validation": true
+    }
+  },
+  "comparison": {
+    "schema_version": "gesture-fit-comparison.v1",
+    "scope": "Descriptive reconstruction comparison using identical WIRED windows and the intersection of coordinates supported by both training fits. Evaluation latent codes are inferred; this is not prediction or perceptual evaluation.",
+    "validation_windows_byte_equivalent": true,
+    "initial_model_sha256": "f5ac3321fdf34525f1eaff21286e4aca34dfe252e9505a0eb2c0549d74a0f324",
+    "expanded_model_sha256": "ede0a38935d22aa980c622214a6d8a77a2c80b5241856f6d0fcbf46b757ec0b4",
+    "groups": {
+      "left_arm": {
+        "initial": {
+          "windows": 1,
+          "observed_coordinates": 174,
+          "neutral_rmse_rad": 0.09091553469731775,
+          "mean_rmse_rad": 0.12477893872781272,
+          "reconstruction_rmse_rad": 0.11160633004380639,
+          "source_events": [
+            "wired-big-interview-2024"
+          ],
+          "status": "masked_reconstruction_only",
+          "scope": "Latent codes are inferred from each evaluation window. This measures representation reconstruction, not causal gesture prediction or perceptual quality."
+        },
+        "expanded": {
+          "windows": 1,
+          "observed_coordinates": 174,
+          "neutral_rmse_rad": 0.09091553469731775,
+          "mean_rmse_rad": 0.12570566493420676,
+          "reconstruction_rmse_rad": 0.06755858985293013,
+          "source_events": [
+            "wired-big-interview-2024"
+          ],
+          "status": "masked_reconstruction_only",
+          "scope": "Latent codes are inferred from each evaluation window. This measures representation reconstruction, not causal gesture prediction or perceptual quality."
+        }
+      },
+      "left_fingers": {
+        "initial": {
+          "windows": 5,
+          "observed_coordinates": 4230,
+          "neutral_rmse_rad": 0.36417688693861455,
+          "mean_rmse_rad": 0.358173536408026,
+          "reconstruction_rmse_rad": 0.3492283709895136,
+          "source_events": [
+            "wired-big-interview-2024"
+          ],
+          "status": "masked_reconstruction_only",
+          "scope": "Latent codes are inferred from each evaluation window. This measures representation reconstruction, not causal gesture prediction or perceptual quality."
+        },
+        "expanded": {
+          "windows": 5,
+          "observed_coordinates": 4230,
+          "neutral_rmse_rad": 0.36417688693861455,
+          "mean_rmse_rad": 0.35784385892381804,
+          "reconstruction_rmse_rad": 0.3498744433979576,
+          "source_events": [
+            "wired-big-interview-2024"
+          ],
+          "status": "masked_reconstruction_only",
+          "scope": "Latent codes are inferred from each evaluation window. This measures representation reconstruction, not causal gesture prediction or perceptual quality."
+        }
+      },
+      "right_arm": {
+        "initial": {
+          "windows": 1,
+          "observed_coordinates": 180,
+          "neutral_rmse_rad": 0.28367898870075553,
+          "mean_rmse_rad": 0.3189254712527316,
+          "reconstruction_rmse_rad": 0.30777869866781343,
+          "source_events": [
+            "wired-big-interview-2024"
+          ],
+          "status": "masked_reconstruction_only",
+          "scope": "Latent codes are inferred from each evaluation window. This measures representation reconstruction, not causal gesture prediction or perceptual quality."
+        },
+        "expanded": {
+          "windows": 1,
+          "observed_coordinates": 180,
+          "neutral_rmse_rad": 0.28367898870075553,
+          "mean_rmse_rad": 0.28653322436963485,
+          "reconstruction_rmse_rad": 0.2764355632062729,
+          "source_events": [
+            "wired-big-interview-2024"
+          ],
+          "status": "masked_reconstruction_only",
+          "scope": "Latent codes are inferred from each evaluation window. This measures representation reconstruction, not causal gesture prediction or perceptual quality."
+        }
+      },
+      "right_fingers": {
+        "initial": {
+          "windows": 5,
+          "observed_coordinates": 4140,
+          "neutral_rmse_rad": 0.3078246744878993,
+          "mean_rmse_rad": 0.32093748841307096,
+          "reconstruction_rmse_rad": 0.31077755739485824,
+          "source_events": [
+            "wired-big-interview-2024"
+          ],
+          "status": "masked_reconstruction_only",
+          "scope": "Latent codes are inferred from each evaluation window. This measures representation reconstruction, not causal gesture prediction or perceptual quality."
+        },
+        "expanded": {
+          "windows": 5,
+          "observed_coordinates": 4140,
+          "neutral_rmse_rad": 0.3078246744878993,
+          "mean_rmse_rad": 0.3141577097077502,
+          "reconstruction_rmse_rad": 0.30378502080099806,
+          "source_events": [
+            "wired-big-interview-2024"
+          ],
+          "status": "masked_reconstruction_only",
+          "scope": "Latent codes are inferred from each evaluation window. This measures representation reconstruction, not causal gesture prediction or perceptual quality."
+        }
+      }
+    }
+  },
+  "runtime_check": {
+    "schema_version": "gesture-runtime-parse-check.v1",
+    "model_id": "jensen-gesture-basis-expanded-2026-11-17",
+    "elapsed_ms": 30000,
+    "step_ms": 50,
+    "active_frames": 480,
+    "inactive_rest_frames": 120,
+    "max_channels": 36,
+    "max_quaternion_unit_error": 2.220446049250313e-16,
+    "max_angle_rad": 0.7999999999999999
+  },
+  "artifacts": [
+    {
+      "path": "data/local/jensen-performance-2026-11-17/gesture-expanded/dataset.json",
+      "bytes": 1409298,
+      "sha256": "773a06bd87710a61a96b20d6232eef63397d5318c8ffb56cf81b205d767c5005"
+    },
+    {
+      "path": "data/local/jensen-performance-2026-11-17/gesture-expanded/preparation.json",
+      "bytes": 652,
+      "sha256": "2cbfa83e9ed3d5a08870f36be5469b01bcf1c4bef031840eb653b0e8635ef61c"
+    },
+    {
+      "path": "data/local/jensen-performance-2026-11-17/gesture-expanded/training-result.json",
+      "bytes": 77925,
+      "sha256": "48f93dbac2d323bfd9804374e7568df79bc3d47c83cca0fb198b5bb6e9c3e2ab"
+    },
+    {
+      "path": "data/local/jensen-performance-2026-11-17/gesture-expanded/jensen-gesture-basis-expanded.json",
+      "bytes": 144793,
+      "sha256": "ede0a38935d22aa980c622214a6d8a77a2c80b5241856f6d0fcbf46b757ec0b4"
+    },
+    {
+      "path": "data/local/jensen-performance-2026-11-17/gesture-expanded/resumed-model-expanded.json",
+      "bytes": 144793,
+      "sha256": "ede0a38935d22aa980c622214a6d8a77a2c80b5241856f6d0fcbf46b757ec0b4"
+    },
+    {
+      "path": "data/local/jensen-performance-2026-11-17/gesture-expanded/comparison.json",
+      "bytes": 4912,
+      "sha256": "f8023570e4ca389869c23d13534c967cbac7e87839fe5fd8c3483960af684dea"
+    },
+    {
+      "path": "data/local/jensen-performance-2026-11-17/gesture-expanded/runtime-check.json",
+      "bytes": 325,
+      "sha256": "c1bc509ccc9cd67bbf5c008d1eab66aced49bb74a0238d9b57f11e76a339c2eb"
+    },
+    {
+      "path": "data/local/jensen-performance-2026-11-17/gesture-expanded/left_arm.checkpoint.json",
+      "bytes": 15173,
+      "sha256": "7c09067f172e40ddc9910bdf930e2b6d65f2fee84939caaaddf91eb91d9e2ca2"
+    },
+    {
+      "path": "data/local/jensen-performance-2026-11-17/gesture-expanded/left_fingers.checkpoint.json",
+      "bytes": 59000,
+      "sha256": "7cb234abff6a9b16e00edd3b3acadeb901b7c2eddf098036aefb6eaae06d80d2"
+    },
+    {
+      "path": "data/local/jensen-performance-2026-11-17/gesture-expanded/right_arm.checkpoint.json",
+      "bytes": 15108,
+      "sha256": "19d54cb0c7ed3a2235c0b0ff4a7b19f0ab04ccdafe911e4786b2830f8442329d"
+    },
+    {
+      "path": "data/local/jensen-performance-2026-11-17/gesture-expanded/right_fingers.checkpoint.json",
+      "bytes": 59101,
+      "sha256": "8a09cf287dee2fd2865164e1bd509d25ad22deeb57cea7cf43eddf2919f9eba0"
+    },
+    {
+      "path": "data/local/jensen-performance-2026-11-17/gesture-expanded/left_arm.checkpoint.previous.json",
+      "bytes": 14646,
+      "sha256": "607e7921fa0b63de1c353c9feecb15dfd75ec9f85662ba1dab8c4661cb91a74c"
+    },
+    {
+      "path": "data/local/jensen-performance-2026-11-17/gesture-expanded/left_fingers.checkpoint.previous.json",
+      "bytes": 58510,
+      "sha256": "a4abeecaaf1b2f8db446ffb334d1846402e10c8ceb34e7b4633127ff0d8cbc8b"
+    },
+    {
+      "path": "data/local/jensen-performance-2026-11-17/gesture-expanded/right_arm.checkpoint.previous.json",
+      "bytes": 14631,
+      "sha256": "496f4bf5e79ea72f6c538c69b9aca9d12b628e42d8cc49add949728ad6efc1a7"
+    },
+    {
+      "path": "data/local/jensen-performance-2026-11-17/gesture-expanded/right_fingers.checkpoint.previous.json",
+      "bytes": 58577,
+      "sha256": "fa0a10f583a67cb2b86f933982aaadd22af93b7a45ba2f851ef4e2cd64990377"
+    },
+    {
+      "path": "apps/web/public/models/gesture/jensen-gesture-basis.json",
+      "bytes": 141273,
+      "sha256": "f5ac3321fdf34525f1eaff21286e4aca34dfe252e9505a0eb2c0549d74a0f324"
+    }
+  ],
+  "resume_verification": {
+    "command": "uv run python -m tools.motion.gesture_training train data/local/jensen-performance-2026-11-17/gesture-expanded --output data/local/jensen-performance-2026-11-17/gesture-expanded/resumed-model-expanded.json --resume",
+    "completed_iterations_per_group": 60,
+    "reexport_bytes_identical": true,
+    "model_sha256": "ede0a38935d22aa980c622214a6d8a77a2c80b5241856f6d0fcbf46b757ec0b4",
+    "scope": "A completed-checkpoint reload and export was executed. A two-update to five-update continuation equivalence is separately covered by the trainer test."
+  },
+  "training_policy": {
+    "frozen_expansion_recipe": "data/motion/jensen-gesture-expansion.v1.json",
+    "hyperparameters_changed_after_expansion_validation": false,
+    "original_model_overwritten": false,
+    "shared_window_ids_all_four_groups": 12,
+    "review_status": "geometry_preview",
+    "runtime_default_promoted": false
+  },
+  "decision": {
+    "status": "explicit_opt_in_expanded_geometry_candidate",
+    "all_groups_below_neutral_on_reused_validation": true,
+    "human_motion_review": false,
+    "independent_unseen_event_evaluation": false,
+    "audio_conditioned_generation": false,
+    "semantic_gesture_prediction": false,
+    "learned_torso_motion": false,
+    "reason": "More observed training support and lower reused-validation reconstruction error support another preview candidate, not a naturalness or personal-gesture acceptance claim. Arm validation still contains only one two-second window per side; all added data is from the existing Goldman training event. Left-finger reconstruction is slightly worse than the initial candidate."
+  },
+  "persistence_status": "uploaded_and_independent_full_readback_verified",
+  "package": {
+    "name": "jensen-gesture-candidates-2026-11-17.zip",
+    "role": "both fitted gesture candidates, exact datasets, current/previous checkpoints, private input clips, recipes, reports and install README",
+    "path": "data/local/jensen-performance-2026-11-17/jensen-gesture-candidates-2026-11-17.zip",
+    "bytes": 2871526,
+    "sha256": "bfbdf4fbfe4b468af1c5f163a5f691344914069cf78d4b658514d91f182aaf2f",
+    "file_id": "file_00000000a02c81f5b915e6d915a8d618",
+    "library_file_id": "libfile_fde3_f-d611b0f3e1048191a17ad39cda6b7fd1_a18ece08681081918d81df44f69c4b1f",
+    "version": 0,
+    "status": "uploaded_and_independent_full_readback_verified",
+    "readback_sha256": "bfbdf4fbfe4b468af1c5f163a5f691344914069cf78d4b658514d91f182aaf2f",
+    "zip_members": 57,
+    "zip_crc_verified": true,
+    "both_model_hashes_independently_verified": true
+  },
+  "last_persisted_iterations_per_group": {
+    "left_arm": 60,
+    "left_fingers": 60,
+    "right_arm": 60,
+    "right_fingers": 60
+  },
+  "work_since_last_persisted_training_step": "No fitting updates after step 60; only the external persistence receipt was appended after package verification."
+}

@@ -22,7 +22,7 @@ contexts are unset and its source geometry has not passed speaker-review gates.
 Those gates are preserved. Learned motion below has its own explicit preview
 label; it is not a promotion of the catalog or a source-context match.
 
-## Verified preparation data
+## Initial preparation data
 
 The frozen [training plan](../data/motion/jensen-gesture-training.v1.json) pins the
 hash of [the existing source manifest](../data/motion/jensen-multievent-input.v1.json).
@@ -103,9 +103,37 @@ geodesic angle, pixel error or perceptual score.
 gesture policy, and this run does not establish generalization or naturalness.
 No further hyperparameter tuning was performed after inspecting validation.
 
-The remaining limitation is concrete: both arm groups have five accepted windows
-from one training event and only one usable validation window. More continuous,
-visible arm data is needed before a stronger cross-event conclusion is possible.
+The initial arm groups have five accepted windows from one training event and
+only one usable validation window. The bounded expansion below adds measured
+training support; it does not add another validation event.
+
+## Executed source expansion and second fit
+
+The follow-up recovered the existing private Goldman source video, froze four
+new intervals, and extracted 38 seconds / 380 additional observed frames. The
+expanded dataset contains ten clips / 960 frames. Each arm's accepted training
+windows increased from 5 to 14; each finger group now has 24. Twelve window IDs
+are supported by all four groups, compared with five initially.
+
+A separate expanded candidate completed the same 60 updates per group, reloaded
+its checkpoints and re-exported identical bytes. The original model is preserved.
+The expanded model is 144,793 bytes, SHA-256
+`ede0a38935d22aa980c622214a6d8a77a2c80b5241856f6d0fcbf46b757ec0b4`.
+
+The common-coordinate WIRED comparison improves both arms and right fingers;
+left fingers are slightly worse than the initial fit. All expanded groups are
+below neutral, but the one-window arm validation remains too small for a
+naturalness or generalization claim. WIRED was already observed during the
+initial fit, and no parameters were retuned after the expansion result.
+
+Read [the executed expansion report and install commands](jensen-gesture-expansion.md)
+for exact source intervals, coverage, comparison denominators, private artifact
+receipts and reproduction. The expanded runtime file is
+`jensen-gesture-basis-expanded.json`; select it with
+`/?head=gaussian&gesture=learned&gestureBundle=jensen-gesture-basis-expanded`.
+The initial route remains `/?head=gaussian&gesture=learned`. Both candidates
+require the same explicit geometry-preview setting and Jensen subject binding.
+The expanded candidate does not replace the original default file.
 
 ## Reproduction and resumption
 
