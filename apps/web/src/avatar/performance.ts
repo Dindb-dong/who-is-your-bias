@@ -2,6 +2,7 @@ import { Quaternion } from 'three';
 import { sampleMotion } from './motion';
 import { sampleSpeech } from './speech';
 import { samplePose } from './timeline';
+import { sampleLearnedGesture, type GestureBasisModel } from './learnedGesture';
 import type { AnimationTelemetry, AvatarClip, QuaternionTuple, RigDiagnostics, RigPose, SpeechTiming, TimelineInput } from './types';
 
 export interface PerformanceInput extends TimelineInput {
@@ -11,6 +12,7 @@ export interface PerformanceInput extends TimelineInput {
   performanceClip?: AvatarClip;
   observationElapsedMs?: number;
   allowGeometryPreview?: boolean;
+  learnedGesture?: GestureBasisModel;
 }
 
 export function samplePerformance(input: PerformanceInput, diagnostics: RigDiagnostics): { pose: RigPose; telemetry: AnimationTelemetry } {
@@ -19,6 +21,14 @@ export function samplePerformance(input: PerformanceInput, diagnostics: RigDiagn
     faceSource: 'designed', boneSource: 'designed', speechSource: input.speaking ? input.amplitude === undefined ? 'estimated' : 'amplitude' : 'silent',
     unsupportedFace: [], unsupportedVisemes: [],
   };
+  if (!input.performanceClip && input.learnedGesture && input.speaking && input.allowGeometryPreview && !input.reducedMotion) {
+    const bones = sampleLearnedGesture(input.learnedGesture, input.audioElapsedMs ?? input.elapsedMs);
+    if (bones) {
+      pose.bones = { ...pose.bones, ...bones };
+      telemetry.boneSource = 'trained_geometry_preview';
+      telemetry.warning = 'Learned geometry preview: source speaker association and motion quality remain unreviewed.';
+    }
+  }
   if (input.performanceClip) {
     const sample = sampleMotion(input.performanceClip, input.observationElapsedMs ?? input.elapsedMs, input.allowGeometryPreview);
     if (sample) {
