@@ -72,6 +72,7 @@ export class AvatarRenderer {
   private start = performance.now();
   private modelAbort?: AbortController;
   private modelSerial = 0;
+  private modelLoadFailed = false;
   private timingInput?: SpeechTiming;
   private clipInput?: AvatarClip;
   private validatedTiming?: SpeechTiming;
@@ -304,7 +305,12 @@ export class AvatarRenderer {
   private attachGaussianHead(): void {
     this.detachGaussianHead();
     if (!this.gaussianFactory) return;
-    if (this.rig.diagnostics.kind !== 'glb') { this.setGaussianState('loading', 'Waiting for the rigged body.'); return; }
+    if (this.rig.diagnostics.kind !== 'glb') {
+      this.setGaussianState(this.modelLoadFailed ? 'error' : 'loading', this.modelLoadFailed
+        ? 'The rigged body could not be loaded. The Gaussian face is disabled while the built-in portrait is shown.'
+        : 'Waiting for the rigged body.');
+      return;
+    }
     this.rig.apply(neutralPose());
     try {
       this.gaussian = this.gaussianFactory(this.rig);
@@ -316,6 +322,7 @@ export class AvatarRenderer {
 
   async setModel(url?: string, mapping: RigMapping = {}): Promise<void> {
     if (this.disposed) return;
+    this.modelLoadFailed = false;
     this.stopAudition('model_or_mapping_changed');
     const serial = ++this.modelSerial;
     this.modelAbort?.abort();
@@ -334,8 +341,10 @@ export class AvatarRenderer {
       this.callbacks.onModelState?.('ready');
     } catch (error) {
       if (this.disposed || serial !== this.modelSerial || abort.signal.aborted) return;
+      this.modelLoadFailed = true;
       if (this.rig.diagnostics.kind !== 'procedural') this.replaceRig(createProceduralRig(this.portraitStyle));
       this.callbacks.onModelState?.('fallback');
+      if (this.gaussianRequested) this.setGaussianState('error', 'The rigged body could not be loaded. The Gaussian face is disabled while the built-in portrait is shown.');
       this.callbacks.onError?.(error instanceof Error ? error : new Error('The model could not be loaded.'));
     }
   }
