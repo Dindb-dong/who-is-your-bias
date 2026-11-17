@@ -1,0 +1,29 @@
+{
+  "schema_version": "gesture-training-plan.v1",
+  "id": "jensen-gesture-basis-expanded-2026-11-17",
+  "persona_id": "jensen-huang",
+  "source_manifest": "data/motion/jensen-gesture-expanded-input.v1.json",
+  "source_manifest_sha256": "5f3c54715033de99d6bceebe5e82f81217bf5bbf107787c5c8512799cca3649d",
+  "event_partitions": {
+    "goldman-sachs-2024": "train",
+    "stripe-sessions-2024": "train",
+    "wired-big-interview-2024": "validation"
+  },
+  "window_ms": 2000,
+  "sample_count": 20,
+  "minimum_coverage": 0.6,
+  "rank": 2,
+  "iterations": 60,
+  "ridge": 0.01,
+  "seed": 1729,
+  "checkpoint_every": 10,
+  "notes": [
+    "Four frozen Goldman windows add exactly 38 seconds/380 measured frames. The six original source clips remain byte-identical.",
+    "All geometry remains unreviewed; no emotional labels or source-context selection are introduced.",
+    "The WIRED clip remains separate within this fit but was already measured in the initial fit and earlier repository work. It is not fresh independent evaluation.",
+    "Sampling, coverage, rank, iteration count, ridge, seed and checkpoint interval remain identical to the pre-extraction expansion recipe. No after-validation tuning is permitted.",
+    "Train a separate candidate artifact; preserve the initial fitted model and checkpoints."
+  ],
+  "expansion_recipe": "data/motion/jensen-gesture-expansion.v1.json",
+  "expansion_recipe_sha256": "f980a783c5d8a743d23492612126f6f68c22dadfc1b1d487ef07d8a518b7fe35"
+}
