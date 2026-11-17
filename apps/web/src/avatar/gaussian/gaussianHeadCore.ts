@@ -12,9 +12,14 @@ function f16ToF32(src) {
 }
 
 export function parseBundle(header, buffer) {
-  const B = {};
+  if (header.schema !== 'gaussian-head.v1' || !(buffer instanceof ArrayBuffer) || !header.buffers || typeof header.buffers !== 'object') throw new Error('Invalid Gaussian head bundle');
+  const B: Record<string, Float32Array | Uint32Array> = {};
   for (const [name, b] of Object.entries(header.buffers)) {
+    if (!Array.isArray(b.shape) || !b.shape.length || b.shape.some((size) => !Number.isSafeInteger(size) || size < 0)) throw new Error('Invalid buffer shape: ' + name);
     const n = b.shape.reduce((a, c) => a * c, 1);
+    const width = b.dtype === 'f16' ? 2 : b.dtype === 'f32' || b.dtype === 'u32' ? 4 : 0;
+    if (!width || !Number.isSafeInteger(n) || !Number.isSafeInteger(b.offset) || b.offset < 0 || b.offset % width !== 0
+        || b.bytes !== n * width || b.offset + b.bytes > buffer.byteLength) throw new Error('Invalid or truncated buffer: ' + name);
     if (b.dtype === 'f32') B[name] = new Float32Array(buffer, b.offset, n);
     else if (b.dtype === 'u32') B[name] = new Uint32Array(buffer, b.offset, n);
     else if (b.dtype === 'f16') B[name] = f16ToF32(new Uint16Array(buffer, b.offset, n));
@@ -23,11 +28,19 @@ export function parseBundle(header, buffer) {
   return B;
 }
 
-export async function loadBundle(stemUrl) {
-  const header = await (await fetch(stemUrl + '.json')).json();
+export async function loadBundle(stemUrl, signal: AbortSignal | undefined = undefined) {
+  const manifest = await fetch(stemUrl + '.json', { signal });
+  if (!manifest.ok) throw new Error('Could not load head manifest (HTTP ' + manifest.status + ')');
+  const header = await manifest.json();
   if (header.schema !== 'gaussian-head.v1') throw new Error('Unsupported head bundle ' + header.schema);
-  const buffer = await (await fetch(stemUrl + '.bin')).arrayBuffer();
-  return { header, B: parseBundle(header, buffer) };
+  const response = await fetch(stemUrl + '.bin', { signal });
+  if (!response.ok) throw new Error('Could not load head data (HTTP ' + response.status + ')');
+  const buffer = await response.arrayBuffer();
+  const B = parseBundle(header, buffer);
+  const hash = await crypto.subtle.digest('SHA-256', buffer);
+  signal?.throwIfAborted();
+  const sha256 = [...new Uint8Array(hash)].map((byte) => byte.toString(16).padStart(2, '0')).join('');
+  return { header, B, sha256 };
 }
 
 function rodrigues(x, y, z, out, o) {
