@@ -205,6 +205,8 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
         {loadingModel && <div role="status" className="avatar-model-status" style={{ position: 'absolute', bottom: 20, left: 20, color: '#d8f8a0', fontSize: 12 }}>Loading your avatar…</div>}
         {gaussianHead && <div role="status" className="avatar-model-status" style={{ position: 'absolute', top: 72, right: 16, left: 16, padding: '6px 10px', borderRadius: 8, background: '#0b1009cc', color: gaussianState === 'error' ? '#efb5a1' : '#d8f8a0', fontSize: 11 }}>
           {gaussianState === 'loading' ? 'Loading local photoreal face…' : gaussianState === 'ready' ? 'Synthetic photoreal face · articulated body' : gaussianState === 'error' ? `Photoreal face unavailable: ${gaussianMessage} The body remains available.` : 'Preparing photoreal face…'}
+          {gaussianState === 'ready' && gaussianMessage && <span title={gaussianMessage}> · Recorded expression preview; semantic calibration pending</span>}
+          {learnedGesture && allowGeometryPreview && <span> · Experimental learned gestures</span>}
         </div>}
         {modelError && !fatal && <div role="status" className="avatar-model-status" style={{ position: 'absolute', bottom: 20, left: 20, right: 20, padding: 12, borderRadius: 12, background: '#172014ed', color: '#e3e8dc', fontSize: 12 }}>
           {modelError} The built-in portrait is still available.

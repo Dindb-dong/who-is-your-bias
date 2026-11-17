@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { Euler, Quaternion, Vector3 } from 'three';
+import { AttentionController, composeAttentionPose } from '../attention';
 import { neutralPose } from '../timeline';
 import { createGaussianPerformance, gaussianFaceWeights, parseGaussianExpressionDriver, type GaussianExpressionDriver } from './gaussianPerformance';
 
@@ -63,5 +65,31 @@ describe('Gaussian live expression controller', () => {
     expect(() => parseGaussianExpressionDriver(leaked, header, hash)).toThrow(/overlapping/);
     expect(() => createGaussianPerformance(header, B, { driver: driver(), bundleSha256: hash, trainingFrameIndices: [0, 2] })).toThrow(/validation/);
     expect(() => createGaussianPerformance(header, B, { trainingFrameIndices: [1, 1] })).toThrow(/ordered/);
+  });
+  it('preserves eyes-first attention after the compositor moves gaze into eye bones', () => {
+    const attention = new AttentionController();
+    const diagnostics = { kind: 'glb' as const, morphs: [], bones: ['head', 'neck', 'leftEye', 'rightEye'], missing: [] };
+    attention.sample({ id: 'selected', x: 1, y: 0.7, observedAtMs: 0 }, 0);
+    const frame = attention.sample({ id: 'selected', x: 1, y: 0.7, observedAtMs: 160 }, 160);
+    const attended = composeAttentionPose(neutralPose(), frame, diagnostics);
+    expect(frame.phase).toBe('eyes');
+    expect(attended.pose.gazeX).toBe(0); expect(attended.pose.gazeY).toBe(0);
+    const sampled = createGaussianPerformance(header, B).sample({ ...input, rigPose: attended.pose });
+    for (const [offset, name] of [[9, 'leftEye'], [12, 'rightEye']] as const) {
+      const axis = new Vector3().fromArray(sampled.pose, offset), angle = axis.length();
+      const actual = new Quaternion().setFromAxisAngle(axis.normalize(), angle);
+      expect(angle).toBeGreaterThan(0.2);
+      expect(actual.angleTo(new Quaternion(...attended.pose.bones![name]!))).toBeLessThan(1e-6);
+    }
+    expect([...sampled.pose.slice(0, 6)]).toEqual([0, 0, 0, 0, 0, 0]);
+  });
+  it('keeps asymmetric per-eye rotations and supports the morph-only attention route', () => {
+    const left = new Quaternion().setFromEuler(new Euler(0.1, 0.3, 0)).toArray() as [number, number, number, number];
+    const right = new Quaternion().setFromEuler(new Euler(-0.05, 0.15, 0)).toArray() as [number, number, number, number];
+    const c = createGaussianPerformance(header, B);
+    const sample = c.sample({ ...input, rigPose: { ...neutralPose(), bones: { leftEye: left, rightEye: right } } });
+    expect(sample.pose[10]).toBeGreaterThan(sample.pose[13]);
+    const morph = c.sample({ ...input, rigPose: { ...neutralPose(), face: { eyeLookOutLeft: 1, eyeLookInRight: 1 } } });
+    expect(morph.pose[10]).toBeCloseTo(0.35); expect(morph.pose[13]).toBeCloseTo(0.35);
   });
 });

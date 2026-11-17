@@ -1,3 +1,4 @@
+import { Euler, Quaternion } from 'three';
 import { FACE_SET, type FaceChannel, type FaceWeights } from '../channels';
 import { clamp01 } from '../timeline';
 import type { RigPose } from '../types';
@@ -90,6 +91,32 @@ export function gaussianFaceWeights(pose: RigPose, speaking: boolean): FaceWeigh
   return face;
 }
 
+/** Attention is composed into canonical eye bone deltas or named look controls,
+ * and deliberately zeroes legacy gaze. Preserve that selected route. */
+function eyeRotation(pose: RigPose, side: 'Left' | 'Right'): [number, number, number] {
+  const bone = pose.bones?.[side === 'Left' ? 'leftEye' : 'rightEye'];
+  let q: Quaternion;
+  if (bone && bone.length === 4 && bone.every(Number.isFinite) && Math.hypot(...bone) > 1e-8) {
+    q = new Quaternion(...bone).normalize();
+  } else {
+    const horizontal = pose.face?.[`eyeLookOut${side}`] !== undefined || pose.face?.[`eyeLookIn${side}`] !== undefined;
+    const vertical = pose.face?.[`eyeLookDown${side}`] !== undefined || pose.face?.[`eyeLookUp${side}`] !== undefined;
+    const yaw = horizontal
+      ? (clamp01(pose.face?.[`eyeLookOut${side}`] ?? 0) - clamp01(pose.face?.[`eyeLookIn${side}`] ?? 0)) * (side === 'Left' ? 0.35 : -0.35)
+      : Math.max(-0.4, Math.min(0.4, finite(pose.gazeX) ? pose.gazeX : 0));
+    const pitch = vertical
+      ? (clamp01(pose.face?.[`eyeLookDown${side}`] ?? 0) - clamp01(pose.face?.[`eyeLookUp${side}`] ?? 0)) * 0.25
+      : -Math.max(-0.3, Math.min(0.3, finite(pose.gazeY) ? pose.gazeY : 0));
+    q = new Quaternion().setFromEuler(new Euler(pitch, yaw, 0));
+  }
+  // q and -q encode the same rotation. Use the shortest axis-angle branch.
+  if (q.w < 0) q.set(-q.x, -q.y, -q.z, -q.w);
+  const sine = Math.hypot(q.x, q.y, q.z);
+  if (sine < 1e-8) return [0, 0, 0];
+  const scale = 2 * Math.atan2(sine, q.w) / sine;
+  return [q.x * scale, q.y * scale, q.z * scale];
+}
+
 export interface GaussianPerformanceInput {
   rigPose: RigPose;
   /** The caller passes its actual audio/media clock, including seeks and pauses. */
@@ -156,9 +183,8 @@ export function createGaussianPerformance(header: GaussianMotionHeader, B: Gauss
       // Body/attention owns global and neck rotations. Do not replay source
       // camera motion on top of its live skeleton. Lip amplitude owns the jaw.
       pose[6] = (face.jawOpen ?? 0) * (driver?.jaw_open_radians ?? 0.35);
-      const x = Math.max(-0.4, Math.min(0.4, finite(input.rigPose.gazeX) ? input.rigPose.gazeX : 0));
-      const y = Math.max(-0.3, Math.min(0.3, finite(input.rigPose.gazeY) ? input.rigPose.gazeY : 0));
-      pose[9] = pose[12] = -y; pose[10] = pose[13] = x;
+      pose.set(eyeRotation(input.rigPose, 'Left'), 9);
+      pose.set(eyeRotation(input.rigPose, 'Right'), 12);
       return { expr, pose, trans, expressionSource, sourceLipResidual: expressionSource === 'observed_replay' };
     },
   };
