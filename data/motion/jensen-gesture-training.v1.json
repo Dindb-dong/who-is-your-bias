@@ -1,0 +1,25 @@
+{
+  "schema_version": "gesture-training-plan.v1",
+  "id": "jensen-gesture-basis-2026-11-17",
+  "persona_id": "jensen-huang",
+  "source_manifest": "data/motion/jensen-multievent-input.v1.json",
+  "source_manifest_sha256": "e82abb8171a5a18c5e3a41c1f85b292f187d4cc4ebb37ab02b7a6cd64056927e",
+  "event_partitions": {
+    "goldman-sachs-2024": "train",
+    "stripe-sessions-2024": "train",
+    "wired-big-interview-2024": "validation"
+  },
+  "window_ms": 2000,
+  "sample_count": 20,
+  "minimum_coverage": 0.6,
+  "rank": 2,
+  "iterations": 60,
+  "ridge": 0.01,
+  "seed": 1729,
+  "checkpoint_every": 10,
+  "notes": [
+    "Frozen event partition for this new fit only. All three events were already exposed in earlier development; validation is not globally unseen.",
+    "Source geometry remains unreviewed. Fitting does not promote speaker association, gesture semantics or conditional personal policy.",
+    "No raw footage, new detections, audio alignment or GPU model training is needed for this bounded kinematic experiment."
+  ]
+}
