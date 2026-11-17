@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { build } from 'vite';
 import { FINGER_JOINTS } from '../../apps/web/src/avatar/channels';
+import { createEventParser, type Turn } from '../../apps/web/src/api';
 
 /** Tests exercise production rendering with explicitly synthetic input. They
  * cannot establish Jensen likeness or trained expression/gesture quality. */
@@ -88,17 +89,21 @@ async function routeSpeech(page: Page) {
     await route.fulfill({ response, json: { ...data, capabilities: { ...data.capabilities, speech: true, live_speech: false },
       bindings: { ...data.bindings, voice: { status: 'matched', persona_id: 'jensen-huang', voice: 'reference' } } } });
   });
-  const turn = { id: 'synthetic-gaussian-test', session_id: 'a'.repeat(32), text: 'Synthetic rendering and transport fixture.', language: 'en', mode: 'behavior', provider: 'evidence',
+  const turn: Turn = { id: 'synthetic-gaussian-test', session_id: 'a'.repeat(32), text: 'Synthetic rendering and transport fixture.', language: 'en', mode: 'behavior', provider: 'evidence',
     citations: [], grounding: { status: 'unverified', retrieved_ids: [], invalid_citation_ids: [], reason: 'Synthetic test fixture.' },
-    metrics: { retrieval_ms: 0, generation_ms: 0, total_ms: 0 }, context: { live_inference: false },
-    behavior: { duration_ms: 8000, timing_basis: 'estimated_text', motion: null, cues: [
+    metrics: { retrieval_ms: 0, generation_ms: 0, total_ms: 0 },
+    behavior: { duration_ms: 8000, timing_basis: 'estimated_text', motion: null, speech: { rate: 1, pitch: 1, pause_ms: 0 }, cues: [
       { channel: 'face', name: 'brow_raise', start_ms: 0, duration_ms: 7900, intensity: .9, provenance: 'designed' },
       { channel: 'gesture', name: 'open_palm', start_ms: 0, duration_ms: 7900, intensity: .9, provenance: 'designed' },
       { channel: 'gesture', name: 'emphasis', start_ms: 0, duration_ms: 7900, intensity: .5, provenance: 'designed' },
     ] } };
-  await page.route('**/api/chat/stream', (route) => route.fulfill({ contentType: 'text/event-stream', body: [
+  const stream = [
     ['meta', { session_id: turn.session_id, turn_id: turn.id }], ['token', { text: turn.text }], ['result', { turn }], ['done', {}],
-  ].map(([event, data]) => `event: ${event}\ndata: ${JSON.stringify(data)}\n\n`).join('') }));
+  ].map(([event, data]) => `event: ${event}\ndata: ${JSON.stringify(data)}\n\n`).join('');
+  // Fail a malformed synthetic response here instead of waiting for a Play
+  // button that the production stream validator correctly refuses to expose.
+  const parser = createEventParser(() => {}); parser.push(stream); parser.finish();
+  await page.route('**/api/chat/stream', (route) => route.fulfill({ contentType: 'text/event-stream', body: stream }));
   await page.route('**/api/speech/prepare', (route) => route.fulfill({ json: { audio_url: clipUrl, audio_sha256: hash, timing_status: 'available',
     speech_timing: { schema_version: 'speech-timing.v1', audio_sha256: hash, audio_duration_ms: 8000, timing_basis: 'manual', label_set: 'rhubarb',
       provenance: { engine: 'synthetic-gaussian-browser-test' }, segments: [{ start_ms: 0, end_ms: 8000, label: 'D' }] } } }));
