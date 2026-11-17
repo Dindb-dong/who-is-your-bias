@@ -126,12 +126,14 @@ trained audio/text conditioning or torso model.
   failure recovery, remounting, learned-preview gates and persona isolation. All fixtures are synthetic.
 - Local Chromium was blocked before page launch by the environment's Unix-socket restriction.
   Browser execution uses repository CI; no local pixel pass is claimed.
-- CI at `28e9349` passed seven of eight Gaussian/performance scenarios, including
-  desktop/mobile real-WebGL pixels, both learned-playback scenarios, missing-asset
-  recovery, and mobile unmount/remount. The sole failure used mobile menu labels
-  in the desktop remount test; `91fecd8` corrects those selectors without removing
-  assertions. The final run and its exact revision are recorded in PR #25's
-  validation section and linked checks.
+- The complete eight-scenario Gaussian/performance browser suite passed on CI
+  at `91fecd861e26a1dec26213299eec34368250d3d3` in
+  [run 44092393352](https://github.com/Dindb-dong/who-is-your-bias/actions/runs/44092393352/job/134070606347).
+  This includes desktop/mobile real-WebGL pixels, both learned-playback
+  scenarios, missing-asset recovery and unmount/remount. Earlier failures were
+  corrected synthetic response fields and desktop menu selectors; no assertions
+  were removed. Later commits contain documentation and measured receipts only.
+  The full workflow outcome is recorded in PR #25's validation section and checks.
 - Actual Jensen face/neck appearance, expression naturalness, target-machine performance and real
   semantic expression calibration remain unverified until the private bundle and
   its correctly paired source sequence are supplied.
