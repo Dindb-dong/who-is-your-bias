@@ -31,7 +31,7 @@ def fixture(tmp_path: Path) -> tuple[Path, Path]:
               "selections": [{"start_ms": 0, "end_ms": 4000, "face_index": 0, "pose_index": None, "left_hand_index": None, "right_hand_index": None}]}
     (tmp_path / "review.json").write_text(json.dumps(review))
     recipe = {"schema": "gaussian-expression-preparation.v1", "subject_id": "jensen-huang", "bundle_stem": "head", "source_id": "synthetic-fixture", "source_timeline": "source-video", "event_id": "synthetic-event", "sequence_id": "synthetic-sequence",
-              "bundle_source_start_seconds": 10, "gaussian_train_ranges": [[0, 32]], "fit_train_ranges": [[0, 32]], "validation_ranges": [[32, 40]], "observation_runs": [{"manifest": "manifest.json", "review": "review.json"}]}
+              "bundle_source_start_seconds": 10, "gaussian_train_ranges": [[0, 40]], "fit_train_ranges": [[0, 32]], "validation_ranges": [[32, 40]], "observation_runs": [{"manifest": "manifest.json", "review": "review.json"}]}
     recipe_path = tmp_path / "recipe.json"; recipe_path.write_text(json.dumps(recipe))
     return recipe_path, tmp_path / "dataset.npz"
 
@@ -69,13 +69,14 @@ def test_checkpoint_resume_is_exact_and_dataset_bound(tmp_path):
     assert (tmp_path / "resume.npz.previous").exists()
 
 
-@pytest.mark.parametrize("change", ["train_on_gaussian_test", "overlap", "clock", "unreviewed", "changed_observations"])
+@pytest.mark.parametrize("change", ["train_on_gaussian_test", "validation_on_gaussian_test", "overlap", "clock", "unreviewed", "changed_observations"])
 def test_preparation_rejects_leakage_and_unverified_alignment(tmp_path, change):
     recipe_path, dataset = fixture(tmp_path)
     recipe = json.loads(recipe_path.read_text())
     if change == "train_on_gaussian_test":
-        recipe["fit_train_ranges"] = [[0, 33]]
-        recipe["validation_ranges"] = [[33, 40]]
+        recipe["gaussian_train_ranges"] = [[0, 30], [32, 40]]
+    elif change == "validation_on_gaussian_test":
+        recipe["gaussian_train_ranges"] = [[0, 32]]
     elif change == "overlap":
         recipe["validation_ranges"] = [[30, 40]]
     elif change == "clock":
@@ -99,6 +100,18 @@ def test_no_observed_brow_variation_is_not_a_trained_expression_claim(tmp_path):
     arrays["train_x"][:, metadata["input_names"].index("browInnerUp")] = 0
     np.savez_compressed(dataset, **arrays)
     with pytest.raises(MediaError, match="brow variation"):
+        fit_driver(dataset, tmp_path / "fit.npz", tmp_path / "driver.json")
+
+
+def test_fit_rechecks_calibration_validation_is_inside_gaussian_training(tmp_path):
+    recipe, dataset = fixture(tmp_path); prepare_dataset(recipe, dataset)
+    with np.load(dataset, allow_pickle=False) as data:
+        arrays = {k: data[k] for k in data.files}
+    metadata = json.loads(str(arrays["metadata"]))
+    metadata["gaussian_training_frame_indices"] = list(range(32))
+    arrays["metadata"] = np.array(json.dumps(metadata))
+    np.savez_compressed(dataset, **arrays)
+    with pytest.raises(MediaError, match="held-out"):
         fit_driver(dataset, tmp_path / "fit.npz", tmp_path / "driver.json")
 
 

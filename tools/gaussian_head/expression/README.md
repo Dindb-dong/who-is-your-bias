@@ -59,8 +59,10 @@ uv run python -m tools.gaussian_head.expression prepare \
 ```
 
 Preparation verifies observation hashes, reviewer selections, matching source
-clocks, finite weights, and the exact .bin hash. It rejects training/validation
-overlap, training on Gaussian held-out frames, duplicate frame ranges and
+clocks, finite weights, and the exact .bin hash. Both calibration training and
+calibration validation must remain inside the declared Gaussian training split.
+It rejects training/validation overlap, either calibration partition using
+Gaussian held-out frames, duplicate frame ranges and
 unreviewed speakers. Missing detections and out-of-tolerance alignment are
 excluded and counted; they are never filled with invented neutral observations.
 

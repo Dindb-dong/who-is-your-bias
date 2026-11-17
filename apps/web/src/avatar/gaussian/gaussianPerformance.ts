@@ -71,6 +71,8 @@ export function parseGaussianExpressionDriver(value: unknown, header: GaussianMo
   const train = indices(training.frame_indices, header.n_frames), validation = indices(training.validation_frame_indices, header.n_frames, true);
   if (training.method !== 'ridge_regression' || !digest(training.dataset_sha256) || training.examples !== train.length
       || validation.some((frame) => train.includes(frame))) throw new Error('Invalid or overlapping expression training partitions');
+  const documented = DOCUMENTED_TRAIN_FRAMES[bundleSha256];
+  if (documented && (header.n_frames !== documented.total || [...train, ...validation].some((frame) => frame >= documented.train))) throw new Error('Calibration includes held-out Gaussian frames or a mismatched documented split');
   return value as GaussianExpressionDriver;
 }
 
@@ -140,6 +142,7 @@ export function createGaussianPerformance(header: GaussianMotionHeader, B: Gauss
   const declared = options.trainingFrameIndices ?? driver?.training.frame_indices
     ?? (documented?.total === T ? Array.from({ length: documented.train }, (_, i) => i) : []);
   const frames = indices(declared, T, true);
+  if (documented && (documented.total !== T || frames.some((frame) => frame >= documented.train))) throw new Error('Replay includes held-out Gaussian frames or a mismatched documented split');
   if (driver && frames.some((frame) => driver.training.validation_frame_indices.includes(frame))) throw new Error('Replay frames overlap the expression validation partition');
   const neutral = new Float32Array(E);
   for (let e = 0; e < E; e++) neutral[e] = driver?.neutral_expr[e] ?? B.m_expr[e];

@@ -92,4 +92,15 @@ describe('Gaussian live expression controller', () => {
     const morph = c.sample({ ...input, rigPose: { ...neutralPose(), face: { eyeLookOutLeft: 1, eyeLookInRight: 1 } } });
     expect(morph.pose[10]).toBeCloseTo(0.35); expect(morph.pose[13]).toBeCloseTo(0.35);
   });
+  it('protects the documented Gaussian holdout from explicit replay and calibration overrides', () => {
+    const known = '32d5bc15901a8673901c6234ae7af946d2bfcf2c0aa5e7ed9c816d1c3aff599c';
+    const documentedHeader = { ...header, n_frames: 3319 };
+    const documentedB = { m_expr: new Float32Array(3319 * 2), m_pose: new Float32Array(3319 * 15), m_trans: new Float32Array(3319 * 3) };
+    expect(() => createGaussianPerformance(documentedHeader, documentedB, { bundleSha256: known, trainingFrameIndices: [0, 2324] })).toThrow(/held-out Gaussian/);
+    const d = driver(); d.bundle_sha256 = known; d.training.validation_frame_indices = [2324];
+    expect(() => parseGaussianExpressionDriver(d, documentedHeader, known)).toThrow(/held-out Gaussian/);
+    d.training.validation_frame_indices = [2, 3];
+    expect(() => parseGaussianExpressionDriver(d, documentedHeader, known)).not.toThrow();
+    expect(() => createGaussianPerformance(header, B, { bundleSha256: known })).toThrow(/mismatched documented split/);
+  });
 });

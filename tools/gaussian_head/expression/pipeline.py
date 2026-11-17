@@ -102,8 +102,8 @@ def prepare_dataset(recipe_path: str | Path, output_path: str | Path) -> dict:
     gaussian_train = _ranges(recipe.get("gaussian_train_ranges"), T, "Gaussian training")
     train = _ranges(recipe.get("fit_train_ranges"), T, "Calibration training")
     validation = _ranges(recipe.get("validation_ranges"), T, "Calibration validation")
-    if not set(train) <= set(gaussian_train) or set(train) & set(validation):
-        raise MediaError("Calibration training includes held-out Gaussian or validation frames")
+    if not (set(train) | set(validation)) <= set(gaussian_train) or set(train) & set(validation):
+        raise MediaError("Calibration train/validation includes held-out Gaussian frames or overlaps")
     start = recipe.get("bundle_source_start_seconds")
     tolerance = recipe.get("max_alignment_error_ms", 35)
     if not isinstance(start, (float, int)) or not np.isfinite(start) or not isinstance(tolerance, (float, int)) or not 0 < tolerance <= 500 / fps:
@@ -199,7 +199,7 @@ def fit_driver(dataset_path: str | Path, checkpoint_path: str | Path, output_pat
         X, Y, jaw, VX, VY = (np.asarray(data[k], dtype=np.float64) for k in ("train_x", "train_y", "train_jaw", "validation_x", "validation_y"))
     names = metadata.get("input_names", [])
     train, validation = metadata.get("training_frame_indices", []), metadata.get("validation_frame_indices", [])
-    if metadata.get("schema") != "gaussian-expression-dataset.v1" or metadata.get("subject_id") != "jensen-huang" or not train or not validation or set(train) & set(validation) or not set(train) <= set(metadata.get("gaussian_training_frame_indices", [])):
+    if metadata.get("schema") != "gaussian-expression-dataset.v1" or metadata.get("subject_id") != "jensen-huang" or not train or not validation or set(train) & set(validation) or not (set(train) | set(validation)) <= set(metadata.get("gaussian_training_frame_indices", [])):
         raise MediaError("Invalid subject or overlapping/held-out training data")
     if X.ndim != 2 or Y.ndim != 2 or X.shape[0] != Y.shape[0] or len(train) != X.shape[0] or X.shape[1] != len(names) or Y.shape[1] != metadata["n_expr"] or jaw.shape != (len(train), 3) or VX.shape != (len(validation), len(names)) or VY.shape != (len(validation), metadata["n_expr"]) or not all(np.isfinite(a).all() for a in (X, Y, jaw, VX, VY)):
         raise MediaError("Invalid paired calibration arrays")
