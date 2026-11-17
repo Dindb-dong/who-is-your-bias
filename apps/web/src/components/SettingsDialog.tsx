@@ -13,6 +13,8 @@ interface Props {
   framing: AvatarFraming; setFraming: (framing: AvatarFraming) => void;
   motionMode: MotionMode; setMotionMode: (mode: MotionMode) => void;
   motionLibrary: MotionLibraryStatus | null; motionLibraryError?: string;
+  learnedGestureEnabled?: boolean; setLearnedGestureEnabled?: (value: boolean) => void;
+  learnedGestureLoading?: boolean; learnedGestureError?: string;
 }
 
 export function SettingsDialog(props: Props) {
@@ -38,6 +40,12 @@ export function SettingsDialog(props: Props) {
         {props.motionMode === 'geometry_preview' && <p style={{ marginTop: 10 }}>Source-geometry preview is enabled for evidence-supported answers in the full conversation mode. It does not establish that the tracked motion belongs to the named speaker.</p>}
         {props.reducedMotion && <p style={{ marginTop: 10 }}>Measured replays are paused while reduced motion is enabled.</p>}
         {props.motionLibraryError && <p role="status" style={{ marginTop: 10 }}>{props.motionLibraryError}</p>}
+        {props.persona?.id === 'jensen-huang' && props.setLearnedGestureEnabled && <>
+          <label className="switch-row"><span>Learned gesture preview</span><input aria-label="Learned gesture preview" type="checkbox" checked={!!props.learnedGestureEnabled && props.motionMode === 'geometry_preview'} onChange={(event) => props.setLearnedGestureEnabled?.(event.target.checked)}/></label>
+          <p>Uses the locally installed experimental motion model. Its source attribution and naturalness are still under review. It follows voice playback and pauses with reduced motion.</p>
+          {props.learnedGestureLoading && <p role="status">Loading learned movement…</p>}
+          {props.learnedGestureError && <p role="status">{props.learnedGestureError}</p>}
+        </>}
       </section>
       <div className="settings-note">{props.persona?.capabilities.llm ? 'A language model is connected.' : 'Source preview is active. Configure a language model on the server for generated dialogue.'}</div>
     </div>

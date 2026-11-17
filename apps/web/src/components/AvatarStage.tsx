@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { Quaternion, Vector3 } from 'three';
 import type { AvatarFraming } from '../avatar/builtin';
 import { BONE_CHANNELS, FACE_CHANNELS, VISEMES } from '../avatar/channels';
-import { AvatarRenderer } from '../avatar/renderer';
+import { AvatarRenderer, type GaussianStageState } from '../avatar/renderer';
+import type { GaussianHeadConfig } from '../avatar/gaussian/gaussianBody';
+import type { GestureBasisModel } from '../avatar/learnedGesture';
 import type { PortraitStyle } from '../avatar/procedural';
 import type { AttentionTarget } from '../avatar/attention';
 import { visemesToFace } from '../avatar/speech';
@@ -22,6 +24,8 @@ export interface AvatarStageProps {
   performanceClip?: AvatarClip;
   observationElapsedMs?: number;
   allowGeometryPreview?: boolean;
+  learnedGesture?: GestureBasisModel;
+  gaussianHead?: GaussianHeadConfig;
   attentionTarget?: AttentionTarget | null;
   portraitStyle?: PortraitStyle;
   showCalibration?: boolean;
@@ -41,13 +45,15 @@ export interface AvatarStageProps {
 export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, modelUrl,
   rigMapping, reducedMotion, onReady, onError, onTelemetry, className = '',
   audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview = false, attentionTarget, portraitStyle = 'reference',
-  showCalibration = false, framing = 'portrait', auditionStartKey = 0 }: AvatarStageProps) {
+  showCalibration = false, framing = 'portrait', auditionStartKey = 0, gaussianHead, learnedGesture }: AvatarStageProps) {
   const host = useRef<HTMLDivElement>(null);
   const runtime = useRef<AvatarRenderer | null>(null);
   const callbacks = useRef({ onReady, onError, onTelemetry, showCalibration }); callbacks.current = { onReady, onError, onTelemetry, showCalibration };
   const [fatal, setFatal] = useState<string | null>(null);
   const [modelError, setModelError] = useState<string | null>(null);
   const [loadingModel, setLoadingModel] = useState(false);
+  const [gaussianState, setGaussianState] = useState<GaussianStageState>('disabled');
+  const [gaussianMessage, setGaussianMessage] = useState<string>();
   const [epoch, setEpoch] = useState(0);
   const [systemReduced, setSystemReduced] = useState(false);
   const [diagnostics, setDiagnostics] = useState<RigDiagnostics | null>(null);
@@ -87,6 +93,10 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
           if (!alive) return;
           setLoadingModel(state === 'loading'); if (state === 'ready') setModelError(null);
         },
+        onGaussianState: (state, message) => {
+          if (!alive) return;
+          setGaussianState(state); setGaussianMessage(message);
+        },
         onTelemetry: (value) => {
           if (!alive) return;
           setTelemetry(value);
@@ -107,14 +117,16 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
 
   useEffect(() => {
     runtime.current?.setPlayback({ speaking, timeline, elapsedMs, amplitude, reducedMotion: reducedMotion ?? systemReduced,
-      audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview, attentionTarget });
-  }, [speaking, timeline, elapsedMs, amplitude, reducedMotion, systemReduced, epoch, audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview, attentionTarget]);
+      audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview, attentionTarget, learnedGesture });
+  }, [speaking, timeline, elapsedMs, amplitude, reducedMotion, systemReduced, epoch, audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview, attentionTarget, learnedGesture]);
 
   useEffect(() => { runtime.current?.setPortraitStyle(portraitStyle); }, [portraitStyle, epoch]);
 
   useEffect(() => { void runtime.current?.setModel(modelUrl, localMapping ?? rigMapping); }, [modelUrl, localMapping, rigMapping, epoch]);
 
   useEffect(() => { runtime.current?.setFraming(framing); }, [framing, epoch]);
+
+  useEffect(() => { void runtime.current?.setGaussianHead(gaussianHead ?? null); }, [gaussianHead, epoch]);
 
   useEffect(() => {
     if (!auditionStartKey || auditionStartKey <= lastAuditionRequest.current || !speaking || !audioSha256 || !diagnostics?.assetInspection?.sha256) return;
@@ -182,6 +194,7 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
       data-portrait-style={portraitStyle} data-rig-kind={diagnostics?.kind ?? 'initializing'} data-face-controls={diagnostics?.morphs.length ?? 0}
       data-visemes={diagnostics?.visemes?.length ?? 0} data-mapped-joints={diagnostics?.bones.length ?? 0}
       data-asset-sha256={diagnostics?.assetInspection?.sha256 ?? ''}
+      data-gaussian-state={gaussianState} data-bone-source={telemetry?.boneSource ?? 'designed'}
       data-framing={framing} data-model-state={loadingModel ? 'loading' : modelError ? 'fallback' : diagnostics ? 'ready' : 'initializing'}
       data-attention-phase={telemetry?.attention?.phase ?? 'idle'} data-attention-target={telemetry?.attention?.targetId ?? ''}
       data-attention-eye-yaw={telemetry?.attention?.eyeYaw ?? 0} data-attention-eye-pitch={telemetry?.attention?.eyePitch ?? 0}
@@ -190,6 +203,9 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
       <div className="avatar-visual">
         <div ref={host} style={{ position: 'absolute', inset: 0 }} aria-hidden={fatal ? true : undefined} />
         {loadingModel && <div role="status" className="avatar-model-status" style={{ position: 'absolute', bottom: 20, left: 20, color: '#d8f8a0', fontSize: 12 }}>Loading your avatar…</div>}
+        {gaussianHead && <div role="status" className="avatar-model-status" style={{ position: 'absolute', top: 72, right: 16, left: 16, padding: '6px 10px', borderRadius: 8, background: '#0b1009cc', color: gaussianState === 'error' ? '#efb5a1' : '#d8f8a0', fontSize: 11 }}>
+          {gaussianState === 'loading' ? 'Loading local photoreal face…' : gaussianState === 'ready' ? 'Synthetic photoreal face · articulated body' : gaussianState === 'error' ? `Photoreal face unavailable: ${gaussianMessage} The body remains available.` : 'Preparing photoreal face…'}
+        </div>}
         {modelError && !fatal && <div role="status" className="avatar-model-status" style={{ position: 'absolute', bottom: 20, left: 20, right: 20, padding: 12, borderRadius: 12, background: '#172014ed', color: '#e3e8dc', fontSize: 12 }}>
           {modelError} The built-in portrait is still available.
         </div>}

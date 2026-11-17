@@ -16,6 +16,9 @@ import { AttentionController, attentionCapabilities, composeAttentionPose, type 
 import { parseAvatarClip, parseSpeechTiming } from './validation';
 import { AUDITION_PROTOCOL, AuditionRecorder, canonicalJson, sealAudition, sha256Bytes } from './audition';
 import type { AnimationTelemetry, AvatarClip, BehaviorPlan, RigDiagnostics, RigMapping, RigPose, SpeechTiming } from './types';
+import type { GestureBasisModel } from './learnedGesture';
+import type { GaussianBodyArrays, GaussianBodyHead, GaussianBodyHeader, GaussianHeadConfig } from './gaussian/gaussianBody';
+import type { createGaussianPerformance } from './gaussian/gaussianPerformance';
 
 export interface PlaybackState {
   speaking: boolean;
@@ -30,7 +33,10 @@ export interface PlaybackState {
   observationElapsedMs?: number;
   allowGeometryPreview?: boolean;
   attentionTarget?: AttentionTarget | null;
+  learnedGesture?: GestureBasisModel;
 }
+
+export type GaussianStageState = 'disabled' | 'loading' | 'ready' | 'error';
 
 interface RendererCallbacks {
   onReady?: (diagnostics: RigDiagnostics) => void;
@@ -38,6 +44,13 @@ interface RendererCallbacks {
   onModelState?: (state: 'loading' | 'ready' | 'fallback') => void;
   onTelemetry?: (telemetry: AnimationTelemetry) => void;
   onAuditionState?: (recording: boolean) => void;
+  onGaussianState?: (state: GaussianStageState, message?: string) => void;
+}
+
+interface ActiveGaussianHead {
+  head: GaussianBodyHead;
+  performance: ReturnType<typeof createGaussianPerformance>;
+  restoreBody: () => void;
 }
 
 export class AvatarRenderer {
@@ -71,6 +84,12 @@ export class AvatarRenderer {
   private attention = new AttentionController();
   private portraitStyle: PortraitStyle = 'reference';
   private upperBodyFramer: ReturnType<typeof createUpperBodyFramer> = null;
+  private gaussian?: ActiveGaussianHead;
+  private gaussianFactory?: (rig: AvatarRig) => ActiveGaussianHead;
+  private gaussianAbort?: AbortController;
+  private gaussianSerial = 0;
+  private gaussianKey = '';
+  private gaussianRequested = false;
 
   constructor(private host: HTMLElement, private callbacks: RendererCallbacks = {}) {
     this.renderer = new WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
@@ -130,7 +149,7 @@ export class AvatarRenderer {
       else if (state.audioSha256 !== this.playback.audioSha256) this.stopAudition('audio_changed');
       else if (state.speechTiming !== this.timingInput) this.stopAudition('speech_timing_changed');
       else if (state.performanceClip !== this.clipInput || state.allowGeometryPreview !== this.playback.allowGeometryPreview
-        || state.reducedMotion !== this.playback.reducedMotion) this.stopAudition('motion_settings_changed');
+        || state.reducedMotion !== this.playback.reducedMotion || state.learnedGesture !== this.playback.learnedGesture) this.stopAudition('motion_settings_changed');
       else if (state.attentionTarget || this.playback.attentionTarget) this.stopAudition('attention_changed');
     }
     if (state.speechTiming !== this.timingInput) {
@@ -154,6 +173,7 @@ export class AvatarRenderer {
 
   async startAudition(): Promise<void> {
     if (this.disposed || this.contextLost || !this.visible) throw new Error('The avatar must be visible before recording.');
+    if (this.gaussianRequested || this.playback.learnedGesture) throw new Error('The GLB audition protocol does not record Gaussian-head or learned-gesture identities. Disable them before recording a GLB-only audition.');
     if (this.calibrationPose) throw new Error('Turn off manual pose preview before recording.');
     if (this.playback.attentionTarget || this.attention.active) throw new Error('Stop attention tracking and wait for the avatar to settle before recording a fixed comparison audition.');
     const asset = this.rig.diagnostics.assetInspection;
@@ -213,6 +233,87 @@ export class AvatarRenderer {
     if (this.rig.diagnostics.kind === 'procedural') this.replaceRig(createProceduralRig(style));
   }
 
+  /** Load a private face bundle into the body scene, keeping the existing
+   * speech, hand, finger and attention playback path intact. */
+  async setGaussianHead(config: GaussianHeadConfig | null = null): Promise<void> {
+    if (this.disposed) return;
+    const key = JSON.stringify(config);
+    if (key === this.gaussianKey) return;
+    this.gaussianKey = key; this.gaussianRequested = !!config;
+    const serial = ++this.gaussianSerial;
+    this.gaussianAbort?.abort(); this.gaussianFactory = undefined; this.detachGaussianHead();
+    this.stopAudition('gaussian_head_changed');
+    if (!config) { this.setGaussianState('disabled'); return; }
+    this.setGaussianState('loading');
+    const abort = new AbortController(); this.gaussianAbort = abort;
+    try {
+      if (!/^[A-Za-z0-9_-]+$/.test(config.bundle)) throw new Error('Choose a local Gaussian head bundle name.');
+      const [core, body, performanceModule] = await Promise.all([
+        import('./gaussian/gaussianHeadCore'), import('./gaussian/gaussianBody'), import('./gaussian/gaussianPerformance'),
+      ]);
+      const stem = `/models/gaussian-head/${config.bundle}`;
+      const { header, B, sha256 } = await core.loadBundle(stem, abort.signal);
+      // A missing optional calibration is a labeled replay fallback. An
+      // explicitly requested or malformed calibration must not be ignored.
+      const driverUrl = new URL(config.driverUrl ?? `${stem}.expression-driver.json`, window.location.origin);
+      if (driverUrl.origin !== window.location.origin || !/^https?:$/.test(driverUrl.protocol)) throw new Error('The expression driver must be hosted by this application.');
+      const driverResponse = await fetch(driverUrl, { signal: abort.signal, credentials: 'same-origin', headers: { Accept: 'application/json' } });
+      let driver: unknown;
+      if (driverResponse.ok) {
+        const text = await driverResponse.text();
+        if (text.length > 2 * 1024 * 1024) throw new Error('The expression driver exceeds the 2 MiB limit.');
+        driver = JSON.parse(text);
+      } else if (driverResponse.status !== 404 || config.driverUrl) throw new Error(`The expression driver could not be loaded (${driverResponse.status}).`);
+      const motion = performanceModule.createGaussianPerformance(header, B as GaussianBodyArrays,
+        { driver, bundleSha256: sha256, trainingFrameIndices: config.trainingFrameIndices });
+      if (this.disposed || serial !== this.gaussianSerial || abort.signal.aborted) return;
+      this.canvas.dataset.gaussianBundle = config.bundle;
+      this.canvas.dataset.gaussianSha256 = sha256;
+      this.gaussianFactory = (rig) => {
+        const attachment = body.fitGaussianAttachment(rig, B as GaussianBodyArrays, config);
+        const head = new body.GaussianBodyHead(header as GaussianBodyHeader, B as GaussianBodyArrays, attachment);
+        let restoreBody: (() => void) | undefined;
+        try {
+          restoreBody = body.hideOriginalHead(rig, attachment.targetCutY);
+          attachment.head.add(head.root);
+          return { head, performance: motion, restoreBody };
+        } catch (error) { restoreBody?.(); head.dispose(); throw error; }
+      };
+      this.attachGaussianHead();
+    } catch (error) {
+      if (this.disposed || serial !== this.gaussianSerial || abort.signal.aborted) return;
+      this.gaussianFactory = undefined; this.detachGaussianHead();
+      this.setGaussianState('error', error instanceof Error ? error.message : 'The Gaussian face could not be loaded.');
+    }
+  }
+
+  private setGaussianState(state: GaussianStageState, message?: string): void {
+    this.canvas.dataset.gaussianState = state;
+    this.canvas.dataset.gaussianMessage = message ?? '';
+    this.callbacks.onGaussianState?.(state, message);
+  }
+
+  private detachGaussianHead(): void {
+    if (!this.gaussian) return;
+    this.gaussian.head.dispose(); this.gaussian.restoreBody(); this.gaussian = undefined;
+    delete this.canvas.dataset.gaussianExpressionSource;
+    delete this.canvas.dataset.gaussianExpressionEnergy;
+    delete this.canvas.dataset.gaussianJaw;
+  }
+
+  private attachGaussianHead(): void {
+    this.detachGaussianHead();
+    if (!this.gaussianFactory) return;
+    if (this.rig.diagnostics.kind !== 'glb') { this.setGaussianState('loading', 'Waiting for the rigged body.'); return; }
+    this.rig.apply(neutralPose());
+    try {
+      this.gaussian = this.gaussianFactory(this.rig);
+      this.setGaussianState('ready', this.gaussian.performance.diagnostics.warning);
+    } catch (error) {
+      this.setGaussianState('error', error instanceof Error ? error.message : 'The Gaussian face could not be attached to this body.');
+    } finally { this.rig.apply(this.pose); }
+  }
+
   async setModel(url?: string, mapping: RigMapping = {}): Promise<void> {
     if (this.disposed) return;
     this.stopAudition('model_or_mapping_changed');
@@ -240,6 +341,7 @@ export class AvatarRenderer {
   }
 
   private replaceRig(rig: AvatarRig): void {
+    this.detachGaussianHead();
     this.scene.remove(this.rig.root); this.rig.dispose(); this.rig = rig;
     this.pose = neutralPose(); this.attention.reset(); rig.apply(this.pose); this.scene.add(rig.root);
     this.readRigOutput = createRigOutputReader(rig);
@@ -250,6 +352,7 @@ export class AvatarRenderer {
       ? 'Interactive rigged 3D human avatar. Drag to change the viewing angle.'
       : 'Interactive stylized 3D avatar. Drag to change the viewing angle.');
     this.resetView();
+    this.attachGaussianHead();
     this.callbacks.onReady?.(rig.diagnostics);
   }
 
@@ -276,6 +379,7 @@ export class AvatarRenderer {
     this.attention.reset();
     event.preventDefault(); this.contextLost = true;
     cancelAnimationFrame(this.raf); this.raf = 0;
+    if (this.gaussianFactory) this.setGaussianState('error', 'The graphics context was interrupted. Reload the avatar.');
     this.callbacks.onError?.(new Error('The graphics context was interrupted. Reload the avatar to continue.'));
   };
 
@@ -334,6 +438,21 @@ export class AvatarRenderer {
       const distance = required >= current ? required : current + (required-current)*(1-Math.exp(-Math.min(delta, .1)*.8));
       this.camera.position.copy(this.controls.target).addScaledVector(direction, distance);
     }
+    if (this.gaussian) {
+      try {
+        const parameters = this.gaussian.performance.sample({ rigPose: this.calibrationPose ? this.pose : attended.pose,
+          elapsedMs: this.playback.audioElapsedMs ?? this.playback.elapsedMs, idleMs: now - this.start,
+          speaking: this.playback.speaking, reducedMotion: this.playback.reducedMotion });
+        const size = this.renderer.getDrawingBufferSize(new Vector2());
+        this.gaussian.head.update(parameters, this.camera, size.x, size.y);
+        this.canvas.dataset.gaussianExpressionSource = parameters.expressionSource;
+        this.canvas.dataset.gaussianExpressionEnergy = Math.hypot(...parameters.expr).toFixed(4);
+        this.canvas.dataset.gaussianJaw = parameters.pose[6].toFixed(4);
+      } catch (error) {
+        this.detachGaussianHead();
+        this.setGaussianState('error', error instanceof Error ? error.message : 'Gaussian animation failed.');
+      }
+    }
     this.renderer.render(this.scene, this.camera);
     if (this.audition?.recording) {
       this.audition.add({ monotonicMs: now, audioMs: this.playback.audioElapsedMs ?? null, speaking: this.playback.speaking,
@@ -357,6 +476,7 @@ export class AvatarRenderer {
     this.stopAudition('renderer_disposed');
     this.attention.reset();
     this.disposed = true; ++this.modelSerial; this.modelAbort?.abort();
+    ++this.gaussianSerial; this.gaussianAbort?.abort(); this.gaussianFactory = undefined; this.detachGaussianHead();
     cancelAnimationFrame(this.raf); this.raf = 0;
     this.resizeObserver.disconnect(); this.controls.dispose();
     document.removeEventListener('visibilitychange', this.onVisibility);

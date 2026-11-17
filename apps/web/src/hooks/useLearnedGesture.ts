@@ -23,5 +23,6 @@ export function useLearnedGesture(enabled: boolean, personaId?: string) {
     })();
     return () => controller.abort();
   }, [enabled, personaId]);
-  return { model, error, loading };
+  // Effect cleanup follows render; subject isolation must apply immediately.
+  return { model: enabled && personaId === 'jensen-huang' ? model : undefined, error, loading };
 }
