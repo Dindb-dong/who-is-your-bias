@@ -15,6 +15,13 @@
 > The current face/body integration, gesture fitting and expression calibration follow-up is
 > recorded in [the 2026-11-17 performance execution record](jensen-performance-2026-11-17.md).
 
+> To install the private face/gesture packages and select the expanded candidate,
+> use the [Jensen studio quickstart](jensen-studio-quickstart.md).
+
+> The private face ZIP was received and numerically checked on 2026-11-18.
+> Current inputs, receipts and remaining gates are in the
+> [face intake and verification record](jensen-face-intake-2026-11-18.md).
+
 > Historical pre-resumption status: the earlier execution session was interrupted. This file
 > preserves the original plan. Read the [recovery and remaining-work handoff](jensen-replication-handoff.md)
 > for verified baseline evidence, reported intermediate progress, and resumption gates.

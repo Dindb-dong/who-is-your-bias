@@ -134,8 +134,10 @@ The optional runtime path is
 `apps/web/public/models/gaussian-head/<bundle>.expression-driver.json`.
 Prepared paired observations, calibration checkpoints and measured results also
 belong under ignored local paths. No real Jensen expression-driver artifact has
-been fitted in this follow-up: the private Gaussian bundle and its aligned source
-observations have not been supplied. Tests use explicitly synthetic fixtures.
+been fitted in this follow-up. The private Gaussian ZIP was received and verified
+on 2026-11-18; its aligned source observations are still missing. See
+[the intake and numerical checks](jensen-face-intake-2026-11-18.md). Calibration
+tests use explicitly synthetic fixtures.
 
 Use [the calibration preparation and fitting commands](../tools/gaussian_head/expression/README.md)
 with the exact bundle and source-frame mapping. Recovered footage from another

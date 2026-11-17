@@ -1,9 +1,14 @@
 # Jensen Gaussian head avatar (VHAP + GaussianAvatars)
 
-Status record for the photoreal real-time head avatar track. Last updated 2026-11-17.
+Status record for the photoreal real-time head avatar track. Last updated 2026-11-18.
 Diagnosis report with charts: [reports/gaussian-head/avatar-diagnosis-2026-11-16.html](../reports/gaussian-head/avatar-diagnosis-2026-11-16.html).
 
 Current follow-up: [expression and upper-body performance execution](jensen-performance-2026-11-17.md).
+
+For installation, exact URL options, expanded-gesture selection and playback controls,
+start with the [Jensen studio quickstart](jensen-studio-quickstart.md).
+The supplied private ZIP and actual-input numerical results are recorded in
+[the 2026-11-18 intake](jensen-face-intake-2026-11-18.md).
 
 ## Scope and boundaries
 
