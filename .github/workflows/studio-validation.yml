@@ -11,6 +11,10 @@ on:
       - 'package*.json'
       - 'pyproject.toml'
       - 'uv.lock'
+      - 'tools/gaussian_head/**'
+      - 'tools/motion/**'
+      - 'tests/gaussian_head/**'
+      - 'tests/motion/**'
   workflow_dispatch:
 
 permissions:
@@ -44,11 +48,13 @@ jobs:
       - name: Check and build web application
         run: npm run check
       - name: Verify Jensen and shared runtime paths
-        run: uv run pytest -q tests/test_jensen_persona.py tests/test_jensen_retrieval.py tests/test_query_evidence_policy.py tests/test_temporal_dialogue.py tests/test_runtime_text_live.py tests/test_runtime_text_cancel_recovery.py
+        run: uv run pytest -q tests/test_jensen_persona.py tests/test_jensen_retrieval.py tests/test_query_evidence_policy.py tests/test_temporal_dialogue.py tests/test_runtime_text_live.py tests/test_runtime_text_cancel_recovery.py tests/gaussian_head tests/motion
       - name: Validate historical desktop and mobile flows
         run: npm run test:e2e
       - name: Validate Jensen selection and hand playback
         run: npm run test:attention
+      - name: Validate Gaussian body and learned gesture playback
+        run: npx playwright test --config playwright.performance.config.ts
       - name: Preserve browser diagnostics
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2

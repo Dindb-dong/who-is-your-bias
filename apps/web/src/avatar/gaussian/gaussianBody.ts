@@ -272,7 +272,8 @@ export class GaussianBodyHead {
     const frames = this.head.updateFaceFrames();
     for (let f = 0; f < this.header.n_faces; f++) {
       const o = f * 8;
-      this.faceData.set([frames[o], frames[o + 1], frames[o + 2], frames[o + 7], frames[o + 3], frames[o + 4], frames[o + 5], frames[o + 6]], o);
+      this.faceData[o] = frames[o]; this.faceData[o + 1] = frames[o + 1]; this.faceData[o + 2] = frames[o + 2]; this.faceData[o + 3] = frames[o + 7];
+      this.faceData[o + 4] = frames[o + 3]; this.faceData[o + 5] = frames[o + 4]; this.faceData[o + 6] = frames[o + 5]; this.faceData[o + 7] = frames[o + 6];
     }
     this.faceTexture.needsUpdate = true;
     gaussianCenters(this.B, frames, this.centers);
