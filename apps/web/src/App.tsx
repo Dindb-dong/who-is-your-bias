@@ -85,7 +85,8 @@ export default function App() {
   const pcmPlayer = useRef<ReturnType<typeof createPcmPlayback> | null>(null);
   const streamingVoice = pcmState.status === 'playing' || pcmState.status === 'loading';
   const measuredMotion = useMeasuredMotion({ mode: motionMode, enabled: page === 'studio' && mode === 'behavior', reducedMotion });
-  const learnedGesture = useLearnedGesture(learnedGestureEnabled && motionMode === 'geometry_preview', persona?.id);
+  const learnedGesture = useLearnedGesture(learnedGestureEnabled && motionMode === 'geometry_preview', persona?.id,
+    avatarQuery.get('gestureBundle') ?? 'jensen-gesture-basis');
   const playbackPreferences = useRef({ autoPlay, voice });
   playbackPreferences.current = { autoPlay, voice };
   const microphone = useMicrophone(language, setDraft);

@@ -189,10 +189,10 @@ test('labels missing calibration and keeps the body visible when private face by
 test('activates the explicit learned-gesture preview and disables it on Stop, reduced motion and another persona', async ({ page }) => {
   await routeBundle(page); await routeSpeech(page);
   let modelRequests = 0;
-  await page.route('**/models/gesture/jensen-gesture-basis.json', (route) => {
+  await page.route('**/models/gesture/jensen-gesture-basis-expanded.json', (route) => {
     modelRequests++; return route.fulfill({ json: syntheticGestureBasis() });
   });
-  await page.goto('/?head=gaussian&gesture=learned');
+  await page.goto('/?head=gaussian&gesture=learned&gestureBundle=jensen-gesture-basis-expanded');
   const stage = page.getByTestId('avatar-stage'), canvas = stage.locator('canvas.avatar-canvas');
   await expect(stage).toHaveAttribute('data-gaussian-state', 'ready', { timeout: 25000 });
   await expect.poll(() => modelRequests).toBeGreaterThan(0);
