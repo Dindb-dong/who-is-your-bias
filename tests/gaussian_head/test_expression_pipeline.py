@@ -12,15 +12,15 @@ from tools.gaussian_head.expression.pipeline import fit_driver, prepare_dataset,
 from tools.media.common import MediaError
 
 
-def fixture(tmp_path: Path) -> tuple[Path, Path]:
+def fixture(tmp_path: Path, fps: float = 10) -> tuple[Path, Path]:
     n = 40
     brow = np.array([(i % 8) / 7 for i in range(n)])
     jaw = np.array([((i * 3) % 7) / 10 for i in range(n)])
     expressions = np.stack([0.1 + brow * 0.7, -0.2 + jaw * 0.4], axis=1)
     poses = np.zeros((n, 15)); poses[:, 6] = jaw * 0.35
-    write_bundle(str(tmp_path / "head"), {"m_expr": ("f32", expressions), "m_pose": ("f32", poses), "m_trans": ("f32", np.zeros((n, 3)))}, {"n_expr": 2, "n_frames": n, "fps": 10})
+    write_bundle(str(tmp_path / "head"), {"m_expr": ("f32", expressions), "m_pose": ("f32", poses), "m_trans": ("f32", np.zeros((n, 3)))}, {"n_expr": 2, "n_frames": n, "fps": fps})
     observations = tmp_path / "observations.jsonl"
-    rows = [{"schema_version": "observation.v1", "source_id": "synthetic-fixture", "source_timeline": "source-video", "timestamp_seconds": i / 10, "source_timestamp_seconds": 10 + i / 10,
+    rows = [{"schema_version": "observation.v1", "source_id": "synthetic-fixture", "source_timeline": "source-video", "timestamp_seconds": i / fps, "source_timestamp_seconds": 10 + i / fps,
              "faces": [{"detection_index": 0, "blendshapes": {"browInnerUp": float(brow[i]), "jawOpen": float(jaw[i]), "eyeBlinkLeft": 0}}]} for i in range(n)]
     observations.write_text("".join(json.dumps(row) + "\n" for row in rows))
     manifest = {"schema_version": "observations.v1", "source_id": "synthetic-fixture", "source_timeline": "source-video", "source_start_seconds": 10,
@@ -28,7 +28,7 @@ def fixture(tmp_path: Path) -> tuple[Path, Path]:
     (tmp_path / "manifest.json").write_text(json.dumps(manifest))
     review = {"schema_version": "motion-review.v1", "observations_sha256": sha256(observations), "status": "speaker_reviewed", "track_continuity_reviewed": True, "source_clock_reviewed": True, "speaker_association_reviewed": True,
               "reviewer": "synthetic-test-only", "track_id": "fixture", "attribution_basis": "Synthetic fixture; no person observation or human review is claimed.",
-              "selections": [{"start_ms": 0, "end_ms": 4000, "face_index": 0, "pose_index": None, "left_hand_index": None, "right_hand_index": None}]}
+              "selections": [{"start_ms": 0, "end_ms": n / fps * 1000, "face_index": 0, "pose_index": None, "left_hand_index": None, "right_hand_index": None}]}
     (tmp_path / "review.json").write_text(json.dumps(review))
     recipe = {"schema": "gaussian-expression-preparation.v1", "subject_id": "jensen-huang", "bundle_stem": "head", "source_id": "synthetic-fixture", "source_timeline": "source-video", "event_id": "synthetic-event", "sequence_id": "synthetic-sequence",
               "bundle_source_start_seconds": 10, "gaussian_train_ranges": [[0, 40]], "fit_train_ranges": [[0, 32]], "validation_ranges": [[32, 40]], "observation_runs": [{"manifest": "manifest.json", "review": "review.json"}]}
@@ -52,6 +52,12 @@ def test_prepare_alignment_and_disjoint_fit(tmp_path):
     assert driver["input_names"] == ["browInnerUp", "jawOpen"]
     assert driver["jaw_open_radians"] == pytest.approx(0.35)
     assert not result["unseen_event_generalization"]
+
+
+def test_default_alignment_tolerance_accepts_the_real_bundles_15_fps(tmp_path):
+    recipe, dataset = fixture(tmp_path, fps=15)
+    result = prepare_dataset(recipe, dataset)
+    assert result["train_frames"] == 32 and result["validation_frames"] == 8
 
 
 def test_checkpoint_resume_is_exact_and_dataset_bound(tmp_path):

@@ -105,7 +105,7 @@ def prepare_dataset(recipe_path: str | Path, output_path: str | Path) -> dict:
     if not (set(train) | set(validation)) <= set(gaussian_train) or set(train) & set(validation):
         raise MediaError("Calibration train/validation includes held-out Gaussian frames or overlaps")
     start = recipe.get("bundle_source_start_seconds")
-    tolerance = recipe.get("max_alignment_error_ms", 35)
+    tolerance = recipe.get("max_alignment_error_ms", min(30, 500 / fps))
     if not isinstance(start, (float, int)) or not np.isfinite(start) or not isinstance(tolerance, (float, int)) or not 0 < tolerance <= 500 / fps:
         raise MediaError("Declare a finite source clock and tolerance no greater than half a FLAME frame")
     runs = recipe.get("observation_runs")
