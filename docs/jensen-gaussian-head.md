@@ -3,6 +3,8 @@
 Status record for the photoreal real-time head avatar track. Last updated 2026-11-17.
 Diagnosis report with charts: [reports/gaussian-head/avatar-diagnosis-2026-11-16.html](../reports/gaussian-head/avatar-diagnosis-2026-11-16.html).
 
+Current follow-up: [expression and upper-body performance execution](jensen-performance-2026-11-17.md).
+
 ## Scope and boundaries
 
 - **Goal.** A FLAME-bound 3D Gaussian head that renders in the browser studio in real time, trained from one
