@@ -6,7 +6,7 @@
 - Task branch: `feat/jensen-gesture-expression-20261117`.
 - Starting `main` / verified remote head: `cdf3c522e02a788f143fff4cabb375d172d46bfb` (PR #23).
 - Requested outcome: preserve the current Gaussian face, prepare and train gesture/expression drivers, and connect upper-body, hand and facial motion to studio playback.
-- Status: code integrated and two gesture candidates fitted and privately preserved. Real-face visual acceptance and semantic expression fitting remain blocked on the absent paired face inputs.
+- Status: merged through PR #25; two gesture candidates are fitted and privately preserved. The face ZIP was received on 2026-11-18 and passes bounded numerical checks. Real-face visual acceptance and paired semantic fitting remain open; see [the intake and verification record](jensen-face-intake-2026-11-18.md).
 
 ## Verified diagnosis at the PR #23 baseline
 
@@ -26,7 +26,7 @@
 ## Available inputs and current limitations
 
 - Source code, generated clothed GLB and bounded extracted motion clips are present at the starting revision.
-- The promised Gaussian ZIP has not yet appeared among the accessible attachments. Semantic calibration also requires the matching `jensen_a` source sequence or its reviewed, clock-aligned face observations. Recovered Goldman gesture footage cannot supply paired labels for unrelated FLAME frames.
+- The Gaussian ZIP was unavailable during this implementation, then received and hash-verified on 2026-11-18. Semantic calibration still requires the matching `jensen_a` source sequence or its reviewed, clock-aligned face observations. Recovered Goldman gesture footage cannot supply paired labels for unrelated FLAME frames.
 - This host has nine logical CPUs, about 10 GB RAM and no visible CUDA GPU. Small CPU fits are feasible; a full GaussianAvatars appearance retrain is not being represented as feasible here.
 - Existing face `.json`/`.bin` files will remain ignored and unchanged. Private derived artifacts must have a verified durable destination before expensive work.
 
@@ -38,7 +38,8 @@ Detailed commands, artifact receipts and remaining gates follow. Do not merge so
 
 ## Verified implementation checkpoint
 
-The follow-up is preserved in [draft PR #25](https://github.com/Dindb-dong/who-is-your-bias/pull/25).
+The follow-up is preserved in [PR #25](https://github.com/Dindb-dong/who-is-your-bias/pull/25),
+now merged at `973627da0dc668c8544d60fd092da2e88bdb2307`.
 The last verified remote checkpoint before this status update is
 `bc3f215015c302a4d353f2e75b311aeb0a23601f`; every preceding implementation batch was
 committed separately, published, fetched again, and verified against its complete Git tree.
@@ -48,7 +49,7 @@ Implemented:
 - Shared-camera/depth Gaussian face and clothed GLB body, with original-head masking that preserves raised hands.
 - Collar-to-neck transform blending, shared speech/body clocks, eyes-first attention, stop/reduced-motion handling, restoration on missing assets, and resource cleanup.
 - Exact binary-hash binding, structural bundle validation and explicit expression replay/static fallbacks. The documented current SH-baked face remains the default.
-- Supervised semantic-expression preparation and resumable calibration, with both fitting and calibration validation kept out of the Gaussian held-out frames. This tooling is tested; it has not fitted the user's absent face data.
+- Supervised semantic-expression preparation and resumable calibration, with both fitting and calibration validation kept out of the Gaussian held-out frames. This tooling is tested; a fit remains pending the paired semantic observations.
 - Real gesture fitting and optional audio-clock runtime application. The UI requires an explicit experimental geometry-preview opt-in. A Jensen model is synchronously excluded for another persona.
 - The legacy GLB audition protocol refuses the new composite/learned modes because it does not record their asset identities; it does not produce misleading comparison receipts.
 
@@ -105,6 +106,9 @@ checked. Persistent IDs and member hashes are in the expanded report.
 
 ## Applying the preserved candidates
 
+For complete commands, URL parameters and exact UI labels, use the
+[Jensen studio quickstart](jensen-studio-quickstart.md).
+
 Place the two files in the package's `models/gesture/` directory into
 `apps/web/public/models/gesture/` before building. Keep the PR #23 face `.json`
 and `.bin` under their existing ignored Gaussian-head directory.
@@ -134,20 +138,21 @@ trained audio/text conditioning or torso model.
   corrected synthetic response fields and desktop menu selectors; no assertions
   were removed. Later commits contain documentation and measured receipts only.
   The full workflow outcome is recorded in PR #25's validation section and checks.
-- Actual Jensen face/neck appearance, expression naturalness, target-machine performance and real
-  semantic expression calibration remain unverified until the private bundle and
-  its correctly paired source sequence are supplied.
+- Actual Jensen face/neck appearance, expression naturalness and target-machine performance
+  remain unverified. The later private-bundle numerical checks and current visual/source-input
+  boundaries are recorded in [the 2026-11-18 intake](jensen-face-intake-2026-11-18.md).
 
 ## Next input and resumption boundary
 
-Supply `jensen_a_c1c3_240k_sh.json` and `.bin` from the promised Gaussian ZIP.
-For actual semantic expression fitting, also supply the original `jensen_a`
+The face ZIP has been received; reuse its verified files and completed numerical
+checks from [the intake record](jensen-face-intake-2026-11-18.md).
+For actual semantic expression fitting, supply the original `jensen_a`
 tracking video with its frame order/time mapping, or its observation JSONL,
 `observations-manifest.json` and matching reviewed selection. The bundle's fixed
 15-FPS header alone is not proof of original-video alignment.
 
-First verify the recorded bundle hashes and inspect the actual combined face,
-neck seam, hands and source-expression variation. Then follow
+The remaining visual review must inspect the actual combined face, neck seam,
+hands and expression variation. Once paired inputs are available, follow
 [the paired calibration workflow](../tools/gaussian_head/expression/README.md),
 keeping both calibration partitions inside Gaussian training frames. No real
 Jensen expression weights have been produced by the synthetic tests in this PR.
