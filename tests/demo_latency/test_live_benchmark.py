@@ -74,6 +74,25 @@ def test_real_format_protocol_fixture_validates_pcm_before_completion():
     assert "First synthetic" not in json.dumps(report)
 
 
+def test_stage_timings_are_saved_without_claiming_browser_playback():
+    events = fixture()
+    timing = {"first_text_ms": 1, "first_segment_ms": 2, "first_synthesis_started_ms": 3,
+              "server_first_pcm_ms": 10, "text_complete_ms": 21}
+    next(data for event, data in events if event == "audio_end")["server_timings_ms"] = timing
+    report = consume(events).summary()
+    assert report["server_metrics"]["live_stages_ms"] == timing
+    assert report["speaker_first_audible_ms"] is None
+    timing["server_first_pcm_ms"] = "fast"
+    with pytest.raises(ProtocolError):
+        consume(events)
+
+
+def test_changed_live_response_policy_invalidates_runtime_comparison():
+    before = {"api": {"live_response_policy": "default"}}
+    after = {"api": {"live_response_policy": "live-concise.v1"}}
+    assert _health_continuity(before, after) == ["api.live_response_policy"]
+
+
 @pytest.mark.parametrize("index,key,value", [
     (0, "protocol", "unknown"),
     (2, "char_end", 500),

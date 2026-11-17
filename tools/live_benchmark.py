@@ -27,6 +27,8 @@ from bias.models import ChatRequest
 
 PROTOCOL = "live-segments-pcm.v1"
 SCHEMA = "live-http-benchmark.v1"
+LIVE_STAGE_KEYS = ("first_text_ms", "first_segment_ms", "first_synthesis_started_ms",
+                   "server_first_pcm_ms", "text_complete_ms")
 
 
 class ProtocolError(ValueError):
@@ -240,6 +242,13 @@ class LiveProtocol:
                 raise ProtocolError("Final text contains an unspoken committed tail")
             _number(data.get("total_ms"))
             _number(data.get("first_pcm_ready_ms"))
+            if "server_timings_ms" in data:
+                if not isinstance(data["server_timings_ms"], dict):
+                    raise ProtocolError("Invalid live stage timings")
+                for key in LIVE_STAGE_KEYS:
+                    value = data["server_timings_ms"].get(key)
+                    if value is not None:
+                        _number(value)
             self.audio_end = data
             self.timings["audio_end_received_ms"] = at_ms
         elif event == "done":
@@ -263,6 +272,7 @@ class LiveProtocol:
                 "first_pcm_preceded_text_result": first_pcm < result_ms if first_pcm is not None and result_ms is not None else None,
                 "server_metrics": {"language": {key: self.result["metrics"][key] for key in ("retrieval_ms", "generation_ms", "total_ms")} if self.result else None,
                                    "first_pcm_ready_ms": (self.audio_end or {}).get("first_pcm_ready_ms"),
+                                   "live_stages_ms": {key: ((self.audio_end or {}).get("server_timings_ms") or {}).get(key) for key in LIVE_STAGE_KEYS},
                                    "total_ms": (self.audio_end or {}).get("total_ms")},
                 "original_wav_hash_verification": "not_possible_without_original_wav_headers; actual PCM digests verified per complete segment",
                 "browser_first_visible_text_ms": None, "browser_playback_first_pcm_ms": None,
@@ -327,7 +337,7 @@ def _health_view(value: dict, kind: str) -> dict:
         common["last_generation"] = {key: (value.get("last_generation") or {}).get(key) for key in
             ("language", "input_chars", "cold_start", "elapsed_seconds", "audio_seconds", "real_time_factor", "termination_reason")}
     else:
-        common = {key: value.get(key) for key in ("status", "version", "provider", "live_protocol", "configuration_only")}
+        common = {key: value.get(key) for key in ("status", "version", "provider", "live_protocol", "live_response_policy", "configuration_only")}
         common["providers"] = {name: {key: (value.get("providers", {}).get(name) or {}).get(key) for key in ("configured", "model")}
                                for name in ("llm", "speech")}
         common["retrieval"] = {key: (value.get("retrieval") or {}).get(key) for key in
@@ -380,7 +390,7 @@ def _health_continuity(before: dict, after: dict) -> list[str]:
     fields = {
         "language": ("model", "identity", "adapter", "runtime", "limits"),
         "voice": ("reference_configured", "reference_mode", "voice", "synthesis", "streaming", "runtime"),
-        "api": ("provider", "live_protocol", "providers", "persona_snapshot"),
+        "api": ("provider", "live_protocol", "live_response_policy", "providers", "persona_snapshot"),
     }
     for kind, keys in fields.items():
         old, new = before.get(kind, {}), after.get(kind, {})

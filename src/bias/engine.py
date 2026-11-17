@@ -13,7 +13,7 @@ from contextlib import aclosing
 from .behavior import plan_behavior
 from .bindings import motion_binding_status
 from .config import Settings
-from .context_budget import ByteBudgetCounter, TokenizerCounter, build_snapshot_messages
+from .context_budget import ByteBudgetCounter, TokenizerCounter, build_snapshot_messages, live_concise_instruction
 from .corpus import Corpus
 from .grounding import CITATION, audit_citations, validate_citations
 from .models import ChatRequest, ChatTurn, Grounding, TurnMetrics
@@ -246,10 +246,13 @@ class Engine:
                 fragments: list[str] = []
                 allowed_ids = {hit.evidence.id for hit in result.hits}
                 if use_llm:
+                    live_concise = committed_segments and self.settings.live_concise
+                    if live_concise:
+                        context["response_policy"] = "live-concise.v1"
                     if self.snapshot or self.settings.retrieval_backend == "hybrid" or speculative:
                         package = build_snapshot_messages(self.corpus, request, result, list(session.history), self.snapshot, temporal,
                             context_window=self.settings.llm_context_window, output_tokens=self.settings.llm_max_tokens,
-                            counter=self.counter, resolved=resolved, speculative=speculative)
+                            counter=self.counter, resolved=resolved, speculative=speculative, live_concise=live_concise)
                         messages = package.messages
                         allowed_ids = set(package.supplied_ids)
                         context["prompt_budget"] = package.budget
@@ -257,6 +260,9 @@ class Engine:
                             raise ProviderError("evidence_budget", "No complete evidence passage fits this model's context budget.", 422)
                     else:
                         messages = self.prompt_builder(self.corpus.persona, request, result, list(session.history), self.corpus.sources)
+                        if live_concise:
+                            messages = [{**message} for message in messages]
+                            messages[0]["content"] += live_concise_instruction(request.language)
                     committer = SegmentCommitter(turn_id=turn_id, language=request.language, allowed_ids=allowed_ids)
                     review_inference = speculative and request.language == "ko"
                     review_evidence = (self.corpus.persona.id == "jensen-huang" and request.language == "ko"
