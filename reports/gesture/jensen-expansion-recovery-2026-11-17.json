@@ -2,7 +2,7 @@
   "schema_version": "jensen-gesture-expansion-recovery.v1",
   "run_id": "jensen-goldman-gesture-expansion-2026-11-17",
   "date": "2026-11-17",
-  "status": "recovered_verified_recipe_frozen_before_extraction",
+  "status": "first_extraction_batch_persisted_remaining_frozen_windows_in_progress",
   "archives": [
     {
       "name": "jensen-goldman-media-batch-01.tar.gz",
@@ -39,9 +39,21 @@
     "status": "bytes_hash_and_stream_metadata_verified"
   },
   "vision_models": [
-    { "name": "face_landmarker.task", "bytes": 3758596, "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff" },
-    { "name": "pose_landmarker_lite.task", "bytes": 5777746, "sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a" },
-    { "name": "hand_landmarker.task", "bytes": 7819105, "sha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1" }
+    {
+      "name": "face_landmarker.task",
+      "bytes": 3758596,
+      "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"
+    },
+    {
+      "name": "pose_landmarker_lite.task",
+      "bytes": 5777746,
+      "sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+    },
+    {
+      "name": "hand_landmarker.task",
+      "bytes": 7819105,
+      "sha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1"
+    }
   ],
   "runtime": {
     "python": "3.12.14",
@@ -53,17 +65,37 @@
   },
   "source_inspection": {
     "method": "Contact sheets at 5-second intervals plus 2-second details and full-size 122-second frame; ffmpeg scene threshold 0.25 over 96-180 seconds.",
-    "detected_cut_seconds": [115.6155, 126.409617, 152.836017, 161.144317, 179.8797],
+    "detected_cut_seconds": [
+      115.6155,
+      126.409617,
+      152.836017,
+      161.144317,
+      179.8797
+    ],
     "observation": "Selected single-subject closeups visibly contain gesturing arms/hands; a wide-shot crop can also retain hips. Actual landmark coverage remains to be measured.",
     "identity_review": "Source metadata supplies the subject attribution. Visual selection does not promote speaker association or continuity review."
   },
   "recipe": "data/motion/jensen-gesture-expansion.v1.json",
-  "next_step": "After remote checkpoint verification, execute the four frozen windows, preserve observations, export selected geometry and report arm coverage before fitting.",
+  "next_step": "Complete the remaining three frozen training-only windows and preserve each bounded extraction batch before fitting a separate expanded candidate.",
   "private_output_root": "data/local/jensen-performance-2026-11-17/gesture-expansion",
   "limitations": [
     "All added intervals are from the existing Goldman training event; this does not add event diversity.",
     "The original WIRED validation result has already been observed and is not a fresh test.",
-    "No new extraction, training or quality result is claimed by this recovery receipt.",
+    "The first 14-second segment has 140 measured frames and a persisted source/observation bundle. No expanded-model fitting or quality result is claimed yet.",
     "Raw source media, observations and derived weights are retained privately, not committed to Git."
+  ],
+  "extraction_code_revision": "5c783c12162c08b69cf0b34847f43a0dc77b4270",
+  "export_code_revision": "3dc3fc0f01e3f10533deb736c297fa49b5dd57de",
+  "generated_artifacts": [
+    {
+      "name": "jensen-gesture-goldman-0100-14s.tar.gz",
+      "role": "first raw observation and prepared source clip batch",
+      "bytes": 6229529,
+      "sha256": "a5f0488d6743c7d7a75268a9cd0fa3568f9c29d3cdbe1e64216e1165cd23686c",
+      "library_file_id": "libfile_fde3_f-a1fa5347aeac81918438ba7bb57993ba_a18ece08681081918d81df44f69c4b1f",
+      "file_id": "file_0000000084fc81f5b0c4d8c7b0c3b826",
+      "status": "uploaded_and_independent_full_readback_verified",
+      "readback_sha256": "a5f0488d6743c7d7a75268a9cd0fa3568f9c29d3cdbe1e64216e1165cd23686c"
+    }
   ]
 }

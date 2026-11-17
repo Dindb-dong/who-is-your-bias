@@ -92,7 +92,47 @@ Each user obtains these themselves after registering on the official sites. Do n
 | `SMPLX_NEUTRAL_2020.npz` (also MALE / FEMALE) | SMPL-X licence (smpl-x.is.tue.mpg.de) | `smplx_head.py` |
 | `SMPL-X__FLAME_vertex_ids.npy` | SMPL-X download (FLAME correspondence) | `smplx_head.py`, `preview_export.py` |
 
-## 5. Other ignored local files
+## 5. Jensen gesture training artifacts (2026-11-17)
+
+The first fitted candidate uses measured geometry from the existing Goldman,
+Stripe and WIRED clips. It remains an explicitly selected `geometry_preview`;
+the validation result does not justify promoting it to the default motion policy.
+See [the method and exact commands](jensen-gesture-training.md) and
+[the artifact receipt](../reports/gesture/jensen-2026-11-17.json).
+
+| Local path or private archive | Role | Bytes | SHA-256 |
+|---|---|---:|---|
+| `apps/web/public/models/gesture/jensen-gesture-basis.json` | First fitted runtime candidate; four arm/finger groups | 141,273 | `f5ac3321fdf34525f1eaff21286e4aca34dfe252e9505a0eb2c0549d74a0f324` |
+| `data/local/jensen-performance-2026-11-17/gesture/dataset.json` | Prepared masked training/validation windows | 923,695 | `3252be1e9f83a8931a92a3c25d5ce90316858ad9c5ecbcd01921adf85354327d` |
+| `jensen-performance-training-2026-11-17.zip` | Prepared data, current/previous checkpoints, model and results | 578,286 | `d410f300051b4940adce298ad66e7f231b170933d00abf78175e24e90f7a847d` |
+
+The archive was privately saved and independently read back with identical bytes.
+Its stable file IDs and member hashes are in the receipt. A copied model belongs
+at the runtime path above; the studio enables it only through the experimental
+gesture setting or `?head=gaussian&gesture=learned`. Missing artifacts leave the
+designed body-motion path available.
+
+Additional recovered source clips, MediaPipe observations and exported geometry
+live under `data/local/jensen-performance-2026-11-17/gesture-expansion/`. Their
+bounded archive receipts are recorded in
+[the expansion report](../reports/gesture/jensen-expansion-recovery-2026-11-17.json).
+Keep the original candidate and any expanded candidate separately identifiable.
+
+## 6. Subject-specific expression calibration outputs
+
+The optional runtime path is
+`apps/web/public/models/gaussian-head/<bundle>.expression-driver.json`.
+Prepared paired observations, calibration checkpoints and measured results also
+belong under ignored local paths. No real Jensen expression-driver artifact has
+been fitted in this follow-up: the private Gaussian bundle and its aligned source
+observations have not been supplied. Tests use explicitly synthetic fixtures.
+
+Use [the calibration preparation and fitting commands](../tools/gaussian_head/expression/README.md)
+with the exact bundle and source-frame mapping. Recovered footage from another
+event cannot be paired with `jensen_a` FLAME frames. Record actual output sizes,
+hashes and private preservation receipts here when that fit is executed.
+
+## 7. Other ignored local files
 
 | Path | What it is | How to get it |
 |---|---|---|
