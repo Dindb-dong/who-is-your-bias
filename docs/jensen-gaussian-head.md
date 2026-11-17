@@ -10,6 +10,7 @@ Diagnosis report with charts: [reports/gaussian-head/avatar-diagnosis-2026-11-16
 - **Not in Git.** Trained weights, exported bundles (`apps/web/public/models/gaussian-head/*`, ignored), source
   video, rendered comparison images, and the FLAME / SMPL-X model files (research licences, no redistribution).
   Reports in Git contain numbers only, no face images.
+  Inventory, hashes and sharing rules for these files: [local-only-assets.md](local-only-assets.md).
 - **Where things live.** Training runs on the lab Slurm cluster under a private work root (`$AVATAR_ROOT` in the
   scripts). Checkpoints and logs stay there. Cluster access details are internal and are not recorded here.
 
