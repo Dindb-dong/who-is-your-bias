@@ -15,6 +15,14 @@ them to the public repository. Read `docs/local-only-assets.md` first.
    source clock. Collect visibly raised/lowered brows, blinks, eyes wide/squint,
    smiles, closed mouth and open mouth frames. A face-only head bundle is not a
    source of ARKit labels; the source video or existing observations are needed.
+   Verify which source timestamp corresponds to bundle frame 0 and whether
+   consecutive bundle frames follow that video's sampling interval without
+   dropped frames or edits. The exporter currently writes `fps=15` as a
+   constant; this field alone does not prove the source-clock mapping. The
+   current preparation assumes `source_time = frame_index / fps + offset`.
+   Do not apply it to a nonlinear or unverified mapping. Observations from a
+   different interview, including recovered Goldman 2024 footage, cannot be
+   paired with the existing `jensen_a` FLAME targets.
 2. Run the existing `tools.media observe` workflow on bounded source windows.
    Its `observations.v1` manifest and `observation.v1` JSONL are the inputs here.
    Reuse the existing hash-bound `motion-review.v1` selection review. Training
@@ -40,8 +48,8 @@ them to the public repository. Read `docs/local-only-assets.md` first.
   "fit_train_ranges": [[0, 1800]],
   "validation_ranges": [[1800, 2324]],
   "observation_runs": [
-    {"manifest": "observations/segment-01/manifest.json", "review": "observations/segment-01/review.json"},
-    {"manifest": "observations/segment-02/manifest.json", "review": "observations/segment-02/review.json"}
+    {"manifest": "observations/segment-01/observations-manifest.json", "review": "observations/segment-01/review.json"},
+    {"manifest": "observations/segment-02/observations-manifest.json", "review": "observations/segment-02/review.json"}
   ]
 }
 ```
@@ -51,6 +59,49 @@ The recipe above reserves some of those frames for calibration validation and
 keeps Gaussian test frames 2324–3318 untouched. This measures within-sequence
 interpolation, **not** unseen-event generalization. An event-independent study
 needs additional source sequences and their own fixed partitions.
+
+### Generate observations when only the matching source video is available
+
+Use the isolated vision environment pinned by
+[`tools/motion/requirements-vision-offline.txt`](../../motion/requirements-vision-offline.txt),
+with FFmpeg, FFprobe and a verified local `face_landmarker.task`. Keep this
+NumPy 1 environment separate from the NumPy 2 development environment used for
+calibration. Replace every uppercase placeholder below with verified local
+paths and source metadata. These are command templates, not executed runs.
+
+```bash
+/PATH/TO/VISION_ENV/bin/python -m tools.media prepare \
+  /PRIVATE/PATH/jensen_a.mp4 \
+  data/local/jensen-expression/observations/segment-01 \
+  --source-id VERIFIED_SOURCE_ID \
+  --source-url https://VERIFIED_PROVENANCE_URL \
+  --source-timeline VERIFIED_SOURCE_CLOCK \
+  --start 0 --duration 120 \
+  --input-source-offset VERIFIED_SOURCE_OFFSET_SECONDS
+
+/PATH/TO/VISION_ENV/bin/python -m tools.media observe \
+  data/local/jensen-expression/observations/segment-01/manifest.json \
+  --face-model /PRIVATE/PATH/face_landmarker.task \
+  --sample-fps 15
+```
+
+`prepare` accepts at most 120 seconds per segment; use new output directories
+and the correct `--start` for subsequent windows. Keep every window within the
+verified Gaussian training portion. The `--sample-fps 15` example matches the
+documented bundle only after its frame/time mapping has been checked.
+
+The existing media preparation command requires an audio stream. A silent VHAP
+video or image sequence cannot pass through it unchanged; use an existing
+verified media manifest or add an explicit video-only preparation path before
+running these commands. Do not invent audio provenance to bypass that check.
+
+The observer creates `observations.jsonl` and `observations-manifest.json`.
+The expression recipe takes the latter, while `observe` takes the original
+media `manifest.json`. Add a hash-matching `motion-review.v1` selection document
+after reviewing the actual source clock, continuity and selected speaker; the
+observer's default `unreviewed` output is not a training acceptance record.
+
+### Build the paired calibration dataset
 
 ```bash
 uv run python -m tools.gaussian_head.expression prepare \
