@@ -2,6 +2,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { build } from 'vite';
+import { FINGER_JOINTS } from '../../apps/web/src/avatar/channels';
 
 /** Tests exercise production rendering with explicitly synthetic input. They
  * cannot establish Jensen likeness or trained expression/gesture quality. */
@@ -57,6 +58,26 @@ function audioFixture() {
   audio.write('data', 36); audio.writeUInt32LE(count * 2, 40);
   for (let i = 0; i < count; i++) audio.writeInt16LE(Math.round(Math.sin(i * 2 * Math.PI * 220 / rate) * 3000), 44 + i * 2);
   return audio;
+}
+
+function syntheticGestureBasis() {
+  const group = (channels: string[]) => {
+    const dimensions = 4 * channels.length * 3;
+    return { channels, rank: 1,
+      mean: Array.from({ length: dimensions }, (_, i) => i % 3 === 0 ? .35 : 0),
+      basis: [Array.from({ length: dimensions }, (_, i) => i % 3 === 0 ? .1 : 0)],
+      latent_examples: [[1], [-1]], latent_ids: ['synthetic:0', 'synthetic:5000'],
+      training_source_events: ['synthetic-browser-fixture'], support_counts: Array(dimensions).fill(2),
+      max_angle_rad: .65, iterations_completed: 1 };
+  };
+  return { schema_version: 'gesture-basis.v1', persona_id: 'jensen-huang', review_status: 'geometry_preview',
+    coordinate_basis: 'right_handed_y_up', rotation_space: 'local_delta', flattening: 'time_channel_xyz',
+    id: 'synthetic-browser-gesture-fixture', dataset_sha256: 'b'.repeat(64), sample_count: 4, duration_ms: 5000,
+    groups: {
+      left_arm: group(['leftUpperArm', 'leftForearm', 'leftHand']), right_arm: group(['rightUpperArm', 'rightForearm', 'rightHand']),
+      left_fingers: group(FINGER_JOINTS.map((name) => `left${name}`).sort()),
+      right_fingers: group(FINGER_JOINTS.map((name) => `right${name}`).sort()),
+    }, limitations: ['Hand-authored synthetic browser fixture. Not trained weights or observations of Jensen.'] };
 }
 
 async function routeSpeech(page: Page) {
@@ -158,4 +179,61 @@ test('labels missing calibration and keeps the body visible when private face by
   await expect(stage).toHaveAttribute('data-model-state', 'ready');
   await expect(stage).toHaveAttribute('data-rig-kind', 'glb');
   await expect(canvas).toBeVisible(); await expect(stage.locator('canvas')).toHaveCount(1);
+});
+
+test('activates the explicit learned-gesture preview and disables it on Stop, reduced motion and another persona', async ({ page }) => {
+  await routeBundle(page); await routeSpeech(page);
+  let modelRequests = 0;
+  await page.route('**/models/gesture/jensen-gesture-basis.json', (route) => {
+    modelRequests++; return route.fulfill({ json: syntheticGestureBasis() });
+  });
+  await page.goto('/?head=gaussian&gesture=learned');
+  const stage = page.getByTestId('avatar-stage'), canvas = stage.locator('canvas.avatar-canvas');
+  await expect(stage).toHaveAttribute('data-gaussian-state', 'ready', { timeout: 25000 });
+  await expect.poll(() => modelRequests).toBeGreaterThan(0);
+  const enableVoice = async () => {
+    await page.getByRole('button', { name: 'Studio settings', exact: true }).filter({ visible: true }).click();
+    await page.getByRole('button', { name: /Connected voice/ }).click(); await page.getByRole('button', { name: 'Close settings' }).click();
+  };
+  const askAndPlay = async () => {
+    await page.getByRole('textbox', { name: 'Your message' }).fill('Synthetic learned-gesture activation check.');
+    await page.getByRole('button', { name: 'Send message', exact: true }).click();
+    await page.getByRole('button', { name: 'Play response', exact: true }).click();
+  };
+  await enableVoice(); await askAndPlay();
+  await expect(stage).toHaveAttribute('data-bone-source', 'trained_geometry_preview');
+  await expect.poll(async () => Number(await canvas.getAttribute('data-rig-arm'))).toBeGreaterThan(.2);
+  await expect.poll(async () => Number(await canvas.getAttribute('data-rig-finger'))).toBeGreaterThan(.2);
+  await expect.poll(async () => Number(await canvas.getAttribute('data-gaussian-jaw'))).toBeGreaterThan(.05);
+  await page.getByRole('button', { name: 'Stop audio', exact: true }).click();
+  await expect(stage).toHaveAttribute('data-bone-source', 'designed');
+  await expect(canvas).toHaveAttribute('data-speaking', 'false');
+  await expect.poll(async () => Number(await canvas.getAttribute('data-rig-finger'))).toBeLessThan(.02);
+  await expect.poll(async () => Number(await canvas.getAttribute('data-rig-arm'))).toBeLessThan(.02);
+  await page.getByRole('button', { name: 'Studio settings', exact: true }).filter({ visible: true }).click();
+  await page.getByRole('checkbox', { name: 'Reduce automatic motion' }).check(); await page.getByRole('button', { name: 'Close settings' }).click();
+  await page.getByRole('button', { name: 'Play response', exact: true }).click();
+  await expect.poll(async () => Number(await canvas.getAttribute('data-audio-clock-ms'))).toBeGreaterThan(800);
+  await expect(stage).toHaveAttribute('data-bone-source', 'designed');
+  expect(Number(await canvas.getAttribute('data-rig-finger'))).toBeLessThan(.08);
+  expect(Number(await canvas.getAttribute('data-gaussian-jaw'))).toBeGreaterThan(.05);
+  await page.getByRole('button', { name: 'Stop audio', exact: true }).click();
+
+  // Re-query a different service persona with the same opt-in URL. Neither
+  // Jensen face bytes nor Jensen gesture weights may activate for that subject.
+  const beforeOtherPersona = modelRequests;
+  await page.route('**/api/persona', async (route) => {
+    const response = await route.fetch(), profile = await response.json();
+    await route.fulfill({ response, json: { ...profile, id: 'elon-musk', name: 'Other persona fixture',
+      capabilities: { ...profile.capabilities, speech: true, live_speech: false },
+      bindings: { ...profile.bindings, voice: { status: 'matched', persona_id: 'elon-musk', voice: 'reference' } } } });
+  });
+  await page.reload();
+  await expect(stage).toHaveAttribute('data-model-state', 'ready', { timeout: 25000 });
+  await expect(stage).toHaveAttribute('data-gaussian-state', 'disabled');
+  await enableVoice(); await askAndPlay();
+  await expect.poll(async () => Number(await canvas.getAttribute('data-audio-clock-ms'))).toBeGreaterThan(800);
+  await expect(stage).toHaveAttribute('data-bone-source', 'designed');
+  expect(modelRequests).toBe(beforeOtherPersona);
+  await page.getByRole('button', { name: 'Stop audio', exact: true }).click();
 });
