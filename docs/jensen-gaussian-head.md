@@ -5,6 +5,9 @@ Diagnosis report with charts: [reports/gaussian-head/avatar-diagnosis-2026-11-16
 
 Current follow-up: [expression and upper-body performance execution](jensen-performance-2026-11-17.md).
 
+For installation, exact URL options, expanded-gesture selection and playback controls,
+start with the [Jensen studio quickstart](jensen-studio-quickstart.md).
+
 ## Scope and boundaries
 
 - **Goal.** A FLAME-bound 3D Gaussian head that renders in the browser studio in real time, trained from one
