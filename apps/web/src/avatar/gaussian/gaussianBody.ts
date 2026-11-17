@@ -18,6 +18,8 @@ export interface GaussianHeadConfig {
   offset?: [number, number, number];
   /** Rest-space band above the FLAME mesh's lower boundary, in metres. */
   collarCutMeters?: number;
+  /** Transition from neck motion at the collar to head motion above it. */
+  seamBlendMeters?: number;
 }
 
 export interface GaussianBodyHeader {
@@ -56,6 +58,7 @@ uniform sampler2D uBinding;
 uniform sampler2D uFaces;
 uniform sampler2D uColor;
 uniform vec2 uViewport;
+uniform mat4 uNeckCorrection;
 in vec3 position;
 in float gaussianIndex;
 out vec2 vPosition;
@@ -72,7 +75,8 @@ mat3 qmat(vec4 q) {
 void main() {
   int i=int(gaussianIndex), W=textureSize(uLocal,0).x;
   vec4 L=texelFetch(uLocal,at(i,W),0);
-  int f=int(texelFetch(uBinding,at(i,W),0).r);
+  vec4 binding=texelFetch(uBinding,at(i,W),0);
+  int f=int(binding.r);
   int fw=textureSize(uFaces,0).x/2;
   ivec2 fp=ivec2((f%fw)*2,f/fw);
   vec4 F0=texelFetch(uFaces,fp,0), F1=normalize(texelFetch(uFaces,fp+ivec2(1,0),0));
@@ -80,11 +84,12 @@ void main() {
   ivec2 rp=ivec2((i%rw)*2,i/rw);
   vec4 q=normalize(texelFetch(uRotation,rp,0));
   vec3 scale=texelFetch(uRotation,rp+ivec2(1,0),0).xyz*F0.w;
-  vec3 center=qrot(F1,L.xyz)*F0.w+F0.xyz;
+  mat4 seam=mat4(1.)*(1.-binding.g)+uNeckCorrection*binding.g;
+  vec3 center=(seam*vec4(qrot(F1,L.xyz)*F0.w+F0.xyz,1.)).xyz;
   vec4 cam=modelViewMatrix*vec4(center,1.);
   float z=-cam.z;
   if(z<0.01 || L.w<=0.) { gl_Position=vec4(0.,0.,2.,1.); vColor=vec4(0.); vPosition=vec2(0.); return; }
-  mat3 M=mat3(modelViewMatrix)*qmat(qmul(F1,q))*mat3(scale.x,0.,0.,0.,scale.y,0.,0.,0.,scale.z);
+  mat3 M=mat3(modelViewMatrix)*mat3(seam)*qmat(qmul(F1,q))*mat3(scale.x,0.,0.,0.,scale.y,0.,0.,0.,scale.z);
   vec2 focal=0.5*uViewport*vec2(projectionMatrix[0][0],projectionMatrix[1][1]);
   mat3 J=mat3(focal.x/z,0.,0.,0.,focal.y/z,0.,focal.x*cam.x/(z*z),focal.y*cam.y/(z*z),0.);
   mat3 covariance=J*(M*transpose(M))*transpose(J);
@@ -124,11 +129,19 @@ function texture(data: Float32Array, width: number, height: number): DataTexture
 
 export interface GaussianAttachment {
   head: Object3D;
+  neck?: Object3D;
   /** Matrix from FLAME metres to the current head's local frame. */
   matrix: Matrix4;
   sourceCutY: number;
   targetCutY: number;
   scale: number;
+  seamBlendMeters?: number;
+}
+
+export function gaussianSeamWeight(height: number, cutY: number, band: number): number {
+  if (band <= 0) return 0;
+  const t = Math.max(0, Math.min(1, (height - cutY) / band));
+  return 1 - t * t * (3 - 2 * t);
 }
 
 /** Fit one uniform similarity transform without altering the learned identity.
@@ -145,9 +158,11 @@ export function fitGaussianAttachment(rig: AvatarRig, B: GaussianBodyArrays, con
   const ratio = (bodyBounds.max.y - targetPivot.y) / (sourceMaxY - pivot.y);
   const correction = config.scale ?? 1;
   const cut = config.collarCutMeters ?? 0.05;
+  const band = config.seamBlendMeters ?? 0.06;
   const offset = config.offset ?? [0, 0, 0];
   if (!Number.isFinite(ratio) || ratio <= 0 || ratio > 20 || !Number.isFinite(correction) || correction < 0.5 || correction > 2
-    || !Number.isFinite(cut) || cut < 0 || cut > 0.15 || offset.some((v) => !Number.isFinite(v) || Math.abs(v) > 0.5)) {
+    || !Number.isFinite(cut) || cut < 0 || cut > 0.15 || !Number.isFinite(band) || band < 0 || band > 0.15
+    || offset.some((v) => !Number.isFinite(v) || Math.abs(v) > 0.5)) {
     throw new Error('The Gaussian/body alignment is invalid; inspect the neutral head and collar calibration.');
   }
   const scale = ratio * correction;
@@ -156,8 +171,10 @@ export function fitGaussianAttachment(rig: AvatarRig, B: GaussianBodyArrays, con
     .multiply(new Matrix4().makeScale(scale, scale, scale))
     .multiply(new Matrix4().makeTranslation(-pivot.x, -pivot.y, -pivot.z));
   const sourceCutY = sourceMinY + cut;
-  return { head, matrix: head.matrixWorld.clone().invert().multiply(world), sourceCutY,
-    targetCutY: target.y + (sourceCutY - pivot.y) * scale, scale };
+  const neckName = rig.diagnostics.resolvedBones?.find((bone) => bone.control === 'neck')?.node;
+  const neck = rig.root.getObjectByName(neckName ?? 'neck');
+  return { head, neck, matrix: head.matrixWorld.clone().invert().multiply(world), sourceCutY,
+    targetCutY: target.y + (sourceCutY - pivot.y) * scale, scale, seamBlendMeters: band };
 }
 
 interface CutMesh { mesh: Mesh; geometry: BufferGeometry; material: Material | Material[]; clonedGeometry: BufferGeometry; clonedMaterials: Material[] }
@@ -228,12 +245,20 @@ export class GaussianBodyHead {
   private readonly keys: Uint16Array;
   private readonly counts = new Uint32Array(65536);
   private readonly view = new Matrix4();
+  private readonly neckCorrection = new Matrix4();
+  private readonly neckReference?: Matrix4;
+  private readonly neck?: Object3D;
+  private readonly neckWeights: Float32Array;
   private disposed = false;
 
   constructor(private readonly header: GaussianBodyHeader, private readonly B: GaussianBodyArrays, attachment: GaussianAttachment) {
     this.head = new FlameHead(header, B);
-    this.root.name = 'GaussianHead'; this.root.matrixAutoUpdate = false; this.root.matrix.copy(attachment.matrix);
+    this.root.name = 'GaussianHead'; this.root.matrixAutoUpdate = false; this.root.matrix.copy(attachment.matrix); this.root.matrixWorldNeedsUpdate = true;
     const n = header.n_gauss, width = 1024, height = Math.max(1, Math.ceil(n / width));
+    this.neck = attachment.neck;
+    if (this.neck) this.neckReference = this.neck.matrixWorld.clone().invert()
+      .multiply(attachment.head.matrixWorld).multiply(attachment.matrix);
+    this.neckWeights = new Float32Array(n);
     const local = new Float32Array(width * height * 4), color = new Float32Array(width * height * 4);
     const binding = new Float32Array(width * height * 4), rotation = new Float32Array(width * height * 8);
     const zero = { expr: new Float32Array(header.n_expr), pose: new Float32Array(15), trans: new Float32Array(3) };
@@ -245,6 +270,8 @@ export class GaussianBodyHead {
       local.set([B.g_xyz[i * 3], B.g_xyz[i * 3 + 1], B.g_xyz[i * 3 + 2], kept ? 1 / (1 + Math.exp(-B.g_opacity[i])) : 0], i * 4);
       for (let c = 0; c < 3; c++) color[i * 4 + c] = Math.min(1, Math.max(0, .5 + .28209479 * B.g_color[i * 3 + c]));
       binding[i * 4] = B.g_binding[i];
+      this.neckWeights[i] = this.neck ? gaussianSeamWeight(restCenters[i * 3 + 1], attachment.sourceCutY, attachment.seamBlendMeters ?? .06) : 0;
+      binding[i * 4 + 1] = this.neckWeights[i];
       rotation.set([B.g_rot[i * 4], B.g_rot[i * 4 + 1], B.g_rot[i * 4 + 2], B.g_rot[i * 4 + 3],
         Math.exp(B.g_scale[i * 3]), Math.exp(B.g_scale[i * 3 + 1]), Math.exp(B.g_scale[i * 3 + 2]), 0], i * 8);
     }
@@ -259,7 +286,7 @@ export class GaussianBodyHead {
     geometry.setAttribute('gaussianIndex', new InstancedBufferAttribute(this.order, 1).setUsage(DynamicDrawUsage));
     const material = new RawShaderMaterial({ glslVersion: GLSL3, vertexShader, fragmentShader,
       uniforms: { uLocal: { value: this.textures[0] }, uRotation: { value: this.textures[1] }, uBinding: { value: this.textures[2] },
-        uFaces: { value: this.faceTexture }, uColor: { value: this.textures[4] }, uViewport: { value: new Vector2(1, 1) } },
+        uFaces: { value: this.faceTexture }, uColor: { value: this.textures[4] }, uViewport: { value: new Vector2(1, 1) }, uNeckCorrection: { value: this.neckCorrection } },
       transparent: true, blending: NormalBlending, depthTest: true, depthWrite: false, toneMapped: false });
     this.mesh = new Mesh(geometry, material); this.mesh.frustumCulled = false; this.mesh.renderOrder = 5;
     this.root.add(this.mesh);
@@ -277,7 +304,23 @@ export class GaussianBodyHead {
     }
     this.faceTexture.needsUpdate = true;
     gaussianCenters(this.B, frames, this.centers);
-    this.mesh.updateWorldMatrix(true, false); camera.updateMatrixWorld();
+    this.root.parent?.updateWorldMatrix(true, false);
+    // The calibrated local matrix is manual: force propagation after a parent
+    // bone moves, before sorting rather than waiting for renderer.render().
+    this.root.updateMatrixWorld(true); camera.updateMatrixWorld();
+    if (this.neck && this.neckReference) {
+      this.neck.updateWorldMatrix(true, false);
+      this.neckCorrection.copy(this.mesh.matrixWorld).invert().multiply(this.neck.matrixWorld).multiply(this.neckReference);
+      // Sorting must use the same skinned centres as the vertex shader.
+      const m = this.neckCorrection.elements;
+      for (let i = 0; i < this.neckWeights.length; i++) {
+        const weight = this.neckWeights[i]; if (weight === 0) continue;
+        const k = i * 3, x = this.centers[k], y = this.centers[k + 1], z = this.centers[k + 2];
+        this.centers[k] += weight * (m[0] * x + m[4] * y + m[8] * z + m[12] - x);
+        this.centers[k + 1] += weight * (m[1] * x + m[5] * y + m[9] * z + m[13] - y);
+        this.centers[k + 2] += weight * (m[2] * x + m[6] * y + m[10] * z + m[14] - z);
+      }
+    }
     this.view.multiplyMatrices(camera.matrixWorldInverse, this.mesh.matrixWorld);
     sortGaussianDepth(this.centers, this.view, this.order, this.depth, this.keys, this.counts);
     this.mesh.geometry.getAttribute('gaussianIndex').needsUpdate = true;

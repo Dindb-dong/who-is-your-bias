@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { BufferAttribute, BufferGeometry, Group, Matrix4, Mesh, MeshStandardMaterial, PerspectiveCamera, Vector3 } from 'three';
 import type { AvatarRig } from '../procedural';
 import { neutralPose } from '../timeline';
-import { fitGaussianAttachment, GaussianBodyHead, hideOriginalHead, sortGaussianDepth } from './gaussianBody';
+import { fitGaussianAttachment, GaussianBodyHead, gaussianSeamWeight, hideOriginalHead, sortGaussianDepth } from './gaussianBody';
 import type { GaussianBodyArrays, GaussianBodyHeader } from './gaussianBody';
 
 function body(): AvatarRig {
@@ -51,6 +51,30 @@ describe('Gaussian body composition', () => {
     const rig = body(); const { B } = bundle(); rig.root.remove(rig.root.getObjectByName('head')!);
     expect(() => fitGaussianAttachment(rig, B, { bundle: 'test' })).toThrow('head joint');
     expect(() => fitGaussianAttachment(body(), B, { bundle: 'test', scale: NaN })).toThrow('invalid');
+  });
+
+  it('keeps the seam exact at rest, follows the neck at the collar and leaves the upper face attached to the head', () => {
+    const rig = body(); const joint = rig.root.getObjectByName('head')!; const neck = new Group(); neck.name = 'neck'; neck.position.y = 1.8;
+    rig.root.add(neck); rig.root.updateMatrixWorld(true); neck.attach(joint); rig.root.updateMatrixWorld(true);
+    const { header, B } = bundle();
+    const fit = fitGaussianAttachment(rig, B, { bundle: 'test', collarCutMeters: .05, seamBlendMeters: .06 });
+    const head = new GaussianBodyHead(header, B, fit); fit.head.add(head.root);
+    const camera = new PerspectiveCamera(36, 1, .1, 10); camera.position.set(0, 2, 3); camera.lookAt(0, 2, 0);
+    const params = { expr: new Float32Array(1), pose: new Float32Array(15), trans: new Float32Array(3) };
+    head.update(params, camera, 128, 128);
+    const correction = head.mesh.material.uniforms.uNeckCorrection.value as Matrix4;
+    expect(correction.elements.map((n, i) => Math.abs(n - new Matrix4().elements[i])).reduce((a, b) => Math.max(a, b))).toBeLessThan(1e-7);
+    const neutral = head.mesh.matrixWorld.clone();
+    const collar = new Vector3(.03, fit.sourceCutY, .02), brow = new Vector3(.03, fit.sourceCutY + .1, .02);
+    expect(gaussianSeamWeight(collar.y, fit.sourceCutY, .06)).toBe(1);
+    expect(gaussianSeamWeight(brow.y, fit.sourceCutY, .06)).toBe(0);
+    joint.rotation.y += .6; head.update(params, camera, 128, 128);
+    const anchored = collar.clone().applyMatrix4(correction).applyMatrix4(head.mesh.matrixWorld);
+    expect(anchored.distanceTo(collar.clone().applyMatrix4(neutral))).toBeLessThan(1e-6);
+    expect(brow.clone().applyMatrix4(head.mesh.matrixWorld).distanceTo(brow.clone().applyMatrix4(neutral))).toBeGreaterThan(.01);
+    // Disabling the optional band gives the unmodified rigid-head behavior.
+    expect(gaussianSeamWeight(collar.y, fit.sourceCutY, 0)).toBe(0);
+    head.dispose();
   });
 
   it('clips the original head in rest space without hiding a raised hand or editing the source geometry', () => {
