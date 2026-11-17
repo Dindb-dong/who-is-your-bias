@@ -165,9 +165,10 @@ test('keeps Gaussian face, articulated body and speech on one playback path, the
   expect(Number(await canvas.getAttribute('data-rig-arm'))).toBeLessThan(.15);
   expect(Number(await canvas.getAttribute('data-gaussian-jaw'))).toBeGreaterThan(.05);
   await page.getByRole('button', { name: 'Stop audio', exact: true }).click();
-  const navigation = page.getByRole('navigation', { name: info.project.name === 'mobile' ? 'Mobile navigation' : 'Main navigation', exact: true });
-  await navigation.getByRole('button', { name: /Sources/ }).click(); await expect(page.locator('canvas.avatar-canvas')).toHaveCount(0);
-  await navigation.getByRole('button', { name: 'Studio', exact: true }).click();
+  const mobile = info.project.name === 'mobile';
+  const navigation = page.getByRole('navigation', { name: mobile ? 'Mobile navigation' : 'Main navigation', exact: true });
+  await navigation.getByRole('button', { name: mobile ? 'Sources' : /Source library/ }).click(); await expect(page.locator('canvas.avatar-canvas')).toHaveCount(0);
+  await navigation.getByRole('button', { name: mobile ? 'Studio' : 'Conversation', exact: true }).click();
   await expect(stage).toHaveAttribute('data-gaussian-state', 'ready', { timeout: 25000 });
   await expect(page.locator('canvas.avatar-canvas')).toHaveCount(1);
 });
