@@ -4,6 +4,7 @@ import copy
 import hashlib
 import json
 import math
+import shutil
 from pathlib import Path
 
 import numpy as np
@@ -11,7 +12,7 @@ import pytest
 
 from bias.motion import MotionError
 from tools.motion.gesture_training import (
-    evaluate_fit, fit_basis, prepare, prepare_windows, quaternion_exp,
+    bounded_path, evaluate_fit, fit_basis, prepare, prepare_windows, quaternion_exp,
     quaternion_log, sample_rotation, train,
 )
 
@@ -136,6 +137,36 @@ def test_prepare_rejects_a_changed_source_manifest_before_fitting(tmp_path):
     copied.write_text(json.dumps(plan))
     with pytest.raises(MotionError, match="manifest hash"):
         prepare(copied, tmp_path / "run", repo_root=root)
+
+
+def test_private_asset_root_preserves_provenance_and_rejects_modified_bytes(tmp_path):
+    root = Path(__file__).resolve().parents[2]
+    private = tmp_path / "private-assets"
+    manifest = json.loads((root / "data/motion/jensen-multievent-input.v1.json").read_text())
+    for record in manifest["clips"]:
+        destination = private / record["path"]
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(root / "apps/web/public" / record["path"], destination)
+    plan = root / "data/motion/jensen-gesture-training.v1.json"
+    public_result = prepare(plan, tmp_path / "public-run", repo_root=root)
+    private_result = prepare(plan, tmp_path / "private-run", repo_root=root, asset_root=private)
+    assert private_result == public_result
+    assert (tmp_path / "private-run/dataset.json").read_bytes() == (tmp_path / "public-run/dataset.json").read_bytes()
+    with (private / manifest["clips"][0]["path"]).open("a") as stream:
+        stream.write(" ")
+    with pytest.raises(MotionError, match="Source clip hash changed"):
+        prepare(plan, tmp_path / "modified-run", repo_root=root, asset_root=private)
+
+
+def test_asset_member_cannot_escape_root_by_traversal_absolute_path_or_symlink(tmp_path):
+    private = tmp_path / "private"
+    private.mkdir()
+    outside = tmp_path / "outside.json"
+    outside.write_text("{}")
+    (private / "link.json").symlink_to(outside)
+    for member in ("../outside.json", str(outside), "link.json"):
+        with pytest.raises(MotionError, match="inside the declared root"):
+            bounded_path(private.resolve(), member)
 
 
 def test_training_rejects_modified_prepared_bytes(tmp_path):

@@ -1,0 +1,69 @@
+{
+  "schema_version": "jensen-gesture-expansion-recovery.v1",
+  "run_id": "jensen-goldman-gesture-expansion-2026-11-17",
+  "date": "2026-11-17",
+  "status": "recovered_verified_recipe_frozen_before_extraction",
+  "archives": [
+    {
+      "name": "jensen-goldman-media-batch-01.tar.gz",
+      "role": "previously acquired source media",
+      "library_file_id": "libfile_fde3_f-b044a9b5804881919cbedc10d94a432b_a18ece08681081918d81df44f69c4b1f",
+      "bytes": 30395339,
+      "sha256": "e6cc51da71a2f9ed09deafa5fc0c53f9e497afadd2ba44281010e0876997ed5e",
+      "status": "downloaded_and_hash_verified",
+      "contents": "180-second Goldman video, acquisition receipt and three reference frames"
+    },
+    {
+      "name": "jensen-avatar-reference-batch1.tar.gz",
+      "role": "previously acquired pinned vision models and reference images",
+      "library_file_id": "libfile_fde3_f-cfe1f0c78f588191a1d3ef4316b395c1_a18ece08681081918d81df44f69c4b1f",
+      "bytes": 26164438,
+      "sha256": "d454e90f9f2d9a5e906c599d7286e11fbfe55559b08a20739181dcc0ac0cff6b",
+      "status": "downloaded_and_hash_verified",
+      "contents": "MediaPipe face, lite pose and hand task files with manifest; public reference photographs with provenance"
+    }
+  ],
+  "source_video": {
+    "basename": "goldman-sachs-2024-0-180.mp4",
+    "bytes": 30524535,
+    "sha256": "4557437ba42c8cf3b90f55210f08e4d1be399ab5fa689139b3b49735ae91da2d",
+    "duration_seconds": 180.013167,
+    "width": 1278,
+    "height": 720,
+    "fps": "60000/1001",
+    "source_id": "goldman-sachs-2024",
+    "source_event_id": "goldman-sachs-2024",
+    "source_url": "https://www.goldmansachs.com/insights/talks-at-gs/jensen-huang",
+    "source_timeline": "publisher_video_elapsed",
+    "source_offset_seconds": 0,
+    "status": "bytes_hash_and_stream_metadata_verified"
+  },
+  "vision_models": [
+    { "name": "face_landmarker.task", "bytes": 3758596, "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff" },
+    { "name": "pose_landmarker_lite.task", "bytes": 5777746, "sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a" },
+    { "name": "hand_landmarker.task", "bytes": 7819105, "sha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1" }
+  ],
+  "runtime": {
+    "python": "3.12.14",
+    "mediapipe": "0.10.21",
+    "numpy": "1.26.4",
+    "device": "cpu",
+    "maximum_affinity_cpus": 2,
+    "environment": "isolated vision environment using tools/motion/requirements-vision-offline.txt"
+  },
+  "source_inspection": {
+    "method": "Contact sheets at 5-second intervals plus 2-second details and full-size 122-second frame; ffmpeg scene threshold 0.25 over 96-180 seconds.",
+    "detected_cut_seconds": [115.6155, 126.409617, 152.836017, 161.144317, 179.8797],
+    "observation": "Selected single-subject closeups visibly contain gesturing arms/hands; a wide-shot crop can also retain hips. Actual landmark coverage remains to be measured.",
+    "identity_review": "Source metadata supplies the subject attribution. Visual selection does not promote speaker association or continuity review."
+  },
+  "recipe": "data/motion/jensen-gesture-expansion.v1.json",
+  "next_step": "After remote checkpoint verification, execute the four frozen windows, preserve observations, export selected geometry and report arm coverage before fitting.",
+  "private_output_root": "data/local/jensen-performance-2026-11-17/gesture-expansion",
+  "limitations": [
+    "All added intervals are from the existing Goldman training event; this does not add event diversity.",
+    "The original WIRED validation result has already been observed and is not a fresh test.",
+    "No new extraction, training or quality result is claimed by this recovery receipt.",
+    "Raw source media, observations and derived weights are retained privately, not committed to Git."
+  ]
+}

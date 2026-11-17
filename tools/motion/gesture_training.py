@@ -166,7 +166,12 @@ def prepare_windows(clip: dict, channels: list[str], *, window_ms: int, samples:
     return accepted, excluded
 
 
-def prepare(plan_path: Path, run_dir: Path, *, repo_root: Path) -> dict:
+def prepare(plan_path: Path, run_dir: Path, *, repo_root: Path, asset_root: Path | None = None) -> dict:
+    # A recovered private bundle can supply the same stable relative members.
+    # Every member is still confined to one explicit root and content-hash bound.
+    assets = (asset_root if asset_root is not None else repo_root / "apps/web/public").resolve()
+    if not assets.is_dir():
+        raise MotionError("The declared motion asset root must be an existing directory")
     plan = read_json(plan_path, 128 * 1024)
     if plan.get("schema_version") != "gesture-training-plan.v1" or plan.get("persona_id") != "jensen-huang":
         raise MotionError("Expected a Jensen gesture-training-plan.v1")
@@ -196,7 +201,7 @@ def prepare(plan_path: Path, run_dir: Path, *, repo_root: Path) -> dict:
         if record["id"] in clip_ids:
             raise MotionError("Duplicate clip ID")
         clip_ids.add(record["id"])
-        path = bounded_path((repo_root / "apps/web/public").resolve(), record["path"])
+        path = bounded_path(assets, record["path"])
         if hashlib.sha256(path.read_bytes()).hexdigest() != record["sha256"]:
             raise MotionError("Source clip hash changed")
         clip = read_json(path, 8 * 1024**2)
@@ -348,6 +353,7 @@ def main() -> None:
     prep.add_argument("plan", type=Path)
     prep.add_argument("run_dir", type=Path)
     prep.add_argument("--repo-root", type=Path, default=Path.cwd())
+    prep.add_argument("--asset-root", type=Path, help="Explicit private root containing the manifest's hash-bound relative clip members")
     fit = commands.add_parser("train")
     fit.add_argument("run_dir", type=Path)
     fit.add_argument("--output", type=Path, required=True)
@@ -355,7 +361,7 @@ def main() -> None:
     fit.add_argument("--iterations", type=int)
     args = parser.parse_args()
     if args.command == "prepare":
-        result = prepare(args.plan.resolve(), args.run_dir, repo_root=args.repo_root.resolve())
+        result = prepare(args.plan.resolve(), args.run_dir, repo_root=args.repo_root.resolve(), asset_root=args.asset_root)
     else:
         report = train(args.run_dir, args.output, resume=args.resume, iterations=args.iterations)
         result = {"run_id": report["run_id"], "model_sha256": report["model_sha256"], "model_bytes": report["model_bytes"], "groups": {name: {"status": group["status"], "iterations_completed": group.get("iterations_completed"), "training": group.get("training"), "validation": group.get("validation")} for name, group in report["groups"].items()}}
