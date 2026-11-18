@@ -36,12 +36,15 @@ Current-turn requests override the default: “한 문장으로 / in one sentenc
 “짧게 / briefly” → 1–2; “더 자세히 / in detail” → 3–5. The last recognized
 instruction wins. The recognizer is deterministic and bounded; it is not a
 general language-understanding model and cannot resolve every negation or mixed
-request. Matching takes precedence comparison → advice → procedure → explanation
+request. Common explicit negations (e.g. “in detail, not briefly”) are excluded.
+Matching takes precedence comparison → procedure → advice → explanation
 → factual. Unrecognized questions use the factual target.
 
 Bare format follow-ups retain the preceding **user** topic. For example,
 “Why reuse rockets?” → “한 문장으로” → “더 자세히” searches the original topic,
-without appending these format-only words to the retrieval query. A new question
+without appending these format-only words to the retrieval query. A substantive
+follow-up such as “Why is that approach cheaper?” remains part of the search
+context when a later format-only request arrives. A new question
 such as “Briefly, what is a GPU?” remains a new topic. Past assistant claims are
 never promoted to evidence. Old detail requests do not control the next turn.
 
@@ -95,8 +98,36 @@ The live benchmark includes policy configuration in its continuity receipt.
 
 Implementation checks are in `tests/test_answer_policy.py`, alongside the
 existing live, dialogue, grounding, context-budget, provider and benchmark tests.
-Current checkpoint: 53 focused policy/live-concise checks passed; broader
-regression and independent code review are in progress.
+Initial implementation checkpoint was saved and byte-verified remotely as
+`eefbb59ce5af886268c385b8ee9310e78058858d`. The follow-up preserves substantive
+follow-up questions across format changes and handles common negated requests.
+Independent code review identified these edge cases; regression tests cover
+the corrections.
+
+Validation on Python 3.12: **290 passed, 2 failed** in the following bounded
+suite, including all new policy tests and all three production API endpoints:
+
+```bash
+uv run --with 'pytest>=8,<10' --with 'numpy>=2,<3' --no-project python -m pytest \
+  tests/test_answer_policy.py tests/test_live_concise.py tests/test_live_streaming.py \
+  tests/test_context_budget_source_types.py tests/test_temporal_dialogue.py \
+  tests/test_grounding.py tests/test_jensen_persona.py tests/test_engine_and_sessions.py \
+  tests/test_providers_and_api.py tests/demo_latency/test_live_benchmark.py -q
+```
+
+Both failures were reproduced on a clean checkout of **main `56b1868`** with
+the same `g07/rag` mismatch, independently of this change:
+
+- `test_legacy_prompts_reproduce_all_prior_measured_prompt_hashes`
+- `test_versioned_prompts_reproduce_all_published_comparison_hashes`
+
+They compare archived historical Musk prompt hashes; observed hash
+`8abd35775ba108fcc1dc9e0df58aa314bdeff21f70a09bac245a8b411224d7c0` differs from
+archived `a31dd19885a93e8b522b127f97eb35a4d509b3c3b4d839b9cee86c4317209a40`
+on both checkouts. The relevant frozen prompt builders, retrieval code and
+archived results were not changed. These remain existing failures, not waived
+passing checks. `git diff --check` and Python compilation also passed.
+
 Stub LLM / synthetic audio tests are **not** measured Qwen answer quality,
 Jensen fidelity, browser audibility or latency improvements.
 

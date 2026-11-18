@@ -13,13 +13,16 @@ VERSION = "adaptive-answer.v1"
 # Only a standalone presentation request inherits the preceding USER topic.
 # A new question containing "briefly" must not inherit an unrelated topic.
 PRESENTATION_FOLLOWUP = re.compile(
-    r"^(?:(?:no|actually)[,\s]+)?(?:please\s+)?(?:tell me more|(?:can you\s+)?(?:explain|elaborate)(?:\s+more|\s+in detail)?|"
+    r"^(?:(?:no|actually)[,\s]+)?(?:please\s+)?(?:tell me more|(?:can you\s+)?(?:explain|elaborate)"
+    r"(?:\s+(?:it|that))?(?:\s+more|\s+in detail)?|"
     r"(?:make|keep) (?:it|that) (?:shorter|brief|short)|(?:answer|summari[sz]e)(?:\s+(?:it|that))?\s+"
-    r"(?:briefly|in (?:one|a single) (?:sentence|line)|in detail)|more detail|briefly)"
+    r"(?:briefly|in (?:one|a single) (?:sentence|line)|in detail)|"
+    r"in (?:one|a single) (?:sentence|line)|in detail|more detail|briefly)"
     r"(?:,?\s+please)?[?!.\s]*$|"
     r"^(?:아니[,\s]+)?(?:(?:좀|조금)\s*)?(?:(?:더\s*)?(?:자세히|자세하게|구체적으로)|"
     r"(?:더\s*)?짧게|간단히|간략히|한\s*(?:문장|줄)(?:으로|로)|핵심만)"
-    r"(?:\s*(?:설명|답변|대답|말|요약)(?:해|해\s*줘|해\s*주세요|해주세요|해줘|해요|해주세요)?)?[?!.\s]*$",
+    r"(?:\s*(?:(?:설명|답변|대답|말|요약)?해(?:\s*(?:줘|주세요|줄래|요))?|"
+    r"알려\s*(?:줘|주세요|줄래)))?[?!.\s]*$",
     re.I,
 )
 
@@ -36,8 +39,8 @@ _DETAIL_REQUESTS = (
 
 _KINDS = (
     ("comparison", r"\b(?:compar(?:e|ison)|versus|vs\.?|trade[- ]?offs?|pros and cons|difference(?:s)? between)\b|비교|차이|장단점"),
-    ("advice", r"\b(?:advice|advise|recommend|should I|should we|how (?:can|do) (?:I|we)|values?|leadership|early jobs?|experience(?:s)?)\b|조언|가치관|리더십|경험|어떻게\s*(?:해야|하면\s*좋)"),
     ("procedure", r"\b(?:pipeline|workflow|step[- ]by[- ]step|steps|procedure)\b|파이프라인|과정|절차|단계별"),
+    ("advice", r"\b(?:advice|advise|recommend|should I|should we|how (?:can|do) (?:I|we)|values|leadership|early jobs?|experience(?:s)?)\b|조언|가치관|리더십|경험|어떻게\s*(?:해야|하면\s*좋)"),
     ("explanation", r"\b(?:why|explain|how (?:does|do|did|is|are|can|would)|reason)\b|왜|이유|원리|어떻게|설명"),
 )
 _TARGETS = {"factual": (1, 2, 45), "explanation": (2, 4, 95),
@@ -49,6 +52,17 @@ _STRUCTURE = {
     "procedure": ("Give the overall flow first, then the key stages in order.", "전체 흐름을 먼저 요약하고 핵심 단계를 순서대로 설명하세요."),
     "advice": ("Give practical advice, then a relevant sourced experience or decision criterion if available.", "실용적인 조언부터 말하고 관련 근거가 있을 때만 경험이나 판단 기준을 연결하세요."),
 }
+
+
+def _negated_detail(message: str, match: re.Match) -> bool:
+    """Exclude common explicit negations; not a general intent parser."""
+    before, after = message[:match.start()], message[match.end():]
+    return bool(
+        re.search(r"\b(?:not|don't|do not|rather than|instead of)"
+                  r"(?:\s+(?!but\b|instead\b)\w+){0,2}\s*$", before, re.I)
+        or re.match(r"\s*(?:(?:설명|답변|대답|말|요약|작성)?(?:하|해)?\s*)?"
+                    r"(?:하지\s*말|하지\s*마|말(?:고|아)|마(?:세요|라))", after)
+    )
 
 
 @dataclass(frozen=True)
@@ -97,7 +111,7 @@ def select_answer_policy(message: str, *, language: str, anchor: str = "",
     # The current user request alone controls detail. The last recognized
     # instruction wins, e.g. "in detail; actually, in one sentence".
     matches = [(match.start(), detail) for detail, pattern in _DETAIL_REQUESTS
-               for match in re.finditer(pattern, message, re.I)]
+               for match in re.finditer(pattern, message, re.I) if not _negated_detail(message, match)]
     detail = max(matches)[1] if matches else "auto"
     low, high, words = _TARGETS[kind]
     if detail == "one_sentence":

@@ -56,6 +56,7 @@ class DialogueRecord:
     search_anchor: str = ""
     supporting_turn_ids: tuple[str, ...] = ()
     temporal_period: str = "exact"
+    search_query: str = ""
 
 
 @dataclass(frozen=True)
@@ -67,6 +68,7 @@ class ResolvedQuery:
     entities: tuple[str, ...]
     is_correction: bool
     anchor: str = ""
+    presentation_topic: str = ""
 
 
 @dataclass
@@ -108,9 +110,12 @@ class DialogueState:
             supporting = tuple(dict.fromkeys((*prior.supporting_turn_ids, prior.turn_id)))[-12:]
             if presentation:
                 # Length/format instructions must not dilute lexical relevance
-                # or accumulate as factual search terms across follow-ups.
-                return ResolvedQuery(query, anchor, supporting, "presentation_followup",
-                                     current or prior.entities, correction, anchor)
+                # or lose a substantive follow-up such as "Why is that cheaper?".
+                # This query and topic contain USER words only, never the reply.
+                topic = next((record.user_text for record in reversed(self.records)
+                              if not is_presentation_followup(record.user_text)), anchor)
+                return ResolvedQuery(query, prior.search_query or anchor, supporting, "presentation_followup",
+                                     current or prior.entities, correction, anchor, topic)
             # Search only actual user words. Artificial labels such as
             # "previous user question" dilute the lexical coverage denominator
             # and can turn a supported follow-up into an abstention.
@@ -125,7 +130,8 @@ class DialogueState:
         self.records.append(DialogueRecord(turn_id, resolved.original[:4000], assistant[:6000], resolved.entities,
                                           tuple(cited_ids), grounding, intent.mode if intent else "general",
                                           snapshot_id, resolved.is_correction, intent.years if intent else (),
-                                          resolved.anchor, resolved.supporting_turn_ids, intent.period if intent else "exact"))
+                                          resolved.anchor, resolved.supporting_turn_ids, intent.period if intent else "exact",
+                                          resolved.query))
 
     def inspect(self) -> dict:
         # A session summary is provenance, never an automatic factual memory.

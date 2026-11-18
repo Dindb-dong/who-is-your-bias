@@ -252,7 +252,8 @@ class Engine:
                 allowed_ids = {hit.evidence.id for hit in result.hits}
                 if use_llm:
                     answer_policy = (select_answer_policy(request.message, language=request.language,
-                        anchor=resolved.anchor if resolved.supporting_turn_ids else "", speculative=speculative)
+                        anchor=(resolved.presentation_topic or resolved.anchor) if resolved.supporting_turn_ids else "",
+                        speculative=speculative)
                         if adaptive else None)
                     live_concise = committed_segments and self.settings.live_concise and answer_policy is None
                     if answer_policy:

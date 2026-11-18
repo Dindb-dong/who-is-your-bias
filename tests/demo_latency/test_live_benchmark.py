@@ -276,7 +276,7 @@ def observed_health():
     "language.runtime.dtype", "language.runtime.device", "language.runtime.threads",
     "language.runtime.base_parameters", "language.runtime.context_window", "language.runtime.versions.torch",
     "language.runtime.generation_defaults.seed", "voice.runtime.revision", "voice.runtime.dtype",
-    "api.providers.llm.model", "api.providers.speech.model",
+    "api.providers.llm.model", "api.providers.speech.model", "api.answer_policy", "api.live_response_policy",
 ])
 def test_observed_model_or_runtime_replacement_cannot_pass_as_same_run(path):
     before = observed_health()

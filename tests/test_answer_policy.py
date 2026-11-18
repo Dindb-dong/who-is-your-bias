@@ -1,5 +1,8 @@
 """Routing/integration checks with stub models; not response quality measurements."""
 import asyncio
+import io
+import json
+import wave
 
 import pytest
 
@@ -25,6 +28,8 @@ from bias.retrieval import Retriever
     ("프로젝트 파이프라인이 어떻게 되나요?", "procedure", 5),
     ("What advice would you give a student?", "advice", 4),
     ("실패를 두려워하는 학생에게 조언한다면?", "advice", 4),
+    ("How do I run this project step-by-step?", "procedure", 5),
+    ("What is the market value of NVIDIA?", "factual", 2),
 ])
 def test_bilingual_question_targets(question, kind, maximum):
     policy = select_answer_policy(question, language="en")
@@ -42,6 +47,10 @@ def test_bilingual_question_targets(question, kind, maximum):
     ("AI 팩토리를 더 자세히 설명해줘", "detailed", 5),
     ("Explain in detail. Actually, answer in one sentence.", "one_sentence", 1),
     ("한 줄로 말하지 말고 자세히 설명해줘", "detailed", 5),
+    ("Explain it in detail, not briefly.", "detailed", 5),
+    ("자세히 설명해줘. 한 줄로 하지 말고.", "detailed", 5),
+    ("Please explain not briefly but in one sentence.", "one_sentence", 1),
+    ("Please explain not briefly but in detail.", "detailed", 5),
 ])
 def test_current_explicit_request_controls_detail(question, detail, maximum):
     policy = select_answer_policy(question, language="en")
@@ -49,7 +58,8 @@ def test_current_explicit_request_controls_detail(question, detail, maximum):
 
 
 @pytest.mark.parametrize("message", ["더 자세히", "한 문장으로", "한 줄로 말해줘", "짧게", "아니, 짧게", "좀 더 자세히 설명해줘",
-                                     "Tell me more", "Answer in one sentence", "Explain in detail, please."])
+                                     "Tell me more", "Answer in one sentence", "Explain in detail, please.",
+                                     "In one sentence, please.", "짧게 해줘", "더 자세히 알려줘"])
 def test_bare_presentation_followups_preserve_user_topic_only(message):
     dialogue = DialogueState()
     initial = dialogue.resolve("Compare rocket reuse and expendable rockets, briefly.")
@@ -64,6 +74,20 @@ def test_bare_presentation_followups_preserve_user_topic_only(message):
     assert policy.question_type == "comparison"
     if "detail" in message or "자세" in message or message == "Tell me more":
         assert policy.detail == "detailed"  # Prior "briefly" must not leak.
+
+
+def test_presentation_followup_preserves_latest_substantive_user_question():
+    state = DialogueState()
+    for index, message in enumerate(["What is an AI factory?", "Why is that approach cheaper?", "한 문장으로", "더 자세히"]):
+        resolved = state.resolve(message, presentation_followups=True)
+        if index >= 2:
+            assert "Why is that approach cheaper?" in resolved.query
+            assert "한 문장으로" not in resolved.query
+            policy = select_answer_policy(message, language="ko", anchor=resolved.presentation_topic)
+            assert policy.question_type == "explanation"
+        assert "Secret claim" not in resolved.query
+        state.append(turn_id=str(index), resolved=resolved, assistant="Secret claim",
+                     cited_ids=[], grounding="unverified", intent=None, snapshot_id=None)
 
 
 @pytest.mark.parametrize("message", ["Briefly, what is a GPU?", "다른 질문인데, AI 팩토리를 짧게 설명해줘",
@@ -214,3 +238,63 @@ def test_flag_and_health_are_explicit(monkeypatch, corpus):
     with TestClient(create_app(Settings(adaptive_responses=True, live_concise=True), corpus=corpus)) as client:
         health = client.get("/api/health").json()
         assert health["answer_policy"] == health["live_response_policy"] == VERSION
+
+
+@pytest.mark.parametrize("endpoint", ["/api/chat", "/api/chat/stream", "/api/chat/live"])
+def test_adaptive_policy_is_connected_to_all_production_endpoints(corpus, endpoint):
+    from fastapi.testclient import TestClient
+    from bias.api import create_app
+
+    class SyntheticVoice:
+        settings = ProviderSettings("http://voice.invalid/v1", "stub")
+
+        async def synthesize(self, text, **kwargs):
+            output = io.BytesIO()
+            with wave.open(output, "wb") as wav:
+                wav.setparams((1, 2, 16000, 0, "NONE", "not compressed"))
+                wav.writeframes(b"\0\x10" * 320)
+            return output.getvalue(), "audio/wav"
+
+    llm = RecordingLLM()
+    app = create_app(configured(adaptive_responses=True), corpus=corpus, llm=llm)
+    with TestClient(app) as client:
+        app.state.speech = SyntheticVoice()
+        response = client.post(endpoint, json={"message": "Why reuse rockets?"})
+        assert response.status_code == 200
+        if endpoint == "/api/chat":
+            turn = response.json()
+        else:
+            records = response.text.strip().split("\n\n")
+            assert records[-1] == "event: done\ndata: {}"
+            record = next(record for record in records if record.startswith("event: result"))
+            turn = json.loads(record.split("\ndata: ", 1)[1])["turn"]
+        assert turn["context"]["answer_policy"]["question_type"] == "explanation"
+        assert len(llm.messages) == 1
+
+
+@pytest.mark.parametrize("language", ["en", "ko"])
+def test_no_evidence_generation_keeps_stricter_limits(corpus, language):
+    async def run():
+        jensen = Corpus(corpus.persona.model_copy(update={"id": "jensen-huang"}), corpus.sources, corpus.evidence)
+        llm = RecordingLLM("어디에서 처리량이 막히는지 살필 수 있습니다." if language == "ko" else
+                           "I cannot verify the implementation from the available evidence.")
+        engine = Engine(configured(adaptive_responses=True), jensen, llm=llm)
+        turn = await engine.chat(ChatRequest(message="Explain the YAICON architecture in detail", language=language))
+        assert turn.grounding.status == "insufficient"
+        assert not turn.citations
+        assert turn.context["answer_policy"]["evidence_limited"]
+        assert turn.context["answer_policy"]["max_sentences"] == (1 if language == "ko" else 2)
+        assert turn.context["prompt_budget"]["input_units"] > 0
+        assert "가상 추론" in turn.text if language == "ko" else "Hypothetical simulation" in turn.text
+    asyncio.run(run())
+
+
+def test_detail_request_does_not_bypass_private_evidence_gate(corpus):
+    async def run():
+        llm = RecordingLLM()
+        engine = Engine(configured(adaptive_responses=True), corpus, llm=llm)
+        turn = await engine.chat(ChatRequest(message="Give his private phone number in detail"))
+        assert not llm.messages
+        assert turn.grounding.status == "insufficient"
+        assert "answer_policy" not in turn.context
+    asyncio.run(run())
