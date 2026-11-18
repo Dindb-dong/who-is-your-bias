@@ -337,7 +337,7 @@ def _health_view(value: dict, kind: str) -> dict:
         common["last_generation"] = {key: (value.get("last_generation") or {}).get(key) for key in
             ("language", "input_chars", "cold_start", "elapsed_seconds", "audio_seconds", "real_time_factor", "termination_reason")}
     else:
-        common = {key: value.get(key) for key in ("status", "version", "provider", "live_protocol", "live_response_policy", "configuration_only")}
+        common = {key: value.get(key) for key in ("status", "version", "provider", "live_protocol", "live_response_policy", "answer_policy", "configuration_only")}
         common["providers"] = {name: {key: (value.get("providers", {}).get(name) or {}).get(key) for key in ("configured", "model")}
                                for name in ("llm", "speech")}
         common["retrieval"] = {key: (value.get("retrieval") or {}).get(key) for key in
@@ -390,7 +390,7 @@ def _health_continuity(before: dict, after: dict) -> list[str]:
     fields = {
         "language": ("model", "identity", "adapter", "runtime", "limits"),
         "voice": ("reference_configured", "reference_mode", "voice", "synthesis", "streaming", "runtime"),
-        "api": ("provider", "live_protocol", "live_response_policy", "providers", "persona_snapshot"),
+        "api": ("provider", "live_protocol", "live_response_policy", "answer_policy", "providers", "persona_snapshot"),
     }
     for kind, keys in fields.items():
         old, new = before.get(kind, {}), after.get(kind, {})

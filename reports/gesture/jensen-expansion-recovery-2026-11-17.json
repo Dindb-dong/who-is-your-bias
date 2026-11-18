@@ -1,0 +1,285 @@
+{
+  "schema_version": "jensen-gesture-expansion-recovery.v1",
+  "run_id": "jensen-goldman-gesture-expansion-2026-11-17",
+  "date": "2026-11-17",
+  "status": "source_recovery_extraction_preparation_and_fit_artifacts_persisted_verified",
+  "archives": [
+    {
+      "name": "jensen-goldman-media-batch-01.tar.gz",
+      "role": "previously acquired source media",
+      "library_file_id": "libfile_fde3_f-b044a9b5804881919cbedc10d94a432b_a18ece08681081918d81df44f69c4b1f",
+      "bytes": 30395339,
+      "sha256": "e6cc51da71a2f9ed09deafa5fc0c53f9e497afadd2ba44281010e0876997ed5e",
+      "status": "downloaded_and_hash_verified",
+      "contents": "180-second Goldman video, acquisition receipt and three reference frames"
+    },
+    {
+      "name": "jensen-avatar-reference-batch1.tar.gz",
+      "role": "previously acquired pinned vision models and reference images",
+      "library_file_id": "libfile_fde3_f-cfe1f0c78f588191a1d3ef4316b395c1_a18ece08681081918d81df44f69c4b1f",
+      "bytes": 26164438,
+      "sha256": "d454e90f9f2d9a5e906c599d7286e11fbfe55559b08a20739181dcc0ac0cff6b",
+      "status": "downloaded_and_hash_verified",
+      "contents": "MediaPipe face, lite pose and hand task files with manifest; public reference photographs with provenance"
+    }
+  ],
+  "source_video": {
+    "basename": "goldman-sachs-2024-0-180.mp4",
+    "bytes": 30524535,
+    "sha256": "4557437ba42c8cf3b90f55210f08e4d1be399ab5fa689139b3b49735ae91da2d",
+    "duration_seconds": 180.013167,
+    "width": 1278,
+    "height": 720,
+    "fps": "60000/1001",
+    "source_id": "goldman-sachs-2024",
+    "source_event_id": "goldman-sachs-2024",
+    "source_url": "https://www.goldmansachs.com/insights/talks-at-gs/jensen-huang",
+    "source_timeline": "publisher_video_elapsed",
+    "source_offset_seconds": 0,
+    "status": "bytes_hash_and_stream_metadata_verified"
+  },
+  "vision_models": [
+    {
+      "name": "face_landmarker.task",
+      "bytes": 3758596,
+      "sha256": "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"
+    },
+    {
+      "name": "pose_landmarker_lite.task",
+      "bytes": 5777746,
+      "sha256": "59929e1d1ee95287735ddd833b19cf4ac46d29bc7afddbbf6753c459690d574a"
+    },
+    {
+      "name": "hand_landmarker.task",
+      "bytes": 7819105,
+      "sha256": "fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1"
+    }
+  ],
+  "runtime": {
+    "python": "3.12.14",
+    "mediapipe": "0.10.21",
+    "numpy": "1.26.4",
+    "device": "cpu",
+    "maximum_affinity_cpus": 2,
+    "environment": "isolated vision environment using tools/motion/requirements-vision-offline.txt"
+  },
+  "source_inspection": {
+    "method": "Contact sheets at 5-second intervals plus 2-second details and full-size 122-second frame; ffmpeg scene threshold 0.25 over 96-180 seconds.",
+    "detected_cut_seconds": [
+      115.6155,
+      126.409617,
+      152.836017,
+      161.144317,
+      179.8797
+    ],
+    "observation": "Selected single-subject closeups visibly contain gesturing arms/hands; a wide-shot crop can also retain hips. Actual landmark coverage remains to be measured.",
+    "identity_review": "Source metadata supplies the subject attribution. Visual selection does not promote speaker association or continuity review."
+  },
+  "recipe": "data/motion/jensen-gesture-expansion.v1.json",
+  "next_step": "Use the separate explicit initial/expanded preview routes for visual acceptance. A stronger generalization claim requires additional event diversity and a new reserved evaluation set; no further tuning was performed in this run.",
+  "private_output_root": "data/local/jensen-performance-2026-11-17/gesture-expansion",
+  "limitations": [
+    "All added intervals are from the existing Goldman training event; this does not add event diversity.",
+    "The original WIRED validation result has already been observed and is not a fresh test.",
+    "All four frozen windows produced 380 new measured frames. The expanded fit completed 60 updates for each of four groups; its narrow reused-validation comparison is recorded in the expanded fit report.",
+    "Raw source media, observations and derived weights are retained privately, not committed to Git.",
+    "The wide crop has chest geometry in 78 of 80 frames. The frozen model still trains only arms and fingers because there is no corresponding torso validation series."
+  ],
+  "extraction_code_revision": "5c783c12162c08b69cf0b34847f43a0dc77b4270",
+  "export_code_revision": "3dc3fc0f01e3f10533deb736c297fa49b5dd57de",
+  "generated_artifacts": [
+    {
+      "name": "jensen-gesture-goldman-0100-14s.tar.gz",
+      "role": "first raw observation and prepared source clip batch",
+      "bytes": 6229529,
+      "sha256": "a5f0488d6743c7d7a75268a9cd0fa3568f9c29d3cdbe1e64216e1165cd23686c",
+      "library_file_id": "libfile_fde3_f-a1fa5347aeac81918438ba7bb57993ba_a18ece08681081918d81df44f69c4b1f",
+      "file_id": "file_0000000084fc81f5b0c4d8c7b0c3b826",
+      "status": "uploaded_and_independent_full_readback_verified",
+      "readback_sha256": "a5f0488d6743c7d7a75268a9cd0fa3568f9c29d3cdbe1e64216e1165cd23686c"
+    },
+    {
+      "name": "jensen-gesture-goldman-0116-8s-crop.tar.gz",
+      "role": "second raw observation batch and first/second private geometry exports",
+      "bytes": 2681151,
+      "sha256": "83525c1a60a4d2dba96ca9931365c6153b6689d982ae1ba87f47d88902255533",
+      "file_id": "file_00000000c3108212bffb72c5d5b673ae",
+      "library_file_id": "libfile_fde3_f-8cbd608ebfe48191a04792160606330c_a18ece08681081918d81df44f69c4b1f",
+      "status": "uploaded_and_independent_full_readback_verified",
+      "readback_sha256": "83525c1a60a4d2dba96ca9931365c6153b6689d982ae1ba87f47d88902255533"
+    },
+    {
+      "name": "jensen-gesture-goldman-0136-10s.tar.gz",
+      "role": "third raw observation batch and private geometry export",
+      "bytes": 4960164,
+      "sha256": "43232ee4e148d53d4541215b34435a462133b1404a2105fb4809150bae442051",
+      "file_id": "file_000000000c4081f7a4b9171433411da6",
+      "library_file_id": "libfile_fde3_f-ff69ab80b4c48191b5dc8fa18b42426d_a18ece08681081918d81df44f69c4b1f",
+      "status": "uploaded_and_independent_full_readback_verified",
+      "readback_sha256": "43232ee4e148d53d4541215b34435a462133b1404a2105fb4809150bae442051"
+    },
+    {
+      "name": "jensen-gesture-goldman-0172-6s.tar.gz",
+      "role": "fourth raw observation batch and private geometry export",
+      "bytes": 2862121,
+      "sha256": "e6ddfd5fe058aed59f56c9119b023b55b00cefc2705c5dab1b5afa0d88b62530",
+      "file_id": "file_00000000c55081f7be78310c43325466",
+      "library_file_id": "libfile_fde3_f-215dce3128b08191abaf150c813c9332_a18ece08681081918d81df44f69c4b1f",
+      "status": "uploaded_and_independent_full_readback_verified",
+      "readback_sha256": "e6ddfd5fe058aed59f56c9119b023b55b00cefc2705c5dab1b5afa0d88b62530"
+    },
+    {
+      "name": "jensen-gesture-expanded-preparation.tar.gz",
+      "role": "exact expanded dataset, clips, review receipts and frozen plans before fitting",
+      "bytes": 2108890,
+      "sha256": "69ca6602c2fa4f363180b5a889fadd726e3f3206b24f2d634782dd94ed24f350",
+      "file_id": "file_00000000956481f591e9f57939fda6b9",
+      "library_file_id": "libfile_fde3_f-3f7fe3362e08819180041a776f42d868_a18ece08681081918d81df44f69c4b1f",
+      "status": "uploaded_and_independent_full_readback_verified",
+      "readback_sha256": "69ca6602c2fa4f363180b5a889fadd726e3f3206b24f2d634782dd94ed24f350"
+    },
+    {
+      "name": "jensen-gesture-candidates-2026-11-17.zip",
+      "role": "both fitted gesture candidates, exact datasets, current/previous checkpoints, private input clips, recipes, reports and install README",
+      "path": "data/local/jensen-performance-2026-11-17/jensen-gesture-candidates-2026-11-17.zip",
+      "bytes": 2871526,
+      "sha256": "bfbdf4fbfe4b468af1c5f163a5f691344914069cf78d4b658514d91f182aaf2f",
+      "file_id": "file_00000000a02c81f5b915e6d915a8d618",
+      "library_file_id": "libfile_fde3_f-d611b0f3e1048191a17ad39cda6b7fd1_a18ece08681081918d81df44f69c4b1f",
+      "version": 0,
+      "status": "uploaded_and_independent_full_readback_verified",
+      "readback_sha256": "bfbdf4fbfe4b468af1c5f163a5f691344914069cf78d4b658514d91f182aaf2f",
+      "zip_members": 57,
+      "zip_crc_verified": true,
+      "both_model_hashes_independently_verified": true
+    }
+  ],
+  "extraction_windows": [
+    {
+      "id": "goldman-0100-14s",
+      "source_start_seconds": 100,
+      "duration_seconds": 14,
+      "crop": null,
+      "observed_frames": 140,
+      "complete_left_arm_frames": 80,
+      "complete_right_arm_frames": 81,
+      "observed_chest_frames": 0,
+      "reference": {
+        "time_ms": 2402.4,
+        "observable_arm_controls": 6,
+        "observable_finger_controls": 30
+      },
+      "clip": {
+        "path": "motion/jensen/goldman-0100-14s.json",
+        "bytes": 859310,
+        "sha256": "1cfc33989fea03ca7c568fb4039c830ef2acbb2ada59e26adc0edada54c7f020"
+      },
+      "observations_sha256": "6c85897a1d348f1f78c1ae4b52033815fd6bacb844c7289f4cd95a2c995ae918"
+    },
+    {
+      "id": "goldman-0116-8s-crop",
+      "source_start_seconds": 116,
+      "duration_seconds": 8,
+      "crop": [
+        760,
+        20,
+        510,
+        560
+      ],
+      "observed_frames": 80,
+      "complete_left_arm_frames": 71,
+      "complete_right_arm_frames": 60,
+      "observed_chest_frames": 78,
+      "reference": {
+        "time_ms": 1801.8000000000002,
+        "observable_arm_controls": 6,
+        "observable_finger_controls": 30
+      },
+      "clip": {
+        "path": "motion/jensen/goldman-0116-8s-crop.json",
+        "bytes": 592978,
+        "sha256": "388f9a9bc91a91d11b1589846545db54dc301c9ffe3badb81faf3a97ee7552e6"
+      },
+      "observations_sha256": "20faf414eeb6b2e569be4f8b9356cd4408b5469ce3f85f333964349ef58cda27"
+    },
+    {
+      "id": "goldman-0136-10s",
+      "source_start_seconds": 136,
+      "duration_seconds": 10,
+      "crop": null,
+      "observed_frames": 100,
+      "complete_left_arm_frames": 72,
+      "complete_right_arm_frames": 63,
+      "observed_chest_frames": 0,
+      "reference": {
+        "time_ms": 100.1,
+        "observable_arm_controls": 6,
+        "observable_finger_controls": 30
+      },
+      "clip": {
+        "path": "motion/jensen/goldman-0136-10s.json",
+        "bytes": 659194,
+        "sha256": "1290bcaeab9aeb6869c69b43efaf7b001683613ae8f336fb8b412ce5da83c49a"
+      },
+      "observations_sha256": "a7222e6ee3e3950a01468c0ddae93fa4d87569ac09039121b4d95685f08f50ee"
+    },
+    {
+      "id": "goldman-0172-6s",
+      "source_start_seconds": 172,
+      "duration_seconds": 6,
+      "crop": null,
+      "observed_frames": 60,
+      "complete_left_arm_frames": 46,
+      "complete_right_arm_frames": 60,
+      "observed_chest_frames": 0,
+      "reference": {
+        "time_ms": 100.1,
+        "observable_arm_controls": 6,
+        "observable_finger_controls": 30
+      },
+      "clip": {
+        "path": "motion/jensen/goldman-0172-6s.json",
+        "bytes": 481602,
+        "sha256": "9f98ffdaabd1650932b9b3cec236b8dc10a5ede7d6ae76b70e7ac2866d3dafcf"
+      },
+      "observations_sha256": "e0f08fa6d335e868090bf73076bcb099e05df339631ffa1a94b93830bb61b6af"
+    }
+  ],
+  "expanded_preparation": {
+    "dataset_sha256": "e61b32907ac28e1031da456c469df437c5320f7f353ef898b3ce3af92c23ffd1",
+    "groups": {
+      "left_arm": {
+        "accepted_train_windows": 14,
+        "accepted_validation_windows": 1,
+        "excluded_windows": 33
+      },
+      "left_fingers": {
+        "accepted_train_windows": 24,
+        "accepted_validation_windows": 5,
+        "excluded_windows": 19
+      },
+      "right_arm": {
+        "accepted_train_windows": 14,
+        "accepted_validation_windows": 1,
+        "excluded_windows": 33
+      },
+      "right_fingers": {
+        "accepted_train_windows": 24,
+        "accepted_validation_windows": 5,
+        "excluded_windows": 19
+      }
+    },
+    "observed_source_frames": 960,
+    "source_clips": 10,
+    "source_events": {
+      "goldman-sachs-2024": "train",
+      "stripe-sessions-2024": "train",
+      "wired-big-interview-2024": "validation"
+    },
+    "dataset_file_bytes": 1409298,
+    "dataset_file_sha256": "773a06bd87710a61a96b20d6232eef63397d5318c8ffb56cf81b205d767c5005",
+    "input_manifest": "data/motion/jensen-gesture-expanded-input.v1.json",
+    "training_plan": "data/motion/jensen-gesture-training-expanded.v1.json"
+  },
+  "expanded_fit_report": "reports/gesture/jensen-expanded-2026-11-17.json"
+}

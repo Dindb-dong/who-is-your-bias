@@ -1,0 +1,315 @@
+{
+  "schema": "gaussian-body-attachment-inspection.v1",
+  "generated_at": "2026-11-17T17:37:11.539Z",
+  "source_commit": "8d804891ac83c61d24c1b6749ef517d417ac5915",
+  "source_sha256": {
+    "package-lock.json": "00d86e5ad676f85f593135388560c65710f2577cca69898f883ee5562a6398b3",
+    "apps/web/src/avatar/builtin.ts": "bf65a4498ef292856e0a15878ae670ccb4be835cc6b50945961d612336f0ad01",
+    "apps/web/src/avatar/retarget.ts": "925f7e0e423890ed6f4ce2cbaeccbb08bbcdaf2d48b1e89828ac0920151e7ebe",
+    "apps/web/src/avatar/timeline.ts": "aa8e0dd47d6ef7d93f1febfaad6e17f64edf522ecb6ea5cbc40f72845f0e8d17",
+    "apps/web/src/avatar/framing.ts": "617d563b9081dcea37f6de1a7d8e9ec364b2cae3f837462d83ea63f203a1010f",
+    "apps/web/src/avatar/channels.ts": "f259c84a48de5613e432d7806098d00f12e9bd39bc1b6b4051d9a8e59a504d18",
+    "apps/web/src/avatar/gaussian/gaussianBody.ts": "d4d53bcfd9dfca56f6b936fca61a5740c92de9c296590c4d72cda0aa1402dcba",
+    "apps/web/src/avatar/gaussian/gaussianHeadCore.ts": "722b55fd55e9ece327fa91959e07556b268a3b48d77e47afabfa39363cbbfd1b",
+    "apps/web/src/avatar/gaussian/gaussianPerformance.ts": "59bd6f21487f3a3faa047a3a22ee4bc9a06d3b4553120cf6288990d11bc84718",
+    "tools/gaussian_head/analysis/inspect_body_attachment.mjs": "3a77db997425d7a961a7cf7f0bf150f5b3fd8c2ec4d1416f05b06b800c3ee730"
+  },
+  "node_version": "v24.22.1",
+  "numerical_checks_passed": true,
+  "inputs": {
+    "bundles": [
+      {
+        "bundle": "jensen_a",
+        "manifest_bytes": 2427,
+        "manifest_sha256": "8a108dafead696d82f6a03505832f3e764e5b6ad79a4e99bbe766cea83d888fd",
+        "binary_bytes": 14001900,
+        "binary_sha256": "727ac52904b7a610b8b3bd59594ed85ef9990fd4b2105e8dc5a57079bc852c0d",
+        "matches_documented_binary": true,
+        "validated": true,
+        "dimensions": {
+          "vertices": 5143,
+          "faces": 10144,
+          "expressions": 100,
+          "gaussians": 132438,
+          "frames": 3319,
+          "fps": 15
+        }
+      },
+      {
+        "bundle": "jensen_a_sh",
+        "manifest_bytes": 2468,
+        "manifest_sha256": "b3681b793b0137388277d26ad6f21ee1144e026de0bb689c625f4626d13dab3f",
+        "binary_bytes": 14001900,
+        "binary_sha256": "1a8c3bed73cdc93553257887bd682b3d87ea5c9dd1d9b2d6f4abed730e0605c7",
+        "matches_documented_binary": true,
+        "validated": true,
+        "dimensions": {
+          "vertices": 5143,
+          "faces": 10144,
+          "expressions": 100,
+          "gaussians": 132438,
+          "frames": 3319,
+          "fps": 15
+        }
+      },
+      {
+        "bundle": "jensen_a_c1c3_240k_sh",
+        "manifest_bytes": 2455,
+        "manifest_sha256": "3891190a06c81e1968a625b868f6e41f5651cb86a41ef3749991a81155c1f753",
+        "binary_bytes": 10856460,
+        "binary_sha256": "32d5bc15901a8673901c6234ae7af946d2bfcf2c0aa5e7ed9c816d1c3aff599c",
+        "matches_documented_binary": true,
+        "validated": true,
+        "dimensions": {
+          "vertices": 5143,
+          "faces": 10144,
+          "expressions": 100,
+          "gaussians": 80014,
+          "frames": 3319,
+          "fps": 15
+        }
+      }
+    ],
+    "body": {
+      "name": "jensen-source-fitted-v3.glb",
+      "bytes": 2530256,
+      "sha256": "dea0c921fb7d5668527bd8ee9082f382b14e8d300c43936842e15356dc7d90cd"
+    }
+  },
+  "methods": {
+    "geometry": "Production Meshopt GLTF decoding, rig mapping, FLAME forward pass, Gaussian attachment, mask and performance controller.",
+    "materials": "Image/material creation replaced by MeshStandardMaterial for CPU inspection; no texture or pixel acceptance.",
+    "rendering": "No browser, WebGL context, GPU draw, screenshots or private-asset upload.",
+    "viewport_for_update": {
+      "width": 1400,
+      "height": 1000,
+      "aspect": 1.4
+    },
+    "hand_identification": "Vertices with weight > 0.05 on a skeleton joint whose name starts with finger or wrist.",
+    "frame_delta_reference": {
+      "training_frame": 0,
+      "live_jaw_open": 0,
+      "compared_live_jaw_open": 0.5,
+      "includes_jaw_motion": true
+    },
+    "documented_training_frames": [
+      0,
+      2323
+    ],
+    "held_out_frames_sampled": 0
+  },
+  "body": {
+    "mapped_bones": 46,
+    "missing_controls": [],
+    "bounds_world_units": {
+      "min": [
+        -0.7607861902921151,
+        0,
+        -0.3375726551712059
+      ],
+      "max": [
+        0.7607861902921154,
+        2.4,
+        0.3375726551712058
+      ]
+    }
+  },
+  "attachment": {
+    "head_joint": "head",
+    "neck_joint": "neck01",
+    "scale": 1.4062096479958441,
+    "collar_cut_source_metres": 0.05,
+    "source_cut_y_metres": -0.10574780106544494,
+    "target_cut_y_world_units": 2.054719778943906,
+    "seam_blend_source_metres": 0.06,
+    "source_bounds_metres": {
+      "min": [
+        -0.11423176527023315,
+        -0.15574780106544495,
+        -0.15597781538963318
+      ],
+      "max": [
+        0.11270273476839066,
+        0.1397918462753296,
+        0.0754309669137001
+      ]
+    },
+    "pivot_error_world_units": 1.393864076242399e-17,
+    "neutral_neck_correction_error": 2.220446049250313e-16,
+    "returned_neck_correction_error": 2.220446049250313e-16,
+    "gaussians_kept": 49033,
+    "gaussians_masked": 30981,
+    "gaussians_partly_neck_blended": 12253,
+    "gaussians_fully_neck_blended": 30
+  },
+  "original_head_mask": [
+    {
+      "name": "JensenCandidateSkin",
+      "vertices": 11072,
+      "mask_applied": true,
+      "hidden_vertices": 4437,
+      "identified_hand_vertices": 3586,
+      "hidden_hand_vertices": 0
+    },
+    {
+      "name": "ResearchHumanSkineyebrow001",
+      "vertices": 124,
+      "mask_applied": true,
+      "hidden_vertices": 124,
+      "identified_hand_vertices": 0,
+      "hidden_hand_vertices": 0
+    },
+    {
+      "name": "ResearchHumanSkinhigh-poly",
+      "vertices": 1076,
+      "mask_applied": true,
+      "hidden_vertices": 1076,
+      "identified_hand_vertices": 0,
+      "hidden_hand_vertices": 0
+    },
+    {
+      "name": "ResearchHumanSkinmale_casualsuit01",
+      "vertices": 8864,
+      "mask_applied": false,
+      "hidden_vertices": 0,
+      "identified_hand_vertices": 0,
+      "hidden_hand_vertices": 0
+    },
+    {
+      "name": "ResearchHumanSkinshort01",
+      "vertices": 3050,
+      "mask_applied": true,
+      "hidden_vertices": 3050,
+      "identified_hand_vertices": 0,
+      "hidden_hand_vertices": 0
+    },
+    {
+      "name": "ResearchHumanSkinteeth_base",
+      "vertices": 4494,
+      "mask_applied": true,
+      "hidden_vertices": 4494,
+      "identified_hand_vertices": 0,
+      "hidden_hand_vertices": 0
+    },
+    {
+      "name": "ResearchHumanSkintongue01",
+      "vertices": 253,
+      "mask_applied": true,
+      "hidden_vertices": 253,
+      "identified_hand_vertices": 0,
+      "hidden_hand_vertices": 0
+    },
+    {
+      "name": "AuthoredGlassesBridge",
+      "vertices": 33,
+      "mask_applied": true,
+      "hidden_vertices": 33,
+      "identified_hand_vertices": 0,
+      "hidden_hand_vertices": 0
+    },
+    {
+      "name": "AuthoredGlassesLeft",
+      "vertices": 715,
+      "mask_applied": true,
+      "hidden_vertices": 715,
+      "identified_hand_vertices": 0,
+      "hidden_hand_vertices": 0
+    },
+    {
+      "name": "AuthoredGlassesRight",
+      "vertices": 715,
+      "mask_applied": true,
+      "hidden_vertices": 715,
+      "identified_hand_vertices": 0,
+      "hidden_hand_vertices": 0
+    },
+    {
+      "name": "AuthoredTempleLeft",
+      "vertices": 22,
+      "mask_applied": true,
+      "hidden_vertices": 22,
+      "identified_hand_vertices": 0,
+      "hidden_hand_vertices": 0
+    },
+    {
+      "name": "AuthoredTempleRight",
+      "vertices": 22,
+      "mask_applied": true,
+      "hidden_vertices": 22,
+      "identified_hand_vertices": 0,
+      "hidden_hand_vertices": 0
+    }
+  ],
+  "training_frame_checks": [
+    {
+      "training_frame": 0,
+      "finite_vertices": true,
+      "finite_centers": true,
+      "maximum_combined_vertex_delta_source_metres": 0.02201413797947281,
+      "expression_source": "observed_replay",
+      "global_and_neck_rotation_zero": true
+    },
+    {
+      "training_frame": 143,
+      "finite_vertices": true,
+      "finite_centers": true,
+      "maximum_combined_vertex_delta_source_metres": 0.02245517578004244,
+      "expression_source": "observed_replay",
+      "global_and_neck_rotation_zero": true
+    },
+    {
+      "training_frame": 599,
+      "finite_vertices": true,
+      "finite_centers": true,
+      "maximum_combined_vertex_delta_source_metres": 0.024015072102115762,
+      "expression_source": "observed_replay",
+      "global_and_neck_rotation_zero": true
+    },
+    {
+      "training_frame": 1200,
+      "finite_vertices": true,
+      "finite_centers": true,
+      "maximum_combined_vertex_delta_source_metres": 0.02740623279089944,
+      "expression_source": "observed_replay",
+      "global_and_neck_rotation_zero": true
+    },
+    {
+      "training_frame": 2323,
+      "finite_vertices": true,
+      "finite_centers": true,
+      "maximum_combined_vertex_delta_source_metres": 0.024383674793398098,
+      "expression_source": "observed_replay",
+      "global_and_neck_rotation_zero": true
+    }
+  ],
+  "motion_checks": [
+    {
+      "name": "head_left",
+      "finite_attachment": true,
+      "finite_neck_correction": true
+    },
+    {
+      "name": "head_right",
+      "finite_attachment": true,
+      "finite_neck_correction": true
+    },
+    {
+      "name": "nod",
+      "finite_attachment": true,
+      "finite_neck_correction": true
+    },
+    {
+      "name": "designed_gesture",
+      "finite_attachment": true,
+      "finite_neck_correction": true
+    }
+  ],
+  "exact_body_restoration": true,
+  "gaussian_binary_unchanged": true,
+  "limitations": [
+    "Numerical attachment and finite-geometry results do not establish likeness, collar appearance, hand occlusion pixels or browser frame rate.",
+    "Render-space world units follow the body normalization; they are not a measurement of the subject physical height.",
+    "Frame displacement includes the fixed live jaw control; no semantic expression driver or eyebrow-quality result is claimed.",
+    "No held-out Gaussian frames were sampled, and no training or model modification ran."
+  ]
+}

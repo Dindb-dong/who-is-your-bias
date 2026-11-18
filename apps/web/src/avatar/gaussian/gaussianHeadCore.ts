@@ -12,9 +12,14 @@ function f16ToF32(src) {
 }
 
 export function parseBundle(header, buffer) {
-  const B = {};
+  if (header.schema !== 'gaussian-head.v1' || !(buffer instanceof ArrayBuffer) || !header.buffers || typeof header.buffers !== 'object') throw new Error('Invalid Gaussian head bundle');
+  const B: Record<string, Float32Array | Uint32Array> = {};
   for (const [name, b] of Object.entries(header.buffers)) {
+    if (!Array.isArray(b.shape) || !b.shape.length || b.shape.some((size) => !Number.isSafeInteger(size) || size < 0)) throw new Error('Invalid buffer shape: ' + name);
     const n = b.shape.reduce((a, c) => a * c, 1);
+    const width = b.dtype === 'f16' ? 2 : b.dtype === 'f32' || b.dtype === 'u32' ? 4 : 0;
+    if (!width || !Number.isSafeInteger(n) || !Number.isSafeInteger(b.offset) || b.offset < 0 || b.offset % width !== 0
+        || b.bytes !== n * width || b.offset + b.bytes > buffer.byteLength) throw new Error('Invalid or truncated buffer: ' + name);
     if (b.dtype === 'f32') B[name] = new Float32Array(buffer, b.offset, n);
     else if (b.dtype === 'u32') B[name] = new Uint32Array(buffer, b.offset, n);
     else if (b.dtype === 'f16') B[name] = f16ToF32(new Uint16Array(buffer, b.offset, n));
@@ -23,11 +28,52 @@ export function parseBundle(header, buffer) {
   return B;
 }
 
-export async function loadBundle(stemUrl) {
-  const header = await (await fetch(stemUrl + '.json')).json();
+/** Reject incomplete geometry before hiding the body's original face. Buffer
+ * offsets alone cannot detect a wrong vertex count or dangling face binding. */
+export function validateGaussianBundle(header, B) {
+  for (const [field, limit] of [['n_verts', 1000000], ['n_faces', 2000000], ['n_gauss', 2000000], ['n_expr', 512], ['n_frames', 1000000]]) {
+    if (!Number.isSafeInteger(header[field]) || header[field] < 1 || header[field] > limit) throw new Error('Invalid Gaussian dimension: ' + field);
+  }
+  if (!Number.isFinite(header.fps) || header.fps <= 0 || header.fps > 240
+      || !Array.isArray(header.parents) || header.parents.join(',') !== '-1,0,1,1,1') throw new Error('Invalid FLAME motion or joint hierarchy');
+  const V = header.n_verts, F = header.n_faces, E = header.n_expr, N = header.n_gauss, T = header.n_frames;
+  const shapes = { v_shaped: [V, 3], expr_dirs: [E, V * 3], pose_dirs: [36, V * 3], lbs_weights: [V, 5],
+    j_base: [5, 3], j_expr_dirs: [E, 15], faces: [F, 3], g_xyz: [N, 3], g_rot: [N, 4], g_scale: [N, 3],
+    g_opacity: [N], g_color: [N, 3], g_binding: [N], m_expr: [T, E], m_pose: [T, 15], m_trans: [T, 3] };
+  for (const [name, shape] of Object.entries(shapes)) {
+    const data = B[name], declared = header.buffers[name];
+    if (!data || !declared || declared.shape.join(',') !== shape.join(',') || data.length !== shape.reduce((a, n) => a * n, 1)) throw new Error('Missing or mismatched Gaussian array: ' + name);
+    if ((name === 'faces' || name === 'g_binding') !== (data instanceof Uint32Array)) throw new Error('Invalid Gaussian array dtype: ' + name);
+    for (let i = 0; i < data.length; i++) if (!Number.isFinite(data[i])) throw new Error('Nonfinite Gaussian array: ' + name);
+  }
+  for (const index of B.faces) if (index >= V) throw new Error('Gaussian face refers to an unavailable vertex');
+  for (const index of B.g_binding) if (index >= F) throw new Error('Gaussian binding refers to an unavailable face');
+  for (let i = 0; i < N; i++) if (Math.hypot(...B.g_rot.subarray(i * 4, i * 4 + 4)) < 1e-12) throw new Error('A Gaussian has no valid rotation');
+  for (let i = 0; i < V; i++) {
+    let sum = 0;
+    for (let j = 0; j < 5; j++) {
+      const w = B.lbs_weights[i * 5 + j];
+      if (w < 0 || w > 1.00001) throw new Error('Invalid FLAME skinning weight');
+      sum += w;
+    }
+    if (Math.abs(sum - 1) > 0.001) throw new Error('FLAME skinning weights do not sum to one');
+  }
+}
+
+export async function loadBundle(stemUrl, signal: AbortSignal | undefined = undefined) {
+  const manifest = await fetch(stemUrl + '.json', { signal });
+  if (!manifest.ok) throw new Error('Could not load head manifest (HTTP ' + manifest.status + ')');
+  const header = await manifest.json();
   if (header.schema !== 'gaussian-head.v1') throw new Error('Unsupported head bundle ' + header.schema);
-  const buffer = await (await fetch(stemUrl + '.bin')).arrayBuffer();
-  return { header, B: parseBundle(header, buffer) };
+  const response = await fetch(stemUrl + '.bin', { signal });
+  if (!response.ok) throw new Error('Could not load head data (HTTP ' + response.status + ')');
+  const buffer = await response.arrayBuffer();
+  const B = parseBundle(header, buffer);
+  validateGaussianBundle(header, B);
+  const hash = await crypto.subtle.digest('SHA-256', buffer);
+  signal?.throwIfAborted();
+  const sha256 = [...new Uint8Array(hash)].map((byte) => byte.toString(16).padStart(2, '0')).join('');
+  return { header, B, sha256 };
 }
 
 function rodrigues(x, y, z, out, o) {

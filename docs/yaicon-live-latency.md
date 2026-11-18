@@ -33,6 +33,9 @@ uv run --env-file .env bias serve --host 127.0.0.1 --port 8000
 ```
 
 `GET /api/health` then reports `live_response_policy: live-concise.v1`.
+Keep `BIAS_ADAPTIVE_RESPONSES=false` for this fixed-concise A/B comparison.
+The separate [adaptive-answer option](yaicon-adaptive-answers.md) takes precedence
+when enabled and uses question-dependent targets across chat, stream and live.
 The default is `false`, reported as `default`. Ordinary `/api/chat` and
 `/api/chat/stream` keep their existing prompt even when the flag is enabled.
 

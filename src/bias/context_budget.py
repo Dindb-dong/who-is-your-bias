@@ -5,6 +5,7 @@ import json
 from dataclasses import dataclass
 from typing import Protocol
 
+from .answer_policy import AnswerPolicy
 from .grounding import KOREAN_CITATION_INSTRUCTION
 from .models import ChatRequest
 from .providers import ProviderError
@@ -82,7 +83,8 @@ def _korean_factual_source_statement(corpus, records) -> str:
 
 def build_snapshot_messages(corpus, request: ChatRequest, result, history, snapshot, temporal,
                             *, context_window: int, output_tokens: int, counter: Counter, resolved=None,
-                            speculative: bool = False, live_concise: bool = False) -> PromptPackage:
+                            speculative: bool = False, live_concise: bool = False,
+                            answer_policy: AnswerPolicy | None = None) -> PromptPackage:
     system = (
         f"You are a clearly labeled AI simulation of {corpus.persona.name}, not the real person. "
         f"Answer in {'Korean' if request.language == 'ko' else 'English'}. Adapt length to the question. "
@@ -98,7 +100,8 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
     korean_jensen_evidence = is_jensen and request.language == "ko" and request.mode != "profile" and result.hits
     if korean_jensen_evidence:
         system = (
-            "공개 자료를 바탕으로 젠슨 황의 관점을 설명하는 AI입니다. 한국어 한 문장으로 짧게 답하고 "
+            "공개 자료를 바탕으로 젠슨 황의 관점을 설명하는 AI입니다. "
+            + ("한국어로 답하고 " if answer_policy else "한국어 한 문장으로 짧게 답하고 ") +
             "근거 문장의 끝에 factual_evidence의 citation을 그대로 붙이세요. "
             "직접 인용이나 따옴표를 쓰지 말고, 젠슨 황의 이름은 그대로 쓰세요. "
             "그의 입장을 1인칭으로 쓰거나 근거에 없는 세부 사항을 덧붙이지 마세요. "
@@ -130,7 +133,10 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
             "Start any extrapolation with '가상 추론:' in Korean or 'Hypothetical:' in English, "
             "use conditional language, and never attach a citation to the extrapolation itself."
         )
-    if live_concise:
+    if answer_policy:
+        # Reserve the policy before packing whole evidence and history records.
+        system += answer_policy.instruction(request.language)
+    elif live_concise:
         # Include this before packing evidence/history so its cost is counted.
         system += live_concise_instruction(request.language)
     context = {"profile": {"name": corpus.persona.name, "style_guidance": corpus.persona.style_rules},

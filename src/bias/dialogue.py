@@ -5,6 +5,7 @@ import re
 from collections import deque
 from dataclasses import dataclass, field
 
+from .answer_policy import is_presentation_followup
 from .snapshots import TemporalIntent
 
 
@@ -72,12 +73,13 @@ class ResolvedQuery:
 class DialogueState:
     records: deque[DialogueRecord] = field(default_factory=lambda: deque(maxlen=12))
 
-    def resolve(self, query: str) -> ResolvedQuery:
+    def resolve(self, query: str, *, presentation_followups: bool = False) -> ResolvedQuery:
         current = entities(query)
         correction = bool(CORRECTION.search(query))
         if not self.records:
             return ResolvedQuery(query, query, (), "explicit_correction" if correction else "original", current, correction, query[:1000])
         prior = self.records[-1]
+        presentation = presentation_followups and is_presentation_followup(query)
         if EXPLICIT_SWITCH.search(query):
             return ResolvedQuery(query, query, (), "topic_switch", current, correction, query[:1000])
         # A specific named earlier USER topic can be resumed. We never recover
@@ -94,15 +96,21 @@ class DialogueState:
             else:
                 earlier_reference = False
         temporal_correction = bool(correction and not current and TEMPORAL_CORRECTION.fullmatch(query.strip()))
-        if correction and not temporal_correction:
+        if correction and not temporal_correction and not presentation:
             return ResolvedQuery(query, query, (), "explicit_correction", current, True, query[:1000])
         if current and prior.entities and not set(current).intersection(prior.entities):
             return ResolvedQuery(query, query, (), "topic_switch", current, False, query[:1000])
         # Shortness alone is not evidence of a reference. Never include an
         # assistant's unsupported generated claims in a rewritten search query.
-        if FOLLOWUP.search(query) or ELLIPSIS.fullmatch(query.strip()) or TEMPORAL_ELLIPSIS.fullmatch(query.strip()) or temporal_correction or earlier_reference:
+        if (FOLLOWUP.search(query) or ELLIPSIS.fullmatch(query.strip()) or TEMPORAL_ELLIPSIS.fullmatch(query.strip())
+                or temporal_correction or earlier_reference or presentation):
             anchor = prior.search_anchor or prior.user_text[:1000]
             supporting = tuple(dict.fromkeys((*prior.supporting_turn_ids, prior.turn_id)))[-12:]
+            if presentation:
+                # Length/format instructions must not dilute lexical relevance
+                # or accumulate as factual search terms across follow-ups.
+                return ResolvedQuery(query, anchor, supporting, "presentation_followup",
+                                     current or prior.entities, correction, anchor)
             # Search only actual user words. Artificial labels such as
             # "previous user question" dilute the lexical coverage denominator
             # and can turn a supported follow-up into an abstention.

@@ -17,6 +17,10 @@ uv run bias serve
 
 Open `http://127.0.0.1:8000`. Jensen's stylized portrait is the default. In **Attention**, try the pointer preview, or explicitly start Camera / Share screen and select a numbered participant. The eyes turn first; the head follows after 220 ms. Selection uses face positions and does not infer gender or identity. See the [Jensen attention guide](docs/jensen-attention.md) for controls, privacy, setup and limitations.
 
+For the private Gaussian face and the initial/expanded learned gestures, follow the
+[Jensen studio quickstart](docs/jensen-studio-quickstart.md). It covers ZIP installation,
+complete preview URLs, playback settings and troubleshooting.
+
 Build and development startup provision a pinned local face detector. Initial setup needs network access to download its verified model; camera frames and inference remain in the browser. The studio also includes source inspection, A/B/C comparison, exportable turn timing, optional voice playback, a generic human rig, local GLB loading and historical presentation/motion labs. See [studio guide](docs/studio.md) for audio and retargeting details.
 
 The Jensen corpus contains 32 editorial evidence records from nine dated sources, including 24 reviewed interview exchanges. When the model is connected and retrieval finds no evidence, the app labels the generated answer as a hypothetical simulation. See the [Jensen corpus](data/personas/jensen-huang/README.md) for provenance and the snapshot cutoff.

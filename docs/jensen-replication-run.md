@@ -1,5 +1,9 @@
 # Jensen persona, speech, and avatar execution
 
+> The opt-in question-dependent answer length/structure extension to PR #24 is
+> recorded in [the adaptive answer implementation note](yaicon-adaptive-answers.md).
+> Actual model quality and deployment latency remain separate acceptance gates.
+
 > PR #19's registered implementation, response execution and agent review are
 > complete as of 2026-11-13. Read the [completion report](../reports/jensen-pr19-completion.md)
 > and [current execution status](jensen-replication-status.md) for actual results,
@@ -11,6 +15,16 @@
 
 > The optional photoreal Gaussian head track (VHAP + GaussianAvatars, browser preview, SMPL-X transplant)
 > is recorded in [jensen-gaussian-head.md](jensen-gaussian-head.md).
+
+> The current face/body integration, gesture fitting and expression calibration follow-up is
+> recorded in [the 2026-11-17 performance execution record](jensen-performance-2026-11-17.md).
+
+> To install the private face/gesture packages and select the expanded candidate,
+> use the [Jensen studio quickstart](jensen-studio-quickstart.md).
+
+> The private face ZIP was received and numerically checked on 2026-11-18.
+> Current inputs, receipts and remaining gates are in the
+> [face intake and verification record](jensen-face-intake-2026-11-18.md).
 
 > Historical pre-resumption status: the earlier execution session was interrupted. This file
 > preserves the original plan. Read the [recovery and remaining-work handoff](jensen-replication-handoff.md)

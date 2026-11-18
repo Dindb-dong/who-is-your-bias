@@ -84,6 +84,9 @@ class Settings:
     # Opt-in prompt policy for the live speech endpoint only. This is not a
     # hard truncation limit and never bypasses evidence/language review.
     live_concise: bool = False
+    # Opt-in question-dependent guidance across chat/stream/live. Takes
+    # precedence over live_concise, while leaving historical ablations intact.
+    adaptive_responses: bool = False
     cors_origins: tuple[str, ...] = ("http://localhost:5173", "http://127.0.0.1:5173")
 
     def __post_init__(self) -> None:
@@ -97,6 +100,8 @@ class Settings:
             raise ValueError("retrieval_prewarm must be a boolean")
         if not isinstance(self.live_concise, bool):
             raise ValueError("live_concise must be a boolean")
+        if not isinstance(self.adaptive_responses, bool):
+            raise ValueError("adaptive_responses must be a boolean")
         if self.retrieval_backend == "hybrid" and not self.embedding_model:
             raise ValueError("Hybrid retrieval requires an explicit embedding model")
         if self.retrieval_backend == "hybrid" and self.embedding_backend == "http" and not self.embedding_base_url:
@@ -138,6 +143,9 @@ class Settings:
         live_concise = os.getenv("BIAS_LIVE_CONCISE", "false").strip().lower()
         if live_concise not in {"true", "false", "1", "0"}:
             raise ValueError("BIAS_LIVE_CONCISE must be true, false, 1, or 0")
+        adaptive = os.getenv("BIAS_ADAPTIVE_RESPONSES", "false").strip().lower()
+        if adaptive not in {"true", "false", "1", "0"}:
+            raise ValueError("BIAS_ADAPTIVE_RESPONSES must be true, false, 1, or 0")
 
         return cls(
             corpus_dir=Path(os.getenv("BIAS_CORPUS_DIR", str(repository_root() / "data/personas/jensen-huang"))),
@@ -176,6 +184,7 @@ class Settings:
             reranker_min_score=float(os.environ["BIAS_RERANKER_MIN_SCORE"]) if os.getenv("BIAS_RERANKER_MIN_SCORE") else None,
             style_examples=os.getenv("BIAS_STYLE_EXAMPLES", "false").lower() == "true",
             live_concise=live_concise in {"true", "1"},
+            adaptive_responses=adaptive in {"true", "1"},
             cors_origins=tuple(x.strip() for x in os.getenv("BIAS_CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",") if x.strip()),
         )
 
