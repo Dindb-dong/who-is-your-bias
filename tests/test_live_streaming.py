@@ -82,6 +82,12 @@ def test_first_audio_arrives_before_language_generation_completes(corpus):
             offset += chunk["sample_count"]
         ending = next(d for k, d in events if k == "audio_end")
         assert offset == ending["sample_count"] == 6400
+        timing = ending["server_timings_ms"]
+        assert 0 <= timing["first_text_ms"] <= timing["first_segment_ms"] <= timing["first_synthesis_started_ms"]
+        assert timing["first_synthesis_started_ms"] <= ending["first_pcm_ready_ms"] <= timing["server_first_pcm_ms"]
+        assert timing["server_first_pcm_ms"] <= timing["text_complete_ms"] <= ending["total_ms"]
+        assert chunks[0]["server_first_pcm_ms"] == timing["server_first_pcm_ms"]
+        assert "not_browser_audibility" in ending["timing_basis"]
         assert ending["spoken_complete"] is False and ending["acoustic_latency_ms"] is None
         assert events[-1][0] == "done"
     asyncio.run(run())

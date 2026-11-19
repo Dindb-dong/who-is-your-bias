@@ -189,6 +189,9 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
                           "prewarmed": request.app.state.retrieval_warmup_ms is not None,
                           "startup_warmup_ms": request.app.state.retrieval_warmup_ms},
             "live_protocol": "live-segments-pcm.v1",
+            "answer_policy": "adaptive-answer.v1" if config.adaptive_responses else "default",
+            "live_response_policy": ("adaptive-answer.v1" if config.adaptive_responses else
+                                     "live-concise.v1" if config.live_concise else "default"),
             "configuration_only": True,
         }
 

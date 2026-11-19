@@ -11,9 +11,10 @@ from collections.abc import AsyncIterator
 from contextlib import aclosing
 
 from .behavior import plan_behavior
+from .answer_policy import VERSION as ANSWER_POLICY_VERSION, select_answer_policy
 from .bindings import motion_binding_status
 from .config import Settings
-from .context_budget import ByteBudgetCounter, TokenizerCounter, build_snapshot_messages
+from .context_budget import ByteBudgetCounter, TokenizerCounter, build_snapshot_messages, live_concise_instruction
 from .corpus import Corpus
 from .grounding import CITATION, audit_citations, validate_citations
 from .models import ChatRequest, ChatTurn, Grounding, TurnMetrics
@@ -172,7 +173,11 @@ class Engine:
             async with session.lock:
                 yield "status", {"stage": "retrieving"}
                 retrieval_started = time.perf_counter()
-                resolved = session.dialogue.resolve(request.message)
+                # Explicit versioned/custom builders are frozen evaluation
+                # conditions, even if the server's environment flag is enabled.
+                adaptive = (self.settings.adaptive_responses and request.mode != "profile"
+                            and self.prompt_builder is build_messages)
+                resolved = session.dialogue.resolve(request.message, presentation_followups=adaptive)
                 temporal_query = request.message
                 inherited_intent = None
                 if self.snapshot and resolved.supporting_turn_ids:
@@ -246,10 +251,21 @@ class Engine:
                 fragments: list[str] = []
                 allowed_ids = {hit.evidence.id for hit in result.hits}
                 if use_llm:
+                    answer_policy = (select_answer_policy(request.message, language=request.language,
+                        anchor=(resolved.presentation_topic or resolved.anchor) if resolved.supporting_turn_ids else "",
+                        speculative=speculative)
+                        if adaptive else None)
+                    live_concise = committed_segments and self.settings.live_concise and answer_policy is None
+                    if answer_policy:
+                        context["response_policy"] = ANSWER_POLICY_VERSION
+                        context["answer_policy"] = answer_policy.as_dict()
+                    elif live_concise:
+                        context["response_policy"] = "live-concise.v1"
                     if self.snapshot or self.settings.retrieval_backend == "hybrid" or speculative:
                         package = build_snapshot_messages(self.corpus, request, result, list(session.history), self.snapshot, temporal,
                             context_window=self.settings.llm_context_window, output_tokens=self.settings.llm_max_tokens,
-                            counter=self.counter, resolved=resolved, speculative=speculative)
+                            counter=self.counter, resolved=resolved, speculative=speculative, live_concise=live_concise,
+                            answer_policy=answer_policy)
                         messages = package.messages
                         allowed_ids = set(package.supplied_ids)
                         context["prompt_budget"] = package.budget
@@ -257,6 +273,10 @@ class Engine:
                             raise ProviderError("evidence_budget", "No complete evidence passage fits this model's context budget.", 422)
                     else:
                         messages = self.prompt_builder(self.corpus.persona, request, result, list(session.history), self.corpus.sources)
+                        if answer_policy or live_concise:
+                            messages = [{**message} for message in messages]
+                            messages[0]["content"] += (answer_policy.instruction(request.language) if answer_policy
+                                                      else live_concise_instruction(request.language))
                     committer = SegmentCommitter(turn_id=turn_id, language=request.language, allowed_ids=allowed_ids)
                     review_inference = speculative and request.language == "ko"
                     review_evidence = (self.corpus.persona.id == "jensen-huang" and request.language == "ko"

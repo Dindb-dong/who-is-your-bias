@@ -1,5 +1,9 @@
 # Jensen persona, speech, and avatar execution
 
+> The opt-in question-dependent answer length/structure extension to PR #24 is
+> recorded in [the adaptive answer implementation note](yaicon-adaptive-answers.md).
+> Actual model quality and deployment latency remain separate acceptance gates.
+
 > PR #19's registered implementation, response execution and agent review are
 > complete as of 2026-11-13. Read the [completion report](../reports/jensen-pr19-completion.md)
 > and [current execution status](jensen-replication-status.md) for actual results,

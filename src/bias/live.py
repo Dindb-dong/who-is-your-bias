@@ -70,6 +70,12 @@ async def _live_events(engine, speech, request, *, session, deadline, started, q
     audio_format = None
     first_pcm_ms = None
     synthesis_ms = []
+    timings = {"first_text_ms": None, "first_segment_ms": None,
+               "first_synthesis_started_ms": None, "server_first_pcm_ms": None,
+               "text_complete_ms": None}
+
+    def elapsed_ms():
+        return round((time.perf_counter() - started) * 1000, 3)
 
     async def generate():
         nonlocal turn_id, text_complete
@@ -82,7 +88,12 @@ async def _live_events(engine, speech, request, *, session, deadline, started, q
                                 "audio_clock": "pcm_sample_offset", "acoustic_latency_ms": None}
                     if kind == "done":
                         text_complete = True
+                        timings["text_complete_ms"] = elapsed_ms()
                         continue
+                    if kind == "token" and data.get("text") and timings["first_text_ms"] is None:
+                        timings["first_text_ms"] = elapsed_ms()
+                    if kind == "segment" and timings["first_segment_ms"] is None:
+                        timings["first_segment_ms"] = elapsed_ms()
                     await output.put((kind, data))
                     if kind == "segment":
                         await segments.put(data)
@@ -101,6 +112,8 @@ async def _live_events(engine, speech, request, *, session, deadline, started, q
                 if len(text) > 4000:
                     raise ProviderError("live_segment_limit", "A committed speech segment exceeds the voice input limit.", 422)
                 synthesis_started = time.perf_counter()
+                if timings["first_synthesis_started_ms"] is None:
+                    timings["first_synthesis_started_ms"] = elapsed_ms()
                 data, _ = await speech.synthesize(text, language=request.language)
                 synthesis_ms.append(round((time.perf_counter() - synthesis_started) * 1000, 3))
                 pcm, rate, channels = decode_pcm(data)
@@ -144,6 +157,7 @@ async def _live_events(engine, speech, request, *, session, deadline, started, q
                 if kind == "_failure":
                     yield "turn_state", {"turn_id": turn_id, "state": "failed", "text_complete": text_complete,
                                          "delivered_audio_chunks": emitted_chunks, "spoken_complete": False,
+                                         "server_timings_ms": dict(timings),
                                          "delivery_basis": "emitted_to_response_iterator_not_client_acknowledgement"}
                     raise data
                 if kind.startswith("_"):
@@ -151,10 +165,17 @@ async def _live_events(engine, speech, request, *, session, deadline, started, q
                     continue
                 if kind == "audio":
                     emitted_chunks += 1
+                    if timings["server_first_pcm_ms"] is None:
+                        # This is server delivery to the response iterator, not
+                        # arrival at the browser or sound from the speakers.
+                        timings["server_first_pcm_ms"] = elapsed_ms()
+                        data = {**data, "server_first_pcm_ms": timings["server_first_pcm_ms"]}
                 yield kind, data
             yield "audio_end", {"turn_id": turn_id, "chunks": sent_chunks, "sample_count": total_frames,
                                 "sample_rate": audio_format[0] if audio_format else None,
                                 "first_pcm_ready_ms": first_pcm_ms, "synthesis_ms": synthesis_ms,
+                                "server_timings_ms": dict(timings),
+                                "timing_basis": "server_request_start_to_event_not_browser_audibility",
                                 "total_ms": round((time.perf_counter() - started) * 1000, 3),
                                 "state": "delivered", "spoken_complete": False, "acoustic_latency_ms": None}
             yield "done", {}

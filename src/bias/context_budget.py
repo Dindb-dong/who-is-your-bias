@@ -5,6 +5,7 @@ import json
 from dataclasses import dataclass
 from typing import Protocol
 
+from .answer_policy import AnswerPolicy
 from .grounding import KOREAN_CITATION_INSTRUCTION
 from .models import ChatRequest
 from .providers import ProviderError
@@ -44,6 +45,24 @@ class PromptPackage:
     budget: dict
 
 
+def live_concise_instruction(language: str) -> str:
+    """Advisory length targets; never cut a generated answer or citation."""
+    if language == "ko":
+        return (
+            " 현장 음성 답변은 핵심 답부터 시작하고 첫 문장을 가능하면 15어절 이내로 쓰세요. "
+            "총 1~2개의 짧은 문장을 사용하되 앞서 정한 더 엄격한 문장 수 제한이 있으면 따르세요. "
+            "인사, 질문 반복, 목록을 생략하세요. 필요한 단서, 불확실성과 근거 출처는 유지하세요. "
+            "길이를 줄이기 위해 근거의 의미를 바꾸거나 확인되지 않은 내용을 단정하지 마세요."
+        )
+    return (
+        " Live spoken-answer mode: start directly with the answer in one complete sentence, "
+        "ideally at most 18 words excluding citation markers. Use at most two short sentences "
+        "and about 45 words total, unless an earlier instruction requires fewer. "
+        "Omit greetings, repetition of the question and lists. Preserve necessary qualifications, "
+        "uncertainty and supporting citations. These length targets never override evidence requirements."
+    )
+
+
 def _korean_factual_source_statement(corpus, records) -> str:
     """Describe only records actually packed, including original excerpts."""
     labels = set()
@@ -64,7 +83,8 @@ def _korean_factual_source_statement(corpus, records) -> str:
 
 def build_snapshot_messages(corpus, request: ChatRequest, result, history, snapshot, temporal,
                             *, context_window: int, output_tokens: int, counter: Counter, resolved=None,
-                            speculative: bool = False) -> PromptPackage:
+                            speculative: bool = False, live_concise: bool = False,
+                            answer_policy: AnswerPolicy | None = None) -> PromptPackage:
     system = (
         f"You are a clearly labeled AI simulation of {corpus.persona.name}, not the real person. "
         f"Answer in {'Korean' if request.language == 'ko' else 'English'}. Adapt length to the question. "
@@ -80,7 +100,8 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
     korean_jensen_evidence = is_jensen and request.language == "ko" and request.mode != "profile" and result.hits
     if korean_jensen_evidence:
         system = (
-            "공개 자료를 바탕으로 젠슨 황의 관점을 설명하는 AI입니다. 한국어 한 문장으로 짧게 답하고 "
+            "공개 자료를 바탕으로 젠슨 황의 관점을 설명하는 AI입니다. "
+            + ("한국어로 답하고 " if answer_policy else "한국어 한 문장으로 짧게 답하고 ") +
             "근거 문장의 끝에 factual_evidence의 citation을 그대로 붙이세요. "
             "직접 인용이나 따옴표를 쓰지 말고, 젠슨 황의 이름은 그대로 쓰세요. "
             "그의 입장을 1인칭으로 쓰거나 근거에 없는 세부 사항을 덧붙이지 마세요. "
@@ -112,6 +133,12 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
             "Start any extrapolation with '가상 추론:' in Korean or 'Hypothetical:' in English, "
             "use conditional language, and never attach a citation to the extrapolation itself."
         )
+    if answer_policy:
+        # Reserve the policy before packing whole evidence and history records.
+        system += answer_policy.instruction(request.language)
+    elif live_concise:
+        # Include this before packing evidence/history so its cost is counted.
+        system += live_concise_instruction(request.language)
     context = {"profile": {"name": corpus.persona.name, "style_guidance": corpus.persona.style_rules},
                "snapshot": snapshot.summary() if snapshot else None,
                "temporal_request": temporal.intent.mode if temporal else "general",
