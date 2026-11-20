@@ -15,7 +15,8 @@ EXP=$R/VHAP/export/monocular/jensen_a_whiteBg_staticOffset_noMeshMask
 OUT=$R/VHAP/export/monocular/jensen_a_upperbody
 # keypoints / fit / prepare run in their own env so the training env is not touched
 if [ ! -f $U/kpenv/.installed ]; then
-  conda create -y -q -p $U/kpenv python=3.10
+  rm -rf $U/kpenv  # leftover from an interrupted install
+  conda create -y -q -p $U/kpenv -c conda-forge --override-channels python=3.10  # conda-forge: no Anaconda ToS prompt
   $U/kpenv/bin/pip install -q "numpy<2" torch opencv-python-headless rtmlib onnxruntime-gpu
   touch $U/kpenv/.installed
 fi

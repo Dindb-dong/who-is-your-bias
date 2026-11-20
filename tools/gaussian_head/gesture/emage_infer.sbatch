@@ -20,7 +20,7 @@ mkdir -p $G/out
 cd $G
 [ -d character-policy ] || git clone -q https://github.com/haiyangliu0/character-policy.git
 cd character-policy && git checkout -q c4b7d0d34ad9a64b7d36274990d338e9f1fb4aee
-[ -d $G/env ] || conda create -y -q -p $G/env python=3.10
+[ -d $G/env ] || conda create -y -q -p $G/env -c conda-forge --override-channels python=3.10
 conda activate $G/env
 if [ ! -f $G/env/.installed ]; then
   echo "== installing $(date)"
