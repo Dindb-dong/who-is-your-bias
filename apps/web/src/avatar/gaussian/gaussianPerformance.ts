@@ -1,14 +1,15 @@
 import { Euler, Quaternion } from 'three';
 import { FACE_SET, type FaceChannel, type FaceWeights } from '../channels';
 import { clamp01 } from '../timeline';
-import type { RigPose } from '../types';
+import type { RigPose, VisemeWeights } from '../types';
+import { createTrackedMouth, TRACKED_MOUTH_BUNDLE } from './trackedMouth';
 
 /** FLAME expression coordinates are dense PCA coefficients, not ARKit names. */
 export interface GaussianMotionHeader { n_expr: number; n_frames: number; fps: number }
 export interface GaussianMotionBuffers { m_expr: ArrayLike<number>; m_pose: ArrayLike<number>; m_trans: ArrayLike<number> }
 export interface GaussianParams { expr: Float32Array; pose: Float32Array; trans: Float32Array }
 export interface GaussianPerformanceSample extends GaussianParams {
-  expressionSource: 'calibrated' | 'observed_replay' | 'static_reference';
+  expressionSource: 'calibrated' | 'tracked_speech' | 'observed_replay' | 'static_reference';
   /** Recorded PCA expressions can still contain lip motion without calibration. */
   sourceLipResidual: boolean;
 }
@@ -36,7 +37,7 @@ export interface GaussianExpressionDriver {
 // The split is a documented property of these exact bytes, never a guessed
 // fraction of an arbitrary new bundle. See docs/local-only-assets.md.
 const DOCUMENTED_TRAIN_FRAMES: Record<string, { total: number; train: number }> = {
-  '32d5bc15901a8673901c6234ae7af946d2bfcf2c0aa5e7ed9c816d1c3aff599c': { total: 3319, train: 2324 },
+  [TRACKED_MOUTH_BUNDLE]: { total: 3319, train: 2324 },
   '1a8c3bed73cdc93553257887bd682b3d87ea5c9dd1d9b2d6f4abed730e0605c7': { total: 3319, train: 2324 },
   '727ac52904b7a610b8b3bd59594ed85ef9990fd4b2105e8dc5a57079bc852c0d': { total: 3319, train: 2324 },
 };
@@ -126,6 +127,9 @@ export interface GaussianPerformanceInput {
   idleMs: number;
   speaking: boolean;
   reducedMotion?: boolean;
+  speechVisemes?: VisemeWeights;
+  amplitude?: number;
+  deltaSeconds?: number;
 }
 export interface GaussianPerformanceOptions {
   driver?: unknown;
@@ -144,6 +148,10 @@ export function createGaussianPerformance(header: GaussianMotionHeader, B: Gauss
   const frames = indices(declared, T, true);
   if (documented && (documented.total !== T || frames.some((frame) => frame >= documented.train))) throw new Error('Replay includes held-out Gaussian frames or a mismatched documented split');
   if (driver && frames.some((frame) => driver.training.validation_frame_indices.includes(frame))) throw new Error('Replay frames overlap the expression validation partition');
+  const trackedMouth = !driver && options.bundleSha256 === TRACKED_MOUTH_BUNDLE ? createTrackedMouth((frame) => ({
+    expr: Float32Array.from({ length: E }, (_, i) => B.m_expr[frame * E + i]),
+    pose: Float32Array.from({ length: 15 }, (_, i) => B.m_pose[frame * 15 + i]),
+  })) : undefined;
   const neutral = new Float32Array(E);
   for (let e = 0; e < E; e++) neutral[e] = driver?.neutral_expr[e] ?? B.m_expr[e];
   if (![...neutral].every(Number.isFinite)) throw new Error('The Gaussian reference expression is not finite');
@@ -151,7 +159,7 @@ export function createGaussianPerformance(header: GaussianMotionHeader, B: Gauss
     calibrated: !!driver,
     supportedChannels: driver?.input_names ?? [],
     replayFrameCount: frames.length,
-    warning: driver ? undefined : frames.length
+    warning: driver || trackedMouth ? undefined : frames.length
       ? 'Observed expression replay; recorded lip-expression residuals remain. A calibrated driver is required for semantic brows and mouth separation.'
       : 'No verified training split: using one static reference expression until a calibrated driver or explicit training frames are supplied.',
   };
@@ -172,6 +180,10 @@ export function createGaussianPerformance(header: GaussianMotionHeader, B: Gauss
           const [lo, hi] = driver.output_bounds[e]; expr[e] = Math.max(lo, Math.min(hi, value));
         }
         expressionSource = 'calibrated';
+      } else if (trackedMouth) {
+        trackedMouth({ expr, pose }, input.speaking, input.speechVisemes,
+          input.amplitude ?? face.jawOpen ?? 0, input.deltaSeconds);
+        expressionSource = 'tracked_speech';
       } else if (frames.length && !input.reducedMotion) {
         const clock = input.speaking ? input.elapsedMs : input.idleMs;
         const time = Math.max(0, finite(clock) ? clock : 0) * header.fps / 1000;
@@ -185,7 +197,7 @@ export function createGaussianPerformance(header: GaussianMotionHeader, B: Gauss
       } else expr.set(neutral);
       // Body/attention owns global and neck rotations. Do not replay source
       // camera motion on top of its live skeleton. Lip amplitude owns the jaw.
-      pose[6] = (face.jawOpen ?? 0) * (driver?.jaw_open_radians ?? 0.35);
+      if (!trackedMouth) pose[6] = (face.jawOpen ?? 0) * (driver?.jaw_open_radians ?? 0.35);
       pose.set(eyeRotation(input.rigPose, 'Left'), 9);
       pose.set(eyeRotation(input.rigPose, 'Right'), 12);
       return { expr, pose, trans, expressionSource, sourceLipResidual: expressionSource === 'observed_replay' };

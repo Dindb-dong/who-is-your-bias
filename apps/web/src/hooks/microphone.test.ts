@@ -9,13 +9,13 @@ class FakeRecognition implements Recognition {
   start = vi.fn(); stop = vi.fn(); abort = vi.fn(() => this.onend?.());
   constructor() { FakeRecognition.instances.push(this); }
 }
-const result = (text: string): RecognitionEvent => ({ resultIndex: 0, results: { length: 1, 0: { isFinal: false, 0: { transcript: text } } } });
+const result = (text: string, isFinal = false): RecognitionEvent => ({ resultIndex: 0, results: { length: 1, 0: { isFinal, 0: { transcript: text } } } });
 
-function setup() {
+function setup(autoSubmit = false) {
   FakeRecognition.instances = [];
-  const states: MicrophoneState[] = []; const onText = vi.fn();
-  const controller = createMicrophoneController((state) => states.push(state), onText, () => FakeRecognition);
-  return { states, onText, controller };
+  const states: MicrophoneState[] = []; const onText = vi.fn(); const onQuestion = vi.fn();
+  const controller = createMicrophoneController((state) => states.push(state), onText, () => FakeRecognition, autoSubmit ? onQuestion : undefined);
+  return { states, onText, onQuestion, controller };
 }
 
 describe('microphone capture ownership', () => {
@@ -43,5 +43,26 @@ describe('microphone capture ownership', () => {
     expect(f.states.at(-1)?.error).toContain('permission'); expect(first.abort).toHaveBeenCalledTimes(1);
     f.controller.toggle('en'); expect(FakeRecognition.instances).toHaveLength(2);
     expect(f.states.at(-1)).toEqual({ listening: true, error: null }); f.controller.dispose();
+  });
+  it('finishes a presentation question once and waits for the final transcription', () => {
+    const f = setup(true); f.controller.toggle('en'); const instance = FakeRecognition.instances[0];
+    instance.onresult?.(result('partial question'));
+    expect(f.onQuestion).not.toHaveBeenCalled();
+    f.controller.toggle('en'); f.controller.toggle('en');
+    expect(instance.stop).toHaveBeenCalledTimes(1);
+    expect(f.states.at(-1)?.processing).toBe(true);
+    instance.onresult?.(result(' What is accelerated computing? ', true));
+    const end = instance.onend;
+    end?.(); end?.();
+    expect(f.onQuestion).toHaveBeenCalledExactlyOnceWith('What is accelerated computing?', expect.any(Number));
+    expect(f.states.at(-1)).toEqual({ listening: false, error: null });
+  });
+  it('does not send only interim text or a final event after explicit cancellation', () => {
+    const f = setup(true); f.controller.toggle('en');
+    FakeRecognition.instances[0].onresult?.(result('interim'));
+    FakeRecognition.instances[0].onend?.();
+    f.controller.toggle('en'); const second = FakeRecognition.instances[1]; const end = second.onend;
+    second.onresult?.(result('cancelled', true)); f.controller.stop(); end?.();
+    expect(f.onQuestion).not.toHaveBeenCalled();
   });
 });

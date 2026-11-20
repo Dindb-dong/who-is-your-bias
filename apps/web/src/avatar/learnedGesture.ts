@@ -123,3 +123,42 @@ export function sampleLearnedGesture(model: GestureBasisModel, elapsedMs: number
   }
   return Object.keys(bones).length ? bones : null;
 }
+
+/** Sparse presentation schedule. Timing is designed from audio rests/cues;
+ * it does not claim that the source gestures match the generated semantics. */
+export function sampleConversationalGesture(model: GestureBasisModel, elapsedMs: number,
+  timing?: import('./types').SpeechTiming, cues: import('./types').BehaviorCue[] = []): BoneRotations | null {
+  if (!Number.isFinite(elapsedMs) || elapsedMs < 0) return null;
+  const duration = timing?.audio_duration_ms;
+  const explicit = cues.filter((cue) => cue.channel === 'gesture' && cue.intensity > .2
+    && Number.isFinite(cue.start_ms) && cue.start_ms >= 800).map((cue) => cue.start_ms);
+  const rests = timing?.label_set === 'rhubarb' ? timing.segments.filter((segment) => segment.label === 'X'
+    && segment.end_ms - segment.start_ms >= 220 && segment.end_ms >= 1800).map((segment) => segment.end_ms) : [];
+  const candidates = [...explicit, ...rests].sort((a, b) => a - b);
+  // A single restrained fallback when word/phrase timing is unavailable.
+  if (!candidates.length) candidates.push(2400);
+  const starts: number[] = [];
+  const windowMs = model.duration_ms * 1.35;
+  for (const candidate of candidates) {
+    const start = Math.max(800, candidate - 250);
+    if (starts.length >= 2) break;
+    if (duration !== undefined && start + windowMs > duration - 600) continue;
+    if (starts.length && start - starts[starts.length - 1] < 8000) continue;
+    starts.push(start);
+  }
+  const index = starts.findIndex((start) => elapsedMs >= start && elapsedMs < start + windowMs);
+  if (index < 0) return null;
+  const local = (elapsedMs - starts[index]) / 1.35;
+  const bones = sampleLearnedGesture(model, index * (model.duration_ms + 500) + local);
+  if (!bones) return null;
+  // Preserve left/right source coordination, with smaller wrist/finger motion.
+  for (const name of Object.keys(bones) as BoneControl[]) {
+    const q = bones[name]!;
+    const halfAngle = Math.acos(Math.max(-1, Math.min(1, q[3])));
+    const gain = /Hand|Thumb|Index|Middle|Ring|Little/.test(name) ? .38 : .55;
+    const divisor = Math.sin(halfAngle);
+    const scale = divisor > 1e-8 ? Math.sin(halfAngle * gain) / divisor : 0;
+    bones[name] = [q[0] * scale, q[1] * scale, q[2] * scale, Math.cos(halfAngle * gain)];
+  }
+  return bones;
+}

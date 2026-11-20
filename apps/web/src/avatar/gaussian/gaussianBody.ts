@@ -1,11 +1,12 @@
 import {
   Box3, BufferAttribute, BufferGeometry, DataTexture, DynamicDrawUsage, FloatType,
   GLSL3, Group, InstancedBufferAttribute, InstancedBufferGeometry, Matrix4, Mesh,
-  NearestFilter, NormalBlending, RawShaderMaterial, RGBAFormat, SkinnedMesh, Vector2, Vector3,
+  MeshStandardMaterial, NearestFilter, NormalBlending, RawShaderMaterial, RGBAFormat, SkinnedMesh, Vector2, Vector3,
 } from 'three';
 import type { Camera, Material, Object3D } from 'three';
 import type { AvatarRig } from '../procedural';
 import { FlameHead, gaussianCenters } from './gaussianHeadCore';
+import { cleanOpacity } from './gaussianMatte';
 
 export interface GaussianHeadConfig {
   /** Basename under /models/gaussian-head; the private bundle never enters Git. */
@@ -251,7 +252,7 @@ export class GaussianBodyHead {
   private readonly neckWeights: Float32Array;
   private disposed = false;
 
-  constructor(private readonly header: GaussianBodyHeader, private readonly B: GaussianBodyArrays, attachment: GaussianAttachment) {
+  constructor(private readonly header: GaussianBodyHeader, private readonly B: GaussianBodyArrays, attachment: GaussianAttachment, cleanWhiteMatte = false) {
     this.head = new FlameHead(header, B);
     this.root.name = 'GaussianHead'; this.root.matrixAutoUpdate = false; this.root.matrix.copy(attachment.matrix); this.root.matrixWorldNeedsUpdate = true;
     const n = header.n_gauss, width = 1024, height = Math.max(1, Math.ceil(n / width));
@@ -269,6 +270,7 @@ export class GaussianBodyHead {
       const kept = restCenters[i * 3 + 1] >= attachment.sourceCutY;
       local.set([B.g_xyz[i * 3], B.g_xyz[i * 3 + 1], B.g_xyz[i * 3 + 2], kept ? 1 / (1 + Math.exp(-B.g_opacity[i])) : 0], i * 4);
       for (let c = 0; c < 3; c++) color[i * 4 + c] = Math.min(1, Math.max(0, .5 + .28209479 * B.g_color[i * 3 + c]));
+      if (cleanWhiteMatte) local[i * 4 + 3] *= cleanOpacity(restCenters[i * 3], restCenters[i * 3 + 1], restCenters[i * 3 + 2], color[i * 4], color[i * 4 + 1], color[i * 4 + 2]);
       binding[i * 4] = B.g_binding[i];
       this.neckWeights[i] = this.neck ? gaussianSeamWeight(restCenters[i * 3 + 1], attachment.sourceCutY, attachment.seamBlendMeters ?? .06) : 0;
       binding[i * 4 + 1] = this.neckWeights[i];
@@ -332,4 +334,40 @@ export class GaussianBodyHead {
     this.root.removeFromParent(); this.mesh.geometry.dispose(); this.mesh.material.dispose();
     for (const entry of this.textures) entry.dispose();
   }
+}
+
+/** Clone materials so leaving the composite restores the authored body exactly. */
+export function softenCompositeMaterials(rig: AvatarRig): () => void {
+  const changed: { mesh: Mesh; original: Material | Material[]; clones: Material[] }[] = [];
+  rig.root.traverse((node) => {
+    if (!(node instanceof Mesh)) return;
+    const originals = Array.isArray(node.material) ? node.material : [node.material];
+    const clones = originals.map((original) => {
+      const material = original.clone();
+      material.onBeforeCompile = original.onBeforeCompile;
+      material.customProgramCacheKey = original.customProgramCacheKey;
+      if (material instanceof MeshStandardMaterial) {
+        if (/suit|jacket/i.test(`${node.name} ${material.name}`)) {
+          material.roughness = .62;
+          material.metalness = 0;
+        } else if (material.map) {
+          // Keep the skin texture; reduce the pale, smooth neck/hand highlights.
+          material.roughness = Math.max(.78, material.roughness);
+          material.color.multiplyScalar(.84);
+        }
+      }
+      return material;
+    });
+    changed.push({ mesh: node, original: node.material, clones });
+    node.material = Array.isArray(node.material) ? clones : clones[0];
+  });
+  let restored = false;
+  return () => {
+    if (restored) return;
+    restored = true;
+    for (const entry of changed) {
+      entry.mesh.material = entry.original;
+      entry.clones.forEach((material) => material.dispose());
+    }
+  };
 }

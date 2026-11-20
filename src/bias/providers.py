@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import asyncio
+import io
 import json
+import re
+import wave
 from collections.abc import AsyncIterator
 
 import httpx
@@ -28,9 +31,13 @@ def _status_error(status: int) -> ProviderError:
 
 
 class OpenAICompatibleLLM:
-    def __init__(self, settings: ProviderSettings, *, timeout: float = 60, max_chars: int = 6000, max_tokens: int = 900, transport: httpx.AsyncBaseTransport | None = None):
+    def __init__(self, settings: ProviderSettings, *, timeout: float = 60, max_chars: int = 6000, max_tokens: int = 900, transport: httpx.AsyncBaseTransport | None = None,
+                 token_limit_field: str = "max_tokens"):
         if isinstance(max_tokens, bool) or not isinstance(max_tokens, int) or not 1 <= max_tokens <= 4096:
             raise ValueError("max_tokens must be an integer between 1 and 4096")
+        if token_limit_field not in {"max_tokens", "max_completion_tokens"}:
+            raise ValueError("Unsupported chat completion token limit field")
+        self.token_limit_field = token_limit_field
         self.settings = settings
         self.timeout = timeout
         self.max_chars = max_chars
@@ -40,7 +47,7 @@ class OpenAICompatibleLLM:
     async def stream(self, messages: list[dict[str, str]]) -> AsyncIterator[str]:
         if not self.settings.configured:
             raise ProviderError("provider_unconfigured", "No language model is configured.", 503)
-        payload = {"model": self.settings.model, "messages": messages, "stream": True, "max_tokens": self.max_tokens}
+        payload = {"model": self.settings.model, "messages": messages, "stream": True, self.token_limit_field: self.max_tokens}
         # Retry a connection failure once, before receiving any output. Never
         # replay after partial output or automatically repeat a billable request.
         for attempt in range(2):
@@ -125,10 +132,22 @@ class SpeechProvider:
         # speech contract. Never add it without explicit server configuration.
         if self.language_hint and language is not None:
             payload["language"] = {"en": "English", "ko": "Korean"}[language]
+        data, mime = await self._request_audio(f"{self.settings.base_url}/audio/speech", payload, self.settings.headers)
+        if data[:4] == b"RIFF" and data[8:12] == b"WAVE":
+            mime = "audio/wav"
+        elif data[:4] == b"OggS":
+            mime = "audio/ogg"
+        elif data[:3] == b"ID3" or (len(data) >= 2 and data[0] == 0xFF and data[1] & 0xE0 == 0xE0):
+            mime = "audio/mpeg"
+        elif not mime.startswith("audio/"):
+            raise ProviderError("audio_protocol", "The speech provider did not return an audio response.")
+        return data, mime
+
+    async def _request_audio(self, url: str, payload: dict, headers: dict[str, str]) -> tuple[bytes, str]:
         try:
             async with asyncio.timeout(self.timeout):
                 async with httpx.AsyncClient(timeout=self.timeout, transport=self.transport, follow_redirects=False) as client:
-                    async with client.stream("POST", f"{self.settings.base_url}/audio/speech", headers=self.settings.headers, json=payload) as response:
+                    async with client.stream("POST", url, headers=headers, json=payload) as response:
                         if response.status_code != 200:
                             raise _status_error(response.status_code)
                         data = bytearray()
@@ -139,19 +158,41 @@ class SpeechProvider:
                         mime = response.headers.get("content-type", "").split(";")[0].strip().lower()
             if not data:
                 raise ProviderError("audio_empty", "The speech provider returned empty audio.")
-            if data[:4] == b"RIFF" and data[8:12] == b"WAVE":
-                mime = "audio/wav"
-            elif data[:4] == b"OggS":
-                mime = "audio/ogg"
-            elif data[:3] == b"ID3" or (len(data) >= 2 and data[0] == 0xFF and data[1] & 0xE0 == 0xE0):
-                mime = "audio/mpeg"
-            elif not mime.startswith("audio/"):
-                raise ProviderError("audio_protocol", "The speech provider did not return an audio response.")
             return bytes(data), mime
         except (httpx.TimeoutException, TimeoutError) as exc:
             raise ProviderError("speech_timeout", "Speech generation timed out.", 504) from exc
         except httpx.HTTPError as exc:
             raise ProviderError("speech_network", "The speech endpoint could not be reached.", 503) from exc
+
+
+ELEVENLABS_BASE_URL = "https://api.elevenlabs.io/v1"
+
+
+class ElevenLabsSpeechProvider(SpeechProvider):
+    """Adapt ElevenLabs PCM to the existing WAV playback and lip-sync path."""
+
+    async def synthesize(self, text: str, voice: str | None = None, *, language: str | None = None) -> tuple[bytes, str]:
+        voice_id = voice or self.voice
+        if not self.settings.api_key or self.settings.base_url != ELEVENLABS_BASE_URL:
+            raise ProviderError("speech_unconfigured", "Configure the ElevenLabs API key before playback.", 503)
+        if not re.fullmatch(r"[A-Za-z0-9_-]+", voice_id):
+            raise ProviderError("speech_voice_invalid", "Configure an ElevenLabs voice ID before playback.", 503)
+        if language not in {None, "en", "ko"}:
+            raise ProviderError("speech_language", "Speech language must be en or ko.", 422)
+        payload = {"text": text, "model_id": self.settings.model}
+        if language and self.settings.model in {"eleven_flash_v2_5", "eleven_turbo_v2_5"}:
+            payload["language_code"] = language
+        pcm, mime = await self._request_audio(
+            f"{ELEVENLABS_BASE_URL}/text-to-speech/{voice_id}/stream?output_format=pcm_24000",
+            payload, {"xi-api-key": self.settings.api_key},
+        )
+        if mime not in {"audio/pcm", "audio/x-pcm", "audio/raw", "application/octet-stream"} or len(pcm) % 2:
+            raise ProviderError("audio_protocol", "ElevenLabs did not return valid 24 kHz PCM audio.")
+        buffer = io.BytesIO()
+        with wave.open(buffer, "wb") as wav:
+            wav.setparams((1, 2, 24_000, 0, "NONE", "not compressed"))
+            wav.writeframes(pcm)
+        return buffer.getvalue(), "audio/wav"
 
 
 class TranscriptionProvider:
@@ -160,14 +201,17 @@ class TranscriptionProvider:
         self.timeout = timeout
         self.transport = transport
 
-    async def transcribe(self, data: bytes, mime: str) -> str:
+    async def transcribe(self, data: bytes, mime: str, *, language: str | None = None) -> str:
         if not self.settings.configured:
             raise ProviderError("transcription_unconfigured", "Configure a transcription provider to enable recorded audio input.", 503)
         extension = {"audio/webm": "webm", "audio/wav": "wav", "audio/ogg": "ogg", "audio/mp4": "m4a", "audio/mpeg": "mp3"}.get(mime, "audio")
+        fields = {"model": self.settings.model, "response_format": "json"}
+        if language:
+            fields["language"] = language
         try:
             async with asyncio.timeout(self.timeout):
                 async with httpx.AsyncClient(timeout=self.timeout, transport=self.transport, follow_redirects=False) as client:
-                    response = await client.post(f"{self.settings.base_url}/audio/transcriptions", headers=self.settings.headers, data={"model": self.settings.model, "response_format": "json"}, files={"file": (f"recording.{extension}", data, mime)})
+                    response = await client.post(f"{self.settings.base_url}/audio/transcriptions", headers=self.settings.headers, data=fields, files={"file": (f"recording.{extension}", data, mime)})
             if response.status_code != 200:
                 raise _status_error(response.status_code)
             result = response.json()

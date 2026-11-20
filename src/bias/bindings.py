@@ -10,7 +10,7 @@ from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 from .config import ProviderSettings, Settings
 from .corpus import Corpus, source_event_id
 from .motion import MotionLibrary
-from .providers import ProviderError, SpeechProvider
+from .providers import ElevenLabsSpeechProvider, ProviderError, SpeechProvider
 
 
 def _media_url(value: str) -> str:
@@ -64,10 +64,14 @@ class SubjectSpeechProvider(SpeechProvider):
         # Live streaming checks settings.configured before starting generation.
         super().__init__(config.tts if enabled else ProviderSettings(), voice=config.tts_voice,
                          timeout=config.request_timeout, language_hint=config.tts_language_hint)
+        self.elevenlabs = (ElevenLabsSpeechProvider(self.settings, voice=self.voice, timeout=self.timeout)
+                           if enabled and config.tts_protocol == "elevenlabs" else None)
 
     async def synthesize(self, text: str, voice: str | None = None, *, language: str | None = None) -> tuple[bytes, str]:
         if self.provider_configured and self.binding["status"] not in {"matched", "generic"}:
             raise ProviderError("speech_subject_mismatch", "Bind the configured voice to this persona, or explicitly select a generic voice, before playback.", 503)
         if voice is not None and voice != self.voice:
             raise ProviderError("speech_voice_override", "This session uses its configured voice. Select another voice in server configuration with its matching persona binding.", 422)
+        if self.elevenlabs:
+            return await self.elevenlabs.synthesize(text, voice, language=language)
         return await super().synthesize(text, voice, language=language)

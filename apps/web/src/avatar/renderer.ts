@@ -91,6 +91,7 @@ export class AvatarRenderer {
   private gaussianSerial = 0;
   private gaussianKey = '';
   private gaussianRequested = false;
+  private compositeLights: { light: DirectionalLight | HemisphereLight; intensity: number }[] = [];
 
   constructor(private host: HTMLElement, private callbacks: RendererCallbacks = {}) {
     this.renderer = new WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
@@ -116,12 +117,13 @@ export class AvatarRenderer {
     this.controls.minAzimuthAngle = -0.42; this.controls.maxAzimuthAngle = 0.42;
     this.controls.minPolarAngle = 1.35; this.controls.maxPolarAngle = 1.64;
 
-    this.scene.add(new HemisphereLight('#dce4c9', '#333827', 2.25));
+    const sky = new HemisphereLight('#e4e5e1', '#383837', 2.25); this.scene.add(sky);
     this.scene.add(new AmbientLight('#d7ddc7', 0.20));
     const key = new DirectionalLight('#ffebd5', 3.2); key.position.set(-2.8, 4.2, 3.4); this.scene.add(key);
     const fill = new DirectionalLight('#d0dfd1', 1.25); fill.position.set(2.5, 2.5, 3.3); this.scene.add(fill);
     const rim = new DirectionalLight('#d8f8a0', 2.3); rim.position.set(1.5, 2.8, -2); this.scene.add(rim);
     const leftRim = new DirectionalLight('#819e91', 1.4); leftRim.position.set(-2, 1.9, -1.2); this.scene.add(leftRim);
+    this.compositeLights = [sky, key, fill, rim, leftRim].map((light) => ({ light, intensity: light.intensity }));
     this.createStudio();
     this.rig = createProceduralRig(this.portraitStyle); this.scene.add(this.rig.root);
     this.readRigOutput = createRigOutputReader(this.rig);
@@ -272,13 +274,20 @@ export class AvatarRenderer {
       this.canvas.dataset.gaussianSha256 = sha256;
       this.gaussianFactory = (rig) => {
         const attachment = body.fitGaussianAttachment(rig, B as GaussianBodyArrays, config);
-        const head = new body.GaussianBodyHead(header as GaussianBodyHeader, B as GaussianBodyArrays, attachment);
+        const refined = sha256 === '32d5bc15901a8673901c6234ae7af946d2bfcf2c0aa5e7ed9c816d1c3aff599c';
+        const head = new body.GaussianBodyHead(header as GaussianBodyHeader, B as GaussianBodyArrays, attachment, refined);
+        const restoreMaterials = refined ? body.softenCompositeMaterials(rig) : () => {};
+        const gains = [0.8, 0.8, 0.8, 0.16, 0.16];
+        if (refined) this.compositeLights.forEach(({ light, intensity }, i) => { light.intensity = intensity * gains[i]; });
         let restoreBody: (() => void) | undefined;
         try {
           restoreBody = body.hideOriginalHead(rig, attachment.targetCutY);
           attachment.head.add(head.root);
-          return { head, performance: motion, restoreBody };
-        } catch (error) { restoreBody?.(); head.dispose(); throw error; }
+          return { head, performance: motion, restoreBody: () => {
+            restoreMaterials(); restoreBody?.();
+            this.compositeLights.forEach(({ light, intensity }) => { light.intensity = intensity; });
+          } };
+        } catch (error) { restoreMaterials(); restoreBody?.(); head.dispose(); this.compositeLights.forEach(({ light, intensity }) => { light.intensity = intensity; }); throw error; }
       };
       this.attachGaussianHead();
     } catch (error) {
@@ -451,7 +460,9 @@ export class AvatarRenderer {
       try {
         const parameters = this.gaussian.performance.sample({ rigPose: this.calibrationPose ? this.pose : attended.pose,
           elapsedMs: this.playback.audioElapsedMs ?? this.playback.elapsedMs, idleMs: now - this.start,
-          speaking: this.playback.speaking, reducedMotion: this.playback.reducedMotion });
+          speaking: this.playback.speaking, reducedMotion: this.playback.reducedMotion,
+          speechVisemes: sample.pose.visemes, amplitude: this.playback.amplitude,
+          deltaSeconds: seek ? undefined : delta });
         const size = this.renderer.getDrawingBufferSize(new Vector2());
         this.gaussian.head.update(parameters, this.camera, size.x, size.y);
         this.canvas.dataset.gaussianExpressionSource = parameters.expressionSource;

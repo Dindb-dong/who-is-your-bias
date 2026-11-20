@@ -1,5 +1,7 @@
 import asyncio
+import io
 import json
+import wave
 
 import httpx
 import pytest
@@ -8,7 +10,7 @@ from fastapi.testclient import TestClient
 from bias.api import create_app
 from bias.config import ProviderSettings, Settings
 from bias.models import ChatTurn
-from bias.providers import OpenAICompatibleLLM, ProviderError, SpeechProvider
+from bias.providers import ELEVENLABS_BASE_URL, ElevenLabsSpeechProvider, OpenAICompatibleLLM, ProviderError, SpeechProvider
 
 
 def collect(provider):
@@ -17,15 +19,19 @@ def collect(provider):
     return asyncio.run(run())
 
 
-def test_llm_compatible_stream_and_secret_header():
+@pytest.mark.parametrize("token_field", ["max_tokens", "max_completion_tokens"])
+def test_llm_compatible_stream_and_secret_header(token_field):
     def handle(request):
         assert request.headers["authorization"] == "Bearer local-secret"
         payload = json.loads(request.content)
         assert payload["stream"] is True
         assert payload["model"] == "local-model"
+        assert payload[token_field] == 900
+        assert {"max_tokens", "max_completion_tokens"} & payload.keys() == {token_field}
         data = 'data: {"choices":[{"delta":{"content":"Hello "}}]}\n\ndata: {"choices":[{"delta":{"content":"world"},"finish_reason":"stop"}]}\n\ndata: {"choices":[],"usage":{"total_tokens":2}}\n\ndata: [DONE]\n\n'
         return httpx.Response(200, text=data, headers={"content-type": "text/event-stream"})
-    provider = OpenAICompatibleLLM(ProviderSettings("http://localhost:9999/v1", "local-model", "local-secret"), transport=httpx.MockTransport(handle))
+    provider = OpenAICompatibleLLM(ProviderSettings("http://localhost:9999/v1", "local-model", "local-secret"), transport=httpx.MockTransport(handle),
+                                     token_limit_field=token_field)
     assert collect(provider) == "Hello world"
 
 
@@ -121,3 +127,50 @@ def test_health_never_serializes_provider_secrets(corpus, tmp_path):
         assert "never-print-this" not in response.text
         assert response.json()["configuration_only"] is True
         assert response.json()["capabilities"]["llm"] is True
+
+
+def test_elevenlabs_full_answer_reaches_existing_wav_playback(corpus, tmp_path, monkeypatch):
+    text = "This is the complete answer. The next sentence belongs to the same request."
+    pcm = b"\x01\x00" * 24_000
+    calls = []
+
+    def respond(request):
+        calls.append(request)
+        assert str(request.url) == f"{ELEVENLABS_BASE_URL}/text-to-speech/test-voice/stream?output_format=pcm_24000"
+        assert request.headers["xi-api-key"] == "test-key"
+        assert "Authorization" not in request.headers
+        assert json.loads(request.content) == {"text": text, "model_id": "eleven_flash_v2_5", "language_code": "en"}
+        return httpx.Response(200, content=pcm, headers={"content-type": "audio/pcm"})
+
+    monkeypatch.setattr("bias.bindings.ElevenLabsSpeechProvider", lambda *args, **kwargs:
+                        ElevenLabsSpeechProvider(*args, transport=httpx.MockTransport(respond), **kwargs))
+    settings = Settings(web_dir=tmp_path / "absent", tts_protocol="elevenlabs", tts_voice="test-voice",
+                        tts_persona_id="generic", tts=ProviderSettings(ELEVENLABS_BASE_URL, "eleven_flash_v2_5", "test-key"))
+    with TestClient(create_app(settings, corpus=corpus)) as client:
+        assert client.get("/api/persona").json()["bindings"]["voice"]["status"] == "generic"
+        wrong_voice = client.post("/api/speech/prepare", json={"text": text, "voice": "different-voice", "language": "en"})
+        assert wrong_voice.status_code == 422
+        assert not calls
+        result = client.post("/api/speech/prepare", json={"text": text, "language": "en"})
+        assert result.status_code == 200
+        audio = client.get(result.json()["audio_url"])
+        assert len(calls) == 1
+        assert audio.headers["Content-Type"] == "audio/wav"
+        with wave.open(io.BytesIO(audio.content)) as wav:
+            assert (wav.getnchannels(), wav.getsampwidth(), wav.getframerate(), wav.getnframes()) == (1, 2, 24_000, 24_000)
+            assert wav.readframes(wav.getnframes()) == pcm
+
+
+@pytest.mark.parametrize("status, mime, pcm, code", [
+    (200, "application/json", b"{}", "audio_protocol"),
+    (200, "audio/pcm", b"x", "audio_protocol"),
+    (429, "application/json", b"private provider detail", "provider_busy"),
+])
+def test_elevenlabs_rejects_invalid_audio_and_surfaces_rate_limit(status, mime, pcm, code):
+    transport = httpx.MockTransport(lambda request: httpx.Response(status, content=pcm, headers={"content-type": mime}))
+    provider = ElevenLabsSpeechProvider(ProviderSettings(ELEVENLABS_BASE_URL, "eleven_flash_v2_5", "test-key"),
+                                        voice="test-voice", transport=transport)
+    with pytest.raises(ProviderError) as error:
+        asyncio.run(provider.synthesize("Hello", language="en"))
+    assert error.value.code == code
+    assert "private provider detail" not in str(error.value)

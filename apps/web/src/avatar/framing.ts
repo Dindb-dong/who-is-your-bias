@@ -12,7 +12,7 @@ export function fitUpperBody(points: readonly FramingPoint[], aspect: number, di
   const up = outward.clone().cross(right).normalize();
   const tangent = Math.tan(36 * Math.PI / 360);
   let distance = 2.3;
-  const torso = [new Vector3(-.40, 1.05, 0), new Vector3(.40, 1.05, 0), new Vector3(0, 2.4, 0)]
+  const torso = [new Vector3(-.40, 1.05, 0), new Vector3(.40, 1.05, 0), new Vector3(0, 2.25, 0)]
     .map((position) => ({ position, radius: .06 }));
   for (const point of [...torso, ...points]) {
     const offset = point.position.clone().sub(target); const depth = offset.dot(outward) + point.radius;

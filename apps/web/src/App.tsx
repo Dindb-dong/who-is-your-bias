@@ -42,6 +42,8 @@ function EvidencePanel({ citations, onClose }: { citations: Citation[]; onClose:
 export default function App() {
   const [avatarQuery] = useState(() => new URLSearchParams(window.location.search));
   const gaussianRequested = avatarQuery.get('head') === 'gaussian';
+  const presentationMode = avatarQuery.get('present') === '1';
+  const reviewQuestion = presentationMode && avatarQuery.get('reviewQuestion') === '1';
   const [learnedGestureEnabled, setLearnedGestureEnabled] = useState(() => avatarQuery.get('gesture') === 'learned');
   const [page, setPage] = useState<Page>('studio');
   const [persona, setPersona] = useState<Persona | null>(null);
@@ -62,8 +64,8 @@ export default function App() {
   const [activeTurn, setActiveTurn] = useState<Turn | undefined>();
   const [evidence, setEvidence] = useState<Citation[] | null>(null);
   const [settings, setSettings] = useState(false);
-  const [voice, setVoice] = useState<VoiceMode>('off');
-  const [autoPlay, setAutoPlay] = useState(false);
+  const [voice, setVoice] = useState<VoiceMode>(presentationMode ? 'provider' : 'off');
+  const [autoPlay, setAutoPlay] = useState(presentationMode);
   const [liveMeasurement, setLiveMeasurement] = useState<LiveMeasurement | null>(null);
   const liveClock = useRef<LiveTurnClock | null>(null);
   const [reducedMotion, setReducedMotion] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -89,7 +91,14 @@ export default function App() {
     avatarQuery.get('gestureBundle') ?? 'jensen-gesture-basis');
   const playbackPreferences = useRef({ autoPlay, voice });
   playbackPreferences.current = { autoPlay, voice };
-  const microphone = useMicrophone(language, setDraft);
+  const microphone = useMicrophone(language, setDraft, presentationMode ? (text, endedAt) => {
+    if (reviewQuestion) {
+      setDraft(text);
+      composer.current?.focus();
+    } else {
+      void send(text, endedAt);
+    }
+  } : undefined, persona?.capabilities.transcription);
   const onAvatarReady = useCallback(() => { setAvatarReady(true); }, []);
   const onAvatarError = useCallback((error: Error) => { setAvatarError(error.message); }, []);
 
@@ -130,7 +139,7 @@ export default function App() {
     composer.current?.focus();
   }
   function navigate(next: Page) { cancel(); setAttentionTarget(null); setPage(next); setEvidence(null); }
-  async function send(text = draft) {
+  async function send(text = draft, microphoneEndedAt?: number) {
     const question = text.trim();
     if (!question || busy || connection !== 'ready') return;
     pcmPlayer.current?.stop(); setPcmState(initialPcmState); setActiveTurn(undefined);
@@ -139,7 +148,7 @@ export default function App() {
     const controller = new AbortController(); currentRequest.current = controller;
     const answerId = crypto.randomUUID();
     const preferences = playbackPreferences.current;
-    const clock = new LiveTurnClock(answerId, performance.now(), preferences.autoPlay ? preferences.voice : 'off');
+    const clock = new LiveTurnClock(answerId, performance.now(), preferences.autoPlay ? preferences.voice : 'off', undefined, microphoneEndedAt);
     liveClock.current = clock; setLiveMeasurement(clock.snapshot());
     let paintScheduled = false;
     setMessages((previous) => [...previous, { id: crypto.randomUUID(), role: 'user', text: question }, { id: answerId, role: 'assistant', text: '', pending: true }]);
@@ -227,6 +236,9 @@ export default function App() {
     if (!avatarChoiceMade.current) setBuiltinAvatar(persona.id === 'jensen-huang' ? gaussianRequested ? 'jensen' : 'portrait' : 'human');
     lastPersona.current = persona.id;
   }, [persona?.id]);
+  useEffect(() => {
+    if (presentationMode && persona && !persona.capabilities.speech) setVoice('off');
+  }, [presentationMode, persona]);
   const isJensen = persona?.id === 'jensen-huang';
   const gaussianEnabled = gaussianRequested && isJensen && builtinAvatar === 'jensen' && !model;
   const gaussianHead = useMemo<GaussianHeadConfig | undefined>(() => {
@@ -242,6 +254,16 @@ export default function App() {
   const visualPlayback = streamingVoice ? { ...playback, ...pcmState, speechTiming: undefined, audioSha256: undefined } : playback;
   const modelUrl = model?.url ?? (builtinAvatar === 'human' ? RESEARCH_HUMAN_AVATAR.modelUrl : builtinAvatar === 'jensen' && isJensen ? JENSEN_SOURCE_FITTED_AVATAR.modelUrl : undefined);
   const stageState = speaking ? 'Speaking' : (playback.status === 'loading' || pcmState.status === 'loading') ? 'Preparing voice' : microphone.listening ? 'Listening' : busy ? 'Thinking' : 'Ready when you are';
+  const finishMicLabel = presentationMode && !reviewQuestion ? 'Finish and send question' : 'Stop microphone';
+  const idleMicLabel = presentationMode ? 'Ask with microphone' : 'Use your voice';
+  const activeMicLabel = reviewQuestion ? 'Finish recording' : presentationMode ? 'Finish & send' : 'Listening';
+  const micLabel = microphone.processing ? 'Processing microphone…' : microphone.listening ? activeMicLabel : idleMicLabel;
+  const micPrompt = presentationMode && !reviewQuestion ? 'Listening… click the microphone again to send' : 'Listening… you can edit before sending';
+  const micHelp = microphone.backend === 'server' ? 'Record through the configured transcription service' : 'Dictate a question';
+  const latestMessage = messages.at(-1);
+  const caption = presentationMode
+    ? (activeTurn?.text ?? (latestMessage?.pending ? latestMessage.text : '')).replace(/\[source:[A-Za-z0-9_.-]*(?:\]|$)/g, '').trim()
+    : '';
 
   return <div className="app-shell">
     <aside className="sidebar">
@@ -266,7 +288,9 @@ export default function App() {
               <div className="stage-bottom"><div className="live-status"><span className={`status-orb ${speaking || busy ? 'animated' : ''}`}/><div><strong>{stageState}</strong><span title={playback.timingMessage}>{streamingVoice ? 'Streaming voice · PCM-clock mouth movement' : voice === 'provider' ? playback.timingStatus === 'available' ? 'Provider voice · audio-timed mouth cues' : 'Provider voice · approximate mouth movement' : voice === 'browser' || speaking ? 'Generic browser voice · approximate lip sync' : 'Text mode · voice available'}</span></div></div><button className="round-control" aria-label={streamingVoice || speaking || playback.status === 'loading' ? 'Stop audio' : 'Enable voice settings'} onClick={() => streamingVoice ? cancel() : speaking || playback.status === 'loading' ? playback.stop() : setSettings(true)}>{streamingVoice || speaking || playback.status === 'loading' ? <Square size={16}/> : voice === 'off' ? <VolumeX size={18}/> : <Volume2 size={18}/>}</button></div>
               {!avatarReady && !avatarError && <div className="avatar-loading"><LoaderCircle size={18} className="spin"/> Preparing the rig</div>}
               {avatarError && <div className="avatar-error" role="alert">{avatarError}<button onClick={() => selectBuiltinAvatar('portrait')}>Use stylized portrait</button></div>}
-            </section><AttentionPanel enabled={page === 'studio'} reducedMotion={reducedMotion} onTarget={setAttentionTarget}/><MotionNotice state={measuredMotion} mode={motionMode} reducedMotion={reducedMotion} noMatch={Boolean(activeTurn && !busy && !activeTurn.behavior.motion)}/></div>
+            </section>
+              {caption && <p className="presentation-caption" aria-label="Answer captions" lang={activeTurn?.language ?? language}>{caption}</p>}
+              <AttentionPanel enabled={page === 'studio'} reducedMotion={reducedMotion} onTarget={setAttentionTarget}/><MotionNotice state={measuredMotion} mode={motionMode} reducedMotion={reducedMotion} noMatch={Boolean(activeTurn && !busy && !activeTurn.behavior.motion)}/></div>
             <section className="conversation-card" aria-label="Conversation">
               <div className="conversation-header"><div><MessageCircle size={18}/><h2>Let's talk</h2></div><span className="preview-label">{persona?.capabilities.llm ? 'LLM connected' : 'Source preview'}</span></div>
               <div className="message-list" role="log" aria-label="Conversation messages" aria-live="polite" aria-relevant="additions text">
@@ -275,7 +299,7 @@ export default function App() {
                 <div ref={chatBottom}/>
               </div>
               {(playback.error || pcmState.error || microphone.error) && <div className="inline-error" role="alert">{playback.error || pcmState.error || microphone.error}</div>}
-              <form className={`composer ${microphone.listening ? 'listening' : ''}`} onSubmit={(event) => { event.preventDefault(); void send(); }}><textarea ref={composer} value={draft} onChange={(event) => setDraft(event.target.value)} placeholder={microphone.listening ? 'Listening… you can edit before sending' : language === 'ko' ? '궁금한 것을 물어봐…' : 'Ask something you’re curious about…'} aria-label="Your message" rows={2} maxLength={2000} disabled={busy} onKeyDown={(event) => { if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void send(); } }}/><div className="composer-bottom"><button className={`microphone-button ${microphone.listening ? 'active' : ''}`} type="button" onClick={() => { playback.stop(); microphone.toggle(); }} disabled={busy || !microphone.supported} aria-label={microphone.listening ? 'Stop microphone' : 'Use microphone'} title={microphone.supported ? 'Dictate a question' : 'Microphone transcription is unavailable in this browser'}><Mic size={16}/><span>{microphone.listening ? 'Listening' : 'Use your voice'}</span></button><span className="keyboard-hint">↵ to send</span>{busy ? <button type="button" className="send-button" onClick={cancel} aria-label="Stop response"><Square size={15}/></button> : <button type="submit" className="send-button" disabled={!draft.trim() || connection !== 'ready'} aria-label="Send message"><ArrowUp size={18}/></button>}</div></form>
+              <form className={`composer ${microphone.listening ? 'listening' : ''}`} onSubmit={(event) => { event.preventDefault(); void send(); }}><textarea ref={composer} value={draft} onChange={(event) => setDraft(event.target.value)} placeholder={microphone.listening ? micPrompt : language === 'ko' ? '궁금한 것을 물어봐…' : 'Ask something you’re curious about…'} aria-label="Your message" rows={2} maxLength={2000} disabled={busy} onKeyDown={(event) => { if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void send(); } }}/><div className="composer-bottom"><button className={`microphone-button ${microphone.listening ? 'active' : ''}`} type="button" onClick={() => { playback.stop(); microphone.toggle(); }} disabled={busy || microphone.processing || !microphone.supported || connection !== 'ready'} aria-label={microphone.listening ? finishMicLabel : 'Use microphone'} title={microphone.supported ? micHelp : 'Microphone transcription is unavailable in this browser'}><Mic size={16}/><span>{micLabel}</span></button><span className="keyboard-hint">↵ to send</span>{busy ? <button type="button" className="send-button" onClick={cancel} aria-label="Stop response"><Square size={15}/></button> : <button type="submit" className="send-button" disabled={!draft.trim() || connection !== 'ready'} aria-label="Send message"><ArrowUp size={18}/></button>}</div></form>
               <div className="conversation-footer"><span className="tiny-dot"/> AI simulation · {persona?.snapshot ? `Snapshot ${persona.snapshot.as_of.slice(0, 10)} · dated sources` : 'Historical sources'} · Verify important claims</div>
             </section>
           </div>
