@@ -17,7 +17,7 @@ delegation, firsthand observations, customer problems, and difficult work with
 realism. The seed has 18 nodes, 12 edges, and 12 source-summary anchors.
 
 English/Korean lexical rules select up to two relevant paths for advice
-questions. Source passages join factual retrieval; interpreted values join a
+questions, requiring a specific topic term or multiple generic terms. Source passages join factual retrieval; interpreted values join a
 separate `persona_memory` context. The prompt treats new applications as
 hypothetical advice, not as actual memories, feelings, quotations, or current
 positions. Selection rules are conservative and can miss paraphrases; they
@@ -25,8 +25,12 @@ are not a learned graph retriever.
 
 The graph validates persona, reviewed training/factual eligibility, evidence
 text hash, and source metadata hash at load and use. Snapshot eligibility is
-applied before path selection. Entire source-supported paths must fit the
-prompt budget; otherwise memory is omitted and the reason is recorded. The
+applied before path selection. A personal deadline such as "now" can use dated
+historical principles, while explicit dates/news/current-position requests
+retain the conservative factual gate. This advice-only scope still excludes
+post-cutoff evidence. Entire source-supported paths must fit the
+prompt budget; the packer tries fewer complete ranked paths before omitting
+memory. Included value IDs and the fallback reason are recorded. The
 existing citation audit still cannot prove semantic faithfulness.
 
 Graph memory does not answer factual questions about this project's
@@ -68,10 +72,16 @@ Condition 3 versus 2 measures the representation difference; 3 versus 1 also
 includes additional information and retrieval. Neither is a claim that a
 graph by itself improves every answer.
 
-First implementation checkpoint: 91 integration and related regression tests
-passed. Graph-specific tests and the frozen real-model pilot are in progress.
-No quality improvement has been measured at this checkpoint. Raw outputs,
-scoring protocol, and limitations will be committed before any result claim.
+The first implementation checkpoint is
+[`f28f112`](https://github.com/Dindb-dong/who-is-your-bias/commit/f28f11212703f715900899e5f8fbe5f817be0192).
+Subsequent pre-generation regression testing passed 310 tests; expanded routing,
+bounded path fallback, and approval-queue disambiguation address issues found
+before any model answers were generated. The same development probes informed
+these fixes, so they are not a held-out generalization test.
+
+See [the frozen evaluation protocol](persona-graph-evaluation-protocol.md) and
+[the execution record](../reports/persona-graph-2026-11-20/README.md). No quality
+improvement has been measured at this pre-generation checkpoint.
 
 ```bash
 uv sync --locked --extra dev

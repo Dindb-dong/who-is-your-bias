@@ -1,5 +1,6 @@
 """Source boundaries and matched payloads, not a claim about persona quality."""
 from dataclasses import replace
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 import pytest
@@ -7,8 +8,12 @@ from pydantic import HttpUrl, ValidationError
 
 from bias.corpus import Corpus
 from bias.hybrid_retrieval import HybridSearchResult
-from bias.persona_graph import GraphDocument, PersonaGraph, PersonaGraphError, augment_result
+from bias.persona_graph import (
+    GraphDocument, PersonaGraph, PersonaGraphError, augment_result,
+    is_persona_advice_request, select_advice_memory,
+)
 from bias.retrieval import SearchHit, SearchResult
+from bias.snapshots import PersonaSnapshot, register_snapshot, select_temporal
 
 DATA = Path(__file__).resolve().parents[1] / "data/personas/jensen-huang"
 
@@ -78,6 +83,65 @@ def test_temporal_filter_cannot_be_overridden_by_graph_links(graph):
     assert graph.select(query, eligible_ids=full.evidence_ids).paths == full.paths
 
 
+@pytest.mark.parametrize("query", [
+    "How would you decide whether to make a prototype?",
+    "What advice would you give me about a prototype next week?",
+    "Where could I find a useful bottleneck to work on?",
+    "What perspective would you bring to customer needs?",
+    "내일 단순 업무를 맡게 되는데 어떻게 하면 좋을까요?",
+])
+def test_advice_intent_does_not_confuse_personal_plans_with_public_news(graph, query):
+    assert is_persona_advice_request(query)
+    assert graph.select(query).paths
+
+
+@pytest.mark.parametrize("query", [
+    "Should I build a prototype, and are you still NVIDIA's CEO?",
+    "What advice follows from what you currently believe about customer needs?",
+    "How would you explain your current stance on delegation?",
+    "What advice did you give employees about prototypes in 2024?",
+    "현재 젠슨 황의 입장에 따라 고객에게 어떤 조언을 해야 할까요?",
+])
+def test_mixed_actual_person_claims_cannot_get_advice_time_override(graph, query):
+    assert not is_persona_advice_request(query)
+    assert not graph.select(query).paths
+
+
+def test_advice_archive_scope_keeps_factual_timing_and_snapshot_cutoff(graph, graph_corpus):
+    snapshot = PersonaSnapshot.load(DATA.parents[1] / "snapshots/jensen-huang-2026-11-12.json", graph_corpus)
+    query = "How would you advise me to test a prototype now?"
+    factual_temporal = select_temporal(graph_corpus, snapshot, query)
+    assert factual_temporal.intent.mode == "current"
+    assert "jensen-acquired-2023-01" not in factual_temporal.eligible_ids
+    selected = select_advice_memory(graph, graph_corpus, query, snapshot=snapshot, temporal=factual_temporal)
+    assert selected.paths
+    assert "jensen-acquired-2023-01" in selected.evidence_ids
+    assert "jensen-acquired-2023-01" not in factual_temporal.eligible_ids
+    assert not select_advice_memory(graph, graph_corpus, query, temporal=factual_temporal).paths
+    cutoff = datetime(2022, 1, 1, tzinfo=timezone.utc)
+    early_snapshot = register_snapshot(graph_corpus, identifier="test-old-cutoff", as_of=cutoff,
+                                      ingested_at=cutoff, current_evidence_since=date(2022, 1, 1))
+    assert not select_advice_memory(graph, graph_corpus, query, snapshot=early_snapshot).paths
+
+
+def test_specific_scope_can_match_once_but_generic_terms_cannot(graph):
+    assert graph.select("Should I make a prototype?").paths
+    assert not graph.select("Should I test a cake?").paths
+    assert not graph.select("Should I optimize my cake?").paths
+
+
+@pytest.mark.parametrize("query,value", [
+    ("What would you recommend before making several prototypes?", "validate_before_commitment"),
+    ("What would you change about instructions for an experienced teammate?", "contextual_delegation"),
+    ("Where could we begin learning about a workflow?", "customer_problem_focus"),
+    ("What should we do to learn something from an ordinary job?", "difficult_work_realism"),
+    ("How would you prioritize latency improvements?", "system_bottlenecks"),
+])
+def test_independent_advice_paraphrases_and_regular_plurals(graph, query, value):
+    selection = graph.select(query, limit=1)
+    assert [path.value_id for path in selection.paths] == [value]
+
+
 def test_token_budget_removes_whole_path_and_keeps_flat_graph_information_matched(graph):
     selection = graph.select("How should I optimize latency and delegate to a junior engineer?")
     assert len(selection.paths) == 2
@@ -92,7 +156,7 @@ def test_token_budget_removes_whole_path_and_keeps_flat_graph_information_matche
         for edge in structured["relations"]
     ]
     assert len(flat["nodes"]) == 3
-    assert all("query_terms" not in node for node in flat["nodes"])
+    assert all("query_terms" not in node and "specific_query_terms" not in node for node in flat["nodes"])
     assert {key for node in flat["nodes"] for key in node["evidence_ids"]} == set(kept_ids)
 
 
@@ -145,6 +209,14 @@ def test_rejects_persona_mismatch_and_missing_anchor(graph, graph_corpus):
     del graph_corpus.evidence[graph.document.anchors[0].evidence_id]
     with pytest.raises(PersonaGraphError, match="anchor"):
         PersonaGraph(graph.document, graph_corpus)
+
+
+def test_valid_anchor_cannot_legitimize_an_invented_experience(graph, graph_corpus):
+    raw = graph.document.model_dump(mode="json")
+    raw["nodes"][0]["text"] = "He won a fictional prize and privately approved this project."
+    document = GraphDocument.model_validate(raw)
+    with pytest.raises(PersonaGraphError, match="Experience text"):
+        PersonaGraph(document, graph_corpus)
 
 
 @pytest.mark.parametrize("malformation", ["unknown_node", "unknown_anchor", "duplicate_edge", "cycle", "factual_value"])

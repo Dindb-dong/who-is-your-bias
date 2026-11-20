@@ -125,8 +125,9 @@ def test_context_overflow_drops_interpretation_but_preserves_evidence(jensen):
         counter=ByteBudgetCounter(), persona_selection=selection)
     assert packed.supplied_ids == plain.supplied_ids
     assert packed.messages == plain.messages
-    assert packed.budget["persona_memory"] == {
-        "format": "graph", "included": False, "reason": "context_budget"}
+    assert packed.budget["persona_memory"]["included"] is False
+    assert packed.budget["persona_memory"]["reason"] == "context_budget"
+    assert packed.budget["persona_memory"]["included_value_ids"] == []
 
 
 def test_flat_and_graph_have_identical_factual_evidence_and_instructions(jensen):
@@ -142,3 +143,44 @@ def test_flat_and_graph_have_identical_factual_evidence_and_instructions(jensen)
     memories = [context.pop("persona_memory") for context in contexts]
     assert contexts[0] == contexts[1]
     assert memories[0]["nodes"] == memories[1]["nodes"]
+
+
+def test_personal_deadline_can_use_archived_principles_without_claiming_current_beliefs(jensen):
+    llm = RecordingLLM()
+    engine = Engine(settings(persona_graph=GRAPH,
+        persona_snapshot=ROOT / "data/snapshots/jensen-huang-2026-11-12.json"), jensen, llm=llm)
+    response = asyncio.run(engine.chat(ChatRequest(message=QUESTION + " I need to decide now.", language="en")))
+    # Existing factual temporal request is still current, but principles are
+    # dated historical inputs for a hypothetical application.
+    assert response.context["temporal"]["mode"] == "current"
+    assert response.context["persona_memory"]["source_scope"] == "archived_principles_for_hypothetical_advice"
+    assert response.context["prompt_budget"]["persona_memory"]["included"] is True
+    assert "Unknown current positions must stay unknown" in llm.calls[0][0]["content"]
+    assert "Hypothetical:" in llm.calls[0][0]["content"]
+
+
+def test_current_factual_request_with_advice_word_does_not_receive_archived_graph(jensen):
+    llm = RecordingLLM()
+    engine = Engine(settings(persona_graph=GRAPH,
+        persona_snapshot=ROOT / "data/snapshots/jensen-huang-2026-11-12.json"), jensen, llm=llm)
+    response = asyncio.run(engine.chat(ChatRequest(
+        message="How should I invest our budget based on NVIDIA's earnings today?", language="en")))
+    assert response.context["persona_memory"]["value_ids"] == []
+    assert "persona_memory" not in unpack(llm.calls[0])
+
+
+def test_default_byte_budget_can_fall_back_to_one_complete_path(jensen):
+    question = "How should I delegate to a junior engineer and test a prototype?"
+    selection = PersonaGraph.load(GRAPH, jensen).select(question)
+    assert len(selection.paths) == 2
+    result = augment_result(selection, jensen, Retriever(jensen).search(question))
+    request = ChatRequest(message=question, language="en")
+    packed = build_snapshot_messages(jensen, request, result, [], None, None,
+        context_window=8192, output_tokens=900, counter=ByteBudgetCounter(), persona_selection=selection)
+    memory = unpack(packed.messages)["persona_memory"]
+    assert len(memory["nodes"]) == 3
+    assert len(memory["relations"]) == 2
+    status = packed.budget["persona_memory"]
+    assert len(status["selected_value_ids"]) == 2
+    assert len(status["included_value_ids"]) == 1
+    assert all(set(node["evidence_ids"]) <= set(packed.supplied_ids) for node in memory["nodes"])

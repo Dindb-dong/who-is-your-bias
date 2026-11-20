@@ -1,0 +1,25 @@
+{
+  "model": "Qwen3-4B-Q4_K_M",
+  "model_sha256": "7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5",
+  "settings": {
+    "n_ctx": 8192,
+    "n_threads": 6,
+    "n_threads_batch": 6,
+    "n_batch": 256,
+    "n_gpu_layers": 0,
+    "seed": 20261120,
+    "verbose": false
+  },
+  "python": "3.12.14",
+  "packages": {
+    "llama-cpp-python": "0.3.36",
+    "numpy": "2.5.5",
+    "jinja2": "3.1.6",
+    "fastapi": "0.165.0",
+    "uvicorn": "0.54.0"
+  },
+  "original_chat_template_sha256": "57f1fd00f0013a2be96aa79b857391f27e23df5b5f847072b524c897e24d0361",
+  "chat_template_override": "prefix {% set enable_thinking = false %}",
+  "thinking": false,
+  "cache_policy": "Llama.reset() before each request; no session history or cross-request cache"
+}

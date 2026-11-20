@@ -27,7 +27,7 @@ from .snapshots import PersonaSnapshot, TemporalIntent, select_temporal, tempora
 from .segments import SegmentCommitter
 from .dialogue import DEICTIC_PAST
 from .query_policy import public_evidence_limitation
-from .persona_graph import PersonaGraph, augment_result
+from .persona_graph import PersonaGraph, augment_result, select_advice_memory
 
 logger = logging.getLogger(__name__)
 
@@ -241,11 +241,13 @@ class Engine:
                 persona_selection = None
                 if (self.persona_graph is not None and request.mode != "profile"
                         and self.prompt_builder is build_messages and not evidence_limitation):
-                    persona_selection = self.persona_graph.select(
-                        resolved.query, eligible_ids=temporal.eligible_ids if temporal else None)
+                    persona_selection = select_advice_memory(
+                        self.persona_graph, self.corpus, resolved.query,
+                        snapshot=self.snapshot, temporal=temporal)
                     result = augment_result(persona_selection, self.corpus, result,
                                             limit=self.settings.retrieval_limit)
                     context["persona_memory"] = persona_selection.trace()
+                    context["persona_memory"]["source_scope"] = "archived_principles_for_hypothetical_advice"
                 retrieval_ms = (time.perf_counter() - retrieval_started) * 1000
                 yield "status", {"stage": "generating"}
                 generation_started = time.perf_counter()

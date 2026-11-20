@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import TYPE_CHECKING, Protocol
 
 from .answer_policy import AnswerPolicy
@@ -211,18 +211,27 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
                 supplied.append(evidence.id)
     memory_status = None
     if persona_selection is not None and request.mode != "profile":
-        memory = persona_selection.payload(format=persona_memory_format, supplied_ids=tuple(supplied))
         memory_status = {"format": persona_memory_format, "included": False,
-                         "reason": "no_source_supported_path"}
-        if memory is not None:
+                         "reason": "no_source_supported_path",
+                         "selected_value_ids": [path.value_id for path in persona_selection.paths],
+                         "included_value_ids": []}
+        # Try complete ranked paths, then fewer complete paths. This preserves
+        # qualifications and useful memory under the default conservative byte
+        # budget, without cutting text or dropping factual source passages.
+        for count in range(len(persona_selection.paths), 0, -1):
+            candidate = replace(persona_selection, paths=persona_selection.paths[:count])
+            memory = candidate.payload(format=persona_memory_format, supplied_ids=tuple(supplied))
+            if memory is None:
+                continue
             context["persona_memory"] = memory
-            # Keep complete paths and their qualifications. If they cannot
-            # fit, retain factual evidence and fall back without the memory.
             if counter.count(messages()) > available:
                 context.pop("persona_memory")
                 memory_status["reason"] = "context_budget"
             else:
                 memory_status.update(included=True, reason="included")
+                memory_status["included_value_ids"] = [node["id"] for node in memory["nodes"]
+                                                       if node["kind"] == "value"]
+                break
     if request.mode != "profile":
         for hit in getattr(result, "style_hits", ()):
             qa = hit.evidence.question_answer

@@ -19,7 +19,8 @@ from pydantic import Field, model_validator
 from .corpus import Corpus
 from .models import Identifier, Record
 from .query_policy import public_evidence_limitation
-from .retrieval import LIVE_QUERY, SearchHit, SearchResult
+from .retrieval import SearchHit, SearchResult
+from .snapshots import PersonaSnapshot, TemporalIntent, TemporalSelection, select_temporal
 
 VERSION = "persona-graph.v1"
 
@@ -48,6 +49,7 @@ class PersonaNode(Record):
     provenance: Literal["source_summary", "editorial_interpretation", "editorial_application"]
     evidence_ids: tuple[Identifier, ...] = Field(min_length=1, max_length=4)
     query_terms: tuple[str, ...] = Field(default=(), max_length=40)
+    specific_query_terms: tuple[str, ...] = Field(default=(), max_length=40)
 
     @model_validator(mode="after")
     def validate_node(self):
@@ -64,6 +66,8 @@ class PersonaNode(Record):
             raise ValueError("Invalid bounded query term")
         if len(set(self.query_terms)) != len(self.query_terms):
             raise ValueError("Duplicate query term")
+        if not set(self.specific_query_terms) <= set(self.query_terms) or len(set(self.specific_query_terms)) != len(self.specific_query_terms):
+            raise ValueError("Specific query terms must be a unique subset of situation query terms")
         return self
 
 
@@ -153,7 +157,7 @@ class GraphSelection:
             "schema_version": "persona-memory.v1",
             "graph_id": self.graph_id,
             "provenance": "Editorial interpretations of dated evidence, not verified mental states or new factual evidence.",
-            "nodes": [node.model_dump(mode="json", exclude={"query_terms"}) for node in nodes.values()],
+            "nodes": [node.model_dump(mode="json", exclude={"query_terms", "specific_query_terms"}) for node in nodes.values()],
         }
         relations = list(dict.fromkeys(
             edge for path in paths for edge in (
@@ -181,16 +185,27 @@ class GraphSelection:
 
 
 _ADVICE = re.compile(
-    r"\b(?:should (?:I|we)|how (?:can|should|do) (?:I|we)|what (?:would|should) you (?:do|prioriti[sz]e)|"
+    r"\b(?:should (?:I|we)|what should (?:I|we)|how (?:can|should|do) (?:I|we)|how would you|"
+    r"where (?:could|should) (?:I|we)|what (?:would|should) you (?:do|change|recommend|prioriti[sz]e)|"
+    r"what (?:advice|perspective)|what do you recommend|"
     r"(?:any|your|give me|give us|offer) (?:advice|recommendations?)|(?:can|could|would) you (?:advise|recommend)|"
     r"help (?:me|us) (?:decide|choose)|which (?:option|choice|approach) (?:would|should)|"
     r"what (?:principles?|values?) (?:would|should))\b|"
     r"조언|어떻게\s*(?:해야|하면|할까|하는\s*게)|할까요|해야\s*할|고민|좋을까|선택해야|판단해야|"
     r"무엇을\s*(?:우선|중시|고려)", re.I)
 _ACTUAL_EVENT = re.compile(
-    r"\b(?:latest|recent|yesterday|tomorrow|earnings|stock (?:price|market)|affair|scandal|"
-    r"what did (?:you|he|jensen|huang)|when did|where did|did (?:you|he|jensen|huang))\b|"
-    r"최근|어제|내일|주가|실적|불륜|스캔들|실제로|언제\s*|무슨\s*말을\s*했|뭐라고\s*했", re.I)
+    r"\b(?:latest|recent|yesterday|earnings|stocks?|shares?|affair|scandal|"
+    r"what did (?:you|he|jensen|huang)|when did|where did|did (?:you|he|jensen|huang)|"
+    r"are you|were you|have you|you said|your (?:decision|announcement|approval|statement))\b|"
+    r"(?<!\d)(?:19|20)\d{2}(?!\d)|"
+    r"최근|어제|주가|주식|실적|불륜|스캔들|실제로|언제\s*|무슨\s*말을\s*했|뭐라고\s*했|"
+    r"당신의\s*(?:발언|결정|발표)", re.I)
+_CURRENT_STANCE = re.compile(
+    r"\b(?:you|jensen|huang|nvidia)\b.{0,35}\b(?:currently|still|now)\b.{0,30}"
+    r"\b(?:believe|think|support|oppose|feel|plan|intend|policy|position|strategy)\b|"
+    r"\b(?:current|latest|present)\s+(?:position|policy|stance|belief|views?|strategy)\b|"
+    r"(?:현재|지금).{0,20}(?:당신|젠슨|황|엔비디아).{0,20}(?:입장|생각|방침|정책)|"
+    r"(?:당신|젠슨|황|엔비디아).{0,20}(?:현재|지금).{0,20}(?:입장|생각|방침|정책)", re.I)
 _OVERRIDE = re.compile(r"\b(?:ignore|disregard|override)\b.{0,60}\b(?:instructions?|rules?|system|evidence)\b|(?:지시|규칙|근거).{0,20}무시", re.I)
 
 
@@ -198,11 +213,32 @@ def _normalize(text: str) -> str:
     return " ".join(unicodedata.normalize("NFKC", text).casefold().split())
 
 
+def _advice_policy_reason(query: str) -> str | None:
+    if public_evidence_limitation(query) or _ACTUAL_EVENT.search(query) or _CURRENT_STANCE.search(query) or _OVERRIDE.search(query):
+        return "requires_factual_verification_or_disallowed_request"
+    if not _ADVICE.search(query):
+        return "not_an_advice_or_value_application_request"
+    return None
+
+
+def is_persona_advice_request(question: str) -> bool:
+    """Conservative intent gate; this is not a general semantic classifier.
+
+    A personal deadline ("next week") is not a request for a current public
+    position. Explicit years, news, actual-person claims and mixed requests
+    matching the factual guards cannot acquire a historical-principle override.
+    """
+    return isinstance(question, str) and len(question) <= 10000 and _advice_policy_reason(_normalize(question)) is None
+
+
 def _contains(query: str, term: str) -> bool:
     term = _normalize(term)
     if re.search(r"[가-힣]", term):
         return term in query
-    return re.search(r"(?<!\w)" + re.escape(term) + r"(?!\w)", query) is not None
+    # Basic regular plurals are enough for controlled terms (prototype/s,
+    # teammate/s); no language model or question-specific rewriting is used.
+    plural = r"s?" if re.fullmatch(r"[a-z][a-z -]*[a-rt-z]", term) else ""
+    return re.search(r"(?<!\w)" + re.escape(term) + plural + r"(?!\w)", query) is not None
 
 
 def _validate_anchors(persona_id: str, anchors: tuple[EvidenceAnchor, ...], corpus: Corpus) -> None:
@@ -240,6 +276,9 @@ class PersonaGraph:
 
     def _validate_binding(self) -> None:
         _validate_anchors(self.document.persona_id, self.document.anchors, self._corpus)
+        for node in self.document.nodes:
+            if node.kind == "experience" and node.text != " ".join(self._corpus.evidence[key].text for key in node.evidence_ids):
+                raise PersonaGraphError("Experience text must reproduce its bound source summaries exactly")
 
     def select(self, question: str, *, eligible_ids: Iterable[str] | None = None, limit: int = 2) -> GraphSelection:
         if isinstance(limit, bool) or not isinstance(limit, int) or not 1 <= limit <= 3:
@@ -253,10 +292,9 @@ class PersonaGraph:
             anchors = tuple(anchor for anchor in self.document.anchors if anchor.evidence_id in ids)
             return GraphSelection(paths, ids, reason, self.document.id, self.sha256, self.document.persona_id, anchors)
         query = _normalize(question)
-        if public_evidence_limitation(query) or LIVE_QUERY.search(query) or _ACTUAL_EVENT.search(query) or _OVERRIDE.search(query):
-            return result(reason="requires_factual_verification_or_disallowed_request")
-        if not _ADVICE.search(query):
-            return result(reason="not_an_advice_or_value_application_request")
+        policy_reason = _advice_policy_reason(query)
+        if policy_reason:
+            return result(reason=policy_reason)
         eligible = set(eligible_ids) if eligible_ids is not None else {a.evidence_id for a in self.document.anchors}
         nodes = {node.id: node for node in self.document.nodes}
         candidates = []
@@ -265,9 +303,9 @@ class PersonaGraph:
                 continue
             value, situation = nodes[application.source], nodes[application.target]
             matched = tuple(sorted(term for term in situation.query_terms if _contains(query, term)))
-            # A single generic term such as "test" or "optimize" can belong to
-            # an unrelated domain. Prefer an explicit abstention over guessing.
-            if len(matched) < 2:
+            # A lone generic term ("test", "optimize") is ambiguous. A curated
+            # specific term ("prototype", "direct reports") identifies a scope.
+            if len(matched) < 2 and not set(matched) & set(situation.specific_query_terms):
                 continue
             for support in self.document.edges:
                 if support.relation != "suggests" or support.target != value.id:
@@ -285,6 +323,24 @@ class PersonaGraph:
             if len(selected) == limit:
                 break
         return result(selected, None if selected else "no_applicable_source_supported_path")
+
+
+def select_advice_memory(graph: PersonaGraph, corpus: Corpus, question: str, *,
+                         snapshot: PersonaSnapshot | None = None,
+                         temporal: TemporalSelection | None = None) -> GraphSelection:
+    """Use dated past principles for advice without changing factual retrieval.
+
+    A snapshot still excludes sources published after its cutoff, and the graph
+    still requires reviewed factual training anchors. Only validated advice can
+    use the archive rather than a personal deadline as the source time filter.
+    Passing just a temporal selection retains its supplied eligibility exactly.
+    """
+    _validate_anchors(graph.document.persona_id, graph.document.anchors, corpus)
+    eligible_ids = temporal.eligible_ids if temporal is not None else None
+    if snapshot is not None and is_persona_advice_request(question):
+        snapshot.verify(corpus)
+        eligible_ids = select_temporal(corpus, snapshot, question, intent_override=TemporalIntent("general")).eligible_ids
+    return graph.select(question, eligible_ids=eligible_ids)
 
 
 def augment_result(selection: GraphSelection, corpus: Corpus, result: SearchResult, *, limit: int = 4) -> SearchResult:

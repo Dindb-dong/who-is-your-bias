@@ -73,3 +73,8 @@ apps/web/public/vision/assets.json
 
 # Copyrighted NVIDIA reference images: team-internal only, never commit
 data/acquisition/jensen-huang/reference-images/internal_reference/
+
+# Optional persona-graph CPU reproduction; keep upstream weights and local logs out of Git.
+reports/persona-graph-2026-11-20/runtime/*.gguf
+reports/persona-graph-2026-11-20/runtime/server.log
+reports/persona-graph-2026-11-20/runtime/requests.jsonl

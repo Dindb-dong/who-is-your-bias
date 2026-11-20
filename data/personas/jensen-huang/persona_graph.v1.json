@@ -127,7 +127,31 @@
         "전재산",
         "제조",
         "생산",
-        "투입"
+        "투입",
+        "budget",
+        "funding",
+        "resources",
+        "risk",
+        "expensive",
+        "pilot",
+        "limited budget",
+        "irreversible commitment",
+        "예산",
+        "위험",
+        "자원",
+        "투자"
+      ],
+      "specific_query_terms": [
+        "prototype",
+        "prototyping",
+        "manufacturing",
+        "limited budget",
+        "irreversible commitment",
+        "검증",
+        "시제품",
+        "프로토타입",
+        "베팅",
+        "제조"
       ]
     },
     {
@@ -180,7 +204,23 @@
         "느려",
         "속도",
         "통신",
-        "조율"
+        "조율",
+        "end-to-end",
+        "system performance",
+        "시스템 성능"
+      ],
+      "specific_query_terms": [
+        "bottleneck",
+        "bottlenecks",
+        "latency",
+        "throughput",
+        "runtime",
+        "system performance",
+        "병목",
+        "지연",
+        "처리량",
+        "최적화",
+        "시스템 성능"
       ]
     },
     {
@@ -233,7 +273,34 @@
         "주니어",
         "팀원",
         "지시",
-        "지도"
+        "지도",
+        "team members",
+        "junior engineer",
+        "권한",
+        "팀장",
+        "experienced",
+        "experience",
+        "new teammate",
+        "teammate",
+        "instruction",
+        "instructions",
+        "direction",
+        "team",
+        "senior"
+      ],
+      "specific_query_terms": [
+        "delegate",
+        "delegation",
+        "micromanage",
+        "micromanagement",
+        "direct reports",
+        "junior engineer",
+        "위임",
+        "자율",
+        "간섭",
+        "신입",
+        "주니어",
+        "new teammate"
       ]
     },
     {
@@ -282,6 +349,20 @@
         "회의",
         "소통",
         "보고서",
+        "우선순위 보고",
+        "short updates",
+        "direct observations",
+        "직접 관찰",
+        "직원"
+      ],
+      "specific_query_terms": [
+        "frontline",
+        "firsthand",
+        "status report",
+        "short updates",
+        "direct observations",
+        "상황 보고",
+        "직접 관찰",
         "우선순위 보고"
       ]
     },
@@ -330,7 +411,30 @@
         "수요",
         "문제 정의",
         "차별화",
-        "기반 모델"
+        "기반 모델",
+        "user problem",
+        "고객 문제",
+        "workflow",
+        "product",
+        "demo",
+        "demos",
+        "user",
+        "domain",
+        "problem"
+      ],
+      "specific_query_terms": [
+        "customer",
+        "customers",
+        "user needs",
+        "product fit",
+        "foundation model",
+        "customer problem",
+        "user problem",
+        "고객",
+        "문제 정의",
+        "차별화",
+        "기반 모델",
+        "workflow"
       ]
     },
     {
@@ -383,7 +487,40 @@
         "힘든 일",
         "창업",
         "의욕",
-        "지루"
+        "지루",
+        "repetitive work",
+        "demanding work",
+        "반복 작업",
+        "어려운 일",
+        "ordinary work",
+        "ordinary",
+        "cleaning",
+        "job",
+        "suffer",
+        "suffering",
+        "harder",
+        "difficult",
+        "demanding",
+        "unglamorous"
+      ],
+      "specific_query_terms": [
+        "routine work",
+        "repetitive work",
+        "demanding work",
+        "chores",
+        "menial",
+        "hard work",
+        "difficult work",
+        "허드렛일",
+        "단순 업무",
+        "힘든 일",
+        "반복 작업",
+        "어려운 일",
+        "ordinary work",
+        "cleaning",
+        "suffer",
+        "suffering",
+        "founding"
       ]
     }
   ],
