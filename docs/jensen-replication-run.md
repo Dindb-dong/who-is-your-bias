@@ -1,5 +1,8 @@
 # Jensen persona, speech, and avatar execution
 
+> The opt-in source-bound persona graph and matched real-model evaluation are
+> recorded in [the persona graph implementation note](jensen-persona-graph.md).
+
 > The opt-in question-dependent answer length/structure extension to PR #24 is
 > recorded in [the adaptive answer implementation note](yaicon-adaptive-answers.md).
 > Actual model quality and deployment latency remain separate acceptance gates.

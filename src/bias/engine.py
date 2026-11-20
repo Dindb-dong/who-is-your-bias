@@ -27,6 +27,7 @@ from .snapshots import PersonaSnapshot, TemporalIntent, select_temporal, tempora
 from .segments import SegmentCommitter
 from .dialogue import DEICTIC_PAST
 from .query_policy import public_evidence_limitation
+from .persona_graph import PersonaGraph, augment_result
 
 logger = logging.getLogger(__name__)
 
@@ -99,6 +100,7 @@ class Engine:
         self.prompt_builder = prompt_builder
         self.motion_library = motion_library if motion_library is not None and motion_binding_status(motion_library, corpus) in {"matched", "source_bound"} else None
         self.snapshot = PersonaSnapshot.load(settings.persona_snapshot, corpus) if settings.persona_snapshot else None
+        self.persona_graph = PersonaGraph.load(settings.persona_graph, corpus) if settings.persona_graph else None
         self.counter = ByteBudgetCounter()
         if settings.llm_tokenizer_path:
             from transformers import AutoTokenizer
@@ -236,6 +238,14 @@ class Engine:
                                          if temporal and temporal.intent.mode != "comparison" else query)
                         context["lexical_search"] = {"query": lexical_query, "temporal_scope_applied_before_search": bool(temporal)}
                         result = retriever.search(lexical_query, limit=self.settings.retrieval_limit, behavior=request.mode == "behavior", allow_live=bool(temporal))
+                persona_selection = None
+                if (self.persona_graph is not None and request.mode != "profile"
+                        and self.prompt_builder is build_messages and not evidence_limitation):
+                    persona_selection = self.persona_graph.select(
+                        resolved.query, eligible_ids=temporal.eligible_ids if temporal else None)
+                    result = augment_result(persona_selection, self.corpus, result,
+                                            limit=self.settings.retrieval_limit)
+                    context["persona_memory"] = persona_selection.trace()
                 retrieval_ms = (time.perf_counter() - retrieval_started) * 1000
                 yield "status", {"stage": "generating"}
                 generation_started = time.perf_counter()
@@ -261,11 +271,13 @@ class Engine:
                         context["answer_policy"] = answer_policy.as_dict()
                     elif live_concise:
                         context["response_policy"] = "live-concise.v1"
-                    if self.snapshot or self.settings.retrieval_backend == "hybrid" or speculative:
+                    if (self.snapshot or self.settings.retrieval_backend == "hybrid" or speculative
+                            or (persona_selection is not None and persona_selection.paths)):
                         package = build_snapshot_messages(self.corpus, request, result, list(session.history), self.snapshot, temporal,
                             context_window=self.settings.llm_context_window, output_tokens=self.settings.llm_max_tokens,
                             counter=self.counter, resolved=resolved, speculative=speculative, live_concise=live_concise,
-                            answer_policy=answer_policy)
+                            answer_policy=answer_policy, persona_selection=persona_selection,
+                            persona_memory_format=self.settings.persona_memory_format)
                         messages = package.messages
                         allowed_ids = set(package.supplied_ids)
                         context["prompt_budget"] = package.budget
