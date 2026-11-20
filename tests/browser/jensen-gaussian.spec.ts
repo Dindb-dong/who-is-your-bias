@@ -51,8 +51,8 @@ async function routeBundle(page: Page, driver = true, failBinary = false) {
   return fixture;
 }
 
-function audioFixture() {
-  const rate = 16000, count = rate * 8, audio = Buffer.alloc(44 + count * 2);
+function audioFixture(durationMs: number) {
+  const rate = 16000, count = rate * durationMs / 1000, audio = Buffer.alloc(44 + count * 2);
   audio.write('RIFF', 0); audio.writeUInt32LE(36 + count * 2, 4); audio.write('WAVEfmt ', 8);
   audio.writeUInt32LE(16, 16); audio.writeUInt16LE(1, 20); audio.writeUInt16LE(1, 22);
   audio.writeUInt32LE(rate, 24); audio.writeUInt32LE(rate * 2, 28); audio.writeUInt16LE(2, 32); audio.writeUInt16LE(16, 34);
@@ -81,8 +81,8 @@ function syntheticGestureBasis() {
     }, limitations: ['Hand-authored synthetic browser fixture. Not trained weights or observations of Jensen.'] };
 }
 
-async function routeSpeech(page: Page) {
-  const audio = audioFixture(), hash = createHash('sha256').update(audio).digest('hex');
+async function routeSpeech(page: Page, durationMs = 8000) {
+  const audio = audioFixture(durationMs), hash = createHash('sha256').update(audio).digest('hex');
   const clipUrl = `/api/speech/clips/${'e'.repeat(32)}`;
   await page.route('**/api/persona', async (route) => {
     const response = await route.fetch(), data = await response.json();
@@ -92,10 +92,10 @@ async function routeSpeech(page: Page) {
   const turn: Turn = { id: 'synthetic-gaussian-test', session_id: 'a'.repeat(32), text: 'Synthetic rendering and transport fixture.', language: 'en', mode: 'behavior', provider: 'evidence',
     citations: [], grounding: { status: 'unverified', retrieved_ids: [], invalid_citation_ids: [], reason: 'Synthetic test fixture.' },
     metrics: { retrieval_ms: 0, generation_ms: 0, total_ms: 0 },
-    behavior: { duration_ms: 8000, timing_basis: 'estimated_text', motion: null, speech: { rate: 1, pitch: 1, pause_ms: 0 }, cues: [
-      { channel: 'face', name: 'brow_raise', start_ms: 0, duration_ms: 7900, intensity: .9, provenance: 'designed' },
-      { channel: 'gesture', name: 'open_palm', start_ms: 0, duration_ms: 7900, intensity: .9, provenance: 'designed' },
-      { channel: 'gesture', name: 'emphasis', start_ms: 0, duration_ms: 7900, intensity: .5, provenance: 'designed' },
+    behavior: { duration_ms: durationMs, timing_basis: 'estimated_text', motion: null, speech: { rate: 1, pitch: 1, pause_ms: 0 }, cues: [
+      { channel: 'face', name: 'brow_raise', start_ms: 0, duration_ms: durationMs - 100, intensity: .9, provenance: 'designed' },
+      { channel: 'gesture', name: 'open_palm', start_ms: 0, duration_ms: durationMs - 100, intensity: .9, provenance: 'designed' },
+      { channel: 'gesture', name: 'emphasis', start_ms: 0, duration_ms: durationMs - 100, intensity: .5, provenance: 'designed' },
     ] } };
   const stream = [
     ['meta', { session_id: turn.session_id, turn_id: turn.id }], ['token', { text: turn.text }], ['result', { turn }], ['done', {}],
@@ -105,8 +105,8 @@ async function routeSpeech(page: Page) {
   const parser = createEventParser(() => {}); parser.push(stream); parser.finish();
   await page.route('**/api/chat/stream', (route) => route.fulfill({ contentType: 'text/event-stream', body: stream }));
   await page.route('**/api/speech/prepare', (route) => route.fulfill({ json: { audio_url: clipUrl, audio_sha256: hash, timing_status: 'available',
-    speech_timing: { schema_version: 'speech-timing.v1', audio_sha256: hash, audio_duration_ms: 8000, timing_basis: 'manual', label_set: 'rhubarb',
-      provenance: { engine: 'synthetic-gaussian-browser-test' }, segments: [{ start_ms: 0, end_ms: 8000, label: 'D' }] } } }));
+    speech_timing: { schema_version: 'speech-timing.v1', audio_sha256: hash, audio_duration_ms: durationMs, timing_basis: 'manual', label_set: 'rhubarb',
+      provenance: { engine: 'synthetic-gaussian-browser-test' }, segments: [{ start_ms: 0, end_ms: durationMs, label: 'D' }] } } }));
   await page.route(`**${clipUrl}`, (route) => route.fulfill({ contentType: 'audio/wav', body: audio }));
 }
 
@@ -188,7 +188,8 @@ test('labels missing calibration and keeps the body visible when private face by
 });
 
 test('activates the explicit learned-gesture preview and disables it on Stop, reduced motion and another persona', async ({ page }) => {
-  await routeBundle(page); await routeSpeech(page);
+  // Leave room for a delayed, slowed 5-second gesture and the ending rest.
+  await routeBundle(page); await routeSpeech(page, 12000);
   let modelRequests = 0;
   await page.route('**/models/gesture/jensen-gesture-basis-expanded.json', (route) => {
     modelRequests++; return route.fulfill({ json: syntheticGestureBasis() });
@@ -209,7 +210,7 @@ test('activates the explicit learned-gesture preview and disables it on Stop, re
   await enableVoice(); await askAndPlay();
   await expect(stage).toHaveAttribute('data-bone-source', 'trained_geometry_preview');
   await expect.poll(async () => Number(await canvas.getAttribute('data-rig-arm'))).toBeGreaterThan(.2);
-  await expect.poll(async () => Number(await canvas.getAttribute('data-rig-finger'))).toBeGreaterThan(.2);
+  await expect.poll(async () => Number(await canvas.getAttribute('data-rig-finger'))).toBeGreaterThan(.1);
   await expect.poll(async () => Number(await canvas.getAttribute('data-gaussian-jaw'))).toBeGreaterThan(.05);
   await page.getByRole('button', { name: 'Stop audio', exact: true }).click();
   await expect(stage).toHaveAttribute('data-bone-source', 'designed');

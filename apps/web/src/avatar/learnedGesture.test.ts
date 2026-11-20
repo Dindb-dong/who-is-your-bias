@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { neutralPose } from './timeline';
 import { samplePerformance } from './performance';
 import { parseGestureBasis, sampleConversationalGesture, sampleLearnedGesture, type GestureBasisGroup, type GestureBasisModel } from './learnedGesture';
-import type { RigDiagnostics } from './types';
+import type { RigDiagnostics, SpeechTiming } from './types';
 
 function model(): GestureBasisModel {
   const group = (side: 'left' | 'right'): GestureBasisGroup => ({
@@ -78,5 +78,33 @@ describe('learned gesture runtime', () => {
     for (const settings of [{ speaking: false }, { reducedMotion: true }]) {
       expect(samplePerformance({ ...input, allowGeometryPreview: true, ...settings }, diagnostics).telemetry.boneSource).toBe('designed');
     }
+  });
+
+  it('preserves designed cues until a learned gesture fits and is playing', () => {
+    const timing = (duration: number): SpeechTiming => ({
+      schema_version: 'speech-timing.v1', audio_sha256: 'b'.repeat(64), audio_duration_ms: duration,
+      timing_basis: 'manual', label_set: 'rhubarb', provenance: { engine: 'synthetic-fixture' },
+      segments: [{ start_ms: 0, end_ms: duration, label: 'D' }],
+    });
+    const input = {
+      speaking: true, elapsedMs: 3000, audioElapsedMs: 3000, idleMs: 0, audioSha256: 'b'.repeat(64),
+      allowGeometryPreview: true, learnedGesture: { ...model(), duration_ms: 5000 },
+      plan: { duration_ms: 12000, cues: [{ channel: 'gesture' as const, name: 'open_palm', start_ms: 0, duration_ms: 8000,
+        intensity: .5, provenance: 'designed' as const }] },
+    };
+
+    const short = samplePerformance({ ...input, speechTiming: timing(8000) }, diagnostics);
+    expect(short.telemetry.boneSource).toBe('designed');
+    expect(short.pose.openPalm).toBe(.5);
+
+    const long = { ...input, speechTiming: timing(12000) };
+    const before = samplePerformance({ ...long, elapsedMs: 1000, audioElapsedMs: 1000 }, diagnostics);
+    expect(before.telemetry.boneSource).toBe('designed');
+    expect(before.pose.openPalm).toBe(.5);
+
+    const active = samplePerformance(long, diagnostics);
+    expect(active.telemetry.boneSource).toBe('trained_geometry_preview');
+    expect(active.pose.openPalm).toBe(0);
+    expect(active.pose.bones?.leftUpperArm?.[0]).toBeGreaterThan(0);
   });
 });

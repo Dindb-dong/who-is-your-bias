@@ -24,9 +24,9 @@ export function samplePerformance(input: PerformanceInput, diagnostics: RigDiagn
   if (!input.performanceClip && input.learnedGesture && input.speaking && input.allowGeometryPreview && !input.reducedMotion) {
     const bones = sampleConversationalGesture(input.learnedGesture, input.audioElapsedMs ?? input.elapsedMs,
       input.speechTiming?.audio_sha256 === input.audioSha256 ? input.speechTiming : undefined, input.plan?.cues);
-    // One controller owns the hands. Suppress overlapping designed arm cues.
-    pose.openPalm = 0; pose.emphasis = 0; pose.shrug = 0; pose.wave = 0;
     if (bones) {
+      // Keep designed cues between learned gestures and when no gesture fits.
+      pose.openPalm = 0; pose.emphasis = 0; pose.shrug = 0; pose.wave = 0;
       const arm = bones.leftUpperArm ?? bones.rightUpperArm;
       const reach = arm ? Math.hypot(arm[0], arm[1], arm[2]) : 0;
       // Small designed torso support, bounded below one degree.
