@@ -74,15 +74,20 @@ graph by itself improves every answer.
 
 The first implementation checkpoint is
 [`f28f112`](https://github.com/Dindb-dong/who-is-your-bias/commit/f28f11212703f715900899e5f8fbe5f817be0192).
-Subsequent pre-generation regression testing passed 310 tests; expanded routing,
+Subsequent pre-generation regression testing passed 313 tests; expanded routing,
 bounded path fallback, and approval-queue disambiguation address issues found
 before any model answers were generated. The same development probes informed
 these fixes, so they are not a held-out generalization test.
 
 See [the frozen evaluation protocol](persona-graph-evaluation-protocol.md) and
 [the execution record](../reports/persona-graph-2026-11-20/README.md). The 54
-scheduled attempts are now complete (48 LLM outputs and six deterministic
-guards); independent condition-hidden quality ratings are in progress.
+scheduled attempts are complete (48 LLM outputs and six deterministic guards).
+Two independent AI raters scored the primary advice pass rate at **83.3% in
+all three conditions**: this pilot found no accuracy improvement. The graph's
+concrete-application subscore rose slightly, while its CPU request median was
+38.77 s versus 19.51 s for baseline. Keep the feature off by default for the
+presentation; the measured report contains raw outputs, failures, limitations
+and reproducible scoring. Final affected Python validation passed 315 tests.
 
 ```bash
 uv sync --locked --extra dev
