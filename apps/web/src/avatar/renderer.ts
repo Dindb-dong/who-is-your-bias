@@ -80,6 +80,7 @@ export class AvatarRenderer {
   private calibrationPose?: RigPose;
   private lastClock = 0;
   private lastTelemetry = 0;
+  private lastBoneSource?: AnimationTelemetry['boneSource'];
   private framing: AvatarFraming = 'portrait';
   private audition?: AuditionRecorder;
   private attention = new AttentionController();
@@ -442,8 +443,10 @@ export class AvatarRenderer {
     this.canvas.dataset.rigArm = Math.max(output.leftUpperArm, output.rightUpperArm).toFixed(4);
     this.canvas.dataset.rigHand = output.leftHand.toFixed(4);
     this.canvas.dataset.rigFinger = output.leftIndexProximal.toFixed(4);
-    if (now - this.lastTelemetry > (attentionFrame.phase === 'idle' ? 250 : 80)) {
+    // Publish a source change in the same frame as the pose, even after Stop.
+    if (telemetry.boneSource !== this.lastBoneSource || now - this.lastTelemetry > (attentionFrame.phase === 'idle' ? 250 : 80)) {
       this.lastTelemetry = now;
+      this.lastBoneSource = telemetry.boneSource;
       this.callbacks.onTelemetry?.(telemetry);
     }
     this.controls.update();
