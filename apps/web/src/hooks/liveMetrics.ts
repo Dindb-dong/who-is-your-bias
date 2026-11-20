@@ -3,8 +3,9 @@ export type PlaybackMark = 'preparation_started' | 'audio_ready' | 'playback_sta
 export interface SpeechServerTiming { synthesis_ms: number; alignment_ms: number; total_ms: number }
 export interface PlaybackEvent { type: PlaybackMark; atMs: number; turnId: string; voiceMode: 'browser' | 'provider'; speechServer?: SpeechServerTiming }
 export interface LiveMeasurement {
-  schema_version: 'live-turn.v1'; id: string; input_basis: 'question_submitted';
+  schema_version: 'live-turn.v1'; id: string; input_basis: 'question_submitted' | 'microphone_ended';
   submitted_at: string;
+  transcription_ms?: number;
   voice: 'off' | 'browser' | 'provider'; provider: 'openai' | 'evidence' | null;
   first_visible_text_ms: number | null; answer_complete_ms: number | null;
   stream_complete_ms: number | null;
@@ -20,10 +21,12 @@ export class LiveTurnClock {
   private preparationAt: number | null = null;
   readonly startedAt: number;
   private value: LiveMeasurement;
-  constructor(id: string, startedAt: number, voice: LiveMeasurement['voice'], submittedAt = new Date().toISOString()) {
-    if (!Number.isFinite(startedAt)) throw new Error('Invalid monotonic start');
-    this.startedAt = startedAt;
-    this.value = { schema_version: 'live-turn.v1', id, input_basis: 'question_submitted', submitted_at: submittedAt, voice, provider: null,
+  constructor(id: string, submittedMs: number, voice: LiveMeasurement['voice'], submittedAt = new Date().toISOString(), microphoneEndedAt?: number) {
+    if (!Number.isFinite(submittedMs)) throw new Error('Invalid monotonic start');
+    const spoken = microphoneEndedAt !== undefined && Number.isFinite(microphoneEndedAt) && microphoneEndedAt <= submittedMs;
+    this.startedAt = spoken ? microphoneEndedAt : submittedMs;
+    this.value = { schema_version: 'live-turn.v1', id, input_basis: spoken ? 'microphone_ended' : 'question_submitted',
+      ...(spoken ? { transcription_ms: this.elapsed(submittedMs)! } : {}), submitted_at: submittedAt, voice, provider: null,
       first_visible_text_ms: null, answer_complete_ms: null, stream_complete_ms: null, speech_preparation_ms: null, audio_start_ms: null,
       first_audio_signal_ms: null, turn_complete_ms: null, status: 'running', server: null, speech_server: null,
       audio_basis: voice === 'off' ? 'not_requested' : voice === 'browser' ? 'browser_start_event_no_pcm' : 'web_audio_signal' };

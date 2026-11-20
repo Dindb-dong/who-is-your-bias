@@ -321,6 +321,17 @@ export interface PreparedSpeech {
   serverTiming?: SpeechServerTiming;
 }
 
+export async function transcribeQuestion(recording: Blob, language: Language, signal: AbortSignal): Promise<string> {
+  const response = await fetch(`/api/transcribe?language=${language}`, {
+    method: 'POST', headers: { 'Content-Type': recording.type }, body: recording, signal, redirect: 'error',
+  });
+  if (!response.ok) return failure(response);
+  const result: unknown = await response.json();
+  if (!object(result) || typeof result.text !== 'string') throw new ApiError('The transcription service returned an invalid response.');
+  signal.throwIfAborted();
+  return result.text.trim();
+}
+
 async function boundedBody(response: Response, maximum: number, service = 'voice service'): Promise<Uint8Array<ArrayBuffer>> {
   if (!response.body) throw new ApiError(`The ${service} returned an empty response.`);
   const reader = response.body.getReader(); const parts: Uint8Array[] = []; let length = 0;

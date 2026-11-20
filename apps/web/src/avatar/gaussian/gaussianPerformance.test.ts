@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { Euler, Quaternion, Vector3 } from 'three';
 import { AttentionController, composeAttentionPose } from '../attention';
 import { neutralPose } from '../timeline';
+import { TRACKED_MOUTH_BUNDLE } from './trackedMouth';
 import { createGaussianPerformance, gaussianFaceWeights, parseGaussianExpressionDriver, type GaussianExpressionDriver } from './gaussianPerformance';
 
 const hash = 'a'.repeat(64);
@@ -38,6 +39,26 @@ describe('Gaussian live expression controller', () => {
     expect([...silent.pose.slice(0, 6)]).toEqual([0, 0, 0, 0, 0, 0]);
     expect([...silent.trans]).toEqual([0, 0, 0]);
     expect(gaussianFaceWeights(rigPose, false).browInnerUp).toBe(0.6);
+  });
+  it('uses trained mouth poses for the exact bundle and closes between audible cues', () => {
+    const n_frames = 3319;
+    const motion = { m_expr: new Float32Array(n_frames * 2),
+      m_pose: new Float32Array(n_frames * 15), m_trans: new Float32Array(n_frames * 3) };
+    motion.m_pose[942 * 15 + 6] = 0.0471;
+    motion.m_pose[2190 * 15 + 6] = 0.2134;
+    motion.m_expr[2190 * 2] = 0.8;
+    const performance = createGaussianPerformance({ ...header, n_frames }, motion, { bundleSha256: TRACKED_MOUTH_BUNDLE });
+    const spoken = { ...input, speaking: true, rigPose: { ...neutralPose(), gazeX: 0.2 } };
+    const wide = performance.sample({ ...spoken, speechVisemes: { aa: 1 } });
+    const closed = performance.sample({ ...spoken, speechVisemes: { PP: 1 }, amplitude: 0.8 });
+    expect(wide.expressionSource).toBe('tracked_speech');
+    expect(wide.expr[0]).toBeCloseTo(0.72);
+    expect(wide.pose[6]).toBeGreaterThan(0.18);
+    expect(closed.pose[6]).toBeCloseTo(0.0471);
+    expect(performance.sample({ ...spoken, amplitude: 0.6 }).pose[6]).toBeGreaterThan(closed.pose[6]);
+    expect(performance.sample(input).pose[6]).toBeCloseTo(closed.pose[6]);
+    expect(wide.pose[10]).toBeCloseTo(0.2);
+    expect([...wide.pose.slice(0, 6)]).toEqual([0, 0, 0, 0, 0, 0]);
   });
   it('maps calibrated brows while silent and leaves source parameters unmodified', () => {
     const c = createGaussianPerformance(header, B, { driver: driver(), bundleSha256: hash });

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { BufferAttribute, BufferGeometry, Group, Matrix4, Mesh, MeshStandardMaterial, PerspectiveCamera, Vector3 } from 'three';
 import type { AvatarRig } from '../procedural';
 import { neutralPose } from '../timeline';
-import { fitGaussianAttachment, GaussianBodyHead, gaussianSeamWeight, hideOriginalHead, sortGaussianDepth } from './gaussianBody';
+import { fitGaussianAttachment, GaussianBodyHead, gaussianSeamWeight, hideOriginalHead, softenCompositeMaterials, sortGaussianDepth } from './gaussianBody';
 import type { GaussianBodyArrays, GaussianBodyHeader } from './gaussianBody';
 
 function body(): AvatarRig {
@@ -88,6 +88,21 @@ describe('Gaussian body composition', () => {
     skin.geometry.getAttribute('position').setY(2, 2.5);
     expect(cutoff.getX(2)).toBeLessThan(0);
     restore(); restore(); expect(skin.geometry).toBe(geometry); expect(skin.material).toBe(material);
+  });
+
+  it('retains the original-head cut while softening materials and restores both layers', () => {
+    const rig = body(); const skin = rig.root.children.find((node) => node instanceof Mesh) as Mesh;
+    const original = skin.material;
+    const restoreCut = hideOriginalHead(rig, 2.0);
+    const cut = skin.material as MeshStandardMaterial;
+    const restoreLook = softenCompositeMaterials(rig);
+    const styled = skin.material as MeshStandardMaterial;
+    const shader = { vertexShader: '#include <begin_vertex>', fragmentShader: '#include <clipping_planes_fragment>' };
+    styled.onBeforeCompile(shader as never, undefined as never);
+    expect(shader.fragmentShader).toContain('if (vGaussianHeadCut > 0.0) discard;');
+    expect(styled).not.toBe(cut);
+    restoreLook(); restoreLook(); expect(skin.material).toBe(cut);
+    restoreCut(); expect(skin.material).toBe(original);
   });
 
   it('uses one scene depth buffer, leaves the learned arrays intact and disposes idempotently', () => {

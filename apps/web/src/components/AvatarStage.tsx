@@ -203,7 +203,7 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
       <div className="avatar-visual">
         <div ref={host} style={{ position: 'absolute', inset: 0 }} aria-hidden={fatal ? true : undefined} />
         {loadingModel && <div role="status" className="avatar-model-status" style={{ position: 'absolute', bottom: 20, left: 20, color: '#d8f8a0', fontSize: 12 }}>Loading your avatar…</div>}
-        {gaussianHead && <div role="status" className="avatar-model-status" style={{ position: 'absolute', top: 72, right: 16, left: 16, padding: '6px 10px', borderRadius: 8, background: '#0b1009cc', color: gaussianState === 'error' ? '#efb5a1' : '#d8f8a0', fontSize: 11 }}>
+        {gaussianHead && <div role="status" className="avatar-model-status" style={{ position: 'absolute', top: 62, left: 16, maxWidth: 'calc(50% - 44px)', pointerEvents: 'none', padding: '6px 10px', borderRadius: 8, background: '#0b1009cc', color: gaussianState === 'error' ? '#efb5a1' : '#d8f8a0', fontSize: 11 }}>
           {gaussianState === 'loading' ? 'Loading local photoreal face…' : gaussianState === 'ready' ? 'Synthetic photoreal face · articulated body' : gaussianState === 'error' ? `Photoreal face unavailable: ${gaussianMessage} The body remains available.` : 'Preparing photoreal face…'}
           {gaussianState === 'ready' && gaussianMessage && <span title={gaussianMessage}> · Recorded expression preview; semantic calibration pending</span>}
           {learnedGesture && allowGeometryPreview && <span> · Experimental learned gestures</span>}

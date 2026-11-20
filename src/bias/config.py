@@ -55,6 +55,7 @@ class Settings:
     # Explicitly bind a server voice to this persona, or declare a generic voice.
     tts_persona_id: str | None = None
     tts_language_hint: bool = False
+    tts_protocol: str = "openai-compatible"
     motion_catalog: Path | None = None
     motion_asset_root: Path = field(default_factory=lambda: repository_root() / "apps/web/public")
     request_timeout: float = 60.0
@@ -92,6 +93,8 @@ class Settings:
     def __post_init__(self) -> None:
         if self.tts_persona_id is not None and (not isinstance(self.tts_persona_id, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,119}", self.tts_persona_id)):
             raise ValueError("tts_persona_id must be a persona identifier or generic")
+        if self.tts_protocol not in {"openai-compatible", "elevenlabs"}:
+            raise ValueError("Unknown speech provider protocol")
         if not isinstance(self.tts_language_hint, bool):
             raise ValueError("tts_language_hint must be a boolean")
         if self.retrieval_backend not in {"lexical", "hybrid", "jensen-lexical"} or self.embedding_backend not in {"local", "http"}:

@@ -9,7 +9,7 @@ import re
 import time
 import anyio
 from contextlib import aclosing, asynccontextmanager
-from typing import AsyncIterator
+from typing import AsyncIterator, Literal, Protocol
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -115,8 +115,16 @@ def _public_error(exc: Exception) -> tuple[int, dict[str, str]]:
     return 500, {"code": "internal_error", "message": "The response could not be completed."}
 
 
-def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None, llm: OpenAICompatibleLLM | None = None, motion_library: MotionLibrary | None = None) -> FastAPI:
+class TranscriptionBackend(Protocol):
+    model_name: str
+
+    async def transcribe(self, data: bytes, mime: str, *, language: str | None = None) -> str: ...
+
+
+def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None, llm: OpenAICompatibleLLM | None = None, motion_library: MotionLibrary | None = None,
+               transcription: TranscriptionBackend | None = None) -> FastAPI:
     config = settings or Settings.from_env()
+    transcription_model = transcription.model_name if transcription else config.asr.model
 
     @asynccontextmanager
     async def lifespan(application: FastAPI) -> AsyncIterator[None]:
@@ -146,7 +154,7 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
             await asyncio.to_thread(application.state.engine.retriever.warm_up)
             application.state.retrieval_warmup_ms = round((time.perf_counter() - started) * 1000, 3)
         application.state.speech = SubjectSpeechProvider(config, loaded_corpus.persona.id)
-        application.state.transcription = TranscriptionProvider(config.asr, timeout=config.request_timeout)
+        application.state.transcription = transcription or TranscriptionProvider(config.asr, timeout=config.request_timeout)
         application.state.lipsync = LipsyncEngine.from_env()
         application.state.speech_packages = SpeechPackages()
         try:
@@ -179,8 +187,8 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
         engine: Engine = request.app.state.engine
         return {
             "status": "ok", "version": __version__, "provider": "openai" if config.llm.configured else "evidence",
-            "capabilities": {"llm": config.llm.configured, "speech": request.app.state.speech.settings.configured, "transcription": config.asr.configured},
-            "providers": {"llm": {"configured": config.llm.configured, "model": config.llm.model}, "speech": {"configured": config.tts.configured, "available": request.app.state.speech.settings.configured, "model": config.tts.model, "binding": request.app.state.speech.binding}, "transcription": {"configured": config.asr.configured, "model": config.asr.model}},
+            "capabilities": {"llm": config.llm.configured, "speech": request.app.state.speech.settings.configured, "transcription": bool(transcription_model)},
+            "providers": {"llm": {"configured": config.llm.configured, "model": config.llm.model}, "speech": {"configured": config.tts.configured, "available": request.app.state.speech.settings.configured, "model": config.tts.model, "binding": request.app.state.speech.binding}, "transcription": {"configured": bool(transcription_model), "model": transcription_model}},
             "corpus": engine.corpus.stats(),
             "qa_corpus": engine.corpus.qa_report(),
             "persona_snapshot": engine.snapshot.summary() if engine.snapshot else None,
@@ -206,7 +214,7 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
                 "example_questions": item.example_questions, "stats": loaded.stats(), "qa_corpus": loaded.qa_report(),
                 "snapshot": snapshot.summary() if snapshot else None,
                 "capabilities": {"llm": config.llm.configured, "speech": speech.settings.configured,
-                                 "transcription": config.asr.configured, "live_speech": speech.settings.configured},
+                                 "transcription": bool(transcription_model), "live_speech": speech.settings.configured},
                 "notice": item.notice, "presentation": (item.model_extra or {}).get("presentation"),
                 "bindings": {"persona_id": item.id, "voice": speech.binding,
                              "motion": {"status": motion_binding_status(motion, loaded) if motion else request.app.state.motion_status,
@@ -330,7 +338,7 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
         return Response(content=clip.data, media_type=clip.mime)
 
     @application.post("/api/transcribe")
-    async def transcribe(request: Request):
+    async def transcribe(request: Request, language: Literal["en", "ko"] | None = None):
         mime = request.headers.get("content-type", "").split(";")[0].strip().lower()
         if mime not in {"audio/webm", "audio/wav", "audio/ogg", "audio/mp4", "audio/mpeg"}:
             raise HTTPException(status_code=415, detail="Send raw audio/webm, wav, ogg, mp4, or mpeg bytes.")
@@ -342,7 +350,7 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
         if not data:
             raise HTTPException(status_code=422, detail="Recording is empty.")
         try:
-            text = await request.app.state.transcription.transcribe(bytes(data), mime)
+            text = await request.app.state.transcription.transcribe(bytes(data), mime, language=language)
             return {"text": text}
         except ProviderError as exc:
             status, error = _public_error(exc)

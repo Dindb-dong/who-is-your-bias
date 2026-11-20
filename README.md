@@ -4,6 +4,9 @@
 
 Active subject: **Jensen Huang**. The project connects documented statements to a conversational model and a synchronized avatar. Generated interactions are explicitly presented as simulations. Historical statements keep their source and date; the system does not claim to reconstruct private thoughts. Earlier Elon Musk corpora, presentations, motion clips and evaluation results remain explicitly historical research assets.
 
+For the YAICON video intake, review, dataset export, and local demo tools, see
+[the workbench guide](workbench/README.md).
+
 ## Run the complete studio
 
 Requires Node 22.12+ (Node 24 recommended), Python 3.11+, and uv.

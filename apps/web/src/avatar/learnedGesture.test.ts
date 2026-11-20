@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { neutralPose } from './timeline';
 import { samplePerformance } from './performance';
-import { parseGestureBasis, sampleLearnedGesture, type GestureBasisGroup, type GestureBasisModel } from './learnedGesture';
-import type { RigDiagnostics } from './types';
+import { parseGestureBasis, sampleConversationalGesture, sampleLearnedGesture, type GestureBasisGroup, type GestureBasisModel } from './learnedGesture';
+import type { RigDiagnostics, SpeechTiming } from './types';
 
 function model(): GestureBasisModel {
   const group = (side: 'left' | 'right'): GestureBasisGroup => ({
@@ -55,8 +55,22 @@ describe('learned gesture runtime', () => {
     expect(sampleLearnedGesture(fitted, NaN)).toBeNull();
   });
 
+  it('limits a reply to two soft gestures and leaves long rests between them', () => {
+    const fitted = model();
+    const cues = [2000, 3000, 11000, 15000, 19000].map((start_ms) => ({
+      start_ms, duration_ms: 1800, channel: 'gesture' as const, name: 'emphasis', intensity: .7, provenance: 'designed' as const,
+    }));
+    expect(sampleConversationalGesture(fitted, 500, undefined, cues)).toBeNull();
+    const active = sampleConversationalGesture(fitted, 2700, undefined, cues)!;
+    expect(active.leftUpperArm).toEqual(active.rightUpperArm);
+    expect(2 * Math.acos(active.leftUpperArm![3])).toBeLessThan(.23);
+    for (const time of [5000, 8000, 15000, 20000]) expect(sampleConversationalGesture(fitted, time, undefined, cues)).toBeNull();
+    expect(sampleConversationalGesture(fitted, 12000, undefined, cues)).not.toBeNull();
+    expect(sampleConversationalGesture(fitted, 2700, undefined, cues)).toEqual(active);
+  });
+
   it('requires explicit geometry preview and follows the actual audio clock', () => {
-    const input = { ...neutralPose(), elapsedMs: 3500, audioElapsedMs: 1000, idleMs: 0, speaking: true, amplitude: .2, learnedGesture: model() };
+    const input = { ...neutralPose(), elapsedMs: 500, audioElapsedMs: 3100, idleMs: 0, speaking: true, amplitude: .2, learnedGesture: model() };
     expect(samplePerformance(input, diagnostics).telemetry.boneSource).toBe('designed');
     const active = samplePerformance({ ...input, allowGeometryPreview: true }, diagnostics);
     expect(active.telemetry.boneSource).toBe('trained_geometry_preview');
@@ -64,5 +78,33 @@ describe('learned gesture runtime', () => {
     for (const settings of [{ speaking: false }, { reducedMotion: true }]) {
       expect(samplePerformance({ ...input, allowGeometryPreview: true, ...settings }, diagnostics).telemetry.boneSource).toBe('designed');
     }
+  });
+
+  it('preserves designed cues until a learned gesture fits and is playing', () => {
+    const timing = (duration: number): SpeechTiming => ({
+      schema_version: 'speech-timing.v1', audio_sha256: 'b'.repeat(64), audio_duration_ms: duration,
+      timing_basis: 'manual', label_set: 'rhubarb', provenance: { engine: 'synthetic-fixture' },
+      segments: [{ start_ms: 0, end_ms: duration, label: 'D' }],
+    });
+    const input = {
+      speaking: true, elapsedMs: 3000, audioElapsedMs: 3000, idleMs: 0, audioSha256: 'b'.repeat(64),
+      allowGeometryPreview: true, learnedGesture: { ...model(), duration_ms: 5000 },
+      plan: { duration_ms: 12000, cues: [{ channel: 'gesture' as const, name: 'open_palm', start_ms: 0, duration_ms: 8000,
+        intensity: .5, provenance: 'designed' as const }] },
+    };
+
+    const short = samplePerformance({ ...input, speechTiming: timing(8000) }, diagnostics);
+    expect(short.telemetry.boneSource).toBe('designed');
+    expect(short.pose.openPalm).toBe(.5);
+
+    const long = { ...input, speechTiming: timing(12000) };
+    const before = samplePerformance({ ...long, elapsedMs: 1000, audioElapsedMs: 1000 }, diagnostics);
+    expect(before.telemetry.boneSource).toBe('designed');
+    expect(before.pose.openPalm).toBe(.5);
+
+    const active = samplePerformance(long, diagnostics);
+    expect(active.telemetry.boneSource).toBe('trained_geometry_preview');
+    expect(active.pose.openPalm).toBe(0);
+    expect(active.pose.bones?.leftUpperArm?.[0]).toBeGreaterThan(0);
   });
 });

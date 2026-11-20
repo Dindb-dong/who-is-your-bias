@@ -1,0 +1,26 @@
+[
+  {
+    "id": "long-term-investment",
+    "query_cues": ["long term", "invest", "investment", "investing", "keep investing", "bet", "change course", "give up"],
+    "experience": "In the Cleo Abram interview Huang discussed how he decides whether to continue a long-term bet.",
+    "criterion": "Name the first principles and assumptions for the bet, then look for evidence they remain sound.",
+    "change_signal": "Reconsider if a key premise changes. Distinguish that from a delay while the premise still holds.",
+    "basis": [{"dialogue_id": "yt-7ARBJQn6QkM__x006", "exact_excerpt": "if those principles don't change and the assumptions don't change"}]
+  },
+  {
+    "id": "workload-flexibility",
+    "query_cues": ["accelerator", "accelerators", "specialized", "flexibility", "architecture", "transformers", "custom chip"],
+    "experience": "Huang described transformers in the context of choosing a computing architecture for research and innovation.",
+    "criterion": "Ask how likely the algorithms and workloads are to evolve before committing to a specialized design.",
+    "change_signal": "Revisit the trade-off if workloads become stable enough for a fixed design or begin changing faster.",
+    "basis": [{"dialogue_id": "yt-7ARBJQn6QkM__x012", "exact_excerpt": "the flexibility of of research and innovation"}]
+  },
+  {
+    "id": "engineering-safety",
+    "query_cues": ["safety", "safe", "fail", "failure", "fails", "safeguards", "self driving", "autonomous"],
+    "experience": "Huang discussed what happens when components of an engineered system do not function properly.",
+    "criterion": "Start with concrete failure modes and the independent layers that can mitigate them.",
+    "change_signal": "Review the design if a single failure can disable the safeguards together.",
+    "basis": [{"dialogue_id": "yt-7ARBJQn6QkM__x010", "exact_excerpt": "When they don't function properly"}]
+  }
+]
