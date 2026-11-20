@@ -15,6 +15,11 @@ on:
       - 'tools/motion/**'
       - 'tests/gaussian_head/**'
       - 'tests/motion/**'
+      - 'tests/test_persona_graph*.py'
+      - 'data/personas/jensen-huang/persona_graph.v1.json'
+      - 'data/evaluation/jensen-persona-graph-v1.json'
+      - 'tools/persona_graph_eval.py'
+      - 'docs/persona-graph-evaluation-protocol.md'
   workflow_dispatch:
 
 permissions:
@@ -49,6 +54,8 @@ jobs:
         run: npm run check
       - name: Verify Jensen and shared runtime paths
         run: uv run pytest -q tests/test_jensen_persona.py tests/test_jensen_retrieval.py tests/test_query_evidence_policy.py tests/test_temporal_dialogue.py tests/test_runtime_text_live.py tests/test_runtime_text_cancel_recovery.py tests/gaussian_head tests/motion
+      - name: Validate source-bound persona memory and evaluation integrity
+        run: uv run pytest -q tests/test_persona_graph.py tests/test_persona_graph_integration.py tests/test_persona_graph_eval.py
       - name: Validate Gaussian body and learned gesture playback
         run: npx playwright test --config playwright.performance.config.ts
       - name: Validate historical desktop and mobile flows
