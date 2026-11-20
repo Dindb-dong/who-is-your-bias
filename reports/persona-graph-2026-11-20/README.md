@@ -1,7 +1,10 @@
 # Jensen persona graph: execution record
 
-Status at this checkpoint: implementation and experiment infrastructure ready;
-no experimental answer generation or quality score yet.
+Status at this checkpoint: all 54 scheduled attempts are complete and prepared
+for independent, condition-hidden AI review. Quality scoring is in progress.
+There are 48 actual LLM completions and six deterministic policy-guard replies;
+no empty, failed or truncated completions. Citation-ID membership checks found
+no unauthorized IDs, which is not a semantic entailment guarantee.
 
 - Repository: `Dindb-dong/who-is-your-bias`
 - Branch: `feat/jensen-persona-graph-nov20`
@@ -12,7 +15,7 @@ no experimental answer generation or quality score yet.
 
 ## Pre-generation checks
 
-310 integration, graph, evaluator and affected runtime regression tests passed
+313 integration, graph, evaluator and affected runtime regression tests passed
 in Python 3.12.14. The test warning concerns an existing Starlette/httpx
 deprecation. This is software correctness evidence, not persona answer quality.
 
@@ -52,9 +55,24 @@ identity, and neutral startup check. The large model is recoverable from the
 pinned upstream URL, and is not a Git artifact. These runtime sources are
 experimental infrastructure, not a production server.
 
-The next checkpoint will add the frozen `manifest.json` before inference. Resume
-the generation runner against that same manifest and its existing `results.json`;
-the runner rejects mismatched identities and does not repeat saved attempts.
+The frozen input checkpoint was
+`e2265bec5c06d21628a35fc70cc00a4046f25365`; it was saved and read back before
+generation. The first 18 outputs were saved at `de692f73a85bf25a06a3767c8e7e80d51829832b`,
+and 36 at `41ec1d66d734273c68810c95beb85e1c1661c7fb`. A transient orchestration
+restart after the second batch was recovered from exact saved request identities;
+no completed attempt was regenerated. The third batch completes the original
+54-attempt schedule. `results.json` retains every raw answer and status.
+
+`diagnostics.json` and `summarize_diagnostics.py` record non-quality checks.
+`ratings/answers.blinded.json` and `ratings.template.json` are the independent
+raters' inputs. The condition mapping is withheld from raters while scoring,
+then retained for reproducibility; it is not a user secret.
+
+After generation inputs were frozen, a separate integration hardening change
+stopped custom/frozen research builders from loading an unrelated configured
+graph. Extra tests cover that isolation and PR #24 adaptive guidance. This does
+not change any frozen prompt, question, corpus, decoding setting, or model answer.
+The latest validation record includes those additional checks.
 
 ```bash
 uv run python -m tools.persona_graph_eval freeze \
@@ -72,4 +90,5 @@ uv run python -m tools.persona_graph_eval run \
 
 Start the optional local server and client within the same launcher command in
 environments with per-command network isolation; see [runtime/README.md](runtime/README.md).
-The commands above are the planned invocation until the frozen run is saved.
+The invocations above were executed. Reusing the completed output file performs
+no duplicate generation; use a separately named frozen run for a new experiment.

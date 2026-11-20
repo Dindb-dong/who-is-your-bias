@@ -80,8 +80,9 @@ before any model answers were generated. The same development probes informed
 these fixes, so they are not a held-out generalization test.
 
 See [the frozen evaluation protocol](persona-graph-evaluation-protocol.md) and
-[the execution record](../reports/persona-graph-2026-11-20/README.md). No quality
-improvement has been measured at this pre-generation checkpoint.
+[the execution record](../reports/persona-graph-2026-11-20/README.md). The 54
+scheduled attempts are now complete (48 LLM outputs and six deterministic
+guards); independent condition-hidden quality ratings are in progress.
 
 ```bash
 uv sync --locked --extra dev

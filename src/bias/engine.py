@@ -100,7 +100,8 @@ class Engine:
         self.prompt_builder = prompt_builder
         self.motion_library = motion_library if motion_library is not None and motion_binding_status(motion_library, corpus) in {"matched", "source_bound"} else None
         self.snapshot = PersonaSnapshot.load(settings.persona_snapshot, corpus) if settings.persona_snapshot else None
-        self.persona_graph = PersonaGraph.load(settings.persona_graph, corpus) if settings.persona_graph else None
+        self.persona_graph = (PersonaGraph.load(settings.persona_graph, corpus)
+                              if settings.persona_graph and prompt_builder is build_messages else None)
         self.counter = ByteBudgetCounter()
         if settings.llm_tokenizer_path:
             from transformers import AutoTokenizer

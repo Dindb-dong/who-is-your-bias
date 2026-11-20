@@ -16,6 +16,8 @@ network route and verified against the LFS SHA-256 at an immutable revision.
 
 Exact dependencies, template and settings are in `requirements.lock.txt`,
 `chat-template.jinja`, `model-manifest.json` and `runtime-manifest.json`.
+The unmodified chat template was extracted from the pinned official Qwen model;
+its upstream Apache 2.0 license is retained in `QWEN-LICENSE.txt`.
 The model itself is not a repository artifact. Its durable recovery source is the
 public pinned upstream URL recorded in the manifest. This local copy is scratch.
 

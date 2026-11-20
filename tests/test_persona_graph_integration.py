@@ -6,6 +6,7 @@ from pathlib import Path
 import pytest
 
 from bias.config import ProviderSettings, Settings
+from bias.answer_policy import VERSION as ANSWER_POLICY_VERSION
 from bias.context_budget import ByteBudgetCounter, build_snapshot_messages
 from bias.corpus import Corpus
 from bias.engine import Engine
@@ -184,3 +185,23 @@ def test_default_byte_budget_can_fall_back_to_one_complete_path(jensen):
     assert len(status["selected_value_ids"]) == 2
     assert len(status["included_value_ids"]) == 1
     assert all(set(node["evidence_ids"]) <= set(packed.supplied_ids) for node in memory["nodes"])
+
+
+def test_graph_coexists_with_pr24_adaptive_answer_guidance(jensen):
+    llm = RecordingLLM()
+    engine = Engine(settings(persona_graph=GRAPH, adaptive_responses=True), jensen, llm=llm)
+    response = asyncio.run(engine.chat(ChatRequest(message=QUESTION, language="en")))
+    assert len(llm.calls) == 1
+    assert response.context["response_policy"] == ANSWER_POLICY_VERSION
+    assert response.context["answer_policy"]
+    assert response.context["prompt_budget"]["persona_memory"]["included"] is True
+    assert unpack(llm.calls[0])["persona_memory"]["nodes"]
+
+
+def test_frozen_custom_builder_does_not_load_an_unrelated_graph(corpus):
+    def frozen(*args, **kwargs):
+        return build_messages(*args, **kwargs)
+    # Historical non-Jensen research builders must remain isolated even when
+    # the server environment opts the ordinary Jensen path into this graph.
+    engine = Engine(settings(persona_graph=GRAPH), corpus, prompt_builder=frozen)
+    assert engine.persona_graph is None
