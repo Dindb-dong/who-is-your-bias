@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.env.live
+data/local/
+data/demo/
+data/test-runs/
+.streamlit/secrets.toml
+.tools/
+integrations/
+.pytest_cache/
+.env.*
+!.env.example
+!.env.live.example
