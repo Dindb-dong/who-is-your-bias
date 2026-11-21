@@ -1,5 +1,9 @@
 # Jensen persona, speech, and avatar execution
 
+> The 2026-11-21 opt-in project/current-source QA and Korean-caption work is
+> tracked in [the bilingual QA handoff](yaicon-qa-bilingual.md). It is separate
+> from the unmerged PR27 Sophon route and PR29 persona evaluation.
+
 > The opt-in question-dependent answer length/structure extension to PR #24 is
 > recorded in [the adaptive answer implementation note](yaicon-adaptive-answers.md).
 > Actual model quality and deployment latency remain separate acceptance gates.

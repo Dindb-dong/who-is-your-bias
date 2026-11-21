@@ -241,3 +241,25 @@ describe('audio and behavior clock', () => {
   });
 });
 
+
+describe('translated subtitle transport', () => {
+  function subtitles(patch: Record<string, unknown> = {}) {
+    const events = liveEvents();
+    events.splice(-1, 0, { event: 'subtitle', data: { turn_id: turn.id, segment_id: `${turn.id}:0`, sequence: 0,
+      language: 'ko', text: '한국어 자막', state: 'ready', ...patch } } as StreamEvent);
+    return events;
+  }
+  it('accepts a late translation after audio delivery while preserving ownership', async () => {
+    mockStream(liveText(subtitles())); const received: StreamEvent[] = [];
+    await streamChat({ ...request, subtitle_language: 'ko' }, new AbortController().signal, (event) => received.push(event), { live: true });
+    expect(received.at(-2)?.event).toBe('subtitle');
+  });
+  it.each([{ language: 'en' }, { segment_id: 'unknown' }, { sequence: 8 }])('rejects mismatched translation %s', async (patch) => {
+    mockStream(liveText(subtitles(patch)));
+    await expect(streamChat({ ...request, subtitle_language: 'ko' }, new AbortController().signal, () => undefined, { live: true })).rejects.toThrow('subtitle');
+  });
+  it('rejects unsolicited subtitles', async () => {
+    mockStream(liveText(subtitles()));
+    await expect(streamChat(request, new AbortController().signal, () => undefined, { live: true })).rejects.toThrow('subtitle');
+  });
+});
