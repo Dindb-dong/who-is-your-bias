@@ -4,7 +4,11 @@
 this pilot.** It produced more verbose answers, exposed internal rule labels,
 and exceeded the common 256-token output limit in five of sixteen requests.
 These failures are preserved. An output-guidance revision is a separate
-development intervention, not a replacement for this experiment.
+development intervention, not a replacement for this experiment. The
+[completed follow-up](development-guidance-v1/README.md) restored 8/8 completion
+on the eight memory-included cases, but its 37.5% advice score remained below
+the original card/RAG's 81.25% on that same subset. No value-fidelity gain has
+been established.
 
 ## Actual model results
 

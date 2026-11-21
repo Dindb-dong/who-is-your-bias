@@ -49,7 +49,11 @@ export BIAS_PERSONA_GRAPH=data/personas/jensen-huang-values-v2/persona_graph.v2.
 export BIAS_PERSONA_MEMORY_FORMAT=graph
 ```
 
-The graph is off by default. `flat` uses the same semantic contents in prose
+The graph is off by default. [Actual evaluation](../../../reports/persona-rules-2026-11-21/README.md)
+did not establish an advice-quality gain over the original card/RAG; the
+output-guidance follow-up improved completion but still underperformed that
+reference. Treat this as an experimental candidate, not the live default.
+`flat` uses the same semantic contents in prose
 relations. Restore the baseline by unsetting these four variables. The graph
 adds no online extraction, model training, search service or additional LLM call.
 It cannot supply missing project facts, live news or private emotional states.

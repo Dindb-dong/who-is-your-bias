@@ -63,8 +63,20 @@ Outputs were verified remotely at `92dc45a2e760df840a1b3ef6a8978cf140c67259`.
 The original ratings, negative report and a narrow v2-only user-facing response
 contract were then saved at `ed015c500c2a6f233c346dae2365c8ceb46ae8f5`.
 That output contract passed 333 relevant Python tests and preserves the source
-graph and existing length-policy precedence. Its model-level development
-diagnostic is separate from the frozen first experiment.
+graph and existing length-policy precedence. The separate diagnostic runner
+passed 16 further integrity tests. Its model-level
+[development diagnostic](../reports/persona-rules-2026-11-21/development-guidance-v1/README.md)
+is complete: 8/8 outputs finished, 0/8 exposed measured internal identifiers,
+and advice passed 37.5% of AI judgments. The same eight-case original card/RAG
+reference passed 81.25%. This does not justify promoting the graph.
+
+All 72 actual model attempts, original and development ratings, failure
+analyses and reproduction inputs are retained. Development inputs were
+verified at `b2bb53ccf4e44886be8568636da8008568edb85f`, and the eight actual
+outputs/blinded packets at `5a273adf04f54a82d186002735d32b0161e2e74a`.
+Private condition mappings are stored outside public Git; their verified
+byte counts/hashes are in the two result reports. Source transcripts likewise
+remain private. No main-branch merge or default activation was performed.
 
 The earlier PR29 result remains preserved in
 `reports/persona-graph-2026-11-20/`; its 83.3% score is not directly comparable

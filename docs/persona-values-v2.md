@@ -114,6 +114,10 @@ did **not** show an improvement: advice pass rate was 29.2% for the initial
 graph versus 54.2% for the original card/RAG, including truncations as failures.
 The output contract is evaluated separately as a development iteration on
 already-seen scenarios. Neither result may be substituted for the other.
+The [completed eight-case follow-up](../reports/persona-rules-2026-11-21/development-guidance-v1/README.md)
+improved completion from 3/8 to 8/8 and removed measured internal-ID leakage,
+but passed only 37.5% of advice judgments versus 81.25% for the original
+card/RAG on those same eight questions. The feature is still experimental.
 
 ## Research basis
 
