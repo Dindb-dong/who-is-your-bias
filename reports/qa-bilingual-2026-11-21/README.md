@@ -57,7 +57,44 @@ This can show a labeled English fallback rather than delay audio for a subtitle.
 The last 250 ms grace after PCM delivery may omit translations even while the
 browser still has audio queued; it is an explicit latency/coverage tradeoff.
 
-A targeted rerun of the project wording, fixed documentation limits and fixed
-uncertainty translations is pending at this checkpoint. Preserve the original
-outputs; do not overwrite them with improved examples or report an accuracy
-percentage from these deliberately selected regression cases.
+`follow-up/` records a completed targeted rerun from checkpoint
+`840cf864b701a12379a80ad9607cce97f5da1b38`: five English replies (one actual Qwen
+generation, four authored source/limitation replies) and eight captions (two
+actual Qwen translations, six exact authored Korean phrases). The model-choice
+and alignment overclaims are absent from these fixed replies. The allegation
+caption now says the allegation cannot be verified, without calling it false.
+The project translation now retains `페르소나 근거 자료`; it still has awkward
+wording and a `파이플라인` spelling error. Do not call all generated Korean
+polished or claim a measured translation-quality improvement.
+
+The rerun uses deliberately selected regression cases. Preserve the original
+outputs; do not report an accuracy percentage, independent generalization
+result or voice-latency improvement from this comparison.
+
+## Software verification and remaining gates
+
+- 159 focused Python tests across knowledge routing, independent regression
+  cases, stream integration, subtitles and pre-existing live/provider checks.
+- Seven workbench adapter tests; 282 web unit tests; typecheck and production
+  build; corpus validation and 12 QA-record schema/freshness checks passed.
+- Playwright tests were added for Korean text/microphone routing, caption
+  timing, failure fallback, cancellation and early PCM finalization. Local
+  browser launch failed before assertions because Chromium's process-singleton
+  socket was denied. Browser assertions remain unverified in this environment.
+- Rehearse the actual Mac/provider/ASR/voice/private-avatar configuration. Check
+  question transcript accuracy, first audible English response, Korean caption
+  coverage and fluency. No private assets were altered, and no main merge or
+  Sophon-websocket integration is included.
+
+Re-run using an explicitly configured compatible answer endpoint (and optional
+independent translation endpoint):
+
+```sh
+python tools/qa_bilingual_smoke.py --output reports/your-new-run
+```
+
+Set `BIAS_LLM_BASE_URL` and `BIAS_LLM_MODEL`; optionally set
+`BIAS_TRANSLATION_BASE_URL` and `BIAS_TRANSLATION_MODEL`. This content-only
+pilot raises the per-caption timeout to 120 seconds for CPU inspection. The
+actual application retains its separately bounded default 12-second timeout.
+Never reuse a run directory after changing its pinned inputs.

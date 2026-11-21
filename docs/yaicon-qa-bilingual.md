@@ -34,6 +34,10 @@ the video is not proof of the selected checkpoint or private corpus.
   unsynchronized transcript. Replay does not promise translated captions.
 - Only English source text goes to the existing English voice provider. Its
   Jensen reference/voice binding is unchanged; no new voice cloning here.
+- Known documentation gaps (model-selection rationale and MCCCD alignment)
+  have exact cited replies. Fixed uncertainty/financial/allegation sentences
+  have reviewed Korean translations, avoiding another model changing their
+  meaning. General generated answers still need translation-quality review.
 
 ## Enable on the demo machine
 
@@ -55,6 +59,14 @@ busy model can increase delay despite parallel application scheduling. No
 external paid provider is selected silently. Missing configuration advertises
 `translated_subtitles: false` and the UI explains what is missing.
 
+News review expires within 48 hours. The seeded review expires on November 23,
+2026 at 23:40 KST; refresh it before using it as current context at a later demo.
+Use `python tools/qa_news.py validate data/qa` to inspect freshness. The RSS
+candidate command never approves material automatically. Read the source,
+review the summary/dates, update the digest and restart the API after changes.
+Update project cards whenever PR status or the deployed implementation changes;
+their pinned old revision must not be described as the new deployment.
+
 Run `npm ci` and `npm run build`, restart the existing API, then open its URL
 with `?present=1&bilingual=1`. Select **English voice + Korean captions**. The
 question selector controls Korean `ko-KR` recognition; requests use `language:
@@ -68,16 +80,31 @@ instructions. Its prepared runtime may point to another checkout; update and
 rebuild that actual checkout too. This change targets `/api/chat/stream` and
 `/api/chat/live`. PR27's Sophon websocket does **not** automatically inherit it.
 
-## Initial checkpoint verification
+## Verification and handoff
 
-Subtitle unit tests: 32 passed. Existing live/provider/language tests: 74 passed
-(overlapping sets). Frontend typecheck, 282 unit tests and production build
-passed. Cross-layer tests are being finalized; a test accessor typo was fixed.
-Browser execution attempted two new bilingual and seven existing live tests,
-but Chromium's process-singleton socket was denied before page initialization.
-Browser assertions have **not** passed here. Actual-model checks are pending.
-No production Mac ASR/TTS, voice-quality or audience-to-first-audio measurement
-is claimed at this checkpoint.
+Implementation is saved in [PR30](https://github.com/Dindb-dong/who-is-your-bias/pull/30).
+Checkpoint `840cf864b701a12379a80ad9607cce97f5da1b38` was read back before the
+targeted rerun. No main/PR27/PR29 merge occurred.
+
+159 focused Python tests, seven workbench tests, 282 web unit tests, typecheck,
+production build, corpus validation and QA-reference schema/freshness checks
+passed. Browser execution attempted two new bilingual and seven existing live
+tests, but Chromium's process-singleton socket was denied before page
+initialization; browser assertions remain unverified here. Another browser
+regression test was added for immediate PCM finalization and was discovered,
+not executed successfully.
+
+The [actual-model report](../reports/qa-bilingual-2026-11-21/README.md) preserves
+seven initial cases and five targeted follow-ups, including the errors that
+motivated fixes. This does not establish general answer accuracy, translation
+fluency, real Mac latency, Korean ASR accuracy or Jensen voice quality.
+Pending acceptance: configure the translation provider, review fresh news,
+and rehearse the exact demo checkout with its private voice/avatar assets.
+
+PCM playback finalizes as soon as audio delivery ends. Subtitle work receives
+only 250 ms extra grace after that event, then becomes explicitly unavailable.
+This bounds completion delay but can drop a late subtitle while audio is still
+queued in the browser. Keep this quality/latency tradeoff in the rehearsal.
 
 ```sh
 python -m pytest -q tests/test_qa_knowledge.py tests/test_qa_delivery.py tests/test_subtitles.py tests/test_live_streaming.py tests/test_providers_and_api.py
