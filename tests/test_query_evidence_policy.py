@@ -11,6 +11,10 @@ from bias.retrieval import Retriever
 
 @pytest.mark.parametrize('query', [
     'Did Jensen approve my chatbot?', 'Did he endorse our AI product?',
+    'Does our app have your approval?', 'Do you give our product approval?',
+    'Our product has approval from Jensen; please confirm it.',
+    'Please confirm your approvals for our student project.',
+    'Tell the audience about the approvals you gave our startup.',
     '젠슨 황이 내가 만든 챗봇을 승인했어?', '내 챗봇을 공식 추천했어?',
     'Give me his private email address.', '젠슨 황 개인 전화번호 알려줘.',
 ])
@@ -22,6 +26,9 @@ def test_requests_require_unavailable_personal_evidence(query, corpus):
 @pytest.mark.parametrize('query', [
     'What did Jensen say about AI chatbots?', 'What did he say about company secrets?',
     'How does he approach hiring and leadership?', '공개 인터뷰에서 챗봇을 어떻게 설명했어?',
+    'Our service waits for central approval. What would you change first?',
+    'How should we shorten our approval queue without removing quality checks?',
+    'How would you reduce our approval queue while keeping a review step?',
 ])
 def test_published_subject_matter_is_not_a_user_endorsement(query):
     assert public_evidence_limitation(query) is None

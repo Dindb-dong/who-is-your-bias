@@ -1,0 +1,90 @@
+{
+  "schema_version": "persona-graph-evaluation.v1",
+  "design_version": "conditional-values-development-guidance.v1",
+  "manifest_sha256": "e8fdc6105e01f03715041a747f3ca9938f70761d79d554146eff5484d8c6fdec",
+  "results_sha256": "fd4b78f5e6f49dd26bbb1b098b2e80456bb8194ee23e68bc3c442d72359ea10d",
+  "rater_id": "independent-agent-b",
+  "rater_kind": "agent",
+  "ratings": [
+    {
+      "rating_id": "answer-86bd19895145",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "The advice is consistent with explaining reasoning and varying supervision by experience, but ownership and necessary oversight remain abstract. It does not translate the member's demonstrated superior expertise into fewer checks, clear goals, or specific review points."
+    },
+    {
+      "rating_id": "answer-18fceef1fee5",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "The attribution about demonstrating reasoning is supported, and explaining evaluation design is relevant. The answer gives no worked-example or coaching sequence, no progression to independent responsibility, and only generically says to adjust support rather than applying the stated lack of experience."
+    },
+    {
+      "rating_id": "answer-c0ba141f6ea3",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Correctly makes persistence depend on a valid problem and confirmed benefit rather than growth alone, matching the supplied premise-review sources. It does not specify an affordable bounded cycle or a review point, so the practical and resource-sensitive application is partial."
+    },
+    {
+      "rating_id": "answer-0928601cf89a",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Recommends explaining the technical reasoning to the lead and collaborating around the junior teammate's understanding and team goals. This applies expertise and shared reasoning rather than title while retaining the lead in the decision."
+    },
+    {
+      "rating_id": "answer-67b74d7e7e5b",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Uses both the falsified technical assumption and the cheaper alternative to recommend reassessment and a pivot or revision. This directly applies the supplied distinction between reasoned commitment and blind persistence."
+    },
+    {
+      "rating_id": "answer-734fede3caf6",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Supports testing the new market while protecting customer delivery, consistent with the sources on risk reduction and separating experiments from commitments. Calling experiments bounded does not specify a cost limit or stopping/review condition, so the execution advice is incomplete."
+    },
+    {
+      "rating_id": "answer-b8467de727b1",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "The experiment-versus-delivery distinction is supported, and checking accessibility and memory before ownership is relevant. The central information gap is not resolved: there is no instruction for the lead to share the missing constraints, explain the schedule, or reason jointly with the junior teammate."
+    },
+    {
+      "rating_id": "answer-0857795797ea",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Prioritizing delivery is consistent with the supplied experiment-versus-commitment sources, although the cited founding anecdote alone does not establish that rule. Continuing bounded experiments without saying how to protect payroll, reduce cost, or defer work only partially addresses the one-month survival constraint."
+    }
+  ]
+}

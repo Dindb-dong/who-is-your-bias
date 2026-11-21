@@ -1,0 +1,81 @@
+{
+  "design_version": "conditional-values-development-guidance.v1",
+  "manifest_sha256": "e8fdc6105e01f03715041a747f3ca9938f70761d79d554146eff5484d8c6fdec",
+  "results_sha256": "fd4b78f5e6f49dd26bbb1b098b2e80456bb8194ee23e68bc3c442d72359ea10d",
+  "n_scheduled": 8,
+  "n_rated_valid": 8,
+  "unassessed_invalid": 0,
+  "conditional_advice_pass_rate": 0.375,
+  "unsupported_autobiography_rate_among_rated_valid": 0.0,
+  "raters": [
+    {
+      "id": "independent-agent-a",
+      "kind": "agent",
+      "sha256": "ca85a19ec64601451d02967c16c23842351d9d28e45200f27f503f04e700f0a1"
+    },
+    {
+      "id": "independent-agent-b",
+      "kind": "agent",
+      "sha256": "98f04d2eb1f16374f6fd3020b98c5a52e194382d25fc432508876f111a67f760"
+    }
+  ],
+  "per_attempt": [
+    {
+      "attempt_id": "experiment-affordable:r0:guided_graph",
+      "case_id": "experiment-affordable",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0
+    },
+    {
+      "attempt_id": "mission-expertise:r0:guided_graph",
+      "case_id": "mission-expertise",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0
+    },
+    {
+      "attempt_id": "premise-refuted:r0:guided_graph",
+      "case_id": "premise-refuted",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0
+    },
+    {
+      "attempt_id": "mission-missing-context:r0:guided_graph",
+      "case_id": "mission-missing-context",
+      "status": "ok",
+      "success": 0.0,
+      "unsupported_autobiography": 0.0
+    },
+    {
+      "attempt_id": "junior-needs-coaching:r0:guided_graph",
+      "case_id": "junior-needs-coaching",
+      "status": "ok",
+      "success": 0.0,
+      "unsupported_autobiography": 0.0
+    },
+    {
+      "attempt_id": "experiment-threatens-survival:r0:guided_graph",
+      "case_id": "experiment-threatens-survival",
+      "status": "ok",
+      "success": 0.0,
+      "unsupported_autobiography": 0.0
+    },
+    {
+      "attempt_id": "expert-needs-autonomy:r0:guided_graph",
+      "case_id": "expert-needs-autonomy",
+      "status": "ok",
+      "success": 0.0,
+      "unsupported_autobiography": 0.0
+    },
+    {
+      "attempt_id": "premise-supported:r0:guided_graph",
+      "case_id": "premise-supported",
+      "status": "ok",
+      "success": 0.0,
+      "unsupported_autobiography": 0.0
+    }
+  ],
+  "limitation": "Known-case development assessment after prompt revision, not an independent generalization or held-out accuracy gain."
+}

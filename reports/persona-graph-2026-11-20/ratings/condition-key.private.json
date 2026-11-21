@@ -1,0 +1,277 @@
+{
+  "schema_version": "persona-graph-evaluation.v1",
+  "manifest_sha256": "8d8901919bf370fbf616af3d88702598eeb5d0330413e0a68a5a0bde2cc0e44f",
+  "results_sha256": "367c73a48df01679ecf612a8643c875032f8ff7cc77a04572f322387121fd65e",
+  "mapping": {
+    "answer-ac301eb98cc1": {
+      "attempt_id": "advice-09:r0:baseline",
+      "result_sha256": "ff0c031cf7ace3202ae5f031475f230eeca984d265fb3b9b47a14d1d518f5300",
+      "answer_sha256": "4f69e72923c332b4a568c9d61305944bb378224b14e0afbef2f896db9c526ef8"
+    },
+    "answer-41ba2e7ae4e5": {
+      "attempt_id": "advice-07:r0:flat",
+      "result_sha256": "da0eeba9012b5539d2359d3cb44c2329436064eb94b0272fde8673a7742df9fa",
+      "answer_sha256": "053fc107a092cc18d1bfbf2dee16be5d549f6656447aab7eaaf0fa1eeea8a510"
+    },
+    "answer-b1b15db27859": {
+      "attempt_id": "advice-04:r0:baseline",
+      "result_sha256": "afb21c23a87480ed3794bb64d91d7234d8dbea1e70d5d7344698257c7bb3a364",
+      "answer_sha256": "5d7d4bd3645e11d3c5475f7909601b6d525b8d2aba1820a0300db02d99aa3b08"
+    },
+    "answer-0bbea5b27c13": {
+      "attempt_id": "advice-01:r0:baseline",
+      "result_sha256": "06ef1775aeb44cf6d3007730ca11e422b0ef89a2f746c8b295177b4606c0798f",
+      "answer_sha256": "c885e2c713b7df5ce975a855ee2ee20ff3d82bc715164507e09df0719ef74134"
+    },
+    "answer-ef3b149fa683": {
+      "attempt_id": "advice-01:r0:flat",
+      "result_sha256": "13a233fff4460fdc76c6f96e10f6d06ce0874e082339f9a5a09e4e113d2d2dd3",
+      "answer_sha256": "e35384497546b19bc45b33206da0609922fa063f6727c6df333db8772fe33dc7"
+    },
+    "answer-cbf148108255": {
+      "attempt_id": "control-03:r0:flat",
+      "result_sha256": "18661dabf1a0bf4b27453ead1ff08013bf4c8a1c4632fcea2c515c3ebccc5d5d",
+      "answer_sha256": "3db178e6957ac1a6156022e2ac941991552d38282599a554106eaeb0bc19bcf1"
+    },
+    "answer-f7f020e235c7": {
+      "attempt_id": "advice-04:r0:graph",
+      "result_sha256": "ee091ffc2ee77ee1e24e4fab936758309b3d7ab8d6d95e2cac649d1fda58357e",
+      "answer_sha256": "5d7d4bd3645e11d3c5475f7909601b6d525b8d2aba1820a0300db02d99aa3b08"
+    },
+    "answer-3a7a82c3ad8c": {
+      "attempt_id": "advice-10:r0:baseline",
+      "result_sha256": "182fdec0812ed8533cc83b677a5506acb4cac9a064dc27a662c0128c1a126f1f",
+      "answer_sha256": "f77e6747e635e6ac22191df19e30a4b88738aacd74acb9aefd1eee50485a4acf"
+    },
+    "answer-bbc4f8b8a6b0": {
+      "attempt_id": "control-01:r0:graph",
+      "result_sha256": "74f2ebb7d126042ad759fd8a9f24b8650e4b85bb26a1caf627e3481b3ac554dd",
+      "answer_sha256": "846cd883999e6b75e121e937800ba949048a2a3186863bdd76affd53110a557f"
+    },
+    "answer-ba644d051313": {
+      "attempt_id": "advice-11:r0:graph",
+      "result_sha256": "1f27072f4cf6568e56d60b94a1fabf57d27a606586db73fe2425ce437a6bae39",
+      "answer_sha256": "7da88b14bec78ac9171a5afba0cc3446decc019185c81984d6c22da211a6d2c3"
+    },
+    "answer-78a7ad1b5a2e": {
+      "attempt_id": "advice-11:r0:baseline",
+      "result_sha256": "9f6ee560e4a896fac84f298f19f9d22d0eba39df2ad5904e41c3de2212dc1e46",
+      "answer_sha256": "f13cc8d3f5242d86ca42ca971e905448a6f3220e79e9ce1259113b0cb29bb41a"
+    },
+    "answer-3880669a2dc9": {
+      "attempt_id": "advice-02:r0:flat",
+      "result_sha256": "d96715092b75ddafe863365df0becd5eeb55cfa9dfa813115daaebd1f8c50dda",
+      "answer_sha256": "73ce7b6618a8d0ba0e3c455ea1e4bd5f4955725d5444bb43c77669863cf86772"
+    },
+    "answer-3167afd6f5e5": {
+      "attempt_id": "control-04:r0:flat",
+      "result_sha256": "e431ae5730677b1949d576627da0123941777402ea044ecda89a294a007e9f3a",
+      "answer_sha256": "6bdc5a783faf3cd1bbb6a8bc54adba628f3b91c8aa434d7f3aac3d3b9b9d2ddc"
+    },
+    "answer-25376a1fdacd": {
+      "attempt_id": "advice-04:r0:flat",
+      "result_sha256": "f1cac3d4ae30b4d39f326dfec2b834d717a59abf3c8ccd2731ba6db0b7525800",
+      "answer_sha256": "5d7d4bd3645e11d3c5475f7909601b6d525b8d2aba1820a0300db02d99aa3b08"
+    },
+    "answer-ccedf715498c": {
+      "attempt_id": "advice-03:r0:flat",
+      "result_sha256": "2ff36249f15555da34badc0e2086d24b34fa75e19d171f28c2a0d2e39eb9845a",
+      "answer_sha256": "cdedb77e6baa4c8cb257355caf2eb6b1bcefea1b5abe8c4b2c431a74bdb02cb1"
+    },
+    "answer-61e1687b20cc": {
+      "attempt_id": "advice-11:r0:flat",
+      "result_sha256": "6ed35ba65fd58a71d9d7ab20ffc080cb5c804b5e68701f59fc776f6ba4103362",
+      "answer_sha256": "5969317401bdd7a649453b48fc698bf8a4793dc4d00e1c228e7623b17e4c9540"
+    },
+    "answer-b326de79c42a": {
+      "attempt_id": "advice-12:r0:baseline",
+      "result_sha256": "c22dff616d02910a07e48b0a0a3159711da70cbf9970629ed77d3b6bf95a4581",
+      "answer_sha256": "774c8805a9f83ce373cb46728e99842b8ab9e7f0e2ad6f9b2ae9282d2ddb57bf"
+    },
+    "answer-abd179a93868": {
+      "attempt_id": "advice-08:r0:graph",
+      "result_sha256": "555d2590c0a3cb7517b5491cad5d3a0bafa781116687421844fdd0c1328709fd",
+      "answer_sha256": "1287c197b376a22117d0de3bb4a77ae5a673dd34771b7c46f4a6d41cb8f7d4fb"
+    },
+    "answer-d157d1897676": {
+      "attempt_id": "advice-10:r0:flat",
+      "result_sha256": "98dccc7171b90d572a73b79526cfb8f886b918637cee564ab230518f9f411414",
+      "answer_sha256": "89e13912482353d26fd64bc18438cfe20138382488d8220db11c27ecda8cea1a"
+    },
+    "answer-ddf5c91a4cd5": {
+      "attempt_id": "advice-05:r0:graph",
+      "result_sha256": "373810af1aded82dd29173e1cc8fc457ffb0744b1abb7216bca77a40ecf61fe1",
+      "answer_sha256": "7f0b713b286a3eaefec1d3d5af87237429ce585739ec2df2a31b405d42e387a4"
+    },
+    "answer-8423e9cc219e": {
+      "attempt_id": "advice-05:r0:flat",
+      "result_sha256": "e3aa24791df16a0216caa1da8105b59f102c42030e5f9127b1b10add4f2e2846",
+      "answer_sha256": "5c70c1cc1d224e99ca79f6bce47ed5880745039fbc573af19f7e72f01f01c5db"
+    },
+    "answer-d4a028000fed": {
+      "attempt_id": "advice-12:r0:flat",
+      "result_sha256": "20263a3dafcbbee94f5225d44f4381f4ec0b492efd84c7ccfcabe862409ab737",
+      "answer_sha256": "1eaad407fd2f92bd991891d69eedcbc09ce79221c80decba3f9433fd4b6059cc"
+    },
+    "answer-638c22b744b5": {
+      "attempt_id": "control-01:r0:baseline",
+      "result_sha256": "72ae526a6805de53c503e96f93390822dc6b540345d7607e4d79043965441b97",
+      "answer_sha256": "846cd883999e6b75e121e937800ba949048a2a3186863bdd76affd53110a557f"
+    },
+    "answer-578729115e55": {
+      "attempt_id": "control-02:r0:baseline",
+      "result_sha256": "1d5ce9e11c1c67e6541dae6f7ec73a409e48291c51c4b79b8294c16ff5f5a739",
+      "answer_sha256": "3db178e6957ac1a6156022e2ac941991552d38282599a554106eaeb0bc19bcf1"
+    },
+    "answer-787b8a6a6ca7": {
+      "attempt_id": "advice-02:r0:graph",
+      "result_sha256": "947f5523bad4cd544d0114113f229fe6430a12045aac3e4edab1f60edb8544ad",
+      "answer_sha256": "e7ce7b0e7ec91a8f6038e2b8d53acf95284b2a312d4c6f90644f727b93804d24"
+    },
+    "answer-7ebe7501644f": {
+      "attempt_id": "advice-09:r0:graph",
+      "result_sha256": "4d03c6552822abbe3f39094c6af3227d4d8e2a1cbde79465531e9269795dd080",
+      "answer_sha256": "4f69e72923c332b4a568c9d61305944bb378224b14e0afbef2f896db9c526ef8"
+    },
+    "answer-4ed918d6be4b": {
+      "attempt_id": "advice-03:r0:graph",
+      "result_sha256": "5debcfeea0055c6eb02abe87c298a5e0d420e3f4f407e348882527cced5b72ec",
+      "answer_sha256": "28673ab235b9145f84d4d354cffd6709fcb938d78da67abf4b449b4d617fd1d8"
+    },
+    "answer-5c41c0fdb003": {
+      "attempt_id": "control-06:r0:graph",
+      "result_sha256": "d0f7b909348761122ea53360f594a3f3692b583379c10b03811766623377084b",
+      "answer_sha256": "afd25e0b8a36680edc550748dfc4a375df2fe33775901f39573279451c22298a"
+    },
+    "answer-770793b07b21": {
+      "attempt_id": "control-04:r0:graph",
+      "result_sha256": "4c02fd03daf5a9dfd77b0507fdb7ba327c0818c082e5bcce740fed3ee0996fb9",
+      "answer_sha256": "6bdc5a783faf3cd1bbb6a8bc54adba628f3b91c8aa434d7f3aac3d3b9b9d2ddc"
+    },
+    "answer-cb073305f71a": {
+      "attempt_id": "advice-02:r0:baseline",
+      "result_sha256": "7e6598d73aecf032affad4543015c48e74f237ebc8b3514bc3009ee6969e1d71",
+      "answer_sha256": "9a0359d1cd5875c2998c222bdfb20146303bfce9c38439c0b5c200ecd89256ad"
+    },
+    "answer-548aa15bfd0e": {
+      "attempt_id": "advice-08:r0:baseline",
+      "result_sha256": "632a1acf747d49c08985ca13f91d93f933d23b73b43467df22790360e17f341a",
+      "answer_sha256": "1287c197b376a22117d0de3bb4a77ae5a673dd34771b7c46f4a6d41cb8f7d4fb"
+    },
+    "answer-d4cc31727cee": {
+      "attempt_id": "control-03:r0:graph",
+      "result_sha256": "77946dd9d5ea6fc54f2497cc37677a2014f112928bd1165277d608a0b3403867",
+      "answer_sha256": "3db178e6957ac1a6156022e2ac941991552d38282599a554106eaeb0bc19bcf1"
+    },
+    "answer-bb7409cbcfbe": {
+      "attempt_id": "advice-07:r0:baseline",
+      "result_sha256": "58b1e8c1841eef51e579844a6223eb35170ac02e19eb58f2a0eaf52a5e8302e3",
+      "answer_sha256": "e747ff129f4ffaec5155b8132ff946a8a53fcd0f5ebee0a09b956715ac06b323"
+    },
+    "answer-4ec428fb07f4": {
+      "attempt_id": "control-06:r0:flat",
+      "result_sha256": "11497dcb0c667c130d48709b9d0fd363236b3fa8eb66f7238aad515c675822a6",
+      "answer_sha256": "afd25e0b8a36680edc550748dfc4a375df2fe33775901f39573279451c22298a"
+    },
+    "answer-0a01edd0663d": {
+      "attempt_id": "advice-06:r0:graph",
+      "result_sha256": "36612e23d48b5c1bb3ab042a3e7b021747898b2c9ac0101c211aae07da161d2d",
+      "answer_sha256": "99f6c3b58876d466ed991fc2d3d33da4004bdcaa9c7885a12925213e8201d4c3"
+    },
+    "answer-b47e379a9d04": {
+      "attempt_id": "control-06:r0:baseline",
+      "result_sha256": "c1beb499277b51c522d4a3bc8a894f78eac9dd3dd0ba0525ed20f14e794d0ce6",
+      "answer_sha256": "afd25e0b8a36680edc550748dfc4a375df2fe33775901f39573279451c22298a"
+    },
+    "answer-5d58c2b7506d": {
+      "attempt_id": "control-01:r0:flat",
+      "result_sha256": "05fe7c219af7f5b7b29e9f7a711dd13d3622c3442c22ddacec325c0e44cd6067",
+      "answer_sha256": "846cd883999e6b75e121e937800ba949048a2a3186863bdd76affd53110a557f"
+    },
+    "answer-261979994d80": {
+      "attempt_id": "advice-09:r0:flat",
+      "result_sha256": "9d0035e414b96ef7bb6e90c38ccb7627078b5affd87a9cefbff4d2a01a89c1c8",
+      "answer_sha256": "4f69e72923c332b4a568c9d61305944bb378224b14e0afbef2f896db9c526ef8"
+    },
+    "answer-ad252732b38e": {
+      "attempt_id": "control-05:r0:graph",
+      "result_sha256": "89ed9235fbdd589618248d5663d94cde97af0e7d613bfb2a41db70a425c97866",
+      "answer_sha256": "5260f8ed5137d9d6e61b3c81ff2b7ae4c984f08b2e07a58578c04e8a21fe8ad9"
+    },
+    "answer-c750b91b7244": {
+      "attempt_id": "control-05:r0:flat",
+      "result_sha256": "9fb39327c8a814efa3b7953fd31f26d77390fe96cfe11919b266ed2ea411561a",
+      "answer_sha256": "5260f8ed5137d9d6e61b3c81ff2b7ae4c984f08b2e07a58578c04e8a21fe8ad9"
+    },
+    "answer-034145c6577d": {
+      "attempt_id": "advice-06:r0:flat",
+      "result_sha256": "8d20f5a6759e851163e72e6c93d1374cf1955ba5a1f33d230ceeae017876e559",
+      "answer_sha256": "173176526d08200d6e470798aa41f7b48afb0efc0bb0a161f6d752ebf582bdbf"
+    },
+    "answer-537a4e454111": {
+      "attempt_id": "advice-10:r0:graph",
+      "result_sha256": "d7c81785c742afa1db234aed5374e1e65b9a606826dcf1bcf134f6d5e7d31d9b",
+      "answer_sha256": "eec89f5c5417b98f5727b5f588e0732ae397c97c9d30a62b6ae5bbe0f1a2a886"
+    },
+    "answer-721224115615": {
+      "attempt_id": "advice-03:r0:baseline",
+      "result_sha256": "2f4c0de221dd3af38259c29602bb5971a82a728075b36dee9334e7cde8afe640",
+      "answer_sha256": "57ee3aba1f115dbdf4ab02d7e04875e3cbf0f865a8c4e82783a3d5a2d8c23eba"
+    },
+    "answer-dfea6374ba94": {
+      "attempt_id": "control-03:r0:baseline",
+      "result_sha256": "9f485d7f33e7891f07b33660d1834c9513d2f64d554f7cc994799c8220a6e784",
+      "answer_sha256": "3db178e6957ac1a6156022e2ac941991552d38282599a554106eaeb0bc19bcf1"
+    },
+    "answer-67e71d91f7fb": {
+      "attempt_id": "advice-06:r0:baseline",
+      "result_sha256": "9562580e208dac77526c7b9427c2abc03c1687f8a2084e8b0115afe2fcb532ea",
+      "answer_sha256": "96ade534c83acc34047d4819e34b26eb67f6cac9294915f3781e510778b77c9b"
+    },
+    "answer-a44045a55370": {
+      "attempt_id": "advice-01:r0:graph",
+      "result_sha256": "6f517ad7f9be3a7ca14dc4d2b6d8fb2424958766f83f97097a18c2a1e24d1a5d",
+      "answer_sha256": "6d21ec22f0970e060b20233a8134bc1c9bef82ed40d334b126af72721068a375"
+    },
+    "answer-9033d0fd478a": {
+      "attempt_id": "advice-05:r0:baseline",
+      "result_sha256": "182493ab00c3e7d3eae4797f656dd032d195324c296be98f65695105f2087cd6",
+      "answer_sha256": "19f2ca5a336aa85090147e6d5dd9288744a6559d7549e33b27f9a7557485ac66"
+    },
+    "answer-d6bb9fb3f30f": {
+      "attempt_id": "advice-12:r0:graph",
+      "result_sha256": "5e6041e8f52de4dcb06acd6283d5fc12979fc15792e2c627556f8fe300ead8d0",
+      "answer_sha256": "9d3b247313cbc3491549e77763d7ece071080283a4148b5b778bd6174a05f241"
+    },
+    "answer-a5aa1919a75c": {
+      "attempt_id": "control-02:r0:graph",
+      "result_sha256": "5b3d603fb698742723e8af9ac896da4fa086793de99117948656036a881e3a2f",
+      "answer_sha256": "3db178e6957ac1a6156022e2ac941991552d38282599a554106eaeb0bc19bcf1"
+    },
+    "answer-b224615b1d05": {
+      "attempt_id": "control-04:r0:baseline",
+      "result_sha256": "19936caa34a2bc21e024b56edde57e75a4255db9e8cbbbcb8b79a5f182452288",
+      "answer_sha256": "6bdc5a783faf3cd1bbb6a8bc54adba628f3b91c8aa434d7f3aac3d3b9b9d2ddc"
+    },
+    "answer-2046dacd4706": {
+      "attempt_id": "advice-07:r0:graph",
+      "result_sha256": "4f80f2423aa19d07c1b5208220e43ff315e7d3079f94b8a2262a3337a26b0139",
+      "answer_sha256": "f7cd0ba9e3d4601530f26eba672091c95ece7536b308571a5123e66dcf614c21"
+    },
+    "answer-3cd802f42f38": {
+      "attempt_id": "advice-08:r0:flat",
+      "result_sha256": "93cf37d594913e1f3641d9df09231bc372c63b59bf00d6c2181e39f5382637d1",
+      "answer_sha256": "1287c197b376a22117d0de3bb4a77ae5a673dd34771b7c46f4a6d41cb8f7d4fb"
+    },
+    "answer-4e334deed4fa": {
+      "attempt_id": "control-05:r0:baseline",
+      "result_sha256": "0ffcfadb5f4d733d6d96f0f9d967db7ee11ad95a1183df40720b07682d919bc3",
+      "answer_sha256": "5260f8ed5137d9d6e61b3c81ff2b7ae4c984f08b2e07a58578c04e8a21fe8ad9"
+    },
+    "answer-bb3ba309f50d": {
+      "attempt_id": "control-02:r0:flat",
+      "result_sha256": "809d217fedf45e0238eadf306b5bb5c74d48cdcfc2b8a5e7e402050c2f7f8521",
+      "answer_sha256": "3db178e6957ac1a6156022e2ac941991552d38282599a554106eaeb0bc19bcf1"
+    }
+  }
+}

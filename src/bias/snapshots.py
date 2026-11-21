@@ -38,20 +38,30 @@ class SourceVersion(Record):
     ingested_at: datetime
     split: Literal["train", "validation", "test"]
     source_content_sha256: str | None = Field(default=None, pattern=r"^[a-f0-9]{64}$")
+    # Only an explicitly hash-bound source capture can establish availability
+    # within a day whose actual publication timestamp is unknown.
+    verified_available_at: datetime | None = None
     # Publication-only metadata cannot establish a current spoken position.
     assertion_period_start: date | None = None
     assertion_period_end: date | None = None
     assertion_period_basis: str | None = Field(default=None, max_length=1000)
 
-    @field_validator("ingested_at")
+    @field_validator("ingested_at", "verified_available_at")
     @classmethod
-    def aware(cls, value: datetime) -> datetime:
+    def aware(cls, value: datetime | None) -> datetime | None:
+        if value is None:
+            return None
         if value.tzinfo is None:
             raise ValueError("Acquisition time must include its UTC offset")
         return value.astimezone(timezone.utc)
 
     @model_validator(mode="after")
     def period(self):
+        if self.verified_available_at is not None:
+            if not self.source_content_sha256 or self.verified_available_at > self.ingested_at:
+                raise ValueError("Verified availability requires captured bytes and cannot follow ingestion")
+            if self.verified_available_at.date() != self.published_at:
+                raise ValueError("Observed availability must match its conservative date bound")
         if self.assertion_period_start is not None:
             if not self.assertion_period_end or not self.assertion_period_basis:
                 raise ValueError("Assertion periods require an end and reviewed attribution basis")
@@ -119,6 +129,15 @@ class PersonaSnapshot(Record):
             acquired = (source.model_extra or {}).get("ingested_at")
             if acquired is not None and row.ingested_at != SourceVersion.aware(datetime.fromisoformat(acquired)):
                 raise ValueError(f"Snapshot acquisition time differs: {row.source_id}")
+            if row.verified_available_at is not None:
+                metadata = source.model_extra or {}
+                observed = metadata.get("availability_observed_at")
+                if (metadata.get("publication_date_verified") is not False
+                        or metadata.get("publication_date_basis") != "observed_availability"
+                        or metadata.get("raw_content_sha256") != row.source_content_sha256
+                        or not observed
+                        or SourceVersion.aware(datetime.fromisoformat(observed)) != row.verified_available_at):
+                    raise ValueError(f"Verified availability lacks a matching source capture: {row.source_id}")
         for link in self.statement_links:
             if link.earlier_id not in corpus.evidence or link.later_id not in corpus.evidence:
                 raise ValueError("Statement link refers to unavailable evidence")
@@ -199,6 +218,8 @@ def select_temporal(corpus: Corpus, snapshot: PersonaSnapshot, query: str, *, pr
                     intent_override: TemporalIntent | None = None) -> TemporalSelection:
     if projection not in {"factual", "text_style"}:
         raise ValueError("Temporal retrieval projection must be factual or text_style")
+    if any(row.verified_available_at is not None for row in snapshot.sources):
+        snapshot.verify(corpus)
     intent = intent_override or temporal_intent(query, snapshot.as_of)
     rows = {s.source_id: s for s in snapshot.sources}
     eligible, excluded, scores = set(), {}, {}
@@ -206,6 +227,8 @@ def select_temporal(corpus: Corpus, snapshot: PersonaSnapshot, query: str, *, pr
         row = rows[evidence.source_id]
         # A date-only release is not known to be available until that day ends.
         release_latest = datetime.combine(row.published_at, time.max, tzinfo=timezone.utc)
+        if row.verified_available_at is not None:
+            release_latest = min(release_latest, row.verified_available_at)
         reason = None
         if intent.mode == "future":
             reason = "requested_period_after_snapshot"
@@ -255,7 +278,9 @@ def register_snapshot(corpus: Corpus, *, identifier: str, as_of: datetime, inges
         sources=[SourceVersion(source_id=s.id, event_family=source_event_id(s), event_at=s.recorded_at,
                                published_at=s.published_at,
                                ingested_at=(s.model_extra or {}).get("ingested_at", ingested_at), split=s.split,
-                               source_content_sha256=hashes.get(s.id)) for _, s in sorted(corpus.sources.items())],
+                               source_content_sha256=hashes.get(s.id) or (s.model_extra or {}).get("raw_content_sha256"),
+                               verified_available_at=(s.model_extra or {}).get("availability_observed_at"))
+                 for _, s in sorted(corpus.sources.items())],
         coverage_note="Snapshot date limits availability; it does not imply contemporary coverage. Unknown event dates remain unknown.")
     snapshot.verify(corpus)
     return snapshot

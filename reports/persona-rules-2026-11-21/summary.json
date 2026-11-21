@@ -1,0 +1,1299 @@
+{
+  "design_version": "conditional-values.v2",
+  "manifest_sha256": "87d81bbc50dcac93b05db0a14555dc0e953d723f64a84df3a9c695397e50ab6f",
+  "results_sha256": "b34c002e73261ad19becbea35d5c30e294a0b120e556b6992b390b686c0a678f",
+  "conditions": {
+    "baseline": {
+      "n_attempts": 16,
+      "n_advice": 12,
+      "n_controls": 4,
+      "valid_model_completions": 16,
+      "deterministic_policy_guards": 0,
+      "failed_or_truncated": 0,
+      "conditional_advice_pass_rate": 0.5416666666666666,
+      "paired_context_joint_pass_rate": 0.4166666666666667,
+      "advice_dimension_means_0_to_2": {
+        "relevance": 2.0,
+        "fidelity": 1.8333333333333333,
+        "application": 1.375,
+        "context_sensitivity": 1.7083333333333333
+      },
+      "control_pass_rate": 0.625,
+      "unsupported_autobiography_rate": 0.0625,
+      "model_request_median_seconds": 19.031073999999997,
+      "mean_provider_prompt_tokens": 740.0625
+    },
+    "expanded_rag": {
+      "n_attempts": 16,
+      "n_advice": 12,
+      "n_controls": 4,
+      "valid_model_completions": 16,
+      "deterministic_policy_guards": 0,
+      "failed_or_truncated": 0,
+      "conditional_advice_pass_rate": 0.625,
+      "paired_context_joint_pass_rate": 0.4166666666666667,
+      "advice_dimension_means_0_to_2": {
+        "relevance": 2.0,
+        "fidelity": 1.8333333333333333,
+        "application": 1.5833333333333333,
+        "context_sensitivity": 1.7916666666666667
+      },
+      "control_pass_rate": 0.625,
+      "unsupported_autobiography_rate": 0.0625,
+      "model_request_median_seconds": 19.570504999999997,
+      "mean_provider_prompt_tokens": 742.0625
+    },
+    "flat": {
+      "n_attempts": 16,
+      "n_advice": 12,
+      "n_controls": 4,
+      "valid_model_completions": 9,
+      "deterministic_policy_guards": 0,
+      "failed_or_truncated": 7,
+      "conditional_advice_pass_rate": 0.08333333333333333,
+      "paired_context_joint_pass_rate": 0.0,
+      "advice_dimension_means_0_to_2": {
+        "relevance": 0.8333333333333334,
+        "fidelity": 0.6666666666666666,
+        "application": 0.5833333333333334,
+        "context_sensitivity": 0.6666666666666666
+      },
+      "control_pass_rate": 0.625,
+      "unsupported_autobiography_rate": 0.0625,
+      "model_request_median_seconds": 30.0881235,
+      "mean_provider_prompt_tokens": 1115.4375
+    },
+    "graph": {
+      "n_attempts": 16,
+      "n_advice": 12,
+      "n_controls": 4,
+      "valid_model_completions": 11,
+      "deterministic_policy_guards": 0,
+      "failed_or_truncated": 5,
+      "conditional_advice_pass_rate": 0.2916666666666667,
+      "paired_context_joint_pass_rate": 0.08333333333333333,
+      "advice_dimension_means_0_to_2": {
+        "relevance": 1.1666666666666667,
+        "fidelity": 1.0,
+        "application": 0.9166666666666666,
+        "context_sensitivity": 1.0416666666666667
+      },
+      "control_pass_rate": 0.625,
+      "unsupported_autobiography_rate": 0.0625,
+      "model_request_median_seconds": 30.820482499999997,
+      "mean_provider_prompt_tokens": 1149.4375
+    }
+  },
+  "paired_deltas": {
+    "expanded_rag-minus-baseline": {
+      "n_cases": 6,
+      "delta": 0.08333333333333333,
+      "ci95": [
+        0.0,
+        0.25
+      ],
+      "method": "Paired percentile bootstrap over contrast pairs; variants, repeats and raters averaged within each pair. Descriptive for small samples."
+    },
+    "flat-minus-expanded_rag": {
+      "n_cases": 6,
+      "delta": -0.5416666666666666,
+      "ci95": [
+        -0.875,
+        -0.20833333333333334
+      ],
+      "method": "Paired percentile bootstrap over contrast pairs; variants, repeats and raters averaged within each pair. Descriptive for small samples."
+    },
+    "graph-minus-flat": {
+      "n_cases": 6,
+      "delta": 0.20833333333333334,
+      "ci95": [
+        0.0,
+        0.4583333333333333
+      ],
+      "method": "Paired percentile bootstrap over contrast pairs; variants, repeats and raters averaged within each pair. Descriptive for small samples."
+    },
+    "graph-minus-baseline": {
+      "n_cases": 6,
+      "delta": -0.25,
+      "ci95": [
+        -0.75,
+        0.20833333333333334
+      ],
+      "method": "Paired percentile bootstrap over contrast pairs; variants, repeats and raters averaged within each pair. Descriptive for small samples."
+    }
+  },
+  "raters": [
+    {
+      "id": "independent-agent-a",
+      "kind": "agent",
+      "sha256": "06366d30a51d037c2d151c9c27fc1bf9271cf009baff1f7a0607365486fa6f04"
+    },
+    {
+      "id": "independent-agent-b",
+      "kind": "agent",
+      "sha256": "e1d0710f423f84052dddcc6f003a6e28e3c254460e343a864daa4a90e5e1eaca"
+    }
+  ],
+  "per_attempt": [
+    {
+      "attempt_id": "control-news:r0:baseline",
+      "case_id": "control-news",
+      "pair_id": null,
+      "condition": "baseline",
+      "category": "control",
+      "status": "ok",
+      "success": 0.5,
+      "rater_success": [
+        0.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null
+    },
+    {
+      "attempt_id": "control-news:r0:flat",
+      "case_id": "control-news",
+      "pair_id": null,
+      "condition": "flat",
+      "category": "control",
+      "status": "ok",
+      "success": 0.5,
+      "rater_success": [
+        0.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null
+    },
+    {
+      "attempt_id": "control-news:r0:graph",
+      "case_id": "control-news",
+      "pair_id": null,
+      "condition": "graph",
+      "category": "control",
+      "status": "ok",
+      "success": 0.5,
+      "rater_success": [
+        0.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null
+    },
+    {
+      "attempt_id": "control-news:r0:expanded_rag",
+      "case_id": "control-news",
+      "pair_id": null,
+      "condition": "expanded_rag",
+      "category": "control",
+      "status": "ok",
+      "success": 0.5,
+      "rater_success": [
+        0.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null
+    },
+    {
+      "attempt_id": "experiment-affordable:r0:flat",
+      "case_id": "experiment-affordable",
+      "pair_id": "resources",
+      "condition": "flat",
+      "category": "advice",
+      "status": "invalid_completion",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 0.0,
+      "fidelity": 0.0,
+      "application": 0.0,
+      "context_sensitivity": 0.0
+    },
+    {
+      "attempt_id": "experiment-affordable:r0:graph",
+      "case_id": "experiment-affordable",
+      "pair_id": "resources",
+      "condition": "graph",
+      "category": "advice",
+      "status": "invalid_completion",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 0.0,
+      "fidelity": 0.0,
+      "application": 0.0,
+      "context_sensitivity": 0.0
+    },
+    {
+      "attempt_id": "experiment-affordable:r0:expanded_rag",
+      "case_id": "experiment-affordable",
+      "pair_id": "resources",
+      "condition": "expanded_rag",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "experiment-affordable:r0:baseline",
+      "case_id": "experiment-affordable",
+      "pair_id": "resources",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "mission-expertise:r0:graph",
+      "case_id": "mission-expertise",
+      "pair_id": "authority-and-information",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "mission-expertise:r0:expanded_rag",
+      "case_id": "mission-expertise",
+      "pair_id": "authority-and-information",
+      "condition": "expanded_rag",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "mission-expertise:r0:baseline",
+      "case_id": "mission-expertise",
+      "pair_id": "authority-and-information",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "mission-expertise:r0:flat",
+      "case_id": "mission-expertise",
+      "pair_id": "authority-and-information",
+      "condition": "flat",
+      "category": "advice",
+      "status": "invalid_completion",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 0.0,
+      "fidelity": 0.0,
+      "application": 0.0,
+      "context_sensitivity": 0.0
+    },
+    {
+      "attempt_id": "premise-refuted:r0:expanded_rag",
+      "case_id": "premise-refuted",
+      "pair_id": "revisable-conviction",
+      "condition": "expanded_rag",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "premise-refuted:r0:baseline",
+      "case_id": "premise-refuted",
+      "pair_id": "revisable-conviction",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "premise-refuted:r0:flat",
+      "case_id": "premise-refuted",
+      "pair_id": "revisable-conviction",
+      "condition": "flat",
+      "category": "advice",
+      "status": "invalid_completion",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 0.0,
+      "fidelity": 0.0,
+      "application": 0.0,
+      "context_sensitivity": 0.0
+    },
+    {
+      "attempt_id": "premise-refuted:r0:graph",
+      "case_id": "premise-refuted",
+      "pair_id": "revisable-conviction",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "mission-missing-context:r0:baseline",
+      "case_id": "mission-missing-context",
+      "pair_id": "authority-and-information",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.5,
+      "rater_success": [
+        0.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0,
+      "context_sensitivity": 1.5
+    },
+    {
+      "attempt_id": "mission-missing-context:r0:flat",
+      "case_id": "mission-missing-context",
+      "pair_id": "authority-and-information",
+      "condition": "flat",
+      "category": "advice",
+      "status": "invalid_completion",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 0.0,
+      "fidelity": 0.0,
+      "application": 0.0,
+      "context_sensitivity": 0.0
+    },
+    {
+      "attempt_id": "mission-missing-context:r0:graph",
+      "case_id": "mission-missing-context",
+      "pair_id": "authority-and-information",
+      "condition": "graph",
+      "category": "advice",
+      "status": "invalid_completion",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 0.0,
+      "fidelity": 0.0,
+      "application": 0.0,
+      "context_sensitivity": 0.0
+    },
+    {
+      "attempt_id": "mission-missing-context:r0:expanded_rag",
+      "case_id": "mission-missing-context",
+      "pair_id": "authority-and-information",
+      "condition": "expanded_rag",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.5,
+      "rater_success": [
+        0.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0,
+      "context_sensitivity": 1.5
+    },
+    {
+      "attempt_id": "junior-needs-coaching:r0:flat",
+      "case_id": "junior-needs-coaching",
+      "pair_id": "leadership-context",
+      "condition": "flat",
+      "category": "advice",
+      "status": "invalid_completion",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 0.0,
+      "fidelity": 0.0,
+      "application": 0.0,
+      "context_sensitivity": 0.0
+    },
+    {
+      "attempt_id": "junior-needs-coaching:r0:graph",
+      "case_id": "junior-needs-coaching",
+      "pair_id": "leadership-context",
+      "condition": "graph",
+      "category": "advice",
+      "status": "invalid_completion",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 0.0,
+      "fidelity": 0.0,
+      "application": 0.0,
+      "context_sensitivity": 0.0
+    },
+    {
+      "attempt_id": "junior-needs-coaching:r0:expanded_rag",
+      "case_id": "junior-needs-coaching",
+      "pair_id": "leadership-context",
+      "condition": "expanded_rag",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "junior-needs-coaching:r0:baseline",
+      "case_id": "junior-needs-coaching",
+      "pair_id": "leadership-context",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "control-private:r0:graph",
+      "case_id": "control-private",
+      "pair_id": null,
+      "condition": "graph",
+      "category": "control",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null
+    },
+    {
+      "attempt_id": "control-private:r0:expanded_rag",
+      "case_id": "control-private",
+      "pair_id": null,
+      "condition": "expanded_rag",
+      "category": "control",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null
+    },
+    {
+      "attempt_id": "control-private:r0:baseline",
+      "case_id": "control-private",
+      "pair_id": null,
+      "condition": "baseline",
+      "category": "control",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null
+    },
+    {
+      "attempt_id": "control-private:r0:flat",
+      "case_id": "control-private",
+      "pair_id": null,
+      "condition": "flat",
+      "category": "control",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null
+    },
+    {
+      "attempt_id": "learn-from-setback:r0:expanded_rag",
+      "case_id": "learn-from-setback",
+      "pair_id": "hardship",
+      "condition": "expanded_rag",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 1.0,
+      "application": 1.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "learn-from-setback:r0:baseline",
+      "case_id": "learn-from-setback",
+      "pair_id": "hardship",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 1.0,
+      "application": 1.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "learn-from-setback:r0:flat",
+      "case_id": "learn-from-setback",
+      "pair_id": "hardship",
+      "condition": "flat",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 1.0,
+      "application": 1.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "learn-from-setback:r0:graph",
+      "case_id": "learn-from-setback",
+      "pair_id": "hardship",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 1.0,
+      "application": 1.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "experiment-threatens-survival:r0:baseline",
+      "case_id": "experiment-threatens-survival",
+      "pair_id": "resources",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "experiment-threatens-survival:r0:flat",
+      "case_id": "experiment-threatens-survival",
+      "pair_id": "resources",
+      "condition": "flat",
+      "category": "advice",
+      "status": "invalid_completion",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 0.0,
+      "fidelity": 0.0,
+      "application": 0.0,
+      "context_sensitivity": 0.0
+    },
+    {
+      "attempt_id": "experiment-threatens-survival:r0:graph",
+      "case_id": "experiment-threatens-survival",
+      "pair_id": "resources",
+      "condition": "graph",
+      "category": "advice",
+      "status": "invalid_completion",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 0.0,
+      "fidelity": 0.0,
+      "application": 0.0,
+      "context_sensitivity": 0.0
+    },
+    {
+      "attempt_id": "experiment-threatens-survival:r0:expanded_rag",
+      "case_id": "experiment-threatens-survival",
+      "pair_id": "resources",
+      "condition": "expanded_rag",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "control-project:r0:flat",
+      "case_id": "control-project",
+      "pair_id": null,
+      "condition": "flat",
+      "category": "control",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null
+    },
+    {
+      "attempt_id": "control-project:r0:graph",
+      "case_id": "control-project",
+      "pair_id": null,
+      "condition": "graph",
+      "category": "control",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null
+    },
+    {
+      "attempt_id": "control-project:r0:expanded_rag",
+      "case_id": "control-project",
+      "pair_id": null,
+      "condition": "expanded_rag",
+      "category": "control",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null
+    },
+    {
+      "attempt_id": "control-project:r0:baseline",
+      "case_id": "control-project",
+      "pair_id": null,
+      "condition": "baseline",
+      "category": "control",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null
+    },
+    {
+      "attempt_id": "do-not-create-harm:r0:graph",
+      "case_id": "do-not-create-harm",
+      "pair_id": "hardship",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 1.0,
+      "application": 1.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "do-not-create-harm:r0:expanded_rag",
+      "case_id": "do-not-create-harm",
+      "pair_id": "hardship",
+      "condition": "expanded_rag",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 1.0,
+      "application": 1.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "do-not-create-harm:r0:baseline",
+      "case_id": "do-not-create-harm",
+      "pair_id": "hardship",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 1.0,
+      "application": 1.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "do-not-create-harm:r0:flat",
+      "case_id": "do-not-create-harm",
+      "pair_id": "hardship",
+      "condition": "flat",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 1.0,
+      "application": 1.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "control-quote:r0:expanded_rag",
+      "case_id": "control-quote",
+      "pair_id": null,
+      "condition": "expanded_rag",
+      "category": "control",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 1.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null
+    },
+    {
+      "attempt_id": "control-quote:r0:baseline",
+      "case_id": "control-quote",
+      "pair_id": null,
+      "condition": "baseline",
+      "category": "control",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 1.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null
+    },
+    {
+      "attempt_id": "control-quote:r0:flat",
+      "case_id": "control-quote",
+      "pair_id": null,
+      "condition": "flat",
+      "category": "control",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 1.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null
+    },
+    {
+      "attempt_id": "control-quote:r0:graph",
+      "case_id": "control-quote",
+      "pair_id": null,
+      "condition": "graph",
+      "category": "control",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 1.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null
+    },
+    {
+      "attempt_id": "tests-feasible:r0:baseline",
+      "case_id": "tests-feasible",
+      "pair_id": "testability",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0,
+      "context_sensitivity": 1.0
+    },
+    {
+      "attempt_id": "tests-feasible:r0:flat",
+      "case_id": "tests-feasible",
+      "pair_id": "testability",
+      "condition": "flat",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0,
+      "context_sensitivity": 1.0
+    },
+    {
+      "attempt_id": "tests-feasible:r0:graph",
+      "case_id": "tests-feasible",
+      "pair_id": "testability",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0,
+      "context_sensitivity": 1.0
+    },
+    {
+      "attempt_id": "tests-feasible:r0:expanded_rag",
+      "case_id": "tests-feasible",
+      "pair_id": "testability",
+      "condition": "expanded_rag",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0,
+      "context_sensitivity": 1.0
+    },
+    {
+      "attempt_id": "tests-exhausted:r0:flat",
+      "case_id": "tests-exhausted",
+      "pair_id": "testability",
+      "condition": "flat",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "tests-exhausted:r0:graph",
+      "case_id": "tests-exhausted",
+      "pair_id": "testability",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "tests-exhausted:r0:expanded_rag",
+      "case_id": "tests-exhausted",
+      "pair_id": "testability",
+      "condition": "expanded_rag",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "tests-exhausted:r0:baseline",
+      "case_id": "tests-exhausted",
+      "pair_id": "testability",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.5,
+      "context_sensitivity": 1.0
+    },
+    {
+      "attempt_id": "expert-needs-autonomy:r0:graph",
+      "case_id": "expert-needs-autonomy",
+      "pair_id": "leadership-context",
+      "condition": "graph",
+      "category": "advice",
+      "status": "invalid_completion",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 0.0,
+      "fidelity": 0.0,
+      "application": 0.0,
+      "context_sensitivity": 0.0
+    },
+    {
+      "attempt_id": "expert-needs-autonomy:r0:expanded_rag",
+      "case_id": "expert-needs-autonomy",
+      "pair_id": "leadership-context",
+      "condition": "expanded_rag",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "expert-needs-autonomy:r0:baseline",
+      "case_id": "expert-needs-autonomy",
+      "pair_id": "leadership-context",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "rater_success": [
+        1.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0,
+      "context_sensitivity": 2.0
+    },
+    {
+      "attempt_id": "expert-needs-autonomy:r0:flat",
+      "case_id": "expert-needs-autonomy",
+      "pair_id": "leadership-context",
+      "condition": "flat",
+      "category": "advice",
+      "status": "invalid_completion",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 0.0,
+      "fidelity": 0.0,
+      "application": 0.0,
+      "context_sensitivity": 0.0
+    },
+    {
+      "attempt_id": "premise-supported:r0:expanded_rag",
+      "case_id": "premise-supported",
+      "pair_id": "revisable-conviction",
+      "condition": "expanded_rag",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0,
+      "context_sensitivity": 1.0
+    },
+    {
+      "attempt_id": "premise-supported:r0:baseline",
+      "case_id": "premise-supported",
+      "pair_id": "revisable-conviction",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0,
+      "context_sensitivity": 1.0
+    },
+    {
+      "attempt_id": "premise-supported:r0:flat",
+      "case_id": "premise-supported",
+      "pair_id": "revisable-conviction",
+      "condition": "flat",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "rater_success": [
+        0.0,
+        0.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0,
+      "context_sensitivity": 1.0
+    },
+    {
+      "attempt_id": "premise-supported:r0:graph",
+      "case_id": "premise-supported",
+      "pair_id": "revisable-conviction",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.5,
+      "rater_success": [
+        0.0,
+        1.0
+      ],
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0,
+      "context_sensitivity": 1.5
+    }
+  ],
+  "limitations": [
+    "Authored novel-situation pilot; not held-out real Jensen answers, a personality diagnosis, or a population accuracy estimate.",
+    "AI ratings are not human judgments. Expected principles/rubrics never enter generation prompts.",
+    "Expanded RAG changes data; flat adds interpreted rules plus evidence selection; only graph-minus-flat isolates serialization.",
+    "Paired context joint pass requires both variants; it is not an independent psychological measure.",
+    "CPU model request timings exclude TTS, browser and real avatar end-to-end latency.",
+    "Failed/truncated attempts remain in denominators. Rerunning after tuning requires a separately labeled development run."
+  ]
+}

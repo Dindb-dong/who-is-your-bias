@@ -88,9 +88,16 @@ class Settings:
     # Opt-in question-dependent guidance across chat/stream/live. Takes
     # precedence over live_concise, while leaving historical ablations intact.
     adaptive_responses: bool = False
+    # Optional source-bound persona memory. A missing path preserves the
+    # existing retrieval/prompt behavior, including frozen evaluation builders.
+    persona_graph: Path | None = None
+    persona_memory_format: str = "graph"
+    persona_delivery: Path | None = None
     cors_origins: tuple[str, ...] = ("http://localhost:5173", "http://127.0.0.1:5173")
 
     def __post_init__(self) -> None:
+        if self.persona_memory_format not in {"graph", "flat", "compact"}:
+            raise ValueError("persona_memory_format must be graph, flat or compact")
         if self.tts_persona_id is not None and (not isinstance(self.tts_persona_id, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,119}", self.tts_persona_id)):
             raise ValueError("tts_persona_id must be a persona identifier or generic")
         if self.tts_protocol not in {"openai-compatible", "elevenlabs"}:
@@ -188,6 +195,11 @@ class Settings:
             style_examples=os.getenv("BIAS_STYLE_EXAMPLES", "false").lower() == "true",
             live_concise=live_concise in {"true", "1"},
             adaptive_responses=adaptive in {"true", "1"},
+            persona_graph=(Path(os.environ["BIAS_PERSONA_GRAPH"]).expanduser()
+                           if os.getenv("BIAS_PERSONA_GRAPH") else None),
+            persona_memory_format=os.getenv("BIAS_PERSONA_MEMORY_FORMAT", "graph"),
+            persona_delivery=(Path(os.environ["BIAS_PERSONA_DELIVERY"]).expanduser()
+                              if os.getenv("BIAS_PERSONA_DELIVERY") else None),
             cors_origins=tuple(x.strip() for x in os.getenv("BIAS_CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",") if x.strip()),
         )
 

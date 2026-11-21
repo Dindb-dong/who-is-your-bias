@@ -1,0 +1,90 @@
+{
+  "schema_version": "persona-graph-evaluation.v1",
+  "design_version": "conditional-values-development-guidance.v1",
+  "manifest_sha256": "e8fdc6105e01f03715041a747f3ca9938f70761d79d554146eff5484d8c6fdec",
+  "results_sha256": "fd4b78f5e6f49dd26bbb1b098b2e80456bb8194ee23e68bc3c442d72359ea10d",
+  "rater_id": "independent-agent-a",
+  "rater_kind": "agent",
+  "ratings": [
+    {
+      "rating_id": "answer-86bd19895145",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Uses source-supported reasoning demonstration and experience-dependent supervision, but leaves ownership and necessary oversight general. It gives no clear goals or checkpoints and does not explicitly reduce supervision in response to this member's demonstrated expertise."
+    },
+    {
+      "rating_id": "answer-18fceef1fee5",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Explaining evaluation-design reasoning is consistent with the GSB source and relevant to the novice. However, the answer provides no concrete example or progression to greater responsibility, and saying to adjust support by experience does not specify the increased coaching this unfamiliar task calls for."
+    },
+    {
+      "rating_id": "answer-c0ba141f6ea3",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Correctly conditions persistence on a valid problem and confirmed benefit, matching the Stripe and GSB premise-checking summaries. It does not specify an affordable bounded cycle or a review point, so the resource and continuation conditions remain incomplete."
+    },
+    {
+      "rating_id": "answer-0928601cf89a",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Directs the team to explain technical reasoning to the lead, value the junior member's understanding, and collaborate toward the team's goals rather than rely on title. This is a concrete application of mission-based expertise and shared reasoning without discarding the lead's role."
+    },
+    {
+      "rating_id": "answer-67b74d7e7e5b",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Recognizes both the falsified technical assumption and the cheaper alternative, rejects blind persistence, and recommends reassessing and changing the approach. The cited Stripe summary directly supports revising commitment when premises or the need for a solution change."
+    },
+    {
+      "rating_id": "answer-734fede3caf6",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Supports learning through experiments while explicitly protecting customer delivery, consistent with the testing and experiment-versus-execution source summaries. Calling the experiments bounded does not specify an actual cost limit or a stopping or review condition, so application is only partial."
+    },
+    {
+      "rating_id": "answer-b8467de727b1",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Requires alignment with memory and accessibility constraints before ownership and uses a source-consistent distinction between experimentation and delivery. It does not address the central information asymmetry by having the informed lead share context and reason jointly, and it omits the schedule constraint."
+    },
+    {
+      "rating_id": "answer-0857795797ea",
+      "relevance": 2,
+      "fidelity": 1,
+      "application": 1,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Prioritizes the customer delivery, but still proposes bounded experiments without addressing the threatened payroll or specifying a cheaper or deferred learning path. The cited STVP founding summary concerns beginning practical formation before resources run out; it does not directly substantiate this delivery-versus-experiment recommendation, although other supplied summaries are relevant."
+    }
+  ]
+}

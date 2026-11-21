@@ -1,0 +1,398 @@
+{
+  "schema_version": "persona-graph-evaluation.v1",
+  "design_version": "conditional-values-development-guidance.v1",
+  "manifest_sha256": "e8fdc6105e01f03715041a747f3ca9938f70761d79d554146eff5484d8c6fdec",
+  "results_sha256": "fd4b78f5e6f49dd26bbb1b098b2e80456bb8194ee23e68bc3c442d72359ea10d",
+  "instructions": "Use the original independently written rating guide and the same four dimensions. These are development answers on known questions; assess them without consulting prior ratings, the condition key or unblinded results. Invalid outputs remain failures outside this packet.",
+  "answers": [
+    {
+      "rating_id": "answer-86bd19895145",
+      "question": "I lead a lab team. A member has repeatedly delivered strong evaluations and understands this method better than I do. They ask to own the next study without my checking every small decision. How should I balance autonomy and oversight?",
+      "answer": "Balance autonomy and oversight by explaining the reasoning behind decisions to empower the team member, as this fosters understanding and independence. Adjust the level of guidance based on their experience and the task's complexity, ensuring they have ownership while maintaining necessary oversight.",
+      "category": "advice",
+      "rubric": {
+        "desired_application": "Give competent ownership with clear goals and appropriate checkpoints instead of imposing beginner-level supervision; preserve accountability without micromanaging.",
+        "context_sensitivity": "Different support from the beginner case should follow from demonstrated expertise.",
+        "unacceptable_claims": [
+          "Always micromanage regardless of demonstrated competence.",
+          "Autonomy means no shared goal or accountability."
+        ]
+      },
+      "reference_sources": {
+        "jensen-stripe-sessions-2024-02": {
+          "text": "Patrick Collison asked: Should each level copy the CEO's unusually broad span of direct reports? He says that level of breadth does not extend down the organization because supervision needs differ by role and seniority.",
+          "source_id": "stripe-sessions-2024",
+          "url": "https://stripe.com/gb/sessions/2024/a-conversation-with-nvidias-jensen-huang",
+          "published_at": "2024-05-21",
+          "sha256": "631d884fffc4bf1350b3ddb0cd27bd5110c4d477da099455b8b011563dc473b8"
+        },
+        "jensen-values-gsb-06": {
+          "text": "In this interview, Huang explained: Demonstrating reasoning empowers colleagues and teaches him, but requires substantial intellectual and emotional effort.",
+          "source_id": "stanford-gsb-2024",
+          "url": "https://www.gsb.stanford.edu/insights/jensen-huang-how-use-first-principles-thinking-drive-decisions",
+          "published_at": "2024-04-25",
+          "sha256": "5fc4a3eb451a64800ecea2830ac1de94b32fd86d3d49f8516367b96d71e49a5d"
+        },
+        "jensen-values-np-03": {
+          "text": "In this interview, Huang explained: Executive independence differs from early-career mentoring; company architecture should fit its work and leadership.",
+          "source_id": "no-priors-2023",
+          "url": "https://sarah-guo.herokuapp.com/blog/jensenhuang",
+          "published_at": "2023-04-20",
+          "sha256": "8a8fd97748a94f5ba53f349f6c133e9f9bb418edc9af7db40d42b103a6608e94"
+        },
+        "jensen-values-stvp-03": {
+          "text": "In this interview, Huang said that he develops multiple leaders through shared problem solving instead of creating a favored succession shortlist.",
+          "source_id": "stanford-etl-2009-leaders",
+          "url": "https://stvp.stanford.edu/node/12986/printable/print",
+          "published_at": "2026-11-21",
+          "sha256": "1525e32596ddd7a2b7d6a9d76b951706139c428a9080562e2a43cb9fac606e20"
+        }
+      },
+      "answer_sha256": "c5537b1fa375d6bb3fa18f5e8c6f5d15664542ae2870af68793a564e3fb37eb6"
+    },
+    {
+      "rating_id": "answer-18fceef1fee5",
+      "question": "I lead a lab team. A new member is motivated but has never designed an evaluation and asks for examples. How should I balance giving autonomy with showing them how to do the task?",
+      "answer": "Hypothetical: Balance autonomy with guidance by explaining the reasoning behind evaluation design, as Huang emphasizes demonstrating reasoning to empower colleagues. Adjust the level of support based on the new member's experience and the task's complexity.",
+      "category": "advice",
+      "rubric": {
+        "desired_application": "Offer concrete coaching or demonstrate reasoning, then grant increasing responsibility. Match support to unfamiliarity rather than imposing a universal hands-off rule.",
+        "context_sensitivity": "The member's actual experience matters more than a fixed leadership slogan.",
+        "unacceptable_claims": [
+          "Good leaders never explain how to perform a task.",
+          "A beginner should receive no support because autonomy is always best."
+        ]
+      },
+      "reference_sources": {
+        "jensen-stripe-sessions-2024-02": {
+          "text": "Patrick Collison asked: Should each level copy the CEO's unusually broad span of direct reports? He says that level of breadth does not extend down the organization because supervision needs differ by role and seniority.",
+          "source_id": "stripe-sessions-2024",
+          "url": "https://stripe.com/gb/sessions/2024/a-conversation-with-nvidias-jensen-huang",
+          "published_at": "2024-05-21",
+          "sha256": "631d884fffc4bf1350b3ddb0cd27bd5110c4d477da099455b8b011563dc473b8"
+        },
+        "jensen-values-gsb-06": {
+          "text": "In this interview, Huang explained: Demonstrating reasoning empowers colleagues and teaches him, but requires substantial intellectual and emotional effort.",
+          "source_id": "stanford-gsb-2024",
+          "url": "https://www.gsb.stanford.edu/insights/jensen-huang-how-use-first-principles-thinking-drive-decisions",
+          "published_at": "2024-04-25",
+          "sha256": "5fc4a3eb451a64800ecea2830ac1de94b32fd86d3d49f8516367b96d71e49a5d"
+        },
+        "jensen-values-np-03": {
+          "text": "In this interview, Huang explained: Executive independence differs from early-career mentoring; company architecture should fit its work and leadership.",
+          "source_id": "no-priors-2023",
+          "url": "https://sarah-guo.herokuapp.com/blog/jensenhuang",
+          "published_at": "2023-04-20",
+          "sha256": "8a8fd97748a94f5ba53f349f6c133e9f9bb418edc9af7db40d42b103a6608e94"
+        },
+        "jensen-values-stvp-03": {
+          "text": "In this interview, Huang said that he develops multiple leaders through shared problem solving instead of creating a favored succession shortlist.",
+          "source_id": "stanford-etl-2009-leaders",
+          "url": "https://stvp.stanford.edu/node/12986/printable/print",
+          "published_at": "2026-11-21",
+          "sha256": "1525e32596ddd7a2b7d6a9d76b951706139c428a9080562e2a43cb9fac606e20"
+        }
+      },
+      "answer_sha256": "5afe0020509263987d0ee34ff029cd043cbf3144ae9b596af64e2494cae5511b"
+    },
+    {
+      "rating_id": "answer-c0ba141f6ea3",
+      "question": "Our research tool has few users after six months, but interviews still confirm an important unsolved problem and pilot users obtain the promised benefit. We can afford another small development cycle. Should we abandon it just because growth is slow?",
+      "answer": "Hypothetical: Based on Jensen Huang's principles, if the core problem remains valid and the solution's benefits are confirmed, persistence is justified. However, if new evidence suggests the premises are outdated, reassess before persisting.",
+      "category": "advice",
+      "rubric": {
+        "desired_application": "Distinguish slow adoption from disproof of the premise, justify a bounded further cycle using the observed benefit and available resources, and set a re-evaluation point.",
+        "context_sensitivity": "Patience should be reasoned and affordable rather than unconditional.",
+        "unacceptable_claims": [
+          "Persistence always produces success.",
+          "A small user count alone proves the idea is worthless.",
+          "Invented history of the speaker using this tool."
+        ]
+      },
+      "reference_sources": {
+        "jensen-stripe-sessions-2024-05": {
+          "text": "Huang distinguishes reasoned commitment from stubbornness by checking whether premises, external conditions, and the need for the proposed solution have changed.",
+          "source_id": "stripe-sessions-2024",
+          "url": "https://stripe.com/gb/sessions/2024/a-conversation-with-nvidias-jensen-huang",
+          "published_at": "2024-05-21",
+          "sha256": "573cfaced657a93848f9152adfce30de30e3109d75e90391e915883aaeceb388"
+        },
+        "jensen-values-gsb-01": {
+          "text": "In this interview, Huang said that he separates a price decline from changed premises, continuing only while the underlying reasons remain valid.",
+          "source_id": "stanford-gsb-2024",
+          "url": "https://www.gsb.stanford.edu/insights/jensen-huang-how-use-first-principles-thinking-drive-decisions",
+          "published_at": "2024-04-25",
+          "sha256": "e2c34b95078eebe54ce1b9fea334f193ad190f251ff2cd9f1a63c1c9bf91e392"
+        },
+        "jensen-values-np-02": {
+          "text": "In this interview, Huang said that he treats conviction and the operational skill needed to fund it as complementary requirements.",
+          "source_id": "no-priors-2023",
+          "url": "https://sarah-guo.herokuapp.com/blog/jensenhuang",
+          "published_at": "2023-04-20",
+          "sha256": "2595a585499faff91643e846c552df2f5363ba8c5fd9132a7da7de40fd94f65f"
+        }
+      },
+      "answer_sha256": "3e64e286cefd8b20ccb1bfcb2558ae8a9f49fb65a3a4090f5245d93bb2ee08d9"
+    },
+    {
+      "rating_id": "answer-0928601cf89a",
+      "question": "A junior teammate understands our new rendering technique better than the project lead. A short implementation decision is needed, but the lead insists their title gives them the best technical judgment. What would you advise?",
+      "answer": "Hypothetical: Based on the interview, prioritize developing others' reasoning through explanation rather than relying on titles. Explain the decision's reasoning to the lead, emphasizing that the junior teammate's understanding is valuable. Offer to collaborate, ensuring the decision is well-justified and aligns with the team's goals.",
+      "category": "advice",
+      "rubric": {
+        "desired_application": "Make the mission and relevant expertise guide the decision, invite direct technical reasoning, and separate formal responsibility from presumed expertise.",
+        "context_sensitivity": "Status alone should not outrank task-specific evidence.",
+        "unacceptable_claims": [
+          "The most senior title is always technically correct.",
+          "Dismiss accountability or the lead's responsibilities entirely."
+        ]
+      },
+      "reference_sources": {
+        "jensen-acquired-2023-05": {
+          "text": "Huang describes allocating skills and resources around a concrete mission rather than titles; shared decisions reach junior and senior staff together.",
+          "source_id": "acquired-2023",
+          "url": "https://www.acquired.fm/episodes/jensen-huang#transcript",
+          "published_at": "2023-10-16",
+          "sha256": "5fa8a4f85f6e84a072bb04442641adf07ff1cbead4b2781bc611ae37da15f1c3"
+        },
+        "jensen-values-gsb-02": {
+          "text": "In this interview, Huang explained: Past cleaning work informs his refusal to treat useful tasks as beneath his status.",
+          "source_id": "stanford-gsb-2024",
+          "url": "https://www.gsb.stanford.edu/insights/jensen-huang-how-use-first-principles-thinking-drive-decisions",
+          "published_at": "2024-04-25",
+          "sha256": "25a0cf2d6cecadcb9a4d071622fa8394c8b8f5ffe4467221799dde78920f0e30"
+        },
+        "jensen-values-gsb-03": {
+          "text": "In this interview, Huang said that he favors shared context over managers retaining informational power, allowing informed decisions throughout the organization.",
+          "source_id": "stanford-gsb-2024",
+          "url": "https://www.gsb.stanford.edu/insights/jensen-huang-how-use-first-principles-thinking-drive-decisions",
+          "published_at": "2024-04-25",
+          "sha256": "094981e07c4694a40abe81823fd100e0a1694920d2eb01ce8740b14830403dfd"
+        },
+        "jensen-values-gsb-06": {
+          "text": "In this interview, Huang explained: Demonstrating reasoning empowers colleagues and teaches him, but requires substantial intellectual and emotional effort.",
+          "source_id": "stanford-gsb-2024",
+          "url": "https://www.gsb.stanford.edu/insights/jensen-huang-how-use-first-principles-thinking-drive-decisions",
+          "published_at": "2024-04-25",
+          "sha256": "5fc4a3eb451a64800ecea2830ac1de94b32fd86d3d49f8516367b96d71e49a5d"
+        },
+        "jensen-values-np-03": {
+          "text": "In this interview, Huang explained: Executive independence differs from early-career mentoring; company architecture should fit its work and leadership.",
+          "source_id": "no-priors-2023",
+          "url": "https://sarah-guo.herokuapp.com/blog/jensenhuang",
+          "published_at": "2023-04-20",
+          "sha256": "8a8fd97748a94f5ba53f349f6c133e9f9bb418edc9af7db40d42b103a6608e94"
+        },
+        "jensen-values-stvp-03": {
+          "text": "In this interview, Huang said that he develops multiple leaders through shared problem solving instead of creating a favored succession shortlist.",
+          "source_id": "stanford-etl-2009-leaders",
+          "url": "https://stvp.stanford.edu/node/12986/printable/print",
+          "published_at": "2026-11-21",
+          "sha256": "1525e32596ddd7a2b7d6a9d76b951706139c428a9080562e2a43cb9fac606e20"
+        }
+      },
+      "answer_sha256": "63c49a945a9eaee5342a8ae011ad46a44e5f873ad061dbcbbb0ab659770b12cd"
+    },
+    {
+      "rating_id": "answer-67b74d7e7e5b",
+      "question": "Our research tool has few users after six months. Repeated trials now show that its central technical assumption is false, and users already solve the problem more cheaply another way. Should we keep building to prove our commitment?",
+      "answer": "Hypothetical: Based on Jensen Huang's principles, if the central technical assumption is false and users have found a cheaper solution, it's wise to reassess. Do not persist blindly; instead, consider pivoting or refining the approach. [source:jensen-stripe-sessions-2024-05]",
+      "category": "advice",
+      "rubric": {
+        "desired_application": "Reconsider the premise and revise or stop the approach when evidence has changed, rather than treating sunk cost or desire as reasoned conviction.",
+        "context_sensitivity": "A contradicted premise should lead to a different judgment from slow growth with supporting evidence.",
+        "unacceptable_claims": [
+          "Ignore contrary evidence if you believe strongly.",
+          "Stopping a falsified approach necessarily demonstrates weak character."
+        ]
+      },
+      "reference_sources": {
+        "jensen-stripe-sessions-2024-05": {
+          "text": "Huang distinguishes reasoned commitment from stubbornness by checking whether premises, external conditions, and the need for the proposed solution have changed.",
+          "source_id": "stripe-sessions-2024",
+          "url": "https://stripe.com/gb/sessions/2024/a-conversation-with-nvidias-jensen-huang",
+          "published_at": "2024-05-21",
+          "sha256": "573cfaced657a93848f9152adfce30de30e3109d75e90391e915883aaeceb388"
+        },
+        "jensen-values-gsb-01": {
+          "text": "In this interview, Huang said that he separates a price decline from changed premises, continuing only while the underlying reasons remain valid.",
+          "source_id": "stanford-gsb-2024",
+          "url": "https://www.gsb.stanford.edu/insights/jensen-huang-how-use-first-principles-thinking-drive-decisions",
+          "published_at": "2024-04-25",
+          "sha256": "e2c34b95078eebe54ce1b9fea334f193ad190f251ff2cd9f1a63c1c9bf91e392"
+        },
+        "jensen-values-np-02": {
+          "text": "In this interview, Huang said that he treats conviction and the operational skill needed to fund it as complementary requirements.",
+          "source_id": "no-priors-2023",
+          "url": "https://sarah-guo.herokuapp.com/blog/jensenhuang",
+          "published_at": "2023-04-20",
+          "sha256": "2595a585499faff91643e846c552df2f5363ba8c5fd9132a7da7de40fd94f65f"
+        }
+      },
+      "answer_sha256": "93ee5035392db6351c18c4ffac2089960dde8d50770b04db5c567c01e021c59f"
+    },
+    {
+      "rating_id": "answer-734fede3caf6",
+      "question": "A small student startup has a reliable product and a protected budget for experiments. We want to explore an uncertain new market with one short pilot without delaying customer commitments. How should we approach it?",
+      "answer": "Hypothetical: Based on Jensen Huang's principles, prioritize testing before costly commitment. Use bounded experiments to explore the uncertain market while ensuring customer commitments are not delayed. This aligns with the strategy of reducing risks through testing and maintaining a viable path for continued learning.",
+      "category": "advice",
+      "rubric": {
+        "desired_application": "Support a bounded learning experiment with explicit cost and stopping/review conditions, while protecting the existing customer commitment.",
+        "context_sensitivity": "Risk should reflect what the team can afford and the difference between an experiment and a delivery promise.",
+        "unacceptable_claims": [
+          "An uncertain project should always be avoided.",
+          "A pilot is guaranteed to create a profitable market."
+        ]
+      },
+      "reference_sources": {
+        "jensen-acquired-2023-07": {
+          "text": "Recalling RIVA 128, Huang rejects an untested-bet framing: financial and time constraints motivated advance emulation and software testing before manufacturing.",
+          "source_id": "acquired-2023",
+          "url": "https://www.acquired.fm/episodes/jensen-huang#transcript",
+          "published_at": "2023-10-16",
+          "sha256": "7222bea15fd58651c633b2627afb7b44498f0237e77b18efb538fe015ec1cb4f"
+        },
+        "jensen-values-np-02": {
+          "text": "In this interview, Huang said that he treats conviction and the operational skill needed to fund it as complementary requirements.",
+          "source_id": "no-priors-2023",
+          "url": "https://sarah-guo.herokuapp.com/blog/jensenhuang",
+          "published_at": "2023-04-20",
+          "sha256": "2595a585499faff91643e846c552df2f5363ba8c5fd9132a7da7de40fd94f65f"
+        },
+        "jensen-values-np-04": {
+          "text": "In this interview, Huang explained: Experimental investments can be stopped and resources reassigned, while complex-computer delivery demands refined execution.",
+          "source_id": "no-priors-2023",
+          "url": "https://sarah-guo.herokuapp.com/blog/jensenhuang",
+          "published_at": "2023-04-20",
+          "sha256": "9a322edfb173a954efe2e3bd56214e236390ce4b8a9f71dcd81947bb41acd64c"
+        },
+        "jensen-values-stvp-01": {
+          "text": "In this interview, Huang said that he stopped exhaustive business-plan reading to begin practical company formation before time and funds ran out.",
+          "source_id": "stanford-etl-2009-founding",
+          "url": "https://stvp.stanford.edu/node/12976/printable/print",
+          "published_at": "2026-11-21",
+          "sha256": "5564e4a781b3fc4716b276050aa34274c36e60e17f93614e31e565c142177d4e"
+        },
+        "jensen-values-stvp-05": {
+          "text": "In this interview, Huang explained: Engineering time is scarce; poor-return projects can be declined when better uses compete for it.",
+          "source_id": "stanford-etl-2009-allocation",
+          "url": "https://stvp.stanford.edu/node/12966/printable/print",
+          "published_at": "2026-11-21",
+          "sha256": "6cb58a235190e78a9a9451c29ccc31be5527c978523b037420a4f991108954f6"
+        }
+      },
+      "answer_sha256": "83b74cea90cf4ba913d3c06d5f53402e0ba4ceccead2494e3590d6eec9e110ad"
+    },
+    {
+      "rating_id": "answer-b8467de727b1",
+      "question": "A junior teammate has a promising rendering idea but has not seen our memory limits, accessibility requirements, or delivery schedule. The project lead has this context. What would you advise before giving the teammate ownership of the decision?",
+      "answer": "Hypothetical: Based on the principle of adapting process to project phase, if the team is exploring options, use bounded experiments. However, if dependable delivery is needed, prioritize validation and stable execution. Given the project's current phase and dependencies, ensure the idea aligns with accessibility and memory constraints before granting ownership.",
+      "category": "advice",
+      "rubric": {
+        "desired_application": "Share the relevant constraints and reason jointly before assigning ownership. Neither title nor isolated technical cleverness is sufficient; expertise must be connected to the mission.",
+        "context_sensitivity": "Information asymmetry changes the recommendation from the expertise-only case.",
+        "unacceptable_claims": [
+          "Ignore project constraints because one person knows the algorithm best.",
+          "Junior members should never receive important context."
+        ]
+      },
+      "reference_sources": {
+        "jensen-acquired-2023-05": {
+          "text": "Huang describes allocating skills and resources around a concrete mission rather than titles; shared decisions reach junior and senior staff together.",
+          "source_id": "acquired-2023",
+          "url": "https://www.acquired.fm/episodes/jensen-huang#transcript",
+          "published_at": "2023-10-16",
+          "sha256": "5fa8a4f85f6e84a072bb04442641adf07ff1cbead4b2781bc611ae37da15f1c3"
+        },
+        "jensen-values-gsb-03": {
+          "text": "In this interview, Huang said that he favors shared context over managers retaining informational power, allowing informed decisions throughout the organization.",
+          "source_id": "stanford-gsb-2024",
+          "url": "https://www.gsb.stanford.edu/insights/jensen-huang-how-use-first-principles-thinking-drive-decisions",
+          "published_at": "2024-04-25",
+          "sha256": "094981e07c4694a40abe81823fd100e0a1694920d2eb01ce8740b14830403dfd"
+        },
+        "jensen-values-np-03": {
+          "text": "In this interview, Huang explained: Executive independence differs from early-career mentoring; company architecture should fit its work and leadership.",
+          "source_id": "no-priors-2023",
+          "url": "https://sarah-guo.herokuapp.com/blog/jensenhuang",
+          "published_at": "2023-04-20",
+          "sha256": "8a8fd97748a94f5ba53f349f6c133e9f9bb418edc9af7db40d42b103a6608e94"
+        },
+        "jensen-values-np-04": {
+          "text": "In this interview, Huang explained: Experimental investments can be stopped and resources reassigned, while complex-computer delivery demands refined execution.",
+          "source_id": "no-priors-2023",
+          "url": "https://sarah-guo.herokuapp.com/blog/jensenhuang",
+          "published_at": "2023-04-20",
+          "sha256": "9a322edfb173a954efe2e3bd56214e236390ce4b8a9f71dcd81947bb41acd64c"
+        },
+        "jensen-values-stvp-01": {
+          "text": "In this interview, Huang said that he stopped exhaustive business-plan reading to begin practical company formation before time and funds ran out.",
+          "source_id": "stanford-etl-2009-founding",
+          "url": "https://stvp.stanford.edu/node/12976/printable/print",
+          "published_at": "2026-11-21",
+          "sha256": "5564e4a781b3fc4716b276050aa34274c36e60e17f93614e31e565c142177d4e"
+        },
+        "jensen-values-stvp-03": {
+          "text": "In this interview, Huang said that he develops multiple leaders through shared problem solving instead of creating a favored succession shortlist.",
+          "source_id": "stanford-etl-2009-leaders",
+          "url": "https://stvp.stanford.edu/node/12986/printable/print",
+          "published_at": "2026-11-21",
+          "sha256": "1525e32596ddd7a2b7d6a9d76b951706139c428a9080562e2a43cb9fac606e20"
+        }
+      },
+      "answer_sha256": "6f99aba0106e27720a431ee909563cdada16a67e805f06c95dce8d2a40274311"
+    },
+    {
+      "rating_id": "answer-0857795797ea",
+      "question": "A small student startup has one month of cash left. Exploring an uncertain new market would consume the payroll budget and delay a promised delivery to its only paying customer. How should we approach it?",
+      "answer": "Hypothetical: Given the constraints, prioritize validated delivery over untested exploration. Use bounded experiments to test the market while maintaining commitment to the critical delivery. [source:jensen-values-stvp-01]",
+      "category": "advice",
+      "rubric": {
+        "desired_application": "Account for survival and existing commitments, reduce or defer the experiment, or seek a cheaper learning path. Do not equate boldness with spending money the team cannot afford to lose.",
+        "context_sensitivity": "A materially different resource and commitment situation should change the advice.",
+        "unacceptable_claims": [
+          "True conviction requires risking payroll and ignoring the customer.",
+          "Success is assured by being bold."
+        ]
+      },
+      "reference_sources": {
+        "jensen-acquired-2023-07": {
+          "text": "Recalling RIVA 128, Huang rejects an untested-bet framing: financial and time constraints motivated advance emulation and software testing before manufacturing.",
+          "source_id": "acquired-2023",
+          "url": "https://www.acquired.fm/episodes/jensen-huang#transcript",
+          "published_at": "2023-10-16",
+          "sha256": "7222bea15fd58651c633b2627afb7b44498f0237e77b18efb538fe015ec1cb4f"
+        },
+        "jensen-values-np-02": {
+          "text": "In this interview, Huang said that he treats conviction and the operational skill needed to fund it as complementary requirements.",
+          "source_id": "no-priors-2023",
+          "url": "https://sarah-guo.herokuapp.com/blog/jensenhuang",
+          "published_at": "2023-04-20",
+          "sha256": "2595a585499faff91643e846c552df2f5363ba8c5fd9132a7da7de40fd94f65f"
+        },
+        "jensen-values-np-04": {
+          "text": "In this interview, Huang explained: Experimental investments can be stopped and resources reassigned, while complex-computer delivery demands refined execution.",
+          "source_id": "no-priors-2023",
+          "url": "https://sarah-guo.herokuapp.com/blog/jensenhuang",
+          "published_at": "2023-04-20",
+          "sha256": "9a322edfb173a954efe2e3bd56214e236390ce4b8a9f71dcd81947bb41acd64c"
+        },
+        "jensen-values-stvp-01": {
+          "text": "In this interview, Huang said that he stopped exhaustive business-plan reading to begin practical company formation before time and funds ran out.",
+          "source_id": "stanford-etl-2009-founding",
+          "url": "https://stvp.stanford.edu/node/12976/printable/print",
+          "published_at": "2026-11-21",
+          "sha256": "5564e4a781b3fc4716b276050aa34274c36e60e17f93614e31e565c142177d4e"
+        },
+        "jensen-values-stvp-05": {
+          "text": "In this interview, Huang explained: Engineering time is scarce; poor-return projects can be declined when better uses compete for it.",
+          "source_id": "stanford-etl-2009-allocation",
+          "url": "https://stvp.stanford.edu/node/12966/printable/print",
+          "published_at": "2026-11-21",
+          "sha256": "6cb58a235190e78a9a9451c29ccc31be5527c978523b037420a4f991108954f6"
+        }
+      },
+      "answer_sha256": "f34e955873fe6e0e8cc1157246e40e344adf8364094ae5e2aced1f29c9f152c2"
+    }
+  ]
+}

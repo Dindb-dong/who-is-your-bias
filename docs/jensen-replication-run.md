@@ -1,5 +1,10 @@
 # Jensen persona, speech, and avatar execution
 
+> The opt-in source-bound persona graph and matched real-model evaluation are
+> recorded in [the persona graph implementation note](jensen-persona-graph.md).
+> The conditional-values revision and expanded source acquisition are tracked
+> in [the v2 execution record](persona-values-v2-execution.md).
+
 > The opt-in question-dependent answer length/structure extension to PR #24 is
 > recorded in [the adaptive answer implementation note](yaicon-adaptive-answers.md).
 > Actual model quality and deployment latency remain separate acceptance gates.
@@ -97,4 +102,12 @@ PR #18 now preserves [repository operating rules](../AGENTS.md) and the
 does not establish completion of text adaptation, speech adaptation, new avatar
 generation, or response-quality experiments. Follow the handoff's M0-M7 gates
 and save verified remote checkpoints throughout any later implementation.
+
+# Conditional delivery follow-up
+
+For the opt-in compact values/reaction/style work and the fresh matched-evidence
+pilot, see [the 2026-11-21 delivery execution record](persona-delivery-execution.md).
+This is separate from acoustic speaker cloning and does not establish a quality
+improvement: the completed 36-attempt pilot did not beat matched-evidence
+prompting and increased median CPU completion time. The feature remains opt-in.
 
