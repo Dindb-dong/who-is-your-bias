@@ -9,7 +9,7 @@ import uuid
 from collections import OrderedDict
 from dataclasses import dataclass
 
-from .gesture import FPS as GESTURE_FPS, POSE_WIDTH, GestureEngine
+from .gesture import ENGINE_LABEL, FPS as GESTURE_FPS, POSE_WIDTH, GestureEngine
 from .lipsync import LipsyncEngine, LipsyncResult, wav_duration_ms
 from .providers import ProviderError, SpeechProvider
 
@@ -99,7 +99,7 @@ class SpeechPackages:
                     motion_id = self.put(motion.motion, "application/octet-stream")
                     description.update(motion_url=f"/api/speech/clips/{motion_id}", format="smplx-axis-angle-f32le",
                                        fps=GESTURE_FPS, frames=motion.frames, width=POSE_WIDTH, audio_sha256=result["audio_sha256"],
-                                       engine="emage-audio (pretrained on BEAT2)", compute_ms=motion.compute_ms)
+                                       engine=ENGINE_LABEL, compute_ms=motion.compute_ms)
                 result["gesture"] = description
             return result
         finally:
