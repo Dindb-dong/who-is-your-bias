@@ -43,6 +43,8 @@ def persona_messages(messages, *, guided_length=False):
     result = [dict(m) for m in messages]
     if not result or result[0].get("role") != "system":
         raise ValueError("Expected a system prompt")
+    if result[0]["content"].startswith("YAICON project/current-source QA."):
+        return result
     result[0]["content"] = result[0]["content"].replace(
         "using third person.", "using conditional simulated first person."
     ) + SPEAKING_RULES.replace(
@@ -209,13 +211,20 @@ def create_app():
         tts = provider("TTS", "http://127.0.0.1:8104/v1", "qwen3-tts")
         voice_id = os.getenv("BIAS_TTS_VOICE", "default" if os.getenv("BIAS_TTS_BASE_URL") else "reference")
     asr = provider("ASR")
+    translation = provider("TRANSLATION")
     local_asr = find_local_whisper(PROJECT) if not asr.configured and "transcription" in signature(upstream_app).parameters else None
     custom_tts = bool(elevenlabs or os.getenv("BIAS_TTS_BASE_URL"))
     adaptive = os.getenv("BIAS_ADAPTIVE_RESPONSES", "false").lower() in {"true", "1"}
     concise = os.getenv("BIAS_LIVE_CONCISE", "false").lower() in {"true", "1"}
     external = any(urlsplit(item.base_url).hostname not in {"127.0.0.1", "localhost", "::1"}
-        for item in (llm, tts, asr) if item.base_url)
+        for item in (llm, tts, asr, translation) if item.base_url)
     baseline = Settings()
+    qa_delivery = {}
+    if hasattr(baseline, "qa_knowledge_dir"):
+        qa_delivery = {"qa_knowledge_dir": Path(os.environ["BIAS_QA_KNOWLEDGE_DIR"]).expanduser() if os.getenv("BIAS_QA_KNOWLEDGE_DIR") else None,
+                       "translation": translation, "translation_timeout": float(os.getenv("BIAS_TRANSLATION_TIMEOUT", "12"))}
+    elif os.getenv("BIAS_QA_KNOWLEDGE_DIR") or translation.configured:
+        raise ValueError("Update the Python studio checkout before enabling QA knowledge or translated subtitles")
     policy = {"adaptive_responses": adaptive, "live_concise": concise} if hasattr(baseline, "adaptive_responses") else {}
     config = replace(baseline, corpus_dir=output / "corpus", persona_snapshot=output / "snapshot.json",
         web_dir=web_dir, llm=llm, tts=tts, asr=asr,
@@ -225,7 +234,7 @@ def create_app():
         llm_max_tokens=280,
         motion_catalog=studio / "data/motion/jensen-multievent.v1.json" if studio in (GESTURE_STUDIO, PR19) else None,
         motion_asset_root=studio / "apps/web/public",
-        llm_context_window=15000, max_response_chars=3000, request_timeout=180, retrieval_limit=3, **policy, **speech_protocol)
+        llm_context_window=15000, max_response_chars=3000, request_timeout=180, retrieval_limit=3, **policy, **speech_protocol, **qa_delivery)
     corpus = Corpus.load(config.corpus_dir)
     validate_card(read_json(card_path), corpus)
     validate_links(links, corpus)
@@ -235,7 +244,9 @@ def create_app():
             system = messages[0]["content"] if messages else ""
             guided_length = bool(policy) and ("adaptive-answer.v1" in system or "Live spoken-answer mode:" in system or "현장 음성 답변은" in system)
             transformed = persona_messages(messages, guided_length=guided_length)
-            transformed, selected = with_links(transformed, links)
+            # Current/project facts must not gain old biographical decision
+            # notes or an instruction to speak as a current NVIDIA executive.
+            transformed, selected = (transformed, []) if system.startswith("YAICON project/current-source QA.") else with_links(transformed, links)
             prompt_dir = output / "effective-prompts"
             prompt_dir.mkdir(exist_ok=True)
             write_json(prompt_dir / f"{uuid4().hex}.json", {"prompt_version": PROMPT_VERSION,

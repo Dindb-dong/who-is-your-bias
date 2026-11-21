@@ -1,0 +1,140 @@
+{
+  "case": "news",
+  "question": "현재 엔비디아 CEO에 대한 최신 발표를 알려 주세요.",
+  "turn": {
+    "id": "7ec701cab2a349cbb741bf8fff1b3853",
+    "session_id": "83bde6411cb8471589d0feca1add6560",
+    "text": "Jensen Huang has resigned as CEO of NVIDIA, effective immediately, as announced on November 12, 2026. Colette Kress was appointed as interim CEO while continuing her role as CFO.",
+    "language": "en",
+    "mode": "behavior",
+    "provider": "openai",
+    "citations": [
+      {
+        "evidence_id": "QA-news-leadership-nov12",
+        "source_id": "QA-news-leadership-nov12",
+        "title": "NVIDIA leadership transition announcement",
+        "url": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+        "locator": {
+          "label": "Published 2026-11-12; reviewed 2026-11-21T14:40:00+00:00; company_claim",
+          "start_seconds": null,
+          "end_seconds": null,
+          "timeline": "reviewed_qa_reference"
+        },
+        "text": "In a November 12, 2026 announcement, NVIDIA said Jensen Huang had resigned as president, chief executive officer and board member with immediate effect. It announced Colette Kress as interim CEO while continuing her CFO role. This is an attributed account of that dated announcement, not an unqualified claim about who holds office at a later time. The announcement does not establish a private-life allegation or a cause connecting such an allegation to the leadership change."
+      }
+    ],
+    "behavior": {
+      "cues": [
+        {
+          "start_ms": 0,
+          "duration_ms": 900,
+          "channel": "face",
+          "name": "brow_raise",
+          "intensity": 0.3,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 0,
+          "duration_ms": 550,
+          "channel": "gaze",
+          "name": "center",
+          "intensity": 0.2,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 350,
+          "duration_ms": 850,
+          "channel": "head",
+          "name": "nod",
+          "intensity": 0.25,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 1200,
+          "duration_ms": 1600,
+          "channel": "gesture",
+          "name": "open_palm",
+          "intensity": 0.4,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 5786,
+          "duration_ms": 1100,
+          "channel": "head",
+          "name": "nod",
+          "intensity": 0.18,
+          "provenance": "designed",
+          "evidence_ids": []
+        }
+      ],
+      "speech": {
+        "rate": 1.0,
+        "pitch": 1.0,
+        "pause_ms": 260
+      },
+      "duration_ms": 11573,
+      "timing_basis": "estimated_text",
+      "motion": null
+    },
+    "grounding": {
+      "status": "unverified",
+      "retrieved_ids": [
+        "QA-news-leadership-nov12"
+      ],
+      "invalid_citation_ids": [],
+      "reason": "Dated auxiliary sources; generated factual entailment is unreviewed.",
+      "citation_status": "complete",
+      "citation_unit_count": 2,
+      "cited_unit_count": 2,
+      "malformed_citations": [],
+      "semantic_status": "unreviewed"
+    },
+    "metrics": {
+      "retrieval_ms": 0.0,
+      "generation_ms": 23320.219,
+      "total_ms": 23321.533
+    },
+    "context": {
+      "qa_knowledge": {
+        "version": "qa-knowledge.v1",
+        "route": "news",
+        "reason": "reviewed_reference_match",
+        "limitations": [],
+        "live_web_search": false,
+        "factual_evidence": [
+          {
+            "id": "QA-news-leadership-nov12",
+            "citation": "[source:QA-news-leadership-nov12]",
+            "title": "NVIDIA leadership transition announcement",
+            "text": "In a November 12, 2026 announcement, NVIDIA said Jensen Huang had resigned as president, chief executive officer and board member with immediate effect. It announced Colette Kress as interim CEO while continuing her CFO role. This is an attributed account of that dated announcement, not an unqualified claim about who holds office at a later time. The announcement does not establish a private-life allegation or a cause connecting such an allegation to the leadership change.",
+            "url": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+            "published_at": "2026-11-12",
+            "reviewed_at": "2026-11-21T14:40:00+00:00",
+            "expires_at": "2026-11-23T14:40:00+00:00",
+            "revision": null,
+            "fact_kind": "company_claim"
+          }
+        ],
+        "supplied_ids": [
+          "QA-news-leadership-nov12"
+        ],
+        "generated": true
+      },
+      "input_language": "ko",
+      "answer_language": "en",
+      "query_resolution": {
+        "original": "현재 엔비디아 CEO에 대한 최신 발표를 알려 주세요.",
+        "query": "현재 엔비디아 CEO에 대한 최신 발표를 알려 주세요.",
+        "method": "original",
+        "supporting_turn_ids": []
+      }
+    }
+  },
+  "answer_wall_seconds": 23.322,
+  "translations": [],
+  "state": "complete"
+}

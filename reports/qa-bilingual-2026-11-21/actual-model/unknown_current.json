@@ -1,0 +1,109 @@
+{
+  "case": "unknown_current",
+  "question": "오늘 엔비디아 주가는 얼마인가요?",
+  "turn": {
+    "id": "5e3a514093ff4b5191daf8c41889c362",
+    "session_id": "4f0a5dde356d4fc3ba844950f1d9bd7c",
+    "text": "I can't verify that current claim from the sources available to this demo. I can discuss dated public statements, but I shouldn't present them as today's news or a confirmed forecast.",
+    "language": "en",
+    "mode": "behavior",
+    "provider": "evidence",
+    "citations": [],
+    "behavior": {
+      "cues": [
+        {
+          "start_ms": 0,
+          "duration_ms": 900,
+          "channel": "face",
+          "name": "brow_raise",
+          "intensity": 0.3,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 0,
+          "duration_ms": 550,
+          "channel": "gaze",
+          "name": "center",
+          "intensity": 0.2,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 350,
+          "duration_ms": 850,
+          "channel": "head",
+          "name": "nod",
+          "intensity": 0.25,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 1200,
+          "duration_ms": 1600,
+          "channel": "gesture",
+          "name": "open_palm",
+          "intensity": 0.4,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 6748,
+          "duration_ms": 1100,
+          "channel": "head",
+          "name": "nod",
+          "intensity": 0.18,
+          "provenance": "designed",
+          "evidence_ids": []
+        }
+      ],
+      "speech": {
+        "rate": 1.0,
+        "pitch": 1.0,
+        "pause_ms": 260
+      },
+      "duration_ms": 13496,
+      "timing_basis": "estimated_text",
+      "motion": null
+    },
+    "grounding": {
+      "status": "insufficient",
+      "retrieved_ids": [],
+      "invalid_citation_ids": [],
+      "reason": "no_fresh_relevant_reference",
+      "citation_status": "not_required",
+      "citation_unit_count": 2,
+      "cited_unit_count": 0,
+      "malformed_citations": [],
+      "semantic_status": "unreviewed"
+    },
+    "metrics": {
+      "retrieval_ms": 0.0,
+      "generation_ms": 0.17,
+      "total_ms": 0.419
+    },
+    "context": {
+      "qa_knowledge": {
+        "version": "qa-knowledge.v1",
+        "route": "news",
+        "reason": "no_fresh_relevant_reference",
+        "limitations": [],
+        "live_web_search": false,
+        "factual_evidence": [],
+        "supplied_ids": [],
+        "generated": false
+      },
+      "input_language": "ko",
+      "answer_language": "en",
+      "query_resolution": {
+        "original": "오늘 엔비디아 주가는 얼마인가요?",
+        "query": "오늘 엔비디아 주가는 얼마인가요?",
+        "method": "original",
+        "supporting_turn_ids": []
+      }
+    }
+  },
+  "answer_wall_seconds": 0.001,
+  "translations": [],
+  "state": "complete"
+}
