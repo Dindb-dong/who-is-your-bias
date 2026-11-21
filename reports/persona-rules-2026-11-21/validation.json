@@ -10,7 +10,10 @@
     "scope": "Implementation and compatibility checks, not persona quality scores"
   },
   "final_source_timestamp_checks": {
-    "tests": ["tests/test_persona_source_availability.py", "tests/test_persona_rules_seed.py"],
+    "tests": [
+      "tests/test_persona_source_availability.py",
+      "tests/test_persona_rules_seed.py"
+    ],
     "passed": 26,
     "failed": 0
   },
@@ -33,5 +36,11 @@
   "limitations": [
     "A successful earlier implementation checkpoint does not attest to a later commit's still-running checks.",
     "Unit and browser checks do not establish value fidelity or real-person accuracy."
-  ]
+  ],
+  "development_response_contract_checks": {
+    "passed": 333,
+    "failed": 0,
+    "warnings": 1,
+    "scope": "The original 322-test suite plus 11 v2-only user-facing response-contract tests; performed after preserving the frozen primary outputs and ratings."
+  }
 }

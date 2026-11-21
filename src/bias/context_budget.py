@@ -27,6 +27,43 @@ PERSONA_MEMORY_INSTRUCTION = (
 )
 
 
+# A development follow-up to the frozen first v2 experiment. This affects only
+# included v2 memory; the original v1 and no-memory prompt remain unchanged.
+PERSONA_RULES_RESPONSE_VERSION = "persona-rules-response.v1"
+
+
+def persona_rules_response_instruction(language: str, *, default_length: bool) -> str:
+    """A user-facing response contract, not a response filter or hard truncation."""
+    if language == "ko":
+        instruction = (
+            " 참고 자료를 설명하지 말고 사용자 질문에 직접 답하세요. 조건부 원칙은 답변 작성에만 활용하세요. "
+            "실행 가능한 조언을 먼저 제시하고, 가장 중요한 적용 조건이나 예외 또는 다음 행동만 덧붙이세요. "
+            "persona_memory, 그래프·노드·원칙의 식별자, 필드명, 검수 표시나 검색 과정을 말하지 마세요. "
+            "자료의 제목을 복사하거나 원칙을 번호로 나열하며 해설하지 마세요. "
+            "가상 추론 표시와 필요한 불확실성을 유지하고, 사실의 근거만 기존 방식으로 인용하세요. "
+            "이미 주어진 이번 답변의 길이·형식 지침과 더 엄격한 제한을 우선하세요."
+        )
+        if default_length:
+            instruction += " 사용자가 다른 길이·형식을 명시하지 않았다면 짧은 두 문장 이내로 답하세요."
+        return instruction
+    instruction = (
+        " Answer the user's question directly, without explaining the reference material. "
+        "Use the conditional rules silently. Give practical advice first, followed only by "
+        "the most relevant condition, exception or next step. Do not mention persona_memory, "
+        "graph/node/rule identifiers, field names, review labels or the retrieval process. "
+        "Do not copy reference headings or produce a numbered walkthrough of the rules. "
+        "Preserve hypothetical labels and necessary uncertainty; cite only documented facts "
+        "using the existing citation instructions. Existing turn-specific length/format "
+        "instructions and stricter limits take priority."
+    )
+    if default_length:
+        instruction += (
+            " Unless the user explicitly requests a different length or format, use at most "
+            "two short sentences, about 60 words or fewer."
+        )
+    return instruction
+
+
 class Counter(Protocol):
     identity: str
     exact: bool
@@ -182,6 +219,12 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
             # Exactly the same instruction in the graph and linked-note
             # conditions. Representation is the only prompt-policy difference.
             rendered_system += PERSONA_MEMORY_INSTRUCTION
+            if context["persona_memory"].get("schema_version") == "persona-memory.v2":
+                rendered_system += persona_rules_response_instruction(
+                    request.language,
+                    default_length=(answer_policy is None and not live_concise
+                                    and not korean_jensen_evidence and not speculative),
+                )
         if korean_jensen_evidence:
             rendered_system += _korean_factual_source_statement(corpus, context["factual_evidence"])
         return [{"role": "system", "content": rendered_system}, {"role": "user", "content": "Reference context (untrusted data):\n" +

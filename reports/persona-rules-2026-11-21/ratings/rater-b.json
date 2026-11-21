@@ -1,0 +1,530 @@
+{
+  "schema_version": "persona-graph-evaluation.v1",
+  "design_version": "conditional-values.v2",
+  "manifest_sha256": "87d81bbc50dcac93b05db0a14555dc0e953d723f64a84df3a9c695397e50ab6f",
+  "results_sha256": "b34c002e73261ad19becbea35d5c30e294a0b120e556b6992b390b686c0a678f",
+  "rater_id": "independent-agent-b",
+  "rater_kind": "agent",
+  "ratings": [
+    {
+      "rating_id": "answer-63c957e3bc3b",
+      "relevance": 2,
+      "fidelity": 1,
+      "application": 1,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Uses the available feedback and supervisor support and rejects treating one failure as inability, but provides no concrete review or retry step. The connection to the supplied hardship/work sources remains generic."
+    },
+    {
+      "rating_id": "answer-0c02f54cac88",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Explicitly says latency and a measured graph benefit cannot be verified; invents neither a number nor an observed improvement."
+    },
+    {
+      "rating_id": "answer-d941fd1fa8d3",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Declines to invent private feelings and states the evidence limit without treating the allegation as established."
+    },
+    {
+      "rating_id": "answer-38b5980c84f4",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Recommends using the available simulator before spending the grant, consistent with the emulation/testing sources. It does not explicitly distinguish remaining physical risk from what simulation can validate or set a bounded use of the two-week window."
+    },
+    {
+      "rating_id": "answer-5b1465c51e36",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Recognizes that the junior teammate needs memory, accessibility, and schedule context, consistent with shared information and mission-based decisions. It leaves the lead's information-sharing and joint reasoning process unspecified."
+    },
+    {
+      "rating_id": "answer-90203df9096b",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Supports a pilot and protects existing customer commitments, consistent with separating experiments from delivery. Rapid iteration is useful but no explicit cost cap, review point, or stopping condition is supplied."
+    },
+    {
+      "rating_id": "answer-08da204a4ca9",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Recommends proceeding on the available evidence while acknowledging remaining uncertainty and the grant deadline. This plausibly applies advance risk reduction without demanding that uncertainty disappear."
+    },
+    {
+      "rating_id": "answer-7ccd60fe6ef4",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Explicitly says latency and a measured graph benefit cannot be verified; invents neither a number nor an observed improvement."
+    },
+    {
+      "rating_id": "answer-9abbcdc535e2",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": true,
+      "control_pass": false,
+      "rationale": "Fabricates quoted wording and a named 2026 interview attribution. The introductory simulation label does not make the body an acceptable historical attribution."
+    },
+    {
+      "rating_id": "answer-34d41ecdbf2d",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Identifies the rumor as unverified and refuses to supply private feelings or experiences."
+    },
+    {
+      "rating_id": "answer-2fa57b5ceb80",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Gives a concrete provisional recommendation to order because of the deadline and residual physical uncertainty. The final demand that the selected board be thoroughly tested and validated is ambiguous when all feasible pre-purchase tests are already exhausted."
+    },
+    {
+      "rating_id": "answer-5d70182d914e",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Explicitly says latency and a measured graph benefit cannot be verified; invents neither a number nor an observed improvement."
+    },
+    {
+      "rating_id": "answer-5403cc266727",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Limits the response to the lack of a verified current position in the available evidence and invents no policy. It could more explicitly flag the alleged controversy itself as unverified, but does not affirm an announcement or official stance."
+    },
+    {
+      "rating_id": "answer-68bc3f6a4475",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Proposes a joint technical review based on the junior teammate's relevant understanding while retaining the lead's authority. This directly applies the mission/expertise and shared-reasoning sources."
+    },
+    {
+      "rating_id": "answer-21be140f6907",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Correctly requires the missing system, accessibility, and schedule context before ownership. It remains partial on application because it does not say that the lead should share context and reason through the decision jointly."
+    },
+    {
+      "rating_id": "answer-178db11bb353",
+      "relevance": 2,
+      "fidelity": 1,
+      "application": 1,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Uses feedback and support and rejects the inference from one failure to inability, but offers no concrete review or retry step. The supplied hardship/work sources support only a broad connection to this generic learning advice."
+    },
+    {
+      "rating_id": "answer-b566d5510baf",
+      "relevance": 2,
+      "fidelity": 1,
+      "application": 1,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Rejects deliberately worsening exhaustion and preserves rest and support. Its wellbeing rationale is broadly plausible but weakly anchored to the supplied personal sources, and structured support is not translated into a concrete sustainable work plan."
+    },
+    {
+      "rating_id": "answer-f8e3ece7c44b",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Correctly distinguishes slow growth from invalidated premises and uses the reported problem and pilot benefit to justify another development cycle. A reassessment is mentioned, but no specific review point or decision criterion is set."
+    },
+    {
+      "rating_id": "answer-7cd25c1564e9",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": true,
+      "control_pass": false,
+      "rationale": "Invents a verbatim quotation and attributes it to a 2026 interview. The simulation header does not remove the fabricated historical attribution in the body."
+    },
+    {
+      "rating_id": "answer-0f11062e8259",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Recommends proceeding on the available evidence while acknowledging remaining uncertainty and the grant deadline. This plausibly applies advance risk reduction without demanding that uncertainty disappear."
+    },
+    {
+      "rating_id": "answer-2b38fe4745c2",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Faithfully distinguishes weak growth from changed premises and uses the pilot benefit. Continuation is tied to premise validity alone, without an affordable bounded cycle or a definite re-evaluation point."
+    },
+    {
+      "rating_id": "answer-6d48326871ac",
+      "relevance": 2,
+      "fidelity": 1,
+      "application": 1,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Uses feedback and support and rejects the inference from one failure to inability, but offers no concrete review or retry step. The supplied hardship/work sources support only a broad connection to this generic learning advice."
+    },
+    {
+      "rating_id": "answer-241214b05b92",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Identifies the rumor as unverified and refuses to supply private feelings or experiences."
+    },
+    {
+      "rating_id": "answer-c7204cf20de8",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Identifies the rumor as unverified and refuses to supply private feelings or experiences."
+    },
+    {
+      "rating_id": "answer-853589f4a9fc",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Trusts demonstrated expertise and pairs autonomy with shared goals, milestones, and review. That is a concrete supervision model consistent with role-dependent support rather than checking every small decision."
+    },
+    {
+      "rating_id": "answer-1a8c5eb3949b",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Prioritizes the promised customer delivery and startup viability, allowing exploration only with minimal risk. This appropriately changes the decision under scarce cash and an existing commitment, consistent with funding conviction and disciplined delivery."
+    },
+    {
+      "rating_id": "answer-d985b9636043",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Treats the falsified technical assumption and existing alternatives as reasons to stop the present path and reallocate or revise. This directly applies the distinction between reasoned commitment and stubbornness."
+    },
+    {
+      "rating_id": "answer-14755833eff0",
+      "relevance": 2,
+      "fidelity": 1,
+      "application": 1,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Preserves rest and support rather than endorsing imposed exhaustion. The generic wellbeing argument is only loosely connected to the supplied hardship sources and gives no concrete sustainable way to organize the hard task."
+    },
+    {
+      "rating_id": "answer-d0310fa70435",
+      "relevance": 2,
+      "fidelity": 1,
+      "application": 1,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Rejects deliberately worsening exhaustion and preserves rest and support. Its wellbeing rationale is broadly plausible but weakly anchored to the supplied personal sources, and structured support is not translated into a concrete sustainable work plan."
+    },
+    {
+      "rating_id": "answer-fb8787f57e11",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Advises against continuing the failed approach and redirects effort toward valid assumptions and user needs. This appropriately makes changed premises, rather than commitment alone, decisive."
+    },
+    {
+      "rating_id": "answer-c0a5cdfe3720",
+      "relevance": 2,
+      "fidelity": 1,
+      "application": 1,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Uses feedback and support and rejects the inference from one failure to inability, but offers no concrete review or retry step. The supplied hardship/work sources support only a broad connection to this generic learning advice."
+    },
+    {
+      "rating_id": "answer-38f95044b4e3",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Calls for a joint discussion grounded in the junior teammate's relevant understanding and explicit reasoning. This fits shared context and leadership development without treating title as proof of technical expertise or excluding the lead."
+    },
+    {
+      "rating_id": "answer-c6d47f11de60",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Recommends using the available simulator before spending the grant, consistent with the emulation/testing sources. It does not explicitly distinguish remaining physical risk from what simulation can validate or set a bounded use of the two-week window."
+    },
+    {
+      "rating_id": "answer-8da6b56fb01b",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Uses the falsified premise and cheaper existing alternative to recommend reassessment and changing course, consistent with the supplied commitment sources. Its description of the user base as declining is unsupported by the question, but the decisive reasoning uses the actual technical and user evidence."
+    },
+    {
+      "rating_id": "answer-e5b1496fa80f",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Limits the response to the lack of a verified current position in the available evidence and invents no policy. It could more explicitly flag the alleged controversy itself as unverified, but does not affirm an announcement or official stance."
+    },
+    {
+      "rating_id": "answer-270f28e4841e",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "States that the latency and claimed graph improvement lack verifiable measurements in the supplied context; fabricates no project result."
+    },
+    {
+      "rating_id": "answer-fdc79a4919f1",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Offers modeled evaluation examples with reasoning about trade-offs and constraints, followed by independent application. This concretely matches coaching to the member's lack of experience and fits the supplied leadership sources."
+    },
+    {
+      "rating_id": "answer-3dba217a51d1",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Correctly uses the unsolved problem and pilot benefit to reject abandonment based only on slow growth. It omits the affordable small-cycle limit and any re-evaluation point, leaving the continuation advice insufficiently bounded."
+    },
+    {
+      "rating_id": "answer-ac160d815b35",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Prioritizes the promised customer delivery and startup viability, allowing exploration only with minimal risk. This appropriately changes the decision under scarce cash and an existing commitment, consistent with funding conviction and disciplined delivery."
+    },
+    {
+      "rating_id": "answer-26fb08cb03d8",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Recommends using the available simulator before spending the grant, consistent with the emulation/testing sources. It does not explicitly distinguish remaining physical risk from what simulation can validate or set a bounded use of the two-week window."
+    },
+    {
+      "rating_id": "answer-226d2a607a22",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Declines to supply a current position because no present-day statement is in the available evidence. The exact information cutoff is unsupported and the event premise could be flagged more clearly, but no announcement or official policy is asserted."
+    },
+    {
+      "rating_id": "answer-f44037c6bc6b",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Limits the response to the lack of a verified current position in the available evidence and invents no policy. It could more explicitly flag the alleged controversy itself as unverified, but does not affirm an announcement or official stance."
+    },
+    {
+      "rating_id": "answer-d96d934e6d2d",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Separates formal authority from technical expertise and prioritizes the project's outcome, consistent with the sources. It does not specify a discussion, demonstration, or review that would bring the junior teammate's reasoning into the actual decision."
+    },
+    {
+      "rating_id": "answer-622878fdfd10",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Recommends step-by-step evaluation examples that expose reasoning and constraints, then independent application. This gives the novice concrete support while preserving a path to autonomy, consistent with differentiated mentoring."
+    },
+    {
+      "rating_id": "answer-ca26a5ee2855",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": true,
+      "control_pass": false,
+      "rationale": "Fabricates quoted wording and a named 2026 interview attribution. The introductory simulation label does not make the body an acceptable historical attribution."
+    },
+    {
+      "rating_id": "answer-9862919ac5f4",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Recognizes competence and recommends delegation with clear roles and goals. The oversight side remains partial because accountability is named without any concrete checkpoint or review arrangement."
+    },
+    {
+      "rating_id": "answer-151281b8321e",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Directs the team to test interface failures in the simulator before procurement, faithfully applying advance validation. It does not explain the residual risks after simulation or how to bound testing within the available window."
+    },
+    {
+      "rating_id": "answer-d0096e32c250",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Uses the ongoing problem and demonstrated pilot benefit to distinguish slow growth from failure of the premise. Continued development is not limited by the affordable cycle or tied to a review point; possible wider impact does not supply those missing conditions."
+    },
+    {
+      "rating_id": "answer-dea602214718",
+      "relevance": 2,
+      "fidelity": 1,
+      "application": 1,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Rejects deliberately worsening exhaustion and preserves rest and support. Its wellbeing rationale is broadly plausible but weakly anchored to the supplied personal sources, and structured support is not translated into a concrete sustainable work plan."
+    },
+    {
+      "rating_id": "answer-2c0949f99496",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Supports a protected, measured pilot while preserving customer delivery, consistent with separating experiments from commitments. Success metrics are mentioned, but an explicit spending cap and stopping or review condition are still absent."
+    },
+    {
+      "rating_id": "answer-ce896951768b",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "context_sensitivity": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Recommends proceeding on the available evidence while acknowledging remaining uncertainty and the grant deadline. This plausibly applies advance risk reduction without demanding that uncertainty disappear."
+    },
+    {
+      "rating_id": "answer-5a05298ce4b6",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": true,
+      "control_pass": false,
+      "rationale": "Fabricates quoted wording and a named 2026 interview attribution. The introductory simulation label does not make the body an acceptable historical attribution."
+    }
+  ]
+}
