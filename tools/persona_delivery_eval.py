@@ -77,6 +77,8 @@ def prepare(corpus, snapshot, graph, delivery, question, *, counter):
 
 
 def freeze(counter):
+    if (REPORT / "manifest.json").exists() or (REPORT / "results.json").exists():
+        raise ValueError("Frozen artifacts already exist; resume run or use a new --report-dir with a registry")
     corpus = Corpus.load(CORPUS)
     snapshot_path = ROOT / "data/snapshots/jensen-values-2026-11-21.json"
     snapshot = PersonaSnapshot.load(snapshot_path, corpus)
@@ -113,7 +115,7 @@ def freeze(counter):
                 "repeat": 0, "condition": condition, "prompt_key": key,
                 "request_sha256": shared.digest({"prompt": prompts[key], "configuration": configuration})})
     code = ["src/bias/persona_delivery.py", "src/bias/persona_rules.py", "src/bias/context_budget.py",
-            "tools/persona_delivery_eval.py", "reports/persona-delivery-2026-11-21/registry.json"]
+            "tools/persona_delivery_eval.py"]
     manifest = {"schema_version": shared.SCHEMA, "design_version": "matched-delivery.v1",
         "scope": "Fresh authored development transfer probes; AI ratings only; no acoustic or unseen-event validation.",
         "registry_id": registry["id"], "cases": registry["cases"], "conditions": list(CONDITIONS),
@@ -123,18 +125,29 @@ def freeze(counter):
             "compact_delivery-minus-compact_values": "Additional source-bound reaction/style guidance; not acoustic identity."},
         "provenance": {"corpus_sha256": corpus_digest(corpus), "graph_sha256": graph.sha256,
             "delivery_sha256": delivery.sha256, "snapshot_sha256": shared.file_digest(snapshot_path),
+            "registry_sha256": shared.file_digest(REPORT / "registry.json"),
             "code_sha256": {p: shared.file_digest(ROOT / p) for p in code}}}
     manifest["manifest_sha256"] = shared.digest(manifest)
     shared.atomic_json(REPORT / "manifest.json", manifest)
     return manifest
 
 
-def blind(manifest, results):
+def _blind_materials(manifest, results):
     shared.check_manifest(manifest); shared._check_results(manifest, results)
+    if manifest.get("design_version") != "matched-delivery.v1" or manifest.get("conditions") != list(CONDITIONS):
+        raise ValueError("Expected the matched-evidence delivery design")
     if set(results["attempts"]) != {s["attempt_id"] for s in manifest["schedule"]}:
         raise ValueError("Complete all planned attempts before blinding")
+    for entry in manifest["schedule"]:
+        row = results["attempts"][entry["attempt_id"]]
+        if any(row.get(key) != entry[key] for key in
+               ("attempt_id", "case_id", "condition", "repeat", "prompt_key", "request_sha256")):
+            raise ValueError("Stored attempt labels differ from frozen schedule")
+        if row.get("prompt_sha256") != manifest["prompts"][entry["prompt_key"]]["prompt_sha256"]:
+            raise ValueError("Stored prompt identity differs from frozen prompt")
     cases = {c["id"]: c for c in manifest["cases"]}
-    items = list(results["attempts"].values()); random.Random(931572).shuffle(items)
+    items = [results["attempts"][entry["attempt_id"]] for entry in manifest["schedule"]]
+    random.Random(931572).shuffle(items)
     packet, mapping = [], {}
     for index, result in enumerate(items):
         identifier = "answer-" + shared.digest([index, result["result_sha256"]])[:12]
@@ -146,18 +159,33 @@ def blind(manifest, results):
         packet.append({"rating_id": identifier, "question": case["question"], "answer": result["display_text"],
             "category": case["category"], "case_rubric": case["rubric"],
             "reference_sources": {k: manifest["judge_sources"][k] for k in sorted(ids)}})
-    shared.atomic_json(REPORT / "blind-packet.json", {"rubric": manifest["rubric"], "answers": packet})
+    return {"rubric": manifest["rubric"], "answers": packet}, mapping
+
+
+def blind(manifest, results):
+    packet, mapping = _blind_materials(manifest, results)
+    shared.atomic_json(REPORT / "blind-packet.json", packet)
     shared.atomic_json(REPORT / "condition-key.private.json", mapping)
 
 
 def summarize(manifest, results, rating_paths):
-    shared.check_manifest(manifest); shared._check_results(manifest, results)
+    expected_packet, expected_mapping = _blind_materials(manifest, results)
     mapping = shared.read_json(REPORT / "condition-key.private.json")
     packet = shared.read_json(REPORT / "blind-packet.json")
+    if mapping != expected_mapping or packet != expected_packet:
+        raise ValueError("Blinded packet or condition mapping differs from frozen actual results")
+    if len(rating_paths) != 2 or len({p.resolve() for p in rating_paths}) != 2:
+        raise ValueError("Exactly two distinct rating files are required")
+    if len({shared.file_digest(p) for p in rating_paths}) != 2:
+        raise ValueError("A duplicate rating file is not a second independent rater")
     valid_ids = {item["rating_id"] for item in packet["answers"]}
-    judges = []
+    judges, rater_ids = [], set()
     for path in rating_paths:
         data = shared.read_json(path)
+        rater_id = data.get("rater_id")
+        if not isinstance(rater_id, str) or not rater_id.strip() or rater_id.strip() in rater_ids:
+            raise ValueError("Each rater needs a distinct nonblank rater_id")
+        rater_ids.add(rater_id.strip())
         rows = {row["rating_id"]: row for row in data["ratings"]}
         if set(rows) != valid_ids or len(rows) != len(data["ratings"]):
             raise ValueError("Every blinded answer needs exactly one rating per judge")
@@ -198,10 +226,13 @@ def summarize(manifest, results, rating_paths):
 
 
 def main():
+    global REPORT
     parser = argparse.ArgumentParser()
     parser.add_argument("action", choices=("freeze", "run", "blind", "summarize"))
     parser.add_argument("--limit", type=int, default=6)
+    parser.add_argument("--report-dir", type=Path, default=REPORT)
     args = parser.parse_args()
+    REPORT = args.report_dir.resolve()
     base = os.getenv("PERSONA_EVAL_BASE_URL", "http://127.0.0.1:8129/v1")
     if args.action == "freeze":
         counter = shared.HTTPTokenCounter(base.removesuffix("/v1") + "/count_tokens",

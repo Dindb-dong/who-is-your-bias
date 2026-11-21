@@ -65,9 +65,26 @@ reports/persona-graph-2026-11-20/runtime/.venv/bin/python reports/persona-graph-
 reports/persona-graph-2026-11-20/runtime/.venv/bin/python reports/persona-graph-2026-11-20/runtime/run_with_server.py -- .venv/bin/python -m tools.persona_delivery_eval run --limit 6
 ```
 
-Only the freeze command has run at this checkpoint. `run` resumes by exact
-manifest/request hashes and saves every attempt atomically. Each bounded batch
-will be pushed and read back before starting the next batch.
+`run` resumes by exact manifest/request hashes and saves every attempt atomically.
+All six bounded batches have now completed and were pushed/read back before
+the next batch. Generation finished at commit
+`5abb86ad6c3de8399b9b750654d0b376cfe93975`: 36/36 planned attempts, consisting of
+33 real model completions and three deterministic private-interaction guards.
+There were no failed or truncated completions. The generated-answer quality
+ratings were still pending when this completion checkpoint was recorded.
+
+After generation, the evaluation utility was hardened to verify complete
+schedule coverage, exact result labels, reconstructed blind packets/mappings and
+two distinct rater files/identities. The rubric, thresholds, questions, prompt
+messages, decoding and measured outputs were not changed. Generation source is
+retained at the commit above and the frozen manifest contains its code hashes.
+The later scoring code and its integrity regressions are separately versioned.
+
+The `freeze` command now refuses to overwrite existing measured artifacts.
+For a new run, copy the registry into a new report directory and use
+`--report-dir PATH`; use `run` to resume this completed frozen run without new
+requests. The independent AI raters receive only the shuffled blind packet,
+not condition names, generation prompts, prior outcomes or each other's scores.
 
 Voice identity/prosody require reference audio and actual TTS comparisons. This
 text experiment does not test or improve acoustic identity by itself.

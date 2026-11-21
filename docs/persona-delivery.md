@@ -40,6 +40,21 @@ export BIAS_PERSONA_DELIVERY=data/personas/jensen-huang-values-v2/persona_delive
 export BIAS_LIVE_CONCISE=true
 ```
 
+### Live-route boundary
+
+This integration is in `bias.engine.Engine`, the Python RAG/text-generation
+route. PR #27 at `ae724bc8c7e86e809f68b9cc5a0aabf1a5874644` has a separate
+`bias.sophon` realtime route: it sends session instructions to Sophon's own
+model and does not run the citation-checked text-conversation engine. Enabling
+the variables above therefore does **not** automatically add per-question
+persona selection to Sophon. PR #27's speech/gesture path is not modified here.
+
+If that route becomes the final demo backend, integrate the selectors at a
+verified per-turn text/transcript boundary, before answer generation, with the
+same source/cutoff and guard checks. A static session prompt containing every
+graph node is not equivalent to the conditional selection evaluated here.
+Neither this document nor the CPU pilot establishes live Sophon integration.
+
 `compact` requires the v2 conditional graph. The existing `flat` and `graph`
 formats remain available. Unset `BIAS_PERSONA_DELIVERY` to remove the delivery
 layer; unset the graph variable to remove value memory. Select the matching
