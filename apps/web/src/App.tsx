@@ -43,6 +43,8 @@ export default function App() {
   const [avatarQuery] = useState(() => new URLSearchParams(window.location.search));
   const gaussianRequested = avatarQuery.get('head') === 'gaussian';
   const [learnedGestureEnabled, setLearnedGestureEnabled] = useState(() => avatarQuery.get('gesture') === 'learned');
+  // ?gesture=emage: request speech-driven gestures with provider voice (needs BIAS_EMAGE_* on the server).
+  const [speechGestureEnabled, setSpeechGestureEnabled] = useState(() => avatarQuery.get('gesture') === 'emage');
   const [page, setPage] = useState<Page>('studio');
   const [persona, setPersona] = useState<Persona | null>(null);
   const [sources, setSources] = useState<Source[]>([]);
@@ -87,8 +89,8 @@ export default function App() {
   const measuredMotion = useMeasuredMotion({ mode: motionMode, enabled: page === 'studio' && mode === 'behavior', reducedMotion });
   const learnedGesture = useLearnedGesture(learnedGestureEnabled && motionMode === 'geometry_preview', persona?.id,
     avatarQuery.get('gestureBundle') ?? 'jensen-gesture-basis');
-  const playbackPreferences = useRef({ autoPlay, voice });
-  playbackPreferences.current = { autoPlay, voice };
+  const playbackPreferences = useRef({ autoPlay, voice, speechGesture: speechGestureEnabled });
+  playbackPreferences.current = { autoPlay, voice, speechGesture: speechGestureEnabled };
   const microphone = useMicrophone(language, setDraft);
   const onAvatarReady = useCallback(() => { setAvatarReady(true); }, []);
   const onAvatarError = useCallback((error: Error) => { setAvatarError(error.message); }, []);
@@ -111,6 +113,13 @@ export default function App() {
     });
     return () => controller.abort();
   }, [reload]);
+  // EMAGE needs the connected voice's audio: ?gesture=emage starts with it selected when the server has one.
+  const speechGestureVoiceSet = useRef(false);
+  useEffect(() => {
+    if (speechGestureVoiceSet.current || !speechGestureEnabled || !persona?.capabilities.speech) return;
+    speechGestureVoiceSet.current = true;
+    setVoice((current) => current === 'off' ? 'provider' : current);
+  }, [speechGestureEnabled, persona?.capabilities.speech]);
   useEffect(() => { chatBottom.current?.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth', block: 'nearest' }); }, [messages.length, busy, reducedMotion]);
   useEffect(() => () => { generation.current += 1; currentRequest.current?.abort(); pcmPlayer.current?.stop(); }, []);
   useEffect(() => () => { if (model) URL.revokeObjectURL(model.url); }, [model]);
@@ -145,7 +154,8 @@ export default function App() {
     setMessages((previous) => [...previous, { id: crypto.randomUUID(), role: 'user', text: question }, { id: answerId, role: 'assistant', text: '', pending: true }]);
     setBusy(true); setStatus('Finding relevant sources');
     let received: Turn | undefined;
-    const useLiveVoice = Boolean(preferences.autoPlay && preferences.voice === 'provider' && persona?.capabilities.live_speech);
+    // Speech-driven gestures need the finished clip, so they use prepared (non-streaming) voice.
+    const useLiveVoice = Boolean(preferences.autoPlay && preferences.voice === 'provider' && persona?.capabilities.live_speech && !preferences.speechGesture);
     let audioFrames = 0; let liveTurnId: string = answerId; let preparationMarked = false; let audioMarked = false;
     let playingMarked = false; let signalMarked = false;
     try {
@@ -191,7 +201,7 @@ export default function App() {
         if (useLiveVoice) await pcmPlayer.current?.finish(audioFrames);
         else if (current.autoPlay && current.voice !== 'off') void playback.play(received, current.voice, (event) => {
           if (ticket === generation.current && event.turnId === received?.id) { clock.playback(event); setLiveMeasurement(clock.snapshot()); }
-        });
+        }, { gesture: current.speechGesture });
       }
     } catch (error) {
       if (ticket === generation.current && !controller.signal.aborted) {
@@ -216,7 +226,7 @@ export default function App() {
     measuredMotion.stop(); setModel(undefined); setBuiltinAvatar(next); setAvatarError(null); setAvatarReady(false);
     if (next === 'jensen') setFraming('upper_body');
   }
-  function listen(turn: Turn) { if (busy) return; pcmPlayer.current?.stop(); setPcmState(initialPcmState); setActiveTurn(turn); void measuredMotion.play(turn.behavior.motion); void playback.play(turn, voice === 'off' ? 'browser' : voice); }
+  function listen(turn: Turn) { if (busy) return; pcmPlayer.current?.stop(); setPcmState(initialPcmState); setActiveTurn(turn); void measuredMotion.play(turn.behavior.motion); void playback.play(turn, voice === 'off' ? 'browser' : voice, undefined, { gesture: speechGestureEnabled }); }
   useEffect(() => {
     if (!persona) return;
     if (lastPersona.current && lastPersona.current !== persona.id) {
@@ -261,7 +271,7 @@ export default function App() {
           <div className="studio-grid">
             <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}><section className="stage-card" aria-label="Avatar studio" style={{ flex: 1 }}>
               <div className="stage-top"><div><span className="tag dark"><span className="tiny-dot"/> AI SIMULATION</span><div className="stage-title">{subjectName}<span>01 / RESEARCH PERSONA</span></div></div><button className="stage-options" onClick={() => setSettings(true)} aria-label="Avatar settings"><Settings2 size={18}/></button></div>
-              <div className="avatar-viewport"><AvatarStage gaussianHead={gaussianHead} learnedGesture={learnedGestureEnabled && mode === 'behavior' ? learnedGesture.model : undefined} attentionTarget={attentionTarget} portraitStyle={isJensen ? 'jensen' : 'reference'} speaking={speaking} timeline={streamingVoice ? undefined : activeTurn?.behavior} elapsedMs={visualPlayback.elapsedMs} amplitude={speaking ? visualPlayback.amplitude : 0} modelUrl={modelUrl} framing={framing} reducedMotion={reducedMotion} speechTiming={visualPlayback.speechTiming} audioSha256={visualPlayback.audioSha256} audioElapsedMs={visualPlayback.audioElapsedMs} performanceClip={motionMode !== 'disabled' && mode === 'behavior' && !reducedMotion ? measuredMotion.clip : undefined} observationElapsedMs={measuredMotion.elapsedMs} allowGeometryPreview={motionMode === 'geometry_preview'} onReady={onAvatarReady} onError={onAvatarError}/></div>
+              <div className="avatar-viewport"><AvatarStage gaussianHead={gaussianHead} learnedGesture={learnedGestureEnabled && mode === 'behavior' ? learnedGesture.model : undefined} speechGesture={speechGestureEnabled && mode === 'behavior' && !streamingVoice ? playback.speechGesture : undefined} attentionTarget={attentionTarget} portraitStyle={isJensen ? 'jensen' : 'reference'} speaking={speaking} timeline={streamingVoice ? undefined : activeTurn?.behavior} elapsedMs={visualPlayback.elapsedMs} amplitude={speaking ? visualPlayback.amplitude : 0} modelUrl={modelUrl} framing={framing} reducedMotion={reducedMotion} speechTiming={visualPlayback.speechTiming} audioSha256={visualPlayback.audioSha256} audioElapsedMs={visualPlayback.audioElapsedMs} performanceClip={motionMode !== 'disabled' && mode === 'behavior' && !reducedMotion ? measuredMotion.clip : undefined} observationElapsedMs={measuredMotion.elapsedMs} allowGeometryPreview={motionMode === 'geometry_preview'} onReady={onAvatarReady} onError={onAvatarError}/></div>
               <div className="stage-caption"><span className="caption-rule"/><span>{gaussianEnabled ? 'JENSEN · PHOTOREAL FACE & BODY' : model ? 'YOUR CUSTOM RIG' : builtinAvatar === 'jensen' && isJensen ? 'JENSEN · SOURCE-FITTED CANDIDATE' : builtinAvatar === 'human' ? (isJensen ? 'GENERIC RESEARCH RIG' : 'RESEARCH HUMAN RIG') : isJensen ? 'JENSEN · STYLIZED PREVIEW' : 'STYLIZED PORTRAIT RIG'}</span><span className="caption-rule"/></div>
               <div className="stage-bottom"><div className="live-status"><span className={`status-orb ${speaking || busy ? 'animated' : ''}`}/><div><strong>{stageState}</strong><span title={playback.timingMessage}>{streamingVoice ? 'Streaming voice · PCM-clock mouth movement' : voice === 'provider' ? playback.timingStatus === 'available' ? 'Provider voice · audio-timed mouth cues' : 'Provider voice · approximate mouth movement' : voice === 'browser' || speaking ? 'Generic browser voice · approximate lip sync' : 'Text mode · voice available'}</span></div></div><button className="round-control" aria-label={streamingVoice || speaking || playback.status === 'loading' ? 'Stop audio' : 'Enable voice settings'} onClick={() => streamingVoice ? cancel() : speaking || playback.status === 'loading' ? playback.stop() : setSettings(true)}>{streamingVoice || speaking || playback.status === 'loading' ? <Square size={16}/> : voice === 'off' ? <VolumeX size={18}/> : <Volume2 size={18}/>}</button></div>
               {!avatarReady && !avatarError && <div className="avatar-loading"><LoaderCircle size={18} className="spin"/> Preparing the rig</div>}
@@ -287,7 +297,7 @@ export default function App() {
       <nav className="mobile-nav" aria-label="Mobile navigation"><button className={page === 'studio' ? 'active' : ''} onClick={() => navigate('studio')}><MessageCircle size={19}/>Studio</button><button className={page === 'sources' ? 'active' : ''} onClick={() => navigate('sources')}><BookOpen size={19}/>Sources</button><button className={page === 'lab' ? 'active' : ''} onClick={() => navigate('lab')}><FlaskConical size={19}/>Lab</button><button className={page === 'presentation' ? 'active' : ''} onClick={() => navigate('presentation')}><Clapperboard size={19}/>Present</button></nav>
     </div>
     {evidence && <><button className="drawer-scrim" onClick={() => setEvidence(null)} aria-label="Close response evidence"/><EvidencePanel citations={evidence} onClose={() => setEvidence(null)}/></>}
-    <SettingsDialog open={settings} close={() => setSettings(false)} persona={persona} voice={voice} setVoice={(next) => { if (streamingVoice) cancel(); playback.stop(); setVoice(next); }} autoPlay={autoPlay} setAutoPlay={setAutoPlay} reducedMotion={reducedMotion} setReducedMotion={(value) => { measuredMotion.stop(); setReducedMotion(value); }} modelName={model?.name} loadModel={loadModel} resetModel={() => selectBuiltinAvatar(isJensen ? 'portrait' : 'human')} builtinAvatar={builtinAvatar} setBuiltinAvatar={selectBuiltinAvatar} framing={framing} setFraming={setFraming} motionMode={motionMode} setMotionMode={(value) => { measuredMotion.stop(); setMotionMode(value); }} motionLibrary={motionLibrary} motionLibraryError={motionLibraryError} learnedGestureEnabled={learnedGestureEnabled} setLearnedGestureEnabled={(enabled) => { measuredMotion.stop(); setLearnedGestureEnabled(enabled); if (enabled) setMotionMode('geometry_preview'); }} learnedGestureLoading={learnedGesture.loading} learnedGestureError={learnedGesture.error}/>
+    <SettingsDialog open={settings} close={() => setSettings(false)} persona={persona} voice={voice} setVoice={(next) => { if (streamingVoice) cancel(); playback.stop(); setVoice(next); }} autoPlay={autoPlay} setAutoPlay={setAutoPlay} reducedMotion={reducedMotion} setReducedMotion={(value) => { measuredMotion.stop(); setReducedMotion(value); }} modelName={model?.name} loadModel={loadModel} resetModel={() => selectBuiltinAvatar(isJensen ? 'portrait' : 'human')} builtinAvatar={builtinAvatar} setBuiltinAvatar={selectBuiltinAvatar} framing={framing} setFraming={setFraming} motionMode={motionMode} setMotionMode={(value) => { measuredMotion.stop(); setMotionMode(value); }} motionLibrary={motionLibrary} motionLibraryError={motionLibraryError} learnedGestureEnabled={learnedGestureEnabled} setLearnedGestureEnabled={(enabled) => { measuredMotion.stop(); setLearnedGestureEnabled(enabled); if (enabled) setMotionMode('geometry_preview'); }} learnedGestureLoading={learnedGesture.loading} learnedGestureError={learnedGesture.error} speechGestureEnabled={speechGestureEnabled} setSpeechGestureEnabled={(enabled) => { setSpeechGestureEnabled(enabled); if (enabled && persona?.capabilities.speech && voice !== 'provider') { if (streamingVoice) cancel(); playback.stop(); setVoice('provider'); } }} speechGestureStatus={playback.gestureStatus} speechGestureMessage={playback.gestureMessage}/>
   </div>;
 }
 

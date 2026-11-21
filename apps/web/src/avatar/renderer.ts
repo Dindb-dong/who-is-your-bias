@@ -17,6 +17,7 @@ import { parseAvatarClip, parseSpeechTiming } from './validation';
 import { AUDITION_PROTOCOL, AuditionRecorder, canonicalJson, sealAudition, sha256Bytes } from './audition';
 import type { AnimationTelemetry, AvatarClip, BehaviorPlan, RigDiagnostics, RigMapping, RigPose, SpeechTiming } from './types';
 import type { GestureBasisModel } from './learnedGesture';
+import type { SpeechGestureMotion } from './speechGesture';
 import type { GaussianBodyArrays, GaussianBodyHead, GaussianBodyHeader, GaussianHeadConfig } from './gaussian/gaussianBody';
 import type { createGaussianPerformance } from './gaussian/gaussianPerformance';
 
@@ -34,6 +35,7 @@ export interface PlaybackState {
   allowGeometryPreview?: boolean;
   attentionTarget?: AttentionTarget | null;
   learnedGesture?: GestureBasisModel;
+  speechGesture?: SpeechGestureMotion;
 }
 
 export type GaussianStageState = 'disabled' | 'loading' | 'ready' | 'error';
@@ -150,7 +152,8 @@ export class AvatarRenderer {
       else if (state.audioSha256 !== this.playback.audioSha256) this.stopAudition('audio_changed');
       else if (state.speechTiming !== this.timingInput) this.stopAudition('speech_timing_changed');
       else if (state.performanceClip !== this.clipInput || state.allowGeometryPreview !== this.playback.allowGeometryPreview
-        || state.reducedMotion !== this.playback.reducedMotion || state.learnedGesture !== this.playback.learnedGesture) this.stopAudition('motion_settings_changed');
+        || state.reducedMotion !== this.playback.reducedMotion || state.learnedGesture !== this.playback.learnedGesture
+        || state.speechGesture !== this.playback.speechGesture) this.stopAudition('motion_settings_changed');
       else if (state.attentionTarget || this.playback.attentionTarget) this.stopAudition('attention_changed');
     }
     if (state.speechTiming !== this.timingInput) {
@@ -174,7 +177,7 @@ export class AvatarRenderer {
 
   async startAudition(): Promise<void> {
     if (this.disposed || this.contextLost || !this.visible) throw new Error('The avatar must be visible before recording.');
-    if (this.gaussianRequested || this.playback.learnedGesture) throw new Error('The GLB audition protocol does not record Gaussian-head or learned-gesture identities. Disable them before recording a GLB-only audition.');
+    if (this.gaussianRequested || this.playback.learnedGesture || this.playback.speechGesture) throw new Error('The GLB audition protocol does not record Gaussian-head, learned-gesture or speech-gesture identities. Disable them before recording a GLB-only audition.');
     if (this.calibrationPose) throw new Error('Turn off manual pose preview before recording.');
     if (this.playback.attentionTarget || this.attention.active) throw new Error('Stop attention tracking and wait for the avatar to settle before recording a fixed comparison audition.');
     const asset = this.rig.diagnostics.assetInspection;

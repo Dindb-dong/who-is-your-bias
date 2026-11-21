@@ -189,7 +189,7 @@ export interface VideoCrop {
 
 export interface AnimationTelemetry {
   faceSource: 'designed' | 'observed' | 'geometry_preview' | 'calibration';
-  boneSource: 'designed' | 'observed' | 'geometry_preview' | 'trained_geometry_preview' | 'calibration';
+  boneSource: 'designed' | 'observed' | 'geometry_preview' | 'trained_geometry_preview' | 'speech_generated' | 'calibration';
   speechSource: SpeechTiming['timing_basis'] | 'amplitude' | 'estimated' | 'silent';
   unsupportedFace: string[];
   unsupportedVisemes: string[];

@@ -1,6 +1,7 @@
 import type { AvatarClip, BehaviorPlan, MotionMode, MotionSelection } from './avatar/types';
 import type { SpeechTiming } from './avatar/types';
 import { parseAvatarClip, parseMotionSelection, parseSpeechTiming } from './avatar/validation';
+import { parseSpeechGestureMotion, type SpeechGestureMotion } from './avatar/speechGesture';
 import type { SpeechServerTiming } from './hooks/liveMetrics';
 import type { PcmChunk } from './hooks/pcmPlayback';
 
@@ -319,6 +320,10 @@ export interface PreparedSpeech {
   timingStatus: string;
   timingMessage?: string;
   serverTiming?: SpeechServerTiming;
+  /** Speech-driven body motion for exactly this audio, when requested and available. */
+  gesture?: SpeechGestureMotion;
+  gestureStatus?: string;
+  gestureMessage?: string;
 }
 
 async function boundedBody(response: Response, maximum: number, service = 'voice service'): Promise<Uint8Array<ArrayBuffer>> {
@@ -393,10 +398,32 @@ export async function getMotionClip(selection: MotionSelection, mode: MotionMode
   return clip;
 }
 
+/** Gesture motion is optional: any problem leaves the verified audio playable with designed movement. */
+async function getSpeechGesture(value: unknown, audioSha256: string, signal: AbortSignal): Promise<Pick<PreparedSpeech, 'gesture' | 'gestureStatus' | 'gestureMessage'>> {
+  if (!object(value) || typeof value.status !== 'string') return { gestureStatus: 'unavailable', gestureMessage: 'The voice service did not return gesture metadata.' };
+  const message = typeof value.message === 'string' ? value.message.slice(0, 500) : undefined;
+  if (value.status !== 'available') return { gestureStatus: value.status.slice(0, 40), gestureMessage: message };
+  try {
+    if (typeof value.motion_url !== 'string' || !/^\/api\/speech\/clips\/[a-f0-9]{32}$/.test(value.motion_url) || value.audio_sha256 !== audioSha256
+      || value.format !== 'smplx-axis-angle-f32le' || value.width !== 165 || typeof value.fps !== 'number' || typeof value.frames !== 'number') {
+      throw new ApiError('Gesture metadata does not match the generated audio.');
+    }
+    const response = await fetch(value.motion_url, { signal });
+    if (!response.ok) throw new ApiError('The gesture motion has expired.');
+    const bytes = await boundedBody(response, 4_000_000, 'gesture service');
+    const gesture = parseSpeechGestureMotion(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength), { fps: value.fps, frames: value.frames, audioSha256,
+      engine: typeof value.engine === 'string' ? value.engine : 'speech-driven gesture model' });
+    return { gesture, gestureStatus: 'available' };
+  } catch (error) {
+    signal.throwIfAborted();
+    return { gestureStatus: 'failed', gestureMessage: error instanceof Error ? error.message : 'The gesture motion could not be loaded.' };
+  }
+}
+
 /** Mouth cues are usable only for the exact verified audio bytes they describe. */
-export async function getPreparedSpeech(text: string, language: Language, signal: AbortSignal): Promise<PreparedSpeech> {
+export async function getPreparedSpeech(text: string, language: Language, signal: AbortSignal, options: { gesture?: boolean } = {}): Promise<PreparedSpeech> {
   const response = await fetch('/api/speech/prepare', {
-    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text, language }), signal,
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ text, language, ...(options.gesture ? { gesture: true } : {}) }), signal,
   });
   if (!response.ok) return failure(response);
   let value: unknown;
@@ -424,10 +451,12 @@ export async function getPreparedSpeech(text: string, language: Language, signal
   const hash = Array.from(digest, (part) => part.toString(16).padStart(2, '0')).join('');
   if (hash !== value.audio_sha256) throw new ApiError('The downloaded audio did not match its timing metadata. Generate the voice again.');
   signal.throwIfAborted();
+  const gesture = options.gesture ? await getSpeechGesture(value.gesture, hash, signal) : undefined;
   return { audio: new Blob([bytes], { type: mime }), audioSha256: hash, speechTiming: timing,
     serverTiming: value.server_timing as SpeechServerTiming | undefined,
     timingStatus: value.timing_status,
-    timingMessage: typeof value.timing_message === 'string' ? value.timing_message.slice(0, 500) : undefined };
+    timingMessage: typeof value.timing_message === 'string' ? value.timing_message.slice(0, 500) : undefined,
+    ...gesture };
 }
 
 

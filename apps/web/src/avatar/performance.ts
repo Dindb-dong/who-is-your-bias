@@ -3,7 +3,8 @@ import { sampleMotion } from './motion';
 import { sampleSpeech } from './speech';
 import { samplePose } from './timeline';
 import { sampleLearnedGesture, type GestureBasisModel } from './learnedGesture';
-import type { AnimationTelemetry, AvatarClip, QuaternionTuple, RigDiagnostics, RigPose, SpeechTiming, TimelineInput } from './types';
+import { sampleSpeechGesture, type SpeechGestureMotion } from './speechGesture';
+import type { AnimationTelemetry, AvatarClip, BoneControl, QuaternionTuple, RigDiagnostics, RigPose, SpeechTiming, TimelineInput } from './types';
 
 export interface PerformanceInput extends TimelineInput {
   audioElapsedMs?: number;
@@ -13,6 +14,8 @@ export interface PerformanceInput extends TimelineInput {
   observationElapsedMs?: number;
   allowGeometryPreview?: boolean;
   learnedGesture?: GestureBasisModel;
+  /** Generated from the playing audio; used only with that audio's digest and clock. */
+  speechGesture?: SpeechGestureMotion;
 }
 
 export function samplePerformance(input: PerformanceInput, diagnostics: RigDiagnostics): { pose: RigPose; telemetry: AnimationTelemetry } {
@@ -21,7 +24,14 @@ export function samplePerformance(input: PerformanceInput, diagnostics: RigDiagn
     faceSource: 'designed', boneSource: 'designed', speechSource: input.speaking ? input.amplitude === undefined ? 'estimated' : 'amplitude' : 'silent',
     unsupportedFace: [], unsupportedVisemes: [],
   };
-  if (!input.performanceClip && input.learnedGesture && input.speaking && input.allowGeometryPreview && !input.reducedMotion) {
+  const speechGesture = !input.performanceClip && input.speechGesture && input.speaking && input.audioElapsedMs !== undefined
+    && input.audioSha256 === input.speechGesture.audioSha256
+    ? sampleSpeechGesture(input.speechGesture, input.audioElapsedMs, { reducedMotion: input.reducedMotion,
+      supported: diagnostics.bones.length ? diagnostics.bones as BoneControl[] : undefined }) : null;
+  if (speechGesture) {
+    pose.bones = { ...pose.bones, ...speechGesture };
+    telemetry.boneSource = 'speech_generated';
+  } else if (!input.performanceClip && input.learnedGesture && input.speaking && input.allowGeometryPreview && !input.reducedMotion) {
     const bones = sampleLearnedGesture(input.learnedGesture, input.audioElapsedMs ?? input.elapsedMs);
     if (bones) {
       pose.bones = { ...pose.bones, ...bones };

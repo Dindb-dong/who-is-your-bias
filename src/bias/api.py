@@ -22,6 +22,7 @@ from .bindings import SubjectSpeechProvider, motion_binding_status
 from .config import Settings
 from .corpus import Corpus
 from .engine import Engine
+from .gesture import GestureEngine
 from .lipsync import LipsyncEngine
 from .models import ChatRequest, ChatTurn, SpeechPackageRequest, SpeechRequest
 from .motion import MotionError, MotionLibrary
@@ -149,9 +150,15 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
         application.state.transcription = TranscriptionProvider(config.asr, timeout=config.request_timeout)
         application.state.lipsync = LipsyncEngine.from_env()
         application.state.speech_packages = SpeechPackages()
+        application.state.gesture = GestureEngine.from_env()
+        # Loading EMAGE takes seconds; warm it in the background instead of delaying readiness.
+        gesture_warmup = asyncio.create_task(application.state.gesture.start()) if application.state.gesture.configured else None
         try:
             yield
         finally:
+            if gesture_warmup is not None:
+                gesture_warmup.cancel()
+            await application.state.gesture.close()
             application.state.speech_packages.clear()
 
     application = FastAPI(title="Who Is Your Bias?", version=__version__, lifespan=lifespan)
@@ -180,7 +187,7 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
         return {
             "status": "ok", "version": __version__, "provider": "openai" if config.llm.configured else "evidence",
             "capabilities": {"llm": config.llm.configured, "speech": request.app.state.speech.settings.configured, "transcription": config.asr.configured},
-            "providers": {"llm": {"configured": config.llm.configured, "model": config.llm.model}, "speech": {"configured": config.tts.configured, "available": request.app.state.speech.settings.configured, "model": config.tts.model, "binding": request.app.state.speech.binding}, "transcription": {"configured": config.asr.configured, "model": config.asr.model}},
+            "providers": {"llm": {"configured": config.llm.configured, "model": config.llm.model}, "speech": {"configured": config.tts.configured, "available": request.app.state.speech.settings.configured, "model": config.tts.model, "binding": request.app.state.speech.binding}, "transcription": {"configured": config.asr.configured, "model": config.asr.model}, "gesture": {"configured": request.app.state.gesture.configured, "ready": request.app.state.gesture.ready}},
             "corpus": engine.corpus.stats(),
             "qa_corpus": engine.corpus.qa_report(),
             "persona_snapshot": engine.snapshot.summary() if engine.snapshot else None,
@@ -311,6 +318,7 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
                 request, request.app.state.speech_packages.prepare(
                     request.app.state.speech, request.app.state.lipsync,
                     text=body.text, voice=body.voice, language=body.language,
+                    gesture=request.app.state.gesture if body.gesture else None,
                 ),
             )
         except ClientDisconnect:

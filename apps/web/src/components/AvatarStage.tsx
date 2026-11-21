@@ -5,6 +5,7 @@ import { BONE_CHANNELS, FACE_CHANNELS, VISEMES } from '../avatar/channels';
 import { AvatarRenderer, type GaussianStageState } from '../avatar/renderer';
 import type { GaussianHeadConfig } from '../avatar/gaussian/gaussianBody';
 import type { GestureBasisModel } from '../avatar/learnedGesture';
+import type { SpeechGestureMotion } from '../avatar/speechGesture';
 import type { PortraitStyle } from '../avatar/procedural';
 import type { AttentionTarget } from '../avatar/attention';
 import { visemesToFace } from '../avatar/speech';
@@ -25,6 +26,7 @@ export interface AvatarStageProps {
   observationElapsedMs?: number;
   allowGeometryPreview?: boolean;
   learnedGesture?: GestureBasisModel;
+  speechGesture?: SpeechGestureMotion;
   gaussianHead?: GaussianHeadConfig;
   attentionTarget?: AttentionTarget | null;
   portraitStyle?: PortraitStyle;
@@ -45,7 +47,7 @@ export interface AvatarStageProps {
 export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, modelUrl,
   rigMapping, reducedMotion, onReady, onError, onTelemetry, className = '',
   audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview = false, attentionTarget, portraitStyle = 'reference',
-  showCalibration = false, framing = 'portrait', auditionStartKey = 0, gaussianHead, learnedGesture }: AvatarStageProps) {
+  showCalibration = false, framing = 'portrait', auditionStartKey = 0, gaussianHead, learnedGesture, speechGesture }: AvatarStageProps) {
   const host = useRef<HTMLDivElement>(null);
   const runtime = useRef<AvatarRenderer | null>(null);
   const callbacks = useRef({ onReady, onError, onTelemetry, showCalibration }); callbacks.current = { onReady, onError, onTelemetry, showCalibration };
@@ -117,8 +119,8 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
 
   useEffect(() => {
     runtime.current?.setPlayback({ speaking, timeline, elapsedMs, amplitude, reducedMotion: reducedMotion ?? systemReduced,
-      audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview, attentionTarget, learnedGesture });
-  }, [speaking, timeline, elapsedMs, amplitude, reducedMotion, systemReduced, epoch, audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview, attentionTarget, learnedGesture]);
+      audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview, attentionTarget, learnedGesture, speechGesture });
+  }, [speaking, timeline, elapsedMs, amplitude, reducedMotion, systemReduced, epoch, audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview, attentionTarget, learnedGesture, speechGesture]);
 
   useEffect(() => { runtime.current?.setPortraitStyle(portraitStyle); }, [portraitStyle, epoch]);
 
@@ -206,7 +208,7 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
         {gaussianHead && <div role="status" className="avatar-model-status" style={{ position: 'absolute', top: 72, right: 16, left: 16, padding: '6px 10px', borderRadius: 8, background: '#0b1009cc', color: gaussianState === 'error' ? '#efb5a1' : '#d8f8a0', fontSize: 11 }}>
           {gaussianState === 'loading' ? 'Loading local photoreal face…' : gaussianState === 'ready' ? 'Synthetic photoreal face · articulated body' : gaussianState === 'error' ? `Photoreal face unavailable: ${gaussianMessage} The body remains available.` : 'Preparing photoreal face…'}
           {gaussianState === 'ready' && gaussianMessage && <span title={gaussianMessage}> · Recorded expression preview; semantic calibration pending</span>}
-          {learnedGesture && allowGeometryPreview && <span> · Experimental learned gestures</span>}
+          {speechGesture ? <span> · Speech-driven gestures (EMAGE)</span> : learnedGesture && allowGeometryPreview && <span> · Experimental learned gestures</span>}
         </div>}
         {modelError && !fatal && <div role="status" className="avatar-model-status" style={{ position: 'absolute', bottom: 20, left: 20, right: 20, padding: 12, borderRadius: 12, background: '#172014ed', color: '#e3e8dc', fontSize: 12 }}>
           {modelError} The built-in portrait is still available.

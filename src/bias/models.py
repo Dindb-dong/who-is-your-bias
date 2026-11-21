@@ -271,6 +271,7 @@ class SpeechRequest(Record):
 
 class SpeechPackageRequest(SpeechRequest):
     language: Language = "en"
+    gesture: bool = False
 
 
 class EvaluationCase(Record):
