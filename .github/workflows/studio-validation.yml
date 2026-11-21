@@ -16,10 +16,16 @@ on:
       - 'tests/gaussian_head/**'
       - 'tests/motion/**'
       - 'tests/test_persona_graph*.py'
+      - 'tests/test_persona_rules*.py'
+      - 'tests/test_persona_source_availability.py'
       - 'data/personas/jensen-huang/**'
+      - 'data/personas/jensen-huang-values-v2/**'
       - 'data/snapshots/jensen-huang-*.json'
+      - 'data/snapshots/jensen-values-*.json'
       - 'data/evaluation/jensen-persona-graph-v1.json'
+      - 'data/evaluation/jensen-persona-rules-v2.json'
       - 'tools/persona_graph_eval.py'
+      - 'tools/persona_rules_eval.py'
       - 'docs/persona-graph-evaluation-protocol.md'
   workflow_dispatch:
 
@@ -56,7 +62,7 @@ jobs:
       - name: Verify Jensen and shared runtime paths
         run: uv run pytest -q tests/test_jensen_persona.py tests/test_jensen_retrieval.py tests/test_query_evidence_policy.py tests/test_temporal_dialogue.py tests/test_runtime_text_live.py tests/test_runtime_text_cancel_recovery.py tests/gaussian_head tests/motion
       - name: Validate source-bound persona memory and evaluation integrity
-        run: uv run pytest -q tests/test_persona_graph.py tests/test_persona_graph_integration.py tests/test_persona_graph_eval.py
+        run: uv run pytest -q tests/test_persona_graph.py tests/test_persona_graph_integration.py tests/test_persona_graph_eval.py tests/test_persona_rules.py tests/test_persona_rules_eval.py tests/test_persona_rules_seed.py tests/test_persona_source_availability.py
       - name: Validate Gaussian body and learned gesture playback
         run: npx playwright test --config playwright.performance.config.ts
       - name: Validate historical desktop and mobile flows

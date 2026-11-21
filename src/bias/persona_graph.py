@@ -270,7 +270,11 @@ class PersonaGraph:
     @classmethod
     def load(cls, path: Path, corpus: Corpus) -> "PersonaGraph":
         try:
-            return cls(GraphDocument.model_validate_json(path.read_text(encoding="utf-8")), corpus)
+            data = json.loads(path.read_text(encoding="utf-8"))
+            if isinstance(data, dict) and data.get("schema_version") == "persona-graph.v2":
+                from .persona_rules import PersonaRuleGraph, RulesDocument
+                return PersonaRuleGraph(RulesDocument.model_validate(data), corpus)
+            return cls(GraphDocument.model_validate(data), corpus)
         except (OSError, ValueError) as exc:
             raise PersonaGraphError(f"Cannot load persona graph: {exc}") from exc
 

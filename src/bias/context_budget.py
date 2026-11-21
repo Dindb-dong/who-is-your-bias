@@ -229,8 +229,9 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
                 memory_status["reason"] = "context_budget"
             else:
                 memory_status.update(included=True, reason="included")
-                memory_status["included_value_ids"] = [node["id"] for node in memory["nodes"]
-                                                       if node["kind"] == "value"]
+                memory_status["included_value_ids"] = memory.get("rule_ids", [
+                    node["id"] for node in memory["nodes"] if node["kind"] == "value"
+                ])
                 break
     if request.mode != "profile":
         for hit in getattr(result, "style_hits", ()):

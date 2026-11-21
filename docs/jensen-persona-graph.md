@@ -1,5 +1,12 @@
 # Source-bound persona graph for new advice
 
+> PR29 now also includes an optional **v2 conditional-values candidate** with
+> expanded primary sources, distinct values/beliefs/style, explicit conditions
+> and exceptions. See [the v2 execution record](persona-values-v2-execution.md)
+> and [corpus/setup guide](../data/personas/jensen-huang-values-v2/README.md).
+> The six-principle implementation and results below describe the preserved v1
+> pilot. Neither candidate changes the default live pipeline automatically.
+
 Task branch: `feat/jensen-persona-graph-nov20`, based on main
 `472713e183e0dbdc8da8d35a22e6bd9e80be5f39` (PR #24).
 

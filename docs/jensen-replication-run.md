@@ -2,6 +2,8 @@
 
 > The opt-in source-bound persona graph and matched real-model evaluation are
 > recorded in [the persona graph implementation note](jensen-persona-graph.md).
+> The conditional-values revision and expanded source acquisition are tracked
+> in [the v2 execution record](persona-values-v2-execution.md).
 
 > The opt-in question-dependent answer length/structure extension to PR #24 is
 > recorded in [the adaptive answer implementation note](yaicon-adaptive-answers.md).
