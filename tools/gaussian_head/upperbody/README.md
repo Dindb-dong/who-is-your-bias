@@ -54,3 +54,36 @@ The output is driven by SMPL-X body pose plus FLAME expression. That is the form
   not go into Git.
 - `SMPLX_NEUTRAL_2020.npz`: the SMPL-X model. Each user needs their own licensed copy.
 - `tools/`: a copy of this folder.
+
+## Face + neck bundle for the studio (`upperbody_to_head_bundle.mjs`)
+
+The full upper body is not usable in the studio as is. The arms are blurry
+fragments, because the source crop rarely shows them, and the torso edges
+carry white-background haze.
+
+What the studio uses instead is the jointly trained head and neck:
+
+```
+node upperbody_to_head_bundle.mjs <export>/jensen_upperbody_120000 \
+  apps/web/public/models/gaussian-head/jensen_a_c1c3_240k_sh \
+  apps/web/public/models/gaussian-head/jensen_ub_head_120k --keep 12 --white 0.5
+```
+
+The script writes a normal `gaussian-head.v1` bundle:
+
+- **Base.** It copies the studio's FLAME arrays and expression replay.
+- **Gaussians.** It takes the upper-body model's FLAME-bound Gaussians. They
+  include the neck and the black T-shirt neckline.
+- **Collar cut.** It writes a negative `collar_cut_m`, so the Gaussians below
+  the FLAME boundary are kept. The neck seam still starts at the FLAME boundary
+  (`seamStartY`), so the neck follows the neck joint and the face follows the
+  head joint.
+
+Open the result with `?head=gaussian&headBundle=jensen_ub_head_120k`.
+
+`--keep 12,13,14` also re-binds the SMPL-X collar Gaussians to the nearest
+FLAME faces. On 2026-11-21 that left a grey wisp over one shoulder, so
+`--keep 12` is preferred. With `--keep 12`, no body Gaussians pass the filter
+and only the FLAME-bound ones are used.
+
+The outputs are research-licensed and are not committed.
