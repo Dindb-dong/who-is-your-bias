@@ -9,6 +9,7 @@ from .answer_policy import AnswerPolicy
 from .grounding import KOREAN_CITATION_INSTRUCTION
 from .models import ChatRequest
 from .providers import ProviderError
+from .persona_delivery import DELIVERY_INSTRUCTION, DeliverySelection
 
 if TYPE_CHECKING:
     from .persona_graph import GraphSelection
@@ -139,9 +140,10 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
                             speculative: bool = False, live_concise: bool = False,
                             answer_policy: AnswerPolicy | None = None,
                             persona_selection: GraphSelection | None = None,
-                            persona_memory_format: str = "graph") -> PromptPackage:
-    if persona_memory_format not in {"graph", "flat"}:
-        raise ValueError("persona_memory_format must be graph or flat")
+                            persona_memory_format: str = "graph",
+                            delivery_selection: DeliverySelection | None = None) -> PromptPackage:
+    if persona_memory_format not in {"graph", "flat", "compact"}:
+        raise ValueError("persona_memory_format must be graph, flat or compact")
     system = (
         f"You are a clearly labeled AI simulation of {corpus.persona.name}, not the real person. "
         f"Answer in {'Korean' if request.language == 'ko' else 'English'}. Adapt length to the question. "
@@ -215,6 +217,8 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
     selected_history = []
     def messages():
         rendered_system = system
+        if context.get("communication_guidance"):
+            rendered_system += DELIVERY_INSTRUCTION
         if "persona_memory" in context:
             # Exactly the same instruction in the graph and linked-note
             # conditions. Representation is the only prompt-policy difference.
@@ -276,6 +280,19 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
                     node["id"] for node in memory["nodes"] if node["kind"] == "value"
                 ])
                 break
+    delivery_status = None
+    if delivery_selection is not None and request.mode != "profile":
+        delivery_status = {**delivery_selection.trace(), "included_ids": [], "dropped_ids": []}
+        for observation in delivery_selection.observations:
+            context.setdefault("communication_guidance", []).append(
+                DeliverySelection((observation,), delivery_selection.document_sha256).payload()[0])
+            if counter.count(messages()) > available:
+                context["communication_guidance"].pop()
+                delivery_status["dropped_ids"].append(observation.id)
+                if not context["communication_guidance"]:
+                    context.pop("communication_guidance")
+            else:
+                delivery_status["included_ids"].append(observation.id)
     if request.mode != "profile":
         for hit in getattr(result, "style_hits", ()):
             qa = hit.evidence.question_answer
@@ -302,4 +319,6 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
                           "history_turns": len(selected_history) // 2}
     if memory_status is not None:
         budget["persona_memory"] = memory_status
+    if delivery_status is not None:
+        budget["persona_delivery"] = delivery_status
     return PromptPackage(packed, tuple(supplied), tuple(styles), budget)

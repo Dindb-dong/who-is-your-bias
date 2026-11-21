@@ -331,7 +331,7 @@ class PersonaGraph:
 
 def select_advice_memory(graph: PersonaGraph, corpus: Corpus, question: str, *,
                          snapshot: PersonaSnapshot | None = None,
-                         temporal: TemporalSelection | None = None) -> GraphSelection:
+                         temporal: TemporalSelection | None = None, limit: int = 2) -> GraphSelection:
     """Use dated past principles for advice without changing factual retrieval.
 
     A snapshot still excludes sources published after its cutoff, and the graph
@@ -344,7 +344,7 @@ def select_advice_memory(graph: PersonaGraph, corpus: Corpus, question: str, *,
     if snapshot is not None and is_persona_advice_request(question):
         snapshot.verify(corpus)
         eligible_ids = select_temporal(corpus, snapshot, question, intent_override=TemporalIntent("general")).eligible_ids
-    return graph.select(question, eligible_ids=eligible_ids)
+    return graph.select(question, eligible_ids=eligible_ids, limit=limit)
 
 
 def augment_result(selection: GraphSelection, corpus: Corpus, result: SearchResult, *, limit: int = 4) -> SearchResult:

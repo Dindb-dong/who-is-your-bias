@@ -172,15 +172,30 @@ class RuleSelection(GraphSelection):
     paths: tuple[RulePath, ...]
     anchors: tuple[RuleAnchor, ...]
 
-    def payload(self, *, format: Literal["flat", "graph"], supplied_ids: Iterable[str]) -> dict | None:
-        if format not in {"flat", "graph"}:
-            raise ValueError("Persona memory format must be flat or graph")
+    def payload(self, *, format: Literal["flat", "graph", "compact"], supplied_ids: Iterable[str]) -> dict | None:
+        if format not in {"flat", "graph", "compact"}:
+            raise ValueError("Persona memory format must be flat, graph or compact")
         supplied = set(supplied_ids)
         paths = [path for path in self.paths if set(path.evidence_ids) <= supplied]
         if not paths:
             return None
         claims = {claim.id: claim for path in paths for claim in path.claims}
         rules = {path.rule.id: path.rule for path in paths}
+        if format == "compact":
+            # Compile the selected graph path without repeating every edge and
+            # identifier. Preserve ALL conditions, exceptions and contrary links.
+            # The source graph/trace retains the full auditable representation.
+            return {
+                "schema_version": "persona-memory.v2", "format": "compact",
+                "rule_ids": list(rules), "nodes": [],
+                "guidance": [{"principles": [
+                    {"text": claim.text, "status": claim.epistemic_status}
+                    for claim in path.claims], "action": path.rule.text,
+                    "when": list(path.rule.conditions), "unless": list(path.rule.exceptions),
+                    "evidence": [{"id": link.evidence_id, "relation": link.relation}
+                        for item in (*path.claims, path.rule) for link in item.evidence_links]}
+                    for path in paths],
+            }
         nodes = [
             {"id": claim.id, "kind": claim.kind, "text": claim.text,
              "epistemic_status": claim.epistemic_status}
