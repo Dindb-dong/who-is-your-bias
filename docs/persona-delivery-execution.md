@@ -4,6 +4,10 @@ Target: `Dindb-dong/who-is-your-bias`, PR #29,
 `feat/jensen-persona-graph-nov20`. Starting remote head:
 `4848dfda9efa6ad0c93a7a8b68cbbc947f9fdae4`. This work does not merge main.
 
+Final status: implementation and 36-attempt/2-AI-rater development experiment
+completed; 193 related tests pass. No net advice-quality gain was observed.
+See the completed assessment below. Feature defaults remain off.
+
 ## Implementation checkpoint
 
 - Added opt-in compact compilation of a single v2 graph strategy, retaining its
@@ -88,3 +92,18 @@ not condition names, generation prompts, prior outcomes or each other's scores.
 
 Voice identity/prosody require reference audio and actual TTS comparisons. This
 text experiment does not test or improve acoustic identity by itself.
+
+## Completed assessment
+
+All 36 blinded answers were rated independently by each of two AI evaluators.
+The strict advice pass judgments were 3/16 for matched evidence, 0/16 for compact
+values and 2/16 for full values/delivery. Median CPU completion times were
+21.59, 29.83 and 30.73 seconds respectively. The small authored pilot does not
+show a net conditional-value improvement. Some responses copied guidance or
+missed an important exception. The feature remains disabled by default.
+
+See [the complete measured report](../reports/persona-delivery-2026-11-21/README.md)
+for all metrics, failure cases, scope limits and artifacts. These results do not
+measure voice similarity or end-to-end live latency. A total of 193 related
+software/evaluation integrity regressions passed; that is distinct from the
+generated-answer quality outcome.

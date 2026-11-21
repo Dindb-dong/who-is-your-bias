@@ -108,5 +108,6 @@ and save verified remote checkpoints throughout any later implementation.
 For the opt-in compact values/reaction/style work and the fresh matched-evidence
 pilot, see [the 2026-11-21 delivery execution record](persona-delivery-execution.md).
 This is separate from acoustic speaker cloning and does not establish a quality
-improvement until the linked generated-answer experiment is completed.
+improvement: the completed 36-attempt pilot did not beat matched-evidence
+prompting and increased median CPU completion time. The feature remains opt-in.
 

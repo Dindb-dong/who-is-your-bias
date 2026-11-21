@@ -4,6 +4,11 @@ This PR separates **what decision criterion to apply**, **how to respond to the
 situation**, **how to phrase the answer**, and **how the audio sounds**. These are
 different targets and require different evidence and measurements.
 
+**Measured status:** the [36-attempt development pilot](../reports/persona-delivery-2026-11-21/README.md)
+did not improve conditional advice over matched-evidence prompting and increased
+median CPU completion time. Keep the feature opt-in; this is not a live-demo
+quality qualification.
+
 | Component | Implementation | Evidence and limit |
 | --- | --- | --- |
 | Conditional values | Compile one relevant v2 graph path into compact guidance, retaining claims, qualifications and exceptions | Existing 60-record source corpus and 12 strategies; lexical routing can miss paraphrases |
@@ -24,6 +29,9 @@ guidance from factual evidence. A historical joke does not justify inventing a
 current scandal, feeling, endorsement or autobiographical story. Explicit humor
 opt-outs and sensitive contexts override the humor invitation. These are
 bounded lexical safeguards, not an exhaustive semantic safety classifier.
+In the actual pilot, excluding the humor observation still allowed the base
+model to produce an inappropriate user-requested joke about a distressed
+teammate. Retrieval suppression alone is not a response-level humor guarantee.
 
 ## Opt-in configuration
 
