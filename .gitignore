@@ -78,3 +78,6 @@ data/acquisition/jensen-huang/reference-images/internal_reference/
 reports/persona-graph-2026-11-20/runtime/*.gguf
 reports/persona-graph-2026-11-20/runtime/server.log
 reports/persona-graph-2026-11-20/runtime/requests.jsonl
+
+# Keep blinded-evaluation condition mappings out of the public repository.
+reports/**/condition-key.private.json
