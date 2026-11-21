@@ -185,5 +185,7 @@
       "sha256": "6c646d67934231521f3c0eb840b88e0859452d86c98406f9ad7a9e8bdb3e2076"
     }
   ],
-  "interpretation_review": "AI source review; full publisher wording is not included in Git; dates are labeled by basis, event clocks are not acoustically checked."
+  "interpretation_review": "AI source review; full publisher wording is not included in Git; dates are labeled by basis, event clocks are not acoustically checked.",
+  "curated_corpus_ingested_at": "2026-11-21T07:38:33.016236+00:00",
+  "verification": "All seven raw source and review-text hashes rechecked at the recorded corpus ingestion time; this is a conservative observed-availability bound."
 }

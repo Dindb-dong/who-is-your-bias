@@ -37,7 +37,7 @@
       "evidence_id": "jensen-values-gsb-01",
       "source_id": "stanford-gsb-2024",
       "evidence_sha256": "68da298d0452a39d2b0b4f0b47bb6cd60742ce8443f7887df6e46bf350a4e7f4",
-      "source_sha256": "5565fa238deb2a4089d139c383c19466c352d0b7b89041c22a97a5281f567156",
+      "source_sha256": "746faa2039729aa95f85db4e5c8155e1c2409c93cc9bdef8790764b723cc8b90",
       "source_event_id": "stanford-gsb-2024",
       "experience_id": "nvidia-cuda-market-decline"
     },
@@ -45,7 +45,7 @@
       "evidence_id": "jensen-values-gsb-02",
       "source_id": "stanford-gsb-2024",
       "evidence_sha256": "4c77050fdc6d47264e2b1f7fc126298fb7ffc10eab75ad0f360057c93b328b54",
-      "source_sha256": "5565fa238deb2a4089d139c383c19466c352d0b7b89041c22a97a5281f567156",
+      "source_sha256": "746faa2039729aa95f85db4e5c8155e1c2409c93cc9bdef8790764b723cc8b90",
       "source_event_id": "stanford-gsb-2024",
       "experience_id": "early-cleaning-work"
     },
@@ -53,7 +53,7 @@
       "evidence_id": "jensen-values-gsb-03",
       "source_id": "stanford-gsb-2024",
       "evidence_sha256": "e43a2f3717073946435c7bd79f485c11be624021cf945c18f8bc77b9741eb1c8",
-      "source_sha256": "5565fa238deb2a4089d139c383c19466c352d0b7b89041c22a97a5281f567156",
+      "source_sha256": "746faa2039729aa95f85db4e5c8155e1c2409c93cc9bdef8790764b723cc8b90",
       "source_event_id": "stanford-gsb-2024",
       "experience_id": "nvidia-information-sharing"
     },
@@ -61,7 +61,7 @@
       "evidence_id": "jensen-values-gsb-04",
       "source_id": "stanford-gsb-2024",
       "evidence_sha256": "c7b85f04ebd2e50aac678b95d38832c87e4541d81513e17ab468fb8398401e31",
-      "source_sha256": "5565fa238deb2a4089d139c383c19466c352d0b7b89041c22a97a5281f567156",
+      "source_sha256": "746faa2039729aa95f85db4e5c8155e1c2409c93cc9bdef8790764b723cc8b90",
       "source_event_id": "stanford-gsb-2024",
       "experience_id": "nvidia-cuda-market-decline"
     },
@@ -69,7 +69,7 @@
       "evidence_id": "jensen-values-gsb-05",
       "source_id": "stanford-gsb-2024",
       "evidence_sha256": "947daf72560825cb23a9b15a33260e9828c0577a593a8e66bdc5ed1dc23fd279",
-      "source_sha256": "5565fa238deb2a4089d139c383c19466c352d0b7b89041c22a97a5281f567156",
+      "source_sha256": "746faa2039729aa95f85db4e5c8155e1c2409c93cc9bdef8790764b723cc8b90",
       "source_event_id": "stanford-gsb-2024",
       "experience_id": "nvidia-project-selection"
     },
@@ -77,7 +77,7 @@
       "evidence_id": "jensen-values-gsb-06",
       "source_id": "stanford-gsb-2024",
       "evidence_sha256": "b57c3610e61329aed4861c6d6ca5c90deec6d838cbfe5f33884af2043846b828",
-      "source_sha256": "5565fa238deb2a4089d139c383c19466c352d0b7b89041c22a97a5281f567156",
+      "source_sha256": "746faa2039729aa95f85db4e5c8155e1c2409c93cc9bdef8790764b723cc8b90",
       "source_event_id": "stanford-gsb-2024",
       "experience_id": "nvidia-reasoning-coaching"
     },
@@ -85,7 +85,7 @@
       "evidence_id": "jensen-values-mil-01",
       "source_id": "milken-2026",
       "evidence_sha256": "df7a9d68523bf28d8568aa43b3206c7bf14dec523cd3ecb8af790c8da775289c",
-      "source_sha256": "a563ebe782b4049c258bc8ef1eb64e1067ec6faa568dfe1d55f11a2813973aad",
+      "source_sha256": "7a39fa865015edbd5cc3f5a023143a323ed837f7a78752c914e836b45d368ae0",
       "source_event_id": "milken-2026-05-04",
       "experience_id": "milken-ai-safety-accountability"
     },
@@ -93,7 +93,7 @@
       "evidence_id": "jensen-values-mil-02",
       "source_id": "milken-2026",
       "evidence_sha256": "6ed9862f76fed588b8ce1f175b7a33bb9f7bc0f42f9fd3313f4fc3f3e696fff4",
-      "source_sha256": "a563ebe782b4049c258bc8ef1eb64e1067ec6faa568dfe1d55f11a2813973aad",
+      "source_sha256": "7a39fa865015edbd5cc3f5a023143a323ed837f7a78752c914e836b45d368ae0",
       "source_event_id": "milken-2026-05-04",
       "experience_id": "milken-ai-application-regulation"
     },
@@ -101,7 +101,7 @@
       "evidence_id": "jensen-values-mil-03",
       "source_id": "milken-2026",
       "evidence_sha256": "5d66754d9b6212dce9e2ee6da8ab3836124bd65ff59bda3d0c26dd570e2a27e5",
-      "source_sha256": "a563ebe782b4049c258bc8ef1eb64e1067ec6faa568dfe1d55f11a2813973aad",
+      "source_sha256": "7a39fa865015edbd5cc3f5a023143a323ed837f7a78752c914e836b45d368ae0",
       "source_event_id": "milken-2026-05-04",
       "experience_id": "milken-automation-purpose"
     },
@@ -109,7 +109,7 @@
       "evidence_id": "jensen-values-mil-04",
       "source_id": "milken-2026",
       "evidence_sha256": "80bf99494c002d855ce647f223b191c72cd05855468aa54ba2574c4d40107408",
-      "source_sha256": "a563ebe782b4049c258bc8ef1eb64e1067ec6faa568dfe1d55f11a2813973aad",
+      "source_sha256": "7a39fa865015edbd5cc3f5a023143a323ed837f7a78752c914e836b45d368ae0",
       "source_event_id": "milken-2026-05-04",
       "experience_id": "milken-automation-purpose"
     },
@@ -117,7 +117,7 @@
       "evidence_id": "jensen-values-mil-05",
       "source_id": "milken-2026",
       "evidence_sha256": "5aaf109779fa81329fe7186d8986f8dfb01fd8bccfac193015ccf7d7466b393d",
-      "source_sha256": "a563ebe782b4049c258bc8ef1eb64e1067ec6faa568dfe1d55f11a2813973aad",
+      "source_sha256": "7a39fa865015edbd5cc3f5a023143a323ed837f7a78752c914e836b45d368ae0",
       "source_event_id": "milken-2026-05-04",
       "experience_id": "milken-ecosystem-investment"
     },
@@ -125,7 +125,7 @@
       "evidence_id": "jensen-values-mil-06",
       "source_id": "milken-2026",
       "evidence_sha256": "677f1ea5d27ea89327378cc15e78bf3e268941193fbe493fe05acca9890ffbb7",
-      "source_sha256": "a563ebe782b4049c258bc8ef1eb64e1067ec6faa568dfe1d55f11a2813973aad",
+      "source_sha256": "7a39fa865015edbd5cc3f5a023143a323ed837f7a78752c914e836b45d368ae0",
       "source_event_id": "milken-2026-05-04",
       "experience_id": "milken-partner-disagreement"
     },
@@ -133,7 +133,7 @@
       "evidence_id": "jensen-values-np-01",
       "source_id": "no-priors-2023",
       "evidence_sha256": "71673a3b9e4ba9c88adbf96ff3c46e52af575418b8012f37eac9bb67f9f92825",
-      "source_sha256": "8c277ff2b716fa609c1b68e8d22a0496fd87e3c14783baacd2d01882a21d2ea1",
+      "source_sha256": "e9542c020bb596f7c8abdb7660e0fc3000fef07581e0b6717f6cef002494c4a9",
       "source_event_id": "no-priors-2023",
       "experience_id": "nvidia-developer-platform-scope"
     },
@@ -141,7 +141,7 @@
       "evidence_id": "jensen-values-np-02",
       "source_id": "no-priors-2023",
       "evidence_sha256": "bf280ecf5aa85852c031492557e5afa45782ed806ea37e480cf58e72d3b5e836",
-      "source_sha256": "8c277ff2b716fa609c1b68e8d22a0496fd87e3c14783baacd2d01882a21d2ea1",
+      "source_sha256": "e9542c020bb596f7c8abdb7660e0fc3000fef07581e0b6717f6cef002494c4a9",
       "source_event_id": "no-priors-2023",
       "experience_id": "nvidia-long-horizon-funding"
     },
@@ -149,7 +149,7 @@
       "evidence_id": "jensen-values-np-03",
       "source_id": "no-priors-2023",
       "evidence_sha256": "9df6798e8adff6c8e1fdbc5bf50d4d3c15a67c0445d8124161d204283b2999ff",
-      "source_sha256": "8c277ff2b716fa609c1b68e8d22a0496fd87e3c14783baacd2d01882a21d2ea1",
+      "source_sha256": "e9542c020bb596f7c8abdb7660e0fc3000fef07581e0b6717f6cef002494c4a9",
       "source_event_id": "no-priors-2023",
       "experience_id": "nvidia-leadership-organization"
     },
@@ -157,7 +157,7 @@
       "evidence_id": "jensen-values-np-04",
       "source_id": "no-priors-2023",
       "evidence_sha256": "a28167e3849dd052d9670df37975623185a6c5d3a9688a601047612597409ad6",
-      "source_sha256": "8c277ff2b716fa609c1b68e8d22a0496fd87e3c14783baacd2d01882a21d2ea1",
+      "source_sha256": "e9542c020bb596f7c8abdb7660e0fc3000fef07581e0b6717f6cef002494c4a9",
       "source_event_id": "no-priors-2023",
       "experience_id": "nvidia-exploration-and-delivery"
     },
@@ -165,7 +165,7 @@
       "evidence_id": "jensen-values-np-05",
       "source_id": "no-priors-2023",
       "evidence_sha256": "07bca4a356dd3497df26b49c0dc6cfce5c96c85be23573c1e6eda9c132368098",
-      "source_sha256": "8c277ff2b716fa609c1b68e8d22a0496fd87e3c14783baacd2d01882a21d2ea1",
+      "source_sha256": "e9542c020bb596f7c8abdb7660e0fc3000fef07581e0b6717f6cef002494c4a9",
       "source_event_id": "no-priors-2023",
       "experience_id": "nvidia-ceo-self-review"
     },
@@ -173,7 +173,7 @@
       "evidence_id": "jensen-values-stvp-01",
       "source_id": "stanford-etl-2009-founding",
       "evidence_sha256": "9a72d195c6918724fe2507c5685d37382fc1bd368c079f014a0e48f30187bb33",
-      "source_sha256": "912837b99dabdfbe3a532210993c9b7d4b2e598fd8b99fdca4ee42377525d0d5",
+      "source_sha256": "f0c2744f1a7922c032fb4b7126cdbcce4c4b2186c861a84dfba88236d6b8f86b",
       "source_event_id": "stanford-etl-2009-04-08",
       "experience_id": "nvidia-founding-1993"
     },
@@ -181,7 +181,7 @@
       "evidence_id": "jensen-values-stvp-03",
       "source_id": "stanford-etl-2009-leaders",
       "evidence_sha256": "71f69df1798e293d31198e11883151c3ff419f4eefb1d527c8dcc2899aeac71c",
-      "source_sha256": "32e166c8f9fd1d7192ec46bdae0c5f21d11781b5027c4d2eafd25cc3edd8149a",
+      "source_sha256": "8763569849ec5d88777ad4ac0d5c235cd95e1c50c7ec631290be9fda6b026bea",
       "source_event_id": "stanford-etl-2009-04-08",
       "experience_id": "nvidia-leadership-development-2009"
     },
@@ -189,7 +189,7 @@
       "evidence_id": "jensen-values-stvp-04",
       "source_id": "stanford-etl-2009-leaders",
       "evidence_sha256": "28da266367819e0f385b355b16793670d26c0d4e03c5a9b5b9f2c7a8bc5f7577",
-      "source_sha256": "32e166c8f9fd1d7192ec46bdae0c5f21d11781b5027c4d2eafd25cc3edd8149a",
+      "source_sha256": "8763569849ec5d88777ad4ac0d5c235cd95e1c50c7ec631290be9fda6b026bea",
       "source_event_id": "stanford-etl-2009-04-08",
       "experience_id": "nvidia-leadership-development-2009"
     },
@@ -197,7 +197,7 @@
       "evidence_id": "jensen-values-stvp-05",
       "source_id": "stanford-etl-2009-allocation",
       "evidence_sha256": "f3b3bf4d6052d35e0683163ebd77b2da57292693aee35b2ea7a7b0586addca6d",
-      "source_sha256": "b465951bc19dde607057f66d2de3a0b64f56b063897f5f5ea97f824b28361c2b",
+      "source_sha256": "e5539479d3bb526a59017e8beb2f76c31229180baab02ba4b38b1b9b9ff5ff5a",
       "source_event_id": "stanford-etl-2009-04-08",
       "experience_id": "nvidia-console-opportunity-cost"
     }

@@ -148,7 +148,7 @@
     "raw_content_sha256": "2c7f3b7db25844b14788092c9832c7e4fa77bcbf49ac913feb477219d52c037e",
     "review_text_sha256": "9af4d688035bafd04f39f4ae2f822454c7a4fddbb598ce7abe5c36268df5b8b6",
     "acquisition_coverage": "full_publisher_transcript",
-    "ingested_at": "2026-11-21T07:20:35+00:00"
+    "ingested_at": "2026-11-21T07:38:33.016236+00:00"
   },
   {
     "id": "no-priors-2023",
@@ -169,7 +169,7 @@
     "raw_content_sha256": "477b8267b3e9e50a15bfd58dfa0bc94f6d5d41fe1c6c57465cb06f020090ae23",
     "review_text_sha256": "d507fd0cdf33b4e79f47ca03e82a2fc4baf4dedc019a88ecccfb499a3f04ba30",
     "acquisition_coverage": "full_publisher_transcript",
-    "ingested_at": "2026-11-21T07:20:35+00:00"
+    "ingested_at": "2026-11-21T07:38:33.016236+00:00"
   },
   {
     "id": "milken-2026",
@@ -180,7 +180,7 @@
     "recorded_at": "2026-05-04",
     "publication_date_verified": false,
     "publication_date_basis": "observed_availability",
-    "availability_observed_at": "2026-11-21T07:20:35+00:00",
+    "availability_observed_at": "2026-11-21T07:38:33.016236+00:00",
     "published_at_basis": "Conservative availability bound: observed on acquisition date; exact publication date unknown. Not the recording date.",
     "source_type": "publisher_transcript",
     "split": "train",
@@ -191,7 +191,7 @@
     "raw_content_sha256": "60ff9415bc786753aa7e8ee3e10b1c3ff312f855ab4251ff43ae7365f22eda62",
     "review_text_sha256": "744a3673495d32de224f02c9a252fd22fd526e8588c3527b4f2e423edcbfdaf0",
     "acquisition_coverage": "full_publisher_transcript",
-    "ingested_at": "2026-11-21T07:20:35+00:00"
+    "ingested_at": "2026-11-21T07:38:33.016236+00:00"
   },
   {
     "id": "stanford-etl-2009-founding",
@@ -202,7 +202,7 @@
     "recorded_at": "2009-04-08",
     "publication_date_verified": false,
     "publication_date_basis": "observed_availability",
-    "availability_observed_at": "2026-11-21T07:20:35+00:00",
+    "availability_observed_at": "2026-11-21T07:38:33.016236+00:00",
     "published_at_basis": "Conservative availability bound: observed on acquisition date; exact publication date unknown. Not the recording date.",
     "source_type": "publisher_clip_transcript",
     "split": "train",
@@ -213,7 +213,7 @@
     "raw_content_sha256": "127b5e91c98b200a15a01e82b7e34255651441a65ef5ada09810726e1ff9c39b",
     "review_text_sha256": "b2b165f36b8ba857e4c243b877e51f6227e857f452db9ec624bae6ddab349921",
     "acquisition_coverage": "full_clip_transcript",
-    "ingested_at": "2026-11-21T07:20:35+00:00"
+    "ingested_at": "2026-11-21T07:38:33.016236+00:00"
   },
   {
     "id": "stanford-etl-2009-leaders",
@@ -224,7 +224,7 @@
     "recorded_at": "2009-04-08",
     "publication_date_verified": false,
     "publication_date_basis": "observed_availability",
-    "availability_observed_at": "2026-11-21T07:20:35+00:00",
+    "availability_observed_at": "2026-11-21T07:38:33.016236+00:00",
     "published_at_basis": "Conservative availability bound: observed on acquisition date; exact publication date unknown. Not the recording date.",
     "source_type": "publisher_clip_transcript",
     "split": "train",
@@ -235,7 +235,7 @@
     "raw_content_sha256": "8ebdefe54d128222b5fbd42b996f6d61d1a9465c29b972b2c949324eaf13cf86",
     "review_text_sha256": "d054050f97b0dc3394ef1873d479d186ae727757acd9abb7bd1f14b39e87a580",
     "acquisition_coverage": "full_clip_transcript",
-    "ingested_at": "2026-11-21T07:20:35+00:00"
+    "ingested_at": "2026-11-21T07:38:33.016236+00:00"
   },
   {
     "id": "stanford-etl-2009-allocation",
@@ -246,7 +246,7 @@
     "recorded_at": "2009-04-08",
     "publication_date_verified": false,
     "publication_date_basis": "observed_availability",
-    "availability_observed_at": "2026-11-21T07:20:35+00:00",
+    "availability_observed_at": "2026-11-21T07:38:33.016236+00:00",
     "published_at_basis": "Conservative availability bound: observed on acquisition date; exact publication date unknown. Not the recording date.",
     "source_type": "publisher_clip_transcript",
     "split": "train",
@@ -257,7 +257,7 @@
     "raw_content_sha256": "d6693318245d9f213d13acd092df52f6747dbdaa7b4743b45198fcba27521460",
     "review_text_sha256": "b5926042fa065819022f0488c120654430fc1a6e2737269865039ffdf13e79b9",
     "acquisition_coverage": "full_clip_transcript",
-    "ingested_at": "2026-11-21T07:20:35+00:00"
+    "ingested_at": "2026-11-21T07:38:33.016236+00:00"
   },
   {
     "id": "stanford-etl-2009-reinvention",
@@ -268,7 +268,7 @@
     "recorded_at": "2009-04-08",
     "publication_date_verified": false,
     "publication_date_basis": "observed_availability",
-    "availability_observed_at": "2026-11-21T07:20:35+00:00",
+    "availability_observed_at": "2026-11-21T07:38:33.016236+00:00",
     "published_at_basis": "Conservative availability bound: observed on acquisition date; exact publication date unknown. Not the recording date.",
     "source_type": "publisher_clip_transcript",
     "split": "train",
@@ -279,6 +279,6 @@
     "raw_content_sha256": "a89025842d0497f01d2ea16267463f8455d3a5a4adf871ed745a12bc6169e8b9",
     "review_text_sha256": "a8620edbc7be1539c85858ccddb7cfa21a63c696497a2de6f50cca08c4b45b38",
     "acquisition_coverage": "full_clip_transcript",
-    "ingested_at": "2026-11-21T07:20:35+00:00"
+    "ingested_at": "2026-11-21T07:38:33.016236+00:00"
   }
 ]
