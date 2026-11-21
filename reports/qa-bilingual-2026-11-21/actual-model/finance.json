@@ -1,0 +1,132 @@
+{
+  "case": "finance",
+  "question": "엔비디아 주식 사야 하나요?",
+  "turn": {
+    "id": "6eed3fbe46434c0396e5d6fd2eeaa560",
+    "session_id": "ece6e99b463b4074b153e0e8d5fe4c1f",
+    "text": "I can't make a personal buy-or-sell recommendation or promise a stock's future return. A sensible discussion would compare current filings, valuation and concentration risk with your time horizon; this demo does not have verified live market data.",
+    "language": "en",
+    "mode": "behavior",
+    "provider": "evidence",
+    "citations": [],
+    "behavior": {
+      "cues": [
+        {
+          "start_ms": 0,
+          "duration_ms": 900,
+          "channel": "face",
+          "name": "brow_raise",
+          "intensity": 0.3,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 0,
+          "duration_ms": 550,
+          "channel": "gaze",
+          "name": "center",
+          "intensity": 0.2,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 350,
+          "duration_ms": 850,
+          "channel": "head",
+          "name": "nod",
+          "intensity": 0.25,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 1200,
+          "duration_ms": 1600,
+          "channel": "gesture",
+          "name": "open_palm",
+          "intensity": 0.4,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 8094,
+          "duration_ms": 1100,
+          "channel": "head",
+          "name": "nod",
+          "intensity": 0.18,
+          "provenance": "designed",
+          "evidence_ids": []
+        }
+      ],
+      "speech": {
+        "rate": 1.0,
+        "pitch": 1.0,
+        "pause_ms": 260
+      },
+      "duration_ms": 16189,
+      "timing_basis": "estimated_text",
+      "motion": null
+    },
+    "grounding": {
+      "status": "insufficient",
+      "retrieved_ids": [],
+      "invalid_citation_ids": [],
+      "reason": "personal_trading_request",
+      "citation_status": "not_required",
+      "citation_unit_count": 2,
+      "cited_unit_count": 0,
+      "malformed_citations": [],
+      "semantic_status": "unreviewed"
+    },
+    "metrics": {
+      "retrieval_ms": 0.0,
+      "generation_ms": 0.386,
+      "total_ms": 0.547
+    },
+    "context": {
+      "qa_knowledge": {
+        "version": "qa-knowledge.v1",
+        "route": "finance",
+        "reason": "personal_trading_request",
+        "limitations": [],
+        "live_web_search": false,
+        "factual_evidence": [],
+        "supplied_ids": [],
+        "generated": false
+      },
+      "input_language": "ko",
+      "answer_language": "en",
+      "query_resolution": {
+        "original": "엔비디아 주식 사야 하나요?",
+        "query": "엔비디아 주식 사야 하나요?",
+        "method": "original",
+        "supporting_turn_ids": []
+      }
+    }
+  },
+  "answer_wall_seconds": 0.001,
+  "translations": [
+    {
+      "event": {
+        "turn_id": "6eed3fbe46434c0396e5d6fd2eeaa560",
+        "segment_id": "6eed3fbe46434c0396e5d6fd2eeaa560:0",
+        "sequence": 0,
+        "language": "ko",
+        "text": "내가 개인적인 구매 또는 판매 권장이나 주식의 향후 수익을 보장할 수 없습니다.",
+        "state": "ready"
+      },
+      "wall_seconds": 6.661
+    },
+    {
+      "event": {
+        "turn_id": "6eed3fbe46434c0396e5d6fd2eeaa560",
+        "segment_id": "6eed3fbe46434c0396e5d6fd2eeaa560:1",
+        "sequence": 1,
+        "language": "ko",
+        "text": "합리적인 논의는 현재 제출된 문서, 평가 및 집중 리스크를 시간 퍼리오드와 비교하는 것이지 이 시나리오에는 검증된 실시간 시장 데이터가 없습니다.",
+        "state": "ready"
+      },
+      "wall_seconds": 15.263
+    }
+  ],
+  "state": "complete"
+}

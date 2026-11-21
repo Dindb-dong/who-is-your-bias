@@ -69,6 +69,19 @@ def test_disabled_knowledge_and_other_persona_keep_explicit_binding(corpus):
         Engine(Settings(qa_knowledge_dir=ROOT / "data/qa"), corpus)
 
 
+@pytest.mark.parametrize("question,source,required", [
+    ("우리 프로젝트에서 Qwen을 선택한 이유와 우위는?", "QA-project-language-model", "does not establish"),
+    ("우리 아바타는 MCCCD 방식으로 학습했나요?", "QA-project-alignment", "do not verify"),
+])
+def test_known_documentation_gaps_do_not_become_invented_results(question, source, required):
+    e = engine()
+    turn = asyncio.run(e.chat(ChatRequest(message=question, language="en")))
+    assert e.llm.messages == []
+    assert source in {citation.evidence_id for citation in turn.citations}
+    assert required in turn.text
+    assert turn.grounding.status == "grounded"
+
+
 def test_stream_api_exposes_separate_translation_and_preserves_english_answer():
     e = engine()
     app = create_app(e.settings, corpus=e.corpus, llm=e.llm, subtitle_translator=SubtitleTranslator(Translation()))
@@ -195,4 +208,19 @@ def test_wrong_language_answer_never_reaches_bilingual_english_voice():
             async for _ in live_events(e, Voice(), ChatRequest(message="이 프로젝트 파이프라인은?", language="en", subtitle_language="ko")):
                 pass
         assert error.value.code == "speech_language_mismatch"
+    asyncio.run(run())
+
+
+@pytest.mark.parametrize("question", ["엔비디아 주식 사야 하나요?", "젠슨 황 불륜 뉴스 사실인가요?",
+                                    "오늘 엔비디아 주가는 얼마인가요?", "우리 아바타는 MCCCD처럼 학습했나요?"])
+def test_fixed_uncertainty_subtitles_preserve_meaning_without_another_model(question):
+    from bias.segments import SegmentCommitter
+    async def run():
+        turn = await engine().chat(ChatRequest(message=question, language="en"))
+        committer = SegmentCommitter(turn_id=turn.id, language="en", allowed_ids=set())
+        events = [await SubtitleTranslator().translate(segment, "ko")
+                  for segment in committer.push(turn.text) + committer.finish()]
+        assert events and all(event["state"] == "ready" for event in events)
+        assert all(event["basis"] == "reviewed_fixed_phrase" for event in events)
+        assert "허위" not in " ".join(event["text"] for event in events)
     asyncio.run(run())

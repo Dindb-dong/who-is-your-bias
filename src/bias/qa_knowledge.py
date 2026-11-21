@@ -156,6 +156,21 @@ class KnowledgeDecision:
     limitations: tuple[str, ...] = ()
 
     def fallback(self, language: str) -> str | None:
+        # Qwen's actual-model smoke check turned lack of documentation into
+        # invented rationale/negative facts. Keep these known evidence limits
+        # explicit rather than asking a small model to infer the distinction.
+        if self.reason == "undocumented_model_rationale":
+            text = ("검토한 코드에는 모델 설정 방법이 있지만, 팀의 모델 선정 이유나 비교 실험에서의 우위는 확인되지 않습니다."
+                    if language == "ko" else
+                    "The reviewed code documents model configuration, but it does not establish the team's model-selection rationale or superiority in a controlled comparison.")
+            return text + " [source:QA-project-language-model]"
+        if self.reason == "alignment_not_verified":
+            text = ("검토한 코드에는 텍스트, 참조 음성, 시각 자료를 각각 준비하는 경로가 있습니다. [source:QA-project-alignment] "
+                    "발화별 텍스트·음성·얼굴을 함께 검증한 데이터셋은 이 자료에서 확인되지 않으므로, MCCCD 전체 파이프라인을 재현했다고 주장할 수 없습니다."
+                    if language == "ko" else
+                    "The reviewed code has separate preparation paths for text, voice references and visual assets. [source:QA-project-alignment] "
+                    "These records do not verify a jointly reviewed, utterance-aligned text, audio and face dataset, so I cannot claim a full MCCCD reproduction.")
+            return text + " [source:QA-project-alignment]"
         if self.entries and self.route in {"project", "news"}:
             return None
         return _FALLBACKS[self.route]["ko" if language == "ko" else "en"]
@@ -244,7 +259,14 @@ class QAKnowledge:
         limitations = ()
         if project and current:
             limitations = ("The supplied entries cover project facts only; the current-company-news part remains unverified by this route.",)
-        return KnowledgeDecision(route, selected, "reviewed_reference_match" if selected else "no_fresh_relevant_reference", limitations)
+        reason = "reviewed_reference_match" if selected else "no_fresh_relevant_reference"
+        ids = {entry.id for entry in selected}
+        if project and "QA-project-language-model" in ids and re.search(
+                r"\b(?:why|reason|choose|chose|chosen|select\w*|superior|outperform\w*)\b|이유|왜|선택|선정|우수|우위", query):
+            reason = "undocumented_model_rationale"
+        if project and "QA-project-alignment" in ids and re.search(r"(?<![a-z0-9])(?:mcccd|mccd)(?![a-z0-9])|발화.{0,12}(?:맞|정렬|동기)|utterance.aligned", query):
+            reason = "alignment_not_verified"
+        return KnowledgeDecision(route, selected, reason, limitations)
 
 
 def _cue_matches(cue: str, query: str) -> bool:

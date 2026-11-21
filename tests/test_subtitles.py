@@ -38,7 +38,7 @@ def test_completed_translation_preserves_identity_and_no_partial_fragments_escap
     llm = FakeLLM()
     result = asyncio.run(SubtitleTranslator(llm).translate(segment(), "ko"))
     assert result == {"turn_id": "turn-a", "segment_id": "turn-a:1", "sequence": 1,
-                      "language": "ko", "text": "그 주장을 확인할 수 없습니다.", "state": "ready"}
+                      "language": "ko", "text": "그 주장을 확인할 수 없습니다.", "state": "ready", "basis": "model_translation"}
     assert llm.closed
     assert "negation, uncertainty, and refusals" in llm.messages[0][0]["content"]
 

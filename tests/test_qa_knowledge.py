@@ -34,7 +34,10 @@ def test_bilingual_questions_select_relevant_reviewed_reference(knowledge, quest
     decision = knowledge.resolve(question, now=NOW)
     assert decision.route == route
     assert expected in {entry.id for entry in decision.entries}
-    assert decision.fallback("en") is None
+    if expected in {"QA-project-language-model", "QA-project-alignment"}:
+        assert f"[source:{expected}]" in decision.fallback("en")
+    else:
+        assert decision.fallback("en") is None
     assert decision.context()["live_web_search"] is False
     assert len(decision.entries) <= 3
 

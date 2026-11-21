@@ -53,11 +53,12 @@ async def main(args):
         qa_knowledge_dir=ROOT / "data/qa", request_timeout=180, llm_max_tokens=260,
         max_response_chars=2400, llm_context_window=8192)
     fingerprints = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
-        for p in [ROOT / "src/bias/qa_dialogue.py", ROOT / "src/bias/qa_knowledge.py", ROOT / "src/bias/subtitles.py",
+        for p in [ROOT / "src/bias/qa_dialogue.py", ROOT / "src/bias/qa_knowledge.py", ROOT / "src/bias/subtitles.py", ROOT / "src/bias/subtitle_phrases.py",
                   ROOT / "data/qa/project.json", ROOT / "data/qa/news.json", Path(__file__)]}
     manifest = {"purpose": "actual-model-content-smoke-not-production-latency", "model": model,
                 "translation_model": translation_model, "max_tokens": 260, "files": fingerprints,
-                "cases": CASES, "voice_synthesis": False, "asr": False, "translations": "sequential_after_answer"}
+                "cases": [case for case in CASES if not args.cases or case[0] in args.cases],
+                "voice_synthesis": False, "asr": False, "translations": "sequential_after_answer"}
     args.output.mkdir(parents=True, exist_ok=True)
     run_path = args.output / "manifest.json"
     if run_path.exists() and json.loads(run_path.read_text()) != json.loads(json.dumps(manifest)):
@@ -66,6 +67,8 @@ async def main(args):
     translator = SubtitleTranslator(OpenAICompatibleLLM(ProviderSettings(translation_endpoint, translation_model,
         os.getenv("BIAS_TRANSLATION_API_KEY")), timeout=120, max_tokens=220, max_chars=2000), timeout=120)
     for name, question in CASES:
+        if args.cases and name not in args.cases:
+            continue
         output = args.output / f"{name}.json"
         saved = json.loads(output.read_text()) if output.exists() else None
         if saved and (saved.get("state") == "complete" or "error_type" in saved):
@@ -100,4 +103,5 @@ async def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--cases", nargs="+", choices=[name for name, _ in CASES])
     asyncio.run(main(parser.parse_args()))

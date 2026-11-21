@@ -44,7 +44,7 @@ async def knowledge_events(engine, request, session, resolved, decision, *, turn
             use_llm = False
             fallback = ("이 질문에 필요한 근거를 모델 입력 범위 안에 담지 못했습니다. 자료에서 확인해 주세요."
                         if request.language == "ko" else "The relevant source records do not fit this model's input budget. Please consult the linked project or news record.")
-    allowed = {entry.id for entry in entries} if fallback is None else set()
+    allowed = {entry.id for entry in entries}
     # With no LLM, expose reviewed source summaries as a preview, never a
     # generated persona answer or a Korean translation of an English passage.
     if fallback is None and not use_llm:
