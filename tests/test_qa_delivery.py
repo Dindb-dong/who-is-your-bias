@@ -17,6 +17,7 @@ from bias.engine import Engine
 from bias.live import live_events
 from bias.models import ChatRequest
 from bias.subtitles import SubtitleTranslator
+from bias.providers import ProviderError
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -153,3 +154,45 @@ def test_translation_env_is_independent_of_answer_and_voice(monkeypatch):
     config = Settings.from_env()
     assert config.translation.configured and config.qa_knowledge_dir == ROOT / "data/qa"
     assert config.translation != config.llm and config.translation != config.tts
+
+
+def test_audio_completion_does_not_wait_for_slow_caption_timeout():
+    async def run():
+        closed = asyncio.Event()
+        class Stalled:
+            timeout = 30
+            async def translate(self, segment, language):
+                try:
+                    await asyncio.Event().wait()
+                finally:
+                    closed.set()
+        async def source():
+            yield "segment", {"turn_id": "t", "segment_id": "t:0", "sequence": 0,
+                              "text": "English", "language": "en", "state": "committed"}
+            await asyncio.sleep(0.01)
+            yield "audio_end", {}
+            yield "done", {}
+        async with asyncio.timeout(1):
+            events = [item async for item in caption_events(source(), Stalled(), "ko", audio_end_grace=0.01)]
+        assert closed.is_set()
+        assert events[-1] == ("done", {})
+        assert next(data for kind, data in events if kind == "subtitle")["reason"] == "translation_late"
+    asyncio.run(run())
+
+
+def test_wrong_language_answer_never_reaches_bilingual_english_voice():
+    async def run():
+        e = engine()
+        class WrongLanguage:
+            async def stream(self, messages):
+                yield "한국어로 잘못 생성한 답변입니다. [source:QA-project-pipeline]"
+        class Voice:
+            settings = ProviderSettings("http://voice.invalid/v1", "synthetic")
+            async def synthesize(self, *args, **kwargs):
+                raise AssertionError("Wrong-language text must not reach speech")
+        e.llm = WrongLanguage()
+        with pytest.raises(ProviderError) as error:
+            async for _ in live_events(e, Voice(), ChatRequest(message="이 프로젝트 파이프라인은?", language="en", subtitle_language="ko")):
+                pass
+        assert error.value.code == "speech_language_mismatch"
+    asyncio.run(run())

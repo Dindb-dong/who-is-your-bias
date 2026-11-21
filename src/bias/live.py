@@ -9,6 +9,7 @@ import asyncio
 import base64
 import hashlib
 import io
+import re
 import time
 import wave
 import anyio
@@ -109,6 +110,9 @@ async def _live_events(engine, speech, request, *, session, deadline, started, q
         try:
             while (segment := await segments.get()) is not None:
                 text = segment["text"]
+                if (request.language == "en" and getattr(request, "subtitle_language", None) == "ko"
+                        and (re.search(r"[가-힣]", text) or not re.search(r"[A-Za-z]", text))):
+                    raise ProviderError("speech_language_mismatch", "The answer model did not produce English speech. Please retry the question.", 422)
                 if len(text) > 4000:
                     raise ProviderError("live_segment_limit", "A committed speech segment exceeds the voice input limit.", 422)
                 synthesis_started = time.perf_counter()

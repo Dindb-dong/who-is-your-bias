@@ -44,6 +44,9 @@ def test_bilingual_questions_select_relevant_reviewed_reference(knowledge, quest
     ("Should I buy or sell NVIDIA shares?", "finance"),
     ("Would you buy NVIDIA stock?", "finance"),
     ("Do you recommend NVIDIA shares?", "finance"),
+    ("Do you recommend purchasing NVIDIA stock?", "finance"),
+    ("엔비디아 주식 사야 하나요?", "finance"),
+    ("엔비디아 주식을 사도 괜찮나요?", "finance"),
     ("Is NVIDIA a good investment?", "finance"),
     ("지금 주식 몰빵해도 되나요?", "finance"),
     ("불륜 뉴스 사실인가요?", "allegation"),
@@ -70,6 +73,13 @@ def test_sensitive_prompts_do_not_turn_a_question_premise_into_news(knowledge, q
     "Why is GPU acceleration useful?",
     "How did NVIDIA sell GPUs in its early days?",
     "How should I invest time in studying?",
+    "What did Jensen say about leadership in 2020?",
+    "What does Jensen teach about leadership?",
+    "What did NVIDIA forecast in 2020?",
+    "Who was NVIDIA's CEO in 2020?",
+    "What is Jensen's leadership style?",
+    "What does Jensen teach about being a CEO?",
+    "How does Jensen invest in people?",
 ])
 def test_ordinary_persona_questions_remain_on_original_route(knowledge, question):
     assert knowledge.resolve(question, now=NOW) is None

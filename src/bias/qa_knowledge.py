@@ -31,10 +31,10 @@ _RECENT = re.compile(
 _OUTLOOK = re.compile(r"\b(?:future|outlook|forecast|stock\s+price|share\s+price|earnings|financial\s+results)\b|미래|전망|주가|실적|분기\s*매출", re.I)
 _INVESTMENT = re.compile(r"\b(?:portfolio|stock|shares?|money|funds?)\b|주식|매수|매도|투자금|종목|몰빵", re.I)
 _TRADE_REQUEST = re.compile(
-    r"\b(?:(?:should|would)\s+(?:i|we|you)\s+(?:buy|sell|hold|invest)|(?:buy|sell|hold)\s+(?:nvidia|nvda|the\s+stock)|"
-    r"(?:recommend|advise)\w*\s+(?:buying|selling|investing)|(?:buy|sell)\s+or\s+(?:buy|sell))\b"
+    r"\b(?:(?:should|would)\s+(?:i|we|you)\s+(?:buy|purchase|sell|hold|invest)|(?:buy|purchase|sell|hold)\s+(?:nvidia|nvda|the\s+stock)|"
+    r"(?:recommend|advise)\w*\s+(?:buying|purchasing|selling|investing)|(?:buy|sell)\s+or\s+(?:buy|sell))\b"
     r"|\b(?:good\s+investment|worth\s+buying|investment\s+advice|recommend\w*\s+(?:nvidia|nvda)\s+(?:stock|shares))\b"
-    r"|살까|팔까|사도\s*(?:돼|되)|팔아야|사야\s*(?:돼|되|할)|매수\s*(?:해|할)|매도\s*(?:해|할)|투자\s*(?:해도|할까요)|몰빵|주식\s*추천", re.I)
+    r"|살까|팔까|사도\s*(?:돼|되|될|괜찮)|팔아야|사야\s*(?:돼|되|할|하)|매수\s*(?:해|할)|매도\s*(?:해|할)|투자\s*(?:해도|할까요)|몰빵|주식\s*추천", re.I)
 _ALLEGATION = re.compile(
     r"\b(?:affair|adultery|mistress|sexual\s+misconduct|sex\s+scandal)\b|불륜|외도|성추문", re.I)
 
@@ -214,15 +214,19 @@ class QAKnowledge:
             return KnowledgeDecision("finance", reason="personal_trading_request")
         project = bool(_PROJECT.search(query) or re.search(
             r"(?<![a-z0-9])(?:mcccd|mccd|qwen[0-9.]*|sophon|emage)(?![a-z0-9])", query))
-        leadership = re.search(r"\b(?:ceo|leadership|resign\w*)\b|대표|최고경영자|사임", query)
+        requested_years = {int(year) for year in re.findall(r"(?<!\d)((?:19|20)\d{2})(?!\d)", query)}
+        recent = bool(_RECENT.search(query))
+        role_question = (bool(re.search(r"\bwho\s+is\b", query) and re.search(r"\b(?:ceo|president)\b", query))
+                         or bool(re.search(r"(?:ceo|대표|최고경영자).{0,15}(?:누구|누가|인가|이야)|(?:누가|누구).{0,20}(?:ceo|대표|최고경영자)", query))
+                         or bool(re.search(r"\bresign\w*\b|사임", query)))
         implicit_leader = re.fullmatch(r"who is (?:the )?ceo (?:now|currently)\??", query)
-        current = bool((_COMPANY.search(query) and (_RECENT.search(query) or _OUTLOOK.search(query) or leadership))
-                       or (_RECENT.search(query) and re.search(r"\b(?:company|you|your)\b|회사|당신", query))
+        historical = bool(requested_years and max(requested_years) < now.year and not recent)
+        current = not historical and bool((_COMPANY.search(query) and (recent or _OUTLOOK.search(query) or role_question))
+                       or (recent and re.search(r"\b(?:company|you|your)\b|회사|당신", query))
                        or implicit_leader)
         if not project and not current:
             return None
         route = "project" if project else "news"
-        requested_years = {int(year) for year in re.findall(r"(?<!\d)((?:19|20)\d{2})(?!\d)", query)}
         candidates = [entry for entry in self.entries if entry.scope == route
                       and entry.reviewed_at <= now < entry.expires_at
                       and (entry.published_at is None or entry.published_at <= now.date())

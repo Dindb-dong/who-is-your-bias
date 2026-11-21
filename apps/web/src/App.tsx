@@ -162,7 +162,8 @@ export default function App() {
     const translated = bilingual && persona?.capabilities.translated_subtitles === true;
     const useLiveVoice = Boolean(preferences.autoPlay && preferences.voice === 'provider' && persona?.capabilities.live_speech);
     captionTrack.current = translated ? new CaptionTrack('ko', 'en', useLiveVoice) : null; refreshCaptions();
-    let audioFrames = 0; let liveTurnId: string = answerId; let preparationMarked = false; let audioMarked = false;
+    let livePlaybackComplete: Promise<{ ok: true } | { ok: false; error: unknown }> | undefined;
+    let liveTurnId: string = answerId; let preparationMarked = false; let audioMarked = false;
     let playingMarked = false; let signalMarked = false;
     try {
       if (useLiveVoice) pcmPlayer.current = createPcmPlayback((state) => {
@@ -182,7 +183,16 @@ export default function App() {
         if (event.event === 'segment' && useLiveVoice && !preparationMarked) { preparationMarked = true; clock.playback({ type: 'preparation_started', atMs: performance.now(), turnId: liveTurnId, voiceMode: 'provider' }); }
         if (event.event === 'audio_segment' && useLiveVoice && !audioMarked) { audioMarked = true; clock.playback({ type: 'audio_ready', atMs: performance.now(), turnId: liveTurnId, voiceMode: 'provider' }); }
         if (event.event === 'audio' && useLiveVoice) await pcmPlayer.current?.push(event.data);
-        if (event.event === 'audio_end') audioFrames = event.data.sample_count;
+        if (event.event === 'audio_end' && useLiveVoice) {
+          const player = pcmPlayer.current;
+          if (!player || livePlaybackComplete) throw new Error('Streaming playback completion ownership changed.');
+          // Seal PCM as soon as delivery ends. Translation events may still
+          // follow, and must never hold the audio clock in a loading state.
+          // Capture rejection immediately without blocking the SSE consumer.
+          livePlaybackComplete = player.finish(event.data.sample_count).then(
+            () => ({ ok: true as const }), (error: unknown) => ({ ok: false as const, error }),
+          );
+        }
         if (event.event === 'status') setStatus(stages[event.data.stage] ?? event.data.stage.replaceAll('_', ' '));
         if (event.event === 'token') {
           setMessages((previous) => previous.map((message) => message.id === answerId ? { ...message, text: message.text + event.data.text } : message));
@@ -205,7 +215,11 @@ export default function App() {
       const current = playbackPreferences.current;
       if (ticket === generation.current && received) {
         clock.streamComplete(performance.now()); clock.configureVoice(current.autoPlay ? current.voice : 'off'); setLiveMeasurement(clock.snapshot());
-        if (useLiveVoice) await pcmPlayer.current?.finish(audioFrames);
+        if (useLiveVoice) {
+          if (!livePlaybackComplete) throw new Error('The voice stream ended without playback completion.');
+          const completion = await livePlaybackComplete;
+          if (!completion.ok) throw completion.error;
+        }
         else if (current.autoPlay && current.voice !== 'off') void playback.play(received, current.voice, (event) => {
           if (ticket === generation.current && event.turnId === received?.id) { clock.playback(event); setLiveMeasurement(clock.snapshot()); }
         });
