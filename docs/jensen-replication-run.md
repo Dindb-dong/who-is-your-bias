@@ -103,3 +103,10 @@ does not establish completion of text adaptation, speech adaptation, new avatar
 generation, or response-quality experiments. Follow the handoff's M0-M7 gates
 and save verified remote checkpoints throughout any later implementation.
 
+# Conditional delivery follow-up
+
+For the opt-in compact values/reaction/style work and the fresh matched-evidence
+pilot, see [the 2026-11-21 delivery execution record](persona-delivery-execution.md).
+This is separate from acoustic speaker cloning and does not establish a quality
+improvement until the linked generated-answer experiment is completed.
+

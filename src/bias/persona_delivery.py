@@ -28,10 +28,17 @@ DELIVERY_INSTRUCTION = (
     "only when invited and appropriate; never joke at a vulnerable person's expense."
 )
 _HUMOR_INVITATION = re.compile(r"\b(?:joke|humou?r|lighthearted|funny)\b|농담|유머", re.I)
+_HUMOR_OPTOUT = re.compile(
+    r"\b(?:no|without|avoid|skip)\s+(?:any\s+)?(?:jok\w*|humou?r)|"
+    r"\b(?:do not|don't|don’t|never)\b.{0,35}\b(?:jok\w*|humou?r|funny)\b|"
+    r"(?:농담|유머).{0,18}(?:하지|말아|말아줘|빼|없이|금지)|(?:웃기려|웃기려고).{0,10}하지", re.I)
 _SENSITIVE = re.compile(
     r"\b(?:grief|grieving|died|death|bereave\w*|suicid\w*|abuse|harass\w*|panic|"
     r"distress\w*|humiliat\w*|fired|layoff\w*|safety|patient|injur\w*|harm|"
-    r"depress\w*|scandal|affair)\b|상실|사망|자살|학대|괴롭|해고|안전|환자|불륜|우울", re.I)
+    r"depress\w*|scandal|affair|discrimination|bankrupt\w*)\b|"
+    r"\b(?:los\w*|lost)\b.{0,35}\b(?:money|savings|funds|income)\b|"
+    r"\bfinancial\s+loss\b|상실|사망|자살|학대|괴롭|해고|안전|환자|불륜|우울|금전|파산|차별|"
+    r"(?:돈|저축|재산).{0,12}(?:잃|날렸)", re.I)
 
 
 class DeliveryObservation(Record):
@@ -116,15 +123,17 @@ class PersonaDelivery:
         if reason == "requires_factual_verification_or_disallowed_request":
             return DeliverySelection((), self.sha256, reason)
         eligible = set(temporal.eligible_ids) if temporal is not None else {a.evidence_id for a in self.document.anchors}
-        if snapshot is not None and reason is None:
+        if snapshot is not None:
             snapshot.verify(self.corpus)
-            eligible = set(select_temporal(self.corpus, snapshot, question,
-                           intent_override=TemporalIntent("general")).eligible_ids)
+            if reason is None or temporal is None:
+                eligible = set(select_temporal(self.corpus, snapshot, question,
+                    intent_override=TemporalIntent("general") if reason is None else None).eligible_ids)
         candidates = []
         for o in self.document.observations:
             if not set(o.evidence_ids) <= eligible:
                 continue
-            if o.humor and (not _HUMOR_INVITATION.search(query) or _SENSITIVE.search(query)):
+            if o.humor and (not _HUMOR_INVITATION.search(query) or _HUMOR_OPTOUT.search(query)
+                            or _SENSITIVE.search(query)):
                 continue
             matches = [sum(_rule_contains(query, cue) for cue in group) for group in o.retrieval_groups]
             if all(matches):

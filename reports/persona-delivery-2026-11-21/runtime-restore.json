@@ -1,0 +1,25 @@
+{
+  "status": "restored_and_smoke_verified",
+  "runtime_root": "/workspace/scratch/06c38dbd4ec3/persona-pr29-v2/reports/persona-graph-2026-11-20/runtime",
+  "python": "/workspace/scratch/06c38dbd4ec3/persona-pr29-v2/reports/persona-graph-2026-11-20/runtime/.venv/bin/python",
+  "model_path": "/workspace/scratch/06c38dbd4ec3/persona-pr29-v2/reports/persona-graph-2026-11-20/runtime/Qwen3-4B-Q4_K_M.gguf",
+  "model_bytes": 2497280256,
+  "model_sha256": "7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5",
+  "model_download_verified": true,
+  "download_seconds": 68.1,
+  "dependencies": "requirements.lock.txt exact pins",
+  "build_environment": {
+    "CC": "/usr/bin/gcc",
+    "CXX": "/usr/bin/g++",
+    "CMAKE_ARGS": "-DGGML_CUDA=OFF -DGGML_BLAS=OFF",
+    "CMAKE_BUILD_PARALLEL_LEVEL": 6
+  },
+  "startup_seconds": 6.445,
+  "smoke_first_token_seconds": 0.7318721949998235,
+  "smoke_elapsed_seconds": 4.569934138999997,
+  "smoke_response": "Retrieval augmented generation is a technique where a language model uses information retrieved from a database or external source to enhance the accuracy and relevance of its generated responses.",
+  "smoke_artifact": "/tmp/startup-smoke.json",
+  "server_running": false,
+  "tracked_runtime_changes": false,
+  "caveat": "Neutral smoke only; not persona score or production latency."
+}
