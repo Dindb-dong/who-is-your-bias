@@ -9,7 +9,7 @@ Read [the method and twelve strategies](persona-values-v2.md) for the full desig
 The existing default corpus, v1 graph, application defaults and other team work
 are preserved. Main is not the write target.
 
-## Implemented, pending empirical acceptance
+## Implemented; default remains off
 
 - Backward-compatible Python graph v2 loader and deterministic situational
   retrieval. Values, beliefs, interaction style and conditional strategies are
@@ -50,13 +50,22 @@ have not been acoustically verified. No audio/video alignment is claimed.
 
 ## Acceptance gates
 
-At this checkpoint the code and curated candidate exist. Model comparison,
-blind source-aware ratings, failure analysis and promotion are still pending.
-Do not infer improved value fidelity from retrieval hits or unit-test passes.
-The optional feature remains off by default. This pilot does not establish
-current news coverage, project knowledge or actual private feelings.
+The [first frozen comparison](../reports/persona-rules-2026-11-21/README.md)
+is complete: 64 actual model requests, 52 completed outputs, 12 length-limit
+failures and two independent AI ratings of each completed output. The graph
+scored 29.2% on the advice rubric versus 54.2% for the original card/RAG.
+These are source-consistency/application judgments, not real-person accuracy.
+No live promotion is justified by this result. The optional feature remains
+off by default. This pilot does not establish current news coverage, project
+knowledge or actual private feelings.
 
-Final results and exact reproduction commands will be linked here after the
-frozen experiment completes. The earlier PR29 result remains preserved in
+Outputs were verified remotely at `92dc45a2e760df840a1b3ef6a8978cf140c67259`.
+The original ratings, negative report and a narrow v2-only user-facing response
+contract were then saved at `ed015c500c2a6f233c346dae2365c8ceb46ae8f5`.
+That output contract passed 333 relevant Python tests and preserves the source
+graph and existing length-policy precedence. Its model-level development
+diagnostic is separate from the frozen first experiment.
+
+The earlier PR29 result remains preserved in
 `reports/persona-graph-2026-11-20/`; its 83.3% score is not directly comparable
 with a different question set or rubric.

@@ -79,6 +79,16 @@ meanings in prose. `graph` uses typed relationships. Neither performs graph
 neural-network training, graph traversal reasoning by a separate model, or the
 fine-tuning stage of ThinkPersona.
 
+After the first frozen experiment, a v2-only response contract was added to
+prevent narrating the graph instead of answering the question. It requests
+practical advice followed by a relevant qualification or next step, without
+internal identifiers or a rule-by-rule explanation. Existing adaptive/live
+and stricter Korean length policies take priority. Otherwise the English
+default is at most two short sentences, approximately 60 words, unless the
+user explicitly requests another format. This is prompt guidance, not a hard
+output cut; all source evidence, conditions and exceptions remain available.
+The contract's token cost participates in normal whole-memory budget checks.
+
 ## Evidence and evaluation
 
 The frozen comparison uses one pinned Qwen3-4B model and identical decoding and
@@ -98,6 +108,12 @@ answers. No test pass, source count or retrieval hit is a persona accuracy score
 See [execution status](persona-values-v2-execution.md),
 [frozen protocol](../reports/persona-rules-2026-11-21/protocol.md), and
 [corpus setup](../data/personas/jensen-huang-values-v2/README.md).
+
+The [completed first comparison](../reports/persona-rules-2026-11-21/README.md)
+did **not** show an improvement: advice pass rate was 29.2% for the initial
+graph versus 54.2% for the original card/RAG, including truncations as failures.
+The output contract is evaluated separately as a development iteration on
+already-seen scenarios. Neither result may be substituted for the other.
 
 ## Research basis
 
