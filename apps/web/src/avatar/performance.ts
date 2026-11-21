@@ -24,12 +24,14 @@ export function samplePerformance(input: PerformanceInput, diagnostics: RigDiagn
     faceSource: 'designed', boneSource: 'designed', speechSource: input.speaking ? input.amplitude === undefined ? 'estimated' : 'amplitude' : 'silent',
     unsupportedFace: [], unsupportedVisemes: [],
   };
+  const gestureLayer = { weight: 1 };
   const speechGesture = !input.performanceClip && input.speechGesture && input.speaking && input.audioElapsedMs !== undefined
     && input.audioSha256 === input.speechGesture.audioSha256
     ? sampleSpeechGesture(input.speechGesture, input.audioElapsedMs, { reducedMotion: input.reducedMotion,
-      supported: diagnostics.bones.length ? diagnostics.bones as BoneControl[] : undefined }) : null;
+      supported: diagnostics.bones.length ? diagnostics.bones as BoneControl[] : undefined, layer: gestureLayer }) : null;
   if (speechGesture) {
     pose.bones = { ...pose.bones, ...speechGesture };
+    pose.boneWeight = gestureLayer.weight;   // fades over the designed arm pose rather than through neutral
     telemetry.boneSource = 'speech_generated';
   } else if (!input.performanceClip && input.learnedGesture && input.speaking && input.allowGeometryPreview && !input.reducedMotion) {
     const bones = sampleLearnedGesture(input.learnedGesture, input.audioElapsedMs ?? input.elapsedMs);

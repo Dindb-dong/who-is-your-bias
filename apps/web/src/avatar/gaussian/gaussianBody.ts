@@ -16,7 +16,8 @@ export interface GaussianHeadConfig {
   scale?: number;
   /** Stage-space adjustment relative to the body's neutral head pivot. */
   offset?: [number, number, number];
-  /** Rest-space band above the FLAME mesh's lower boundary, in metres. */
+  /** Rest-space band above the FLAME mesh's lower boundary, in metres. Negative keeps gaussians below it (neck and
+   * collar re-bound from an upper-body model). */
   collarCutMeters?: number;
   /** Transition from neck motion at the collar to head motion above it. */
   seamBlendMeters?: number;
@@ -133,6 +134,8 @@ export interface GaussianAttachment {
   /** Matrix from FLAME metres to the current head's local frame. */
   matrix: Matrix4;
   sourceCutY: number;
+  /** Where the neck seam starts (rest FLAME space); below it gaussians follow the neck joint fully. */
+  seamStartY?: number;
   targetCutY: number;
   scale: number;
   seamBlendMeters?: number;
@@ -161,7 +164,7 @@ export function fitGaussianAttachment(rig: AvatarRig, B: GaussianBodyArrays, con
   const band = config.seamBlendMeters ?? 0.06;
   const offset = config.offset ?? [0, 0, 0];
   if (!Number.isFinite(ratio) || ratio <= 0 || ratio > 20 || !Number.isFinite(correction) || correction < 0.5 || correction > 2
-    || !Number.isFinite(cut) || cut < 0 || cut > 0.15 || !Number.isFinite(band) || band < 0 || band > 0.15
+    || !Number.isFinite(cut) || cut < -0.15 || cut > 0.15 || !Number.isFinite(band) || band < 0 || band > 0.3
     || offset.some((v) => !Number.isFinite(v) || Math.abs(v) > 0.5)) {
     throw new Error('The Gaussian/body alignment is invalid; inspect the neutral head and collar calibration.');
   }
@@ -173,7 +176,7 @@ export function fitGaussianAttachment(rig: AvatarRig, B: GaussianBodyArrays, con
   const sourceCutY = sourceMinY + cut;
   const neckName = rig.diagnostics.resolvedBones?.find((bone) => bone.control === 'neck')?.node;
   const neck = rig.root.getObjectByName(neckName ?? 'neck');
-  return { head, neck, matrix: head.matrixWorld.clone().invert().multiply(world), sourceCutY,
+  return { head, neck, matrix: head.matrixWorld.clone().invert().multiply(world), sourceCutY, seamStartY: Math.max(sourceCutY, sourceMinY),
     targetCutY: target.y + (sourceCutY - pivot.y) * scale, scale, seamBlendMeters: band };
 }
 
@@ -270,7 +273,7 @@ export class GaussianBodyHead {
       local.set([B.g_xyz[i * 3], B.g_xyz[i * 3 + 1], B.g_xyz[i * 3 + 2], kept ? 1 / (1 + Math.exp(-B.g_opacity[i])) : 0], i * 4);
       for (let c = 0; c < 3; c++) color[i * 4 + c] = Math.min(1, Math.max(0, .5 + .28209479 * B.g_color[i * 3 + c]));
       binding[i * 4] = B.g_binding[i];
-      this.neckWeights[i] = this.neck ? gaussianSeamWeight(restCenters[i * 3 + 1], attachment.sourceCutY, attachment.seamBlendMeters ?? .06) : 0;
+      this.neckWeights[i] = this.neck ? gaussianSeamWeight(restCenters[i * 3 + 1], attachment.seamStartY ?? attachment.sourceCutY, attachment.seamBlendMeters ?? .06) : 0;
       binding[i * 4 + 1] = this.neckWeights[i];
       rotation.set([B.g_rot[i * 4], B.g_rot[i * 4 + 1], B.g_rot[i * 4 + 2], B.g_rot[i * 4 + 3],
         Math.exp(B.g_scale[i * 3]), Math.exp(B.g_scale[i * 3 + 1]), Math.exp(B.g_scale[i * 3 + 2]), 0], i * 8);

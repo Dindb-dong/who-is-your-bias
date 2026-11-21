@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowDown, ArrowRight, ArrowUp, ArrowUpRight, BookOpen, ChevronDown, ChevronRight, CircleHelp, Clapperboard, FlaskConical, Globe2, Layers3, LoaderCircle, MessageCircle, Mic, Plus, Radio, RotateCcw, Settings2, Sparkles, Square, Volume2, VolumeX, X } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUp, ArrowUpRight, BookOpen, ChevronDown, ChevronRight, CircleHelp, Clapperboard, FlaskConical, Globe2, Layers3, LoaderCircle, MessageCircle, Mic, Phone, PhoneOff, Plus, Radio, RotateCcw, Settings2, Sparkles, Square, Volume2, VolumeX, X } from 'lucide-react';
 import { getJson, getMotionLibrary, streamChat } from './api';
 import type { Citation, ExperimentMode, Language, MotionLibraryStatus, Persona, Source, Turn } from './api';
 import type { MotionMode } from './avatar/types';
+import { appendStreamingGesture, completeStreamingGesture, createStreamingGesture, type SpeechGestureMotion } from './avatar/speechGesture';
 import { JENSEN_SOURCE_FITTED_AVATAR, RESEARCH_HUMAN_AVATAR, type AvatarFraming, type BuiltinAvatar } from './avatar/builtin';
 import { AvatarStage } from './components/AvatarStage';
 import type { GaussianHeadConfig } from './avatar/gaussian/gaussianBody';
@@ -16,6 +17,7 @@ import { MotionLab } from './components/MotionLab';
 import { GroundingBadge } from './components/GroundingBadge';
 import { MotionNotice } from './components/MotionNotice';
 import { usePlayback } from './hooks/usePlayback';
+import { startRealtimeCall, type CallStatus } from './hooks/realtimeCall';
 import type { VoiceMode } from './hooks/usePlayback';
 import { useMicrophone } from './hooks/useMicrophone';
 import { useMeasuredMotion } from './hooks/useMeasuredMotion';
@@ -26,7 +28,7 @@ import { PresentationView } from './components/PresentationView';
 import { createPcmPlayback, initialPcmState } from './hooks/pcmPlayback';
 import type { PcmState } from './hooks/pcmPlayback';
 
-interface Message { id: string; role: 'user' | 'assistant'; text: string; turn?: Turn; pending?: boolean; error?: string }
+interface Message { id: string; role: 'user' | 'assistant'; text: string; turn?: Turn; pending?: boolean; error?: string; note?: string }
 type Page = 'studio' | 'sources' | 'lab' | 'presentation';
 const defaultQuestions = ['What is accelerated computing?', 'What are AI factories?', 'How does simulation help robotics?'];
 const stages: Record<string, string> = { retrieving: 'Finding relevant sources', generating: 'Composing a response', planning: 'Planning expression', complete: 'Response ready' };
@@ -71,7 +73,7 @@ export default function App() {
   const [reducedMotion, setReducedMotion] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches);
   const [model, setModel] = useState<{ name: string; url: string } | undefined>();
   const [builtinAvatar, setBuiltinAvatar] = useState<BuiltinAvatar>('human');
-  const [framing, setFraming] = useState<AvatarFraming>(() => gaussianRequested ? 'upper_body' : 'portrait');
+  const [framing, setFraming] = useState<AvatarFraming>('portrait');   // the photoreal face reads best in portrait; upper body stays one click away
   const [attentionTarget, setAttentionTarget] = useState<AttentionTarget | null>(null);
   const avatarChoiceMade = useRef(false);
   const lastPersona = useRef<string | null>(null);
@@ -84,6 +86,13 @@ export default function App() {
   const composer = useRef<HTMLTextAreaElement>(null);
   const playback = usePlayback();
   const [pcmState, setPcmState] = useState<PcmState>(initialPcmState);
+  // Live voice + EMAGE: motion frames for the current streamed turn, and the server's gesture status.
+  const [liveGesture, setLiveGesture] = useState<SpeechGestureMotion>();
+  const [liveGestureStatus, setLiveGestureStatus] = useState<{ status: string; message?: string }>();
+  // Live call: microphone <-> Sophon realtime voice model through /api/realtime (replies are not source-checked).
+  const realtimeCall = useRef<{ stop(): void } | null>(null);
+  const [callState, setCallState] = useState<{ status: CallStatus; message?: string }>({ status: 'idle' });
+  const callActive = !['idle', 'ended', 'failed'].includes(callState.status);
   const pcmPlayer = useRef<ReturnType<typeof createPcmPlayback> | null>(null);
   const streamingVoice = pcmState.status === 'playing' || pcmState.status === 'loading';
   const measuredMotion = useMeasuredMotion({ mode: motionMode, enabled: page === 'studio' && mode === 'behavior', reducedMotion });
@@ -121,9 +130,47 @@ export default function App() {
     setVoice((current) => current === 'off' ? 'provider' : current);
   }, [speechGestureEnabled, persona?.capabilities.speech]);
   useEffect(() => { chatBottom.current?.scrollIntoView({ behavior: reducedMotion ? 'instant' : 'smooth', block: 'nearest' }); }, [messages.length, busy, reducedMotion]);
-  useEffect(() => () => { generation.current += 1; currentRequest.current?.abort(); pcmPlayer.current?.stop(); }, []);
+  useEffect(() => () => { generation.current += 1; currentRequest.current?.abort(); pcmPlayer.current?.stop(); realtimeCall.current?.stop(); }, []);
   useEffect(() => () => { if (model) URL.revokeObjectURL(model.url); }, [model]);
 
+  function toggleCall() {
+    if (realtimeCall.current) { realtimeCall.current.stop(); realtimeCall.current = null; return; }
+    cancel(); playback.stop(); microphone.stop(); measuredMotion.stop(); pcmPlayer.current?.stop();
+    setPcmState(initialPcmState); setLiveGesture(undefined); setLiveGestureStatus(undefined); setActiveTurn(undefined);
+    let motion: SpeechGestureMotion | undefined; let audioMs = 0;
+    const gestureOn = playbackPreferences.current.speechGesture;
+    realtimeCall.current = startRealtimeCall({
+      status: (status, message) => {
+        setCallState({ status, message });
+        if (status === 'ended' || status === 'failed') { realtimeCall.current = null; setPcmState(initialPcmState); setLiveGesture(undefined); }
+      },
+      audio: (state) => { audioMs = state.audioElapsedMs; setPcmState(state); },
+      replyStarted: (id) => {
+        motion = undefined; audioMs = 0; setLiveGesture(undefined);
+        setMessages((previous) => [...previous, { id: `call-user-${id}`, role: 'user', text: '🎙 Spoken question (sent as audio to the realtime voice service)' },
+          { id: `call-${id}`, role: 'assistant', text: '', note: 'Live call · Sophon voice model · not checked against the source library' }]);
+      },
+      transcript: (id, delta) => setMessages((previous) => previous.map((message) => message.id === `call-${id}` ? { ...message, text: message.text + delta } : message)),
+      replyEnded: (id, how) => {
+        if (how === 'cancelled') {
+          motion = undefined; setLiveGesture(undefined);
+          setMessages((previous) => previous.map((message) => message.id === `call-${id}` ? { ...message, note: `${message.note} · interrupted` } : message));
+        }
+      },
+      gesture: (message) => {
+        try {
+          if (message.type === 'gesture_state') {
+            if (message.status === 'streaming' && !motion) { motion = createStreamingGesture(`call:${String(message.turn_id)}`, String(message.engine)); setLiveGesture(motion); setLiveGestureStatus({ status: 'available' }); }
+            else if (message.status !== 'streaming') { motion = undefined; setLiveGesture(undefined); setLiveGestureStatus({ status: String(message.status), message: String(message.message ?? '') }); }
+          } else if (message.type === 'gesture' && motion) appendStreamingGesture(motion, message as unknown as Parameters<typeof appendStreamingGesture>[1], audioMs);
+          else if (message.type === 'gesture_end' && motion) completeStreamingGesture(motion, Number(message.frames));
+        } catch (error) {
+          motion = undefined; setLiveGesture(undefined);
+          setLiveGestureStatus({ status: 'failed', message: error instanceof Error ? error.message : 'Invalid gesture frames.' });
+        }
+      },
+    }, { gesture: gestureOn, language });
+  }
   function cancel() {
     liveClock.current?.finish('cancelled');
     if (liveClock.current) setLiveMeasurement(liveClock.current.snapshot());
@@ -142,7 +189,7 @@ export default function App() {
   async function send(text = draft) {
     const question = text.trim();
     if (!question || busy || connection !== 'ready') return;
-    pcmPlayer.current?.stop(); setPcmState(initialPcmState); setActiveTurn(undefined);
+    pcmPlayer.current?.stop(); setPcmState(initialPcmState); setActiveTurn(undefined); setLiveGesture(undefined); setLiveGestureStatus(undefined);
     playback.stop(); microphone.stop(); measuredMotion.stop(); setDraft(''); setEvidence(null);
     const ticket = ++generation.current;
     const controller = new AbortController(); currentRequest.current = controller;
@@ -154,8 +201,14 @@ export default function App() {
     setMessages((previous) => [...previous, { id: crypto.randomUUID(), role: 'user', text: question }, { id: answerId, role: 'assistant', text: '', pending: true }]);
     setBusy(true); setStatus('Finding relevant sources');
     let received: Turn | undefined;
-    // Speech-driven gestures need the finished clip, so they use prepared (non-streaming) voice.
-    const useLiveVoice = Boolean(preferences.autoPlay && preferences.voice === 'provider' && persona?.capabilities.live_speech && !preferences.speechGesture);
+    const useLiveVoice = Boolean(preferences.autoPlay && preferences.voice === 'provider' && persona?.capabilities.live_speech);
+    // With live voice, EMAGE runs window by window beside the PCM (gesture_* events) instead of on a finished clip.
+    const liveGestures = useLiveVoice && preferences.speechGesture;
+    let gestureMotion: SpeechGestureMotion | undefined;
+    // Audio pushes wait for playback room (HTTP backpressure). With gestures on, chain them instead so gesture frames
+    // that arrive behind buffered audio are applied at once; the chain keeps audio order and is awaited before finish.
+    let pcmChain: Promise<void> = Promise.resolve();
+    const stopGesture = (status: string, message: string) => { gestureMotion = undefined; setLiveGesture(undefined); setLiveGestureStatus({ status, message }); };
     let audioFrames = 0; let liveTurnId: string = answerId; let preparationMarked = false; let audioMarked = false;
     let playingMarked = false; let signalMarked = false;
     try {
@@ -169,12 +222,30 @@ export default function App() {
         if (state.status === 'cancelled' || state.status === 'failed') mark(state.status);
         setLiveMeasurement(clock.snapshot());
       });
-      await streamChat({ message: question, session_id: sessionId, mode, language, motion_mode: motionMode }, controller.signal, async (event) => {
+      await streamChat({ message: question, session_id: sessionId, mode, language, motion_mode: motionMode, ...(liveGestures ? { gesture: true } : {}) }, controller.signal, async (event) => {
         if (ticket !== generation.current) return;
         if (event.event === 'meta') { setSessionId(event.data.session_id); liveTurnId = event.data.turn_id ?? answerId; }
         if (event.event === 'segment' && useLiveVoice && !preparationMarked) { preparationMarked = true; clock.playback({ type: 'preparation_started', atMs: performance.now(), turnId: liveTurnId, voiceMode: 'provider' }); }
         if (event.event === 'audio_segment' && useLiveVoice && !audioMarked) { audioMarked = true; clock.playback({ type: 'audio_ready', atMs: performance.now(), turnId: liveTurnId, voiceMode: 'provider' }); }
-        if (event.event === 'audio' && useLiveVoice) await pcmPlayer.current?.push(event.data);
+        if (event.event === 'audio' && useLiveVoice) {
+          const chunk = event.data, player = pcmPlayer.current;
+          if (liveGestures) { pcmChain = pcmChain.then(() => player?.push(chunk)); pcmChain.catch(() => undefined); }
+          else await player?.push(chunk);
+        }
+        if (event.event === 'gesture_state' && liveGestures) {
+          if (event.data.status === 'streaming' && !gestureMotion) {
+            gestureMotion = createStreamingGesture(`live:${liveTurnId}`, event.data.engine);
+            setLiveGesture(gestureMotion); setLiveGestureStatus({ status: 'available' });
+          } else if (event.data.status !== 'streaming') stopGesture(event.data.status, event.data.message ?? 'Speech-driven gestures stopped; the avatar uses designed movement.');
+        }
+        if (event.event === 'gesture' && gestureMotion) {
+          try { appendStreamingGesture(gestureMotion, event.data, pcmPlayer.current?.snapshot().audioElapsedMs ?? 0); }
+          catch (error) { stopGesture('failed', error instanceof Error ? error.message : 'Invalid gesture frames.'); }
+        }
+        if (event.event === 'gesture_end' && gestureMotion) {
+          try { completeStreamingGesture(gestureMotion, event.data.frames); }
+          catch (error) { stopGesture('failed', error instanceof Error ? error.message : 'Incomplete gesture frames.'); }
+        }
         if (event.event === 'audio_end') audioFrames = event.data.sample_count;
         if (event.event === 'status') setStatus(stages[event.data.stage] ?? event.data.stage.replaceAll('_', ' '));
         if (event.event === 'token') {
@@ -198,7 +269,7 @@ export default function App() {
       const current = playbackPreferences.current;
       if (ticket === generation.current && received) {
         clock.streamComplete(performance.now()); clock.configureVoice(current.autoPlay ? current.voice : 'off'); setLiveMeasurement(clock.snapshot());
-        if (useLiveVoice) await pcmPlayer.current?.finish(audioFrames);
+        if (useLiveVoice) { await pcmChain; await pcmPlayer.current?.finish(audioFrames); }
         else if (current.autoPlay && current.voice !== 'off') void playback.play(received, current.voice, (event) => {
           if (ticket === generation.current && event.turnId === received?.id) { clock.playback(event); setLiveMeasurement(clock.snapshot()); }
         }, { gesture: current.speechGesture });
@@ -224,7 +295,7 @@ export default function App() {
     avatarChoiceMade.current = true;
     if (!model && builtinAvatar === next && !avatarError) return;
     measuredMotion.stop(); setModel(undefined); setBuiltinAvatar(next); setAvatarError(null); setAvatarReady(false);
-    if (next === 'jensen') setFraming('upper_body');
+    if (next === 'jensen' && !gaussianRequested) setFraming('upper_body');
   }
   function listen(turn: Turn) { if (busy) return; pcmPlayer.current?.stop(); setPcmState(initialPcmState); setActiveTurn(turn); void measuredMotion.play(turn.behavior.motion); void playback.play(turn, voice === 'off' ? 'browser' : voice, undefined, { gesture: speechGestureEnabled }); }
   useEffect(() => {
@@ -249,9 +320,9 @@ export default function App() {
   const topics = persona?.presentation?.topics ?? [];
   const questions = persona?.example_questions[language] ?? defaultQuestions;
   const speaking = pcmState.status === 'playing' || playback.status === 'playing';
-  const visualPlayback = streamingVoice ? { ...playback, ...pcmState, speechTiming: undefined, audioSha256: undefined } : playback;
+  const visualPlayback = streamingVoice ? { ...playback, ...pcmState, speechTiming: undefined, audioSha256: liveGesture?.audioSha256 } : playback;
   const modelUrl = model?.url ?? (builtinAvatar === 'human' ? RESEARCH_HUMAN_AVATAR.modelUrl : builtinAvatar === 'jensen' && isJensen ? JENSEN_SOURCE_FITTED_AVATAR.modelUrl : undefined);
-  const stageState = speaking ? 'Speaking' : (playback.status === 'loading' || pcmState.status === 'loading') ? 'Preparing voice' : microphone.listening ? 'Listening' : busy ? 'Thinking' : 'Ready when you are';
+  const stageState = callActive && !speaking ? (callState.status === 'hearing' ? 'Hearing you' : callState.status === 'connecting' ? 'Connecting call' : 'Listening (live call)') : speaking ? 'Speaking' : (playback.status === 'loading' || pcmState.status === 'loading') ? 'Preparing voice' : microphone.listening ? 'Listening' : busy ? 'Thinking' : 'Ready when you are';
 
   return <div className="app-shell">
     <aside className="sidebar">
@@ -269,9 +340,9 @@ export default function App() {
         {page === 'presentation' ? <><div className="about-banner"><p><strong>Historical Musk presentation.</strong> This archived evaluation video predates the Jensen studio and is not a Jensen avatar or voice.</p></div><PresentationView onAsk={() => { reset(); navigate('studio'); setTimeout(() => composer.current?.focus(), 0); }}/></> : page === 'sources' ? <SourcesView sources={sources} corpusInfo={persona?.qa_corpus}/> : page === 'lab' ? <><ResearchLab language={language}/><MotionLab key={persona?.id ?? "unbound"} personaId={persona?.id} modelUrl={modelUrl} reducedMotion={reducedMotion}/></> : <>
           <div className="studio-heading"><div><div className="eyebrow">CURIOSITY, IN CONVERSATION</div><h1>Meet the mind. <span>Explore the ideas.</span></h1><p>A conversation with a source-grounded {subjectName} persona.</p></div><button className="secondary-button" onClick={reset}><Plus size={16}/> New conversation</button></div>
           <div className="studio-grid">
-            <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}><section className="stage-card" aria-label="Avatar studio" style={{ flex: 1 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}><section className={`stage-card${gaussianEnabled ? ' photoreal' : ''}`} aria-label="Avatar studio" style={{ flex: 1 }}>
               <div className="stage-top"><div><span className="tag dark"><span className="tiny-dot"/> AI SIMULATION</span><div className="stage-title">{subjectName}<span>01 / RESEARCH PERSONA</span></div></div><button className="stage-options" onClick={() => setSettings(true)} aria-label="Avatar settings"><Settings2 size={18}/></button></div>
-              <div className="avatar-viewport"><AvatarStage gaussianHead={gaussianHead} learnedGesture={learnedGestureEnabled && mode === 'behavior' ? learnedGesture.model : undefined} speechGesture={speechGestureEnabled && mode === 'behavior' && !streamingVoice ? playback.speechGesture : undefined} attentionTarget={attentionTarget} portraitStyle={isJensen ? 'jensen' : 'reference'} speaking={speaking} timeline={streamingVoice ? undefined : activeTurn?.behavior} elapsedMs={visualPlayback.elapsedMs} amplitude={speaking ? visualPlayback.amplitude : 0} modelUrl={modelUrl} framing={framing} reducedMotion={reducedMotion} speechTiming={visualPlayback.speechTiming} audioSha256={visualPlayback.audioSha256} audioElapsedMs={visualPlayback.audioElapsedMs} performanceClip={motionMode !== 'disabled' && mode === 'behavior' && !reducedMotion ? measuredMotion.clip : undefined} observationElapsedMs={measuredMotion.elapsedMs} allowGeometryPreview={motionMode === 'geometry_preview'} onReady={onAvatarReady} onError={onAvatarError}/></div>
+              <div className="avatar-viewport"><AvatarStage gaussianHead={gaussianHead} backdrop={gaussianEnabled ? 'white' : 'studio'} learnedGesture={learnedGestureEnabled && mode === 'behavior' ? learnedGesture.model : undefined} speechGesture={speechGestureEnabled && mode === 'behavior' ? streamingVoice ? liveGesture : playback.speechGesture : undefined} attentionTarget={attentionTarget} portraitStyle={isJensen ? 'jensen' : 'reference'} speaking={speaking} timeline={streamingVoice ? undefined : activeTurn?.behavior} elapsedMs={visualPlayback.elapsedMs} amplitude={speaking ? visualPlayback.amplitude : 0} modelUrl={modelUrl} framing={framing} reducedMotion={reducedMotion} speechTiming={visualPlayback.speechTiming} audioSha256={visualPlayback.audioSha256} audioElapsedMs={visualPlayback.audioElapsedMs} performanceClip={motionMode !== 'disabled' && mode === 'behavior' && !reducedMotion ? measuredMotion.clip : undefined} observationElapsedMs={measuredMotion.elapsedMs} allowGeometryPreview={motionMode === 'geometry_preview'} onReady={onAvatarReady} onError={onAvatarError}/></div>
               <div className="stage-caption"><span className="caption-rule"/><span>{gaussianEnabled ? 'JENSEN · PHOTOREAL FACE & BODY' : model ? 'YOUR CUSTOM RIG' : builtinAvatar === 'jensen' && isJensen ? 'JENSEN · SOURCE-FITTED CANDIDATE' : builtinAvatar === 'human' ? (isJensen ? 'GENERIC RESEARCH RIG' : 'RESEARCH HUMAN RIG') : isJensen ? 'JENSEN · STYLIZED PREVIEW' : 'STYLIZED PORTRAIT RIG'}</span><span className="caption-rule"/></div>
               <div className="stage-bottom"><div className="live-status"><span className={`status-orb ${speaking || busy ? 'animated' : ''}`}/><div><strong>{stageState}</strong><span title={playback.timingMessage}>{streamingVoice ? 'Streaming voice · PCM-clock mouth movement' : voice === 'provider' ? playback.timingStatus === 'available' ? 'Provider voice · audio-timed mouth cues' : 'Provider voice · approximate mouth movement' : voice === 'browser' || speaking ? 'Generic browser voice · approximate lip sync' : 'Text mode · voice available'}</span></div></div><button className="round-control" aria-label={streamingVoice || speaking || playback.status === 'loading' ? 'Stop audio' : 'Enable voice settings'} onClick={() => streamingVoice ? cancel() : speaking || playback.status === 'loading' ? playback.stop() : setSettings(true)}>{streamingVoice || speaking || playback.status === 'loading' ? <Square size={16}/> : voice === 'off' ? <VolumeX size={18}/> : <Volume2 size={18}/>}</button></div>
               {!avatarReady && !avatarError && <div className="avatar-loading"><LoaderCircle size={18} className="spin"/> Preparing the rig</div>}
@@ -281,11 +352,11 @@ export default function App() {
               <div className="conversation-header"><div><MessageCircle size={18}/><h2>Let's talk</h2></div><span className="preview-label">{persona?.capabilities.llm ? 'LLM connected' : 'Source preview'}</span></div>
               <div className="message-list" role="log" aria-label="Conversation messages" aria-live="polite" aria-relevant="additions text">
                 {!messages.length && <div className="welcome-message"><div className="assistant-avatar"><Mark small/></div><span className="eyebrow">A GOOD QUESTION IS A GOOD START</span><h2>{language === 'ko' ? '어떤 이야기가 궁금해?' : 'Where should we begin?'}</h2><p>{language === 'ko' ? '공개된 자료를 바탕으로 궁금한 것을 물어봐. 답변의 출처도 함께 확인할 수 있어.' : `Explore ${topics.length ? topics.join(', ') : 'the ideas'} — with the original sources close by.`}</p><div className="starter-questions">{questions.slice(0, 3).map((question) => <button key={question} disabled={connection !== 'ready'} onClick={() => void send(question)}><span>{question}</span><ArrowUpRight size={16}/></button>)}</div><div className="preview-explainer"><BookOpen size={14}/><span>{persona?.capabilities.llm ? 'Responses use a connected model and selected evidence.' : 'Source preview uses published evidence. Connect a model for generated dialogue.'}</span></div></div>}
-                {messages.map((message) => <article key={message.id} className={`message ${message.role}`}><div className="message-avatar">{message.role === 'assistant' ? <Mark small/> : 'Y'}</div><div className="message-content"><div className="message-author">{message.role === 'assistant' ? 'Research persona' : 'You'}{message.turn && <span>{message.turn.provider === 'evidence' ? 'Source notes' : 'Generated'}</span>}</div>{message.text && <p className="message-text">{message.text}</p>}{message.pending && <div className="thinking"><LoaderCircle size={13} className="spin"/>{status || 'Working on your question'}</div>}{message.error && <div className="message-error" role="alert">{message.error}</div>}{message.turn && <div className="message-tools"><button onClick={() => setEvidence(message.turn!.citations)}><BookOpen size={13}/>{message.turn.citations.length ? `${message.turn.citations.length} evidence records` : 'No supporting evidence'}</button><button onClick={() => listen(message.turn!)} disabled={busy} aria-label="Play response"><Volume2 size={14}/><span>Listen</span></button><GroundingBadge grounding={message.turn.grounding} language={message.turn.language}/></div>}</div></article>)}
+                {messages.map((message) => <article key={message.id} className={`message ${message.role}`}><div className="message-avatar">{message.role === 'assistant' ? <Mark small/> : 'Y'}</div><div className="message-content"><div className="message-author">{message.role === 'assistant' ? 'Research persona' : 'You'}{message.turn && <span>{message.turn.provider === 'evidence' ? 'Source notes' : 'Generated'}</span>}</div>{message.text && <p className="message-text">{message.text}</p>}{message.note && <div className="message-note" style={{ fontSize: 11, opacity: 0.7, marginTop: 4 }}>{message.note}</div>}{message.pending && <div className="thinking"><LoaderCircle size={13} className="spin"/>{status || 'Working on your question'}</div>}{message.error && <div className="message-error" role="alert">{message.error}</div>}{message.turn && <div className="message-tools"><button onClick={() => setEvidence(message.turn!.citations)}><BookOpen size={13}/>{message.turn.citations.length ? `${message.turn.citations.length} evidence records` : 'No supporting evidence'}</button><button onClick={() => listen(message.turn!)} disabled={busy} aria-label="Play response"><Volume2 size={14}/><span>Listen</span></button><GroundingBadge grounding={message.turn.grounding} language={message.turn.language}/></div>}</div></article>)}
                 <div ref={chatBottom}/>
               </div>
               {(playback.error || pcmState.error || microphone.error) && <div className="inline-error" role="alert">{playback.error || pcmState.error || microphone.error}</div>}
-              <form className={`composer ${microphone.listening ? 'listening' : ''}`} onSubmit={(event) => { event.preventDefault(); void send(); }}><textarea ref={composer} value={draft} onChange={(event) => setDraft(event.target.value)} placeholder={microphone.listening ? 'Listening… you can edit before sending' : language === 'ko' ? '궁금한 것을 물어봐…' : 'Ask something you’re curious about…'} aria-label="Your message" rows={2} maxLength={2000} disabled={busy} onKeyDown={(event) => { if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void send(); } }}/><div className="composer-bottom"><button className={`microphone-button ${microphone.listening ? 'active' : ''}`} type="button" onClick={() => { playback.stop(); microphone.toggle(); }} disabled={busy || !microphone.supported} aria-label={microphone.listening ? 'Stop microphone' : 'Use microphone'} title={microphone.supported ? 'Dictate a question' : 'Microphone transcription is unavailable in this browser'}><Mic size={16}/><span>{microphone.listening ? 'Listening' : 'Use your voice'}</span></button><span className="keyboard-hint">↵ to send</span>{busy ? <button type="button" className="send-button" onClick={cancel} aria-label="Stop response"><Square size={15}/></button> : <button type="submit" className="send-button" disabled={!draft.trim() || connection !== 'ready'} aria-label="Send message"><ArrowUp size={18}/></button>}</div></form>
+              <form className={`composer ${microphone.listening ? 'listening' : ''}`} onSubmit={(event) => { event.preventDefault(); void send(); }}><textarea ref={composer} value={draft} onChange={(event) => setDraft(event.target.value)} placeholder={microphone.listening ? 'Listening… you can edit before sending' : language === 'ko' ? '궁금한 것을 물어봐…' : 'Ask something you’re curious about…'} aria-label="Your message" rows={2} maxLength={2000} disabled={busy} onKeyDown={(event) => { if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void send(); } }}/><div className="composer-bottom"><button className={`microphone-button ${microphone.listening ? 'active' : ''}`} type="button" onClick={() => { playback.stop(); microphone.toggle(); }} disabled={busy || !microphone.supported} aria-label={microphone.listening ? 'Stop microphone' : 'Use microphone'} title={microphone.supported ? 'Dictate a question' : 'Microphone transcription is unavailable in this browser'}><Mic size={16}/><span>{microphone.listening ? 'Listening' : 'Use your voice'}</span></button>{persona?.capabilities.realtime_call && <button type="button" className={`microphone-button ${callActive ? 'active' : ''}`} onClick={toggleCall} disabled={busy && !callActive} aria-label={callActive ? 'End live call' : 'Start live call'} title="Talk in real time with the Sophon voice model; replies are not checked against the source library">{callActive ? <PhoneOff size={16}/> : <Phone size={16}/>}<span>{callActive ? 'End call' : 'Live call'}</span></button>}{callState.status === 'failed' && callState.message && <span role="status" style={{ fontSize: 11, color: '#b4532a' }}>{callState.message}</span>}<span className="keyboard-hint">↵ to send</span>{busy ? <button type="button" className="send-button" onClick={cancel} aria-label="Stop response"><Square size={15}/></button> : <button type="submit" className="send-button" disabled={!draft.trim() || connection !== 'ready' || callActive} aria-label="Send message"><ArrowUp size={18}/></button>}</div></form>
               <div className="conversation-footer"><span className="tiny-dot"/> AI simulation · {persona?.snapshot ? `Snapshot ${persona.snapshot.as_of.slice(0, 10)} · dated sources` : 'Historical sources'} · Verify important claims</div>
             </section>
           </div>
@@ -297,7 +368,7 @@ export default function App() {
       <nav className="mobile-nav" aria-label="Mobile navigation"><button className={page === 'studio' ? 'active' : ''} onClick={() => navigate('studio')}><MessageCircle size={19}/>Studio</button><button className={page === 'sources' ? 'active' : ''} onClick={() => navigate('sources')}><BookOpen size={19}/>Sources</button><button className={page === 'lab' ? 'active' : ''} onClick={() => navigate('lab')}><FlaskConical size={19}/>Lab</button><button className={page === 'presentation' ? 'active' : ''} onClick={() => navigate('presentation')}><Clapperboard size={19}/>Present</button></nav>
     </div>
     {evidence && <><button className="drawer-scrim" onClick={() => setEvidence(null)} aria-label="Close response evidence"/><EvidencePanel citations={evidence} onClose={() => setEvidence(null)}/></>}
-    <SettingsDialog open={settings} close={() => setSettings(false)} persona={persona} voice={voice} setVoice={(next) => { if (streamingVoice) cancel(); playback.stop(); setVoice(next); }} autoPlay={autoPlay} setAutoPlay={setAutoPlay} reducedMotion={reducedMotion} setReducedMotion={(value) => { measuredMotion.stop(); setReducedMotion(value); }} modelName={model?.name} loadModel={loadModel} resetModel={() => selectBuiltinAvatar(isJensen ? 'portrait' : 'human')} builtinAvatar={builtinAvatar} setBuiltinAvatar={selectBuiltinAvatar} framing={framing} setFraming={setFraming} motionMode={motionMode} setMotionMode={(value) => { measuredMotion.stop(); setMotionMode(value); }} motionLibrary={motionLibrary} motionLibraryError={motionLibraryError} learnedGestureEnabled={learnedGestureEnabled} setLearnedGestureEnabled={(enabled) => { measuredMotion.stop(); setLearnedGestureEnabled(enabled); if (enabled) setMotionMode('geometry_preview'); }} learnedGestureLoading={learnedGesture.loading} learnedGestureError={learnedGesture.error} speechGestureEnabled={speechGestureEnabled} setSpeechGestureEnabled={(enabled) => { setSpeechGestureEnabled(enabled); if (enabled && persona?.capabilities.speech && voice !== 'provider') { if (streamingVoice) cancel(); playback.stop(); setVoice('provider'); } }} speechGestureStatus={playback.gestureStatus} speechGestureMessage={playback.gestureMessage}/>
+    <SettingsDialog open={settings} close={() => setSettings(false)} persona={persona} voice={voice} setVoice={(next) => { if (streamingVoice) cancel(); playback.stop(); setVoice(next); }} autoPlay={autoPlay} setAutoPlay={setAutoPlay} reducedMotion={reducedMotion} setReducedMotion={(value) => { measuredMotion.stop(); setReducedMotion(value); }} modelName={model?.name} loadModel={loadModel} resetModel={() => selectBuiltinAvatar(isJensen ? 'portrait' : 'human')} builtinAvatar={builtinAvatar} setBuiltinAvatar={selectBuiltinAvatar} framing={framing} setFraming={setFraming} motionMode={motionMode} setMotionMode={(value) => { measuredMotion.stop(); setMotionMode(value); }} motionLibrary={motionLibrary} motionLibraryError={motionLibraryError} learnedGestureEnabled={learnedGestureEnabled} setLearnedGestureEnabled={(enabled) => { measuredMotion.stop(); setLearnedGestureEnabled(enabled); if (enabled) setMotionMode('geometry_preview'); }} learnedGestureLoading={learnedGesture.loading} learnedGestureError={learnedGesture.error} speechGestureEnabled={speechGestureEnabled} setSpeechGestureEnabled={(enabled) => { setSpeechGestureEnabled(enabled); if (enabled && persona?.capabilities.speech && voice !== 'provider') { if (streamingVoice) cancel(); playback.stop(); setVoice('provider'); } }} speechGestureStatus={liveGestureStatus?.status ?? playback.gestureStatus} speechGestureMessage={liveGestureStatus?.message ?? playback.gestureMessage}/>
   </div>;
 }
 

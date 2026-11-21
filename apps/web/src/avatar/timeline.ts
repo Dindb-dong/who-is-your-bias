@@ -97,7 +97,11 @@ export function samplePose(input: TimelineInput): RigPose {
 export function dampPose(current: RigPose, target: RigPose, deltaSeconds: number): RigPose {
   const t = 1 - Math.exp(-18 * Math.max(0, Math.min(0.1, finite(deltaSeconds))));
   const output = { ...current };
-  for (const key of Object.keys(neutralPose()) as (keyof Omit<RigPose, 'face' | 'bones' | 'visemes'>)[]) output[key] += (target[key] - output[key]) * t;
+  for (const key of Object.keys(neutralPose()) as (keyof Omit<RigPose, 'face' | 'bones' | 'visemes' | 'boneWeight'>)[]) output[key] += (target[key] - output[key]) * t;
+  // Weighted bones (speech gestures): follow the target weight; if they vanish (barge-in), fade the weight out so the
+  // last full-strength bones do not linger over the designed pose.
+  output.boneWeight = target.boneWeight !== undefined ? target.boneWeight
+    : current.boneWeight !== undefined && !target.bones ? current.boneWeight * (1 - t) : undefined;
   if (current.face || target.face) {
     const face: FaceWeights = {};
     for (const channel of new Set([...Object.keys(current.face ?? {}), ...Object.keys(target.face ?? {})]) as Set<keyof FaceWeights>) {

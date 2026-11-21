@@ -32,13 +32,13 @@ export interface Persona {
   example_questions: { en: string[]; ko: string[] };
   stats: { sources: number; evidence: number; held_out_sources: number };
   qa_corpus?: { corpus_id: string | null; materialization: string; question_answer_records: number; training_question_answers: number; complete_exchanges: number; excerpts: number };
-  capabilities: { llm: boolean; speech: boolean; transcription?: boolean; live_speech?: boolean };
+  capabilities: { llm: boolean; speech: boolean; transcription?: boolean; live_speech?: boolean; realtime_call?: boolean };
   snapshot?: { id: string; as_of: string; current_dated_training_sources: number; coverage_note: string } | null;
   notice: string;
   presentation?: { initials: string; topics: string[]; avatar_status: string; avatar_label: string } | null;
   bindings?: { persona_id: string; voice: { status: string; persona_id: string | null; voice: string }; motion: { status: string; persona_id: string | null } };
 }
-export interface ChatRequest { message: string; session_id?: string; mode: ExperimentMode; language: Language; motion_mode?: MotionMode }
+export interface ChatRequest { message: string; session_id?: string; mode: ExperimentMode; language: Language; motion_mode?: MotionMode; gesture?: boolean }
 export type StreamEvent =
   | { event: 'meta'; data: { session_id: string; turn_id?: string; snapshot_id?: string | null; protocol?: string } }
   | { event: 'status'; data: { stage: string } }
@@ -47,6 +47,9 @@ export type StreamEvent =
   | { event: 'segment'; data: { turn_id: string; segment_id: string; sequence: number; text: string; evidence_ids: string[]; state: 'committed' } }
   | { event: 'audio_segment'; data: { turn_id: string; segment_id: string; sequence: number; audio_sha256: string; sample_rate: number; channels: number; sample_offset: number; sample_count: number; synthesis_ms: number } }
   | { event: 'audio'; data: PcmChunk }
+  | { event: 'gesture_state'; data: { turn_id: string; status: string; message: string | null; fps: number; width: number; format: string; window_frames: number | null; engine: string } }
+  | { event: 'gesture'; data: { turn_id: string; sequence: number; start_frame: number; frame_count: number; encoding: 'f32le'; poses_base64: string } }
+  | { event: 'gesture_end'; data: { turn_id: string; chunks: number; frames: number; status: 'complete' | 'stopped' } }
   | { event: 'audio_segment_end'; data: { turn_id: string; segment_id: string; sequence: number; sample_end: number; state: 'delivered' } }
   | { event: 'audio_end'; data: { turn_id: string; chunks: number; sample_count: number; sample_rate: number | null; first_pcm_ready_ms: number | null; total_ms: number; state: 'delivered'; spoken_complete: false; acoustic_latency_ms: null } }
   | { event: 'turn_state'; data: { turn_id: string | null; state: 'failed'; text_complete: boolean; delivered_audio_chunks: number; spoken_complete: false } }
@@ -109,7 +112,7 @@ function isTurn(value: unknown): value is Turn {
 }
 
 function validateEvent(event: string, data: unknown): StreamEvent | null {
-  if (!['meta', 'status', 'token', 'result', 'done', 'error', 'segment', 'audio_segment', 'audio', 'audio_segment_end', 'audio_end', 'turn_state'].includes(event)) return null;
+  if (!['meta', 'status', 'token', 'result', 'done', 'error', 'segment', 'audio_segment', 'audio', 'audio_segment_end', 'audio_end', 'turn_state', 'gesture_state', 'gesture', 'gesture_end'].includes(event)) return null;
   if (!object(data)) throw new ApiError('Invalid event from the conversation service.');
   const integer = (value: unknown) => positive(value) && Number.isSafeInteger(value);
   const identity = (value: unknown) => typeof value === 'string' && value.length > 0;
@@ -125,6 +128,9 @@ function validateEvent(event: string, data: unknown): StreamEvent | null {
     : event === 'audio' ? segment() && integer(data.segment_sequence) && integer(data.sample_offset) && integer(data.sample_count) && Number(data.sample_count) > 0 && Number(data.sample_count) <= 16384 && rate(data.sample_rate) && [1, 2].includes(Number(data.channels)) && data.encoding === 'pcm_s16le' && typeof data.pcm_base64 === 'string' && data.pcm_base64.length <= 90000
     : event === 'audio_segment_end' ? segment() && integer(data.sample_end) && data.state === 'delivered'
     : event === 'audio_end' ? identity(data.turn_id) && integer(data.chunks) && integer(data.sample_count) && (data.sample_rate === null || rate(data.sample_rate)) && (data.first_pcm_ready_ms === null || positive(data.first_pcm_ready_ms)) && positive(data.total_ms) && data.state === 'delivered' && data.spoken_complete === false && data.acoustic_latency_ms === null
+    : event === 'gesture_state' ? identity(data.turn_id) && typeof data.status === 'string' && data.status.length <= 40 && (data.message === null || typeof data.message === 'string') && data.fps === 30 && data.width === 165 && typeof data.engine === 'string' && (data.window_frames === null || integer(data.window_frames))
+    : event === 'gesture' ? identity(data.turn_id) && integer(data.sequence) && integer(data.start_frame) && integer(data.frame_count) && Number(data.frame_count) >= 1 && Number(data.frame_count) <= 64 && data.encoding === 'f32le' && typeof data.poses_base64 === 'string' && data.poses_base64.length <= 60000
+    : event === 'gesture_end' ? identity(data.turn_id) && integer(data.chunks) && integer(data.frames) && ['complete', 'stopped'].includes(String(data.status))
     : event === 'turn_state' ? (data.turn_id === null || typeof data.turn_id === 'string') && data.state === 'failed' && typeof data.text_complete === 'boolean' && integer(data.delivered_audio_chunks) && data.spoken_complete === false
     : true;
   if (!valid) throw new ApiError(`Invalid ${event} event from the conversation service.`);
@@ -187,7 +193,7 @@ class LiveStreamIntegrity {
     const owner = this.owner!;
     if (this.failed) invalid('data arrived after failure');
     if ('turn_id' in event.data && event.data.turn_id !== owner.turnId) invalid('turn identity changed');
-    if (this.audioComplete && ['segment', 'audio_segment', 'audio', 'audio_segment_end', 'audio_end'].includes(event.event)) invalid('audio arrived after completion');
+    if (this.audioComplete && ['segment', 'audio_segment', 'audio', 'audio_segment_end', 'audio_end', 'gesture_state', 'gesture', 'gesture_end'].includes(event.event)) invalid('audio arrived after completion');
     switch (event.event) {
       case 'result':
         if (event.data.turn.id !== owner.turnId || event.data.turn.session_id !== owner.sessionId) invalid('result ownership changed');

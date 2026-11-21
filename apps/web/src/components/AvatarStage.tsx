@@ -27,6 +27,8 @@ export interface AvatarStageProps {
   allowGeometryPreview?: boolean;
   learnedGesture?: GestureBasisModel;
   speechGesture?: SpeechGestureMotion;
+  /** 'white': plain white backdrop without the studio floor (used behind the photoreal face). */
+  backdrop?: 'studio' | 'white';
   gaussianHead?: GaussianHeadConfig;
   attentionTarget?: AttentionTarget | null;
   portraitStyle?: PortraitStyle;
@@ -47,7 +49,7 @@ export interface AvatarStageProps {
 export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, modelUrl,
   rigMapping, reducedMotion, onReady, onError, onTelemetry, className = '',
   audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview = false, attentionTarget, portraitStyle = 'reference',
-  showCalibration = false, framing = 'portrait', auditionStartKey = 0, gaussianHead, learnedGesture, speechGesture }: AvatarStageProps) {
+  showCalibration = false, framing = 'portrait', auditionStartKey = 0, gaussianHead, learnedGesture, speechGesture, backdrop = 'studio' }: AvatarStageProps) {
   const host = useRef<HTMLDivElement>(null);
   const runtime = useRef<AvatarRenderer | null>(null);
   const callbacks = useRef({ onReady, onError, onTelemetry, showCalibration }); callbacks.current = { onReady, onError, onTelemetry, showCalibration };
@@ -129,6 +131,7 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
   useEffect(() => { runtime.current?.setFraming(framing); }, [framing, epoch]);
 
   useEffect(() => { void runtime.current?.setGaussianHead(gaussianHead ?? null); }, [gaussianHead, epoch]);
+  useEffect(() => { runtime.current?.setStudioVisible(backdrop !== 'white'); }, [backdrop, epoch]);
 
   useEffect(() => {
     if (!auditionStartKey || auditionStartKey <= lastAuditionRequest.current || !speaking || !audioSha256 || !diagnostics?.assetInspection?.sha256) return;
@@ -201,11 +204,11 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
       data-attention-phase={telemetry?.attention?.phase ?? 'idle'} data-attention-target={telemetry?.attention?.targetId ?? ''}
       data-attention-eye-yaw={telemetry?.attention?.eyeYaw ?? 0} data-attention-eye-pitch={telemetry?.attention?.eyePitch ?? 0}
       data-attention-head-yaw={telemetry?.attention?.headYaw ?? 0} data-attention-head-pitch={telemetry?.attention?.headPitch ?? 0}
-      style={{ position: 'relative', width: '100%', height: showCalibration ? 'auto' : '100%', minHeight: 440, overflow: 'hidden', background: 'radial-gradient(ellipse at 50% 38%, #26301f 0%, #151c13 45%, #10160f 100%)' }}>
+      style={{ position: 'relative', width: '100%', height: showCalibration ? 'auto' : '100%', minHeight: 440, overflow: 'hidden', background: backdrop === 'white' ? '#ffffff' : 'radial-gradient(ellipse at 50% 38%, #26301f 0%, #151c13 45%, #10160f 100%)' }}>
       <div className="avatar-visual">
         <div ref={host} style={{ position: 'absolute', inset: 0 }} aria-hidden={fatal ? true : undefined} />
         {loadingModel && <div role="status" className="avatar-model-status" style={{ position: 'absolute', bottom: 20, left: 20, color: '#d8f8a0', fontSize: 12 }}>Loading your avatar…</div>}
-        {gaussianHead && <div role="status" className="avatar-model-status" style={{ position: 'absolute', top: 72, right: 16, left: 16, padding: '6px 10px', borderRadius: 8, background: '#0b1009cc', color: gaussianState === 'error' ? '#efb5a1' : '#d8f8a0', fontSize: 11 }}>
+        {gaussianHead && <div role="status" className="avatar-model-status" style={{ position: 'absolute', bottom: 44, right: 16, left: 16, padding: '6px 10px', borderRadius: 8, background: '#0b1009cc', color: gaussianState === 'error' ? '#efb5a1' : '#d8f8a0', fontSize: 11 }}>
           {gaussianState === 'loading' ? 'Loading local photoreal face…' : gaussianState === 'ready' ? 'Synthetic photoreal face · articulated body' : gaussianState === 'error' ? `Photoreal face unavailable: ${gaussianMessage} The body remains available.` : 'Preparing photoreal face…'}
           {gaussianState === 'ready' && gaussianMessage && <span title={gaussianMessage}> · Recorded expression preview; semantic calibration pending</span>}
           {speechGesture ? <span> · Speech-driven gestures (EMAGE)</span> : learnedGesture && allowGeometryPreview && <span> · Experimental learned gestures</span>}

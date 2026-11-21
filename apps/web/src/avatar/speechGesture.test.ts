@@ -4,9 +4,10 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
 import { describe, expect, it } from 'vitest';
 import { createResearchHumanMapping } from './builtin';
+import { createProceduralRig } from './procedural';
 import { samplePerformance } from './performance';
 import { createRetargetedRig } from './retarget';
-import { calmPoses, parseSpeechGestureMotion, sampleSpeechGesture, SMPLX_POSE_WIDTH, type SpeechGestureMotion } from './speechGesture';
+import { appendStreamingGesture, calmPoses, completeStreamingGesture, createStreamingGesture, parseSpeechGestureMotion, sampleSpeechGesture, SMPLX_POSE_WIDTH, type SpeechGestureMotion } from './speechGesture';
 import { neutralPose } from './timeline';
 import type { BoneBinding, BoneControl, RigDiagnostics } from './types';
 
@@ -86,6 +87,55 @@ describe('speech-driven gesture conversion', () => {
     expect(noCollar.leftShoulder).toBeUndefined();
     const withCollar = sampleSpeechGesture(motion, 1000, { supported: ['chest', 'leftShoulder', 'leftUpperArm', 'leftForearm'] })!;
     withCollar.leftUpperArm!.forEach((v, i) => expect(v).toBeCloseTo(full.leftUpperArm![i], 6));
+  });
+
+  it('plays live chunks on the PCM clock, holds briefly when playback outruns them, and fades back in', () => {
+    const chunk = (sequence: number, start: number, count: number, value = 0.4) => {
+      const bytes = new Uint8Array(count * SMPLX_POSE_WIDTH * 4); const view = new DataView(bytes.buffer);
+      for (let i = 0; i < count * SMPLX_POSE_WIDTH; i++) view.setFloat32(i * 4, (i % SMPLX_POSE_WIDTH) === 16 * 3 + 2 ? value : 0, true);
+      return { sequence, start_frame: start, frame_count: count, poses_base64: btoa(String.fromCharCode(...bytes)) };
+    };
+    const live = createStreamingGesture('live:turn', 'emage');
+    expect(sampleSpeechGesture(live, 100)).toBeNull();                       // nothing yet: designed movement
+    appendStreamingGesture(live, chunk(0, 0, 60));
+    expect(live.frames).toBe(60);
+    expect(live.poses[30 * SMPLX_POSE_WIDTH + 16 * 3 + 2]).toBeCloseTo(0.4, 5);   // constant input survives the calm filter
+    const lifted = (ms: number) => 2 * Math.acos(Math.min(1, Math.abs(sampleSpeechGesture(live, ms)?.leftUpperArm?.[3] ?? 1)));
+    expect(lifted(1000)).toBeGreaterThan(0.2);
+    expect(lifted(2100)).toBeGreaterThan(0);                                 // past the last frame: held…
+    expect(lifted(2100)).toBeLessThan(lifted(1000));                        // …while fading
+    expect(sampleSpeechGesture(live, 2500)).toBeNull();
+    expect(() => appendStreamingGesture(live, chunk(1, 61, 10))).toThrow();   // gap in frames
+    appendStreamingGesture(live, chunk(1, 60, 60), 2500);                    // arrives after playback passed it
+    expect(lifted(2510)).toBeLessThan(lifted(3200) * 0.2);                   // fades in again instead of snapping
+    expect(() => completeStreamingGesture(live, 100)).toThrow();
+    completeStreamingGesture(live, 120);
+    expect(sampleSpeechGesture(live, 4100)).toBeNull();
+    const diagnostics = { kind: 'procedural', morphs: [], bones: [], missing: [] } as unknown as RigDiagnostics;
+    const base = { elapsedMs: 3000, idleMs: 3000, speaking: true, audioElapsedMs: 3000, speechGesture: live };
+    expect(samplePerformance({ ...base, audioSha256: 'live:turn' }, diagnostics).telemetry.boneSource).toBe('speech_generated');
+    expect(samplePerformance({ ...base, audioSha256: 'live:other' }, diagnostics).telemetry.boneSource).toBe('designed');
+  });
+
+  it('hands over from the designed arm pose without passing through neutral', () => {
+    const rig = createProceduralRig('jensen');
+    const forearm = () => rig.root.getObjectByName('leftForearm')!.quaternion.clone();
+    const designed = { ...neutralPose(), openPalm: 1 };
+    const observed: [number, number, number, number] = [0, 0, Math.sin(0.3), Math.cos(0.3)];
+    rig.apply(designed); const designedQ = forearm();
+    rig.apply({ ...designed, bones: { leftForearm: observed }, boneWeight: 0 });
+    expect(forearm().angleTo(designedQ)).toBeLessThan(1e-6);                 // weight 0 = designed pose exactly
+    rig.apply({ ...designed, bones: { leftForearm: observed }, boneWeight: 1 }); const observedQ = forearm();
+    rig.apply({ ...designed, bones: { leftForearm: observed }, boneWeight: 0.5 }); const half = forearm();
+    expect(half.angleTo(designedQ)).toBeCloseTo(half.angleTo(observedQ), 4);  // halfway between the two, not toward neutral
+    rig.apply(designed);
+    expect(forearm().angleTo(designedQ)).toBeLessThan(1e-6);                 // nothing leaks into the next designed frame
+    const live = clip(new Vector3(0, 0, 1), new Vector3(0, 0, 1));
+    const diagnostics = { kind: 'procedural', morphs: [], bones: [], missing: [] } as unknown as RigDiagnostics;
+    const early = samplePerformance({ elapsedMs: 100, idleMs: 100, speaking: true, audioElapsedMs: 100, speechGesture: live, audioSha256: sha }, diagnostics);
+    expect(early.pose.boneWeight).toBeGreaterThan(0);
+    expect(early.pose.boneWeight).toBeLessThan(1);
+    expect(2 * Math.acos(Math.abs(early.pose.bones!.leftUpperArm![3]))).toBeGreaterThan(1);   // full-strength bones, faded by weight
   });
 
   it('is used only for the audio it was generated from', () => {

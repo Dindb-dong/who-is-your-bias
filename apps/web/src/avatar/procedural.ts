@@ -306,6 +306,7 @@ export function createProceduralRig(style: PortraitStyle = 'reference'): AvatarR
     forearm.add(ellipsoid(jensen ? shirt : skin, [0.10, 0.255, 0.105], [0, -0.19, 0], 32));
     const hand = makeHand(skin, side); hand.position.set(0, -0.41, 0); forearm.add(hand); hands.push(hand);
   }
+  const armNeutral = new Map([...shoulders, ...forearms, ...hands].map((object) => [object, object.quaternion.clone()] as const));
   root.rotation.y = -0.075;
   const supported: (keyof FaceWeights)[] = ['eyeBlinkLeft', 'eyeBlinkRight', 'eyeWideLeft', 'eyeWideRight', 'eyeSquintLeft', 'eyeSquintRight',
     'eyeLookUpLeft', 'eyeLookUpRight', 'eyeLookDownLeft', 'eyeLookDownRight', 'eyeLookInLeft', 'eyeLookInRight', 'eyeLookOutLeft', 'eyeLookOutRight',
@@ -375,6 +376,9 @@ export function createProceduralRig(style: PortraitStyle = 'reference'): AvatarR
       tongue.position.z = 0.017 + v('tongueOut') * 0.045;
       shoulders.forEach((shoulder, index) => {
         const side = index === 0 ? -1 : 1;
+        // The designed pose sets only some Euler axes: start from neutral so an earlier measured or blended
+        // rotation does not leak into it.
+        for (const object of [shoulder, forearms[index], hands[index]]) object.quaternion.copy(armNeutral.get(object)!);
         shoulder.rotation.z = side * (0.13 + pose.openPalm * 0.19 + pose.shrug * 0.1);
         shoulder.rotation.x = -(pose.openPalm * 0.4 + pose.emphasis * (index === 1 ? 0.4 : 0.08) + pose.wave * (index === 0 ? 0.8 : 0));
         shoulder.position.y = 1.12 + pose.shrug * 0.055;
@@ -385,7 +389,12 @@ export function createProceduralRig(style: PortraitStyle = 'reference'): AvatarR
       });
       for (const [name, binding] of articulated) {
         const measured = pose.bones?.[name];
-        if (measured) binding.object.quaternion.copy(binding.neutral).multiply(new Quaternion(...measured)).normalize();
+        if (!measured) continue;
+        const target = new Quaternion(...measured).normalize();
+        const weight = Math.max(0, Math.min(1, pose.boneWeight ?? 1));
+        // Partly observed: start from the designed rotation set above (relative to neutral), not from neutral.
+        if (weight < 1) target.copy(binding.neutral.clone().invert().multiply(binding.object.quaternion).slerp(target, weight));
+        binding.object.quaternion.copy(binding.neutral).multiply(target).normalize();
       }
     },
     dispose() { disposeObject(root); },

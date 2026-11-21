@@ -10,6 +10,19 @@ export interface SpeechGestureMotion {
   poses: Float32Array;
   audioSha256: string;
   engine: string;
+  /** Live voice: frames arrive while the turn plays (see appendStreamingGesture). */
+  stream?: StreamingGestureState;
+}
+
+interface StreamingGestureState {
+  complete: boolean;
+  /** Audio time from which the motion fades in (first frames, or after the motion caught up again). */
+  fadeFromMs: number;
+  raw: Float32Array;
+  sum: Float64Array;
+  nextSequence: number;
+  calm: number;
+  smooth: number;
 }
 
 export const SMPLX_POSE_WIDTH = 165;
@@ -45,6 +58,55 @@ export function parseSpeechGestureMotion(bytes: ArrayBuffer, meta: { fps: number
   }
   return { fps, frames, audioSha256: meta.audioSha256, engine: meta.engine.slice(0, 120),
     poses: calmPoses(poses, frames, filter.calm, filter.smooth) };
+}
+
+/** Empty motion for one live turn; `key` binds it to that turn's audio clock (passed as audioSha256). */
+export function createStreamingGesture(key: string, engine: string, filter: { calm?: number; smooth?: number } = {}): SpeechGestureMotion {
+  return { fps: 30, frames: 0, poses: new Float32Array(0), audioSha256: key, engine: engine.slice(0, 120),
+    stream: { complete: false, fadeFromMs: 0, raw: new Float32Array(0), sum: new Float64Array(SMPLX_POSE_WIDTH), nextSequence: 0,
+      calm: Math.min(1, Math.max(0, filter.calm ?? 0.7)), smooth: Math.max(0, Math.round(filter.smooth ?? 3)) } };
+}
+
+/** Appends one server chunk (frames on the turn's PCM clock). The calm filter runs causally: it shrinks toward
+ * the mean of the frames received so far, and frames near the end are re-smoothed when later frames arrive. */
+export function appendStreamingGesture(motion: SpeechGestureMotion,
+  chunk: { sequence: number; start_frame: number; frame_count: number; poses_base64: string }, audioElapsedMs = 0): void {
+  const stream = motion.stream;
+  if (!stream || stream.complete) throw new Error('The gesture stream is not open.');
+  const width = SMPLX_POSE_WIDTH, start = motion.frames, count = chunk.frame_count;
+  if (chunk.sequence !== stream.nextSequence || chunk.start_frame !== start || !Number.isInteger(count) || count < 1 || count > 64
+    || start + count > MAX_FRAMES * 4) throw new Error('Gesture frames arrived out of order.');
+  const raw = atob(chunk.poses_base64);
+  if (raw.length !== count * width * 4) throw new Error('A gesture chunk has an unexpected size.');
+  const view = new DataView(Uint8Array.from(raw, (c) => c.charCodeAt(0)).buffer);
+  const end = start + count;
+  if (stream.raw.length < end * width) {
+    const capacity = Math.max(end, start * 2, 64) * width;
+    const grownRaw = new Float32Array(capacity); grownRaw.set(stream.raw); stream.raw = grownRaw;
+    const grownPoses = new Float32Array(capacity); grownPoses.set(motion.poses); motion.poses = grownPoses;
+  }
+  for (let i = 0; i < count * width; i++) {
+    const value = view.getFloat32(i * 4, true);
+    if (!Number.isFinite(value) || Math.abs(value) > 4 * Math.PI) throw new Error('The generated gesture motion contains invalid rotations.');
+    stream.raw[start * width + i] = value; stream.sum[i % width] += value;
+  }
+  const { calm, smooth } = stream;
+  for (let f = Math.max(0, start - smooth); f < end; f++) {
+    const a = Math.max(0, f - smooth), b = Math.min(end - 1, f + smooth);
+    for (let k = 0; k < width; k++) {
+      let v = 0; for (let g = a; g <= b; g++) v += stream.raw[g * width + k];
+      const mean = stream.sum[k] / end;
+      motion.poses[f * width + k] = mean + calm * (v / (b - a + 1) - mean);
+    }
+  }
+  // If playback had already run past the motion, fade in again from now instead of snapping.
+  if (start === 0 || audioElapsedMs > start / motion.fps * 1000) stream.fadeFromMs = Math.max(0, audioElapsedMs);
+  motion.frames = end; stream.nextSequence++;
+}
+
+export function completeStreamingGesture(motion: SpeechGestureMotion, frames: number): void {
+  if (!motion.stream || frames !== motion.frames) throw new Error('The gesture stream ended with missing frames.');
+  motion.stream.complete = true;
 }
 
 // SMPL-X kinematic tree (55 joints). Rest frames are world-aligned: Y up, facing +Z, subject's left at +X,
@@ -113,12 +175,24 @@ const axisAngle = (poses: Float32Array, frame: number, joint: number, target: Qu
  * `supported` lists the rig's bones: a missing bone's rotation is passed down to its nearest supported
  * descendant so the limbs still point where the generated motion puts them. */
 export function sampleSpeechGesture(motion: SpeechGestureMotion, audioElapsedMs: number,
-  options: { reducedMotion?: boolean; supported?: readonly BoneControl[] } = {}): BoneRotations | null {
+  options: { reducedMotion?: boolean; supported?: readonly BoneControl[]; layer?: { weight: number } } = {}): BoneRotations | null {
   const duration = motion.frames / motion.fps * 1000;
-  if (!Number.isFinite(audioElapsedMs) || audioElapsedMs < 0 || audioElapsedMs >= duration) return null;
+  const stream = motion.stream;
+  if (!Number.isFinite(audioElapsedMs) || audioElapsedMs < 0 || motion.frames < 1) return null;
+  let envelope: number;
+  if (stream && !stream.complete) {
+    // Still arriving: if playback reaches the last frame, hold it and fade out until more frames come.
+    const last = (motion.frames - 1) / motion.fps * 1000;
+    const stall = smoothstep(1 - Math.max(0, audioElapsedMs - last) / 350);
+    if (stall <= 0) return null;
+    envelope = smoothstep((audioElapsedMs - stream.fadeFromMs) / 250) * stall;
+  } else {
+    if (audioElapsedMs >= duration) return null;
+    envelope = smoothstep((audioElapsedMs - (stream?.fadeFromMs ?? 0)) / 250) * smoothstep((duration - audioElapsedMs) / 350);
+  }
+  envelope *= options.reducedMotion ? 0.15 : 1;
   const position = Math.min(motion.frames - 1, audioElapsedMs / 1000 * motion.fps);
   const a = Math.floor(position), b = Math.min(motion.frames - 1, a + 1), mix = position - a;
-  const envelope = smoothstep(audioElapsedMs / 250) * smoothstep((duration - audioElapsedMs) / 350) * (options.reducedMotion ? 0.15 : 1);
   const identity = new Quaternion();
   const qa = new Quaternion(), qb = new Quaternion(), local = new Quaternion(), refLocal = new Quaternion();
   const supported = options.supported ? new Set(options.supported) : null;
@@ -145,8 +219,10 @@ export function sampleSpeechGesture(motion: SpeechGestureMotion, audioElapsedMs:
       delta = (up ? world.get(up)!.clone().invert() : new Quaternion()).multiply(accumulated);
       if (delta.w < 0) delta.set(-delta.x, -delta.y, -delta.z, -delta.w);
     }
-    delta = identity.clone().slerp(delta, envelope);
+    // With `layer`, the caller blends full-strength bones over the designed pose by layer.weight instead.
+    if (!options.layer) delta = identity.clone().slerp(delta, envelope);
     bones[control] = delta.normalize().toArray() as QuaternionTuple;
   }
+  if (options.layer) options.layer.weight = envelope;
   return bones;
 }

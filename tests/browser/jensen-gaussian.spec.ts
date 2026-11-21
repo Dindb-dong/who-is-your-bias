@@ -139,7 +139,7 @@ test('keeps Gaussian face, articulated body and speech on one playback path, the
   const fixture = await routeBundle(page); await routeSpeech(page); await page.goto('/?head=gaussian');
   const stage = page.getByTestId('avatar-stage'), canvas = stage.locator('canvas.avatar-canvas');
   await expect(stage).toHaveAttribute('data-gaussian-state', 'ready', { timeout: 25000 });
-  await expect(stage).toHaveAttribute('data-framing', 'upper_body');
+  await expect(stage).toHaveAttribute('data-framing', 'portrait');
   await expect(canvas).toHaveAttribute('data-gaussian-sha256', fixture.hash);
   await expect(canvas).toHaveAttribute('data-gaussian-expression-source', 'calibrated');
   await expect(stage.locator('canvas')).toHaveCount(1);

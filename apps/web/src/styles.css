@@ -44,3 +44,5 @@
 .live-timing dd { margin: 6px 0 0; font-size: 17px; font-variant-numeric: tabular-nums; color: #284b3a; }
 .live-timing > p { color: #748075; margin: 0; font-size: 11px; line-height: 1.5; }
 @media (max-width: 760px) { .presentation-page { padding: 20px 16px; } .presentation-details { flex-direction: column; align-items: stretch; } .live-timing dl { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 14px; } .live-timing-heading { flex-wrap: wrap; } }
+/* Photoreal face: plain white backdrop behind the avatar; header text switches to dark. */
+.stage-card.photoreal{background:#fff;color:#1b2219}.stage-card.photoreal .stage-title span{color:#6b7563}.stage-card.photoreal .tag.dark{color:#4e5a45;border-color:#4e5a4530;background:#00000008}.stage-card.photoreal .stage-options{color:#4e5a45;border-color:#4e5a4530}.stage-card.photoreal .stage-caption{color:#7c8873}.stage-card.photoreal .caption-rule{background:#7c887350}

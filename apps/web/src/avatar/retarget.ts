@@ -129,13 +129,16 @@ export function createRetargetedRig(model: Group, suppliedMapping: RigMapping = 
   const rotate = (pose: RigPose, name: BoneControl, x = 0, y = 0, z = 0, allowObserved = true): void => {
     const binding = bones.get(name); if (!binding) return;
     const observed = allowObserved ? pose.bones?.[name] : undefined;
-    if (observed) rotation.fromArray(observed).normalize();
+    const weight = Math.max(0, Math.min(1, pose.boneWeight ?? 1));
+    if (observed && weight >= 1) rotation.fromArray(observed).normalize();
     else {
       if (binding.axis) {
         const angle = x || y || z;
         euler.set(binding.axis === 'x' ? angle : 0, binding.axis === 'y' ? angle : 0, binding.axis === 'z' ? angle : 0);
       } else euler.set(x, y, z);
       rotation.setFromEuler(euler);
+      // Partly observed: blend from the designed rotation (not from neutral), so hand-overs do not snap.
+      if (observed && weight > 0) rotation.slerp(scaled.fromArray(observed).normalize(), weight);
     }
     // q and -q are the same orientation. Canonicalizing avoids long-path scaling.
     if (rotation.w < 0) rotation.set(-rotation.x, -rotation.y, -rotation.z, -rotation.w);

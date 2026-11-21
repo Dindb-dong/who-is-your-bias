@@ -61,6 +61,9 @@ export interface RigPose {
   face?: FaceWeights;
   /** Source-local delta rotations in XYZW order, relative to source neutral. */
   bones?: BoneRotations;
+  /** 0..1 (default 1): how far `bones` replace the designed pose of the same bones. Speech gestures fade in
+   * and out over the designed movement this way instead of passing through the neutral pose. */
+  boneWeight?: number;
   visemes?: VisemeWeights;
 }
 

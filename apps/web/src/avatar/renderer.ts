@@ -1,7 +1,7 @@
 import {
   ACESFilmicToneMapping, AmbientLight, CircleGeometry, DirectionalLight,
   FogExp2, HemisphereLight, Mesh, MeshBasicMaterial, MeshStandardMaterial,
-  PerspectiveCamera, PlaneGeometry, Scene, SRGBColorSpace, Vector2, Vector3, WebGLRenderer,
+  PerspectiveCamera, PlaneGeometry, Scene, SRGBColorSpace, Vector2, Vector3, WebGLRenderer, Group,
 } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { avatarView, type AvatarFraming } from './builtin';
@@ -135,15 +135,26 @@ export class AvatarRenderer {
     callbacks.onReady?.(this.rig.diagnostics);
   }
 
+  private readonly studio = new Group();
+
+  /** The dark studio floor and backdrop; hidden for the plain white photoreal backdrop. */
+  setStudioVisible(visible: boolean): void {
+    this.studio.visible = visible;
+    this.studioFog ??= this.scene.fog;          // the dark studio haze would grey a white backdrop
+    this.scene.fog = visible ? this.studioFog : null;
+  }
+  private studioFog: Scene['fog'] | undefined;
+
   private createStudio(): void {
+    this.scene.add(this.studio);
     const ground = new Mesh(new PlaneGeometry(200, 200), new MeshStandardMaterial({ color: '#151b14', roughness: 1 }));
-    ground.rotation.x = -Math.PI / 2; ground.position.y = -0.03; this.scene.add(ground);
+    ground.rotation.x = -Math.PI / 2; ground.position.y = -0.03; this.studio.add(ground);
     const disc = new Mesh(new CircleGeometry(1.05, 96), new MeshBasicMaterial({ color: '#050905', transparent: true, opacity: 0.30, depthWrite: false }));
-    disc.rotation.x = -Math.PI / 2; disc.position.set(0, -0.015, 0); disc.scale.y = 0.45; this.scene.add(disc);
+    disc.rotation.x = -Math.PI / 2; disc.position.set(0, -0.015, 0); disc.scale.y = 0.45; this.studio.add(disc);
     // A large out-of-focus studio backdrop is represented by a subtle mesh,
     // avoiding heavyweight environment maps or external image requests.
     const backdrop = new Mesh(new CircleGeometry(1.80, 96), new MeshBasicMaterial({ color: '#20291d', transparent: true, opacity: 0.40, depthWrite: false }));
-    backdrop.position.set(0, 1.50, -1.1); this.scene.add(backdrop);
+    backdrop.position.set(0, 1.50, -1.1); this.studio.add(backdrop);
   }
 
   setPlayback(state: PlaybackState): void {
@@ -274,7 +285,12 @@ export class AvatarRenderer {
       this.canvas.dataset.gaussianBundle = config.bundle;
       this.canvas.dataset.gaussianSha256 = sha256;
       this.gaussianFactory = (rig) => {
-        const attachment = body.fitGaussianAttachment(rig, B as GaussianBodyArrays, config);
+        // Bundles with re-bound neck/collar gaussians carry their own (negative) cut. The neck seam still starts at the
+        // FLAME boundary, so the collar below it follows the neck joint and only the head follows the head joint.
+        const headerCut = (header as { collar_cut_m?: unknown }).collar_cut_m;
+        const cut = typeof headerCut === 'number' && Number.isFinite(headerCut) ? headerCut : undefined;
+        const fitted = { ...config, collarCutMeters: config.collarCutMeters ?? cut };
+        const attachment = body.fitGaussianAttachment(rig, B as GaussianBodyArrays, fitted);
         const head = new body.GaussianBodyHead(header as GaussianBodyHeader, B as GaussianBodyArrays, attachment);
         let restoreBody: (() => void) | undefined;
         try {
