@@ -3,6 +3,9 @@
 Repository: `Dindb-dong/who-is-your-bias`.
 Authorized target: PR #29, `feat/jensen-persona-graph-nov20`.
 Starting remote head: `6631af9dd993e5134c642dfaf397e2156702898a`.
+Implementation checkpoint: `d65817048778ed87d48ad037dded05d6cba2b4b6`.
+Frozen inputs checkpoint: `c19b6e53b6302dd87ebc819b25c2757eb41e1eb6`.
+Read [the method and twelve strategies](persona-values-v2.md) for the full design.
 The existing default corpus, v1 graph, application defaults and other team work
 are preserved. Main is not the write target.
 
