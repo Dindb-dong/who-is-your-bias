@@ -1,0 +1,40 @@
+{
+  "purpose": "actual-model-content-smoke-not-production-latency",
+  "model": "Qwen3-4B-Q4_K_M",
+  "translation_model": "Qwen3-4B-Q4_K_M",
+  "max_tokens": 260,
+  "files": {
+    "src/bias/qa_dialogue.py": "ccc65a7ebd85e01065cfc21a28c78e293eb960f03f72f755514bc5fa6b2a0291",
+    "src/bias/qa_knowledge.py": "a8b584a2ca16cf88d0ac654f210fce5c2e67e93aa9b7d6fcbbeb249355e63391",
+    "src/bias/subtitles.py": "157f153ae9b1c6abf695b85b1c2052fb62f5121e8212f6bbd93dadc612943b52",
+    "src/bias/subtitle_phrases.py": "05de139606e46ce2642c78b2a66207b9b7ad89b2b25af5419b4fbea4bad84955",
+    "data/qa/project.json": "12e1e9c74ef12ccb4353e06c827f2ce10986b5aff33f8911d73cef90ac6623f2",
+    "data/qa/news.json": "a3f847f3f0fb65988bd3f13fb944371c775e3f8e65fe7290a87639cd708fc2e0",
+    "tools/qa_bilingual_smoke.py": "d52d31b8ead794c3ced05774910125ee27819c4d390caa6e7f95b766932468a0"
+  },
+  "cases": [
+    [
+      "project",
+      "우리 프로젝트 파이프라인을 설명해 주세요."
+    ],
+    [
+      "model_choice",
+      "우리 프로젝트에서 Qwen을 선택한 이유는 무엇인가요? 다른 모델보다 더 우수하다고 검증했나요?"
+    ],
+    [
+      "alignment",
+      "우리 아바타는 MCCCD처럼 발화, 음성, 얼굴을 같은 구간으로 맞춰서 학습했나요?"
+    ],
+    [
+      "finance",
+      "엔비디아 주식 사야 하나요?"
+    ],
+    [
+      "allegation",
+      "젠슨 황 불륜 뉴스 사실인가요?"
+    ]
+  ],
+  "voice_synthesis": false,
+  "asr": false,
+  "translations": "sequential_after_answer"
+}

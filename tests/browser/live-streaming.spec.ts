@@ -136,7 +136,7 @@ function segment(connection: Connection, sequence: number, offset: number, secon
   connection.emit('audio_segment_end', { ...identity, sample_end: offset + frames, state: 'delivered' });
   return chunk;
 }
-function finish(connection: Connection, chunks: number, frames: number) {
+function finish(connection: Connection, chunks: number, frames: number, close = true) {
   connection.emit('result', { turn: { id: 'synthetic-turn', session_id: 'synthetic-session', text: PREFIX + SUFFIX,
     language: 'en', mode: 'behavior', provider: 'openai', citations: [],
     behavior: { duration_ms: frames / RATE * 1000, cues: [], speech: { rate: 1, pitch: 1, pause_ms: 0 } },
@@ -144,7 +144,7 @@ function finish(connection: Connection, chunks: number, frames: number) {
     metrics: { retrieval_ms: 0, generation_ms: 0, total_ms: 0 } } });
   connection.emit('audio_end', { turn_id: 'synthetic-turn', chunks, sample_count: frames, sample_rate: RATE,
     first_pcm_ready_ms: 0, total_ms: 0, state: 'delivered', spoken_complete: false, acoustic_latency_ms: null });
-  connection.emit('done', {}); connection.end();
+  if (close) { connection.emit('done', {}); connection.end(); }
 }
 const timing = (page: Page) => page.getByRole('region', { name: 'Live response timing', exact: true });
 const timingValue = (page: Page, label: string) => timing(page).locator('dl > div').filter({ has: page.getByText(label, { exact: true }) }).locator('dd');
@@ -230,3 +230,21 @@ for (const defect of ['stale-turn', 'sample-boundary'] as const) {
     expect(observed.errors).toEqual([]); expect(observed.synthesisRequests).toEqual([]);
   });
 }
+
+
+test('seals the PCM clock on audio_end while optional metadata still keeps SSE open', async ({ page, live }, info) => {
+  const observed = await prepare(page, live); const connection = await submit(page, live); begin(connection);
+  const chunks = segment(connection, 0, 0, 2, 0);
+  finish(connection, chunks, RATE * 2, false);
+  // The server intentionally withholds done to model outstanding subtitles.
+  // Playback must finish independently, without waiting for that channel.
+  await expect.poll(() => audioStates(page)).toEqual(['closed']);
+  const beforeDone = await exportTiming(page, info, 'audio-ended-before-subtitles');
+  expect(beforeDone.streaming_pcm.status).toBe('completed');
+  expect(beforeDone.streaming_pcm.audioElapsedMs).toBe(2000);
+  expect(beforeDone.turn_complete_ms).not.toBeNull();
+  expect(beforeDone.stream_complete_ms).toBeNull();
+  connection.emit('done', {}); connection.end();
+  await expect(page.getByRole('textbox', { name: 'Your message', exact: true })).toBeEnabled();
+  expect(observed.errors).toEqual([]);
+});

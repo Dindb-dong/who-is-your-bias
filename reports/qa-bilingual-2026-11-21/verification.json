@@ -1,0 +1,92 @@
+{
+  "verified_implementation_checkpoint": "840cf864b701a12379a80ad9607cce97f5da1b38",
+  "python_tests": {
+    "focused": 159,
+    "workbench": 7,
+    "combined": 166,
+    "outcome": "passed"
+  },
+  "web_unit_tests": {
+    "count": 282,
+    "outcome": "passed"
+  },
+  "typecheck": "passed",
+  "production_build": "passed",
+  "corpus_validation": "passed",
+  "qa_records": 12,
+  "browser": "launch_blocked_before_assertions: Chromium process-singleton socket permission",
+  "actual_model": {
+    "model": "Qwen3-4B-Q4_K_M",
+    "thinking": false,
+    "device": "CPU",
+    "initial_questions": 7,
+    "initial_generated_answers": 4,
+    "initial_fixed_answers": 3,
+    "initial_model_translations": 9,
+    "follow_up_questions": 5,
+    "follow_up_generated_answers": 1,
+    "follow_up_fixed_answers": 4,
+    "follow_up_model_translations": 2,
+    "follow_up_fixed_translations": 6
+  },
+  "production_asr_tts_and_latency": "not_measured",
+  "main_merged": false,
+  "files": {
+    "actual-model/alignment.json": {
+      "bytes": 10865,
+      "sha256": "ed6a089f296465816e9e8205ae077c543a55a9ccc42ab6c17a5fbe1232f89022"
+    },
+    "actual-model/allegation.json": {
+      "bytes": 3874,
+      "sha256": "3898d59bdd00109756606ca4ebfe524850b05ba2b15808d85c7e475b8b465edd"
+    },
+    "actual-model/finance.json": {
+      "bytes": 3910,
+      "sha256": "c2bf59c9578e1e8c53465186fb0e8c35b90d3b520e7d0169826471cd47c44327"
+    },
+    "actual-model/manifest.json": {
+      "bytes": 1643,
+      "sha256": "d7ab89215f0dab6b71ac064d50a4ebb1f697dce9198ee726179c49ac873d0235"
+    },
+    "actual-model/model_choice.json": {
+      "bytes": 5685,
+      "sha256": "fe2ad8d2f235716abd0f0f6d724f930a978ea60eed4e18d01d511950c546952a"
+    },
+    "actual-model/news.json": {
+      "bytes": 5216,
+      "sha256": "86ccd5eed13c0bb151e928e5c98c4df9d4f9d54ed845acfed6b7b402cbf9c617"
+    },
+    "actual-model/project.json": {
+      "bytes": 6253,
+      "sha256": "c94674d9cecabceab0be2c0b5096558aaf0f876ab92103068d2d38dd0024e368"
+    },
+    "actual-model/unknown_current.json": {
+      "bytes": 3019,
+      "sha256": "aa8ec822eba2b5ff4c1c9c68c34ca8b9f0bea8a6cd300ecbb414a1fc87c0a3c7"
+    },
+    "follow-up/alignment.json": {
+      "bytes": 8616,
+      "sha256": "19ee51f3ef385c1fc56b28b9767a9f93fe1679e63e1a0aeb09aa84ddb430baa9"
+    },
+    "follow-up/allegation.json": {
+      "bytes": 3929,
+      "sha256": "ed5589ebc7730481e11e564315094db0cfc8f9b8c2f25140b8cb6b2908f9ccfe"
+    },
+    "follow-up/finance.json": {
+      "bytes": 3954,
+      "sha256": "58dd425ac738b9b00c6f75c6e7aeee1c6a381eae306432932affbb50beffece4"
+    },
+    "follow-up/manifest.json": {
+      "bytes": 1550,
+      "sha256": "86d25600ea4e6dea3d4ee133107dc92e2fa020c8607998748ef9f6259ab47cdc"
+    },
+    "follow-up/model_choice.json": {
+      "bytes": 5547,
+      "sha256": "f76bf1161199129fb7d506cba2e001cc05c5c342bab3996c387c96c681c3996a"
+    },
+    "follow-up/project.json": {
+      "bytes": 6333,
+      "sha256": "8568e1f5eb3fed8ae4946088ba876a8e5af53a0ae0dc47ba9ef7f8854b2f4e9c"
+    }
+  }
+}

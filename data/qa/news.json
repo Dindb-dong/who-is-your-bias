@@ -1,0 +1,63 @@
+{
+  "schema_version": "qa-knowledge.v1",
+  "entries": [
+    {
+      "id": "QA-news-fy27-q3",
+      "scope": "news",
+      "title": "NVIDIA Q3 fiscal 2027 results announcement",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2027",
+      "publisher": "NVIDIA Newsroom",
+      "summary": "In its November 17, 2026 release, NVIDIA reported revenue of $115.8 billion for Q3 fiscal 2027, the quarter ending October 25, 2026, including $107.6 billion in Data Center revenue. The release forecast Q4 fiscal 2027 revenue of $130.0 billion plus or minus 3%; that figure is the company's outlook, not an achieved result or a stock-price forecast. This digest is dated source context and supplies no live share price or personalized investment recommendation.",
+      "cues": [
+        "financial results",
+        "earnings",
+        "revenue",
+        "quarter",
+        "outlook",
+        "future",
+        "forecast",
+        "실적",
+        "매출",
+        "분기",
+        "전망",
+        "미래",
+        "예상"
+      ],
+      "reviewed_at": "2026-11-21T14:40:00Z",
+      "expires_at": "2026-11-23T14:40:00Z",
+      "reviewer": "primary-source-audit-agent",
+      "reviewer_type": "agent",
+      "review_status": "reviewed",
+      "published_at": "2026-11-17",
+      "fact_kind": "company_claim"
+    },
+    {
+      "id": "QA-news-leadership-nov12",
+      "scope": "news",
+      "title": "NVIDIA leadership transition announcement",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-ceo-transition",
+      "publisher": "NVIDIA Newsroom",
+      "summary": "In a November 12, 2026 announcement, NVIDIA said Jensen Huang had resigned as president, chief executive officer and board member with immediate effect. It announced Colette Kress as interim CEO while continuing her CFO role. This is an attributed account of that dated announcement, not an unqualified claim about who holds office at a later time. The announcement does not establish a private-life allegation or a cause connecting such an allegation to the leadership change.",
+      "cues": [
+        "ceo",
+        "leadership",
+        "resigned",
+        "resignation",
+        "kress",
+        "사임",
+        "대표",
+        "경영진",
+        "리더십",
+        "크레스",
+        "최고경영자"
+      ],
+      "reviewed_at": "2026-11-21T14:40:00Z",
+      "expires_at": "2026-11-23T14:40:00Z",
+      "reviewer": "primary-source-audit-agent",
+      "reviewer_type": "agent",
+      "review_status": "reviewed",
+      "published_at": "2026-11-12",
+      "fact_kind": "company_claim"
+    }
+  ]
+}

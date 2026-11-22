@@ -1,0 +1,47 @@
+{
+  "purpose": "actual-model-content-smoke-not-production-latency",
+  "model": "Qwen3-4B-Q4_K_M",
+  "translation_model": "Qwen3-4B-Q4_K_M",
+  "max_tokens": 260,
+  "files": {
+    "src/bias/qa_dialogue.py": "3b93fc270dd1855beea22be01e77c8ec5b9bfa6efbaeecbd916026158f3fc027",
+    "src/bias/qa_knowledge.py": "39f6850d7c67a4861242ad33c5add0cbef8466a320a9b5ad2162f1833f37eed0",
+    "src/bias/subtitles.py": "bb9d6a9362af557726465d005586c1b755505ee9146f52a71f1deaa266d154cf",
+    "data/qa/project.json": "12e1e9c74ef12ccb4353e06c827f2ce10986b5aff33f8911d73cef90ac6623f2",
+    "data/qa/news.json": "a3f847f3f0fb65988bd3f13fb944371c775e3f8e65fe7290a87639cd708fc2e0",
+    "tools/qa_bilingual_smoke.py": "7d4d92077c88669532bff13644e89455e5435dd20bb319e4223682998b3831a0"
+  },
+  "cases": [
+    [
+      "project",
+      "우리 프로젝트 파이프라인을 설명해 주세요."
+    ],
+    [
+      "model_choice",
+      "우리 프로젝트에서 Qwen을 선택한 이유는 무엇인가요? 다른 모델보다 더 우수하다고 검증했나요?"
+    ],
+    [
+      "alignment",
+      "우리 아바타는 MCCCD처럼 발화, 음성, 얼굴을 같은 구간으로 맞춰서 학습했나요?"
+    ],
+    [
+      "news",
+      "현재 엔비디아 CEO에 대한 최신 발표를 알려 주세요."
+    ],
+    [
+      "finance",
+      "엔비디아 주식 사야 하나요?"
+    ],
+    [
+      "allegation",
+      "젠슨 황 불륜 뉴스 사실인가요?"
+    ],
+    [
+      "unknown_current",
+      "오늘 엔비디아 주가는 얼마인가요?"
+    ]
+  ],
+  "voice_synthesis": false,
+  "asr": false,
+  "translations": "sequential_after_answer"
+}

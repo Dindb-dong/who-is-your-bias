@@ -30,6 +30,8 @@ from .request_work import run_until_disconnect
 from .sessions import SessionCapacityError, SessionNotFound
 from .speech import SpeechPackages
 from .live import live_events
+from .caption_stream import caption_events
+from .subtitles import SubtitleTranslator
 
 logger = logging.getLogger(__name__)
 
@@ -122,7 +124,7 @@ class TranscriptionBackend(Protocol):
 
 
 def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None, llm: OpenAICompatibleLLM | None = None, motion_library: MotionLibrary | None = None,
-               transcription: TranscriptionBackend | None = None) -> FastAPI:
+               transcription: TranscriptionBackend | None = None, subtitle_translator: SubtitleTranslator | None = None) -> FastAPI:
     config = settings or Settings.from_env()
     transcription_model = transcription.model_name if transcription else config.asr.model
 
@@ -155,6 +157,9 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
             application.state.retrieval_warmup_ms = round((time.perf_counter() - started) * 1000, 3)
         application.state.speech = SubjectSpeechProvider(config, loaded_corpus.persona.id)
         application.state.transcription = transcription or TranscriptionProvider(config.asr, timeout=config.request_timeout)
+        translation_llm = (OpenAICompatibleLLM(config.translation, timeout=config.translation_timeout, max_chars=4000, max_tokens=600)
+                           if config.translation.configured else None)
+        application.state.subtitles = subtitle_translator or SubtitleTranslator(translation_llm, timeout=config.translation_timeout)
         application.state.lipsync = LipsyncEngine.from_env()
         application.state.speech_packages = SpeechPackages()
         try:
@@ -214,7 +219,9 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
                 "example_questions": item.example_questions, "stats": loaded.stats(), "qa_corpus": loaded.qa_report(),
                 "snapshot": snapshot.summary() if snapshot else None,
                 "capabilities": {"llm": config.llm.configured, "speech": speech.settings.configured,
-                                 "transcription": bool(transcription_model), "live_speech": speech.settings.configured},
+                                 "transcription": bool(transcription_model), "live_speech": speech.settings.configured,
+                                 "translated_subtitles": request.app.state.subtitles.configured,
+                                 "qa_knowledge": request.app.state.engine.qa_knowledge is not None},
                 "notice": item.notice, "presentation": (item.model_extra or {}).get("presentation"),
                 "bindings": {"persona_id": item.id, "voice": speech.binding,
                              "motion": {"status": motion_binding_status(motion, loaded) if motion else request.app.state.motion_status,
@@ -259,7 +266,8 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
     async def stream(body: ChatRequest, request: Request):
         async def events():
             try:
-                async with aclosing(request.app.state.engine.events(body)) as engine_events:
+                source = request.app.state.engine.events(body, committed_segments=body.subtitle_language is not None)
+                async with aclosing(caption_events(source, request.app.state.subtitles, body.subtitle_language)) as engine_events:
                     async for event, data in engine_events:
                         yield encode_sse(event, data)
             except asyncio.CancelledError:
@@ -290,8 +298,9 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
     async def live_chat(body: ChatRequest, request: Request):
         async def events():
             try:
-                async with aclosing(live_events(request.app.state.engine, request.app.state.speech, body,
-                                               timeout=min(1800, max(180, config.request_timeout * 4)))) as stream:
+                source = live_events(request.app.state.engine, request.app.state.speech, body,
+                                     timeout=min(1800, max(180, config.request_timeout * 4)))
+                async with aclosing(caption_events(source, request.app.state.subtitles, body.subtitle_language)) as stream:
                     async for event, data in stream:
                         yield encode_sse(event, data)
             except asyncio.CancelledError:

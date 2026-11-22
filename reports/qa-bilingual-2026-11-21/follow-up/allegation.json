@@ -1,0 +1,134 @@
+{
+  "case": "allegation",
+  "question": "젠슨 황 불륜 뉴스 사실인가요?",
+  "turn": {
+    "id": "538c4cc6096541cf9e82d54391b7829c",
+    "session_id": "8d2338cd6cfb4df0aabced1253d3bea8",
+    "text": "I can't verify that allegation from the sources available here, and I shouldn't repeat a personal rumor as fact. I can discuss a specific, reliable public statement if one is provided and reviewed.",
+    "language": "en",
+    "mode": "behavior",
+    "provider": "evidence",
+    "citations": [],
+    "behavior": {
+      "cues": [
+        {
+          "start_ms": 0,
+          "duration_ms": 900,
+          "channel": "face",
+          "name": "brow_raise",
+          "intensity": 0.3,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 0,
+          "duration_ms": 550,
+          "channel": "gaze",
+          "name": "center",
+          "intensity": 0.2,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 350,
+          "duration_ms": 850,
+          "channel": "head",
+          "name": "nod",
+          "intensity": 0.25,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 1200,
+          "duration_ms": 1600,
+          "channel": "gesture",
+          "name": "open_palm",
+          "intensity": 0.4,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 6940,
+          "duration_ms": 1100,
+          "channel": "head",
+          "name": "nod",
+          "intensity": 0.18,
+          "provenance": "designed",
+          "evidence_ids": []
+        }
+      ],
+      "speech": {
+        "rate": 1.0,
+        "pitch": 1.0,
+        "pause_ms": 260
+      },
+      "duration_ms": 13881,
+      "timing_basis": "estimated_text",
+      "motion": null
+    },
+    "grounding": {
+      "status": "insufficient",
+      "retrieved_ids": [],
+      "invalid_citation_ids": [],
+      "reason": "unverified_personal_allegation",
+      "citation_status": "not_required",
+      "citation_unit_count": 2,
+      "cited_unit_count": 0,
+      "malformed_citations": [],
+      "semantic_status": "unreviewed"
+    },
+    "metrics": {
+      "retrieval_ms": 0.0,
+      "generation_ms": 0.179,
+      "total_ms": 0.413
+    },
+    "context": {
+      "qa_knowledge": {
+        "version": "qa-knowledge.v1",
+        "route": "allegation",
+        "reason": "unverified_personal_allegation",
+        "limitations": [],
+        "live_web_search": false,
+        "factual_evidence": [],
+        "supplied_ids": [],
+        "generated": false
+      },
+      "input_language": "ko",
+      "answer_language": "en",
+      "query_resolution": {
+        "original": "젠슨 황 불륜 뉴스 사실인가요?",
+        "query": "젠슨 황 불륜 뉴스 사실인가요?",
+        "method": "original",
+        "supporting_turn_ids": []
+      }
+    }
+  },
+  "answer_wall_seconds": 0.001,
+  "translations": [
+    {
+      "event": {
+        "turn_id": "538c4cc6096541cf9e82d54391b7829c",
+        "segment_id": "538c4cc6096541cf9e82d54391b7829c:0",
+        "sequence": 0,
+        "language": "ko",
+        "text": "여기서 이용할 수 있는 자료로는 그 의혹을 확인할 수 없으며, 개인에 관한 소문을 사실처럼 반복하지 않겠습니다.",
+        "state": "ready",
+        "basis": "reviewed_fixed_phrase"
+      },
+      "wall_seconds": 0.0
+    },
+    {
+      "event": {
+        "turn_id": "538c4cc6096541cf9e82d54391b7829c",
+        "segment_id": "538c4cc6096541cf9e82d54391b7829c:1",
+        "sequence": 1,
+        "language": "ko",
+        "text": "구체적이고 신뢰할 만한 공개 입장이 제공되고 검토되면 그 내용을 설명할 수 있습니다.",
+        "state": "ready",
+        "basis": "reviewed_fixed_phrase"
+      },
+      "wall_seconds": 0.0
+    }
+  ],
+  "state": "complete"
+}
