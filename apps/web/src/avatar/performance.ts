@@ -3,7 +3,8 @@ import { sampleMotion } from './motion';
 import { sampleSpeech } from './speech';
 import { samplePose } from './timeline';
 import { sampleConversationalGesture, type GestureBasisModel } from './learnedGesture';
-import type { AnimationTelemetry, AvatarClip, QuaternionTuple, RigDiagnostics, RigPose, SpeechTiming, TimelineInput } from './types';
+import { sampleSpeechGesture, type SpeechGestureMotion } from './speechGesture';
+import type { AnimationTelemetry, AvatarClip, BoneControl, QuaternionTuple, RigDiagnostics, RigPose, SpeechTiming, TimelineInput } from './types';
 
 export interface PerformanceInput extends TimelineInput {
   audioElapsedMs?: number;
@@ -13,6 +14,8 @@ export interface PerformanceInput extends TimelineInput {
   observationElapsedMs?: number;
   allowGeometryPreview?: boolean;
   learnedGesture?: GestureBasisModel;
+  /** Generated from the playing audio; used only with that audio's digest and clock. */
+  speechGesture?: SpeechGestureMotion;
 }
 
 export function samplePerformance(input: PerformanceInput, diagnostics: RigDiagnostics): { pose: RigPose; telemetry: AnimationTelemetry } {
@@ -21,7 +24,16 @@ export function samplePerformance(input: PerformanceInput, diagnostics: RigDiagn
     faceSource: 'designed', boneSource: 'designed', speechSource: input.speaking ? input.amplitude === undefined ? 'estimated' : 'amplitude' : 'silent',
     unsupportedFace: [], unsupportedVisemes: [],
   };
-  if (!input.performanceClip && input.learnedGesture && input.speaking && input.allowGeometryPreview && !input.reducedMotion) {
+  const gestureLayer = { weight: 1 };
+  const speechGesture = !input.performanceClip && input.speechGesture && input.speaking && input.audioElapsedMs !== undefined
+    && input.audioSha256 === input.speechGesture.audioSha256
+    ? sampleSpeechGesture(input.speechGesture, input.audioElapsedMs, { reducedMotion: input.reducedMotion,
+      supported: diagnostics.bones.length ? diagnostics.bones as BoneControl[] : undefined, layer: gestureLayer }) : null;
+  if (speechGesture) {
+    pose.bones = { ...pose.bones, ...speechGesture };
+    pose.boneWeight = gestureLayer.weight;   // fades over the designed arm pose rather than through neutral
+    telemetry.boneSource = 'speech_generated';
+  } else if (!input.performanceClip && input.learnedGesture && input.speaking && input.allowGeometryPreview && !input.reducedMotion) {
     const bones = sampleConversationalGesture(input.learnedGesture, input.audioElapsedMs ?? input.elapsedMs,
       input.speechTiming?.audio_sha256 === input.audioSha256 ? input.speechTiming : undefined, input.plan?.cues);
     if (bones) {

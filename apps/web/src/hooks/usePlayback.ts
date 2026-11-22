@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Turn } from '../api';
 import { browserPlaybackEnvironment, createPlaybackController, initialPlayback } from './playback';
-import type { PlaybackController, PlaybackState, VoiceMode } from './playback';
+import type { PlaybackController, PlaybackOptions, PlaybackState, VoiceMode } from './playback';
 import type { PlaybackEvent } from './liveMetrics';
 
 export { planTime } from './playback';
@@ -17,7 +17,7 @@ export function usePlayback() {
     return () => { instance.dispose(); if (controller.current === instance) controller.current = null; };
   }, []);
   const stop = useCallback(() => controller.current?.stop(), []);
-  const play = useCallback((turn: Turn, mode: VoiceMode, observe?: (event: PlaybackEvent) => void) => controller.current?.play(turn, mode, observe) ?? Promise.resolve(), []);
+  const play = useCallback((turn: Turn, mode: VoiceMode, observe?: (event: PlaybackEvent) => void, options?: PlaybackOptions) => controller.current?.play(turn, mode, observe, options) ?? Promise.resolve(), []);
   return { ...state, play, stop };
 }
 

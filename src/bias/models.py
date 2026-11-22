@@ -175,6 +175,8 @@ class ChatRequest(Record):
     mode: Mode = "behavior"
     language: Language = "en"
     motion_mode: Literal["disabled", "reviewed", "geometry_preview"] = "disabled"
+    # Live voice only: also stream speech-driven gesture frames (EMAGE) beside the PCM.
+    gesture: bool = False
 
     @field_validator("message")
     @classmethod
@@ -271,6 +273,7 @@ class SpeechRequest(Record):
 
 class SpeechPackageRequest(SpeechRequest):
     language: Language = "en"
+    gesture: bool = False
 
 
 class EvaluationCase(Record):

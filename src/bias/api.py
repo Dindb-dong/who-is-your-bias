@@ -11,7 +11,7 @@ import anyio
 from contextlib import aclosing, asynccontextmanager
 from typing import AsyncIterator, Literal, Protocol
 
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
@@ -22,6 +22,7 @@ from .bindings import SubjectSpeechProvider, motion_binding_status
 from .config import Settings
 from .corpus import Corpus
 from .engine import Engine
+from .gesture import GestureEngine
 from .lipsync import LipsyncEngine
 from .models import ChatRequest, ChatTurn, SpeechPackageRequest, SpeechRequest
 from .motion import MotionError, MotionLibrary
@@ -30,6 +31,7 @@ from .request_work import run_until_disconnect
 from .sessions import SessionCapacityError, SessionNotFound
 from .speech import SpeechPackages
 from .live import live_events
+from .sophon import SophonSettings, bridge as sophon_bridge, build_instructions
 
 logger = logging.getLogger(__name__)
 
@@ -157,9 +159,17 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
         application.state.transcription = transcription or TranscriptionProvider(config.asr, timeout=config.request_timeout)
         application.state.lipsync = LipsyncEngine.from_env()
         application.state.speech_packages = SpeechPackages()
+        application.state.gesture = GestureEngine.from_env()
+        application.state.sophon = SophonSettings.from_env()
+        application.state.realtime_lock = asyncio.Lock()   # one upstream call at a time (trial accounts allow one)
+        # Loading EMAGE takes seconds; warm it in the background instead of delaying readiness.
+        gesture_warmup = asyncio.create_task(application.state.gesture.start()) if application.state.gesture.configured else None
         try:
             yield
         finally:
+            if gesture_warmup is not None:
+                gesture_warmup.cancel()
+            await application.state.gesture.close()
             application.state.speech_packages.clear()
 
     application = FastAPI(title="Who Is Your Bias?", version=__version__, lifespan=lifespan)
@@ -188,7 +198,7 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
         return {
             "status": "ok", "version": __version__, "provider": "openai" if config.llm.configured else "evidence",
             "capabilities": {"llm": config.llm.configured, "speech": request.app.state.speech.settings.configured, "transcription": bool(transcription_model)},
-            "providers": {"llm": {"configured": config.llm.configured, "model": config.llm.model}, "speech": {"configured": config.tts.configured, "available": request.app.state.speech.settings.configured, "model": config.tts.model, "binding": request.app.state.speech.binding}, "transcription": {"configured": bool(transcription_model), "model": transcription_model}},
+            "providers": {"llm": {"configured": config.llm.configured, "model": config.llm.model}, "speech": {"configured": config.tts.configured, "available": request.app.state.speech.settings.configured, "model": config.tts.model, "binding": request.app.state.speech.binding}, "transcription": {"configured": bool(transcription_model), "model": transcription_model}, "gesture": {"configured": request.app.state.gesture.configured, "ready": request.app.state.gesture.ready}},
             "corpus": engine.corpus.stats(),
             "qa_corpus": engine.corpus.qa_report(),
             "persona_snapshot": engine.snapshot.summary() if engine.snapshot else None,
@@ -214,7 +224,8 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
                 "example_questions": item.example_questions, "stats": loaded.stats(), "qa_corpus": loaded.qa_report(),
                 "snapshot": snapshot.summary() if snapshot else None,
                 "capabilities": {"llm": config.llm.configured, "speech": speech.settings.configured,
-                                 "transcription": bool(transcription_model), "live_speech": speech.settings.configured},
+                                 "transcription": bool(transcription_model), "live_speech": speech.settings.configured,
+                                 "realtime_call": request.app.state.sophon.configured},
                 "notice": item.notice, "presentation": (item.model_extra or {}).get("presentation"),
                 "bindings": {"persona_id": item.id, "voice": speech.binding,
                              "motion": {"status": motion_binding_status(motion, loaded) if motion else request.app.state.motion_status,
@@ -286,12 +297,51 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
             raise HTTPException(status_code=404, detail=str(exc)) from exc
         return session.dialogue.inspect()
 
+    @application.websocket("/api/realtime")
+    async def realtime_call(websocket: WebSocket):
+        """Browser microphone <-> Sophon-Realtime (key stays on this server); see bias.sophon."""
+        origin = websocket.headers.get("origin", "")
+        host = websocket.headers.get("host", "")
+        local = re.match(r"^https?://(127\.0\.0\.1|localhost)(:\d+)?$", origin)
+        if origin and not local and origin.split("://", 1)[-1] != host:
+            await websocket.close(code=1008)
+            return
+        await websocket.accept()
+        settings = websocket.app.state.sophon
+        if not settings.configured:
+            await websocket.send_json({"type": "error", "code": "realtime_unconfigured", "message": "Set BIAS_SOPHON_URL to enable realtime calls."})
+            await websocket.close()
+            return
+        lock = websocket.app.state.realtime_lock
+        if lock.locked():
+            await websocket.send_json({"type": "error", "code": "realtime_busy", "message": "Another realtime call is in progress."})
+            await websocket.close()
+            return
+        async with lock:
+            try:
+                instructions = build_instructions(websocket.app.state.engine.corpus)
+                await sophon_bridge(websocket, settings, instructions, gesture=websocket.app.state.gesture)
+            except WebSocketDisconnect:
+                return
+            except Exception as exc:   # upstream refused or dropped: tell the browser without leaking details
+                logging.getLogger(__name__).warning("realtime call ended: %s", type(exc).__name__)
+                try:
+                    await websocket.send_json({"type": "error", "code": "realtime_failed",
+                                               "message": "The realtime voice service could not be reached or closed the call."})
+                except Exception:
+                    return
+            try:
+                await websocket.close()
+            except Exception:
+                pass
+
     @application.post("/api/chat/live")
     async def live_chat(body: ChatRequest, request: Request):
         async def events():
             try:
                 async with aclosing(live_events(request.app.state.engine, request.app.state.speech, body,
-                                               timeout=min(1800, max(180, config.request_timeout * 4)))) as stream:
+                                               timeout=min(1800, max(180, config.request_timeout * 4)),
+                                               gesture=request.app.state.gesture if body.gesture else None)) as stream:
                     async for event, data in stream:
                         yield encode_sse(event, data)
             except asyncio.CancelledError:
@@ -322,6 +372,7 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
                 request, request.app.state.speech_packages.prepare(
                     request.app.state.speech, request.app.state.lipsync,
                     text=body.text, voice=body.voice, language=body.language,
+                    gesture=request.app.state.gesture if body.gesture else None,
                 ),
             )
         except ClientDisconnect:

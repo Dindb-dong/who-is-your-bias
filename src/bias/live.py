@@ -14,6 +14,7 @@ import wave
 import anyio
 from contextlib import aclosing
 
+from .gesture import stream_gestures
 from .providers import ProviderError
 
 
@@ -33,7 +34,7 @@ def decode_pcm(data: bytes) -> tuple[bytes, int, int]:
         raise ProviderError("live_audio_format", "Streaming speech requires a complete 16-bit mono/stereo PCM WAV.") from exc
 
 
-async def live_events(engine, speech, request, *, timeout: float = 180, queue_size: int = 4, chunk_frames: int = 2048):
+async def live_events(engine, speech, request, *, timeout: float = 180, queue_size: int = 4, chunk_frames: int = 2048, gesture=None):
     if not 1 <= queue_size <= 16 or not 256 <= chunk_frames <= 16384 or not 1 <= timeout <= 1800:
         raise ValueError("Invalid live-stream bounds")
     if not speech.settings.configured:
@@ -50,7 +51,7 @@ async def live_events(engine, speech, request, *, timeout: float = 180, queue_si
             await session.turn_lock.acquire()
             acquired = True
         async with aclosing(_live_events(engine, speech, request, session=session, deadline=deadline, started=started,
-                                         queue_size=queue_size, chunk_frames=chunk_frames)) as events:
+                                         queue_size=queue_size, chunk_frames=chunk_frames, gesture=gesture)) as events:
             async for event in events:
                 yield event
     finally:
@@ -59,9 +60,12 @@ async def live_events(engine, speech, request, *, timeout: float = 180, queue_si
         session.in_flight -= 1
 
 
-async def _live_events(engine, speech, request, *, session, deadline, started, queue_size, chunk_frames):
+async def _live_events(engine, speech, request, *, session, deadline, started, queue_size, chunk_frames, gesture=None):
     output: asyncio.Queue = asyncio.Queue(maxsize=queue_size * 2)
     segments: asyncio.Queue = asyncio.Queue(maxsize=queue_size)
+    # Sentence PCM for the gesture worker. Unbounded so gestures never hold back speech; the turn's
+    # deadline and per-segment limits bound the audio it can hold.
+    gesture_audio: asyncio.Queue | None = asyncio.Queue() if gesture is not None else None
     turn_id = None
     text_complete = False
     sent_chunks = 0
@@ -120,6 +124,8 @@ async def _live_events(engine, speech, request, *, session, deadline, started, q
                 if audio_format is not None and audio_format != (rate, channels):
                     raise ProviderError("live_audio_format_changed", "The speech service changed format within a turn.")
                 audio_format = rate, channels
+                if gesture_audio is not None:
+                    gesture_audio.put_nowait((pcm, rate, channels))
                 digest = hashlib.sha256(data).hexdigest()
                 segment_offset = total_frames
                 await output.put(("audio_segment", {"turn_id": turn_id, "segment_id": segment["segment_id"],
@@ -142,17 +148,30 @@ async def _live_events(engine, speech, request, *, session, deadline, started, q
                     total_frames += frames
                 await output.put(("audio_segment_end", {"turn_id": turn_id, "segment_id": segment["segment_id"],
                     "sequence": segment["sequence"], "sample_end": total_frames, "state": "delivered"}))
+            if gesture_audio is not None:
+                gesture_audio.put_nowait(None)
             await output.put(("_audio_done", {}))
         except asyncio.CancelledError:
             raise
         except Exception as exc:
             await output.put(("_failure", exc))
 
+    async def gestures():
+        try:
+            await stream_gestures(gesture, gesture_audio, lambda kind, data: output.put((kind, data)), lambda: turn_id)
+        except asyncio.CancelledError:
+            raise
+        except Exception:   # never fail the spoken turn because of gestures
+            pass
+        await output.put(("_gesture_done", {}))
+
     workers = [asyncio.create_task(generate()), asyncio.create_task(synthesize())]
+    if gesture is not None:
+        workers.append(asyncio.create_task(gestures()))
     complete = set()
     try:
         async with asyncio.timeout_at(deadline):
-            while len(complete) < 2:
+            while len(complete) < len(workers):
                 kind, data = await output.get()
                 if kind == "_failure":
                     yield "turn_state", {"turn_id": turn_id, "state": "failed", "text_complete": text_complete,

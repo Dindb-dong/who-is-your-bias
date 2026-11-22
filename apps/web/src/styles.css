@@ -58,3 +58,5 @@
   text-wrap: pretty;
   overflow-wrap: anywhere;
 }
+/* Photoreal face: plain white backdrop behind the avatar; header text switches to dark. */
+.stage-card.photoreal{background:#fff;color:#1b2219}.stage-card.photoreal .stage-title span{color:#6b7563}.stage-card.photoreal .tag.dark{color:#4e5a45;border-color:#4e5a4530;background:#00000008}.stage-card.photoreal .stage-options{color:#4e5a45;border-color:#4e5a4530}.stage-card.photoreal .stage-caption{color:#7c8873}.stage-card.photoreal .caption-rule{background:#7c887350}
