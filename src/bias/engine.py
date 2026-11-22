@@ -98,6 +98,12 @@ class Engine:
     def __init__(self, settings: Settings, corpus: Corpus, *, llm: OpenAICompatibleLLM | None = None, prompt_builder: PromptBuilder = build_messages, motion_library: MotionLibrary | None = None):
         self.settings = settings
         self.corpus = corpus
+        self.qa_knowledge = None
+        if settings.qa_knowledge_dir is not None:
+            from .qa_knowledge import QAKnowledge
+            if corpus.persona.id != "jensen-huang":
+                raise ValueError("YAICON QA knowledge is bound to the Jensen avatar")
+            self.qa_knowledge = QAKnowledge.load(settings.qa_knowledge_dir)
         self.prompt_builder = prompt_builder
         self.motion_library = motion_library if motion_library is not None and motion_binding_status(motion_library, corpus) in {"matched", "source_bound"} else None
         self.snapshot = PersonaSnapshot.load(settings.persona_snapshot, corpus) if settings.persona_snapshot else None
@@ -187,6 +193,20 @@ class Engine:
                 adaptive = (self.settings.adaptive_responses and request.mode != "profile"
                             and self.prompt_builder is build_messages)
                 resolved = session.dialogue.resolve(request.message, presentation_followups=adaptive)
+                # Auxiliary project/news records are independent of persona
+                # training, the historical snapshot and frozen ablations.
+                if (self.qa_knowledge and request.mode != "profile" and self.prompt_builder is build_messages
+                        and not (public_evidence_limitation(request.message) or public_evidence_limitation(resolved.query))):
+                    decision = self.qa_knowledge.resolve(request.message)
+                    if decision is None and resolved.supporting_turn_ids:
+                        decision = self.qa_knowledge.resolve(resolved.query)
+                    if decision is not None:
+                        from .qa_dialogue import knowledge_events
+                        async with aclosing(knowledge_events(self, request, session, resolved, decision,
+                                turn_id=turn_id, started=started, committed_segments=committed_segments)) as qa_events:
+                            async for event in qa_events:
+                                yield event
+                        return
                 temporal_query = request.message
                 inherited_intent = None
                 if self.snapshot and resolved.supporting_turn_ids:

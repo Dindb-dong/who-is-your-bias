@@ -51,6 +51,9 @@ class Settings:
     llm: ProviderSettings = field(default_factory=ProviderSettings)
     tts: ProviderSettings = field(default_factory=ProviderSettings)
     asr: ProviderSettings = field(default_factory=ProviderSettings)
+    translation: ProviderSettings = field(default_factory=ProviderSettings)
+    translation_timeout: float = 12.0
+    qa_knowledge_dir: Path | None = None
     tts_voice: str = "default"
     # Explicitly bind a server voice to this persona, or declare a generic voice.
     tts_persona_id: str | None = None
@@ -98,6 +101,8 @@ class Settings:
     def __post_init__(self) -> None:
         if self.persona_memory_format not in {"graph", "flat", "compact"}:
             raise ValueError("persona_memory_format must be graph, flat or compact")
+        if not 0.1 <= self.translation_timeout <= 30:
+            raise ValueError("translation_timeout must be between 0.1 and 30 seconds")
         if self.tts_persona_id is not None and (not isinstance(self.tts_persona_id, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,119}", self.tts_persona_id)):
             raise ValueError("tts_persona_id must be a persona identifier or generic")
         if self.tts_protocol not in {"openai-compatible", "elevenlabs"}:
@@ -163,6 +168,9 @@ class Settings:
             llm=provider("LLM"),
             tts=provider("TTS"),
             asr=provider("ASR"),
+            translation=provider("TRANSLATION"),
+            translation_timeout=number("BIAS_TRANSLATION_TIMEOUT", 12, 0.1, 30),
+            qa_knowledge_dir=Path(os.environ["BIAS_QA_KNOWLEDGE_DIR"]).expanduser() if os.getenv("BIAS_QA_KNOWLEDGE_DIR") else None,
             tts_voice=os.getenv("BIAS_TTS_VOICE", "default"),
             tts_persona_id=os.getenv("BIAS_TTS_PERSONA_ID") or None,
             tts_language_hint=language_hint in {"true", "1"},

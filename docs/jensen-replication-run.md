@@ -5,6 +5,10 @@
 > The conditional-values revision and expanded source acquisition are tracked
 > in [the v2 execution record](persona-values-v2-execution.md).
 
+> The 2026-11-21 opt-in project/current-source QA and Korean-caption work is
+> tracked in [the bilingual QA handoff](yaicon-qa-bilingual.md). It uses the
+> Python conversation path and has independent configuration from persona memory.
+
 > The opt-in question-dependent answer length/structure extension to PR #24 is
 > recorded in [the adaptive answer implementation note](yaicon-adaptive-answers.md).
 > Actual model quality and deployment latency remain separate acceptance gates.

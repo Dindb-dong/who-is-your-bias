@@ -174,6 +174,10 @@ class ChatRequest(Record):
     session_id: str | None = Field(default=None, pattern=r"^[a-f0-9]{32}$")
     mode: Mode = "behavior"
     language: Language = "en"
+    # The existing language remains the answer/TTS language. Microphone input
+    # and translated captions are independent, opt-in delivery preferences.
+    input_language: Language | None = None
+    subtitle_language: Language | None = None
     motion_mode: Literal["disabled", "reviewed", "geometry_preview"] = "disabled"
     # Live voice only: also stream speech-driven gesture frames (EMAGE) beside the PCM.
     gesture: bool = False
