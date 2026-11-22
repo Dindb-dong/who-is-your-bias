@@ -1,0 +1,140 @@
+{
+  "case": "model_choice",
+  "question": "우리 프로젝트에서 Qwen을 선택한 이유는 무엇인가요? 다른 모델보다 더 우수하다고 검증했나요?",
+  "turn": {
+    "id": "08eca85928b14ed8a6cf74037d4e3389",
+    "session_id": "a9e3c94bd8234331bb4761aa3143350d",
+    "text": "The project chose Qwen based on its configurability and local deployment flexibility, as indicated in the reviewed QA-records. However, there is no verified evidence in the source records that Qwen outperforms other models in this specific project context.",
+    "language": "en",
+    "mode": "behavior",
+    "provider": "openai",
+    "citations": [
+      {
+        "evidence_id": "QA-project-language-model",
+        "source_id": "QA-project-language-model",
+        "title": "Configurable local dialogue model",
+        "url": "https://github.com/Dindb-dong/who-is-your-bias/blob/713232c74c890a61d7f6f6f4b67d5fed984b883c/workbench/scripts/local_persona.py",
+        "locator": {
+          "label": "reviewed 2026-11-21T14:40:00+00:00; implementation",
+          "start_seconds": null,
+          "end_seconds": null,
+          "timeline": "reviewed_qa_reference"
+        },
+        "text": "The local demo adapter defaults to an OpenAI-compatible LLM endpoint at localhost port 8103 and allows an explicitly configured external LLM endpoint. The launcher runs mlx_lm.server with locally registered model files; the selected model identity comes from the local runtime metadata. The adapter adds source-bound persona-card observations and conditional decision notes, with bounded response length. This configuration does not establish that Qwen outperforms other models or prove the team's selection rationale."
+      }
+    ],
+    "behavior": {
+      "cues": [
+        {
+          "start_ms": 0,
+          "duration_ms": 900,
+          "channel": "face",
+          "name": "brow_raise",
+          "intensity": 0.3,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 0,
+          "duration_ms": 550,
+          "channel": "gaze",
+          "name": "center",
+          "intensity": 0.2,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 350,
+          "duration_ms": 850,
+          "channel": "head",
+          "name": "nod",
+          "intensity": 0.25,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 1200,
+          "duration_ms": 1600,
+          "channel": "gesture",
+          "name": "open_palm",
+          "intensity": 0.4,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 7710,
+          "duration_ms": 1100,
+          "channel": "head",
+          "name": "nod",
+          "intensity": 0.18,
+          "provenance": "designed",
+          "evidence_ids": []
+        }
+      ],
+      "speech": {
+        "rate": 1.0,
+        "pitch": 1.0,
+        "pause_ms": 260
+      },
+      "duration_ms": 15420,
+      "timing_basis": "estimated_text",
+      "motion": null
+    },
+    "grounding": {
+      "status": "unverified",
+      "retrieved_ids": [
+        "QA-project-language-model"
+      ],
+      "invalid_citation_ids": [],
+      "reason": "Dated auxiliary sources; generated factual entailment is unreviewed.",
+      "citation_status": "partial",
+      "citation_unit_count": 2,
+      "cited_unit_count": 1,
+      "malformed_citations": [],
+      "semantic_status": "unreviewed"
+    },
+    "metrics": {
+      "retrieval_ms": 0.0,
+      "generation_ms": 21187.858,
+      "total_ms": 21188.476
+    },
+    "context": {
+      "qa_knowledge": {
+        "version": "qa-knowledge.v1",
+        "route": "project",
+        "reason": "reviewed_reference_match",
+        "limitations": [],
+        "live_web_search": false,
+        "factual_evidence": [
+          {
+            "id": "QA-project-language-model",
+            "citation": "[source:QA-project-language-model]",
+            "title": "Configurable local dialogue model",
+            "text": "The local demo adapter defaults to an OpenAI-compatible LLM endpoint at localhost port 8103 and allows an explicitly configured external LLM endpoint. The launcher runs mlx_lm.server with locally registered model files; the selected model identity comes from the local runtime metadata. The adapter adds source-bound persona-card observations and conditional decision notes, with bounded response length. This configuration does not establish that Qwen outperforms other models or prove the team's selection rationale.",
+            "url": "https://github.com/Dindb-dong/who-is-your-bias/blob/713232c74c890a61d7f6f6f4b67d5fed984b883c/workbench/scripts/local_persona.py",
+            "published_at": null,
+            "reviewed_at": "2026-11-21T14:40:00+00:00",
+            "expires_at": "2026-11-28T14:40:00+00:00",
+            "revision": "713232c74c890a61d7f6f6f4b67d5fed984b883c",
+            "fact_kind": "implementation"
+          }
+        ],
+        "supplied_ids": [
+          "QA-project-language-model"
+        ],
+        "generated": true
+      },
+      "input_language": "ko",
+      "answer_language": "en",
+      "query_resolution": {
+        "original": "우리 프로젝트에서 Qwen을 선택한 이유는 무엇인가요? 다른 모델보다 더 우수하다고 검증했나요?",
+        "query": "우리 프로젝트에서 Qwen을 선택한 이유는 무엇인가요? 다른 모델보다 더 우수하다고 검증했나요?",
+        "method": "original",
+        "supporting_turn_ids": []
+      }
+    }
+  },
+  "answer_wall_seconds": 21.189,
+  "translations": [],
+  "state": "complete"
+}

@@ -25,6 +25,7 @@ import { LiveTiming } from './components/LiveTiming';
 import { PresentationView } from './components/PresentationView';
 import { createPcmPlayback, initialPcmState } from './hooks/pcmPlayback';
 import type { PcmState } from './hooks/pcmPlayback';
+import { CaptionTrack } from './hooks/captions';
 
 interface Message { id: string; role: 'user' | 'assistant'; text: string; turn?: Turn; pending?: boolean; error?: string }
 type Page = 'studio' | 'sources' | 'lab' | 'presentation';
@@ -51,7 +52,11 @@ export default function App() {
   const [connection, setConnection] = useState<'connecting' | 'ready' | 'error'>('connecting');
   const [connectionError, setConnectionError] = useState('');
   const [reload, setReload] = useState(0);
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>(avatarQuery.get('bilingual') === '1' ? 'ko' : 'en');
+  const [bilingual, setBilingual] = useState(avatarQuery.get('bilingual') === '1');
+  const captionTrack = useRef<CaptionTrack | null>(null);
+  const [, setCaptionRevision] = useState(0);
+  const refreshCaptions = () => setCaptionRevision((revision) => revision + 1);
   const [mode, setMode] = useState<ExperimentMode>('behavior');
   const [motionMode, setMotionMode] = useState<MotionMode>(() => avatarQuery.get('gesture') === 'learned' ? 'geometry_preview' : 'disabled');
   const [motionLibrary, setMotionLibrary] = useState<MotionLibraryStatus | null>(null);
@@ -64,8 +69,8 @@ export default function App() {
   const [activeTurn, setActiveTurn] = useState<Turn | undefined>();
   const [evidence, setEvidence] = useState<Citation[] | null>(null);
   const [settings, setSettings] = useState(false);
-  const [voice, setVoice] = useState<VoiceMode>(presentationMode ? 'provider' : 'off');
-  const [autoPlay, setAutoPlay] = useState(presentationMode);
+  const [voice, setVoice] = useState<VoiceMode>(presentationMode || avatarQuery.get('bilingual') === '1' ? 'provider' : 'off');
+  const [autoPlay, setAutoPlay] = useState(presentationMode || avatarQuery.get('bilingual') === '1');
   const [liveMeasurement, setLiveMeasurement] = useState<LiveMeasurement | null>(null);
   const liveClock = useRef<LiveTurnClock | null>(null);
   const [reducedMotion, setReducedMotion] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -127,7 +132,7 @@ export default function App() {
   function cancel() {
     liveClock.current?.finish('cancelled');
     if (liveClock.current) setLiveMeasurement(liveClock.current.snapshot());
-    pcmPlayer.current?.stop();
+    pcmPlayer.current?.stop(); captionTrack.current = null; refreshCaptions();
     generation.current += 1;
     currentRequest.current?.abort(); currentRequest.current = null;
     setMessages((previous) => previous.map((message) => message.pending ? { ...message, pending: false, text: message.text || 'Response stopped.' } : message));
@@ -154,8 +159,11 @@ export default function App() {
     setMessages((previous) => [...previous, { id: crypto.randomUUID(), role: 'user', text: question }, { id: answerId, role: 'assistant', text: '', pending: true }]);
     setBusy(true); setStatus('Finding relevant sources');
     let received: Turn | undefined;
+    const translated = bilingual && persona?.capabilities.translated_subtitles === true;
     const useLiveVoice = Boolean(preferences.autoPlay && preferences.voice === 'provider' && persona?.capabilities.live_speech);
-    let audioFrames = 0; let liveTurnId: string = answerId; let preparationMarked = false; let audioMarked = false;
+    captionTrack.current = translated ? new CaptionTrack('ko', 'en', useLiveVoice) : null; refreshCaptions();
+    let livePlaybackComplete: Promise<{ ok: true } | { ok: false; error: unknown }> | undefined;
+    let liveTurnId: string = answerId; let preparationMarked = false; let audioMarked = false;
     let playingMarked = false; let signalMarked = false;
     try {
       if (useLiveVoice) pcmPlayer.current = createPcmPlayback((state) => {
@@ -168,13 +176,23 @@ export default function App() {
         if (state.status === 'cancelled' || state.status === 'failed') mark(state.status);
         setLiveMeasurement(clock.snapshot());
       });
-      await streamChat({ message: question, session_id: sessionId, mode, language, motion_mode: motionMode }, controller.signal, async (event) => {
+      await streamChat({ message: question, session_id: sessionId, mode, language: translated ? 'en' : language, ...(translated ? { subtitle_language: 'ko' as const, input_language: language } : {}), motion_mode: motionMode }, controller.signal, async (event) => {
         if (ticket !== generation.current) return;
+        if (captionTrack.current?.accept(event)) refreshCaptions();
         if (event.event === 'meta') { setSessionId(event.data.session_id); liveTurnId = event.data.turn_id ?? answerId; }
         if (event.event === 'segment' && useLiveVoice && !preparationMarked) { preparationMarked = true; clock.playback({ type: 'preparation_started', atMs: performance.now(), turnId: liveTurnId, voiceMode: 'provider' }); }
         if (event.event === 'audio_segment' && useLiveVoice && !audioMarked) { audioMarked = true; clock.playback({ type: 'audio_ready', atMs: performance.now(), turnId: liveTurnId, voiceMode: 'provider' }); }
         if (event.event === 'audio' && useLiveVoice) await pcmPlayer.current?.push(event.data);
-        if (event.event === 'audio_end') audioFrames = event.data.sample_count;
+        if (event.event === 'audio_end' && useLiveVoice) {
+          const player = pcmPlayer.current;
+          if (!player || livePlaybackComplete) throw new Error('Streaming playback completion ownership changed.');
+          // Seal PCM as soon as delivery ends. Translation events may still
+          // follow, and must never hold the audio clock in a loading state.
+          // Capture rejection immediately without blocking the SSE consumer.
+          livePlaybackComplete = player.finish(event.data.sample_count).then(
+            () => ({ ok: true as const }), (error: unknown) => ({ ok: false as const, error }),
+          );
+        }
         if (event.event === 'status') setStatus(stages[event.data.stage] ?? event.data.stage.replaceAll('_', ' '));
         if (event.event === 'token') {
           setMessages((previous) => previous.map((message) => message.id === answerId ? { ...message, text: message.text + event.data.text } : message));
@@ -197,13 +215,18 @@ export default function App() {
       const current = playbackPreferences.current;
       if (ticket === generation.current && received) {
         clock.streamComplete(performance.now()); clock.configureVoice(current.autoPlay ? current.voice : 'off'); setLiveMeasurement(clock.snapshot());
-        if (useLiveVoice) await pcmPlayer.current?.finish(audioFrames);
+        if (useLiveVoice) {
+          if (!livePlaybackComplete) throw new Error('The voice stream ended without playback completion.');
+          const completion = await livePlaybackComplete;
+          if (!completion.ok) throw completion.error;
+        }
         else if (current.autoPlay && current.voice !== 'off') void playback.play(received, current.voice, (event) => {
           if (ticket === generation.current && event.turnId === received?.id) { clock.playback(event); setLiveMeasurement(clock.snapshot()); }
         });
       }
     } catch (error) {
       if (ticket === generation.current && !controller.signal.aborted) {
+        captionTrack.current = null; refreshCaptions();
         pcmPlayer.current?.stop(error instanceof Error ? error.message : 'Streaming playback failed.');
         clock.finish('failed'); setLiveMeasurement(clock.snapshot());
         const message = error instanceof Error ? error.message : 'The response could not be completed.';
@@ -225,7 +248,7 @@ export default function App() {
     measuredMotion.stop(); setModel(undefined); setBuiltinAvatar(next); setAvatarError(null); setAvatarReady(false);
     if (next === 'jensen') setFraming('upper_body');
   }
-  function listen(turn: Turn) { if (busy) return; pcmPlayer.current?.stop(); setPcmState(initialPcmState); setActiveTurn(turn); void measuredMotion.play(turn.behavior.motion); void playback.play(turn, voice === 'off' ? 'browser' : voice); }
+  function listen(turn: Turn) { if (busy) return; captionTrack.current = null; refreshCaptions(); pcmPlayer.current?.stop(); setPcmState(initialPcmState); setActiveTurn(turn); void measuredMotion.play(turn.behavior.motion); void playback.play(turn, voice === 'off' ? 'browser' : voice); }
   useEffect(() => {
     if (!persona) return;
     if (lastPersona.current && lastPersona.current !== persona.id) {
@@ -237,8 +260,9 @@ export default function App() {
     lastPersona.current = persona.id;
   }, [persona?.id]);
   useEffect(() => {
-    if (presentationMode && persona && !persona.capabilities.speech) setVoice('off');
-  }, [presentationMode, persona]);
+    if ((presentationMode || bilingual) && persona && !persona.capabilities.speech) setVoice('off');
+    if (bilingual && persona && !persona.capabilities.translated_subtitles) setBilingual(false);
+  }, [presentationMode, bilingual, persona]);
   const isJensen = persona?.id === 'jensen-huang';
   const gaussianEnabled = gaussianRequested && isJensen && builtinAvatar === 'jensen' && !model;
   const gaussianHead = useMemo<GaussianHeadConfig | undefined>(() => {
@@ -261,7 +285,8 @@ export default function App() {
   const micPrompt = presentationMode && !reviewQuestion ? 'Listening… click the microphone again to send' : 'Listening… you can edit before sending';
   const micHelp = microphone.backend === 'server' ? 'Record through the configured transcription service' : 'Dictate a question';
   const latestMessage = messages.at(-1);
-  const caption = presentationMode
+  const translatedCaption = captionTrack.current?.active(pcmState.audioElapsedMs, pcmState.status === 'playing') ?? captionTrack.current?.transcript();
+  const caption = !bilingual && presentationMode
     ? (activeTurn?.text ?? (latestMessage?.pending ? latestMessage.text : '')).replace(/\[source:[A-Za-z0-9_.-]*(?:\]|$)/g, '').trim()
     : '';
 
@@ -274,7 +299,7 @@ export default function App() {
       <div className="sidebar-bottom"><button className="nav-item" onClick={() => setSettings(true)}><Settings2 size={18}/><span>Studio settings</span></button><button className="nav-item" onClick={() => setInfoOpen(!infoOpen)}><CircleHelp size={18}/><span>About this project</span></button><div className="simulation-note"><span className="tiny-dot"/> An AI simulation, openly labeled.</div></div>
     </aside>
     <div className="workspace">
-      <header className="topbar"><div className="breadcrumb"><span>Workspace</span><ChevronRight size={14}/><strong>{page === 'studio' ? 'Conversation' : page === 'sources' ? 'Source library' : page === 'presentation' ? 'Presentation' : 'Research lab'}</strong></div><div className="topbar-actions"><span className={`connection ${connection}`}><i/>{connection === 'ready' ? 'Studio connected' : connection === 'connecting' ? 'Connecting' : 'Service offline'}</span><label className="language-select"><Globe2 size={15}/><select aria-label="Response language" value={language} onChange={(event) => setLanguage(event.target.value as Language)}><option value="en">English</option><option value="ko">한국어</option></select><ChevronDown size={12}/></label><button className="icon-button mobile-settings" onClick={() => setSettings(true)} aria-label="Studio settings"><Settings2 size={18}/></button><div className="user-avatar">Y</div></div></header>
+      <header className="topbar"><div className="breadcrumb"><span>Workspace</span><ChevronRight size={14}/><strong>{page === 'studio' ? 'Conversation' : page === 'sources' ? 'Source library' : page === 'presentation' ? 'Presentation' : 'Research lab'}</strong></div><div className="topbar-actions"><span className={`connection ${connection}`}><i/>{connection === 'ready' ? 'Studio connected' : connection === 'connecting' ? 'Connecting' : 'Service offline'}</span><label className="language-select"><Globe2 size={15}/><select aria-label={bilingual ? "Question language" : "Response language"} disabled={busy} value={language} onChange={(event) => setLanguage(event.target.value as Language)}><option value="en">English</option><option value="ko">한국어</option></select><ChevronDown size={12}/></label><button className="icon-button mobile-settings" onClick={() => setSettings(true)} aria-label="Studio settings"><Settings2 size={18}/></button><div className="user-avatar">Y</div></div></header>
       <main>
         {infoOpen && <div className="about-banner"><Sparkles size={19}/><p><strong>Who Is Your Bias?</strong> A research workspace for source-grounded dialogue, voice, and embodied behavior. This is an AI simulation, not {subjectName} or an official representative. The portrait and attention interaction are designed previews; they do not reproduce learned personal habits.</p><button className="icon-button" onClick={() => setInfoOpen(false)} aria-label="Close project information"><X size={17}/></button></div>}
         {connection === 'error' && <div className="connection-error" role="alert"><span><strong>The conversation service is offline.</strong> {connectionError}</span><button onClick={() => setReload((value) => value + 1)}><RotateCcw size={14}/> Reconnect</button></div>}
@@ -289,10 +314,15 @@ export default function App() {
               {!avatarReady && !avatarError && <div className="avatar-loading"><LoaderCircle size={18} className="spin"/> Preparing the rig</div>}
               {avatarError && <div className="avatar-error" role="alert">{avatarError}<button onClick={() => selectBuiltinAvatar('portrait')}>Use stylized portrait</button></div>}
             </section>
+              {translatedCaption && <p className="presentation-caption" aria-label="Korean answer captions" lang={translatedCaption.language}><small>{translatedCaption.label}</small>{translatedCaption.text}</p>}
               {caption && <p className="presentation-caption" aria-label="Answer captions" lang={activeTurn?.language ?? language}>{caption}</p>}
               <AttentionPanel enabled={page === 'studio'} reducedMotion={reducedMotion} onTarget={setAttentionTarget}/><MotionNotice state={measuredMotion} mode={motionMode} reducedMotion={reducedMotion} noMatch={Boolean(activeTurn && !busy && !activeTurn.behavior.motion)}/></div>
             <section className="conversation-card" aria-label="Conversation">
               <div className="conversation-header"><div><MessageCircle size={18}/><h2>Let's talk</h2></div><span className="preview-label">{persona?.capabilities.llm ? 'LLM connected' : 'Source preview'}</span></div>
+              <div className="bilingual-controls"><label><input type="checkbox" checked={bilingual} disabled={busy || !persona?.capabilities.translated_subtitles} onChange={(event) => {
+                cancel(); setBilingual(event.target.checked);
+                if (event.target.checked) { setLanguage('ko'); if (persona?.capabilities.speech) { setVoice('provider'); setAutoPlay(true); } }
+              }}/>English voice + Korean captions</label><p>{!persona?.capabilities.translated_subtitles ? 'Configure a translation provider to enable Korean captions.' : bilingual ? 'Ask in the selected question language. English audio uses the configured voice. Late translations show the English original.' : 'Korean questions can be typed or dictated.'}</p></div>
               <div className="message-list" role="log" aria-label="Conversation messages" aria-live="polite" aria-relevant="additions text">
                 {!messages.length && <div className="welcome-message"><div className="assistant-avatar"><Mark small/></div><span className="eyebrow">A GOOD QUESTION IS A GOOD START</span><h2>{language === 'ko' ? '어떤 이야기가 궁금해?' : 'Where should we begin?'}</h2><p>{language === 'ko' ? '공개된 자료를 바탕으로 궁금한 것을 물어봐. 답변의 출처도 함께 확인할 수 있어.' : `Explore ${topics.length ? topics.join(', ') : 'the ideas'} — with the original sources close by.`}</p><div className="starter-questions">{questions.slice(0, 3).map((question) => <button key={question} disabled={connection !== 'ready'} onClick={() => void send(question)}><span>{question}</span><ArrowUpRight size={16}/></button>)}</div><div className="preview-explainer"><BookOpen size={14}/><span>{persona?.capabilities.llm ? 'Responses use a connected model and selected evidence.' : 'Source preview uses published evidence. Connect a model for generated dialogue.'}</span></div></div>}
                 {messages.map((message) => <article key={message.id} className={`message ${message.role}`}><div className="message-avatar">{message.role === 'assistant' ? <Mark small/> : 'Y'}</div><div className="message-content"><div className="message-author">{message.role === 'assistant' ? 'Research persona' : 'You'}{message.turn && <span>{message.turn.provider === 'evidence' ? 'Source notes' : 'Generated'}</span>}</div>{message.text && <p className="message-text">{message.text}</p>}{message.pending && <div className="thinking"><LoaderCircle size={13} className="spin"/>{status || 'Working on your question'}</div>}{message.error && <div className="message-error" role="alert">{message.error}</div>}{message.turn && <div className="message-tools"><button onClick={() => setEvidence(message.turn!.citations)}><BookOpen size={13}/>{message.turn.citations.length ? `${message.turn.citations.length} evidence records` : 'No supporting evidence'}</button><button onClick={() => listen(message.turn!)} disabled={busy} aria-label="Play response"><Volume2 size={14}/><span>Listen</span></button><GroundingBadge grounding={message.turn.grounding} language={message.turn.language}/></div>}</div></article>)}

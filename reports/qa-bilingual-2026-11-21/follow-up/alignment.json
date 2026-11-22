@@ -1,0 +1,193 @@
+{
+  "case": "alignment",
+  "question": "우리 아바타는 MCCCD처럼 발화, 음성, 얼굴을 같은 구간으로 맞춰서 학습했나요?",
+  "turn": {
+    "id": "5cedde483f384a11ab898da6e83914f4",
+    "session_id": "bdb03d8b2def456e9261932f54d43b5c",
+    "text": "The reviewed code has separate preparation paths for text, voice references and visual assets. These records do not verify a jointly reviewed, utterance-aligned text, audio and face dataset, so I cannot claim a full MCCCD reproduction.",
+    "language": "en",
+    "mode": "behavior",
+    "provider": "evidence",
+    "citations": [
+      {
+        "evidence_id": "QA-project-alignment",
+        "source_id": "QA-project-alignment",
+        "title": "Evidence export and multimodal alignment limits",
+        "url": "https://github.com/Dindb-dong/who-is-your-bias/blob/713232c74c890a61d7f6f6f4b67d5fed984b883c/workbench/scripts/avatar_demo.py",
+        "locator": {
+          "label": "reviewed 2026-11-21T14:40:00+00:00; implementation",
+          "start_seconds": null,
+          "end_seconds": null,
+          "timeline": "reviewed_qa_reference"
+        },
+        "text": "The audited workbench exports reviewed text exchanges and source metadata to the dialogue corpus. Speech-reference preparation and visual assets have separate inputs and review records. These serving and export paths do not establish that every text passage has a jointly validated matching audio segment and visible speaking-face segment. Describe MCCCD-style utterance alignment as an intended collection approach unless the exact aligned dataset and its review record are supplied."
+      }
+    ],
+    "behavior": {
+      "cues": [
+        {
+          "start_ms": 0,
+          "duration_ms": 900,
+          "channel": "face",
+          "name": "brow_raise",
+          "intensity": 0.3,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 0,
+          "duration_ms": 550,
+          "channel": "gaze",
+          "name": "center",
+          "intensity": 0.2,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 350,
+          "duration_ms": 850,
+          "channel": "head",
+          "name": "nod",
+          "intensity": 0.25,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 1200,
+          "duration_ms": 1600,
+          "channel": "gesture",
+          "name": "open_palm",
+          "intensity": 0.4,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 7325,
+          "duration_ms": 1100,
+          "channel": "head",
+          "name": "nod",
+          "intensity": 0.18,
+          "provenance": "designed",
+          "evidence_ids": []
+        }
+      ],
+      "speech": {
+        "rate": 1.0,
+        "pitch": 1.0,
+        "pause_ms": 260
+      },
+      "duration_ms": 14650,
+      "timing_basis": "estimated_text",
+      "motion": null
+    },
+    "grounding": {
+      "status": "grounded",
+      "retrieved_ids": [
+        "QA-project-alignment",
+        "QA-project-avatar",
+        "QA-project-voice"
+      ],
+      "invalid_citation_ids": [],
+      "reason": "alignment_not_verified",
+      "citation_status": "not_required",
+      "citation_unit_count": 2,
+      "cited_unit_count": 2,
+      "malformed_citations": [],
+      "semantic_status": "curated_source"
+    },
+    "metrics": {
+      "retrieval_ms": 0.0,
+      "generation_ms": 0.245,
+      "total_ms": 1.319
+    },
+    "context": {
+      "qa_knowledge": {
+        "version": "qa-knowledge.v1",
+        "route": "project",
+        "reason": "alignment_not_verified",
+        "limitations": [],
+        "live_web_search": false,
+        "factual_evidence": [
+          {
+            "id": "QA-project-alignment",
+            "citation": "[source:QA-project-alignment]",
+            "title": "Evidence export and multimodal alignment limits",
+            "text": "The audited workbench exports reviewed text exchanges and source metadata to the dialogue corpus. Speech-reference preparation and visual assets have separate inputs and review records. These serving and export paths do not establish that every text passage has a jointly validated matching audio segment and visible speaking-face segment. Describe MCCCD-style utterance alignment as an intended collection approach unless the exact aligned dataset and its review record are supplied.",
+            "url": "https://github.com/Dindb-dong/who-is-your-bias/blob/713232c74c890a61d7f6f6f4b67d5fed984b883c/workbench/scripts/avatar_demo.py",
+            "published_at": null,
+            "reviewed_at": "2026-11-21T14:40:00+00:00",
+            "expires_at": "2026-11-28T14:40:00+00:00",
+            "revision": "713232c74c890a61d7f6f6f4b67d5fed984b883c",
+            "fact_kind": "implementation"
+          },
+          {
+            "id": "QA-project-avatar",
+            "citation": "[source:QA-project-avatar]",
+            "title": "Configured appearance and gesture assets",
+            "text": "The studio documentation separates the Gaussian face bundle, a body or rig, and optional learned gesture bundles. Gaussian face data supplies appearance, FLAME data and recorded expression coefficients; gesture data is selected separately. Private asset files and explicit runtime switches are required. The presence of a renderer or a learned-preview switch is not a measured result for facial likeness, natural gesture quality or semantic expression accuracy.",
+            "url": "https://github.com/Dindb-dong/who-is-your-bias/blob/713232c74c890a61d7f6f6f4b67d5fed984b883c/docs/jensen-studio-quickstart.md",
+            "published_at": null,
+            "reviewed_at": "2026-11-21T14:40:00+00:00",
+            "expires_at": "2026-11-28T14:40:00+00:00",
+            "revision": "713232c74c890a61d7f6f6f4b67d5fed984b883c",
+            "fact_kind": "implementation"
+          },
+          {
+            "id": "QA-project-voice",
+            "citation": "[source:QA-project-voice]",
+            "title": "Separate reference-conditioned voice synthesis",
+            "text": "The local launcher configures a separate Qwen voice service with a reviewed reference WAV and its matching transcript. It checks the reference file hashes before starting. External voice endpoints are configurable. Voice reference conditioning is distinct from fine-tuning speech-model weights, and source code does not establish Jensen voice similarity or a measured speed on the presentation machine.",
+            "url": "https://github.com/Dindb-dong/who-is-your-bias/blob/713232c74c890a61d7f6f6f4b67d5fed984b883c/workbench/scripts/run_local_persona.py",
+            "published_at": null,
+            "reviewed_at": "2026-11-21T14:40:00+00:00",
+            "expires_at": "2026-11-28T14:40:00+00:00",
+            "revision": "713232c74c890a61d7f6f6f4b67d5fed984b883c",
+            "fact_kind": "implementation"
+          }
+        ],
+        "supplied_ids": [
+          "QA-project-alignment",
+          "QA-project-avatar",
+          "QA-project-voice"
+        ],
+        "generated": false
+      },
+      "input_language": "ko",
+      "answer_language": "en",
+      "query_resolution": {
+        "original": "우리 아바타는 MCCCD처럼 발화, 음성, 얼굴을 같은 구간으로 맞춰서 학습했나요?",
+        "query": "우리 아바타는 MCCCD처럼 발화, 음성, 얼굴을 같은 구간으로 맞춰서 학습했나요?",
+        "method": "original",
+        "supporting_turn_ids": []
+      }
+    }
+  },
+  "answer_wall_seconds": 0.002,
+  "translations": [
+    {
+      "event": {
+        "turn_id": "5cedde483f384a11ab898da6e83914f4",
+        "segment_id": "5cedde483f384a11ab898da6e83914f4:0",
+        "sequence": 0,
+        "language": "ko",
+        "text": "검토한 코드에는 텍스트, 참조 음성, 시각 자료를 각각 준비하는 경로가 있습니다.",
+        "state": "ready",
+        "basis": "reviewed_fixed_phrase"
+      },
+      "wall_seconds": 0.0
+    },
+    {
+      "event": {
+        "turn_id": "5cedde483f384a11ab898da6e83914f4",
+        "segment_id": "5cedde483f384a11ab898da6e83914f4:1",
+        "sequence": 1,
+        "language": "ko",
+        "text": "발화별 텍스트·음성·얼굴을 함께 검증한 데이터셋은 이 자료에서 확인되지 않으므로, MCCCD 전체 파이프라인을 재현했다고 주장할 수 없습니다.",
+        "state": "ready",
+        "basis": "reviewed_fixed_phrase"
+      },
+      "wall_seconds": 0.0
+    }
+  ],
+  "state": "complete"
+}

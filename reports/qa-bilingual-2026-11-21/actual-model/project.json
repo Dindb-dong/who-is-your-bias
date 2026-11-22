@@ -1,0 +1,163 @@
+{
+  "case": "project",
+  "question": "우리 프로젝트 파이프라인을 설명해 주세요.",
+  "turn": {
+    "id": "403c3392d32f4ff496fad6506acbbfcb",
+    "session_id": "d6c93badcb9342eaaeac15fc63d1efab",
+    "text": "The project pipeline involves a Python Engine that resolves questions, retrieves reviewed persona evidence, and generates answers with citations. The web application can then send these answers to a voice service for audio playback while rendering the avatar.",
+    "language": "en",
+    "mode": "behavior",
+    "provider": "openai",
+    "citations": [
+      {
+        "evidence_id": "QA-project-pipeline",
+        "source_id": "QA-project-pipeline",
+        "title": "Versioned text-to-avatar serving pipeline",
+        "url": "https://github.com/Dindb-dong/who-is-your-bias/blob/713232c74c890a61d7f6f6f4b67d5fed984b883c/src/bias/engine.py",
+        "locator": {
+          "label": "reviewed 2026-11-21T14:40:00+00:00; implementation",
+          "start_seconds": null,
+          "end_seconds": null,
+          "timeline": "reviewed_qa_reference"
+        },
+        "text": "At the audited main revision, the Python Engine resolves the question, retrieves reviewed persona evidence, supplies a persona profile and source context to a configured language model, and returns answer text with citation metadata and a behavior plan. The web application can send committed answer sentences to a configured voice service and play audio while rendering the avatar. A source citation indicates a selected record; the code does not equate citation presence with factual entailment."
+      }
+    ],
+    "behavior": {
+      "cues": [
+        {
+          "start_ms": 0,
+          "duration_ms": 900,
+          "channel": "face",
+          "name": "brow_raise",
+          "intensity": 0.3,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 0,
+          "duration_ms": 550,
+          "channel": "gaze",
+          "name": "center",
+          "intensity": 0.2,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 350,
+          "duration_ms": 850,
+          "channel": "head",
+          "name": "nod",
+          "intensity": 0.25,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 1200,
+          "duration_ms": 1600,
+          "channel": "gesture",
+          "name": "open_palm",
+          "intensity": 0.4,
+          "provenance": "designed",
+          "evidence_ids": []
+        },
+        {
+          "start_ms": 7517,
+          "duration_ms": 1100,
+          "channel": "head",
+          "name": "nod",
+          "intensity": 0.18,
+          "provenance": "designed",
+          "evidence_ids": []
+        }
+      ],
+      "speech": {
+        "rate": 1.0,
+        "pitch": 1.0,
+        "pause_ms": 260
+      },
+      "duration_ms": 15035,
+      "timing_basis": "estimated_text",
+      "motion": null
+    },
+    "grounding": {
+      "status": "unverified",
+      "retrieved_ids": [
+        "QA-project-pipeline"
+      ],
+      "invalid_citation_ids": [],
+      "reason": "Dated auxiliary sources; generated factual entailment is unreviewed.",
+      "citation_status": "partial",
+      "citation_unit_count": 2,
+      "cited_unit_count": 1,
+      "malformed_citations": [],
+      "semantic_status": "unreviewed"
+    },
+    "metrics": {
+      "retrieval_ms": 0.0,
+      "generation_ms": 18867.462,
+      "total_ms": 18872.654
+    },
+    "context": {
+      "qa_knowledge": {
+        "version": "qa-knowledge.v1",
+        "route": "project",
+        "reason": "reviewed_reference_match",
+        "limitations": [],
+        "live_web_search": false,
+        "factual_evidence": [
+          {
+            "id": "QA-project-pipeline",
+            "citation": "[source:QA-project-pipeline]",
+            "title": "Versioned text-to-avatar serving pipeline",
+            "text": "At the audited main revision, the Python Engine resolves the question, retrieves reviewed persona evidence, supplies a persona profile and source context to a configured language model, and returns answer text with citation metadata and a behavior plan. The web application can send committed answer sentences to a configured voice service and play audio while rendering the avatar. A source citation indicates a selected record; the code does not equate citation presence with factual entailment.",
+            "url": "https://github.com/Dindb-dong/who-is-your-bias/blob/713232c74c890a61d7f6f6f4b67d5fed984b883c/src/bias/engine.py",
+            "published_at": null,
+            "reviewed_at": "2026-11-21T14:40:00+00:00",
+            "expires_at": "2026-11-28T14:40:00+00:00",
+            "revision": "713232c74c890a61d7f6f6f4b67d5fed984b883c",
+            "fact_kind": "implementation"
+          }
+        ],
+        "supplied_ids": [
+          "QA-project-pipeline"
+        ],
+        "generated": true
+      },
+      "input_language": "ko",
+      "answer_language": "en",
+      "query_resolution": {
+        "original": "우리 프로젝트 파이프라인을 설명해 주세요.",
+        "query": "우리 프로젝트 파이프라인을 설명해 주세요.",
+        "method": "original",
+        "supporting_turn_ids": []
+      }
+    }
+  },
+  "answer_wall_seconds": 18.873,
+  "translations": [
+    {
+      "event": {
+        "turn_id": "403c3392d32f4ff496fad6506acbbfcb",
+        "segment_id": "403c3392d32f4ff496fad6506acbbfcb:0",
+        "sequence": 0,
+        "language": "ko",
+        "text": "프로젝트 파이프라인은 질문을 해결하는 Python 엔진이 있으며, 검토된 인사 증거를 검색하고 인용을 포함한 답변을 생성합니다.",
+        "state": "ready"
+      },
+      "wall_seconds": 9.261
+    },
+    {
+      "event": {
+        "turn_id": "403c3392d32f4ff496fad6506acbbfcb",
+        "segment_id": "403c3392d32f4ff496fad6506acbbfcb:1",
+        "sequence": 1,
+        "language": "ko",
+        "text": "웹 애플리케이션은 그런 답변을 음성 서비스에 전송하여 오디오 재생하면서 아바타를 렌더링할 수 있습니다.",
+        "state": "ready"
+      },
+      "wall_seconds": 7.726
+    }
+  ],
+  "state": "complete"
+}

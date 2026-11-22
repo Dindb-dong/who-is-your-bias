@@ -28,6 +28,12 @@ def test_missing_system_prompt_is_rejected():
         persona_messages([{"role": "user", "content": "hello"}])
 
 
+def test_auxiliary_qa_keeps_explicit_project_and_current_source_scope():
+    original = [{"role": "system", "content": "YAICON project/current-source QA. Do not claim to be the current CEO."},
+                {"role": "user", "content": "What is this project's pipeline?"}]
+    assert persona_messages(original) == original
+
+
 def fixture():
     corpus = SimpleNamespace(persona=SimpleNamespace(id="jensen-huang"), evidence={
         "qa1": SimpleNamespace(question_answer=SimpleNamespace(answer="We built the system together."))})
