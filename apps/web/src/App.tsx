@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowDown, ArrowRight, ArrowUp, ArrowUpRight, BookOpen, ChevronDown, ChevronRight, CircleHelp, Clapperboard, FlaskConical, Globe2, Layers3, LoaderCircle, MessageCircle, Mic, Phone, PhoneOff, Plus, Radio, RotateCcw, Settings2, Sparkles, Square, Volume2, VolumeX, X } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUp, ArrowUpRight, BookOpen, ChevronDown, ChevronRight, CircleHelp, Clapperboard, FlaskConical, Globe2, Layers3, LoaderCircle, MessageCircle, Mic, Phone, PhoneOff, PictureInPicture2, Plus, Radio, RotateCcw, Settings2, Sparkles, Square, Volume2, VolumeX, X } from 'lucide-react';
 import { getJson, getMotionLibrary, streamChat } from './api';
 import type { Citation, ExperimentMode, Language, MotionLibraryStatus, Persona, Source, Turn } from './api';
 import type { MotionMode } from './avatar/types';
@@ -21,6 +21,7 @@ import { startRealtimeCall, type CallStatus } from './hooks/realtimeCall';
 import type { VoiceMode } from './hooks/usePlayback';
 import { useMicrophone } from './hooks/useMicrophone';
 import { useMeasuredMotion } from './hooks/useMeasuredMotion';
+import { useAvatarWindow } from './hooks/useAvatarWindow';
 import { LiveTurnClock } from './hooks/liveMetrics';
 import type { LiveMeasurement } from './hooks/liveMetrics';
 import { LiveTiming } from './components/LiveTiming';
@@ -51,6 +52,7 @@ export default function App() {
   // ?gesture=emage: request speech-driven gestures with provider voice (needs BIAS_EMAGE_* on the server).
   const [speechGestureEnabled, setSpeechGestureEnabled] = useState(() => avatarQuery.get('gesture') === 'emage');
   const [page, setPage] = useState<Page>('studio');
+  const avatarWindow = useAvatarWindow();
   const [persona, setPersona] = useState<Persona | null>(null);
   const [sources, setSources] = useState<Source[]>([]);
   const [connection, setConnection] = useState<'connecting' | 'ready' | 'error'>('connecting');
@@ -200,7 +202,7 @@ export default function App() {
     liveClock.current = null; setLiveMeasurement(null);
     composer.current?.focus();
   }
-  function navigate(next: Page) { cancel(); setAttentionTarget(null); setPage(next); setEvidence(null); }
+  function navigate(next: Page) { if (next !== 'studio') avatarWindow.close(); cancel(); setAttentionTarget(null); setPage(next); setEvidence(null); }
   async function send(text = draft, microphoneEndedAt?: number) {
     const question = text.trim();
     if (!question || busy || realtimeCall.current || connection !== 'ready') return;
@@ -389,13 +391,22 @@ export default function App() {
           <div className="studio-heading"><div><div className="eyebrow">CURIOSITY, IN CONVERSATION</div><h1>Meet the mind. <span>Explore the ideas.</span></h1><p>A conversation with a source-grounded {subjectName} persona.</p></div><button className="secondary-button" onClick={reset}><Plus size={16}/> New conversation</button></div>
           <div className="studio-grid">
             <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}><section className={`stage-card${gaussianEnabled ? ' photoreal' : ''}`} aria-label="Avatar studio" style={{ flex: 1 }}>
-              <div className="stage-top"><div><span className="tag dark"><span className="tiny-dot"/> AI SIMULATION</span><div className="stage-title">{subjectName}<span>01 / RESEARCH PERSONA</span></div></div><button className="stage-options" onClick={() => setSettings(true)} aria-label="Avatar settings"><Settings2 size={18}/></button></div>
-              <div className="avatar-viewport"><AvatarStage gaussianHead={gaussianHead} backdrop={gaussianEnabled ? 'white' : 'studio'} learnedGesture={learnedGestureEnabled && mode === 'behavior' ? learnedGesture.model : undefined} speechGesture={speechGestureEnabled && mode === 'behavior' ? streamingVoice ? liveGesture : playback.speechGesture : undefined} attentionTarget={attentionTarget} portraitStyle={isJensen ? 'jensen' : 'reference'} speaking={speaking} timeline={streamingVoice ? undefined : activeTurn?.behavior} elapsedMs={visualPlayback.elapsedMs} amplitude={speaking ? visualPlayback.amplitude : 0} modelUrl={modelUrl} framing={framing} reducedMotion={reducedMotion} speechTiming={visualPlayback.speechTiming} audioSha256={visualPlayback.audioSha256} audioElapsedMs={visualPlayback.audioElapsedMs} performanceClip={motionMode !== 'disabled' && mode === 'behavior' && !reducedMotion ? measuredMotion.clip : undefined} observationElapsedMs={measuredMotion.elapsedMs} allowGeometryPreview={motionMode === 'geometry_preview'} onReady={onAvatarReady} onError={onAvatarError}/></div>
+              <div className="stage-top"><div><span className="tag dark"><span className="tiny-dot"/> AI SIMULATION</span><div className="stage-title">{subjectName}<span>01 / RESEARCH PERSONA</span></div></div><div className="stage-actions">
+                <button type="button" className="stage-options" disabled={avatarWindow.opening}
+                  onClick={avatarWindow.target ? avatarWindow.close : avatarWindow.open}
+                  aria-label={avatarWindow.target ? 'Return avatar to Studio' : avatarWindow.pip ? 'Open avatar picture-in-picture' : 'Open avatar in a separate window'}
+                  title={avatarWindow.target ? 'Return avatar to Studio' : avatarWindow.pip ? 'Picture-in-picture' : 'Separate avatar window'}>
+                  <PictureInPicture2 size={17}/>
+                </button>
+                <button className="stage-options" onClick={() => setSettings(true)} aria-label="Avatar settings"><Settings2 size={18}/></button>
+              </div></div>
+              <div className="avatar-viewport"><AvatarStage presentationTarget={avatarWindow.target} gaussianHead={gaussianHead} backdrop={gaussianEnabled ? 'white' : 'studio'} learnedGesture={learnedGestureEnabled && mode === 'behavior' ? learnedGesture.model : undefined} speechGesture={speechGestureEnabled && mode === 'behavior' ? streamingVoice ? liveGesture : playback.speechGesture : undefined} attentionTarget={attentionTarget} portraitStyle={isJensen ? 'jensen' : 'reference'} speaking={speaking} timeline={streamingVoice ? undefined : activeTurn?.behavior} elapsedMs={visualPlayback.elapsedMs} amplitude={speaking ? visualPlayback.amplitude : 0} modelUrl={modelUrl} framing={framing} reducedMotion={reducedMotion} speechTiming={visualPlayback.speechTiming} audioSha256={visualPlayback.audioSha256} audioElapsedMs={visualPlayback.audioElapsedMs} performanceClip={motionMode !== 'disabled' && mode === 'behavior' && !reducedMotion ? measuredMotion.clip : undefined} observationElapsedMs={measuredMotion.elapsedMs} allowGeometryPreview={motionMode === 'geometry_preview'} onReady={onAvatarReady} onError={onAvatarError}/></div>
               <div className="stage-caption"><span className="caption-rule"/><span>{gaussianEnabled ? 'JENSEN · PHOTOREAL FACE & BODY' : model ? 'YOUR CUSTOM RIG' : builtinAvatar === 'jensen' && isJensen ? 'JENSEN · SOURCE-FITTED CANDIDATE' : builtinAvatar === 'human' ? (isJensen ? 'GENERIC RESEARCH RIG' : 'RESEARCH HUMAN RIG') : isJensen ? 'JENSEN · STYLIZED PREVIEW' : 'STYLIZED PORTRAIT RIG'}</span><span className="caption-rule"/></div>
               <div className="stage-bottom"><div className="live-status"><span className={`status-orb ${speaking || busy ? 'animated' : ''}`}/><div><strong>{stageState}</strong><span title={playback.timingMessage}>{streamingVoice ? 'Streaming voice · PCM-clock mouth movement' : voice === 'provider' ? playback.timingStatus === 'available' ? 'Provider voice · audio-timed mouth cues' : 'Provider voice · approximate mouth movement' : voice === 'browser' || speaking ? 'Generic browser voice · approximate lip sync' : 'Text mode · voice available'}</span></div></div><button className="round-control" aria-label={streamingVoice || speaking || playback.status === 'loading' ? 'Stop audio' : 'Enable voice settings'} onClick={() => streamingVoice ? cancel() : speaking || playback.status === 'loading' ? playback.stop() : setSettings(true)}>{streamingVoice || speaking || playback.status === 'loading' ? <Square size={16}/> : voice === 'off' ? <VolumeX size={18}/> : <Volume2 size={18}/>}</button></div>
               {!avatarReady && !avatarError && <div className="avatar-loading"><LoaderCircle size={18} className="spin"/> Preparing the rig</div>}
               {avatarError && <div className="avatar-error" role="alert">{avatarError}<button onClick={() => selectBuiltinAvatar('portrait')}>Use stylized portrait</button></div>}
             </section>
+              {avatarWindow.error && <p className="inline-error" role="alert">{avatarWindow.error}</p>}
               {translatedCaption && <p className="presentation-caption" aria-label="Korean answer captions" lang={translatedCaption.language}><small>{translatedCaption.label}</small>{translatedCaption.text}</p>}
               {caption && <p className="presentation-caption" aria-label="Answer captions" lang={activeTurn?.language ?? language}>{caption}</p>}
               <AttentionPanel enabled={page === 'studio'} reducedMotion={reducedMotion} onTarget={setAttentionTarget}/><MotionNotice state={measuredMotion} mode={motionMode} reducedMotion={reducedMotion} noMatch={Boolean(activeTurn && !busy && !activeTurn.behavior.motion)}/></div>

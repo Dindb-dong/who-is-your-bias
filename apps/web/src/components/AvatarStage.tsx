@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Quaternion, Vector3 } from 'three';
 import type { AvatarFraming } from '../avatar/builtin';
 import { BONE_CHANNELS, FACE_CHANNELS, VISEMES } from '../avatar/channels';
@@ -41,6 +42,7 @@ export interface AvatarStageProps {
   onError?: (error: Error) => void;
   onTelemetry?: (telemetry: AnimationTelemetry) => void;
   className?: string;
+  presentationTarget?: HTMLElement | null;
   /** Increment when local sample playback starts to capture from its first frames. */
   auditionStartKey?: number;
 }
@@ -49,9 +51,23 @@ export interface AvatarStageProps {
 export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, modelUrl,
   rigMapping, reducedMotion, onReady, onError, onTelemetry, className = '',
   audioElapsedMs, audioSha256, speechTiming, performanceClip, observationElapsedMs, allowGeometryPreview = false, attentionTarget, portraitStyle = 'reference',
-  showCalibration = false, framing = 'portrait', auditionStartKey = 0, gaussianHead, learnedGesture, speechGesture, backdrop = 'studio' }: AvatarStageProps) {
+  showCalibration = false, framing = 'portrait', auditionStartKey = 0, gaussianHead, learnedGesture, speechGesture, backdrop = 'studio', presentationTarget }: AvatarStageProps) {
   const host = useRef<HTMLDivElement>(null);
   const runtime = useRef<AvatarRenderer | null>(null);
+  const inlineSlot = useRef<HTMLDivElement>(null);
+  const [portal] = useState(() => {
+    if (presentationTarget === undefined) return null;
+    const element = document.createElement('div');
+    element.className = 'avatar-portal';
+    return element;
+  });
+
+  useLayoutEffect(() => {
+    const destination = presentationTarget ?? inlineSlot.current;
+    if (!portal || !destination || portal.parentElement === destination) return;
+    if (runtime.current) runtime.current.moveViewport(portal, destination);
+    else destination.append(portal);
+  }, [portal, presentationTarget]);
   const callbacks = useRef({ onReady, onError, onTelemetry, showCalibration }); callbacks.current = { onReady, onError, onTelemetry, showCalibration };
   const [fatal, setFatal] = useState<string | null>(null);
   const [modelError, setModelError] = useState<string | null>(null);
@@ -194,7 +210,7 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
     } catch (error) { setAuditionStatus(error instanceof Error ? error.message : 'Could not export audition.'); }
   };
 
-  return (
+  const stage = (
     <div className={`avatar-stage${showCalibration ? ' avatar-stage--calibration' : ''} ${className}`} data-testid="avatar-stage"
       data-portrait-style={portraitStyle} data-rig-kind={diagnostics?.kind ?? 'initializing'} data-face-controls={diagnostics?.morphs.length ?? 0}
       data-visemes={diagnostics?.visemes?.length ?? 0} data-mapped-joints={diagnostics?.bones.length ?? 0}
@@ -272,6 +288,14 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
       </details>}
     </div>
   );
+  return portal ? (
+    <>
+      <div ref={inlineSlot} className="avatar-inline-slot">
+        {presentationTarget && <p role="status">Avatar is in a separate window.</p>}
+      </div>
+      {createPortal(stage, portal)}
+    </>
+  ) : stage;
 }
 
 export default AvatarStage;

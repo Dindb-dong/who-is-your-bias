@@ -1,0 +1,104 @@
+import { useEffect, useRef, useState } from 'react';
+import { flushSync } from 'react-dom';
+
+type PictureInPictureWindow = Window & {
+  documentPictureInPicture?: { requestWindow(options: { width: number; height: number }): Promise<Window> };
+};
+
+function prepareWindow(view: Window): HTMLElement {
+  const doc = view.document;
+  doc.title = 'Presentation avatar';
+  doc.documentElement.lang = document.documentElement.lang || 'en';
+  doc.body.classList.add('avatar-window');
+
+  for (const sheet of document.querySelectorAll<HTMLLinkElement | HTMLStyleElement>('link[rel="stylesheet"], style')) {
+    const copy = doc.importNode(sheet, true);
+    if (sheet instanceof HTMLLinkElement) (copy as HTMLLinkElement).href = sheet.href;
+    doc.head.append(copy);
+  }
+
+  const target = doc.createElement('main');
+  target.className = 'avatar-window-stage';
+  const disclosure = doc.createElement('p');
+  disclosure.className = 'avatar-window-disclosure';
+  disclosure.textContent = 'AI simulation';
+  doc.body.append(target, disclosure);
+  return target;
+}
+
+export function useAvatarWindow() {
+  const [target, setTarget] = useState<HTMLElement | null>(null);
+  const [opening, setOpening] = useState(false);
+  const [error, setError] = useState('');
+  const attempt = useRef<AbortController | null>(null);
+  const active = useRef<{ view: Window; removeCloseListener: () => void } | null>(null);
+  const pip = (window as PictureInPictureWindow).documentPictureInPicture;
+
+  function close() {
+    attempt.current?.abort();
+    attempt.current = null;
+    setOpening(false);
+    active.current?.view.close();
+  }
+
+  async function open() {
+    if (attempt.current || active.current) return;
+    const controller = new AbortController();
+    attempt.current = controller;
+    setOpening(true);
+    setError('');
+    let view: Window | null = null;
+    try {
+      view = pip ? await pip.requestWindow({ width: 420, height: 320 })
+        : window.open('', '_blank', 'popup,width=420,height=320');
+      if (controller.signal.aborted) { view?.close(); return; }
+      if (!view || view.closed) throw new Error('Window unavailable');
+
+      const presentation = prepareWindow(view);
+      const onClose = () => {
+        active.current = null;
+        // Move the existing canvas back before the browser tears down this document.
+        flushSync(() => setTarget(null));
+      };
+      view.addEventListener('pagehide', onClose, { once: true });
+      active.current = { view, removeCloseListener: () => view?.removeEventListener('pagehide', onClose) };
+      setTarget(presentation);
+    } catch {
+      view?.close();
+      if (!controller.signal.aborted) {
+        setError(pip ? 'Could not open picture-in-picture. Try opening it again.'
+          : 'Could not open the avatar window. Allow pop-ups for this site and try again.');
+      }
+    } finally {
+      if (attempt.current === controller) {
+        attempt.current = null;
+        setOpening(false);
+      }
+    }
+  }
+
+  useEffect(() => {
+    const dispose = () => {
+      attempt.current?.abort();
+      attempt.current = null;
+      active.current?.removeCloseListener();
+      active.current?.view.close();
+      active.current = null;
+    };
+    const onPageHide = () => {
+      // Restore the inline stage if the opener is later resumed from the back/forward cache.
+      if (active.current || attempt.current) flushSync(() => {
+        setTarget(null);
+        setOpening(false);
+      });
+      dispose();
+    };
+    window.addEventListener('pagehide', onPageHide);
+    return () => {
+      window.removeEventListener('pagehide', onPageHide);
+      dispose();
+    };
+  }, []);
+
+  return { target, opening, error, pip: Boolean(pip), open, close };
+}

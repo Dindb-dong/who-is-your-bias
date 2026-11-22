@@ -64,6 +64,7 @@ export class AvatarRenderer {
   private rig: AvatarRig;
   private readRigOutput: ReturnType<typeof createRigOutputReader>;
   private resizeObserver: ResizeObserver;
+  private view: Window & typeof globalThis;
   private raf = 0;
   private disposed = false;
   private contextLost = false;
@@ -97,6 +98,7 @@ export class AvatarRenderer {
   private compositeLights: { light: DirectionalLight | HemisphereLight; intensity: number }[] = [];
 
   constructor(private host: HTMLElement, private callbacks: RendererCallbacks = {}) {
+    this.view = host.ownerDocument.defaultView ?? window;
     this.renderer = new WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
     this.canvas = this.renderer.domElement as HTMLCanvasElement;
     this.canvas.className = 'avatar-canvas';
@@ -105,7 +107,7 @@ export class AvatarRenderer {
     this.canvas.setAttribute('role', 'img');
     this.canvas.dataset.avatar = 'procedural';
     this.canvas.dataset.framing = this.framing;
-    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
+    this.renderer.setPixelRatio(Math.min(this.view.devicePixelRatio || 1, 1.75));
     this.renderer.setClearColor(0x10150f, 0);
     this.renderer.outputColorSpace = SRGBColorSpace;
     this.renderer.toneMapping = ACESFilmicToneMapping;
@@ -131,10 +133,10 @@ export class AvatarRenderer {
     this.rig = createProceduralRig(this.portraitStyle); this.scene.add(this.rig.root);
     this.readRigOutput = createRigOutputReader(this.rig);
     this.host.appendChild(this.canvas);
-    this.resizeObserver = new ResizeObserver(this.resize); this.resizeObserver.observe(host);
-    document.addEventListener('visibilitychange', this.onVisibility);
+    this.resizeObserver = new this.view.ResizeObserver(this.resize); this.resizeObserver.observe(host);
+    this.host.ownerDocument.addEventListener('visibilitychange', this.onVisibility);
     this.canvas.addEventListener('webglcontextlost', this.onContextLost);
-    this.resize(); this.raf = requestAnimationFrame(this.frame);
+    this.resize(); this.onVisibility();
     callbacks.onReady?.(this.rig.diagnostics);
   }
 
@@ -406,24 +408,48 @@ export class AvatarRenderer {
     this.camera.updateProjectionMatrix(); this.renderer.setSize(width, height, false);
   };
 
+  moveViewport(container: HTMLElement, destination: HTMLElement): void {
+    const next = destination.ownerDocument.defaultView;
+    if (!next || this.disposed) return;
+    if (next === this.view) { destination.append(container); return; }
+
+    this.stopAudition('viewport_changed');
+    this.view.cancelAnimationFrame(this.raf);
+    this.raf = 0;
+    this.resizeObserver.disconnect();
+    this.host.ownerDocument.removeEventListener('visibilitychange', this.onVisibility);
+    this.controls.disconnect();
+
+    destination.append(container);
+    this.view = next;
+    this.controls.connect(this.canvas);
+    this.renderer.setPixelRatio(Math.min(next.devicePixelRatio || 1, 1.75));
+    this.resizeObserver = new next.ResizeObserver(this.resize);
+    this.resizeObserver.observe(this.host);
+    next.document.addEventListener('visibilitychange', this.onVisibility);
+    this.resize();
+    this.onVisibility();
+  }
+
   private onVisibility = (): void => {
-    this.visible = !document.hidden;
+    this.visible = !this.host.ownerDocument.hidden;
     if (!this.visible) { this.stopAudition('document_hidden'); this.attention.reset(); }
-    if (this.visible) { this.previousFrame = 0; if (!this.raf && !this.contextLost) this.raf = requestAnimationFrame(this.frame); }
+    if (this.visible) { this.previousFrame = 0; if (!this.raf && !this.contextLost) this.raf = this.view.requestAnimationFrame(this.frame); }
   };
 
   private onContextLost = (event: Event): void => {
     this.stopAudition('graphics_context_lost');
     this.attention.reset();
     event.preventDefault(); this.contextLost = true;
-    cancelAnimationFrame(this.raf); this.raf = 0;
+    this.view.cancelAnimationFrame(this.raf); this.raf = 0;
     if (this.gaussianFactory) this.setGaussianState('error', 'The graphics context was interrupted. Reload the avatar.');
     this.callbacks.onError?.(new Error('The graphics context was interrupted. Reload the avatar to continue.'));
   };
 
-  private frame = (now: number): void => {
+  private frame = (): void => {
     this.raf = 0;
     if (this.disposed || this.contextLost || !this.visible) return;
+    const now = performance.now();
     const delta = this.previousFrame ? (now - this.previousFrame) / 1000 : 1 / 60;
     this.previousFrame = now;
     const sample = samplePerformance({ ...this.playback, plan: this.playback.timeline, idleMs: now - this.start }, this.rig.diagnostics);
@@ -502,7 +528,7 @@ export class AvatarRenderer {
         geometryCount: this.renderer.info.memory.geometries, textureCount: this.renderer.info.memory.textures }, this.playback.audioSha256);
       if (!this.audition.recording) { this.controls.enabled = true; this.callbacks.onAuditionState?.(false); }
     }
-    this.raf = requestAnimationFrame(this.frame);
+    this.raf = this.view.requestAnimationFrame(this.frame);
   };
 
   resetView(fixedEnvelope = false): void {
@@ -519,9 +545,9 @@ export class AvatarRenderer {
     this.attention.reset();
     this.disposed = true; ++this.modelSerial; this.modelAbort?.abort();
     ++this.gaussianSerial; this.gaussianAbort?.abort(); this.gaussianFactory = undefined; this.detachGaussianHead();
-    cancelAnimationFrame(this.raf); this.raf = 0;
+    this.view.cancelAnimationFrame(this.raf); this.raf = 0;
     this.resizeObserver.disconnect(); this.controls.dispose();
-    document.removeEventListener('visibilitychange', this.onVisibility);
+    this.host.ownerDocument.removeEventListener('visibilitychange', this.onVisibility);
     this.canvas.removeEventListener('webglcontextlost', this.onContextLost);
     // One scene traversal disposes both rig and stage, avoiding double disposal.
     disposeObject(this.scene);
