@@ -1,7 +1,7 @@
 import {
   ACESFilmicToneMapping, AmbientLight, CircleGeometry, DirectionalLight,
   FogExp2, HemisphereLight, Mesh, MeshBasicMaterial, MeshStandardMaterial,
-  PerspectiveCamera, PlaneGeometry, Scene, SRGBColorSpace, Vector2, Vector3, WebGLRenderer,
+  PerspectiveCamera, PlaneGeometry, Scene, SRGBColorSpace, Vector2, Vector3, WebGLRenderer, Group,
 } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { avatarView, type AvatarFraming } from './builtin';
@@ -17,6 +17,7 @@ import { parseAvatarClip, parseSpeechTiming } from './validation';
 import { AUDITION_PROTOCOL, AuditionRecorder, canonicalJson, sealAudition, sha256Bytes } from './audition';
 import type { AnimationTelemetry, AvatarClip, BehaviorPlan, RigDiagnostics, RigMapping, RigPose, SpeechTiming } from './types';
 import type { GestureBasisModel } from './learnedGesture';
+import type { SpeechGestureMotion } from './speechGesture';
 import type { GaussianBodyArrays, GaussianBodyHead, GaussianBodyHeader, GaussianHeadConfig } from './gaussian/gaussianBody';
 import type { createGaussianPerformance } from './gaussian/gaussianPerformance';
 
@@ -34,6 +35,7 @@ export interface PlaybackState {
   allowGeometryPreview?: boolean;
   attentionTarget?: AttentionTarget | null;
   learnedGesture?: GestureBasisModel;
+  speechGesture?: SpeechGestureMotion;
 }
 
 export type GaussianStageState = 'disabled' | 'loading' | 'ready' | 'error';
@@ -136,15 +138,26 @@ export class AvatarRenderer {
     callbacks.onReady?.(this.rig.diagnostics);
   }
 
+  private readonly studio = new Group();
+
+  /** The dark studio floor and backdrop; hidden for the plain white photoreal backdrop. */
+  setStudioVisible(visible: boolean): void {
+    this.studio.visible = visible;
+    this.studioFog ??= this.scene.fog;          // the dark studio haze would grey a white backdrop
+    this.scene.fog = visible ? this.studioFog : null;
+  }
+  private studioFog: Scene['fog'] | undefined;
+
   private createStudio(): void {
+    this.scene.add(this.studio);
     const ground = new Mesh(new PlaneGeometry(200, 200), new MeshStandardMaterial({ color: '#151b14', roughness: 1 }));
-    ground.rotation.x = -Math.PI / 2; ground.position.y = -0.03; this.scene.add(ground);
+    ground.rotation.x = -Math.PI / 2; ground.position.y = -0.03; this.studio.add(ground);
     const disc = new Mesh(new CircleGeometry(1.05, 96), new MeshBasicMaterial({ color: '#050905', transparent: true, opacity: 0.30, depthWrite: false }));
-    disc.rotation.x = -Math.PI / 2; disc.position.set(0, -0.015, 0); disc.scale.y = 0.45; this.scene.add(disc);
+    disc.rotation.x = -Math.PI / 2; disc.position.set(0, -0.015, 0); disc.scale.y = 0.45; this.studio.add(disc);
     // A large out-of-focus studio backdrop is represented by a subtle mesh,
     // avoiding heavyweight environment maps or external image requests.
     const backdrop = new Mesh(new CircleGeometry(1.80, 96), new MeshBasicMaterial({ color: '#20291d', transparent: true, opacity: 0.40, depthWrite: false }));
-    backdrop.position.set(0, 1.50, -1.1); this.scene.add(backdrop);
+    backdrop.position.set(0, 1.50, -1.1); this.studio.add(backdrop);
   }
 
   setPlayback(state: PlaybackState): void {
@@ -153,7 +166,8 @@ export class AvatarRenderer {
       else if (state.audioSha256 !== this.playback.audioSha256) this.stopAudition('audio_changed');
       else if (state.speechTiming !== this.timingInput) this.stopAudition('speech_timing_changed');
       else if (state.performanceClip !== this.clipInput || state.allowGeometryPreview !== this.playback.allowGeometryPreview
-        || state.reducedMotion !== this.playback.reducedMotion || state.learnedGesture !== this.playback.learnedGesture) this.stopAudition('motion_settings_changed');
+        || state.reducedMotion !== this.playback.reducedMotion || state.learnedGesture !== this.playback.learnedGesture
+        || state.speechGesture !== this.playback.speechGesture) this.stopAudition('motion_settings_changed');
       else if (state.attentionTarget || this.playback.attentionTarget) this.stopAudition('attention_changed');
     }
     if (state.speechTiming !== this.timingInput) {
@@ -177,7 +191,7 @@ export class AvatarRenderer {
 
   async startAudition(): Promise<void> {
     if (this.disposed || this.contextLost || !this.visible) throw new Error('The avatar must be visible before recording.');
-    if (this.gaussianRequested || this.playback.learnedGesture) throw new Error('The GLB audition protocol does not record Gaussian-head or learned-gesture identities. Disable them before recording a GLB-only audition.');
+    if (this.gaussianRequested || this.playback.learnedGesture || this.playback.speechGesture) throw new Error('The GLB audition protocol does not record Gaussian-head, learned-gesture or speech-gesture identities. Disable them before recording a GLB-only audition.');
     if (this.calibrationPose) throw new Error('Turn off manual pose preview before recording.');
     if (this.playback.attentionTarget || this.attention.active) throw new Error('Stop attention tracking and wait for the avatar to settle before recording a fixed comparison audition.');
     const asset = this.rig.diagnostics.assetInspection;
@@ -274,7 +288,12 @@ export class AvatarRenderer {
       this.canvas.dataset.gaussianBundle = config.bundle;
       this.canvas.dataset.gaussianSha256 = sha256;
       this.gaussianFactory = (rig) => {
-        const attachment = body.fitGaussianAttachment(rig, B as GaussianBodyArrays, config);
+        // Bundles with re-bound neck/collar gaussians carry their own (negative) cut. The neck seam still starts at the
+        // FLAME boundary, so the collar below it follows the neck joint and only the head follows the head joint.
+        const headerCut = (header as { collar_cut_m?: unknown }).collar_cut_m;
+        const cut = typeof headerCut === 'number' && Number.isFinite(headerCut) ? headerCut : undefined;
+        const fitted = { ...config, collarCutMeters: config.collarCutMeters ?? cut };
+        const attachment = body.fitGaussianAttachment(rig, B as GaussianBodyArrays, fitted);
         const refined = sha256 === '32d5bc15901a8673901c6234ae7af946d2bfcf2c0aa5e7ed9c816d1c3aff599c';
         const head = new body.GaussianBodyHead(header as GaussianBodyHeader, B as GaussianBodyArrays, attachment, refined);
         const restoreMaterials = refined ? body.softenCompositeMaterials(rig) : () => {};

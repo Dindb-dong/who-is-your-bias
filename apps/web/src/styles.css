@@ -58,6 +58,8 @@
   text-wrap: pretty;
   overflow-wrap: anywhere;
 }
+/* Photoreal face: plain white backdrop behind the avatar; header text switches to dark. */
+.stage-card.photoreal{background:#fff;color:#1b2219}.stage-card.photoreal .stage-title span{color:#6b7563}.stage-card.photoreal .tag.dark{color:#4e5a45;border-color:#4e5a4530;background:#00000008}.stage-card.photoreal .stage-options{color:#4e5a45;border-color:#4e5a4530}.stage-card.photoreal .stage-caption{color:#7c8873}.stage-card.photoreal .caption-rule{background:#7c887350}
 .bilingual-controls { padding: 10px 18px; border-bottom: 1px solid var(--line); background: #f5f8ee; }
 .bilingual-controls label { display: flex; align-items: center; gap: 7px; color: #43583a; font-size: 11px; font-weight: 600; }
 .bilingual-controls input { accent-color: #709c45; }

@@ -61,6 +61,9 @@ export interface RigPose {
   face?: FaceWeights;
   /** Source-local delta rotations in XYZW order, relative to source neutral. */
   bones?: BoneRotations;
+  /** 0..1 (default 1): how far `bones` replace the designed pose of the same bones. Speech gestures fade in
+   * and out over the designed movement this way instead of passing through the neutral pose. */
+  boneWeight?: number;
   visemes?: VisemeWeights;
 }
 
@@ -189,7 +192,7 @@ export interface VideoCrop {
 
 export interface AnimationTelemetry {
   faceSource: 'designed' | 'observed' | 'geometry_preview' | 'calibration';
-  boneSource: 'designed' | 'observed' | 'geometry_preview' | 'trained_geometry_preview' | 'calibration';
+  boneSource: 'designed' | 'observed' | 'geometry_preview' | 'trained_geometry_preview' | 'speech_generated' | 'calibration';
   speechSource: SpeechTiming['timing_basis'] | 'amplitude' | 'estimated' | 'silent';
   unsupportedFace: string[];
   unsupportedVisemes: string[];

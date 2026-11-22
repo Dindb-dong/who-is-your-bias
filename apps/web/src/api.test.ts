@@ -174,6 +174,23 @@ describe('live stream ownership and delivery', () => {
     expect(received.findIndex((event) => event.event === 'audio')).toBeLessThan(received.findIndex((event) => event.event === 'result'));
   });
 
+  it('delivers gesture frames before audio completion and subtitles after it', async () => {
+    const events = liveEvents();
+    events.splice(-2, 0, {
+      event: 'gesture', data: { turn_id: turn.id, sequence: 0, start_frame: 0, frame_count: 1,
+        encoding: 'f32le', poses_base64: btoa('\x00'.repeat(165 * 4)) },
+    });
+    events.splice(-1, 0, {
+      event: 'subtitle', data: { turn_id: turn.id, segment_id: `${turn.id}:0`, sequence: 0,
+        language: 'ko', text: '안녕하세요', state: 'ready' },
+    });
+    mockStream(liveText(events), true);
+    const received: StreamEvent[] = [];
+    await streamChat({ ...request, gesture: true, subtitle_language: 'ko' }, new AbortController().signal,
+      (event) => received.push(event), { live: true });
+    expect(received).toEqual(events);
+  });
+
   const invalidCases: [string, (events: StreamEvent[]) => StreamEvent[]][] = [
     ['missing meta', (events) => events.slice(1)],
     ['missing protocol', (events) => changeLive(events, 'meta', { protocol: undefined })],

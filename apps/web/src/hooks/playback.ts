@@ -1,6 +1,7 @@
 import { getPreparedSpeech, getSpeech } from '../api';
 import type { Turn } from '../api';
 import type { SpeechTiming } from '../avatar/types';
+import type { SpeechGestureMotion } from '../avatar/speechGesture';
 import type { PlaybackEvent, PlaybackMark } from './liveMetrics';
 
 export type VoiceMode = 'off' | 'browser' | 'provider';
@@ -8,6 +9,7 @@ export type PlaybackState = {
   status: 'idle' | 'loading' | 'playing'; elapsedMs: number; audioElapsedMs: number;
   amplitude: number; error: string | null; audioSha256?: string; speechTiming?: SpeechTiming;
   timingStatus?: string; timingMessage?: string;
+  speechGesture?: SpeechGestureMotion; gestureStatus?: string; gestureMessage?: string;
 };
 export const initialPlayback: PlaybackState = { status: 'idle', elapsedMs: 0, audioElapsedMs: 0, amplitude: 0, error: null };
 
@@ -41,8 +43,13 @@ export function browserPlaybackEnvironment(): PlaybackEnvironment {
   };
 }
 
+export interface PlaybackOptions {
+  /** Ask the speech service for speech-driven gestures (provider voice only). */
+  gesture?: boolean;
+}
+
 export interface PlaybackController {
-  play(turn: Turn, mode: VoiceMode, observe?: (event: PlaybackEvent) => void): Promise<void>;
+  play(turn: Turn, mode: VoiceMode, observe?: (event: PlaybackEvent) => void, options?: PlaybackOptions): Promise<void>;
   stop(): void;
   dispose(): void;
 }
@@ -62,7 +69,7 @@ export function createPlaybackController(emit: (state: PlaybackState) => void, e
   return {
     stop,
     dispose() { disposed = true; ++generation; const release = cleanup; cleanup = noop; release(); },
-    async play(turn, mode, observe) {
+    async play(turn, mode, observe, options = {}) {
       if (disposed) return;
       stop();
       if (mode === 'off') return;
@@ -112,7 +119,7 @@ export function createPlaybackController(emit: (state: PlaybackState) => void, e
           audioContext = environment.createContext();
           await audioContext.resume();
           if (!isCurrent()) return;
-          const prepared = environment.prepareSpeech ? await environment.prepareSpeech(speechText, turn.language, abort.signal) : undefined;
+          const prepared = environment.prepareSpeech ? await environment.prepareSpeech(speechText, turn.language, abort.signal, { gesture: options.gesture }) : undefined;
           if (!isCurrent()) return;
           const blob = prepared?.audio ?? await environment.getSpeech(speechText, abort.signal);
           if (!isCurrent()) return;
@@ -135,7 +142,8 @@ export function createPlaybackController(emit: (state: PlaybackState) => void, e
               audioElapsedMs: Number.isFinite(audio.currentTime) ? Math.max(0, audio.currentTime * 1000) : 0,
               amplitude: Math.min(1, Math.sqrt(squareSum / samples.length) * 5), error: null,
               audioSha256: prepared?.audioSha256, speechTiming: prepared?.speechTiming,
-              timingStatus: prepared?.timingStatus ?? 'not_configured', timingMessage: prepared?.timingMessage });
+              timingStatus: prepared?.timingStatus ?? 'not_configured', timingMessage: prepared?.timingMessage,
+              speechGesture: prepared?.gesture, gestureStatus: prepared?.gestureStatus, gestureMessage: prepared?.gestureMessage });
             raf = environment.requestFrame(tick);
           };
           audio.onended = () => finish();

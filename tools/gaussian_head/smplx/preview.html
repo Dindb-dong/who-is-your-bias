@@ -48,11 +48,11 @@ let r = null, head = null, header = null, B = null, center = null, frame = +(q.g
 window.__pv = { frames: 0, ready: false };
 async function load() {
   window.__pv.ready = false;
-  ({ header, B } = await loadPreview('./preview_cut' + $('cut').value));
+  ({ header, B } = await loadPreview(q.has('bundle') && /^[\w-]+$/.test(q.get('bundle')) ? './' + q.get('bundle') : './preview_cut' + $('cut').value));
   head = new SmplxHead(header, B);
   const v = head.forward(new Float32Array(165), new Float32Array(header.n_expr), [0, 0, 0]);
   let cx = 0, cy = 0, cz = 0; for (const i of B.vmap) { cx += v[3 * i]; cy += v[3 * i + 1]; cz += v[3 * i + 2]; }
-  const k = B.vmap.length; center = [cx / k, cy / k - 0.12, cz / k];
+  const k = B.vmap.length; center = [cx / k, cy / k - +(q.get('cy') ?? 0.12), cz / k];
   const fresh = document.createElement('canvas'); fresh.id = 'c'; canvas.replaceWith?.call(document.getElementById('c'), fresh);
   r = new SmplxPreviewRenderer(document.getElementById('c'), header, B, head);
   window.__pv = { frames: 0, ready: true, n_gauss: header.n_gauss };
@@ -60,25 +60,66 @@ async function load() {
 $('cut').addEventListener('change', load);
 await load();
 const pose = new Float32Array(165), expr = new Float32Array(100);
+// ?motion=<stem>: play motion_<stem>.json/.bin (schema smplx-motion.v1: SMPL-X poses + FLAME expressions) with motion_<stem>.wav
+let motion = null; const audio = new Audio();
+if (q.has('motion') && /^[\w-]+$/.test(q.get('motion'))) {
+  const stem = './motion_' + q.get('motion'), mh = await (await fetch(stem + '.json')).json();
+  if (mh.schema !== 'smplx-motion.v1') throw new Error('Unsupported motion ' + mh.schema);
+  const mb = await (await fetch(stem + '.bin')).arrayBuffer(), P = mh.buffers.poses, X = mh.buffers.expressions;
+  motion = { fps: mh.fps, n: mh.n_frames, poses: new Float32Array(mb, P.offset, P.shape[0] * 165), expr: new Float32Array(mb, X.offset, X.shape[0] * 100) };
+  // ?calm=<0..1>: shrink every joint's motion around its mean over the clip (1 = as generated)
+  // ?smooth=<frames>: centred moving average (removes small fast movements); both leave the face expression alone
+  // Default 0.7 / 3 frames (team choice 2026-11-19: "slightly calmer"); calm=1&smooth=0 plays the motion as generated.
+  const calm = Math.min(1, Math.max(0, +(q.get('calm') ?? 0.7))), sm = Math.max(0, Math.round(+(q.get('smooth') ?? 3)));
+  if (calm < 1 || sm > 0) {
+    const n = motion.n, src = motion.poses, mean = new Float32Array(165), out = new Float32Array(n * 165);
+    for (let f = 0; f < n; f++) for (let c = 0; c < 165; c++) mean[c] += src[165 * f + c] / n;
+    for (let f = 0; f < n; f++) {
+      const a = Math.max(0, f - sm), b = Math.min(n - 1, f + sm);
+      for (let c = 0; c < 165; c++) {
+        let v = 0; for (let g = a; g <= b; g++) v += src[165 * g + c];
+        v /= (b - a + 1);
+        out[165 * f + c] = mean[c] + calm * (v - mean[c]);
+      }
+    }
+    motion.poses = out;
+  }
+  audio.src = stem + '.wav'; audio.addEventListener('ended', () => { $('play').checked = false; });
+  window.__pv.motion = { frames: motion.n, fps: motion.fps };
+}
 function tick(now) {
   const cv = document.getElementById('c');
   const dpr = Math.min(2, window.devicePixelRatio || 1), w = Math.round(cv.clientWidth * dpr), h = Math.round(cv.clientHeight * dpr);
   if (cv.width !== w || cv.height !== h) { cv.width = w; cv.height = h; }
-  pose.fill(0); expr.fill(0);
-  pose[3 * 16 + 2] = -1.15; pose[3 * 17 + 2] = 1.15;                       // arms down from the T-pose
-  pose[3 * 18 + 1] = -0.25; pose[3 * 19 + 1] = 0.25;
+  pose.fill(0); expr.fill(0); let bodyTrans = [0, 0, 0];
+  if (!motion) {
+    pose[3 * 16 + 2] = -1.15; pose[3 * 17 + 2] = 1.15;                     // arms down from the T-pose
+    pose[3 * 18 + 1] = -0.25; pose[3 * 19 + 1] = 0.25;
+  }
   const val = id => +$(id).value; for (const k of ['neck', 'nod', 'spine', 'shrug', 'jaw', 'cam', 'dist']) $('v_' + k).textContent = $(k).value + (k === 'dist' ? ' cm' : '°');
   pose[3 * 12 + 1] += val('neck') * D; pose[3 * 15] += val('nod') * D; pose[3 * 9] += val('spine') * D;
   pose[3 * 13 + 2] -= val('shrug') * D; pose[3 * 14 + 2] += val('shrug') * D; pose[3 * 22] += val('jaw') * D;
-  if ($('play').checked) {
+  if (motion) {
+    let f;
+    if (q.has('frame')) f = Math.min(motion.n - 1, +q.get('frame'));
+    else {
+      if ($('play').checked && audio.paused && !audio.ended) audio.play().catch(() => {});
+      if (!$('play').checked && !audio.paused) audio.pause();
+      f = Math.min(motion.n - 1, Math.floor(audio.currentTime * motion.fps));
+    }
+    pose.set(motion.poses.subarray(165 * f, 165 * f + 165));
+    const es = +(q.get('exprScale') ?? 1); for (let e = 0; e < 100; e++) expr[e] = es * motion.expr[100 * f + e];
+    window.__pv.motionFrame = f;
+  } else if ($('play').checked) {
     const f = Math.floor(frame) % header.n_frames;
-    applyFlamePose(pose, B.m_pose.subarray(15 * f, 15 * f + 15));
+    if (B.m_body) { pose.set(B.m_body.subarray(165 * f, 165 * f + 165)); bodyTrans = Array.from(B.m_body_trans.subarray(3 * f, 3 * f + 3)); }
+    else applyFlamePose(pose, B.m_pose.subarray(15 * f, 15 * f + 15));
     expr.set(B.m_expr.subarray(header.n_expr * f, header.n_expr * f + header.n_expr));
     if (!q.has('frame')) frame += Math.min(0.1, (now - last) / 1000) * header.fps;
   }
   const yaw = val('cam') * D, dist = val('dist') / 100;
   const eye = [center[0] + dist * Math.sin(yaw), center[1] + 0.05, center[2] + dist * Math.cos(yaw)];
-  r.render(pose, expr, [0, 0, 0], { view: lookAt(eye, center), fovY: 30 * D }, { showBody: $('body').checked });
+  r.render(pose, expr, bodyTrans, { view: lookAt(eye, center), fovY: 30 * D }, { showBody: $('body').checked });
   const dt = now - last; last = now; fps = fps * 0.9 + 100 / Math.max(dt, 1); n++;
   window.__pv.frames = n; window.__pv.fps = fps; window.__pv.cpuMs = r.stats.cpuMs;
   hud.textContent = `가우시안 ${header.n_gauss.toLocaleString()}개\n${fps.toFixed(0)} fps · CPU ${r.stats.cpuMs.toFixed(0)} ms`;
