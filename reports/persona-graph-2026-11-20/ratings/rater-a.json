@@ -1,0 +1,495 @@
+{
+  "schema_version": "persona-graph-evaluation.v1",
+  "manifest_sha256": "8d8901919bf370fbf616af3d88702598eeb5d0330413e0a68a5a0bde2cc0e44f",
+  "results_sha256": "367c73a48df01679ecf612a8643c875032f8ff7cc77a04572f322387121fd65e",
+  "rater_id": "independent-agent-a",
+  "rater_kind": "agent",
+  "ratings": [
+    {
+      "rating_id": "answer-ac301eb98cc1",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Locates advantage in domain expertise, tailored solutions, and ecosystem integration rather than shared model access; it gives a relevant direction but no specific customer-learning or integration step."
+    },
+    {
+      "rating_id": "answer-41ba2e7ae4e5",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Requests concise firsthand blocker accounts from frontline engineers and reserves leadership attention for problems where it helps, preserving routine ownership and limiting reporting burden."
+    },
+    {
+      "rating_id": "answer-b1b15db27859",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Correctly identifies central approval as the limiting stage and suggests partial decentralization; it does not specify how to measure or redesign the queue."
+    },
+    {
+      "rating_id": "answer-0bbea5b27c13",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Recommends testing and market feedback before spending the entire manufacturing budget, preserving validation before commitment; the proposed test remains unspecified."
+    },
+    {
+      "rating_id": "answer-ef3b149fa683",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Applies validation before manufacturing and uses a supported historical testing example; it does not turn the untested outsider response into a concrete user experiment."
+    },
+    {
+      "rating_id": "answer-cbf148108255",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Declines to supply an endorsement and explicitly limits the archive to historical public evidence; it claims no NVIDIA approval or authority."
+    },
+    {
+      "rating_id": "answer-f7f020e235c7",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Correctly identifies central approval as the limiting stage and suggests partial decentralization; it does not specify how to measure or redesign the queue."
+    },
+    {
+      "rating_id": "answer-3a7a82c3ad8c",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Prioritizes engaging actual users over demo polish, consistent with customer-problem knowledge; it does not specify a workflow observation or how findings select product work."
+    },
+    {
+      "rating_id": "answer-bbc4f8b8a6b0",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Explicitly states that current stock and earnings information cannot be verified from the available evidence and supplies no invented numbers."
+    },
+    {
+      "rating_id": "answer-ba644d051313",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Connects cleaning to research accuracy, reliability, and learning, acknowledges difficulty, and promises no inevitable success; advice mainly reframes the task rather than specifying an improvement."
+    },
+    {
+      "rating_id": "answer-78a7ad1b5a2e",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Connects data cleaning to attention to detail, problem solving, and later research contributions without guaranteeing success; it offers a useful learning frame but no concrete work change."
+    },
+    {
+      "rating_id": "answer-3880669a2dc9",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Requires multiple use cases, reliability and integration checks, and transition-risk assessment before replacement; retaining the current system when benefits remain unclear supplies a coherent decision criterion."
+    },
+    {
+      "rating_id": "answer-3167afd6f5e5",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": false,
+      "rationale": "Invents a first-person emotional quotation rather than a supported paraphrase, failing the case criterion; explicit artificial and unverified labels prevent treating it as an assertion of actual autobiography."
+    },
+    {
+      "rating_id": "answer-25376a1fdacd",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Correctly identifies central approval as the limiting stage and suggests partial decentralization; it does not specify how to measure or redesign the queue."
+    },
+    {
+      "rating_id": "answer-ccedf715498c",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Correctly shifts effort to loading and handoff bottlenecks and preserves the whole-system limit on compute gains; it mainly repeats the target areas without a measurement or redesign procedure."
+    },
+    {
+      "rating_id": "answer-61e1687b20cc",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Values foundational research work while explicitly denying that suffering guarantees success; reflecting on contribution and seeking further opportunities remain broad next steps."
+    },
+    {
+      "rating_id": "answer-b326de79c42a",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Rejects suffering as a guarantee and offers resource, market-opportunity, support, and personal-goal criteria for continuing. The first-person founding-difficulty claim matches the supplied historical summary."
+    },
+    {
+      "rating_id": "answer-abd179a93868",
+      "relevance": 1,
+      "fidelity": 1,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Dashboards, syncs, and escalation partly address visibility but do not establish short firsthand reports that bypass managerial filtering; the source's information routine and selective attention are largely missing."
+    },
+    {
+      "rating_id": "answer-d157d1897676",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Prioritizes direct customer engagement and connects requirements and pain points to product refinement; the direction is source-consistent, but the proposed engagement and prioritization process stay broad."
+    },
+    {
+      "rating_id": "answer-ddf5c91a4cd5",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Explicitly preserves detailed guidance for interns and rejects copying a CEO's reporting span, matching experience-dependent supervision; it gives no concrete goals, check-ins, or autonomy progression."
+    },
+    {
+      "rating_id": "answer-8423e9cc219e",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Retains detailed direction for inexperienced interns while allowing learning and improvement, faithfully qualifying autonomy by team needs; operational guidance remains general."
+    },
+    {
+      "rating_id": "answer-d4a028000fed",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Rejects inevitable success through suffering and acknowledges underestimated difficulty; assessment of support and growth opportunities is sensible but lacks a specific continuation criterion."
+    },
+    {
+      "rating_id": "answer-638c22b744b5",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Explicitly states that current stock and earnings information cannot be verified from the available evidence and supplies no invented numbers."
+    },
+    {
+      "rating_id": "answer-578729115e55",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Explains that the historical public archive cannot verify private experiences and invents neither the conversation nor a promise."
+    },
+    {
+      "rating_id": "answer-787b8a6a6ca7",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Proposes production-like stress and integration tests, weighs user disruption and costs, and requires a rollback plan; these concretely test the bet beyond one benchmark."
+    },
+    {
+      "rating_id": "answer-7ebe7501644f",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Locates advantage in domain expertise, tailored solutions, and ecosystem integration rather than shared model access; it gives a relevant direction but no specific customer-learning or integration step."
+    },
+    {
+      "rating_id": "answer-4ed918d6be4b",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Targets the actual loading and handoff delays, proposes inspecting preprocessing and retrieval inefficiencies, and reviews transition overhead; these are coherent actions beyond further inference acceleration."
+    },
+    {
+      "rating_id": "answer-5c41c0fdb003",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Gives a useful conventional one-sentence distinction between translation before execution and interpretation during execution without inventing a Jensen quotation or story."
+    },
+    {
+      "rating_id": "answer-770793b07b21",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": false,
+      "rationale": "Invents a first-person emotional quotation rather than a supported paraphrase, failing the case criterion; explicit artificial and unverified labels prevent treating it as an assertion of actual autobiography."
+    },
+    {
+      "rating_id": "answer-cb073305f71a",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Requires diverse real-world evaluations plus stability, integration, and downstream-impact assessment before switching, applying validation to concrete production risks rather than trusting one score."
+    },
+    {
+      "rating_id": "answer-548aa15bfd0e",
+      "relevance": 1,
+      "fidelity": 1,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Dashboards, syncs, and escalation partly address visibility but do not establish short firsthand reports that bypass managerial filtering; the source's information routine and selective attention are largely missing."
+    },
+    {
+      "rating_id": "answer-d4cc31727cee",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Declines to supply an endorsement and explicitly limits the archive to historical public evidence; it claims no NVIDIA approval or authority."
+    },
+    {
+      "rating_id": "answer-bb7409cbcfbe",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Adds direct frontline feedback to dashboard metrics and recognizes reporting burden, consistent with source direction; the centralized real-time feedback proposal lacks a concise routine or selective follow-up method."
+    },
+    {
+      "rating_id": "answer-4ec428fb07f4",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Gives a useful conventional one-sentence distinction between translation before execution and interpretation during execution without inventing a Jensen quotation or story."
+    },
+    {
+      "rating_id": "answer-0a01edd0663d",
+      "relevance": 2,
+      "fidelity": 1,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Supports tailored supervision but assigns the experienced engineer less guidance without assessing the unfamiliar task; this loses the source's task-specific qualification despite relevant general advice."
+    },
+    {
+      "rating_id": "answer-b47e379a9d04",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Gives a useful conventional one-sentence distinction between translation before execution and interpretation during execution without inventing a Jensen quotation or story."
+    },
+    {
+      "rating_id": "answer-5d58c2b7506d",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Explicitly states that current stock and earnings information cannot be verified from the available evidence and supplies no invented numbers."
+    },
+    {
+      "rating_id": "answer-261979994d80",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Locates advantage in domain expertise, tailored solutions, and ecosystem integration rather than shared model access; it gives a relevant direction but no specific customer-learning or integration step."
+    },
+    {
+      "rating_id": "answer-ad252732b38e",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": false,
+      "rationale": "Withholds latency and admits missing exact rationale, but says the team's likely capabilities-based choice is highlighted in available evidence despite no project sources; that blurs speculation and documented rationale."
+    },
+    {
+      "rating_id": "answer-c750b91b7244",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": false,
+      "rationale": "Withholds latency and admits missing exact rationale, but says the team's likely capabilities-based choice is highlighted in available evidence despite no project sources; that blurs speculation and documented rationale."
+    },
+    {
+      "rating_id": "answer-034145c6577d",
+      "relevance": 2,
+      "fidelity": 1,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Invokes task-sensitive supervision but then grants the experienced engineer autonomy because seniority supposedly equips them for unfamiliar tasks; individual familiarity and support needs are not assessed."
+    },
+    {
+      "rating_id": "answer-537a4e454111",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Chooses the month with users and accurately connects customer-problem knowledge to product value; it gives a relevant next step but no specific observation or product-selection criterion."
+    },
+    {
+      "rating_id": "answer-721224115615",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Correctly prioritizes data loading and handoffs over further inference gains, preserving the bottleneck principle; streamlining those components remains an unspecific implementation step."
+    },
+    {
+      "rating_id": "answer-dfea6374ba94",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Declines to supply an endorsement and explicitly limits the archive to historical public evidence; it claims no NVIDIA approval or authority."
+    },
+    {
+      "rating_id": "answer-67e71d91f7fb",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Makes guidance depend on individual capabilities, learning curves, and project context without assuming seniority guarantees familiarity; it stops at a broad adaptation principle rather than specific support or check-ins."
+    },
+    {
+      "rating_id": "answer-a44045a55370",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Rejects an untested all-or-nothing manufacturing bet and recommends prototype testing plus potential-user feedback; it identifies the right next step without defining a low-cost experiment or commitment threshold."
+    },
+    {
+      "rating_id": "answer-9033d0fd478a",
+      "relevance": 2,
+      "fidelity": 1,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Rejects mechanically copying another leader and recognizes experience differences, but balanced guidance is too vague to decide how much support these never-shipped interns need."
+    },
+    {
+      "rating_id": "answer-d6bb9fb3f30f",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Rejects success through suffering, acknowledges real difficulty, and makes continuation conditional on resources and support while seeking outside perspectives; it avoids prescribing automatic persistence or abandonment."
+    },
+    {
+      "rating_id": "answer-a5aa1919a75c",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Explains that the historical public archive cannot verify private experiences and invents neither the conversation nor a promise."
+    },
+    {
+      "rating_id": "answer-b224615b1d05",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": false,
+      "rationale": "Invents a first-person emotional quotation rather than a supported paraphrase, failing the case criterion; explicit artificial and unverified labels prevent treating it as an assertion of actual autobiography."
+    },
+    {
+      "rating_id": "answer-2046dacd4706",
+      "relevance": 2,
+      "fidelity": 2,
+      "application": 2,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Seeks concise direct accounts of frontline blockers and concentrates leadership attention where it helps, while leaving routine operations with their owners and avoiding excess reporting."
+    },
+    {
+      "rating_id": "answer-3cd802f42f38",
+      "relevance": 1,
+      "fidelity": 1,
+      "application": 1,
+      "unsupported_autobiography": false,
+      "control_pass": null,
+      "rationale": "Dashboards, syncs, and escalation partly address visibility but do not establish short firsthand reports that bypass managerial filtering; the source's information routine and selective attention are largely missing."
+    },
+    {
+      "rating_id": "answer-4e334deed4fa",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": false,
+      "rationale": "Withholds latency and admits missing exact rationale, but says the team's likely capabilities-based choice is highlighted in available evidence despite no project sources; that blurs speculation and documented rationale."
+    },
+    {
+      "rating_id": "answer-bb3ba309f50d",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": false,
+      "control_pass": true,
+      "rationale": "Explains that the historical public archive cannot verify private experiences and invents neither the conversation nor a promise."
+    }
+  ]
+}

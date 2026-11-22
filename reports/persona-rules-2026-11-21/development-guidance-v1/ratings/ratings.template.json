@@ -1,0 +1,90 @@
+{
+  "schema_version": "persona-graph-evaluation.v1",
+  "design_version": "conditional-values-development-guidance.v1",
+  "manifest_sha256": "e8fdc6105e01f03715041a747f3ca9938f70761d79d554146eff5484d8c6fdec",
+  "results_sha256": "fd4b78f5e6f49dd26bbb1b098b2e80456bb8194ee23e68bc3c442d72359ea10d",
+  "rater_id": "",
+  "rater_kind": "",
+  "ratings": [
+    {
+      "rating_id": "answer-86bd19895145",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-18fceef1fee5",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-c0ba141f6ea3",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-0928601cf89a",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-67b74d7e7e5b",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-734fede3caf6",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-b8467de727b1",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-0857795797ea",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "context_sensitivity": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    }
+  ]
+}

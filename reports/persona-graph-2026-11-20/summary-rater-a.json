@@ -1,0 +1,827 @@
+{
+  "schema_version": "persona-graph-evaluation.v1",
+  "manifest_sha256": "8d8901919bf370fbf616af3d88702598eeb5d0330413e0a68a5a0bde2cc0e44f",
+  "results_sha256": "367c73a48df01679ecf612a8643c875032f8ff7cc77a04572f322387121fd65e",
+  "raters": [
+    {
+      "id": "independent-agent-a",
+      "kind": "agent",
+      "ratings_sha256": "fbb72933cd8ee0ade14b91ded41b60f98e430537cdf99f1a5030cd9543ca1182"
+    }
+  ],
+  "conditions": {
+    "baseline": {
+      "n_attempts": 18,
+      "n_advice": 12,
+      "n_controls": 6,
+      "valid_model_completions": 16,
+      "deterministic_policy_guards": 2,
+      "failed_or_truncated": 0,
+      "advice_value_application_accuracy": 0.8333333333333334,
+      "advice_dimension_means_0_to_2": {
+        "relevance": 1.9166666666666667,
+        "fidelity": 1.8333333333333333,
+        "application": 1.1666666666666667
+      },
+      "control_pass_rate": 0.6666666666666666,
+      "unsupported_autobiographical_assertion_rate_all_attempts": 0.0,
+      "finish_reasons": {
+        "stop": 16,
+        "deterministic_guard": 2
+      },
+      "provider_reported_models": [
+        "Qwen3-4B-Q4_K_M"
+      ],
+      "prompt_budget": {
+        "counters": [
+          "server-chat-template:Qwen3-4B-Q4_K_M@bc640142c66e1fdd12af0bd68f40445458f3869b:Q4_K_M:7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5"
+        ],
+        "all_exact_model_tokens": true,
+        "mean_input_units": 740.1875,
+        "max_input_units": 814,
+        "mean_provider_prompt_tokens": 740.1875
+      }
+    },
+    "flat": {
+      "n_attempts": 18,
+      "n_advice": 12,
+      "n_controls": 6,
+      "valid_model_completions": 16,
+      "deterministic_policy_guards": 2,
+      "failed_or_truncated": 0,
+      "advice_value_application_accuracy": 0.8333333333333334,
+      "advice_dimension_means_0_to_2": {
+        "relevance": 1.9166666666666667,
+        "fidelity": 1.8333333333333333,
+        "application": 1.1666666666666667
+      },
+      "control_pass_rate": 0.6666666666666666,
+      "unsupported_autobiographical_assertion_rate_all_attempts": 0.0,
+      "finish_reasons": {
+        "stop": 16,
+        "deterministic_guard": 2
+      },
+      "provider_reported_models": [
+        "Qwen3-4B-Q4_K_M"
+      ],
+      "prompt_budget": {
+        "counters": [
+          "server-chat-template:Qwen3-4B-Q4_K_M@bc640142c66e1fdd12af0bd68f40445458f3869b:Q4_K_M:7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5"
+        ],
+        "all_exact_model_tokens": true,
+        "mean_input_units": 1146.75,
+        "max_input_units": 1909,
+        "mean_provider_prompt_tokens": 1146.75
+      }
+    },
+    "graph": {
+      "n_attempts": 18,
+      "n_advice": 12,
+      "n_controls": 6,
+      "valid_model_completions": 16,
+      "deterministic_policy_guards": 2,
+      "failed_or_truncated": 0,
+      "advice_value_application_accuracy": 0.8333333333333334,
+      "advice_dimension_means_0_to_2": {
+        "relevance": 1.9166666666666667,
+        "fidelity": 1.8333333333333333,
+        "application": 1.3333333333333333
+      },
+      "control_pass_rate": 0.6666666666666666,
+      "unsupported_autobiographical_assertion_rate_all_attempts": 0.0,
+      "finish_reasons": {
+        "stop": 16,
+        "deterministic_guard": 2
+      },
+      "provider_reported_models": [
+        "Qwen3-4B-Q4_K_M"
+      ],
+      "prompt_budget": {
+        "counters": [
+          "server-chat-template:Qwen3-4B-Q4_K_M@bc640142c66e1fdd12af0bd68f40445458f3869b:Q4_K_M:7485fe6f11af29433bc51cab58009521f205840f5b4ae3a32fa7f92e8534fdf5"
+        ],
+        "all_exact_model_tokens": true,
+        "mean_input_units": 1164.625,
+        "max_input_units": 1966,
+        "mean_provider_prompt_tokens": 1164.625
+      }
+    }
+  },
+  "paired_deltas": {
+    "advice:graph-minus-baseline": {
+      "n_cases": 12,
+      "delta": 0.0,
+      "ci95": [
+        -0.25,
+        0.25
+      ],
+      "method": "paired percentile bootstrap over cases; repeats/raters averaged within each case"
+    },
+    "advice:graph-minus-flat": {
+      "n_cases": 12,
+      "delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "method": "paired percentile bootstrap over cases; repeats/raters averaged within each case"
+    },
+    "control:graph-minus-baseline": {
+      "n_cases": 6,
+      "delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "method": "paired percentile bootstrap over cases; repeats/raters averaged within each case"
+    },
+    "control:graph-minus-flat": {
+      "n_cases": 6,
+      "delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "method": "paired percentile bootstrap over cases; repeats/raters averaged within each case"
+    }
+  },
+  "selection_coverage": {
+    "advice": {
+      "n_cases": 12,
+      "memory_included": 9,
+      "selection_reasons": {
+        "selected": 9,
+        "no_applicable_source_supported_path": 1,
+        "not_an_advice_or_value_application_request": 2
+      },
+      "interpretation": "Routing/coverage diagnostics only, not answer quality."
+    },
+    "control": {
+      "n_cases": 6,
+      "memory_included": 0,
+      "selection_reasons": {
+        "requires_factual_verification_or_disallowed_request": 1,
+        "production_public_evidence_guard": 2,
+        "not_an_advice_or_value_application_request": 3
+      },
+      "interpretation": "Routing/coverage diagnostics only, not answer quality."
+    }
+  },
+  "per_attempt": [
+    {
+      "attempt_id": "advice-10:r0:flat",
+      "case_id": "advice-10",
+      "condition": "flat",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-10:r0:baseline",
+      "case_id": "advice-10",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-10:r0:graph",
+      "case_id": "advice-10",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-11:r0:baseline",
+      "case_id": "advice-11",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-11:r0:flat",
+      "case_id": "advice-11",
+      "condition": "flat",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-11:r0:graph",
+      "case_id": "advice-11",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-01:r0:baseline",
+      "case_id": "advice-01",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-01:r0:graph",
+      "case_id": "advice-01",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-01:r0:flat",
+      "case_id": "advice-01",
+      "condition": "flat",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-09:r0:graph",
+      "case_id": "advice-09",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-09:r0:flat",
+      "case_id": "advice-09",
+      "condition": "flat",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-09:r0:baseline",
+      "case_id": "advice-09",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-02:r0:graph",
+      "case_id": "advice-02",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0
+    },
+    {
+      "attempt_id": "advice-02:r0:baseline",
+      "case_id": "advice-02",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0
+    },
+    {
+      "attempt_id": "advice-02:r0:flat",
+      "case_id": "advice-02",
+      "condition": "flat",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0
+    },
+    {
+      "attempt_id": "advice-12:r0:flat",
+      "case_id": "advice-12",
+      "condition": "flat",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-12:r0:graph",
+      "case_id": "advice-12",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0
+    },
+    {
+      "attempt_id": "advice-12:r0:baseline",
+      "case_id": "advice-12",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0
+    },
+    {
+      "attempt_id": "control-05:r0:flat",
+      "case_id": "control-05",
+      "condition": "flat",
+      "category": "control",
+      "status": "ok",
+      "success": 0.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "control-05:r0:baseline",
+      "case_id": "control-05",
+      "condition": "baseline",
+      "category": "control",
+      "status": "ok",
+      "success": 0.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "control-05:r0:graph",
+      "case_id": "control-05",
+      "condition": "graph",
+      "category": "control",
+      "status": "ok",
+      "success": 0.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "advice-06:r0:baseline",
+      "case_id": "advice-06",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-06:r0:flat",
+      "case_id": "advice-06",
+      "condition": "flat",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 1.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-06:r0:graph",
+      "case_id": "advice-06",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 1.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-08:r0:baseline",
+      "case_id": "advice-08",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 1.0,
+      "fidelity": 1.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-08:r0:graph",
+      "case_id": "advice-08",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 1.0,
+      "fidelity": 1.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-08:r0:flat",
+      "case_id": "advice-08",
+      "condition": "flat",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 1.0,
+      "fidelity": 1.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "control-04:r0:graph",
+      "case_id": "control-04",
+      "condition": "graph",
+      "category": "control",
+      "status": "ok",
+      "success": 0.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "control-04:r0:flat",
+      "case_id": "control-04",
+      "condition": "flat",
+      "category": "control",
+      "status": "ok",
+      "success": 0.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "control-04:r0:baseline",
+      "case_id": "control-04",
+      "condition": "baseline",
+      "category": "control",
+      "status": "ok",
+      "success": 0.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "control-06:r0:graph",
+      "case_id": "control-06",
+      "condition": "graph",
+      "category": "control",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "control-06:r0:baseline",
+      "case_id": "control-06",
+      "condition": "baseline",
+      "category": "control",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "control-06:r0:flat",
+      "case_id": "control-06",
+      "condition": "flat",
+      "category": "control",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "control-01:r0:flat",
+      "case_id": "control-01",
+      "condition": "flat",
+      "category": "control",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "control-01:r0:graph",
+      "case_id": "control-01",
+      "condition": "graph",
+      "category": "control",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "control-01:r0:baseline",
+      "case_id": "control-01",
+      "condition": "baseline",
+      "category": "control",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "advice-03:r0:flat",
+      "case_id": "advice-03",
+      "condition": "flat",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-03:r0:baseline",
+      "case_id": "advice-03",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-03:r0:graph",
+      "case_id": "advice-03",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0
+    },
+    {
+      "attempt_id": "advice-07:r0:baseline",
+      "case_id": "advice-07",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-07:r0:flat",
+      "case_id": "advice-07",
+      "condition": "flat",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0
+    },
+    {
+      "attempt_id": "advice-07:r0:graph",
+      "case_id": "advice-07",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 2.0
+    },
+    {
+      "attempt_id": "control-03:r0:baseline",
+      "case_id": "control-03",
+      "condition": "baseline",
+      "category": "control",
+      "status": "policy_guard",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "control-03:r0:graph",
+      "case_id": "control-03",
+      "condition": "graph",
+      "category": "control",
+      "status": "policy_guard",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "control-03:r0:flat",
+      "case_id": "control-03",
+      "condition": "flat",
+      "category": "control",
+      "status": "policy_guard",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "advice-04:r0:graph",
+      "case_id": "advice-04",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-04:r0:flat",
+      "case_id": "advice-04",
+      "condition": "flat",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-04:r0:baseline",
+      "case_id": "advice-04",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "control-02:r0:graph",
+      "case_id": "control-02",
+      "condition": "graph",
+      "category": "control",
+      "status": "policy_guard",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "control-02:r0:baseline",
+      "case_id": "control-02",
+      "condition": "baseline",
+      "category": "control",
+      "status": "policy_guard",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "control-02:r0:flat",
+      "case_id": "control-02",
+      "condition": "flat",
+      "category": "control",
+      "status": "policy_guard",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": null,
+      "fidelity": null,
+      "application": null
+    },
+    {
+      "attempt_id": "advice-05:r0:flat",
+      "case_id": "advice-05",
+      "condition": "flat",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-05:r0:graph",
+      "case_id": "advice-05",
+      "condition": "graph",
+      "category": "advice",
+      "status": "ok",
+      "success": 1.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 2.0,
+      "application": 1.0
+    },
+    {
+      "attempt_id": "advice-05:r0:baseline",
+      "case_id": "advice-05",
+      "condition": "baseline",
+      "category": "advice",
+      "status": "ok",
+      "success": 0.0,
+      "unsupported_autobiography": 0.0,
+      "relevance": 2.0,
+      "fidelity": 1.0,
+      "application": 1.0
+    }
+  ],
+  "limitations": [
+    "Small synthetic development set, not held-out event/personality validation.",
+    "Agent ratings are AI review, not human ratings or the real person's ground truth.",
+    "Graph-minus-baseline changes retrieval and interpreted values together; graph-minus-flat isolates representation, with unequal prompt lengths.",
+    "No inference about live avatar latency, speech, Korean quality or production hybrid retrieval.",
+    "Bootstrap intervals are descriptive and unstable for small case counts; do not tune on these answers."
+  ]
+}

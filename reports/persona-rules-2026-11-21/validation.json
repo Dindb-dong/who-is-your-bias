@@ -1,0 +1,53 @@
+{
+  "schema_version": "persona-validation-receipt.v1",
+  "date": "2026-11-21",
+  "local_python": {
+    "command": ".venv/bin/python -m pytest -q tests/test_persona_graph.py tests/test_persona_graph_integration.py tests/test_persona_graph_eval.py tests/test_persona_rules.py tests/test_persona_rules_seed.py tests/test_persona_rules_eval.py tests/test_persona_source_availability.py tests/test_context_budget_source_types.py tests/test_jensen_persona.py tests/test_jensen_retrieval.py tests/test_query_evidence_policy.py tests/test_temporal_dialogue.py tests/test_runtime_text_live.py tests/test_runtime_text_cancel_recovery.py",
+    "passed": 322,
+    "failed": 0,
+    "warnings": 1,
+    "warning": "Existing FastAPI/Starlette deprecation warning",
+    "scope": "Implementation and compatibility checks, not persona quality scores"
+  },
+  "final_source_timestamp_checks": {
+    "tests": [
+      "tests/test_persona_source_availability.py",
+      "tests/test_persona_rules_seed.py"
+    ],
+    "passed": 26,
+    "failed": 0
+  },
+  "github_actions": [
+    {
+      "commit": "c19b6e53b6302dd87ebc819b25c2757eb41e1eb6",
+      "url": "https://github.com/Dindb-dong/who-is-your-bias/actions/runs/44881317005",
+      "conclusion": "failure",
+      "persona_and_shared_runtime_steps": "success",
+      "failure": "Mobile learned-gesture preview locator.click exceeded 15000 ms in tests/browser/jensen-gaussian.spec.ts:220"
+    },
+    {
+      "commit": "6b9287b9f7f82b0876d72261f29d9620717833ea",
+      "url": "https://github.com/Dindb-dong/who-is-your-bias/actions/runs/44882871954",
+      "conclusion": "success",
+      "scope": "Full Studio validation: web checks/build, shared runtime, source-bound persona/evaluation integrity, Gaussian/gesture playback, historical flows and Jensen attention",
+      "code_changes_since_previous_run": "None; intervening changes were reports and documentation. The prior mobile timeout did not recur."
+    }
+  ],
+  "limitations": [
+    "A successful earlier implementation checkpoint does not attest to a later commit's still-running checks.",
+    "Unit and browser checks do not establish value fidelity or real-person accuracy."
+  ],
+  "development_response_contract_checks": {
+    "passed": 333,
+    "failed": 0,
+    "warnings": 1,
+    "scope": "The original 322-test suite plus 11 v2-only user-facing response-contract tests; performed after preserving the frozen primary outputs and ratings."
+  },
+  "development_diagnostic_integrity_tests": {
+    "command": ".venv/bin/python -m pytest -q tests/test_persona_rules_diagnostic.py",
+    "passed": 16,
+    "failed": 0,
+    "scope": "Manifest isolation, guidance-only assertions, exact-token contract, private key placement, atomic resume, failed-output denominators and rating integrity; provider fixtures are explicitly synthetic."
+  },
+  "distinct_relevant_tests_after_guidance_and_runner": 349
+}

@@ -1,0 +1,74 @@
+{
+  "manifest_sha256": "d4772b91681f3478dd2a7ca1029de60edce907389d0a7da8c5fc11a6b0656938",
+  "results_sha256": "55e6db13a0d52ce9045ed0afa1d10803e7510ea0c449b2f7652f8532ba8bbb7f",
+  "judge_files": {
+    "ratings-a.json": "2eb3ee4d1d63f9e2cde5d6d554e9e69e5edab1054cf941ccd43ed1feae3685fb",
+    "ratings-b.json": "e9703f39604215e4c367abddce296b7963f06c7b6fc20b7eb3b2ae4f851a186b"
+  },
+  "rating_type": "independent blinded AI judgments, not human validation",
+  "conditions": {
+    "matched_evidence": {
+      "attempts": 12,
+      "valid_model_completions": 11,
+      "deterministic_guards": 1,
+      "failed_or_truncated": 0,
+      "n_advice": 8,
+      "conditional_advice_pass_rate": 0.1875,
+      "both_judges_advice_passes": 1,
+      "advice_dimension_means_0_to_2": {
+        "relevance": 1.75,
+        "fidelity": 1.8125,
+        "application": 1.0625,
+        "reaction": 1.75,
+        "style": 1.6875
+      },
+      "control_safe_rate": 1,
+      "style_probe_mean_0_to_2": 1,
+      "style_probe_safe_rate": 0.5,
+      "median_full_completion_seconds_cpu": 21.586746,
+      "median_output_words": 24
+    },
+    "compact_values": {
+      "attempts": 12,
+      "valid_model_completions": 11,
+      "deterministic_guards": 1,
+      "failed_or_truncated": 0,
+      "n_advice": 8,
+      "conditional_advice_pass_rate": 0,
+      "both_judges_advice_passes": 0,
+      "advice_dimension_means_0_to_2": {
+        "relevance": 1.4375,
+        "fidelity": 1.8125,
+        "application": 0.625,
+        "reaction": 1.5,
+        "style": 1.625
+      },
+      "control_safe_rate": 1,
+      "style_probe_mean_0_to_2": 1,
+      "style_probe_safe_rate": 0.5,
+      "median_full_completion_seconds_cpu": 29.829946,
+      "median_output_words": 22
+    },
+    "compact_delivery": {
+      "attempts": 12,
+      "valid_model_completions": 11,
+      "deterministic_guards": 1,
+      "failed_or_truncated": 0,
+      "n_advice": 8,
+      "conditional_advice_pass_rate": 0.125,
+      "both_judges_advice_passes": 1,
+      "advice_dimension_means_0_to_2": {
+        "relevance": 1.4375,
+        "fidelity": 1.8125,
+        "application": 0.875,
+        "reaction": 1.5,
+        "style": 1.5
+      },
+      "control_safe_rate": 1,
+      "style_probe_mean_0_to_2": 1,
+      "style_probe_safe_rate": 0.5,
+      "median_full_completion_seconds_cpu": 30.726264,
+      "median_output_words": 29
+    }
+  }
+}

@@ -1,0 +1,495 @@
+{
+  "schema_version": "persona-graph-evaluation.v1",
+  "manifest_sha256": "8d8901919bf370fbf616af3d88702598eeb5d0330413e0a68a5a0bde2cc0e44f",
+  "results_sha256": "367c73a48df01679ecf612a8643c875032f8ff7cc77a04572f322387121fd65e",
+  "rater_id": "",
+  "rater_kind": "",
+  "ratings": [
+    {
+      "rating_id": "answer-ac301eb98cc1",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-41ba2e7ae4e5",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-b1b15db27859",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-0bbea5b27c13",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-ef3b149fa683",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-cbf148108255",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-f7f020e235c7",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-3a7a82c3ad8c",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-bbc4f8b8a6b0",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-ba644d051313",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-78a7ad1b5a2e",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-3880669a2dc9",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-3167afd6f5e5",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-25376a1fdacd",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-ccedf715498c",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-61e1687b20cc",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-b326de79c42a",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-abd179a93868",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-d157d1897676",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-ddf5c91a4cd5",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-8423e9cc219e",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-d4a028000fed",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-638c22b744b5",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-578729115e55",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-787b8a6a6ca7",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-7ebe7501644f",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-4ed918d6be4b",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-5c41c0fdb003",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-770793b07b21",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-cb073305f71a",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-548aa15bfd0e",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-d4cc31727cee",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-bb7409cbcfbe",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-4ec428fb07f4",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-0a01edd0663d",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-b47e379a9d04",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-5d58c2b7506d",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-261979994d80",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-ad252732b38e",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-c750b91b7244",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-034145c6577d",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-537a4e454111",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-721224115615",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-dfea6374ba94",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-67e71d91f7fb",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-a44045a55370",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-9033d0fd478a",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-d6bb9fb3f30f",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-a5aa1919a75c",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-b224615b1d05",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-2046dacd4706",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-3cd802f42f38",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-4e334deed4fa",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    },
+    {
+      "rating_id": "answer-bb3ba309f50d",
+      "relevance": null,
+      "fidelity": null,
+      "application": null,
+      "unsupported_autobiography": null,
+      "control_pass": null,
+      "rationale": ""
+    }
+  ]
+}
