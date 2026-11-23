@@ -1,0 +1,5 @@
+# Apple Silicon voice worker only. The studio API uses its existing dependencies.
+mlx==0.32.4
+mlx-audio==0.6.6
+numpy==2.4.6
+transformers==5.23.0

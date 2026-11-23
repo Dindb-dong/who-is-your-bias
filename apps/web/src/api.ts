@@ -32,7 +32,7 @@ export interface Persona {
   example_questions: { en: string[]; ko: string[] };
   stats: { sources: number; evidence: number; held_out_sources: number };
   qa_corpus?: { corpus_id: string | null; materialization: string; question_answer_records: number; training_question_answers: number; complete_exchanges: number; excerpts: number };
-  capabilities: { llm: boolean; speech: boolean; transcription?: boolean; live_speech?: boolean; translated_subtitles?: boolean; realtime_call?: boolean };
+  capabilities: { llm: boolean; speech: boolean; transcription?: boolean; live_speech?: boolean; qwen_mlx_voice?: boolean; translated_subtitles?: boolean; realtime_call?: boolean };
   snapshot?: { id: string; as_of: string; current_dated_training_sources: number; coverage_note: string } | null;
   notice: string;
   presentation?: { initials: string; topics: string[]; avatar_status: string; avatar_label: string } | null;
@@ -40,13 +40,13 @@ export interface Persona {
 }
 export interface ChatRequest { message: string; session_id?: string; mode: ExperimentMode; language: Language; motion_mode?: MotionMode; input_language?: Language; subtitle_language?: Language | null; gesture?: boolean }
 export type StreamEvent =
-  | { event: 'meta'; data: { session_id: string; turn_id?: string; snapshot_id?: string | null; protocol?: string } }
+  | { event: 'meta'; data: { session_id: string; turn_id?: string; snapshot_id?: string | null; protocol?: string; speech_backend?: string } }
   | { event: 'status'; data: { stage: string } }
   | { event: 'token'; data: { text: string } }
   | { event: 'result'; data: { turn: Turn } }
   | { event: 'segment'; data: { turn_id: string; segment_id: string; sequence: number; text: string; evidence_ids: string[]; state: 'committed' } }
   | { event: 'subtitle'; data: { turn_id: string; segment_id: string; sequence: number; language: Language; text: string; state: 'ready' | 'unavailable'; reason?: string } }
-  | { event: 'audio_segment'; data: { turn_id: string; segment_id: string; sequence: number; audio_sha256: string; sample_rate: number; channels: number; sample_offset: number; sample_count: number; synthesis_ms: number } }
+  | { event: 'audio_segment'; data: { turn_id: string; segment_id: string; sequence: number; audio_sha256: string | null; sample_rate: number; channels: number; sample_offset: number; sample_count: number | null; synthesis_ms: number } }
   | { event: 'audio'; data: PcmChunk }
   | { event: 'gesture_state'; data: { turn_id: string; status: string; message: string | null; fps: number; width: number; format: string; window_frames: number | null; engine: string } }
   | { event: 'gesture'; data: { turn_id: string; sequence: number; start_frame: number; frame_count: number; encoding: 'f32le'; poses_base64: string } }
@@ -119,14 +119,14 @@ function validateEvent(event: string, data: unknown): StreamEvent | null {
   const identity = (value: unknown) => typeof value === 'string' && value.length > 0;
   const rate = (value: unknown) => integer(value) && Number(value) >= 8000 && Number(value) <= 48000;
   const segment = () => identity(data.turn_id) && identity(data.segment_id) && integer(data.sequence);
-  const valid = event === 'meta' ? identity(data.session_id) && (data.turn_id === undefined || identity(data.turn_id)) && (data.protocol === undefined || typeof data.protocol === 'string')
+  const valid = event === 'meta' ? identity(data.session_id) && (data.turn_id === undefined || identity(data.turn_id)) && (data.protocol === undefined || typeof data.protocol === 'string') && (data.speech_backend === undefined || typeof data.speech_backend === 'string')
     : event === 'status' ? typeof data.stage === 'string'
     : event === 'token' ? typeof data.text === 'string'
     : event === 'result' ? isTurn(data.turn)
     : event === 'error' ? typeof data.code === 'string' && typeof data.message === 'string'
     : event === 'segment' ? segment() && typeof data.text === 'string' && data.text.length <= 6000 && strings(data.evidence_ids) && data.state === 'committed'
     : event === 'subtitle' ? segment() && ['en', 'ko'].includes(String(data.language)) && typeof data.text === 'string' && data.text.length <= 6000 && ['ready', 'unavailable'].includes(String(data.state)) && (data.state !== 'ready' || data.text.trim().length > 0) && (data.reason === undefined || typeof data.reason === 'string')
-    : event === 'audio_segment' ? segment() && typeof data.audio_sha256 === 'string' && /^[a-f0-9]{64}$/.test(data.audio_sha256) && rate(data.sample_rate) && [1, 2].includes(Number(data.channels)) && integer(data.sample_offset) && integer(data.sample_count) && Number(data.sample_count) > 0 && Number(data.sample_count) <= Number(data.sample_rate) * 180 && positive(data.synthesis_ms)
+    : event === 'audio_segment' ? segment() && (data.audio_sha256 === null ? data.sample_count === null : (typeof data.audio_sha256 === 'string' && /^[a-f0-9]{64}$/.test(data.audio_sha256) && integer(data.sample_count) && Number(data.sample_count) > 0 && Number(data.sample_count) <= Number(data.sample_rate) * 180)) && rate(data.sample_rate) && [1, 2].includes(Number(data.channels)) && integer(data.sample_offset) && positive(data.synthesis_ms)
     : event === 'audio' ? segment() && integer(data.segment_sequence) && integer(data.sample_offset) && integer(data.sample_count) && Number(data.sample_count) > 0 && Number(data.sample_count) <= 16384 && rate(data.sample_rate) && [1, 2].includes(Number(data.channels)) && data.encoding === 'pcm_s16le' && typeof data.pcm_base64 === 'string' && data.pcm_base64.length <= 90000
     : event === 'audio_segment_end' ? segment() && integer(data.sample_end) && data.state === 'delivered'
     : event === 'audio_end' ? identity(data.turn_id) && integer(data.chunks) && integer(data.sample_count) && (data.sample_rate === null || rate(data.sample_rate)) && (data.first_pcm_ready_ms === null || positive(data.first_pcm_ready_ms)) && positive(data.total_ms) && data.state === 'delivered' && data.spoken_complete === false && data.acoustic_latency_ms === null
@@ -183,12 +183,14 @@ class LiveStreamIntegrity {
   private textComplete = false;
   private audioComplete = false;
   private failed = false;
+  private qwenStream = false;
 
   accept(event: StreamEvent): void {
     const invalid = (detail: string): never => { throw new ApiError(`Invalid live voice stream: ${detail}.`); };
     if (event.event === 'meta') {
       if (this.owner || !event.data.turn_id || event.data.protocol !== 'live-segments-pcm.v1') invalid('missing or changed turn ownership');
       this.owner = { turnId: event.data.turn_id!, sessionId: event.data.session_id };
+      this.qwenStream = event.data.speech_backend === 'qwen_mlx_pcm';
       return;
     }
     if (!this.owner) invalid('data arrived before turn ownership');
@@ -214,7 +216,7 @@ class LiveStreamIntegrity {
       case 'audio_segment': {
         const data = event.data; const committed = this.segments[0];
         if (this.active || !committed || data.segment_id !== committed.id || data.sequence !== committed.sequence) invalid('audio does not match the next committed segment');
-        if (data.sample_offset !== this.nextSample || !Number.isSafeInteger(data.sample_offset + data.sample_count)) invalid('segment sample boundary changed');
+        if ((data.sample_count === null) !== this.qwenStream || data.sample_offset !== this.nextSample || !Number.isSafeInteger(data.sample_offset + (data.sample_count ?? 0))) invalid('segment sample boundary changed');
         if (this.format && (data.sample_rate !== this.format[0] || data.channels !== this.format[1])) invalid('PCM format changed');
         this.format = [data.sample_rate, data.channels]; this.active = data;
         break;
@@ -222,14 +224,15 @@ class LiveStreamIntegrity {
       case 'audio': {
         const data = event.data; const active = this.active;
         if (!active || data.segment_id !== active.segment_id || data.segment_sequence !== active.sequence) invalid('PCM has no matching committed segment');
-        if (data.sequence !== this.nextChunk || data.sample_offset !== this.nextSample || data.sample_offset + data.sample_count > active!.sample_offset + active!.sample_count) invalid('PCM sequence or sample boundary changed');
+        const limit = active!.sample_count ?? active!.sample_rate * 80;
+        if (data.sequence !== this.nextChunk || data.sample_offset !== this.nextSample || data.sample_offset + data.sample_count > active!.sample_offset + limit) invalid('PCM sequence or sample boundary changed');
         if (data.sample_rate !== active!.sample_rate || data.channels !== active!.channels) invalid('PCM format differs from its segment');
         this.nextChunk++; this.nextSample += data.sample_count;
         break;
       }
       case 'audio_segment_end': {
         const data = event.data; const active = this.active;
-        if (!active || data.segment_id !== active.segment_id || data.sequence !== active.sequence || data.sample_end !== this.nextSample || this.nextSample !== active.sample_offset + active.sample_count) invalid('segment ended with missing or unexpected samples');
+        if (!active || data.segment_id !== active.segment_id || data.sequence !== active.sequence || data.sample_end !== this.nextSample || this.nextSample <= active.sample_offset || (active.sample_count !== null && this.nextSample !== active.sample_offset + active.sample_count)) invalid('segment ended with missing or unexpected samples');
         this.active = undefined; this.segments.shift();
         break;
       }
@@ -274,7 +277,7 @@ export async function streamChat(request: ChatRequest, signal: AbortSignal, emit
   const parser = createEventParser((event) => {
     signal.throwIfAborted();
     if (completed) throw new ApiError('The conversation service sent data after completion.');
-    if (event.event === 'error') throw new ApiError(event.data.message);
+    if (event.event === 'error') { pending.push(event); return; }
     liveIntegrity?.accept(event);
     if (event.event === 'meta') subtitleOwner = event.data.turn_id;
     if (event.event === 'segment') subtitleSegments.set(event.data.segment_id, event.data.sequence);
@@ -302,7 +305,11 @@ export async function streamChat(request: ChatRequest, signal: AbortSignal, emit
     pending.push(event);
   });
   async function deliver() {
-    for (const event of pending.splice(0)) { signal.throwIfAborted(); await emit(event); }
+    for (const event of pending.splice(0)) {
+      signal.throwIfAborted();
+      if (event.event === 'error') throw new ApiError(event.data.message);
+      await emit(event);
+    }
   }
   try {
     while (true) {

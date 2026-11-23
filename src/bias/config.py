@@ -105,8 +105,10 @@ class Settings:
             raise ValueError("translation_timeout must be between 0.1 and 30 seconds")
         if self.tts_persona_id is not None and (not isinstance(self.tts_persona_id, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,119}", self.tts_persona_id)):
             raise ValueError("tts_persona_id must be a persona identifier or generic")
-        if self.tts_protocol not in {"openai-compatible", "elevenlabs"}:
+        if self.tts_protocol not in {"openai-compatible", "elevenlabs", "qwen-mlx"}:
             raise ValueError("Unknown speech provider protocol")
+        if self.tts_protocol == "qwen-mlx" and self.tts.base_url != "http://127.0.0.1:8108":
+            raise ValueError("Qwen MLX voice requires the local worker at http://127.0.0.1:8108")
         if not isinstance(self.tts_language_hint, bool):
             raise ValueError("tts_language_hint must be a boolean")
         if self.retrieval_backend not in {"lexical", "hybrid", "jensen-lexical"} or self.embedding_backend not in {"local", "http"}:
@@ -174,6 +176,7 @@ class Settings:
             tts_voice=os.getenv("BIAS_TTS_VOICE", "default"),
             tts_persona_id=os.getenv("BIAS_TTS_PERSONA_ID") or None,
             tts_language_hint=language_hint in {"true", "1"},
+            tts_protocol=os.getenv("BIAS_TTS_PROTOCOL", "openai-compatible"),
             motion_catalog=Path(os.environ["BIAS_MOTION_CATALOG"]).expanduser() if os.getenv("BIAS_MOTION_CATALOG") else None,
             motion_asset_root=Path(os.getenv("BIAS_MOTION_ASSET_ROOT", str(repository_root() / "apps/web/public"))).expanduser(),
             request_timeout=number("BIAS_REQUEST_TIMEOUT", 60, 1, 180),

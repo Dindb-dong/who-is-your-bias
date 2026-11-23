@@ -108,6 +108,7 @@ export function createPcmPlayback(publish: (state: PcmState) => void, options: {
   notify();
   return {
     snapshot,
+    bufferedMs: () => Math.max(0, nextStart - context.currentTime) * 1000,
     async push(chunk: PcmChunk) {
       if (stopped) return;
       if (ended) throw new Error('PCM arrived after stream completion.');

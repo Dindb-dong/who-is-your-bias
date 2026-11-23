@@ -9,6 +9,7 @@ import time
 import uuid
 from collections.abc import AsyncIterator
 from contextlib import aclosing
+from dataclasses import replace
 
 from .behavior import plan_behavior
 from .answer_policy import VERSION as ANSWER_POLICY_VERSION, select_answer_policy
@@ -160,7 +161,7 @@ class Engine:
         session = _session_owner or self.sessions.get_or_create(request.session_id)
         if _session_owner is not None:
             # The live transport holds the turn lock/pin until voice cleanup.
-            async with aclosing(self._session_events(request, session, started, deadline=deadline, committed_segments=committed_segments)) as events:
+            async with aclosing(self._session_events(request, session, started, deadline=deadline, committed_segments=committed_segments, live=True)) as events:
                 async for event in events:
                     yield event
             return
@@ -180,7 +181,7 @@ class Engine:
                 session.turn_lock.release()
             session.in_flight -= 1
 
-    async def _session_events(self, request: ChatRequest, session: Session, started: float, *, deadline: float, committed_segments: bool = False) -> AsyncIterator[tuple[str, dict]]:
+    async def _session_events(self, request: ChatRequest, session: Session, started: float, *, deadline: float, committed_segments: bool = False, live: bool = False) -> AsyncIterator[tuple[str, dict]]:
         async with asyncio.timeout_at(deadline):
             turn_id = uuid.uuid4().hex
             yield "meta", {"session_id": session.id, "turn_id": turn_id,
@@ -300,6 +301,12 @@ class Engine:
                         anchor=(resolved.presentation_topic or resolved.anchor) if resolved.supporting_turn_ids else "",
                         speculative=speculative)
                         if adaptive else None)
+                    qwen_live = (live and committed_segments and request.language == "en"
+                                 and self.settings.tts_protocol == "qwen-mlx" and self.prompt_builder is build_messages)
+                    if qwen_live:
+                        policy = answer_policy or select_answer_policy(request.message, language="en", speculative=speculative)
+                        answer_policy = replace(policy, min_sentences=1, max_sentences=min(2, policy.max_sentences),
+                                                target_words=min(40, policy.target_words))
                     live_concise = committed_segments and self.settings.live_concise and answer_policy is None
                     if answer_policy:
                         context["response_policy"] = ANSWER_POLICY_VERSION
@@ -327,6 +334,9 @@ class Engine:
                             messages[0]["content"] += (answer_policy.instruction(request.language) if answer_policy
                                                       else live_concise_instruction(request.language))
                     committer = SegmentCommitter(turn_id=turn_id, language=request.language, allowed_ids=allowed_ids)
+                    sentence_limit = answer_policy.max_sentences if qwen_live and answer_policy else None
+                    committed_count = visible_chars = 0
+                    capped = False
                     review_inference = speculative and request.language == "ko"
                     review_evidence = (self.corpus.persona.id == "jensen-huang" and request.language == "ko"
                                        and request.mode != "profile" and bool(result.hits))
@@ -339,11 +349,21 @@ class Engine:
                                 if not token.strip():
                                     continue
                                 token = f"Hypothetical simulation (no verified statement)\n\n{token.lstrip()}"
-                            fragments.append(token)
-                            yield "token", {"text": token}
-                            if committed_segments:
-                                for segment in committer.push(token):
-                                    yield "segment", segment
+                            segments = committer.push(token) if committed_segments else []
+                            if sentence_limit:
+                                segments = segments[:sentence_limit - committed_count]
+                                committed_count += len(segments)
+                                capped = committed_count == sentence_limit
+                                if capped:
+                                    token = token[:max(0, segments[-1]["char_end"] - visible_chars)]
+                                visible_chars += len(token)
+                            if token:
+                                fragments.append(token)
+                                yield "token", {"text": token}
+                            for segment in segments:
+                                yield "segment", segment
+                            if capped:
+                                break
                     if review_inference or review_evidence:
                         text = "".join(fragments).strip()
                         if review_inference:
@@ -356,7 +376,7 @@ class Engine:
                         if committed_segments:
                             for segment in committer.push(text):
                                 yield "segment", segment
-                    if committed_segments:
+                    if committed_segments and not capped:
                         for segment in committer.finish():
                             yield "segment", segment
                 else:

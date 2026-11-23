@@ -4,7 +4,7 @@ export interface CaptionDisplay { text: string; language: Language; label: strin
 interface CaptionEntry {
   id: string; sequence: number; original: string;
   subtitle?: Extract<StreamEvent, { event: 'subtitle' }>['data'];
-  startMs?: number; endMs?: number;
+  startMs?: number; endMs?: number; sampleRate?: number;
 }
 
 /** One request owns the translations. PCM sample time, never token arrival,
@@ -18,8 +18,7 @@ export class CaptionTrack {
       if (this.turnId || !event.data.turn_id) throw new Error('Caption turn ownership is missing or duplicated.');
       this.turnId = event.data.turn_id; return false;
     }
-    if (!['segment', 'subtitle', 'audio_segment'].includes(event.event)) return false;
-    if (event.event !== 'segment' && event.event !== 'subtitle' && event.event !== 'audio_segment') return false;
+    if (event.event !== 'segment' && event.event !== 'subtitle' && event.event !== 'audio_segment' && event.event !== 'audio_segment_end') return false;
     const data = event.data;
     if (!this.turnId || data.turn_id !== this.turnId) throw new Error('Caption turn ownership changed.');
     if (event.event === 'segment') {
@@ -32,10 +31,14 @@ export class CaptionTrack {
       if (event.event === 'subtitle') {
         if (event.data.language !== this.target || entry.subtitle) throw new Error('Caption language changed or subtitle was duplicated.');
         entry.subtitle = event.data;
+      } else if (event.event === 'audio_segment_end') {
+        if (entry.sampleRate !== undefined && entry.endMs === Infinity) entry.endMs = event.data.sample_end / entry.sampleRate * 1000;
       } else {
         if (entry.startMs !== undefined) throw new Error('Caption audio timing was duplicated.');
         entry.startMs = event.data.sample_offset / event.data.sample_rate * 1000;
-        entry.endMs = (event.data.sample_offset + event.data.sample_count) / event.data.sample_rate * 1000;
+        entry.sampleRate = event.data.sample_rate;
+        entry.endMs = event.data.sample_count === null ? Infinity :
+          (event.data.sample_offset + event.data.sample_count) / event.data.sample_rate * 1000;
       }
     }
     return true;
