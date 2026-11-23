@@ -271,7 +271,13 @@ export class AvatarRenderer {
       const [core, body, performanceModule] = await Promise.all([
         import('./gaussian/gaussianHeadCore'), import('./gaussian/gaussianBody'), import('./gaussian/gaussianPerformance'),
       ]);
-      const stem = `/models/gaussian-head/${config.bundle}`;
+      // A preferred bundle that is not installed locally (it never enters Git) falls back to the shared head.
+      let bundle = config.bundle;
+      if (config.fallbackBundle && /^[A-Za-z0-9_-]+$/.test(config.fallbackBundle)) {
+        const probe = await fetch(`/models/gaussian-head/${bundle}.json`, { method: 'HEAD', signal: abort.signal }).catch(() => undefined);
+        if (!probe?.ok || !(probe.headers.get('content-type') ?? '').includes('json')) bundle = config.fallbackBundle;
+      }
+      const stem = `/models/gaussian-head/${bundle}`;
       const { header, B, sha256 } = await core.loadBundle(stem, abort.signal);
       // A missing optional calibration is a labeled replay fallback. An
       // explicitly requested or malformed calibration must not be ignored.
@@ -287,7 +293,7 @@ export class AvatarRenderer {
       const motion = performanceModule.createGaussianPerformance(header, B as GaussianBodyArrays,
         { driver, bundleSha256: sha256, trainingFrameIndices: config.trainingFrameIndices });
       if (this.disposed || serial !== this.gaussianSerial || abort.signal.aborted) return;
-      this.canvas.dataset.gaussianBundle = config.bundle;
+      this.canvas.dataset.gaussianBundle = bundle;
       this.canvas.dataset.gaussianSha256 = sha256;
       this.gaussianFactory = (rig) => {
         // Bundles with re-bound neck/collar gaussians carry their own (negative) cut. The neck seam still starts at the
@@ -296,7 +302,10 @@ export class AvatarRenderer {
         const cut = typeof headerCut === 'number' && Number.isFinite(headerCut) ? headerCut : undefined;
         const fitted = { ...config, collarCutMeters: config.collarCutMeters ?? cut };
         const attachment = body.fitGaussianAttachment(rig, B as GaussianBodyArrays, fitted);
-        const refined = sha256 === '32d5bc15901a8673901c6234ae7af946d2bfcf2c0aa5e7ed9c816d1c3aff599c';
+        // Composite finishing (white-matte cleanup, matte jacket, softer lights) was tuned on the shared 240k head; the
+        // face+neck bundle converted from the upper-body model shares its FLAME rest space, so it gets the same pass.
+        const refined = sha256 === '32d5bc15901a8673901c6234ae7af946d2bfcf2c0aa5e7ed9c816d1c3aff599c'
+          || typeof (header as { upperbody?: unknown }).upperbody === 'object';
         const head = new body.GaussianBodyHead(header as GaussianBodyHeader, B as GaussianBodyArrays, attachment, refined);
         const restoreMaterials = refined ? body.softenCompositeMaterials(rig) : () => {};
         const gains = [0.8, 0.8, 0.8, 0.16, 0.16];

@@ -224,11 +224,22 @@ export function AvatarStage({ speaking, timeline, elapsedMs = 0, amplitude, mode
       <div className="avatar-visual">
         <div ref={host} style={{ position: 'absolute', inset: 0 }} aria-hidden={fatal ? true : undefined} />
         {loadingModel && <div role="status" className="avatar-model-status" style={{ position: 'absolute', bottom: 20, left: 20, color: '#d8f8a0', fontSize: 12 }}>Loading your avatar…</div>}
-        {gaussianHead && <div role="status" className="avatar-model-status" style={{ position: 'absolute', top: 62, left: 16, maxWidth: 'calc(50% - 44px)', pointerEvents: 'none', padding: '6px 10px', borderRadius: 8, background: '#0b1009cc', color: gaussianState === 'error' ? '#efb5a1' : '#d8f8a0', fontSize: 11 }}>
-          {gaussianState === 'loading' ? 'Loading local photoreal face…' : gaussianState === 'ready' ? 'Synthetic photoreal face · articulated body' : gaussianState === 'error' ? `Photoreal face unavailable: ${gaussianMessage} The body remains available.` : 'Preparing photoreal face…'}
-          {gaussianState === 'ready' && gaussianMessage && <span title={gaussianMessage}> · Recorded expression preview; semantic calibration pending</span>}
-          {speechGesture ? <span> · Speech-driven gestures (EMAGE)</span> : learnedGesture && allowGeometryPreview && <span> · Experimental learned gestures</span>}
-        </div>}
+        {gaussianHead && (() => {
+          // Ready: one compact line so it never covers the face; the full disclosure stays in the tooltip.
+          const ready = gaussianState === 'ready';
+          const detail = ['Synthetic photoreal face', 'articulated body',
+            gaussianMessage ? 'recorded expression preview; semantic calibration pending' : '',
+            speechGesture ? 'speech-driven gestures (EMAGE)' : learnedGesture && allowGeometryPreview ? 'experimental learned gestures' : ''].filter(Boolean).join(' · ');
+          const light = backdrop === 'white';
+          return <div role="status" className="avatar-model-status" title={ready ? detail : undefined} style={{ position: 'absolute', top: 62, left: 16,
+            maxWidth: 'calc(50% - 44px)', pointerEvents: 'none', padding: ready ? '4px 9px' : '6px 10px', borderRadius: 8,
+            background: light && ready ? '#ffffffd9' : '#0b1009cc', border: light && ready ? '1px solid #1b22191a' : undefined,
+            color: gaussianState === 'error' ? '#efb5a1' : light && ready ? '#3a4535' : '#d8f8a0', fontSize: ready ? 10 : 11,
+            whiteSpace: ready ? 'nowrap' : undefined, overflow: 'hidden', textOverflow: 'ellipsis' }}>
+            {gaussianState === 'loading' ? 'Loading local photoreal face…' : ready ? `Synthetic photoreal face${speechGesture ? ' · EMAGE gestures' : ''}`
+              : gaussianState === 'error' ? `Photoreal face unavailable: ${gaussianMessage} The body remains available.` : 'Preparing photoreal face…'}
+          </div>;
+        })()}
         {modelError && !fatal && <div role="status" className="avatar-model-status" style={{ position: 'absolute', bottom: 20, left: 20, right: 20, padding: 12, borderRadius: 12, background: '#172014ed', color: '#e3e8dc', fontSize: 12 }}>
           {modelError} The built-in portrait is still available.
         </div>}

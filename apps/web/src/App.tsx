@@ -83,7 +83,8 @@ export default function App() {
   const [reducedMotion, setReducedMotion] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches);
   const [model, setModel] = useState<{ name: string; url: string } | undefined>();
   const [builtinAvatar, setBuiltinAvatar] = useState<BuiltinAvatar>('human');
-  const [framing, setFraming] = useState<AvatarFraming>('portrait');   // the photoreal face reads best in portrait; upper body stays one click away
+  // The photoreal face reads best chest-up (interview); upper body stays one click away.
+  const [framing, setFraming] = useState<AvatarFraming>(() => gaussianRequested ? 'interview' : 'portrait');
   const [attentionTarget, setAttentionTarget] = useState<AttentionTarget | null>(null);
   const avatarChoiceMade = useRef(false);
   const lastPersona = useRef<string | null>(null);
@@ -362,7 +363,9 @@ export default function App() {
   const gaussianHead = useMemo<GaussianHeadConfig | undefined>(() => {
     if (!gaussianEnabled) return undefined;
     const override = avatarQuery.get('headBundle');
-    return { bundle: override && /^[A-Za-z0-9_-]+$/.test(override) ? override : 'jensen_a_c1c3_240k_sh' };
+    // Default: the face + neck from the jointly trained upper-body model; the shared 240k head when it is not installed.
+    return override && /^[A-Za-z0-9_-]+$/.test(override) ? { bundle: override }
+      : { bundle: 'jensen_ub_head_120k', fallbackBundle: 'jensen_a_c1c3_240k_sh' };
   }, [gaussianEnabled, avatarQuery]);
   const subjectName = persona?.name ?? 'Studio persona';
   const initials = persona?.presentation?.initials ?? (persona?.name.split(/\s+/).map((part) => part[0]).slice(0, 2).join('') || '—');

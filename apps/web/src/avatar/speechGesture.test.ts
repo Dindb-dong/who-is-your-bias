@@ -7,13 +7,15 @@ import { createResearchHumanMapping } from './builtin';
 import { createProceduralRig } from './procedural';
 import { samplePerformance } from './performance';
 import { createRetargetedRig } from './retarget';
-import { appendStreamingGesture, calmPoses, completeStreamingGesture, createStreamingGesture, parseSpeechGestureMotion, sampleSpeechGesture, SMPLX_POSE_WIDTH, type SpeechGestureMotion } from './speechGesture';
+import { appendStreamingGesture, calmPoses, completeStreamingGesture, createStreamingGesture, parseSpeechGestureMotion, sampleSpeechGesture,
+  SMPLX_PARENTS, SMPLX_POSE_WIDTH, speechGestureReference, type SpeechGestureMotion } from './speechGesture';
 import { neutralPose } from './timeline';
 import type { BoneBinding, BoneControl, RigDiagnostics } from './types';
 
 const sha = 'a'.repeat(64);
-const upperL = new Vector3(0.16, -1, 0.025).normalize(), foreL = new Vector3(0.10, -1, 0.14).normalize();
-const upperR = new Vector3(-0.16, -1, 0.025).normalize();
+const reference = speechGestureReference();
+const X = new Vector3(1, 0, 0), Z = new Vector3(0, 0, 1);
+const turn = (axis: Vector3, degrees: number) => new Quaternion().setFromAxisAngle(axis, degrees * Math.PI / 180);
 
 function setJoint(poses: Float32Array, frame: number, joint: number, q: Quaternion) {
   const angle = 2 * Math.acos(Math.min(1, Math.abs(q.w))), s = Math.sqrt(Math.max(0, 1 - q.w * q.w)), sign = q.w < 0 ? -1 : 1;
@@ -22,34 +24,36 @@ function setJoint(poses: Float32Array, frame: number, joint: number, q: Quaterni
   poses[o] = sign * q.x / s * angle; poses[o + 1] = sign * q.y / s * angle; poses[o + 2] = sign * q.z / s * angle;
 }
 
-/** An SMPL-X clip whose arms point along the given world directions (collars at rest). */
-function clip(leftUpper: Vector3, leftFore: Vector3, frames = 60, rightUpper = upperR): SpeechGestureMotion {
-  const poses = new Float32Array(frames * SMPLX_POSE_WIDTH);
-  const gU = new Quaternion().setFromUnitVectors(new Vector3(1, 0, 0), leftUpper);
-  const gF = new Quaternion().setFromUnitVectors(leftUpper, leftFore).multiply(gU);
-  const gUR = new Quaternion().setFromUnitVectors(new Vector3(-1, 0, 0), rightUpper);
-  const gFR = new Quaternion().setFromUnitVectors(rightUpper, rightUpper === upperR ? new Vector3(-0.10, -1, 0.14).normalize() : rightUpper).multiply(gUR);
-  for (let f = 0; f < frames; f++) {
-    setJoint(poses, f, 16, gU); setJoint(poses, f, 18, gU.clone().invert().multiply(gF));
-    setJoint(poses, f, 17, gUR); setJoint(poses, f, 19, gUR.clone().invert().multiply(gFR));
+/** A clip at the reference posture (what leaves the rig at its neutral), with world-axis turns applied at the
+ * given joints; children follow their parents, as in SMPL-X. */
+function clip(changes: Record<number, Quaternion> = {}, frames = 60): SpeechGestureMotion {
+  const poses = new Float32Array(frames * SMPLX_POSE_WIDTH), global: Quaternion[] = [], local: Quaternion[] = [];
+  for (let j = 0; j < 55; j++) {
+    const parent = j ? global[SMPLX_PARENTS[j]] : new Quaternion();
+    const g = parent.clone().multiply(reference.local[j]);
+    if (changes[j]) g.premultiply(changes[j]);
+    global[j] = g; local[j] = parent.clone().invert().multiply(g);
   }
+  for (let f = 0; f < frames; f++) for (let j = 0; j < 55; j++) setJoint(poses, f, j, local[j]);
   return { fps: 30, frames, poses, audioSha256: sha, engine: 'test' };
 }
 
-const rotated = (q: [number, number, number, number] | undefined, v: Vector3) => v.clone().applyQuaternion(new Quaternion(...(q ?? [0, 0, 0, 1])));
+const asQuaternion = (q: [number, number, number, number] | undefined) => new Quaternion(...(q ?? [0, 0, 0, 1]));
 
 describe('speech-driven gesture conversion', () => {
-  it('maps the arms-down reference pose to the rig neutral and follows raised arms', () => {
-    const rest = sampleSpeechGesture(clip(upperL, foreL), 1000)!;
+  it('maps the EMAGE average posture to the rig neutral and follows changes around it', () => {
+    const rest = sampleSpeechGesture(clip(), 1000)!;
     for (const [control, q] of Object.entries(rest)) expect(Math.abs(q![3]), control).toBeGreaterThan(0.9999);
-    const forward = new Vector3(0, 0, 1);
-    const raised = sampleSpeechGesture(clip(forward, forward), 1000)!;
-    expect(rotated(raised.leftUpperArm, upperL).dot(forward)).toBeGreaterThan(0.999);
+    // The average posture leans the torso forward and lifts the arms: none of that reaches the rig.
+    expect(2 * Math.acos(Math.abs(reference.local[3].w))).toBeGreaterThan(0.2);
+    const raise = turn(X, -60);
+    const raised = sampleSpeechGesture(clip({ 16: raise }), 1000)!;
+    expect(asQuaternion(raised.leftUpperArm).angleTo(raise)).toBeLessThan(1e-4);
     expect(Math.abs(raised.rightUpperArm![3])).toBeGreaterThan(0.9999);
   });
 
   it('fades in and out, is silent outside the clip, and damps for reduced motion', () => {
-    const motion = clip(new Vector3(0, 0, 1), new Vector3(0, 0, 1));
+    const motion = clip({ 16: turn(X, -60) });
     const angle = (ms: number, reducedMotion = false) => 2 * Math.acos(Math.abs(sampleSpeechGesture(motion, ms, { reducedMotion })!.leftUpperArm![3]));
     expect(angle(0)).toBeLessThan(1e-6);
     expect(angle(100)).toBeLessThan(angle(1000));
@@ -72,13 +76,8 @@ describe('speech-driven gesture conversion', () => {
   });
 
   it('hands a missing collar rotation to the upper arm so the arm still hangs where EMAGE puts it', () => {
-    const motion = clip(upperL, foreL);
-    const collar = new Quaternion().setFromAxisAngle(new Vector3(0, 0, 1), -0.35);           // collar lowers the arm…
-    const shoulder = new Quaternion().setFromUnitVectors(new Vector3(1, 0, 0), upperL);
-    for (let f = 0; f < motion.frames; f++) {
-      setJoint(motion.poses, f, 13, collar);
-      setJoint(motion.poses, f, 16, collar.clone().invert().multiply(shoulder));            // …and the shoulder compensates
-    }
+    const collar = turn(Z, -20);                                                // collar lowers the arm…
+    const motion = clip({ 13: collar, 16: collar.clone().invert() });             // …and the shoulder compensates
     const full = sampleSpeechGesture(motion, 1000)!;
     expect(2 * Math.acos(Math.abs(full.leftUpperArm![3]))).toBeGreaterThan(0.3);            // alone it would raise the arm
     const noCollar = sampleSpeechGesture(motion, 1000, { supported: ['chest', 'leftUpperArm', 'leftForearm', 'leftHand'] })!;
@@ -130,7 +129,7 @@ describe('speech-driven gesture conversion', () => {
     expect(half.angleTo(designedQ)).toBeCloseTo(half.angleTo(observedQ), 4);  // halfway between the two, not toward neutral
     rig.apply(designed);
     expect(forearm().angleTo(designedQ)).toBeLessThan(1e-6);                 // nothing leaks into the next designed frame
-    const live = clip(new Vector3(0, 0, 1), new Vector3(0, 0, 1));
+    const live = clip({ 16: turn(X, -65) });
     const diagnostics = { kind: 'procedural', morphs: [], bones: [], missing: [] } as unknown as RigDiagnostics;
     const early = samplePerformance({ elapsedMs: 100, idleMs: 100, speaking: true, audioElapsedMs: 100, speechGesture: live, audioSha256: sha }, diagnostics);
     expect(early.pose.boneWeight).toBeGreaterThan(0);
@@ -139,7 +138,7 @@ describe('speech-driven gesture conversion', () => {
   });
 
   it('is used only for the audio it was generated from', () => {
-    const motion = clip(new Vector3(0, 0, 1), new Vector3(0, 0, 1));
+    const motion = clip({ 16: turn(X, -60) });
     const diagnostics = { kind: 'procedural', morphs: [], bones: [], missing: [] } as unknown as RigDiagnostics;
     const base = { elapsedMs: 1000, idleMs: 1000, speaking: true, audioElapsedMs: 1000, speechGesture: motion };
     expect(samplePerformance({ ...base, audioSha256: sha }, diagnostics).telemetry.boneSource).toBe('speech_generated');
@@ -164,29 +163,24 @@ describe('speech-driven gesture on the shipped research human', () => {
     const apply = (motion: SpeechGestureMotion) => rig.apply({ ...neutralPose(), bones: sampleSpeechGesture(motion, 1000)! });
 
     rig.apply(neutralPose());
-    const neutralUpper = direction('leftUpperArm', 'leftForearm'), neutralFore = direction('leftForearm', 'leftHand');
-    apply(clip(upperL, foreL));
-    expect(direction('leftUpperArm', 'leftForearm').dot(neutralUpper)).toBeGreaterThan(0.999);
-    expect(direction('leftForearm', 'leftHand').dot(neutralFore)).toBeGreaterThan(0.995);
+    const neutral = { lu: direction('leftUpperArm', 'leftForearm'), lf: direction('leftForearm', 'leftHand'),
+      ru: direction('rightUpperArm', 'rightForearm') };
+    apply(clip());
+    expect(direction('leftUpperArm', 'leftForearm').dot(neutral.lu)).toBeGreaterThan(0.999);
+    expect(direction('leftForearm', 'leftHand').dot(neutral.lf)).toBeGreaterThan(0.995);
 
-    // Within the rig's 70° joint limit: upper arm 60° forward, then the elbow bends the forearm 60° further up.
-    const forward = upperL.clone().applyAxisAngle(new Vector3(1, 0, 0), -Math.PI / 3);
-    const bent = forward.clone().applyAxisAngle(new Vector3(1, 0, 0), -Math.PI / 3);
-    apply(clip(forward, bent));
-    expect(direction('leftUpperArm', 'leftForearm').dot(forward)).toBeGreaterThan(0.995);
-    expect(direction('leftForearm', 'leftHand').dot(bent)).toBeGreaterThan(0.99);
-    // Abduction toward the subject's left (+X), 50°.
-    const out = upperL.clone().applyAxisAngle(new Vector3(0, 0, 1), 50 * Math.PI / 180);
-    apply(clip(out, out));
-    expect(out.x).toBeGreaterThan(0.8);
-    expect(direction('leftUpperArm', 'leftForearm').dot(out)).toBeGreaterThan(0.995);
-    // Right arm 50° toward the subject's right (-X) and 60° forward.
-    const rightOut = upperR.clone().applyAxisAngle(new Vector3(0, 0, 1), -50 * Math.PI / 180);
-    apply(clip(upperL, foreL, 60, rightOut));
-    expect(rightOut.x).toBeLessThan(-0.8);
-    expect(direction('rightUpperArm', 'rightForearm').dot(rightOut)).toBeGreaterThan(0.995);
-    const rightForward = upperR.clone().applyAxisAngle(new Vector3(1, 0, 0), -Math.PI / 3);
-    apply(clip(upperL, foreL, 60, rightForward));
-    expect(direction('rightUpperArm', 'rightForearm').dot(rightForward)).toBeGreaterThan(0.995);
+    // Within the rig's 70° joint limit: upper arm 60° forward, then the elbow lifts the forearm 60° further.
+    const forward = turn(X, -60), lift = turn(X, -60);
+    apply(clip({ 16: forward, 18: lift }));
+    expect(direction('leftUpperArm', 'leftForearm').dot(neutral.lu.clone().applyQuaternion(forward))).toBeGreaterThan(0.995);
+    expect(direction('leftForearm', 'leftHand').dot(neutral.lf.clone().applyQuaternion(lift.clone().multiply(forward)))).toBeGreaterThan(0.99);
+    // Abduction toward the subject's left (+X) and, for the right arm, toward the subject's right (-X), 50°.
+    const outLeft = turn(Z, 50), outRight = turn(Z, -50);
+    apply(clip({ 16: outLeft, 17: outRight }));
+    expect(direction('leftUpperArm', 'leftForearm').dot(neutral.lu.clone().applyQuaternion(outLeft))).toBeGreaterThan(0.995);
+    expect(direction('rightUpperArm', 'rightForearm').dot(neutral.ru.clone().applyQuaternion(outRight))).toBeGreaterThan(0.995);
+    expect(direction('rightUpperArm', 'rightForearm').x).toBeLessThan(neutral.ru.x);
+    apply(clip({ 17: forward }));
+    expect(direction('rightUpperArm', 'rightForearm').dot(neutral.ru.clone().applyQuaternion(forward))).toBeGreaterThan(0.995);
   }, 30_000);
 });

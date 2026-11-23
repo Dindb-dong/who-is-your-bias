@@ -16,7 +16,7 @@ export const JENSEN_SOURCE_FITTED_AVATAR = {
 
 export type BuiltinAvatar = 'human' | 'portrait' | 'jensen';
 
-export type AvatarFraming = 'portrait' | 'upper_body' | 'full_body';
+export type AvatarFraming = 'interview' | 'portrait' | 'upper_body' | 'full_body';
 
 const JOINTS = {
   hips: 'root', spine: 'spine03', chest: 'spine01', neck: 'neck01', head: 'head', jaw: 'jaw',
@@ -91,6 +91,8 @@ export function avatarView(kind: 'procedural' | 'glb', framing: AvatarFraming, a
     const distance = Math.max(1.05 / halfVertical, 1.30 / (halfVertical * Math.max(0.2, aspect)));
     return { position: [0, 1.65, distance] as const, target: [0, 1.65, 0] as const, fov };
   }
+  // Interview: chest up, so the photoreal face reads at a natural size and raised-hand gestures enter the frame.
+  if (framing === 'interview') return { position: [0.03, 1.96, 1.76] as const, target: [0, 1.92, 0] as const, fov: aspect < 0.7 ? 38 : 33 };
   if (framing === 'full_body') return { position: [0.04, 1.32, 4.55] as const, target: [0, 1.20, 0] as const, fov: aspect < 0.65 ? 40 : 34 };
   return { position: [0.035, 2.06, 2.20] as const, target: [0, 1.99, 0] as const, fov: aspect < 0.7 ? 39 : 34 };
 }

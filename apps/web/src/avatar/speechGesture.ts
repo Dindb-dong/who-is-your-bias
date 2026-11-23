@@ -111,7 +111,7 @@ export function completeStreamingGesture(motion: SpeechGestureMotion, frames: nu
 
 // SMPL-X kinematic tree (55 joints). Rest frames are world-aligned: Y up, facing +Z, subject's left at +X,
 // which is also the runtime's subject-relative bone convention.
-const SMPLX_PARENTS = [-1, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 12, 13, 14, 16, 17, 18, 19, 15, 15, 15,
+export const SMPLX_PARENTS = [-1, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 12, 13, 14, 16, 17, 18, 19, 15, 15, 15,
   20, 25, 26, 20, 28, 29, 20, 31, 32, 20, 34, 35, 20, 37, 38, 21, 40, 41, 21, 43, 44, 21, 46, 47, 21, 49, 50, 21, 52, 53];
 // Per hand: index, middle, pinky, ring, thumb (3 joints each), starting at 25 (left) and 40 (right).
 const SMPLX_FINGER_OFFSET: Record<string, number> = { Index: 0, Middle: 3, Little: 6, Ring: 9, Thumb: 12 };
@@ -131,23 +131,41 @@ const CHANNELS: [BoneControl, number[], number][] = [
   })),
 ];
 
+// EMAGE's average speaking posture (BEAT2 style: torso ~26° forward over three spine joints, collars ~16° raised,
+// upper arms ~52° below the T-pose), axis-angle, measured over 48 s of generated motion on 2026-11-23. Torso,
+// collars and upper arms are referenced to it, so that average maps to the rig's own relaxed neutral and only
+// EMAGE's movement around it is applied (otherwise every reply would hunch the avatar forward with arms out).
+const POSTURE_MEAN: Record<number, [number, number, number]> = {
+  3: [0.2626, 0.0491, 0.0069], 6: [0.0839, -0.0354, -0.0186], 9: [0.0961, -0.0094, 0.0394],
+  13: [0.0221, -0.1588, -0.2333], 14: [-0.0612, 0.2557, 0.1027],
+  16: [0.0238, -0.2427, -0.873], 17: [0.0396, 0.3045, 0.8404],
+};
+
 // The rig's neutral relaxes the arms (builtin.ts createResearchHumanMapping), and its bone basis is taken
 // from that relaxed pose, so a bone delta is a world-axis change from the neutral, composed down the chain.
-// The SMPL-X reference pose points the same limbs the same way: EMAGE arms hanging down leave the rig at
-// its neutral, and changes from the reference map one to one.
+// The reference pose is what leaves the rig at its neutral: the average posture above for torso, collars and upper
+// arms, and an anatomical slight bend for the elbows (elbow bend is the gesture itself, so it stays absolute).
 const reference = (() => {
-  const global = Array.from({ length: 55 }, () => new Quaternion());
+  const local = Array.from({ length: 55 }, () => new Quaternion());
   for (const [side, sign] of [[0, 1], [1, -1]] as const) {
     const upper = new Vector3(sign * 0.16, -1, 0.025).normalize(), fore = new Vector3(sign * 0.10, -1, 0.14).normalize();
-    const shoulder = 16 + side, elbow = 18 + side, wrist = 20 + side;
-    global[shoulder].setFromUnitVectors(new Vector3(sign, 0, 0), upper);
-    global[elbow].setFromUnitVectors(upper, fore).multiply(global[shoulder]);
-    global[wrist].copy(global[elbow]);
-    for (let j = 25 + side * 15; j < 40 + side * 15; j++) global[j].copy(global[wrist]);
+    const gUpper = new Quaternion().setFromUnitVectors(new Vector3(sign, 0, 0), upper);
+    const gFore = new Quaternion().setFromUnitVectors(upper, fore).multiply(gUpper);
+    local[18 + side] = gUpper.clone().invert().multiply(gFore);
   }
-  const local = global.map((q, j) => j ? global[SMPLX_PARENTS[j]].clone().invert().multiply(q) : q.clone());
+  for (const [joint, [x, y, z]] of Object.entries(POSTURE_MEAN)) {
+    const angle = Math.hypot(x, y, z);
+    local[Number(joint)].setFromAxisAngle(new Vector3(x / angle, y / angle, z / angle), angle);
+  }
+  const global: Quaternion[] = [];
+  local.forEach((q, j) => { global[j] = j ? global[SMPLX_PARENTS[j]].clone().multiply(q) : q.clone(); });   // parents precede children
   return { global, local };
 })();
+
+/** The SMPL-X pose (local rotations) that leaves the rig at its neutral; exported for tests and tools. */
+export function speechGestureReference(): { local: Quaternion[]; global: Quaternion[] } {
+  return { local: reference.local.map((q) => q.clone()), global: reference.global.map((q) => q.clone()) };
+}
 
 // Control hierarchy used to hand a parent's rotation to its child when a rig lacks the parent
 // (e.g. the procedural portrait has no collar or spine bones: EMAGE lowers the arm partly through the collar).

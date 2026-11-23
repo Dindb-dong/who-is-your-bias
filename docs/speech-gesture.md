@@ -37,9 +37,14 @@ gestures.
    - head, neck, jaw and the pelvis/legs are left alone. Head direction stays
      with attention and the Gaussian head, and the speaker stays in place.
 
-   Each joint becomes a change from an SMPL-X reference pose whose arms point
-   along the rig's relaxed neutral. EMAGE arms hanging down therefore leave the
-   avatar at its neutral. When a rig lacks a bone (the stylized portrait has
+   Each joint becomes a change from an SMPL-X reference pose. That pose leaves
+   the avatar at its neutral. For the torso, collars and upper arms it is
+   EMAGE's own average speaking posture (BEAT2 style: torso about 26° forward,
+   collars about 16° raised, upper arms about 52° below the T-pose), measured
+   over 48 s of generated motion. That average maps to the rig's relaxed
+   neutral, so a reply no longer hunches the avatar forward with its arms out.
+   Only EMAGE's movement around the average is applied. The elbows keep an
+   anatomical reference, because their bend is the gesture itself. When a rig lacks a bone (the stylized portrait has
    no collar or spine bones), that bone's rotation is passed to the nearest
    bone below it. EMAGE lowers the arm partly through the collar, so without
    this the portrait's arms would swing out. The rig's 70° per-joint limit

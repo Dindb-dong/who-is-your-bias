@@ -11,6 +11,8 @@ import { cleanOpacity } from './gaussianMatte';
 export interface GaussianHeadConfig {
   /** Basename under /models/gaussian-head; the private bundle never enters Git. */
   bundle: string;
+  /** Used when `bundle` is not installed on this machine. */
+  fallbackBundle?: string;
   driverUrl?: string;
   trainingFrameIndices?: number[];
   /** Uniform correction after the fitted head/body scale. */
