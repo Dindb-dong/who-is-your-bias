@@ -1,7 +1,7 @@
 """Request-owned sentence synthesis and bounded PCM delivery while text continues.
 
-The baseline voice server returns one complete WAV per committed sentence. This
-is application-level early playback, not a claim of token-input neural TTS.
+Each sentence is sent once, using either a complete WAV or PCM chunks from
+the local Qwen MLX worker.
 """
 from __future__ import annotations
 
@@ -68,6 +68,8 @@ async def _live_events(engine, speech, request, *, session, deadline, started, q
     # deadline and per-segment limits bound the audio it can hold.
     gesture_audio: asyncio.Queue | None = asyncio.Queue() if gesture is not None else None
     turn_id = None
+    qwen = getattr(speech, "qwen_mlx", None)
+    speech_failure = None
     text_complete = False
     sent_chunks = 0
     emitted_chunks = 0
@@ -89,7 +91,7 @@ async def _live_events(engine, speech, request, *, session, deadline, started, q
                 async for kind, data in events:
                     if kind == "meta":
                         turn_id = data["turn_id"]
-                        data = {**data, "protocol": "live-segments-pcm.v1", "speech_backend": "committed_sentence_wav",
+                        data = {**data, "protocol": "live-segments-pcm.v1", "speech_backend": "qwen_mlx_pcm" if qwen else "committed_sentence_wav",
                                 "audio_clock": "pcm_sample_offset", "acoustic_latency_ms": None}
                     if kind == "done":
                         text_complete = True
@@ -109,8 +111,48 @@ async def _live_events(engine, speech, request, *, session, deadline, started, q
         except Exception as exc:
             await output.put(("_failure", exc))
 
-    async def synthesize():
+    async def deliver_segment(segment, chunks, *, rate, channels, byte_count, digest, pcm_digest, started_at, wav_synthesis_ms=None):
         nonlocal sent_chunks, total_frames, audio_format, first_pcm_ms
+        if audio_format is not None and audio_format != (rate, channels):
+            raise ProviderError("live_audio_format_changed", "The speech service changed format within a turn.")
+        audio_format = rate, channels
+        frame_size = channels * 2
+        gesture_buffer = bytearray()
+        segment_metadata = {"turn_id": turn_id, "segment_id": segment["segment_id"],
+            "sequence": segment["sequence"], "audio_sha256": digest, "pcm_sha256": pcm_digest,
+            "sample_rate": rate, "channels": channels, "sample_offset": total_frames,
+            "sample_count": byte_count // frame_size if byte_count is not None else None,
+            "timing_basis": "pcm_clock_energy_articulation", "speech_timing": None, "state": "ready"}
+        async for part in chunks:
+            if "synthesis_ms" not in segment_metadata:
+                segment_metadata["synthesis_ms"] = wav_synthesis_ms if wav_synthesis_ms is not None else round((time.perf_counter() - started_at) * 1000, 3)
+                await output.put(("audio_segment", segment_metadata))
+            frames = len(part) // frame_size
+            if first_pcm_ms is None:
+                first_pcm_ms = elapsed_ms()
+            await output.put(("audio", {"turn_id": turn_id, "segment_id": segment["segment_id"],
+                "sequence": sent_chunks, "segment_sequence": segment["sequence"], "sample_rate": rate,
+                "channels": channels, "sample_offset": total_frames, "sample_count": frames,
+                "encoding": "pcm_s16le", "pcm_base64": base64.b64encode(part).decode("ascii")}))
+            sent_chunks += 1
+            total_frames += frames
+            if qwen and gesture_audio is not None:
+                gesture_buffer.extend(part)
+                if len(gesture_buffer) >= rate * frame_size * 0.75:
+                    gesture_audio.put_nowait((bytes(gesture_buffer), rate, channels))
+                    gesture_buffer.clear()
+        if gesture_buffer:
+            gesture_audio.put_nowait((bytes(gesture_buffer), rate, channels))
+        synthesis_ms.append(wav_synthesis_ms if wav_synthesis_ms is not None else
+                            round((time.perf_counter() - started_at) * 1000, 3))
+        await output.put(("audio_segment_end", {"turn_id": turn_id, "segment_id": segment["segment_id"],
+            "sequence": segment["sequence"], "sample_end": total_frames, "state": "delivered"}))
+
+    async def wav_chunks(pcm, step):
+        for offset in range(0, len(pcm), step):
+            yield pcm[offset:offset + step]
+
+    async def synthesize():
         try:
             while (segment := await segments.get()) is not None:
                 text = segment["text"]
@@ -122,43 +164,35 @@ async def _live_events(engine, speech, request, *, session, deadline, started, q
                 synthesis_started = time.perf_counter()
                 if timings["first_synthesis_started_ms"] is None:
                     timings["first_synthesis_started_ms"] = elapsed_ms()
-                data, _ = await speech.synthesize(text, language=request.language)
-                synthesis_ms.append(round((time.perf_counter() - synthesis_started) * 1000, 3))
-                pcm, rate, channels = decode_pcm(data)
-                if audio_format is not None and audio_format != (rate, channels):
-                    raise ProviderError("live_audio_format_changed", "The speech service changed format within a turn.")
-                audio_format = rate, channels
-                if gesture_audio is not None:
-                    gesture_audio.put_nowait((pcm, rate, channels))
-                digest = hashlib.sha256(data).hexdigest()
-                segment_offset = total_frames
-                await output.put(("audio_segment", {"turn_id": turn_id, "segment_id": segment["segment_id"],
-                    "sequence": segment["sequence"], "audio_sha256": digest, "pcm_sha256": hashlib.sha256(pcm).hexdigest(),
-                    "sample_rate": rate, "channels": channels,
-                    "sample_offset": segment_offset, "sample_count": len(pcm) // (channels * 2),
-                    "timing_basis": "pcm_clock_energy_articulation", "speech_timing": None,
-                    "synthesis_ms": synthesis_ms[-1], "state": "ready"}))
-                step = chunk_frames * channels * 2
-                for offset in range(0, len(pcm), step):
-                    part = pcm[offset:offset + step]
-                    frames = len(part) // (channels * 2)
-                    if first_pcm_ms is None:
-                        first_pcm_ms = round((time.perf_counter() - started) * 1000, 3)
-                    await output.put(("audio", {"turn_id": turn_id, "segment_id": segment["segment_id"],
-                        "sequence": sent_chunks, "segment_sequence": segment["sequence"], "sample_rate": rate,
-                        "channels": channels, "sample_offset": total_frames, "sample_count": frames,
-                        "encoding": "pcm_s16le", "pcm_base64": base64.b64encode(part).decode("ascii")}))
-                    sent_chunks += 1
-                    total_frames += frames
-                await output.put(("audio_segment_end", {"turn_id": turn_id, "segment_id": segment["segment_id"],
-                    "sequence": segment["sequence"], "sample_end": total_frames, "state": "delivered"}))
+                if qwen:
+                    async with aclosing(qwen.stream_pcm(text, language=request.language)) as pcm_stream:
+                        await deliver_segment(segment, pcm_stream, rate=qwen.sample_rate, channels=1,
+                            byte_count=None, digest=None, pcm_digest=None, started_at=synthesis_started)
+                else:
+                    data, _ = await speech.synthesize(text, language=request.language)
+                    wav_synthesis_ms = round((time.perf_counter() - synthesis_started) * 1000, 3)
+                    pcm, rate, channels = decode_pcm(data)
+                    if gesture_audio is not None:
+                        gesture_audio.put_nowait((pcm, rate, channels))
+                    await deliver_segment(segment, wav_chunks(pcm, chunk_frames * channels * 2), rate=rate,
+                        channels=channels, byte_count=len(pcm), digest=hashlib.sha256(data).hexdigest(),
+                        pcm_digest=hashlib.sha256(pcm).hexdigest(), started_at=synthesis_started,
+                        wav_synthesis_ms=wav_synthesis_ms)
             if gesture_audio is not None:
                 gesture_audio.put_nowait(None)
             await output.put(("_audio_done", {}))
         except asyncio.CancelledError:
             raise
         except Exception as exc:
-            await output.put(("_failure", exc))
+            if qwen and isinstance(exc, ProviderError):
+                if gesture_audio is not None:
+                    gesture_audio.put_nowait(None)
+                # Keep consuming commits so a failed voice worker cannot block the text.
+                while await segments.get() is not None:
+                    pass
+                await output.put(("_voice_failure", exc))
+            else:
+                await output.put(("_failure", exc))
 
     async def gestures():
         try:
@@ -183,6 +217,8 @@ async def _live_events(engine, speech, request, *, session, deadline, started, q
                                          "server_timings_ms": dict(timings),
                                          "delivery_basis": "emitted_to_response_iterator_not_client_acknowledgement"}
                     raise data
+                if kind == "_voice_failure":
+                    speech_failure = data
                 if kind.startswith("_"):
                     complete.add(kind)
                     continue
@@ -194,6 +230,10 @@ async def _live_events(engine, speech, request, *, session, deadline, started, q
                         timings["server_first_pcm_ms"] = elapsed_ms()
                         data = {**data, "server_first_pcm_ms": timings["server_first_pcm_ms"]}
                 yield kind, data
+            if speech_failure:
+                yield "turn_state", {"turn_id": turn_id, "state": "failed", "text_complete": text_complete,
+                                     "delivered_audio_chunks": emitted_chunks, "spoken_complete": False}
+                raise speech_failure
             yield "audio_end", {"turn_id": turn_id, "chunks": sent_chunks, "sample_count": total_frames,
                                 "sample_rate": audio_format[0] if audio_format else None,
                                 "first_pcm_ready_ms": first_pcm_ms, "synthesis_ms": synthesis_ms,

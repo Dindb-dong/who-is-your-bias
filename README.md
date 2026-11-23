@@ -171,6 +171,7 @@ Imports are **draft, unindexed** records. Review the target speaker, segmentatio
 - [Controlled adaptation comparison](docs/adaptation-comparison.md): frozen factual/style inputs, base/style/adapter controls, raw failures, and blinded review exports.
 - [Dialogue evaluation](docs/dialogue-evaluation.md): English/Korean follow-ups, date corrections, topic switches, bounded context, and source-preview regressions.
 - [Held-out evaluation data](docs/heldout-evaluation-data.md): publisher acquisition, source-family isolation, corpus overlap checks, and evaluation-only records.
+- [Qwen MLX live voice on Apple Silicon](docs/qwen-mlx-live.md) setup, reference preparation, and test procedure.
 - [Live neural streaming benchmark](docs/live-stream-benchmark.md): actual HTTP text/PCM measurements, service identity, cancellation, and unmeasured playback/acoustic outcomes.
 - [2026 implementation and evidence](docs/2026-implementation.md): package status, exact snapshot, runtime configuration, early PCM protocol and remaining release conditions.
 - [Original-data expansion and adaptation](docs/persona-data.md): ten actual acquisitions, nine dialogue events, independent modality eligibility, pinned replay and training exports/launchers.

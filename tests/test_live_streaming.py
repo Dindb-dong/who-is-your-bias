@@ -266,3 +266,59 @@ def test_send_failure_closes_suspended_live_iterator_before_response_exits(corpu
         assert response is not None and llm_closed.is_set() and voice_closed.is_set()
         assert all(s.in_flight == 0 and not s.turn_lock.locked() for s in engine.sessions.sessions.values())
     asyncio.run(run())
+
+
+@pytest.mark.parametrize("fail_voice", [False, True])
+def test_qwen_mlx_streams_before_text_completion_and_keeps_one_timeline(corpus, fail_voice):
+    async def run():
+        release = asyncio.Event()
+        reply_ready = asyncio.Event()
+
+        class LLM:
+            async def stream(self, messages):
+                yield "Reusable rockets lower costs. [source:rocket-reuse] "
+                yield "They can fly again"
+                await release.wait()
+                reply_ready.set()
+                yield ". [source:rocket-reuse] This third sentence should be dropped."
+
+        class QwenVoice:
+            sample_rate = 24_000
+            settings = ProviderSettings("http://127.0.0.1:8108", "qwen3-tts-mlx")
+
+            def __init__(self):
+                self.qwen_mlx = self
+
+            async def stream_pcm(self, text, *, language):
+                if fail_voice:
+                    release.set()
+                    raise ProviderError("speech_network", "Local voice unavailable")
+                yield b"\0\x10" * 48
+                await reply_ready.wait()
+                yield b"\0\x10" * 24
+
+        voice = QwenVoice()
+        engine = Engine(Settings(llm=ProviderSettings("http://llm.invalid/v1", "test"),
+                                 tts=voice.settings, tts_protocol="qwen-mlx"), corpus, llm=LLM())
+        events = []
+        async def collect():
+            async with aclosing(live_events(engine, voice, ChatRequest(message="How does reusing rockets help?"), timeout=3)) as stream:
+                async for kind, data in stream:
+                    events.append((kind, data))
+                    if kind == "audio" and not release.is_set():
+                        assert not any(k == "result" for k, _ in events)
+                        release.set()
+        if fail_voice:
+            with pytest.raises(ProviderError, match="Local voice unavailable"):
+                await collect()
+            assert events[-1][0] == "turn_state" and events[-1][1]["text_complete"]
+        else:
+            await collect()
+            chunks = [data for kind, data in events if kind == "audio"]
+            assert [(d["sequence"], d["sample_offset"], d["segment_sequence"]) for d in chunks] == [
+                (0, 0, 0), (1, 48, 0), (2, 72, 1), (3, 120, 1)]
+            assert all(d["sample_count"] is None for kind, d in events if kind == "audio_segment")
+            assert events[-2][1]["sample_count"] == 144
+        turn = next(data["turn"] for kind, data in events if kind == "result")
+        assert turn["text"] == "Reusable rockets lower costs. They can fly again."
+    asyncio.run(run())

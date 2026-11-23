@@ -225,3 +225,47 @@ class TranscriptionProvider:
             raise ProviderError("transcription_network", "The transcription endpoint could not be reached.", 503) from exc
         except (ValueError, AttributeError) as exc:
             raise ProviderError("transcription_protocol", "The provider returned an invalid transcription.") from exc
+
+
+class QwenMlxSpeechProvider(SpeechProvider):
+    """Stream 24 kHz PCM from the loopback worker and package WAV for replay."""
+
+    sample_rate = 24_000
+    max_frames = sample_rate * 80
+
+    async def stream_pcm(self, text: str, *, language: str | None = None) -> AsyncIterator[bytes]:
+        if language not in {None, "en"}:
+            raise ProviderError("speech_language", "The local Qwen MLX voice is configured for English.", 422)
+        text = re.sub(r"\[\s*source\s*:[^\]\r\n]*(?:\]|$)", "", text, flags=re.I).strip()
+        if not 0 < len(text) <= 3000:
+            raise ProviderError("live_segment_limit", "Qwen MLX requires up to 3000 characters of speakable text.", 422)
+        received = 0
+        try:
+            async with asyncio.timeout(self.timeout):
+                async with httpx.AsyncClient(timeout=self.timeout, transport=self.transport, trust_env=False) as client:
+                    async with client.stream("POST", f"{self.settings.base_url}/speech", json={"text": text}) as response:
+                        if response.status_code != 200:
+                            raise _status_error(response.status_code)
+                        if response.headers.get("content-type") != "application/octet-stream":
+                            raise ProviderError("audio_protocol", "The Qwen MLX worker did not return raw PCM.")
+                        async for chunk in response.aiter_bytes(chunk_size=11_520):
+                            received += len(chunk)
+                            if received > self.max_frames * 2 or len(chunk) % 2:
+                                raise ProviderError("live_audio_format", "Invalid PCM from the Qwen MLX worker.")
+                            yield chunk
+        except (httpx.TimeoutException, TimeoutError) as exc:
+            raise ProviderError("speech_timeout", "Qwen MLX voice generation timed out.", 504) from exc
+        except httpx.HTTPError as exc:
+            raise ProviderError("speech_network", "The local Qwen MLX voice stream was interrupted.", 503) from exc
+        if not received:
+            raise ProviderError("audio_empty", "The Qwen MLX worker returned empty audio.")
+
+    async def synthesize(self, text: str, voice: str | None = None, *, language: str | None = None) -> tuple[bytes, str]:
+        pcm = bytearray()
+        async for chunk in self.stream_pcm(text, language=language):
+            pcm.extend(chunk)
+        output = io.BytesIO()
+        with wave.open(output, "wb") as wav:
+            wav.setparams((1, 2, self.sample_rate, 0, "NONE", "not compressed"))
+            wav.writeframes(pcm)
+        return output.getvalue(), "audio/wav"

@@ -29,6 +29,7 @@ import { PresentationView } from './components/PresentationView';
 import { createPcmPlayback, initialPcmState } from './hooks/pcmPlayback';
 import type { PcmState } from './hooks/pcmPlayback';
 import { CaptionTrack } from './hooks/captions';
+import { bufferQwenVoice } from './hooks/qwenPlayback';
 
 interface Message { id: string; role: 'user' | 'assistant'; text: string; turn?: Turn; pending?: boolean; error?: string; note?: string }
 type Page = 'studio' | 'sources' | 'lab' | 'presentation';
@@ -212,14 +213,17 @@ export default function App() {
     const controller = new AbortController(); currentRequest.current = controller;
     const answerId = crypto.randomUUID();
     const preferences = playbackPreferences.current;
-    const clock = new LiveTurnClock(answerId, performance.now(), preferences.autoPlay ? preferences.voice : 'off', undefined, microphoneEndedAt);
+    const translated = bilingual && persona?.capabilities.translated_subtitles === true;
+    const answerLanguage = translated ? 'en' : language;
+    const qwenVoice = Boolean(persona?.capabilities.qwen_mlx_voice);
+    const canSpeak = !qwenVoice || answerLanguage === 'en' || preferences.voice !== 'provider';
+    const clock = new LiveTurnClock(answerId, performance.now(), preferences.autoPlay && canSpeak ? preferences.voice : 'off', undefined, microphoneEndedAt);
     liveClock.current = clock; setLiveMeasurement(clock.snapshot());
     let paintScheduled = false;
     setMessages((previous) => [...previous, { id: crypto.randomUUID(), role: 'user', text: question }, { id: answerId, role: 'assistant', text: '', pending: true }]);
     setBusy(true); setStatus('Finding relevant sources');
     let received: Turn | undefined;
-    const translated = bilingual && persona?.capabilities.translated_subtitles === true;
-    const useLiveVoice = Boolean(preferences.autoPlay && preferences.voice === 'provider' && persona?.capabilities.live_speech);
+    const useLiveVoice = Boolean(canSpeak && preferences.autoPlay && preferences.voice === 'provider' && persona?.capabilities.live_speech);
     // With live voice, EMAGE runs window by window beside the PCM (gesture_* events) instead of on a finished clip.
     const liveGestures = useLiveVoice && preferences.speechGesture;
     let gestureMotion: SpeechGestureMotion | undefined;
@@ -241,8 +245,9 @@ export default function App() {
         if (state.status === 'completed') mark('playback_completed');
         if (state.status === 'cancelled' || state.status === 'failed') mark(state.status);
         setLiveMeasurement(clock.snapshot());
-      });
-      await streamChat({ message: question, session_id: sessionId, mode, language: translated ? 'en' : language, ...(translated ? { subtitle_language: 'ko' as const, input_language: language } : {}), motion_mode: motionMode, ...(liveGestures ? { gesture: true } : {}) }, controller.signal, async (event) => {
+      }, qwenVoice ? { context: new AudioContext({ sampleRate: 24000 }) } : undefined);
+      const buffer = qwenVoice && useLiveVoice && pcmPlayer.current ? bufferQwenVoice(pcmPlayer.current) : undefined;
+      await streamChat({ message: question, session_id: sessionId, mode, language: answerLanguage, ...(translated ? { subtitle_language: 'ko' as const, input_language: language } : {}), motion_mode: motionMode, ...(liveGestures ? { gesture: true } : {}) }, controller.signal, async (event) => {
         if (ticket !== generation.current) return;
         if (captionTrack.current?.accept(event)) refreshCaptions();
         if (event.event === 'meta') { setSessionId(event.data.session_id); liveTurnId = event.data.turn_id ?? answerId; }
@@ -250,8 +255,9 @@ export default function App() {
         if (event.event === 'audio_segment' && useLiveVoice && !audioMarked) { audioMarked = true; clock.playback({ type: 'audio_ready', atMs: performance.now(), turnId: liveTurnId, voiceMode: 'provider' }); }
         if (event.event === 'audio' && useLiveVoice) {
           const chunk = event.data, player = pcmPlayer.current;
-          if (liveGestures) { pcmChain = pcmChain.then(() => player?.push(chunk)); pcmChain.catch(() => undefined); }
-          else await player?.push(chunk);
+          const push = () => buffer ? buffer.push(chunk) : player?.push(chunk);
+          if (liveGestures) { pcmChain = pcmChain.then(push); pcmChain.catch(() => undefined); }
+          else await push();
         }
         if (event.event === 'gesture_state' && liveGestures) {
           if (event.data.status === 'streaming' && !gestureMotion) {
@@ -273,7 +279,10 @@ export default function App() {
           // Seal PCM as soon as delivery ends. Translation events may still
           // follow, and must never hold the audio clock in a loading state.
           // Capture rejection immediately without blocking the SSE consumer.
-          livePlaybackComplete = pcmChain.then(() => player.finish(event.data.sample_count)).then(
+          livePlaybackComplete = pcmChain.then(async () => {
+            await buffer?.flush();
+            await player.finish(event.data.sample_count);
+          }).then(
             () => ({ ok: true as const }), (error: unknown) => ({ ok: false as const, error }),
           );
         }
@@ -289,8 +298,9 @@ export default function App() {
         }
         if (event.event === 'result') {
           received = event.data.turn; setActiveTurn(received);
+          buffer?.updateText(received.text);
           const current = playbackPreferences.current;
-          clock.configureVoice(current.autoPlay ? current.voice : 'off');
+          clock.configureVoice(current.autoPlay && canSpeak ? current.voice : 'off');
           clock.answer(performance.now(), received.provider, received.metrics); setLiveMeasurement(clock.snapshot());
           void measuredMotion.play(received.behavior.motion);
           setMessages((previous) => previous.map((message) => message.id === answerId ? { ...message, text: event.data.turn.text, turn: event.data.turn, pending: false } : message));
@@ -298,13 +308,13 @@ export default function App() {
       }, { live: useLiveVoice });
       const current = playbackPreferences.current;
       if (ticket === generation.current && received) {
-        clock.streamComplete(performance.now()); clock.configureVoice(current.autoPlay ? current.voice : 'off'); setLiveMeasurement(clock.snapshot());
+        clock.streamComplete(performance.now()); clock.configureVoice(current.autoPlay && canSpeak ? current.voice : 'off'); setLiveMeasurement(clock.snapshot());
         if (useLiveVoice) {
           if (!livePlaybackComplete) throw new Error('The voice stream ended without playback completion.');
           const completion = await livePlaybackComplete;
           if (!completion.ok) throw completion.error;
         }
-        else if (current.autoPlay && current.voice !== 'off') void playback.play(received, current.voice, (event) => {
+        else if (current.autoPlay && canSpeak && current.voice !== 'off') void playback.play(received, current.voice, (event) => {
           if (ticket === generation.current && event.turnId === received?.id) { clock.playback(event); setLiveMeasurement(clock.snapshot()); }
         }, { gesture: current.speechGesture });
       }
@@ -332,7 +342,7 @@ export default function App() {
     measuredMotion.stop(); setModel(undefined); setBuiltinAvatar(next); setAvatarError(null); setAvatarReady(false);
     if (next === 'jensen' && !gaussianRequested) setFraming('upper_body');
   }
-  function listen(turn: Turn) { if (busy || realtimeCall.current) return; captionTrack.current = null; refreshCaptions(); pcmPlayer.current?.stop(); setPcmState(initialPcmState); setActiveTurn(turn); void measuredMotion.play(turn.behavior.motion); void playback.play(turn, voice === 'off' ? 'browser' : voice, undefined, { gesture: speechGestureEnabled }); }
+  function listen(turn: Turn) { if (busy || realtimeCall.current) return; captionTrack.current = null; refreshCaptions(); pcmPlayer.current?.stop(); setPcmState(initialPcmState); setActiveTurn(turn); void measuredMotion.play(turn.behavior.motion); void playback.play(turn, voice === 'off' || (voice === 'provider' && turn.language !== 'en' && persona?.capabilities.qwen_mlx_voice) ? 'browser' : voice, undefined, { gesture: speechGestureEnabled }); }
   useEffect(() => {
     if (!persona) return;
     if (lastPersona.current && lastPersona.current !== persona.id) {

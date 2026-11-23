@@ -230,6 +230,7 @@ def create_app(settings: Settings | None = None, *, corpus: Corpus | None = None
                 "snapshot": snapshot.summary() if snapshot else None,
                 "capabilities": {"llm": config.llm.configured, "speech": speech.settings.configured,
                                  "transcription": bool(transcription_model), "live_speech": speech.settings.configured,
+                                 "qwen_mlx_voice": speech.qwen_mlx is not None,
                                  "realtime_call": request.app.state.sophon.configured,
                                  "translated_subtitles": request.app.state.subtitles.configured,
                                  "qa_knowledge": request.app.state.engine.qa_knowledge is not None},
