@@ -35,7 +35,7 @@
     "title": "Doing important, hard work you love",
     "url": "https://engineering.oregonstate.edu/all-stories/doing-important-hard-work-you-love",
     "publisher": "Oregon State University College of Engineering",
-    "published_at": "2026-11-24",
+    "published_at": "2013-02-25",
     "source_type": "university_event_report",
     "split": "train",
     "source_event_id": "osu-hall-of-fame-2013",
@@ -43,9 +43,9 @@
     "accessed_at": "2026-11-24",
     "access_status": "publisher_text_read",
     "attribution": "Bounded agent-reviewed research notes; original wording appears only in verbatim_excerpt. No audio or video verification.",
-    "date_basis": "verified_availability_only",
-    "published_date_unknown": true,
-    "event_year": 2013
+    "date_basis": "publisher_byline",
+    "event_year": 2013,
+    "publication_date_locator": "Story By / Gregg Kleiner / Feb. 25, 2013"
   },
   {
     "id": "jhb-osu-hall-2013",
@@ -62,7 +62,19 @@
     "attribution": "Bounded agent-reviewed research notes; original wording appears only in verbatim_excerpt. No audio or video verification.",
     "date_basis": "verified_availability_only",
     "published_date_unknown": true,
-    "event_year": 2013
+    "event_year": 2013,
+    "publication_date_verified": false,
+    "publication_date_basis": "observed_availability",
+    "availability_observed_at": "2026-11-24T11:18:33.789798+00:00",
+    "raw_content_sha256": "61152de6b8506fd91a7e763bfe71b79a4d5ed7c0e14fd073dd1482a2f3b2a3e2",
+    "ingested_at": "2026-11-24T11:18:33.789798+00:00",
+    "raw_content_bytes": 43889,
+    "source_capture": {
+      "manifest": "capture-manifest.json",
+      "receipt": "capture-receipt.json",
+      "member": "captures/jhb-osu-hall-2013.html",
+      "status": "uploaded_and_readback_verified"
+    }
   },
   {
     "id": "jhb-hkust-2024",
@@ -155,7 +167,19 @@
     "attribution": "Bounded agent-reviewed research notes; original wording appears only in verbatim_excerpt. No audio or video verification.",
     "date_basis": "verified_availability_only",
     "published_date_unknown": true,
-    "recorded_at": "2019-08-02"
+    "recorded_at": "2019-08-02",
+    "publication_date_verified": false,
+    "publication_date_basis": "observed_availability",
+    "availability_observed_at": "2026-11-24T11:18:32.616390+00:00",
+    "raw_content_sha256": "b18030ecdd265d4dfffdfe33686288a86b6fb2b85892711f4177caf2ecd86417",
+    "ingested_at": "2026-11-24T11:18:32.616390+00:00",
+    "raw_content_bytes": 61153,
+    "source_capture": {
+      "manifest": "capture-manifest.json",
+      "receipt": "capture-receipt.json",
+      "member": "captures/jhb-oneida-hall-2019.html",
+      "status": "uploaded_and_readback_verified"
+    }
   },
   {
     "id": "jhb-hoover-only-in-america",
@@ -172,7 +196,19 @@
     "attribution": "Bounded agent-reviewed research notes; original wording appears only in verbatim_excerpt. No audio or video verification.",
     "date_basis": "verified_availability_only",
     "published_date_unknown": true,
-    "curation_note": "Publisher speaker labels checked. Embedded archival speakers are not attributed to Huang. Publication date not visible in retrieved text."
+    "curation_note": "Publisher speaker labels checked. Embedded archival speakers are not attributed to Huang. Publication date not visible in retrieved text.",
+    "publication_date_verified": false,
+    "publication_date_basis": "observed_availability",
+    "availability_observed_at": "2026-11-24T11:18:33.280587+00:00",
+    "raw_content_sha256": "8154a66983ea56221f8670662ca32605fa6ad0d6b392e07a0564cb868adab9f4",
+    "ingested_at": "2026-11-24T11:18:33.280587+00:00",
+    "raw_content_bytes": 242805,
+    "source_capture": {
+      "manifest": "capture-manifest.json",
+      "receipt": "capture-receipt.json",
+      "member": "captures/jhb-hoover-only-in-america.html",
+      "status": "uploaded_and_readback_verified"
+    }
   },
   {
     "id": "jhb-sia-noyce-2021",
@@ -234,7 +270,19 @@
     "attribution": "Bounded agent-reviewed research notes; original wording appears only in verbatim_excerpt. No audio or video verification.",
     "date_basis": "verified_availability_only",
     "published_date_unknown": true,
-    "curation_note": "Birth-city and arrival-age statements conflict with other sources and are excluded; only education and building facts used."
+    "curation_note": "Birth-city and arrival-age statements conflict with other sources and are excluded; only education and building facts used.",
+    "publication_date_verified": false,
+    "publication_date_basis": "observed_availability",
+    "availability_observed_at": "2026-11-24T11:18:37.432506+00:00",
+    "raw_content_sha256": "2ca8ff85455bcb6a897bef3a045b1c73b039b19d1e14d002b2e98c848294c38b",
+    "ingested_at": "2026-11-24T11:18:37.432506+00:00",
+    "raw_content_bytes": 95597,
+    "source_capture": {
+      "manifest": "capture-manifest.json",
+      "receipt": "capture-receipt.json",
+      "member": "captures/jhb-stanford-pillars.html",
+      "status": "uploaded_and_readback_verified"
+    }
   },
   {
     "id": "jhb-sec-social-2026",
@@ -267,7 +315,19 @@
     "attribution": "Bounded agent-reviewed research notes; original wording appears only in verbatim_excerpt. No audio or video verification.",
     "date_basis": "verified_availability_only",
     "published_date_unknown": true,
-    "curation_note": "Mutable biography. Historical education and prior employment only; this record is not a current corporate-title authority."
+    "curation_note": "Mutable biography. Historical education and prior employment only; this record is not a current corporate-title authority.",
+    "publication_date_verified": false,
+    "publication_date_basis": "observed_availability",
+    "availability_observed_at": "2026-11-24T11:18:19.052468+00:00",
+    "raw_content_sha256": "42c23bd2697da6c511d142ba500f4baf20ca1282848629d9ba3ead52bb982e56",
+    "ingested_at": "2026-11-24T11:18:19.052468+00:00",
+    "raw_content_bytes": 52904,
+    "source_capture": {
+      "manifest": "capture-manifest.json",
+      "receipt": "capture-receipt.json",
+      "member": "captures/jhb-nvidia-official-bio.html",
+      "status": "uploaded_and_readback_verified"
+    }
   },
   {
     "id": "jhb-nvidia-history",
@@ -284,7 +344,19 @@
     "attribution": "Bounded agent-reviewed research notes; original wording appears only in verbatim_excerpt. No audio or video verification.",
     "date_basis": "verified_availability_only",
     "published_date_unknown": true,
-    "curation_note": "Corporate chronology, not independent proof of industry-wide invention claims."
+    "curation_note": "Corporate chronology, not independent proof of industry-wide invention claims.",
+    "publication_date_verified": false,
+    "publication_date_basis": "observed_availability",
+    "availability_observed_at": "2026-11-24T11:18:39.401661+00:00",
+    "raw_content_sha256": "8a34743fb3807ed53a06dd5db8955a9e067299faab0bb7fe890175069fe7a0b0",
+    "ingested_at": "2026-11-24T11:18:39.401661+00:00",
+    "raw_content_bytes": 633643,
+    "source_capture": {
+      "manifest": "capture-manifest.json",
+      "receipt": "capture-receipt.json",
+      "member": "captures/jhb-nvidia-history.html",
+      "status": "uploaded_and_readback_verified"
+    }
   },
   {
     "id": "jhb-kitchen-keynote-2020",

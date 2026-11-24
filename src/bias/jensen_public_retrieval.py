@@ -49,10 +49,11 @@ _KOREAN = {
     "불확실": "uncertainty", "인정": "admit", "소버린": "sovereign",
     "주권": "sovereign", "언어": "language", "문화": "culture",
     "국가": "country", "나라": "country", "주방": "kitchen", "키노트": "keynote",
+    "의사결정": "decision", "기준": "criterion",
 }
 _SYNONYMS = {
     "dennys": "denny", "diner": "restaurant", "dishes": "dish", "dishwashing": "dishwasher",
-    "waited": "waiter", "waiting": "waiter", "waitstaff": "waiter", "server": "waiter",
+    "waitstaff": "waiter",
     "worked": "work", "working": "work", "jobs": "job", "workers": "employee",
     "buyers": "customer", "buyer": "customer", "customer": "customer", "pay": "paying",
     "faster": "speed", "speedup": "speed", "sixfold": "six", "6x": "six",
@@ -72,6 +73,7 @@ _ANCHORS = frozenset({"denny", "cuda", "sega", "tsmc", "tpu", "attention", "blac
 
 def public_tokens(text: str) -> list[str]:
     normalized = unicodedata.normalize("NFKC", text).casefold()
+    normalized = re.sub(r"\b(?:wait|waited|waiting)\s+tables\b", "waiter", normalized)
     # Keep translation at word starts; a short morpheme inside another word is
     # not evidence. Remaining unknown Korean/English words keep their weight in
     # the confidence denominator rather than disappearing.

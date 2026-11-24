@@ -114,8 +114,8 @@ class Settings:
             raise ValueError("Qwen MLX voice requires the local worker at http://127.0.0.1:8108")
         if not isinstance(self.tts_language_hint, bool):
             raise ValueError("tts_language_hint must be a boolean")
-        if self.retrieval_backend not in {"lexical", "hybrid", "jensen-lexical"} or self.embedding_backend not in {"local", "http"}:
-            raise ValueError("Select lexical/hybrid/jensen-lexical retrieval and local/http embeddings")
+        if self.retrieval_backend not in {"lexical", "hybrid", "jensen-lexical", "jensen-public"} or self.embedding_backend not in {"local", "http"}:
+            raise ValueError("Select lexical/hybrid/jensen-lexical/jensen-public retrieval and local/http embeddings")
         if not isinstance(self.retrieval_prewarm, bool):
             raise ValueError("retrieval_prewarm must be a boolean")
         if not isinstance(self.live_concise, bool):
@@ -171,7 +171,7 @@ class Settings:
         translation = (provider("TRANSLATION") if translation_protocol == "openai-compatible"
                        else ProviderSettings(api_key=os.getenv("BIAS_TRANSLATION_API_KEY")))
         return cls(
-            corpus_dir=Path(os.getenv("BIAS_CORPUS_DIR", str(repository_root() / "data/personas/jensen-huang"))),
+            corpus_dir=Path(os.getenv("BIAS_CORPUS_DIR", str(repository_root() / "data/personas/jensen-huang-public-v3"))),
             web_dir=Path(os.getenv("BIAS_WEB_DIR", str(repository_root() / "apps/web/dist"))),
             llm=provider("LLM"),
             tts=provider("TTS"),
@@ -195,10 +195,10 @@ class Settings:
             llm_max_tokens=int(llm_max_tokens),
             persona_snapshot=(Path(os.environ["BIAS_PERSONA_SNAPSHOT"]).expanduser() if os.getenv("BIAS_PERSONA_SNAPSHOT") else
                               None if os.getenv("BIAS_CORPUS_DIR") or os.environ.get("BIAS_PERSONA_SNAPSHOT") == "" else
-                              repository_root() / "data/snapshots/jensen-huang-2026-11-12.json"),
+                              repository_root() / "data/snapshots/jensen-public-2026-11-24.json"),
             llm_context_window=int(number("BIAS_LLM_CONTEXT_WINDOW", 8192, 1024, 262144)),
             llm_tokenizer_path=Path(os.environ["BIAS_LLM_TOKENIZER_PATH"]).expanduser() if os.getenv("BIAS_LLM_TOKENIZER_PATH") else None,
-            retrieval_backend=os.getenv("BIAS_RETRIEVAL_BACKEND", "lexical"),
+            retrieval_backend=os.getenv("BIAS_RETRIEVAL_BACKEND", "lexical" if os.getenv("BIAS_CORPUS_DIR") else "jensen-public"),
             retrieval_prewarm=prewarm in {"true", "1"},
             embedding_backend=os.getenv("BIAS_EMBEDDING_BACKEND", "local"),
             embedding_model=os.getenv("BIAS_EMBEDDING_MODEL") or None,

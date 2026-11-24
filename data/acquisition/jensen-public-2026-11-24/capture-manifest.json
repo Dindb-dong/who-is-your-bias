@@ -1,0 +1,317 @@
+{
+  "capture_batch": "jensen-source-capture-2026-11-24",
+  "manifest_version": 1,
+  "scope": "Exact public document bytes for sources with unknown publication dates; source publication dates remain unknown.",
+  "records": [
+    {
+      "source_id": "jhb-nvidia-official-bio",
+      "source_event_id": "nvidia-official-biography",
+      "source_url": "https://nvidianews.nvidia.com/bios/jensen-huang",
+      "source_title": "Jensen Huang",
+      "source_shard": "biography-sources.json",
+      "attempted_at": "2026-11-24T11:18:13.669016+00:00",
+      "request_method": "GET",
+      "request_user_agent": "Jensen-public-source-provenance/1.0 (public document archival verification)",
+      "request_accept_encoding": "identity",
+      "http_status": 200,
+      "resolved_url": "https://nvidianews.nvidia.com/bios/jensen-huang",
+      "response_headers": {
+        "content-type": "text/html; charset=utf-8",
+        "date": "Tue, 24 Nov 2026 11:18:19 GMT",
+        "content-length": "52904"
+      },
+      "acquired_at": "2026-11-24T11:18:19.052468+00:00",
+      "status": "captured",
+      "raw_content_sha256": "42c23bd2697da6c511d142ba500f4baf20ca1282848629d9ba3ead52bb982e56",
+      "byte_length": 52904,
+      "raw_relative_path": "captures/jhb-nvidia-official-bio.html",
+      "validation": {
+        "format": "HTML",
+        "document_title": "Jensen Huang | NVIDIA Newsroom  Artificial Intelligence Computing Leadership from NVIDIA ic_arrow-back-to-top Facebook LinkedIn Instagram YouTube NVIDIA",
+        "substantive_text_length": 3041,
+        "required_fragments_present": {
+          "Jensen Huang": true,
+          "NVIDIA": true,
+          "1993": true,
+          "Oregon State": true
+        },
+        "not_login_bot_error": true
+      },
+      "provenance_note": "Exact HTTP response body bytes saved without editorial modification. Original publication date remains unknown; acquisition proves observed availability only."
+    },
+    {
+      "source_id": "jhb-oneida-hall-2019",
+      "source_event_id": "oneida-huang-hall-2019",
+      "source_url": "https://www.oneidaschool.org/about/huanghall.cfm",
+      "source_title": "Jen-Hsun Huang Hall Construction",
+      "source_shard": "biography-sources.json",
+      "attempted_at": "2026-11-24T11:18:28.166173+00:00",
+      "request_method": "GET",
+      "request_user_agent": "Jensen-public-source-provenance/1.0 (public document archival verification)",
+      "request_accept_encoding": "identity",
+      "http_status": 200,
+      "resolved_url": "https://www.oneidaschool.org/about/huanghall.cfm",
+      "response_headers": {
+        "content-type": "text/html;charset=UTF-8",
+        "date": "Tue, 24 Nov 2026 11:18:32 GMT"
+      },
+      "acquired_at": "2026-11-24T11:18:32.616390+00:00",
+      "status": "captured",
+      "raw_content_sha256": "b18030ecdd265d4dfffdfe33686288a86b6fb2b85892711f4177caf2ecd86417",
+      "byte_length": 61153,
+      "raw_relative_path": "captures/jhb-oneida-hall-2019.html",
+      "validation": {
+        "format": "HTML",
+        "document_title": "Jen-Hsun Huang Hall Construction - Oneida Baptist Institute",
+        "substantive_text_length": 3942,
+        "required_fragments_present": {
+          "Huang Hall": true,
+          "NVIDIA": true
+        },
+        "not_login_bot_error": true
+      },
+      "provenance_note": "Exact HTTP response body bytes saved without editorial modification. Original publication date remains unknown; acquisition proves observed availability only."
+    },
+    {
+      "source_id": "jhb-hoover-only-in-america",
+      "source_event_id": "hoover-only-in-america-huang",
+      "source_url": "https://www.hoover.org/plus/research/jensen-huang-vision-risk-and-gpu",
+      "source_title": "Only In America: Jensen Huang on Vision, Risk, and the GPU",
+      "source_shard": "biography-sources.json",
+      "attempted_at": "2026-11-24T11:18:28.166738+00:00",
+      "request_method": "GET",
+      "request_user_agent": "Jensen-public-source-provenance/1.0 (public document archival verification)",
+      "request_accept_encoding": "identity",
+      "http_status": 200,
+      "resolved_url": "https://www.hoover.org/plus/research/jensen-huang-vision-risk-and-gpu",
+      "response_headers": {
+        "content-type": "text/html; charset=utf-8",
+        "etag": "\"mb9f7yvz6q573z\"",
+        "date": "Tue, 24 Nov 2026 11:18:33 GMT"
+      },
+      "acquired_at": "2026-11-24T11:18:33.280587+00:00",
+      "status": "captured",
+      "raw_content_sha256": "8154a66983ea56221f8670662ca32605fa6ad0d6b392e07a0564cb868adab9f4",
+      "byte_length": 242805,
+      "raw_relative_path": "captures/jhb-hoover-only-in-america.html",
+      "validation": {
+        "format": "HTML",
+        "document_title": "Only In America: Jensen Huang on Vision, Risk, and the GPU | Hoover Plus",
+        "substantive_text_length": 37492,
+        "required_fragments_present": {
+          "Jensen Huang": true,
+          "Condoleezza Rice": true,
+          "GPU": true
+        },
+        "not_login_bot_error": true
+      },
+      "provenance_note": "Exact HTTP response body bytes saved without editorial modification. Original publication date remains unknown; acquisition proves observed availability only."
+    },
+    {
+      "source_id": "jhb-osu-hall-2013",
+      "source_event_id": "osu-hall-of-fame-2013",
+      "source_url": "https://engineering.oregonstate.edu/alumni-partners/oregon-stater-awards/searchable-awards-database/jen-hsun-huang-engineering-hall",
+      "source_title": "Jen-Hsun Huang: Engineering Hall of Fame - 2013",
+      "source_shard": "biography-sources.json",
+      "attempted_at": "2026-11-24T11:18:28.165506+00:00",
+      "request_method": "GET",
+      "request_user_agent": "Jensen-public-source-provenance/1.0 (public document archival verification)",
+      "request_accept_encoding": "identity",
+      "http_status": 200,
+      "resolved_url": "https://engineering.oregonstate.edu/alumni-partners/oregon-stater-awards/searchable-awards-database/jen-hsun-huang-engineering-hall",
+      "response_headers": {
+        "date": "Tue, 24 Nov 2026 11:18:33 GMT",
+        "content-type": "text/html; charset=UTF-8",
+        "content-length": "43889",
+        "last-modified": "Thu, 19 Nov 2026 20:40:39 GMT",
+        "etag": "W/\"1795120839-gzip\""
+      },
+      "acquired_at": "2026-11-24T11:18:33.789798+00:00",
+      "status": "captured",
+      "raw_content_sha256": "61152de6b8506fd91a7e763bfe71b79a4d5ed7c0e14fd073dd1482a2f3b2a3e2",
+      "byte_length": 43889,
+      "raw_relative_path": "captures/jhb-osu-hall-2013.html",
+      "validation": {
+        "format": "HTML",
+        "document_title": "Jen-Hsun Huang: Engineering Hall of Fame - 2013 | College of Engineering | Oregon State University",
+        "substantive_text_length": 5733,
+        "required_fragments_present": {
+          "Huang": true,
+          "Engineering Hall of Fame": true,
+          "1984": true
+        },
+        "not_login_bot_error": true
+      },
+      "provenance_note": "Exact HTTP response body bytes saved without editorial modification. Original publication date remains unknown; acquisition proves observed availability only."
+    },
+    {
+      "source_id": "jhb-stanford-pillars",
+      "source_event_id": "stanford-huang-engineering-history",
+      "source_url": "https://engineering.stanford.edu/about/visit/pillars",
+      "source_title": "Pillars",
+      "source_shard": "biography-sources.json",
+      "attempted_at": "2026-11-24T11:18:32.620821+00:00",
+      "request_method": "GET",
+      "request_user_agent": "Jensen-public-source-provenance/1.0 (public document archival verification)",
+      "request_accept_encoding": "identity",
+      "http_status": 200,
+      "resolved_url": "https://engineering.stanford.edu/about/visit/pillars",
+      "response_headers": {
+        "content-type": "text/html; charset=utf-8",
+        "last-modified": "Tue, 24 Nov 2026 06:06:15 GMT",
+        "etag": "\"1795500375-gzip\"",
+        "date": "Tue, 24 Nov 2026 11:18:37 GMT"
+      },
+      "acquired_at": "2026-11-24T11:18:37.432506+00:00",
+      "status": "captured",
+      "raw_content_sha256": "2ca8ff85455bcb6a897bef3a045b1c73b039b19d1e14d002b2e98c848294c38b",
+      "byte_length": 95597,
+      "raw_relative_path": "captures/jhb-stanford-pillars.html",
+      "validation": {
+        "format": "HTML",
+        "document_title": "Pillars | Stanford University School of Engineering",
+        "substantive_text_length": 11835,
+        "required_fragments_present": {
+          "Pillars": true,
+          "Huang": true,
+          "Engineering": true
+        },
+        "not_login_bot_error": true
+      },
+      "provenance_note": "Exact HTTP response body bytes saved without editorial modification. Original publication date remains unknown; acquisition proves observed availability only."
+    },
+    {
+      "source_id": "milken-2026",
+      "source_event_id": "milken-2026-05-04",
+      "source_url": "https://milkeninstitute.org/sites/default/files/2026-05/LeadingAgeAIAConversationNVIDIACEOJensenHuang_Transcript_GC26.pdf",
+      "source_title": "Leading in the Age of AI: A Conversation with NVIDIA CEO Jensen Huang",
+      "source_shard": "judgment-sources.json",
+      "attempted_at": "2026-11-24T11:18:33.793214+00:00",
+      "request_method": "GET",
+      "request_user_agent": "Jensen-public-source-provenance/1.0 (public document archival verification)",
+      "request_accept_encoding": "identity",
+      "http_status": 200,
+      "resolved_url": "https://milkeninstitute.org/sites/default/files/2026-05/LeadingAgeAIAConversationNVIDIACEOJensenHuang_Transcript_GC26.pdf",
+      "response_headers": {
+        "date": "Tue, 24 Nov 2026 11:18:38 GMT",
+        "content-type": "application/pdf",
+        "content-length": "714015",
+        "etag": "\"69fcd227-ae51f\"",
+        "last-modified": "Thu, 07 May 2026 17:55:51 GMT"
+      },
+      "acquired_at": "2026-11-24T11:18:38.319051+00:00",
+      "status": "captured",
+      "raw_content_sha256": "60ff9415bc786753aa7e8ee3e10b1c3ff312f855ab4251ff43ae7365f22eda62",
+      "byte_length": 714015,
+      "raw_relative_path": "captures/milken-2026.pdf",
+      "validation": {
+        "format": "PDF",
+        "document_title": "Leading in the Age of AI: A Conversation with NVIDIA CEO Jensen Huang",
+        "substantive_text_length": 43241,
+        "required_fragments_present": {
+          "Jensen Huang": true,
+          "AI": true
+        },
+        "not_login_bot_error": true,
+        "full_source_title_present": true,
+        "document_title_basis": "Exact source title verified in extracted PDF body"
+      },
+      "provenance_note": "Exact HTTP response body bytes saved without editorial modification. Original publication date remains unknown; acquisition proves observed availability only."
+    },
+    {
+      "source_id": "jhb-nvidia-history",
+      "source_event_id": "nvidia-corporate-history",
+      "source_url": "https://www.nvidia.com/en-us/about-nvidia/corporate-timeline/",
+      "source_title": "Our History: Innovations Over the Years",
+      "source_shard": "biography-sources.json",
+      "attempted_at": "2026-11-24T11:18:33.287244+00:00",
+      "request_method": "GET",
+      "request_user_agent": "Jensen-public-source-provenance/1.0 (public document archival verification)",
+      "request_accept_encoding": "identity",
+      "http_status": 200,
+      "resolved_url": "https://www.nvidia.com/en-us/about-nvidia/corporate-timeline/",
+      "response_headers": {
+        "content-type": "text/html; charset=UTF-8",
+        "last-modified": "Thu, 05 Nov 2026 05:00:45 GMT",
+        "etag": "W/\"9ab2b-65f8060d8892d\"",
+        "date": "Tue, 24 Nov 2026 11:18:39 GMT"
+      },
+      "acquired_at": "2026-11-24T11:18:39.401661+00:00",
+      "status": "captured",
+      "raw_content_sha256": "8a34743fb3807ed53a06dd5db8955a9e067299faab0bb7fe890175069fe7a0b0",
+      "byte_length": 633643,
+      "raw_relative_path": "captures/jhb-nvidia-history.html",
+      "validation": {
+        "format": "HTML",
+        "document_title": "Our History: Innovations Over the Years | NVIDIA NVIDIA Home Menu Menu Close Close Close Caret down icon Caret down icon Caret up icon Caret right icon Caret right icon Caret right icon Caret left icon Caret left icon Caret left icon Shopping Cart Search icon Artificial Intelligence Computing Leadership from NVIDIA Artificial Intelligence Computing Leadership from NVIDIA NVIDIA NVIDIA",
+        "substantive_text_length": 28533,
+        "required_fragments_present": {
+          "NVIDIA History": true,
+          "CUDA": true,
+          "AlexNet": true,
+          "2006": true,
+          "2012": true
+        },
+        "not_login_bot_error": true
+      },
+      "provenance_note": "Exact HTTP response body bytes saved without editorial modification. Original publication date remains unknown; acquisition proves observed availability only."
+    },
+    {
+      "source_id": "stanford-etl-2003-time",
+      "source_event_id": "stanford-etl-2003-01-29",
+      "source_url": "https://stvp.stanford.edu/wp-content/uploads/sites/3/2024/09/how-a-ceo-spends-time-transcript.pdf",
+      "source_title": "How a CEO Spends Time",
+      "source_shard": "judgment-sources.json",
+      "attempted_at": "2026-11-24T11:18:37.439493+00:00",
+      "request_method": "GET",
+      "request_user_agent": "Jensen-public-source-provenance/1.0 (public document archival verification)",
+      "request_accept_encoding": "identity",
+      "status": "unavailable",
+      "http_status": 404,
+      "reason": "HTTP Error 404: Not Found",
+      "finished_at": "2026-11-24T11:18:41.731494+00:00",
+      "retry_policy": "No retry after HTTP refusal/rate-limit."
+    },
+    {
+      "source_id": "stanford-etl-2003-culture",
+      "source_event_id": "stanford-etl-2003-01-29",
+      "source_url": "https://stvp.stanford.edu/node/19126/printable/print",
+      "source_title": "The Power of Corporate Culture",
+      "source_shard": "judgment-sources.json",
+      "attempted_at": "2026-11-24T11:18:38.375956+00:00",
+      "request_method": "GET",
+      "request_user_agent": "Jensen-public-source-provenance/1.0 (public document archival verification)",
+      "request_accept_encoding": "identity",
+      "http_status": 200,
+      "resolved_url": "https://stvp.stanford.edu/node/19126/printable/print",
+      "response_headers": {
+        "content-type": "text/html; charset=utf-8",
+        "date": "Tue, 24 Nov 2026 11:18:41 GMT",
+        "content-length": "4010"
+      },
+      "acquired_at": "2026-11-24T11:18:41.872464+00:00",
+      "status": "captured",
+      "raw_content_sha256": "2676c51d220aef0913e7216d8817169fae8af65ba0f0f75138f23a663c0d692a",
+      "byte_length": 4010,
+      "raw_relative_path": "captures/stanford-etl-2003-culture.html",
+      "validation": {
+        "format": "HTML",
+        "document_title": "The Power of Corporate Culture",
+        "substantive_text_length": 1564,
+        "required_fragments_present": {
+          "Corporate Culture": true,
+          "Huang": true
+        },
+        "not_login_bot_error": true
+      },
+      "provenance_note": "Exact HTTP response body bytes saved without editorial modification. Original publication date remains unknown; acquisition proves observed availability only."
+    }
+  ],
+  "updated_at": "2026-11-24T11:18:41.873321+00:00",
+  "summary": {
+    "requested_documents": 9,
+    "captured_documents": 8,
+    "unavailable_documents": 1,
+    "captured_byte_total": 1848016
+  }
+}

@@ -1,0 +1,285 @@
+{
+  "schema_version": "source-event-split.v1",
+  "events": [
+    {
+      "source_event_id": "acquired-2023",
+      "split": "train",
+      "source_ids": [
+        "acquired-2023"
+      ]
+    },
+    {
+      "source_event_id": "caltech-commencement-2024",
+      "split": "train",
+      "source_ids": [
+        "jhb-caltech-2024"
+      ]
+    },
+    {
+      "source_event_id": "citadel-sequoia-2025",
+      "split": "train",
+      "source_ids": [
+        "citadel-sequoia-2025"
+      ]
+    },
+    {
+      "source_event_id": "csis-2025",
+      "split": "train",
+      "source_ids": [
+        "csis-2025"
+      ]
+    },
+    {
+      "source_event_id": "dwarkesh-2026",
+      "split": "train",
+      "source_ids": [
+        "dwarkesh-2026"
+      ]
+    },
+    {
+      "source_event_id": "hkust-huang-shum-2024",
+      "split": "train",
+      "source_ids": [
+        "jhb-hkust-2024"
+      ]
+    },
+    {
+      "source_event_id": "hoover-only-in-america-huang",
+      "split": "train",
+      "source_ids": [
+        "jhb-hoover-only-in-america"
+      ]
+    },
+    {
+      "source_event_id": "ieee-honors-2020",
+      "split": "train",
+      "source_ids": [
+        "jhb-ieee-founders-2020"
+      ]
+    },
+    {
+      "source_event_id": "lex-494",
+      "split": "train",
+      "source_ids": [
+        "lex-494"
+      ]
+    },
+    {
+      "source_event_id": "milken-2026-05-04",
+      "split": "train",
+      "source_ids": [
+        "milken-2026"
+      ]
+    },
+    {
+      "source_event_id": "ntu-commencement-2023",
+      "split": "train",
+      "source_ids": [
+        "jhb-ntu-ceremony-2023",
+        "jhb-nvidia-ntu-2023"
+      ]
+    },
+    {
+      "source_event_id": "nvidia-ces-2025",
+      "split": "train",
+      "source_ids": [
+        "nvidia-ces-2025-report"
+      ]
+    },
+    {
+      "source_event_id": "nvidia-computex-2024",
+      "split": "train",
+      "source_ids": [
+        "nvidia-computex-2024"
+      ]
+    },
+    {
+      "source_event_id": "nvidia-computex-2025",
+      "split": "train",
+      "source_ids": [
+        "nvidia-computex-2025"
+      ]
+    },
+    {
+      "source_event_id": "nvidia-corporate-history",
+      "split": "train",
+      "source_ids": [
+        "jhb-nvidia-history"
+      ]
+    },
+    {
+      "source_event_id": "nvidia-dennys-2023",
+      "split": "train",
+      "source_ids": [
+        "jhb-nvidia-dennys-2023"
+      ]
+    },
+    {
+      "source_event_id": "nvidia-fy2027-q2-filing",
+      "split": "train",
+      "source_ids": [
+        "jhb-sec-social-2026"
+      ]
+    },
+    {
+      "source_event_id": "nvidia-gtc-2020",
+      "split": "train",
+      "source_ids": [
+        "jhb-kitchen-keynote-2020"
+      ]
+    },
+    {
+      "source_event_id": "nvidia-gtc-2024",
+      "split": "train",
+      "source_ids": [
+        "nvidia-gtc-2024-report"
+      ]
+    },
+    {
+      "source_event_id": "nvidia-gtc-2025",
+      "split": "train",
+      "source_ids": [
+        "nvidia-blackwell-ultra-2025",
+        "nvidia-gtc-2025-live-report"
+      ]
+    },
+    {
+      "source_event_id": "nvidia-gtc-2026",
+      "split": "train",
+      "source_ids": [
+        "cnbc-jensen-2026-03-17"
+      ]
+    },
+    {
+      "source_event_id": "nvidia-gtc-fall-2021",
+      "split": "train",
+      "source_ids": [
+        "jhb-toy-jensen-2021"
+      ]
+    },
+    {
+      "source_event_id": "nvidia-gtc-spring-2021",
+      "split": "train",
+      "source_ids": [
+        "jhb-virtual-jensen-2021"
+      ]
+    },
+    {
+      "source_event_id": "nvidia-official-biography",
+      "split": "train",
+      "source_ids": [
+        "jhb-nvidia-official-bio"
+      ]
+    },
+    {
+      "source_event_id": "oneida-huang-hall-2019",
+      "split": "train",
+      "source_ids": [
+        "jhb-oneida-hall-2019"
+      ]
+    },
+    {
+      "source_event_id": "osu-hall-of-fame-2013",
+      "split": "train",
+      "source_ids": [
+        "jhb-osu-hall-2013",
+        "jhb-osu-hard-work-2013"
+      ]
+    },
+    {
+      "source_event_id": "osu-huang-complex-gift-2022",
+      "split": "train",
+      "source_ids": [
+        "jhb-osu-gift-2022"
+      ]
+    },
+    {
+      "source_event_id": "sequoia-crucible-nvidia-2023",
+      "split": "train",
+      "source_ids": [
+        "sequoia-crucible-nvidia-2023"
+      ]
+    },
+    {
+      "source_event_id": "sia-noyce-huang-2021",
+      "split": "train",
+      "source_ids": [
+        "jhb-sia-noyce-2021"
+      ]
+    },
+    {
+      "source_event_id": "siggraph-meta-2024",
+      "split": "train",
+      "source_ids": [
+        "siggraph-meta-2024"
+      ]
+    },
+    {
+      "source_event_id": "stanford-etl-2003-01-29",
+      "split": "train",
+      "source_ids": [
+        "stanford-etl-2003-culture",
+        "stanford-etl-2003-time"
+      ]
+    },
+    {
+      "source_event_id": "stanford-etl-2009-04-08",
+      "split": "train",
+      "source_ids": [
+        "stanford-etl-2009-allocation",
+        "stanford-etl-2009-founding",
+        "stanford-etl-2009-leaders",
+        "stanford-etl-2009-reinvention"
+      ]
+    },
+    {
+      "source_event_id": "stanford-gsb-2024",
+      "split": "train",
+      "source_ids": [
+        "stanford-gsb-2024"
+      ]
+    },
+    {
+      "source_event_id": "stanford-huang-engineering-history",
+      "split": "train",
+      "source_ids": [
+        "jhb-stanford-pillars"
+      ]
+    },
+    {
+      "source_event_id": "stanford-siepr-2024",
+      "split": "train",
+      "source_ids": [
+        "jhb-siepr-2024"
+      ]
+    },
+    {
+      "source_event_id": "strange-loop-2025",
+      "split": "train",
+      "source_ids": [
+        "strange-loop-2025"
+      ]
+    },
+    {
+      "source_event_id": "stripe-sessions-2024",
+      "split": "train",
+      "source_ids": [
+        "stripe-sessions-2024"
+      ]
+    },
+    {
+      "source_event_id": "world-governments-summit-2024",
+      "split": "train",
+      "source_ids": [
+        "world-governments-summit-2024"
+      ]
+    },
+    {
+      "source_event_id": "yc-startup-school-2026",
+      "split": "train",
+      "source_ids": [
+        "yc-startup-school-2026"
+      ]
+    }
+  ]
+}

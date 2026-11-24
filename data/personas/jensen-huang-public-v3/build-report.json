@@ -1,0 +1,99 @@
+{
+  "sources": 46,
+  "event_families": 39,
+  "records": 155,
+  "retrieval_records": 155,
+  "added_records": 101,
+  "new_records_with_short_original_excerpt": 26,
+  "source_types": {
+    "award_body_announcement": 1,
+    "award_body_event": 1,
+    "company_executive_biography": 1,
+    "company_historical_timeline": 1,
+    "company_press_release": 1,
+    "company_production_report": 2,
+    "company_regulatory_filing": 1,
+    "publisher_clip_transcript": 4,
+    "publisher_commencement_report": 1,
+    "publisher_event_report": 1,
+    "publisher_interview_report": 2,
+    "publisher_interview_transcript": 13,
+    "publisher_keynote_announcement": 1,
+    "publisher_keynote_report": 5,
+    "publisher_transcript": 2,
+    "school_facility_report": 1,
+    "university_biography": 1,
+    "university_commencement_report": 2,
+    "university_event_report": 1,
+    "university_gift_announcement": 1,
+    "university_historical_exhibit": 1,
+    "university_interview_report": 2
+  },
+  "splits": {
+    "train": 46
+  },
+  "quality": {
+    "distinct_source_events": 39,
+    "sources_without_event_ids": [],
+    "repeated_event_families": [
+      {
+        "source_event_id": "ntu-commencement-2023",
+        "sources": [
+          "jhb-ntu-ceremony-2023",
+          "jhb-nvidia-ntu-2023"
+        ],
+        "splits": [
+          "train"
+        ]
+      },
+      {
+        "source_event_id": "nvidia-gtc-2025",
+        "sources": [
+          "nvidia-blackwell-ultra-2025",
+          "nvidia-gtc-2025-live-report"
+        ],
+        "splits": [
+          "train"
+        ]
+      },
+      {
+        "source_event_id": "osu-hall-of-fame-2013",
+        "sources": [
+          "jhb-osu-hall-2013",
+          "jhb-osu-hard-work-2013"
+        ],
+        "splits": [
+          "train"
+        ]
+      },
+      {
+        "source_event_id": "stanford-etl-2003-01-29",
+        "sources": [
+          "stanford-etl-2003-culture",
+          "stanford-etl-2003-time"
+        ],
+        "splits": [
+          "train"
+        ]
+      },
+      {
+        "source_event_id": "stanford-etl-2009-04-08",
+        "sources": [
+          "stanford-etl-2009-allocation",
+          "stanford-etl-2009-founding",
+          "stanford-etl-2009-leaders",
+          "stanford-etl-2009-reinvention"
+        ],
+        "splits": [
+          "train"
+        ]
+      }
+    ],
+    "source_event_split_leaks": [],
+    "duplicate_urls": [],
+    "url_split_leaks": [],
+    "duplicate_evidence": [],
+    "scope": "Reviewed event IDs and exact normalized URL/text checks; not semantic duplicate detection or a persona-quality score."
+  },
+  "corpus_sha256": "a3a8424bdd63aaec8a157656bdfd3f8fc9a8e0ff070eeeb8766acfab733cced5"
+}
