@@ -49,6 +49,8 @@ def test_project_qa_has_its_own_sources_and_accepts_korean_input_with_english_an
     assert turn.grounding.semantic_status == "unreviewed"
     assert turn.context["qa_knowledge"]["route"] == "project"
     assert "Answer in English" in e.llm.messages[0][0]["content"]
+    assert "make the constraint concrete" in e.llm.messages[0][0]["content"]
+    assert "student team in the third person" in e.llm.messages[0][0]["content"]
     assert not any("NV-" in m["content"] for m in e.llm.messages[0])
 
 
@@ -60,6 +62,15 @@ def test_unsupported_sensitive_current_requests_do_not_invoke_speculative_model(
     assert e.llm.messages == []
     assert turn.context["qa_knowledge"]["route"] == route
     assert turn.grounding.status == "insufficient" and turn.citations == []
+
+
+def test_missing_project_cards_never_fall_through_on_presentation_turn():
+    e = engine()
+    e.qa_knowledge = None
+    with pytest.raises(ProviderError) as error:
+        asyncio.run(e.chat(ChatRequest(message="What did you build?", presentation_qa=True)))
+    assert error.value.code == "presentation_qa_unavailable"
+    assert e.llm.messages == []
 
 
 def test_disabled_knowledge_and_other_persona_keep_explicit_binding(corpus):
@@ -80,6 +91,66 @@ def test_known_documentation_gaps_do_not_become_invented_results(question, sourc
     assert source in {citation.evidence_id for citation in turn.citations}
     assert required in turn.text
     assert turn.grounding.status == "grounded"
+
+
+@pytest.mark.parametrize(("answer", "problem"), [
+    ("The design supports low latency. [source:QA-unknown]", "citation_check_failed"),
+    ("We built it for low latency. [source:QA-project-pipeline]", "team_attribution_check_failed"),
+    ("Jensen Huang built the system. [source:QA-project-pipeline]", "team_attribution_check_failed"),
+    ("Latency fell by 99 percent. [source:QA-project-pipeline]", "numeric_evidence_check_failed"),
+    ("이 프로젝트는 검색을 사용합니다. [source:QA-project-pipeline]", "language_check_failed"),
+])
+def test_presentation_screen_rejects_project_draft_before_text_and_speech(answer, problem):
+    class Draft:
+        async def stream(self, messages):
+            yield answer
+
+    e = engine()
+    e.llm = Draft()
+    request = ChatRequest(message="이 프로젝트 파이프라인은?", language="en", presentation_qa=True)
+
+    async def run():
+        return [item async for item in e.events(request, committed_segments=True)]
+
+    events = asyncio.run(run())
+    visible = " ".join(event["text"] for kind, event in events if kind in {"token", "segment"})
+    assert answer.split(" [source:")[0] not in visible
+    assert "Reviewed source summary" in visible
+    turn = next(event["turn"] for kind, event in events if kind == "result")
+    assert turn["provider"] == "evidence"
+    assert turn["context"]["qa_knowledge"]["draft_validation"] == problem
+
+
+def test_presentation_approved_draft_can_be_spoken():
+    request = ChatRequest(message="이 프로젝트 파이프라인은?", language="en", presentation_qa=True)
+
+    async def run():
+        return [item async for item in engine().events(request, committed_segments=True)]
+
+    events = asyncio.run(run())
+    speech = [event for kind, event in events if kind == "segment"]
+    assert [event["text"] for event in speech] == ["The team retrieves reviewed evidence before generating a response."]
+    turn = next(event["turn"] for kind, event in events if kind == "result")
+    assert turn["context"]["qa_knowledge"]["draft_validation"] == "mechanical_checks_passed"
+    assert turn["grounding"]["semantic_status"] == "unreviewed"
+
+
+def test_project_model_reason_is_spoken_as_a_possible_explanation():
+    e = engine()
+    request = ChatRequest(message="Why did the team choose Qwen for this project?", language="en", presentation_qa=True)
+
+    async def run():
+        return [item async for item in e.events(request, committed_segments=True)]
+
+    events = asyncio.run(run())
+    spoken = " ".join(event["text"] for kind, event in events if kind == "segment")
+    assert spoken.startswith("One plausible engineering reason is ")
+    assert "do not establish the team's actual reason" in spoken
+    assert e.llm.messages == []
+    turn = next(event["turn"] for kind, event in events if kind == "result")
+    assert turn["context"]["qa_knowledge"]["rationale"] == {
+        "kind": "engineering_inference", "source_id": "QA-project-language-model"}
+    assert turn["grounding"]["status"] == "unverified"
 
 
 def test_stream_api_exposes_separate_translation_and_preserves_english_answer():
@@ -193,7 +264,11 @@ def test_audio_completion_does_not_wait_for_slow_caption_timeout():
     asyncio.run(run())
 
 
-def test_wrong_language_answer_never_reaches_bilingual_english_voice():
+@pytest.mark.parametrize("request_fields", [
+    {"message": "이 프로젝트 파이프라인은?", "subtitle_language": "ko"},
+    {"message": "What did you mean by AI factories at COMPUTEX 2025?", "presentation_qa": True},
+])
+def test_wrong_language_answer_never_reaches_english_voice(request_fields):
     async def run():
         e = engine()
         class WrongLanguage:
@@ -205,7 +280,7 @@ def test_wrong_language_answer_never_reaches_bilingual_english_voice():
                 raise AssertionError("Wrong-language text must not reach speech")
         e.llm = WrongLanguage()
         with pytest.raises(ProviderError) as error:
-            async for _ in live_events(e, Voice(), ChatRequest(message="이 프로젝트 파이프라인은?", language="en", subtitle_language="ko")):
+            async for _ in live_events(e, Voice(), ChatRequest(language="en", **request_fields)):
                 pass
         assert error.value.code == "speech_language_mismatch"
     asyncio.run(run())

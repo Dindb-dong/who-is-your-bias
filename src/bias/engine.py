@@ -182,6 +182,12 @@ class Engine:
             session.in_flight -= 1
 
     async def _session_events(self, request: ChatRequest, session: Session, started: float, *, deadline: float, committed_segments: bool = False, live: bool = False) -> AsyncIterator[tuple[str, dict]]:
+        if request.presentation_qa:
+            if self.qa_knowledge is None:
+                raise ProviderError("presentation_qa_unavailable",
+                                    "Set BIAS_QA_KNOWLEDGE_DIR to enable presentation Q&A.", 503)
+            if self.prompt_builder is not build_messages or request.mode == "profile":
+                raise ProviderError("presentation_qa_mode", "Presentation Q&A requires the standard retrieval mode.", 422)
         async with asyncio.timeout_at(deadline):
             turn_id = uuid.uuid4().hex
             yield "meta", {"session_id": session.id, "turn_id": turn_id,
@@ -193,14 +199,15 @@ class Engine:
                 # conditions, even if the server's environment flag is enabled.
                 adaptive = (self.settings.adaptive_responses and request.mode != "profile"
                             and self.prompt_builder is build_messages)
-                resolved = session.dialogue.resolve(request.message, presentation_followups=adaptive)
+                resolved = session.dialogue.resolve(
+                    request.message, presentation_followups=adaptive or request.presentation_qa)
                 # Auxiliary project/news records are independent of persona
                 # training, the historical snapshot and frozen ablations.
                 if (self.qa_knowledge and request.mode != "profile" and self.prompt_builder is build_messages
                         and not (public_evidence_limitation(request.message) or public_evidence_limitation(resolved.query))):
-                    decision = self.qa_knowledge.resolve(request.message)
+                    decision = self.qa_knowledge.resolve(request.message, presentation=request.presentation_qa)
                     if decision is None and resolved.supporting_turn_ids:
-                        decision = self.qa_knowledge.resolve(resolved.query)
+                        decision = self.qa_knowledge.resolve(resolved.query, presentation=request.presentation_qa)
                     if decision is not None:
                         from .qa_dialogue import knowledge_events
                         async with aclosing(knowledge_events(self, request, session, resolved, decision,
