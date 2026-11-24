@@ -36,11 +36,11 @@ function stream(translationAvailable: boolean, includeCaptions: boolean) {
   return output + frame('audio_end', { turn_id: turnId, chunks: 4, sample_count: RATE * 4, sample_rate: RATE,
     first_pcm_ready_ms: 0, total_ms: 0, state: 'delivered', spoken_complete: false, acoustic_latency_ms: null }) + frame('done', {});
 }
-async function prepare(page: Page, translationAvailable = true, url = '/?present=1&bilingual=1') {
+async function prepare(page: Page, translationAvailable = true, url = '/?present=1&bilingual=1', renderAvatar = false) {
   const requests: Record<string, unknown>[] = [];
   // The browser contract below exercises PCM and the caption clock. Software
   // 3D rendering can starve that clock on shared runners.
-  await page.addInitScript(() => {
+  if (!renderAvatar) await page.addInitScript(() => {
     const original = HTMLCanvasElement.prototype.getContext;
     HTMLCanvasElement.prototype.getContext = function (...args: Parameters<typeof original>) {
       if (['webgl', 'webgl2', 'experimental-webgl'].includes(args[0])) return null;
@@ -132,4 +132,36 @@ test('keeps English input and voice available when the operator turns off Korean
     message: question, input_language: 'en', language: 'en', presentation_qa: true,
   });
   expect(requests[0]).not.toHaveProperty('subtitle_language');
+});
+
+test('shows Korean subtitles over English speech in the real picture-in-picture window', async ({ page, isMobile }, testInfo) => {
+  test.skip(isMobile, 'Document Picture-in-Picture is a desktop presentation feature.');
+  const requests = await prepare(page, true, '/?present=1&bilingual=1', true);
+  const open = page.getByRole('button', { name: 'Open avatar picture-in-picture' });
+  test.skip(await open.count() === 0, 'This browser does not expose Document Picture-in-Picture.');
+  await expect(page.locator('.avatar-viewport canvas')).toBeVisible({ timeout: 20_000 });
+  const [pipWindow] = await Promise.all([
+    page.context().waitForEvent('page'),
+    open.click(),
+  ]);
+  await expect(page.getByRole('status').filter({ hasText: 'Avatar is in a separate window.' })).toBeVisible();
+  await pipWindow.setViewportSize({ width: 420, height: 320 });
+  await page.getByLabel('Your message', { exact: true }).fill(QUESTION);
+  await page.getByRole('button', { name: 'Send message', exact: true }).click();
+
+  const captionState = () => page.evaluate(() => {
+    const pip = (window as Window & { documentPictureInPicture: { window: Window } }).documentPictureInPicture.window;
+    const caption = pip.document.querySelector('.presentation-caption');
+    return { text: caption?.lastChild?.textContent, lang: caption?.getAttribute('lang') };
+  });
+  await expect.poll(captionState).toEqual({ text: KOREAN, lang: 'ko' });
+  await expect(pipWindow.locator('.presentation-caption')).toHaveCSS('position', 'absolute');
+  await expect(pipWindow.getByText('AI simulation', { exact: true })).toBeVisible();
+  const screenshot = testInfo.outputPath('pip-korean-captions.png');
+  await pipWindow.screenshot({ path: screenshot });
+  await testInfo.attach('PiP window with Korean subtitles', { path: screenshot, contentType: 'image/png' });
+  expect(requests[0]).toMatchObject({ language: 'en', input_language: 'ko', subtitle_language: 'ko' });
+  await expect.poll(captionState).toEqual({ text: ENGLISH[1], lang: 'en' });
+  await page.getByRole('button', { name: 'Stop audio', exact: true }).click();
+  await expect.poll(captionState).toEqual({ text: undefined, lang: undefined });
 });

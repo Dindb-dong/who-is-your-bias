@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { ArrowDown, ArrowRight, ArrowUp, ArrowUpRight, BookOpen, ChevronDown, ChevronRight, CircleHelp, Clapperboard, FlaskConical, Globe2, Layers3, LoaderCircle, MessageCircle, Mic, Phone, PhoneOff, PictureInPicture2, Plus, Radio, RotateCcw, Settings2, Sparkles, Square, Volume2, VolumeX, X } from 'lucide-react';
 import { getJson, getMotionLibrary, streamChat } from './api';
 import type { Citation, ExperimentMode, Language, MotionLibraryStatus, Persona, Source, Turn } from './api';
@@ -403,9 +404,16 @@ export default function App() {
   const micHelp = microphone.backend === 'server' ? 'Record through the configured transcription service' : 'Dictate a question';
   const latestMessage = messages.at(-1);
   const translatedCaption = captionTrack.current?.active(pcmState.audioElapsedMs, pcmState.status === 'playing') ?? captionTrack.current?.transcript();
-  const caption = !translatedCaption && presentationMode && !captionTrack.current
+  const caption = !bilingual && presentationMode
     ? (activeTurn?.text ?? (latestMessage?.pending ? latestMessage.text : '')).replace(/\[source:[A-Za-z0-9_.-]*(?:\]|$)/g, '').trim()
     : '';
+  const captionContent = translatedCaption
+    ? <p className="presentation-caption" aria-label="Korean answer captions" lang={translatedCaption.language}>
+        <small>{translatedCaption.label}</small>{translatedCaption.text}
+      </p>
+    : caption
+      ? <p className="presentation-caption" aria-label="Answer captions" lang={activeTurn?.language ?? (englishAnswer ? 'en' : language)}>{caption}</p>
+      : null;
 
   return <div className="app-shell">
     <aside className="sidebar">
@@ -440,8 +448,8 @@ export default function App() {
               {avatarError && <div className="avatar-error" role="alert">{avatarError}<button onClick={() => selectBuiltinAvatar('portrait')}>Use stylized portrait</button></div>}
             </section>
               {avatarWindow.error && <p className="inline-error" role="alert">{avatarWindow.error}</p>}
-              {translatedCaption && <p className="presentation-caption" aria-label="Korean answer captions" lang={translatedCaption.language}><small>{translatedCaption.label}</small>{translatedCaption.text}</p>}
-              {caption && <p className="presentation-caption" aria-label="Answer captions" lang={activeTurn?.language ?? (englishAnswer ? 'en' : language)}>{caption}</p>}
+              {captionContent}
+              {avatarWindow.target && captionContent && createPortal(captionContent, avatarWindow.target)}
               <AttentionPanel enabled={page === 'studio'} reducedMotion={reducedMotion} onTarget={setAttentionTarget}/><MotionNotice state={measuredMotion} mode={motionMode} reducedMotion={reducedMotion} noMatch={Boolean(activeTurn && !busy && !activeTurn.behavior.motion)}/></div>
             <section className="conversation-card" aria-label="Conversation">
               <div className="conversation-header"><div><MessageCircle size={18}/><h2>Let's talk</h2></div><span className="preview-label">{persona?.capabilities.llm ? 'LLM connected' : 'Source preview'}</span></div>

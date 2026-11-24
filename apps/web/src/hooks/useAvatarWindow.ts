@@ -11,10 +11,20 @@ function prepareWindow(view: Window): HTMLElement {
   doc.documentElement.lang = document.documentElement.lang || 'en';
   doc.body.classList.add('avatar-window');
 
-  for (const sheet of document.querySelectorAll<HTMLLinkElement | HTMLStyleElement>('link[rel="stylesheet"], style')) {
-    const copy = doc.importNode(sheet, true);
-    if (sheet instanceof HTMLLinkElement) (copy as HTMLLinkElement).href = sheet.href;
-    doc.head.append(copy);
+  for (const sheet of document.styleSheets) {
+    try {
+      const style = doc.createElement('style');
+      style.media = sheet.media.mediaText;
+      style.textContent = Array.from(sheet.cssRules, (rule) => rule.cssText).join('\n');
+      doc.head.append(style);
+    } catch {
+      if (!sheet.href) continue;
+      const link = doc.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = sheet.href;
+      link.media = sheet.media.mediaText;
+      doc.head.append(link);
+    }
   }
 
   const target = doc.createElement('main');

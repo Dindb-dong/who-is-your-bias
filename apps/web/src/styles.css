@@ -73,6 +73,13 @@
 .photoreal .avatar-inline-slot > p { color: #4e5a45; }
 .avatar-portal, .avatar-window-stage { width: 100%; height: 100%; }
 .avatar-window .avatar-window-stage { max-width: none; margin: 0; padding: 0; }
+.avatar-window-stage > .presentation-caption {
+  position: absolute;
+  z-index: 1;
+  inset: auto 8px 28px;
+  margin: 0;
+  pointer-events: none;
+}
 .avatar-portal > .avatar-stage { min-height: 0 !important; }
 body.avatar-window { margin: 0; height: 100dvh; min-height: 0; overflow: hidden; background: #151c13; }
 .avatar-window .avatar-visual { height: 100%; }
