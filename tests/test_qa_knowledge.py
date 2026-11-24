@@ -266,6 +266,11 @@ def test_direct_persona_and_news_stay_separate_even_with_technical_keywords(know
     ("Why did the team choose Qwen for this project?", "QA-project-language-model"),
     ("왜 이 프로젝트는 모델을 나눴어요?", "QA-project-model-separation"),
     ("왜 우리 프로젝트에서 큐웬을 썼나요?", "QA-project-language-model"),
+    ("Why does this demo use Korean subtitles tied to audio?", "QA-project-caption-timing"),
+    ("Why did this project use a held-out test set?", "QA-project-split-isolation"),
+    ("Why does this project process camera frames in the browser?", "QA-project-detection-privacy"),
+    ("Why does this demo use a separate window?", "QA-project-presentation-window"),
+    ("Why does this project check the reference hash?", "QA-project-reference-provenance"),
 ])
 def test_engineering_inference_is_targeted_and_has_both_languages(knowledge, question, source):
     decision = knowledge.resolve(question, now=NOW)
@@ -275,6 +280,18 @@ def test_engineering_inference_is_targeted_and_has_both_languages(knowledge, que
     assert en_entry == ko_entry and en_entry.id == source
     assert en != ko
     assert decision.fallback("en") is None
+
+
+def test_uncovered_presentation_question_offers_verified_overview_after_the_limitation(knowledge):
+    question = "우리 프로젝트에서 양자 오류 정정을 어떻게 검증했나요?"
+    ordinary = knowledge.resolve(question, now=NOW)
+    assert ordinary.reason == "no_fresh_relevant_reference"
+    decision = knowledge.resolve(question, now=NOW, presentation=True)
+    assert decision.reason == "project_overview_only"
+    assert [entry.id for entry in decision.entries] == ["QA-project-overview"]
+    assert decision.fallback("en").startswith("I don't have reviewed project documentation for that detail.")
+    assert "uses them to answer audience questions" in decision.fallback("en")
+    assert "양자" not in decision.fallback("ko")
 
 
 def test_documented_rationale_and_comparison_stay_separate_from_inference(knowledge):

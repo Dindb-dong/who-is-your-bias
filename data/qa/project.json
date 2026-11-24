@@ -514,7 +514,9 @@
       "review_status": "reviewed",
       "summary": "In the bilingual text and retrieval path, input, spoken answer, and subtitle languages are separate. Sentence translation runs beside synthesis. The playing audio's PCM offset determines the displayed sentence. This is not word-level alignment.",
       "url": "https://github.com/Dindb-dong/who-is-your-bias/blob/8a9d901cb6a168d4fe8de59086705a8bedadd115/docs/yaicon-qa-bilingual.md#L27-L40",
-      "revision": "8a9d901cb6a168d4fe8de59086705a8bedadd115"
+      "revision": "8a9d901cb6a168d4fe8de59086705a8bedadd115",
+      "engineering_rationale_en": "using the playing audio clock can keep a caption aligned even when synthesis or buffering changes when its sentence starts.",
+      "engineering_rationale_ko": "재생 중인 오디오 시계를 쓰면 합성이나 버퍼링으로 문장의 시작 시점이 달라져도 자막을 맞출 수 있습니다."
     },
     {
       "id": "QA-project-caption-failure",
@@ -589,7 +591,9 @@
       "review_status": "reviewed",
       "summary": "An entire held-out source is excluded from runtime retrieval, including its records and reference answers. This preserves the distinction between available evidence and material used to evaluate generalization.",
       "url": "https://github.com/Dindb-dong/who-is-your-bias/blob/8a9d901cb6a168d4fe8de59086705a8bedadd115/README.md#L130-L138",
-      "revision": "8a9d901cb6a168d4fe8de59086705a8bedadd115"
+      "revision": "8a9d901cb6a168d4fe8de59086705a8bedadd115",
+      "engineering_rationale_en": "holding out a whole source can reduce the chance that near-duplicate exchanges from the same event enter both retrieval and evaluation.",
+      "engineering_rationale_ko": "출처 전체를 평가용으로 남기면 같은 행사에서 나온 비슷한 문답이 검색과 평가에 동시에 포함될 가능성을 줄일 수 있습니다."
     },
     {
       "id": "QA-project-corpus-ingestion",
@@ -639,7 +643,9 @@
       "review_status": "reviewed",
       "summary": "The capture path processes face positions in the browser and does not upload, record or persist camera frames. A presenter selects whom the avatar watches. Positional tracking does not establish a person's identity.",
       "url": "https://github.com/Dindb-dong/who-is-your-bias/blob/8a9d901cb6a168d4fe8de59086705a8bedadd115/docs/jensen-attention.md#L75-L104",
-      "revision": "8a9d901cb6a168d4fe8de59086705a8bedadd115"
+      "revision": "8a9d901cb6a168d4fe8de59086705a8bedadd115",
+      "engineering_rationale_en": "processing frames in the browser can support participant selection while keeping camera footage off the server.",
+      "engineering_rationale_ko": "브라우저에서 영상 프레임을 처리하면 카메라 영상을 서버로 보내지 않고도 발표자가 참가자를 선택할 수 있습니다."
     },
     {
       "id": "QA-project-attention",
@@ -690,7 +696,9 @@
       "review_status": "reviewed",
       "summary": "The studio exposes a separate avatar presentation window while the main browser tab owns conversation controls. This presentation feature does not select a different model. Test actual caption and display behavior on the event setup.",
       "url": "https://github.com/Dindb-dong/who-is-your-bias/blob/8a9d901cb6a168d4fe8de59086705a8bedadd115/apps/web/src/App.tsx",
-      "revision": "8a9d901cb6a168d4fe8de59086705a8bedadd115"
+      "revision": "8a9d901cb6a168d4fe8de59086705a8bedadd115",
+      "engineering_rationale_en": "a separate window can let the audience see the avatar while the operator retains access to the conversation controls.",
+      "engineering_rationale_ko": "별도 창을 쓰면 관객이 아바타를 보는 동안 진행자가 대화 제어 화면을 사용할 수 있습니다."
     },
     {
       "id": "QA-project-gaussian-head",
@@ -1153,7 +1161,9 @@
       "review_status": "reviewed",
       "summary": "The worker checks the reference audio and transcript SHA-256 digests. The studio explicitly binds the voice to the Jensen persona. A missing or mismatched reference is a configuration issue.",
       "url": "https://github.com/Dindb-dong/who-is-your-bias/blob/8a9d901cb6a168d4fe8de59086705a8bedadd115/docs/qwen-mlx-live.md#L16-L29",
-      "revision": "8a9d901cb6a168d4fe8de59086705a8bedadd115"
+      "revision": "8a9d901cb6a168d4fe8de59086705a8bedadd115",
+      "engineering_rationale_en": "checking the reference hashes can catch accidental replacement of the recording or its matching transcript before synthesis.",
+      "engineering_rationale_ko": "참조 파일 해시를 확인하면 녹음이나 대응 전사본이 바뀐 것을 합성 전에 알아낼 수 있습니다."
     }
   ]
 }

@@ -183,6 +183,13 @@ class KnowledgeDecision:
     limitations: tuple[str, ...] = ()
 
     def fallback(self, language: str) -> str | None:
+        if self.reason == "project_overview_only":
+            if language == "ko":
+                return ("그 세부 사항을 확인할 검토된 프로젝트 자료가 없습니다. "
+                        "스튜디오는 검토된 자료를 검색해 시뮬레이션 아바타로 관객 질문에 답합니다. [source:QA-project-overview]")
+            return ("I don't have reviewed project documentation for that detail. "
+                    "The studio retrieves reviewed records and uses them to answer audience questions through "
+                    "the simulated avatar. [source:QA-project-overview]")
         # Qwen's actual-model smoke check turned lack of documentation into
         # invented rationale/negative facts. Keep these known evidence limits
         # explicit rather than asking a small model to infer the distinction.
@@ -306,6 +313,10 @@ class QAKnowledge:
         limitations = ()
         if project and current:
             limitations = ("The supplied entries cover project facts only; the current-company-news part remains unverified by this route.",)
+        if presentation and project and not current and not selected:
+            overview_entry = next((entry for entry in candidates if entry.id == "QA-project-overview"), None)
+            if overview_entry is not None:
+                return KnowledgeDecision("project", (overview_entry,), "project_overview_only")
         reason = "reviewed_reference_match" if selected else "no_fresh_relevant_reference"
         ids = {entry.id for entry in selected}
         if project and "QA-project-alignment" in ids and re.search(r"(?<![a-z0-9])(?:mcccd|mccd)(?![a-z0-9])|발화.{0,12}(?:맞|정렬|동기)|utterance.aligned", query):
