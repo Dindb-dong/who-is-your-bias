@@ -38,6 +38,15 @@ function stream(translationAvailable: boolean) {
 }
 async function prepare(page: Page, translationAvailable = true, url = '/?present=1&bilingual=1') {
   const requests: Record<string, unknown>[] = [];
+  // The browser contract below exercises PCM and the caption clock. Software
+  // 3D rendering can starve that clock on shared runners.
+  await page.addInitScript(() => {
+    const original = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function (...args: Parameters<typeof original>) {
+      if (['webgl', 'webgl2', 'experimental-webgl'].includes(args[0])) return null;
+      return Reflect.apply(original, this, args);
+    } as typeof original;
+  });
   await page.route('**/api/persona', (route) => route.fulfill({ json: {
     id: 'jensen-huang', name: 'Synthetic bilingual fixture', tagline: '', description: '',
     example_questions: { en: [], ko: [] }, stats: { sources: 0, evidence: 0, held_out_sources: 0 },
@@ -48,7 +57,7 @@ async function prepare(page: Page, translationAvailable = true, url = '/?present
   await page.route('**/api/motion/library', (route) => route.fulfill({ json: { available: false, status: 'not_configured', reviewed_runtime_primitives: 0, preview_runtime_primitives: 0 } }));
   await page.route('**/api/chat/live', (route) => { requests.push(route.request().postDataJSON()); return route.fulfill({ contentType: 'text/event-stream', body: stream(translationAvailable) }); });
   await page.goto(url);
-  await expect(page.getByText('Studio connected', { exact: true })).toBeVisible();
+  await expect(page.getByText('Studio connected', { exact: true })).toBeVisible({ timeout: 20_000 });
   return requests;
 }
 test('routes a Korean typed question to English speech with sentence-timed Korean captions and explicit fallback', async ({ page }) => {
