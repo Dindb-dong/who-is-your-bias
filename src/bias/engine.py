@@ -30,6 +30,10 @@ from .dialogue import DEICTIC_PAST
 from .query_policy import public_evidence_limitation
 from .persona_graph import PersonaGraph, augment_result, select_advice_memory
 from .persona_delivery import PersonaDelivery
+from .persona_voice import (
+    VERSION as PERSONA_VOICE_VERSION, actual_personal_fact_question, identity_reply,
+    missing_memory_reply, permits_first_person,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -46,25 +50,41 @@ KOREAN_EVIDENCE_VIOLATION = re.compile(
     r"""["“”「」『』]|['‘][^'’\n]{12,}['’]"""
     r"|(?<![가-힣])(?:저는|제가|나는|내가|우리는|우리가)(?![가-힣])"
 )
+KOREAN_QUOTATION_VIOLATION = re.compile(r'''["“”「」『』]|['‘][^'’\n]{12,}['’]''')
+KOREAN_FIRST_PERSON = re.compile(r"(?<![가-힣])(?:저는|제가|나는|내가|우리는|우리가|제|우리)(?![가-힣])")
 KOREAN_INFERENCE_FALLBACK = "어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다."
 
 
-def korean_inference(text: str) -> str:
+def korean_inference(text: str, *, first_person: bool = False) -> str:
     proposal = text.strip()
     if not KOREAN_INFERENCE.fullmatch(proposal) or UNSUPPORTED_ATTRIBUTION.search(proposal):
         proposal = KOREAN_INFERENCE_FALLBACK
+    if first_person:
+        return "가상 추론 (실제 발언 확인 불가)\n\n" + proposal
     return (
         "가상 추론 (실제 발언 확인 불가)\n\n"
         f"젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, {proposal}"
     )
 
 
-def korean_summary_is_valid(text: str) -> bool:
+def korean_summary_is_valid(text: str, *, allow_first_person: bool = False) -> bool:
     return (
         re.search(r"[가-힣]", text) is not None
-        and KOREAN_EVIDENCE_VIOLATION.search(text) is None
+        and (KOREAN_QUOTATION_VIOLATION if allow_first_person else KOREAN_EVIDENCE_VIOLATION).search(text) is None
         and all(char.isascii() or not char.isalpha() or "가" <= char <= "힣" for char in text)
     )
+
+
+def korean_first_person_has_sources(text: str, corpus: Corpus, allowed_ids: set[str]) -> bool:
+    """Check subject attribution per cited unit, not semantic entailment."""
+    audit = audit_citations(text, allowed_ids, required=True)
+    for unit in audit.units:
+        if KOREAN_FIRST_PERSON.search(unit.text) and not any(
+            permits_first_person(corpus.evidence[identifier], corpus.sources[corpus.evidence[identifier].source_id])
+            for identifier in unit.trailing_valid_ids
+        ):
+            return False
+    return True
 
 
 def evidence_preview(request: ChatRequest, result: SearchResult) -> str:
@@ -133,6 +153,9 @@ class Engine:
         elif settings.retrieval_backend == "jensen-lexical":
             from .jensen_retrieval import JensenConceptRetriever
             self.retriever = JensenConceptRetriever(corpus)
+        elif settings.retrieval_backend == "jensen-public":
+            from .jensen_public_retrieval import JensenPublicRetriever
+            self.retriever = JensenPublicRetriever(corpus)
         else:
             self.retriever = Retriever(corpus)
         self.sessions = SessionStore(ttl=settings.session_ttl, max_sessions=settings.max_sessions, max_turns=settings.max_turns)
@@ -236,6 +259,11 @@ class Engine:
                            "temporal": {"mode": temporal.intent.mode, "years": list(temporal.intent.years), "period": temporal.intent.period,
                                         "excluded": temporal.exclusion_reasons} if temporal else None,
                            "retrieval_backend": self.settings.retrieval_backend}
+                persona_voice = (self.corpus.persona.id == "jensen-huang" and request.mode != "profile"
+                                 and self.prompt_builder is build_messages)
+                if persona_voice:
+                    context["persona_voice"] = {"version": PERSONA_VOICE_VERSION,
+                                                "perspective": "simulated_first_person", "simulation": True}
                 evidence_limitation = public_evidence_limitation(request.message) or public_evidence_limitation(resolved.query)
                 if evidence_limitation:
                     result = SearchResult((), 0, evidence_limitation)
@@ -292,13 +320,19 @@ class Engine:
                 retrieval_ms = (time.perf_counter() - retrieval_started) * 1000
                 yield "status", {"stage": "generating"}
                 generation_started = time.perf_counter()
+                fixed_identity = identity_reply(request.message, request.language) if persona_voice else None
+                missing_memory = (persona_voice and not result.hits
+                                  and actual_personal_fact_question(resolved.query))
+                if missing_memory:
+                    context["persona_voice"]["memory_status"] = "unverified_not_denied"
                 speculative = (self.settings.llm.configured and self.corpus.persona.id == "jensen-huang"
-                               and request.mode != "profile" and not result.hits and not evidence_limitation)
+                               and request.mode != "profile" and not result.hits and not evidence_limitation
+                               and not fixed_identity and not missing_memory)
                 unverified_quote = (
-                    speculative and request.language == "ko" and KOREAN_EXACT_SPEECH.search(request.message) is not None
+                    (speculative or missing_memory) and request.language == "ko" and KOREAN_EXACT_SPEECH.search(request.message) is not None
                     and temporal is not None and temporal.intent.mode == "future"
                 )
-                use_llm = not evidence_limitation and not unverified_quote and self.settings.llm.configured and (
+                use_llm = not evidence_limitation and not unverified_quote and not fixed_identity and not missing_memory and self.settings.llm.configured and (
                     request.mode == "profile" or bool(result.hits) or speculative
                 )
                 fragments: list[str] = []
@@ -328,7 +362,7 @@ class Engine:
                             counter=self.counter, resolved=resolved, speculative=speculative, live_concise=live_concise,
                             answer_policy=answer_policy, persona_selection=persona_selection,
                             persona_memory_format=self.settings.persona_memory_format,
-                            delivery_selection=delivery_selection)
+                            delivery_selection=delivery_selection, persona_voice=persona_voice)
                         messages = package.messages
                         allowed_ids = set(package.supplied_ids)
                         context["prompt_budget"] = package.budget
@@ -374,8 +408,9 @@ class Engine:
                     if review_inference or review_evidence:
                         text = "".join(fragments).strip()
                         if review_inference:
-                            text = korean_inference(text)
-                        elif not korean_summary_is_valid(text):
+                            text = korean_inference(text, first_person=persona_voice)
+                        elif (not korean_summary_is_valid(text, allow_first_person=persona_voice)
+                              or (persona_voice and not korean_first_person_has_sources(text, self.corpus, allowed_ids))):
                             source = next(hit.evidence.id for hit in result.hits if hit.evidence.id in allowed_ids)
                             text = f"한국어 답변을 확인할 수 없습니다. 관련 공개 자료를 참고해 주세요. [source:{source}]"
                         fragments = [text]
@@ -390,6 +425,10 @@ class Engine:
                     preview = evidence_preview(request, result)
                     if unverified_quote:
                         preview = "요청한 시점은 자료 기준일 이후라 실제 발언을 확인할 수 없습니다."
+                    elif fixed_identity:
+                        preview = fixed_identity
+                    elif missing_memory and not evidence_limitation:
+                        preview = missing_memory_reply(request.language)
                     elif temporal and temporal.reason and request.mode != "profile":
                         preview = ("이 스냅샷에는 요청한 시점의 입장을 확인할 수 있는 검토된 자료가 없습니다. 과거 발언을 현재 입장으로 간주하지 않습니다."
                                    if request.language == "ko" else temporal.reason)
@@ -404,7 +443,10 @@ class Engine:
                 raw = "".join(fragments)
                 text, valid, invalid = validate_citations(raw, allowed_ids)
                 audit = audit_citations(raw, allowed_ids, required=use_llm and not speculative and request.mode != "profile")
-                if request.mode != "profile" and not result.hits:
+                if fixed_identity:
+                    status = "unverified"
+                    reason = "Simulation identity; not a historical statement by the real person."
+                elif request.mode != "profile" and not result.hits:
                     status = "insufficient"
                     reason = ("Hypothetical simulation. No supporting evidence was retrieved." if speculative and use_llm else result.reason)
                 elif use_llm:
