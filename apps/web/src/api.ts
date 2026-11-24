@@ -38,7 +38,7 @@ export interface Persona {
   presentation?: { initials: string; topics: string[]; avatar_status: string; avatar_label: string } | null;
   bindings?: { persona_id: string; voice: { status: string; persona_id: string | null; voice: string }; motion: { status: string; persona_id: string | null } };
 }
-export interface ChatRequest { message: string; session_id?: string; mode: ExperimentMode; language: Language; motion_mode?: MotionMode; input_language?: Language; subtitle_language?: Language | null; gesture?: boolean }
+export interface ChatRequest { message: string; session_id?: string; mode: ExperimentMode; language: Language; motion_mode?: MotionMode; input_language?: Language; subtitle_language?: Language | null; presentation_qa?: boolean; gesture?: boolean }
 export type StreamEvent =
   | { event: 'meta'; data: { session_id: string; turn_id?: string; snapshot_id?: string | null; protocol?: string; speech_backend?: string } }
   | { event: 'status'; data: { stage: string } }
