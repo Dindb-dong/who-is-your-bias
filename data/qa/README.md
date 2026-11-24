@@ -5,18 +5,18 @@ do not train model weights, become Jensen Huang's personal memories, or establis
 that the avatar speaks for NVIDIA. `src/bias/qa_knowledge.py` owns validation,
 source routing, freshness checks, and bounded relevant-record selection.
 
-- `project.json`: ten code/status summaries audited at main
-  `713232c74c890a61d7f6f6f4b67d5fed984b883c` on 2026-11-21. Branch status cards
-  explicitly identify PR #27 and PR #29 as open at that audit. New work in the
-  Q&A branch is not described as already merged. Review these cards whenever the
-  selected runtime or team branch status changes, and before the presentation.
+- `project.json`: 43 reviewed project cards audited at main
+  `8a9d901cb6a168d4fe8de59086705a8bedadd115` on 2026-11-24. The cards cover the
+  overview, architecture, deployment choices, measurements, and limitations.
+  Status cards record the merged revisions of PR #27 and PR #29. The runtime
+  still needs to verify which optional components are in use.
 - `news.json`: two dated official NVIDIA releases opened and reviewed on
   2026-11-21, including the November 17 fiscal-results release and November 12
   leadership announcement. Company reports and forecasts remain attributed
   company statements. This small digest is not comprehensive news coverage.
 
 The news review window expires **2026-11-23 14:40 UTC** (23:40 KST); the project
-cards expire **2026-11-28 14:40 UTC**. Expired and future-reviewed entries are
+cards expire **2026-12-01 08:40 UTC**. Expired and future-reviewed entries are
 excluded. Publication dates are also checked: a freshly reviewed old release
 does not become current news. The runtime accepts only news published within
 31 days of the request and reviewed for at most 48 hours. Re-read a source and
@@ -47,7 +47,10 @@ live answer path. Runtime source freshness is checked for every question.
 
 Project questions use code/documentation cards, not unrelated interview facts.
 The model is asked to distinguish implementation from deployment and evaluation,
-and not to invent a model-selection rationale. Missing project details produce
+and not to invent a model-selection rationale. A reviewed engineering inference
+may accompany a targeted rationale question when the card provides a narrow
+bilingual inference anchored in the implementation. This remains separate from
+documented team motives and measured evidence. Missing project details produce
 an explicit request for team confirmation. Mixed project/current-news questions
 are marked as only partially covered when the project route is selected.
 
