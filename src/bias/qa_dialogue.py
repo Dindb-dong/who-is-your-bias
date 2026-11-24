@@ -30,7 +30,7 @@ _INFERENCE_ACKNOWLEDGEMENT = {
     "en": "The reviewed records do not establish the team's actual reason.",
     "ko": "검토한 자료에서는 팀의 실제 선택 이유를 확인할 수 없습니다.",
 }
-_INFERENCE_LABEL = {"en": "One plausible engineering reason is ", "ko": "가능한 기술적 이유는 "}
+_INFERENCE_LABEL = {"en": "One plausible engineering reason is that ", "ko": "가능한 기술적 이유를 하나 들면, "}
 
 
 def _project_draft_problem(draft: str, entries: list[QAEntry]) -> str | None:

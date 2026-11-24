@@ -7,7 +7,7 @@ const ENGLISH = ['We use a configured speech model.', 'Voice quality still needs
 const KOREAN = '설정된 음성 모델을 사용합니다.';
 const RATE = 16000;
 const frame = (event: string, data: unknown) => `event: ${event}\ndata: ${JSON.stringify(data)}\n\n`;
-function stream(translationAvailable: boolean) {
+function stream(translationAvailable: boolean, includeCaptions: boolean) {
   const turnId = 'bilingual-test';
   let output = frame('meta', { turn_id: turnId, session_id: 'bilingual-session', protocol: 'live-segments-pcm.v1' });
   output += frame('token', { text: ENGLISH.join(' ') });
@@ -15,7 +15,7 @@ function stream(translationAvailable: boolean) {
     const id = { turn_id: turnId, segment_id: `${turnId}:${sequence}`, sequence };
     output += frame('segment', { ...id, text: ENGLISH[sequence], evidence_ids: [], state: 'committed' });
     const translated = translationAvailable && sequence === 0;
-    output += frame('subtitle', { ...id, language: 'ko', text: translated ? KOREAN : '',
+    if (includeCaptions) output += frame('subtitle', { ...id, language: 'ko', text: translated ? KOREAN : '',
       state: translated ? 'ready' : 'unavailable', ...(translated ? {} : { reason: 'synthetic-timeout' }) });
     output += frame('audio_segment', { ...id, audio_sha256: 'a'.repeat(64), sample_rate: RATE, channels: 1,
       sample_offset: sequence * RATE * 2, sample_count: RATE * 2, synthesis_ms: 0 });
@@ -55,7 +55,11 @@ async function prepare(page: Page, translationAvailable = true, url = '/?present
   } }));
   await page.route('**/api/sources', (route) => route.fulfill({ json: { sources: [] } }));
   await page.route('**/api/motion/library', (route) => route.fulfill({ json: { available: false, status: 'not_configured', reviewed_runtime_primitives: 0, preview_runtime_primitives: 0 } }));
-  await page.route('**/api/chat/live', (route) => { requests.push(route.request().postDataJSON()); return route.fulfill({ contentType: 'text/event-stream', body: stream(translationAvailable) }); });
+  await page.route('**/api/chat/live', (route) => {
+    const request = route.request().postDataJSON();
+    requests.push(request);
+    return route.fulfill({ contentType: 'text/event-stream', body: stream(translationAvailable, request.subtitle_language === 'ko') });
+  });
   await page.goto(url);
   await expect(page.getByText('Studio connected', { exact: true })).toBeVisible({ timeout: 20_000 });
   return requests;
@@ -110,4 +114,22 @@ test('keeps Jensen presentation answers and playback in English when Korean tran
   expect(requests[0]).toMatchObject({
     message: QUESTION, input_language: 'ko', language: 'en', subtitle_language: 'ko', presentation_qa: true,
   });
+});
+
+test('keeps English input and voice available when the operator turns off Korean captions', async ({ page }) => {
+  const requests = await prepare(page, false, '/?present=1');
+  await page.getByRole('checkbox', { name: 'Korean captions' }).uncheck();
+  await expect(page.getByLabel('Question language')).toHaveValue('en');
+  const question = 'How does this project work?';
+  await page.getByLabel('Your message', { exact: true }).fill(question);
+  await page.getByRole('button', { name: 'Send message', exact: true }).click();
+
+  const caption = page.getByLabel('Answer captions', { exact: true });
+  await expect(caption).toContainText(ENGLISH[0]);
+  await expect(caption).toHaveAttribute('lang', 'en');
+  expect(requests).toHaveLength(1);
+  expect(requests[0]).toMatchObject({
+    message: question, input_language: 'en', language: 'en', presentation_qa: true,
+  });
+  expect(requests[0]).not.toHaveProperty('subtitle_language');
 });

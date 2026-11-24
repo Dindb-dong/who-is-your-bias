@@ -378,8 +378,8 @@ export default function App() {
   }, [persona?.id]);
   useEffect(() => {
     if ((presentationMode || bilingual) && persona && !persona.capabilities.speech) setVoice('off');
-    if (bilingual && persona && !persona.capabilities.translated_subtitles) setBilingual(false);
-  }, [presentationMode, bilingual, persona]);
+    if (!presentationQa && bilingual && persona && !translationAvailable) setBilingual(false);
+  }, [presentationMode, presentationQa, bilingual, persona, translationAvailable]);
   const isJensen = persona?.id === 'jensen-huang';
   const gaussianEnabled = gaussianRequested && isJensen && builtinAvatar === 'jensen' && !model;
   const gaussianHead = useMemo<GaussianHeadConfig | undefined>(() => {
