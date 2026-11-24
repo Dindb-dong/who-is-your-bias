@@ -1,5 +1,9 @@
 # Jensen persona, speech, and avatar execution
 
+> The 2026-11-24 first-person response repair, broader public-source acquisition
+> and bilingual RAG integration are tracked in
+> [the public RAG execution record](jensen-public-rag-2026-11-24.md).
+
 > The opt-in source-bound persona graph and matched real-model evaluation are
 > recorded in [the persona graph implementation note](jensen-persona-graph.md).
 > The conditional-values revision and expanded source acquisition are tracked
