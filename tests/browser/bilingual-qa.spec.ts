@@ -41,7 +41,8 @@ async function prepare(page: Page, translationAvailable = true, url = '/?present
   await page.route('**/api/persona', (route) => route.fulfill({ json: {
     id: 'jensen-huang', name: 'Synthetic bilingual fixture', tagline: '', description: '',
     example_questions: { en: [], ko: [] }, stats: { sources: 0, evidence: 0, held_out_sources: 0 },
-    capabilities: { llm: true, speech: true, live_speech: true, transcription: false, translated_subtitles: translationAvailable, realtime_call: true }, notice: 'Synthetic protocol test.',
+    capabilities: { llm: true, speech: true, live_speech: true, transcription: false, translated_subtitles: translationAvailable, qa_knowledge: true, realtime_call: true }, notice: 'Synthetic protocol test.',
+    bindings: { voice: { status: 'matched', persona_id: 'jensen-huang' } },
   } }));
   await page.route('**/api/sources', (route) => route.fulfill({ json: { sources: [] } }));
   await page.route('**/api/motion/library', (route) => route.fulfill({ json: { available: false, status: 'not_configured', reviewed_runtime_primitives: 0, preview_runtime_primitives: 0 } }));

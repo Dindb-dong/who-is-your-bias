@@ -66,6 +66,9 @@ export default function App() {
     || (presentationQa && avatarQuery.get('bilingual') !== '0'));
   const englishAnswer = presentationQa || bilingual;
   const translationAvailable = persona?.capabilities.translated_subtitles === true;
+  const presentationVoiceReady = persona?.capabilities.speech === true
+    && persona.bindings?.voice.status === 'matched'
+    && persona.bindings.voice.persona_id === 'jensen-huang';
   const captionTrack = useRef<CaptionTrack | null>(null);
   const [, setCaptionRevision] = useState(0);
   const refreshCaptions = () => setCaptionRevision((revision) => revision + 1);
@@ -221,7 +224,9 @@ export default function App() {
     const translated = bilingual && (presentationQa || translationAvailable);
     const answerLanguage = englishAnswer ? 'en' : language;
     const qwenVoice = Boolean(persona?.capabilities.qwen_mlx_voice);
-    const canSpeak = !qwenVoice || answerLanguage === 'en' || preferences.voice !== 'provider';
+    const canSpeak = presentationQa
+      ? presentationVoiceReady && preferences.voice === 'provider'
+      : !qwenVoice || answerLanguage === 'en' || preferences.voice !== 'provider';
     const clock = new LiveTurnClock(answerId, performance.now(), preferences.autoPlay && canSpeak ? preferences.voice : 'off', undefined, microphoneEndedAt);
     liveClock.current = clock; setLiveMeasurement(clock.snapshot());
     let paintScheduled = false;
@@ -353,7 +358,14 @@ export default function App() {
     measuredMotion.stop(); setModel(undefined); setBuiltinAvatar(next); setAvatarError(null); setAvatarReady(false);
     if (next === 'jensen' && !gaussianRequested) setFraming('upper_body');
   }
-  function listen(turn: Turn) { if (busy || realtimeCall.current) return; captionTrack.current = null; refreshCaptions(); pcmPlayer.current?.stop(); setPcmState(initialPcmState); setActiveTurn(turn); void measuredMotion.play(turn.behavior.motion); void playback.play(turn, voice === 'off' || (voice === 'provider' && turn.language !== 'en' && persona?.capabilities.qwen_mlx_voice) ? 'browser' : voice, undefined, { gesture: speechGestureEnabled }); }
+  function listen(turn: Turn) {
+    if (busy || realtimeCall.current || (presentationQa && (!presentationVoiceReady || turn.language !== 'en'))) return;
+    captionTrack.current = null; refreshCaptions(); pcmPlayer.current?.stop(); setPcmState(initialPcmState);
+    setActiveTurn(turn); void measuredMotion.play(turn.behavior.motion);
+    const replayVoice = presentationQa ? 'provider' :
+      voice === 'off' || (voice === 'provider' && turn.language !== 'en' && persona?.capabilities.qwen_mlx_voice) ? 'browser' : voice;
+    void playback.play(turn, replayVoice, undefined, { gesture: speechGestureEnabled });
+  }
   useEffect(() => {
     if (!persona) return;
     if (lastPersona.current && lastPersona.current !== persona.id) {
@@ -451,9 +463,13 @@ export default function App() {
                   bilingual ? 'Ask in the selected question language. Late translations show the English original.' :
                     'Korean questions can be typed or dictated.'}</p>
               </div>
+              {presentationQa && persona?.capabilities.qa_knowledge !== true &&
+                <p className="inline-error" role="status">Project Q&amp;A sources are unavailable. Check the presentation server configuration.</p>}
+              {presentationQa && !presentationVoiceReady &&
+                <p className="inline-error" role="status">The Jensen voice is unavailable. Answers use text and captions.</p>}
               <div className="message-list" role="log" aria-label="Conversation messages" aria-live="polite" aria-relevant="additions text">
                 {!messages.length && <div className="welcome-message"><div className="assistant-avatar"><Mark small/></div><span className="eyebrow">A GOOD QUESTION IS A GOOD START</span><h2>{language === 'ko' ? '어떤 이야기가 궁금해?' : 'Where should we begin?'}</h2><p>{language === 'ko' ? '공개된 자료를 바탕으로 궁금한 것을 물어봐. 답변의 출처도 함께 확인할 수 있어.' : `Explore ${topics.length ? topics.join(', ') : 'the ideas'} — with the original sources close by.`}</p><div className="starter-questions">{questions.slice(0, 3).map((question) => <button key={question} disabled={connection !== 'ready'} onClick={() => void send(question)}><span>{question}</span><ArrowUpRight size={16}/></button>)}</div><div className="preview-explainer"><BookOpen size={14}/><span>{persona?.capabilities.llm ? 'Responses use a connected model and selected evidence.' : 'Source preview uses published evidence. Connect a model for generated dialogue.'}</span></div></div>}
-                {messages.map((message) => <article key={message.id} className={`message ${message.role}`}><div className="message-avatar">{message.role === 'assistant' ? <Mark small/> : 'Y'}</div><div className="message-content"><div className="message-author">{message.role === 'assistant' ? 'Research persona' : 'You'}{message.turn && <span>{message.turn.provider === 'evidence' ? 'Source notes' : 'Generated'}</span>}</div>{message.text && <p className="message-text">{message.text}</p>}{message.note && <div className="message-note" style={{ fontSize: 11, opacity: 0.7, marginTop: 4 }}>{message.note}</div>}{message.pending && <div className="thinking"><LoaderCircle size={13} className="spin"/>{status || 'Working on your question'}</div>}{message.error && <div className="message-error" role="alert">{message.error}</div>}{message.turn && <div className="message-tools"><button onClick={() => setEvidence(message.turn!.citations)}><BookOpen size={13}/>{message.turn.citations.length ? `${message.turn.citations.length} evidence records` : 'No supporting evidence'}</button><button onClick={() => listen(message.turn!)} disabled={busy || callActive} aria-label="Play response"><Volume2 size={14}/><span>Listen</span></button><GroundingBadge grounding={message.turn.grounding} language={message.turn.language}/></div>}</div></article>)}
+                {messages.map((message) => <article key={message.id} className={`message ${message.role}`}><div className="message-avatar">{message.role === 'assistant' ? <Mark small/> : 'Y'}</div><div className="message-content"><div className="message-author">{message.role === 'assistant' ? 'Research persona' : 'You'}{message.turn && <span>{message.turn.provider === 'evidence' ? 'Source notes' : 'Generated'}</span>}</div>{message.text && <p className="message-text">{message.text}</p>}{message.note && <div className="message-note" style={{ fontSize: 11, opacity: 0.7, marginTop: 4 }}>{message.note}</div>}{message.pending && <div className="thinking"><LoaderCircle size={13} className="spin"/>{status || 'Working on your question'}</div>}{message.error && <div className="message-error" role="alert">{message.error}</div>}{message.turn && <div className="message-tools"><button onClick={() => setEvidence(message.turn!.citations)}><BookOpen size={13}/>{message.turn.citations.length ? `${message.turn.citations.length} evidence records` : 'No supporting evidence'}</button><button onClick={() => listen(message.turn!)} disabled={busy || callActive || (presentationQa && !presentationVoiceReady)} aria-label="Play response"><Volume2 size={14}/><span>Listen</span></button><GroundingBadge grounding={message.turn.grounding} language={message.turn.language}/></div>}</div></article>)}
                 <div ref={chatBottom}/>
               </div>
               {(playback.error || pcmState.error || microphone.error) && <div className="inline-error" role="alert">{playback.error || pcmState.error || microphone.error}</div>}

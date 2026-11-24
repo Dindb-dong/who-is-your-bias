@@ -32,7 +32,7 @@ export interface Persona {
   example_questions: { en: string[]; ko: string[] };
   stats: { sources: number; evidence: number; held_out_sources: number };
   qa_corpus?: { corpus_id: string | null; materialization: string; question_answer_records: number; training_question_answers: number; complete_exchanges: number; excerpts: number };
-  capabilities: { llm: boolean; speech: boolean; transcription?: boolean; live_speech?: boolean; qwen_mlx_voice?: boolean; translated_subtitles?: boolean; realtime_call?: boolean };
+  capabilities: { llm: boolean; speech: boolean; transcription?: boolean; live_speech?: boolean; qwen_mlx_voice?: boolean; translated_subtitles?: boolean; qa_knowledge?: boolean; realtime_call?: boolean };
   snapshot?: { id: string; as_of: string; current_dated_training_sources: number; coverage_note: string } | null;
   notice: string;
   presentation?: { initials: string; topics: string[]; avatar_status: string; avatar_label: string } | null;
