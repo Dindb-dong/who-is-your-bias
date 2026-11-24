@@ -46,18 +46,24 @@ private assets; add to the existing launch environment:
 
 ```sh
 export BIAS_QA_KNOWLEDGE_DIR=/absolute/path/to/who-is-your-bias/data/qa
-export BIAS_TRANSLATION_BASE_URL=http://127.0.0.1:8120/v1
-export BIAS_TRANSLATION_MODEL=your-non-thinking-translation-model
-export BIAS_TRANSLATION_TIMEOUT=12
-# BIAS_TRANSLATION_API_KEY is optional; keep it outside Git.
+export BIAS_TRANSLATION_PROTOCOL=google-web
 ```
 
-The translation address is an example, not an included running service. It uses
-streaming Chat Completions like the answer provider. A separate fast endpoint
-avoids contention when the local answer model serializes requests. Sharing one
-busy model can increase delay despite parallel application scheduling. No
-external paid provider is selected silently. Missing configuration advertises
-`translated_subtitles: false` and the UI explains what is missing.
+The Google choices send only committed English answer sentences for translation
+to Korean. The default response deadline is 2.5 seconds. Known reviewed phrases
+use local translations first. When a subtitle is late or the service is
+unavailable, the presenter can continue with English audio and English captions.
+
+| `BIAS_TRANSLATION_PROTOCOL` | Setup |
+| --- | --- |
+| `google-web` | Orbit-compatible keyless web endpoint. Rehearse on the venue network because the web interface can change or rate-limit requests. |
+| `google-cloud` | Official [Cloud Translation Basic v2](https://docs.cloud.google.com/translate/docs/reference/rest/v2/translate). Enable the API and billing and set `BIAS_TRANSLATION_API_KEY` in the server environment. |
+| `openai-compatible` (default) | Retains `BIAS_TRANSLATION_BASE_URL`, `BIAS_TRANSLATION_MODEL` and the optional `BIAS_TRANSLATION_API_KEY`. A separate non-thinking Chat Completions backend keeps translation away from the answer model's queue. Its default deadline is 12 seconds. |
+
+Keep provider keys outside Git. `BIAS_TRANSLATION_TIMEOUT` overrides the selected
+provider's deadline. Before rehearsal, check `/api/persona` for
+`capabilities.qa_knowledge` and `capabilities.translated_subtitles` and confirm
+the selected backend with an actual audience question.
 
 News review expires within 48 hours. The seeded review expires on November 23,
 2026 at 23:40 KST; refresh it before using it as current context at a later demo.
@@ -67,13 +73,15 @@ review the summary/dates, update the digest and restart the API after changes.
 Update project cards whenever PR status or the deployed implementation changes;
 their pinned old revision must not be described as the new deployment.
 
-Run `npm ci` and `npm run build`, restart the existing API, then open its URL
-with `?present=1&bilingual=1`. Select **English voice + Korean captions**. The
-question selector controls Korean `ko-KR` recognition; requests use `language:
-en`, `input_language: ko`, `subtitle_language: ko`. Configured server ASR or
-browser ASR is used; browser support/microphone permission still matters. Typed
-Korean works without ASR. Recording is transcribed after stopping, not continuous
-speech-to-speech or interruption handling.
+Run `npm ci` and `npm run build`, restart the API, then open its URL with
+`?present=1&reviewQuestion=1`. This starts in English input. Add `&bilingual=1`
+to start in Korean or `&bilingual=0` to disable Korean captions while keeping
+English answers and voice. Select the audience's language before recording.
+After stopping the mic, the operator can review and edit the transcript, then
+submit it. Requests use `language: en` and pass the selected `input_language`
+separately. Korean-caption requests also include `subtitle_language: ko`.
+Configured server ASR or browser ASR still needs microphone permission. Typed
+questions use the same answer path.
 
 The workbench adapter forwards these options and preserves auxiliary QA
 instructions. Its prepared runtime may point to another checkout; update and
