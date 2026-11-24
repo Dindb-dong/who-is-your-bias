@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "purpose": "Reserved source-event evaluation references. Never load into active retrieval, persona prompts, adaptation, or answer templates.",
+  "evaluation_status": "prepared_not_executed",
+  "novelty_check": {
+    "searched_at": "2026-11-24",
+    "scope": [
+      "data",
+      "docs",
+      "reports"
+    ],
+    "patterns": [
+      "nba.all.star",
+      "nba.tech.summit",
+      "152690",
+      "asaptext"
+    ],
+    "baseline_matches": 0,
+    "limitation": "No matches in checked-out repository does not prove absence from every historical private model dataset."
+  },
+  "source": {
+    "id": "nba-tech-summit-2025",
+    "source_event_id": "nba-tech-summit-2025-02-14",
+    "title": "NBA All-Star Technology Summit: Powering the AI Revolution, a conversation with Jensen Huang",
+    "url": "https://asaptext.com/asap_media/media/1002/1398/browse_file.php?browse_file_name=transcripts/152690.html",
+    "publisher": "ASAP Sports event transcription",
+    "recorded_at": "2025-02-14",
+    "published_at": "2026-11-24",
+    "date_basis": "verified_availability_only",
+    "published_date_unknown": true,
+    "source_type": "publisher_event_transcript",
+    "split": "test",
+    "persona_id": "jensen-huang",
+    "accessed_at": "2026-11-24",
+    "access_status": "public_event_transcript_rendering_opened",
+    "verification_refs": [
+      "turn410975847view0",
+      "turn807969854view0"
+    ],
+    "review_note": "Date in event header. Retrieval rendered extensive speaker-attributed turns and labelled the URL view a rewritten summary; no exact answer quotation is retained here. Human evaluator should inspect publisher before judging literal style."
+  },
+  "cases": [
+    {
+      "id": "JHH-001",
+      "prompt_en": "A colleague received the promotion I wanted. Why should I celebrate their success?",
+      "prompt_ko": "동료가 내가 원하던 승진을 했어. 내가 왜 그 사람의 성공을 기뻐해야 해?",
+      "locator": {
+        "label": "Becky Quick asks about competition and colleagues; employee-promotion exchange"
+      },
+      "reference_note": "Huang connects celebrating colleagues’ success to team culture and ecosystem growth.",
+      "criteria": [
+        "Explain the group benefit without dismissing disappointment.",
+        "Avoid inventing a private personal incident."
+      ],
+      "rubric_dimensions": [
+        "grounding",
+        "decision_criterion",
+        "conversational_structure"
+      ]
+    },
+    {
+      "id": "JHH-002",
+      "prompt_en": "Two important customers dislike each other and want me to choose a side. How would you reason about that?",
+      "prompt_ko": "중요한 고객 두 곳이 서로 싫어해서 내게 편을 고르래. 어떻게 판단하겠어?",
+      "locator": {
+        "label": "Becky Quick asks about Musk, Altman and competing customers"
+      },
+      "reference_note": "He distinguishes one contest from growth of the overall industry, using basketball’s shared success as an analogy.",
+      "criteria": [
+        "Separate immediate rivalry from the long partnership.",
+        "Do not claim to know customers’ private intentions."
+      ],
+      "rubric_dimensions": [
+        "grounding",
+        "decision_criterion",
+        "conversational_structure"
+      ]
+    },
+    {
+      "id": "JHH-003",
+      "prompt_en": "A public comment I made harmed a partner’s confidence. I still think the technical problem is hard. What should I do next?",
+      "prompt_ko": "내 공개 발언 때문에 파트너가 타격을 받았지만 기술 문제는 여전히 어렵다고 생각해. 다음에 뭘 해야 할까?",
+      "locator": {
+        "label": "Becky Quick asks about quantum-computing comments and the planned GTC discussion"
+      },
+      "reference_note": "He acknowledges the consequence and invites quantum partners to discuss where his assessment could be wrong.",
+      "criteria": [
+        "Acknowledge impact and create a route to correction.",
+        "Do not turn humility into an unsupported technical reversal."
+      ],
+      "rubric_dimensions": [
+        "grounding",
+        "decision_criterion",
+        "conversational_structure"
+      ]
+    },
+    {
+      "id": "JHH-004",
+      "prompt_en": "A rival released impressive engineering, but its publicity exaggerates the cost savings. How would you talk about it?",
+      "prompt_ko": "경쟁사가 훌륭한 기술을 만들었지만 홍보에서 비용 절감을 과장했어. 어떻게 말하겠어?",
+      "locator": {
+        "label": "DeepSeek engineering and exaggerated surrounding narratives exchange"
+      },
+      "reference_note": "He credits the engineering while separating it from exaggerated surrounding claims.",
+      "criteria": [
+        "Recognize the technical contribution before qualifying the claim.",
+        "Keep unsupported numbers out of the answer."
+      ],
+      "rubric_dimensions": [
+        "grounding",
+        "decision_criterion",
+        "conversational_structure"
+      ]
+    }
+  ],
+  "blind_comparison_protocol": {
+    "conditions": [
+      "baseline_card_and_retrieval",
+      "expanded_grounded_persona_retrieval"
+    ],
+    "controls": [
+      "same model revision",
+      "same decoding and output budget",
+      "same question language",
+      "same history",
+      "randomized anonymous output labels"
+    ],
+    "exclude_source_event_ids": [
+      "nba-tech-summit-2025-02-14"
+    ],
+    "report_separately": [
+      "factual support",
+      "decision criteria",
+      "discourse/style",
+      "completion and latency"
+    ],
+    "voice_control": "Compare identical generated answer text through the same voice pipeline before attributing differences to synthesis."
+  }
+}
