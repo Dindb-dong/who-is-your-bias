@@ -8,6 +8,7 @@ from __future__ import annotations
 import asyncio
 import json
 from datetime import date, datetime, timedelta, timezone
+from pathlib import Path
 
 import pytest
 
@@ -17,7 +18,7 @@ from bias.context_budget import ByteBudgetCounter, build_snapshot_messages
 from bias.corpus import Corpus
 from bias.engine import Engine
 from bias.models import ChatRequest, Evidence, Locator, Persona, Source
-from bias.persona_voice import VERSION, actual_personal_fact_question, identity_reply
+from bias.persona_voice import VERSION, actual_personal_fact_question, identity_reply, principle_advice_question
 from bias.prompts import build_messages
 from bias.qa_knowledge import QAEntry, QAKnowledge
 from bias.retrieval import SearchHit, SearchResult
@@ -184,3 +185,74 @@ def test_explicit_frozen_builder_remains_unmodified(persona_corpus):
     turn = asyncio.run(engine.chat(ChatRequest(message="Denny's waiter")))
     assert "persona_voice" not in turn.context
     assert "simulated first-person voice" not in llm.messages[0][0]["content"]
+
+
+@pytest.mark.parametrize("question", [
+    "Did you secretly fire your restaurant manager at Denny's?",
+    "Did you fire the manager at Denny's?",
+    "What did you and Steve Jobs discuss at Denny's?",
+    "Did you work at Burger King?",
+    "Did NVIDIA secretly fire its restaurant manager?",
+])
+def test_tangential_biography_hits_cannot_authorize_unrelated_experiences(persona_corpus, question):
+    llm = RecordingLLM("Yes, I did, and I remember every detail. [source:fixture-dennys]")
+    engine = Engine(configured(), persona_corpus, llm=llm)
+    class TangentialRetriever:
+        def search(self, *_args, **_kwargs):
+            return result(persona_corpus)
+    engine.retriever = TangentialRetriever()
+    engine.qa_knowledge = QAKnowledge()
+    async def run():
+        return [event async for event in engine.events(ChatRequest(message=question), committed_segments=True)]
+    events = asyncio.run(run())
+    turn = next(payload["turn"] for kind, payload in events if kind == "result")
+    assert llm.messages == [] and turn["citations"] == []
+    assert turn["context"]["persona_voice"]["rejected_evidence_ids"] == ["fixture-dennys"]
+    assert "cannot verify" in turn["text"] or "can't verify" in turn["text"]
+    assert not any("remember every detail" in json.dumps(payload) for _, payload in events)
+
+
+@pytest.mark.parametrize("question", ["Did you work at Denny's?", "Did you work as a dishwasher and waiter at Denny's?"])
+def test_supported_personal_activity_is_not_blocked_by_detail_guard(persona_corpus, question):
+    llm = RecordingLLM("I worked as a dishwasher and waiter. [source:fixture-dennys]")
+    engine = Engine(configured(retrieval_backend="jensen-public"), persona_corpus, llm=llm)
+    turn = asyncio.run(engine.chat(ChatRequest(message=question)))
+    assert len(llm.messages) == 1 and turn.citations
+    assert "detail_guard" not in turn.context["persona_voice"]
+
+
+@pytest.mark.parametrize("question,expected", [
+    ("We currently have no paying customers but verified 6x speedup. Would you keep investing?", True),
+    ("지금 유료 고객은 없지만 실제 작업이 6배 빨라졌어. 계속 투자할까?", True),
+    ("What is NVIDIA's current plan for CUDA?", False),
+    ("What is your current stance on investing in my technology?", False),
+    ("Given NVIDIA's current plan for CUDA, how should we invest?", False),
+    ("엔비디아의 현재 계획에 맞춰 어떻게 해야 할까요?", False),
+    ("Did you keep investing in CUDA in 2008?", False),
+    ("Should I buy NVIDIA stock now?", False),
+])
+def test_archived_principles_do_not_override_actual_current_or_financial_requests(question, expected):
+    assert principle_advice_question(question) is expected
+
+
+@pytest.mark.parametrize("question", [
+    "We currently have no paying customers but verified 6x speedup. Would you keep investing?",
+    "지금 유료 고객은 없지만 실제 작업이 6배 빨라졌어. 계속 투자할까?",
+    "Jensen, our technology currently runs six times faster but has no paying customers. Should we invest?",
+])
+def test_current_user_scenario_retrieves_archived_principles_without_graph(question):
+    root = Path(__file__).resolve().parents[1]
+    directory = root / "data/personas/jensen-huang-public-v3"
+    corpus = Corpus.load(directory)
+    llm = RecordingLLM("Hypothetical: I would test the technical premise before discarding the opportunity.")
+    engine = Engine(configured(corpus_dir=directory, retrieval_backend="jensen-public",
+                              persona_snapshot=root / "data/snapshots/jensen-public-2026-11-24.json"), corpus, llm=llm)
+    engine.qa_knowledge = QAKnowledge()
+    turn = asyncio.run(engine.chat(ChatRequest(message=question)))
+    assert len(llm.messages) == 1
+    assert engine.persona_graph is None and "persona_memory" not in turn.context
+    assert turn.context["temporal"]["mode"] == "current"
+    assert turn.context["persona_voice"]["evidence_scope"] == "archived_principles_for_hypothetical_advice"
+    assert {"JHJ-001", "JHJ-003"} & set(turn.grounding.retrieved_ids)
+    assert "qa_knowledge" not in turn.context
+    assert "Hypothetical:" in llm.messages[0][0]["content"]

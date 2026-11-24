@@ -39,6 +39,16 @@ _KOREAN = {
     "병목": "bottleneck", "대역폭": "bandwidth", "지연": "latency",
     "확장": "scale", "코칭": "coaching", "배움": "learn", "채용": "hiring",
     "해고": "dismissal", "위임": "delegation", "실패했": "failure",
+    "파트너": "partner", "인프라": "infrastructure", "만들": "build",
+    "테이프아웃": "tapeout", "검증": "verification", "검사": "test",
+    "현금": "cash", "자금": "funding", "시도": "attempt",
+    "판독": "reading", "의사": "doctor", "의료": "medical", "환자": "patient",
+    "목적": "purpose", "작업": "task", "업무": "task", "직업": "job",
+    "방사선": "radiology", "영상": "image", "자동화": "automation",
+    "리더": "leader", "자신감": "confidence", "확신": "conviction",
+    "불확실": "uncertainty", "인정": "admit", "소버린": "sovereign",
+    "주권": "sovereign", "언어": "language", "문화": "culture",
+    "국가": "country", "나라": "country", "주방": "kitchen", "키노트": "keynote",
 }
 _SYNONYMS = {
     "dennys": "denny", "diner": "restaurant", "dishes": "dish", "dishwashing": "dishwasher",

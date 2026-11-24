@@ -32,7 +32,8 @@ from .persona_graph import PersonaGraph, augment_result, select_advice_memory
 from .persona_delivery import PersonaDelivery
 from .persona_voice import (
     VERSION as PERSONA_VOICE_VERSION, actual_personal_fact_question, identity_reply,
-    missing_memory_reply, permits_first_person,
+    missing_memory_reply, permits_first_person, principle_advice_question,
+    operational_advice_question, unsupported_biography_detail,
 )
 
 logger = logging.getLogger(__name__)
@@ -224,13 +225,25 @@ class Engine:
                             and self.prompt_builder is build_messages)
                 resolved = session.dialogue.resolve(
                     request.message, presentation_followups=adaptive or request.presentation_qa)
+                persona_voice = (self.corpus.persona.id == "jensen-huang" and request.mode != "profile"
+                                 and self.prompt_builder is build_messages)
+                archived_advice = persona_voice and principle_advice_question(resolved.query)
                 # Auxiliary project/news records are independent of persona
                 # training, the historical snapshot and frozen ablations.
                 if (self.qa_knowledge and request.mode != "profile" and self.prompt_builder is build_messages
-                        and not (public_evidence_limitation(request.message) or public_evidence_limitation(resolved.query))):
+                        and not (public_evidence_limitation(request.message) or public_evidence_limitation(resolved.query))
+                        and not (persona_voice and unsupported_biography_detail(resolved.query, []))):
                     decision = self.qa_knowledge.resolve(request.message, presentation=request.presentation_qa)
                     if decision is None and resolved.supporting_turn_ids:
                         decision = self.qa_knowledge.resolve(resolved.query, presentation=request.presentation_qa)
+                    if (decision is not None and archived_advice and (
+                        decision.route == "news" or (decision.route == "finance" and operational_advice_question(resolved.query))
+                    )):
+                        # "Currently no customers; would you keep investing?"
+                        # asks for a hypothetical decision, not a current stance
+                        # or securities recommendation. Actual/current/stock
+                        # questions cannot enter the guarded advice predicate.
+                        decision = None
                     if decision is not None:
                         from .qa_dialogue import knowledge_events
                         async with aclosing(knowledge_events(self, request, session, resolved, decision,
@@ -252,6 +265,9 @@ class Engine:
                         temporal_query = resolved.query
                         inherited_intent = TemporalIntent(prior.temporal_mode, prior.temporal_years, prior.temporal_period)
                 temporal = select_temporal(self.corpus, self.snapshot, temporal_query, intent_override=inherited_intent) if self.snapshot else None
+                search_temporal = (select_temporal(self.corpus, self.snapshot, resolved.query,
+                                                   intent_override=TemporalIntent("general"))
+                                   if archived_advice and self.snapshot else temporal)
                 style_temporal = select_temporal(self.corpus, self.snapshot, temporal_query, projection="text_style", intent_override=inherited_intent) if self.snapshot and self.settings.style_examples else None
                 context = {"snapshot": self.snapshot.summary() if self.snapshot else None,
                            "query_resolution": {"original": request.message, "query": resolved.query,
@@ -259,38 +275,38 @@ class Engine:
                            "temporal": {"mode": temporal.intent.mode, "years": list(temporal.intent.years), "period": temporal.intent.period,
                                         "excluded": temporal.exclusion_reasons} if temporal else None,
                            "retrieval_backend": self.settings.retrieval_backend}
-                persona_voice = (self.corpus.persona.id == "jensen-huang" and request.mode != "profile"
-                                 and self.prompt_builder is build_messages)
                 if persona_voice:
                     context["persona_voice"] = {"version": PERSONA_VOICE_VERSION,
                                                 "perspective": "simulated_first_person", "simulation": True}
+                    if archived_advice:
+                        context["persona_voice"]["evidence_scope"] = "archived_principles_for_hypothetical_advice"
                 evidence_limitation = public_evidence_limitation(request.message) or public_evidence_limitation(resolved.query)
                 if evidence_limitation:
                     result = SearchResult((), 0, evidence_limitation)
                     context["evidence_limitation"] = evidence_limitation
                 elif request.mode == "profile":
                     result = SearchResult((), 0, "Profile-only ablation has no retrieved evidence.")
-                elif temporal and not temporal.eligible_ids:
-                    result = SearchResult((), 0, temporal.reason)
+                elif search_temporal and not search_temporal.eligible_ids:
+                    result = SearchResult((), 0, search_temporal.reason)
                 else:
                     query = resolved.query
                     if self.settings.retrieval_backend == "hybrid":
                         from .hybrid_retrieval import EmbeddingError
                         try:
                             result = await asyncio.to_thread(self.retriever.search, query, limit=self.settings.retrieval_limit,
-                                behavior=request.mode == "behavior", original_query=request.message, allow_live=bool(temporal),
-                                eligible_ids=temporal.eligible_ids if temporal else None,
+                                behavior=request.mode == "behavior", original_query=request.message, allow_live=bool(search_temporal) or archived_advice,
+                                eligible_ids=search_temporal.eligible_ids if search_temporal else None,
                                 eligible_style_ids=style_temporal.eligible_ids if style_temporal else None,
-                                exclusion_reasons=temporal.exclusion_reasons if temporal else None,
-                                temporal_scores=temporal.temporal_scores if temporal else None, include_style=self.settings.style_examples)
+                                exclusion_reasons=search_temporal.exclusion_reasons if search_temporal else None,
+                                temporal_scores=search_temporal.temporal_scores if search_temporal else None, include_style=self.settings.style_examples)
                         except EmbeddingError as exc:
                             raise ProviderError("embedding_unavailable", "The configured embedding service failed; retrieval was not silently downgraded.", 503) from exc
                         context["retrieval"] = result.trace
                     else:
                         retriever = self.retriever
-                        if temporal and len(temporal.eligible_ids) != len(self.corpus.training_evidence):
+                        if search_temporal and len(search_temporal.eligible_ids) != len(self.corpus.training_evidence):
                             filtered = Corpus(self.corpus.persona, self.corpus.sources,
-                                              {key: value for key, value in self.corpus.evidence.items() if key in temporal.eligible_ids})
+                                              {key: value for key, value in self.corpus.evidence.items() if key in search_temporal.eligible_ids})
                             retriever = self.retriever.with_corpus(filtered)
                         # The snapshot already applies exact/before/through/
                         # forecast policy to the eligible corpus. The archived
@@ -298,9 +314,9 @@ class Engine:
                         # not turn "before 2020" into "in 2020", or a future
                         # target into the publication year of its old forecast.
                         lexical_query = (re.sub(r"(?<!\d)(?:19|20)\d{2}(?!\d)", "", query)
-                                         if temporal and temporal.intent.mode != "comparison" else query)
-                        context["lexical_search"] = {"query": lexical_query, "temporal_scope_applied_before_search": bool(temporal)}
-                        result = retriever.search(lexical_query, limit=self.settings.retrieval_limit, behavior=request.mode == "behavior", allow_live=bool(temporal))
+                                         if search_temporal and search_temporal.intent.mode != "comparison" else query)
+                        context["lexical_search"] = {"query": lexical_query, "temporal_scope_applied_before_search": bool(search_temporal)}
+                        result = retriever.search(lexical_query, limit=self.settings.retrieval_limit, behavior=request.mode == "behavior", allow_live=bool(search_temporal) or archived_advice)
                 persona_selection = None
                 if (self.persona_graph is not None and request.mode != "profile"
                         and self.prompt_builder is build_messages and not evidence_limitation):
@@ -317,6 +333,12 @@ class Engine:
                     delivery_selection = self.persona_delivery.select(resolved.query,
                         snapshot=self.snapshot, temporal=temporal)
                     context["persona_delivery"] = delivery_selection.trace()
+                if persona_voice and not evidence_limitation:
+                    detail_limit = unsupported_biography_detail(resolved.query, [hit.evidence for hit in result.hits])
+                    if detail_limit:
+                        context["persona_voice"]["detail_guard"] = detail_limit
+                        context["persona_voice"]["rejected_evidence_ids"] = [hit.evidence.id for hit in result.hits]
+                        result = SearchResult((), 0, detail_limit)
                 retrieval_ms = (time.perf_counter() - retrieval_started) * 1000
                 yield "status", {"stage": "generating"}
                 generation_started = time.perf_counter()
@@ -357,7 +379,7 @@ class Engine:
                     if (self.snapshot or self.settings.retrieval_backend == "hybrid" or speculative
                             or (persona_selection is not None and persona_selection.paths)
                             or (delivery_selection is not None and delivery_selection.observations)):
-                        package = build_snapshot_messages(self.corpus, request, result, list(session.history), self.snapshot, temporal,
+                        package = build_snapshot_messages(self.corpus, request, result, list(session.history), self.snapshot, search_temporal,
                             context_window=self.settings.llm_context_window, output_tokens=self.settings.llm_max_tokens,
                             counter=self.counter, resolved=resolved, speculative=speculative, live_concise=live_concise,
                             answer_policy=answer_policy, persona_selection=persona_selection,

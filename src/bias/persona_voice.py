@@ -90,7 +90,7 @@ def identity_reply(question: str, language: str) -> str | None:
 
 
 _PERSONAL_FACT = re.compile(
-    r"\b(?:did|have|were|was)\s+(?:you|jensen(?:\s+huang)?|he)\b|"
+    r"\b(?:did|have|were|was)\s+(?:you|jensen(?:\s+huang)?|he|nvidia|your company)\b|"
     r"\byour\s+(?:childhood|upbringing|first\s+job|early\s+jobs?|career|family|education|"
     r"life|experience|experiences|memories|parents|wife|children|school)\b|"
     r"\b(?:denny'?s|busboy|dishwash(?:er|ing)|wait(?:ed)?\s+tables|"
@@ -110,7 +110,7 @@ def actual_personal_fact_question(question: str) -> bool:
 Concrete biography requests cannot fall through to free-form speculation.
 Explicit hypothetical advice keeps the existing conditional-answer route.
 """
-    direct_past_question = re.search(r"\b(?:did|have|were|was)\s+(?:you|jensen(?:\s+huang)?|he)\b", question, re.I)
+    direct_past_question = re.search(r"\b(?:did|have|were|was)\s+(?:you|jensen(?:\s+huang)?|he|nvidia|your company)\b", question, re.I)
     return (_PERSONAL_FACT.search(question) is not None
             and (direct_past_question is not None or _EXPLICIT_HYPOTHESIS.search(question) is None))
 
@@ -120,3 +120,90 @@ def missing_memory_reply(language: str) -> str:
         return "지금 찾은 공개 자료만으로는 그 경험의 세부 사항을 확인할 수 없습니다. 자료를 찾지 못했다고 해서 그런 경험이 없었다고 단정하지 않겠습니다."
     return ("I can't verify that detail from the public material available here. "
             "A missing source does not mean that experience never happened.")
+
+
+_ADVICE_EXTENSION = re.compile(
+    r"\b(?:would|should) you (?:keep|continue|stop|invest|fund|build|choose|abandon|change|prioriti[sz]e)\b|"
+    r"(?:계속\s*)?(?:투자|개발|진행|중단|포기|선택|지원)할까(?:요)?|계속할까(?:요)?", re.I)
+_OPERATIONAL = re.compile(
+    r"\b(?:technology|prototype|product|research|chip|performance|customers?|benchmark|speedup)\b|"
+    r"기술|시제품|제품|연구|칩|성능|고객|벤치마크", re.I)
+_SECURITIES = re.compile(
+    r"\b(?:stocks?|shares?|portfolio|securit(?:y|ies)|valuation|buy|purchase|sell|trading)\b|"
+    r"주식|주가|매수|매도|종목|포트폴리오|증권", re.I)
+_CURRENT_PUBLIC_FACT = re.compile(
+    r"\b(?:current|latest|present)\s+(?:plans?|announcements?|position|policy|stance|strategy|"
+    r"decision|belief|opinion|forecast|outlook)\b|"
+    r"(?:현재|지금).{0,15}(?:엔비디아|젠슨|당신).{0,20}(?:계획|발언|입장|정책|전망)|"
+    r"(?:엔비디아|젠슨|당신).{0,20}(?:현재|지금).{0,15}(?:계획|발언|입장|정책|전망)", re.I)
+
+
+def principle_advice_question(question: str) -> bool:
+    """Reuse factual/current-position exclusions without enabling a graph.
+
+Only the production advice vocabulary expands. Appending the classifier cue
+does not alter the user message, retrieved data or model prompt.
+"""
+    from .persona_graph import is_persona_advice_request
+    if _CURRENT_PUBLIC_FACT.search(question):
+        return False
+    if is_persona_advice_request(question):
+        return True
+    return bool(_ADVICE_EXTENSION.search(question)
+                and is_persona_advice_request(question + " What advice?"))
+
+
+def operational_advice_question(question: str) -> bool:
+    return (principle_advice_question(question) and _OPERATIONAL.search(question) is not None
+            and _SECURITIES.search(question) is None)
+
+
+_PRIVATE_EPISODE = re.compile(
+    r"\b(?:secret(?:ly)?|private|confidential|undisclosed|unpublished)\b|비공개|비밀|은밀", re.I)
+_COACTOR = re.compile(
+    r"\b(?:you|jensen(?: huang)?)\s+and\s+([a-z][a-z'’.-]*(?:\s+[a-z][a-z'’.-]*){0,4}?)\s+"
+    r"(?:discuss|decide|do|say|build|invent|create|meet|work|agree|plan|talk|eat|start|found)\b", re.I)
+_WITH_PERSON = re.compile(
+    r"\b(?:meet|met|speak|spoke|talk|talked|discuss|discussed|negotiate|negotiated)\b"
+    r"(?:\s+(?:with|to))?\s+([A-Z][A-Za-z'’.-]*(?:\s+[A-Z][A-Za-z'’.-]*){0,3})")
+_WORK_LOCATION = re.compile(
+    r"\b(?:work(?:ed|ing)?|wait(?:ed)?\s+tables|study|studied|teach|taught|meet|met)\s+"
+    r"(?:at|for|in)\s+([A-Z][A-Za-z'’.-]*(?:\s+[A-Z][A-Za-z'’.-]*){0,3})")
+_ACTIVITIES = (
+    ("dismissal", re.compile(r"\b(?:fire[ds]?|firing|sack(?:ed)?|dismiss(?:ed|al)?)\b|해고", re.I)),
+    ("patent", re.compile(r"\b(?:patents?|patented|invent(?:ed|ion)?)\b|특허|발명", re.I)),
+    ("arrest", re.compile(r"\b(?:arrest(?:ed)?|convict(?:ed|ion)?)\b|체포|유죄", re.I)),
+    ("waiting_tables", re.compile(r"\b(?:wait(?:ed|ing)?\s+tables|waiter|waitstaff|server)\b|웨이터|서빙", re.I)),
+    ("dishwashing", re.compile(r"\b(?:dishwash(?:er|ing)|wash(?:ed|ing)?\s+dishes)\b|설거지|식기\s*세척", re.I)),
+)
+
+
+def _anchor_text(text: str) -> str:
+    return " ".join(re.findall(r"[^\W_]+", text.casefold().replace("’", "'")))
+
+
+def unsupported_biography_detail(question: str, evidence: list[Evidence]) -> str | None:
+    """Reject specific unsupported slots in a personal-event question.
+
+This conservative guard checks explicit co-actor/location syntactic frames and
+a small activity vocabulary. It is not NER, semantic entailment, or proof that a
+remaining answer is true. Only source text counts; search aliases cannot supply
+an absent fact. Evidence about one job cannot support an unrelated firing.
+"""
+    if not actual_personal_fact_question(question):
+        return None
+    if _PRIVATE_EPISODE.search(question):
+        return "unverified_private_personal_event"
+    if not evidence:
+        return None  # The separate no-evidence policy handles this case.
+    anchors = {_anchor_text(match.group(1)) for pattern in (_COACTOR, _WITH_PERSON, _WORK_LOCATION)
+               for match in pattern.finditer(question)}
+    activities = [(name, pattern) for name, pattern in _ACTIVITIES if pattern.search(question)]
+    if not anchors and not activities:
+        return None
+    for record in evidence:
+        normalized = _anchor_text(record.text)
+        if (all(re.search(r"(?<!\w)" + re.escape(anchor) + r"(?!\w)", normalized) for anchor in anchors)
+                and all(pattern.search(record.text) for _, pattern in activities)):
+            return None
+    return "unsupported_personal_event_details"
