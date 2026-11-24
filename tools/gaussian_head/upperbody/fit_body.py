@@ -103,12 +103,13 @@ def project(J):                                                                 
 conf = kp[:, P_COCO, 2]
 # joints outside the crop (seated hips, elbows at the frame edge) are clamped to the border by the detector: ignore them
 IMG_WH = torch.tensor([[frames[t]['w'], frames[t]['h']] for t in ts], dtype=torch.float32, device=dev)
-xy = kp[:, P_COCO, :2]; BORDER = 10.0
+PX = float(IMG_WH.max()) / 512.0                   # pixel thresholds were tuned on 512-pixel exports
+xy = kp[:, P_COCO, :2]; BORDER = 10.0 * PX
 inside = (xy > BORDER).all(-1) & (xy < IMG_WH[:, None] - BORDER).all(-1)
 conf = torch.where(inside, conf, torch.zeros_like(conf))
 print(f'confident keypoints dropped at the image border: {float(((kp[:, P_COCO, 2] > 0.3) & ~inside).sum()) / max(1.0, float((kp[:, P_COCO, 2] > 0.3).sum())):.1%}')
 wconf = torch.where(conf > 0.3, conf, torch.zeros_like(conf)) * P_W
-RHO_END = 20.0
+RHO_END = 20.0 * PX
 
 
 def losses(stage, rho=RHO_END):
@@ -137,7 +138,7 @@ for stage, n in enumerate(a.iters):
     opt = torch.optim.Adam(params, lr=0.03 if stage == 0 else 0.01)
     for it in range(n):
         # robust radius anneals from wide (far-off start) to RHO_END px, so distant joints still get pulled in
-        rho = float(np.exp(np.log(300.0) + (np.log(RHO_END) - np.log(300.0)) * min(1.0, it / (0.7 * n))))
+        rho = float(np.exp(np.log(300.0 * PX) + (np.log(RHO_END) - np.log(300.0 * PX)) * min(1.0, it / (0.7 * n))))
         L, _ = losses(stage, rho)
         tot = sum(L.values())
         opt.zero_grad(); tot.backward(); opt.step()

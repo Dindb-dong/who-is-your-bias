@@ -16,7 +16,8 @@ ITERS=${@:-120000 240000}
 R=${AVATAR_ROOT:?set AVATAR_ROOT}; U=$R/upperbody
 source $R/env.sh
 export GA_MIN_EXTENT=1.0 GA_UPPERBODY=$U/jensen_c1c3_smplx_head_b0.06.npz
-MODEL=$R/GaussianAvatars/output/jensen_a_upperbody
+NAME=${UB_NAME:-jensen_a_upperbody}                     # e.g. jensen_a_upperbody_hr, jensen_ab_upperbody_hr
+MODEL=$R/GaussianAvatars/output/$NAME
 IDS=$U/SMPL-X__FLAME_vertex_ids.npy
 [ -f $IDS ] || { echo "missing $IDS"; exit 2; }
 mkdir -p $U/export
@@ -24,11 +25,11 @@ cd $R/GaussianAvatars
 python $U/tools/ga_patch/apply_patch.py $R/GaussianAvatars
 for IT in $ITERS; do
   echo "== export $IT $(date)"
-  GA_ITER=$IT python $U/tools/export_upperbody.py $MODEL $GA_UPPERBODY $IDS $U/export/jensen_upperbody_$IT
-  ls -la $U/export/jensen_upperbody_$IT.*
+  GA_ITER=$IT python $U/tools/export_upperbody.py $MODEL $GA_UPPERBODY $IDS $U/export/${NAME}_$IT
+  ls -la $U/export/${NAME}_$IT.*
   echo "== render test $IT $(date)"
   python render.py -m $MODEL --iteration $IT --skip_train --skip_val
-  python - $MODEL $IT $U/export/test_compare_$IT.jpg <<'PY'
+  python - $MODEL $IT $U/export/test_compare_${NAME}_$IT.jpg <<'PY'
 import glob, sys
 from PIL import Image
 model, it, out = sys.argv[1:4]

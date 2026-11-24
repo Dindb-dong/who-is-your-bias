@@ -87,3 +87,22 @@ FLAME faces. On 2026-11-21 that left a grey wisp over one shoulder, so
 and only the FLAME-bound ones are used.
 
 The outputs are research-licensed and are not committed.
+
+## Full-resolution retraining (`prep_hr.sbatch`, `union_datasets.py`)
+
+`prep_hr.sbatch <seq>` re-exports a tracked sequence at the source resolution
+(1024 instead of 512) and reruns keypoints, the body fit, the dataset and the
+frame audit. Pixel thresholds are scaled to the image size. Keypoints must run
+on the GPU (`keypoints.py` exits if onnxruntime falls back to the CPU).
+`union_datasets.py` merges two prepared sequences into one training folder
+(`UB_UNION` in `train_upperbody.sbatch`). Export with `UB_NAME=<model>`.
+
+Result on 2026-11-24 (120k iterations each, compared in the studio at 4×
+device pixels):
+
+- **jensen_a at 1024.** It looks about the same as the 512 model. The
+  source video limits the detail, not the training resolution. The default
+  stays `jensen_ub_head_120k`.
+- **jensen_a + jensen_b.** Coloured ghosts appear beside the hair. jensen_b
+  includes cutaway shots of the interviewer that `frame_audit.py` keeps,
+  so those frames have to be removed before a union is used.

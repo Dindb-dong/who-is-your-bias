@@ -19,6 +19,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument('export'); ap.add_argument('out')
 ap.add_argument('--device', default='cpu'); ap.add_argument('--mode', default='balanced')
 ap.add_argument('--stride', type=int, default=1, help='every Nth timestep only (quick checks); others keep score 0')
+ap.add_argument('--allow-cpu', action='store_true', help='with --device cuda, continue if onnxruntime falls back to CPU')
 a = ap.parse_args()
 
 files = {}
@@ -30,7 +31,22 @@ for split in ('train', 'val', 'test'):
                 files[int(fr['timestep_index'])] = fr['file_path']
 T = max(files) + 1
 print(f'{len(files)} timesteps (max index {T - 1})')
+if a.device == 'cuda':
+    # onnxruntime-gpu silently runs on CPU when it cannot load CUDA/cuDNN (seen: ~7 s per 1024 frame). It needs the
+    # CUDA 12 runtime wheels (nvidia-*-cu12); torch here ships CUDA 13, so do not import torch first. preload_dlls()
+    # loads the cu12 libraries from site-packages; then refuse to continue on CPU unless asked.
+    import onnxruntime as ort
+    if hasattr(ort, 'preload_dlls'):
+        ort.preload_dlls()
+    print('onnxruntime', ort.__version__, 'available providers', ort.get_available_providers(), flush=True)
 model = Wholebody(mode=a.mode, backend='onnxruntime', device=a.device)
+if a.device == 'cuda':
+    used = [getattr(getattr(model, part, None), 'session', None) for part in ('det_model', 'pose_model')]
+    used = [s.get_providers() for s in used if s is not None]
+    print('session providers', used, flush=True)
+    if not used or any(p[0] != 'CUDAExecutionProvider' for p in used):
+        if not a.allow_cpu:
+            raise SystemExit('onnxruntime is not using CUDA for keypoints; fix the CUDA/cuDNN libraries or pass --allow-cpu')
 kp = np.zeros((T, 133, 3), np.float32)
 done = np.zeros(T, bool)
 partial = a.out + '.partial.npz'
