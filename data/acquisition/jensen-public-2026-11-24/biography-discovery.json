@@ -1,0 +1,151 @@
+{
+  "schema_version": "jensen-public-discovery.v1",
+  "reviewed_at": "2026-11-24",
+  "scope": "Biography, public experiences, university appearances, verified social identity, and excluded social/media leads.",
+  "leads": [
+    {
+      "id": "instagram-nvidia-profile",
+      "url": "https://www.instagram.com/nvidia/",
+      "source_kind": "official_company_social_profile",
+      "identity_status": "company_account_verified_by_sec",
+      "identity_source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+      "access_status": "blocked_http_429",
+      "content_acquired": false,
+      "rag_eligible": false,
+      "note": "Company account; not evidence of a personal Jensen Instagram account."
+    },
+    {
+      "id": "instagram-nvidia-DbTPv7UE5FA",
+      "url": "https://www.instagram.com/p/DbTPv7UE5FA/",
+      "source_kind": "social_post_candidate",
+      "discovery_url": "https://imginn.com/p/DbTPv7UE5FA/",
+      "identity_status": "poster_claimed_nvidia_by_third_party_not_verified_on_platform",
+      "access_status": "blocked_disabled_error",
+      "content_acquired": false,
+      "rag_eligible": false,
+      "note": "Discovered post identifier via search. Caption, date, speaker, and media not verified; do not treat aggregator copy as primary evidence."
+    },
+    {
+      "id": "instagram-nvidia-DdZJtLeF7XS",
+      "url": "https://www.instagram.com/p/DdZJtLeF7XS/",
+      "source_kind": "social_post_candidate",
+      "discovery_url": "https://imginn.com/p/DdZJtLeF7XS/",
+      "identity_status": "poster_claimed_nvidia_by_third_party_not_verified_on_platform",
+      "access_status": "blocked_disabled_error",
+      "content_acquired": false,
+      "rag_eligible": false,
+      "note": "Discovered post identifier via search. Caption, date, speaker, and media not verified."
+    },
+    {
+      "id": "instagram-reel-DgAnFSvscgb",
+      "url": "https://www.instagram.com/reel/DgAnFSvscgb/",
+      "source_kind": "social_post_candidate",
+      "discovery_url": "https://boxden.com/showthread.php?t=3605536",
+      "identity_status": "unknown",
+      "access_status": "blocked_disabled_error",
+      "content_acquired": false,
+      "rag_eligible": false,
+      "note": "Canonical reel URL appeared in a public discussion. No content or attribution accepted."
+    },
+    {
+      "id": "x-jensenhuang-profile",
+      "url": "https://x.com/JensenHuang",
+      "source_kind": "official_subject_social_profile",
+      "identity_status": "listed_by_nvidia_sec_filing",
+      "identity_source_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000075/nvda-20260726.htm",
+      "access_status": "blocked_http_403",
+      "content_acquired": false,
+      "rag_eligible": false,
+      "note": "Account identity does not verify arbitrary posts or screenshots."
+    },
+    {
+      "id": "hp-moment-2023",
+      "url": "https://www.youtube.com/watch?v=8QcLkB-zdCU",
+      "publisher": "HP",
+      "source_kind": "publisher_interview_video",
+      "published_at": "2023-10-26",
+      "access_status": "search_metadata_only_direct_open_failed",
+      "content_acquired": false,
+      "rag_eligible": false,
+      "note": "Verified publisher/title metadata only; interview content and speech timing not acquired."
+    },
+    {
+      "id": "osu-commencement-2009",
+      "url": "https://www.youtube.com/watch?v=lMW5v7wK7zo",
+      "publisher": "Oregon State University",
+      "source_kind": "publisher_commencement_video",
+      "published_at": "2009-08-27",
+      "access_status": "search_metadata_only",
+      "content_acquired": false,
+      "rag_eligible": false,
+      "note": "University video describes 2009 commencement; upload date is not the ceremony date. No speech transcript acquired."
+    },
+    {
+      "id": "hkust-original-video-2024",
+      "url": "https://video.ust.hk/watch?video=4668AF892099991D",
+      "publisher": "Hong Kong University of Science and Technology",
+      "source_kind": "publisher_interview_video",
+      "recorded_at": "2024-11-23",
+      "access_status": "search_metadata_only",
+      "content_acquired": false,
+      "rag_eligible": false,
+      "note": "Publisher metadata lists duration1:09:44 and event date; primary prose report supplies indexed evidence, not this unacquired media."
+    },
+    {
+      "id": "npr-oneida-2012",
+      "url": "https://www.npr.org/sections/alltechconsidered/2012/02/20/147162496/tech-pioneer-channels-hard-lessons-into-silicon-valley-success",
+      "publisher": "NPR",
+      "source_kind": "publisher_interview",
+      "discovery_url": "https://www.oneidaschool.org/about/huanghall.cfm",
+      "access_status": "blocked_restricted_url",
+      "content_acquired": false,
+      "rag_eligible": false,
+      "note": "Linked by Oneida; inaccessible publisher content not paraphrased or treated as an acquired interview."
+    }
+  ],
+  "conflicts": [
+    {
+      "topic": "Birthplace and arrival age",
+      "source_urls": [
+        "https://engineering.stanford.edu/about/visit/pillars",
+        "https://stripe.com/sessions/2024/a-conversation-with-nvidias-jensen-huang",
+        "https://www.televisionacademy.com/bios/jensen-huang"
+      ],
+      "resolution": "Exclude birth city. Preserve Stripe self-report of arrival in1973 aged9 with explicit attribution. Do not merge differing institutional biographies into invented certainty."
+    },
+    {
+      "topic": "NTU publication versus ceremony date",
+      "source_urls": [
+        "https://blogs.nvidia.com/blog/huang-ntu-commencement/",
+        "https://www.ntu.edu.tw/english/spotlight/2023/2164_20230529.html"
+      ],
+      "resolution": "NVIDIA displays2023-05-26; university records ceremony2023-05-27. Keep separate published_at and recorded_at; do not manufacture a timestamp."
+    },
+    {
+      "topic": "Caltech chronology sentence",
+      "source_urls": [
+        "https://www.caltech.edu/about/news/caltech-commencement-2024",
+        "https://www.nvidia.com/en-us/about-nvidia/corporate-timeline/"
+      ],
+      "resolution": "Exclude Caltech report sentence assigning IBM System/360 to1980s and AlexNet to2016; retain separately supported2012 AlexNet chronology and the speaker’s attributed advice."
+    },
+    {
+      "topic": "Synthetic Jensen content",
+      "source_urls": [
+        "https://blogs.nvidia.com/blog/omniverse-making-of-gtc/",
+        "https://blogs.nvidia.com/blog/how-omniverse-keynote/"
+      ],
+      "resolution": "Never index Toy Jensen generated utterances as real Huang statements. Separate spring2021 digital-double segment from fall2021 live-speaker virtual-set production."
+    },
+    {
+      "topic": "Private mental states and viral social captions",
+      "resolution": "No personal Instagram ownership inferred from name. Unread posts, aggregator captions, private discussions, and generated content have no persona-evidence status."
+    }
+  ],
+  "limits": [
+    "No full transcripts, video bytes, audio, screenshots, or social media captions acquired in this stream.",
+    "New public notes are bounded editorial paraphrases plus short verified excerpts, not complete original Q&A or audio-verified behavior.",
+    "English/Korean retrieval aliases are authored prompts, not quotations or evaluated translation equivalence.",
+    "All indexed sources in this stream are development material; no held-out generalization claim."
+  ]
+}
