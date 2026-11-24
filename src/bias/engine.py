@@ -30,6 +30,11 @@ from .dialogue import DEICTIC_PAST
 from .query_policy import public_evidence_limitation
 from .persona_graph import PersonaGraph, augment_result, select_advice_memory
 from .persona_delivery import PersonaDelivery
+from .persona_voice import (
+    VERSION as PERSONA_VOICE_VERSION, actual_personal_fact_question, identity_reply,
+    missing_memory_reply, permits_first_person, principle_advice_question,
+    operational_advice_question, unsupported_biography_detail,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -46,25 +51,41 @@ KOREAN_EVIDENCE_VIOLATION = re.compile(
     r"""["“”「」『』]|['‘][^'’\n]{12,}['’]"""
     r"|(?<![가-힣])(?:저는|제가|나는|내가|우리는|우리가)(?![가-힣])"
 )
+KOREAN_QUOTATION_VIOLATION = re.compile(r'''["“”「」『』]|['‘][^'’\n]{12,}['’]''')
+KOREAN_FIRST_PERSON = re.compile(r"(?<![가-힣])(?:저는|제가|나는|내가|우리는|우리가|제|우리)(?![가-힣])")
 KOREAN_INFERENCE_FALLBACK = "어디에서 전체 성능이 막히는지, 개선이 실제 사용자의 비용과 시간에 어떤 영향을 줄지 비교할 수 있습니다."
 
 
-def korean_inference(text: str) -> str:
+def korean_inference(text: str, *, first_person: bool = False) -> str:
     proposal = text.strip()
     if not KOREAN_INFERENCE.fullmatch(proposal) or UNSUPPORTED_ATTRIBUTION.search(proposal):
         proposal = KOREAN_INFERENCE_FALLBACK
+    if first_person:
+        return "가상 추론 (실제 발언 확인 불가)\n\n" + proposal
     return (
         "가상 추론 (실제 발언 확인 불가)\n\n"
         f"젠슨 황의 공개 발언에서 드러난 판단 방식을 적용해 보면, {proposal}"
     )
 
 
-def korean_summary_is_valid(text: str) -> bool:
+def korean_summary_is_valid(text: str, *, allow_first_person: bool = False) -> bool:
     return (
         re.search(r"[가-힣]", text) is not None
-        and KOREAN_EVIDENCE_VIOLATION.search(text) is None
+        and (KOREAN_QUOTATION_VIOLATION if allow_first_person else KOREAN_EVIDENCE_VIOLATION).search(text) is None
         and all(char.isascii() or not char.isalpha() or "가" <= char <= "힣" for char in text)
     )
+
+
+def korean_first_person_has_sources(text: str, corpus: Corpus, allowed_ids: set[str]) -> bool:
+    """Check subject attribution per cited unit, not semantic entailment."""
+    audit = audit_citations(text, allowed_ids, required=True)
+    for unit in audit.units:
+        if KOREAN_FIRST_PERSON.search(unit.text) and not any(
+            permits_first_person(corpus.evidence[identifier], corpus.sources[corpus.evidence[identifier].source_id])
+            for identifier in unit.trailing_valid_ids
+        ):
+            return False
+    return True
 
 
 def evidence_preview(request: ChatRequest, result: SearchResult) -> str:
@@ -133,6 +154,9 @@ class Engine:
         elif settings.retrieval_backend == "jensen-lexical":
             from .jensen_retrieval import JensenConceptRetriever
             self.retriever = JensenConceptRetriever(corpus)
+        elif settings.retrieval_backend == "jensen-public":
+            from .jensen_public_retrieval import JensenPublicRetriever
+            self.retriever = JensenPublicRetriever(corpus)
         else:
             self.retriever = Retriever(corpus)
         self.sessions = SessionStore(ttl=settings.session_ttl, max_sessions=settings.max_sessions, max_turns=settings.max_turns)
@@ -201,13 +225,25 @@ class Engine:
                             and self.prompt_builder is build_messages)
                 resolved = session.dialogue.resolve(
                     request.message, presentation_followups=adaptive or request.presentation_qa)
+                persona_voice = (self.corpus.persona.id == "jensen-huang" and request.mode != "profile"
+                                 and self.prompt_builder is build_messages)
+                archived_advice = persona_voice and principle_advice_question(resolved.query)
                 # Auxiliary project/news records are independent of persona
                 # training, the historical snapshot and frozen ablations.
                 if (self.qa_knowledge and request.mode != "profile" and self.prompt_builder is build_messages
-                        and not (public_evidence_limitation(request.message) or public_evidence_limitation(resolved.query))):
+                        and not (public_evidence_limitation(request.message) or public_evidence_limitation(resolved.query))
+                        and not (persona_voice and unsupported_biography_detail(resolved.query, []))):
                     decision = self.qa_knowledge.resolve(request.message, presentation=request.presentation_qa)
                     if decision is None and resolved.supporting_turn_ids:
                         decision = self.qa_knowledge.resolve(resolved.query, presentation=request.presentation_qa)
+                    if (decision is not None and archived_advice and (
+                        decision.route == "news" or (decision.route == "finance" and operational_advice_question(resolved.query))
+                    )):
+                        # "Currently no customers; would you keep investing?"
+                        # asks for a hypothetical decision, not a current stance
+                        # or securities recommendation. Actual/current/stock
+                        # questions cannot enter the guarded advice predicate.
+                        decision = None
                     if decision is not None:
                         from .qa_dialogue import knowledge_events
                         async with aclosing(knowledge_events(self, request, session, resolved, decision,
@@ -229,6 +265,9 @@ class Engine:
                         temporal_query = resolved.query
                         inherited_intent = TemporalIntent(prior.temporal_mode, prior.temporal_years, prior.temporal_period)
                 temporal = select_temporal(self.corpus, self.snapshot, temporal_query, intent_override=inherited_intent) if self.snapshot else None
+                search_temporal = (select_temporal(self.corpus, self.snapshot, resolved.query,
+                                                   intent_override=TemporalIntent("general"))
+                                   if archived_advice and self.snapshot else temporal)
                 style_temporal = select_temporal(self.corpus, self.snapshot, temporal_query, projection="text_style", intent_override=inherited_intent) if self.snapshot and self.settings.style_examples else None
                 context = {"snapshot": self.snapshot.summary() if self.snapshot else None,
                            "query_resolution": {"original": request.message, "query": resolved.query,
@@ -236,33 +275,38 @@ class Engine:
                            "temporal": {"mode": temporal.intent.mode, "years": list(temporal.intent.years), "period": temporal.intent.period,
                                         "excluded": temporal.exclusion_reasons} if temporal else None,
                            "retrieval_backend": self.settings.retrieval_backend}
+                if persona_voice:
+                    context["persona_voice"] = {"version": PERSONA_VOICE_VERSION,
+                                                "perspective": "simulated_first_person", "simulation": True}
+                    if archived_advice:
+                        context["persona_voice"]["evidence_scope"] = "archived_principles_for_hypothetical_advice"
                 evidence_limitation = public_evidence_limitation(request.message) or public_evidence_limitation(resolved.query)
                 if evidence_limitation:
                     result = SearchResult((), 0, evidence_limitation)
                     context["evidence_limitation"] = evidence_limitation
                 elif request.mode == "profile":
                     result = SearchResult((), 0, "Profile-only ablation has no retrieved evidence.")
-                elif temporal and not temporal.eligible_ids:
-                    result = SearchResult((), 0, temporal.reason)
+                elif search_temporal and not search_temporal.eligible_ids:
+                    result = SearchResult((), 0, search_temporal.reason)
                 else:
                     query = resolved.query
                     if self.settings.retrieval_backend == "hybrid":
                         from .hybrid_retrieval import EmbeddingError
                         try:
                             result = await asyncio.to_thread(self.retriever.search, query, limit=self.settings.retrieval_limit,
-                                behavior=request.mode == "behavior", original_query=request.message, allow_live=bool(temporal),
-                                eligible_ids=temporal.eligible_ids if temporal else None,
+                                behavior=request.mode == "behavior", original_query=request.message, allow_live=bool(search_temporal) or archived_advice,
+                                eligible_ids=search_temporal.eligible_ids if search_temporal else None,
                                 eligible_style_ids=style_temporal.eligible_ids if style_temporal else None,
-                                exclusion_reasons=temporal.exclusion_reasons if temporal else None,
-                                temporal_scores=temporal.temporal_scores if temporal else None, include_style=self.settings.style_examples)
+                                exclusion_reasons=search_temporal.exclusion_reasons if search_temporal else None,
+                                temporal_scores=search_temporal.temporal_scores if search_temporal else None, include_style=self.settings.style_examples)
                         except EmbeddingError as exc:
                             raise ProviderError("embedding_unavailable", "The configured embedding service failed; retrieval was not silently downgraded.", 503) from exc
                         context["retrieval"] = result.trace
                     else:
                         retriever = self.retriever
-                        if temporal and len(temporal.eligible_ids) != len(self.corpus.training_evidence):
+                        if search_temporal and len(search_temporal.eligible_ids) != len(self.corpus.training_evidence):
                             filtered = Corpus(self.corpus.persona, self.corpus.sources,
-                                              {key: value for key, value in self.corpus.evidence.items() if key in temporal.eligible_ids})
+                                              {key: value for key, value in self.corpus.evidence.items() if key in search_temporal.eligible_ids})
                             retriever = self.retriever.with_corpus(filtered)
                         # The snapshot already applies exact/before/through/
                         # forecast policy to the eligible corpus. The archived
@@ -270,9 +314,9 @@ class Engine:
                         # not turn "before 2020" into "in 2020", or a future
                         # target into the publication year of its old forecast.
                         lexical_query = (re.sub(r"(?<!\d)(?:19|20)\d{2}(?!\d)", "", query)
-                                         if temporal and temporal.intent.mode != "comparison" else query)
-                        context["lexical_search"] = {"query": lexical_query, "temporal_scope_applied_before_search": bool(temporal)}
-                        result = retriever.search(lexical_query, limit=self.settings.retrieval_limit, behavior=request.mode == "behavior", allow_live=bool(temporal))
+                                         if search_temporal and search_temporal.intent.mode != "comparison" else query)
+                        context["lexical_search"] = {"query": lexical_query, "temporal_scope_applied_before_search": bool(search_temporal)}
+                        result = retriever.search(lexical_query, limit=self.settings.retrieval_limit, behavior=request.mode == "behavior", allow_live=bool(search_temporal) or archived_advice)
                 persona_selection = None
                 if (self.persona_graph is not None and request.mode != "profile"
                         and self.prompt_builder is build_messages and not evidence_limitation):
@@ -289,16 +333,28 @@ class Engine:
                     delivery_selection = self.persona_delivery.select(resolved.query,
                         snapshot=self.snapshot, temporal=temporal)
                     context["persona_delivery"] = delivery_selection.trace()
+                if persona_voice and not evidence_limitation:
+                    detail_limit = unsupported_biography_detail(resolved.query, [hit.evidence for hit in result.hits])
+                    if detail_limit:
+                        context["persona_voice"]["detail_guard"] = detail_limit
+                        context["persona_voice"]["rejected_evidence_ids"] = [hit.evidence.id for hit in result.hits]
+                        result = SearchResult((), 0, detail_limit)
                 retrieval_ms = (time.perf_counter() - retrieval_started) * 1000
                 yield "status", {"stage": "generating"}
                 generation_started = time.perf_counter()
+                fixed_identity = identity_reply(request.message, request.language) if persona_voice else None
+                missing_memory = (persona_voice and not result.hits
+                                  and actual_personal_fact_question(resolved.query))
+                if missing_memory:
+                    context["persona_voice"]["memory_status"] = "unverified_not_denied"
                 speculative = (self.settings.llm.configured and self.corpus.persona.id == "jensen-huang"
-                               and request.mode != "profile" and not result.hits and not evidence_limitation)
+                               and request.mode != "profile" and not result.hits and not evidence_limitation
+                               and not fixed_identity and not missing_memory)
                 unverified_quote = (
-                    speculative and request.language == "ko" and KOREAN_EXACT_SPEECH.search(request.message) is not None
+                    (speculative or missing_memory) and request.language == "ko" and KOREAN_EXACT_SPEECH.search(request.message) is not None
                     and temporal is not None and temporal.intent.mode == "future"
                 )
-                use_llm = not evidence_limitation and not unverified_quote and self.settings.llm.configured and (
+                use_llm = not evidence_limitation and not unverified_quote and not fixed_identity and not missing_memory and self.settings.llm.configured and (
                     request.mode == "profile" or bool(result.hits) or speculative
                 )
                 fragments: list[str] = []
@@ -323,12 +379,12 @@ class Engine:
                     if (self.snapshot or self.settings.retrieval_backend == "hybrid" or speculative
                             or (persona_selection is not None and persona_selection.paths)
                             or (delivery_selection is not None and delivery_selection.observations)):
-                        package = build_snapshot_messages(self.corpus, request, result, list(session.history), self.snapshot, temporal,
+                        package = build_snapshot_messages(self.corpus, request, result, list(session.history), self.snapshot, search_temporal,
                             context_window=self.settings.llm_context_window, output_tokens=self.settings.llm_max_tokens,
                             counter=self.counter, resolved=resolved, speculative=speculative, live_concise=live_concise,
                             answer_policy=answer_policy, persona_selection=persona_selection,
                             persona_memory_format=self.settings.persona_memory_format,
-                            delivery_selection=delivery_selection)
+                            delivery_selection=delivery_selection, persona_voice=persona_voice)
                         messages = package.messages
                         allowed_ids = set(package.supplied_ids)
                         context["prompt_budget"] = package.budget
@@ -374,8 +430,9 @@ class Engine:
                     if review_inference or review_evidence:
                         text = "".join(fragments).strip()
                         if review_inference:
-                            text = korean_inference(text)
-                        elif not korean_summary_is_valid(text):
+                            text = korean_inference(text, first_person=persona_voice)
+                        elif (not korean_summary_is_valid(text, allow_first_person=persona_voice)
+                              or (persona_voice and not korean_first_person_has_sources(text, self.corpus, allowed_ids))):
                             source = next(hit.evidence.id for hit in result.hits if hit.evidence.id in allowed_ids)
                             text = f"한국어 답변을 확인할 수 없습니다. 관련 공개 자료를 참고해 주세요. [source:{source}]"
                         fragments = [text]
@@ -390,6 +447,10 @@ class Engine:
                     preview = evidence_preview(request, result)
                     if unverified_quote:
                         preview = "요청한 시점은 자료 기준일 이후라 실제 발언을 확인할 수 없습니다."
+                    elif fixed_identity:
+                        preview = fixed_identity
+                    elif missing_memory and not evidence_limitation:
+                        preview = missing_memory_reply(request.language)
                     elif temporal and temporal.reason and request.mode != "profile":
                         preview = ("이 스냅샷에는 요청한 시점의 입장을 확인할 수 있는 검토된 자료가 없습니다. 과거 발언을 현재 입장으로 간주하지 않습니다."
                                    if request.language == "ko" else temporal.reason)
@@ -404,7 +465,10 @@ class Engine:
                 raw = "".join(fragments)
                 text, valid, invalid = validate_citations(raw, allowed_ids)
                 audit = audit_citations(raw, allowed_ids, required=use_llm and not speculative and request.mode != "profile")
-                if request.mode != "profile" and not result.hits:
+                if fixed_identity:
+                    status = "unverified"
+                    reason = "Simulation identity; not a historical statement by the real person."
+                elif request.mode != "profile" and not result.hits:
                     status = "insufficient"
                     reason = ("Hypothetical simulation. No supporting evidence was retrieved." if speculative and use_llm else result.reason)
                 elif use_llm:

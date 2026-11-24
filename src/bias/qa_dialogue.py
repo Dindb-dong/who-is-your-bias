@@ -11,6 +11,7 @@ from .grounding import audit_citations, validate_citations
 from .models import ChatTurn, Grounding, TurnMetrics
 from .qa_knowledge import QAEntry
 from .segments import SegmentCommitter
+from .persona_voice import VERSION as PERSONA_VOICE_VERSION, perspective_instruction
 
 
 _PROJECT_STYLE = (
@@ -63,6 +64,10 @@ async def knowledge_events(engine, request, session, resolved, decision, *, turn
                "answer_language": request.language,
                "query_resolution": {"original": request.message, "query": resolved.query,
                                     "method": resolved.method, "supporting_turn_ids": list(resolved.supporting_turn_ids)}}
+    if decision.route == "news":
+        context["persona_voice"] = {"version": PERSONA_VOICE_VERSION,
+                                    "perspective": "simulated_first_person", "simulation": True,
+                                    "scope": "dated_company_records_not_personal_memories"}
     fallback = decision.fallback(request.language)
     inference = decision.possible_rationale(request.language)
     if inference is not None:
@@ -84,6 +89,7 @@ async def knowledge_events(engine, request, session, resolved, decision, *, turn
             "Reply directly in two or three short sentences, putting the useful answer first. "
             "Every factual sentence needs [source:QA-...] using an ID supplied below. "
             + (_PROJECT_STYLE if decision.route == "project" else "")
+            + (perspective_instruction(request.language, news=True) if decision.route == "news" else "")
             + decision.instructions(request.language)
         )
         while entries:

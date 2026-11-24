@@ -1,0 +1,5614 @@
+{
+  "schema_version": "jensen-public-retrieval-report.v1",
+  "scope": "Authored development/regression questions. Tests retrieval of relevant records, not answer truth, human likeness, fluent speech, or unseen-interview generalization. Raw retriever comparison is distinct from production routing and temporal filtering.",
+  "corpus_sha256": "a3a8424bdd63aaec8a157656bdfd3f8fc9a8e0ff070eeeb8766acfab733cced5",
+  "summary": {
+    "baseline_32_lexical": {
+      "positive_hits_at_4": 5,
+      "positive_cases": 54,
+      "controls_without_hits": 10,
+      "control_cases": 10,
+      "failures": [
+        "dennys_roles-ko",
+        "dennys_founding-en",
+        "dennys_founding-ko",
+        "cuda_patience-en",
+        "cuda_patience-ko",
+        "absent_market-en",
+        "absent_market-ko",
+        "bad_measurement-en",
+        "bad_measurement-ko",
+        "programmability-en",
+        "programmability-ko",
+        "scope-en",
+        "scope-ko",
+        "directx-ko",
+        "sega-en",
+        "sega-ko",
+        "simulation-en",
+        "amdahl-en",
+        "amdahl-ko",
+        "codesign-en",
+        "codesign-ko",
+        "layers-ko",
+        "biology-ko",
+        "safety-en",
+        "safety-ko",
+        "physical_ai-en",
+        "physical_ai-ko",
+        "memory-en",
+        "memory-ko",
+        "task_purpose-en",
+        "task_purpose-ko",
+        "confidence-en",
+        "confidence-ko",
+        "institution-en",
+        "institution-ko",
+        "dress-en",
+        "dress-ko",
+        "culture-en",
+        "culture-ko",
+        "sovereign-en",
+        "sovereign-ko",
+        "kitchen-en",
+        "kitchen-ko",
+        "avatar-en",
+        "avatar-ko",
+        "synthetic-en",
+        "synthetic-ko",
+        "social-en",
+        "social-ko"
+      ]
+    },
+    "baseline_60_lexical": {
+      "positive_hits_at_4": 5,
+      "positive_cases": 54,
+      "controls_without_hits": 10,
+      "control_cases": 10,
+      "failures": [
+        "dennys_roles-ko",
+        "dennys_founding-en",
+        "dennys_founding-ko",
+        "cuda_patience-en",
+        "cuda_patience-ko",
+        "absent_market-en",
+        "absent_market-ko",
+        "bad_measurement-en",
+        "bad_measurement-ko",
+        "programmability-en",
+        "programmability-ko",
+        "scope-en",
+        "scope-ko",
+        "directx-ko",
+        "sega-en",
+        "sega-ko",
+        "simulation-en",
+        "amdahl-en",
+        "amdahl-ko",
+        "codesign-en",
+        "codesign-ko",
+        "layers-ko",
+        "biology-ko",
+        "safety-en",
+        "safety-ko",
+        "physical_ai-en",
+        "physical_ai-ko",
+        "memory-en",
+        "memory-ko",
+        "task_purpose-en",
+        "task_purpose-ko",
+        "confidence-en",
+        "confidence-ko",
+        "institution-en",
+        "institution-ko",
+        "dress-en",
+        "dress-ko",
+        "culture-en",
+        "culture-ko",
+        "sovereign-en",
+        "sovereign-ko",
+        "kitchen-en",
+        "kitchen-ko",
+        "avatar-en",
+        "avatar-ko",
+        "synthetic-en",
+        "synthetic-ko",
+        "social-en",
+        "social-ko"
+      ]
+    },
+    "expanded_legacy_lexical": {
+      "positive_hits_at_4": 30,
+      "positive_cases": 54,
+      "controls_without_hits": 10,
+      "control_cases": 10,
+      "failures": [
+        "dennys_roles-ko",
+        "dennys_founding-ko",
+        "cuda_patience-ko",
+        "absent_market-en",
+        "absent_market-ko",
+        "bad_measurement-en",
+        "bad_measurement-ko",
+        "programmability-ko",
+        "scope-ko",
+        "directx-ko",
+        "sega-ko",
+        "amdahl-en",
+        "amdahl-ko",
+        "codesign-ko",
+        "layers-ko",
+        "biology-ko",
+        "safety-ko",
+        "physical_ai-ko",
+        "memory-ko",
+        "task_purpose-ko",
+        "institution-ko",
+        "culture-ko",
+        "sovereign-ko",
+        "avatar-ko"
+      ]
+    },
+    "expanded_public_bm25": {
+      "positive_hits_at_4": 54,
+      "positive_cases": 54,
+      "controls_without_hits": 10,
+      "control_cases": 10,
+      "failures": []
+    }
+  },
+  "snapshot_general_eligible_records": 152,
+  "snapshot_general_exclusions": {
+    "JHJ-044": "publication_or_event_after_snapshot",
+    "JHJ-045": "publication_or_event_after_snapshot",
+    "JHJ-046": "publication_or_event_after_snapshot"
+  },
+  "results": [
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "dennys_roles-en",
+      "language": "en",
+      "question": "You used to work at Denny's—what jobs did you actually do?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023",
+        "stripe-sessions-2024"
+      ],
+      "expected_ids": [
+        "JHB-dennys-roles",
+        "JHB-stripe-early-work"
+      ],
+      "retrieved_ids": [
+        "jensen-stripe-sessions-2024-01"
+      ],
+      "retrieved_sources": [
+        "stripe-sessions-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.654
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "dennys_roles-ko",
+      "language": "ko",
+      "question": "데니스에서 접시만 씻었던 거야, 손님 서빙도 했어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023",
+        "stripe-sessions-2024"
+      ],
+      "expected_ids": [
+        "JHB-dennys-roles",
+        "JHB-stripe-early-work"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.085
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "dennys_founding-en",
+      "language": "en",
+      "question": "Was the restaurant where NVIDIA began the same place as your teenage job?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023"
+      ],
+      "expected_ids": [
+        "JHB-dennys-founder-booth",
+        "JHB-dennys-portland-job"
+      ],
+      "retrieved_ids": [
+        "jensen-stripe-sessions-2024-04"
+      ],
+      "retrieved_sources": [
+        "stripe-sessions-2024"
+      ],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.273
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "dennys_founding-ko",
+      "language": "ko",
+      "question": "엔비디아 창업을 논의한 식당과 십대 때 일한 데니스는 같은 곳이야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023"
+      ],
+      "expected_ids": [
+        "JHB-dennys-founder-booth",
+        "JHB-dennys-portland-job"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.255
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "cuda_patience-en",
+      "language": "en",
+      "question": "Why keep funding CUDA before customers would pay a premium?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "jensen-acquired-2023-02"
+      ],
+      "retrieved_sources": [
+        "acquired-2023"
+      ],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.254
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "cuda_patience-ko",
+      "language": "ko",
+      "question": "고객이 돈을 더 내지 않았는데 CUDA 투자를 왜 계속했어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.226
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "absent_market-en",
+      "language": "en",
+      "question": "Our engine really cuts compute time sixfold, but nobody is paying yet. Is that a reason to stop?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024"
+      ],
+      "expected_ids": [
+        "JHJ-001",
+        "JHJ-003"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.295
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "absent_market-ko",
+      "language": "ko",
+      "question": "실제 작업 시간이 6분의 1로 줄었는데 유료 고객이 없어. 개발을 접어야 해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024"
+      ],
+      "expected_ids": [
+        "JHJ-001",
+        "JHJ-003"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.237
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "bad_measurement-en",
+      "language": "en",
+      "question": "The benchmark was faulty; our supposed performance advantage vanished. What changes?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stanford-gsb-2024",
+        "jhb-osu-hard-work-2013"
+      ],
+      "expected_ids": [
+        "JHJ-004",
+        "JHB-osu-memory-price-reset"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.27
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "bad_measurement-ko",
+      "language": "ko",
+      "question": "측정 오류 때문에 성능 우위가 사라졌어. 투자 판단도 바꿔야 해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stanford-gsb-2024",
+        "jhb-osu-hard-work-2013"
+      ],
+      "expected_ids": [
+        "JHJ-004",
+        "JHB-osu-memory-price-reset"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.231
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "programmability-en",
+      "language": "en",
+      "question": "Why does a novel attention algorithm challenge a chip optimized for matrix multiplication?",
+      "kind": "source_question",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-005"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.244
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "programmability-ko",
+      "language": "ko",
+      "question": "새 attention 구조가 생기면 행렬곱 특화 칩은 왜 어려워져?",
+      "kind": "source_question",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-005"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.219
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "scope-en",
+      "language": "en",
+      "question": "Why build infrastructure yourself when partners could supply it?",
+      "kind": "source_question",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-006"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.241
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "scope-ko",
+      "language": "ko",
+      "question": "파트너가 만들 수 있는 인프라까지 직접 만들어야 할까?",
+      "kind": "source_question",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-006"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.264
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "directx-en",
+      "language": "en",
+      "question": "How did DirectX change the assumptions behind NV1 and RIVA 128?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "jensen-acquired-2023-01"
+      ],
+      "retrieved_sources": [
+        "acquired-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.29
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "directx-ko",
+      "language": "ko",
+      "question": "DirectX가 등장했을 때 NV1과 RIVA 128은 어떻게 달라졌어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.225
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "sega-en",
+      "language": "en",
+      "question": "What did admitting the wrong architecture mean for the Sega contract?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.318
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "sega-ko",
+      "language": "ko",
+      "question": "세가 계약의 아키텍처가 잘못됐다는 걸 인정하면 무슨 문제가 있었어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.234
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "simulation-en",
+      "language": "en",
+      "question": "How did software verification help when you only had money for one tapeout?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [
+        "JHJ-010",
+        "JHJ-015"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.239
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "simulation-ko",
+      "language": "ko",
+      "question": "테이프아웃을 한 번만 할 돈이 있을 때 소프트웨어 검증을 어떻게 활용했어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [
+        "JHJ-010",
+        "JHJ-015"
+      ],
+      "retrieved_ids": [
+        "jensen-acquired-2023-01"
+      ],
+      "retrieved_sources": [
+        "acquired-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.238
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "amdahl-en",
+      "language": "en",
+      "question": "If half a task becomes infinitely fast, how much faster is the whole task?",
+      "kind": "source_question",
+      "expected_sources": [
+        "lex-494"
+      ],
+      "expected_ids": [
+        "JHJ-017"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.286
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "amdahl-ko",
+      "language": "ko",
+      "question": "작업의 절반만 무한히 빨라지면 전체 성능은 얼마나 빨라져?",
+      "kind": "source_question",
+      "expected_sources": [
+        "lex-494"
+      ],
+      "expected_ids": [
+        "JHJ-017"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.081
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "codesign-en",
+      "language": "en",
+      "question": "Why do GPU performance gains depend on cooling and networking?",
+      "kind": "source_question",
+      "expected_sources": [
+        "lex-494",
+        "nvidia-gtc-2025-live-report"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "jensen-2024-acceleration-efficiency"
+      ],
+      "retrieved_sources": [
+        "nvidia-computex-2024"
+      ],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.227
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "codesign-ko",
+      "language": "ko",
+      "question": "GPU 성능을 높이는데 냉각과 네트워크까지 왜 함께 설계해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "lex-494",
+        "nvidia-gtc-2025-live-report"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.202
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "layers-en",
+      "language": "en",
+      "question": "What are the layers below an AI application, from energy to models?",
+      "kind": "source_question",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-022"
+      ],
+      "retrieved_ids": [
+        "jensen-csis-2025-02",
+        "jensen-2025-ai-factories",
+        "jensen-strange-loop-2025-03",
+        "jensen-2024-physical-ai"
+      ],
+      "retrieved_sources": [
+        "csis-2025",
+        "nvidia-computex-2025",
+        "strange-loop-2025",
+        "nvidia-computex-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.274
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "layers-ko",
+      "language": "ko",
+      "question": "에너지부터 모델과 애플리케이션까지 AI는 어떤 층으로 구성돼?",
+      "kind": "source_question",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-022"
+      ],
+      "retrieved_ids": [
+        "jensen-2024-acceleration-efficiency"
+      ],
+      "retrieved_sources": [
+        "nvidia-computex-2024"
+      ],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.202
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "biology-en",
+      "language": "en",
+      "question": "Would an AI platform company have to own a drug-discovery company?",
+      "kind": "source_question",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-021",
+        "JHJ-023"
+      ],
+      "retrieved_ids": [
+        "jensen-csis-2025-01",
+        "jensen-acquired-2023-03",
+        "jensen-lex-494-04",
+        "jensen-dwarkesh-2026-03"
+      ],
+      "retrieved_sources": [
+        "csis-2025",
+        "acquired-2023",
+        "lex-494",
+        "dwarkesh-2026"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.272
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "biology-ko",
+      "language": "ko",
+      "question": "AI 플랫폼 회사가 신약 개발 기업까지 직접 운영해야 해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-021",
+        "JHJ-023"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.231
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "safety-en",
+      "language": "en",
+      "question": "What can aviation redundancy teach us about AI safety?",
+      "kind": "source_question",
+      "expected_sources": [
+        "milken-2026"
+      ],
+      "expected_ids": [
+        "JHJ-028"
+      ],
+      "retrieved_ids": [
+        "jensen-csis-2025-02"
+      ],
+      "retrieved_sources": [
+        "csis-2025"
+      ],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.214
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "safety-ko",
+      "language": "ko",
+      "question": "항공기의 중복 설계에서 AI 안전성에 적용할 점이 뭐야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "milken-2026"
+      ],
+      "expected_ids": [
+        "JHJ-028"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.223
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "physical_ai-en",
+      "language": "en",
+      "question": "How can world models help small robotics teams?",
+      "kind": "source_question",
+      "expected_sources": [
+        "nvidia-ces-2025-report"
+      ],
+      "expected_ids": [
+        "JHJ-034"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.208
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "physical_ai-ko",
+      "language": "ko",
+      "question": "작은 로봇 팀에게 월드 모델은 어떤 도움을 줄까?",
+      "kind": "source_question",
+      "expected_sources": [
+        "nvidia-ces-2025-report"
+      ],
+      "expected_ids": [
+        "JHJ-034"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.199
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "memory-en",
+      "language": "en",
+      "question": "Why combine SRAM with HBM and low-power memory?",
+      "kind": "source_question",
+      "expected_sources": [
+        "cnbc-jensen-2026-03-17"
+      ],
+      "expected_ids": [
+        "JHJ-041"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.19
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "memory-ko",
+      "language": "ko",
+      "question": "SRAM과 HBM, 저전력 메모리를 함께 쓰는 이유가 뭐야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "cnbc-jensen-2026-03-17"
+      ],
+      "expected_ids": [
+        "JHJ-041"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.106
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "task_purpose-en",
+      "language": "en",
+      "question": "Is reading a scan the whole purpose of a radiologist?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-hoover-only-in-america"
+      ],
+      "expected_ids": [
+        "JHB-hoover-task-purpose"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.08
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "task_purpose-ko",
+      "language": "ko",
+      "question": "영상 판독이라는 작업과 의사의 본래 목적은 어떻게 달라?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-hoover-only-in-america"
+      ],
+      "expected_ids": [
+        "JHB-hoover-task-purpose"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.194
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "confidence-en",
+      "language": "en",
+      "question": "Can a leader be confident and still admit uncertainty?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-hkust-2024"
+      ],
+      "expected_ids": [
+        "JHB-hkust-confidence-uncertainty"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.196
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "confidence-ko",
+      "language": "ko",
+      "question": "리더가 자신감을 보이면서도 불확실성을 인정할 수 있어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-hkust-2024"
+      ],
+      "expected_ids": [
+        "JHB-hkust-confidence-uncertainty"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.071
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "institution-en",
+      "language": "en",
+      "question": "What did you study at Oregon State and Stanford?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-osu-hall-2013",
+        "jhb-nvidia-official-bio",
+        "jhb-stanford-pillars"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.078
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "institution-ko",
+      "language": "ko",
+      "question": "오리건 주립대와 스탠퍼드에서는 무엇을 공부했어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-osu-hall-2013",
+        "jhb-nvidia-official-bio",
+        "jhb-stanford-pillars"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.058
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "dress-en",
+      "language": "en",
+      "question": "What was the joke about your black jacket and itching?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-siepr-2024"
+      ],
+      "expected_ids": [
+        "JHB-siepr-jacket-joke"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.083
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "dress-ko",
+      "language": "ko",
+      "question": "검은 가죽 재킷과 가려움에 대해 했던 농담은 뭐야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-siepr-2024"
+      ],
+      "expected_ids": [
+        "JHB-siepr-jacket-joke"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.076
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "culture-en",
+      "language": "en",
+      "question": "Why is intellectual honesty important when your company makes a mistake?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stanford-etl-2003-culture"
+      ],
+      "expected_ids": [
+        "JHJ-047"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.361
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "culture-ko",
+      "language": "ko",
+      "question": "회사가 실수했을 때 지적 정직함과 비판 수용이 왜 중요해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stanford-etl-2003-culture"
+      ],
+      "expected_ids": [
+        "JHJ-047"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.209
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "sovereign-en",
+      "language": "en",
+      "question": "Why does sovereign AI include language and culture?",
+      "kind": "source_question",
+      "expected_sources": [
+        "world-governments-summit-2024"
+      ],
+      "expected_ids": [
+        "JHJ-051",
+        "JHJ-052"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.254
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "sovereign-ko",
+      "language": "ko",
+      "question": "소버린 AI에서 언어와 문화가 왜 중요해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "world-governments-summit-2024"
+      ],
+      "expected_ids": [
+        "JHJ-051",
+        "JHJ-052"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.068
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "kitchen-en",
+      "language": "en",
+      "question": "What was distinctive about your first kitchen keynote?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-kitchen-keynote-2020"
+      ],
+      "expected_ids": [
+        "JHB-first-kitchen-keynote"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.195
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "kitchen-ko",
+      "language": "ko",
+      "question": "첫 주방 키노트는 어떤 발표였어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-kitchen-keynote-2020"
+      ],
+      "expected_ids": [
+        "JHB-first-kitchen-keynote"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.056
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "avatar-en",
+      "language": "en",
+      "question": "Was your entire spring 2021 keynote performed by a digital double?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-virtual-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-virtual-jensen-duration"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.28
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "avatar-ko",
+      "language": "ko",
+      "question": "2021년 봄 키노트 전체가 디지털 아바타였어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-virtual-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-virtual-jensen-duration"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.064
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "synthetic-en",
+      "language": "en",
+      "question": "Should Toy Jensen generated answers be treated as your own statements?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-toy-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-toy-jensen-attribution"
+      ],
+      "retrieved_ids": [
+        "jensen-2025-test-time-scaling"
+      ],
+      "retrieved_sources": [
+        "nvidia-blackwell-ultra-2025"
+      ],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.233
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "synthetic-ko",
+      "language": "ko",
+      "question": "토이 젠슨이 AI로 생성한 답변도 실제 발언으로 봐야 해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-toy-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-toy-jensen-attribution"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.085
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "social-en",
+      "language": "en",
+      "question": "Which official Instagram account is identified in NVIDIA filings?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-sec-social-2026"
+      ],
+      "expected_ids": [
+        "JHB-official-social-channels"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.313
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "social-ko",
+      "language": "ko",
+      "question": "엔비디아 공시에서 공식으로 확인되는 인스타그램 계정은 뭐야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-sec-social-2026"
+      ],
+      "expected_ids": [
+        "JHB-official-social-channels"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.095
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "control-private-en",
+      "language": "en",
+      "question": "What is your private phone number?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "This public-source archive cannot verify private contact details or the user's private interactions.",
+      "retrieval_ms": 0.006
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "control-endorse-en",
+      "language": "en",
+      "question": "Did you approve our Jensen chatbot?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "A public-source archive cannot verify a personal endorsement or approval of the user's product.",
+      "retrieval_ms": 0.009
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "control-future-en",
+      "language": "en",
+      "question": "What exact words did you say at the 2035 CUDA keynote?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.2
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "control-latest-en",
+      "language": "en",
+      "question": "What is the NVIDIA stock price right now?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "The curated corpus is historical and cannot verify current information.",
+      "retrieval_ms": 0.008
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "control-unrelated-en",
+      "language": "en",
+      "question": "Explain quasar viscosity topological marmalade.",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.056
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "control-anchor_noise-en",
+      "language": "en",
+      "question": "TSMC quasar nebula viscosity topological marmalade xylophone",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.192
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "control-private-ko",
+      "language": "ko",
+      "question": "젠슨 황 개인 전화번호 알려줘",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "This public-source archive cannot verify private contact details or the user's private interactions.",
+      "retrieval_ms": 0.004
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "control-latest-ko",
+      "language": "ko",
+      "question": "지금 엔비디아 주가는 얼마야?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.051
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "control-future-ko",
+      "language": "ko",
+      "question": "2035년 비공개 회의에서 실제로 뭐라고 말했어?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.18
+    },
+    {
+      "configuration": "baseline_32_lexical",
+      "case_id": "control-unrelated-ko",
+      "language": "ko",
+      "question": "오징어 은하의 점성에 관한 수학적 증명을 알려줘",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.067
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "dennys_roles-en",
+      "language": "en",
+      "question": "You used to work at Denny's—what jobs did you actually do?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023",
+        "stripe-sessions-2024"
+      ],
+      "expected_ids": [
+        "JHB-dennys-roles",
+        "JHB-stripe-early-work"
+      ],
+      "retrieved_ids": [
+        "jensen-stripe-sessions-2024-01"
+      ],
+      "retrieved_sources": [
+        "stripe-sessions-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.42
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "dennys_roles-ko",
+      "language": "ko",
+      "question": "데니스에서 접시만 씻었던 거야, 손님 서빙도 했어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023",
+        "stripe-sessions-2024"
+      ],
+      "expected_ids": [
+        "JHB-dennys-roles",
+        "JHB-stripe-early-work"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.074
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "dennys_founding-en",
+      "language": "en",
+      "question": "Was the restaurant where NVIDIA began the same place as your teenage job?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023"
+      ],
+      "expected_ids": [
+        "JHB-dennys-founder-booth",
+        "JHB-dennys-portland-job"
+      ],
+      "retrieved_ids": [
+        "jensen-stripe-sessions-2024-04"
+      ],
+      "retrieved_sources": [
+        "stripe-sessions-2024"
+      ],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.328
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "dennys_founding-ko",
+      "language": "ko",
+      "question": "엔비디아 창업을 논의한 식당과 십대 때 일한 데니스는 같은 곳이야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023"
+      ],
+      "expected_ids": [
+        "JHB-dennys-founder-booth",
+        "JHB-dennys-portland-job"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.322
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "cuda_patience-en",
+      "language": "en",
+      "question": "Why keep funding CUDA before customers would pay a premium?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "jensen-acquired-2023-02"
+      ],
+      "retrieved_sources": [
+        "acquired-2023"
+      ],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.324
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "cuda_patience-ko",
+      "language": "ko",
+      "question": "고객이 돈을 더 내지 않았는데 CUDA 투자를 왜 계속했어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.281
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "absent_market-en",
+      "language": "en",
+      "question": "Our engine really cuts compute time sixfold, but nobody is paying yet. Is that a reason to stop?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024"
+      ],
+      "expected_ids": [
+        "JHJ-001",
+        "JHJ-003"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.374
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "absent_market-ko",
+      "language": "ko",
+      "question": "실제 작업 시간이 6분의 1로 줄었는데 유료 고객이 없어. 개발을 접어야 해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024"
+      ],
+      "expected_ids": [
+        "JHJ-001",
+        "JHJ-003"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.319
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "bad_measurement-en",
+      "language": "en",
+      "question": "The benchmark was faulty; our supposed performance advantage vanished. What changes?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stanford-gsb-2024",
+        "jhb-osu-hard-work-2013"
+      ],
+      "expected_ids": [
+        "JHJ-004",
+        "JHB-osu-memory-price-reset"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.314
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "bad_measurement-ko",
+      "language": "ko",
+      "question": "측정 오류 때문에 성능 우위가 사라졌어. 투자 판단도 바꿔야 해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stanford-gsb-2024",
+        "jhb-osu-hard-work-2013"
+      ],
+      "expected_ids": [
+        "JHJ-004",
+        "JHB-osu-memory-price-reset"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.36
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "programmability-en",
+      "language": "en",
+      "question": "Why does a novel attention algorithm challenge a chip optimized for matrix multiplication?",
+      "kind": "source_question",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-005"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.328
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "programmability-ko",
+      "language": "ko",
+      "question": "새 attention 구조가 생기면 행렬곱 특화 칩은 왜 어려워져?",
+      "kind": "source_question",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-005"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.272
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "scope-en",
+      "language": "en",
+      "question": "Why build infrastructure yourself when partners could supply it?",
+      "kind": "source_question",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-006"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.304
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "scope-ko",
+      "language": "ko",
+      "question": "파트너가 만들 수 있는 인프라까지 직접 만들어야 할까?",
+      "kind": "source_question",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-006"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.278
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "directx-en",
+      "language": "en",
+      "question": "How did DirectX change the assumptions behind NV1 and RIVA 128?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "jensen-acquired-2023-01",
+        "jensen-acquired-2023-07"
+      ],
+      "retrieved_sources": [
+        "acquired-2023",
+        "acquired-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.3
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "directx-ko",
+      "language": "ko",
+      "question": "DirectX가 등장했을 때 NV1과 RIVA 128은 어떻게 달라졌어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.259
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "sega-en",
+      "language": "en",
+      "question": "What did admitting the wrong architecture mean for the Sega contract?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.256
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "sega-ko",
+      "language": "ko",
+      "question": "세가 계약의 아키텍처가 잘못됐다는 걸 인정하면 무슨 문제가 있었어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.296
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "simulation-en",
+      "language": "en",
+      "question": "How did software verification help when you only had money for one tapeout?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [
+        "JHJ-010",
+        "JHJ-015"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.313
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "simulation-ko",
+      "language": "ko",
+      "question": "테이프아웃을 한 번만 할 돈이 있을 때 소프트웨어 검증을 어떻게 활용했어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [
+        "JHJ-010",
+        "JHJ-015"
+      ],
+      "retrieved_ids": [
+        "jensen-acquired-2023-01"
+      ],
+      "retrieved_sources": [
+        "acquired-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.312
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "amdahl-en",
+      "language": "en",
+      "question": "If half a task becomes infinitely fast, how much faster is the whole task?",
+      "kind": "source_question",
+      "expected_sources": [
+        "lex-494"
+      ],
+      "expected_ids": [
+        "JHJ-017"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.34
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "amdahl-ko",
+      "language": "ko",
+      "question": "작업의 절반만 무한히 빨라지면 전체 성능은 얼마나 빨라져?",
+      "kind": "source_question",
+      "expected_sources": [
+        "lex-494"
+      ],
+      "expected_ids": [
+        "JHJ-017"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.082
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "codesign-en",
+      "language": "en",
+      "question": "Why do GPU performance gains depend on cooling and networking?",
+      "kind": "source_question",
+      "expected_sources": [
+        "lex-494",
+        "nvidia-gtc-2025-live-report"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "jensen-2024-acceleration-efficiency"
+      ],
+      "retrieved_sources": [
+        "nvidia-computex-2024"
+      ],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.295
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "codesign-ko",
+      "language": "ko",
+      "question": "GPU 성능을 높이는데 냉각과 네트워크까지 왜 함께 설계해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "lex-494",
+        "nvidia-gtc-2025-live-report"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.261
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "layers-en",
+      "language": "en",
+      "question": "What are the layers below an AI application, from energy to models?",
+      "kind": "source_question",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-022"
+      ],
+      "retrieved_ids": [
+        "jensen-csis-2025-02",
+        "jensen-2025-ai-factories",
+        "jensen-strange-loop-2025-03",
+        "jensen-2024-physical-ai"
+      ],
+      "retrieved_sources": [
+        "csis-2025",
+        "nvidia-computex-2025",
+        "strange-loop-2025",
+        "nvidia-computex-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.34
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "layers-ko",
+      "language": "ko",
+      "question": "에너지부터 모델과 애플리케이션까지 AI는 어떤 층으로 구성돼?",
+      "kind": "source_question",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-022"
+      ],
+      "retrieved_ids": [
+        "jensen-2024-acceleration-efficiency"
+      ],
+      "retrieved_sources": [
+        "nvidia-computex-2024"
+      ],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.264
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "biology-en",
+      "language": "en",
+      "question": "Would an AI platform company have to own a drug-discovery company?",
+      "kind": "source_question",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-021",
+        "JHJ-023"
+      ],
+      "retrieved_ids": [
+        "jensen-csis-2025-01",
+        "jensen-acquired-2023-03",
+        "jensen-lex-494-04",
+        "jensen-dwarkesh-2026-03"
+      ],
+      "retrieved_sources": [
+        "csis-2025",
+        "acquired-2023",
+        "lex-494",
+        "dwarkesh-2026"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.365
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "biology-ko",
+      "language": "ko",
+      "question": "AI 플랫폼 회사가 신약 개발 기업까지 직접 운영해야 해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-021",
+        "JHJ-023"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.313
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "safety-en",
+      "language": "en",
+      "question": "What can aviation redundancy teach us about AI safety?",
+      "kind": "source_question",
+      "expected_sources": [
+        "milken-2026"
+      ],
+      "expected_ids": [
+        "JHJ-028"
+      ],
+      "retrieved_ids": [
+        "jensen-csis-2025-02"
+      ],
+      "retrieved_sources": [
+        "csis-2025"
+      ],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.293
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "safety-ko",
+      "language": "ko",
+      "question": "항공기의 중복 설계에서 AI 안전성에 적용할 점이 뭐야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "milken-2026"
+      ],
+      "expected_ids": [
+        "JHJ-028"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.276
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "physical_ai-en",
+      "language": "en",
+      "question": "How can world models help small robotics teams?",
+      "kind": "source_question",
+      "expected_sources": [
+        "nvidia-ces-2025-report"
+      ],
+      "expected_ids": [
+        "JHJ-034"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.287
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "physical_ai-ko",
+      "language": "ko",
+      "question": "작은 로봇 팀에게 월드 모델은 어떤 도움을 줄까?",
+      "kind": "source_question",
+      "expected_sources": [
+        "nvidia-ces-2025-report"
+      ],
+      "expected_ids": [
+        "JHJ-034"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.262
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "memory-en",
+      "language": "en",
+      "question": "Why combine SRAM with HBM and low-power memory?",
+      "kind": "source_question",
+      "expected_sources": [
+        "cnbc-jensen-2026-03-17"
+      ],
+      "expected_ids": [
+        "JHJ-041"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.264
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "memory-ko",
+      "language": "ko",
+      "question": "SRAM과 HBM, 저전력 메모리를 함께 쓰는 이유가 뭐야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "cnbc-jensen-2026-03-17"
+      ],
+      "expected_ids": [
+        "JHJ-041"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.077
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "task_purpose-en",
+      "language": "en",
+      "question": "Is reading a scan the whole purpose of a radiologist?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-hoover-only-in-america"
+      ],
+      "expected_ids": [
+        "JHB-hoover-task-purpose"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.271
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "task_purpose-ko",
+      "language": "ko",
+      "question": "영상 판독이라는 작업과 의사의 본래 목적은 어떻게 달라?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-hoover-only-in-america"
+      ],
+      "expected_ids": [
+        "JHB-hoover-task-purpose"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.279
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "confidence-en",
+      "language": "en",
+      "question": "Can a leader be confident and still admit uncertainty?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-hkust-2024"
+      ],
+      "expected_ids": [
+        "JHB-hkust-confidence-uncertainty"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.272
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "confidence-ko",
+      "language": "ko",
+      "question": "리더가 자신감을 보이면서도 불확실성을 인정할 수 있어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-hkust-2024"
+      ],
+      "expected_ids": [
+        "JHB-hkust-confidence-uncertainty"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.252
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "institution-en",
+      "language": "en",
+      "question": "What did you study at Oregon State and Stanford?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-osu-hall-2013",
+        "jhb-nvidia-official-bio",
+        "jhb-stanford-pillars"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.079
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "institution-ko",
+      "language": "ko",
+      "question": "오리건 주립대와 스탠퍼드에서는 무엇을 공부했어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-osu-hall-2013",
+        "jhb-nvidia-official-bio",
+        "jhb-stanford-pillars"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.06
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "dress-en",
+      "language": "en",
+      "question": "What was the joke about your black jacket and itching?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-siepr-2024"
+      ],
+      "expected_ids": [
+        "JHB-siepr-jacket-joke"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.084
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "dress-ko",
+      "language": "ko",
+      "question": "검은 가죽 재킷과 가려움에 대해 했던 농담은 뭐야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-siepr-2024"
+      ],
+      "expected_ids": [
+        "JHB-siepr-jacket-joke"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.091
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "culture-en",
+      "language": "en",
+      "question": "Why is intellectual honesty important when your company makes a mistake?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stanford-etl-2003-culture"
+      ],
+      "expected_ids": [
+        "JHJ-047"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.313
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "culture-ko",
+      "language": "ko",
+      "question": "회사가 실수했을 때 지적 정직함과 비판 수용이 왜 중요해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stanford-etl-2003-culture"
+      ],
+      "expected_ids": [
+        "JHJ-047"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.253
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "sovereign-en",
+      "language": "en",
+      "question": "Why does sovereign AI include language and culture?",
+      "kind": "source_question",
+      "expected_sources": [
+        "world-governments-summit-2024"
+      ],
+      "expected_ids": [
+        "JHJ-051",
+        "JHJ-052"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.282
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "sovereign-ko",
+      "language": "ko",
+      "question": "소버린 AI에서 언어와 문화가 왜 중요해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "world-governments-summit-2024"
+      ],
+      "expected_ids": [
+        "JHJ-051",
+        "JHJ-052"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.062
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "kitchen-en",
+      "language": "en",
+      "question": "What was distinctive about your first kitchen keynote?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-kitchen-keynote-2020"
+      ],
+      "expected_ids": [
+        "JHB-first-kitchen-keynote"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.275
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "kitchen-ko",
+      "language": "ko",
+      "question": "첫 주방 키노트는 어떤 발표였어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-kitchen-keynote-2020"
+      ],
+      "expected_ids": [
+        "JHB-first-kitchen-keynote"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.057
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "avatar-en",
+      "language": "en",
+      "question": "Was your entire spring 2021 keynote performed by a digital double?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-virtual-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-virtual-jensen-duration"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.265
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "avatar-ko",
+      "language": "ko",
+      "question": "2021년 봄 키노트 전체가 디지털 아바타였어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-virtual-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-virtual-jensen-duration"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.061
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "synthetic-en",
+      "language": "en",
+      "question": "Should Toy Jensen generated answers be treated as your own statements?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-toy-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-toy-jensen-attribution"
+      ],
+      "retrieved_ids": [
+        "jensen-2025-test-time-scaling"
+      ],
+      "retrieved_sources": [
+        "nvidia-blackwell-ultra-2025"
+      ],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.295
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "synthetic-ko",
+      "language": "ko",
+      "question": "토이 젠슨이 AI로 생성한 답변도 실제 발언으로 봐야 해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-toy-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-toy-jensen-attribution"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.1
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "social-en",
+      "language": "en",
+      "question": "Which official Instagram account is identified in NVIDIA filings?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-sec-social-2026"
+      ],
+      "expected_ids": [
+        "JHB-official-social-channels"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.279
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "social-ko",
+      "language": "ko",
+      "question": "엔비디아 공시에서 공식으로 확인되는 인스타그램 계정은 뭐야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-sec-social-2026"
+      ],
+      "expected_ids": [
+        "JHB-official-social-channels"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.07
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "control-private-en",
+      "language": "en",
+      "question": "What is your private phone number?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "This public-source archive cannot verify private contact details or the user's private interactions.",
+      "retrieval_ms": 0.004
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "control-endorse-en",
+      "language": "en",
+      "question": "Did you approve our Jensen chatbot?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "A public-source archive cannot verify a personal endorsement or approval of the user's product.",
+      "retrieval_ms": 0.003
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "control-future-en",
+      "language": "en",
+      "question": "What exact words did you say at the 2035 CUDA keynote?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.251
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "control-latest-en",
+      "language": "en",
+      "question": "What is the NVIDIA stock price right now?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "The curated corpus is historical and cannot verify current information.",
+      "retrieval_ms": 0.008
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "control-unrelated-en",
+      "language": "en",
+      "question": "Explain quasar viscosity topological marmalade.",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.058
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "control-anchor_noise-en",
+      "language": "en",
+      "question": "TSMC quasar nebula viscosity topological marmalade xylophone",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.247
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "control-private-ko",
+      "language": "ko",
+      "question": "젠슨 황 개인 전화번호 알려줘",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "This public-source archive cannot verify private contact details or the user's private interactions.",
+      "retrieval_ms": 0.003
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "control-latest-ko",
+      "language": "ko",
+      "question": "지금 엔비디아 주가는 얼마야?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.055
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "control-future-ko",
+      "language": "ko",
+      "question": "2035년 비공개 회의에서 실제로 뭐라고 말했어?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.239
+    },
+    {
+      "configuration": "baseline_60_lexical",
+      "case_id": "control-unrelated-ko",
+      "language": "ko",
+      "question": "오징어 은하의 점성에 관한 수학적 증명을 알려줘",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.069
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "dennys_roles-en",
+      "language": "en",
+      "question": "You used to work at Denny's—what jobs did you actually do?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023",
+        "stripe-sessions-2024"
+      ],
+      "expected_ids": [
+        "JHB-dennys-roles",
+        "JHB-stripe-early-work"
+      ],
+      "retrieved_ids": [
+        "jensen-stripe-sessions-2024-01",
+        "JHB-dennys-hospitality"
+      ],
+      "retrieved_sources": [
+        "stripe-sessions-2024",
+        "jhb-nvidia-dennys-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.698
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "dennys_roles-ko",
+      "language": "ko",
+      "question": "데니스에서 접시만 씻었던 거야, 손님 서빙도 했어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023",
+        "stripe-sessions-2024"
+      ],
+      "expected_ids": [
+        "JHB-dennys-roles",
+        "JHB-stripe-early-work"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.583
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "dennys_founding-en",
+      "language": "en",
+      "question": "Was the restaurant where NVIDIA began the same place as your teenage job?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023"
+      ],
+      "expected_ids": [
+        "JHB-dennys-founder-booth",
+        "JHB-dennys-portland-job"
+      ],
+      "retrieved_ids": [
+        "JHB-dennys-portland-job",
+        "JHB-dennys-hospitality",
+        "JHB-dennys-founder-booth",
+        "jensen-stripe-sessions-2024-04"
+      ],
+      "retrieved_sources": [
+        "jhb-nvidia-dennys-2023",
+        "jhb-nvidia-dennys-2023",
+        "jhb-nvidia-dennys-2023",
+        "stripe-sessions-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.66
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "dennys_founding-ko",
+      "language": "ko",
+      "question": "엔비디아 창업을 논의한 식당과 십대 때 일한 데니스는 같은 곳이야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023"
+      ],
+      "expected_ids": [
+        "JHB-dennys-founder-booth",
+        "JHB-dennys-portland-job"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.567
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "cuda_patience-en",
+      "language": "en",
+      "question": "Why keep funding CUDA before customers would pay a premium?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "JHJ-002",
+        "JHB-ntu-cuda-patience",
+        "jensen-acquired-2023-02"
+      ],
+      "retrieved_sources": [
+        "stripe-sessions-2024",
+        "jhb-nvidia-ntu-2023",
+        "acquired-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.562
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "cuda_patience-ko",
+      "language": "ko",
+      "question": "고객이 돈을 더 내지 않았는데 CUDA 투자를 왜 계속했어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.606
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "absent_market-en",
+      "language": "en",
+      "question": "Our engine really cuts compute time sixfold, but nobody is paying yet. Is that a reason to stop?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024"
+      ],
+      "expected_ids": [
+        "JHJ-001",
+        "JHJ-003"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.699
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "absent_market-ko",
+      "language": "ko",
+      "question": "실제 작업 시간이 6분의 1로 줄었는데 유료 고객이 없어. 개발을 접어야 해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024"
+      ],
+      "expected_ids": [
+        "JHJ-001",
+        "JHJ-003"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.576
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "bad_measurement-en",
+      "language": "en",
+      "question": "The benchmark was faulty; our supposed performance advantage vanished. What changes?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stanford-gsb-2024",
+        "jhb-osu-hard-work-2013"
+      ],
+      "expected_ids": [
+        "JHJ-004",
+        "JHB-osu-memory-price-reset"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.59
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "bad_measurement-ko",
+      "language": "ko",
+      "question": "측정 오류 때문에 성능 우위가 사라졌어. 투자 판단도 바꿔야 해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stanford-gsb-2024",
+        "jhb-osu-hard-work-2013"
+      ],
+      "expected_ids": [
+        "JHJ-004",
+        "JHB-osu-memory-price-reset"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.59
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "programmability-en",
+      "language": "en",
+      "question": "Why does a novel attention algorithm challenge a chip optimized for matrix multiplication?",
+      "kind": "source_question",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-005"
+      ],
+      "retrieved_ids": [
+        "JHJ-005"
+      ],
+      "retrieved_sources": [
+        "dwarkesh-2026"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.675
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "programmability-ko",
+      "language": "ko",
+      "question": "새 attention 구조가 생기면 행렬곱 특화 칩은 왜 어려워져?",
+      "kind": "source_question",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-005"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.577
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "scope-en",
+      "language": "en",
+      "question": "Why build infrastructure yourself when partners could supply it?",
+      "kind": "source_question",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-006"
+      ],
+      "retrieved_ids": [
+        "JHJ-006"
+      ],
+      "retrieved_sources": [
+        "dwarkesh-2026"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.685
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "scope-ko",
+      "language": "ko",
+      "question": "파트너가 만들 수 있는 인프라까지 직접 만들어야 할까?",
+      "kind": "source_question",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-006"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.643
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "directx-en",
+      "language": "en",
+      "question": "How did DirectX change the assumptions behind NV1 and RIVA 128?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "JHJ-009",
+        "JHJ-004",
+        "JHJ-010",
+        "jensen-acquired-2023-01"
+      ],
+      "retrieved_sources": [
+        "acquired-2023",
+        "stanford-gsb-2024",
+        "acquired-2023",
+        "acquired-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.622
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "directx-ko",
+      "language": "ko",
+      "question": "DirectX가 등장했을 때 NV1과 RIVA 128은 어떻게 달라졌어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.545
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "sega-en",
+      "language": "en",
+      "question": "What did admitting the wrong architecture mean for the Sega contract?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "JHJ-014",
+        "JHB-ntu-sega-mistake"
+      ],
+      "retrieved_sources": [
+        "sequoia-crucible-nvidia-2023",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.51
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "sega-ko",
+      "language": "ko",
+      "question": "세가 계약의 아키텍처가 잘못됐다는 걸 인정하면 무슨 문제가 있었어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.565
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "simulation-en",
+      "language": "en",
+      "question": "How did software verification help when you only had money for one tapeout?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [
+        "JHJ-010",
+        "JHJ-015"
+      ],
+      "retrieved_ids": [
+        "JHJ-015"
+      ],
+      "retrieved_sources": [
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.558
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "simulation-ko",
+      "language": "ko",
+      "question": "테이프아웃을 한 번만 할 돈이 있을 때 소프트웨어 검증을 어떻게 활용했어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [
+        "JHJ-010",
+        "JHJ-015"
+      ],
+      "retrieved_ids": [
+        "jensen-acquired-2023-01"
+      ],
+      "retrieved_sources": [
+        "acquired-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.574
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "amdahl-en",
+      "language": "en",
+      "question": "If half a task becomes infinitely fast, how much faster is the whole task?",
+      "kind": "source_question",
+      "expected_sources": [
+        "lex-494"
+      ],
+      "expected_ids": [
+        "JHJ-017"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.655
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "amdahl-ko",
+      "language": "ko",
+      "question": "작업의 절반만 무한히 빨라지면 전체 성능은 얼마나 빨라져?",
+      "kind": "source_question",
+      "expected_sources": [
+        "lex-494"
+      ],
+      "expected_ids": [
+        "JHJ-017"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.097
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "codesign-en",
+      "language": "en",
+      "question": "Why do GPU performance gains depend on cooling and networking?",
+      "kind": "source_question",
+      "expected_sources": [
+        "lex-494",
+        "nvidia-gtc-2025-live-report"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "JHJ-018",
+        "jensen-2024-acceleration-efficiency"
+      ],
+      "retrieved_sources": [
+        "lex-494",
+        "nvidia-computex-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.539
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "codesign-ko",
+      "language": "ko",
+      "question": "GPU 성능을 높이는데 냉각과 네트워크까지 왜 함께 설계해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "lex-494",
+        "nvidia-gtc-2025-live-report"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.55
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "layers-en",
+      "language": "en",
+      "question": "What are the layers below an AI application, from energy to models?",
+      "kind": "source_question",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-022"
+      ],
+      "retrieved_ids": [
+        "JHJ-022",
+        "jensen-csis-2025-02",
+        "jensen-2025-ai-factories",
+        "jensen-strange-loop-2025-03"
+      ],
+      "retrieved_sources": [
+        "csis-2025",
+        "csis-2025",
+        "nvidia-computex-2025",
+        "strange-loop-2025"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.605
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "layers-ko",
+      "language": "ko",
+      "question": "에너지부터 모델과 애플리케이션까지 AI는 어떤 층으로 구성돼?",
+      "kind": "source_question",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-022"
+      ],
+      "retrieved_ids": [
+        "jensen-2024-acceleration-efficiency"
+      ],
+      "retrieved_sources": [
+        "nvidia-computex-2024"
+      ],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.523
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "biology-en",
+      "language": "en",
+      "question": "Would an AI platform company have to own a drug-discovery company?",
+      "kind": "source_question",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-021",
+        "JHJ-023"
+      ],
+      "retrieved_ids": [
+        "jensen-csis-2025-01",
+        "JHJ-023",
+        "jensen-acquired-2023-03",
+        "jensen-dwarkesh-2026-03"
+      ],
+      "retrieved_sources": [
+        "csis-2025",
+        "csis-2025",
+        "acquired-2023",
+        "dwarkesh-2026"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.654
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "biology-ko",
+      "language": "ko",
+      "question": "AI 플랫폼 회사가 신약 개발 기업까지 직접 운영해야 해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-021",
+        "JHJ-023"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.588
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "safety-en",
+      "language": "en",
+      "question": "What can aviation redundancy teach us about AI safety?",
+      "kind": "source_question",
+      "expected_sources": [
+        "milken-2026"
+      ],
+      "expected_ids": [
+        "JHJ-028"
+      ],
+      "retrieved_ids": [
+        "JHJ-028",
+        "jensen-csis-2025-02",
+        "JHB-hoover-cautious-optimism"
+      ],
+      "retrieved_sources": [
+        "milken-2026",
+        "csis-2025",
+        "jhb-hoover-only-in-america"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.601
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "safety-ko",
+      "language": "ko",
+      "question": "항공기의 중복 설계에서 AI 안전성에 적용할 점이 뭐야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "milken-2026"
+      ],
+      "expected_ids": [
+        "JHJ-028"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.583
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "physical_ai-en",
+      "language": "en",
+      "question": "How can world models help small robotics teams?",
+      "kind": "source_question",
+      "expected_sources": [
+        "nvidia-ces-2025-report"
+      ],
+      "expected_ids": [
+        "JHJ-034"
+      ],
+      "retrieved_ids": [
+        "JHJ-034",
+        "JHJ-033",
+        "JHB-hkust-physical-intelligence",
+        "JHJ-049"
+      ],
+      "retrieved_sources": [
+        "nvidia-ces-2025-report",
+        "nvidia-ces-2025-report",
+        "jhb-hkust-2024",
+        "yc-startup-school-2026"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.614
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "physical_ai-ko",
+      "language": "ko",
+      "question": "작은 로봇 팀에게 월드 모델은 어떤 도움을 줄까?",
+      "kind": "source_question",
+      "expected_sources": [
+        "nvidia-ces-2025-report"
+      ],
+      "expected_ids": [
+        "JHJ-034"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.553
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "memory-en",
+      "language": "en",
+      "question": "Why combine SRAM with HBM and low-power memory?",
+      "kind": "source_question",
+      "expected_sources": [
+        "cnbc-jensen-2026-03-17"
+      ],
+      "expected_ids": [
+        "JHJ-041"
+      ],
+      "retrieved_ids": [
+        "JHJ-041",
+        "JHJ-018"
+      ],
+      "retrieved_sources": [
+        "cnbc-jensen-2026-03-17",
+        "lex-494"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.503
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "memory-ko",
+      "language": "ko",
+      "question": "SRAM과 HBM, 저전력 메모리를 함께 쓰는 이유가 뭐야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "cnbc-jensen-2026-03-17"
+      ],
+      "expected_ids": [
+        "JHJ-041"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.509
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "task_purpose-en",
+      "language": "en",
+      "question": "Is reading a scan the whole purpose of a radiologist?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-hoover-only-in-america"
+      ],
+      "expected_ids": [
+        "JHB-hoover-task-purpose"
+      ],
+      "retrieved_ids": [
+        "JHB-hoover-task-purpose"
+      ],
+      "retrieved_sources": [
+        "jhb-hoover-only-in-america"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.533
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "task_purpose-ko",
+      "language": "ko",
+      "question": "영상 판독이라는 작업과 의사의 본래 목적은 어떻게 달라?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-hoover-only-in-america"
+      ],
+      "expected_ids": [
+        "JHB-hoover-task-purpose"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.509
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "confidence-en",
+      "language": "en",
+      "question": "Can a leader be confident and still admit uncertainty?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-hkust-2024"
+      ],
+      "expected_ids": [
+        "JHB-hkust-confidence-uncertainty"
+      ],
+      "retrieved_ids": [
+        "JHB-hkust-confidence-uncertainty"
+      ],
+      "retrieved_sources": [
+        "jhb-hkust-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.529
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "confidence-ko",
+      "language": "ko",
+      "question": "리더가 자신감을 보이면서도 불확실성을 인정할 수 있어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-hkust-2024"
+      ],
+      "expected_ids": [
+        "JHB-hkust-confidence-uncertainty"
+      ],
+      "retrieved_ids": [
+        "JHB-hkust-confidence-uncertainty"
+      ],
+      "retrieved_sources": [
+        "jhb-hkust-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.553
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "institution-en",
+      "language": "en",
+      "question": "What did you study at Oregon State and Stanford?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-osu-hall-2013",
+        "jhb-nvidia-official-bio",
+        "jhb-stanford-pillars"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "JHB-osu-degree-timeline",
+        "JHB-nvidia-prior-employers",
+        "JHB-hoover-amd-stanford"
+      ],
+      "retrieved_sources": [
+        "jhb-osu-hall-2013",
+        "jhb-nvidia-official-bio",
+        "jhb-hoover-only-in-america"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.516
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "institution-ko",
+      "language": "ko",
+      "question": "오리건 주립대와 스탠퍼드에서는 무엇을 공부했어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-osu-hall-2013",
+        "jhb-nvidia-official-bio",
+        "jhb-stanford-pillars"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.482
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "dress-en",
+      "language": "en",
+      "question": "What was the joke about your black jacket and itching?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-siepr-2024"
+      ],
+      "expected_ids": [
+        "JHB-siepr-jacket-joke"
+      ],
+      "retrieved_ids": [
+        "JHB-siepr-jacket-joke"
+      ],
+      "retrieved_sources": [
+        "jhb-siepr-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.522
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "dress-ko",
+      "language": "ko",
+      "question": "검은 가죽 재킷과 가려움에 대해 했던 농담은 뭐야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-siepr-2024"
+      ],
+      "expected_ids": [
+        "JHB-siepr-jacket-joke"
+      ],
+      "retrieved_ids": [
+        "JHB-siepr-jacket-joke"
+      ],
+      "retrieved_sources": [
+        "jhb-siepr-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.531
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "culture-en",
+      "language": "en",
+      "question": "Why is intellectual honesty important when your company makes a mistake?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stanford-etl-2003-culture"
+      ],
+      "expected_ids": [
+        "JHJ-047"
+      ],
+      "retrieved_ids": [
+        "JHJ-047"
+      ],
+      "retrieved_sources": [
+        "stanford-etl-2003-culture"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.564
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "culture-ko",
+      "language": "ko",
+      "question": "회사가 실수했을 때 지적 정직함과 비판 수용이 왜 중요해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stanford-etl-2003-culture"
+      ],
+      "expected_ids": [
+        "JHJ-047"
+      ],
+      "retrieved_ids": [
+        "JHB-ntu-cuda-patience"
+      ],
+      "retrieved_sources": [
+        "jhb-nvidia-ntu-2023"
+      ],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": null,
+      "retrieval_ms": 0.537
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "sovereign-en",
+      "language": "en",
+      "question": "Why does sovereign AI include language and culture?",
+      "kind": "source_question",
+      "expected_sources": [
+        "world-governments-summit-2024"
+      ],
+      "expected_ids": [
+        "JHJ-051",
+        "JHJ-052"
+      ],
+      "retrieved_ids": [
+        "JHJ-051",
+        "JHJ-052",
+        "JHJ-023"
+      ],
+      "retrieved_sources": [
+        "world-governments-summit-2024",
+        "world-governments-summit-2024",
+        "csis-2025"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.593
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "sovereign-ko",
+      "language": "ko",
+      "question": "소버린 AI에서 언어와 문화가 왜 중요해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "world-governments-summit-2024"
+      ],
+      "expected_ids": [
+        "JHJ-051",
+        "JHJ-052"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.472
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "kitchen-en",
+      "language": "en",
+      "question": "What was distinctive about your first kitchen keynote?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-kitchen-keynote-2020"
+      ],
+      "expected_ids": [
+        "JHB-first-kitchen-keynote"
+      ],
+      "retrieved_ids": [
+        "JHB-first-kitchen-keynote"
+      ],
+      "retrieved_sources": [
+        "jhb-kitchen-keynote-2020"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.557
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "kitchen-ko",
+      "language": "ko",
+      "question": "첫 주방 키노트는 어떤 발표였어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-kitchen-keynote-2020"
+      ],
+      "expected_ids": [
+        "JHB-first-kitchen-keynote"
+      ],
+      "retrieved_ids": [
+        "JHB-first-kitchen-keynote"
+      ],
+      "retrieved_sources": [
+        "jhb-kitchen-keynote-2020"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.479
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "avatar-en",
+      "language": "en",
+      "question": "Was your entire spring 2021 keynote performed by a digital double?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-virtual-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-virtual-jensen-duration"
+      ],
+      "retrieved_ids": [
+        "JHB-virtual-jensen-duration",
+        "JHB-real-ceo-virtual-set"
+      ],
+      "retrieved_sources": [
+        "jhb-virtual-jensen-2021",
+        "jhb-toy-jensen-2021"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.523
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "avatar-ko",
+      "language": "ko",
+      "question": "2021년 봄 키노트 전체가 디지털 아바타였어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-virtual-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-virtual-jensen-duration"
+      ],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": false,
+      "specific_new_turn_hit": false,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.483
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "synthetic-en",
+      "language": "en",
+      "question": "Should Toy Jensen generated answers be treated as your own statements?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-toy-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-toy-jensen-attribution"
+      ],
+      "retrieved_ids": [
+        "JHB-toy-jensen-attribution",
+        "JHB-osu-supercomputer-time",
+        "jensen-2025-test-time-scaling"
+      ],
+      "retrieved_sources": [
+        "jhb-toy-jensen-2021",
+        "jhb-osu-gift-2022",
+        "nvidia-blackwell-ultra-2025"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.566
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "synthetic-ko",
+      "language": "ko",
+      "question": "토이 젠슨이 AI로 생성한 답변도 실제 발언으로 봐야 해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-toy-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-toy-jensen-attribution"
+      ],
+      "retrieved_ids": [
+        "JHB-toy-jensen-attribution"
+      ],
+      "retrieved_sources": [
+        "jhb-toy-jensen-2021"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.65
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "social-en",
+      "language": "en",
+      "question": "Which official Instagram account is identified in NVIDIA filings?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-sec-social-2026"
+      ],
+      "expected_ids": [
+        "JHB-official-social-channels"
+      ],
+      "retrieved_ids": [
+        "JHB-official-social-channels",
+        "JHB-osu-memory-price-reset",
+        "JHB-virtual-jensen-production"
+      ],
+      "retrieved_sources": [
+        "jhb-sec-social-2026",
+        "jhb-osu-hard-work-2013",
+        "jhb-virtual-jensen-2021"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.636
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "social-ko",
+      "language": "ko",
+      "question": "엔비디아 공시에서 공식으로 확인되는 인스타그램 계정은 뭐야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-sec-social-2026"
+      ],
+      "expected_ids": [
+        "JHB-official-social-channels"
+      ],
+      "retrieved_ids": [
+        "JHB-official-social-channels"
+      ],
+      "retrieved_sources": [
+        "jhb-sec-social-2026"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.51
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "control-private-en",
+      "language": "en",
+      "question": "What is your private phone number?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "This public-source archive cannot verify private contact details or the user's private interactions.",
+      "retrieval_ms": 0.005
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "control-endorse-en",
+      "language": "en",
+      "question": "Did you approve our Jensen chatbot?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "A public-source archive cannot verify a personal endorsement or approval of the user's product.",
+      "retrieval_ms": 0.004
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "control-future-en",
+      "language": "en",
+      "question": "What exact words did you say at the 2035 CUDA keynote?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.479
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "control-latest-en",
+      "language": "en",
+      "question": "What is the NVIDIA stock price right now?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "The curated corpus is historical and cannot verify current information.",
+      "retrieval_ms": 0.009
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "control-unrelated-en",
+      "language": "en",
+      "question": "Explain quasar viscosity topological marmalade.",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.075
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "control-anchor_noise-en",
+      "language": "en",
+      "question": "TSMC quasar nebula viscosity topological marmalade xylophone",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.566
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "control-private-ko",
+      "language": "ko",
+      "question": "젠슨 황 개인 전화번호 알려줘",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "This public-source archive cannot verify private contact details or the user's private interactions.",
+      "retrieval_ms": 0.005
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "control-latest-ko",
+      "language": "ko",
+      "question": "지금 엔비디아 주가는 얼마야?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.13
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "control-future-ko",
+      "language": "ko",
+      "question": "2035년 비공개 회의에서 실제로 뭐라고 말했어?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.493
+    },
+    {
+      "configuration": "expanded_legacy_lexical",
+      "case_id": "control-unrelated-ko",
+      "language": "ko",
+      "question": "오징어 은하의 점성에 관한 수학적 증명을 알려줘",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.081
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "dennys_roles-en",
+      "language": "en",
+      "question": "You used to work at Denny's—what jobs did you actually do?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023",
+        "stripe-sessions-2024"
+      ],
+      "expected_ids": [
+        "JHB-dennys-roles",
+        "JHB-stripe-early-work"
+      ],
+      "retrieved_ids": [
+        "JHB-dennys-roles",
+        "JHB-dennys-hospitality",
+        "JHB-stripe-early-work",
+        "jensen-stripe-sessions-2024-01"
+      ],
+      "retrieved_sources": [
+        "jhb-nvidia-dennys-2023",
+        "jhb-nvidia-dennys-2023",
+        "stripe-sessions-2024",
+        "stripe-sessions-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.767
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "dennys_roles-ko",
+      "language": "ko",
+      "question": "데니스에서 접시만 씻었던 거야, 손님 서빙도 했어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023",
+        "stripe-sessions-2024"
+      ],
+      "expected_ids": [
+        "JHB-dennys-roles",
+        "JHB-stripe-early-work"
+      ],
+      "retrieved_ids": [
+        "JHB-dennys-roles",
+        "JHB-stripe-early-work"
+      ],
+      "retrieved_sources": [
+        "jhb-nvidia-dennys-2023",
+        "stripe-sessions-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.581
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "dennys_founding-en",
+      "language": "en",
+      "question": "Was the restaurant where NVIDIA began the same place as your teenage job?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023"
+      ],
+      "expected_ids": [
+        "JHB-dennys-founder-booth",
+        "JHB-dennys-portland-job"
+      ],
+      "retrieved_ids": [
+        "JHB-dennys-portland-job",
+        "jensen-stripe-sessions-2024-01",
+        "JHB-dennys-hospitality",
+        "JHB-dennys-founder-booth"
+      ],
+      "retrieved_sources": [
+        "jhb-nvidia-dennys-2023",
+        "stripe-sessions-2024",
+        "jhb-nvidia-dennys-2023",
+        "jhb-nvidia-dennys-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.596
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "dennys_founding-ko",
+      "language": "ko",
+      "question": "엔비디아 창업을 논의한 식당과 십대 때 일한 데니스는 같은 곳이야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023"
+      ],
+      "expected_ids": [
+        "JHB-dennys-founder-booth",
+        "JHB-dennys-portland-job"
+      ],
+      "retrieved_ids": [
+        "JHB-dennys-portland-job",
+        "JHB-dennys-founder-booth"
+      ],
+      "retrieved_sources": [
+        "jhb-nvidia-dennys-2023",
+        "jhb-nvidia-dennys-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.658
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "cuda_patience-en",
+      "language": "en",
+      "question": "Why keep funding CUDA before customers would pay a premium?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "JHJ-002",
+        "JHJ-001",
+        "JHB-ntu-cuda-patience",
+        "jensen-acquired-2023-02"
+      ],
+      "retrieved_sources": [
+        "stripe-sessions-2024",
+        "stripe-sessions-2024",
+        "jhb-nvidia-ntu-2023",
+        "acquired-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.694
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "cuda_patience-ko",
+      "language": "ko",
+      "question": "고객이 돈을 더 내지 않았는데 CUDA 투자를 왜 계속했어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "JHJ-002",
+        "JHJ-001",
+        "JHJ-003",
+        "JHJ-016"
+      ],
+      "retrieved_sources": [
+        "stripe-sessions-2024",
+        "stripe-sessions-2024",
+        "stanford-gsb-2024",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.61
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "absent_market-en",
+      "language": "en",
+      "question": "Our engine really cuts compute time sixfold, but nobody is paying yet. Is that a reason to stop?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024"
+      ],
+      "expected_ids": [
+        "JHJ-001",
+        "JHJ-003"
+      ],
+      "retrieved_ids": [
+        "JHJ-001"
+      ],
+      "retrieved_sources": [
+        "stripe-sessions-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.704
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "absent_market-ko",
+      "language": "ko",
+      "question": "실제 작업 시간이 6분의 1로 줄었는데 유료 고객이 없어. 개발을 접어야 해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024"
+      ],
+      "expected_ids": [
+        "JHJ-001",
+        "JHJ-003"
+      ],
+      "retrieved_ids": [
+        "JHJ-003"
+      ],
+      "retrieved_sources": [
+        "stanford-gsb-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.932
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "bad_measurement-en",
+      "language": "en",
+      "question": "The benchmark was faulty; our supposed performance advantage vanished. What changes?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stanford-gsb-2024",
+        "jhb-osu-hard-work-2013"
+      ],
+      "expected_ids": [
+        "JHJ-004",
+        "JHB-osu-memory-price-reset"
+      ],
+      "retrieved_ids": [
+        "JHJ-004",
+        "JHJ-003"
+      ],
+      "retrieved_sources": [
+        "stanford-gsb-2024",
+        "stanford-gsb-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.601
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "bad_measurement-ko",
+      "language": "ko",
+      "question": "측정 오류 때문에 성능 우위가 사라졌어. 투자 판단도 바꿔야 해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stanford-gsb-2024",
+        "jhb-osu-hard-work-2013"
+      ],
+      "expected_ids": [
+        "JHJ-004",
+        "JHB-osu-memory-price-reset"
+      ],
+      "retrieved_ids": [
+        "JHJ-004",
+        "JHJ-003"
+      ],
+      "retrieved_sources": [
+        "stanford-gsb-2024",
+        "stanford-gsb-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.672
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "programmability-en",
+      "language": "en",
+      "question": "Why does a novel attention algorithm challenge a chip optimized for matrix multiplication?",
+      "kind": "source_question",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-005"
+      ],
+      "retrieved_ids": [
+        "JHJ-005"
+      ],
+      "retrieved_sources": [
+        "dwarkesh-2026"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.676
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "programmability-ko",
+      "language": "ko",
+      "question": "새 attention 구조가 생기면 행렬곱 특화 칩은 왜 어려워져?",
+      "kind": "source_question",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-005"
+      ],
+      "retrieved_ids": [
+        "JHJ-005",
+        "JHB-osu-how-build"
+      ],
+      "retrieved_sources": [
+        "dwarkesh-2026",
+        "jhb-osu-hard-work-2013"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.635
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "scope-en",
+      "language": "en",
+      "question": "Why build infrastructure yourself when partners could supply it?",
+      "kind": "source_question",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-006"
+      ],
+      "retrieved_ids": [
+        "JHJ-006"
+      ],
+      "retrieved_sources": [
+        "dwarkesh-2026"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.726
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "scope-ko",
+      "language": "ko",
+      "question": "파트너가 만들 수 있는 인프라까지 직접 만들어야 할까?",
+      "kind": "source_question",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-006"
+      ],
+      "retrieved_ids": [
+        "JHJ-006"
+      ],
+      "retrieved_sources": [
+        "dwarkesh-2026"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.692
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "directx-en",
+      "language": "en",
+      "question": "How did DirectX change the assumptions behind NV1 and RIVA 128?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "JHJ-009",
+        "JHJ-004",
+        "JHJ-010",
+        "JHB-ntu-sega-mistake"
+      ],
+      "retrieved_sources": [
+        "acquired-2023",
+        "stanford-gsb-2024",
+        "acquired-2023",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.586
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "directx-ko",
+      "language": "ko",
+      "question": "DirectX가 등장했을 때 NV1과 RIVA 128은 어떻게 달라졌어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "JHJ-009",
+        "JHJ-010",
+        "jensen-acquired-2023-01",
+        "jensen-acquired-2023-07"
+      ],
+      "retrieved_sources": [
+        "acquired-2023",
+        "acquired-2023",
+        "acquired-2023",
+        "acquired-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.595
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "sega-en",
+      "language": "en",
+      "question": "What did admitting the wrong architecture mean for the Sega contract?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "JHJ-014",
+        "JHB-ntu-sega-mistake"
+      ],
+      "retrieved_sources": [
+        "sequoia-crucible-nvidia-2023",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.547
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "sega-ko",
+      "language": "ko",
+      "question": "세가 계약의 아키텍처가 잘못됐다는 걸 인정하면 무슨 문제가 있었어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "JHJ-014",
+        "JHB-ntu-sega-mistake",
+        "JHB-hkust-confidence-uncertainty",
+        "JHJ-047"
+      ],
+      "retrieved_sources": [
+        "sequoia-crucible-nvidia-2023",
+        "jhb-nvidia-ntu-2023",
+        "jhb-hkust-2024",
+        "stanford-etl-2003-culture"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.613
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "simulation-en",
+      "language": "en",
+      "question": "How did software verification help when you only had money for one tapeout?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [
+        "JHJ-010",
+        "JHJ-015"
+      ],
+      "retrieved_ids": [
+        "JHJ-015",
+        "jensen-acquired-2023-01"
+      ],
+      "retrieved_sources": [
+        "sequoia-crucible-nvidia-2023",
+        "acquired-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.619
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "simulation-ko",
+      "language": "ko",
+      "question": "테이프아웃을 한 번만 할 돈이 있을 때 소프트웨어 검증을 어떻게 활용했어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [
+        "JHJ-010",
+        "JHJ-015"
+      ],
+      "retrieved_ids": [
+        "JHJ-015",
+        "jensen-acquired-2023-01"
+      ],
+      "retrieved_sources": [
+        "sequoia-crucible-nvidia-2023",
+        "acquired-2023"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.664
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "amdahl-en",
+      "language": "en",
+      "question": "If half a task becomes infinitely fast, how much faster is the whole task?",
+      "kind": "source_question",
+      "expected_sources": [
+        "lex-494"
+      ],
+      "expected_ids": [
+        "JHJ-017"
+      ],
+      "retrieved_ids": [
+        "JHJ-017"
+      ],
+      "retrieved_sources": [
+        "lex-494"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.636
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "amdahl-ko",
+      "language": "ko",
+      "question": "작업의 절반만 무한히 빨라지면 전체 성능은 얼마나 빨라져?",
+      "kind": "source_question",
+      "expected_sources": [
+        "lex-494"
+      ],
+      "expected_ids": [
+        "JHJ-017"
+      ],
+      "retrieved_ids": [
+        "JHJ-017",
+        "JHJ-011",
+        "JHJ-004"
+      ],
+      "retrieved_sources": [
+        "lex-494",
+        "acquired-2023",
+        "stanford-gsb-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.613
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "codesign-en",
+      "language": "en",
+      "question": "Why do GPU performance gains depend on cooling and networking?",
+      "kind": "source_question",
+      "expected_sources": [
+        "lex-494",
+        "nvidia-gtc-2025-live-report"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "JHJ-018",
+        "jensen-2024-acceleration-efficiency",
+        "JHJ-017"
+      ],
+      "retrieved_sources": [
+        "lex-494",
+        "nvidia-computex-2024",
+        "lex-494"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.568
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "codesign-ko",
+      "language": "ko",
+      "question": "GPU 성능을 높이는데 냉각과 네트워크까지 왜 함께 설계해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "lex-494",
+        "nvidia-gtc-2025-live-report"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "JHJ-036",
+        "JHB-hoover-building-simulation",
+        "jensen-2024-acceleration-efficiency",
+        "JHJ-017"
+      ],
+      "retrieved_sources": [
+        "nvidia-gtc-2024-report",
+        "jhb-hoover-only-in-america",
+        "nvidia-computex-2024",
+        "lex-494"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.625
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "layers-en",
+      "language": "en",
+      "question": "What are the layers below an AI application, from energy to models?",
+      "kind": "source_question",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-022"
+      ],
+      "retrieved_ids": [
+        "JHJ-022",
+        "jensen-csis-2025-02",
+        "jensen-strange-loop-2025-03",
+        "jensen-2025-ai-factories"
+      ],
+      "retrieved_sources": [
+        "csis-2025",
+        "csis-2025",
+        "strange-loop-2025",
+        "nvidia-computex-2025"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.668
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "layers-ko",
+      "language": "ko",
+      "question": "에너지부터 모델과 애플리케이션까지 AI는 어떤 층으로 구성돼?",
+      "kind": "source_question",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-022"
+      ],
+      "retrieved_ids": [
+        "JHJ-022",
+        "JHJ-052",
+        "JHJ-051",
+        "jensen-csis-2025-02"
+      ],
+      "retrieved_sources": [
+        "csis-2025",
+        "world-governments-summit-2024",
+        "world-governments-summit-2024",
+        "csis-2025"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.747
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "biology-en",
+      "language": "en",
+      "question": "Would an AI platform company have to own a drug-discovery company?",
+      "kind": "source_question",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-021",
+        "JHJ-023"
+      ],
+      "retrieved_ids": [
+        "JHJ-023",
+        "jensen-csis-2025-01",
+        "jensen-acquired-2023-03",
+        "JHJ-042"
+      ],
+      "retrieved_sources": [
+        "csis-2025",
+        "csis-2025",
+        "acquired-2023",
+        "cnbc-jensen-2026-03-17"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.828
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "biology-ko",
+      "language": "ko",
+      "question": "AI 플랫폼 회사가 신약 개발 기업까지 직접 운영해야 해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-021",
+        "JHJ-023"
+      ],
+      "retrieved_ids": [
+        "JHJ-023",
+        "JHJ-052",
+        "JHJ-025",
+        "jensen-2025-robot-simulation"
+      ],
+      "retrieved_sources": [
+        "csis-2025",
+        "world-governments-summit-2024",
+        "citadel-sequoia-2025",
+        "nvidia-computex-2025"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.803
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "safety-en",
+      "language": "en",
+      "question": "What can aviation redundancy teach us about AI safety?",
+      "kind": "source_question",
+      "expected_sources": [
+        "milken-2026"
+      ],
+      "expected_ids": [
+        "JHJ-028"
+      ],
+      "retrieved_ids": [
+        "JHJ-028",
+        "jensen-csis-2025-02",
+        "JHB-hoover-cautious-optimism"
+      ],
+      "retrieved_sources": [
+        "milken-2026",
+        "csis-2025",
+        "jhb-hoover-only-in-america"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.691
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "safety-ko",
+      "language": "ko",
+      "question": "항공기의 중복 설계에서 AI 안전성에 적용할 점이 뭐야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "milken-2026"
+      ],
+      "expected_ids": [
+        "JHJ-028"
+      ],
+      "retrieved_ids": [
+        "JHJ-028",
+        "JHJ-036",
+        "JHJ-018",
+        "JHJ-039"
+      ],
+      "retrieved_sources": [
+        "milken-2026",
+        "nvidia-gtc-2024-report",
+        "lex-494",
+        "nvidia-gtc-2025-live-report"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.874
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "physical_ai-en",
+      "language": "en",
+      "question": "How can world models help small robotics teams?",
+      "kind": "source_question",
+      "expected_sources": [
+        "nvidia-ces-2025-report"
+      ],
+      "expected_ids": [
+        "JHJ-034"
+      ],
+      "retrieved_ids": [
+        "JHJ-034",
+        "JHB-hkust-physical-intelligence",
+        "JHJ-033",
+        "JHJ-049"
+      ],
+      "retrieved_sources": [
+        "nvidia-ces-2025-report",
+        "jhb-hkust-2024",
+        "nvidia-ces-2025-report",
+        "yc-startup-school-2026"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.581
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "physical_ai-ko",
+      "language": "ko",
+      "question": "작은 로봇 팀에게 월드 모델은 어떤 도움을 줄까?",
+      "kind": "source_question",
+      "expected_sources": [
+        "nvidia-ces-2025-report"
+      ],
+      "expected_ids": [
+        "JHJ-034"
+      ],
+      "retrieved_ids": [
+        "JHJ-034"
+      ],
+      "retrieved_sources": [
+        "nvidia-ces-2025-report"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.65
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "memory-en",
+      "language": "en",
+      "question": "Why combine SRAM with HBM and low-power memory?",
+      "kind": "source_question",
+      "expected_sources": [
+        "cnbc-jensen-2026-03-17"
+      ],
+      "expected_ids": [
+        "JHJ-041"
+      ],
+      "retrieved_ids": [
+        "JHJ-041",
+        "JHJ-018"
+      ],
+      "retrieved_sources": [
+        "cnbc-jensen-2026-03-17",
+        "lex-494"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.535
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "memory-ko",
+      "language": "ko",
+      "question": "SRAM과 HBM, 저전력 메모리를 함께 쓰는 이유가 뭐야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "cnbc-jensen-2026-03-17"
+      ],
+      "expected_ids": [
+        "JHJ-041"
+      ],
+      "retrieved_ids": [
+        "JHJ-041"
+      ],
+      "retrieved_sources": [
+        "cnbc-jensen-2026-03-17"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.573
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "task_purpose-en",
+      "language": "en",
+      "question": "Is reading a scan the whole purpose of a radiologist?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-hoover-only-in-america"
+      ],
+      "expected_ids": [
+        "JHB-hoover-task-purpose"
+      ],
+      "retrieved_ids": [
+        "JHB-hoover-task-purpose"
+      ],
+      "retrieved_sources": [
+        "jhb-hoover-only-in-america"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.672
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "task_purpose-ko",
+      "language": "ko",
+      "question": "영상 판독이라는 작업과 의사의 본래 목적은 어떻게 달라?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-hoover-only-in-america"
+      ],
+      "expected_ids": [
+        "JHB-hoover-task-purpose"
+      ],
+      "retrieved_ids": [
+        "JHB-hoover-task-purpose",
+        "jensen-values-mil-03"
+      ],
+      "retrieved_sources": [
+        "jhb-hoover-only-in-america",
+        "milken-2026"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.56
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "confidence-en",
+      "language": "en",
+      "question": "Can a leader be confident and still admit uncertainty?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-hkust-2024"
+      ],
+      "expected_ids": [
+        "JHB-hkust-confidence-uncertainty"
+      ],
+      "retrieved_ids": [
+        "JHB-hkust-confidence-uncertainty"
+      ],
+      "retrieved_sources": [
+        "jhb-hkust-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.542
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "confidence-ko",
+      "language": "ko",
+      "question": "리더가 자신감을 보이면서도 불확실성을 인정할 수 있어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-hkust-2024"
+      ],
+      "expected_ids": [
+        "JHB-hkust-confidence-uncertainty"
+      ],
+      "retrieved_ids": [
+        "JHB-hkust-confidence-uncertainty",
+        "JHJ-047"
+      ],
+      "retrieved_sources": [
+        "jhb-hkust-2024",
+        "stanford-etl-2003-culture"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.556
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "institution-en",
+      "language": "en",
+      "question": "What did you study at Oregon State and Stanford?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-osu-hall-2013",
+        "jhb-nvidia-official-bio",
+        "jhb-stanford-pillars"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "JHB-osu-degree-timeline",
+        "JHB-nvidia-prior-employers",
+        "JHB-hoover-amd-stanford"
+      ],
+      "retrieved_sources": [
+        "jhb-osu-hall-2013",
+        "jhb-nvidia-official-bio",
+        "jhb-hoover-only-in-america"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.967
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "institution-ko",
+      "language": "ko",
+      "question": "오리건 주립대와 스탠퍼드에서는 무엇을 공부했어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-osu-hall-2013",
+        "jhb-nvidia-official-bio",
+        "jhb-stanford-pillars"
+      ],
+      "expected_ids": [],
+      "retrieved_ids": [
+        "JHB-osu-degree-timeline",
+        "JHB-nvidia-prior-employers"
+      ],
+      "retrieved_sources": [
+        "jhb-osu-hall-2013",
+        "jhb-nvidia-official-bio"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": null,
+      "retrieval_ms": 0.574
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "dress-en",
+      "language": "en",
+      "question": "What was the joke about your black jacket and itching?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-siepr-2024"
+      ],
+      "expected_ids": [
+        "JHB-siepr-jacket-joke"
+      ],
+      "retrieved_ids": [
+        "JHB-siepr-jacket-joke"
+      ],
+      "retrieved_sources": [
+        "jhb-siepr-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.549
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "dress-ko",
+      "language": "ko",
+      "question": "검은 가죽 재킷과 가려움에 대해 했던 농담은 뭐야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-siepr-2024"
+      ],
+      "expected_ids": [
+        "JHB-siepr-jacket-joke"
+      ],
+      "retrieved_ids": [
+        "JHB-siepr-jacket-joke"
+      ],
+      "retrieved_sources": [
+        "jhb-siepr-2024"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.545
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "culture-en",
+      "language": "en",
+      "question": "Why is intellectual honesty important when your company makes a mistake?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stanford-etl-2003-culture"
+      ],
+      "expected_ids": [
+        "JHJ-047"
+      ],
+      "retrieved_ids": [
+        "JHJ-047",
+        "JHB-osu-three-tests"
+      ],
+      "retrieved_sources": [
+        "stanford-etl-2003-culture",
+        "jhb-osu-hard-work-2013"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.624
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "culture-ko",
+      "language": "ko",
+      "question": "회사가 실수했을 때 지적 정직함과 비판 수용이 왜 중요해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "stanford-etl-2003-culture"
+      ],
+      "expected_ids": [
+        "JHJ-047"
+      ],
+      "retrieved_ids": [
+        "JHJ-047"
+      ],
+      "retrieved_sources": [
+        "stanford-etl-2003-culture"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.588
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "sovereign-en",
+      "language": "en",
+      "question": "Why does sovereign AI include language and culture?",
+      "kind": "source_question",
+      "expected_sources": [
+        "world-governments-summit-2024"
+      ],
+      "expected_ids": [
+        "JHJ-051",
+        "JHJ-052"
+      ],
+      "retrieved_ids": [
+        "JHJ-051",
+        "JHJ-052",
+        "JHJ-022",
+        "JHJ-023"
+      ],
+      "retrieved_sources": [
+        "world-governments-summit-2024",
+        "world-governments-summit-2024",
+        "csis-2025",
+        "csis-2025"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.628
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "sovereign-ko",
+      "language": "ko",
+      "question": "소버린 AI에서 언어와 문화가 왜 중요해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "world-governments-summit-2024"
+      ],
+      "expected_ids": [
+        "JHJ-051",
+        "JHJ-052"
+      ],
+      "retrieved_ids": [
+        "JHJ-051",
+        "JHJ-052",
+        "JHJ-022"
+      ],
+      "retrieved_sources": [
+        "world-governments-summit-2024",
+        "world-governments-summit-2024",
+        "csis-2025"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.656
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "kitchen-en",
+      "language": "en",
+      "question": "What was distinctive about your first kitchen keynote?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-kitchen-keynote-2020"
+      ],
+      "expected_ids": [
+        "JHB-first-kitchen-keynote"
+      ],
+      "retrieved_ids": [
+        "JHB-first-kitchen-keynote",
+        "JHB-real-ceo-virtual-set"
+      ],
+      "retrieved_sources": [
+        "jhb-kitchen-keynote-2020",
+        "jhb-toy-jensen-2021"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.629
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "kitchen-ko",
+      "language": "ko",
+      "question": "첫 주방 키노트는 어떤 발표였어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-kitchen-keynote-2020"
+      ],
+      "expected_ids": [
+        "JHB-first-kitchen-keynote"
+      ],
+      "retrieved_ids": [
+        "JHB-first-kitchen-keynote",
+        "JHB-real-ceo-virtual-set"
+      ],
+      "retrieved_sources": [
+        "jhb-kitchen-keynote-2020",
+        "jhb-toy-jensen-2021"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.536
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "avatar-en",
+      "language": "en",
+      "question": "Was your entire spring 2021 keynote performed by a digital double?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-virtual-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-virtual-jensen-duration"
+      ],
+      "retrieved_ids": [
+        "JHB-virtual-jensen-duration",
+        "JHB-virtual-jensen-production",
+        "JHB-real-ceo-virtual-set"
+      ],
+      "retrieved_sources": [
+        "jhb-virtual-jensen-2021",
+        "jhb-virtual-jensen-2021",
+        "jhb-toy-jensen-2021"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.528
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "avatar-ko",
+      "language": "ko",
+      "question": "2021년 봄 키노트 전체가 디지털 아바타였어?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-virtual-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-virtual-jensen-duration"
+      ],
+      "retrieved_ids": [
+        "JHB-virtual-jensen-duration"
+      ],
+      "retrieved_sources": [
+        "jhb-virtual-jensen-2021"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.55
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "synthetic-en",
+      "language": "en",
+      "question": "Should Toy Jensen generated answers be treated as your own statements?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-toy-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-toy-jensen-attribution"
+      ],
+      "retrieved_ids": [
+        "JHB-toy-jensen-attribution",
+        "jensen-2025-test-time-scaling"
+      ],
+      "retrieved_sources": [
+        "jhb-toy-jensen-2021",
+        "nvidia-blackwell-ultra-2025"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.573
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "synthetic-ko",
+      "language": "ko",
+      "question": "토이 젠슨이 AI로 생성한 답변도 실제 발언으로 봐야 해?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-toy-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-toy-jensen-attribution"
+      ],
+      "retrieved_ids": [
+        "JHB-toy-jensen-attribution",
+        "JHB-real-ceo-virtual-set"
+      ],
+      "retrieved_sources": [
+        "jhb-toy-jensen-2021",
+        "jhb-toy-jensen-2021"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.695
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "social-en",
+      "language": "en",
+      "question": "Which official Instagram account is identified in NVIDIA filings?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-sec-social-2026"
+      ],
+      "expected_ids": [
+        "JHB-official-social-channels"
+      ],
+      "retrieved_ids": [
+        "JHB-official-social-channels"
+      ],
+      "retrieved_sources": [
+        "jhb-sec-social-2026"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.575
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "social-ko",
+      "language": "ko",
+      "question": "엔비디아 공시에서 공식으로 확인되는 인스타그램 계정은 뭐야?",
+      "kind": "source_question",
+      "expected_sources": [
+        "jhb-sec-social-2026"
+      ],
+      "expected_ids": [
+        "JHB-official-social-channels"
+      ],
+      "retrieved_ids": [
+        "JHB-official-social-channels"
+      ],
+      "retrieved_sources": [
+        "jhb-sec-social-2026"
+      ],
+      "passed": true,
+      "specific_new_turn_hit": true,
+      "reason": null,
+      "retrieval_ms": 0.549
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "control-private-en",
+      "language": "en",
+      "question": "What is your private phone number?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "This public-source archive cannot verify private contact details or the user's private interactions.",
+      "retrieval_ms": 0.006
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "control-endorse-en",
+      "language": "en",
+      "question": "Did you approve our Jensen chatbot?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "A public-source archive cannot verify a personal endorsement or approval of the user's product.",
+      "retrieval_ms": 0.004
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "control-future-en",
+      "language": "en",
+      "question": "What exact words did you say at the 2035 CUDA keynote?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.491
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "control-latest-en",
+      "language": "en",
+      "question": "What is the NVIDIA stock price right now?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "The curated corpus is historical and cannot verify current information.",
+      "retrieval_ms": 0.008
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "control-unrelated-en",
+      "language": "en",
+      "question": "Explain quasar viscosity topological marmalade.",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.08
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "control-anchor_noise-en",
+      "language": "en",
+      "question": "TSMC quasar nebula viscosity topological marmalade xylophone",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.497
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "control-private-ko",
+      "language": "ko",
+      "question": "젠슨 황 개인 전화번호 알려줘",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "This public-source archive cannot verify private contact details or the user's private interactions.",
+      "retrieval_ms": 0.004
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "control-latest-ko",
+      "language": "ko",
+      "question": "지금 엔비디아 주가는 얼마야?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.502
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "control-future-ko",
+      "language": "ko",
+      "question": "2035년 비공개 회의에서 실제로 뭐라고 말했어?",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "Matches are too weak to support an answer.",
+      "retrieval_ms": 0.654
+    },
+    {
+      "configuration": "expanded_public_bm25",
+      "case_id": "control-unrelated-ko",
+      "language": "ko",
+      "question": "오징어 은하의 점성에 관한 수학적 증명을 알려줘",
+      "kind": "abstention_control",
+      "expected_sources": [],
+      "expected_ids": [],
+      "retrieved_ids": [],
+      "retrieved_sources": [],
+      "passed": true,
+      "specific_new_turn_hit": null,
+      "reason": "No matching evidence in the reviewed training corpus.",
+      "retrieval_ms": 0.144
+    }
+  ]
+}

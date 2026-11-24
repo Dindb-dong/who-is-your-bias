@@ -1,0 +1,44 @@
+{
+  "id": "jensen-public-rag.v3",
+  "built_as_of": "2026-11-24T11:23:47.521755+00:00",
+  "baseline": "jensen-huang-values-v2",
+  "inherited_records": 60,
+  "inherited_retained_records": 54,
+  "reserved_event_exclusions": {
+    "source_ids": [
+      "no-priors-2023"
+    ],
+    "evidence_ids": [
+      "jensen-values-np-01",
+      "jensen-values-np-02",
+      "jensen-values-np-03",
+      "jensen-values-np-04",
+      "jensen-values-np-05",
+      "jensen-values-np-06"
+    ]
+  },
+  "added_records": 101,
+  "acquisition_shard_sha256": {
+    "biography-sources.json": "07db067c9351a29f8a6af1230ad04b58832fbb25b020f2616c393bd87d376345",
+    "judgment-sources.json": "70f319b33f79a7ddfdff2b2963ed8c6c87adcf00e5485f1fee23a27f01d3b2b4",
+    "biography-evidence.jsonl": "8f6917307a7e57836d7f858af89707c5d5c630a9fdf92559a3729cdbe2bd5e7b",
+    "judgment-evidence.jsonl": "3f19b9aa59f7f13dbbbbee3fc855ce380bbf9d834879bd21b5a0100da4216995"
+  },
+  "source_content_sha256": {
+    "stanford-gsb-2024": "2c7f3b7db25844b14788092c9832c7e4fa77bcbf49ac913feb477219d52c037e",
+    "milken-2026": "60ff9415bc786753aa7e8ee3e10b1c3ff312f855ab4251ff43ae7365f22eda62",
+    "stanford-etl-2009-founding": "127b5e91c98b200a15a01e82b7e34255651441a65ef5ada09810726e1ff9c39b",
+    "stanford-etl-2009-leaders": "8ebdefe54d128222b5fbd42b996f6d61d1a9465c29b972b2c949324eaf13cf86",
+    "stanford-etl-2009-allocation": "d6693318245d9f213d13acd092df52f6747dbdaa7b4743b45198fcba27521460",
+    "stanford-etl-2009-reinvention": "a89025842d0497f01d2ea16267463f8455d3a5a4adf871ed745a12bc6169e8b9",
+    "jhb-osu-hall-2013": "61152de6b8506fd91a7e763bfe71b79a4d5ed7c0e14fd073dd1482a2f3b2a3e2",
+    "jhb-oneida-hall-2019": "b18030ecdd265d4dfffdfe33686288a86b6fb2b85892711f4177caf2ecd86417",
+    "jhb-hoover-only-in-america": "8154a66983ea56221f8670662ca32605fa6ad0d6b392e07a0564cb868adab9f4",
+    "jhb-stanford-pillars": "2ca8ff85455bcb6a897bef3a045b1c73b039b19d1e14d002b2e98c848294c38b",
+    "jhb-nvidia-official-bio": "42c23bd2697da6c511d142ba500f4baf20ca1282848629d9ba3ead52bb982e56",
+    "jhb-nvidia-history": "8a34743fb3807ed53a06dd5db8955a9e067299faab0bb7fe890175069fe7a0b0",
+    "stanford-etl-2003-culture": "2676c51d220aef0913e7216d8817169fae8af65ba0f0f75138f23a663c0d692a"
+  },
+  "content_note": "Runtime records are bounded editorial paraphrases, source-linked decision annotations and explicitly marked short verbatim excerpts. Eight original source documents are preserved in a separate verified archive; no newly prepared complete original Q&A, audio, weights or acoustic alignment.",
+  "review_note": "Agent review against public publisher pages; not human certification or a measured likeness score."
+}

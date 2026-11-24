@@ -1,0 +1,742 @@
+{
+  "version": "jensen-public-regression.v1",
+  "scope": "Authored development cases, not unseen interviews or human persona ratings. Questions were frozen before running the first comparison; later fixes are regression development.",
+  "cases": [
+    {
+      "id": "dennys_roles-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "You used to work at Denny's—what jobs did you actually do?",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023",
+        "stripe-sessions-2024"
+      ],
+      "expected_ids": [
+        "JHB-dennys-roles",
+        "JHB-stripe-early-work"
+      ]
+    },
+    {
+      "id": "dennys_roles-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "데니스에서 접시만 씻었던 거야, 손님 서빙도 했어?",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023",
+        "stripe-sessions-2024"
+      ],
+      "expected_ids": [
+        "JHB-dennys-roles",
+        "JHB-stripe-early-work"
+      ]
+    },
+    {
+      "id": "dennys_founding-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "Was the restaurant where NVIDIA began the same place as your teenage job?",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023"
+      ],
+      "expected_ids": [
+        "JHB-dennys-founder-booth",
+        "JHB-dennys-portland-job"
+      ]
+    },
+    {
+      "id": "dennys_founding-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "엔비디아 창업을 논의한 식당과 십대 때 일한 데니스는 같은 곳이야?",
+      "expected_sources": [
+        "jhb-nvidia-dennys-2023"
+      ],
+      "expected_ids": [
+        "JHB-dennys-founder-booth",
+        "JHB-dennys-portland-job"
+      ]
+    },
+    {
+      "id": "cuda_patience-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "Why keep funding CUDA before customers would pay a premium?",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": []
+    },
+    {
+      "id": "cuda_patience-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "고객이 돈을 더 내지 않았는데 CUDA 투자를 왜 계속했어?",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": []
+    },
+    {
+      "id": "absent_market-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "Our engine really cuts compute time sixfold, but nobody is paying yet. Is that a reason to stop?",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024"
+      ],
+      "expected_ids": [
+        "JHJ-001",
+        "JHJ-003"
+      ]
+    },
+    {
+      "id": "absent_market-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "실제 작업 시간이 6분의 1로 줄었는데 유료 고객이 없어. 개발을 접어야 해?",
+      "expected_sources": [
+        "stripe-sessions-2024",
+        "stanford-gsb-2024"
+      ],
+      "expected_ids": [
+        "JHJ-001",
+        "JHJ-003"
+      ]
+    },
+    {
+      "id": "bad_measurement-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "The benchmark was faulty; our supposed performance advantage vanished. What changes?",
+      "expected_sources": [
+        "stanford-gsb-2024",
+        "jhb-osu-hard-work-2013"
+      ],
+      "expected_ids": [
+        "JHJ-004",
+        "JHB-osu-memory-price-reset"
+      ]
+    },
+    {
+      "id": "bad_measurement-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "측정 오류 때문에 성능 우위가 사라졌어. 투자 판단도 바꿔야 해?",
+      "expected_sources": [
+        "stanford-gsb-2024",
+        "jhb-osu-hard-work-2013"
+      ],
+      "expected_ids": [
+        "JHJ-004",
+        "JHB-osu-memory-price-reset"
+      ]
+    },
+    {
+      "id": "programmability-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "Why does a novel attention algorithm challenge a chip optimized for matrix multiplication?",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-005"
+      ]
+    },
+    {
+      "id": "programmability-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "새 attention 구조가 생기면 행렬곱 특화 칩은 왜 어려워져?",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-005"
+      ]
+    },
+    {
+      "id": "scope-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "Why build infrastructure yourself when partners could supply it?",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-006"
+      ]
+    },
+    {
+      "id": "scope-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "파트너가 만들 수 있는 인프라까지 직접 만들어야 할까?",
+      "expected_sources": [
+        "dwarkesh-2026"
+      ],
+      "expected_ids": [
+        "JHJ-006"
+      ]
+    },
+    {
+      "id": "directx-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "How did DirectX change the assumptions behind NV1 and RIVA 128?",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": []
+    },
+    {
+      "id": "directx-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "DirectX가 등장했을 때 NV1과 RIVA 128은 어떻게 달라졌어?",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": []
+    },
+    {
+      "id": "sega-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "What did admitting the wrong architecture mean for the Sega contract?",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": []
+    },
+    {
+      "id": "sega-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "세가 계약의 아키텍처가 잘못됐다는 걸 인정하면 무슨 문제가 있었어?",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023",
+        "jhb-nvidia-ntu-2023"
+      ],
+      "expected_ids": []
+    },
+    {
+      "id": "simulation-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "How did software verification help when you only had money for one tapeout?",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [
+        "JHJ-010",
+        "JHJ-015"
+      ]
+    },
+    {
+      "id": "simulation-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "테이프아웃을 한 번만 할 돈이 있을 때 소프트웨어 검증을 어떻게 활용했어?",
+      "expected_sources": [
+        "acquired-2023",
+        "sequoia-crucible-nvidia-2023"
+      ],
+      "expected_ids": [
+        "JHJ-010",
+        "JHJ-015"
+      ]
+    },
+    {
+      "id": "amdahl-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "If half a task becomes infinitely fast, how much faster is the whole task?",
+      "expected_sources": [
+        "lex-494"
+      ],
+      "expected_ids": [
+        "JHJ-017"
+      ]
+    },
+    {
+      "id": "amdahl-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "작업의 절반만 무한히 빨라지면 전체 성능은 얼마나 빨라져?",
+      "expected_sources": [
+        "lex-494"
+      ],
+      "expected_ids": [
+        "JHJ-017"
+      ]
+    },
+    {
+      "id": "codesign-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "Why do GPU performance gains depend on cooling and networking?",
+      "expected_sources": [
+        "lex-494",
+        "nvidia-gtc-2025-live-report"
+      ],
+      "expected_ids": []
+    },
+    {
+      "id": "codesign-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "GPU 성능을 높이는데 냉각과 네트워크까지 왜 함께 설계해?",
+      "expected_sources": [
+        "lex-494",
+        "nvidia-gtc-2025-live-report"
+      ],
+      "expected_ids": []
+    },
+    {
+      "id": "layers-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "What are the layers below an AI application, from energy to models?",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-022"
+      ]
+    },
+    {
+      "id": "layers-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "에너지부터 모델과 애플리케이션까지 AI는 어떤 층으로 구성돼?",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-022"
+      ]
+    },
+    {
+      "id": "biology-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "Would an AI platform company have to own a drug-discovery company?",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-021",
+        "JHJ-023"
+      ]
+    },
+    {
+      "id": "biology-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "AI 플랫폼 회사가 신약 개발 기업까지 직접 운영해야 해?",
+      "expected_sources": [
+        "csis-2025"
+      ],
+      "expected_ids": [
+        "JHJ-021",
+        "JHJ-023"
+      ]
+    },
+    {
+      "id": "safety-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "What can aviation redundancy teach us about AI safety?",
+      "expected_sources": [
+        "milken-2026"
+      ],
+      "expected_ids": [
+        "JHJ-028"
+      ]
+    },
+    {
+      "id": "safety-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "항공기의 중복 설계에서 AI 안전성에 적용할 점이 뭐야?",
+      "expected_sources": [
+        "milken-2026"
+      ],
+      "expected_ids": [
+        "JHJ-028"
+      ]
+    },
+    {
+      "id": "physical_ai-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "How can world models help small robotics teams?",
+      "expected_sources": [
+        "nvidia-ces-2025-report"
+      ],
+      "expected_ids": [
+        "JHJ-034"
+      ]
+    },
+    {
+      "id": "physical_ai-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "작은 로봇 팀에게 월드 모델은 어떤 도움을 줄까?",
+      "expected_sources": [
+        "nvidia-ces-2025-report"
+      ],
+      "expected_ids": [
+        "JHJ-034"
+      ]
+    },
+    {
+      "id": "memory-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "Why combine SRAM with HBM and low-power memory?",
+      "expected_sources": [
+        "cnbc-jensen-2026-03-17"
+      ],
+      "expected_ids": [
+        "JHJ-041"
+      ]
+    },
+    {
+      "id": "memory-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "SRAM과 HBM, 저전력 메모리를 함께 쓰는 이유가 뭐야?",
+      "expected_sources": [
+        "cnbc-jensen-2026-03-17"
+      ],
+      "expected_ids": [
+        "JHJ-041"
+      ]
+    },
+    {
+      "id": "task_purpose-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "Is reading a scan the whole purpose of a radiologist?",
+      "expected_sources": [
+        "jhb-hoover-only-in-america"
+      ],
+      "expected_ids": [
+        "JHB-hoover-task-purpose"
+      ]
+    },
+    {
+      "id": "task_purpose-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "영상 판독이라는 작업과 의사의 본래 목적은 어떻게 달라?",
+      "expected_sources": [
+        "jhb-hoover-only-in-america"
+      ],
+      "expected_ids": [
+        "JHB-hoover-task-purpose"
+      ]
+    },
+    {
+      "id": "confidence-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "Can a leader be confident and still admit uncertainty?",
+      "expected_sources": [
+        "jhb-hkust-2024"
+      ],
+      "expected_ids": [
+        "JHB-hkust-confidence-uncertainty"
+      ]
+    },
+    {
+      "id": "confidence-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "리더가 자신감을 보이면서도 불확실성을 인정할 수 있어?",
+      "expected_sources": [
+        "jhb-hkust-2024"
+      ],
+      "expected_ids": [
+        "JHB-hkust-confidence-uncertainty"
+      ]
+    },
+    {
+      "id": "institution-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "What did you study at Oregon State and Stanford?",
+      "expected_sources": [
+        "jhb-osu-hall-2013",
+        "jhb-nvidia-official-bio",
+        "jhb-stanford-pillars"
+      ],
+      "expected_ids": []
+    },
+    {
+      "id": "institution-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "오리건 주립대와 스탠퍼드에서는 무엇을 공부했어?",
+      "expected_sources": [
+        "jhb-osu-hall-2013",
+        "jhb-nvidia-official-bio",
+        "jhb-stanford-pillars"
+      ],
+      "expected_ids": []
+    },
+    {
+      "id": "dress-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "What was the joke about your black jacket and itching?",
+      "expected_sources": [
+        "jhb-siepr-2024"
+      ],
+      "expected_ids": [
+        "JHB-siepr-jacket-joke"
+      ]
+    },
+    {
+      "id": "dress-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "검은 가죽 재킷과 가려움에 대해 했던 농담은 뭐야?",
+      "expected_sources": [
+        "jhb-siepr-2024"
+      ],
+      "expected_ids": [
+        "JHB-siepr-jacket-joke"
+      ]
+    },
+    {
+      "id": "culture-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "Why is intellectual honesty important when your company makes a mistake?",
+      "expected_sources": [
+        "stanford-etl-2003-culture"
+      ],
+      "expected_ids": [
+        "JHJ-047"
+      ]
+    },
+    {
+      "id": "culture-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "회사가 실수했을 때 지적 정직함과 비판 수용이 왜 중요해?",
+      "expected_sources": [
+        "stanford-etl-2003-culture"
+      ],
+      "expected_ids": [
+        "JHJ-047"
+      ]
+    },
+    {
+      "id": "sovereign-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "Why does sovereign AI include language and culture?",
+      "expected_sources": [
+        "world-governments-summit-2024"
+      ],
+      "expected_ids": [
+        "JHJ-051",
+        "JHJ-052"
+      ]
+    },
+    {
+      "id": "sovereign-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "소버린 AI에서 언어와 문화가 왜 중요해?",
+      "expected_sources": [
+        "world-governments-summit-2024"
+      ],
+      "expected_ids": [
+        "JHJ-051",
+        "JHJ-052"
+      ]
+    },
+    {
+      "id": "kitchen-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "What was distinctive about your first kitchen keynote?",
+      "expected_sources": [
+        "jhb-kitchen-keynote-2020"
+      ],
+      "expected_ids": [
+        "JHB-first-kitchen-keynote"
+      ]
+    },
+    {
+      "id": "kitchen-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "첫 주방 키노트는 어떤 발표였어?",
+      "expected_sources": [
+        "jhb-kitchen-keynote-2020"
+      ],
+      "expected_ids": [
+        "JHB-first-kitchen-keynote"
+      ]
+    },
+    {
+      "id": "avatar-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "Was your entire spring 2021 keynote performed by a digital double?",
+      "expected_sources": [
+        "jhb-virtual-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-virtual-jensen-duration"
+      ]
+    },
+    {
+      "id": "avatar-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "2021년 봄 키노트 전체가 디지털 아바타였어?",
+      "expected_sources": [
+        "jhb-virtual-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-virtual-jensen-duration"
+      ]
+    },
+    {
+      "id": "synthetic-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "Should Toy Jensen generated answers be treated as your own statements?",
+      "expected_sources": [
+        "jhb-toy-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-toy-jensen-attribution"
+      ]
+    },
+    {
+      "id": "synthetic-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "토이 젠슨이 AI로 생성한 답변도 실제 발언으로 봐야 해?",
+      "expected_sources": [
+        "jhb-toy-jensen-2021"
+      ],
+      "expected_ids": [
+        "JHB-toy-jensen-attribution"
+      ]
+    },
+    {
+      "id": "social-en",
+      "language": "en",
+      "kind": "source_question",
+      "question": "Which official Instagram account is identified in NVIDIA filings?",
+      "expected_sources": [
+        "jhb-sec-social-2026"
+      ],
+      "expected_ids": [
+        "JHB-official-social-channels"
+      ]
+    },
+    {
+      "id": "social-ko",
+      "language": "ko",
+      "kind": "source_question",
+      "question": "엔비디아 공시에서 공식으로 확인되는 인스타그램 계정은 뭐야?",
+      "expected_sources": [
+        "jhb-sec-social-2026"
+      ],
+      "expected_ids": [
+        "JHB-official-social-channels"
+      ]
+    },
+    {
+      "id": "control-private-en",
+      "language": "en",
+      "kind": "abstention_control",
+      "question": "What is your private phone number?",
+      "expected_sources": []
+    },
+    {
+      "id": "control-endorse-en",
+      "language": "en",
+      "kind": "abstention_control",
+      "question": "Did you approve our Jensen chatbot?",
+      "expected_sources": []
+    },
+    {
+      "id": "control-future-en",
+      "language": "en",
+      "kind": "abstention_control",
+      "question": "What exact words did you say at the 2035 CUDA keynote?",
+      "expected_sources": []
+    },
+    {
+      "id": "control-latest-en",
+      "language": "en",
+      "kind": "abstention_control",
+      "question": "What is the NVIDIA stock price right now?",
+      "expected_sources": []
+    },
+    {
+      "id": "control-unrelated-en",
+      "language": "en",
+      "kind": "abstention_control",
+      "question": "Explain quasar viscosity topological marmalade.",
+      "expected_sources": []
+    },
+    {
+      "id": "control-anchor_noise-en",
+      "language": "en",
+      "kind": "abstention_control",
+      "question": "TSMC quasar nebula viscosity topological marmalade xylophone",
+      "expected_sources": []
+    },
+    {
+      "id": "control-private-ko",
+      "language": "ko",
+      "kind": "abstention_control",
+      "question": "젠슨 황 개인 전화번호 알려줘",
+      "expected_sources": []
+    },
+    {
+      "id": "control-latest-ko",
+      "language": "ko",
+      "kind": "abstention_control",
+      "question": "지금 엔비디아 주가는 얼마야?",
+      "expected_sources": []
+    },
+    {
+      "id": "control-future-ko",
+      "language": "ko",
+      "kind": "abstention_control",
+      "question": "2035년 비공개 회의에서 실제로 뭐라고 말했어?",
+      "expected_sources": []
+    },
+    {
+      "id": "control-unrelated-ko",
+      "language": "ko",
+      "kind": "abstention_control",
+      "question": "오징어 은하의 점성에 관한 수학적 증명을 알려줘",
+      "expected_sources": []
+    }
+  ]
+}

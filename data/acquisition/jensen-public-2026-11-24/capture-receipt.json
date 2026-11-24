@@ -1,0 +1,15 @@
+{
+  "schema_version": "jensen-source-capture-receipt.v1",
+  "artifact_role": "original_public_source_documents_for_availability_verification",
+  "file_name": "jensen-source-capture-2026-11-24.zip",
+  "library_file_id": "libfile_fde3_f-ff5bb043f4088191ad97db06a7762428_a18ece08681081918d81df44f69c4b1f",
+  "file_id": "file_000000000e40820993c6a7a49437d9db",
+  "size_bytes": 848160,
+  "sha256": "d8b88a2f9a9a4ac8fe43f2c9cc47839a02202487642986567f1dc3efbe65ae09",
+  "manifest_sha256": "0a3387984dc4aec7dfd234ba0b6538f5081e2db596d36adf7a6109da9b8dda75",
+  "captured_documents": 8,
+  "unavailable_documents": 1,
+  "persistence_status": "uploaded_and_independently_materialized_with_matching_sha256",
+  "contains": "7 original HTML documents, 1 original PDF, manifest and README",
+  "excludes": "No model weights, audio/video, prepared complete interview Q&A dataset or speech timing alignment."
+}

@@ -11,6 +11,7 @@ from .legacy_prompts import build_legacy_messages
 from .models import ChatRequest, Persona, Source
 from .retrieval import SearchResult
 from .qa_prompts import build_qa_messages
+from .persona_voice import memory_payload, perspective_instruction
 
 PromptBuilder = Callable[[Persona, ChatRequest, SearchResult, list[dict[str, str]], Mapping[str, Source]], list[dict[str, str]]]
 
@@ -44,11 +45,34 @@ filter. The profile-only ablation is held identical to compact v1.
     return messages
 
 
-# Promotion is a separate, reviewable decision after actual model evaluation.
-# Keep the current default unchanged while grounded_v2 is measured.
 def build_messages(persona: Persona, request: ChatRequest, result: SearchResult, history: list[dict[str, str]], sources: Mapping[str, Source] | None = None) -> list[dict[str, str]]:
     builder = build_qa_messages if (persona.model_extra or {}).get("qa_corpus_id") or any(hit.evidence.question_answer for hit in result.hits) else build_compact_messages
     messages = builder(persona, request, result, history, sources)
+    # Production perspective is deliberately separate from the frozen builders
+    # in PROMPT_BUILDERS. Their historical A/B outputs remain reproducible.
+    if persona.id == "jensen-huang" and request.mode != "profile":
+        messages[0]["content"] += perspective_instruction(request.language)
+        context = json.loads(messages[1]["content"][len(CONTEXT_PREFIX):])
+        # Mixed original-dialogue and editorial records must all reach the
+        # model. The frozen Q&A builder only renders original exchanges.
+        records = context.setdefault("evidence_records", [])
+        by_id = {record["id"]: record for record in records}
+        original_ids = {record["id"] for record in context.get("interview_examples", [])}
+        for hit in result.hits:
+            evidence = hit.evidence
+            if evidence.id in original_ids:
+                record = next(item for item in context["interview_examples"] if item["id"] == evidence.id)
+            else:
+                record = by_id.get(evidence.id)
+                if record is None:
+                    record = {"id": evidence.id, "citation": f"[source:{evidence.id}]",
+                              "text": evidence.text, "kind": evidence.kind}
+                    records.append(record)
+                if sources and evidence.source_id in sources:
+                    record["published_at"] = sources[evidence.source_id].published_at.isoformat()
+            if memory := memory_payload(evidence):
+                record["persona_memory"] = memory
+        messages[1]["content"] = CONTEXT_PREFIX + json.dumps(context, ensure_ascii=False, separators=(",", ":"))
     if request.language == "ko" and request.mode != "profile" and result.hits:
         messages[0]["content"] += KOREAN_CITATION_INSTRUCTION
     return messages

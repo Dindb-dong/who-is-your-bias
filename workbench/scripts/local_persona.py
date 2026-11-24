@@ -11,7 +11,7 @@ from pathlib import Path
 from uuid import uuid4
 from urllib.parse import urlsplit
 
-from pipeline.common import digest, read_json, write_json
+from pipeline.common import digest, read_json, read_jsonl, write_json, write_jsonl
 from scripts.avatar_appearance import appearance_record, build_studio, gaussian_record, verify_gaussian_assets
 from scripts.avatar_demo import GESTURE_STUDIO, PR19, PROJECT, UPSTREAM, export
 from scripts.persona_reasoning import validate_links, with_links
@@ -96,13 +96,161 @@ def runtime_studio(runtime):
     return {GESTURE_STUDIO.name: GESTURE_STUDIO, PR19.name: PR19}.get(runtime.get("studio"), UPSTREAM)
 
 
+def runtime_python_checkout(runtime):
+    """Code and prepared assets may intentionally come from different checkouts."""
+    root = Path(runtime.get("python_checkout") or UPSTREAM)
+    if not root.is_absolute() or not (root / "src/bias/api.py").is_file():
+        raise ValueError("Prepared Python checkout is unavailable; run prepare from the updated checkout")
+    return root.resolve()
+
+
+def public_rag_enabled():
+    value = os.getenv("YAICON_PUBLIC_RAG", "1").strip()
+    if value not in {"0", "1"}:
+        raise ValueError("YAICON_PUBLIC_RAG must be 1 (public overlay) or 0 (original corpus)")
+    return value == "1"
+
+
+def public_rag_backend():
+    """Reject an older Python checkout before expensive local preparation."""
+    try:
+        from bias.config import Settings
+        from bias.jensen_public_retrieval import JensenPublicRetriever, VERSION
+        from bias.public_corpus import merge_public_corpus
+        replace(Settings(), retrieval_backend="jensen-public")
+    except (ImportError, TypeError, ValueError) as exc:
+        raise ValueError("Update the Python studio checkout to the public RAG version, or set "
+                         "YAICON_PUBLIC_RAG=0 explicitly before preparing the original corpus") from exc
+    return JensenPublicRetriever, merge_public_corpus, VERSION
+
+
+def public_rag_input():
+    if not public_rag_enabled():
+        return None
+    retriever, _, version = public_rag_backend()
+    from bias.config import repository_root
+    from bias.corpus import Corpus
+
+    configured = os.getenv("YAICON_PUBLIC_CORPUS_DIR")
+    directory = (Path(configured).expanduser() if configured else
+                 repository_root() / "data/personas/jensen-huang-public-v3")
+    if not directory.is_absolute():
+        raise ValueError("YAICON_PUBLIC_CORPUS_DIR must be an absolute corpus directory")
+    directory = directory.resolve()
+    required = ("profile.json", "sources.json", "evidence.jsonl", "split-manifest.json", "corpus-manifest.json")
+    if not directory.is_dir() or any(not (directory / name).is_file() for name in required):
+        raise ValueError(f"Public RAG corpus is missing or incomplete: {directory}. Update the imported "
+                         "Python checkout, set YAICON_PUBLIC_CORPUS_DIR to an absolute reviewed corpus, "
+                         "or set YAICON_PUBLIC_RAG=0 explicitly")
+    corpus = Corpus.load(directory)
+    if corpus.persona.id != "jensen-huang":
+        raise ValueError("The public RAG corpus must belong to jensen-huang")
+    retriever(corpus)  # Validate searchable annotations before exporting private data.
+    return corpus, version
+
+
+def public_rag_reservations(output):
+    """Read only reservation metadata; evaluation answers never enter the corpus."""
+    from bias.config import repository_root
+    from pipeline import dataset
+
+    integration = read_json(output / "integration.json")
+    events = set(integration.get("reserved_events", []))
+    urls, assignments = set(), {}
+
+    def reserve(source):
+        if source.get("split", "train") == "train":
+            return
+        sid = source.get("id") or source["source_id"]
+        event = source.get("source_event_id") or source.get("recording_id") or sid
+        assignment = (event, source["split"])
+        if sid in assignments and assignments[sid] != assignment:
+            raise ValueError(f"Inconsistent held-out reservation: {sid}")
+        assignments[sid] = assignment
+        events.update((sid, event))
+        urls.update(source[key] for key in ("url", "acquisition_url") if source.get(key))
+
+    for root in {repository_root().resolve(), UPSTREAM.resolve()}:
+        registry = root / "data/acquisition/jensen-huang"
+        families = registry / "source-families.json"
+        if families.is_file():
+            for source in read_json(families)["sources"]:
+                reserve(source)
+        documents = registry / "heldout-documents.json"
+        if documents.is_file():
+            urls.update(row["acquisition_url"] for row in read_json(documents)["documents"])
+        heldout = root / "data/acquisition/jensen-public-2026-11-24/judgment-heldout.json"
+        if heldout.is_file():
+            reserve(read_json(heldout)["source"])
+    for source in dataset.sources(PROJECT / "data/local"):
+        reserve(source)
+    return {"reserved_events": events, "reserved_urls": urls, "reserved_assignments": assignments}
+
+
+def attach_public_corpus(output, incoming):
+    report_path = output / "public-rag-merge.json"
+    if incoming is None:
+        report = {"schema_version": "public-corpus-overlay.v1", "status": "disabled",
+                  "reason": "YAICON_PUBLIC_RAG=0"}
+    else:
+        from bias.corpus import Corpus
+        from bias.public_corpus import merge_public_corpus, split_manifest
+        from bias.snapshots import corpus_digest
+
+        public, version = incoming
+        directory = output / "corpus"
+        original_sources = {row["id"]: row for row in read_json(directory / "sources.json")}
+        original_records = {row["id"]: row for row in read_jsonl(directory / "evidence.jsonl")}
+        result = merge_public_corpus(Corpus.load(directory), public, **public_rag_reservations(output))
+        # Original JSON objects retain every exact Q&A string, cue, review,
+        # projection flag and card reference. Only new records are serialized.
+        write_json(directory / "sources.json", [original_sources.get(key, source.model_dump(mode="json"))
+                                                for key, source in result.corpus.sources.items()])
+        write_jsonl(directory / "evidence.jsonl", [original_records.get(key, row.model_dump(mode="json"))
+                                                  for key, row in result.corpus.evidence.items()])
+        write_json(directory / "split-manifest.json", split_manifest(result.corpus))
+        write_json(directory / "corpus-manifest.json", result.corpus.manifest)
+        materialized = Corpus.load(directory)
+        if corpus_digest(materialized) != result.report["merged_corpus_sha256"]:
+            raise ValueError("Public overlay materialization changed the reviewed corpus")
+        report = {**result.report, "retrieval_version": version}
+    write_json(report_path, report)
+    integration = read_json(output / "integration.json")
+    integration["public_rag"] = report
+    write_json(output / "integration.json", integration)
+    return report
+
+
+def checked_public_rag_report(runtime, output):
+    report = runtime.get("public_rag")
+    if not report:
+        if public_rag_enabled():
+            raise ValueError("Public RAG is enabled but this runtime predates the overlay; run prepare again")
+        return {"status": "disabled", "reason": "legacy_runtime_explicit_opt_out"}
+    if (report.get("status") == "integrated") != public_rag_enabled():
+        raise ValueError("YAICON_PUBLIC_RAG changed; run prepare again to materialize the selected corpus")
+    path = output / "public-rag-merge.json"
+    if not path.is_file() or digest(path) != runtime.get("public_rag_report_sha256"):
+        raise ValueError("Public RAG audit report changed; run prepare again")
+    actual = read_json(path)
+    if actual != report:
+        raise ValueError("Public RAG runtime and audit report disagree; run prepare again")
+    if report["status"] == "integrated":
+        _, _, version = public_rag_backend()
+        if version != report.get("retrieval_version"):
+            raise ValueError("Public RAG retrieval version changed; run prepare again")
+    return report
+
+
 def prepare():
+    from bias.config import repository_root
     from bias.corpus import Corpus
     from bias.snapshots import register_snapshot
 
     models = read_json(PROJECT / ".tools/local-models.json")
     if not {"llm", "voice"} <= models.keys():
         raise ValueError("Both local models must finish downloading first")
+    public = public_rag_input()
     output = export(PROJECT / "data/local")
     corpus = Corpus.load(output / "corpus")
     card_path = EXPANDED_CARD if EXPANDED_CARD.exists() else CARD
@@ -134,18 +282,26 @@ def prepare():
     ]
     profile["notice"] = "AI persona simulation. Generated speech uses an experimental Jensen Huang reference; likeness has not been rated."
     write_json(output / "corpus/profile.json", profile)
+    public_report = attach_public_corpus(output, public)
     corpus = Corpus.load(output / "corpus")
+    validate_card(card, corpus)
+    validate_links(links, corpus)
     stamp = datetime.now(timezone.utc)
     snapshot = register_snapshot(corpus, identifier=output.name, as_of=stamp,
         ingested_at=stamp, current_evidence_since=date(2026, 1, 1))
     snapshot = snapshot.model_copy(update={"voice_version": "qwen3-tts06-reference-candidate",
         "style_version": PROMPT_VERSION, "appearance_version": appearance_version,
-        "coverage_note": "Reviewed training interviews plus editorial seed. Persona and voice likeness are unmeasured."})
+        "coverage_note": ("Reviewed training interviews plus the audited public evidence overlay. "
+                          if public_report["status"] == "integrated" else
+                          "Reviewed training interviews plus editorial seed. ") +
+                         "Persona and voice likeness are unmeasured."})
     snapshot.verify(corpus)
     write_json(output / "snapshot.json", snapshot.model_dump(mode="json"))
     write_json(output / "persona-card.json", card)
     write_json(output / "decision-notes.json", links)
     runtime = {"output": str(output), "models": models, "card_sha256": digest(output / "persona-card.json"),
+        "python_checkout": str(repository_root().resolve()),
+        "public_rag": public_report, "public_rag_report_sha256": digest(output / "public-rag-merge.json"),
         "decision_notes_sha256": digest(output / "decision-notes.json"), "studio": studio.name,
         "appearance_version": appearance_version,
         "appearance_sha256": gaussian["sha256"]["bin"] if gaussian else appearance["sha256"] if appearance else None,
@@ -156,6 +312,8 @@ def prepare():
         "prompt_version": PROMPT_VERSION, "language": "en", "llm_port": 8103, "voice_port": 8104,
         "app_port": 8105, "external_inference": (
             bool(elevenlabs_config()) or os.getenv("BIAS_TRANSLATION_PROTOCOL") in {"google-web", "google-cloud"}
+            or (os.getenv("BIAS_RETRIEVAL_BACKEND") == "hybrid" and os.getenv("BIAS_EMBEDDING_BACKEND") == "http"
+                and bool(os.getenv("BIAS_EMBEDDING_BASE_URL")))
             or any(os.getenv(f"BIAS_{kind}_BASE_URL") for kind in ("LLM", "TTS", "ASR", "TRANSLATION")))}
     write_json(RUNTIME, runtime)
     write_json(output / "local-runtime.json", runtime)
@@ -165,12 +323,15 @@ def prepare():
 def create_app():
     from bias.api import create_app as upstream_app
     from inspect import signature
-    from bias.config import Settings, ProviderSettings
+    from bias.config import Settings, ProviderSettings, repository_root
     from bias.corpus import Corpus
     from bias.providers import OpenAICompatibleLLM
 
     runtime = read_json(RUNTIME)
     output = Path(runtime["output"])
+    if runtime.get("python_checkout") and runtime_python_checkout(runtime) != repository_root().resolve():
+        raise ValueError("This API imported a different Python checkout than prepare; restart with the local launcher")
+    public_report = checked_public_rag_report(runtime, output)
     card_path = output / "persona-card.json"
     if not card_path.exists():
         card_path = CARD
@@ -224,6 +385,22 @@ def create_app():
         urlsplit(item.base_url).hostname not in {"127.0.0.1", "localhost", "::1"}
         for item in (llm, tts, asr, translation) if item.base_url)
     baseline = Settings()
+    retrieval_backend = os.getenv("BIAS_RETRIEVAL_BACKEND") or (
+        "jensen-public" if public_report["status"] == "integrated" else baseline.retrieval_backend)
+    hybrid_embedding = {}
+    if retrieval_backend == "hybrid":
+        # Read only settings required by this explicit retrieval override. Do
+        # not import global from_env() defaults into the private demo runtime.
+        hybrid_embedding = {
+            "embedding_backend": os.getenv("BIAS_EMBEDDING_BACKEND", baseline.embedding_backend),
+            "embedding_model": os.getenv("BIAS_EMBEDDING_MODEL") or baseline.embedding_model,
+            "embedding_revision": os.getenv("BIAS_EMBEDDING_REVISION") or baseline.embedding_revision,
+            "embedding_base_url": os.getenv("BIAS_EMBEDDING_BASE_URL") or baseline.embedding_base_url,
+            "embedding_api_key": os.getenv("BIAS_EMBEDDING_API_KEY") or baseline.embedding_api_key,
+            "embedding_query_prefix": os.getenv("BIAS_EMBEDDING_QUERY_PREFIX", baseline.embedding_query_prefix),
+            "embedding_passage_prefix": os.getenv("BIAS_EMBEDDING_PASSAGE_PREFIX", baseline.embedding_passage_prefix),
+            "dense_min_similarity": float(os.getenv("BIAS_DENSE_MIN_SIMILARITY", str(baseline.dense_min_similarity))),
+        }
     qa_delivery = {}
     if hasattr(baseline, "qa_knowledge_dir"):
         qa_delivery = {"qa_knowledge_dir": Path(os.environ["BIAS_QA_KNOWLEDGE_DIR"]).expanduser() if os.getenv("BIAS_QA_KNOWLEDGE_DIR") else None,
@@ -238,6 +415,7 @@ def create_app():
         raise ValueError("Update the Python studio checkout before enabling Google captions")
     policy = {"adaptive_responses": adaptive, "live_concise": concise} if hasattr(baseline, "adaptive_responses") else {}
     config = replace(baseline, corpus_dir=output / "corpus", persona_snapshot=output / "snapshot.json",
+        retrieval_backend=retrieval_backend,
         web_dir=web_dir, llm=llm, tts=tts, asr=asr,
         tts_voice=voice_id,
         tts_persona_id="generic" if elevenlabs else os.getenv("BIAS_TTS_PERSONA_ID", "generic" if custom_tts else "jensen-huang"),
@@ -245,8 +423,15 @@ def create_app():
         llm_max_tokens=280,
         motion_catalog=studio / "data/motion/jensen-multievent.v1.json" if studio in (GESTURE_STUDIO, PR19) else None,
         motion_asset_root=studio / "apps/web/public",
-        llm_context_window=15000, max_response_chars=3000, request_timeout=180, retrieval_limit=3, **policy, **speech_protocol, **qa_delivery)
+        llm_context_window=15000, max_response_chars=3000, request_timeout=180, retrieval_limit=3,
+        **hybrid_embedding, **policy, **speech_protocol, **qa_delivery)
+    if config.retrieval_backend == "hybrid" and config.embedding_backend == "http":
+        external = external or urlsplit(config.embedding_base_url).hostname not in {"127.0.0.1", "localhost", "::1"}
     corpus = Corpus.load(config.corpus_dir)
+    if public_report["status"] == "integrated":
+        from bias.snapshots import corpus_digest
+        if corpus_digest(corpus) != public_report["merged_corpus_sha256"]:
+            raise ValueError("Public RAG corpus changed; run prepare again")
     validate_card(read_json(card_path), corpus)
     validate_links(links, corpus)
 
@@ -274,6 +459,17 @@ def create_app():
         return {"llm": config.llm.model if os.getenv("BIAS_LLM_BASE_URL") else runtime["models"]["llm"]["repo"],
             "local_only": not external, "server_transcription": asr.model or (local_asr.model_name if local_asr else None),
             "prompt_version": PROMPT_VERSION, "voice": config.tts.model if custom_tts else "Qwen3-TTS Base / experimental reference",
+            "retrieval_backend": config.retrieval_backend,
+            "retrieval_version": public_report.get("retrieval_version") if config.retrieval_backend == "jensen-public" else None,
+            "knowledge_version": (corpus.manifest or {}).get("id"),
+            "public_rag": {"status": public_report["status"],
+                           "public_corpus_id": public_report.get("public_corpus_id"),
+                           "added_records": len(public_report.get("added_evidence_ids", [])),
+                           "excluded_events": len(public_report.get("excluded_events", [])),
+                           "corpus_sha256": public_report.get("merged_corpus_sha256")},
+            "corpus_counts": {"sources": len(corpus.sources), "records": len(corpus.evidence),
+                              "training_records": len(corpus.training_evidence),
+                              "question_answers": sum(row.question_answer is not None for row in corpus.evidence.values())},
             "voice_provider": "elevenlabs" if elevenlabs else "openai-compatible" if custom_tts else "local-qwen",
             "voice_playback": "whole_answer_default_with_optional_segment_playback",
             "studio": runtime["studio"], "decision_notes_enabled": runtime["decision_notes_enabled"],

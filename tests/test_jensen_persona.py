@@ -24,25 +24,35 @@ def jensen():
     return Corpus.load(repository_root() / "data/personas/jensen-huang")
 
 
-def default_settings(monkeypatch, tmp_path):
+def default_settings(monkeypatch, tmp_path, *, production=False):
     for key in ("BIAS_CORPUS_DIR", "BIAS_PERSONA_SNAPSHOT", "BIAS_LLM_BASE_URL", "BIAS_LLM_MODEL",
                 "BIAS_TTS_BASE_URL", "BIAS_TTS_MODEL", "BIAS_TTS_PERSONA_ID", "BIAS_MOTION_CATALOG"):
         monkeypatch.delenv(key, raising=False)
     monkeypatch.setenv("BIAS_WEB_DIR", str(tmp_path / "absent"))
-    return Settings.from_env()
+    config = Settings.from_env()
+    if production:
+        return config
+    # The historical regression fixtures keep their exact frozen source corpus.
+    return replace(config, corpus_dir=repository_root() / "data/personas/jensen-huang",
+                   persona_snapshot=repository_root() / "data/snapshots/jensen-huang-2026-11-12.json",
+                   retrieval_backend="lexical")
 
 
 def test_default_studio_has_jensen_identity_and_its_exact_snapshot(monkeypatch, tmp_path):
-    config = default_settings(monkeypatch, tmp_path)
-    assert config.corpus_dir == Settings().corpus_dir == repository_root() / "data/personas/jensen-huang"
+    config = default_settings(monkeypatch, tmp_path, production=True)
+    assert config.corpus_dir == repository_root() / "data/personas/jensen-huang-public-v3"
+    assert config.retrieval_backend == "jensen-public"
+    # Programmatic Settings() remains a reproducible historical experiment.
+    assert Settings().corpus_dir == repository_root() / "data/personas/jensen-huang"
     with TestClient(create_app(config)) as client:
         profile = client.get("/api/persona").json()
         assert profile["id"] == profile["bindings"]["persona_id"] == "jensen-huang"
         assert profile["name"] == "Jensen Huang"
         assert profile["presentation"]["initials"] == "JH"
-        assert profile["stats"] == {"sources": 9, "evidence": 32, "held_out_sources": 0, "total_evidence": 32}
-        assert profile["snapshot"]["id"] == "jensen-huang-2026-11-12-interviews.v2"
-        assert profile["snapshot"]["current_dated_training_sources"] == 0
+        assert profile["stats"]["sources"] >= 40
+        assert profile["stats"]["evidence"] >= 150
+        assert profile["stats"]["held_out_sources"] == 0
+        assert profile["snapshot"]["id"] == "jensen-public-2026-11-24.v3"
         assert profile["bindings"]["voice"]["status"] == "not_configured"
         assert profile["capabilities"]["speech"] is False
         assert client.get("/api/motion/library").json()["available"] is False

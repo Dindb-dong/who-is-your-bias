@@ -10,6 +10,7 @@ from .grounding import KOREAN_CITATION_INSTRUCTION
 from .models import ChatRequest
 from .providers import ProviderError
 from .persona_delivery import DELIVERY_INSTRUCTION, DeliverySelection
+from .persona_voice import memory_payload, perspective_instruction
 
 if TYPE_CHECKING:
     from .persona_graph import GraphSelection
@@ -141,7 +142,8 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
                             answer_policy: AnswerPolicy | None = None,
                             persona_selection: GraphSelection | None = None,
                             persona_memory_format: str = "graph",
-                            delivery_selection: DeliverySelection | None = None) -> PromptPackage:
+                            delivery_selection: DeliverySelection | None = None,
+                            persona_voice: bool = False) -> PromptPackage:
     if persona_memory_format not in {"graph", "flat", "compact"}:
         raise ValueError("persona_memory_format must be graph, flat or compact")
     system = (
@@ -157,7 +159,7 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
     )
     is_jensen = corpus.persona.id == "jensen-huang"
     korean_jensen_evidence = is_jensen and request.language == "ko" and request.mode != "profile" and result.hits
-    if korean_jensen_evidence:
+    if korean_jensen_evidence and not persona_voice:
         system = (
             "공개 자료를 바탕으로 젠슨 황의 관점을 설명하는 AI입니다. "
             + ("한국어로 답하고 " if answer_policy else "한국어 한 문장으로 짧게 답하고 ") +
@@ -169,10 +171,14 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
         )
     elif request.language == "ko" and request.mode != "profile" and result.hits:
         system += KOREAN_CITATION_INSTRUCTION
+    if persona_voice and is_jensen and request.mode != "profile":
+        system += perspective_instruction(request.language)
     if speculative:
         system += (
             " No verified evidence was retrieved. In one or two sentences, give a useful conditional answer "
-            "inspired by the persona's public reasoning style, using third person. Start directly with the answer; "
+            + ("inspired by the persona's public reasoning style, in simulated first person. "
+               if persona_voice else "inspired by the persona's public reasoning style, using third person. ") +
+            "Start directly with the answer; "
             "the application adds a simulation label. For questions about actual events, dates or positions, "
             "state what cannot be verified and offer a conditional perspective if useful. "
             "Do not produce quotations, citations, concrete unsupported facts or invented personal details."
@@ -186,6 +192,9 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
                 "제목 없이 문장을 '살필 수 있습니다.' 또는 '비교할 수 있습니다.'로 끝내세요. "
                 "예시: 수요가 갑자기 늘었을 때 어디서 처리량이 먼저 막히는지 살필 수 있습니다."
             )
+            if persona_voice:
+                system += (" 이 시뮬레이션의 1인칭 관점에서 조언하되, 확인된 개인 경험인 것처럼 말하지 마세요. "
+                           "자료가 없다는 이유로 경험을 부정하지 마세요.")
     elif is_jensen and request.mode != "profile":
         system += (
             " For a hypothetical question, you may also extrapolate from the supplied reasoning patterns. "
@@ -237,7 +246,7 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
     available = context_window - output_tokens
     if available < 256 or counter.count(messages()) > available:
         raise ProviderError("context_budget", "This question and persona context exceed the configured model input budget.", 422)
-    supplied, styles, dropped = [], [], []
+    supplied, styles, dropped, dropped_memory = [], [], [], []
     # Reserve factual evidence before style/history. Never truncate an original
     # answer into a more categorical claim, and never authorize a dropped ID.
     if request.mode != "profile":
@@ -251,7 +260,17 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
             if qa:
                 record.update(question=qa.question, context=qa.context_before, context_kind=qa.context_kind,
                               completeness=qa.completeness, excerpt_note=qa.excerpt_note)
+            if persona_voice:
+                record["kind"] = evidence.kind
+                record["source_type"] = source.source_type
+                if memory := memory_payload(evidence):
+                    record["persona_memory"] = memory
             context["factual_evidence"].append(record)
+            # Preserve the complete source passage before optional editorial
+            # interpretation. Never cut a qualification to make it fit.
+            if counter.count(messages()) > available and "persona_memory" in record:
+                record.pop("persona_memory")
+                dropped_memory.append(evidence.id)
             if counter.count(messages()) > available:
                 context["factual_evidence"].pop(); dropped.append(evidence.id)
             else:
@@ -321,4 +340,6 @@ def build_snapshot_messages(corpus, request: ChatRequest, result, history, snaps
         budget["persona_memory"] = memory_status
     if delivery_status is not None:
         budget["persona_delivery"] = delivery_status
+    if persona_voice:
+        budget["dropped_persona_memory_ids"] = dropped_memory
     return PromptPackage(packed, tuple(supplied), tuple(styles), budget)

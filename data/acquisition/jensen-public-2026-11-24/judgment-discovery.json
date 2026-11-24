@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-11-24",
+  "not_active_persona_evidence": [
+    {
+      "id": "no-priors-2024",
+      "source_event_id": "no-priors-2024",
+      "title": "NVIDIA’s Jensen Huang on AI Chip Design, Scaling Data Centers, and his 10-Year Bets",
+      "url": "https://www.youtube.com/watch?v=hw7EnjC68Fw",
+      "publisher": "No Priors",
+      "published_at": "2024-11-07",
+      "access_status": "publisher_video_description_and_chapters_verified_only",
+      "secondary_url": "https://podcasts.apple.com/us/podcast/nvidias-jensen-huang-on-ai-chip-design-scaling-data/id1668002688?i=1000676047524",
+      "topics": [
+        "10-year infrastructure bets",
+        "NVLink",
+        "software compatibility",
+        "embodied AI",
+        "AI in science"
+      ],
+      "not_acquired": [
+        "publisher original transcript",
+        "audio",
+        "video"
+      ],
+      "reason_excluded": "Third-party transcripts surfaced, but speaker wording was not verified against a readable publisher transcript. Episode metadata is not first-person memory.",
+      "verification_ref": "turn437035475youtube8"
+    },
+    {
+      "id": "a16z-mistral-jensen-2025",
+      "source_event_id": "a16z-mistral-jensen-2025",
+      "title": "Jensen Huang, Anjney Midha and Arthur Mensch on Winning the Global AI Race",
+      "url": "https://a16z.com/podcast/jensen-huang-and-arthur-mensch-on-winning-the-global-ai-race/",
+      "publisher": "Andreessen Horowitz",
+      "published_at": "2025-03-21",
+      "access_status": "publisher_episode_summary_opened_only",
+      "topics": [
+        "sovereign AI",
+        "full stack",
+        "open models",
+        "national strategies"
+      ],
+      "not_acquired": [
+        "original dialogue transcript",
+        "audio",
+        "video"
+      ],
+      "reason_excluded": "Publisher synopsis combines speakers. It cannot establish Huang’s exact wording or an individual claim.",
+      "verification_ref": "turn614130905view3"
+    },
+    {
+      "id": "wef-davos-2026",
+      "source_event_id": "wef-davos-2026",
+      "title": "Davos 2026: Conversation with Jensen Huang, President and CEO of NVIDIA",
+      "url": "https://www.weforum.org/podcasts/meet-the-leader/conversation-with-jensen-huang-president-and-ceo-of-nvidia-5dd06ee82e",
+      "publisher": "World Economic Forum",
+      "published_at": "2026-01-23",
+      "access_status": "publisher_transcript_opened",
+      "topics": [
+        "AI infrastructure",
+        "tasks versus jobs",
+        "economic applications"
+      ],
+      "reason_excluded": "Existing repository event-family registry reserves this event for evaluation. Do not rename the event and silently import it into retrieval.",
+      "verification_ref": "turn249380846view2",
+      "existing_registry": "data/acquisition/jensen-huang/source-families.json"
+    }
+  ],
+  "reuse_cautions": [
+    "No Priors 2023 appears as a historical held-out event and was later used in the conditional-values development corpus. It is not a fresh independent holdout.",
+    "Milken 2026 was already exposed by conditional-values-v2 and remains development evidence.",
+    "Multiple clips from Stanford 2003 share one event; SIGGRAPH article and recording share one event."
+  ],
+  "copyright_handling": "No complete transcripts or media are redistributed. Each active source has a bounded paraphrase and at most25 words of exact excerpts across this judgment batch."
+}

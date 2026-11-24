@@ -11,7 +11,7 @@ import time
 import urllib.request
 from pathlib import Path
 
-from scripts.local_persona import PROJECT, UPSTREAM, RUNTIME, elevenlabs_config, prepare, runtime_studio
+from scripts.local_persona import PROJECT, RUNTIME, elevenlabs_config, prepare, runtime_python_checkout
 from pipeline.common import read_json, digest, write_json, load_env
 
 
@@ -29,6 +29,16 @@ def wait_ready(url, child, timeout=180):
         except (OSError, urllib.error.URLError):
             time.sleep(0.5)
     raise TimeoutError(f"Local service did not become ready: {url}")
+
+
+def process_environment(runtime):
+    python_checkout = runtime_python_checkout(runtime)
+    # A PR19 frontend/avatar may accompany newer shared Python code. Keep the
+    # imported checkout that preparation validated when launching the API.
+    return dict(os.environ, PYTHONPATH=os.pathsep.join(map(str, (PROJECT, python_checkout / "src", python_checkout))),
+        HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1", HF_HUB_DISABLE_TELEMETRY="1",
+        HF_HOME=str(PROJECT / ".tools/hf-home"), HF_HUB_CACHE=str(PROJECT / ".tools/hf-cache"),
+        TOKENIZERS_PARALLELISM="false")
 
 
 def main():
@@ -50,11 +60,7 @@ def main():
             raise ValueError("Voice reference changed; update its review record first")
     output = prepare()
     runtime = read_json(RUNTIME)
-    studio = runtime_studio(runtime)
-    common = dict(os.environ, PYTHONPATH=os.pathsep.join(map(str, (PROJECT, studio / "src", studio))),
-        HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1", HF_HUB_DISABLE_TELEMETRY="1",
-        HF_HOME=str(PROJECT / ".tools/hf-home"), HF_HUB_CACHE=str(PROJECT / ".tools/hf-cache"),
-        TOKENIZERS_PARALLELISM="false")
+    common = process_environment(runtime)
     voice = dict(common, BIAS_VOICE_MODEL=runtime["models"]["voice"]["repo"],
         BIAS_VOICE_REVISION=runtime["models"]["voice"]["revision"],
         BIAS_VOICE_CACHE_DIR=str(PROJECT / ".tools/hf-cache"), BIAS_VOICE_LOCAL_FILES_ONLY="true",
@@ -75,7 +81,7 @@ def main():
             "--allowed-origins", "http://127.0.0.1:8105"], common, "http://127.0.0.1:8103/v1/models"),
         ("voice", [str(PROJECT / ".tools/venv-voice/bin/python"), "-m", "uvicorn", "scripts.local_voice:app",
             "--host", "127.0.0.1", "--port", "8104"], voice, "http://127.0.0.1:8104/health"),
-        ("app", [str(UPSTREAM / ".venv/bin/python"), "-m", "uvicorn", "scripts.local_persona:create_app", "--factory",
+        ("app", [sys.executable, "-m", "uvicorn", "scripts.local_persona:create_app", "--factory",
             "--host", "127.0.0.1", "--port", "8105"], app_env, "http://127.0.0.1:8105/api/health"),
     ]
     commands = [command for command, port in zip(commands, (8103, 8104, 8105)) if port not in external_ports]
