@@ -54,7 +54,7 @@ export default function App() {
   // ?gesture=emage: request speech-driven gestures with provider voice (needs BIAS_EMAGE_* on the server).
   const [speechGestureEnabled, setSpeechGestureEnabled] = useState(() => avatarQuery.get('gesture') === 'emage');
   const [page, setPage] = useState<Page>('studio');
-  const avatarWindow = useAvatarWindow();
+  const avatarWindow = useAvatarWindow(presentationMode);
   const [persona, setPersona] = useState<Persona | null>(null);
   const [sources, setSources] = useState<Source[]>([]);
   const [connection, setConnection] = useState<'connecting' | 'ready' | 'error'>('connecting');
@@ -449,7 +449,10 @@ export default function App() {
             </section>
               {avatarWindow.error && <p className="inline-error" role="alert">{avatarWindow.error}</p>}
               {captionContent}
-              {avatarWindow.target && captionContent && createPortal(captionContent, avatarWindow.target)}
+              {avatarWindow.target && createPortal(
+                presentationMode ? <div className="avatar-window-captions">{captionContent}</div> : captionContent,
+                avatarWindow.target,
+              )}
               <AttentionPanel enabled={page === 'studio'} reducedMotion={reducedMotion} onTarget={setAttentionTarget}/><MotionNotice state={measuredMotion} mode={motionMode} reducedMotion={reducedMotion} noMatch={Boolean(activeTurn && !busy && !activeTurn.behavior.motion)}/></div>
             <section className="conversation-card" aria-label="Conversation">
               <div className="conversation-header"><div><MessageCircle size={18}/><h2>Let's talk</h2></div><span className="preview-label">{persona?.capabilities.llm ? 'LLM connected' : 'Source preview'}</span></div>

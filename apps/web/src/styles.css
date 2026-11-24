@@ -80,6 +80,26 @@
   margin: 0;
   pointer-events: none;
 }
+.avatar-window-wide .avatar-window-stage {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+.avatar-window-wide .avatar-portal { grid-row: 2; min-height: 0; }
+.avatar-window-captions {
+  grid-row: 1;
+  display: grid;
+  align-items: center;
+  min-height: 86px;
+  background: #101813;
+}
+.avatar-window-captions .presentation-caption {
+  margin: 0;
+  padding: 10px clamp(12px, 3vw, 24px);
+  border-radius: 0;
+  background: none;
+  font-size: clamp(18px, 3.6vw, 30px);
+  line-height: 1.25;
+}
 .avatar-portal > .avatar-stage { min-height: 0 !important; }
 body.avatar-window { margin: 0; height: 100dvh; min-height: 0; overflow: hidden; background: #151c13; }
 .avatar-window .avatar-visual { height: 100%; }

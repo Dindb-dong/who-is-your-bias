@@ -5,11 +5,12 @@ type PictureInPictureWindow = Window & {
   documentPictureInPicture?: { requestWindow(options: { width: number; height: number }): Promise<Window> };
 };
 
-function prepareWindow(view: Window): HTMLElement {
+function prepareWindow(view: Window, wideCaptions: boolean): HTMLElement {
   const doc = view.document;
   doc.title = 'Presentation avatar';
   doc.documentElement.lang = document.documentElement.lang || 'en';
   doc.body.classList.add('avatar-window');
+  doc.body.classList.toggle('avatar-window-wide', wideCaptions);
 
   for (const sheet of document.styleSheets) {
     try {
@@ -36,7 +37,7 @@ function prepareWindow(view: Window): HTMLElement {
   return target;
 }
 
-export function useAvatarWindow() {
+export function useAvatarWindow(wideCaptions: boolean) {
   const [target, setTarget] = useState<HTMLElement | null>(null);
   const [opening, setOpening] = useState(false);
   const [error, setError] = useState('');
@@ -59,12 +60,13 @@ export function useAvatarWindow() {
     setError('');
     let view: Window | null = null;
     try {
-      view = pip ? await pip.requestWindow({ width: 420, height: 320 })
-        : window.open('', '_blank', 'popup,width=420,height=320');
+      const { width, height } = wideCaptions ? { width: 760, height: 380 } : { width: 420, height: 320 };
+      view = pip ? await pip.requestWindow({ width, height })
+        : window.open('', '_blank', `popup,width=${width},height=${height}`);
       if (controller.signal.aborted) { view?.close(); return; }
       if (!view || view.closed) throw new Error('Window unavailable');
 
-      const presentation = prepareWindow(view);
+      const presentation = prepareWindow(view, wideCaptions);
       const onClose = () => {
         active.current = null;
         // Move the existing canvas back before the browser tears down this document.

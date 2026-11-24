@@ -83,6 +83,13 @@ separately. Korean-caption requests also include `subtitle_language: ko`.
 Configured server ASR or browser ASR still needs microphone permission. Typed
 questions use the same answer path.
 
+For a full-screen slide show, open **Avatar picture-in-picture** from the Studio
+before switching to the slides. Presentation mode requests a 760 × 380 window
+with a full-width caption strip above the avatar. The browser can clamp the
+window dimensions and controls its placement. Move the entire window to the
+audience display and confirm it stays above that display's slide show during
+rehearsal. The caption strip and the avatar move together.
+
 The workbench adapter forwards these options and preserves auxiliary QA
 instructions. Its prepared runtime may point to another checkout; update and
 rebuild that actual checkout too. This change targets `/api/chat/stream` and

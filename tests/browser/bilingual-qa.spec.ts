@@ -145,7 +145,7 @@ test('shows Korean subtitles over English speech in the real picture-in-picture 
     open.click(),
   ]);
   await expect(page.getByRole('status').filter({ hasText: 'Avatar is in a separate window.' })).toBeVisible();
-  await pipWindow.setViewportSize({ width: 420, height: 320 });
+  await pipWindow.setViewportSize({ width: 760, height: 380 });
   await page.getByLabel('Your message', { exact: true }).fill(QUESTION);
   await page.getByRole('button', { name: 'Send message', exact: true }).click();
 
@@ -155,7 +155,18 @@ test('shows Korean subtitles over English speech in the real picture-in-picture 
     return { text: caption?.lastChild?.textContent, lang: caption?.getAttribute('lang') };
   });
   await expect.poll(captionState).toEqual({ text: KOREAN, lang: 'ko' });
-  await expect(pipWindow.locator('.presentation-caption')).toHaveCSS('position', 'absolute');
+  const layout = await pipWindow.locator('.avatar-window-captions').evaluate((band) => {
+    const caption = band.querySelector('.presentation-caption');
+    const avatar = band.parentElement?.querySelector('.avatar-portal');
+    return {
+      width: band.getBoundingClientRect().width,
+      aboveAvatar: !!avatar && band.getBoundingClientRect().bottom <= avatar.getBoundingClientRect().top,
+      fontSize: caption ? parseFloat(getComputedStyle(caption).fontSize) : 0,
+    };
+  });
+  expect(layout.width).toBeGreaterThanOrEqual(740);
+  expect(layout.aboveAvatar).toBe(true);
+  expect(layout.fontSize).toBeGreaterThanOrEqual(26);
   await expect(pipWindow.getByText('AI simulation', { exact: true })).toBeVisible();
   const screenshot = testInfo.outputPath('pip-korean-captions.png');
   await pipWindow.screenshot({ path: screenshot });
