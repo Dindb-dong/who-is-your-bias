@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { ArrowDown, ArrowRight, ArrowUp, ArrowUpRight, BookOpen, ChevronDown, ChevronRight, CircleHelp, Clapperboard, FlaskConical, Globe2, Layers3, LoaderCircle, MessageCircle, Mic, Phone, PhoneOff, PictureInPicture2, Plus, Radio, RotateCcw, Settings2, Sparkles, Square, Volume2, VolumeX, X } from 'lucide-react';
 import { getJson, getMotionLibrary, streamChat } from './api';
 import type { Citation, ExperimentMode, Language, MotionLibraryStatus, Persona, Source, Turn } from './api';
@@ -53,14 +54,22 @@ export default function App() {
   // ?gesture=emage: request speech-driven gestures with provider voice (needs BIAS_EMAGE_* on the server).
   const [speechGestureEnabled, setSpeechGestureEnabled] = useState(() => avatarQuery.get('gesture') === 'emage');
   const [page, setPage] = useState<Page>('studio');
-  const avatarWindow = useAvatarWindow();
+  const avatarWindow = useAvatarWindow(presentationMode);
   const [persona, setPersona] = useState<Persona | null>(null);
   const [sources, setSources] = useState<Source[]>([]);
   const [connection, setConnection] = useState<'connecting' | 'ready' | 'error'>('connecting');
   const [connectionError, setConnectionError] = useState('');
   const [reload, setReload] = useState(0);
   const [language, setLanguage] = useState<Language>(avatarQuery.get('bilingual') === '1' ? 'ko' : 'en');
-  const [bilingual, setBilingual] = useState(avatarQuery.get('bilingual') === '1');
+  const [bilingualPreference, setBilingual] = useState<boolean>();
+  const presentationQa = presentationMode && persona?.id === 'jensen-huang';
+  const bilingual = bilingualPreference ?? (avatarQuery.get('bilingual') === '1'
+    || (presentationQa && avatarQuery.get('bilingual') !== '0'));
+  const englishAnswer = presentationQa || bilingual;
+  const translationAvailable = persona?.capabilities.translated_subtitles === true;
+  const presentationVoiceReady = persona?.capabilities.speech === true
+    && persona.bindings?.voice.status === 'matched'
+    && persona.bindings.voice.persona_id === 'jensen-huang';
   const captionTrack = useRef<CaptionTrack | null>(null);
   const [, setCaptionRevision] = useState(0);
   const refreshCaptions = () => setCaptionRevision((revision) => revision + 1);
@@ -213,10 +222,12 @@ export default function App() {
     const controller = new AbortController(); currentRequest.current = controller;
     const answerId = crypto.randomUUID();
     const preferences = playbackPreferences.current;
-    const translated = bilingual && persona?.capabilities.translated_subtitles === true;
-    const answerLanguage = translated ? 'en' : language;
+    const translated = bilingual && (presentationQa || translationAvailable);
+    const answerLanguage = englishAnswer ? 'en' : language;
     const qwenVoice = Boolean(persona?.capabilities.qwen_mlx_voice);
-    const canSpeak = !qwenVoice || answerLanguage === 'en' || preferences.voice !== 'provider';
+    const canSpeak = presentationQa
+      ? presentationVoiceReady && preferences.voice === 'provider'
+      : !qwenVoice || answerLanguage === 'en' || preferences.voice !== 'provider';
     const clock = new LiveTurnClock(answerId, performance.now(), preferences.autoPlay && canSpeak ? preferences.voice : 'off', undefined, microphoneEndedAt);
     liveClock.current = clock; setLiveMeasurement(clock.snapshot());
     let paintScheduled = false;
@@ -247,7 +258,13 @@ export default function App() {
         setLiveMeasurement(clock.snapshot());
       }, qwenVoice ? { context: new AudioContext({ sampleRate: 24000 }) } : undefined);
       const buffer = qwenVoice && useLiveVoice && pcmPlayer.current ? bufferQwenVoice(pcmPlayer.current) : undefined;
-      await streamChat({ message: question, session_id: sessionId, mode, language: answerLanguage, ...(translated ? { subtitle_language: 'ko' as const, input_language: language } : {}), motion_mode: motionMode, ...(liveGestures ? { gesture: true } : {}) }, controller.signal, async (event) => {
+      await streamChat({
+        message: question, session_id: sessionId, mode, language: answerLanguage, motion_mode: motionMode,
+        ...(englishAnswer ? { input_language: language } : {}),
+        ...(translated ? { subtitle_language: 'ko' as const } : {}),
+        ...(presentationQa ? { presentation_qa: true } : {}),
+        ...(liveGestures ? { gesture: true } : {}),
+      }, controller.signal, async (event) => {
         if (ticket !== generation.current) return;
         if (captionTrack.current?.accept(event)) refreshCaptions();
         if (event.event === 'meta') { setSessionId(event.data.session_id); liveTurnId = event.data.turn_id ?? answerId; }
@@ -342,7 +359,14 @@ export default function App() {
     measuredMotion.stop(); setModel(undefined); setBuiltinAvatar(next); setAvatarError(null); setAvatarReady(false);
     if (next === 'jensen' && !gaussianRequested) setFraming('upper_body');
   }
-  function listen(turn: Turn) { if (busy || realtimeCall.current) return; captionTrack.current = null; refreshCaptions(); pcmPlayer.current?.stop(); setPcmState(initialPcmState); setActiveTurn(turn); void measuredMotion.play(turn.behavior.motion); void playback.play(turn, voice === 'off' || (voice === 'provider' && turn.language !== 'en' && persona?.capabilities.qwen_mlx_voice) ? 'browser' : voice, undefined, { gesture: speechGestureEnabled }); }
+  function listen(turn: Turn) {
+    if (busy || realtimeCall.current || (presentationQa && (!presentationVoiceReady || turn.language !== 'en'))) return;
+    captionTrack.current = null; refreshCaptions(); pcmPlayer.current?.stop(); setPcmState(initialPcmState);
+    setActiveTurn(turn); void measuredMotion.play(turn.behavior.motion);
+    const replayVoice = presentationQa ? 'provider' :
+      voice === 'off' || (voice === 'provider' && turn.language !== 'en' && persona?.capabilities.qwen_mlx_voice) ? 'browser' : voice;
+    void playback.play(turn, replayVoice, undefined, { gesture: speechGestureEnabled });
+  }
   useEffect(() => {
     if (!persona) return;
     if (lastPersona.current && lastPersona.current !== persona.id) {
@@ -355,8 +379,8 @@ export default function App() {
   }, [persona?.id]);
   useEffect(() => {
     if ((presentationMode || bilingual) && persona && !persona.capabilities.speech) setVoice('off');
-    if (bilingual && persona && !persona.capabilities.translated_subtitles) setBilingual(false);
-  }, [presentationMode, bilingual, persona]);
+    if (!presentationQa && bilingual && persona && !translationAvailable) setBilingual(false);
+  }, [presentationMode, presentationQa, bilingual, persona, translationAvailable]);
   const isJensen = persona?.id === 'jensen-huang';
   const gaussianEnabled = gaussianRequested && isJensen && builtinAvatar === 'jensen' && !model;
   const gaussianHead = useMemo<GaussianHeadConfig | undefined>(() => {
@@ -383,6 +407,13 @@ export default function App() {
   const caption = !bilingual && presentationMode
     ? (activeTurn?.text ?? (latestMessage?.pending ? latestMessage.text : '')).replace(/\[source:[A-Za-z0-9_.-]*(?:\]|$)/g, '').trim()
     : '';
+  const captionContent = translatedCaption
+    ? <p className="presentation-caption" aria-label="Korean answer captions" lang={translatedCaption.language}>
+        <small>{translatedCaption.label}</small>{translatedCaption.text}
+      </p>
+    : caption
+      ? <p className="presentation-caption" aria-label="Answer captions" lang={activeTurn?.language ?? (englishAnswer ? 'en' : language)}>{caption}</p>
+      : null;
 
   return <div className="app-shell">
     <aside className="sidebar">
@@ -393,7 +424,7 @@ export default function App() {
       <div className="sidebar-bottom"><button className="nav-item" onClick={() => setSettings(true)}><Settings2 size={18}/><span>Studio settings</span></button><button className="nav-item" onClick={() => setInfoOpen(!infoOpen)}><CircleHelp size={18}/><span>About this project</span></button><div className="simulation-note"><span className="tiny-dot"/> An AI simulation, openly labeled.</div></div>
     </aside>
     <div className="workspace">
-      <header className="topbar"><div className="breadcrumb"><span>Workspace</span><ChevronRight size={14}/><strong>{page === 'studio' ? 'Conversation' : page === 'sources' ? 'Source library' : page === 'presentation' ? 'Presentation' : 'Research lab'}</strong></div><div className="topbar-actions"><span className={`connection ${connection}`}><i/>{connection === 'ready' ? 'Studio connected' : connection === 'connecting' ? 'Connecting' : 'Service offline'}</span><label className="language-select"><Globe2 size={15}/><select aria-label={bilingual ? "Question language" : "Response language"} disabled={busy} value={language} onChange={(event) => setLanguage(event.target.value as Language)}><option value="en">English</option><option value="ko">한국어</option></select><ChevronDown size={12}/></label><button className="icon-button mobile-settings" onClick={() => setSettings(true)} aria-label="Studio settings"><Settings2 size={18}/></button><div className="user-avatar">Y</div></div></header>
+      <header className="topbar"><div className="breadcrumb"><span>Workspace</span><ChevronRight size={14}/><strong>{page === 'studio' ? 'Conversation' : page === 'sources' ? 'Source library' : page === 'presentation' ? 'Presentation' : 'Research lab'}</strong></div><div className="topbar-actions"><span className={`connection ${connection}`}><i/>{connection === 'ready' ? 'Studio connected' : connection === 'connecting' ? 'Connecting' : 'Service offline'}</span><label className="language-select"><Globe2 size={15}/><select aria-label={englishAnswer ? "Question language" : "Response language"} disabled={busy || microphone.listening || microphone.processing || callActive} value={language} onChange={(event) => setLanguage(event.target.value as Language)}><option value="en">English</option><option value="ko">한국어</option></select><ChevronDown size={12}/></label><button className="icon-button mobile-settings" onClick={() => setSettings(true)} aria-label="Studio settings"><Settings2 size={18}/></button><div className="user-avatar">Y</div></div></header>
       <main>
         {infoOpen && <div className="about-banner"><Sparkles size={19}/><p><strong>Who Is Your Bias?</strong> A research workspace for source-grounded dialogue, voice, and embodied behavior. This is an AI simulation, not {subjectName} or an official representative. The portrait and attention interaction are designed previews; they do not reproduce learned personal habits.</p><button className="icon-button" onClick={() => setInfoOpen(false)} aria-label="Close project information"><X size={17}/></button></div>}
         {connection === 'error' && <div className="connection-error" role="alert"><span><strong>The conversation service is offline.</strong> {connectionError}</span><button onClick={() => setReload((value) => value + 1)}><RotateCcw size={14}/> Reconnect</button></div>}
@@ -417,22 +448,43 @@ export default function App() {
               {avatarError && <div className="avatar-error" role="alert">{avatarError}<button onClick={() => selectBuiltinAvatar('portrait')}>Use stylized portrait</button></div>}
             </section>
               {avatarWindow.error && <p className="inline-error" role="alert">{avatarWindow.error}</p>}
-              {translatedCaption && <p className="presentation-caption" aria-label="Korean answer captions" lang={translatedCaption.language}><small>{translatedCaption.label}</small>{translatedCaption.text}</p>}
-              {caption && <p className="presentation-caption" aria-label="Answer captions" lang={activeTurn?.language ?? language}>{caption}</p>}
+              {captionContent}
+              {avatarWindow.target && createPortal(
+                presentationMode ? <div className="avatar-window-captions">{captionContent}</div> : captionContent,
+                avatarWindow.target,
+              )}
               <AttentionPanel enabled={page === 'studio'} reducedMotion={reducedMotion} onTarget={setAttentionTarget}/><MotionNotice state={measuredMotion} mode={motionMode} reducedMotion={reducedMotion} noMatch={Boolean(activeTurn && !busy && !activeTurn.behavior.motion)}/></div>
             <section className="conversation-card" aria-label="Conversation">
               <div className="conversation-header"><div><MessageCircle size={18}/><h2>Let's talk</h2></div><span className="preview-label">{persona?.capabilities.llm ? 'LLM connected' : 'Source preview'}</span></div>
-              <div className="bilingual-controls"><label><input type="checkbox" checked={bilingual} disabled={busy || !persona?.capabilities.translated_subtitles} onChange={(event) => {
-                cancel(); setBilingual(event.target.checked);
-                if (event.target.checked) { setLanguage('ko'); if (persona?.capabilities.speech) { setVoice('provider'); setAutoPlay(true); } }
-              }}/>English voice + Korean captions</label><p>{!persona?.capabilities.translated_subtitles ? 'Configure a translation provider to enable Korean captions.' : bilingual ? 'Ask in the selected question language. English audio uses the configured voice. Late translations show the English original.' : 'Korean questions can be typed or dictated.'}</p></div>
+              <div className="bilingual-controls">
+                <label><input type="checkbox" checked={bilingual}
+                  disabled={busy || microphone.listening || microphone.processing || callActive || (!presentationQa && !translationAvailable)}
+                  aria-describedby="caption-help" onChange={(event) => {
+                    cancel();
+                    setBilingual(event.target.checked);
+                    if (event.target.checked && !presentationQa) {
+                      setLanguage('ko');
+                      if (persona?.capabilities.speech) { setVoice('provider'); setAutoPlay(true); }
+                    }
+                  }}/>{presentationQa ? 'Korean captions' : 'English voice + Korean captions'}</label>
+                <p id="caption-help">{presentationQa ? (
+                  translationAvailable ? 'Answers are spoken in English. Late translations show the English original.' :
+                    'Answers are in English. When Korean translation is unavailable, captions use the English original.'
+                ) : !translationAvailable ? 'Configure a translation provider to enable Korean captions.' :
+                  bilingual ? 'Ask in the selected question language. Late translations show the English original.' :
+                    'Korean questions can be typed or dictated.'}</p>
+              </div>
+              {presentationQa && persona?.capabilities.qa_knowledge !== true &&
+                <p className="inline-error" role="status">Project Q&amp;A sources are unavailable. Check the presentation server configuration.</p>}
+              {presentationQa && !presentationVoiceReady &&
+                <p className="inline-error" role="status">The Jensen voice is unavailable. Answers use text and captions.</p>}
               <div className="message-list" role="log" aria-label="Conversation messages" aria-live="polite" aria-relevant="additions text">
                 {!messages.length && <div className="welcome-message"><div className="assistant-avatar"><Mark small/></div><span className="eyebrow">A GOOD QUESTION IS A GOOD START</span><h2>{language === 'ko' ? '어떤 이야기가 궁금해?' : 'Where should we begin?'}</h2><p>{language === 'ko' ? '공개된 자료를 바탕으로 궁금한 것을 물어봐. 답변의 출처도 함께 확인할 수 있어.' : `Explore ${topics.length ? topics.join(', ') : 'the ideas'} — with the original sources close by.`}</p><div className="starter-questions">{questions.slice(0, 3).map((question) => <button key={question} disabled={connection !== 'ready'} onClick={() => void send(question)}><span>{question}</span><ArrowUpRight size={16}/></button>)}</div><div className="preview-explainer"><BookOpen size={14}/><span>{persona?.capabilities.llm ? 'Responses use a connected model and selected evidence.' : 'Source preview uses published evidence. Connect a model for generated dialogue.'}</span></div></div>}
-                {messages.map((message) => <article key={message.id} className={`message ${message.role}`}><div className="message-avatar">{message.role === 'assistant' ? <Mark small/> : 'Y'}</div><div className="message-content"><div className="message-author">{message.role === 'assistant' ? 'Research persona' : 'You'}{message.turn && <span>{message.turn.provider === 'evidence' ? 'Source notes' : 'Generated'}</span>}</div>{message.text && <p className="message-text">{message.text}</p>}{message.note && <div className="message-note" style={{ fontSize: 11, opacity: 0.7, marginTop: 4 }}>{message.note}</div>}{message.pending && <div className="thinking"><LoaderCircle size={13} className="spin"/>{status || 'Working on your question'}</div>}{message.error && <div className="message-error" role="alert">{message.error}</div>}{message.turn && <div className="message-tools"><button onClick={() => setEvidence(message.turn!.citations)}><BookOpen size={13}/>{message.turn.citations.length ? `${message.turn.citations.length} evidence records` : 'No supporting evidence'}</button><button onClick={() => listen(message.turn!)} disabled={busy || callActive} aria-label="Play response"><Volume2 size={14}/><span>Listen</span></button><GroundingBadge grounding={message.turn.grounding} language={message.turn.language}/></div>}</div></article>)}
+                {messages.map((message) => <article key={message.id} className={`message ${message.role}`}><div className="message-avatar">{message.role === 'assistant' ? <Mark small/> : 'Y'}</div><div className="message-content"><div className="message-author">{message.role === 'assistant' ? 'Research persona' : 'You'}{message.turn && <span>{message.turn.provider === 'evidence' ? 'Source notes' : 'Generated'}</span>}</div>{message.text && <p className="message-text">{message.text}</p>}{message.note && <div className="message-note" style={{ fontSize: 11, opacity: 0.7, marginTop: 4 }}>{message.note}</div>}{message.pending && <div className="thinking"><LoaderCircle size={13} className="spin"/>{status || 'Working on your question'}</div>}{message.error && <div className="message-error" role="alert">{message.error}</div>}{message.turn && <div className="message-tools"><button onClick={() => setEvidence(message.turn!.citations)}><BookOpen size={13}/>{message.turn.citations.length ? `${message.turn.citations.length} evidence records` : 'No supporting evidence'}</button><button onClick={() => listen(message.turn!)} disabled={busy || callActive || (presentationQa && !presentationVoiceReady)} aria-label="Play response"><Volume2 size={14}/><span>Listen</span></button><GroundingBadge grounding={message.turn.grounding} language={message.turn.language}/></div>}</div></article>)}
                 <div ref={chatBottom}/>
               </div>
               {(playback.error || pcmState.error || microphone.error) && <div className="inline-error" role="alert">{playback.error || pcmState.error || microphone.error}</div>}
-              <form className={`composer ${microphone.listening ? 'listening' : ''}`} onSubmit={(event) => { event.preventDefault(); void send(); }}><textarea ref={composer} value={draft} onChange={(event) => setDraft(event.target.value)} placeholder={microphone.listening ? micPrompt : language === 'ko' ? '궁금한 것을 물어봐…' : 'Ask something you’re curious about…'} aria-label="Your message" rows={2} maxLength={2000} disabled={busy || callActive} onKeyDown={(event) => { if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void send(); } }}/><div className="composer-bottom"><button className={`microphone-button ${microphone.listening ? 'active' : ''}`} type="button" onClick={() => { playback.stop(); microphone.toggle(); }} disabled={busy || callActive || microphone.processing || !microphone.supported || connection !== 'ready'} aria-label={microphone.listening ? finishMicLabel : 'Use microphone'} title={microphone.supported ? micHelp : 'Microphone transcription is unavailable in this browser'}><Mic size={16}/><span>{micLabel}</span></button>{persona?.capabilities.realtime_call && <button type="button" className={`microphone-button ${callActive ? 'active' : ''}`} onClick={toggleCall} disabled={!callActive && (busy || microphone.listening || microphone.processing || connection !== 'ready')} aria-label={callActive ? 'End live call' : 'Start live call'} title="Talk in real time with the Sophon voice model; replies are not checked against the source library">{callActive ? <PhoneOff size={16}/> : <Phone size={16}/>}<span>{callActive ? 'End call' : 'Live call'}</span></button>}{callState.status === 'failed' && callState.message && <span role="status" style={{ fontSize: 11, color: '#b4532a' }}>{callState.message}</span>}<span className="keyboard-hint">↵ to send</span>{busy ? <button type="button" className="send-button" onClick={cancel} aria-label="Stop response"><Square size={15}/></button> : <button type="submit" className="send-button" disabled={!draft.trim() || connection !== 'ready' || callActive} aria-label="Send message"><ArrowUp size={18}/></button>}</div></form>
+              <form className={`composer ${microphone.listening ? 'listening' : ''}`} onSubmit={(event) => { event.preventDefault(); void send(); }}><textarea ref={composer} value={draft} onChange={(event) => setDraft(event.target.value)} placeholder={microphone.listening ? micPrompt : language === 'ko' ? '궁금한 것을 물어봐…' : 'Ask something you’re curious about…'} aria-label="Your message" rows={2} maxLength={2000} disabled={busy || callActive} onKeyDown={(event) => { if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void send(); } }}/><div className="composer-bottom"><button className={`microphone-button ${microphone.listening ? 'active' : ''}`} type="button" onClick={() => { playback.stop(); microphone.toggle(); }} disabled={busy || callActive || microphone.processing || !microphone.supported || connection !== 'ready'} aria-label={microphone.listening ? finishMicLabel : 'Use microphone'} title={microphone.supported ? micHelp : 'Microphone transcription is unavailable in this browser'}><Mic size={16}/><span>{micLabel}</span></button>{!presentationQa && persona?.capabilities.realtime_call && <button type="button" className={`microphone-button ${callActive ? 'active' : ''}`} onClick={toggleCall} disabled={!callActive && (busy || microphone.listening || microphone.processing || connection !== 'ready')} aria-label={callActive ? 'End live call' : 'Start live call'} title="Talk in real time with the Sophon voice model; replies are not checked against the source library">{callActive ? <PhoneOff size={16}/> : <Phone size={16}/>}<span>{callActive ? 'End call' : 'Live call'}</span></button>}{callState.status === 'failed' && callState.message && <span role="status" style={{ fontSize: 11, color: '#b4532a' }}>{callState.message}</span>}<span className="keyboard-hint">↵ to send</span>{busy ? <button type="button" className="send-button" onClick={cancel} aria-label="Stop response"><Square size={15}/></button> : <button type="submit" className="send-button" disabled={!draft.trim() || connection !== 'ready' || callActive} aria-label="Send message"><ArrowUp size={18}/></button>}</div></form>
               <div className="conversation-footer"><span className="tiny-dot"/> AI simulation · {persona?.snapshot ? `Snapshot ${persona.snapshot.as_of.slice(0, 10)} · dated sources` : 'Historical sources'} · Verify important claims</div>
             </section>
           </div>

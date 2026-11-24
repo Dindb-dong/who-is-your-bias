@@ -6,6 +6,8 @@ Unknown generated sentences still use the configured translation service.
 """
 
 REVIEWED_KOREAN = {
+    "The reviewed records do not establish the team's actual reason.":
+        "검토한 자료에서는 팀의 실제 선택 이유를 확인할 수 없습니다.",
     "I can't make a personal buy-or-sell recommendation or promise a stock's future return.":
         "개인에게 주식을 사거나 팔라고 권하거나 미래 수익을 보장할 수는 없습니다.",
     "A sensible discussion would compare current filings, valuation and concentration risk with your time horizon; this demo does not have verified live market data.":
@@ -18,6 +20,8 @@ REVIEWED_KOREAN = {
         "이 시연에서 이용할 수 있는 자료만으로는 해당 최신 정보를 확인할 수 없습니다.",
     "I can discuss dated public statements, but I shouldn't present them as today's news or a confirmed forecast.":
         "과거의 공개 발언을 설명할 수는 있지만, 오늘의 뉴스나 확정된 전망으로 제시하지는 않겠습니다.",
+    "The studio retrieves reviewed records and uses them to answer audience questions through the simulated avatar.":
+        "스튜디오는 검토된 자료를 검색해 시뮬레이션 아바타로 관객 질문에 답합니다.",
     "I don't have reviewed project documentation for that detail.":
         "그 세부 사항을 확인할 검토된 프로젝트 자료가 없습니다.",
     "The team should confirm the implementation or measurement before I describe it as a result.":

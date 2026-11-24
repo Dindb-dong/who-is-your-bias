@@ -7,15 +7,16 @@ const ENGLISH = ['We use a configured speech model.', 'Voice quality still needs
 const KOREAN = '설정된 음성 모델을 사용합니다.';
 const RATE = 16000;
 const frame = (event: string, data: unknown) => `event: ${event}\ndata: ${JSON.stringify(data)}\n\n`;
-function stream() {
+function stream(translationAvailable: boolean, includeCaptions: boolean) {
   const turnId = 'bilingual-test';
   let output = frame('meta', { turn_id: turnId, session_id: 'bilingual-session', protocol: 'live-segments-pcm.v1' });
   output += frame('token', { text: ENGLISH.join(' ') });
   for (let sequence = 0; sequence < 2; sequence++) {
     const id = { turn_id: turnId, segment_id: `${turnId}:${sequence}`, sequence };
     output += frame('segment', { ...id, text: ENGLISH[sequence], evidence_ids: [], state: 'committed' });
-    output += frame('subtitle', { ...id, language: 'ko', text: sequence ? '' : KOREAN,
-      state: sequence ? 'unavailable' : 'ready', ...(sequence ? { reason: 'synthetic-timeout' } : {}) });
+    const translated = translationAvailable && sequence === 0;
+    if (includeCaptions) output += frame('subtitle', { ...id, language: 'ko', text: translated ? KOREAN : '',
+      state: translated ? 'ready' : 'unavailable', ...(translated ? {} : { reason: 'synthetic-timeout' }) });
     output += frame('audio_segment', { ...id, audio_sha256: 'a'.repeat(64), sample_rate: RATE, channels: 1,
       sample_offset: sequence * RATE * 2, sample_count: RATE * 2, synthesis_ms: 0 });
     for (let second = 0; second < 2; second++) {
@@ -35,18 +36,32 @@ function stream() {
   return output + frame('audio_end', { turn_id: turnId, chunks: 4, sample_count: RATE * 4, sample_rate: RATE,
     first_pcm_ready_ms: 0, total_ms: 0, state: 'delivered', spoken_complete: false, acoustic_latency_ms: null }) + frame('done', {});
 }
-async function prepare(page: Page) {
+async function prepare(page: Page, translationAvailable = true, url = '/?present=1&bilingual=1', renderAvatar = false) {
   const requests: Record<string, unknown>[] = [];
+  // The browser contract below exercises PCM and the caption clock. Software
+  // 3D rendering can starve that clock on shared runners.
+  if (!renderAvatar) await page.addInitScript(() => {
+    const original = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function (...args: Parameters<typeof original>) {
+      if (['webgl', 'webgl2', 'experimental-webgl'].includes(args[0])) return null;
+      return Reflect.apply(original, this, args);
+    } as typeof original;
+  });
   await page.route('**/api/persona', (route) => route.fulfill({ json: {
-    id: 'synthetic-bilingual', name: 'Synthetic bilingual fixture', tagline: '', description: '',
+    id: 'jensen-huang', name: 'Synthetic bilingual fixture', tagline: '', description: '',
     example_questions: { en: [], ko: [] }, stats: { sources: 0, evidence: 0, held_out_sources: 0 },
-    capabilities: { llm: true, speech: true, live_speech: true, transcription: false, translated_subtitles: true }, notice: 'Synthetic protocol test.',
+    capabilities: { llm: true, speech: true, live_speech: true, transcription: false, translated_subtitles: translationAvailable, qa_knowledge: true, realtime_call: true }, notice: 'Synthetic protocol test.',
+    bindings: { voice: { status: 'matched', persona_id: 'jensen-huang' } },
   } }));
   await page.route('**/api/sources', (route) => route.fulfill({ json: { sources: [] } }));
   await page.route('**/api/motion/library', (route) => route.fulfill({ json: { available: false, status: 'not_configured', reviewed_runtime_primitives: 0, preview_runtime_primitives: 0 } }));
-  await page.route('**/api/chat/live', (route) => { requests.push(route.request().postDataJSON()); return route.fulfill({ contentType: 'text/event-stream', body: stream() }); });
-  await page.goto('/?present=1&bilingual=1');
-  await expect(page.getByText('Studio connected', { exact: true })).toBeVisible();
+  await page.route('**/api/chat/live', (route) => {
+    const request = route.request().postDataJSON();
+    requests.push(request);
+    return route.fulfill({ contentType: 'text/event-stream', body: stream(translationAvailable, request.subtitle_language === 'ko') });
+  });
+  await page.goto(url);
+  await expect(page.getByText('Studio connected', { exact: true })).toBeVisible({ timeout: 20_000 });
   return requests;
 }
 test('routes a Korean typed question to English speech with sentence-timed Korean captions and explicit fallback', async ({ page }) => {
@@ -84,4 +99,80 @@ test('dictates Korean using ko-KR without switching the English answer language'
   await expect(page.getByLabel('Korean answer captions')).toContainText(KOREAN);
   expect(await page.evaluate(() => (window as unknown as { __capturedRecognitionLanguage: string }).__capturedRecognitionLanguage)).toBe('ko-KR');
   expect(requests[0]).toMatchObject({ message: QUESTION, language: 'en', input_language: 'ko', subtitle_language: 'ko' });
+});
+
+test('keeps Jensen presentation answers and playback in English when Korean translation is unconfigured', async ({ page }) => {
+  const requests = await prepare(page, false, '/?present=1');
+  await expect(page.getByRole('button', { name: 'Start live call' })).toHaveCount(0);
+  await page.getByLabel('Question language').selectOption('ko');
+  await page.getByLabel('Your message', { exact: true }).fill(QUESTION);
+  await page.getByRole('button', { name: 'Send message', exact: true }).click();
+
+  await expect(page.getByLabel('Korean answer captions')).toContainText(ENGLISH[0]);
+  await expect(page.getByLabel('Korean answer captions')).toHaveAttribute('lang', 'en');
+  expect(requests).toHaveLength(1);
+  expect(requests[0]).toMatchObject({
+    message: QUESTION, input_language: 'ko', language: 'en', subtitle_language: 'ko', presentation_qa: true,
+  });
+});
+
+test('keeps English input and voice available when the operator turns off Korean captions', async ({ page }) => {
+  const requests = await prepare(page, false, '/?present=1');
+  await page.getByRole('checkbox', { name: 'Korean captions' }).uncheck();
+  await expect(page.getByLabel('Question language')).toHaveValue('en');
+  const question = 'How does this project work?';
+  await page.getByLabel('Your message', { exact: true }).fill(question);
+  await page.getByRole('button', { name: 'Send message', exact: true }).click();
+
+  const caption = page.getByLabel('Answer captions', { exact: true });
+  await expect(caption).toContainText(ENGLISH[0]);
+  await expect(caption).toHaveAttribute('lang', 'en');
+  expect(requests).toHaveLength(1);
+  expect(requests[0]).toMatchObject({
+    message: question, input_language: 'en', language: 'en', presentation_qa: true,
+  });
+  expect(requests[0]).not.toHaveProperty('subtitle_language');
+});
+
+test('shows Korean subtitles over English speech in the real picture-in-picture window', async ({ page, isMobile }, testInfo) => {
+  test.skip(isMobile, 'Document Picture-in-Picture is a desktop presentation feature.');
+  const requests = await prepare(page, true, '/?present=1&bilingual=1', true);
+  const open = page.getByRole('button', { name: 'Open avatar picture-in-picture' });
+  test.skip(await open.count() === 0, 'This browser does not expose Document Picture-in-Picture.');
+  await expect(page.locator('.avatar-viewport canvas')).toBeVisible({ timeout: 20_000 });
+  const [pipWindow] = await Promise.all([
+    page.context().waitForEvent('page'),
+    open.click(),
+  ]);
+  await expect(page.getByRole('status').filter({ hasText: 'Avatar is in a separate window.' })).toBeVisible();
+  await pipWindow.setViewportSize({ width: 760, height: 380 });
+  await page.getByLabel('Your message', { exact: true }).fill(QUESTION);
+  await page.getByRole('button', { name: 'Send message', exact: true }).click();
+
+  const captionState = () => page.evaluate(() => {
+    const pip = (window as Window & { documentPictureInPicture: { window: Window } }).documentPictureInPicture.window;
+    const caption = pip.document.querySelector('.presentation-caption');
+    return { text: caption?.lastChild?.textContent, lang: caption?.getAttribute('lang') };
+  });
+  await expect.poll(captionState).toEqual({ text: KOREAN, lang: 'ko' });
+  const layout = await pipWindow.locator('.avatar-window-captions').evaluate((band) => {
+    const caption = band.querySelector('.presentation-caption');
+    const avatar = band.parentElement?.querySelector('.avatar-portal');
+    return {
+      width: band.getBoundingClientRect().width,
+      aboveAvatar: !!avatar && band.getBoundingClientRect().bottom <= avatar.getBoundingClientRect().top,
+      fontSize: caption ? parseFloat(getComputedStyle(caption).fontSize) : 0,
+    };
+  });
+  expect(layout.width).toBeGreaterThanOrEqual(740);
+  expect(layout.aboveAvatar).toBe(true);
+  expect(layout.fontSize).toBeGreaterThanOrEqual(26);
+  await expect(pipWindow.getByText('AI simulation', { exact: true })).toBeVisible();
+  const screenshot = testInfo.outputPath('pip-korean-captions.png');
+  await pipWindow.screenshot({ path: screenshot });
+  await testInfo.attach('PiP window with Korean subtitles', { path: screenshot, contentType: 'image/png' });
+  expect(requests[0]).toMatchObject({ language: 'en', input_language: 'ko', subtitle_language: 'ko' });
+  await expect.poll(captionState).toEqual({ text: ENGLISH[1], lang: 'en' });
+  await page.getByRole('button', { name: 'Stop audio', exact: true }).click();
+  await expect.poll(captionState).toEqual({ text: undefined, lang: undefined });
 });

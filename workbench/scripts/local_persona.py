@@ -154,7 +154,9 @@ def prepare():
         "web_dir": str(web_dir),
         "decision_notes_enabled": os.environ.get("YAICON_DECISION_NOTES", "1") != "0",
         "prompt_version": PROMPT_VERSION, "language": "en", "llm_port": 8103, "voice_port": 8104,
-        "app_port": 8105, "external_inference": bool(elevenlabs_config()) or any(os.getenv(f"BIAS_{kind}_BASE_URL") for kind in ("LLM", "TTS", "ASR"))}
+        "app_port": 8105, "external_inference": (
+            bool(elevenlabs_config()) or os.getenv("BIAS_TRANSLATION_PROTOCOL") in {"google-web", "google-cloud"}
+            or any(os.getenv(f"BIAS_{kind}_BASE_URL") for kind in ("LLM", "TTS", "ASR", "TRANSLATION")))}
     write_json(RUNTIME, runtime)
     write_json(output / "local-runtime.json", runtime)
     return output
@@ -211,20 +213,29 @@ def create_app():
         tts = provider("TTS", "http://127.0.0.1:8104/v1", "qwen3-tts")
         voice_id = os.getenv("BIAS_TTS_VOICE", "default" if os.getenv("BIAS_TTS_BASE_URL") else "reference")
     asr = provider("ASR")
-    translation = provider("TRANSLATION")
+    translation_protocol = os.getenv("BIAS_TRANSLATION_PROTOCOL", "openai-compatible")
+    translation = (provider("TRANSLATION") if translation_protocol == "openai-compatible"
+                   else ProviderSettings(api_key=os.getenv("BIAS_TRANSLATION_API_KEY")))
     local_asr = find_local_whisper(PROJECT) if not asr.configured and "transcription" in signature(upstream_app).parameters else None
     custom_tts = bool(elevenlabs or os.getenv("BIAS_TTS_BASE_URL"))
     adaptive = os.getenv("BIAS_ADAPTIVE_RESPONSES", "false").lower() in {"true", "1"}
     concise = os.getenv("BIAS_LIVE_CONCISE", "false").lower() in {"true", "1"}
-    external = any(urlsplit(item.base_url).hostname not in {"127.0.0.1", "localhost", "::1"}
+    external = translation_protocol in {"google-web", "google-cloud"} or any(
+        urlsplit(item.base_url).hostname not in {"127.0.0.1", "localhost", "::1"}
         for item in (llm, tts, asr, translation) if item.base_url)
     baseline = Settings()
     qa_delivery = {}
     if hasattr(baseline, "qa_knowledge_dir"):
         qa_delivery = {"qa_knowledge_dir": Path(os.environ["BIAS_QA_KNOWLEDGE_DIR"]).expanduser() if os.getenv("BIAS_QA_KNOWLEDGE_DIR") else None,
-                       "translation": translation, "translation_timeout": float(os.getenv("BIAS_TRANSLATION_TIMEOUT", "12"))}
+                       "translation": translation,
+                       "translation_timeout": float(os.getenv("BIAS_TRANSLATION_TIMEOUT",
+                                                            "12" if translation_protocol == "openai-compatible" else "2.5"))}
     elif os.getenv("BIAS_QA_KNOWLEDGE_DIR") or translation.configured:
         raise ValueError("Update the Python studio checkout before enabling QA knowledge or translated subtitles")
+    if hasattr(baseline, "translation_protocol"):
+        qa_delivery["translation_protocol"] = translation_protocol
+    elif translation_protocol != "openai-compatible":
+        raise ValueError("Update the Python studio checkout before enabling Google captions")
     policy = {"adaptive_responses": adaptive, "live_concise": concise} if hasattr(baseline, "adaptive_responses") else {}
     config = replace(baseline, corpus_dir=output / "corpus", persona_snapshot=output / "snapshot.json",
         web_dir=web_dir, llm=llm, tts=tts, asr=asr,

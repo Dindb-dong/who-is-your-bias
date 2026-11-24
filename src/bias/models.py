@@ -178,6 +178,7 @@ class ChatRequest(Record):
     # and translated captions are independent, opt-in delivery preferences.
     input_language: Language | None = None
     subtitle_language: Language | None = None
+    presentation_qa: bool = False
     motion_mode: Literal["disabled", "reviewed", "geometry_preview"] = "disabled"
     # Live voice only: also stream speech-driven gesture frames (EMAGE) beside the PCM.
     gesture: bool = False
@@ -188,6 +189,12 @@ class ChatRequest(Record):
         if not value.strip():
             raise ValueError("Message cannot be blank")
         return value.strip()
+
+    @model_validator(mode="after")
+    def presentation_answer_is_english(self) -> ChatRequest:
+        if self.presentation_qa and self.language != "en":
+            raise ValueError("Presentation Q&A answers must be in English")
+        return self
 
 
 class Citation(Record):

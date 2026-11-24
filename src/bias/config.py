@@ -52,6 +52,7 @@ class Settings:
     tts: ProviderSettings = field(default_factory=ProviderSettings)
     asr: ProviderSettings = field(default_factory=ProviderSettings)
     translation: ProviderSettings = field(default_factory=ProviderSettings)
+    translation_protocol: str = "openai-compatible"
     translation_timeout: float = 12.0
     qa_knowledge_dir: Path | None = None
     tts_voice: str = "default"
@@ -103,6 +104,8 @@ class Settings:
             raise ValueError("persona_memory_format must be graph, flat or compact")
         if not 0.1 <= self.translation_timeout <= 30:
             raise ValueError("translation_timeout must be between 0.1 and 30 seconds")
+        if self.translation_protocol not in {"openai-compatible", "google-web", "google-cloud"}:
+            raise ValueError("Unknown subtitle translation protocol")
         if self.tts_persona_id is not None and (not isinstance(self.tts_persona_id, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,119}", self.tts_persona_id)):
             raise ValueError("tts_persona_id must be a persona identifier or generic")
         if self.tts_protocol not in {"openai-compatible", "elevenlabs", "qwen-mlx"}:
@@ -164,14 +167,19 @@ class Settings:
         if adaptive not in {"true", "false", "1", "0"}:
             raise ValueError("BIAS_ADAPTIVE_RESPONSES must be true, false, 1, or 0")
 
+        translation_protocol = os.getenv("BIAS_TRANSLATION_PROTOCOL", "openai-compatible")
+        translation = (provider("TRANSLATION") if translation_protocol == "openai-compatible"
+                       else ProviderSettings(api_key=os.getenv("BIAS_TRANSLATION_API_KEY")))
         return cls(
             corpus_dir=Path(os.getenv("BIAS_CORPUS_DIR", str(repository_root() / "data/personas/jensen-huang"))),
             web_dir=Path(os.getenv("BIAS_WEB_DIR", str(repository_root() / "apps/web/dist"))),
             llm=provider("LLM"),
             tts=provider("TTS"),
             asr=provider("ASR"),
-            translation=provider("TRANSLATION"),
-            translation_timeout=number("BIAS_TRANSLATION_TIMEOUT", 12, 0.1, 30),
+            translation=translation,
+            translation_protocol=translation_protocol,
+            translation_timeout=number("BIAS_TRANSLATION_TIMEOUT",
+                                       12 if translation_protocol == "openai-compatible" else 2.5, 0.1, 30),
             qa_knowledge_dir=Path(os.environ["BIAS_QA_KNOWLEDGE_DIR"]).expanduser() if os.getenv("BIAS_QA_KNOWLEDGE_DIR") else None,
             tts_voice=os.getenv("BIAS_TTS_VOICE", "default"),
             tts_persona_id=os.getenv("BIAS_TTS_PERSONA_ID") or None,

@@ -21,9 +21,28 @@ from .models import Citation, Locator, Record
 
 _PROJECT = re.compile(
     r"\b(?:yaicon|who\s+is\s+your\s+bias|this\s+(?:project|avatar|demo|app|pipeline)|"
-    r"(?:our|your)\s+(?:project|avatar|demo|pipeline)|this\s+model|persona\s+graph|qwen\w*|sophon|emage|mcccd|mccd)\b"
+    r"(?:our|your|the)\s+(?:project|avatar|demo|pipeline)|this\s+model|persona\s+graph)\b"
     r"|야이콘|(?:이|우리|이번)\s*(?:프로젝트|아바타|시연|파이프라인|발표)|"
-    r"아바타|(?:이|우리)\s*모델|사용한\s*모델|페르소나\s*그래프|상반신\s*학습|한국어\s*자막", re.I)
+    r"아바타|무슨\s*프로젝트|(?:이|우리)\s*모델|사용한\s*모델|페르소나\s*(?:그래프|.{0,5}구현)|상반신\s*학습|한국어\s*자막", re.I)
+_PRESENTATION_PROJECT = re.compile(
+    r"\b(?:what did you build|what exactly am i looking at|how did you build (?:it|this)|"
+    r"how does (?:it|this) work|which architecture.{0,70}(?:running|using)|"
+    r"what (?:architecture|model|stack).{0,40}(?:are you|does this)|walk me through (?:this|the) demo|"
+    r"how (?:is|did you) (?:the )?(?:persona|avatar).{0,20}(?:built|implemented)|rag|tts|asr|flame|vhap)\b"
+    r"|(?:이거|이걸|여기서).{0,16}(?:어떻게.{0,8}만(?:들|든)|뭘.{0,6}볼|어디에.{0,6}써|뭐부터)"
+    r"|(?:오늘|지금).{0,16}(?:실제|쓰는|사용).{0,16}(?:아키텍처|파이프라인|구조|모델)"
+    r"|왜.{0,10}영어|마이크.{0,14}(?:인식|질문)|한국어\s*음성\s*학습", re.I)
+_OVERVIEW = re.compile(
+    r"\b(?:what (?:is|was) (?:this|your|the) (?:project|demo)(?!'s\b)|what does (?:this|your|the) (?:project|demo) do|"
+    r"what did you build|what exactly am i looking at|walk me through (?:this|the) demo|"
+    r"(?:introduce|give (?:me|us) an overview of) (?:this|your|the) (?:project|demo))\b"
+    r"|(?:프로젝트|시연|발표)(?:를|가|는|인데)?\s*(?:간단히\s*|한\s*줄로\s*)?(?:소개|뭐|무엇)"
+    r"|무슨\s*프로젝트|여기서\s*(?:뭘|무엇을)\s*볼", re.I)
+_WHY = re.compile(r"\b(?:why|reason|choose|chose|chosen|design rationale)\b|이유|왜|선택|선정", re.I)
+_COMPARISON = re.compile(
+    r"\b(?:benchmark|compar\w*|superior|outperform\w*|better|faster|vs)\b|벤치마크|비교|우수|우위|보다.{0,8}(?:빠르|낫)", re.I)
+_QWEN = re.compile(r"(?<![a-z0-9])qwen[0-9.\w]*(?![a-z0-9])|큐[웬원엔]|퀀", re.I)
+_NVIDIA = re.compile(r"\b(?:nvidia|nvda|(?:your|the) company)\b|엔비디아|당신의 회사", re.I)
 _COMPANY = re.compile(r"\b(?:nvidia|nvda|jensen|huang)\b|엔비디아|젠슨|황\b", re.I)
 _RECENT = re.compile(
     r"\b(?:latest|recent|today|currently|current|news|now|still|next\s+year|this\s+(?:week|month|year))\b"
@@ -60,7 +79,9 @@ class QAEntry(Record):
     review_status: Literal["reviewed"]
     published_at: date | None = None
     revision: str | None = Field(default=None, pattern=r"^[a-f0-9]{40}$")
-    fact_kind: Literal["implementation", "branch_status", "company_claim", "public_filing"]
+    fact_kind: Literal["implementation", "branch_status", "design_rationale", "measurement", "company_claim", "public_filing"]
+    engineering_rationale_en: str | None = Field(default=None, min_length=1, max_length=300)
+    engineering_rationale_ko: str | None = Field(default=None, min_length=1, max_length=300)
 
     @field_validator("title", "publisher", "summary", "reviewer")
     @classmethod
@@ -91,12 +112,18 @@ class QAEntry(Record):
             raise ValueError("Knowledge expiry must follow its review")
         if self.published_at is not None and self.published_at > self.reviewed_at.date():
             raise ValueError("A source cannot be reviewed before publication")
+        rationale = (self.engineering_rationale_en, self.engineering_rationale_ko)
+        if any(value is not None for value in rationale) and (
+            self.scope != "project" or self.fact_kind != "implementation"
+            or not all(value and value.strip() and "[source:" not in value for value in rationale)
+        ):
+            raise ValueError("Engineering rationales require a project implementation source and both languages")
         if self.scope == "project":
             if url.hostname != "github.com" or not url.path.startswith("/Dindb-dong/who-is-your-bias/"):
                 raise ValueError("Project cards must cite the team repository")
-            if self.fact_kind not in {"implementation", "branch_status"} or self.revision is None:
+            if self.fact_kind not in {"implementation", "branch_status", "design_rationale", "measurement"} or self.revision is None:
                 raise ValueError("Project cards require an audited revision and project fact kind")
-            if self.fact_kind == "implementation" and f"/blob/{self.revision}/" not in url.path:
+            if self.fact_kind != "branch_status" and f"/blob/{self.revision}/" not in url.path:
                 raise ValueError("Implementation cards must link to immutable audited code or docs")
             if self.expires_at - self.reviewed_at > timedelta(days=14):
                 raise ValueError("Project cards need review at least every 14 days")
@@ -156,6 +183,13 @@ class KnowledgeDecision:
     limitations: tuple[str, ...] = ()
 
     def fallback(self, language: str) -> str | None:
+        if self.reason == "project_overview_only":
+            if language == "ko":
+                return ("그 세부 사항을 확인할 검토된 프로젝트 자료가 없습니다. "
+                        "스튜디오는 검토된 자료를 검색해 시뮬레이션 아바타로 관객 질문에 답합니다. [source:QA-project-overview]")
+            return ("I don't have reviewed project documentation for that detail. "
+                    "The studio retrieves reviewed records and uses them to answer audience questions through "
+                    "the simulated avatar. [source:QA-project-overview]")
         # Qwen's actual-model smoke check turned lack of documentation into
         # invented rationale/negative facts. Keep these known evidence limits
         # explicit rather than asking a small model to infer the distinction.
@@ -174,6 +208,14 @@ class KnowledgeDecision:
         if self.entries and self.route in {"project", "news"}:
             return None
         return _FALLBACKS[self.route]["ko" if language == "ko" else "en"]
+
+    def possible_rationale(self, language: str) -> tuple[QAEntry, str] | None:
+        if self.reason == "engineering_inference_available" and self.entries:
+            entry = self.entries[0]
+            rationale = entry.engineering_rationale_ko if language == "ko" else entry.engineering_rationale_en
+            if rationale:
+                return entry, rationale
+        return None
 
     def citations(self) -> list[Citation]:
         return [entry.citation() for entry in self.entries]
@@ -220,15 +262,20 @@ class QAKnowledge:
             entries.extend(QABundle.model_validate_json(file.read_text(encoding="utf-8")).entries)
         return cls(tuple(entries))
 
-    def resolve(self, question: str, *, now: datetime | None = None) -> KnowledgeDecision | None:
+    def resolve(self, question: str, *, now: datetime | None = None, presentation: bool = False) -> KnowledgeDecision | None:
         now = _utc(now or datetime.now(timezone.utc))
-        query = unicodedata.normalize("NFKC", question).strip().casefold()
+        query = " ".join(unicodedata.normalize("NFKC", question).casefold().replace("’", "'").split())
         if _ALLEGATION.search(query):
             return KnowledgeDecision("allegation", reason="unverified_personal_allegation")
         if (_INVESTMENT.search(query) or _COMPANY.search(query)) and _TRADE_REQUEST.search(query):
             return KnowledgeDecision("finance", reason="personal_trading_request")
-        project = bool(_PROJECT.search(query) or re.search(
-            r"(?<![a-z0-9])(?:mcccd|mccd|qwen[0-9.]*|sophon|emage)(?![a-z0-9])", query))
+        qwen = bool(_QWEN.search(query))
+        overview = bool(_OVERVIEW.search(query))
+        explicit_project = _PROJECT.search(query)
+        project_technology = qwen or re.search(r"(?<![a-z0-9])(?:mcccd|mccd|sophon|emage)(?![a-z0-9])", query)
+        project = bool(explicit_project or (
+            not _COMPANY.search(query) and (project_technology or (presentation and _PRESENTATION_PROJECT.search(query)))
+        ))
         requested_years = {int(year) for year in re.findall(r"(?<!\d)((?:19|20)\d{2})(?!\d)", query)}
         recent = bool(_RECENT.search(query))
         role_question = (bool(re.search(r"\bwho\s+is\b", query) and re.search(r"\b(?:ceo|president)\b", query))
@@ -236,9 +283,9 @@ class QAKnowledge:
                          or bool(re.search(r"\bresign\w*\b|사임", query)))
         implicit_leader = re.fullmatch(r"who is (?:the )?ceo (?:now|currently)\??", query)
         historical = bool(requested_years and max(requested_years) < now.year and not recent)
-        current = not historical and bool((_COMPANY.search(query) and (recent or _OUTLOOK.search(query) or role_question))
-                       or (recent and re.search(r"\b(?:company|you|your)\b|회사|당신", query))
-                       or implicit_leader)
+        company = _NVIDIA if project else _COMPANY
+        current = not historical and bool((company.search(query) and (recent or _OUTLOOK.search(query) or role_question))
+                       or (recent and _NVIDIA.search(query)) or implicit_leader)
         if not project and not current:
             return None
         route = "project" if project else "news"
@@ -247,25 +294,39 @@ class QAKnowledge:
                       and (entry.published_at is None or entry.published_at <= now.date())
                       and (entry.scope != "news" or (now.date() - entry.published_at <= timedelta(days=31)
                            and (not requested_years or entry.published_at.year in requested_years)))]
+        why = bool(_WHY.search(query))
+        comparison = bool(_COMPARISON.search(query))
         ranked = []
         for entry in candidates:
             matches = [cue for cue in entry.cues if _cue_matches(cue, query)]
-            if matches:
-                # Specific phrases outrank generic model or project mentions.
-                score = sum(1 + min(len(cue.split()) - 1, 3) for cue in matches)
+            if matches or (overview and entry.id == "QA-project-overview"):
+                # More specific cues weigh more than repeated generic terms.
+                specificity = max((min(len(cue.split()), 4) for cue in matches), default=1)
+                score = specificity * 2 + min(len(matches), 3)
+                if overview and entry.id == "QA-project-overview":
+                    score += 20
+                if why and entry.fact_kind == "design_rationale":
+                    score += 2
                 ranked.append((score, entry.id, entry))
         ranked.sort(key=lambda item: (-item[0], item[1]))
         selected = tuple(item[2] for item in ranked[:3])
         limitations = ()
         if project and current:
             limitations = ("The supplied entries cover project facts only; the current-company-news part remains unverified by this route.",)
+        if presentation and project and not current and not selected:
+            overview_entry = next((entry for entry in candidates if entry.id == "QA-project-overview"), None)
+            if overview_entry is not None:
+                return KnowledgeDecision("project", (overview_entry,), "project_overview_only")
         reason = "reviewed_reference_match" if selected else "no_fresh_relevant_reference"
         ids = {entry.id for entry in selected}
-        if project and "QA-project-language-model" in ids and re.search(
-                r"\b(?:why|reason|choose|chose|chosen|select\w*|superior|outperform\w*)\b|이유|왜|선택|선정|우수|우위", query):
-            reason = "undocumented_model_rationale"
         if project and "QA-project-alignment" in ids and re.search(r"(?<![a-z0-9])(?:mcccd|mccd)(?![a-z0-9])|발화.{0,12}(?:맞|정렬|동기)|utterance.aligned", query):
             reason = "alignment_not_verified"
+        elif project and qwen and "QA-project-language-model" in ids and (comparison or why) and (
+            comparison or not selected[0].engineering_rationale_en
+        ):
+            reason = "undocumented_model_rationale"
+        elif project and why and not comparison and selected and selected[0].engineering_rationale_en:
+            reason = "engineering_inference_available"
         return KnowledgeDecision(route, selected, reason, limitations)
 
 

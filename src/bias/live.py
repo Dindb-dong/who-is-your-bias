@@ -156,7 +156,7 @@ async def _live_events(engine, speech, request, *, session, deadline, started, q
         try:
             while (segment := await segments.get()) is not None:
                 text = segment["text"]
-                if (request.language == "en" and getattr(request, "subtitle_language", None) == "ko"
+                if (request.language == "en" and (request.presentation_qa or request.subtitle_language == "ko")
                         and (re.search(r"[가-힣]", text) or not re.search(r"[A-Za-z]", text))):
                     raise ProviderError("speech_language_mismatch", "The answer model did not produce English speech. Please retry the question.", 422)
                 if len(text) > 4000:
