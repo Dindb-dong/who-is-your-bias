@@ -249,6 +249,12 @@ def test_local_app_uses_materialized_overlay_and_explicit_backend_override(tmp_p
     monkeypatch.setattr(local_persona, "RUNTIME", runtime_path)
     monkeypatch.setenv("YAICON_PUBLIC_RAG", "1")
     monkeypatch.delenv("BIAS_RETRIEVAL_BACKEND", raising=False)
+    for key, value in {"BIAS_EMBEDDING_BACKEND": "http", "BIAS_EMBEDDING_MODEL": "synthetic-embedding",
+                       "BIAS_EMBEDDING_REVISION": "fixture-revision", "BIAS_EMBEDDING_BASE_URL": "https://embeddings.example.org/v1",
+                       "BIAS_EMBEDDING_API_KEY": "synthetic-key", "BIAS_EMBEDDING_QUERY_PREFIX": "question: ",
+                       "BIAS_EMBEDDING_PASSAGE_PREFIX": "document: ", "BIAS_DENSE_MIN_SIMILARITY": "0.73",
+                       "BIAS_PERSONA_GRAPH": "/synthetic/graph-must-stay-disabled.json"}.items():
+        monkeypatch.setenv(key, value)
     monkeypatch.setattr(local_persona, "elevenlabs_config", lambda: None)
     captured = []
 
@@ -258,7 +264,10 @@ def test_local_app_uses_materialized_overlay_and_explicit_backend_override(tmp_p
 
     monkeypatch.setattr(bias.api, "create_app", upstream)
     app = local_persona.create_app()
-    assert captured[-1][0].retrieval_backend == "jensen-public"
+    original_config = captured[-1][0]
+    assert original_config.retrieval_backend == "jensen-public"
+    assert original_config.embedding_model is None
+    assert original_config.persona_graph is None
     assert captured[-1][1].evidence["private-qa"].question_answer == original_qa().question_answer
     info = next(route.endpoint for route in app.router.routes if route.path == "/api/local-runtime")()
     assert info["retrieval_version"] == VERSION
@@ -267,3 +276,24 @@ def test_local_app_uses_materialized_overlay_and_explicit_backend_override(tmp_p
     monkeypatch.setenv("BIAS_RETRIEVAL_BACKEND", "lexical")
     local_persona.create_app()
     assert captured[-1][0].retrieval_backend == "lexical"
+    assert captured[-1][0].embedding_model is None
+    monkeypatch.setenv("BIAS_RETRIEVAL_BACKEND", "hybrid")
+    hybrid_app = local_persona.create_app()
+    configured = captured[-1][0]
+    assert configured.retrieval_backend == "hybrid"
+    assert configured.embedding_backend == "http"
+    assert configured.embedding_model == "synthetic-embedding"
+    assert configured.embedding_revision == "fixture-revision"
+    assert configured.embedding_base_url == "https://embeddings.example.org/v1"
+    assert configured.embedding_api_key == "synthetic-key"
+    assert configured.embedding_query_prefix == "question: "
+    assert configured.embedding_passage_prefix == "document: "
+    assert configured.dense_min_similarity == 0.73
+    assert configured.persona_graph is None
+    assert configured.tts == original_config.tts
+    assert configured.tts_voice == original_config.tts_voice
+    assert configured.tts_persona_id == original_config.tts_persona_id
+    assert configured.motion_catalog == original_config.motion_catalog
+    hybrid_info = next(route.endpoint for route in hybrid_app.router.routes if route.path == "/api/local-runtime")()
+    assert hybrid_info["local_only"] is False
+    assert "synthetic-key" not in str(hybrid_info)

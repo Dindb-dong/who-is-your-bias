@@ -312,6 +312,8 @@ def prepare():
         "prompt_version": PROMPT_VERSION, "language": "en", "llm_port": 8103, "voice_port": 8104,
         "app_port": 8105, "external_inference": (
             bool(elevenlabs_config()) or os.getenv("BIAS_TRANSLATION_PROTOCOL") in {"google-web", "google-cloud"}
+            or (os.getenv("BIAS_RETRIEVAL_BACKEND") == "hybrid" and os.getenv("BIAS_EMBEDDING_BACKEND") == "http"
+                and bool(os.getenv("BIAS_EMBEDDING_BASE_URL")))
             or any(os.getenv(f"BIAS_{kind}_BASE_URL") for kind in ("LLM", "TTS", "ASR", "TRANSLATION")))}
     write_json(RUNTIME, runtime)
     write_json(output / "local-runtime.json", runtime)
@@ -385,6 +387,20 @@ def create_app():
     baseline = Settings()
     retrieval_backend = os.getenv("BIAS_RETRIEVAL_BACKEND") or (
         "jensen-public" if public_report["status"] == "integrated" else baseline.retrieval_backend)
+    hybrid_embedding = {}
+    if retrieval_backend == "hybrid":
+        # Read only settings required by this explicit retrieval override. Do
+        # not import global from_env() defaults into the private demo runtime.
+        hybrid_embedding = {
+            "embedding_backend": os.getenv("BIAS_EMBEDDING_BACKEND", baseline.embedding_backend),
+            "embedding_model": os.getenv("BIAS_EMBEDDING_MODEL") or baseline.embedding_model,
+            "embedding_revision": os.getenv("BIAS_EMBEDDING_REVISION") or baseline.embedding_revision,
+            "embedding_base_url": os.getenv("BIAS_EMBEDDING_BASE_URL") or baseline.embedding_base_url,
+            "embedding_api_key": os.getenv("BIAS_EMBEDDING_API_KEY") or baseline.embedding_api_key,
+            "embedding_query_prefix": os.getenv("BIAS_EMBEDDING_QUERY_PREFIX", baseline.embedding_query_prefix),
+            "embedding_passage_prefix": os.getenv("BIAS_EMBEDDING_PASSAGE_PREFIX", baseline.embedding_passage_prefix),
+            "dense_min_similarity": float(os.getenv("BIAS_DENSE_MIN_SIMILARITY", str(baseline.dense_min_similarity))),
+        }
     qa_delivery = {}
     if hasattr(baseline, "qa_knowledge_dir"):
         qa_delivery = {"qa_knowledge_dir": Path(os.environ["BIAS_QA_KNOWLEDGE_DIR"]).expanduser() if os.getenv("BIAS_QA_KNOWLEDGE_DIR") else None,
@@ -407,7 +423,10 @@ def create_app():
         llm_max_tokens=280,
         motion_catalog=studio / "data/motion/jensen-multievent.v1.json" if studio in (GESTURE_STUDIO, PR19) else None,
         motion_asset_root=studio / "apps/web/public",
-        llm_context_window=15000, max_response_chars=3000, request_timeout=180, retrieval_limit=3, **policy, **speech_protocol, **qa_delivery)
+        llm_context_window=15000, max_response_chars=3000, request_timeout=180, retrieval_limit=3,
+        **hybrid_embedding, **policy, **speech_protocol, **qa_delivery)
+    if config.retrieval_backend == "hybrid" and config.embedding_backend == "http":
+        external = external or urlsplit(config.embedding_base_url).hostname not in {"127.0.0.1", "localhost", "::1"}
     corpus = Corpus.load(config.corpus_dir)
     if public_report["status"] == "integrated":
         from bias.snapshots import corpus_digest
